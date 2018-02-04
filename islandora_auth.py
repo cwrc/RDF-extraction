@@ -1,16 +1,14 @@
 import requests
 import sys
+from Env import env
 
-
-
+session = requests.Session()
 
 
 def login(auth):
-    s = requests.Session()
-    response = s.get('http://beta.cwrc.ca/rest/user/login'i, auth=auth)
+    response = session.get('http://beta.cwrc.ca/rest/user/login', auth=auth)
     if response.status_code != 200:
         raise ValueError('Invalid response')
-    return s
 
 
 def usage():
@@ -19,7 +17,9 @@ def usage():
 
 def main(argv):            
     # Store the session for future requests.
-    s = login((argv[0], argv[1]))
+    login((argv[0], argv[1]))
 
 
 if __name__ == "__main__":
+    argv = [env.env("USER_NAME", "NONE"), env.env("PASSWORD", "NONE")]
+    main(argv)
