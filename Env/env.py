@@ -17,4 +17,4 @@ def setEnv():
     with open(".env", 'r') as f:
         for line in f:
             (name,value) = line.split("=")
-            variables[name] = value
+            variables[name] = value.strip()
