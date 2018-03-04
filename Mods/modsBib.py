@@ -1,13 +1,25 @@
 from bs4 import BeautifulSoup
+import rdflib
 
+from rdflib import RDF, RDFS, Literal
+
+CWRC = rdflib.Namespace("cwrc", "http://sparql.cwrc.ca/ontologies/cwrc#")
 
 class ModsParser():
 
     soup=None
+    mainURI = ""
+    g=None
+    id=""
+
 
     def __init__(self, filename):
         with open(filename) as f:
             self.soup = BeautifulSoup(f, 'lxml')
+
+        self.g = rdflib.Graph()
+        self.id = filename.replace(".xml", "")
+
 
     def get_type(self):
         if self.soup.typeofresource:
@@ -52,6 +64,9 @@ class ModsParser():
                 publisher = oi.publisher.text
                 date = oi.dateissued.text
                 date_type = oi.dateissued['encoding']
+
+
+
                 origins.append({'place': place, 'publisher': publisher, 'date': date, 'date_type': date_type})
 
         return origins
@@ -63,3 +78,11 @@ class ModsParser():
                 langs.append({'language': t.text, 'type': t['type']})
 
         return langs
+
+
+    def build_graph(self):
+        g = rdflib.Graph()
+        id = self.id
+
+        g.add((self.mainURI, RDFS.label, Literal(self.get_title())))
+        g.add((id, RDF.type, CWRC.CreativeWork))
