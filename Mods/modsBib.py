@@ -5,7 +5,7 @@ from rdflib import RDF, RDFS, Literal
 
 CWRC = rdflib.Namespace("cwrc", "http://sparql.cwrc.ca/ontologies/cwrc#")
 
-class ModsParser():
+class BibliographyParse():
 
     soup=None
     mainURI = ""
