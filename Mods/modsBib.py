@@ -3,7 +3,7 @@ import rdflib
 
 from rdflib import RDF, RDFS, Literal
 
-CWRC = rdflib.Namespace("cwrc", "http://sparql.cwrc.ca/ontologies/cwrc#")
+CWRC = rdflib.Namespace("http://sparql.cwrc.ca/ontologies/cwrc#")
 
 class BibliographyParse():
 
