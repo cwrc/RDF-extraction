@@ -33,5 +33,10 @@ def get_file_with_format(uuid, format):
 
 
 if __name__ == "__main__":
-    argv = [env.env("USER_NAME", sys.argv[1]), env.env("PASSWORD", sys.argv[2])]
+    default_user = "NONE"
+    default_password = "NONE"
+    if len(sys.argv) > 2:
+        default_user = sys.argv[1]
+        default_password = sys.argv[2]
+    argv = [env.env("USER_NAME", default_user), env.env("PASSWORD", default_password)]
     main(argv)
