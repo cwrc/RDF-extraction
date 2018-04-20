@@ -6,7 +6,7 @@ session = requests.Session()
 
 
 def login(auth):
-    print(auth)
+    #print(auth)
     response = session.post('http://beta.cwrc.ca/rest/user/login', auth)
     print(response)
     if response.status_code != 200:
@@ -20,8 +20,15 @@ def usage():
 def main(argv):            
     # Store the session for future requests.
     login({"username": argv[0], "password": argv[1]})
-    res = session.get('http://beta.cwrc.ca/islandora/object/orlando%3A79764579-bb88-4d9f-9c6b-a70276b00d3a')
-    print(res)
+
+
+def get_file_description(uuid):
+    res = session.get('http://beta.cwrc.ca/islandora/rest/v1/object/' + uuid);
+    return res.text
+
+def get_file_with_format(uuid, format):
+    res = session.get('http://beta.cwrc.ca/islandora/rest/v1/object/' + uuid + '/datastream/' + format)
+    return res.text
 
 
 
