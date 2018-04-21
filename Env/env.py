@@ -3,7 +3,8 @@ import sys
 
 variables = {}
 
-def env(name, default):
+
+def env(name, default="NONE"):
     if len(variables) == 0:
         setEnv()
 
@@ -16,5 +17,5 @@ def env(name, default):
 def setEnv():
     with open(".env", 'r') as f:
         for line in f:
-            (name,value) = line.split("=")
+            (name, value) = line.split("=")
             variables[name] = value.strip()
