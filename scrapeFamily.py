@@ -116,7 +116,7 @@ def getFamilyInfo():
 
     # getBirthAndDeath(myRoot2)
 
-def getBirthAndDeath():
+def getBirth():
 
     filePath = os.path.expanduser("~/Downloads/laurma-b.xml")
     getTreeRoot = xml.etree.ElementTree.parse(filePath)
@@ -130,8 +130,12 @@ def getBirthAndDeath():
     birthPositions = []
 
     birthTagParent = treeRoot.findall("./DIV0/DIV1")
-    birthTag = birthTagParent[1].find('BIRTH')
+    birthTag = birthTagParent[1].find('BIRTH/DIV2/CHRONSTRUCT')
     
+    if birthTag == None:
+        print("Birth information not found")
+        return
+
     birthDateTag = list(birthTag.iter('DATE'))[0]
     birthDate = birthDateTag.attrib['VALUE']
     
@@ -154,6 +158,13 @@ def getBirthAndDeath():
     print("birth place: {}, {}, {}".format(birthPlaceSettlement,birthPlaceRegion,birthPlaceGeog))
     print("birth positions: {}".format(birthPositions))
 
+
+def getDeath():
+
+    filePath = os.path.expanduser("~/Downloads/laurma-b.xml")
+    getTreeRoot = xml.etree.ElementTree.parse(filePath)
+    treeRoot = getTreeRoot.getroot()
+
     # DEATH
     deathDate = ""
     deathPlaceSettlement = ""
@@ -161,9 +172,15 @@ def getBirthAndDeath():
     deathPlaceGeog = ""
     deathCauses = []
 
-    deathTagParent = treeRoot.find("./DIV0/DIV1/DEATH")
-
-    deathDateTag = list(deathTagParent.iter('DATE'))[0]
+    deathTagParent = treeRoot.find("./DIV0/DIV1/DEATH/DIV2/CHRONSTRUCT")
+    deathDateTag = ""
+    
+    try:
+        deathDateTag = list(deathTagParent.iter('DATE'))[0]
+    except (AttributeError,NameError):
+        print("Death information not found")
+        return
+    
     deathDate = deathDateTag.attrib['VALUE']
 
     deathCauseTags = list(deathTagParent.iter('CAUSE'))
@@ -186,15 +203,10 @@ def getBirthAndDeath():
             deathPlaceGeog = tag.attrib['REG']
 
 
-    print("\ndeath date: ", birthDate)
+    print("\ndeath date: ", deathDate)
     print("death place: {}, {}, {}".format(deathPlaceSettlement,deathPlaceRegion,deathPlaceGeog))
     print("death causes: {}".format(deathCauses))
-    # print(deathTagParent)
 
-
-
-
-   
 
 def printMemberInfo(memberList):
     for mem in memberList:
@@ -203,20 +215,6 @@ def printMemberInfo(memberList):
 if __name__ == "__main__":
     # startLogin()
     # getFamilyInfo()
-    getBirthAndDeath()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    getBirth()
+    getDeath()
 
