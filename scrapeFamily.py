@@ -1,7 +1,6 @@
 import requests
 import sys
 from Env import env
-# import xml.etree.ElementTree as ET
 import xml.etree.ElementTree
 import os
 
@@ -57,7 +56,7 @@ def get_file_with_format(uuid, format):
     res = session.get('http://beta.cwrc.ca/islandora/rest/v1/object/' + uuid + '/datastream/' + format)
     return res.text
 
-def getXML():
+def getFamilyInfo():
 
     filePath = os.path.expanduser("~/Downloads/laurma-b.xml")
     myRoot = xml.etree.ElementTree.parse(filePath)
@@ -70,7 +69,7 @@ def getXML():
     memberName = ""
     memberJobs = []
     memberSigAct = []
-        
+    
     for familyTag in myRoot2.findall('.//FAMILY'):
         print(familyTag.tag)
         for familyMember in familyTag.findall('MEMBER'):
@@ -115,6 +114,86 @@ def getXML():
     printMemberInfo(listOfMembers)
     print("")
 
+    # getBirthAndDeath(myRoot2)
+
+def getBirthAndDeath():
+
+    filePath = os.path.expanduser("~/Downloads/laurma-b.xml")
+    getTreeRoot = xml.etree.ElementTree.parse(filePath)
+    treeRoot = getTreeRoot.getroot()
+
+    # BIRTH
+    birthDate = ""
+    birthPlaceSettlement = ""
+    birthPlaceRegion = ""
+    birthPlaceGeog = ""
+    birthPositions = []
+
+    birthTagParent = treeRoot.findall("./DIV0/DIV1")
+    birthTag = birthTagParent[1].find('BIRTH')
+    
+    birthDateTag = list(birthTag.iter('DATE'))[0]
+    birthDate = birthDateTag.attrib['VALUE']
+    
+    birthPositionTags = list(birthTag.iter('BIRTHPOSITION'))
+    for positions in birthPositionTags:
+        birthPositions.append(positions.attrib['POSITION'])
+
+    birthPlaceTag = list(birthTag.iter('PLACE'))[0]
+
+    for tag in birthPlaceTag.iter():
+        if tag.tag == "SETTLEMENT":
+            birthPlaceSettlement = tag.text
+        elif tag.tag == "REGION":
+            birthPlaceRegion = tag.text
+        elif tag.tag == "GEOG":
+            birthPlaceGeog = tag.attrib['REG']
+
+    print("---------Information about person--------------")
+    print("birth date: ", birthDate)
+    print("birth place: {}, {}, {}".format(birthPlaceSettlement,birthPlaceRegion,birthPlaceGeog))
+    print("birth positions: {}".format(birthPositions))
+
+    # DEATH
+    deathDate = ""
+    deathPlaceSettlement = ""
+    deathPlaceRegion = ""
+    deathPlaceGeog = ""
+    deathCauses = []
+
+    deathTagParent = treeRoot.find("./DIV0/DIV1/DEATH")
+
+    deathDateTag = list(deathTagParent.iter('DATE'))[0]
+    deathDate = deathDateTag.attrib['VALUE']
+
+    deathCauseTags = list(deathTagParent.iter('CAUSE'))
+    for causes in deathCauseTags:
+        try:
+            thisCause = causes.attrib['REG']
+            if thisCause is not None:
+                deathCauses.append(thisCause)
+        except KeyError:
+            deathCauses.append(causes.text)            
+
+    deathPlaceTag = list(deathTagParent.iter('PLACE'))[0]
+
+    for tag in deathPlaceTag.iter():
+        if tag.tag == "SETTLEMENT":
+            deathPlaceSettlement = tag.text
+        elif tag.tag == "REGION":
+            deathPlaceRegion = tag.text
+        elif tag.tag == "GEOG":
+            deathPlaceGeog = tag.attrib['REG']
+
+
+    print("\ndeath date: ", birthDate)
+    print("death place: {}, {}, {}".format(deathPlaceSettlement,deathPlaceRegion,deathPlaceGeog))
+    print("death causes: {}".format(deathCauses))
+    # print(deathTagParent)
+
+
+
+
    
 
 def printMemberInfo(memberList):
@@ -123,7 +202,8 @@ def printMemberInfo(memberList):
 
 if __name__ == "__main__":
     # startLogin()
-    getXML()
+    # getFamilyInfo()
+    getBirthAndDeath()
 
 
 
