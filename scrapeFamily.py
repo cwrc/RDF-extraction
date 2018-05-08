@@ -3,6 +3,7 @@ import sys
 from Env import env
 import xml.etree.ElementTree
 import os
+import logging
 
 session = requests.Session()
 
@@ -19,6 +20,12 @@ class Family:
         print(*self.memberJobs,sep=", ")
         print("SigAct: ",end="")
         print(*self.memberSigActs,sep=", ")
+
+# Get birth information about the subject
+# ------ Example ------
+# birth date:  1873-12-07
+# birth positions: ['ELDEST']
+# birth place: Gore, Virginia, USA
 def getBirth(xmlString):
 
     # filePath = os.path.expanduser("~/Downloads/laurma-b.xml")
@@ -55,19 +62,25 @@ def getBirth(xmlString):
         return
 
     try:
+        # Get birth date
         birthDateTags = list(birthTag.iter('DATE'))
         if len(birthDateTags) == 0:
+            
+            # If no 'DATE' tag, try 'DATERANGE' tag
             birthDateTags = list(birthTag.iter('DATERANGE'))
         if len(birthDateTags) == 0:
-            print("still nothing found")
+            
+            # If no 'DATERANGE' tag, try 'DATESTRUCT' tag
             birthDateTags = list(birthTag.iter('DATESTRUCT'))
 
         birthDateTag = birthDateTags[0]
 
         if 'VALUE' in birthDateTag.attrib:
             birthDate = birthDateTag.attrib['VALUE']
-        elif 'CERTAINTY' in birthDateTag.attrib:
+        elif 'CERTAINTY' in birthDateTag.attrib and 'FROM' in birthDateTag.attrib and 'TO' in birthDateTag.attrib:
+            # Sometimes the birth date isn't exact so a range is used
             birthDate = birthDateTag.attrib['FROM'] + " to " + birthDateTag.attrib['TO']
+        
         print("---------Information about person--------------")
         print("birth date: ", birthDate)
     
@@ -77,27 +90,50 @@ def getBirth(xmlString):
         sys.stdin.read(1)
         return
     
+    # Get birth positions
+    # Ex. 'Oldest', 'Youngest'
     birthPositionTags = list(birthTag.iter('BIRTHPOSITION'))
     for positions in birthPositionTags:
         if 'POSITION' in positions.attrib:
             birthPositions.append(positions.attrib['POSITION'])
     print("birth positions: {}".format(birthPositions))
     
+    # Get birth place.
+    # Where the subject is born
     birthPlaceTags = list(birthTag.iter('PLACE'))
     birthPlaceTag = ""
     try:
         if len(birthPlaceTags) > 0:
             birthPlaceTag = birthPlaceTags[0]
             for tag in birthPlaceTag.iter():
+                # Get settlement where they were born
                 if tag.tag == "SETTLEMENT":
-                    birthPlaceSettlement = tag.text
+                    if "REG" in tag.attrib:
+                        birthPlaceSettlement = tag.attrib["REG"]
+                    elif "CURRENT" in tag.attrib:
+                        # Current refers to a place where the name has changed.
+                        # i.e. Today it is known as something else but during this
+                        # subject's time, the name was different
+                        birthPlaceSettlement = tag.attrib["CURRENT"]
+                    else:
+                        birthPlaceSettlement = tag.text
+                # Get region where they were born
                 elif tag.tag == "REGION":
-                    birthPlaceRegion = tag.text
+                    if "CURRENT" in tag.attrib:
+                        birthPlaceRegion = tag.attrib['CURRENT']
+                    elif "REG" in tag.attrib:
+                        birthPlaceRegion = tag.attrib['REG']
+                    else:
+                        birthPlaceRegion = tag.text
+                # Get country
                 elif tag.tag == "GEOG":
-                    try:
-                        birthPlaceGeog = tag.attrib['REG']
-                    except KeyError:
+                    if "REG" in tag.attrib:
+                        birthPlaceGeog = tag.attrib["REG"]
+                    elif "CURRENT" in tag.attrib:
+                        birthPlaceGeog = tag.attrib["CURRENT"]
+                    else:
                         birthPlaceGeog = tag.text
+                    
             print("birth place: {}, {}, {}".format(birthPlaceSettlement,birthPlaceRegion,birthPlaceGeog))
         else:
             print("no birthPlaceTag")
@@ -108,8 +144,6 @@ def getBirth(xmlString):
         # sys.stdin(1)
 
     
-
-
 def getDeath(xmlString):
 
     # filePath = os.path.expanduser("~/Downloads/laurma-b.xml")
@@ -131,30 +165,66 @@ def getDeath(xmlString):
     deathDateTag = ""
     
     try:
+        if deathTagParent == None:
+            # Death tag not found
+            deathTagParent = treeRoot.find(".//DEATH/")
+            if deathTagParent is not None:
+                print("used to be none but found death")
+                sys.stdin.read(1)
+            else:
+                # Still no death tag found
+                print("still no death tag found")
+                # sys.stdin.read(1)
+                return
         getChronstructTags = list(deathTagParent.iter("CHRONSTRUCT"))
         
         if len(getChronstructTags) == 0:
+            # No chronstruct tag found. Look for a shortprose tag
             getChronstructTags = list(deathTagParent.iter("SHORTPROSE"))
 
         if len(getChronstructTags) == 0:
-            print("no CHRONSTRUCT in death found")
+            # No shortprose tag found either
+            print("no SHORTPROSE in death found")
             sys.stdin.read(1)
             return
 
-        if len(getChronstructTags) > 0
+        if len(getChronstructTags) > 0:
+            # A tag is found. Either a chronstruct or a shortprose
             firstChronstructTag = getChronstructTags[0]
-            deathDateTag = list(firstChronstructTag.iter('DATE'))
-            if deathDateTag == None:
-                print("no date found in construct")
-                deathDateTag = firstChronstructTag.find('DATESTRUCT')
-            if deathDateTag == None:
-                print("still none")
-            deathDate = deathDateTag.attrib['VALUE']
+            
+            # Iterate through date tags
+            deathDateTags = list(firstChronstructTag.iter('DATE'))
+            
+            if len(deathDateTags) == 0:
+                # No date tag found, look for a datestruct tag
+                print("no date found in construct. trying datestruct")
+                deathDateTags = list(firstChronstructTag.iter('DATESTRUCT'))
+            if len(deathDateTags) == 0:
+                # No datestruct tag found, look for a daterange tag
+                print("no datestruct. trying dateRange")
+                deathDateTags = list(firstChronstructTag.iter('DATERANGE'))
+            if len(deathDateTags) == 0:
+                # No daterange tag found either
+                print("no date range either")
+                # sys.stdin.read(1)
+            else:
+                # Found a date tag
+                deathDateTag = deathDateTags[0]
+                if 'VALUE' in deathDateTag.attrib:
+                    deathDate = deathDateTag.attrib['VALUE']
+                elif 'CERTAINTY' in deathDateTag.attrib and 'FROM' in deathDateTag.attrib and 'TO' in deathDateTag.attrib:
+                    deathDate = deathDateTag.attrib['FROM'] + " to " + deathDateTag.attrib['TO']
+            
+            
+            
+    
     except (AttributeError) as e:
         print("Death information not found. person probably still alive")
-        print("error: ", e)
-        # sys.stdin.read(1)
+        # print("error: ", e)
+        logging.exception(e)
+        sys.stdin.read(1)
         return
+
     except NameError:
         print("Name Error")
         print("error: ", e)
@@ -167,12 +237,11 @@ def getDeath(xmlString):
     deathCauseTags = (firstChronstructTag.findall('CHRONPROSE/CAUSE'))
     if len(deathCauseTags) > 0:
         for causes in deathCauseTags:
-            try:
-                thisCause = causes.attrib['REG']
-                if thisCause is not None:
-                    deathCauses.append(thisCause)
-            except KeyError:
+            if "REG" in causes.attrib:
+                deathCauses.append(causes.attrib['REG'])
+            else:
                 deathCauses.append(causes.text)
+        
         print("death causes: {}".format(deathCauses))          
 
     # PLACE OF DEATH
@@ -180,17 +249,28 @@ def getDeath(xmlString):
     if len(deathPlaceTags) > 0:
         for tag in deathPlaceTags:
             if tag.tag == "SETTLEMENT":
-                deathPlaceSettlement = tag.text
+                if "CURRENT" in tag.attrib:
+                    deathPlaceSettlement = tag.attrib["CURRENT"]
+                elif "REG" in tag.attrib:
+                    deathPlaceSettlement = tag.attrib["REG"]
+                else:
+                    deathPlaceSettlement = tag.text
+                
             elif tag.tag == "REGION":
-                try:
-                    deathPlaceRegion = tag.attrib['REG']
-                except KeyError:
+                if "CURRENT" in tag.attrib:
+                    deathPlaceRegion = tag.attrib["CURRENT"]
+                elif "REG" in tag.attrib:
+                    deathPlaceRegion = tag.attrib["REG"]
+                else:
                     deathPlaceRegion = tag.text
             elif tag.tag == "GEOG":
-                try:
-                    deathPlaceGeog = tag.attrib['REG']
-                except KeyError:
+                if "CURRENT" in tag.attrib:
+                    deathPlaceGeog = tag.attrib["CURRENT"]
+                elif "REG" in tag.attrib:
+                    deathPlaceGeog = tag.attrib["REG"]
+                else:
                     deathPlaceGeog = tag.text
+    
         print("death place: {}, {}, {}".format(deathPlaceSettlement,deathPlaceRegion,deathPlaceGeog))
 
     else:
@@ -222,6 +302,13 @@ def getDeath(xmlString):
 def printMemberInfo(memberList):
     for mem in memberList:
         mem.samplePrint()
+
+# This function obtains family information
+# ------ Example ------
+# Name:  Grant, Josceline Charles Henry
+# Relation:  FATHER
+# Jobs: army officer
+# SigAct: lost money, currency committee
 def getFamilyInfo(xmlString):
 
     # filePath = os.path.expanduser("~/Downloads/laurma-b.xml")
@@ -240,11 +327,19 @@ def getFamilyInfo(xmlString):
     for familyTag in myRoot2.findall('.//FAMILY'):
         # print(familyTag.tag)
         for familyMember in familyTag.findall('MEMBER'):
-            memberRelation = familyMember.attrib['RELATION']
+            if "RELATION" in familyMember.attrib:
+                memberRelation = familyMember.attrib['RELATION']
+            
             for thisTag in familyMember.iter():
-                # print(thisTag)
+                # Get name of family Member by making sure the name is not of the person about whom the biography is about
                 if thisTag.tag == "NAME" and thisTag.attrib['STANDARD'] != SOURCENAME and memberName == "":
-                    memberName = thisTag.attrib['STANDARD']
+                    if ",," in thisTag.attrib['STANDARD']:
+                        memberName = thisTag.text
+                        if "(" in memberName and ")" not in memberName:
+                            memberName += ")"
+                    else:
+                        memberName = thisTag.attrib['STANDARD']
+                # Get the family member's job
                 elif thisTag.tag == "JOB":
                     try:
                         job=""
@@ -254,6 +349,7 @@ def getFamilyInfo(xmlString):
                     except KeyError:
                         if job != "" and job not in memberJobs:
                             memberJobs.append(thisTag.text)
+                # Get the family member's significant activities
                 elif thisTag.tag == "SIGNIFICANTACTIVITY":
                     sigAct = thisTag.text
                     if sigAct != "" and sigAct not in memberSigAct:
@@ -276,15 +372,10 @@ def getFamilyInfo(xmlString):
             description = ""
             memberJobs.clear()
             memberSigAct.clear()
-        # print("==========================================================")
     
-    # print("\n\n+++++++++++++++++++++++++++++")
-    # print("Listed Below are members extracted from the biography that are known to be related to %s\n+++++++++++++++++++++++++++++" %SOURCENAME)
     print("----------- ",SOURCENAME.strip(),"'s Family Members -----------")
     printMemberInfo(listOfMembers)
     print("")
-
-    # getBirthAndDeath(myRoot2)
 
 
 def startLogin():
@@ -345,25 +436,33 @@ if __name__ == "__main__":
     # getDeath()
     mydir = os.path.expanduser("~/Downloads/biography/")
     # print(mydir)
-    peopleDone = 0
+    numBiographiesRead = 0
+    printInfo = False
     for dirName, subdirlist, files in os.walk(mydir):
         for name in files:
-            # if "ruskjo-b" not in name:
-            #     continue
+            # if "cobbfr-b.xml" not in name:
+                # continue
             # if "laurma-b" not in name:
             #     continue
-            print('\n===========%s=================' % name)
-            openFile = open(mydir+name,"r")
-            xmlString = openFile.read()
-            peopleDone += 1
-            # getFamilyInfo(xmlString)
-            getBirth(xmlString)
-            getDeath(xmlString)
+            if "cobbfr-b" in name:
+                printInfo = True
+
+            if printInfo == True:
+                print('\n===========%s=================' % name)
+                openFile = open(mydir+name,"r")
+                xmlString = openFile.read()
+                # numBiographiesRead += 1
+                getFamilyInfo(xmlString)
+                getBirth(xmlString)
+                getDeath(xmlString)
+                # if (peopleDone % 25 == 0):
+                #     sys.stdin.read(1)
+                # numBiographiesRead += 1
             # getchar()
             # print(openFile.read())
         # for file in files:
         #     print(os.path.join(subdir,file))
-    # print("people looked at", peopleDone)
+    print("people looked at", numBiographiesRead)
 
 
 
