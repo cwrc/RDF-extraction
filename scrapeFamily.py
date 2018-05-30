@@ -4,7 +4,11 @@ from Env import env
 import xml.etree.ElementTree
 import os
 import logging
+import csv
+import datetime
 
+numSigs = 0
+numAdded = 0
 session = requests.Session()
 
 class Family:
@@ -21,11 +25,35 @@ class Family:
         print("SigAct: ",end="")
         print(*self.memberSigActs,sep=", ")
 
-# Get birth information about the subject
+class birthData:
+    def __init__(self, bDate, bPosition, bSettl, bRegion, bGeog):
+        self.birthDate = bDate
+        self.birthPosition = bPosition
+        self.birthSettlement = bSettl
+        self.birthRegion = bRegion
+        self.birthGeog = bGeog
+
+class deathData:
+    def __init__(self, dDate, dCauses, dSettl, dRegion, dGeog):
+        self.deathDate = dDate
+        self.deathCauses= dCauses
+        self.deathSettlement = dSettl
+        self.deathRegion = dRegion
+        self.deathGeog = dGeog
+
+
+# Get g information about the subject
 # ------ Example ------
 # birth date:  1873-12-07
 # birth positions: ['ELDEST']
 # birth place: Gore, Virginia, USA
+def dateValidate(dateStr):
+    try:
+        datetime.datetime.strptime(dateStr, '%Y-%m-%d')
+        return True
+    except ValueError:
+        return False
+        
 def getBirth(xmlString):
 
     # filePath = os.path.expanduser("~/Downloads/laurma-b.xml")
@@ -142,6 +170,8 @@ def getBirth(xmlString):
     except AttributeError:
         print("no birth place information for this individual")
         # sys.stdin(1)
+
+    return birthData(birthDate, birthPositions, birthPlaceSettlement, birthPlaceRegion, birthPlaceGeog)
 
     
 def getDeath(xmlString):
@@ -298,6 +328,7 @@ def getDeath(xmlString):
                         deathPlaceRegion = ""
                         deathPlaceGeog = ""
 
+    return deathData(deathDate, deathCauses, deathPlaceSettlement, deathPlaceRegion, deathPlaceGeog)
 
 def printMemberInfo(memberList):
     for mem in memberList:
@@ -309,15 +340,20 @@ def printMemberInfo(memberList):
 # Relation:  FATHER
 # Jobs: army officer
 # SigAct: lost money, currency committee
-def getFamilyInfo(xmlString):
-
+def getFamilyInfo(xmlString, sourceFile):
+    global numSigs
+    global numAdded
     # filePath = os.path.expanduser("~/Downloads/laurma-b.xml")
     # myRoot = xml.etree.ElementTree.parse(filePath)
     # myRoot2 = myRoot.getroot()
     myRoot2 = xml.etree.ElementTree.fromstring(xmlString)
 
     SOURCENAME = myRoot2.find("./DIV0/STANDARD").text
-
+    # sigi = myRoot2.find("./DIV0/DIV1/FAMILY/MEMBER/DIV2/SHORTPROSE/P/SIGNIFICANTACTIVITY")
+    
+    # print(' '.join(sigi.itertext()))
+    # print(sigi.itertext()' '.join())
+    # return
     listOfMembers = []
     memberRelation = ""
     memberName = ""
@@ -331,6 +367,7 @@ def getFamilyInfo(xmlString):
                 memberRelation = familyMember.attrib['RELATION']
             
             for thisTag in familyMember.iter():
+                
                 # Get name of family Member by making sure the name is not of the person about whom the biography is about
                 if thisTag.tag == "NAME" and thisTag.attrib['STANDARD'] != SOURCENAME and memberName == "":
                     if ",," in thisTag.attrib['STANDARD']:
@@ -351,9 +388,42 @@ def getFamilyInfo(xmlString):
                             memberJobs.append(thisTag.text)
                 # Get the family member's significant activities
                 elif thisTag.tag == "SIGNIFICANTACTIVITY":
-                    sigAct = thisTag.text
-                    if sigAct != "" and sigAct not in memberSigAct:
+                    numSigs += 1
+                    if "REG" in thisTag.attrib:
+                        sigAct = thisTag.attrib["REG"]
                         memberSigAct.append(sigAct)
+                        numAdded += 1
+                    else:
+                        sigAct = thisTag.text
+                        print(sigAct)
+
+                        if sigAct == None or sigAct == "":
+                           sigAct = ' '.join(thisTag.itertext())
+
+                           print(sigAct)
+                           if sigAct != "" and sigAct not in memberSigAct:
+                               memberSigAct.append(sigAct)
+                               numAdded += 1
+                               print(sigAct)
+                               print("2. number of sigActs added: ",numAdded)
+                               # sys.stdin.read(1)
+                           else:
+                               print("1.significant activity not added")
+                               # sys.stdin.read(1)
+                        else:
+                            memberSigAct.append(sigAct)
+                            numAdded += 1
+                            # print(sigAct)
+                            # print("2.significant activity not added")
+
+                            # sys.stdin.read(1)
+
+                           # print("no significant Acts in the sigact")
+                           # response = input("open file? ")
+                           # if response == "y" or response == "Y":
+                           #     print(sourceFile)
+                           #     os.system("open "+sourceFile)
+                           #     sys.stdin.read(1)
 
             # print("......................")
             # print("Name: ",memberName)
@@ -375,7 +445,8 @@ def getFamilyInfo(xmlString):
     
     print("----------- ",SOURCENAME.strip(),"'s Family Members -----------")
     printMemberInfo(listOfMembers)
-    print("")
+    # print("")
+    return SOURCENAME,listOfMembers
 
 
 def startLogin():
@@ -394,10 +465,10 @@ def login(auth):
     if response.status_code != 200:
         raise ValueError('Invalid response')
     else:
+        link = 'http://beta.cwrc.ca/islandora/rest/v1/object/'
+        objectToGet = 'orlando%3Ad9ab7813-1b1d-42c8-98b0-9712398d8990/datastream/CWRC/?content=true'
 
-        # url = "{0}/islandora/rest/v1/object/orlando%3A{1}/datastream/CWRC/?content=true".format('http://beta.cwrc.ca','2ef845b2-3421-460a-9e0f-623cb30d62d1')
-        # r2 = session.get('http://beta.cwrc.ca/islandora/rest/v1/object/orlando%3Ab4859cdd-8c58-46e9-bf2a-28bf8090fcbc/datastream/CWRC/?content=true')
-        r2 = session.get('http://beta.cwrc.ca/islandora/rest/v1/object/orlando%3Ad9ab7813-1b1d-42c8-98b0-9712398d8990/datastream/CWRC/?content=true')
+        r2 = session.get(link+objectToGet)
         if r2.status_code == 200:
             print("got the content")
             # print(r2.pid)
@@ -426,43 +497,116 @@ def get_file_with_format(uuid, format):
     res = session.get('http://beta.cwrc.ca/islandora/rest/v1/object/' + uuid + '/datastream/' + format)
     return res.text
 
+def getCwrcTag(familyRelation):
+    csvFile = open(os.path.expanduser("~/Google Drive/Term 3 - UoGuelph/mapping2.csv"),"r")
+    
+    cwrcTag = 'CWRC_Tag'
+    orlandoTag = 'Orlando_Relation'
+    
+    fileContent = csv.DictReader(csvFile)
+    
+    for row in fileContent:
+        # print(row)
+        if row[orlandoTag] == familyRelation:
+            return row[cwrcTag]
 
+def graphMaker(familyInfo, birthInfo, deathInfo):
+    
+    from rdflib import Namespace, Graph, Literal, URIRef
+    import rdflib
+    
+    personNamespace   = Namespace('http://example.org/')
+    cwrcNamespace     = Namespace('http://cwrc.org/')
+
+
+    g = Graph()
+    source = URIRef(str(personNamespace) + familyInfo[0])
+
+    # Adding family info to the ttl file
+    for family in familyInfo[1]:
+        memberName = family.memberName
+        print("=======",memberName,"=========")
+        if ',' in memberName:
+            splitName = memberName.split(",")
+            memberName = splitName[1].strip() + " " + splitName[0].strip()
+
+        memberSource = URIRef(str(personNamespace) + memberName.replace(" ","_"))
+        g.add((memberSource,cwrcNamespace.hasName,Literal(memberName)))
+        
+        for jobs in family.memberJobs:
+            g.add((memberSource,cwrcNamespace.hasJob,Literal(jobs.strip())))
+            # print("added job ", jobs)
+
+        for sigActs in family.memberSigActs:
+            g.add((memberSource,cwrcNamespace.sigActs,Literal(sigActs.strip())))
+            # print("added significant ", sigActs)
+
+        predicate = URIRef(str(cwrcNamespace) + getCwrcTag(family.memberRelation))
+        # g.add((source,predicate,Literal(memberName)))
+        g.add((source,predicate,memberSource))
+
+
+    # Adding Birth Info to the ttl file
+    # g.add((source,cwrcNamespace.hasBirthDate,Literal(birthInfo[0])))
+    # for birthPosition in birthInfo[1]:
+    #     g.add((source,cwrcNamespace.hasBirthPosition,Literal(birthPosition)))
+    # g.add((source,cwrcNamespace.hasBirthPlace,Literal(birthInfo[2][0]+", "+birthInfo[2][1]+", "+birthInfo[2][2])))
+
+    # death validation
+    # print(deathInfo.deathDate)
+    if deathInfo != None:
+        if dateValidate(deathInfo.deathDate):
+            g.add((source,cwrcNamespace.hasDeathDate,Literal(deathInfo.deathDate)))
+        
+        for deathCause in deathInfo.deathCauses:
+            g.add((source,cwrcNamespace.hasDeathCause,Literal(deathCause)))
+        
+        g.add((source,cwrcNamespace.hasDeathPlace,Literal(deathInfo.deathSettlement+", "+deathInfo.deathRegion+", "+deathInfo.deathGeog)))
+
+
+    print(g.serialize(format='turtle').decode())
+    # return
+
+    
 
 if __name__ == "__main__":
+    
     # startLogin()
 
-    # getFamilyInfo()
-    # getBirth()
-    # getDeath()
-    mydir = os.path.expanduser("~/Downloads/biography/")
+    mydir = os.path.expanduser("~/Google Drive/Term 3 - UoGuelph/biography/")
     # print(mydir)
     numBiographiesRead = 0
-    printInfo = False
+    printInfo = True
+    sourceName = ""
+    birthInfo = ""
+    deathInfo = ""
     for dirName, subdirlist, files in os.walk(mydir):
         for name in files:
-            # if "cobbfr-b.xml" not in name:
-                # continue
+            # if "britve-b.xml" not in name:
+            #     continue
             # if "laurma-b" not in name:
             #     continue
-            if "cobbfr-b" in name:
-                printInfo = True
+            # os.system("open "+"\""+mydir+name+"\"")
+            # if "cobbfr-b" in name:
+            #     printInfo = True
 
             if printInfo == True:
                 print('\n===========%s=================' % name)
                 openFile = open(mydir+name,"r")
                 xmlString = openFile.read()
                 # numBiographiesRead += 1
-                getFamilyInfo(xmlString)
-                getBirth(xmlString)
-                getDeath(xmlString)
-                # if (peopleDone % 25 == 0):
-                #     sys.stdin.read(1)
-                # numBiographiesRead += 1
-            # getchar()
-            # print(openFile.read())
-        # for file in files:
-        #     print(os.path.join(subdir,file))
-    print("people looked at", numBiographiesRead)
+                sourceName,familyMembers   = getFamilyInfo(xmlString,os.path.expanduser("\""+mydir+name+"\""))
+                birthInfo       = getBirth(xmlString)
+                deathInfo       = getDeath(xmlString)
+                graphMaker([name[0:-6],familyMembers],birthInfo,deathInfo)
+    print(numSigs, " number of significant activities found")
+    print(numAdded, " number of significant activities added")
+
+
+
+
+
+
 
 
 
