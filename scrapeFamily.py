@@ -28,7 +28,7 @@ class Family:
 class birthData:
     def __init__(self, bDate, bPosition, bSettl, bRegion, bGeog):
         self.birthDate = bDate
-        self.birthPosition = bPosition
+        self.birthPositions = bPosition
         self.birthSettlement = bSettl
         self.birthRegion = bRegion
         self.birthGeog = bGeog
@@ -516,7 +516,7 @@ def graphMaker(familyInfo, birthInfo, deathInfo):
     import rdflib
     
     personNamespace   = Namespace('http://example.org/')
-    cwrcNamespace     = Namespace('http://cwrc.org/')
+    cwrcNamespace     = Namespace('http://sparql.cwrc.ca/ontologies/cwrc#')
 
 
     g = Graph()
@@ -538,7 +538,7 @@ def graphMaker(familyInfo, birthInfo, deathInfo):
             # print("added job ", jobs)
 
         for sigActs in family.memberSigActs:
-            g.add((memberSource,cwrcNamespace.sigActs,Literal(sigActs.strip())))
+            g.add((memberSource,cwrcNamespace.significantAct,Literal(sigActs.strip())))
             # print("added significant ", sigActs)
 
         predicate = URIRef(str(cwrcNamespace) + getCwrcTag(family.memberRelation))
@@ -547,16 +547,16 @@ def graphMaker(familyInfo, birthInfo, deathInfo):
 
 
     # Adding Birth Info to the ttl file
-    # g.add((source,cwrcNamespace.hasBirthDate,Literal(birthInfo[0])))
-    # for birthPosition in birthInfo[1]:
-    #     g.add((source,cwrcNamespace.hasBirthPosition,Literal(birthPosition)))
-    # g.add((source,cwrcNamespace.hasBirthPlace,Literal(birthInfo[2][0]+", "+birthInfo[2][1]+", "+birthInfo[2][2])))
+    g.add((source,cwrcNamespace.hasBirthDate,Literal(birthInfo.birthDate)))
+    for birthPosition in birthInfo.birthPositions:
+        g.add((source,cwrcNamespace.hasBirthPosition,Literal(birthPosition)))
+    g.add((source,cwrcNamespace.hasBirthPlace,Literal(birthInfo.birthSettlement+", "+birthInfo.birthRegion+", "+birthInfo.birthGeog)))
 
     # death validation
     # print(deathInfo.deathDate)
     if deathInfo != None:
-        if dateValidate(deathInfo.deathDate):
-            g.add((source,cwrcNamespace.hasDeathDate,Literal(deathInfo.deathDate)))
+        # if dateValidate(deathInfo.deathDate):
+        g.add((source,cwrcNamespace.hasDeathDate,Literal(deathInfo.deathDate)))
         
         for deathCause in deathInfo.deathCauses:
             g.add((source,cwrcNamespace.hasDeathCause,Literal(deathCause)))
@@ -582,7 +582,7 @@ if __name__ == "__main__":
     deathInfo = ""
     for dirName, subdirlist, files in os.walk(mydir):
         for name in files:
-            # if "britve-b.xml" not in name:
+            # if "straju-b.xml" not in name:
             #     continue
             # if "laurma-b" not in name:
             #     continue
