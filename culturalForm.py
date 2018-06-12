@@ -6,6 +6,8 @@ from rdflib import RDF, RDFS, Literal
 from Env import env
 import islandora_auth as login
 
+# temp function for
+
 
 def strip_all_whitespace(string):
     return re.sub('[\s+]', '', str(string))
@@ -23,12 +25,16 @@ class Biography(object):
         self.gender = gender
         self.context_list = []
         self.cf_list = []
+        self.event_list = []
 
     def add_context(self, id, text, type="culturalformation"):
         self.context_list.append(Context(id, text, type))
 
     def add_cultural_form(self, predicate, reported, value, other_attributes=None):
         self.cf_list.append(CulturalForm(predicate, reported, value, other_attributes))
+
+    def add_event(self, title, event_type, date, other_attributes=None):
+        self.event_list.append(Event(title, event_type, date, other_attributes))
 
     def create_context_triples(self):
         # create mini context graph
@@ -44,6 +50,8 @@ class Biography(object):
         # create graph
         # create bio triples
             # Foaf name?
+        self.create_context_triples()
+        self.create_cf_triples()
         # create context triples
         # create cf triples
         # self.cre
@@ -60,6 +68,10 @@ class Biography(object):
         if self.cf_list:
             string += "CulturalForms: \n"
             for x in self.cf_list:
+                string += str(x) + "\n"
+        if self.event_list:
+            string += "Events: \n"
+            for x in self.event_list:
                 string += str(x) + "\n"
 
         return string
@@ -79,6 +91,7 @@ class Context(object):
         self.id = id
         self.text = text
         self.type = self.context_map[type]
+        self.subjects = []
 
     def to_triple(self, person_uri):
         # Pending OA stuff
@@ -96,18 +109,18 @@ class Context(object):
 
 
 class CulturalForm(object):
-    """docstring for CulturalForm"""
+    """docstring for CulturalForm
+        Notes: mapping is done prior to creation of cf, no need to include class type then
+        if no term found then use value as string --> this needs to be logged eventually not just in final triples
 
-    def __init__(self, predicate, reported, value, other_attributes=None):
+    """
+
+    def __init__(self, context_id, predicate, reported, value, other_attributes=None):
         super(CulturalForm, self).__init__()
+        self.context_id = context_id
         self.predicate = predicate
         self.reported = reported
-        # Should I do mapping prior to creation of obj or during?
-        # if during then may want to include class type of value to ensure it matches up currently?
-        self.value = value  # this can go through some mapping process of either a csv or the ontology itself
-        # add possible related context id related to OA
-        # Or the mapping can be in the to_triple
-         # what to do when their is no mapped term?
+        self.value = value
 
     def to_triple(self, person_uri):
         p = self.predicate + self.reported
@@ -118,6 +131,29 @@ class CulturalForm(object):
         string = "\tpredicate: " + self.predicate + "\n"
         string += "\treported: " + str(self.reported) + "\n"
         string += "\tvalue: " + str(self.value) + "\n"
+        return string
+
+
+class Event(object):
+    """docstring for CulturalForm"""
+
+    def __init__(self, title, event_type, date, other_attributes=None):
+        super(Event, self).__init__()
+        self.title = title
+        self.event_type = event_type
+        self.date = date
+
+    def to_triple(self, person_uri):
+        # p = self.predicate + self.reported
+        # o = self.value
+        # figure out if i can just return tuple or triple without creating a whole graph
+        pass
+
+    def __str__(self):
+        string = "\tevent_type: " + str(self.event_type) + "\n"
+        text = strip_all_whitespace(str(self.title))
+        string += "\tcontent: " + text + "\n"
+        string += "\tdate: " + str(self.date) + "\n"
         return string
 
 
@@ -187,7 +223,7 @@ def find_cultural_forms(cf):
 
         pas = cf.find_all("politicalaffiliation")
         for x in pas:
-            print(x)
+            # print(x)
             value = get_reg(x)
             if not value:
                 value = "__" + str(x.text) + "__"
@@ -223,7 +259,16 @@ def find_cultural_forms(cf):
             cf_list.append(CulturalForm(predicate, None, value))
 
     def get_forebear_cfs():
+        # This optional attribute attaches to the elements Ethnicity, Geographical Heritage, National Heritage, or Race, Colour,
+        # has ten possible values: Father, Mother, Parents, Grandfather, Grandmother, Grandparents, Aunt, Uncle, Other, and Family.
+        #
         tags = ["racecolour", "nationalheritage", "geogheritage", "ethnicity"]
+        # geogheritage and national
+
+        # for x in tags[:1]:
+        temp = cf.find_all("language")
+        # for y in temp:
+            # print(y)
         # This will have to interact will sparql endpoint to check family related triples
         # sparql query to check if person hasMother/hasFather, and there is a valid uri
         # otherwise create the person and familial relation?
@@ -232,10 +277,32 @@ def find_cultural_forms(cf):
         # go through mapping here or no?
         tags = ["nationality", "sexualidentity"]
 
+    get_forebear_cfs()
     get_class()
     get_language()
     get_PA()
     return cf_list
+
+
+def find_event(type, tag, person):
+    event_tag = tag.find_all("chronstruct")
+    for x in event_tag:
+        # print(type)
+        # print(event_tag)
+        event_body = ""
+
+        for y in x.find_all("chronprose"):
+            event_body += str(y)
+
+        date = None
+        for y in x.find_all("date"):
+            date = y.text
+
+        # print(date)
+
+        person.add_event(event_body, type, date)
+
+    pass
 
 
 def create_cf_data(bio, person):
@@ -245,8 +312,11 @@ def create_cf_data(bio, person):
     id = 1
 
     for cf in cfs:
+
         forms_found = 0
         for x in cf_subelements:
+            find_event(x, cf, person)
+
             temp = cf.find_all(x)
             for y in temp:
                 person.add_context(x + "_context" + str(id), y, x)
@@ -279,6 +349,7 @@ def main():
         create_cf_data(soup, test_person)
 
         print(test_person)
+        print("=" * 75)
         # exit()
 
     # exit()
