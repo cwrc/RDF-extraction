@@ -6,7 +6,15 @@ from rdflib import RDF, RDFS, Literal
 from Env import env
 import islandora_auth as login
 
-# temp function for
+# temp log library for debugging
+from log import *
+log = Log("log/cf/errors")
+log.test_name("CF extraction Error Logging")
+
+extract_log = Log("log/cf/extraction")
+extract_log.test_name("CF extraction Test Logging")
+
+# temp function for condensing the context strings in visibility
 
 
 def strip_all_whitespace(string):
@@ -21,7 +29,6 @@ class Biography(object):
         super(Biography, self).__init__()
         self.id = id
         self.name = name
-        # Check mapping for gender ? --> do it before creating bio obj
         self.gender = gender
         self.context_list = []
         self.cf_list = []
@@ -39,6 +46,12 @@ class Biography(object):
 
     def add_cultural_form(self, culturalform):
         self.cf_list += culturalform
+        # if culturalform is list:
+            # self.cf_list += culturalform
+            # self.cf_list.extend(culturalform)
+        #     pass
+        # else:
+        #     self.cf_list.append(culturalform)
 
     def create_cultural_form(self, predicate, reported, value, other_attributes=None):
         self.cf_list.append(CulturalForm(predicate, reported, value, other_attributes))
@@ -99,8 +112,12 @@ class Context(object):
     def __init__(self, id, text, type="culturalformation", motivation="describing"):
         super(Context, self).__init__()
         self.id = id
-        self.text = text
-        # holding off till we know how src should work
+
+        self.tag = text
+        # Will possibly have to clean up citations sans ()
+        self.text = ' '.join(str(text.get_text()).split())
+
+        # holding off till we know how src should work may have to how we're grabbing entries from islandora api
         # self.src = src
         self.type = self.context_map[type]
         self.motivation = motivation
@@ -117,15 +134,15 @@ class Context(object):
 
     def __str__(self):
         string = "\tid: " + str(self.id) + "\n"
-        text = ' '.join(str(self.text).split())
         # text = strip_all_whitespace(str(self.text))
         string += "\ttype: " + self.type + "\n"
         string += "\tmotivation: " + self.motivation + "\n"
-        string += "\ttext: \n\t\t{" + text + "}\n"
+        string += "\ttag: \n\t\t{" + str(self.tag) + "}\n"
+        string += "\ttext: \n\t\t{" + self.text + "}\n"
         if self.subjects:
-            string += "\tsubjects:"
+            string += "\tsubjects:\n"
             for x in self.subjects:
-                string += str(x)
+                string += "\t\t" + str(x) + "\n"
         return string + "\n"
 
     # def context_count(self,type):
@@ -216,19 +233,50 @@ def find_cultural_forms(cf):
         return None
 
     def get_reg(tag):
-        reg = tag.get("reg")
-        if reg:
-            return reg
+        return get_attribute(tag, "reg")
+
+    def get_attribute(tag, attribute):
+        value = tag.get(attribute)
+        if value:
+            return value
         return None
+
+    def get_value(tag):
+        value = get_reg(tag)
+        if not value:
+            value = get_attribute(tag, "CURRENTALTERNATIVETERM")
+        if not value:
+            value = str(tag.text)
+            value = ' '.join(value.split())
+        return value
 
     def get_class():
         classes = cf.find_all("class")
         for x in classes:
             value = x.get("socialrank")
-            if not value:
-                value = str(x.text)
+
+            if not value or value == "OTHER":
+                value = get_value(x)
 
             cf_list.append(CulturalForm("hasSocialClass", get_reported(x), get_mapped_term("SocialClass", value)))
+
+    def get_language():
+        # NEED MAPPING TO LOC CODES
+        langs = cf.find_all("language")
+        for x in langs:
+            value = get_value(x)
+
+            # What if nested ethnicity tag?
+            competence = x.get("competence")
+            predicate = ""
+            if competence == "MOTHER":
+                predicate = "hasNativeLinguisticAbility"
+            elif competence == "OTHER":
+                predicate = "hasLinguisticAbility"
+            else:
+                predicate = "hasLinguisticAbility"
+
+            cf_list.append(CulturalForm(predicate, None, get_mapped_term("Language", value)))
 
     def get_denomination():
         pass
@@ -266,27 +314,6 @@ def find_cultural_forms(cf):
             elif x.get("membership") == "MEMBERSHIPYES":
                 cf_list.append(CulturalForm("hasMembership", None, value))
 
-    def get_language():
-        # NEED MAPPING TO LOC CODES
-        langs = cf.find_all("language")
-        for x in langs:
-            value = get_reg(x)
-            if not value:
-                value = x.text
-
-            # Need real value from mapping
-            # What if nested ethnicity tag?
-
-            competence = x.get("competence")
-            predicate = ""
-            if competence == "MOTHER":
-                predicate = "hasNativeLinguisticAbility"
-            elif competence == "OTHER":
-                predicate = "hasLinguisticAbility"
-            else:
-                predicate = "hasLinguisticAbility"
-            cf_list.append(CulturalForm(predicate, None, value))
-
     def get_forebear_cfs():
         # This optional attribute attaches to the elements Ethnicity, Geographical Heritage, National Heritage, or Race, Colour,
         # has ten possible values: Father, Mother, Parents, Grandfather, Grandmother, Grandparents, Aunt, Uncle, Other, and Family.
@@ -308,7 +335,7 @@ def find_cultural_forms(cf):
 
     # get_forebear_cfs()
     get_class()
-    # get_language()
+    get_language()
     # get_PA()
     return cf_list
 
@@ -354,17 +381,22 @@ def create_cf_data(bio, person):
 
             temp = cf.find_all(x)
             for y in temp:
-                temp_context = Context(x + "_context" + str(cf_subelements_count[x]), y.get_text(), x)
+                temp_context = None
+                cf_list = None
+                temp_context = Context(x + "_context" + str(cf_subelements_count[x]), y, x)
                 cf_subelements_count[x] += 1
                 forms_found += 1
 
-                cf_list = find_cultural_forms(cf)
-                temp_context.subjects = get_subjects(cf_list)
+                cf_list = find_cultural_forms(y)
+                if cf_list:
+                    temp_context.subjects = get_subjects(cf_list)
+                    person.add_cultural_form(cf_list)
                 person.add_context(temp_context)
-                person.add_cultural_form(cf_list)
 
         if forms_found == 0:
-            temp_context = Context(x + "_context" + str(id), cf.get_text())
+            temp_context = None
+            cf_list = None
+            temp_context = Context(x + "_context" + str(id), cf)
 
             cf_list = find_cultural_forms(cf)
             temp_context.subjects = get_subjects(cf_list)
@@ -380,7 +412,7 @@ cf_map = {}
 def create_cf_map():
     import csv
     global cf_map
-    with open('mapping.csv', newline='') as csvfile:
+    with open('cf_mapping.csv', newline='') as csvfile:
         reader = csv.reader(csvfile)
         next(reader)
         for row in reader:
@@ -392,18 +424,39 @@ def create_cf_map():
 
 
 # Currently getting exact match ignoring case and "-"
-# todo:
+# TODO:
 # Will need add some sort of percentage match for failures
 # log unmatched term,
 # return literal or uri
+# Make csv of upmapped
+# Make stats report of sucessfulness/failure of mappings
+map_attempt = 0
+map_success = 0
+map_fail = 0
+
+fail_dict = {}
+
+
+def update_fails(rdf_type):
+    global fail_dict
+    if rdf_type in fail_dict:
+        fail_dict[rdf_type] += 1
+    else:
+        fail_dict[rdf_type] = 1
+
+
 def get_mapped_term(rdf_type, value):
+    global map_attempt
+    global map_success
+    global map_fail
     if "http://sparql.cwrc.ca/ontologies/cwrc#" not in rdf_type:
         rdf_type = "http://sparql.cwrc.ca/ontologies/cwrc#" + rdf_type
-
+    map_attempt += 1
     term = None
     for x in cf_map[rdf_type]:
-        if value.lower().replace("-", " ") in x:
+        if value.lower().replace("-", " ").strip() in x:
             term = x[0]
+            map_success += 1
             break
 
     if "http" in str(term):
@@ -412,10 +465,19 @@ def get_mapped_term(rdf_type, value):
         term = rdflib.term.Literal(term, datatype=rdflib.namespace.XSD.string)
     else:
         term = rdflib.term.Literal("_" + value.lower() + "_", datatype=rdflib.namespace.XSD.string)
+        log.msg("Unable to find mapped term:" + value)
+        log.msg("\tclass type: " + rdf_type.split("#")[1])
+        log.msg("\t\tvalue:" + "'" + value + "'")
+        log.msg("")
+        map_fail += 1
+        update_fails(rdf_type)
     return term
 
 
 def main():
+    # testing()
+    # exit()
+
     import os
     create_cf_map()
     # get_mapped_term("Gender", "MALE")
@@ -434,6 +496,7 @@ def main():
     # g = rdflib.Graph()
 
     filelist = [filename for filename in sorted(os.listdir("bio_data")) if filename.endswith(".xml")]
+    entry_num = 1
 
     # for filename in filelist[:200]:
     for filename in filelist:
@@ -445,10 +508,27 @@ def main():
 
         create_cf_data(soup, test_person)
 
-        print(test_person)
-        print("=" * 75)
+        # print("=" * 50, "Entry #", entry_num, "=" * 50)
+        # print(test_person)
+        # print("=" * 50, "Entry #", entry_num, "=" * 50)
+        # print("\n\n")
+
+        extract_log.subtitle("Entry #" + str(entry_num))
+        extract_log.msg(str(test_person))
+        extract_log.subtitle("Entry #" + str(entry_num))
+        extract_log.msg("\n\n")
+        entry_num += 1
+
         # exit()
 
+    extract_log.subtitle("Attempts: #" + str(map_attempt))
+    extract_log.subtitle("Fails: #" + str(map_fail))
+    extract_log.subtitle("Success: #" + str(map_success))
+    extract_log.separ()
+    extract_log.msg("")
+    extract_log.subtitle("Failure Details:")
+    for x in fail_dict.keys():
+        extract_log.subtitle(x.split("#")[1] + ":" + str(fail_dict[x]))
     # exit()
 
 
@@ -476,10 +556,6 @@ def test():
     # g.add((data.him, cwrc.brother, data.joe))
     # g.add((data.eve, cwrc.hasReligion, data.hindu))
     temp = g.serialize(format="ttl").decode()
-    print(temp)
-    # for s, p, o in g.triples((None, None, None)):
-    #     print(s, p, o)
-
     exit()
 
 if __name__ == "__main__":
