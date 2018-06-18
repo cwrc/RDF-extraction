@@ -6,7 +6,7 @@ from rdflib import RDF, RDFS, Literal
 from Env import env
 import islandora_auth as login
 
-# temp log library for debugging
+# temp log library for debugging --> to be eventually replaced with proper logging library
 from log import *
 log = Log("log/cf/errors")
 log.test_name("CF extraction Error Logging")
@@ -25,6 +25,7 @@ namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
 namespace_manager.bind('cwrc', CWRC, override=False)
 namespace_manager.bind('foaf', FOAF, override=False)
 namespace_manager.bind('cwrcdata', DATA, override=False)
+
 
 def strip_all_whitespace(string):
 # temp function for condensing the context strings in visibility
@@ -81,14 +82,12 @@ class Biography(object):
         namespace_manager.bind('cwrc', CWRC, override=False)
         namespace_manager.bind('foaf', FOAF, override=False)
         namespace_manager.bind('cwrcdata', DATA, override=False)
+        g.add((self.uri, RDF.type, CWRC.NaturalPerson))
         g.add((self.uri, FOAF.name, rdflib.Literal(self.name)))
         g.add((self.uri, CWRC.hasGender, self.gender))
         g += self.create_triples(self.cf_list)
         # g += self.create_triples(self.context_list)
         # g += self.create_triples(self.event_list)
-        # g += self.create_cf_triples()
-        # g += self.create_context_triples()
-        # create event triples
         global uber_graph
         uber_graph += g
         return g
@@ -167,8 +166,6 @@ class Context(object):
 class CulturalForm(object):
     """docstring for CulturalForm
         Notes: mapping is done prior to creation of cf, no need to include class type then
-        if no term found then use value as string --> this needs to be logged eventually not just in final triples
-
     """
 
     def __init__(self, predicate, reported, value, other_attributes=None):
@@ -362,7 +359,7 @@ def find_cultural_forms(cf):
         # geogheritage and national
 
         # for x in tags[:1]:
-        temp = cf.find_all("language")
+        # temp = cf.find_all("language")
         # for y in temp:
             # print(y)
         # This will have to interact will sparql endpoint to check family related triples
@@ -460,28 +457,30 @@ def create_cf_map():
             cf_map[row[0]].append(list(filter(None, [row[1], *temp_row])))
 
 
+map_attempt = 0
+map_success = 0
+map_fail = 0
+fail_dict = {}
+
+
+def update_fails(rdf_type, value):
+    global fail_dict
+    if rdf_type in fail_dict:
+        if value in fail_dict[rdf_type]:
+            fail_dict[rdf_type][value] += 1
+        else:
+            fail_dict[rdf_type][value] = 1
+    else:
+        fail_dict[rdf_type] = {value: 1}
+
+
 # Currently getting exact match ignoring case and "-"
 # TODO:
 # Will need add some sort of percentage match for failures
 # log unmatched term,
 # return literal or uri
-# Make csv of upmapped
+# Make csv of unmapped
 # Make stats report of sucessfulness/failure of mappings
-map_attempt = 0
-map_success = 0
-map_fail = 0
-
-fail_dict = {}
-
-
-def update_fails(rdf_type):
-    global fail_dict
-    if rdf_type in fail_dict:
-        fail_dict[rdf_type] += 1
-    else:
-        fail_dict[rdf_type] = 1
-
-
 def get_mapped_term(rdf_type, value):
     global map_attempt
     global map_success
@@ -502,19 +501,12 @@ def get_mapped_term(rdf_type, value):
         term = rdflib.term.Literal(term, datatype=rdflib.namespace.XSD.string)
     else:
         term = rdflib.term.Literal("_" + value.lower() + "_", datatype=rdflib.namespace.XSD.string)
-        log.msg("Unable to find mapped term:" + value)
-        log.msg("\tclass type: " + rdf_type.split("#")[1])
-        log.msg("\t\tvalue:" + "'" + value + "'")
-        log.msg("")
         map_fail += 1
-        update_fails(rdf_type)
+        update_fails(rdf_type, value)
     return term
 
 
 def main():
-    # testing()
-    # exit()
-
     import os
     create_cf_map()
 
@@ -547,50 +539,32 @@ def main():
 
         entry_num += 1
 
-        # exit()
     turtle_log.subtitle(str(len(uber_graph)) + " triples created")
-    turtle_log.msg(uber_graph.serialize(format="ttl").decode())
+    turtle_log.msg(uber_graph.serialize(format="ttl").decode(), stdout=False)
     turtle_log.msg("")
 
     extract_log.subtitle("Attempts: #" + str(map_attempt))
     extract_log.subtitle("Fails: #" + str(map_fail))
     extract_log.subtitle("Success: #" + str(map_success))
     extract_log.separ()
-    extract_log.msg("")
     extract_log.subtitle("Failure Details:")
     for x in fail_dict.keys():
-        extract_log.subtitle(x.split("#")[1] + ":" + str(fail_dict[x]))
-    # exit()
+        log.subtitle(x.split("#")[1] + ":" + str(len(fail_dict[x].keys())))
+
+    log.separ("#")
+    for x in fail_dict.keys():
+        log.msg(x.split("#")[1] + "(" + str(len(fail_dict[x].keys())) + ")" + ":")
+        for y in fail_dict[x].keys():
+            log.msg("\t" + y + ": " + str(fail_dict[x][y]))
+        log.separ()
+        print()
 
 
-# test code for creating triples
 def test():
-    g = rdflib.Graph()
-    namespace_manager = rdflib.namespace.NamespaceManager(g)
-
-    cwrc = rdflib.Namespace("http://sparql.cwrc.ca/ontologies/cwrc#")
-    data = rdflib.Namespace("http://cwrc.ca/cwrcdata/")
-    namespace_manager.bind('cwrc', cwrc, override=False)
-    namespace_manager.bind('cwrcdata', data, override=False)
-
-    data.bob  # = rdflib.term.URIRef(u'http://example.org/people/bob')
-    data.eve  # = rdflib.term.URIRef(u'http://example.org/people/eve')
-
-    temp1 = ["name1", "name2", "name3"]
-
-    for x in temp1:
-        b = str(data) + x
-        g.add((rdflib.term.URIRef(b), cwrc.hasBrother, data.eve))
-
-    # g.add((data.bob, cwrc.potato, data.idk))
-    # g.add((data.bob, cwrc.something, data.lol))
-    # g.add((data.him, cwrc.brother, data.joe))
-    # g.add((data.eve, cwrc.hasReligion, data.hindu))
-    temp = g.serialize(format="ttl").decode()
     exit()
 
 if __name__ == "__main__":
     # auth = [env.env("USER_NAME"), env.env("PASSWORD")]
     # login.main(auth)
-    main()
     # test()
+    main()

@@ -11,6 +11,7 @@ class Log(object):
         file (file_obj)
         file_name (string)
     """
+    TERM_SIZE = os.get_terminal_size().columns
 
     def __init__(self, file_name, script_file=None):
         """Init Log object
@@ -149,16 +150,18 @@ class Log(object):
         """
         self.time(True)
         self.separ()
-        self.msg(name.center(100))
+        print(name.center(self.TERM_SIZE))
+        self.msg(name.center(100), stdout=False)
         self.separ()
 
     def subtitle(self, name):
         """outputting a formatted test label to log file includes the full date
         """
         # self.time(True)
-        self.separ(character="=")
-        self.msg(name.center(100))
-        self.separ(character="=")
+        self.separ("=")
+        print(name.center(self.TERM_SIZE))
+        self.msg(name.center(100), stdout=False)
+        self.separ("=")
         # self.separ()
 
     def time(self, full=False):
