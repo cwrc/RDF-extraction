@@ -2,7 +2,7 @@
 import time
 import os
 import sys
-from tabulate import tabulate
+# from tabulate import tabulate
 
 
 class Log(object):
@@ -82,7 +82,7 @@ class Log(object):
         for line in self.fail_count:
             table.append(line.split(","))
 
-        self.msg(tabulate(table, ["Channel", "Trap", "Details", "Occurences"], tablefmt="grid"))
+        # self.msg(tabulate(table, ["Channel", "Trap", "Details", "Occurences"], tablefmt="grid"))
 
         # for x in sorted(self.fail_countBeta, key=self.fail_countBeta.get, reverse=True):
         #     # print x, failCount[x]

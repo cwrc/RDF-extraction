@@ -10,24 +10,34 @@ import islandora_auth as login
 from log import *
 log = Log("log/cf/errors")
 log.test_name("CF extraction Error Logging")
-
 extract_log = Log("log/cf/extraction")
 extract_log.test_name("CF extraction Test Logging")
+turtle_log = Log("log/cf/triples")
+turtle_log.test_name("CF extracted Triples")
 
-# temp function for condensing the context strings in visibility
 
+CWRC = rdflib.Namespace("http://sparql.cwrc.ca/ontologies/cwrc#")
+FOAF = rdflib.Namespace('http://xmlns.com/foaf/0.1/')
+DATA = rdflib.Namespace("http://cwrc.ca/cwrcdata/")
+
+uber_graph = rdflib.Graph()
+namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
+namespace_manager.bind('cwrc', CWRC, override=False)
+namespace_manager.bind('foaf', FOAF, override=False)
+namespace_manager.bind('cwrcdata', DATA, override=False)
 
 def strip_all_whitespace(string):
+# temp function for condensing the context strings in visibility
     return re.sub('[\s+]', '', str(string))
 
 
 class Biography(object):
     """docstring for Biography"""
-    g = rdflib.Graph()
 
     def __init__(self, id, name, gender):
         super(Biography, self).__init__()
         self.id = id
+        self.uri = rdflib.term.URIRef(str(DATA) + id)
         self.name = name
         self.gender = gender
         self.context_list = []
@@ -59,27 +69,32 @@ class Biography(object):
     def add_event(self, title, event_type, date, other_attributes=None):
         self.event_list.append(Event(title, event_type, date, other_attributes))
 
-    def create_context_triples(self):
-        # create mini context graph
-        # for x in self.context_list:
-        #     x.to_triple(self.id)
-        pass
-
-    def create_cf_triples(self):
-        # create mini cf graph
-        pass
+    def create_triples(self, e_list):
+        g = rdflib.Graph()
+        for x in e_list:
+            g += x.to_triple(self.uri)
+        return g
 
     def to_graph(self):
-        # create graph
-        # create bio triples
-            # Foaf name?
-            # hasGender?
-        self.create_context_triples()
-        self.create_cf_triples()
-        # create context triples
-        # create cf triples
+        g = rdflib.Graph()
+        namespace_manager = rdflib.namespace.NamespaceManager(g)
+        namespace_manager.bind('cwrc', CWRC, override=False)
+        namespace_manager.bind('foaf', FOAF, override=False)
+        namespace_manager.bind('cwrcdata', DATA, override=False)
+        g.add((self.uri, FOAF.name, rdflib.Literal(self.name)))
+        g.add((self.uri, CWRC.hasGender, self.gender))
+        g += self.create_triples(self.cf_list)
+        # g += self.create_triples(self.context_list)
+        # g += self.create_triples(self.event_list)
+        # g += self.create_cf_triples()
+        # g += self.create_context_triples()
         # create event triples
-        pass
+        global uber_graph
+        uber_graph += g
+        return g
+
+    def to_file(self, graph, serialization="ttl"):
+        return graph.serialize(format=serialization).decode()
 
     def __str__(self):
         string = "id: " + str(self.id) + "\n"
@@ -163,10 +178,25 @@ class CulturalForm(object):
         self.reported = reported
         self.value = value
 
-    def to_triple(self, person_uri):
-        p = self.predicate + self.reported
+    # figure out if i can just return tuple or triple without creating a whole graph
+    # Evaluate efficency of creating this graph or just returning a tuple and have the biography deal with it
+    def to_tuple(self, person_uri):
+        # For future testing
+        p = str(CWRC) + self.predicate + self.reported
         o = self.value
-        # figure out if i can just return tuple or triple without creating a whole graph
+        return ((person_uri, rdflib.term.URIRef(p), o))
+
+    def to_triple(self, person_uri):
+        if self.reported:
+            p = str(CWRC) + self.predicate + self.reported
+        else:
+            p = str(CWRC) + self.predicate
+
+        # o = str(CWRC) + self.value
+        o = self.value
+        g = rdflib.Graph()
+        g.add((person_uri, rdflib.term.URIRef(p), o))
+        return g
 
     def __str__(self):
         string = "\tpredicate: " + self.predicate + "\n"
@@ -228,6 +258,7 @@ def find_cultural_forms(cf):
                 return "Reported"
             elif reported == "SELFUNKNOWN":
                 return "Reported"
+                log.title(str(tag))
             else:
                 return "?????"
         return None
@@ -261,7 +292,6 @@ def find_cultural_forms(cf):
             cf_list.append(CulturalForm("hasSocialClass", get_reported(x), get_mapped_term("SocialClass", value)))
 
     def get_language():
-        # NEED MAPPING TO LOC CODES
         langs = cf.find_all("language")
         for x in langs:
             value = get_value(x)
@@ -277,6 +307,16 @@ def find_cultural_forms(cf):
                 predicate = "hasLinguisticAbility"
 
             cf_list.append(CulturalForm(predicate, None, get_mapped_term("Language", value)))
+
+    def get_other_cfs():
+        tags = {"nationality": ["hasNationality", "NationalIdentity"],
+                "sexualidentity": ["hasSexuality", "Sexuality"]}
+        for tag in tags.keys():
+            instances = cf.find_all(tag)
+            for x in instances:
+                value = get_value(x)
+                cf_list.append(CulturalForm(tags[tag][0], get_reported(x),
+                                            get_mapped_term(tags[tag][1], value)))
 
     def get_denomination():
         pass
@@ -329,13 +369,11 @@ def find_cultural_forms(cf):
         # sparql query to check if person hasMother/hasFather, and there is a valid uri
         # otherwise create the person and familial relation?
         pass
-    def get_other_cfs():
-        # go through mapping here or no?
-        tags = ["nationality", "sexualidentity"]
 
     # get_forebear_cfs()
     get_class()
     get_language()
+    get_other_cfs()
     # get_PA()
     return cf_list
 
@@ -419,7 +457,6 @@ def create_cf_map():
             if row[0] not in cf_map:
                 cf_map[row[0]] = []
             temp_row = [x.lower().replace("-", " ") for x in row[2:]]
-
             cf_map[row[0]].append(list(filter(None, [row[1], *temp_row])))
 
 
@@ -480,31 +517,18 @@ def main():
 
     import os
     create_cf_map()
-    # get_mapped_term("Gender", "MALE")
-    # get_mapped_term("Gender", "transgendered male to female")
-    # get_mapped_term("PoliticalAffiliation", "sugar boycotter")
-    # get_mapped_term("RaceColour", "mixed-race")
-    # get_mapped_term("Ethnicity", "jew")
-    # get_mapped_term("Religion", "Buddhist")
-    # get_mapped_term("Language", "Russian")
-    # get_mapped_term("http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity", "scot")
-    # get_mapped_term("Language", "JEW")
-    # exit()
-
-    # data = rdflib.Namespace("http://cwrc.ca/cwrcdata/")
-    # cwrc = rdflib.Namespace("http://sparql.cwrc.ca/ontologies/cwrc#")
-    # g = rdflib.Graph()
 
     filelist = [filename for filename in sorted(os.listdir("bio_data")) if filename.endswith(".xml")]
     entry_num = 1
 
     # for filename in filelist[:200]:
+    # for filename in filelist[-5:]:
     for filename in filelist:
         with open("bio_data/" + filename) as f:
             soup = BeautifulSoup(f, 'lxml')
 
         # print(filename)
-        test_person = Biography(filename[:-3], get_name(soup), get_mapped_term("Gender", get_sex(soup)))
+        test_person = Biography(filename[:-4], get_name(soup), get_mapped_term("Gender", get_sex(soup)))
 
         create_cf_data(soup, test_person)
 
@@ -517,9 +541,16 @@ def main():
         extract_log.msg(str(test_person))
         extract_log.subtitle("Entry #" + str(entry_num))
         extract_log.msg("\n\n")
+        graph = test_person.to_graph()
+        extract_log.subtitle(str(len(graph)) + " triples created")
+        extract_log.msg(test_person.to_file(graph))
+
         entry_num += 1
 
         # exit()
+    turtle_log.subtitle(str(len(uber_graph)) + " triples created")
+    turtle_log.msg(uber_graph.serialize(format="ttl").decode())
+    turtle_log.msg("")
 
     extract_log.subtitle("Attempts: #" + str(map_attempt))
     extract_log.subtitle("Fails: #" + str(map_fail))
