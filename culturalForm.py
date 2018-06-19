@@ -243,7 +243,7 @@ def get_uri(value):
     pass
 
 
-def find_cultural_forms(cf):
+def find_cultural_forms(cf, person_uri):
     cf_list = []
 
     def get_reported(tag):
@@ -315,8 +315,87 @@ def find_cultural_forms(cf):
                 cf_list.append(CulturalForm(tags[tag][0], get_reported(x),
                                             get_mapped_term(tags[tag][1], value)))
 
-    def get_denomination():
+    def get_geoheritage():
+        # will require more detailed scrape and parsing of place info + mapping to geonames, may need to split into a separate script pending
+        return "None"
+
+    def get_forebear_cfs():
+        # This will have to interact will sparql endpoint to check family related triples
+        # sparql query to check if person hasMother/hasFather, and there is a valid uri
+        # otherwise create the person and familial relation?
+        def get_forebear(tag):
+            return get_attribute(tag, "FOREBEAR")
+        # This optional attribute attaches to the elements Ethnicity, Geographical Heritage, National Heritage, or Race, Colour,
+        # has ten possible values: Father, Mother, Parents, Grandfather, Grandmother, Grandparents, Aunt, Uncle, Other, and Family.
+
+        def existing_forebear(relation):
+            # TODO: sparql query to check if relation exists will also need person's uri
+            # also check current uber graph?
+            return None
+
+        def add_forebear(relation, culturalform):
+            family = {
+                "FATHER": "hasFather",
+                "MOTHER": "hasMother",
+                "GRANDFATHER": "hasGrandFather",
+                "GRANDMOTHER": "hasGrandMother",
+                "AUNT": "hasAunt",
+                "UNCLE": "hasUncle"
+            }
+            # check graph for existing forebear and get their uri
+            forebear_uri = existing_forebear(family[relation])
+            if not forebear_uri:
+                pass
+                # create forebear
+                # check if uri available
+                # foafname
+                # type as real person
+                # gender
+                # person_uri cwrc.relation forebear_uri
+                # uber_graph.add()
+
+            # forebear_uri culturalform.predicate culturalform.value
+            # Create
+            pass
+
+        tags = {"racecolour": "RaceColour",
+                "nationalheritage": "NationalHeritage",
+                "geogheritage": "GeographicHeritage",
+                "ethnicity": "Ethnicity"}
+
+        for tag in tags.keys():
+            instances = cf.find_all(tag)
+            for x in instances:
+                forebear = get_forebear(x)
+
+                if tag == "geogheritage":
+                    value = get_geoheritage()
+                else:
+                    value = get_value(x)
+
+                culturalform = CulturalForm("has" + tags[tag], get_reported(x), get_mapped_term(tags[tag], value))
+                cf_list.append(culturalform)
+
+                if not forebear or forebear in ["OTHER", "FAMILY"]:
+                    continue
+
+                if forebear == "PARENTS":
+                    add_forebear("MOTHER", culturalform)
+                    add_forebear("FATHER", culturalform)
+
+                elif forebear == "GRANDPARENTS":
+                    add_forebear("GRANDMOTHER", culturalform)
+                    add_forebear("GRANDFATHER", culturalform)
+                else:
+                    add_forebear(forebear, culturalform)
+
         pass
+
+    def get_denomination():
+        religions = cf.find_all("denomination")
+        for x in religions:
+            value = get_mapped_term("Religion", get_value(x))
+            cf_list.append(CulturalForm("hasReligion", get_reported(x), value))
 
     def get_PA():
         # Create theoretical extra triples for now
@@ -337,10 +416,7 @@ def find_cultural_forms(cf):
 
         pas = cf.find_all("politicalaffiliation")
         for x in pas:
-            # print(x)
-            value = get_reg(x)
-            if not value:
-                value = "__" + str(x.text) + "__"
+            value = get_mapped_term("PoliticalAffiliation", get_value(x))
 
             cf_list.append(CulturalForm("hasPoliticalAffiliation", get_reported(x), value))
             # Since according to orlando it is a scale and they overlap
@@ -351,27 +427,12 @@ def find_cultural_forms(cf):
             elif x.get("membership") == "MEMBERSHIPYES":
                 cf_list.append(CulturalForm("hasMembership", None, value))
 
-    def get_forebear_cfs():
-        # This optional attribute attaches to the elements Ethnicity, Geographical Heritage, National Heritage, or Race, Colour,
-        # has ten possible values: Father, Mother, Parents, Grandfather, Grandmother, Grandparents, Aunt, Uncle, Other, and Family.
-        #
-        tags = ["racecolour", "nationalheritage", "geogheritage", "ethnicity"]
-        # geogheritage and national
-
-        # for x in tags[:1]:
-        # temp = cf.find_all("language")
-        # for y in temp:
-            # print(y)
-        # This will have to interact will sparql endpoint to check family related triples
-        # sparql query to check if person hasMother/hasFather, and there is a valid uri
-        # otherwise create the person and familial relation?
-        pass
-
-    # get_forebear_cfs()
     get_class()
     get_language()
     get_other_cfs()
-    # get_PA()
+    get_PA()
+    get_forebear_cfs()
+    get_denomination()
     return cf_list
 
 
@@ -398,7 +459,7 @@ def get_subjects(cf_list):
     subjects = []
     for x in cf_list:
         subjects.append(x.value)
-    return subjects
+    return list(set(subjects))
 
 
 def create_cf_data(bio, person):
@@ -422,7 +483,7 @@ def create_cf_data(bio, person):
                 cf_subelements_count[x] += 1
                 forms_found += 1
 
-                cf_list = find_cultural_forms(y)
+                cf_list = find_cultural_forms(y, person.uri)
                 if cf_list:
                     temp_context.subjects = get_subjects(cf_list)
                     person.add_cultural_form(cf_list)
@@ -433,7 +494,7 @@ def create_cf_data(bio, person):
             cf_list = None
             temp_context = Context(x + "_context" + str(id), cf)
 
-            cf_list = find_cultural_forms(cf)
+            cf_list = find_cultural_forms(cf, person.uri)
             temp_context.subjects = get_subjects(cf_list)
 
             person.add_context(temp_context)
