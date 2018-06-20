@@ -613,11 +613,18 @@ def main():
         log.subtitle(x.split("#")[1] + ":" + str(len(fail_dict[x].keys())))
 
     log.separ("#")
+    from collections import OrderedDict
     for x in fail_dict.keys():
         log.msg(x.split("#")[1] + "(" + str(len(fail_dict[x].keys())) + ")" + ":")
-        for y in fail_dict[x].keys():
-            log.msg("\t" + y + ": " + str(fail_dict[x][y]))
+
+        new_dict = OrderedDict(sorted(fail_dict[x].items(), key=lambda t: t[1], reverse=True))
+        for y in new_dict.keys():
+            log.msg("\t" + str(new_dict[y]) + ": " + y)
         log.separ()
+
+        # for y in fail_dict[x].keys():
+        #     log.msg("\t" + y + ": " + str(fail_dict[x][y]))
+        # log.separ()
         print()
 
 
