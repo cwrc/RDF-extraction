@@ -5,7 +5,7 @@ import re
 from rdflib import RDF, RDFS, Literal
 from Env import env
 import islandora_auth as login
-
+from difflib import get_close_matches
 # temp log library for debugging --> to be eventually replaced with proper logging library
 from log import *
 log = Log("log/cf/errors")
@@ -394,6 +394,7 @@ def find_cultural_forms(cf, person_uri):
     def get_denomination():
         religions = cf.find_all("denomination")
         for x in religions:
+            # extract_log.msg(str(x))
             value = get_mapped_term("Religion", get_value(x))
             cf_list.append(CulturalForm("hasReligion", get_reported(x), value))
 
@@ -505,6 +506,17 @@ def create_cf_data(bio, person):
 cf_map = {}
 
 
+def clean_term(string):
+    string = string.lower().replace("-", " ").strip().replace(" ", "")
+    if string[-1:] == "s":
+        string = string[:-1]
+    if string[-3:] in ["ism", "ist", "ing"]:
+        string = string[:-3]
+    if string[-2:] == "er":
+        string = string[:-2]
+    return string
+
+
 def create_cf_map():
     import csv
     global cf_map
@@ -514,7 +526,7 @@ def create_cf_map():
         for row in reader:
             if row[0] not in cf_map:
                 cf_map[row[0]] = []
-            temp_row = [x.lower().replace("-", " ") for x in row[2:]]
+            temp_row = [clean_term(x) for x in row[2:]]
             cf_map[row[0]].append(list(filter(None, [row[1], *temp_row])))
 
 
@@ -551,7 +563,11 @@ def get_mapped_term(rdf_type, value):
     map_attempt += 1
     term = None
     for x in cf_map[rdf_type]:
-        if value.lower().replace("-", " ").strip() in x:
+        # if get_close_matches(value.lower(), x):
+        #     term = x[0]
+        #     map_success += 1
+        #     break
+        if clean_term(value) in x:
             term = x[0]
             map_success += 1
             break
@@ -563,7 +579,14 @@ def get_mapped_term(rdf_type, value):
     else:
         term = rdflib.term.Literal("_" + value.lower() + "_", datatype=rdflib.namespace.XSD.string)
         map_fail += 1
-        update_fails(rdf_type, value)
+        possibilites = []
+        for x in cf_map[rdf_type]:
+            if get_close_matches(value.lower(), x):
+                possibilites.append(x[0])
+        if type(term) is rdflib.term.Literal:
+            update_fails(rdf_type, value)
+        else:
+            update_fails(rdf_type, value + "->" + str(possibilites) + "?")
     return term
 
 
@@ -608,10 +631,16 @@ def main():
     extract_log.subtitle("Fails: #" + str(map_fail))
     extract_log.subtitle("Success: #" + str(map_success))
     extract_log.separ()
+    print()
     extract_log.subtitle("Failure Details:")
+    total_unmapped = 0
     for x in fail_dict.keys():
-        log.subtitle(x.split("#")[1] + ":" + str(len(fail_dict[x].keys())))
+        num = len(fail_dict[x].keys())
+        total_unmapped += num
+        log.subtitle(x.split("#")[1] + ":" + str(num))
+    extract_log.subtitle("Failed to find " + str(total_unmapped) + " unique terms")
 
+    print()
     log.separ("#")
     from collections import OrderedDict
     for x in fail_dict.keys():
@@ -621,14 +650,20 @@ def main():
         for y in new_dict.keys():
             log.msg("\t" + str(new_dict[y]) + ": " + y)
         log.separ()
-
-        # for y in fail_dict[x].keys():
-        #     log.msg("\t" + y + ": " + str(fail_dict[x][y]))
-        # log.separ()
         print()
 
 
 def test():
+    print(clean_term("Dissenter"))
+    print()
+    print(clean_term("Dissenting"))
+    print()
+    print(clean_term("Dissenters"))
+    print()
+    print(clean_term("DISSENTERS"))
+    print()
+    print(clean_term("dissent"))
+    print()
     exit()
 
 if __name__ == "__main__":
