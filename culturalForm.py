@@ -303,6 +303,8 @@ def find_cultural_forms(cf, person_uri):
             else:
                 predicate = "hasLinguisticAbility"
 
+            if value == "hindustani":
+                cf_list.append(CulturalForm(predicate, None, get_mapped_term("Language", "hindi")))
             cf_list.append(CulturalForm(predicate, None, get_mapped_term("Language", value)))
 
     def get_other_cfs():
@@ -312,11 +314,27 @@ def find_cultural_forms(cf, person_uri):
             instances = cf.find_all(tag)
             for x in instances:
                 value = get_value(x)
-                cf_list.append(CulturalForm(tags[tag][0], get_reported(x),
-                                            get_mapped_term(tags[tag][1], value)))
+                if tags[tag][1] == "NationalIdentity" and value in ["Indian/English", "scots american"]:
+                    cf_list.append(CulturalForm(tags[tag][0], get_reported(
+                        x), get_mapped_term(tags[tag][1], value.split("/")[0])))
+                    value = value.split("/")[1]
 
-    def get_geoheritage():
+                cf_list.append(CulturalForm(tags[tag][0], get_reported(x), get_mapped_term(tags[tag][1], value)))
+
+    def get_geoheritage(tag):
         # will require more detailed scrape and parsing of place info + mapping to geonames, may need to split into a separate script pending
+        log.separ()
+        log.msg(strip_all_whitespace(str(tag)))
+        value = get_value(tag)
+        if value and len(value) < 50:
+            log.msg("\t" + value)
+        settlement = tag.find_all("settlement")
+        region = tag.find_all("region")
+        geog = tag.find_all("geog")
+        log.msg("\t\tsettlement: " + str([get_value(x) for x in settlement]))
+        log.msg("\t\tregion: " + str([get_value(x) for x in region]))
+        log.msg("\t\tgeog: " + str([get_value(x) for x in geog]))
+
         return "None"
 
     def get_forebear_cfs():
@@ -369,32 +387,41 @@ def find_cultural_forms(cf, person_uri):
                 forebear = get_forebear(x)
 
                 if tag == "geogheritage":
-                    value = get_geoheritage()
+                    value = get_geoheritage(x)
                 else:
                     value = get_value(x)
 
-                culturalform = CulturalForm("has" + tags[tag], get_reported(x), get_mapped_term(tags[tag], value))
-                cf_list.append(culturalform)
-
-                if not forebear or forebear in ["OTHER", "FAMILY"]:
-                    continue
-
-                if forebear == "PARENTS":
-                    add_forebear("MOTHER", culturalform)
-                    add_forebear("FATHER", culturalform)
-
-                elif forebear == "GRANDPARENTS":
-                    add_forebear("GRANDMOTHER", culturalform)
-                    add_forebear("GRANDFATHER", culturalform)
+                culturalforms = []
+                if tag == "nationalheritage" and value in ["American-Austrian", "Anglo-Scottish", "Scottish-Irish"]:
+                    culturalforms.append(CulturalForm(
+                        "has" + tags[tag], get_reported(x), get_mapped_term(tags[tag], value.split("-")[0])))
+                    culturalforms.append(CulturalForm(
+                        "has" + tags[tag], get_reported(x), get_mapped_term(tags[tag], value.split("-")[1])))
                 else:
-                    add_forebear(forebear, culturalform)
+                    culturalforms.append(CulturalForm(
+                        "has" + tags[tag], get_reported(x), get_mapped_term(tags[tag], value)))
+
+                for culturalform in culturalforms:
+                    cf_list.append(culturalform)
+
+                    if not forebear or forebear in ["OTHER", "FAMILY"]:
+                        continue
+
+                    if forebear == "PARENTS":
+                        add_forebear("MOTHER", culturalform)
+                        add_forebear("FATHER", culturalform)
+
+                    elif forebear == "GRANDPARENTS":
+                        add_forebear("GRANDMOTHER", culturalform)
+                        add_forebear("GRANDFATHER", culturalform)
+                    else:
+                        add_forebear(forebear, culturalform)
 
         pass
 
     def get_denomination():
         religions = cf.find_all("denomination")
         for x in religions:
-            # extract_log.msg(str(x))
             value = get_mapped_term("Religion", get_value(x))
             cf_list.append(CulturalForm("hasReligion", get_reported(x), value))
 
@@ -402,19 +429,13 @@ def find_cultural_forms(cf, person_uri):
         # Create theoretical extra triples for now
         # possible predicates:
         # These will also need inverse if we were to maintain consistency?
-        # There's also some
-        # These are the levels of political involvement
         # MEMBERSHIP --> INVOLVEMENT --> ACTIVISM
         # low --> med --> high
-
         # possible that we can change these predicates to some of leveling term
-        # Should examine data for any contradictions
         # INVOLVEMENTYES --> hasPoliticalInvolvement
         # ACTIVISMYES --> hasActivistRole
         # MEMBERSHIPYES --> hasMembership
         # Membership can be broader to work for general organizations perhaps? ex. religious organizations
-        #
-
         pas = cf.find_all("politicalaffiliation")
         for x in pas:
             value = get_mapped_term("PoliticalAffiliation", get_value(x))
@@ -432,8 +453,8 @@ def find_cultural_forms(cf, person_uri):
     get_language()
     get_other_cfs()
     get_PA()
-    get_forebear_cfs()
     get_denomination()
+    get_forebear_cfs()
     return cf_list
 
 
