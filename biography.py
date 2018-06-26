@@ -1,9 +1,13 @@
 import rdflib
-from rdflib import RDF  #, RDFS, Literal
+from rdflib import RDF  # , RDFS, Literal
 
+AS = rdflib.Namespace("http://www.w3.org/ns/activitystreams#")
 CWRC = rdflib.Namespace("http://sparql.cwrc.ca/ontologies/cwrc#")
-FOAF = rdflib.Namespace('http://xmlns.com/foaf/0.1/')
 DATA = rdflib.Namespace("http://cwrc.ca/cwrcdata/")
+DCTYPES = rdflib.Namespace("http://purl.org/dc/dcmitype/")
+FOAF = rdflib.Namespace('http://xmlns.com/foaf/0.1/')
+OA = rdflib.Namespace("http://www.w3.org/ns/oa#")
+DCTERMS = rdflib.Namespace("http://purl.org/dc/terms/")
 
 
 class Biography(object):
@@ -53,14 +57,17 @@ class Biography(object):
     def to_graph(self):
         g = rdflib.Graph()
         namespace_manager = rdflib.namespace.NamespaceManager(g)
+        namespace_manager.bind('as', AS, override=False)
         namespace_manager.bind('cwrc', CWRC, override=False)
-        namespace_manager.bind('foaf', FOAF, override=False)
         namespace_manager.bind('cwrcdata', DATA, override=False)
+        namespace_manager.bind('dctypes', DCTYPES, override=False)
+        namespace_manager.bind('oa', OA, override=False)
+        namespace_manager.bind('dc', DCTERMS, override=False)
         g.add((self.uri, RDF.type, CWRC.NaturalPerson))
         g.add((self.uri, FOAF.name, rdflib.Literal(self.name)))
         g.add((self.uri, CWRC.hasGender, self.gender))
         g += self.create_triples(self.cf_list)
-        # g += self.create_triples(self.context_list)
+        g += self.create_triples(self.context_list)
         # g += self.create_triples(self.event_list)
 
         return g

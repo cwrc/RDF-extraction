@@ -57,7 +57,6 @@ class CulturalForm(object):
         else:
             p = str(CWRC) + self.predicate
 
-        # o = str(CWRC) + self.value
         o = self.value
         g = rdflib.Graph()
         g.add((person_uri, rdflib.term.URIRef(p), o))
@@ -69,8 +68,6 @@ class CulturalForm(object):
         string += "\tvalue: " + str(self.value) + "\n"
         return string
 
-
-# 3
 
 
 def get_name(bio):
@@ -101,9 +98,8 @@ def find_cultural_forms(cf, person_uri):
                 return "Reported"
             elif reported == "SELFUNKNOWN":
                 return "Reported"
-                log.title(str(tag))
             else:
-                return "?????"
+                log.msg("self-defined attribute RETURNED UNEXPECTED RESULTS:"+str(tag)+ "?????")
         return None
 
     def get_reg(tag):
@@ -275,12 +271,12 @@ def find_cultural_forms(cf, person_uri):
         # Create theoretical extra triples for now
         # possible predicates:
         # These will also need inverse if we were to maintain consistency?
-        # MEMBERSHIP --> INVOLVEMENT --> ACTIVISM
+        # INVOLVEMENT --> MEMBERSHIP --> ACTIVISM
         # low --> med --> high
         # possible that we can change these predicates to some of leveling term
         # INVOLVEMENTYES --> hasPoliticalInvolvement
-        # ACTIVISMYES --> hasActivistRole
         # MEMBERSHIPYES --> hasMembership
+        # ACTIVISMYES --> hasActivistRole
         # Membership can be broader to work for general organizations perhaps? ex. religious organizations
         pas = cf.find_all("politicalaffiliation")
         for x in pas:
@@ -290,10 +286,10 @@ def find_cultural_forms(cf, person_uri):
             # Since according to orlando it is a scale and they overlap
             if x.get("activism") == "ACTIVISTYES":
                 cf_list.append(CulturalForm("hasActivistRole", None, value))
-            elif x.get("involvement") == "INVOLVEMENTYES":
-                cf_list.append(CulturalForm("hasPoliticalInvolvement", None, value))
             elif x.get("membership") == "MEMBERSHIPYES":
                 cf_list.append(CulturalForm("hasMembership", None, value))
+            elif x.get("involvement") == "INVOLVEMENTYES":
+                cf_list.append(CulturalForm("hasPoliticalInvolvement", None, value))
 
     get_class()
     get_language()
@@ -333,8 +329,8 @@ def get_subjects(cf_list):
 def create_cf_data(bio, person):
     cfs = bio.find_all("culturalformation")
     cf_subelements = ["classissue", "raceandethnicity", "nationalityissue", "sexuality", "religion"]
-    cf_subelements_count = {"classissue": 1, "raceandethnicity": 1,
-                            "nationalityissue": 1, "sexuality": 1, "religion": 1}
+    cf_subelements_count = {"classissue": 0, "raceandethnicity": 0,
+                            "nationalityissue": 0, "sexuality": 0, "religion": 0}
 
     id = 1
 # TODO clean up naming in this function
@@ -347,8 +343,8 @@ def create_cf_data(bio, person):
             for y in temp:
                 temp_context = None
                 cf_list = None
-                temp_context = Context(x + "_context" + str(cf_subelements_count[x]), y, x)
                 cf_subelements_count[x] += 1
+                temp_context = Context(x + "_context" + str(cf_subelements_count[x]), y, x)
                 forms_found += 1
 
                 cf_list = find_cultural_forms(y, person.uri)
@@ -360,7 +356,7 @@ def create_cf_data(bio, person):
         if forms_found == 0:
             temp_context = None
             cf_list = None
-            temp_context = Context(x + "_context" + str(id), cf)
+            temp_context = Context("culturalformation" + "_context" + str(id), cf)
 
             cf_list = find_cultural_forms(cf, person.uri)
             temp_context.subjects = get_subjects(cf_list)
@@ -420,7 +416,6 @@ def update_fails(rdf_type, value):
 # log unmatched term,
 # return literal or uri
 # Make csv of unmapped
-# Make stats report of sucessfulness/failure of mappings
 def get_mapped_term(rdf_type, value):
     global map_attempt
     global map_success
@@ -430,10 +425,6 @@ def get_mapped_term(rdf_type, value):
     map_attempt += 1
     term = None
     for x in cf_map[rdf_type]:
-        # if get_close_matches(value.lower(), x):
-        #     term = x[0]
-        #     map_success += 1
-        #     break
         if clean_term(value) in x:
             term = x[0]
             map_success += 1
