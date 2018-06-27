@@ -1,15 +1,17 @@
 #!/usr/bin/python3
 from bs4 import BeautifulSoup
+from difflib import get_close_matches
+from Env import env
+from rdflib import RDF, RDFS, Literal
+import islandora_auth as login
 import rdflib
 import re
-from rdflib import RDF, RDFS, Literal
-from Env import env
-import islandora_auth as login
-from difflib import get_close_matches
-from biography import *
-from context import *
+
+from biography import Biography, bind_ns, NS_DICT
+from context import Context, strip_all_whitespace
 from log import *
-from event import *
+from event import Event
+
 # temp log library for debugging --> to be eventually replaced with proper logging library
 # from log import *
 log = Log("log/cf/errors")
@@ -19,16 +21,9 @@ extract_log.test_name("CF extraction Test Logging")
 turtle_log = Log("log/cf/triples")
 turtle_log.test_name("CF extracted Triples")
 
-
-CWRC = rdflib.Namespace("http://sparql.cwrc.ca/ontologies/cwrc#")
-FOAF = rdflib.Namespace('http://xmlns.com/foaf/0.1/')
-DATA = rdflib.Namespace("http://cwrc.ca/cwrcdata/")
-
 uber_graph = rdflib.Graph()
 namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
-namespace_manager.bind('cwrc', CWRC, override=False)
-namespace_manager.bind('foaf', FOAF, override=False)
-namespace_manager.bind('cwrcdata', DATA, override=False)
+bind_ns(namespace_manager, NS_DICT)
 
 
 class CulturalForm(object):
@@ -47,15 +42,15 @@ class CulturalForm(object):
     # Evaluate efficency of creating this graph or just returning a tuple and have the biography deal with it
     def to_tuple(self, person_uri):
         # For future testing
-        p = str(CWRC) + self.predicate + self.reported
+        p = str(NS_DICT["cwrc"]) + self.predicate + self.reported
         o = self.value
         return ((person_uri, rdflib.term.URIRef(p), o))
 
     def to_triple(self, person_uri):
         if self.reported:
-            p = str(CWRC) + self.predicate + self.reported
+            p = str(NS_DICT["cwrc"]) + self.predicate + self.reported
         else:
-            p = str(CWRC) + self.predicate
+            p = str(NS_DICT["cwrc"]) + self.predicate
 
         o = self.value
         g = rdflib.Graph()
@@ -67,7 +62,6 @@ class CulturalForm(object):
         string += "\treported: " + str(self.reported) + "\n"
         string += "\tvalue: " + str(self.value) + "\n"
         return string
-
 
 
 def get_name(bio):
@@ -99,7 +93,7 @@ def find_cultural_forms(cf, person_uri):
             elif reported == "SELFUNKNOWN":
                 return "Reported"
             else:
-                log.msg("self-defined attribute RETURNED UNEXPECTED RESULTS:"+str(tag)+ "?????")
+                log.msg("self-defined attribute RETURNED UNEXPECTED RESULTS:" + str(tag) + "?????")
         return None
 
     def get_reg(tag):
@@ -344,7 +338,7 @@ def create_cf_data(bio, person):
                 temp_context = None
                 cf_list = None
                 cf_subelements_count[x] += 1
-                temp_context = Context(x + "_context" + str(cf_subelements_count[x]), y, x)
+                temp_context = Context(person.id + "_" + x + "_context" + str(cf_subelements_count[x]), y, x)
                 forms_found += 1
 
                 cf_list = find_cultural_forms(y, person.uri)
@@ -356,7 +350,7 @@ def create_cf_data(bio, person):
         if forms_found == 0:
             temp_context = None
             cf_list = None
-            temp_context = Context("culturalformation" + "_context" + str(id), cf)
+            temp_context = Context(person.id + "_culturalformation" + "_context" + str(id), cf)
 
             cf_list = find_cultural_forms(cf, person.uri)
             temp_context.subjects = get_subjects(cf_list)
@@ -462,8 +456,8 @@ def main():
         with open("bio_data/" + filename) as f:
             soup = BeautifulSoup(f, 'lxml')
 
-        # print(filename)
-        test_person = Biography(filename[:-4], get_name(soup), get_mapped_term("Gender", get_sex(soup)))
+        print(filename)
+        test_person = Biography(filename[:-6], get_name(soup), get_mapped_term("Gender", get_sex(soup)))
 
         create_cf_data(soup, test_person)
 
@@ -474,11 +468,11 @@ def main():
 
         extract_log.subtitle("Entry #" + str(entry_num))
         extract_log.msg(str(test_person))
-        extract_log.subtitle("Entry #" + str(entry_num))
-        extract_log.msg("\n\n")
         graph = test_person.to_graph()
         extract_log.subtitle(str(len(graph)) + " triples created")
         extract_log.msg(test_person.to_file(graph))
+        extract_log.subtitle("Entry #" + str(entry_num))
+        extract_log.msg("\n\n")
         uber_graph += graph
         entry_num += 1
 
@@ -513,16 +507,6 @@ def main():
 
 
 def test():
-    print(clean_term("Dissenter"))
-    print()
-    print(clean_term("Dissenting"))
-    print()
-    print(clean_term("Dissenters"))
-    print()
-    print(clean_term("DISSENTERS"))
-    print()
-    print(clean_term("dissent"))
-    print()
     exit()
 
 if __name__ == "__main__":

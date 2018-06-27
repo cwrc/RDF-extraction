@@ -1,13 +1,20 @@
 import rdflib
 from rdflib import RDF  # , RDFS, Literal
 
-AS = rdflib.Namespace("http://www.w3.org/ns/activitystreams#")
-CWRC = rdflib.Namespace("http://sparql.cwrc.ca/ontologies/cwrc#")
-DATA = rdflib.Namespace("http://cwrc.ca/cwrcdata/")
-DCTYPES = rdflib.Namespace("http://purl.org/dc/dcmitype/")
-FOAF = rdflib.Namespace('http://xmlns.com/foaf/0.1/')
-OA = rdflib.Namespace("http://www.w3.org/ns/oa#")
-DCTERMS = rdflib.Namespace("http://purl.org/dc/terms/")
+NS_DICT = {
+    "as": rdflib.Namespace("http://www.w3.org/ns/activitystreams#"),
+    "cwrc": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/cwrc#"),
+    "data": rdflib.Namespace("http://cwrc.ca/cwrcdata/"),
+    "dctypes": rdflib.Namespace("http://purl.org/dc/dcmitype/"),
+    "foaf": rdflib.Namespace('http://xmlns.com/foaf/0.1/'),
+    "oa": rdflib.Namespace("http://www.w3.org/ns/oa#"),
+    "dcterms": rdflib.Namespace("http://purl.org/dc/terms/")
+}
+
+
+def bind_ns(namespace_manager, ns_dictionary):
+    for x in ns_dictionary.keys():
+        namespace_manager.bind(x, ns_dictionary[x], override=False)
 
 
 class Biography(object):
@@ -16,7 +23,7 @@ class Biography(object):
     def __init__(self, id, name, gender):
         super(Biography, self).__init__()
         self.id = id
-        self.uri = rdflib.term.URIRef(str(DATA) + id)
+        self.uri = rdflib.term.URIRef(str(NS_DICT["data"]) + id)
         self.name = name
         self.gender = gender
         self.context_list = []
@@ -57,17 +64,15 @@ class Biography(object):
     def to_graph(self):
         g = rdflib.Graph()
         namespace_manager = rdflib.namespace.NamespaceManager(g)
-        namespace_manager.bind('as', AS, override=False)
-        namespace_manager.bind('cwrc', CWRC, override=False)
-        namespace_manager.bind('cwrcdata', DATA, override=False)
-        namespace_manager.bind('dctypes', DCTYPES, override=False)
-        namespace_manager.bind('oa', OA, override=False)
-        namespace_manager.bind('dc', DCTERMS, override=False)
-        g.add((self.uri, RDF.type, CWRC.NaturalPerson))
-        g.add((self.uri, FOAF.name, rdflib.Literal(self.name)))
-        g.add((self.uri, CWRC.hasGender, self.gender))
+        bind_ns(namespace_manager, NS_DICT)
+
+        g.add((self.uri, RDF.type, NS_DICT["cwrc"].NaturalPerson))
+        g.add((self.uri, NS_DICT["foaf"].name, rdflib.Literal(self.name)))
+        g.add((self.uri, NS_DICT["cwrc"].hasGender, self.gender))
         g += self.create_triples(self.cf_list)
         g += self.create_triples(self.context_list)
+        for x in self.context_list:
+            g.add((x.uri, NS_DICT["oa"].hasTarget, self.uri))
         # g += self.create_triples(self.event_list)
 
         return g
