@@ -258,7 +258,11 @@ def find_cultural_forms(cf, person_uri):
     def get_denomination():
         religions = cf.find_all("denomination")
         for x in religions:
+            # Get reg --> get org reg --> org freeform
+            # if no org
+            # Get reg -->  freeform
             value = get_mapped_term("Religion", get_value(x))
+            # and to add membership details to orgnames, same thing to do for religons
             cf_list.append(CulturalForm("hasReligion", get_reported(x), value))
 
     def get_PA():
@@ -274,6 +278,8 @@ def find_cultural_forms(cf, person_uri):
         # Membership can be broader to work for general organizations perhaps? ex. religious organizations
         pas = cf.find_all("politicalaffiliation")
         for x in pas:
+            # Will have to make variant of this function to reject orgname free form data
+            # and to add membership details to orgnames, same thing to do for religons
             value = get_mapped_term("PoliticalAffiliation", get_value(x))
 
             cf_list.append(CulturalForm("hasPoliticalAffiliation", get_reported(x), value))
@@ -284,13 +290,13 @@ def find_cultural_forms(cf, person_uri):
                 cf_list.append(CulturalForm("hasMembership", None, value))
             elif x.get("involvement") == "INVOLVEMENTYES":
                 cf_list.append(CulturalForm("hasPoliticalInvolvement", None, value))
-
-    get_class()
-    get_language()
-    get_other_cfs()
+    if cf.name != "politics":
+        get_class()
+        get_language()
+        get_other_cfs()
+        get_denomination()
+        get_forebear_cfs()
     get_PA()
-    get_denomination()
-    get_forebear_cfs()
     return cf_list
 
 
@@ -330,18 +336,19 @@ def create_cf_data(bio, person):
 # TODO clean up naming in this function
     for cf in cfs:
         forms_found = 0
-        for x in cf_subelements:
+        for context_type in cf_subelements:
             # find_event(x, cf, person)
 
-            temp = cf.find_all(x)
-            for y in temp:
+            contexts = cf.find_all(context_type)
+            for context in contexts:
                 temp_context = None
                 cf_list = None
-                cf_subelements_count[x] += 1
-                temp_context = Context(person.id + "_" + x + "_context" + str(cf_subelements_count[x]), y, x)
+                cf_subelements_count[context_type] += 1
+                temp_context = Context(person.id + "_" + context_type + "_context" +
+                                       str(cf_subelements_count[context_type]), context, context_type)
                 forms_found += 1
 
-                cf_list = find_cultural_forms(y, person.uri)
+                cf_list = find_cultural_forms(context, person.uri)
                 if cf_list:
                     temp_context.subjects = get_subjects(cf_list)
                     person.add_cultural_form(cf_list)
@@ -358,6 +365,20 @@ def create_cf_data(bio, person):
             person.add_context(temp_context)
             person.add_cultural_form(cf_list)
             id += 1
+
+    elements = bio.find_all("politics")
+    for element in elements:
+        forms_found = 0
+        temp_context = None
+        cf_list = None
+        temp_context = Context(person.id + "_politics_context" + str(forms_found), element, "politics")
+        forms_found += 1
+
+        cf_list = find_cultural_forms(element, person.uri)
+        if cf_list:
+            temp_context.subjects = get_subjects(cf_list)
+            person.add_cultural_form(cf_list)
+        person.add_context(temp_context)
 
 
 cf_map = {}

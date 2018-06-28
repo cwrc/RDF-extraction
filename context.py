@@ -14,7 +14,7 @@ class Context(object):
     context_types = ["GenderContext", "PoliticalContext", "SocialClassContext",
                      "SexualityContext", "RaceEthnicityContext", "ReligionContext", "NationalityContext"]
     context_map = {"classissue": "SocialClassContext", "raceandethnicity": "RaceEthnicityContext",
-                   "nationalityissue": "NationalityContext", "sexuality": "SexualityContext",
+                   "nationalityissue": "NationalityContext", "sexuality": "SexualityContext", "politics": "PoliticalContext",
                    "religion": "ReligionContext", "culturalformation": "CulturalFormContext"}
 
     def __init__(self, id, text, type="culturalformation", motivation="describing"):
@@ -27,8 +27,11 @@ class Context(object):
 
         # holding off till we know how src should work may have to do how we're grabbing entries from islandora api
         # self.src = src
+        if type not in self.context_types:
+            self.type = rdflib.term.URIRef(str(NS_DICT["cwrc"]) + self.context_map[type])
+        else:
+            self.type = rdflib.term.URIRef(str(NS_DICT["cwrc"]) + type)
 
-        self.type = rdflib.term.URIRef(str(NS_DICT["cwrc"]) + self.context_map[type])
         self.motivation = rdflib.term.URIRef(str(NS_DICT["oa"]) + motivation)
         self.subjects = []
         self.uri = rdflib.term.URIRef(str(NS_DICT["data"]) + id)
