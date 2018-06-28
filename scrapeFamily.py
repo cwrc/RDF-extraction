@@ -30,6 +30,8 @@ class Family:
 # birth date:  1873-12-07
 # birth positions: ['ELDEST']
 # birth place: Gore, Virginia, USA
+def getch():
+    sys.stdin.read(1)
 def dateValidate(dateStr):
     try:
         datetime.datetime.strptime(dateStr, '%Y-%m-%d')
@@ -42,6 +44,12 @@ def dateValidate(dateStr):
 def printMemberInfo(memberList):
     for mem in memberList:
         mem.samplePrint()
+
+def extractSourceName(nameStr):
+    if "," in nameStr:
+        fullName = nameStr.split(",")
+        return fullName[1].strip(" ") + " "+ fullName[0].strip(" ")
+    return nameStr
 def extractName(nameStr):
     nameSeparation = nameStr.split(",,")
     returnName = ""
@@ -54,7 +62,7 @@ def extractName(nameStr):
         returnName = fullName[1].strip(" ") + " "+ fullName[0].strip(" ")
         # print(newName)
     else:
-        print("something went wrong")
+        print(nameStr,"something went wrong")
         sys.stdin.read(1)
     if " of " in returnName:
         justName = returnName.split(" of ")
@@ -104,7 +112,7 @@ def getFamilyInfo(xmlString, sourceFile):
                         print("new: ", memberName)
                         # memberName = thisTag.text
                         # print(memberRelation,"|,, name|",thisTag.attrib['STANDARD'])
-                        sys.stdin.read(1)
+                        # sys.stdin.read(1)
                         if "(" in memberName and ")" not in memberName:
                             memberName += ")"
                     else:
@@ -113,8 +121,18 @@ def getFamilyInfo(xmlString, sourceFile):
                 elif thisTag.tag == "JOB":
                     if 'REG' in thisTag.attrib:
                         memberJobs.append(thisTag.attrib['REG'])
-                    else:
+                    elif thisTag.text is '':
                         memberJobs.append(thisTag.text)
+                    else:
+                        paraText = thisTag.itertext()
+                        paragraph = ""
+
+                        for text in paraText:
+                            paragraph = paragraph + " " + text.strip()
+                        paragraph = paragraph.strip()
+                        print("tag: ",thisTag)
+                        print(paragraph)
+                        memberJobs.append(paragraph)
                     
                 # Get the family member's significant activities
                 elif thisTag.tag == "SIGNIFICANTACTIVITY":
@@ -177,7 +195,7 @@ def getFamilyInfo(xmlString, sourceFile):
     print("----------- ",SOURCENAME.strip(),"'s Family Members -----------")
     printMemberInfo(listOfMembers)
     # print("")
-    return SOURCENAME,listOfMembers
+    return extractSourceName(SOURCENAME),listOfMembers
     
 
 if __name__ == "__main__":
@@ -191,12 +209,13 @@ if __name__ == "__main__":
     sourceName = ""
     birthInfo = ""
     deathInfo = ""
+    numTriples = 0
     for dirName, subdirlist, files in os.walk(mydir):
         for name in files:
-            if "seacma-b.xml" not in name:
-                continue
-            # if "laurma-b" not in name:
+            # if "seacma-b.xml" not in name:
             #     continue
+            if "gilba2-b" not in name:
+                continue
             # os.system("open "+"\""+mydir+name+"\"")
             # if "cobbfr-b" in name:
             #     printInfo = True
@@ -209,6 +228,7 @@ if __name__ == "__main__":
                 sourceName,familyMembers   = getFamilyInfo(xmlString,os.path.expanduser("\""+mydir+name+"\""))
                 birthInfo       = getBirth(xmlString)
                 deathInfo       = getDeath(xmlString)
-                graphMaker(sourceName,[name[0:-6],familyMembers],birthInfo,deathInfo)
+                numTriples += graphMaker(sourceName,[name[0:-6],familyMembers],birthInfo,deathInfo)
     print(numSigs, " number of significant activities found")
     print(numAdded, " number of significant activities added")
+    print("number of triples: ", numTriples)

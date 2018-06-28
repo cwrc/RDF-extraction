@@ -1,6 +1,6 @@
 # this file simply holds functions for scrapeFamily.py
 
-import os
+import os, sys
 import csv
 from rdflib import RDF
 
@@ -31,8 +31,9 @@ def graphMaker(sourceName,familyInfo, birthInfo, deathInfo):
     # put in foaf.name instead of cwrc.hasName
     # namespace_manager.bind('cwrcdata', cwrcNamespace, override=False)
 
-    source = URIRef(str(personNamespace) + familyInfo[0])
-    g.add((source,cwrcNamespace.hasName,Literal(sourceName)))
+    sourceName = sourceName.replace(" ","_")
+    source = URIRef(str(personNamespace) + sourceName)
+    g.add((source,cwrcNamespace.hasName,Literal(sourceName.replace("_", " "))))
     g.add((source,RDF.type, cwrcNamespace.NaturalPerson))
 
     # Adding family info to the ttl file
@@ -45,7 +46,8 @@ def graphMaker(sourceName,familyInfo, birthInfo, deathInfo):
 
         memberSource = URIRef(str(personNamespace) + memberName.replace(" ","_"))
         if memberName == "":
-            memberSource = URIRef(str(personNamespace) + sourceName.replace(", ","_") + "_" + family.memberRelation.lower().title())
+            print(sourceName, memberName)
+            memberSource = URIRef(str(personNamespace) + sourceName.replace(" ","_") + "_" + family.memberRelation.lower().title())
         else:
             g.add((memberSource,cwrcNamespace.hasName,Literal(memberName)))
 
@@ -107,4 +109,5 @@ def graphMaker(sourceName,familyInfo, birthInfo, deathInfo):
 
 
     print(g.serialize(format='turtle').decode())
+    return len(g)
     # return
