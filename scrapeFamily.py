@@ -214,8 +214,8 @@ if __name__ == "__main__":
         for name in files:
             # if "seacma-b.xml" not in name:
             #     continue
-            if "gilba2-b" not in name:
-                continue
+            # if "gilba2-b" not in name:
+            #     continue
             # os.system("open "+"\""+mydir+name+"\"")
             # if "cobbfr-b" in name:
             #     printInfo = True
