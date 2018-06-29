@@ -54,11 +54,11 @@ def graphMaker(sourceName,familyInfo, birthInfo, deathInfo):
         g.add((memberSource, RDF.type, cwrcNamespace.NaturalPerson))
         
         for jobs in family.memberJobs:
-            g.add((memberSource,cwrcNamespace.hasJob,Literal(jobs.strip())))
+            g.add((memberSource,cwrcNamespace.hasJob,Literal(jobs.strip().title())))
             # print("added job ", jobs)
 
         for sigActs in family.memberSigActs:
-            g.add((memberSource,cwrcNamespace.significantAct,Literal(sigActs.strip())))
+            g.add((memberSource,cwrcNamespace.significantAct,Literal(sigActs.strip().title())))
             # print("added significant ", sigActs)
 
         predicate = URIRef(str(cwrcNamespace) + getCwrcTag(family.memberRelation))

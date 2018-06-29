@@ -101,7 +101,9 @@ def getFamilyInfo(xmlString, sourceFile):
         for familyMember in familyTag.findall('MEMBER'):
             if "RELATION" in familyMember.attrib:
                 memberRelation = familyMember.attrib['RELATION']
-            
+
+            if len(list(familyMember.iter())) == 1:
+                continue
             for thisTag in familyMember.iter():
                 
                 # Get name of family Member by making sure the name is not of the person about whom the biography is about
@@ -117,6 +119,7 @@ def getFamilyInfo(xmlString, sourceFile):
                             memberName += ")"
                     else:
                         memberName = thisTag.attrib['STANDARD']
+                
                 # Get the family member's job
                 elif thisTag.tag == "JOB":
                     if 'REG' in thisTag.attrib:
@@ -182,9 +185,30 @@ def getFamilyInfo(xmlString, sourceFile):
             # print("----------------------------------")
             
             # if any(mem.memberName == memberName and mem.memberRelation == memberRelation for mem in listOfMembers) == False:
-            # if memberName != "" and memberRelation != "":
+            # if memberName != "" and 
 
-            listOfMembers.append(Family(memberName,memberRelation,memberJobs,memberSigAct))
+            # taking care of duplicates for parents
+            newMember = Family(memberName,memberRelation,memberJobs,memberSigAct)
+
+            uniqueMember = True
+            if newMember.memberRelation == "MOTHER" or newMember.memberRelation == "FATHER":
+                for addedMember in listOfMembers:
+                    if addedMember.memberRelation == newMember.memberRelation:
+                        addedMember.memberJobs = list(set(addedMember.memberJobs).union(set(newMember.memberJobs)))
+                        addedMember.memberSigActs= list(set(newMember.memberSigActs).union(set(newMember.memberSigActs)))
+                        if addedMember.memberName == "" and newMember.memberName != "":
+                            addedMember.memberName = memberName
+                        uniqueMember = False
+            else:
+                for addedMember in listOfMembers:
+                    # print(newMember.memberName, "(", newMember.memberRelation,")"," vs ", addedMember.memberName,"(", addedMember.memberRelation,")")
+                    if newMember.memberRelation == addedMember.memberRelation and newMember.memberName == addedMember.memberName:
+                        addedMember.memberJobs = list(set(addedMember.memberJobs).union(set(newMember.memberJobs)))
+                        addedMember.memberSigActs= list(set(newMember.memberSigActs).union(set(newMember.memberSigActs)))
+                        uniqueMember = False
+
+            if memberRelation != "" and uniqueMember == True:
+                listOfMembers.append(newMember)
            
             memberRelation = ""
             memberName = ""
@@ -214,7 +238,7 @@ if __name__ == "__main__":
         for name in files:
             # if "seacma-b.xml" not in name:
             #     continue
-            # if "gilba2-b" not in name:
+            # if "straju-b" not in name:
             #     continue
             # os.system("open "+"\""+mydir+name+"\"")
             # if "cobbfr-b" in name:
@@ -224,7 +248,7 @@ if __name__ == "__main__":
                 print('\n===========%s=================' % name)
                 openFile = open(mydir+name,"r")
                 xmlString = openFile.read()
-                # numBiographiesRead += 1
+                numBiographiesRead += 1
                 sourceName,familyMembers   = getFamilyInfo(xmlString,os.path.expanduser("\""+mydir+name+"\""))
                 birthInfo       = getBirth(xmlString)
                 deathInfo       = getDeath(xmlString)
@@ -232,3 +256,4 @@ if __name__ == "__main__":
     print(numSigs, " number of significant activities found")
     print(numAdded, " number of significant activities added")
     print("number of triples: ", numTriples)
+    print("number of biographies: ", numBiographiesRead)
