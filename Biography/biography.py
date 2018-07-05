@@ -31,6 +31,10 @@ class Biography(object):
         # Hold off on events for now
         self.event_list = []
 
+        self.education_context_list = []
+        # self.occupations = []
+        # self.other_contexts = []
+
     def add_context(self, context):
         if context is list:
             self.context_list += context

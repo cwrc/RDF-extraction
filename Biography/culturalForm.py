@@ -1,9 +1,11 @@
 #!/usr/bin/python3
+
+# from Env import env
+# import islandora_auth as login
+
 from bs4 import BeautifulSoup
 from difflib import get_close_matches
-from Env import env
 from rdflib import RDF, RDFS, Literal
-import islandora_auth as login
 import rdflib
 import re
 
@@ -62,22 +64,6 @@ class CulturalForm(object):
         string += "\treported: " + str(self.reported) + "\n"
         string += "\tvalue: " + str(self.value) + "\n"
         return string
-
-
-def get_name(bio):
-    return (bio.biography.div0.standard.text)
-
-
-def get_sex(bio):
-    return (bio.biography.get("sex"))
-
-
-def extract_contexts(bio):
-    pass
-
-
-def get_uri(value):
-    pass
 
 
 def find_cultural_forms(cf, person_uri):
@@ -223,6 +209,7 @@ def find_cultural_forms(cf, person_uri):
                 forebear = get_forebear(x)
 
                 if tag == "geogheritage":
+                    pass
                     value = get_geoheritage(x)
                 else:
                     value = get_value(x)
@@ -381,9 +368,6 @@ def create_cf_data(bio, person):
         person.add_context(temp_context)
 
 
-cf_map = {}
-
-
 def clean_term(string):
     string = string.lower().replace("-", " ").strip().replace(" ", "")
     if string[-1:] == "s":
@@ -408,6 +392,8 @@ def create_cf_map():
             cf_map[row[0]].append(list(filter(None, [row[1], *temp_row])))
 
 
+cf_map = {}
+create_cf_map()
 map_attempt = 0
 map_success = 0
 map_fail = 0
@@ -463,6 +449,45 @@ def get_mapped_term(rdf_type, value):
     return term
 
 
+def get_name(bio):
+    return (bio.biography.div0.standard.text)
+
+
+def get_sex(bio):
+    return (bio.biography.get("sex"))
+
+
+def log_mapping_fails(main_log, error_log, detail=True):
+    main_log.subtitle("Attempts: #" + str(map_attempt))
+    main_log.subtitle("Fails: #" + str(map_fail))
+    main_log.subtitle("Success: #" + str(map_success))
+    main_log.separ()
+    print()
+    main_log.subtitle("Failure Details:")
+    total_unmapped = 0
+    for x in fail_dict.keys():
+        num = len(fail_dict[x].keys())
+        total_unmapped += num
+        error_log.subtitle(x.split("#")[1] + ":" + str(num))
+    main_log.subtitle("Failed to find " + str(total_unmapped) + " unique terms")
+
+    print()
+    error_log.separ("#")
+    if not detail:
+        log_mapping_fails(extract_log, log)
+        return
+
+    from collections import OrderedDict
+    for x in fail_dict.keys():
+        error_log.msg(x.split("#")[1] + "(" + str(len(fail_dict[x].keys())) + ")" + ":")
+
+        new_dict = OrderedDict(sorted(fail_dict[x].items(), key=lambda t: t[1], reverse=True))
+        for y in new_dict.keys():
+            error_log.msg("\t" + str(new_dict[y]) + ": " + y)
+        error_log.separ()
+        print()
+
+
 def main():
     import os
     create_cf_map()
@@ -482,49 +507,22 @@ def main():
 
         create_cf_data(soup, test_person)
 
-        # print("=" * 50, "Entry #", entry_num, "=" * 50)
-        # print(test_person)
-        # print("=" * 50, "Entry #", entry_num, "=" * 50)
-        # print("\n\n")
+        graph = test_person.to_graph()
 
         extract_log.subtitle("Entry #" + str(entry_num))
         extract_log.msg(str(test_person))
-        graph = test_person.to_graph()
         extract_log.subtitle(str(len(graph)) + " triples created")
         extract_log.msg(test_person.to_file(graph))
         extract_log.subtitle("Entry #" + str(entry_num))
         extract_log.msg("\n\n")
+
         uber_graph += graph
         entry_num += 1
 
     turtle_log.subtitle(str(len(uber_graph)) + " triples created")
     turtle_log.msg(uber_graph.serialize(format="ttl").decode(), stdout=False)
     turtle_log.msg("")
-
-    extract_log.subtitle("Attempts: #" + str(map_attempt))
-    extract_log.subtitle("Fails: #" + str(map_fail))
-    extract_log.subtitle("Success: #" + str(map_success))
-    extract_log.separ()
-    print()
-    extract_log.subtitle("Failure Details:")
-    total_unmapped = 0
-    for x in fail_dict.keys():
-        num = len(fail_dict[x].keys())
-        total_unmapped += num
-        log.subtitle(x.split("#")[1] + ":" + str(num))
-    extract_log.subtitle("Failed to find " + str(total_unmapped) + " unique terms")
-
-    print()
-    log.separ("#")
-    from collections import OrderedDict
-    for x in fail_dict.keys():
-        log.msg(x.split("#")[1] + "(" + str(len(fail_dict[x].keys())) + ")" + ":")
-
-        new_dict = OrderedDict(sorted(fail_dict[x].items(), key=lambda t: t[1], reverse=True))
-        for y in new_dict.keys():
-            log.msg("\t" + str(new_dict[y]) + ": " + y)
-        log.separ()
-        print()
+    log_mapping_fails(extract_log, log)
 
 
 def test():
