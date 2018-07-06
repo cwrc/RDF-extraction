@@ -3,6 +3,12 @@ from rdflib import RDF, RDFS, Literal
 import re
 from biography import bind_ns, NS_DICT
 
+"""
+Status: ~75%
+OA has been implemented (primaryily describing)
+However identifying contexts may need more handling
+TODO: Review triples related to identifying contexts
+"""
 
 def strip_all_whitespace(string):
 # temp function for condensing the context strings for visibility in testing
@@ -17,7 +23,7 @@ class Context(object):
                    "nationalityissue": "NationalityContext", "sexuality": "SexualityContext", "politics": "PoliticalContext",
                    "religion": "ReligionContext", "culturalformation": "CulturalFormContext"}
 
-    def __init__(self, id, text, type="culturalformation", motivation="describing"):
+    def __init__(self, id, text, context_type="culturalformation", motivation="describing"):
         super(Context, self).__init__()
         self.id = id
 
@@ -25,12 +31,12 @@ class Context(object):
         # Will possibly have to clean up citations sans ()
         self.text = ' '.join(str(text.get_text()).split())
 
-        # holding off till we know how src should work may have to do how we're grabbing entries from islandora api
+        #NOTE: holding off till we know how src should work may have to do how we're grabbing entries from islandora api
         # self.src = src
-        if type not in self.context_types:
-            self.type = rdflib.term.URIRef(str(NS_DICT["cwrc"]) + self.context_map[type])
+        if context_type in self.context_map:
+            self.context_type = rdflib.term.URIRef(str(NS_DICT["cwrc"]) + self.context_map[context_type])
         else:
-            self.type = rdflib.term.URIRef(str(NS_DICT["cwrc"]) + type)
+            self.context_type = rdflib.term.URIRef(str(NS_DICT["cwrc"]) + context_type)
 
         self.motivation = rdflib.term.URIRef(str(NS_DICT["oa"]) + motivation)
         self.subjects = []
@@ -40,8 +46,9 @@ class Context(object):
         g = rdflib.Graph()
         namespace_manager = rdflib.namespace.NamespaceManager(g)
         bind_ns(namespace_manager, NS_DICT)
-        g.add((self.uri, RDF.type, self.type))
+        g.add((self.uri, RDF.type, self.context_type))
         g.add((self.uri, NS_DICT["oa"].motivatedBy, self.motivation))
+        g.add((self.uri, NS_DICT["oa"].hasTarget, person_uri))
 
         choix = rdflib.term.URIRef(str(self.uri) + "_annotationbody")
         g.add((choix, RDF.type, NS_DICT["oa"].choice))
@@ -70,7 +77,7 @@ class Context(object):
     def __str__(self):
         string = "\tid: " + str(self.id) + "\n"
         # text = strip_all_whitespace(str(self.text))
-        string += "\ttype: " + str(self.type) + "\n"
+        string += "\ttype: " + str(self.context_type) + "\n"
         string += "\tmotivation: " + str(self.motivation) + "\n"
         string += "\ttag: \n\t\t{" + str(self.tag) + "}\n"
         string += "\ttext: \n\t\t{" + str(self.text) + "}\n"

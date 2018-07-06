@@ -14,6 +14,23 @@ from context import Context, strip_all_whitespace
 from log import *
 from event import Event
 
+"""
+Status: ~75%
+Most of cultural forms have been mapped
+    orgnames need to be reconciled
+    TODO: add organization triples for religion and pa
+    GeogHeritage needs to be properly mapped to geonames
+
+Forebear still needs to be handled/attempted with a query
+--> load up gurjap's produced graph and query it  for forebear info to test
+temp solution until endpoint is active
+
+Descriptive Contexts have been created
+
+Events need to be created--> bigger issue
+"""
+
+
 # temp log library for debugging --> to be eventually replaced with proper logging library
 # from log import *
 log = Log("log/cf/errors")
@@ -30,7 +47,7 @@ bind_ns(namespace_manager, NS_DICT)
 
 class CulturalForm(object):
     """docstring for CulturalForm
-        Notes: mapping is done prior to creation of cf, no need to include class type then
+        NOTE: mapping is done prior to creation of cf, no need to include class type then
     """
 
     def __init__(self, predicate, reported, value, other_attributes=None):
@@ -39,24 +56,20 @@ class CulturalForm(object):
         self.predicate = predicate
         self.reported = reported
         self.value = value
+        if self.reported:
+            self.uri = str(NS_DICT["cwrc"]) + self.predicate + self.reported
+        else:
+            self.uri = str(NS_DICT["cwrc"]) + self.predicate
+        self.uri = rdflib.term.URIRef(self.uri)
 
-    # figure out if i can just return tuple or triple without creating a whole graph
+    # TODO figure out if i can just return tuple or triple without creating a whole graph
     # Evaluate efficency of creating this graph or just returning a tuple and have the biography deal with it
     def to_tuple(self, person_uri):
-        # For future testing
-        p = str(NS_DICT["cwrc"]) + self.predicate + self.reported
-        o = self.value
-        return ((person_uri, rdflib.term.URIRef(p), o))
+        return ((person_uri, self.uri, self.value))
 
     def to_triple(self, person_uri):
-        if self.reported:
-            p = str(NS_DICT["cwrc"]) + self.predicate + self.reported
-        else:
-            p = str(NS_DICT["cwrc"]) + self.predicate
-
-        o = self.value
         g = rdflib.Graph()
-        g.add((person_uri, rdflib.term.URIRef(p), o))
+        g.add((person_uri, self.uri, self.value))
         return g
 
     def __str__(self):
@@ -144,7 +157,7 @@ def find_cultural_forms(cf, person_uri):
                 cf_list.append(CulturalForm(tags[tag][0], get_reported(x), get_mapped_term(tags[tag][1], value)))
 
     def get_geoheritage(tag):
-        # will require more detailed scrape and parsing of place info + mapping to geonames, may need to split into a separate script pending
+        # NOTE: will require more detailed scrape and parsing of place info + mapping to geonames, may need to split into a separate script pending
         log.separ()
         log.msg(strip_all_whitespace(str(tag)))
         value = get_value(tag)
@@ -160,7 +173,7 @@ def find_cultural_forms(cf, person_uri):
         return "None"
 
     def get_forebear_cfs():
-        # This will have to interact will sparql endpoint to check family related triples
+        # NOTE: This will have to interact will sparql endpoint to check family related triples
         # sparql query to check if person hasMother/hasFather, and there is a valid uri
         # otherwise create the person and familial relation?
         def get_forebear(tag):
@@ -313,7 +326,8 @@ def get_subjects(cf_list):
     return list(set(subjects))
 
 
-def create_cf_data(bio, person):
+# Also handles politics tag as well
+def extract_cf_data(bio, person):
     cfs = bio.find_all("culturalformation")
     cf_subelements = ["classissue", "raceandethnicity", "nationalityissue", "sexuality", "religion"]
     cf_subelements_count = {"classissue": 0, "raceandethnicity": 0,
@@ -505,7 +519,7 @@ def main():
         print(filename)
         test_person = Biography(filename[:-6], get_name(soup), get_mapped_term("Gender", get_sex(soup)))
 
-        create_cf_data(soup, test_person)
+        extract_cf_data(soup, test_person)
 
         graph = test_person.to_graph()
 

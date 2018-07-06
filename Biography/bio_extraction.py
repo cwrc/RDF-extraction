@@ -12,6 +12,16 @@ from context import Context, strip_all_whitespace
 from log import *
 from event import Event
 import culturalForm as cf
+import education
+
+"""
+This is a possible temporary main script that creates the biography related triples
+TODO: 
+add documentation
+implement other contexts
+implement occupation
+
+"""
 
 # temp log library for debugging --> to be eventually replaced with proper logging library
 # from log import *
@@ -50,7 +60,9 @@ def main():
         print(filename)
         person = Biography(filename[:-6], get_name(soup), cf.get_mapped_term("Gender", get_sex(soup)))
 
-        cf.create_cf_data(soup, person)
+        cf.extract_cf_data(soup, person)
+        education.extract_education_data(soup, person)
+        # cf.create_cf_data(soup, person)
 
         graph = person.to_graph()
 
@@ -71,7 +83,6 @@ def main():
     extract_log.test_name("Cultural Form mapping results")
     cf.log_mapping_fails(extract_log, log, detail=False)
     extract_log.msg("See CF Error Log for more indepth logging about failures:")
-
     exit()
 
 

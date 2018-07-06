@@ -56,6 +56,13 @@ class Biography(object):
     def create_cultural_form(self, predicate, reported, value, other_attributes=None):
         self.cf_list.append(CulturalForm(predicate, reported, value, other_attributes))
 
+    def add_education_context(self, education_context):
+        # self.education_context_list += [education_context]
+        if education_context is list:
+            self.education_context_list += education_context
+        else:
+            self.education_context_list.append(education_context)
+
     def add_event(self, title, event_type, date, other_attributes=None):
         self.event_list.append(Event(title, event_type, date, other_attributes))
 
@@ -75,8 +82,7 @@ class Biography(object):
         g.add((self.uri, NS_DICT["cwrc"].hasGender, self.gender))
         g += self.create_triples(self.cf_list)
         g += self.create_triples(self.context_list)
-        for x in self.context_list:
-            g.add((x.uri, NS_DICT["oa"].hasTarget, self.uri))
+        g += self.create_triples(self.education_context_list)
         # g += self.create_triples(self.event_list)
 
         return g
