@@ -17,11 +17,12 @@ def getCwrcTag(familyRelation):
         if row[orlandoTag] == familyRelation:
             return row[cwrcTag]
 
-def graphMaker(sourceName,familyInfo, birthInfo, deathInfo):
+def graphMaker(sourceName,familyInfo, birthInfo, deathInfo, childInfo):
     
     from rdflib import Namespace, Graph, Literal, URIRef
     import rdflib
-    
+    numNamelessPeople = 0
+
     g = Graph()
     personNamespace   = Namespace('http://example.org/')
     cwrcNamespace     = Namespace('http://sparql.cwrc.ca/ontologies/cwrc#')
@@ -48,6 +49,7 @@ def graphMaker(sourceName,familyInfo, birthInfo, deathInfo):
         if memberName == "":
             print(sourceName, memberName)
             memberSource = URIRef(str(personNamespace) + sourceName.replace(" ","_") + "_" + family.memberRelation.lower().title())
+            numNamelessPeople += 1
         else:
             g.add((memberSource,cwrcNamespace.hasName,Literal(memberName)))
 
@@ -107,7 +109,13 @@ def graphMaker(sourceName,familyInfo, birthInfo, deathInfo):
                 # g.add((source,cwrcNamespace.hasDeathContext,(cwrcNamespace.hasDeathContext,cwrcNamespace.hasSource,Literal(deathContext))))
 
 
+    if childInfo.ChildType == "numberOfChildren":
+        if childInfo.NumChildren == "1":
+            g.add((source, cwrcNamespace.hasChild, Literal(childInfo.NumChildren)))
+        else:
+            g.add((source, cwrcNamespace.hasChildren, Literal(childInfo.NumChildren)))
+
 
     print(g.serialize(format='turtle').decode())
-    return len(g)
+    return len(g),numNamelessPeople
     # return

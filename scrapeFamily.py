@@ -5,10 +5,50 @@ import sys
 from gLoggingInFunctions import *
 from graphOntology import *
 from birthDeath import *
+from xml.etree import ElementTree
 
 numSigs = 0
 numAdded = 0
 session = requests.Session()
+
+
+# from https://stackoverflow.com/questions/749796/pretty-printing-xml-in-python
+def indenter(elem, level=0):
+    i = "\n" + level*"  "
+    j = "\n" + (level-1)*"  "
+    
+    if len(elem):
+        if not elem.text or not elem.text.strip():
+            elem.text = i + "  "
+        if not elem.tail or not elem.tail.strip():
+            elem.tail = i
+        for subelem in elem:
+            indenter(subelem, level+1)
+        if not elem.tail or not elem.tail.strip():
+            elem.tail = j
+    else:
+        if level and (not elem.tail or not elem.tail.strip()):
+            elem.tail = j
+
+def ElemPrint(elem):
+    indenter(elem)
+    ElementTree.dump(elem)
+
+def getOnlyText(tag):
+    paraText = tag.itertext()
+    paragraph = ""
+
+    for text in paraText:
+        paragraph = paragraph + " " + text.strip()
+    paragraph = paragraph.strip()
+    
+    return paragraph
+
+class ChildStatus:
+    def __init__(self, childType,numChild):
+        self.ChildType = childType
+        self.NumChildren = numChild
+
 
 class Family:
     def __init__(self, memName, memRLTN,memJobs,memSigActs):
@@ -50,7 +90,7 @@ def extractSourceName(nameStr):
         fullName = nameStr.split(",")
         return fullName[1].strip(" ") + " "+ fullName[0].strip(" ")
     return nameStr
-def extractName(nameStr):
+def extractNameFromTitle(nameStr):
     nameSeparation = nameStr.split(",,")
     returnName = ""
     if "of" in nameSeparation[-1]:
@@ -69,7 +109,73 @@ def extractName(nameStr):
         returnName = justName[0]
     return returnName
 
+# checks if child's name is available in children tag
+def childrenCheck(xmlString, sourceFile):
+    root = xml.etree.ElementTree.fromstring(xmlString)
+    childrenTag = root.findall('.//CHILDREN')
+    childType = ""
 
+    for child in childrenTag:
+        if "NUMBER" in child.attrib:
+            print("contains number of child: ", child.attrib["NUMBER"])
+            childType = "numberOfChildren"
+            numChild = child.attrib["NUMBER"]
+            
+    return ChildStatus(childType,numChild)
+
+    # if len(childlessTag) > 0 :
+        
+        
+    # for child in myRoot2.findall(".//MEMBER[@RELATION='MOTHER']"):
+    #     print("found MOTHER TAG")
+    #     print(child.text)
+
+def childlessnessCheck(xmlString):
+    root = xml.etree.ElementTree.fromstring(xmlString)
+    childrenTag = root.findall('.//CHILDLESSNESS')
+    
+    for tag in childrenTag:
+        ElemPrint(tag)
+        
+        if any(miscarriageWord in getOnlyText(tag) for miscarriageWord in 
+            ["miscarriage","miscarriages","miscarried"]):
+            print("this person had a miscarriage")
+            getch()
+        
+        elif any(stillbirthWord in getOnlyText(tag) for stillbirthWord in 
+            ["stillborn","still birth"]):
+            print("this person experienced a stillbirthWord")
+            getch()
+        
+        elif any(abortionWord in getOnlyText(tag) for abortionWord in 
+            ["abortion","aborted",]):
+            print("this person experienced an abortion")
+            getch()
+        # elif any(birthControlWord in getOnlyText(tag) for birthControlWord in 
+        #     ["childless","no children","no surviving children"]):
+        #     print("this person is childless")
+        
+        elif any(veneralDisease in getOnlyText(tag) for veneralDisease in 
+            ["syphilis","veneral","VD"]):
+            print("this person experienced a veneral")
+            getch()
+        
+        elif any(adoptionWord in getOnlyText(tag) for adoptionWord in 
+            ["adopted","adoption"]):
+            print("this person experienced an adoption")
+            getch()
+        
+        elif any(childlessWord in getOnlyText(tag) for childlessWord in 
+            ["childless","no children","no surviving children"]):
+            print("this person is childless")
+            getch()
+        else:
+            print("this person is childless (else statement)")
+            getch()
+        
+        print("------------")
+        # print(getOnlyText(tag))
+        # getch()
 # This function obtains family information
 # ------ Example ------
 # Name:  Grant, Josceline Charles Henry
@@ -85,6 +191,9 @@ def getFamilyInfo(xmlString, sourceFile):
     myRoot2 = xml.etree.ElementTree.fromstring(xmlString)
 
     SOURCENAME = myRoot2.find("./DIV0/STANDARD").text
+    for child in myRoot2.findall('.//CHILDREN'):
+        print("found child")
+
     # sigi = myRoot2.find("./DIV0/DIV1/FAMILY/MEMBER/DIV2/SHORTPROSE/P/SIGNIFICANTACTIVITY")
     
     # print(' '.join(sigi.itertext()))
@@ -110,7 +219,7 @@ def getFamilyInfo(xmlString, sourceFile):
                 if thisTag.tag == "NAME" and thisTag.attrib['STANDARD'] != SOURCENAME and memberName == "":
                     if ",," in thisTag.attrib['STANDARD']:
                         print("old: ", thisTag.attrib['STANDARD'])
-                        memberName = extractName(thisTag.attrib['STANDARD'])
+                        memberName = extractNameFromTitle(thisTag.attrib['STANDARD'])
                         print("new: ", memberName)
                         # memberName = thisTag.text
                         # print(memberRelation,"|,, name|",thisTag.attrib['STANDARD'])
@@ -133,8 +242,6 @@ def getFamilyInfo(xmlString, sourceFile):
                         for text in paraText:
                             paragraph = paragraph + " " + text.strip()
                         paragraph = paragraph.strip()
-                        print("tag: ",thisTag)
-                        print(paragraph)
                         memberJobs.append(paragraph)
                     
                 # Get the family member's significant activities
@@ -226,34 +333,41 @@ if __name__ == "__main__":
     
     # startLogin()
 
-    mydir = os.path.expanduser("~/Google Drive/Term 3 - UoGuelph/biography/")
-    # print(mydir)
+    bioFolder = os.path.expanduser("~/Documents/UoGuelph Projects/biography/")
+    # print(bioFolder)
     numBiographiesRead = 0
     printInfo = True
     sourceName = ""
     birthInfo = ""
     deathInfo = ""
     numTriples = 0
-    for dirName, subdirlist, files in os.walk(mydir):
+    numNamelessPeople = 0
+    for dirName, subdirlist, files in os.walk(bioFolder):
         for name in files:
-            # if "seacma-b.xml" not in name:
+            # if "dempch-b.xml" not in name:
             #     continue
-            # if "straju-b" not in name:
+            # if "mosshe-b" not in name:
             #     continue
-            # os.system("open "+"\""+mydir+name+"\"")
+            # os.system("open "+"\""+bioFolder+name+"\"")
             # if "cobbfr-b" in name:
             #     printInfo = True
 
             if printInfo == True:
                 print('\n===========%s=================' % name)
-                openFile = open(mydir+name,"r")
+                openFile = open(bioFolder+name,"r")
                 xmlString = openFile.read()
                 numBiographiesRead += 1
-                sourceName,familyMembers   = getFamilyInfo(xmlString,os.path.expanduser("\""+mydir+name+"\""))
+                childlessnessCheck(xmlString)
+                continue
+                childInfo = childrenCheck(xmlString,os.path.expanduser("\""+bioFolder+name+"\""))
+                sourceName,familyMembers   = getFamilyInfo(xmlString,os.path.expanduser("\""+bioFolder+name+"\""))
                 birthInfo       = getBirth(xmlString)
                 deathInfo       = getDeath(xmlString)
-                numTriples += graphMaker(sourceName,[name[0:-6],familyMembers],birthInfo,deathInfo)
+                numGraphTripples,numNameless = graphMaker(sourceName,[name[0:-6],familyMembers],birthInfo,deathInfo,childInfo)
+                numTriples += numGraphTripples
+                numNamelessPeople += numNameless
     print(numSigs, " number of significant activities found")
     print(numAdded, " number of significant activities added")
     print("number of triples: ", numTriples)
     print("number of biographies: ", numBiographiesRead)
+    print("number of nameless: ", numNamelessPeople)
