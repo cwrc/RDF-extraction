@@ -10,7 +10,7 @@ from xml.etree import ElementTree
 numSigs = 0
 numAdded = 0
 session = requests.Session()
-
+numtags = 0
 
 # from https://stackoverflow.com/questions/749796/pretty-printing-xml-in-python
 def indenter(elem, level=0):
@@ -44,11 +44,19 @@ def getOnlyText(tag):
     
     return paragraph
 
+class ChildlessStatus:
+    def __init__(self, label):
+        self.Label = label
+
 class ChildStatus:
     def __init__(self, childType,numChild):
         self.ChildType = childType
         self.NumChildren = numChild
 
+class IntimateRelationships:
+    def __init__(self, attrValue, name):
+        self.AttrValue  = attrValue;
+        self.PersonName = name;
 
 class Family:
     def __init__(self, memName, memRLTN,memJobs,memSigActs):
@@ -121,7 +129,7 @@ def childrenCheck(xmlString, sourceFile):
             childType = "numberOfChildren"
             numChild = child.attrib["NUMBER"]
             
-    return ChildStatus(childType,numChild)
+            return ChildStatus(childType,numChild)
 
     # if len(childlessTag) > 0 :
         
@@ -133,49 +141,111 @@ def childrenCheck(xmlString, sourceFile):
 def childlessnessCheck(xmlString):
     root = xml.etree.ElementTree.fromstring(xmlString)
     childrenTag = root.findall('.//CHILDLESSNESS')
-    
+    childlessList = []
+    global numtags
     for tag in childrenTag:
         ElemPrint(tag)
         
         if any(miscarriageWord in getOnlyText(tag) for miscarriageWord in 
             ["miscarriage","miscarriages","miscarried"]):
-            print("this person had a miscarriage")
-            getch()
+            # print("this person had a miscarriage")
+            childlessList.append(ChildlessStatus("miscarriage"))
+            # getch()
         
         elif any(stillbirthWord in getOnlyText(tag) for stillbirthWord in 
             ["stillborn","still birth"]):
-            print("this person experienced a stillbirthWord")
-            getch()
+            # print("this person experienced a stillbirth")
+            childlessList.append(ChildlessStatus("stillbirth"))
+            # getch()
+            # one still birth
         
         elif any(abortionWord in getOnlyText(tag) for abortionWord in 
-            ["abortion","aborted",]):
-            print("this person experienced an abortion")
-            getch()
-        # elif any(birthControlWord in getOnlyText(tag) for birthControlWord in 
-        #     ["childless","no children","no surviving children"]):
-        #     print("this person is childless")
+            ["abortion","aborted"]):
+            # print("this person experienced an abortion")
+            childlessList.append(ChildlessStatus("abortion"))
+
+            # getch()
+            # no entries has this
+        elif any(birthControlWord in getOnlyText(tag) for birthControlWord in 
+            ["contraception"]):
+            # print("this person used contraception")
+            childlessList.append(ChildlessStatus("birth control"))
+
+            # getch()
+            # no entries has this
         
         elif any(veneralDisease in getOnlyText(tag) for veneralDisease in 
             ["syphilis","veneral","VD"]):
-            print("this person experienced a veneral")
-            getch()
+            # print("this person experienced a veneral")
+            childlessList.append(ChildlessStatus("venereal disease"))
+
+            # getch()
+            # 2 entries have this
         
         elif any(adoptionWord in getOnlyText(tag) for adoptionWord in 
             ["adopted","adoption"]):
-            print("this person experienced an adoption")
-            getch()
+            # print("this person experienced an adoption")
+            childlessList.append(ChildlessStatus("adoption"))
+
+            # getch()
+            # 8 entries have this
         
         elif any(childlessWord in getOnlyText(tag) for childlessWord in 
             ["childless","no children","no surviving children"]):
-            print("this person is childless")
-            getch()
+            # print("this person is childless")
+            childlessList.append(ChildlessStatus("childlessness"))
+
+            # getch()
+            # 131 entries have this
+            # numtags += 1
         else:
-            print("this person is childless (else statement)")
-            getch()
+            # print("this person is childless (else statement)")
+            childlessList.append(ChildlessStatus("childlessness"))
+
+            # getch()
+            numtags += 1
+            # 69 entries
         
         print("------------")
+        
+        for child in childlessList:
+            print(child.Label)
+
+    print("number of tags: ", numtags)
+    return childlessList
         # print(getOnlyText(tag))
         # getch()
+
+def friendOrAssociateCheck(xmlString):
+    root = xml.etree.ElementTree.fromstring(xmlString)
+    fOrAtag = root.findall('.//FRIENDORASSOCIATE')
+    for tag in fOrAtag:
+        ElemPrint(tag)
+        getch()
+
+def intimateRelationshipsCheck(xmlString):
+    root = xml.etree.ElementTree.fromstring(xmlString)
+    irTag = root.findall('.//INTIMATERELATIONSHIPS')
+    for tag in irTag:
+        if "EROTIC" in tag.attrib:
+            attr = tag.attrib["EROTIC"]
+            print("attr: ", tag.attrib["EROTIC"])
+            # ElemPrint(tag)
+            for person in tag.iter("DIV2"):
+                print("======person======")
+                print(getOnlyText(person))
+                for name in person.iter("NAME"):
+                    print(name.attrib["STANDARD"])
+                getch()
+                
+
+        # ElemPrint(tag)
+        else:
+            # hasIntimateRelationship
+            print("intimate relationship attribute")
+            # ElemPrint(tag)
+            # getch()
+
 # This function obtains family information
 # ------ Example ------
 # Name:  Grant, Josceline Charles Henry
@@ -346,8 +416,8 @@ if __name__ == "__main__":
         for name in files:
             # if "dempch-b.xml" not in name:
             #     continue
-            # if "mosshe-b" not in name:
-            #     continue
+            if "larkph-b" not in name:
+                continue
             # os.system("open "+"\""+bioFolder+name+"\"")
             # if "cobbfr-b" in name:
             #     printInfo = True
@@ -357,15 +427,19 @@ if __name__ == "__main__":
                 openFile = open(bioFolder+name,"r")
                 xmlString = openFile.read()
                 numBiographiesRead += 1
-                childlessnessCheck(xmlString)
+                # friendAssociateList = friendOrAssociateCheck(xmlString)
+                intimateRelationshipsList = intimateRelationshipsCheck(xmlString)
                 continue
+                childlessList = childlessnessCheck(xmlString)
                 childInfo = childrenCheck(xmlString,os.path.expanduser("\""+bioFolder+name+"\""))
                 sourceName,familyMembers   = getFamilyInfo(xmlString,os.path.expanduser("\""+bioFolder+name+"\""))
                 birthInfo       = getBirth(xmlString)
                 deathInfo       = getDeath(xmlString)
-                numGraphTripples,numNameless = graphMaker(sourceName,[name[0:-6],familyMembers],birthInfo,deathInfo,childInfo)
+                numGraphTripples,numNameless = graphMaker(sourceName,[name[0:-6],familyMembers],birthInfo,deathInfo,childInfo,childlessList)
                 numTriples += numGraphTripples
                 numNamelessPeople += numNameless
+                if len(childlessList) > 0:
+                    getch()
     print(numSigs, " number of significant activities found")
     print(numAdded, " number of significant activities added")
     print("number of triples: ", numTriples)

@@ -17,7 +17,7 @@ def getCwrcTag(familyRelation):
         if row[orlandoTag] == familyRelation:
             return row[cwrcTag]
 
-def graphMaker(sourceName,familyInfo, birthInfo, deathInfo, childInfo):
+def graphMaker(sourceName,familyInfo, birthInfo, deathInfo, childInfo,childlessList):
     
     from rdflib import Namespace, Graph, Literal, URIRef
     import rdflib
@@ -109,13 +109,17 @@ def graphMaker(sourceName,familyInfo, birthInfo, deathInfo, childInfo):
                 # g.add((source,cwrcNamespace.hasDeathContext,(cwrcNamespace.hasDeathContext,cwrcNamespace.hasSource,Literal(deathContext))))
 
 
-    if childInfo.ChildType == "numberOfChildren":
-        if childInfo.NumChildren == "1":
-            g.add((source, cwrcNamespace.hasChild, Literal(childInfo.NumChildren)))
-        else:
-            g.add((source, cwrcNamespace.hasChildren, Literal(childInfo.NumChildren)))
+    # if childInfo.ChildType == "numberOfChildren":
+    #     if childInfo.NumChildren == "1":
+    #         g.add((source, cwrcNamespace.hasChild, Literal(childInfo.NumChildren)))
+    #     else:
+    #         g.add((source, cwrcNamespace.hasChildren, Literal(childInfo.NumChildren)))
+
+    for childAttribute in childlessList:
+        g.add((source,cwrcNamespace.hasReproductiveHistory,Literal(childAttribute.Label.title())))
 
 
     print(g.serialize(format='turtle').decode())
+
     return len(g),numNamelessPeople
     # return
