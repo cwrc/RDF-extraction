@@ -3,6 +3,7 @@
 import os, sys
 import csv
 from rdflib import RDF
+from scrapeFamily import getch
 
 def getCwrcTag(familyRelation):
     csvFile = open(os.path.expanduser("~/Google Drive/Term 3 - UoGuelph/mapping2.csv"),"r")
@@ -17,7 +18,7 @@ def getCwrcTag(familyRelation):
         if row[orlandoTag] == familyRelation:
             return row[cwrcTag]
 
-def graphMaker(sourceName,familyInfo, birthInfo, deathInfo, childInfo,childlessList):
+def graphMaker(sourceName,familyInfo, birthInfo, deathInfo, childInfo,childlessList,intmtRelationshipsList):
     
     from rdflib import Namespace, Graph, Literal, URIRef
     import rdflib
@@ -60,7 +61,7 @@ def graphMaker(sourceName,familyInfo, birthInfo, deathInfo, childInfo,childlessL
             # print("added job ", jobs)
 
         for sigActs in family.memberSigActs:
-            g.add((memberSource,cwrcNamespace.significantAct,Literal(sigActs.strip().title())))
+            g.add((memberSource,cwrcNamespace.hasJob,Literal(sigActs.strip().title())))
             # print("added significant ", sigActs)
 
         predicate = URIRef(str(cwrcNamespace) + getCwrcTag(family.memberRelation))
@@ -117,9 +118,28 @@ def graphMaker(sourceName,familyInfo, birthInfo, deathInfo, childInfo,childlessL
 
     for childAttribute in childlessList:
         g.add((source,cwrcNamespace.hasReproductiveHistory,Literal(childAttribute.Label.title())))
-
+    checkIntimate = False
+    for relationship in intmtRelationshipsList:
+        if relationship.AttrValue == "EROTICYES":
+            g.add((source,cwrcNamespace.hasEroticRelationhip,Literal(relationship.PersonName.title())))
+            print("eroticyes")
+            # getch()
+        elif relationship.AttrValue == "EROTICNO":
+            g.add((source,cwrcNamespace.hasEroticRelationhip,Literal(relationship.PersonName.title())))
+            print("eroticno")
+            # getch()
+        elif relationship.AttrValue == "EROTICPOSSIBLY":
+            g.add((source,cwrcNamespace.hasEroticRelationhip,Literal(relationship.PersonName.title())))
+            print("EROTICPOSSIBLY")
+            # getch()
+        else:
+            g.add((source,cwrcNamespace.hasEroticRelationhip,Literal(relationship.PersonName.title())))
+            print("not erotic")
+            # getch()
+        checkIntimate = True
 
     print(g.serialize(format='turtle').decode())
+    # if checkIntimate:
+    #     getch()
 
     return len(g),numNamelessPeople
-    # return

@@ -222,29 +222,222 @@ def friendOrAssociateCheck(xmlString):
     for tag in fOrAtag:
         ElemPrint(tag)
         getch()
+def getNameOfAssociate(names,sourcePerson):
+    foundName = False
+    otherName = ""
+    for thisName in names:
+        name = thisName.attrib["STANDARD"]
+        print("looking at :", name)
+        if name != sourcePerson:
+            foundName = True
+            otherName = name
+            break
+    return foundName,otherName
 
 def intimateRelationshipsCheck(xmlString):
     root = xml.etree.ElementTree.fromstring(xmlString)
     irTag = root.findall('.//INTIMATERELATIONSHIPS')
+    sourcePerson = root.find("./DIV0/STANDARD").text
+    intimateRelationshipsList = []
+
     for tag in irTag:
+        attr = ""
+        
         if "EROTIC" in tag.attrib:
             attr = tag.attrib["EROTIC"]
             print("attr: ", tag.attrib["EROTIC"])
-            # ElemPrint(tag)
-            for person in tag.iter("DIV2"):
-                print("======person======")
-                print(getOnlyText(person))
-                for name in person.iter("NAME"):
-                    print(name.attrib["STANDARD"])
-                getch()
-                
-
-        # ElemPrint(tag)
         else:
-            # hasIntimateRelationship
-            print("intimate relationship attribute")
-            # ElemPrint(tag)
+            attr = "nonErotic"
+        
+        for person in tag.iter("DIV2"):
+                print("======person======")
+                print("source: ", sourcePerson)
+                print(getOnlyText(person))
+                foundOtherName,otherName = getNameOfAssociate(person.iter("NAME"), sourcePerson)
+                if foundOtherName:
+                    print("relationship with: ", otherName)
+                    intimateRelationshipsList.append(IntimateRelationships(attr,extractSourceName(otherName)))
+                else:
+                    print("othername not found")
+                    intimateRelationshipsList.append(IntimateRelationships(attr,"intimate relationship"))
+                # for name in person.iter("NAME"):
+                #     print(name.attrib["STANDARD"])
+                # getch()
+                
+    return intimateRelationshipsList
+def getMemberName(thisTag):
+
+    memberName = ""
+
+    if ",," in thisTag.attrib['STANDARD']:
+        print("old: ", thisTag.attrib['STANDARD'])
+        memberName = extractNameFromTitle(thisTag.attrib['STANDARD'])
+        print("new: ", memberName)
+        # memberName = thisTag.text
+        # print(memberRelation,"|,, name|",thisTag.attrib['STANDARD'])
+        # sys.stdin.read(1)
+        if "(" in memberName and ")" not in memberName:
+            memberName += ")"
+    else:
+        memberName = thisTag.attrib['STANDARD']
+
+    return memberName
+
+def getMemberJobs(thisTag,memberJobs):
+
+    # memberJobs = []
+
+    if 'REG' in thisTag.attrib:
+        memberJobs.append(thisTag.attrib['REG'])
+    elif thisTag.text is '':
+        memberJobs.append(thisTag.text)
+    else:
+        paraText = thisTag.itertext()
+        paragraph = ""
+
+        for text in paraText:
+            paragraph = paragraph + " " + text.strip()
+        paragraph = paragraph.strip()
+        memberJobs.append(paragraph)
+
+    return memberJobs
+
+def getMemberActs(thisTag,memberSigAct):
+    
+    # memberSigAct = []
+    global numSigs
+    global numAdded
+    numSigs += 1
+    if "REG" in thisTag.attrib:
+        sigAct = thisTag.attrib["REG"]
+        memberSigAct.append(sigAct)
+        numAdded += 1
+    else:
+        sigAct = thisTag.text
+        print(sigAct)
+
+        if sigAct == None or sigAct == "":
+           sigAct = ' '.join(thisTag.itertext())
+
+           print(sigAct)
+           if sigAct != "" and sigAct not in memberSigAct:
+               memberSigAct.append(sigAct)
+               numAdded += 1
+               print(sigAct)
+               print("2. number of sigActs added: ",numAdded)
+               # sys.stdin.read(1)
+           else:
+               print("1.significant activity not added")
+               # sys.stdin.read(1)
+        else:
+            memberSigAct.append(sigAct)
+            numAdded += 1
+
+    return memberSigAct
+def uniqueMemberCheck(newMember, listOfMembers):
+    uniqueMember = True
+    if newMember.memberRelation == "MOTHER" or newMember.memberRelation == "FATHER":
+        for addedMember in listOfMembers:
+            if addedMember.memberRelation == newMember.memberRelation:
+                addedMember.memberJobs = list(set(addedMember.memberJobs).union(set(newMember.memberJobs)))
+                addedMember.memberSigActs= list(set(newMember.memberSigActs).union(set(newMember.memberSigActs)))
+                if addedMember.memberName == "" and newMember.memberName != "":
+                    addedMember.memberName = newMember.memberName
+                uniqueMember = False
+                print("this is not a unique member")
+                # getch()
+    else:
+        for addedMember in listOfMembers:
+            # print(newMember.memberName, "(", newMember.memberRelation,")"," vs ", addedMember.memberName,"(", addedMember.memberRelation,")")
+            if newMember.memberRelation == addedMember.memberRelation and newMember.memberName == addedMember.memberName:
+                addedMember.memberJobs = list(set(addedMember.memberJobs).union(set(newMember.memberJobs)))
+                addedMember.memberSigActs= list(set(newMember.memberSigActs).union(set(newMember.memberSigActs)))
+                uniqueMember = False
+                print("this is not a unique member")
+                # getch()
+
+    if newMember.memberRelation != "" and uniqueMember == True:
+        print("now adding in the new member")
+        listOfMembers.append(newMember)
+        # getch()
+    else:
+        print("memberRelation is blank and unique member is false")
+        # getch()
+    return listOfMembers
+
+def getMemberInfo(familyMember,listOfMembers,SOURCENAME):
+    memberRelation = ""
+    memberName = ""
+    memberJobs = []
+    memberSigAct = []
+    memberRelation = familyMember.attrib['RELATION']
+
+    for thisTag in familyMember.iter():
+        # Get name of family Member by making sure the name is not of the person about whom the biography is about
+        if thisTag.tag == "NAME" and thisTag.attrib['STANDARD'] != SOURCENAME and memberName == "":
+            memberName = getMemberName(thisTag)
+        
+        # Get the family member's job
+        elif thisTag.tag == "JOB":
+            memberJobs = getMemberJobs(thisTag,memberJobs)
+            
+        # Get the family member's significant activities
+        elif thisTag.tag == "SIGNIFICANTACTIVITY":
+            memberSigAct = getMemberActs(thisTag,memberSigAct)
+
+    # taking care of duplicates for parents
+    newMember = Family(memberName,memberRelation,memberJobs,memberSigAct)    
+    
+    return uniqueMemberCheck(newMember,listOfMembers)
+
+def notParentName(personName,parentList):
+    print("welcome to not parent home")
+    print("parent list: ",len(parentList))
+    for parent in parentList:
+        print("compare ", personName, " and ", parent.memberName)
+        if parent.memberName == personName:
+            return False
+
+    print("finished notparentname check")
+    # getch()
+
+
+    return True
+def getMemberChildInfo(familyMember,listOfMembers,SOURCENAME):
+    memberRelation = familyMember.attrib['RELATION']
+    memberName = ""
+    memberJobs = []
+    memberSigAct = []
+    listOfParents = []
+
+    for member in listOfMembers:
+        print("memberName: ", member.memberName)
+        print("memberRLTN: ", member.memberRelation)
+        if member.memberRelation == "WIFE" or member.memberRelation == "HUSBAND":
+            listOfParents.append(member)
+            print("added parent")
             # getch()
+
+    for thisTag in familyMember.iter():
+        # Get name of family Member by making sure the name is not of the person about whom the biography is about
+        if thisTag.tag == "NAME" and thisTag.attrib['STANDARD'] != SOURCENAME and memberName == "" and notParentName(thisTag.attrib['STANDARD'],listOfParents):
+            memberName = getMemberName(thisTag)
+        
+        # Get the family member's job
+        elif thisTag.tag == "JOB":
+            memberJobs = getMemberJobs(thisTag,memberJobs)
+    
+        # Get the family member's significant activities
+        elif thisTag.tag == "SIGNIFICANTACTIVITY":
+            memberSigAct = getMemberActs(thisTag,memberSigAct)
+            print("added significant activity")
+
+    # taking care of duplicates for parents
+    newMember = Family(memberName,memberRelation,memberJobs,memberSigAct)
+    # newMember.samplePrint()
+    
+    return uniqueMemberCheck(newMember,listOfMembers)
+
 
 # This function obtains family information
 # ------ Example ------
@@ -255,154 +448,48 @@ def intimateRelationshipsCheck(xmlString):
 def getFamilyInfo(xmlString, sourceFile):
     global numSigs
     global numAdded
-    # filePath = os.path.expanduser("~/Downloads/laurma-b.xml")
-    # myRoot = xml.etree.ElementTree.parse(filePath)
-    # myRoot2 = myRoot.getroot()
+
     myRoot2 = xml.etree.ElementTree.fromstring(xmlString)
-
     SOURCENAME = myRoot2.find("./DIV0/STANDARD").text
-    for child in myRoot2.findall('.//CHILDREN'):
-        print("found child")
-
-    # sigi = myRoot2.find("./DIV0/DIV1/FAMILY/MEMBER/DIV2/SHORTPROSE/P/SIGNIFICANTACTIVITY")
-    
-    # print(' '.join(sigi.itertext()))
-    # print(sigi.itertext()' '.join())
-    # return
     listOfMembers = []
-    memberRelation = ""
-    memberName = ""
-    memberJobs = []
-    memberSigAct = []
     
     for familyTag in myRoot2.findall('.//FAMILY'):
-        # print(familyTag.tag)
+        
+        #--------------------------------- Get husband and wife ---------------------------------
+        for familyMember in familyTag.findall("MEMBER"):
+            # memberRelation = familyMember.attrib['RELATION']
+            if familyMember.attrib['RELATION'] in ["HUSBAND","WIFE"]:
+                if len(list(familyMember.iter())) == 1:
+                    continue
+                else:
+                    listOfMembers = getMemberInfo(familyMember,listOfMembers,SOURCENAME)
+
+        #--------------------------------- get children ---------------------------------
+        for familyMember in familyTag.findall("MEMBER"):
+            # memberRelation = familyMember.attrib['RELATION']
+            if familyMember.attrib['RELATION'] in ["SON","DAUGHTER","STEPSON","STEPDAUGHTER"]:
+                if len(list(familyMember.iter())) == 1:
+                    continue
+                else:
+                    listOfMembers = getMemberChildInfo(familyMember,listOfMembers,SOURCENAME)
+        
+        #--------------------------------- get others ---------------------------------
         for familyMember in familyTag.findall('MEMBER'):
-            if "RELATION" in familyMember.attrib:
-                memberRelation = familyMember.attrib['RELATION']
-
-            if len(list(familyMember.iter())) == 1:
+            if familyMember.attrib['RELATION'] in ["HUSBAND","WIFE","SON","DAUGHTER","STEPSON","STEPDAUGHTER"] or len(list(familyMember.iter())) == 1:
                 continue
-            for thisTag in familyMember.iter():
-                
-                # Get name of family Member by making sure the name is not of the person about whom the biography is about
-                if thisTag.tag == "NAME" and thisTag.attrib['STANDARD'] != SOURCENAME and memberName == "":
-                    if ",," in thisTag.attrib['STANDARD']:
-                        print("old: ", thisTag.attrib['STANDARD'])
-                        memberName = extractNameFromTitle(thisTag.attrib['STANDARD'])
-                        print("new: ", memberName)
-                        # memberName = thisTag.text
-                        # print(memberRelation,"|,, name|",thisTag.attrib['STANDARD'])
-                        # sys.stdin.read(1)
-                        if "(" in memberName and ")" not in memberName:
-                            memberName += ")"
-                    else:
-                        memberName = thisTag.attrib['STANDARD']
-                
-                # Get the family member's job
-                elif thisTag.tag == "JOB":
-                    if 'REG' in thisTag.attrib:
-                        memberJobs.append(thisTag.attrib['REG'])
-                    elif thisTag.text is '':
-                        memberJobs.append(thisTag.text)
-                    else:
-                        paraText = thisTag.itertext()
-                        paragraph = ""
-
-                        for text in paraText:
-                            paragraph = paragraph + " " + text.strip()
-                        paragraph = paragraph.strip()
-                        memberJobs.append(paragraph)
-                    
-                # Get the family member's significant activities
-                elif thisTag.tag == "SIGNIFICANTACTIVITY":
-                    numSigs += 1
-                    if "REG" in thisTag.attrib:
-                        sigAct = thisTag.attrib["REG"]
-                        memberSigAct.append(sigAct)
-                        numAdded += 1
-                    else:
-                        sigAct = thisTag.text
-                        print(sigAct)
-
-                        if sigAct == None or sigAct == "":
-                           sigAct = ' '.join(thisTag.itertext())
-
-                           print(sigAct)
-                           if sigAct != "" and sigAct not in memberSigAct:
-                               memberSigAct.append(sigAct)
-                               numAdded += 1
-                               print(sigAct)
-                               print("2. number of sigActs added: ",numAdded)
-                               # sys.stdin.read(1)
-                           else:
-                               print("1.significant activity not added")
-                               # sys.stdin.read(1)
-                        else:
-                            memberSigAct.append(sigAct)
-                            numAdded += 1
-                            # print(sigAct)
-                            # print("2.significant activity not added")
-
-                            # sys.stdin.read(1)
-
-                           # print("no significant Acts in the sigact")
-                           # response = input("open file? ")
-                           # if response == "y" or response == "Y":
-                           #     print(sourceFile)
-                           #     os.system("open "+sourceFile)
-                           #     sys.stdin.read(1)
-
-            # print("......................")
-            # print("Name: ",memberName)
-            # print("Relation: ",memberRelation)
-            # print("Jobs: ",memberJobs)
-            # print("sigAct: ", memberSigAct)
-            # print("......................")
-            # print("----------------------------------")
-            
-            # if any(mem.memberName == memberName and mem.memberRelation == memberRelation for mem in listOfMembers) == False:
-            # if memberName != "" and 
-
-            # taking care of duplicates for parents
-            newMember = Family(memberName,memberRelation,memberJobs,memberSigAct)
-
-            uniqueMember = True
-            if newMember.memberRelation == "MOTHER" or newMember.memberRelation == "FATHER":
-                for addedMember in listOfMembers:
-                    if addedMember.memberRelation == newMember.memberRelation:
-                        addedMember.memberJobs = list(set(addedMember.memberJobs).union(set(newMember.memberJobs)))
-                        addedMember.memberSigActs= list(set(newMember.memberSigActs).union(set(newMember.memberSigActs)))
-                        if addedMember.memberName == "" and newMember.memberName != "":
-                            addedMember.memberName = memberName
-                        uniqueMember = False
             else:
-                for addedMember in listOfMembers:
-                    # print(newMember.memberName, "(", newMember.memberRelation,")"," vs ", addedMember.memberName,"(", addedMember.memberRelation,")")
-                    if newMember.memberRelation == addedMember.memberRelation and newMember.memberName == addedMember.memberName:
-                        addedMember.memberJobs = list(set(addedMember.memberJobs).union(set(newMember.memberJobs)))
-                        addedMember.memberSigActs= list(set(newMember.memberSigActs).union(set(newMember.memberSigActs)))
-                        uniqueMember = False
-
-            if memberRelation != "" and uniqueMember == True:
-                listOfMembers.append(newMember)
-           
-            memberRelation = ""
-            memberName = ""
-            description = ""
-            memberJobs.clear()
-            memberSigAct.clear()
+                listOfMembers = getMemberInfo(familyMember,listOfMembers,SOURCENAME)
     
     print("----------- ",SOURCENAME.strip(),"'s Family Members -----------")
     printMemberInfo(listOfMembers)
     # print("")
     return extractSourceName(SOURCENAME),listOfMembers
     
-
-if __name__ == "__main__":
-    
-    # startLogin()
-
+def getTripleNum(fileString):
+    return fileString.split(':')[1]
+def getFileName(fileString):
+    return fileString.split(':')[0]
+def executeFile(name):
     bioFolder = os.path.expanduser("~/Documents/UoGuelph Projects/biography/")
     # print(bioFolder)
     numBiographiesRead = 0
@@ -412,36 +499,105 @@ if __name__ == "__main__":
     deathInfo = ""
     numTriples = 0
     numNamelessPeople = 0
+    file = open("namesAndLines.txt_new","w")
+
+    if printInfo == True:
+        print('\n===========%s=================' % name)
+        # continue
+        openFile = open(bioFolder+name,"r")
+        xmlString = openFile.read()
+        numBiographiesRead += 1
+        # friendAssociateList = friendOrAssociateCheck(xmlString)
+        intimateRelationshipsList = intimateRelationshipsCheck(xmlString)
+        # continue
+        childlessList = childlessnessCheck(xmlString)
+        childInfo = childrenCheck(xmlString,os.path.expanduser("\""+bioFolder+name+"\""))
+        sourceName,familyMembers   = getFamilyInfo(xmlString,os.path.expanduser("\""+bioFolder+name+"\""))
+        birthInfo       = getBirth(xmlString)
+        deathInfo       = getDeath(xmlString)
+        numGraphTripples,numNameless = graphMaker(sourceName,[name[0:-6],familyMembers],birthInfo,deathInfo,childInfo,childlessList,intimateRelationshipsList)
+        numTriples += numGraphTripples
+        numNamelessPeople += numNameless
+        file.write("%s:%d\n" % (name,numGraphTripples))
+        # if len(childlessList) > 0:
+        #     getch()
+    file.close()
+
+
+def main():
+    # with open(os.path.expanduser("~/Documents/differentfiles/namesAndLines_new.txt")) as newFile:
+    #     contentNew = newFile.readlines()
+    # contentNew = [x.strip() for x in contentNew] 
+
+    # with open(os.path.expanduser("~/Documents/differentfiles/namesAndLines_old.txt")) as oldFile:
+    #     contentOld = oldFile.readlines()
+    # contentOld = [x.strip() for x in contentOld] 
+
+    # for i in range(0,len(contentOld)):
+    #     newTriple = getTripleNum(contentNew[i])
+    #     oldTriple = getTripleNum(contentOld[i])
+    #     newFile = getFileName(contentNew[i])
+    #     oldFile = getFileName(contentOld[i])
+
+    #     if oldTriple > newTriple:
+    #         print("%d < %d"%(int(newTriple),int(oldTriple)))
+    #         executeFile(newFile)
+    #         # getch()
+
+    # print(len(contentNew))
+    # print(len(contentOld))
+    # return
+    bioFolder = os.path.expanduser("~/Documents/UoGuelph Projects/biography/")
+    # print(bioFolder)
+    numBiographiesRead = 0
+    printInfo = True
+    sourceName = ""
+    birthInfo = ""
+    deathInfo = ""
+    numTriples = 0
+    numNamelessPeople = 0
+    file = open("namesAndLines.txt_new","w")
+
     for dirName, subdirlist, files in os.walk(bioFolder):
         for name in files:
-            # if "dempch-b.xml" not in name:
+            # if "saviet-b.xml" not in name:
             #     continue
-            if "larkph-b" not in name:
-                continue
+            # if "dempch-b" not in name:
+            #     continue
             # os.system("open "+"\""+bioFolder+name+"\"")
             # if "cobbfr-b" in name:
             #     printInfo = True
-
             if printInfo == True:
                 print('\n===========%s=================' % name)
+                # continue
                 openFile = open(bioFolder+name,"r")
                 xmlString = openFile.read()
                 numBiographiesRead += 1
                 # friendAssociateList = friendOrAssociateCheck(xmlString)
                 intimateRelationshipsList = intimateRelationshipsCheck(xmlString)
-                continue
+                # continue
                 childlessList = childlessnessCheck(xmlString)
                 childInfo = childrenCheck(xmlString,os.path.expanduser("\""+bioFolder+name+"\""))
                 sourceName,familyMembers   = getFamilyInfo(xmlString,os.path.expanduser("\""+bioFolder+name+"\""))
                 birthInfo       = getBirth(xmlString)
                 deathInfo       = getDeath(xmlString)
-                numGraphTripples,numNameless = graphMaker(sourceName,[name[0:-6],familyMembers],birthInfo,deathInfo,childInfo,childlessList)
+                numGraphTripples,numNameless = graphMaker(sourceName,[name[0:-6],familyMembers],birthInfo,deathInfo,childInfo,childlessList,intimateRelationshipsList)
                 numTriples += numGraphTripples
                 numNamelessPeople += numNameless
-                if len(childlessList) > 0:
-                    getch()
+                file.write("%s:%d\n" % (name,numGraphTripples))
+                # if len(childlessList) > 0:
+                #     getch()
+            # executeFile(name)
+    file.close()
+          
     print(numSigs, " number of significant activities found")
     print(numAdded, " number of significant activities added")
     print("number of triples: ", numTriples)
-    print("number of biographies: ", numBiographiesRead)
-    print("number of nameless: ", numNamelessPeople)
+    # print("number of biographies: ", numBiographiesRead)
+    # print("number of nameless: ", numNamelessPeople)
+
+if __name__ == "__main__":
+    
+    # startLogin()
+    main()
+    
