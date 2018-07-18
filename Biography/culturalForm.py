@@ -213,7 +213,7 @@ def find_cultural_forms(cf, person_uri):
 
         tags = {"racecolour": "RaceColour",
                 "nationalheritage": "NationalHeritage",
-                "geogheritage": "GeographicHeritage",
+                # "geogheritage": "GeographicHeritage",
                 "ethnicity": "Ethnicity"}
 
         for tag in tags.keys():
@@ -222,7 +222,6 @@ def find_cultural_forms(cf, person_uri):
                 forebear = get_forebear(x)
 
                 if tag == "geogheritage":
-                    pass
                     value = get_geoheritage(x)
                 else:
                     value = get_value(x)
