@@ -14,11 +14,10 @@ def getCwrcTag(familyRelation):
     fileContent = csv.DictReader(csvFile)
     
     for row in fileContent:
-        # print(row)
         if row[orlandoTag] == familyRelation:
             return row[cwrcTag]
 
-def graphMaker(sourceName,familyInfo, birthInfo, deathInfo, childInfo,childlessList,intmtRelationshipsList):
+def graphMaker(sourceName,fileName,familyInfo, birthInfo, deathInfo, childInfo,childlessList,intmtRelationshipsList):
     
     from rdflib import Namespace, Graph, Literal, URIRef
     import rdflib
@@ -39,7 +38,7 @@ def graphMaker(sourceName,familyInfo, birthInfo, deathInfo, childInfo,childlessL
     g.add((source,RDF.type, cwrcNamespace.NaturalPerson))
 
     # Adding family info to the ttl file
-    for family in familyInfo[1]:
+    for family in familyInfo:
         memberName = family.memberName
         print("=======",memberName,"=========")
         if ',' in memberName:
@@ -103,7 +102,7 @@ def graphMaker(sourceName,familyInfo, birthInfo, deathInfo, childInfo,childlessL
             # print(deathInfo.deathContexts[0])
             for thisDeathContext in deathInfo.deathContexts:
                 print("context: ", thisDeathContext)
-                deathContextURI = URIRef(str(familyInfo[0]) + "deathContext" + str(numDeathContexts))
+                deathContextURI = URIRef(str(fileName) + "deathContext" + str(numDeathContexts))
                 numDeathContexts += 1
                 g.add((deathContextURI, oa.hasTarget, source))
                 g.add((deathContextURI,cwrcNamespace.hasdescription, Literal(thisDeathContext)))
