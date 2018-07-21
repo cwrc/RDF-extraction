@@ -5,7 +5,6 @@ from bs4 import BeautifulSoup
 from difflib import get_close_matches
 from rdflib import RDF, RDFS, Literal
 import rdflib
-import re
 
 from biography import Biography, bind_ns, NS_DICT
 from context import Context, strip_all_whitespace
@@ -13,6 +12,7 @@ from log import *
 from event import Event
 import culturalForm as cf
 import education
+import other_contexts
 
 """
 This is a possible temporary main script that creates the biography related triples
@@ -52,7 +52,8 @@ def main():
     global uber_graph
 
     # for filename in filelist[:200]:
-    # for filename in filelist[-5:]:
+    # for filename in filelist[:2]:
+    # for filename in ["sample-b.xml","atwoma-b.xml"]:
     for filename in filelist:
         with open("bio_data/" + filename) as f:
             soup = BeautifulSoup(f, 'lxml')
@@ -61,17 +62,24 @@ def main():
         person = Biography(filename[:-6], get_name(soup), cf.get_mapped_term("Gender", get_sex(soup)))
 
         cf.extract_cf_data(soup, person)
-        education.extract_education_data(soup, person)
-        # cf.create_cf_data(soup, person)
+        # education.extract_education_data(soup, person)
+        # other_contexts.extract_other_contexts_data(soup, person)
 
         graph = person.to_graph()
 
+        # Logging bits
         extract_log.subtitle("Entry #" + str(entry_num))
         extract_log.msg(str(person))
         extract_log.subtitle(str(len(graph)) + " triples created")
         extract_log.msg(person.to_file(graph))
         extract_log.subtitle("Entry #" + str(entry_num))
         extract_log.msg("\n\n")
+
+        # triples to files
+        # file = open("culturalform_triples/" + str(person.id) + "-cf.ttl", "w")
+        # file.write("#" + str(len(graph)) + " triples created\n")
+        # file.write(person.to_file(graph))
+        # file.close()
 
         uber_graph += graph
         entry_num += 1
