@@ -42,6 +42,8 @@ def strip_all_whitespace(string):
 """
 Handle places, orgnames, instructors ,subjects within school tag
 """
+
+
 class School(object):
     """docstring for School"""
 #  Institution, Institution Level, Religious, and Student Body
@@ -51,7 +53,7 @@ class School(object):
         "SECONDARY": CWRC.SecondarySchool,
         "POST-SECONDARY": CWRC.PostSecondarySchool,
         # Religion
-        # NOTE: idk about secular school as theres no negation attribute 
+        # NOTE: idk about secular school as theres no negation attribute
         "RELIGIOUSYES": CWRC.ReligiousSchool,
         # Student body
         "SINGLESEX": CWRC.SingleSexSchool,
@@ -130,8 +132,7 @@ class School(object):
 
 
 class Education(Context):
-    # Make a subclass of Context
-    """docstring for Education"""
+    """a subclass of Context"""
     context_types = ["InstitutionalEducationContext", "SelfTaughtEducationContext", "DomesticEducationContext"]
     context_map = {"INSTITUTIONAL": "InstitutionalEducationContext", "SELF-TAUGHT": "SelfTaughtEducationContext",
                    "DOMESTIC": "DomesticEducationContext", None: "EducationContext"}
@@ -158,7 +159,17 @@ class Education(Context):
         for x in self.studied_subjects:
             # NOTE this is temporary as the uri for the study subjects should be provided before
             subj_uri = str(NS_DICT["cwrc"]) + x
-            g.add((self.uri, CWRC.hasSubjectofStudy, rdflib.term.URIRef(subj_uri)))
+            g.add((self.uri, CWRC.hasSubjectofStudy, rdflib.term.URIRef(strip_all_whitespace(subj_uri))))
+
+        for x in self.awards:
+            # NOTE this is temporary as the uri for the study subjects should be provided before
+            subj_uri = str(NS_DICT["cwrc"]) + x
+            g.add((self.uri, CWRC.hasAward, rdflib.term.URIRef(strip_all_whitespace(subj_uri))))
+
+        for x in self.instructors:
+            # NOTE this is temporary as the uri for the study subjects should be provided before
+            subj_uri = str(NS_DICT["cwrc"]) + x
+            g.add((self.uri, CWRC.hasInstructor, rdflib.term.URIRef(strip_all_whitespace(subj_uri))))
 
         return g
 
@@ -166,7 +177,7 @@ class Education(Context):
     def __str__(self):
         string = "\tid: " + str(self.id) + "\n"
         # text = strip_all_whitespace(str(self.text))
-        string += "\ttype: " + str(self.type) + "\n"
+        string += "\ttype: " + str(self.mode) + "\n"
         string += "\tmotivation: " + str(self.motivation) + "\n"
         string += "\ttag: \n\t\t{" + str(self.tag) + "}\n"
         string += "\ttext: \n\t\t{" + str(self.text) + "}\n"
@@ -174,6 +185,28 @@ class Education(Context):
             string += "\tsubjects:\n"
             for x in self.subjects:
                 string += "\t\t" + str(x) + "\n"
+
+        if self.schools:
+            string += "\tschools:\n"
+            for x in self.schools:
+                string += "\t\t" + str(x) + "\n"
+        if self.awards:
+            string += "\tawards:\n"
+            for x in self.awards:
+                string += "\t\t" + str(x) + "\n"
+        if self.studied_subjects:
+            string += "\tstudied_subjects:\n"
+            for x in self.studied_subjects:
+                string += "\t\t" + str(x) + "\n"
+        if self.texts:
+            string += "\ttexts:\n"
+            for x in self.texts:
+                string += "\t\t" + str(x) + "\n"
+        if self.instructors:
+            string += "\tinstructors:\n"
+            for x in self.instructors:
+                string += "\t\t" + str(x) + "\n"
+
         return string + "\n"
 
     # def context_count(self,type):
@@ -283,8 +316,8 @@ def extract_education_data(bio, person):
             id += str(count)
         temp_education = Education(id, education, mode, schools, awards, subjects, texts, instructors)
         modes.append(mode)
-
         uber_graph += temp_education.to_triple(person.uri)
+        extract_log.msg(str(temp_education))
         person.add_education_context(temp_education)
 
     turtle_log.subtitle("Education context for " + person.name)
