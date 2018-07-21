@@ -90,7 +90,7 @@ def find_cultural_forms(cf, person_uri):
             elif reported == "SELFNO":
                 return "Reported"
             elif reported == "SELFUNKNOWN":
-                return "Reported"
+                return None
             else:
                 log.msg("self-defined attribute RETURNED UNEXPECTED RESULTS:" + str(tag) + "?????")
         return None
@@ -158,19 +158,19 @@ def find_cultural_forms(cf, person_uri):
 
     def get_geoheritage(tag):
         # NOTE: will require more detailed scrape and parsing of place info + mapping to geonames, may need to split into a separate script pending
-        log.separ()
-        log.msg(strip_all_whitespace(str(tag)))
-        value = get_value(tag)
-        if value and len(value) < 50:
-            log.msg("\t" + value)
-        settlement = tag.find_all("settlement")
-        region = tag.find_all("region")
-        geog = tag.find_all("geog")
-        log.msg("\t\tsettlement: " + str([get_value(x) for x in settlement]))
-        log.msg("\t\tregion: " + str([get_value(x) for x in region]))
-        log.msg("\t\tgeog: " + str([get_value(x) for x in geog]))
+        # log.separ()
+        # log.msg(strip_all_whitespace(str(tag)))
+        # value = get_value(tag)
+        # if value and len(value) < 50:
+        #     log.msg("\t" + value)
+        # settlement = tag.find_all("settlement")
+        # region = tag.find_all("region")
+        # geog = tag.find_all("geog")
+        # log.msg("\t\tsettlement: " + str([get_value(x) for x in settlement]))
+        # log.msg("\t\tregion: " + str([get_value(x) for x in region]))
+        # log.msg("\t\tgeog: " + str([get_value(x) for x in geog]))
 
-        return "None"
+        return tag.text()
 
     def get_forebear_cfs():
         # NOTE: This will have to interact will sparql endpoint to check family related triples
