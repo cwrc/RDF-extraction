@@ -10,9 +10,12 @@ However identifying contexts may need more handling
 TODO: Review triples related to identifying contexts
 """
 
+
 def strip_all_whitespace(string):
 # temp function for condensing the context strings for visibility in testing
     return re.sub('[\s+]', '', str(string))
+
+MAX_WORD_COUNT = 35
 
 
 class Context(object):
@@ -30,8 +33,12 @@ class Context(object):
         self.tag = text
         # Will possibly have to clean up citations sans ()
         self.text = ' '.join(str(text.get_text()).split())
+        words = self.text.split(" ")
+        self.text = ' '.join(words[:MAX_WORD_COUNT])
+        if len(words) > MAX_WORD_COUNT:
+            self.text += "..."
 
-        #NOTE: holding off till we know how src should work may have to do how we're grabbing entries from islandora api
+        # NOTE: holding off till we know how src should work may have to do how we're grabbing entries from islandora api
         # self.src = src
         if context_type in self.context_map:
             self.context_type = rdflib.term.URIRef(str(NS_DICT["cwrc"]) + self.context_map[context_type])
@@ -62,13 +69,13 @@ class Context(object):
         g.add((item_1, NS_DICT["dctypes"].description, rdflib.term.Literal(
             self.text, datatype=rdflib.namespace.XSD.string)))
 
-        item_2 = rdflib.term.URIRef(str(self.uri) + "_item2_snippettag")
-        g.add((item_2, RDF.type, NS_DICT["dctypes"].text))
-        g.add((item_2, NS_DICT["dctypes"].description, rdflib.term.Literal(
-            self.tag, datatype=rdflib.namespace.XSD.string)))
+        # item_2 = rdflib.term.URIRef(str(self.uri) + "_item2_snippettag")
+        # g.add((item_2, RDF.type, NS_DICT["dctypes"].text))
+        # g.add((item_2, NS_DICT["dctypes"].description, rdflib.term.Literal(
+        #     self.tag, datatype=rdflib.namespace.XSD.string)))
 
         g.add((choix, NS_DICT["as"].items, item_1))
-        g.add((choix, NS_DICT["as"].items, item_2))
+        # g.add((choix, NS_DICT["as"].items, item_2))
         for x in self.subjects:
             g.add((choix, NS_DICT["as"].items, x))
             g.add((self.uri, NS_DICT["dcterms"].subject, x))
