@@ -2,6 +2,11 @@ from xml.etree import ElementTree
 import datetime, sys
 class Family:
     def __init__(self, memName, memRLTN,memJobs,memSigActs):
+        if memName == "":
+            self.isNoName = True
+        else:
+            self.isNoName = False
+        self.noNameLetter = ''
         self.memberName = memName
         self.memberRelation = memRLTN
         self.memberJobs = list(memJobs)
@@ -46,7 +51,7 @@ def getOnlyText(tag):
     paragraph = ""
 
     for text in paraText:
-        paragraph = paragraph + " " + text.strip()
+        paragraph = paragraph.strip() + " " + text.strip()
     paragraph = paragraph.strip()
     
     return paragraph
@@ -121,7 +126,11 @@ def getNameOfAssociate(names,sourcePerson):
             otherName = name
             break
     return foundName,otherName
-
+def isUniqueSigAct(newAct, pastActs):
+    for act in pastActs:
+        if newAct.replace(' ','') == act.replace(' ',''):
+            return False
+    return True
 def getMemberName(thisTag):
 
     memberName = ""
@@ -165,30 +174,17 @@ def getMemberActs(thisTag,memberSigAct):
     # numSigs += 1
     if "REG" in thisTag.attrib:
         sigAct = thisTag.attrib["REG"]
-        memberSigAct.append(sigAct)
+        if isUniqueSigAct(sigAct,memberSigAct):
+            memberSigAct.append(sigAct)
         # numAdded += 1
     else:
         sigAct = getOnlyText(thisTag)
-        print(sigAct)
-
-        if sigAct == None or sigAct == "":
-           sigAct = ' '.join(thisTag.itertext())
-
-           print(sigAct)
-           if sigAct != "" and sigAct not in memberSigAct:
-               memberSigAct.append(sigAct)
-               # numAdded += 1
-               print(sigAct)
-               # print("2. number of sigActs added: ",numAdded)
-               # sys.stdin.read(1)
-           else:
-               print("1.significant activity not added")
-               # sys.stdin.read(1)
-        else:
+        if isUniqueSigAct(sigAct, memberSigAct):
             memberSigAct.append(sigAct)
-            # numAdded += 1
 
     return memberSigAct
+def incrementLetter(inputLetter):
+    return chr(ord(inputLetter) + 1)
 
 def uniqueMemberCheck(newMember, listOfMembers):
     uniqueMember = True
@@ -203,14 +199,39 @@ def uniqueMemberCheck(newMember, listOfMembers):
                 print("this is not a unique member")
                 # getch()
     else:
+        if newMember.memberName == "":
+            noNameList = []
+            for member in listOfMembers:
+                if member.memberRelation == newMember.memberRelation and member.isNoName == True:
+                    linkToMember = member
+                    noNameList.append(linkToMember)
+
+            if len(noNameList) == 0:
+                newMember.isNoName = True
+                newMember.noNameLetter = ''
+                newMember.memberName
+
+            elif len(noNameList) == 1:
+                newMember.isNoName = True
+                newMember.noNameLetter = 'B'
+                noNameList[0].noNameLetter = 'A'
+
+            elif len(noNameList) > 1:
+                lastMember = noNameList[-1]
+                newMember.isNoName = True
+                newMember.noNameLetter = incrementLetter(lastMember.noNameLetter)
+
+            # elif len(noNameList) == 1:
+
         for addedMember in listOfMembers:
             # print(newMember.memberName, "(", newMember.memberRelation,")"," vs ", addedMember.memberName,"(", addedMember.memberRelation,")")
-            if newMember.memberRelation == addedMember.memberRelation and newMember.memberName == addedMember.memberName:
+            if newMember.memberRelation == addedMember.memberRelation and newMember.memberName == addedMember.memberName and newMember.noNameLetter == addedMember.noNameLetter:
                 addedMember.memberJobs = list(set(addedMember.memberJobs).union(set(newMember.memberJobs)))
                 addedMember.memberSigActs= list(set(newMember.memberSigActs).union(set(newMember.memberSigActs)))
                 uniqueMember = False
                 print("this is not a unique member")
                 # getch()
+
 
     if newMember.memberRelation != "" and uniqueMember == True:
         # print("now adding in the new member")
@@ -220,13 +241,13 @@ def uniqueMemberCheck(newMember, listOfMembers):
     return listOfMembers
 
 def getMemberInfo(familyMember,listOfMembers,SOURCENAME):
-    memberRelation = ""
     memberName = ""
     memberJobs = []
     memberSigAct = []
     memberRelation = familyMember.attrib['RELATION']
 
     for thisTag in familyMember.iter():
+
         # Get name of family Member by making sure the name is not of the person about whom the biography is about
         if thisTag.tag == "NAME" and thisTag.attrib['STANDARD'] != SOURCENAME and memberName == "":
             memberName = getMemberName(thisTag)

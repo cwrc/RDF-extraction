@@ -46,10 +46,19 @@ def graphMaker(sourceName,fileName,familyInfo, birthInfo, deathInfo, childInfo,c
             memberName = splitName[1].strip() + " " + splitName[0].strip()
 
         memberSource = URIRef(str(personNamespace) + memberName.replace(" ","_"))
-        if memberName == "":
-            print(sourceName, memberName)
-            memberSource = URIRef(str(personNamespace) + sourceName.replace(" ","_") + "_" + family.memberRelation.lower().title())
-            numNamelessPeople += 1
+        if family.isNoName:
+            if family.noNameLetter == "":
+                # print(sourceName, memberName)
+                # if family.memberRelation == "UNCLE":
+                #     if (source, URIRef(str(cwrcNamespace) + "hasUncle"),None) in g:
+                #         print("multipleUncles")
+                #     print(family.memberRelation)
+                memberSource = URIRef(str(personNamespace) + sourceName.replace(" ","_") + "_" + family.memberRelation.lower().title())
+                numNamelessPeople += 1
+            else:
+                memberSource = URIRef(str(personNamespace) + sourceName.replace(" ", "_") + "_" + family.memberRelation.lower().title() + "_" + family.noNameLetter)
+                numNamelessPeople += 1
+
         else:
             g.add((memberSource,cwrcNamespace.hasName,Literal(memberName)))
 
@@ -62,6 +71,8 @@ def graphMaker(sourceName,fileName,familyInfo, birthInfo, deathInfo, childInfo,c
         for sigActs in family.memberSigActs:
             g.add((memberSource,cwrcNamespace.hasJob,Literal(sigActs.strip().title())))
             # print("added significant ", sigActs)
+
+        cwrcTag = getCwrcTag(family.memberRelation)
 
         predicate = URIRef(str(cwrcNamespace) + getCwrcTag(family.memberRelation))
         # g.add((source,predicate,Literal(memberName)))
@@ -109,36 +120,29 @@ def graphMaker(sourceName,fileName,familyInfo, birthInfo, deathInfo, childInfo,c
                 # g.add((source,cwrcNamespace.hasDeathContext,(cwrcNamespace.hasDeathContext,cwrcNamespace.hasSource,Literal(deathContext))))
 
 
-    # if childInfo.ChildType == "numberOfChildren":
-    #     if childInfo.NumChildren == "1":
-    #         g.add((source, cwrcNamespace.hasChild, Literal(childInfo.NumChildren)))
-    #     else:
-    #         g.add((source, cwrcNamespace.hasChildren, Literal(childInfo.NumChildren)))
+    for child in childInfo:
+        if child.ChildType == "numberOfChildren":
+            if child.NumChildren == "1":
+                g.add((source, cwrcNamespace.hasChild, Literal(child.NumChildren)))
+            else:
+                g.add((source, cwrcNamespace.hasChildren, Literal(child.NumChildren)))
 
     for childAttribute in childlessList:
         g.add((source,cwrcNamespace.hasReproductiveHistory,Literal(childAttribute.Label.title())))
-    checkIntimate = False
+
     for relationship in intmtRelationshipsList:
         if relationship.AttrValue == "EROTICYES":
             g.add((source,cwrcNamespace.hasEroticRelationhip,Literal(relationship.PersonName.title())))
-            print("eroticyes")
-            # getch()
+
         elif relationship.AttrValue == "EROTICNO":
             g.add((source,cwrcNamespace.hasEroticRelationhip,Literal(relationship.PersonName.title())))
-            print("eroticno")
-            # getch()
+
         elif relationship.AttrValue == "EROTICPOSSIBLY":
             g.add((source,cwrcNamespace.hasEroticRelationhip,Literal(relationship.PersonName.title())))
-            print("EROTICPOSSIBLY")
-            # getch()
+
         else:
             g.add((source,cwrcNamespace.hasEroticRelationhip,Literal(relationship.PersonName.title())))
-            print("not erotic")
-            # getch()
-        checkIntimate = True
 
     print(g.serialize(format='turtle').decode())
-    # if checkIntimate:
-    #     getch()
-
+    # g.serialize(destination='AllTriples/' + fileName+'.txt', format='turtle')
     return len(g),numNamelessPeople

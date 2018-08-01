@@ -1,6 +1,7 @@
 # this file simply holds functions for scrapeFamily.py
 import xml.etree.ElementTree
 import os
+import sys
 class birthData:
     def __init__(self, bDate, bPosition, bSettl, bRegion, bGeog):
         self.birthDate = bDate

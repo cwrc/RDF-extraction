@@ -46,7 +46,7 @@ def getch():
 def childrenCheck(xmlString, sourceFile):
     root = xml.etree.ElementTree.fromstring(xmlString)
     childrenTag = root.findall('.//CHILDREN')
-    childType = ""
+    childrenList = []
 
     for child in childrenTag:
         if "NUMBER" in child.attrib:
@@ -54,14 +54,10 @@ def childrenCheck(xmlString, sourceFile):
             childType = "numberOfChildren"
             numChild = child.attrib["NUMBER"]
             
-            return ChildStatus(childType,numChild)
+            childrenList.append(ChildStatus(childType,numChild))
 
-    # if len(childlessTag) > 0 :
-        
-        
-    # for child in myRoot2.findall(".//MEMBER[@RELATION='MOTHER']"):
-    #     print("found MOTHER TAG")
-    #     print(child.text)
+    return childrenList
+
 
 def childlessnessCheck(xmlString):
     root = xml.etree.ElementTree.fromstring(xmlString)
@@ -207,10 +203,14 @@ def main():
     numTriples = 0
     numNamelessPeople = 0
 
+    # f = open("namesAndTriples2.txt","w")
+
     for dirName, subdirlist, files in os.walk(bioFolder):
         for name in files:
-            if "woodel-b.xml" not in name:
-                continue
+            # if "manyUncles-b.xml" not in name:
+            #     continue
+            # if "beetis-b.xml" not in name:
+            #     continue
 
             if printInfo == True:
                 print('\n===========%s=================' % name)
@@ -226,10 +226,10 @@ def main():
                 birthInfo                   = getBirth(xmlString)
                 deathInfo                   = getDeath(xmlString)
                 numGraphTriples,numNameless = graphMaker(sourceName,name[0:-6],familyMembers,birthInfo,deathInfo,childInfo,childlessList,intimateRelationshipsList)
-                
+                # f.write("%s:%d\n"%(name,numGraphTriples))
                 numTriples += numGraphTriples
                 numNamelessPeople += numNameless
-          
+    # f.close()
     print(numSigs, " number of significant activities found")
     print(numAdded, " number of significant activities added")
     print("number of triples: ", numTriples)
