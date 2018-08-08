@@ -52,7 +52,7 @@ def graphMaker(sourceName,fileName,familyInfo, birthInfo, deathInfo, childInfo,c
     # source = URIRef(str(personNamespace) + sourceName)
     source = URIRef(str(data)+ str(getStandardUri(fileName)))
              # URIRef(str(cwrcNamespace) + str(fileName) + "deathContext" + str(numDeathContexts))
-    g.add((source,foaf.name,Literal(sourceName.replace("_", " "))))
+    # g.add((source,foaf.name,Literal(sourceName.replace("_", " "))))
     g.add((source,RDF.type, cwrcNamespace.NaturalPerson))
 
     # Adding family info to the ttl file
@@ -109,8 +109,8 @@ def graphMaker(sourceName,fileName,familyInfo, birthInfo, deathInfo, childInfo,c
         # if dateValidate(deathInfo.deathDate):
         g.add((source,cwrcNamespace.hasDeathDate,Literal(deathInfo.deathDate)))
         
-        for deathCause in deathInfo.deathCauses:
-            g.add((source,cwrcNamespace.hasDeathCause,Literal(deathCause)))
+        # for deathCause in deathInfo.deathCauses:
+        #     g.add((source,cwrcNamespace.hasDeathCause,Literal(deathCause)))
         
         g.add((source,cwrcNamespace.hasDeathPlace,Literal(deathInfo.deathSettlement+", "+deathInfo.deathRegion+", "+deathInfo.deathGeog)))
         
@@ -129,6 +129,7 @@ def graphMaker(sourceName,fileName,familyInfo, birthInfo, deathInfo, childInfo,c
             # g.add((cwrc.AnnaLeonowens, rdf.type, cwrc.Person))
             numDeathContexts = 1
             # print(deathInfo.deathContexts[0])
+
             for thisDeathContext in deathInfo.deathContexts:
                 print("context: ", thisDeathContext)
                 deathContextURI = URIRef(str(cwrcNamespace)+str(fileName) + "deathContext" + str(numDeathContexts))
@@ -156,7 +157,7 @@ def graphMaker(sourceName,fileName,familyInfo, birthInfo, deathInfo, childInfo,c
             g.add((thisMember, foaf.name, Literal(relationship.PersonName.title())))
             g.add((source,cwrcNamespace.hasEroticRelationship,thisMember))
 
-        elif relationship.AttrValue == "EROTICNO":
+        elif relationship.AttrValue == "EROTICNO" :
             thisMember = URIRef(str(personNamespace) + relationship.PersonName.title().replace(" ", "_"))
             g.add((thisMember, RDF.type, cwrcNamespace.NaturalPerson))
             g.add((thisMember, foaf.name, Literal(relationship.PersonName.title())))
@@ -170,10 +171,13 @@ def graphMaker(sourceName,fileName,familyInfo, birthInfo, deathInfo, childInfo,c
 
         else:
             thisMember = URIRef(str(personNamespace) + relationship.PersonName.title().replace(" ", "_"))
-            g.add((thisMember, RDF.type, cwrcNamespace.NaturalPerson))
-            g.add((thisMember, foaf.name, Literal(relationship.PersonName.title())))
-            g.add((source,cwrcNamespace.hasERROREROTICRELATIONSHIP,thisMember))
+            if relationship.PersonName.title() != "Intimate Relationship":
+                g.add((thisMember, RDF.type, cwrcNamespace.NaturalPerson))
+                g.add((thisMember, foaf.name, Literal(relationship.PersonName.title())))
+                g.add((source,cwrcNamespace.hasIntimateRelationship,thisMember))
+            else:
+                g.add((source, cwrcNamespace.hasIntimateRelationship, Literal(relationship.PersonName.title())))
 
     print(g.serialize(format='turtle').decode())
-    g.serialize(destination="gTriples/"+fileName+'.ttl', format='turtle')
+    g.serialize(destination=os.path.expanduser("~/Documents/UoGuelph Projects/Coding-Projects/CombiningTriples/gTriples/"+ fileName+ '.ttl'), format='turtle')
     return len(g),numNamelessPeople

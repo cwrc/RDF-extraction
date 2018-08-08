@@ -209,10 +209,10 @@ def main():
 
     for dirName, subdirlist, files in os.walk(bioFolder):
         for name in files:
-            if "levyam-b.xml" not in name:
-                continue
-            # if "seacma-b.xml" not in name:
+            # if "levyam-b.xml" not in name:
             #     continue
+            if "seacma-b.xml" not in name:
+                continue
 
             if printInfo == True:
                 print('\n===========%s=================' % name)
