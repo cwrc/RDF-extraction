@@ -8,7 +8,8 @@ NS_DICT = {
     "dctypes": rdflib.Namespace("http://purl.org/dc/dcmitype/"),
     "foaf": rdflib.Namespace('http://xmlns.com/foaf/0.1/'),
     "oa": rdflib.Namespace("http://www.w3.org/ns/oa#"),
-    "dcterms": rdflib.Namespace("http://purl.org/dc/terms/")
+    "dcterms": rdflib.Namespace("http://purl.org/dc/terms/"),
+    "org": rdflib.Namespace("http://www.w3.org/ns/org#")
 }
 
 
@@ -17,14 +18,23 @@ def bind_ns(namespace_manager, ns_dictionary):
         namespace_manager.bind(x, ns_dictionary[x], override=False)
 
 
+def make_standard_uri(std_str):
+    import string
+    translator = str.maketrans('', '', string.punctuation)
+    temp_str = std_str.translate(translator)
+    temp_str = temp_str.replace(" ", "_")
+    return rdflib.term.URIRef(str(NS_DICT["data"]) + temp_str)
+
+
 class Biography(object):
     """docstring for Biography"""
 
     def __init__(self, id, name, gender):
         super(Biography, self).__init__()
         self.id = id
-        self.uri = rdflib.term.URIRef(str(NS_DICT["data"]) + id)
+        # self.uri = rdflib.term.URIRef(str(NS_DICT["data"]) + id)
         self.name = name
+        self.uri = make_standard_uri(name)
         self.gender = gender
         self.context_list = []
         self.cf_list = []
@@ -32,8 +42,10 @@ class Biography(object):
         self.event_list = []
 
         self.education_context_list = []
-        # self.occupations = []
-        # self.other_contexts = []
+        self.occupations = []
+        self.other_contexts = []
+        self.organizations = []
+        self.other_triples = []
 
     def add_context(self, context):
         if context is list:
@@ -43,6 +55,9 @@ class Biography(object):
 
     def create_context(self, id, text, type="culturalformation"):
         self.context_list.append(Context(id, text, type))
+
+    def add_organization(self, orgname):
+        self.organizations += orgname
 
     def add_cultural_form(self, culturalform):
         self.cf_list += culturalform
@@ -78,11 +93,16 @@ class Biography(object):
         bind_ns(namespace_manager, NS_DICT)
 
         g.add((self.uri, RDF.type, NS_DICT["cwrc"].NaturalPerson))
-        g.add((self.uri, NS_DICT["foaf"].name, rdflib.Literal(self.name)))
+        g.add((self.uri, NS_DICT["foaf"].name, rdflib.Literal(self.name, datatype=rdflib.namespace.XSD.string)))
         g.add((self.uri, NS_DICT["cwrc"].hasGender, self.gender))
         g += self.create_triples(self.cf_list)
         g += self.create_triples(self.context_list)
         g += self.create_triples(self.education_context_list)
+
+        # Organization triples
+        for x in self.organizations:
+            g.add((self.uri, NS_DICT["org"].memberOf, x))
+
         # g += self.create_triples(self.event_list)
 
         return g
