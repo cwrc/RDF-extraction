@@ -17,6 +17,13 @@ def getCwrcTag(familyRelation):
         if row[orlandoTag] == familyRelation:
             return row[cwrcTag]
 
+def getStandardUri(std_str):
+    import string
+    translator = str.maketrans('', '', string.punctuation)
+    temp_str = std_str.translate(translator)
+    temp_str = temp_str.replace(" ", "_")
+    return temp_str
+
 def graphMaker(sourceName,fileName,familyInfo, birthInfo, deathInfo, childInfo,childlessList,intmtRelationshipsList):
     
     from rdflib import Namespace, Graph, Literal, URIRef
@@ -24,17 +31,25 @@ def graphMaker(sourceName,fileName,familyInfo, birthInfo, deathInfo, childInfo,c
     numNamelessPeople = 0
 
     g = Graph()
-    personNamespace   = Namespace('http://example.org/')
+    # personNamespace   = Namespace('http://example.org/')
+    personNamespace   = Namespace('http://cwrc.ca/cwrcdata/')
     cwrcNamespace     = Namespace('http://sparql.cwrc.ca/ontologies/cwrc#')
-    oa                = Namespace('http://exampleoa.org/')
+    oa                = Namespace('http://www.w3.org/ns/oa#')
+    data              = Namespace('http://cwrc.ca/cwrcdata/')
+    foaf              = Namespace('http://xmlns.com/foaf/0.1/')
+
     g.bind('cwrc',cwrcNamespace)
     g.bind('oa',oa)
+    g.bind('data',data)
+    g.bind('foaf',foaf)
     # put in foaf.name instead of cwrc.hasName
     # namespace_manager.bind('cwrcdata', cwrcNamespace, override=False)
 
     sourceName = sourceName.replace(" ","_")
-    source = URIRef(str(personNamespace) + sourceName)
-    g.add((source,cwrcNamespace.hasName,Literal(sourceName.replace("_", " "))))
+    # source = URIRef(str(personNamespace) + sourceName)
+    source = URIRef(str(data)+ str(getStandardUri(fileName)))
+             # URIRef(str(cwrcNamespace) + str(fileName) + "deathContext" + str(numDeathContexts))
+    g.add((source,foaf.name,Literal(sourceName.replace("_", " "))))
     g.add((source,RDF.type, cwrcNamespace.NaturalPerson))
 
     # Adding family info to the ttl file
@@ -60,7 +75,7 @@ def graphMaker(sourceName,fileName,familyInfo, birthInfo, deathInfo, childInfo,c
                 numNamelessPeople += 1
 
         else:
-            g.add((memberSource,cwrcNamespace.hasName,Literal(memberName)))
+            g.add((memberSource,foaf.name,Literal(memberName)))
 
         g.add((memberSource, RDF.type, cwrcNamespace.NaturalPerson))
         
@@ -113,8 +128,9 @@ def graphMaker(sourceName,fileName,familyInfo, birthInfo, deathInfo, childInfo,c
             # print(deathInfo.deathContexts[0])
             for thisDeathContext in deathInfo.deathContexts:
                 print("context: ", thisDeathContext)
-                deathContextURI = URIRef(str(fileName) + "deathContext" + str(numDeathContexts))
+                deathContextURI = URIRef(str(cwrcNamespace)+str(fileName) + "deathContext" + str(numDeathContexts))
                 numDeathContexts += 1
+
                 g.add((deathContextURI, oa.hasTarget, source))
                 g.add((deathContextURI,cwrcNamespace.hasdescription, Literal(thisDeathContext)))
                 # g.add((source,cwrcNamespace.hasDeathContext,(cwrcNamespace.hasDeathContext,cwrcNamespace.hasSource,Literal(deathContext))))
@@ -132,17 +148,17 @@ def graphMaker(sourceName,fileName,familyInfo, birthInfo, deathInfo, childInfo,c
 
     for relationship in intmtRelationshipsList:
         if relationship.AttrValue == "EROTICYES":
-            g.add((source,cwrcNamespace.hasEroticRelationhip,Literal(relationship.PersonName.title())))
+            g.add((source,cwrcNamespace.hasEroticRelationship,Literal(relationship.PersonName.title())))
 
         elif relationship.AttrValue == "EROTICNO":
-            g.add((source,cwrcNamespace.hasEroticRelationhip,Literal(relationship.PersonName.title())))
+            g.add((source,cwrcNamespace.hasEroticRelationship,Literal(relationship.PersonName.title())))
 
         elif relationship.AttrValue == "EROTICPOSSIBLY":
-            g.add((source,cwrcNamespace.hasEroticRelationhip,Literal(relationship.PersonName.title())))
+            g.add((source,cwrcNamespace.hasEroticRelationship,Literal(relationship.PersonName.title())))
 
         else:
-            g.add((source,cwrcNamespace.hasEroticRelationhip,Literal(relationship.PersonName.title())))
+            g.add((source,cwrcNamespace.hasEroticRelationship,Literal(relationship.PersonName.title())))
 
     print(g.serialize(format='turtle').decode())
-    # g.serialize(destination='AllTriples/' + fileName+'.txt', format='turtle')
+    g.serialize(destination="gTriples/"+fileName+'.ttl', format='turtle')
     return len(g),numNamelessPeople

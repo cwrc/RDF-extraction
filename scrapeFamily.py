@@ -195,6 +195,8 @@ def getFamilyInfo(xmlString, sourceFile):
     # printMemberInfo(listOfMembers)
     # print("")
     return rearrangeSourceName(SOURCENAME),listOfMembers
+    # return SOURCENAME,listOfMembers
+
     
 def main():
     bioFolder = os.path.expanduser("~/Documents/UoGuelph Projects/biography/")
@@ -207,9 +209,9 @@ def main():
 
     for dirName, subdirlist, files in os.walk(bioFolder):
         for name in files:
-            # if "manyUncles-b.xml" not in name:
-            #     continue
-            # if "beetis-b.xml" not in name:
+            if "levyam-b.xml" not in name:
+                continue
+            # if "seacma-b.xml" not in name:
             #     continue
 
             if printInfo == True:
