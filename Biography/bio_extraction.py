@@ -2,14 +2,10 @@
 # from Env import env
 # import islandora_auth as login
 from bs4 import BeautifulSoup
-from difflib import get_close_matches
-from rdflib import RDF, RDFS, Literal
 import rdflib
 
 from biography import Biography, bind_ns, NS_DICT
-from context import Context, strip_all_whitespace
 from log import *
-from event import Event
 import culturalForm as cf
 import education
 import other_contexts
@@ -24,7 +20,6 @@ implement occupation
 """
 
 # temp log library for debugging --> to be eventually replaced with proper logging library
-# from log import *
 log = Log("log/biography/errors")
 log.test_name("Biography extraction Error Logging")
 extract_log = Log("log/biography/extraction")
@@ -48,6 +43,7 @@ def get_sex(bio):
 def main():
     import os
     filelist = [filename for filename in sorted(os.listdir("bio_data")) if filename.endswith(".xml")]
+    filelist.remove("fielmi-b.xml")
     entry_num = 1
     global uber_graph
 
@@ -76,7 +72,7 @@ def main():
         extract_log.msg("\n\n")
 
         # triples to files
-        # file = open("culturalform_triples/" + str(person.id) + "-cf.ttl", "w")
+        # file = open("culturalform_triples/" + str(person.id) + "-cf.txt", "w")
         # file.write("#" + str(len(graph)) + " triples created\n")
         # file.write(person.to_file(graph))
         # file.close()
