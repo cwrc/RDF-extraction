@@ -21,7 +21,8 @@ class Log(object):
         """
         super(Log, self).__init__()
 
-        date = time.strftime("%d_%b_%Y")
+        # date = time.strftime("%d_%b_%Y")
+        date = time.strftime("%b_%d_%Y")
 
         file_directory = file_name.split('/')[0]
         if not os.path.exists(file_directory):
@@ -142,7 +143,7 @@ class Log(object):
             print(string)
 
     def separ(self, character="x"):
-        """ add line charators to act as text separators """
+        """ add line characters to act as text separators """
         self.msg(character * 100, stdout=False)
 
     def test_name(self, name):
