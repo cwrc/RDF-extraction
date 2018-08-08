@@ -4,6 +4,12 @@ import os, sys
 import csv
 from rdflib import RDF
 from scrapeFamily import getch
+from rdflib import Namespace, Graph, Literal, URIRef
+personNamespace   = Namespace('http://cwrc.ca/cwrcdata/')
+cwrcNamespace     = Namespace('http://sparql.cwrc.ca/ontologies/cwrc#')
+oa                = Namespace('http://www.w3.org/ns/oa#')
+data              = Namespace('http://cwrc.ca/cwrcdata/')
+foaf              = Namespace('http://xmlns.com/foaf/0.1/')
 
 def getCwrcTag(familyRelation):
     csvFile = open(os.path.expanduser("~/Google Drive/Term 3 - UoGuelph/mapping2.csv"),"r")
@@ -24,19 +30,16 @@ def getStandardUri(std_str):
     temp_str = temp_str.replace(" ", "_")
     return temp_str
 
+
 def graphMaker(sourceName,fileName,familyInfo, birthInfo, deathInfo, childInfo,childlessList,intmtRelationshipsList):
     
-    from rdflib import Namespace, Graph, Literal, URIRef
+
     import rdflib
     numNamelessPeople = 0
 
     g = Graph()
     # personNamespace   = Namespace('http://example.org/')
-    personNamespace   = Namespace('http://cwrc.ca/cwrcdata/')
-    cwrcNamespace     = Namespace('http://sparql.cwrc.ca/ontologies/cwrc#')
-    oa                = Namespace('http://www.w3.org/ns/oa#')
-    data              = Namespace('http://cwrc.ca/cwrcdata/')
-    foaf              = Namespace('http://xmlns.com/foaf/0.1/')
+
 
     g.bind('cwrc',cwrcNamespace)
     g.bind('oa',oa)
@@ -148,16 +151,28 @@ def graphMaker(sourceName,fileName,familyInfo, birthInfo, deathInfo, childInfo,c
 
     for relationship in intmtRelationshipsList:
         if relationship.AttrValue == "EROTICYES":
-            g.add((source,cwrcNamespace.hasEroticRelationship,Literal(relationship.PersonName.title())))
+            thisMember = URIRef(str(personNamespace) + relationship.PersonName.title().replace(" ", "_"))
+            g.add((thisMember, RDF.type, cwrcNamespace.NaturalPerson))
+            g.add((thisMember, foaf.name, Literal(relationship.PersonName.title())))
+            g.add((source,cwrcNamespace.hasEroticRelationship,thisMember))
 
         elif relationship.AttrValue == "EROTICNO":
-            g.add((source,cwrcNamespace.hasEroticRelationship,Literal(relationship.PersonName.title())))
+            thisMember = URIRef(str(personNamespace) + relationship.PersonName.title().replace(" ", "_"))
+            g.add((thisMember, RDF.type, cwrcNamespace.NaturalPerson))
+            g.add((thisMember, foaf.name, Literal(relationship.PersonName.title())))
+            g.add((source,cwrcNamespace.hasNonEroticRelationship,thisMember))
 
         elif relationship.AttrValue == "EROTICPOSSIBLY":
-            g.add((source,cwrcNamespace.hasEroticRelationship,Literal(relationship.PersonName.title())))
+            thisMember = URIRef(str(personNamespace) + relationship.PersonName.title().replace(" ", "_"))
+            g.add((thisMember, RDF.type, cwrcNamespace.NaturalPerson))
+            g.add((thisMember, foaf.name, Literal(relationship.PersonName.title())))
+            g.add((source,cwrcNamespace.hasPossiblyEroticRelationship,thisMember))
 
         else:
-            g.add((source,cwrcNamespace.hasEroticRelationship,Literal(relationship.PersonName.title())))
+            thisMember = URIRef(str(personNamespace) + relationship.PersonName.title().replace(" ", "_"))
+            g.add((thisMember, RDF.type, cwrcNamespace.NaturalPerson))
+            g.add((thisMember, foaf.name, Literal(relationship.PersonName.title())))
+            g.add((source,cwrcNamespace.hasERROREROTICRELATIONSHIP,thisMember))
 
     print(g.serialize(format='turtle').decode())
     g.serialize(destination="gTriples/"+fileName+'.ttl', format='turtle')
