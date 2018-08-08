@@ -13,6 +13,7 @@ from biography import Biography, bind_ns, NS_DICT
 from context import Context, strip_all_whitespace
 from log import *
 from event import Event
+from place import Place
 
 """
 Status: ~75%
@@ -79,7 +80,7 @@ class CulturalForm(object):
         return string
 
 
-def find_cultural_forms(cf, person_uri):
+def find_cultural_forms(cf, person):
     cf_list = []
 
     def get_reported(tag):
@@ -157,20 +158,20 @@ def find_cultural_forms(cf, person_uri):
                 cf_list.append(CulturalForm(tags[tag][0], get_reported(x), get_mapped_term(tags[tag][1], value)))
 
     def get_geoheritage(tag):
-        # NOTE: will require more detailed scrape and parsing of place info + mapping to geonames, may need to split into a separate script pending
-        # log.separ()
-        # log.msg(strip_all_whitespace(str(tag)))
-        # value = get_value(tag)
-        # if value and len(value) < 50:
-        #     log.msg("\t" + value)
-        # settlement = tag.find_all("settlement")
-        # region = tag.find_all("region")
-        # geog = tag.find_all("geog")
-        # log.msg("\t\tsettlement: " + str([get_value(x) for x in settlement]))
-        # log.msg("\t\tregion: " + str([get_value(x) for x in region]))
-        # log.msg("\t\tgeog: " + str([get_value(x) for x in geog]))
 
-        return tag.text()
+        places = tag.find_all("place")
+        if places:
+            place_values = []
+            for x in places:
+                temp_place = Place(x)
+                if not temp_place.uri:
+                    value = get_mapped_term("GeographicHeritage", temp_place.address)
+                    place_values.append(value)
+                else:
+                    place_values.append(rdflib.term.URIRef(temp_place.uri))
+            return place_values
+        else:
+            return get_mapped_term("GeographicHeritage", get_value(tag))
 
     def get_forebear_cfs():
         # NOTE: This will have to interact will sparql endpoint to check family related triples
@@ -213,28 +214,33 @@ def find_cultural_forms(cf, person_uri):
 
         tags = {"racecolour": "RaceColour",
                 "nationalheritage": "NationalHeritage",
-                # "geogheritage": "GeographicHeritage",
+                "geogheritage": "GeographicHeritage",
                 "ethnicity": "Ethnicity"}
 
         for tag in tags.keys():
             instances = cf.find_all(tag)
             for x in instances:
-                forebear = get_forebear(x)
+                culturalforms = []
 
+                forebear = get_forebear(x)
                 if tag == "geogheritage":
                     value = get_geoheritage(x)
+                    if type(value) is list:
+                        for place in value:
+                            culturalforms.append(CulturalForm("has" + tags[tag], get_reported(x), place))
+                    else:
+                        culturalforms.append(CulturalForm("has" + tags[tag], get_reported(x), value))
+
                 else:
                     value = get_value(x)
-
-                culturalforms = []
-                if tag == "nationalheritage" and value in ["American-Austrian", "Anglo-Scottish", "Scottish-Irish"]:
-                    culturalforms.append(CulturalForm(
-                        "has" + tags[tag], get_reported(x), get_mapped_term(tags[tag], value.split("-")[0])))
-                    culturalforms.append(CulturalForm(
-                        "has" + tags[tag], get_reported(x), get_mapped_term(tags[tag], value.split("-")[1])))
-                else:
-                    culturalforms.append(CulturalForm(
-                        "has" + tags[tag], get_reported(x), get_mapped_term(tags[tag], value)))
+                    if tag == "nationalheritage" and value in ["American-Austrian", "Anglo-Scottish", "Scottish-Irish"]:
+                        culturalforms.append(CulturalForm(
+                            "has" + tags[tag], get_reported(x), get_mapped_term(tags[tag], value.split("-")[0])))
+                        culturalforms.append(CulturalForm(
+                            "has" + tags[tag], get_reported(x), get_mapped_term(tags[tag], value.split("-")[1])))
+                    else:
+                        culturalforms.append(CulturalForm(
+                            "has" + tags[tag], get_reported(x), get_mapped_term(tags[tag], value)))
 
                 for culturalform in culturalforms:
                     cf_list.append(culturalform)
@@ -246,55 +252,95 @@ def find_cultural_forms(cf, person_uri):
                         add_forebear("MOTHER", culturalform)
                         add_forebear("FATHER", culturalform)
 
-                    elif forebear == "GRANDPARENTS":
-                        add_forebear("GRANDMOTHER", culturalform)
-                        add_forebear("GRANDFATHER", culturalform)
-                    else:
-                        add_forebear(forebear, culturalform)
+                    # elif forebear == "GRANDPARENTS":
+                    #     add_forebear("GRANDMOTHER", culturalform)
+                    #     add_forebear("GRANDFATHER", culturalform)
+                    # else:
+                    #     add_forebear(forebear, culturalform)
 
         pass
 
+    def make_fake_uri(name, suffix):
+        import string
+        translator = str.maketrans('', '', string.punctuation)
+        return(name.translate(translator))
+
+    def get_org(tag):
+        orgs = tag.find_all("orgname")
+        if not orgs:
+            parent_tag = tag.parent.name
+            if parent_tag == "orgname":
+                return make_fake_uri(get_attribute(tag.parent, "standard"), "_ORG")
+
+        for x in orgs:
+            make_fake_uri(str(x), "_ORG")
+
+        return tag.find_all("orgname")
+
     def get_denomination():
         religions = cf.find_all("denomination")
+        # person.other_triples.append((person.uri, self.uri, self.value))
+        # g.add((person_uri, self.uri, self.value))
         for x in religions:
             # Get reg --> get org reg --> org freeform
+            value = get_reg(x)
+            orgName = get_org(x)
+
+            if not value and orgName:
+                continue
+
+            # value = get_mapped_term("Religion", value)
+
+            value = get_mapped_term("Religion", get_value(x), True)
+            if type(value) is rdflib.term.Literal:
+                value = get_mapped_term("PoliticalAffiliation", get_value(x), True)
+                log.msg((value))
+            if type(value) is rdflib.term.Literal:
+                value = get_mapped_term("Religion", get_value(x))
+
+            religion = CulturalForm("hasReligion", get_reported(x), value)
+
+            cf_list.append(religion)
             # if no org
             # Get reg -->  freeform
-            value = get_mapped_term("Religion", get_value(x))
             # and to add membership details to orgnames, same thing to do for religons
-            cf_list.append(CulturalForm("hasReligion", get_reported(x), value))
 
     def get_PA():
-        # Create theoretical extra triples for now
-        # possible predicates:
-        # These will also need inverse if we were to maintain consistency?
-        # INVOLVEMENT --> MEMBERSHIP --> ACTIVISM
-        # low --> med --> high
-        # possible that we can change these predicates to some of leveling term
-        # INVOLVEMENTYES --> hasPoliticalInvolvement
-        # MEMBERSHIPYES --> hasMembership
-        # ACTIVISMYES --> hasActivistRole
-        # Membership can be broader to work for general organizations perhaps? ex. religious organizations
         pas = cf.find_all("politicalaffiliation")
         for x in pas:
             # Will have to make variant of this function to reject orgname free form data
             # and to add membership details to orgnames, same thing to do for religons
-            value = get_mapped_term("PoliticalAffiliation", get_value(x))
+            # orgName = get_org(x)
+            # if orgName:
+            #     continue
+            value = get_reg(x)
+            if not value:
+                orgName = get_org(x)
+                if orgName:
+                    continue
 
-            cf_list.append(CulturalForm("hasPoliticalAffiliation", get_reported(x), value))
-            # Since according to orlando it is a scale and they overlap
+            value = get_mapped_term("PoliticalAffiliation", get_value(x))
+            gender_issue = False
+            if x.get("woman-genderissue") == "GENDERYES":
+                cf_list.append(CulturalForm("hasGenderedPoliticalActivity", get_reported(x), value))
+                gender_issue = True
+
             if x.get("activism") == "ACTIVISTYES":
-                cf_list.append(CulturalForm("hasActivistRole", None, value))
+                cf_list.append(CulturalForm("hasActivistInvolvementIn", None, value))
             elif x.get("membership") == "MEMBERSHIPYES":
-                cf_list.append(CulturalForm("hasMembership", None, value))
+                cf_list.append(CulturalForm("hasPoliticalMembershipIn", None, value))
             elif x.get("involvement") == "INVOLVEMENTYES":
-                cf_list.append(CulturalForm("hasPoliticalInvolvement", None, value))
+                cf_list.append(CulturalForm("hasPoliticalInvolvementIn", None, value))
+            else:
+                if not gender_issue:
+                    cf_list.append(CulturalForm("hasPoliticalAffiliation", get_reported(x), value))
+
     if cf.name != "politics":
+        get_forebear_cfs()
         get_class()
         get_language()
         get_other_cfs()
         get_denomination()
-        get_forebear_cfs()
     get_PA()
     return cf_list
 
@@ -348,7 +394,7 @@ def extract_cf_data(bio, person):
                                        str(cf_subelements_count[context_type]), context, context_type)
                 forms_found += 1
 
-                cf_list = find_cultural_forms(context, person.uri)
+                cf_list = find_cultural_forms(context, person)
                 if cf_list:
                     temp_context.subjects = get_subjects(cf_list)
                     person.add_cultural_form(cf_list)
@@ -359,7 +405,7 @@ def extract_cf_data(bio, person):
             cf_list = None
             temp_context = Context(person.id + "_culturalformation" + "_context" + str(id), cf)
 
-            cf_list = find_cultural_forms(cf, person.uri)
+            cf_list = find_cultural_forms(cf, person)
             temp_context.subjects = get_subjects(cf_list)
 
             person.add_context(temp_context)
@@ -374,7 +420,7 @@ def extract_cf_data(bio, person):
         temp_context = Context(person.id + "_politics_context" + str(forms_found), element, "politics")
         forms_found += 1
 
-        cf_list = find_cultural_forms(element, person.uri)
+        cf_list = find_cultural_forms(element, person)
         if cf_list:
             temp_context.subjects = get_subjects(cf_list)
             person.add_cultural_form(cf_list)
@@ -394,18 +440,18 @@ def clean_term(string):
 
 def create_cf_map():
     import csv
-    global cf_map
+    global CF_MAP
     with open('cf_mapping.csv', newline='') as csvfile:
         reader = csv.reader(csvfile)
         next(reader)
         for row in reader:
-            if row[0] not in cf_map:
-                cf_map[row[0]] = []
+            if row[0] not in CF_MAP:
+                CF_MAP[row[0]] = []
             temp_row = [clean_term(x) for x in row[2:]]
-            cf_map[row[0]].append(list(filter(None, [row[1], *temp_row])))
+            CF_MAP[row[0]].append(list(filter(None, [row[1], *temp_row])))
 
 
-cf_map = {}
+CF_MAP = {}
 create_cf_map()
 map_attempt = 0
 map_success = 0
@@ -430,7 +476,7 @@ def update_fails(rdf_type, value):
 # log unmatched term,
 # return literal or uri
 # Make csv of unmapped
-def get_mapped_term(rdf_type, value):
+def get_mapped_term(rdf_type, value, retry=False):
     global map_attempt
     global map_success
     global map_fail
@@ -438,8 +484,9 @@ def get_mapped_term(rdf_type, value):
         rdf_type = "http://sparql.cwrc.ca/ontologies/cwrc#" + rdf_type
     map_attempt += 1
     term = None
-    for x in cf_map[rdf_type]:
-        if clean_term(value) in x:
+    temp_val = clean_term(value)
+    for x in CF_MAP[rdf_type]:
+        if temp_val in x:
             term = x[0]
             map_success += 1
             break
@@ -450,15 +497,18 @@ def get_mapped_term(rdf_type, value):
         term = rdflib.term.Literal(term, datatype=rdflib.namespace.XSD.string)
     else:
         term = rdflib.term.Literal("_" + value.lower() + "_", datatype=rdflib.namespace.XSD.string)
-        map_fail += 1
-        possibilites = []
-        for x in cf_map[rdf_type]:
-            if get_close_matches(value.lower(), x):
-                possibilites.append(x[0])
-        if type(term) is rdflib.term.Literal:
-            update_fails(rdf_type, value)
+        if retry:
+            map_attempt -= 1
         else:
-            update_fails(rdf_type, value + "->" + str(possibilites) + "?")
+            map_fail += 1
+            possibilites = []
+            for x in CF_MAP[rdf_type]:
+                if get_close_matches(value.lower(), x):
+                    possibilites.append(x[0])
+            if type(term) is rdflib.term.Literal:
+                update_fails(rdf_type, value)
+            else:
+                update_fails(rdf_type, value + "->" + str(possibilites) + "?")
     return term
 
 
@@ -492,11 +542,14 @@ def log_mapping_fails(main_log, error_log, detail=True):
 
     from collections import OrderedDict
     for x in fail_dict.keys():
-        error_log.msg(x.split("#")[1] + "(" + str(len(fail_dict[x].keys())) + ")" + ":")
+        error_log.msg(x.split("#")[1] + "(" + str(len(fail_dict[x].keys())) + " unique)" + ":")
 
         new_dict = OrderedDict(sorted(fail_dict[x].items(), key=lambda t: t[1], reverse=True))
+        count = 0
         for y in new_dict.keys():
             error_log.msg("\t" + str(new_dict[y]) + ": " + y)
+            count += new_dict[y]
+        error_log.msg("Total missed " + x.split("#")[1] + ": " + str(count))
         error_log.separ()
         print()
 
