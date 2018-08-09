@@ -139,10 +139,11 @@ def intimateRelationshipsCheck(xmlString):
                 print("======person======")
                 print("source: ", sourcePerson)
                 # print(getOnlyText(person))
-                foundOtherName,otherName = getNameOfAssociate(person.iter("NAME"), sourcePerson)
+                foundOtherName,otherNames = getNameOfAssociate(person.iter("NAME"), sourcePerson)
                 if foundOtherName:
-                    print("relationship with: ", otherName)
-                    intimateRelationshipsList.append(IntimateRelationships(attr,rearrangeSourceName(otherName)))
+                    print("relationship with: ", otherNames)
+                    for name in otherNames:
+                        intimateRelationshipsList.append(IntimateRelationships(attr,rearrangeSourceName(name)))
                 else:
                     print("othername not found")
                     intimateRelationshipsList.append(IntimateRelationships(attr,"intimate relationship"))
@@ -209,9 +210,11 @@ def main():
 
     for dirName, subdirlist, files in os.walk(bioFolder):
         for name in files:
-            if "levyam-b.xml" not in name:
-                continue
+            # if "levyam-b.xml" not in name:
+            #     continue
             # if "seacma-b.xml" not in name:
+            #     continue
+            # if "humema-b.xml" not in name:
             #     continue
 
             if printInfo == True:
@@ -227,7 +230,7 @@ def main():
                 sourceName,familyMembers    = getFamilyInfo(xmlString,os.path.expanduser("\""+bioFolder+name+"\""))
                 birthInfo                   = getBirth(xmlString)
                 deathInfo                   = getDeath(xmlString)
-                numGraphTriples,numNameless = graphMaker(sourceName,name[0:-6],familyMembers,birthInfo,deathInfo,childInfo,childlessList,intimateRelationshipsList)
+                numGraphTriples,numNameless = graphMaker(rearrangeSourceName(sourceName),name[0:-6],sourceName,familyMembers,birthInfo,deathInfo,childInfo,childlessList,intimateRelationshipsList)
                 # f.write("%s:%d\n"%(name,numGraphTriples))
                 numTriples += numGraphTriples
                 numNamelessPeople += numNameless

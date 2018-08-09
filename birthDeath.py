@@ -292,26 +292,57 @@ def getDeath(xmlString):
     else:
         allShortprose = firstChronstructTag.findall('SHORTPROSE')
         # print(allShortprose)
-        for shortprose in allShortprose:
-            for tags in shortprose.iter('PLACE'):
-                for placeInfo in tags.iter():
-                    if placeInfo.tag == "SETTLEMENT":
-                        deathPlaceSettlement = placeInfo.text
-                    elif placeInfo.tag == "REGION":
-                        try:
-                            deathPlaceRegion = placeInfo.attrib['REG']
-                        except KeyError:
-                            deathPlaceRegion = placeInfo.text
-                    elif placeInfo.tag == "GEOG":
-                        try:
-                            deathPlaceGeog = placeInfo.attrib['REG']
-                        except KeyError:
-                            deathPlaceGeog = placeInfo.text
-                    # fix: some place tags don't have all of the above
-                    if deathPlaceSettlement != "" and deathPlaceRegion != "" and deathPlaceGeog != "":
-                        print("other death info: {}, {}, {}".format(deathPlaceSettlement,deathPlaceRegion,deathPlaceGeog))
-                        deathPlaceSettlement = ""
-                        deathPlaceRegion = ""
-                        deathPlaceGeog = ""
+        if len(allShortprose) > 0:
+            for shortprose in allShortprose:
+                for tags in shortprose.iter('PLACE'):
+                    for placeInfo in tags.iter():
+                        if placeInfo.tag == "SETTLEMENT":
+                            deathPlaceSettlement = placeInfo.text
+                        elif placeInfo.tag == "REGION":
+                            try:
+                                deathPlaceRegion = placeInfo.attrib['REG']
+                            except KeyError:
+                                deathPlaceRegion = placeInfo.text
+                        elif placeInfo.tag == "GEOG":
+                            try:
+                                deathPlaceGeog = placeInfo.attrib['REG']
+                            except KeyError:
+                                deathPlaceGeog = placeInfo.text
+                        # fix: some place tags don't have all of the above
+                        if deathPlaceSettlement != "" and deathPlaceRegion != "" and deathPlaceGeog != "":
+                            print("other death info: {}, {}, {}".format(deathPlaceSettlement,deathPlaceRegion,deathPlaceGeog))
+                            deathPlaceSettlement = ""
+                            deathPlaceRegion = ""
+                            deathPlaceGeog = ""
+        else:
+            # chronstructParent = firstChronstructTag.find('./..')
+            place = deathTagParent.find('.//PLACE')
+            if place == None:
+                print("no place found")
+            if place is not None and len(place) > 0:
+                print("found place")
+                for tag in place.iter():
+                    if tag.tag == "SETTLEMENT":
+                        if "CURRENT" in tag.attrib:
+                            deathPlaceSettlement = tag.attrib["CURRENT"]
+                        elif "REG" in tag.attrib:
+                            deathPlaceSettlement = tag.attrib["REG"]
+                        else:
+                            deathPlaceSettlement = tag.text
+
+                    elif tag.tag == "REGION":
+                        if "CURRENT" in tag.attrib:
+                            deathPlaceRegion = tag.attrib["CURRENT"]
+                        elif "REG" in tag.attrib:
+                            deathPlaceRegion = tag.attrib["REG"]
+                        else:
+                            deathPlaceRegion = tag.text
+                    elif tag.tag == "GEOG":
+                        if "CURRENT" in tag.attrib:
+                            deathPlaceGeog = tag.attrib["CURRENT"]
+                        elif "REG" in tag.attrib:
+                            deathPlaceGeog = tag.attrib["REG"]
+                        else:
+                            deathPlaceGeog = tag.text
 
     return deathData(deathDate, deathCauses, deathPlaceSettlement, deathPlaceRegion, deathPlaceGeog, deathContexts)

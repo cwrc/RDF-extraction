@@ -31,7 +31,7 @@ def getStandardUri(std_str):
     return temp_str
 
 
-def graphMaker(sourceName,fileName,familyInfo, birthInfo, deathInfo, childInfo,childlessList,intmtRelationshipsList):
+def graphMaker(sourceName,fileName,unfixedSourceName,familyInfo, birthInfo, deathInfo, childInfo,childlessList,intmtRelationshipsList):
     
 
     import rdflib
@@ -48,9 +48,9 @@ def graphMaker(sourceName,fileName,familyInfo, birthInfo, deathInfo, childInfo,c
     # put in foaf.name instead of cwrc.hasName
     # namespace_manager.bind('cwrcdata', cwrcNamespace, override=False)
 
-    # sourceName = sourceName.replace(" ","_")
+    sourceName = sourceName.replace(" ","_")
     # source = URIRef(str(personNamespace) + sourceName)
-    source = URIRef(str(data)+ str(getStandardUri(sourceName)))
+    source = URIRef(str(data)+ str(getStandardUri(unfixedSourceName)))
              # URIRef(str(cwrcNamespace) + str(fileName) + "deathContext" + str(numDeathContexts))
     # g.add((source,foaf.name,Literal(sourceName.replace("_", " "))))
     g.add((source,RDF.type, cwrcNamespace.NaturalPerson))

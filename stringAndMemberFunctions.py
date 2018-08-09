@@ -117,15 +117,15 @@ def notParentName(personName,parentList):
 # name that is not the source person
 def getNameOfAssociate(names,sourcePerson):
     foundName = False
-    otherName = ""
+    otherNames = []
     for thisName in names:
         name = thisName.attrib["STANDARD"]
         # print("looking at :", name)
         if name != sourcePerson:
             foundName = True
-            otherName = name
-            break
-    return foundName,otherName
+            otherNames.append(name)
+
+    return foundName,otherNames
 def isUniqueSigAct(newAct, pastActs):
     for act in pastActs:
         if newAct.replace(' ','') == act.replace(' ',''):
