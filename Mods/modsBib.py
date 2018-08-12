@@ -8,7 +8,7 @@ BF = rdflib.Namespace( "http://id.loc.gov/ontologies/bibframe/")
 XML = rdflib.Namespace("http://www.w3.org/XML/1998/namespace")
 
 
-class ModsParser():
+class BibliographyParse():
 
     soup=None
     mainURI = ""
@@ -152,7 +152,7 @@ if __name__ == "__main__":
 
     filename = sys.argv[1]
 
-    mp = ModsParser(filename, g)
+    mp = BibliographyParse(filename, g)
 
     mp.build_graph()
 
