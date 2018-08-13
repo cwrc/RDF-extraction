@@ -57,12 +57,49 @@ class BibliographyParse():
                 return self.soup.titleinfo.title.text
         return ""
 
+    def get_record_content_source(self):
+        records = []
+        for record in self.soup.find_all('recordcontentsource'):
+            if 'authority' in record.attrs:
+                records.append({"value": record.text, "authority": record['authority']})
+            else:
+                records.append({"value": record.text})
+
+        return records
+
+    def get_record_language_catalog(self):
+        records = []
+
+        for r in self.soup.find_all("languageterm"):
+            if 'type' in r.attrs and  r['type'] == "code":
+                records.append({"language": r.text, "authority": r['authority'], "type": r['type']})
+            else:
+                records.append({"language": r.text})
+
+        return records
+
+    def get_record_origin(self):
+        records = []
+
+        for r in self.soup.find_all('recordorigin'):
+            records.append({"origin": r.text})
+
+        return records
+
+    def get_record_change_date(self):
+        records = []
+
+        for r in self.soup.find_all('recordchangedate'):
+            records.append({"date": r.text})
+
+        return records
+
     def get_records(self):
         records = []
         for r in self.soup.find_all('recordinfo'):
             record = {}
             record['sources'] = []
-            for source in r.get_all(['recordcontentsource']):
+            for source in r.find_all('recordcontentsource'):
                 if 'authority' in source:
                     record['sources'].append({'source': source.text, 'authority': source['authority']})
                 else:
@@ -107,6 +144,26 @@ class BibliographyParse():
 
         return langs
 
+    def origin_info_place(self):
+        places = []
+        for o in self.soup.find_all('origininfo'):
+            places.append({"term": o.place.placeterm.text})
+
+        return places
+
+    def origin_info_publisher(self):
+        publishers = []
+        for o in self.soup.find_all('origininfo'):
+            publishers.append({"publisher": o.publisher.text})
+
+        return publishers
+
+    def origin_info_date(self):
+        dates = []
+        for o in self.soup.find_all("origininfo"):
+            dates.append({"date": o.dateissued.text})
+
+        return dates
 
     def build_graph(self):
         g = self.g
@@ -132,6 +189,77 @@ class BibliographyParse():
 
         for lang in self.get_languages():
             resource.add(XML.lang, Literal(lang['language']))
+
+
+        adminMetaData = g.resource("{}_admin_metatdata".format(self.mainURI))
+
+        i = 0
+        for r in self.get_record_content_source():
+            assigner_agent = g.resource("{}_admin_agent_{}".format(self.mainURI, i))
+            assigner_agent.add(RDF.type, BF.Agent)
+            assigner_agent.add(RDFS.label, Literal(r['value']))
+
+            if 'authority' in r:
+                source_agent = g.resource("{}_admin_agent_source_{}".format(self.mainURI, i))
+                source_agent.add(RDF.type, BF.Source)
+                source_agent.add(RDF.value, Literal(r['authority']))
+                assigner_agent.add(BF.source, source_agent)
+
+            adminMetaData.add(BF.assigner, assigner_agent)
+
+            i += 1
+
+        for r in self.get_record_change_date():
+            adminMetaData.add(BF.changeDate, Literal(r['date']))
+
+        i = 0
+        for r in self.get_record_origin():
+            generationProcess = g.resource("{}_generation_process_{}".format(self.mainURI, i))
+            generationProcess.add(RDF.type, BF.GenerationProcess)
+            generationProcess.add(RDF.value, Literal(r['origin']))
+
+            adminMetaData.add(BF.generationProcess, generationProcess)
+
+        i = 0
+        for r in self.get_record_language_catalog():
+            adminMetaData.add(BF.descriptionLanguage, Literal(r['language']))
+
+        resource.add(BF.adminMetadata, adminMetaData)
+
+
+        originInfo = g.resource("{}_activity_statement".format(self.mainURI))
+
+        i = 0
+
+        for r in self.origin_info_date():
+            publisher = g.resource("{}_activity_statement_publisher_{}".format(self.mainURI, i))
+            publisher.add(RDF.type, BF.Publication)
+            publisher.add(BF.date, Literal(r['date']))
+
+            originInfo.add(BF.provisionActivity, publisher)
+            i += 1
+
+        i = 0
+        for r in self.origin_info_place():
+            place = g.resource("{}_activity_statement_place_{}".format(self.mainURI, i))
+            place.add(RDF.value, Literal(r['term']))
+            place.add(RDF.type, BF.Place)
+
+            originInfo.add(BF.place, place)
+            i += 0
+
+        i = 0
+        for r in self.origin_info_publisher():
+            publisher = g.resource("{}_activity_statement_publisher_{}".format(self.mainURI, i))
+            publisher.add(RDF.type, BF.Agent)
+            publisher.add(RDFS.label, Literal(r['publisher']))
+
+            originInfo.add(BF.agent, publisher)
+
+            i += 0
+
+        resource.add(BF.provisionActivityStatement, originInfo)
+
 
         genre = self.get_genre()
 
