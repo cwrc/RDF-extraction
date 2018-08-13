@@ -113,12 +113,30 @@ def childlessnessCheck(xmlString):
 
     return childlessList
 
+def cohabitantCheck(xmlString):
+    root = xml.etree.ElementTree.fromstring(xmlString)
+    sourcePerson = root.find("./DIV0/STANDARD").text
+    livesWithTag = root.findall('.//LIVESWITH')
+    names = []
+    for person in livesWithTag:
+        print("found it",person)
+        foundNames,names = getNameOfAssociate(person.iter("NAME"),sourcePerson)
+
+    return names
+
 def friendOrAssociateCheck(xmlString):
     root = xml.etree.ElementTree.fromstring(xmlString)
-    fOrAtag = root.findall('.//FRIENDORASSOCIATE')
+    sourcePerson = root.find("./DIV0/STANDARD").text
+    fOrAtag = root.findall('.//FRIENDSASSOCIATES')
+
+    mergedLists = []
+
     for tag in fOrAtag:
-        ElemPrint(tag)
-        getch()
+        foundNames,names = getNameOfAssociate(tag.iter("NAME"),sourcePerson)
+        if foundNames:
+            mergedLists += names
+
+    return mergedLists
 
 def intimateRelationshipsCheck(xmlString):
     root = xml.etree.ElementTree.fromstring(xmlString)
@@ -143,7 +161,7 @@ def intimateRelationshipsCheck(xmlString):
                 if foundOtherName:
                     print("relationship with: ", otherNames)
                     for name in otherNames:
-                        intimateRelationshipsList.append(IntimateRelationships(attr,rearrangeSourceName(name)))
+                        intimateRelationshipsList.append(IntimateRelationships(attr,name))
                 else:
                     print("othername not found")
                     intimateRelationshipsList.append(IntimateRelationships(attr,"intimate relationship"))
@@ -198,23 +216,49 @@ def getFamilyInfo(xmlString, sourceFile):
     # return rearrangeSourceName(SOURCENAME),listOfMembers
     return SOURCENAME,listOfMembers
 
-    
+def getOccupationDict():
+    listToReturn = {}
+    with open(os.path.expanduser('~/Documents/UoGuelph Projects/occupation.csv'),encoding='utf8') as csvInput:
+        csvReader = csv.reader(csvInput,delimiter=',')
+
+        skipFirst = True
+        for row in csvReader:
+            if skipFirst:
+                skipFirst = False
+                continue
+            if row[0] == "":
+                continue
+            print(row)
+            print("to use: ", row[0])
+            for j in range(3,len(row)):
+                if row[j] != "":
+                    listToReturn[row[j]] = row[0]
+                    # print("alternative: ",row[j])
+            # break
+        print(len(listToReturn))
+    return listToReturn
+
 def main():
     bioFolder = os.path.expanduser("~/Documents/UoGuelph Projects/biography/")
     numBiographiesRead = 0
     printInfo = True
     numTriples = 0
     numNamelessPeople = 0
-
-    # f = open("namesAndTriples2.txt","w")
-
+    occupations = getOccupationDict()
+    f = open("namesAndTriples3.txt","w")
+    cntr = -1
     for dirName, subdirlist, files in os.walk(bioFolder):
         for name in files:
-            # if "levyam-b.xml" not in name:
+            cntr += 1
+            # if cntr == 3:
+            #     break
+            # if "acklva-b.xml" not in name:
             #     continue
             # if "seacma-b.xml" not in name:
             #     continue
-            # if "humema-b.xml" not in name:
+            # if "larkph-b.xml" not in name:
+            #     continue
+            # if "guesch-b.xml" not in name:
             #     continue
 
             if printInfo == True:
@@ -223,18 +267,21 @@ def main():
                 openFile = open(bioFolder+name,"r",encoding="utf-8")
                 xmlString = openFile.read()
                 numBiographiesRead += 1
-                
+
+                cohabitantList              = cohabitantCheck(xmlString)
+                friendAssociateList         = friendOrAssociateCheck(xmlString)
                 intimateRelationshipsList   = intimateRelationshipsCheck(xmlString)
                 childlessList               = childlessnessCheck(xmlString)
                 childInfo                   = childrenCheck(xmlString,os.path.expanduser("\""+bioFolder+name+"\""))
                 sourceName,familyMembers    = getFamilyInfo(xmlString,os.path.expanduser("\""+bioFolder+name+"\""))
                 birthInfo                   = getBirth(xmlString)
                 deathInfo                   = getDeath(xmlString)
-                numGraphTriples,numNameless = graphMaker(rearrangeSourceName(sourceName),name[0:-6],sourceName,familyMembers,birthInfo,deathInfo,childInfo,childlessList,intimateRelationshipsList)
-                # f.write("%s:%d\n"%(name,numGraphTriples))
+                numGraphTriples,numNameless = graphMaker(rearrangeSourceName(sourceName),name[0:-6],sourceName,familyMembers,birthInfo,
+                                                         deathInfo,childInfo,childlessList,intimateRelationshipsList,friendAssociateList,occupations,cohabitantList,cntr)
+                f.write("%s:%d\n"%(name,numGraphTriples))
                 numTriples += numGraphTriples
                 numNamelessPeople += numNameless
-    # f.close()
+    f.close()
     print(numSigs, " number of significant activities found")
     print(numAdded, " number of significant activities added")
     print("number of triples: ", numTriples)

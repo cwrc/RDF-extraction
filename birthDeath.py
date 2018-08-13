@@ -2,6 +2,9 @@
 import xml.etree.ElementTree
 import os
 import sys
+import logging
+
+from stringAndMemberFunctions import *
 class birthData:
     def __init__(self, bDate, bPosition, bSettl, bRegion, bGeog):
         self.birthDate = bDate
@@ -11,13 +14,19 @@ class birthData:
         self.birthGeog = bGeog
 
 class deathData:
-    def __init__(self, dDate, dCauses, dSettl, dRegion, dGeog, dContexts):
+    def __init__(self, dDate, dCauses, dSettl, dRegion, dGeog, dContexts, dBurialSettl, dBurialRegion, dBurialGeog):
         self.deathDate = dDate
         self.deathCauses= dCauses
+
         self.deathSettlement = dSettl
         self.deathRegion = dRegion
         self.deathGeog = dGeog
+
         self.deathContexts = dContexts
+
+        self.burialSettl = dBurialSettl
+        self.burialRegion = dBurialRegion
+        self.burialGeog = dBurialGeog
 
 def getBirth(xmlString):
 
@@ -151,6 +160,9 @@ def getDeath(xmlString):
     deathPlaceSettlement = ""
     deathPlaceRegion = ""
     deathPlaceGeog = ""
+    burialPlaceSettlement = ""
+    burialPlaceRegion = ""
+    burialPlaceGeog = ""
     deathCauses = []
     deathContexts = []
 
@@ -241,7 +253,7 @@ def getDeath(xmlString):
         sys.stdin.read(1)
         return
 
-    except NameError:
+    except NameError as e:
         print("Name Error")
         print("error: ", e)
         sys.stdin.read(1)
@@ -321,28 +333,48 @@ def getDeath(xmlString):
                 print("no place found")
             if place is not None and len(place) > 0:
                 print("found place")
-                for tag in place.iter():
-                    if tag.tag == "SETTLEMENT":
-                        if "CURRENT" in tag.attrib:
-                            deathPlaceSettlement = tag.attrib["CURRENT"]
-                        elif "REG" in tag.attrib:
-                            deathPlaceSettlement = tag.attrib["REG"]
-                        else:
-                            deathPlaceSettlement = tag.text
+                deathPlaceSettlement,deathPlaceRegion,deathPlaceGeog = getPlaceTagContent(place)
+                # for tag in place.iter():
+                #     if tag.tag == "SETTLEMENT":
+                #         if "CURRENT" in tag.attrib:
+                #             deathPlaceSettlement = tag.attrib["CURRENT"]
+                #         elif "REG" in tag.attrib:
+                #             deathPlaceSettlement = tag.attrib["REG"]
+                #         else:
+                #             deathPlaceSettlement = tag.text
+                #
+                #     elif tag.tag == "REGION":
+                #         if "CURRENT" in tag.attrib:
+                #             deathPlaceRegion = tag.attrib["CURRENT"]
+                #         elif "REG" in tag.attrib:
+                #             deathPlaceRegion = tag.attrib["REG"]
+                #         else:
+                #             deathPlaceRegion = tag.text
+                #     elif tag.tag == "GEOG":
+                #         if "CURRENT" in tag.attrib:
+                #             deathPlaceGeog = tag.attrib["CURRENT"]
+                #         elif "REG" in tag.attrib:
+                #             deathPlaceGeog = tag.attrib["REG"]
+                #         else:
+                #             deathPlaceGeog = tag.text
 
-                    elif tag.tag == "REGION":
-                        if "CURRENT" in tag.attrib:
-                            deathPlaceRegion = tag.attrib["CURRENT"]
-                        elif "REG" in tag.attrib:
-                            deathPlaceRegion = tag.attrib["REG"]
-                        else:
-                            deathPlaceRegion = tag.text
-                    elif tag.tag == "GEOG":
-                        if "CURRENT" in tag.attrib:
-                            deathPlaceGeog = tag.attrib["CURRENT"]
-                        elif "REG" in tag.attrib:
-                            deathPlaceGeog = tag.attrib["REG"]
-                        else:
-                            deathPlaceGeog = tag.text
+    # place of burial
+    # ElemPrint(deathTagParent)
+    burialTags = deathTagParent.findall("*")
+    print(len(burialTags))
 
-    return deathData(deathDate, deathCauses, deathPlaceSettlement, deathPlaceRegion, deathPlaceGeog, deathContexts)
+    for i in range(0,len(burialTags)):
+        if i == len(burialTags)-1:
+            continue
+        # print(getOnlyText(burialTags[i+1].find(".//P")))
+        if burialTags[i].tag == "CHRONSTRUCT" and burialTags[i+1].tag == "SHORTPROSE" and burialTags[i+1].find(".//PLACE") is not None:
+            paragraph = getOnlyText(burialTags[i+1].find(".//P"))
+
+            if "buried" in paragraph or "grave" in paragraph or "interred" in paragraph:
+                    burialPlaceSettlement,burialPlaceRegion,burialPlaceGeog = getPlaceTagContent(burialTags[i+1].find(".//PLACE"))
+                    print(burialPlaceSettlement,burialPlaceRegion,burialPlaceGeog)
+
+            else:
+                print("no buried in the paragraph")
+
+    return deathData(deathDate, deathCauses, deathPlaceSettlement, deathPlaceRegion, deathPlaceGeog, deathContexts,burialPlaceSettlement,burialPlaceRegion,burialPlaceGeog)

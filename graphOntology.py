@@ -5,7 +5,11 @@ import csv
 from rdflib import RDF
 from scrapeFamily import getch
 from rdflib import Namespace, Graph, Literal, URIRef
-personNamespace   = Namespace('http://cwrc.ca/cwrcdata/')
+from stringAndMemberFunctions import *
+
+g         = Graph()
+megaGraph = Graph()
+
 cwrcNamespace     = Namespace('http://sparql.cwrc.ca/ontologies/cwrc#')
 oa                = Namespace('http://www.w3.org/ns/oa#')
 data              = Namespace('http://cwrc.ca/cwrcdata/')
@@ -23,33 +27,32 @@ def getCwrcTag(familyRelation):
         if row[orlandoTag] == familyRelation:
             return row[cwrcTag]
 
-def getStandardUri(std_str):
-    import string
-    translator = str.maketrans('', '', string.punctuation)
-    temp_str = std_str.translate(translator)
-    temp_str = temp_str.replace(" ", "_")
-    return temp_str
 
 
-def graphMaker(sourceName,fileName,unfixedSourceName,familyInfo, birthInfo, deathInfo, childInfo,childlessList,intmtRelationshipsList):
-    
+def createPerson(personName):
+    # if personName == "":
+    #     getch()
+    thisMember = URIRef(str(data) + getStandardUri(personName))
+    g.add((thisMember, RDF.type, cwrcNamespace.NaturalPerson))
+    g.add((thisMember, foaf.name, Literal(personName)))
 
+    return thisMember
+def graphMaker(sourceName,fileName,unfixedSourceName,familyInfo, birthInfo, deathInfo,
+               childInfo,childlessList,intmtRelationshipsList,friendAssociateList, occupations,cohabitantList,cntr):
+    # global g
+    global megaGraph
     import rdflib
     numNamelessPeople = 0
 
     g = Graph()
-    # personNamespace   = Namespace('http://example.org/')
-
 
     g.bind('cwrc',cwrcNamespace)
     g.bind('oa',oa)
     g.bind('data',data)
     g.bind('foaf',foaf)
-    # put in foaf.name instead of cwrc.hasName
-    # namespace_manager.bind('cwrcdata', cwrcNamespace, override=False)
 
     sourceName = sourceName.replace(" ","_")
-    # source = URIRef(str(personNamespace) + sourceName)
+    # source = URIRef(str(data) + sourceName)
     source = URIRef(str(data)+ str(getStandardUri(unfixedSourceName)))
              # URIRef(str(cwrcNamespace) + str(fileName) + "deathContext" + str(numDeathContexts))
     # g.add((source,foaf.name,Literal(sourceName.replace("_", " "))))
@@ -59,11 +62,12 @@ def graphMaker(sourceName,fileName,unfixedSourceName,familyInfo, birthInfo, deat
     for family in familyInfo:
         memberName = family.memberName
         print("=======",memberName,"=========")
-        if ',' in memberName:
-            splitName = memberName.split(",")
-            memberName = splitName[1].strip() + " " + splitName[0].strip()
-
-        memberSource = URIRef(str(personNamespace) + memberName.replace(" ","_"))
+        # FIXME : name rearranement removed to match alliyya's code
+        # if ',' in memberName:
+        #     splitName = memberName.split(",")
+        #     memberName = splitName[1].strip() + " " + splitName[0].strip()
+        # memberName = getStandardUri(memberName)
+        memberSource = URIRef(str(data) + getStandardUri(memberName))
         if family.isNoName:
             if family.noNameLetter == "":
                 # print(sourceName, memberName)
@@ -71,10 +75,10 @@ def graphMaker(sourceName,fileName,unfixedSourceName,familyInfo, birthInfo, deat
                 #     if (source, URIRef(str(cwrcNamespace) + "hasUncle"),None) in g:
                 #         print("multipleUncles")
                 #     print(family.memberRelation)
-                memberSource = URIRef(str(personNamespace) + sourceName.replace(" ","_") + "_" + family.memberRelation.lower().title())
+                memberSource = URIRef(str(data) + sourceName.replace(" ","_") + "_" + family.memberRelation.lower().title())
                 numNamelessPeople += 1
             else:
-                memberSource = URIRef(str(personNamespace) + sourceName.replace(" ", "_") + "_" + family.memberRelation.lower().title() + "_" + family.noNameLetter)
+                memberSource = URIRef(str(data) + sourceName.replace(" ", "_") + "_" + family.memberRelation.lower().title() + "_" + family.noNameLetter)
                 numNamelessPeople += 1
 
         else:
@@ -83,36 +87,78 @@ def graphMaker(sourceName,fileName,unfixedSourceName,familyInfo, birthInfo, deat
         g.add((memberSource, RDF.type, cwrcNamespace.NaturalPerson))
         
         for jobs in family.memberJobs:
-            g.add((memberSource,cwrcNamespace.hasJob,Literal(jobs.strip().title())))
+            if jobs.job == "":
+                continue
+            if jobs.predicate == "familyOccupation":
+                predicate = cwrcNamespace.hasFamilyBasedOccupation
+            else:
+                predicate = cwrcNamespace.hasPaidOccupation
+
+
+            # FIXME : change jobs to jogs.job in order to make the thing work. right now, it is not functional.
+
+            if jobs in occupations:
+                print(jobs,"->",occupations[jobs])
+                g.add((memberSource, predicate, Literal(occupations[jobs.job].title())))
+            else:
+                g.add((memberSource,predicate,Literal(jobs.job.strip().title())))
             # print("added job ", jobs)
 
         for sigActs in family.memberSigActs:
-            g.add((memberSource,cwrcNamespace.hasJob,Literal(sigActs.strip().title())))
+            if sigActs.job == "":
+                continue
+            if sigActs.predicate == "volunteerOccupation":
+                predicate = cwrcNamespace.hasVolunteerOccupation
+            else:
+                predicate = cwrcNamespace.hasOccupation
+
+            if sigActs in occupations:
+                print(sigActs,"-->",occupations[sigActs])
+                g.add((memberSource, predicate, Literal(occupations[sigActs.job].title())))
+            else:
+                g.add((memberSource,predicate,Literal(sigActs.job.strip().title())))
             # print("added significant ", sigActs)
 
         cwrcTag = getCwrcTag(family.memberRelation)
 
-        predicate = URIRef(str(cwrcNamespace) + getCwrcTag(family.memberRelation))
+        predicate = URIRef(str(cwrcNamespace) + cwrcTag)
         # g.add((source,predicate,Literal(memberName)))
         g.add((source,predicate,memberSource))
 
 
     # Adding Birth Info to the ttl file
-    g.add((source,cwrcNamespace.hasBirthDate,Literal(birthInfo.birthDate)))
+    if birthInfo.birthDate != "":
+        g.add((source,cwrcNamespace.hasBirthDate,Literal(birthInfo.birthDate)))
+
     for birthPosition in birthInfo.birthPositions:
-        g.add((source,cwrcNamespace.hasBirthPosition,Literal(birthPosition)))
-    g.add((source,cwrcNamespace.hasBirthPlace,Literal(birthInfo.birthSettlement+", "+birthInfo.birthRegion+", "+birthInfo.birthGeog)))
+        if birthPosition == "ONLY":
+            positionObj = cwrcNamespace.onlyChild
+        elif birthPosition == "ELDEST":
+            positionObj = cwrcNamespace.eldestChild
+        elif birthPosition == "YOUNGEST":
+            positionObj = cwrcNamespace.youngestChild
+        elif birthPosition == "MIDDLE:":
+            positionObj = cwrcNamespace.middleChild
+        g.add((source,cwrcNamespace.hasBirthPosition,positionObj))
+
+    if birthInfo.birthSettlement != "" and birthInfo.birthRegion != "" and birthInfo.birthGeog != "":
+        g.add((source,cwrcNamespace.hasBirthPlace,Literal(birthInfo.birthSettlement+", "+birthInfo.birthRegion+", "+birthInfo.birthGeog)))
 
     # death validation
     # print(deathInfo.deathDate)
     if deathInfo != None:
         # if dateValidate(deathInfo.deathDate):
-        g.add((source,cwrcNamespace.hasDeathDate,Literal(deathInfo.deathDate)))
+        if deathInfo.deathDate != "":
+            g.add((source,cwrcNamespace.hasDeathDate,Literal(deathInfo.deathDate)))
         
         # for deathCause in deathInfo.deathCauses:
         #     g.add((source,cwrcNamespace.hasDeathCause,Literal(deathCause)))
-        
-        g.add((source,cwrcNamespace.hasDeathPlace,Literal(deathInfo.deathSettlement+", "+deathInfo.deathRegion+", "+deathInfo.deathGeog)))
+        if deathInfo.deathSettlement !="" and deathInfo.deathRegion != ""+ deathInfo.deathGeog != "":
+            g.add((source,cwrcNamespace.hasDeathPlace,Literal(deathInfo.deathSettlement+", "+deathInfo.deathRegion+", "+deathInfo.deathGeog)))
+
+        if deathInfo.burialSettl != "" and deathInfo.burialRegion != "" and deathInfo.burialGeog != "":
+            g.add((source,cwrcNamespace.hasBurialPlace,Literal(deathInfo.burialSettl+", "+deathInfo.burialRegion+", "+deathInfo.burialGeog)))
+
         
         if len(deathInfo.deathContexts) > 0:
             # g.add((cwrc.alRecChoice1, dctypes.description, Literal("insert sentence here")))
@@ -148,36 +194,48 @@ def graphMaker(sourceName,fileName,unfixedSourceName,familyInfo, birthInfo, deat
                 g.add((source, cwrcNamespace.hasChildren, Literal(child.NumChildren)))
 
     for childAttribute in childlessList:
-        g.add((source,cwrcNamespace.hasReproductiveHistory,Literal(childAttribute.Label.title())))
+        label = childAttribute.Label.title()
+        if label == "Birth Control":
+            g.add((source, cwrcNamespace.hasReproductiveHistory, cwrcNamespace.birthControl))
+        elif label == "Adoption":
+            g.add((source, cwrcNamespace.hasReproductiveHistory, cwrcNamespace.adoption))
+        elif label == "Childlessness":
+            g.add((source, cwrcNamespace.hasReproductiveHistory, cwrcNamespace.childlessness))
+
+
+
 
     for relationship in intmtRelationshipsList:
         if relationship.AttrValue == "EROTICYES":
-            thisMember = URIRef(str(personNamespace) + relationship.PersonName.title().replace(" ", "_"))
-            g.add((thisMember, RDF.type, cwrcNamespace.NaturalPerson))
-            g.add((thisMember, foaf.name, Literal(relationship.PersonName.title())))
-            g.add((source,cwrcNamespace.hasEroticRelationship,thisMember))
+            g.add((source, cwrcNamespace.hasEroticRelationshipWith, createPerson(relationship.PersonName.title())))
 
         elif relationship.AttrValue == "EROTICNO" :
-            thisMember = URIRef(str(personNamespace) + relationship.PersonName.title().replace(" ", "_"))
-            g.add((thisMember, RDF.type, cwrcNamespace.NaturalPerson))
-            g.add((thisMember, foaf.name, Literal(relationship.PersonName.title())))
-            g.add((source,cwrcNamespace.hasNonEroticRelationship,thisMember))
+            g.add((source, cwrcNamespace.hasNonEroticRelationshipWith, createPerson(relationship.PersonName.title())))
+
 
         elif relationship.AttrValue == "EROTICPOSSIBLY":
-            thisMember = URIRef(str(personNamespace) + relationship.PersonName.title().replace(" ", "_"))
-            g.add((thisMember, RDF.type, cwrcNamespace.NaturalPerson))
-            g.add((thisMember, foaf.name, Literal(relationship.PersonName.title())))
-            g.add((source,cwrcNamespace.hasPossiblyEroticRelationship,thisMember))
+            g.add((source, cwrcNamespace.hasPossiblyEroticRelationshipWith, createPerson(relationship.PersonName.title())))
 
         else:
-            thisMember = URIRef(str(personNamespace) + relationship.PersonName.title().replace(" ", "_"))
+
+
             if relationship.PersonName.title() != "Intimate Relationship":
-                g.add((thisMember, RDF.type, cwrcNamespace.NaturalPerson))
-                g.add((thisMember, foaf.name, Literal(relationship.PersonName.title())))
-                g.add((source,cwrcNamespace.hasIntimateRelationship,thisMember))
+                g.add((source,cwrcNamespace.hasIntimateRelationshipWith, createPerson(relationship.PersonName.title())))
+
             else:
-                g.add((source, cwrcNamespace.hasIntimateRelationship, Literal(relationship.PersonName.title())))
+                g.add((source, cwrcNamespace.hasIntimateRelationshipWith, Literal(relationship.PersonName.title())))
+
+    for friend in friendAssociateList:
+        g.add((source,cwrcNamespace.hasInterpersonalRelationshipWith,createPerson(friend)))
+
+    for habitant in cohabitantList:
+        g.add((source,cwrcNamespace.hasCohabitant,createPerson(habitant)))
 
     print(g.serialize(format='turtle').decode())
-    g.serialize(destination=os.path.expanduser("~/Documents/UoGuelph Projects/Coding-Projects/CombiningTriples/gTriples/"+ fileName+ '.ttl'), format='turtle')
+    # g.serialize(destination=os.path.expanduser("~/Documents/UoGuelph Projects/CombiningTriples/birthDeathFamily_triples/"+ fileName+ '.txt'), format='turtle')
+    # if cntr == 1369:
+    #     megaGraph.serialize(destination=os.path.expanduser("~/Documents/UoGuelph Projects/"+ "motherGraph2"+ '.txt'), format='turtle')
+    # else:
+    #     megaGraph += g
+
     return len(g),numNamelessPeople
