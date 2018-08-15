@@ -1,5 +1,8 @@
 import rdflib
-from rdflib import RDF  # , RDFS, Literal
+from rdflib import RDF, RDFS, Literal
+# from context import Context
+# from culturalForm import CulturalForm
+# from event import Event
 
 NS_DICT = {
     "as": rdflib.Namespace("http://www.w3.org/ns/activitystreams#"),
@@ -9,7 +12,9 @@ NS_DICT = {
     "foaf": rdflib.Namespace('http://xmlns.com/foaf/0.1/'),
     "oa": rdflib.Namespace("http://www.w3.org/ns/oa#"),
     "dcterms": rdflib.Namespace("http://purl.org/dc/terms/"),
-    "org": rdflib.Namespace("http://www.w3.org/ns/org#")
+    "org": rdflib.Namespace("http://www.w3.org/ns/org#"),
+    "skos": rdflib.Namespace("http://www.w3.org/2004/02/skos/core#")
+    # "gn": rdflib.Namespace("http://www.geonames.org/ontology#")
 }
 
 
@@ -18,12 +23,15 @@ def bind_ns(namespace_manager, ns_dictionary):
         namespace_manager.bind(x, ns_dictionary[x], override=False)
 
 
-def make_standard_uri(std_str):
+def make_standard_uri(std_str, ns="data"):
+    """Makes uri based of string, removes punctuation and replaces spaces with an underscore
+    v2, leaving hypens
+    """
     import string
-    translator = str.maketrans('', '', string.punctuation)
+    translator = str.maketrans('', '', string.punctuation.replace("-", ""))
     temp_str = std_str.translate(translator)
     temp_str = temp_str.replace(" ", "_")
-    return rdflib.term.URIRef(str(NS_DICT["data"]) + temp_str)
+    return rdflib.term.URIRef(str(NS_DICT[ns]) + temp_str)
 
 
 class Biography(object):
@@ -93,7 +101,8 @@ class Biography(object):
         bind_ns(namespace_manager, NS_DICT)
 
         g.add((self.uri, RDF.type, NS_DICT["cwrc"].NaturalPerson))
-        g.add((self.uri, NS_DICT["foaf"].name, rdflib.Literal(self.name, datatype=rdflib.namespace.XSD.string)))
+        g.add((self.uri, NS_DICT["foaf"].name, Literal(self.name, datatype=rdflib.namespace.XSD.string)))
+        g.add((self.uri, RDFS.label, Literal(self.name, datatype=rdflib.namespace.XSD.string)))
         g.add((self.uri, NS_DICT["cwrc"].hasGender, self.gender))
         g += self.create_triples(self.cf_list)
         g += self.create_triples(self.context_list)
