@@ -49,7 +49,7 @@ def main():
 
     # for filename in filelist[:200]:
     # for filename in filelist[:2]:
-    # for filename in ["sample-b.xml","atwoma-b.xml"]:
+    # for filename in ["levyam-b.xml","atwoma-b.xml"]:
     for filename in filelist:
         with open("bio_data/" + filename) as f:
             soup = BeautifulSoup(f, 'lxml')
@@ -72,10 +72,10 @@ def main():
         extract_log.msg("\n\n")
 
         # triples to files
-        # file = open("culturalform_triples/" + str(person.id) + "-cf.txt", "w")
-        # file.write("#" + str(len(graph)) + " triples created\n")
-        # file.write(person.to_file(graph))
-        # file.close()
+        file = open("culturalform_triples/" + str(person.id) + "-cf.txt", "w")
+        file.write("#" + str(len(graph)) + " triples created\n")
+        file.write(person.to_file(graph))
+        file.close()
 
         uber_graph += graph
         entry_num += 1

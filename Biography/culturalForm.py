@@ -9,11 +9,12 @@ from rdflib import RDF, RDFS, Literal
 import rdflib
 import re
 
-from biography import Biography, bind_ns, NS_DICT
+from biography import Biography, bind_ns, NS_DICT, make_standard_uri
 from context import Context, strip_all_whitespace
 from log import *
 from event import Event
 from place import Place
+from organizations import get_org, get_org_uri
 
 """
 Status: ~75%
@@ -49,6 +50,10 @@ bind_ns(namespace_manager, NS_DICT)
 class CulturalForm(object):
     """docstring for CulturalForm
         NOTE: mapping is done prior to creation of cf, no need to include class type then
+        using other_attributes to handle extra predicates that may come up for cfs
+        Ex. Organizations
+        other_attributes=NS_DICT["org"].memberOf
+        This being the uri rather the typical cf one
     """
 
     def __init__(self, predicate, reported, value, other_attributes=None):
@@ -57,10 +62,14 @@ class CulturalForm(object):
         self.predicate = predicate
         self.reported = reported
         self.value = value
-        if self.reported:
+
+        if other_attributes:
+            self.uri = other_attributes
+        elif self.reported:
             self.uri = str(NS_DICT["cwrc"]) + self.predicate + self.reported
         else:
             self.uri = str(NS_DICT["cwrc"]) + self.predicate
+
         self.uri = rdflib.term.URIRef(self.uri)
 
     # TODO figure out if i can just return tuple or triple without creating a whole graph
@@ -74,45 +83,51 @@ class CulturalForm(object):
         return g
 
     def __str__(self):
-        string = "\tpredicate: " + self.predicate + "\n"
+        string = "\tURI: " + str(self.uri) + "\n"
+        string += "\tpredicate: " + str(self.predicate) + "\n"
         string += "\treported: " + str(self.reported) + "\n"
         string += "\tvalue: " + str(self.value) + "\n"
+
         return string
+
+
+def get_reg(tag):
+    return get_attribute(tag, "reg")
+
+
+def get_attribute(tag, attribute):
+    value = tag.get(attribute)
+    if value:
+        return value
+    return None
+
+
+def get_value(tag):
+    value = get_reg(tag)
+    if not value:
+        value = get_attribute(tag, "CURRENTALTERNATIVETERM")
+    if not value:
+        value = str(tag.text)
+        value = ' '.join(value.split())
+    return value
+
+
+def get_reported(tag):
+    reported = tag.get("self-defined")
+    if reported:
+        if reported == "SELFYES":
+            return "SelfReported"
+        elif reported == "SELFNO":
+            return "Reported"
+        elif reported == "SELFUNKNOWN":
+            return None
+        else:
+            log.msg("self-defined attribute RETURNED UNEXPECTED RESULTS:" + str(tag) + "?????")
+    return None
 
 
 def find_cultural_forms(cf, person):
     cf_list = []
-
-    def get_reported(tag):
-        reported = tag.get("self-defined")
-        if reported:
-            if reported == "SELFYES":
-                return "SelfReported"
-            elif reported == "SELFNO":
-                return "Reported"
-            elif reported == "SELFUNKNOWN":
-                return None
-            else:
-                log.msg("self-defined attribute RETURNED UNEXPECTED RESULTS:" + str(tag) + "?????")
-        return None
-
-    def get_reg(tag):
-        return get_attribute(tag, "reg")
-
-    def get_attribute(tag, attribute):
-        value = tag.get(attribute)
-        if value:
-            return value
-        return None
-
-    def get_value(tag):
-        value = get_reg(tag)
-        if not value:
-            value = get_attribute(tag, "CURRENTALTERNATIVETERM")
-        if not value:
-            value = str(tag.text)
-            value = ' '.join(value.split())
-        return value
 
     def get_class():
         classes = cf.find_all("class")
@@ -150,15 +165,19 @@ def find_cultural_forms(cf, person):
             instances = cf.find_all(tag)
             for x in instances:
                 value = get_value(x)
-                if tags[tag][1] == "NationalIdentity" and value in ["Indian/English", "scots american"]:
-                    cf_list.append(CulturalForm(tags[tag][0], get_reported(
-                        x), get_mapped_term(tags[tag][1], value.split("/")[0])))
-                    value = value.split("/")[1]
+                if tags[tag][1] == "NationalIdentity":
+                    if value == "Indian/English":
+                        cf_list.append(CulturalForm(tags[tag][0], get_reported(
+                            x), get_mapped_term(tags[tag][1], value.split("/")[0])))
+                        value = value.split("/")[1]
+                    elif value == "Scots-American":
+                        cf_list.append(CulturalForm(tags[tag][0], get_reported(
+                            x), get_mapped_term(tags[tag][1], value.split("-")[0])))
+                        value = value.split("-")[1]
 
                 cf_list.append(CulturalForm(tags[tag][0], get_reported(x), get_mapped_term(tags[tag][1], value)))
 
     def get_geoheritage(tag):
-
         places = tag.find_all("place")
         if places:
             place_values = []
@@ -260,36 +279,21 @@ def find_cultural_forms(cf, person):
 
         pass
 
-    def make_fake_uri(name, suffix):
-        import string
-        translator = str.maketrans('', '', string.punctuation)
-        return(name.translate(translator))
-
-    def get_org(tag):
-        orgs = tag.find_all("orgname")
-        if not orgs:
-            parent_tag = tag.parent.name
-            if parent_tag == "orgname":
-                return make_fake_uri(get_attribute(tag.parent, "standard"), "_ORG")
-
-        for x in orgs:
-            make_fake_uri(str(x), "_ORG")
-
-        return tag.find_all("orgname")
-
     def get_denomination():
         religions = cf.find_all("denomination")
-        # person.other_triples.append((person.uri, self.uri, self.value))
-        # g.add((person_uri, self.uri, self.value))
+
         for x in religions:
-            # Get reg --> get org reg --> org freeform
             value = get_reg(x)
             orgName = get_org(x)
 
             if not value and orgName:
-                continue
-
-            # value = get_mapped_term("Religion", value)
+                for org in orgName:
+                    cf_list.append(CulturalForm(None, None, get_org_uri(org),
+                                                other_attributes=NS_DICT["org"].memberOf))
+            elif orgName:
+                for org in orgName:
+                    cf_list.append(CulturalForm(None, None, get_org_uri(org),
+                                                other_attributes=NS_DICT["org"].memberOf))
 
             value = get_mapped_term("Religion", get_value(x), True)
             if type(value) is rdflib.term.Literal:
@@ -301,25 +305,25 @@ def find_cultural_forms(cf, person):
             religion = CulturalForm("hasReligion", get_reported(x), value)
 
             cf_list.append(religion)
-            # if no org
-            # Get reg -->  freeform
-            # and to add membership details to orgnames, same thing to do for religons
 
     def get_PA():
         pas = cf.find_all("politicalaffiliation")
         for x in pas:
-            # Will have to make variant of this function to reject orgname free form data
-            # and to add membership details to orgnames, same thing to do for religons
-            # orgName = get_org(x)
-            # if orgName:
-            #     continue
             value = get_reg(x)
-            if not value:
-                orgName = get_org(x)
-                if orgName:
-                    continue
+            orgName = get_org(x)
+            if not value and orgName:
+                for org in orgName:
+                    cf_list.append(CulturalForm(None, None, get_org_uri(org),
+                                                other_attributes=NS_DICT["org"].memberOf))
+                value = get_org_uri(org)
+            elif orgName:
+                for org in orgName:
+                    cf_list.append(CulturalForm(None, None, get_org_uri(org),
+                                                other_attributes=NS_DICT["org"].memberOf))
+                value = get_mapped_term("PoliticalAffiliation", get_value(x))
+            else:
+                value = get_mapped_term("PoliticalAffiliation", get_value(x))
 
-            value = get_mapped_term("PoliticalAffiliation", get_value(x))
             gender_issue = False
             if x.get("woman-genderissue") == "GENDERYES":
                 cf_list.append(CulturalForm("hasGenderedPoliticalActivity", get_reported(x), value))
@@ -400,12 +404,12 @@ def extract_cf_data(bio, person):
                     person.add_cultural_form(cf_list)
                 person.add_context(temp_context)
 
-        if forms_found == 0:
+        if cf.div2:
             temp_context = None
             cf_list = None
             temp_context = Context(person.id + "_culturalformation" + "_context" + str(id), cf)
 
-            cf_list = find_cultural_forms(cf, person)
+            cf_list = find_cultural_forms(cf.div2, person)
             temp_context.subjects = get_subjects(cf_list)
 
             person.add_context(temp_context)

@@ -8,6 +8,12 @@ Status: ~75%
 OA has been implemented (primaryily describing)
 However identifying contexts may need more handling
 TODO: Review triples related to identifying contexts
+
+Contexts will have associated triples for the semi-reifying bit of the OA model
+attach triples to contexts somehow
+
+could make a list of tuples attached to a given context?
+
 """
 
 

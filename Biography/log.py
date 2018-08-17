@@ -145,6 +145,7 @@ class Log(object):
     def separ(self, character="x"):
         """ add line characters to act as text separators """
         self.msg(character * 100, stdout=False)
+        print()
 
     def test_name(self, name):
         """outputting a formatted test label to log file includes the full date

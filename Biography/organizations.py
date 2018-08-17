@@ -1,17 +1,17 @@
 #!/usr/bin/python3
 
-# from Env import env
-# import islandora_auth as login
-
 from bs4 import BeautifulSoup
 from rdflib import RDF, RDFS, Literal
 import rdflib
-
+import culturalForm as cf
 from biography import bind_ns, NS_DICT, make_standard_uri
 
 uber_graph = rdflib.Graph()
 namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
 bind_ns(namespace_manager, NS_DICT)
+
+# this is temporary list to ensure that the orgname standard is within the auth list
+org_list = []
 
 
 class Organization(object):
@@ -19,23 +19,12 @@ class Organization(object):
     Currently dependent on the org authority list --> org csv
 
     TODO: if not typed as any of the orgs to be typed as org:FormalOrg
-    investigate instance of "Abbey School" in dataset but not authority file
     1) Going to create each one as an organization as they arise and merge them together in uber graph at the end
     2) Will likely be more efficent to add triples in the graph concurrently and add if they don't already exist.
     And adding triples but I could be wrong in terms of time for querying for each org every time.
     I think by letting the serialization dealing with duplicate triples it might be even
     TODO: test efficency among the two approaches
     """
-    def get_altnames(orgName):
-        std = orgName.get("standard")
-        reg = orgName.get("reg")
-        altnames = []
-        if reg and reg != std:
-            altnames.append(reg)
-        free = orgName.text()
-        if free and free != std and free != reg:
-            altnames.append(free)
-        return altnames
 
     def __init__(self, uri, name, altlabels, other_attributes=None):
         super(Organization, self).__init__()
@@ -56,8 +45,9 @@ class Organization(object):
         bind_ns(namespace_manager, NS_DICT)
         g.add((self.uri, NS_DICT["foaf"].name, Literal(self.name)))
         g.add((self.uri, RDFS.label, Literal(self.name)))
+        g.add((self.uri, RDF.type, NS_DICT["org"].FormalOrganization))
         for x in self.altlabels:
-            g.add((self.uri, NS_DICT["skos"].altLabel, Literal(x, lang='en')))
+            g.add((self.uri, NS_DICT["skos"].altLabel, Literal(x)))
         return g
 
     def __str__(self):
@@ -68,6 +58,21 @@ class Organization(object):
         for x in self.altlabels:
             string += "\t\t" + x + "\n"
         return string
+
+
+def get_name(bio):
+    return (bio.biography.div0.standard.text)
+
+
+def get_org_uri(tag):
+    if tag.get("standard") in org_list:
+        name = tag.get("standard")
+    elif tag.get("reg") in org_list:
+        name = tag.get("reg")
+    else:
+        name = tag.get("standard")
+
+    return make_standard_uri(name + " ORG", ns="cwrc")
 
 
 def get_org(tag):
@@ -88,28 +93,31 @@ def extract_org_data(bio):
             org = get_org(instance)
             if org:
                 if element == elements[0]:
-                    org_type = NS_DICT["cwrc"].PoliticalOrganization                # get element
+                    org_type = NS_DICT["cwrc"].PoliticalOrganization
                 elif element == elements[1]:
                     org_type = NS_DICT["cwrc"].ReligiousOrganization
                 elif element == elements[2]:
                     org_type = NS_DICT["cwrc"].EducationalOrganization
 
                 for x in org:
-                    uber_graph.add((get_org_uri(x.get("standard")), RDF.type, org_type))
+                    org_uri = get_org_uri(x)
+                    uber_graph.add((org_uri, RDF.type, org_type))
+                    uber_graph.remove((org_uri, RDF.type, NS_DICT["org"].FormalOrganization))
 
-
-def get_name(bio):
-    return (bio.biography.div0.standard.text)
-
-
-def get_org_uri(std_name):
-    return make_standard_uri(std_name + " ORG", ns="cwrc")
+                    # Adding the hasOrganization relation
+                    if org_type == NS_DICT["cwrc"].ReligiousOrganization:
+                        mapped_value = cf.get_mapped_term("Religion", cf.get_value(instance))
+                        if type(mapped_value) is rdflib.term.URIRef:
+                            uber_graph.add((mapped_value, NS_DICT["cwrc"].hasOrganization, org_uri))
+                    elif org_type == NS_DICT["cwrc"].PoliticalOrganization:
+                        mapped_value = cf.get_mapped_term("PoliticalAffiliation", cf.get_value(instance))
+                        if type(mapped_value) is rdflib.term.URIRef:
+                            uber_graph.add((mapped_value, NS_DICT["cwrc"].hasOrganization, org_uri))
 
 
 def create_org_csv():
     import csv
     w = csv.writer(open("orgNames.csv", "w"))
-
     with open("scrapes/authority/org_auth.xml") as f:
         soup = BeautifulSoup(f, 'lxml')
     items = soup.find_all("authorityitem")
@@ -130,9 +138,11 @@ def create_org_csv():
 def csv_to_triples():
     import csv
     global uber_graph
+    global org_list
     with open('orgNames.csv', newline='') as csvfile:
         reader = csv.reader(csvfile)
         for row in reader:
+            org_list.append(row[1])
             uber_graph += Organization(row[0], row[1], row[2:]).to_triple()
 
 
@@ -140,7 +150,7 @@ def main():
     import os
     global uber_graph
     csv_to_triples()
-    # # create_org_csv()
+    # create_org_csv()
 
     filelist = [filename for filename in sorted(os.listdir("bio_data")) if filename.endswith(".xml")]
 
@@ -155,11 +165,5 @@ def main():
     file.close()
 
 
-def test():
-    exit()
-
 if __name__ == "__main__":
-    # auth = [env.env("USER_NAME"), env.env("PASSWORD")]
-    # login.main(auth)
-    # test()
     main()
