@@ -3,15 +3,16 @@ import xml.etree.ElementTree
 import os
 import sys
 import logging
-
+import copy
 from stringAndMemberFunctions import *
 class birthData:
-    def __init__(self, bDate, bPosition, bSettl, bRegion, bGeog):
+    def __init__(self, bDate, bPosition, bSettl, bRegion, bGeog, bContexts):
         self.birthDate = bDate
         self.birthPositions = bPosition
         self.birthSettlement = bSettl
         self.birthRegion = bRegion
         self.birthGeog = bGeog
+        self.birthContexts = bContexts
 
 class deathData:
     def __init__(self, dDate, dCauses, dSettl, dRegion, dGeog, dContexts, dBurialSettl, dBurialRegion, dBurialGeog):
@@ -107,35 +108,13 @@ def getBirth(xmlString):
     try:
         if len(birthPlaceTags) > 0:
             birthPlaceTag = birthPlaceTags[0]
-            for tag in birthPlaceTag.iter():
-                # Get settlement where they were born
-                if tag.tag == "SETTLEMENT":
-                    if "REG" in tag.attrib:
-                        birthPlaceSettlement = tag.attrib["REG"]
-                    elif "CURRENT" in tag.attrib:
-                        # Current refers to a place where the name has changed.
-                        # i.e. Today it is known as something else but during this
-                        # subject's time, the name was different
-                        birthPlaceSettlement = tag.attrib["CURRENT"]
-                    else:
-                        birthPlaceSettlement = tag.text
-                # Get region where they were born
-                elif tag.tag == "REGION":
-                    if "CURRENT" in tag.attrib:
-                        birthPlaceRegion = tag.attrib['CURRENT']
-                    elif "REG" in tag.attrib:
-                        birthPlaceRegion = tag.attrib['REG']
-                    else:
-                        birthPlaceRegion = tag.text
-                # Get country
-                elif tag.tag == "GEOG":
-                    if "REG" in tag.attrib:
-                        birthPlaceGeog = tag.attrib["REG"]
-                    elif "CURRENT" in tag.attrib:
-                        birthPlaceGeog = tag.attrib["CURRENT"]
-                    else:
-                        birthPlaceGeog = tag.text
-                    
+            # get settlement, region, geog
+            # Current refers to a place where the name has changed.
+            # i.e. Today it is known as something else but during this
+            # subject's time, the name was different
+            birthPlaceSettlement, birthPlaceRegion, birthPlaceGeog = getPlaceTagContent(birthPlaceTag)
+
+
             print("birth place: {}, {}, {}".format(birthPlaceSettlement,birthPlaceRegion,birthPlaceGeog))
         else:
             print("no birthPlaceTag")
@@ -145,7 +124,8 @@ def getBirth(xmlString):
         print("no birth place information for this individual")
         # sys.stdin(1)
 
-    return birthData(birthDate, birthPositions, birthPlaceSettlement, birthPlaceRegion, birthPlaceGeog)
+    birthContexts = getContexts(birthTagParent.findall("*"))
+    return birthData(birthDate, birthPositions, birthPlaceSettlement, birthPlaceRegion, birthPlaceGeog,birthContexts)
 
     
 def getDeath(xmlString):
@@ -186,20 +166,22 @@ def getDeath(xmlString):
                 # sys.stdin.read(1)
                 return
 
-        deathParagraphs = list(deathTagParent.iter("P"))
-        if deathParagraphs != None and len(deathParagraphs) > 0:
-            for para in list(deathTagParent.iter("P")):
-                
-                # gets all text in paragraph. creates element iterator
-                paraText = para.itertext() 
-                # the paragraph will be saved as a string in variable below
-                paragraph = ""
+        deathContexts = getContexts([deathTagParent])
 
-                for text in paraText:
-                    paragraph = paragraph + " " + text.strip()
-                paragraph = paragraph.strip()
-                print(paragraph)
-                deathContexts.append(paragraph)
+        # deathParagraphs = list(deathTagParent.iter("P"))
+        # if deathParagraphs != None and len(deathParagraphs) > 0:
+        #     for para in list(deathTagParent.iter("P")):
+        #
+        #         # gets all text in paragraph. creates element iterator
+        #         paraText = para.itertext()
+        #         # the paragraph will be saved as a string in variable below
+        #         paragraph = ""
+        #
+        #         for text in paraText:
+        #             paragraph = paragraph + " " + text.strip()
+        #         paragraph = paragraph.strip()
+        #         print(paragraph)
+        #         deathContexts.append(paragraph)
                 # print(paragraph)
         getChronstructTags = list(deathTagParent.iter("CHRONSTRUCT"))
         
@@ -243,9 +225,7 @@ def getDeath(xmlString):
                 elif 'CERTAINTY' in deathDateTag.attrib and 'FROM' in deathDateTag.attrib and 'TO' in deathDateTag.attrib:
                     deathDate = deathDateTag.attrib['FROM'] + " to " + deathDateTag.attrib['TO']
             
-            
-            
-    
+
     except (AttributeError) as e:
         print("Death information not found. person probably still alive")
         # print("error: ", e)
@@ -273,31 +253,9 @@ def getDeath(xmlString):
         print("death causes: {}".format(deathCauses))          
 
     # PLACE OF DEATH
-    deathPlaceTags = (firstChronstructTag.findall('CHRONPROSE/PLACE/'))
+    deathPlaceTags = (firstChronstructTag.findall('CHRONPROSE/PLACE'))
     if len(deathPlaceTags) > 0:
-        for tag in deathPlaceTags:
-            if tag.tag == "SETTLEMENT":
-                if "CURRENT" in tag.attrib:
-                    deathPlaceSettlement = tag.attrib["CURRENT"]
-                elif "REG" in tag.attrib:
-                    deathPlaceSettlement = tag.attrib["REG"]
-                else:
-                    deathPlaceSettlement = tag.text
-                
-            elif tag.tag == "REGION":
-                if "CURRENT" in tag.attrib:
-                    deathPlaceRegion = tag.attrib["CURRENT"]
-                elif "REG" in tag.attrib:
-                    deathPlaceRegion = tag.attrib["REG"]
-                else:
-                    deathPlaceRegion = tag.text
-            elif tag.tag == "GEOG":
-                if "CURRENT" in tag.attrib:
-                    deathPlaceGeog = tag.attrib["CURRENT"]
-                elif "REG" in tag.attrib:
-                    deathPlaceGeog = tag.attrib["REG"]
-                else:
-                    deathPlaceGeog = tag.text
+        deathPlaceSettlement,deathPlaceRegion,deathPlaceGeog = getPlaceTagContent(deathPlaceTags[0])
     
         print("death place: {}, {}, {}".format(deathPlaceSettlement,deathPlaceRegion,deathPlaceGeog))
 
@@ -334,29 +292,7 @@ def getDeath(xmlString):
             if place is not None and len(place) > 0:
                 print("found place")
                 deathPlaceSettlement,deathPlaceRegion,deathPlaceGeog = getPlaceTagContent(place)
-                # for tag in place.iter():
-                #     if tag.tag == "SETTLEMENT":
-                #         if "CURRENT" in tag.attrib:
-                #             deathPlaceSettlement = tag.attrib["CURRENT"]
-                #         elif "REG" in tag.attrib:
-                #             deathPlaceSettlement = tag.attrib["REG"]
-                #         else:
-                #             deathPlaceSettlement = tag.text
-                #
-                #     elif tag.tag == "REGION":
-                #         if "CURRENT" in tag.attrib:
-                #             deathPlaceRegion = tag.attrib["CURRENT"]
-                #         elif "REG" in tag.attrib:
-                #             deathPlaceRegion = tag.attrib["REG"]
-                #         else:
-                #             deathPlaceRegion = tag.text
-                #     elif tag.tag == "GEOG":
-                #         if "CURRENT" in tag.attrib:
-                #             deathPlaceGeog = tag.attrib["CURRENT"]
-                #         elif "REG" in tag.attrib:
-                #             deathPlaceGeog = tag.attrib["REG"]
-                #         else:
-                #             deathPlaceGeog = tag.text
+
 
     # place of burial
     # ElemPrint(deathTagParent)

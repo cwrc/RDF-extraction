@@ -1,5 +1,5 @@
 from xml.etree import ElementTree
-import datetime, sys
+import datetime, sys, copy
 
 class Family:
     def __init__(self, memName, memRLTN,memJobs,memSigActs):
@@ -24,6 +24,82 @@ class JobSigAct:
     def __init__(self,jobPredicate,jobName):
         self.predicate  = jobPredicate
         self.job = jobName
+def getch():
+    sys.stdin.read(1)
+
+def getContexts(tagList):
+    print("taglist: ",tagList)
+    returnList = []
+    for tagParent in tagList:
+        if "DIV" not in tagParent.tag:
+            print("what is this",tagParent)
+            getch()
+        # else:
+        #     print("proper what is this", tagParent)
+        #     getch()
+        tags = tagParent.findall("*")
+        markedForRemoval = []
+        foundChronstruct = False
+
+        if len(tags) == 2:
+            if tags[0].tag == "SHORTPROSE" and tags[1].tag == "CHRONSTRUCT":
+                tags[0],tags[1] = tags[1],tags[0]
+
+        tags2 = copy.deepcopy(tags)
+        for i in range(0, len(tags2)):
+            if foundChronstruct == False and tags2[i].tag != "CHRONSTRUCT":
+                markedForRemoval.append(i)
+            elif tags2[i].tag == "CHRONSTRUCT":
+                foundChronstruct = True
+
+        print(tags)
+        print(markedForRemoval)
+
+        if len(markedForRemoval) == len(tags):
+            print("weird thing going on")
+            lonePars = tagParent.findall(".//P")
+            for par in lonePars:
+                returnList.append(getOnlyText(par))
+        else:
+            i = 0
+
+            while i < len(tags):
+                if i in markedForRemoval:
+                    i += 1
+                    continue
+
+                if len(tags) > 1:
+                    if i == len(tags) - 1:
+                        i += 1
+                        continue
+
+                    if tags[i].tag == "CHRONSTRUCT" and tags[i + 1].tag == "SHORTPROSE" and tags[i + 1].find(
+                            ".//P") is not None:
+                        returnList.append(getOnlyText(tags[i]) + "\n" + getOnlyText(tags[i + 1].find(
+                            ".//P")))
+                        print("chronstruct with paragraph next")
+                        i += 1
+
+
+                # print("index: ",i)
+                # print("isConstruct",deathcnts[i].tag == "CHRONSTRUCT")
+                # print("shortprosenext",deathcnts[i+1].tag == "SHORTPROSE")
+                # print("paragraph in shortprose", deathcnts[i+1].find(".//P") != None)
+
+
+                    # getch()
+                else:
+                    print("weird thing going on")
+                    lonePars = tagParent.findall(".//P")
+                    for par in lonePars:
+                        returnList.append(getOnlyText(par))
+                    print("list of Paragraphs2: ", lonePars)
+                    # getch()
+
+                i += 1
+    if len(returnList) > 0:
+        print(returnList)
+    return returnList
 def getPlaceTagContent(place):
     placeSettlement = ""
     placeRegion     = ""

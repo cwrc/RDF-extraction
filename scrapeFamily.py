@@ -25,10 +25,15 @@ class ChildStatus:
         self.NumChildren = numChild
 
 class IntimateRelationships:
-    def __init__(self, attrValue, name):
+    def __init__(self, attrValue, name,contexts):
         self.AttrValue  = attrValue;
         self.PersonName = name;
+        self.contexts = contexts
 
+class PersonContext:
+    def __init__(self, name, contexts):
+        self.names = name
+        self.contexts = contexts
 
 
 
@@ -37,8 +42,7 @@ class IntimateRelationships:
 # birth date:  1873-12-07
 # birth positions: ['ELDEST']
 # birth place: Gore, Virginia, USA
-def getch():
-    sys.stdin.read(1)
+
     # o
 
 
@@ -113,30 +117,50 @@ def childlessnessCheck(xmlString):
 
     return childlessList
 
-def cohabitantCheck(xmlString):
+def friendsAssociateCheck(xmlString,tagName):
     root = xml.etree.ElementTree.fromstring(xmlString)
     sourcePerson = root.find("./DIV0/STANDARD").text
-    livesWithTag = root.findall('.//LIVESWITH')
-    names = []
-    for person in livesWithTag:
-        print("found it",person)
-        foundNames,names = getNameOfAssociate(person.iter("NAME"),sourcePerson)
 
-    return names
+    tagToFind = root.findall(".//" + tagName)
 
-def friendOrAssociateCheck(xmlString):
-    root = xml.etree.ElementTree.fromstring(xmlString)
-    sourcePerson = root.find("./DIV0/STANDARD").text
-    fOrAtag = root.findall('.//FRIENDSASSOCIATES')
+    listToReturn = []
 
-    mergedLists = []
-
-    for tag in fOrAtag:
-        foundNames,names = getNameOfAssociate(tag.iter("NAME"),sourcePerson)
+    for instance in tagToFind:
+        foundNames, names = getNameOfAssociate(instance.iter("NAME"), sourcePerson)
+        if len(names) > 1:
+            print(names)
+        friendContext = getContexts(instance.findall("*"))
         if foundNames:
-            mergedLists += names
+            # listToReturn += names
+            listToReturn.append(PersonContext(names,friendContext))
+    return listToReturn
 
-    return mergedLists
+def cohabitantsCheck(xmlString,tagName):
+    root = xml.etree.ElementTree.fromstring(xmlString)
+    sourcePerson = root.find("./DIV0/STANDARD").text
+
+    tagToFind = root.findall(".//" + tagName)
+
+    listToReturn = []
+
+    for instance in tagToFind:
+        foundNames, names = getNameOfAssociate(instance.iter("NAME"), sourcePerson)
+        if foundNames:
+            listToReturn += names
+
+    return listToReturn
+def getSexualityContexts(xmlString):
+    root = xml.etree.ElementTree.fromstring(xmlString)
+    sourcePerson = root.find("./DIV0/STANDARD").text
+    tagToFind = root.findall(".//SEXUALITY")
+    print(tagToFind)
+    listToReturn = []
+
+    for instance in tagToFind:
+        print(instance.findall("*"))
+        sexualityContext = getContexts(instance.findall("*"))
+        listToReturn += sexualityContext
+    return listToReturn
 
 def intimateRelationshipsCheck(xmlString):
     root = xml.etree.ElementTree.fromstring(xmlString)
@@ -154,20 +178,23 @@ def intimateRelationshipsCheck(xmlString):
             attr = "nonErotic"
         
         for person in tag.iter("DIV2"):
-                print("======person======")
-                print("source: ", sourcePerson)
-                # print(getOnlyText(person))
-                foundOtherName,otherNames = getNameOfAssociate(person.iter("NAME"), sourcePerson)
-                if foundOtherName:
-                    print("relationship with: ", otherNames)
-                    for name in otherNames:
-                        intimateRelationshipsList.append(IntimateRelationships(attr,name))
-                else:
-                    print("othername not found")
-                    intimateRelationshipsList.append(IntimateRelationships(attr,"intimate relationship"))
-                # for name in person.iter("NAME"):
-                #     print(name.attrib["STANDARD"])
-                # getch()
+            print("======person======")
+            print("source: ", sourcePerson)
+            # print(getOnlyText(person))
+            foundOtherName,otherNames = getNameOfAssociate(person.iter("NAME"), sourcePerson)
+            print(person.findall("*"))
+            intimateContexts = getContexts([person])
+
+            if foundOtherName:
+                print("relationship with: ", otherNames)
+                for name in otherNames:
+                    intimateRelationshipsList.append(IntimateRelationships(attr,name,intimateContexts))
+            else:
+                print("othername not found")
+                intimateRelationshipsList.append(IntimateRelationships(attr,"intimate relationship",intimateContexts))
+            # for name in person.iter("NAME"):
+            #     print(name.attrib["STANDARD"])
+            # getch()
                 
     return intimateRelationshipsList
 
@@ -228,14 +255,14 @@ def getOccupationDict():
                 continue
             if row[0] == "":
                 continue
-            print(row)
+            # print(row)
             print("to use: ", row[0])
             for j in range(3,len(row)):
                 if row[j] != "":
                     listToReturn[row[j]] = row[0]
                     # print("alternative: ",row[j])
             # break
-        print(len(listToReturn))
+        # print(len(listToReturn))
     return listToReturn
 
 def main():
@@ -245,20 +272,20 @@ def main():
     numTriples = 0
     numNamelessPeople = 0
     occupations = getOccupationDict()
-    f = open("namesAndTriples3.txt","w")
+    f = open("namesAndTriples6.txt","w")
     cntr = -1
     for dirName, subdirlist, files in os.walk(bioFolder):
         for name in files:
             cntr += 1
             # if cntr == 3:
             #     break
-            # if "acklva-b.xml" not in name:
+            # if "lee_ve-b.xml" not in name:
             #     continue
             # if "seacma-b.xml" not in name:
             #     continue
             # if "larkph-b.xml" not in name:
             #     continue
-            # if "guesch-b.xml" not in name:
+            # if "kempma-b.xml" not in name:
             #     continue
 
             if printInfo == True:
@@ -268,17 +295,22 @@ def main():
                 xmlString = openFile.read()
                 numBiographiesRead += 1
 
-                cohabitantList              = cohabitantCheck(xmlString)
-                friendAssociateList         = friendOrAssociateCheck(xmlString)
+                cohabitantList              = cohabitantsCheck(xmlString, "LIVESWITH")
+                friendAssociateList         = friendsAssociateCheck(xmlString, "FRIENDSASSOCIATES")
                 intimateRelationshipsList   = intimateRelationshipsCheck(xmlString)
                 childlessList               = childlessnessCheck(xmlString)
                 childInfo                   = childrenCheck(xmlString,os.path.expanduser("\""+bioFolder+name+"\""))
                 sourceName,familyMembers    = getFamilyInfo(xmlString,os.path.expanduser("\""+bioFolder+name+"\""))
                 birthInfo                   = getBirth(xmlString)
                 deathInfo                   = getDeath(xmlString)
+                sexualityContext            = getSexualityContexts(xmlString)
                 numGraphTriples,numNameless = graphMaker(rearrangeSourceName(sourceName),name[0:-6],sourceName,familyMembers,birthInfo,
-                                                         deathInfo,childInfo,childlessList,intimateRelationshipsList,friendAssociateList,occupations,cohabitantList,cntr)
-                f.write("%s:%d\n"%(name,numGraphTriples))
+                                                         deathInfo,childInfo,childlessList,intimateRelationshipsList,friendAssociateList,
+                                                         occupations,cohabitantList,sexualityContext,cntr)
+                if deathInfo != None and deathInfo.deathContexts != None:
+                    f.write("%s:%d\n"%(name,len(deathInfo.deathContexts)))
+                else:
+                    f.write("%s:%d\n" % (name, 0))
                 numTriples += numGraphTriples
                 numNamelessPeople += numNameless
     f.close()

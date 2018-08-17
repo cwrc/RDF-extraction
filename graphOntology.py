@@ -28,6 +28,15 @@ def getCwrcTag(familyRelation):
             return row[cwrcTag]
 
 
+def addContexts(fileName,contextName,contexts,source,numContexts):
+    for context in contexts:
+        contextURI = URIRef(str(cwrcNamespace) + str(fileName) + contextName + str(numContexts))
+        g.add((contextURI, oa.hasTarget, source))
+        g.add((contextURI, cwrcNamespace.hasdescription, Literal(context)))
+
+        numContexts += 1
+
+    return numContexts
 
 def createPerson(personName):
     # if personName == "":
@@ -38,8 +47,8 @@ def createPerson(personName):
 
     return thisMember
 def graphMaker(sourceName,fileName,unfixedSourceName,familyInfo, birthInfo, deathInfo,
-               childInfo,childlessList,intmtRelationshipsList,friendAssociateList, occupations,cohabitantList,cntr):
-    # global g
+               childInfo,childlessList,intmtRelationshipsList,friendAssociateList, occupations,cohabitantList,sexualityContext,cntr):
+    global g
     global megaGraph
     import rdflib
     numNamelessPeople = 0
@@ -144,6 +153,18 @@ def graphMaker(sourceName,fileName,unfixedSourceName,familyInfo, birthInfo, deat
     if birthInfo.birthSettlement != "" and birthInfo.birthRegion != "" and birthInfo.birthGeog != "":
         g.add((source,cwrcNamespace.hasBirthPlace,Literal(birthInfo.birthSettlement+", "+birthInfo.birthRegion+", "+birthInfo.birthGeog)))
 
+    if birthInfo.birthContexts != None and len(birthInfo.birthContexts) > 0:
+
+        addContexts(fileName,"birthContext",birthInfo.birthContexts,source,1)
+        # print(deathInfo.deathContexts[0])
+
+        # for thisBirthContext in birthInfo.birthContexts:
+        #     print("context: ", thisBirthContext)
+        #     birthContextURI = URIRef(str(cwrcNamespace) + str(fileName) + "birthContext" + str(numBirthContexts))
+        #     numBirthContexts += 1
+        #
+        #     g.add((birthContextURI, oa.hasTarget, source))
+        #     g.add((birthContextURI, cwrcNamespace.hasdescription, Literal(thisBirthContext)))
     # death validation
     # print(deathInfo.deathDate)
     if deathInfo != None:
@@ -153,14 +174,14 @@ def graphMaker(sourceName,fileName,unfixedSourceName,familyInfo, birthInfo, deat
         
         # for deathCause in deathInfo.deathCauses:
         #     g.add((source,cwrcNamespace.hasDeathCause,Literal(deathCause)))
-        if deathInfo.deathSettlement !="" and deathInfo.deathRegion != ""+ deathInfo.deathGeog != "":
+        if deathInfo.deathSettlement !="" or deathInfo.deathRegion != "" or deathInfo.deathGeog != "":
             g.add((source,cwrcNamespace.hasDeathPlace,Literal(deathInfo.deathSettlement+", "+deathInfo.deathRegion+", "+deathInfo.deathGeog)))
 
-        if deathInfo.burialSettl != "" and deathInfo.burialRegion != "" and deathInfo.burialGeog != "":
+        if deathInfo.burialSettl != "" or deathInfo.burialRegion != "" or deathInfo.burialGeog != "":
             g.add((source,cwrcNamespace.hasBurialPlace,Literal(deathInfo.burialSettl+", "+deathInfo.burialRegion+", "+deathInfo.burialGeog)))
 
         
-        if len(deathInfo.deathContexts) > 0:
+        if deathInfo.deathContexts != None and len(deathInfo.deathContexts) > 0:
             # g.add((cwrc.alRecChoice1, dctypes.description, Literal("insert sentence here")))
             # g.add((cwrc.alRecChoice1,  rdf.type, dctypes.text))`
             
@@ -173,16 +194,17 @@ def graphMaker(sourceName,fileName,unfixedSourceName,familyInfo, birthInfo, deat
             
             # g.add((cwrc.AnnaLeonowens, cwrc:RaceEthnicityContext, cwrc.AnnaLeonowensRaceEthnicityContext))
             # g.add((cwrc.AnnaLeonowens, rdf.type, cwrc.Person))
-            numDeathContexts = 1
+            addContexts(fileName,"hasDeathContext",deathInfo.deathContexts,source,1)
+            # numDeathContexts = 1
             # print(deathInfo.deathContexts[0])
 
-            for thisDeathContext in deathInfo.deathContexts:
-                print("context: ", thisDeathContext)
-                deathContextURI = URIRef(str(cwrcNamespace)+str(fileName) + "deathContext" + str(numDeathContexts))
-                numDeathContexts += 1
-
-                g.add((deathContextURI, oa.hasTarget, source))
-                g.add((deathContextURI,cwrcNamespace.hasdescription, Literal(thisDeathContext)))
+            # for thisDeathContext in deathInfo.deathContexts:
+            #     print("context: ", thisDeathContext)
+            #     deathContextURI = URIRef(str(cwrcNamespace)+str(fileName) + "deathContext" + str(numDeathContexts))
+            #
+            #     g.add((deathContextURI, oa.hasTarget, source))
+            #     g.add((deathContextURI,cwrcNamespace.hasdescription, Literal(thisDeathContext)))
+            #     numDeathContexts += 1
                 # g.add((source,cwrcNamespace.hasDeathContext,(cwrcNamespace.hasDeathContext,cwrcNamespace.hasSource,Literal(deathContext))))
 
 
@@ -204,8 +226,9 @@ def graphMaker(sourceName,fileName,unfixedSourceName,familyInfo, birthInfo, deat
 
 
 
-
+    numIntimateContext = 1
     for relationship in intmtRelationshipsList:
+        numIntimateContext = addContexts(fileName,"hasIntimateRelationshipsContext",relationship.contexts,source,numIntimateContext)
         if relationship.AttrValue == "EROTICYES":
             g.add((source, cwrcNamespace.hasEroticRelationshipWith, createPerson(relationship.PersonName.title())))
 
@@ -218,24 +241,34 @@ def graphMaker(sourceName,fileName,unfixedSourceName,familyInfo, birthInfo, deat
 
         else:
 
-
             if relationship.PersonName.title() != "Intimate Relationship":
                 g.add((source,cwrcNamespace.hasIntimateRelationshipWith, createPerson(relationship.PersonName.title())))
 
             else:
                 g.add((source, cwrcNamespace.hasIntimateRelationshipWith, Literal(relationship.PersonName.title())))
-
+    numFriendContext = 1
     for friend in friendAssociateList:
-        g.add((source,cwrcNamespace.hasInterpersonalRelationshipWith,createPerson(friend)))
+        if friend != None:
+            for name in friend.names:
+                g.add((source,cwrcNamespace.hasInterpersonalRelationshipWith,createPerson(name)))
+            numFriendContext = addContexts(fileName,"friendAssociateContext",friend.contexts,source,numFriendContext)
+
+
 
     for habitant in cohabitantList:
         g.add((source,cwrcNamespace.hasCohabitant,createPerson(habitant)))
 
+    addContexts(fileName,"hasSexualityContext",sexualityContext,source,1)
     print(g.serialize(format='turtle').decode())
-    # g.serialize(destination=os.path.expanduser("~/Documents/UoGuelph Projects/CombiningTriples/birthDeathFamily_triples/"+ fileName+ '.txt'), format='turtle')
+    # officialPath = os.path.expanduser("~/Documents/UoGuelph Projects/CombiningTriples/birthDeathFamily_triples/"+ fileName+ '.txt')
+    # testingPath = os.path.expanduser('./oldContext/'+ fileName+ '.txt')
+    # testingPath = os.path.expanduser('./newContext/'+ fileName+ '.txt')
+
+    # g.serialize(destination=testingPath, format='turtle')
     # if cntr == 1369:
     #     megaGraph.serialize(destination=os.path.expanduser("~/Documents/UoGuelph Projects/"+ "motherGraph2"+ '.txt'), format='turtle')
     # else:
     #     megaGraph += g
 
     return len(g),numNamelessPeople
+
