@@ -19,9 +19,7 @@ from organizations import get_org, get_org_uri
 """
 Status: ~75%
 Most of cultural forms have been mapped
-    orgnames need to be reconciled
-    TODO: add organization triples for religion and pa
-    GeogHeritage needs to be properly mapped to geonames
+    TODO: Review missing religions & PAs
 
 Forebear still needs to be handled/attempted with a query
 --> load up gurjap's produced graph and query it  for forebear info to test

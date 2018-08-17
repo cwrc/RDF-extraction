@@ -14,6 +14,13 @@ attach triples to contexts somehow
 
 could make a list of tuples attached to a given context?
 
+<HEADING>Married Life</HEADING> --> MarriedLife
+--> 
+http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id=akhman#MarriedLife
+
+http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id=
+id
+heading without spaces?
 """
 
 

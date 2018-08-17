@@ -6,7 +6,8 @@ PLACE_MAP = {}
 def create_place_map():
     import csv
     # TODO: eventually replace with total place one
-    with open('geoghert_places.csv', newline='') as csvfile:
+    # with open('geoghert_places.csv', newline='') as csvfile:
+    with open('places.csv', newline='') as csvfile:
         reader = csv.reader(csvfile)
         next(reader)
         for row in reader:
@@ -39,7 +40,9 @@ def get_value(tag):
 
 
 class Place(object):
-    """Probably will remove this class and just leave the functions for address and uri but for now"""
+    """Probably will remove this class and just leave the functions for address and uri but for now
+        Maybe morph this class into the one for locations
+    """
 
     def get_address(self, place_tag):
         # place_
