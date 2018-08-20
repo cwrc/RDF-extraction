@@ -3,21 +3,19 @@
 # from Env import env
 # import islandora_auth as login
 
-from bs4 import BeautifulSoup
 from difflib import get_close_matches
 from rdflib import RDF, RDFS, Literal
 import rdflib
-import re
 
-from biography import Biography, bind_ns, NS_DICT, make_standard_uri
-from context import Context, strip_all_whitespace
-from log import *
+import biography
+from context import Context
 from event import Event
-from place import Place
+from log import *
 from organizations import get_org, get_org_uri
+from place import Place
 
 """
-Status: ~75%
+Status: ~85%
 Most of cultural forms have been mapped
     TODO: Review missing religions & PAs
 
@@ -25,11 +23,9 @@ Forebear still needs to be handled/attempted with a query
 --> load up gurjap's produced graph and query it  for forebear info to test
 temp solution until endpoint is active
 
-Descriptive Contexts have been created
-
 Events need to be created--> bigger issue
+Waiting on event modelling and time
 """
-
 
 # temp log library for debugging --> to be eventually replaced with proper logging library
 # from log import *
@@ -42,7 +38,7 @@ turtle_log.test_name("CF extracted Triples")
 
 uber_graph = rdflib.Graph()
 namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
-bind_ns(namespace_manager, NS_DICT)
+biography.bind_ns(namespace_manager, biography.NS_DICT)
 
 
 class CulturalForm(object):
@@ -56,7 +52,6 @@ class CulturalForm(object):
 
     def __init__(self, predicate, reported, value, other_attributes=None):
         super(CulturalForm, self).__init__()
-        # self.context_id = context_id
         self.predicate = predicate
         self.reported = reported
         self.value = value
@@ -64,9 +59,9 @@ class CulturalForm(object):
         if other_attributes:
             self.uri = other_attributes
         elif self.reported:
-            self.uri = str(NS_DICT["cwrc"]) + self.predicate + self.reported
+            self.uri = str(biography.NS_DICT["cwrc"]) + self.predicate + self.reported
         else:
-            self.uri = str(NS_DICT["cwrc"]) + self.predicate
+            self.uri = str(biography.NS_DICT["cwrc"]) + self.predicate
 
         self.uri = rdflib.term.URIRef(self.uri)
 
@@ -75,9 +70,11 @@ class CulturalForm(object):
     def to_tuple(self, person_uri):
         return ((person_uri, self.uri, self.value))
 
-    def to_triple(self, person_uri):
+    def to_triple(self, person):
         g = rdflib.Graph()
-        g.add((person_uri, self.uri, self.value))
+        namespace_manager = rdflib.namespace.NamespaceManager(g)
+        biography.bind_ns(namespace_manager, biography.NS_DICT)
+        g.add((person.uri, self.uri, self.value))
         return g
 
     def __str__(self):
@@ -287,11 +284,11 @@ def find_cultural_forms(cf, person):
             if not value and orgName:
                 for org in orgName:
                     cf_list.append(CulturalForm(None, None, get_org_uri(org),
-                                                other_attributes=NS_DICT["org"].memberOf))
+                                                other_attributes=biography.NS_DICT["org"].memberOf))
             elif orgName:
                 for org in orgName:
                     cf_list.append(CulturalForm(None, None, get_org_uri(org),
-                                                other_attributes=NS_DICT["org"].memberOf))
+                                                other_attributes=biography.NS_DICT["org"].memberOf))
 
             value = get_mapped_term("Religion", get_value(x), True)
             if type(value) is rdflib.term.Literal:
@@ -312,12 +309,12 @@ def find_cultural_forms(cf, person):
             if not value and orgName:
                 for org in orgName:
                     cf_list.append(CulturalForm(None, None, get_org_uri(org),
-                                                other_attributes=NS_DICT["org"].memberOf))
+                                                other_attributes=biography.NS_DICT["org"].memberOf))
                 value = get_org_uri(org)
             elif orgName:
                 for org in orgName:
                     cf_list.append(CulturalForm(None, None, get_org_uri(org),
-                                                other_attributes=NS_DICT["org"].memberOf))
+                                                other_attributes=biography.NS_DICT["org"].memberOf))
                 value = get_mapped_term("PoliticalAffiliation", get_value(x))
             else:
                 value = get_mapped_term("PoliticalAffiliation", get_value(x))
@@ -366,13 +363,6 @@ def find_event(type, tag, person):
     pass
 
 
-def get_subjects(cf_list):
-    subjects = []
-    for x in cf_list:
-        subjects.append(x.value)
-    return list(set(subjects))
-
-
 # Also handles politics tag as well
 def extract_cf_data(bio, person):
     cfs = bio.find_all("culturalformation")
@@ -398,17 +388,17 @@ def extract_cf_data(bio, person):
 
                 cf_list = find_cultural_forms(context, person)
                 if cf_list:
-                    temp_context.subjects = get_subjects(cf_list)
+                    temp_context.link_triples(cf_list)
                     person.add_cultural_form(cf_list)
                 person.add_context(temp_context)
 
         if cf.div2:
             temp_context = None
             cf_list = None
-            temp_context = Context(person.id + "_culturalformation" + "_context" + str(id), cf)
 
+            temp_context = Context(person.id + "_culturalformation" + "_context" + str(id), cf)
             cf_list = find_cultural_forms(cf.div2, person)
-            temp_context.subjects = get_subjects(cf_list)
+            temp_context.link_triples(cf_list)
 
             person.add_context(temp_context)
             person.add_cultural_form(cf_list)
@@ -424,8 +414,12 @@ def extract_cf_data(bio, person):
 
         cf_list = find_cultural_forms(element, person)
         if cf_list:
-            temp_context.subjects = get_subjects(cf_list)
+            temp_context.link_triples(cf_list)
             person.add_cultural_form(cf_list)
+        else:
+            temp_context = Context(person.id + "_politics_context" + str(forms_found),
+                                   element, "politics", "identifying")
+
         person.add_context(temp_context)
 
 
@@ -474,7 +468,6 @@ def update_fails(rdf_type, value):
 
 # Currently getting exact match ignoring case and "-"
 # TODO:
-# Will need add some sort of percentage match for failures
 # log unmatched term,
 # return literal or uri
 # Make csv of unmapped
@@ -558,6 +551,7 @@ def log_mapping_fails(main_log, error_log, detail=True):
 
 def main():
     import os
+    from bs4 import BeautifulSoup
     create_cf_map()
 
     filelist = [filename for filename in sorted(os.listdir("bio_data")) if filename.endswith(".xml")]
@@ -571,7 +565,7 @@ def main():
             soup = BeautifulSoup(f, 'lxml')
 
         print(filename)
-        test_person = Biography(filename[:-6], get_name(soup), get_mapped_term("Gender", get_sex(soup)))
+        test_person = biography.Biography(filename[:-6], get_name(soup), get_mapped_term("Gender", get_sex(soup)))
 
         extract_cf_data(soup, test_person)
 

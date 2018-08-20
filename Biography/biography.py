@@ -14,7 +14,6 @@ NS_DICT = {
     "dcterms": rdflib.Namespace("http://purl.org/dc/terms/"),
     "org": rdflib.Namespace("http://www.w3.org/ns/org#"),
     "skos": rdflib.Namespace("http://www.w3.org/2004/02/skos/core#")
-    # "gn": rdflib.Namespace("http://www.geonames.org/ontology#")
 }
 
 
@@ -40,19 +39,19 @@ class Biography(object):
     def __init__(self, id, name, gender):
         super(Biography, self).__init__()
         self.id = id
-        # self.uri = rdflib.term.URIRef(str(NS_DICT["data"]) + id)
         self.name = name
         self.uri = make_standard_uri(name)
         self.gender = gender
         self.context_list = []
         self.cf_list = []
+
         # Hold off on events for now
         self.event_list = []
 
         self.education_context_list = []
         self.occupations = []
+        self.locations = []
         self.other_contexts = []
-        self.organizations = []
         self.other_triples = []
 
     def add_context(self, context):
@@ -63,9 +62,6 @@ class Biography(object):
 
     def create_context(self, id, text, type="culturalformation"):
         self.context_list.append(Context(id, text, type))
-
-    def add_organization(self, orgname):
-        self.organizations += orgname
 
     def add_cultural_form(self, culturalform):
         self.cf_list += culturalform
@@ -92,7 +88,7 @@ class Biography(object):
     def create_triples(self, e_list):
         g = rdflib.Graph()
         for x in e_list:
-            g += x.to_triple(self.uri)
+            g += x.to_triple(self)
         return g
 
     def to_graph(self):
@@ -107,10 +103,6 @@ class Biography(object):
         g += self.create_triples(self.cf_list)
         g += self.create_triples(self.context_list)
         g += self.create_triples(self.education_context_list)
-
-        # Organization triples
-        for x in self.organizations:
-            g.add((self.uri, NS_DICT["org"].memberOf, x))
 
         # g += self.create_triples(self.event_list)
 

@@ -1,11 +1,22 @@
 import rdflib
-
 PLACE_MAP = {}
+
+"""
+Class/series of functions that deal with mapping place to its respective uri
+based on the places.csv
+
+TODO:
+1)create log of unmapped places
+2)error handling of missing place.csv
+3)review necessity of Place class
+
+"""
 
 
 def create_place_map():
     import csv
-    # TODO: eventually replace with total place one
+    # if searching takes too long
+    # Create better searching mechanism
     # with open('geoghert_places.csv', newline='') as csvfile:
     with open('places.csv', newline='') as csvfile:
         reader = csv.reader(csvfile)
@@ -13,11 +24,6 @@ def create_place_map():
         for row in reader:
             if row[0] not in PLACE_MAP:
                 PLACE_MAP[row[0]] = row[1]
-create_place_map()
-
-
-def get_reg(tag):
-    return get_attribute(tag, "reg")
 
 
 def get_attribute(tag, attribute):
@@ -30,7 +36,7 @@ def get_attribute(tag, attribute):
 def get_value(tag):
     value = get_attribute(tag, "current")
     if not value:
-        value = get_reg(tag)
+        value = get_attribute(tag, "reg")
     if not value:
         value = get_attribute(tag, "currentalternativeterm")
     if not value:
@@ -39,9 +45,14 @@ def get_value(tag):
     return value
 
 
+create_place_map()
+
+
 class Place(object):
-    """Probably will remove this class and just leave the functions for address and uri but for now
+    """
+        Probably will remove this class and just leave the functions for address and uri but for now
         Maybe morph this class into the one for locations
+        keeping for now.
     """
 
     def get_address(self, place_tag):
@@ -62,8 +73,6 @@ class Place(object):
 
     def __init__(self, place_tag, other_attributes=None):
         super(Place, self).__init__()
-        # Add somefunction to create uri/ get relevant uri from geonames
-        # self.uri = str([settlement, region, geo])[1:-1]
         self.address = self.get_address(place_tag)
 
         if self.address in PLACE_MAP:
@@ -79,13 +88,12 @@ class Place(object):
         pass
 
     def __str__(self):
-        string = "\turi: " + str(self.address) + "\n"
+        string = "\taddress: " + str(self.address) + "\n"
+        string += "\turi: " + str(self.uri) + "\n"
         return string
 
 
-# scrape freestanding events
 def main():
-    create_place_map()
     print(PLACE_MAP)
 
 

@@ -1,26 +1,19 @@
 import rdflib
 from rdflib import RDF, RDFS, Literal
 import re
-from biography import bind_ns, NS_DICT
-
+from biography import bind_ns, NS_DICT, make_standard_uri
+from place import Place
+from organizations import get_org_uri
 """
-Status: ~75%
-OA has been implemented (primaryily describing)
-However identifying contexts may need more handling
-TODO: Review triples related to identifying contexts
+Status: ~80%
 
-Contexts will have associated triples for the semi-reifying bit of the OA model
-attach triples to contexts somehow
-
-could make a list of tuples attached to a given context?
-
-<HEADING>Married Life</HEADING> --> MarriedLife
---> 
-http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id=akhman#MarriedLife
-
-http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id=
-id
-heading without spaces?
+TODO: 
+1) Review triples related to identifying contexts
+2) revise mechanism for getting closest heading
+3) Fix up labelling of contexts possibly
+4) Revise text snippet to grab from where the first triple is extracted
+    - however sometime for identifying contexts, names/orgs are identified
+        prior to triples extracted
 """
 
 
@@ -31,67 +24,146 @@ def strip_all_whitespace(string):
 MAX_WORD_COUNT = 35
 
 
+def identifying_motivation(tag):
+    identified_subjects = []
+    for x in tag.find_all("place"):
+        temp_place = Place(x)
+        if temp_place.uri:
+            identified_subjects.append(rdflib.term.URIRef(temp_place.uri))
+        else:
+            identified_subjects.append(Literal(temp_place.address))
+    for x in tag.find_all("name"):
+        identified_subjects.append(make_standard_uri(x.get("standard")))
+    for x in tag.find_all("orgname"):
+        identified_subjects.append(get_org_uri(x))
+
+    return identified_subjects
+
+
+def get_heading(tag):
+    # TODO: improve heading finding to also look for nearest sibling tags
+    # Maybe do search throughout the whole file for the nearest tag
+    # Going through direct parent fails 69% of the time
+    # Placeholder for now
+    # Iterate through parents then siblings
+    heading = tag.find("heading")
+    if not heading:
+        heading = tag.parent.find("heading")
+    if not heading:
+        heading = tag.parent.parent.find("heading")
+    if not heading:
+        return "Biography"
+    return strip_all_whitespace(heading.text)
+
+
 class Context(object):
     """docstring for Context"""
     context_types = ["GenderContext", "PoliticalContext", "SocialClassContext",
                      "SexualityContext", "RaceEthnicityContext", "ReligionContext", "NationalityContext"]
-    context_map = {"classissue": "SocialClassContext", "raceandethnicity": "RaceEthnicityContext",
-                   "nationalityissue": "NationalityContext", "sexuality": "SexualityContext", "politics": "PoliticalContext",
-                   "religion": "ReligionContext", "culturalformation": "CulturalFormContext"}
+    context_map = {"classissue": "SocialClassContext", "raceandethnicity": "RaceEthnicityContext","nationalityissue": "NationalityContext", "sexuality": "SexualityContext", "politics": "PoliticalContext","religion": "ReligionContext", "culturalformation": "CulturalFormContext","leisureandsociety": "LeisureContext", "occupation": "OccupationContext", "location": "SpatialContext", "violence": "ViolenceContext", "wealth": "WealthContext"}
 
-    def __init__(self, id, text, context_type="culturalformation", motivation="describing"):
+    def __init__(self, id, tag, context_type="culturalformation", motivation="describing"):
         super(Context, self).__init__()
         self.id = id
+        self.triples = []
 
-        self.tag = text
-        # Will possibly have to clean up citations sans ()
-        self.text = ' '.join(str(text.get_text()).split())
+        self.tag = tag
+        self.src = "http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id="
+        self.heading = get_heading(tag)
+
+        # rdfs:label "Atwood Education Context 1" ;
+        # self.label = " "
+
+        # Making the text the max amount of words
+        # TODO: Make snippet start where first triple is extracted from
+        self.text = ' '.join(str(tag.get_text()).split())
         words = self.text.split(" ")
         self.text = ' '.join(words[:MAX_WORD_COUNT])
         if len(words) > MAX_WORD_COUNT:
             self.text += "..."
 
-        # NOTE: holding off till we know how src should work may have to do how we're grabbing entries from islandora api
-        # self.src = src
         if context_type in self.context_map:
             self.context_type = rdflib.term.URIRef(str(NS_DICT["cwrc"]) + self.context_map[context_type])
+            self.context_label = self.context_map[context_type]
         else:
+            self.context_label = context_type
             self.context_type = rdflib.term.URIRef(str(NS_DICT["cwrc"]) + context_type)
 
         self.motivation = rdflib.term.URIRef(str(NS_DICT["oa"]) + motivation)
         self.subjects = []
+        if motivation == "identifying":
+            self.subjects = identifying_motivation(self.tag)
         self.uri = rdflib.term.URIRef(str(NS_DICT["data"]) + id)
 
-    def to_triple(self, person_uri):
+    def link_triples(self, comp_list):
+        """ Adding to list of components to link context to triples
+        """
+        self.triples += comp_list
+
+    def get_subjects(self, comp_list):
+        """
+        Dependent on the other other classes functioning similarly to cf
+        May have to make a variant for more complex components of biography
+        """
+        subjects = []
+        for x in comp_list:
+            subjects.append(x.value)
+        return list(set(subjects))
+
+    def to_triple(self, person):
+        # if tag is a describing one create the identifying triples
         g = rdflib.Graph()
         namespace_manager = rdflib.namespace.NamespaceManager(g)
         bind_ns(namespace_manager, NS_DICT)
-        g.add((self.uri, RDF.type, self.context_type))
-        g.add((self.uri, NS_DICT["oa"].motivatedBy, self.motivation))
-        g.add((self.uri, NS_DICT["oa"].hasTarget, person_uri))
 
-        choix = rdflib.term.URIRef(str(self.uri) + "_annotationbody")
-        g.add((choix, RDF.type, NS_DICT["oa"].choice))
-        g.add((self.uri, NS_DICT["oa"].hasBody, choix))
-
-        # Source hasn't really been figured out
-        # g.add((self.uri, NS_DICT["oa"].hasSource, self.src))
-
-        item_1 = rdflib.term.URIRef(str(self.uri) + "_item1_snippettext")
-        g.add((item_1, RDF.type, NS_DICT["dctypes"].text))
-        g.add((item_1, NS_DICT["dctypes"].description, rdflib.term.Literal(
+        # Creating Textual body first
+        snippet_uri = rdflib.term.URIRef(str(self.uri) + "_Snippet")
+        source_url = rdflib.term.URIRef(self.src + person.id + "#" + self.heading)
+        snippet_label = person.name + " " + self.context_label + " snippet"
+        g.add((snippet_uri, RDF.type, NS_DICT["oa"].TextualBody))
+        g.add((snippet_uri, RDFS.label, rdflib.term.Literal(snippet_label)))
+        g.add((snippet_uri, NS_DICT["oa"].hasSource, source_url))
+        g.add((snippet_uri, NS_DICT["dctypes"].description, rdflib.term.Literal(
             self.text, datatype=rdflib.namespace.XSD.string)))
 
-        # item_2 = rdflib.term.URIRef(str(self.uri) + "_item2_snippettag")
-        # g.add((item_2, RDF.type, NS_DICT["dctypes"].text))
-        # g.add((item_2, NS_DICT["dctypes"].description, rdflib.term.Literal(
-        #     self.tag, datatype=rdflib.namespace.XSD.string)))
-
-        g.add((choix, NS_DICT["as"].items, item_1))
-        # g.add((choix, NS_DICT["as"].items, item_2))
+        # Creating identifying context first and always
+        context_label = person.name + " " + self.context_label + " identifying annotation"
+        identifying_uri = rdflib.term.URIRef(str(NS_DICT["data"]) + self.id + "_identifying")
+        g.add((identifying_uri, RDF.type, self.context_type))
+        g.add((identifying_uri, RDFS.label, rdflib.term.Literal(context_label)))
+        g.add((identifying_uri, NS_DICT["oa"].hasTarget, snippet_uri))
+        g.add((identifying_uri, NS_DICT["oa"].motivatedBy, NS_DICT["oa"].identifying))
+        self.subjects += identifying_motivation(self.tag)
+        if self.triples:
+            self.subjects += self.get_subjects(self.triples)
         for x in self.subjects:
-            g.add((choix, NS_DICT["as"].items, x))
-            g.add((self.uri, NS_DICT["dcterms"].subject, x))
+            g.add((identifying_uri, NS_DICT["oa"].hasBody, x))
+
+        # Creating describing context if applicable
+        if self.motivation == NS_DICT["oa"].describing:
+            self.uri = rdflib.term.URIRef(str(NS_DICT["data"]) + self.id + "_describing")
+            context_label = person.name + " " + self.context_label + " describing annotation"
+            g.add((self.uri, RDF.type, self.context_type))
+            g.add((self.uri, RDFS.label, rdflib.term.Literal(context_label)))
+            g.add((self.uri, NS_DICT["cwrc"].hasIDependencyOn, identifying_uri))
+            g.add((self.uri, NS_DICT["oa"].hasTarget, person.uri))
+            g.add((self.uri, NS_DICT["oa"].hasTarget, snippet_uri))
+            g.add((self.uri, NS_DICT["oa"].motivatedBy, self.motivation))
+
+            for x in self.subjects:
+                g.add((self.uri, NS_DICT["dcterms"].subject, x))
+
+            format_str = rdflib.term.Literal("text/turtle", datatype=rdflib.namespace.XSD.string)
+            format_uri = rdflib.term.URIRef(str(NS_DICT["dcterms"]) + "format")
+            for x in self.triples:
+                triple_str = x.to_triple(person).serialize(format="ttl").decode().splitlines()[-2]
+                triple_str = rdflib.term.Literal(triple_str, datatype=rdflib.namespace.XSD.string)
+                temp_body = rdflib.BNode()
+                g.add((self.uri, NS_DICT["oa"].hasBody, temp_body))
+                g.add((temp_body, RDF.type, NS_DICT["oa"].TextualBody))
+                g.add((temp_body, RDF.value, triple_str))
+                g.add((temp_body, format_uri, format_str))
+
         return g
 
     def __str__(self):
@@ -106,6 +178,3 @@ class Context(object):
             for x in self.subjects:
                 string += "\t\t" + str(x) + "\n"
         return string + "\n"
-
-    # def context_count(self,type):
-    #     pass
