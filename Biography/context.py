@@ -41,19 +41,17 @@ def identifying_motivation(tag):
 
 
 def get_heading(tag):
-    # TODO: improve heading finding to also look for nearest sibling tags
-    # Maybe do search throughout the whole file for the nearest tag
-    # Going through direct parent fails 69% of the time
+    # TODO: improve heading finding
+    # Figure out distance between tag and the two available headings to see which is closest
     # Placeholder for now
-    # Iterate through parents then siblings
     heading = tag.find("heading")
     if not heading:
-        heading = tag.parent.find("heading")
+        heading = tag.findPrevious("heading")
     if not heading:
-        heading = tag.parent.parent.find("heading")
+        heading = tag.findNext("heading")
     if not heading:
         return "Biography"
-    return remove_punctuation(strip_all_whitespace(heading.text))
+    return remove_punctuation(strip_all_whitespace(heading.text), True)
 
 
 class Context(object):
@@ -176,6 +174,7 @@ class Context(object):
         # text = strip_all_whitespace(str(self.text))
         string += "\ttype: " + str(self.context_type) + "\n"
         string += "\tmotivation: " + str(self.motivation) + "\n"
+        string += "\theading: " + str(self.heading) + "\n"
         string += "\ttag: \n\t\t{" + str(self.tag) + "}\n"
         string += "\ttext: \n\t\t{" + str(self.text) + "}\n"
         if self.subjects:

@@ -22,9 +22,12 @@ def bind_ns(namespace_manager, ns_dictionary):
         namespace_manager.bind(x, ns_dictionary[x], override=False)
 
 
-def remove_punctuation(temp_str):
+def remove_punctuation(temp_str, all=False):
     import string
-    translator = str.maketrans('', '', string.punctuation.replace("-", ""))
+    if all:
+        translator = str.maketrans('', '', string.punctuation)
+    else:
+        translator = str.maketrans('', '', string.punctuation.replace("-", ""))
     temp_str = temp_str.translate(translator)
     temp_str = temp_str.replace(" ", "_")
     return temp_str

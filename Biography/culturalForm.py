@@ -392,25 +392,26 @@ def extract_cf_data(bio, person):
                     person.add_cultural_form(cf_list)
                 person.add_context(temp_context)
 
-        if cf.div2:
-            temp_context = None
-            cf_list = None
+        for x in cf.children:
+            if x.name == "div2":
+                temp_context = None
+                cf_list = None
 
-            temp_context = Context(person.id + "_culturalformation" + "_context" + str(id), cf)
-            cf_list = find_cultural_forms(cf.div2, person)
-            temp_context.link_triples(cf_list)
+                temp_context = Context(person.id + "_culturalformation" + "_context" + str(id), cf)
+                cf_list = find_cultural_forms(x, person)
+                temp_context.link_triples(cf_list)
 
-            person.add_context(temp_context)
-            person.add_cultural_form(cf_list)
-            id += 1
+                person.add_context(temp_context)
+                person.add_cultural_form(cf_list)
+                id += 1
 
     elements = bio.find_all("politics")
+    forms_found = 0
     for element in elements:
-        forms_found = 0
         temp_context = None
         cf_list = None
-        temp_context = Context(person.id + "_politics_context" + str(forms_found), element, "politics")
         forms_found += 1
+        temp_context = Context(person.id + "_politics_context" + str(forms_found), element, "politics")
 
         cf_list = find_cultural_forms(element, person)
         if cf_list:

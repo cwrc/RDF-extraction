@@ -11,7 +11,8 @@ class Log(object):
         file (file_obj)
         file_name (string)
     """
-    TERM_SIZE = os.get_terminal_size().columns
+    TERM_SIZE = 200
+    # TERM_SIZE = os.get_terminal_size().columns
 
     def __init__(self, file_name, script_file=None):
         """Init Log object
