@@ -133,7 +133,7 @@ class Log(object):
             newline (bool, optional): flag to end msg with newline
         """
         # stdout = False
-
+        string = str(string)
         if newline:
             self.file.write(string + "\n")
         else:

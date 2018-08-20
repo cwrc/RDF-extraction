@@ -11,17 +11,13 @@ Basic School class created
     Scheme for coming up with uris need to be in place
     and what to do about conflict properties 
 Rough Education context class created
-    Triples need to figured out testdata is outdated
-    Graffle is also outdated and doesn't include OA
-Subject of study mapping still needed
+
 
 Events need to be created--> bigger issue
 TODO: 
 Review produced triples
 review graffle and testdata with susan
 Get status update on subject of study sheet 
-Review naming structure with susan
-
 """
 
 log = Log("log/education/errors")

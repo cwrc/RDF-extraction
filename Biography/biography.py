@@ -22,15 +22,19 @@ def bind_ns(namespace_manager, ns_dictionary):
         namespace_manager.bind(x, ns_dictionary[x], override=False)
 
 
+def remove_punctuation(temp_str):
+    import string
+    translator = str.maketrans('', '', string.punctuation.replace("-", ""))
+    temp_str = temp_str.translate(translator)
+    temp_str = temp_str.replace(" ", "_")
+    return temp_str
+
+
 def make_standard_uri(std_str, ns="data"):
     """Makes uri based of string, removes punctuation and replaces spaces with an underscore
     v2, leaving hypens
     """
-    import string
-    translator = str.maketrans('', '', string.punctuation.replace("-", ""))
-    temp_str = std_str.translate(translator)
-    temp_str = temp_str.replace(" ", "_")
-    return rdflib.term.URIRef(str(NS_DICT[ns]) + temp_str)
+    return rdflib.term.URIRef(str(NS_DICT[ns]) + remove_punctuation(std_str))
 
 
 class Biography(object):
@@ -50,7 +54,7 @@ class Biography(object):
 
         self.education_context_list = []
         self.occupations = []
-        self.locations = []
+        self.location_list = []
         self.other_contexts = []
         self.other_triples = []
 
@@ -71,6 +75,9 @@ class Biography(object):
         #     pass
         # else:
         #     self.cf_list.append(culturalform)
+
+    def add_location(self, location):
+        self.location_list += location
 
     def create_cultural_form(self, predicate, reported, value, other_attributes=None):
         self.cf_list.append(CulturalForm(predicate, reported, value, other_attributes))
@@ -102,6 +109,7 @@ class Biography(object):
         g.add((self.uri, NS_DICT["cwrc"].hasGender, self.gender))
         g += self.create_triples(self.cf_list)
         g += self.create_triples(self.context_list)
+        g += self.create_triples(self.location_list)
         g += self.create_triples(self.education_context_list)
 
         # g += self.create_triples(self.event_list)
@@ -122,6 +130,10 @@ class Biography(object):
         if self.cf_list:
             string += "CulturalForms: \n"
             for x in self.cf_list:
+                string += str(x) + "\n"
+        if self.location_list:
+            string += "Locations: \n"
+            for x in self.location_list:
                 string += str(x) + "\n"
         if self.event_list:
             string += "Events: \n"

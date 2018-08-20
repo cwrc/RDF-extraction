@@ -1,7 +1,7 @@
 import rdflib
 from rdflib import RDF, RDFS, Literal
 import re
-from biography import bind_ns, NS_DICT, make_standard_uri
+from biography import bind_ns, NS_DICT, make_standard_uri, remove_punctuation
 from place import Place
 from organizations import get_org_uri
 """
@@ -53,14 +53,19 @@ def get_heading(tag):
         heading = tag.parent.parent.find("heading")
     if not heading:
         return "Biography"
-    return strip_all_whitespace(heading.text)
+    return remove_punctuation(strip_all_whitespace(heading.text))
 
 
 class Context(object):
     """docstring for Context"""
     context_types = ["GenderContext", "PoliticalContext", "SocialClassContext",
                      "SexualityContext", "RaceEthnicityContext", "ReligionContext", "NationalityContext"]
-    context_map = {"classissue": "SocialClassContext", "raceandethnicity": "RaceEthnicityContext","nationalityissue": "NationalityContext", "sexuality": "SexualityContext", "politics": "PoliticalContext","religion": "ReligionContext", "culturalformation": "CulturalFormContext","leisureandsociety": "LeisureContext", "occupation": "OccupationContext", "location": "SpatialContext", "violence": "ViolenceContext", "wealth": "WealthContext"}
+    context_map = {"classissue": "SocialClassContext", "raceandethnicity": "RaceEthnicityContext",
+                   "nationalityissue": "NationalityContext", "sexuality": "SexualityContext",
+                   "politics": "PoliticalContext", "religion": "ReligionContext",
+                   "culturalformation": "CulturalFormContext", "leisureandsociety": "LeisureContext",
+                   "occupation": "OccupationContext", "location": "SpatialContext",
+                   "violence": "ViolenceContext", "wealth": "WealthContext"}
 
     def __init__(self, id, tag, context_type="culturalformation", motivation="describing"):
         super(Context, self).__init__()

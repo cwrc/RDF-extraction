@@ -8,6 +8,7 @@ from biography import Biography, bind_ns, NS_DICT
 from log import *
 import culturalForm as cf
 import education
+import location
 import other_contexts
 """
 This is a possible temporary main script that creates the biography related triples
@@ -60,6 +61,7 @@ def main():
 
         cf.extract_cf_data(soup, person)
         # education.extract_education_data(soup, person)
+        location.extract_location_data(soup, person)
         other_contexts.extract_other_contexts_data(soup, person)
 
         graph = person.to_graph()
