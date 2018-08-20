@@ -3,7 +3,6 @@
 from bs4 import BeautifulSoup
 from rdflib import RDF, RDFS, Literal
 import rdflib
-import culturalForm as cf
 from biography import bind_ns, NS_DICT, make_standard_uri
 
 uber_graph = rdflib.Graph()
@@ -17,8 +16,6 @@ org_list = []
 class Organization(object):
     """docstring for Organization
     Currently dependent on the org authority list --> org csv
-
-    TODO: if not typed as any of the orgs to be typed as org:FormalOrg
     1) Going to create each one as an organization as they arise and merge them together in uber graph at the end
     2) Will likely be more efficent to add triples in the graph concurrently and add if they don't already exist.
     And adding triples but I could be wrong in terms of time for querying for each org every time.
@@ -45,7 +42,7 @@ class Organization(object):
         bind_ns(namespace_manager, NS_DICT)
         g.add((self.uri, NS_DICT["foaf"].name, Literal(self.name)))
         g.add((self.uri, RDFS.label, Literal(self.name)))
-        g.add((self.uri, RDF.type, NS_DICT["org"].FormalOrganization))
+        g.add((self.uri, RDF.type, NS_DICT["org"].Organization))
         for x in self.altlabels:
             g.add((self.uri, NS_DICT["skos"].altLabel, Literal(x)))
         return g
@@ -85,8 +82,9 @@ def get_org(tag):
 
 
 def extract_org_data(bio):
-    elements = ["politicalaffiliation", "denomination", "school"]
+    import culturalForm as cf
     global uber_graph
+    elements = ["politicalaffiliation", "denomination", "school"]
     for element in elements:
         tag = bio.find_all(element)
         for instance in tag:
@@ -102,7 +100,7 @@ def extract_org_data(bio):
                 for x in org:
                     org_uri = get_org_uri(x)
                     uber_graph.add((org_uri, RDF.type, org_type))
-                    uber_graph.remove((org_uri, RDF.type, NS_DICT["org"].FormalOrganization))
+                    uber_graph.remove((org_uri, RDF.type, NS_DICT["org"].Organization))
 
                     # Adding the hasOrganization relation
                     if org_type == NS_DICT["cwrc"].ReligiousOrganization:
@@ -116,6 +114,8 @@ def extract_org_data(bio):
 
 
 def create_org_csv():
+    """ Creates orgName.csv based off of authority file using forms as alt labels
+    """
     import csv
     w = csv.writer(open("orgNames.csv", "w"))
     with open("scrapes/authority/org_auth.xml") as f:
@@ -149,6 +149,7 @@ def csv_to_triples():
 def main():
     import os
     global uber_graph
+
     csv_to_triples()
     # create_org_csv()
 
