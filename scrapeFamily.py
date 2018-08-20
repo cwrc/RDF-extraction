@@ -24,11 +24,15 @@ class ChildStatus:
         self.ChildType = childType
         self.NumChildren = numChild
 
-class IntimateRelationships:
-    def __init__(self, attrValue, name,contexts):
-        self.AttrValue  = attrValue;
+class PersonAttribute:
+    def __init__(self,attrValue,name):
+        self.AttrValue = attrValue;
         self.PersonName = name;
-        self.contexts = contexts
+
+class IntimateRelationships:
+    def __init__(self, Persons, contexts):
+        self.Persons =  Persons
+        self.Contexts = contexts
 
 class PersonContext:
     def __init__(self, name, contexts):
@@ -126,7 +130,7 @@ def friendsAssociateCheck(xmlString,tagName):
     listToReturn = []
 
     for instance in tagToFind:
-        foundNames, names = getNameOfAssociate(instance.iter("NAME"), sourcePerson)
+        foundNames, names = getAllNames(instance.iter("NAME"), sourcePerson)
         if len(names) > 1:
             print(names)
         friendContext = getContexts(instance.findall("*"))
@@ -144,7 +148,7 @@ def cohabitantsCheck(xmlString,tagName):
     listToReturn = []
 
     for instance in tagToFind:
-        foundNames, names = getNameOfAssociate(instance.iter("NAME"), sourcePerson)
+        foundNames, names = getAllNames(instance.iter("NAME"), sourcePerson)
         if foundNames:
             listToReturn += names
 
@@ -166,7 +170,8 @@ def intimateRelationshipsCheck(xmlString):
     root = xml.etree.ElementTree.fromstring(xmlString)
     irTag = root.findall('.//INTIMATERELATIONSHIPS')
     sourcePerson = root.find("./DIV0/STANDARD").text
-    intimateRelationshipsList = []
+    personAttrList = []
+    intimateContexts = []
 
     for tag in irTag:
         attr = ""
@@ -183,20 +188,22 @@ def intimateRelationshipsCheck(xmlString):
             # print(getOnlyText(person))
             foundOtherName,otherNames = getNameOfAssociate(person.iter("NAME"), sourcePerson)
             print(person.findall("*"))
-            intimateContexts = getContexts([person])
+            intimateContexts += (getContexts([person]))
 
             if foundOtherName:
                 print("relationship with: ", otherNames)
-                for name in otherNames:
-                    intimateRelationshipsList.append(IntimateRelationships(attr,name,intimateContexts))
+                # for name in otherNames:
+                #     personAttrList.append(PersonAttribute(attr,name))
+                personAttrList.append(PersonAttribute(attr,otherNames))
             else:
                 print("othername not found")
-                intimateRelationshipsList.append(IntimateRelationships(attr,"intimate relationship",intimateContexts))
+                personAttrList.append(PersonAttribute(attr, "intimate relationship"))
             # for name in person.iter("NAME"):
             #     print(name.attrib["STANDARD"])
             # getch()
-                
-    return intimateRelationshipsList
+    intimateRelationships = IntimateRelationships(personAttrList,intimateContexts)
+
+    return intimateRelationships
 
 # This function obtains family information
 # ------ Example ------
@@ -281,7 +288,7 @@ def main():
             #     break
             # if "lee_ve-b.xml" not in name:
             #     continue
-            # if "seacma-b.xml" not in name:
+            # if "bowlwi-b.xml" not in name:
             #     continue
             # if "larkph-b.xml" not in name:
             #     continue

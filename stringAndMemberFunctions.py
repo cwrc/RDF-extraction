@@ -1,5 +1,6 @@
 from xml.etree import ElementTree
 import datetime, sys, copy
+from xml.etree.ElementTree import Element
 
 class Family:
     def __init__(self, memName, memRLTN,memJobs,memSigActs):
@@ -27,7 +28,16 @@ class JobSigAct:
 def getch():
     sys.stdin.read(1)
 
-def getContexts(tagList):
+def getContexts(tagInput):
+    print(tagInput)
+    tagList = []
+    for tag in tagInput:
+        if "DIV" not in tag.tag:
+            DIV = Element('DIV2')
+            DIV.insert(0, tag)
+            tagList.append(DIV)
+        else:
+            tagList.append(tag)
     print("taglist: ",tagList)
     returnList = []
     for tagParent in tagList:
@@ -88,6 +98,8 @@ def getContexts(tagList):
 
 
                     # getch()
+                elif len(tags) == 1 and tags[i].tag == "CHRONSTRUCT":
+                    returnList.append(getOnlyText(tags[i]))
                 else:
                     print("weird thing going on")
                     lonePars = tagParent.findall(".//P")
@@ -237,9 +249,8 @@ def notParentName(personName,parentList):
             return False
     return True
 
-# get a name of a person by getting the first
-# name that is not the source person
-def getNameOfAssociate(names,sourcePerson):
+# get all names in a tag that are not the subject's
+def getAllNames(names, sourcePerson):
     foundName = False
     otherNames = []
     for thisName in names:
@@ -250,6 +261,21 @@ def getNameOfAssociate(names,sourcePerson):
             otherNames.append(name)
 
     return foundName,otherNames
+
+# get a name of a person by getting the first
+# name that is not the source person
+def getNameOfAssociate(names,sourcePerson):
+    foundName = False
+    otherName = ""
+    for thisName in names:
+        name = thisName.attrib["STANDARD"]
+        # print("looking at :", name)
+        if name != sourcePerson :
+            foundName = True
+            otherName = (name)
+            break
+
+    return foundName,otherName
 def isUniqueSigAct(newAct, pastActs):
     for act in pastActs:
         act = act.job

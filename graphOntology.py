@@ -3,7 +3,6 @@
 import os, sys
 import csv
 from rdflib import RDF
-from scrapeFamily import getch
 from rdflib import Namespace, Graph, Literal, URIRef
 from stringAndMemberFunctions import *
 
@@ -46,8 +45,8 @@ def createPerson(personName):
     g.add((thisMember, foaf.name, Literal(personName)))
 
     return thisMember
-def graphMaker(sourceName,fileName,unfixedSourceName,familyInfo, birthInfo, deathInfo,
-               childInfo,childlessList,intmtRelationshipsList,friendAssociateList, occupations,cohabitantList,sexualityContext,cntr):
+def graphMaker(sourceName, fileName, unfixedSourceName, familyInfo, birthInfo, deathInfo,
+               childInfo, childlessList, intmtRelationships, friendAssociateList, occupations, cohabitantList, sexualityContext, cntr):
     global g
     global megaGraph
     import rdflib
@@ -182,30 +181,7 @@ def graphMaker(sourceName,fileName,unfixedSourceName,familyInfo, birthInfo, deat
 
         
         if deathInfo.deathContexts != None and len(deathInfo.deathContexts) > 0:
-            # g.add((cwrc.alRecChoice1, dctypes.description, Literal("insert sentence here")))
-            # g.add((cwrc.alRecChoice1,  rdf.type, dctypes.text))`
-            
-            #     # g.add((cwrc.alRecChoice, dctypes.text, cwrc.alRecChoice1))
-            # g.add((cwrc.AlReccChoice, as.items, cwrc.alRecChoice1))
-            # g.add((cwrc.AlReccChoice, rdf.type, oa.Choice))
-
-            # g.add((cwrc.AnnaLeonowensRaceEthnicityContext, oa.hasBody, cwrc.alRecChoice))
-            # g.add((cwrc.AnnaLeonowensRaceEthnicityContext, rdf.type, cwrc.RaceEthnicityContext))
-            
-            # g.add((cwrc.AnnaLeonowens, cwrc:RaceEthnicityContext, cwrc.AnnaLeonowensRaceEthnicityContext))
-            # g.add((cwrc.AnnaLeonowens, rdf.type, cwrc.Person))
             addContexts(fileName,"hasDeathContext",deathInfo.deathContexts,source,1)
-            # numDeathContexts = 1
-            # print(deathInfo.deathContexts[0])
-
-            # for thisDeathContext in deathInfo.deathContexts:
-            #     print("context: ", thisDeathContext)
-            #     deathContextURI = URIRef(str(cwrcNamespace)+str(fileName) + "deathContext" + str(numDeathContexts))
-            #
-            #     g.add((deathContextURI, oa.hasTarget, source))
-            #     g.add((deathContextURI,cwrcNamespace.hasdescription, Literal(thisDeathContext)))
-            #     numDeathContexts += 1
-                # g.add((source,cwrcNamespace.hasDeathContext,(cwrcNamespace.hasDeathContext,cwrcNamespace.hasSource,Literal(deathContext))))
 
 
     for child in childInfo:
@@ -225,27 +201,29 @@ def graphMaker(sourceName,fileName,unfixedSourceName,familyInfo, birthInfo, deat
             g.add((source, cwrcNamespace.hasReproductiveHistory, cwrcNamespace.childlessness))
 
 
+    if intmtRelationships != None:
+        numIntimateContext = 1
+        print(intmtRelationships.Contexts)
+        numIntimateContext = addContexts(fileName,"hasIntimateRelationshipsContext",intmtRelationships.Contexts,source,numIntimateContext)
 
-    numIntimateContext = 1
-    for relationship in intmtRelationshipsList:
-        numIntimateContext = addContexts(fileName,"hasIntimateRelationshipsContext",relationship.contexts,source,numIntimateContext)
-        if relationship.AttrValue == "EROTICYES":
-            g.add((source, cwrcNamespace.hasEroticRelationshipWith, createPerson(relationship.PersonName.title())))
+        for relationship in intmtRelationships.Persons:
+            if relationship.AttrValue == "EROTICYES":
+                g.add((source, cwrcNamespace.hasEroticRelationshipWith, createPerson(relationship.PersonName.title())))
 
-        elif relationship.AttrValue == "EROTICNO" :
-            g.add((source, cwrcNamespace.hasNonEroticRelationshipWith, createPerson(relationship.PersonName.title())))
+            elif relationship.AttrValue == "EROTICNO" :
+                g.add((source, cwrcNamespace.hasNonEroticRelationshipWith, createPerson(relationship.PersonName.title())))
 
 
-        elif relationship.AttrValue == "EROTICPOSSIBLY":
-            g.add((source, cwrcNamespace.hasPossiblyEroticRelationshipWith, createPerson(relationship.PersonName.title())))
-
-        else:
-
-            if relationship.PersonName.title() != "Intimate Relationship":
-                g.add((source,cwrcNamespace.hasIntimateRelationshipWith, createPerson(relationship.PersonName.title())))
+            elif relationship.AttrValue == "EROTICPOSSIBLY":
+                g.add((source, cwrcNamespace.hasPossiblyEroticRelationshipWith, createPerson(relationship.PersonName.title())))
 
             else:
-                g.add((source, cwrcNamespace.hasIntimateRelationshipWith, Literal(relationship.PersonName.title())))
+
+                if relationship.PersonName.title() != "Intimate Relationship":
+                    g.add((source,cwrcNamespace.hasIntimateRelationshipWith, createPerson(relationship.PersonName.title())))
+
+                else:
+                    g.add((source, cwrcNamespace.hasIntimateRelationshipWith, Literal(relationship.PersonName.title())))
     numFriendContext = 1
     for friend in friendAssociateList:
         if friend != None:
@@ -259,16 +237,16 @@ def graphMaker(sourceName,fileName,unfixedSourceName,familyInfo, birthInfo, deat
         g.add((source,cwrcNamespace.hasCohabitant,createPerson(habitant)))
 
     addContexts(fileName,"hasSexualityContext",sexualityContext,source,1)
-    print(g.serialize(format='turtle').decode())
-    # officialPath = os.path.expanduser("~/Documents/UoGuelph Projects/CombiningTriples/birthDeathFamily_triples/"+ fileName+ '.txt')
+    # print(g.serialize(format='turtle').decode())
+    officialPath = os.path.expanduser("~/Documents/UoGuelph Projects/CombiningTriples/birthDeathFamily_triples/"+ fileName+ '.txt')
     # testingPath = os.path.expanduser('./oldContext/'+ fileName+ '.txt')
     # testingPath = os.path.expanduser('./newContext/'+ fileName+ '.txt')
 
-    # g.serialize(destination=testingPath, format='turtle')
-    # if cntr == 1369:
-    #     megaGraph.serialize(destination=os.path.expanduser("~/Documents/UoGuelph Projects/"+ "motherGraph2"+ '.txt'), format='turtle')
-    # else:
-    #     megaGraph += g
+    g.serialize(destination=officialPath, format='turtle')
+    if cntr == 1369:
+        megaGraph.serialize(destination=os.path.expanduser("~/Documents/UoGuelph Projects/"+ "motherGraph2"+ '.txt'), format='turtle')
+    else:
+        megaGraph += g
 
     return len(g),numNamelessPeople
 

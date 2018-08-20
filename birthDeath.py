@@ -1,5 +1,6 @@
 # this file simply holds functions for scrapeFamily.py
 import xml.etree.ElementTree
+
 import os
 import sys
 import logging
@@ -123,8 +124,16 @@ def getBirth(xmlString):
     except AttributeError:
         print("no birth place information for this individual")
         # sys.stdin(1)
+    getContextsFrom = birthTagParent.findall("*")
 
-    birthContexts = getContexts(birthTagParent.findall("*"))
+
+    # if "DIV" not in getContextsFrom[0].tag:
+    #     DIV = Element('DIV')
+    #     DIV.insert(0,getContextsFrom[0])
+    #
+    #     # DIV.append(getContextsFrom)
+    #     getContextsFrom = [DIV]
+    birthContexts = getContexts(getContextsFrom)
     return birthData(birthDate, birthPositions, birthPlaceSettlement, birthPlaceRegion, birthPlaceGeog,birthContexts)
 
     
@@ -166,7 +175,14 @@ def getDeath(xmlString):
                 # sys.stdin.read(1)
                 return
 
-        deathContexts = getContexts([deathTagParent])
+        getContextsFrom = [deathTagParent]
+        if "DIV" not in getContextsFrom[0].tag:
+            DIV = Element('DIV')
+            DIV.insert(0, getContextsFrom[0])
+
+            # DIV.append(getContextsFrom)
+            getContextsFrom = [DIV]
+        deathContexts = getContexts(getContextsFrom)
 
         # deathParagraphs = list(deathTagParent.iter("P"))
         # if deathParagraphs != None and len(deathParagraphs) > 0:
