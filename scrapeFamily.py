@@ -125,7 +125,7 @@ def friendsAssociateCheck(xmlString,tagName):
     root = xml.etree.ElementTree.fromstring(xmlString)
     sourcePerson = root.find("./DIV0/STANDARD").text
 
-    tagToFind = root.findall(".//" + tagName)
+    tagToFind = root.findall(".//FRIENDSASSOCIATES/")
 
     listToReturn = []
 
@@ -133,7 +133,7 @@ def friendsAssociateCheck(xmlString,tagName):
         foundNames, names = getAllNames(instance.iter("NAME"), sourcePerson)
         if len(names) > 1:
             print(names)
-        friendContext = getContexts(instance.findall("*"))
+        friendContext = getContexts([instance])
         if foundNames:
             # listToReturn += names
             listToReturn.append(PersonContext(names,friendContext))
@@ -294,6 +294,8 @@ def main():
             #     continue
             # if "kempma-b.xml" not in name:
             #     continue
+            if "woolvi-b.xml" not in name:
+                continue
 
             if printInfo == True:
                 print('\n===========%s=================' % name)

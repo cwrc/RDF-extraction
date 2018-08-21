@@ -3,16 +3,34 @@
 import os, sys
 import csv
 from rdflib import RDF
-from rdflib import Namespace, Graph, Literal, URIRef
+from rdflib import Namespace, Graph, Literal, URIRef, BNode
+from rdflib.namespace import XSD
 from stringAndMemberFunctions import *
 
-g         = Graph()
-megaGraph = Graph()
+cwrcNamespace   = Namespace('http://sparql.cwrc.ca/ontologies/cwrc#')
+oa              = Namespace('http://www.w3.org/ns/oa#')
+data            = Namespace('http://cwrc.ca/cwrcdata/')
+foaf            = Namespace('http://xmlns.com/foaf/0.1/')
+dctypes         = Namespace("http://purl.org/dc/dcmitype/")
+rdfs            = Namespace("http://www.w3.org/2000/01/rdf-schema#")
+dcterms         = Namespace("http://purl.org/dc/terms/")
 
-cwrcNamespace     = Namespace('http://sparql.cwrc.ca/ontologies/cwrc#')
-oa                = Namespace('http://www.w3.org/ns/oa#')
-data              = Namespace('http://cwrc.ca/cwrcdata/')
-foaf              = Namespace('http://xmlns.com/foaf/0.1/')
+def newGraph():
+    new = Graph()
+    new.bind('cwrc', cwrcNamespace)
+    new.bind('oa', oa)
+    new.bind('data', data)
+    new.bind('foaf', foaf)
+    new.bind("dctypes", dctypes)
+    new.bind("rdfs", rdfs)
+    new.bind("dcterms", dcterms)
+
+    return new
+
+g         = newGraph()
+megaGraph = newGraph()
+
+
 
 def getCwrcTag(familyRelation):
     csvFile = open(os.path.expanduser("~/Google Drive/Term 3 - UoGuelph/mapping2.csv"),"r")
@@ -36,15 +54,73 @@ def addContexts(fileName,contextName,contexts,source,numContexts):
         numContexts += 1
 
     return numContexts
+def addContextsNew(fileName,contextName,contexts,source,numContexts,propertyDict):
+    descType = propertyDict["descType"]
+    descLabel = propertyDict["descLabel"]
+    subjectName = propertyDict["subjectName"]
+    descSubjects = propertyDict["descSubjects"]
+    descPredicate = propertyDict["descPredicate"]
+    descSource = propertyDict["unchangedName"]
 
+    for context in contexts:
+        snippetURI = URIRef(str(cwrcNamespace) + str(fileName) + contextName +"_snippet"+ str(numContexts))
+        # g.add((snippetURI, oa.hasTarget, source))
+        g.add((snippetURI, dctypes.description, Literal(context)))
+        g.add((snippetURI, RDF.type, oa.TextualBody))
+        g.add((snippetURI, rdfs.label, Literal(subjectName + " " + descLabel + " snippet")))
+        # ########################################################################################################
+        indentURI = URIRef(str(cwrcNamespace) + str(fileName) + contextName +"identifying"+ str(numContexts))
+        for subject in descSubjects:
+            g.add((indentURI,oa.hasBody,createPerson(subject)))
+        g.add((indentURI,oa.hasBody,source))
+
+        g.add((indentURI,oa.hasTarget,snippetURI))
+        g.add((indentURI,oa.motivatedBy,oa.describing))
+        # ########################################################################################################
+        descURI = URIRef(str(cwrcNamespace) + str(fileName) + contextName +"_describing"+ str(numContexts))
+        g.add((descURI, RDF.type, descType))
+        g.add((descURI, rdfs.label, Literal(subjectName + " "+descLabel + " describing annotation")))
+
+        for subject in descSubjects:
+            g.add((descURI, dcterms.subject, createPerson(subject)))
+        g.add((descURI, dcterms.subject, source))
+        g.add((descURI, cwrcNamespace.hasIdDependencyOn, indentURI))
+
+        for body in descSubjects:
+            bodyURI = BNode()
+            g.add((bodyURI, RDF.type,oa.TextualBody))
+            g.add((bodyURI, URIRef(str(dcterms) + "format"), Literal("text/turtle",datatype=XSD.string)))
+            value = "data:" + getStandardUri(descSource) + " " + descPredicate + " " + "data:"+ getStandardUri(body)
+            g.add((bodyURI, RDF.value, Literal(value)))
+            g.add((descURI,oa.hasBody,bodyURI))
+            # g.add((descURI,))
+
+        g.add((descURI, oa.hasTarget, source))
+        g.add((descURI, oa.hasTarget, snippetURI))
+        g.add((descURI, oa.motivatedBy, oa.describing))
+
+
+
+        numContexts += 1
+
+    return numContexts
+
+def returnPersonUri(personName):
+    return URIRef(str(data) + getStandardUri(personName))
 def createPerson(personName):
     # if personName == "":
     #     getch()
-    thisMember = URIRef(str(data) + getStandardUri(personName))
+    personURI = returnPersonUri(personName)
+
+    if (personURI, None, None) in g:
+        return personURI
+
+    thisMember = returnPersonUri(personName)
     g.add((thisMember, RDF.type, cwrcNamespace.NaturalPerson))
     g.add((thisMember, foaf.name, Literal(personName)))
 
     return thisMember
+
 def graphMaker(sourceName, fileName, unfixedSourceName, familyInfo, birthInfo, deathInfo,
                childInfo, childlessList, intmtRelationships, friendAssociateList, occupations, cohabitantList, sexualityContext, cntr):
     global g
@@ -52,12 +128,9 @@ def graphMaker(sourceName, fileName, unfixedSourceName, familyInfo, birthInfo, d
     import rdflib
     numNamelessPeople = 0
 
-    g = Graph()
+    g = newGraph()
 
-    g.bind('cwrc',cwrcNamespace)
-    g.bind('oa',oa)
-    g.bind('data',data)
-    g.bind('foaf',foaf)
+
 
     sourceName = sourceName.replace(" ","_")
     # source = URIRef(str(data) + sourceName)
@@ -224,13 +297,29 @@ def graphMaker(sourceName, fileName, unfixedSourceName, familyInfo, birthInfo, d
 
                 else:
                     g.add((source, cwrcNamespace.hasIntimateRelationshipWith, Literal(relationship.PersonName.title())))
+
+    g = newGraph()
+    g.add((source, RDF.type, cwrcNamespace.NaturalPerson))
     numFriendContext = 1
     for friend in friendAssociateList:
         if friend != None:
             for name in friend.names:
                 g.add((source,cwrcNamespace.hasInterpersonalRelationshipWith,createPerson(name)))
+                # break
+
+            listProperties = {}
+            listProperties["descType"] = cwrcNamespace.FriendsAndAssociatesContext
+            listProperties["descLabel"] = "FriendsAndAssociatesContext"
+            listProperties["subjectName"] = sourceName
+            listProperties["descSubjects"] = friend.names
+            listProperties["unchangedName"]= unfixedSourceName
+            listProperties["descPredicate"] = "cwrcNamespace.hasInterpersonalRelationshipWith"
+
+            # numFriendContext = addContextsNew(fileName,"friendAssociateContext",friend.contexts,source,numFriendContext,listProperties)
             numFriendContext = addContexts(fileName,"friendAssociateContext",friend.contexts,source,numFriendContext)
 
+
+    print(g.serialize(format='turtle').decode())
 
 
     for habitant in cohabitantList:

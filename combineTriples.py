@@ -5,11 +5,14 @@ import os
 
 
 def main():
-    root = "~/Documents/UoGuelph Projects/CombiningTriples/"
-    aPath       = os.path.expanduser(root + "culturalform_triples/")
-    gPath       = os.path.expanduser(root + "birthDeathFamily_triples/")
-    dPath       = os.path.expanduser(root + "CauseOfDeath_Triples/")
+    root        = "~/Documents/UoGuelph Projects/CombiningTriples/"
+    drivePath    = os.path.expanduser("~/Google Drive/Extraction/")
     dtnPath     = os.path.expanduser(root + "CombinedFiles/")
+
+    aPath       = os.path.expanduser(drivePath + "culturalform_triples/")
+    dPath       = os.path.expanduser(drivePath + "CauseOfDeath_Triples/")
+    gPath       = os.path.expanduser(root + "birthDeathFamily_triples/")
+
 
     index = 1
     numTriples = 0
@@ -17,6 +20,7 @@ def main():
     noWork = []
     missing = []
     gurjapCounter  = 0
+    megaGraph = Graph()
     # f = open("namesAndTriples6.txt", "w")
     for dirName, subdirlist, files in os.walk(gPath):
         for name in files:
@@ -24,7 +28,6 @@ def main():
             # if "dumaal" not in name:
             #     continue
 
-            graph   = Graph()
             alGraph = Graph()
             dGraph  = Graph()
             gGraph  = Graph()
@@ -46,15 +49,15 @@ def main():
             #     debNum += 1
 
             alGraph.parse(alFileName,format="turtle")
-            if os.path.isfile(dFileName) == True:
+            # if os.path.isfile(dFileName) == True:
                 # continue
-                try:
-                    dGraph.parse(dFileName,format="turtle")
-                except Exception as e:
-                    noWork.append(fileName + "-cod.txt")
-                    print("error", e)
-            else:
-                missing.append(fileName + "-cod.txt")
+            try:
+                dGraph.parse(dFileName,format="turtle")
+            except Exception as e:
+                noWork.append(fileName + "-cod.txt")
+                print("error", e)
+            # else:
+            #     missing.append(fileName + "-cod.txt")
 
 
             gGraph.parse(gFileName,format="turtle")
@@ -69,18 +72,20 @@ def main():
             graph.bind('data', data)
             graph.bind('foaf', foaf)
             # print(graph.serialize(format='turtle').decode())
-            # break
-            # print(len(graph))
-            # print("========================================")
-            graph.serialize(destination=dtnPath + fileName + '.txt', format='turtle')
+
             # f.write("%s:%d\n" % (name, len(graph)))
             # print("Al:",len(alGraph),"d:",len(dGraph),"g:",len(gGraph))
             # print("index: ",index,"total triples",len(graph))
+
             index += 1
             numTriples += len(graph)
+            megaGraph += graph
+            # graph.serialize(destination=dtnPath + fileName + '.txt', format='turtle')
             # print("number of triples",numTriples)
-            # break
+
     # f.close()
+    megaGraph.serialize(destination=drivePath + "SUPER_MEGA_GRAPH" + '.txt', format='turtle')
+
     print("total Triples: ",numTriples)
     print("total Gurjap Triples: ", gurjapCounter)
     print("didnt work ==============")
