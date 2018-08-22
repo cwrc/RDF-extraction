@@ -1,44 +1,19 @@
 import requests
-# import sys, xml.etree.ElementTree, os, logging, csv, datetime,
+import sys, xml.etree.ElementTree, os, logging, csv, datetime
+from bs4 import BeautifulSoup
 # from Env import env
-import sys
-from gLoggingInFunctions import *
-from graphOntology import *
-from birthDeath import *
 
+from gLoggingInFunctions import *
+from classes import *
+
+from graphOntology import graphMaker
+from birthDeath import getBirth, getDeath
 from stringAndMemberFunctions import *
 
 numSigs = 0
 numAdded = 0
 session = requests.Session()
 numtags = 0
-
-
-
-class ChildlessStatus:
-    def __init__(self, label):
-        self.Label = label
-
-class ChildStatus:
-    def __init__(self, childType,numChild):
-        self.ChildType = childType
-        self.NumChildren = numChild
-
-class PersonAttribute:
-    def __init__(self,attrValue,name):
-        self.AttrValue = attrValue;
-        self.PersonName = name;
-
-class IntimateRelationships:
-    def __init__(self, Persons, contexts):
-        self.Persons =  Persons
-        self.Contexts = contexts
-
-class PersonContext:
-    def __init__(self, name, contexts):
-        self.names = name
-        self.contexts = contexts
-
 
 
 # Get g information about the subject
@@ -116,8 +91,7 @@ def childlessnessCheck(xmlString):
         
         print("------------")
         
-        for child in childlessList:
-            print(child.Label)
+
 
     return childlessList
 
@@ -130,13 +104,14 @@ def friendsAssociateCheck(xmlString,tagName):
     listToReturn = []
 
     for instance in tagToFind:
-        foundNames, names = getAllNames(instance.iter("NAME"), sourcePerson)
-        if len(names) > 1:
-            print(names)
-        friendContext = getContexts([instance])
-        if foundNames:
-            # listToReturn += names
-            listToReturn.append(PersonContext(names,friendContext))
+        listToReturn+=getContextsAndNames(instance,sourcePerson)
+        # foundNames, names = getAllNames(instance.iter("NAME"), sourcePerson)
+        # if len(names) > 1:
+        #     print(names)
+        # friendContext = getContexts(instance)
+        # if foundNames:
+        #     # listToReturn += names
+        #     listToReturn.append(PeopleAndContext(names, friendContext))
     return listToReturn
 
 def cohabitantsCheck(xmlString,tagName):
@@ -148,31 +123,35 @@ def cohabitantsCheck(xmlString,tagName):
     listToReturn = []
 
     for instance in tagToFind:
-        foundNames, names = getAllNames(instance.iter("NAME"), sourcePerson)
-        if foundNames:
+        names = getAllNames(instance.iter("NAME"), sourcePerson)
+        if names is not None:
             listToReturn += names
 
     return listToReturn
+
 def getSexualityContexts(xmlString):
     root = xml.etree.ElementTree.fromstring(xmlString)
     sourcePerson = root.find("./DIV0/STANDARD").text
-    tagToFind = root.findall(".//SEXUALITY")
+    tagToFind = root.findall(".//SEXUALITY/")
     print(tagToFind)
     listToReturn = []
 
-    for instance in tagToFind:
-        print(instance.findall("*"))
-        sexualityContext = getContexts(instance.findall("*"))
+    for div in tagToFind:
+        # print(div.findall("*"))
+        sexualityContext = getContexts(div)
         listToReturn += sexualityContext
+    print(listToReturn)
+#    ================================================
+    root = BeautifulSoup(xmlString,'lxml')
+    print(root)
     return listToReturn
-
 def intimateRelationshipsCheck(xmlString):
     root = xml.etree.ElementTree.fromstring(xmlString)
     irTag = root.findall('.//INTIMATERELATIONSHIPS')
     sourcePerson = root.find("./DIV0/STANDARD").text
     personAttrList = []
     intimateContexts = []
-
+    intimateRelationships = []
     for tag in irTag:
         attr = ""
         
@@ -186,9 +165,18 @@ def intimateRelationshipsCheck(xmlString):
             print("======person======")
             print("source: ", sourcePerson)
             # print(getOnlyText(person))
+            intmtContextsAndNames = getContextsAndNames(person,sourcePerson)
+            print(intmtContextsAndNames)
+            for thisContext in intmtContextsAndNames:
+                if len(thisContext.names) > 1:
+                    intimateRelationships.append(IntimateRelationships(thisContext.names[0],attr,thisContext.contexts))
+                else:
+                    intimateRelationships.append(IntimateRelationships("intimate relationship",attr,thisContext.contexts))
+
+            continue
             foundOtherName,otherNames = getNameOfAssociate(person.iter("NAME"), sourcePerson)
             print(person.findall("*"))
-            intimateContexts += (getContexts([person]))
+            intimateContexts += (getContexts(person))
 
             if foundOtherName:
                 print("relationship with: ", otherNames)
@@ -201,7 +189,7 @@ def intimateRelationshipsCheck(xmlString):
             # for name in person.iter("NAME"):
             #     print(name.attrib["STANDARD"])
             # getch()
-    intimateRelationships = IntimateRelationships(personAttrList,intimateContexts)
+    # intimateRelationships = IntimateRelationships(personAttrList,intimateContexts)
 
     return intimateRelationships
 
@@ -263,7 +251,7 @@ def getOccupationDict():
             if row[0] == "":
                 continue
             # print(row)
-            print("to use: ", row[0])
+            # print("to use: ", row[0])
             for j in range(3,len(row)):
                 if row[j] != "":
                     listToReturn[row[j]] = row[0]
@@ -288,11 +276,11 @@ def main():
             #     break
             # if "lee_ve-b.xml" not in name:
             #     continue
-            # if "bowlwi-b.xml" not in name:
+            # if "dempch-b.xml" not in name:
             #     continue
             # if "larkph-b.xml" not in name:
             #     continue
-            # if "kempma-b.xml" not in name:
+            # if "guesch-b.xml" not in name:
             #     continue
             if "woolvi-b.xml" not in name:
                 continue

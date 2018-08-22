@@ -84,7 +84,7 @@ def main():
             # print("number of triples",numTriples)
 
     # f.close()
-    megaGraph.serialize(destination=drivePath + "SUPER_MEGA_GRAPH" + '.txt', format='turtle')
+    # megaGraph.serialize(destination=drivePath + "SUPER_MEGA_GRAPH" + '.txt', format='turtle')
 
     print("total Triples: ",numTriples)
     print("total Gurjap Triples: ", gurjapCounter)

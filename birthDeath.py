@@ -5,30 +5,10 @@ import os
 import sys
 import logging
 import copy
+from classes import *
 from stringAndMemberFunctions import *
-class birthData:
-    def __init__(self, bDate, bPosition, bSettl, bRegion, bGeog, bContexts):
-        self.birthDate = bDate
-        self.birthPositions = bPosition
-        self.birthSettlement = bSettl
-        self.birthRegion = bRegion
-        self.birthGeog = bGeog
-        self.birthContexts = bContexts
 
-class deathData:
-    def __init__(self, dDate, dCauses, dSettl, dRegion, dGeog, dContexts, dBurialSettl, dBurialRegion, dBurialGeog):
-        self.deathDate = dDate
-        self.deathCauses= dCauses
 
-        self.deathSettlement = dSettl
-        self.deathRegion = dRegion
-        self.deathGeog = dGeog
-
-        self.deathContexts = dContexts
-
-        self.burialSettl = dBurialSettl
-        self.burialRegion = dBurialRegion
-        self.burialGeog = dBurialGeog
 
 def getBirth(xmlString):
 
@@ -125,15 +105,16 @@ def getBirth(xmlString):
         print("no birth place information for this individual")
         # sys.stdin(1)
     getContextsFrom = birthTagParent.findall("*")
-
-
+    birthContexts = []
+    for div in getContextsFrom:
+        birthContexts += getContexts(div)
     # if "DIV" not in getContextsFrom[0].tag:
     #     DIV = Element('DIV')
     #     DIV.insert(0,getContextsFrom[0])
     #
     #     # DIV.append(getContextsFrom)
     #     getContextsFrom = [DIV]
-    birthContexts = getContexts(getContextsFrom)
+    # birthContexts = getContexts(getContextsFrom)
     return birthData(birthDate, birthPositions, birthPlaceSettlement, birthPlaceRegion, birthPlaceGeog,birthContexts)
 
     
@@ -175,14 +156,19 @@ def getDeath(xmlString):
                 # sys.stdin.read(1)
                 return
 
-        getContextsFrom = [deathTagParent]
-        if "DIV" not in getContextsFrom[0].tag:
-            DIV = Element('DIV')
-            DIV.insert(0, getContextsFrom[0])
-
-            # DIV.append(getContextsFrom)
-            getContextsFrom = [DIV]
-        deathContexts = getContexts(getContextsFrom)
+        for div in treeRoot.findall("./DIV0/DIV1/DEATH/"):
+            deathContexts += getContexts(div)
+        if type(deathContexts) is list:
+            print(deathContexts)
+            print("this is a list")
+        # getContextsFrom = [deathTagParent]
+        # if "DIV" not in getContextsFrom[0].tag:
+        #     DIV = Element('DIV')
+        #     DIV.insert(0, getContextsFrom[0])
+        #
+        #     # DIV.append(getContextsFrom)
+        #     getContextsFrom = [DIV]
+        # deathContexts = getContexts(getContextsFrom)
 
         # deathParagraphs = list(deathTagParent.iter("P"))
         # if deathParagraphs != None and len(deathParagraphs) > 0:

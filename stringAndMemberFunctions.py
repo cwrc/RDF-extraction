@@ -1,117 +1,99 @@
 from xml.etree import ElementTree
 import datetime, sys, copy
 from xml.etree.ElementTree import Element
+# from scrapeFamily import *
+from classes import *
 
-class Family:
-    def __init__(self, memName, memRLTN,memJobs,memSigActs):
-        if memName == "":
-            self.isNoName = True
-        else:
-            self.isNoName = False
-        self.noNameLetter = ''
-        self.memberName = memName
-        self.memberRelation = memRLTN
-        self.memberJobs = list(memJobs)
-        self.memberSigActs = list(memSigActs)
 
-    def samplePrint(self):
-        print("......................\nName: ",self.memberName,"\nRelation: ",self.memberRelation)
-        print("Jobs: ",end="")
-        print(*self.memberJobs,sep=", ")
-        print("SigAct: ",end="")
-        print(*self.memberSigActs,sep=", ")
-
-class JobSigAct:
-    def __init__(self,jobPredicate,jobName):
-        self.predicate  = jobPredicate
-        self.job = jobName
 def getch():
     sys.stdin.read(1)
 
-def getContexts(tagInput):
-    print(tagInput)
-    tagList = []
-    for tag in tagInput:
-        if "DIV" not in tag.tag:
-            DIV = Element('DIV2')
-            DIV.insert(0, tag)
-            tagList.append(DIV)
-        else:
-            tagList.append(tag)
-    print("taglist: ",tagList)
+
+
+def getContexts(tagParent):
+    print(tagParent)
+    # tagList = []
+    # for tag in tagInput:
+    #     if "DIV" not in tag.tag:
+    #         DIV = Element('DIV2')
+    #         DIV.insert(0, tag)
+    #         tagList.append(DIV)
+    #     else:
+    #         tagList.append(tag)
+    # print("taglist: ",tagList)
     returnList = []
-    for tagParent in tagList:
-        if "DIV" not in tagParent.tag:
-            print("what is this",tagParent)
-            getch()
-        # else:
-        #     print("proper what is this", tagParent)
-        #     getch()
-        tags = tagParent.findall("*")
-        markedForRemoval = []
-        foundChronstruct = False
+    # if "DIV" not in tagParent.tag:
+    #     print("what is this",tagParent)
+    #     getch()
+    # else:
+    #     print("proper what is this", tagParent)
+    #     getch()
+    tags = tagParent.findall("*")
+    markedForRemoval = []
+    foundChronstruct = False
 
-        if len(tags) == 2:
-            if tags[0].tag == "SHORTPROSE" and tags[1].tag == "CHRONSTRUCT":
-                tags[0],tags[1] = tags[1],tags[0]
+    if len(tags) == 2:
+        if tags[0].tag == "SHORTPROSE" and tags[1].tag == "CHRONSTRUCT":
+            tags[0],tags[1] = tags[1],tags[0]
 
-        tags2 = copy.deepcopy(tags)
-        for i in range(0, len(tags2)):
-            if foundChronstruct == False and tags2[i].tag != "CHRONSTRUCT":
-                markedForRemoval.append(i)
-            elif tags2[i].tag == "CHRONSTRUCT":
-                foundChronstruct = True
+    tags2 = copy.deepcopy(tags)
+    for i in range(0, len(tags2)):
+        if foundChronstruct == False and tags2[i].tag != "CHRONSTRUCT":
+            markedForRemoval.append(i)
+        elif tags2[i].tag == "CHRONSTRUCT":
+            foundChronstruct = True
 
-        print(tags)
-        print(markedForRemoval)
+    print(tags)
+    print(markedForRemoval)
 
-        if len(markedForRemoval) == len(tags):
-            print("weird thing going on")
-            lonePars = tagParent.findall(".//P")
-            for par in lonePars:
-                returnList.append(getOnlyText(par))
-        else:
-            i = 0
+    if len(markedForRemoval) == len(tags):
+        print("1. weird thing going on")
+        lonePars = tagParent.findall(".//P")
+        for par in lonePars:
+            returnList.append(getOnlyText(par))
+    else:
+        i = 0
 
-            while i < len(tags):
-                if i in markedForRemoval:
+        while i < len(tags):
+            if i in markedForRemoval:
+                i += 1
+                continue
+
+            if len(tags) > 1:
+                if i == len(tags) - 1:
                     i += 1
                     continue
 
-                if len(tags) > 1:
-                    if i == len(tags) - 1:
-                        i += 1
-                        continue
-
-                    if tags[i].tag == "CHRONSTRUCT" and tags[i + 1].tag == "SHORTPROSE" and tags[i + 1].find(
-                            ".//P") is not None:
-                        returnList.append(getOnlyText(tags[i]) + "\n" + getOnlyText(tags[i + 1].find(
-                            ".//P")))
-                        print("chronstruct with paragraph next")
-                        i += 1
+                if tags[i].tag == "CHRONSTRUCT" and tags[i + 1].tag == "SHORTPROSE" and tags[i + 1].find(
+                        ".//P") is not None:
+                    returnList.append(getOnlyText(tags[i]) + "\n" + getOnlyText(tags[i + 1].find(
+                        ".//P")))
+                    print("chronstruct with paragraph next")
+                    i += 1
 
 
-                # print("index: ",i)
-                # print("isConstruct",deathcnts[i].tag == "CHRONSTRUCT")
-                # print("shortprosenext",deathcnts[i+1].tag == "SHORTPROSE")
-                # print("paragraph in shortprose", deathcnts[i+1].find(".//P") != None)
+            # print("index: ",i)
+            # print("isConstruct",deathcnts[i].tag == "CHRONSTRUCT")
+            # print("shortprosenext",deathcnts[i+1].tag == "SHORTPROSE")
+            # print("paragraph in shortprose", deathcnts[i+1].find(".//P") != None)
 
 
-                    # getch()
-                elif len(tags) == 1 and tags[i].tag == "CHRONSTRUCT":
-                    returnList.append(getOnlyText(tags[i]))
-                else:
-                    print("weird thing going on")
-                    lonePars = tagParent.findall(".//P")
-                    for par in lonePars:
-                        returnList.append(getOnlyText(par))
-                    print("list of Paragraphs2: ", lonePars)
-                    # getch()
+                # getch()
+            elif len(tags) == 1 and tags[i].tag == "CHRONSTRUCT":
+                returnList.append(getOnlyText(tags[i]))
+            else:
+                print("2. weird thing going on")
+                lonePars = tagParent.findall(".//P")
+                for par in lonePars:
+                    returnList.append(getOnlyText(par))
+                print("list of Paragraphs2: ", lonePars)
+                # getch()
 
-                i += 1
+            i += 1
     if len(returnList) > 0:
         print(returnList)
     return returnList
+
 def getPlaceTagContent(place):
     placeSettlement = ""
     placeRegion     = ""
@@ -142,6 +124,79 @@ def getPlaceTagContent(place):
                 placeGeog = tag.text
 
     return placeSettlement,placeRegion,placeGeog
+
+def getContextDataMultiTag(tag1,tag2,sourcePerson):
+    names = getAllNames(tag1.iter("NAME"), sourcePerson) + getAllNames(tag2.iter("NAME"), sourcePerson)
+    context = getOnlyText(tag1) + "\n" + getOnlyText(tag2.find(".//P"))
+
+    return PeopleAndContext(names,context)
+
+def getContextData(tag,sourcePerson):
+    names = getAllNames(tag.iter("NAME"),sourcePerson)
+    context = getOnlyText(tag)
+
+    return PeopleAndContext(names,context)
+
+def getContextsAndNames(tagParent,sourcePerson):
+    print(tagParent)
+    returnList = []
+    tags = tagParent.findall("*")
+    markedForRemoval = []
+    foundChronstruct = False
+
+    if len(tags) == 2:
+        if tags[0].tag == "SHORTPROSE" and tags[1].tag == "CHRONSTRUCT":
+            tags[0],tags[1] = tags[1],tags[0]
+
+    tags2 = copy.deepcopy(tags)
+    for i in range(0, len(tags2)):
+        if foundChronstruct == False and tags2[i].tag != "CHRONSTRUCT":
+            markedForRemoval.append(i)
+        elif tags2[i].tag == "CHRONSTRUCT":
+            foundChronstruct = True
+
+    print("tags: ",tags)
+    print("marked for removal: ",markedForRemoval)
+
+    if len(markedForRemoval) == len(tags):
+        print("3. No Chronstsruct")
+        lonePars = tagParent.findall(".//P")
+        for par in lonePars:
+            returnList.append(getContextData(par,sourcePerson))
+    else:
+        i = 0
+
+        while i < len(tags):
+            if i in markedForRemoval:
+                i += 1
+                continue
+
+            if len(tags) > 1:
+                if i == len(tags) - 1:
+                    i += 1
+                    continue
+
+                if tags[i].tag == "CHRONSTRUCT" and tags[i + 1].tag == "SHORTPROSE" and tags[i + 1].find(
+                        ".//P") is not None:
+                    print("chronstruct with paragraph next")
+                    returnList.append(getContextDataMultiTag(tags[i],tags[i+1],sourcePerson))
+                    i += 1
+
+            elif len(tags) == 1 and tags[i].tag == "CHRONSTRUCT":
+                returnList.append(getContextData(tags[i]),sourcePerson)
+                # returnList.append(PeopleAndContext(getAllNames(tags[i].iter("NAME"), sourcePerson),getOnlyText(tags[i])))
+            else:
+                print("4. weird thing going on")
+                lonePars = tagParent.findall(".//P")
+                for par in lonePars:
+                    returnList.append(getContextData(par, sourcePerson))
+                    # returnList.append(PeopleAndContext(getAllNames(par.iter("NAME"), sourcePerson),getOnlyText(par)))
+                print("list of Paragraphs2: ", lonePars)
+
+            i += 1
+    # if len(returnList) > 0:
+    #     print(returnList)
+    return returnList
 
 def getStandardUri(std_str):
     import string
@@ -251,16 +306,14 @@ def notParentName(personName,parentList):
 
 # get all names in a tag that are not the subject's
 def getAllNames(names, sourcePerson):
-    foundName = False
     otherNames = []
     for thisName in names:
         name = thisName.attrib["STANDARD"]
         # print("looking at :", name)
         if name != sourcePerson:
-            foundName = True
             otherNames.append(name)
 
-    return foundName,otherNames
+    return otherNames
 
 # get a name of a person by getting the first
 # name that is not the source person
@@ -304,7 +357,7 @@ def getMemberJobs(thisTag,memberJobs):
     # memberJobs = []
     paidFamilyOccupation = False
     if "FAMILYBUSINESS" in thisTag.attrib:
-        print(thisTag.attrib)
+        # print(thisTag.attrib)
         if thisTag.attrib["FAMILYBUSINESS"] == "FAMILYBUSINESSYES":
             paidFamilyOccupation = True
     # if "HISTORICALTERM" in thisTag.attrib:
