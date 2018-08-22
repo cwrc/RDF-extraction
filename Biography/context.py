@@ -4,9 +4,11 @@ import re
 from biography import bind_ns, NS_DICT, make_standard_uri, remove_punctuation
 from place import Place
 from organizations import get_org_uri
+
+MAX_WORD_COUNT = 35
+
 """
 Status: ~80%
-
 TODO: 
 1) Review triples related to identifying contexts
 2) revise mechanism for getting closest heading
@@ -17,11 +19,28 @@ TODO:
 """
 
 
+def get_attribute(tag, attribute):
+    value = tag.get(attribute)
+    if value:
+        return value
+    return None
+
+
+def get_value(tag):
+    value = get_attribute(tag, "standard")
+    if not value:
+        value = get_attribute(tag, "reg")
+    if not value:
+        value = get_attribute(tag, "currentalternativeterm")
+    if not value:
+        value = str(tag.text)
+        value = ' '.join(value.split())
+    return value
+
+
 def strip_all_whitespace(string):
 # temp function for condensing the context strings for visibility in testing
     return re.sub('[\s+]', '', str(string))
-
-MAX_WORD_COUNT = 35
 
 
 def identifying_motivation(tag):
@@ -36,6 +55,9 @@ def identifying_motivation(tag):
         identified_subjects.append(make_standard_uri(x.get("standard")))
     for x in tag.find_all("orgname"):
         identified_subjects.append(get_org_uri(x))
+    for x in tag.find_all("title"):
+        title = get_value(x)
+        identified_subjects.append(make_standard_uri(title + " TITLE", ns="cwrc"))
 
     return identified_subjects
 
