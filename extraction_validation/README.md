@@ -6,8 +6,12 @@ Currently checks provided datafile against the CWRC Ontology as available on git
 1. If any cwrc term used in the datafile is not in CWRC Ontology
 2. If a used cwrc term has been deprecated and should not be used
 
+### Forseen possible usage
+In terms of RDF-Extraction it would be ideal to use this script, prior to adding a sample file to [qa](https://github.com/cwrc/testData/tree/master/qa) for review by humans
+And prior to making a dataset publically available. For a large dataset, suggested usage is merging dataset into a single file for this to parse. (As the current version grabs the ontology raw from the cwrc ontology repo, in the todo to allow inputted ontologies from a file) 
+
 ### Expected Usage
-	`python3 verify_terms.py path/file.ttl`
+`python3 verify_terms.py path/file.ttl`
 #### Sample Output
 ```
 224 Triples in provided data file
@@ -28,6 +32,7 @@ Number of invalid terms: 2
 ### Future 
 Hoping to extend this past our ontology eventually
 Very barebones at the moment
+- Loading other ontologies
 - General error handling (inability to parse file, ...)
 - Options for parsing different formats (simple)
 - Adding counts for error occurences within the dataset
