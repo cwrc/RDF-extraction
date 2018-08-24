@@ -3,15 +3,94 @@ import datetime, sys, copy
 from xml.etree.ElementTree import Element
 # from scrapeFamily import *
 from classes import *
+from bs4 import BeautifulSoup
 
 
 def getch():
     sys.stdin.read(1)
 
+# used for getting divs
+# equivalent of something like ".//FRIENDSASSOCIATES/"
+# that would get all the divs in all of the friends tags
+def allTagsAllChildren(base,tagToGet):
+    if base == None:
+        return None
+    childrenToReturn = []
+    allTags = base.find_all(tagToGet)
+    for tag in allTags:
+        childrenToReturn += tag.find_all(recursive=False)
+
+    return childrenToReturn
+def findTag(base,tagPath):
+    if base == None:
+        return None
+    instances = base.select(tagPath)
+    if len(instances) == 0:
+        return None
+    else:
+        return instances[0]
+def tagChildren(base):
+    if base == None:
+        return None
+    return base.find_all(recursive=False)
+def tagChild(base):
+    if base == None:
+        return None
+    return base.find(recursive=False)
+def iterList(base,tagToGet):
+    if base == None:
+        return None
+    returnList = []
+    if base.name == tagToGet:
+        returnList.append(base)
+    returnList += base.find_all(tagToGet)
+    return returnList
+def getPlaceTagContent(place):
+    placeSettlement = ""
+    placeRegion     = ""
+    placeGeog       = ""
+    allPlacetags = place.find_all()
+    # allPlacetags.prettify()
+    for tag in place.find_all():
+        if tag.name == "SETTLEMENT":
+            if "CURRENT" in tag.attrs:
+                placeSettlement = tag.attrs["CURRENT"]
+            elif "REG" in tag.attrs:
+                placeSettlement = tag.attrs["REG"]
+            else:
+                placeSettlement = tag.text
+
+        elif tag.name == "REGION":
+            if "CURRENT" in tag.attrs:
+                placeRegion = tag.attrs["CURRENT"]
+            elif "REG" in tag.attrs:
+                placeRegion = tag.attrs["REG"]
+            else:
+                placeRegion = tag.text
+        elif tag.name == "GEOG":
+            if "CURRENT" in tag.attrs:
+                placeGeog = tag.attrs["CURRENT"]
+            elif "REG" in tag.attrs:
+                placeGeog = tag.attrs["REG"]
+            else:
+                placeGeog = tag.text
+
+    return placeSettlement,placeRegion,placeGeog
+
+def getContextDataMultiTag(tag1,tag2,sourcePerson):
+    names = getAllNames(tag1.find_all("NAME"), sourcePerson) + getAllNames(tag2.find_all("NAME"), sourcePerson)
+    context = getOnlyText(tag1) + "\n" + getOnlyText(tag2.find("P"))
+
+    return PeopleAndContext(names,context)
+
+def getContextData(tag,sourcePerson):
+    names = getAllNames(tag.find_all("NAME"),sourcePerson)
+    context = getOnlyText(tag)
+
+    return PeopleAndContext(names,context)
 
 
 def getContexts(tagParent):
-    print(tagParent)
     # tagList = []
     # for tag in tagInput:
     #     if "DIV" not in tag.tag:
@@ -28,27 +107,24 @@ def getContexts(tagParent):
     # else:
     #     print("proper what is this", tagParent)
     #     getch()
-    tags = tagParent.findall("*")
+    tags = tagParent.find_all(recursive=False)
     markedForRemoval = []
     foundChronstruct = False
 
     if len(tags) == 2:
-        if tags[0].tag == "SHORTPROSE" and tags[1].tag == "CHRONSTRUCT":
+        if tags[0].name == "SHORTPROSE" and tags[1].name == "CHRONSTRUCT":
             tags[0],tags[1] = tags[1],tags[0]
 
-    tags2 = copy.deepcopy(tags)
+    tags2 = copy.copy(tags)
     for i in range(0, len(tags2)):
-        if foundChronstruct == False and tags2[i].tag != "CHRONSTRUCT":
+        if foundChronstruct == False and tags2[i].name != "CHRONSTRUCT":
             markedForRemoval.append(i)
-        elif tags2[i].tag == "CHRONSTRUCT":
+        elif tags2[i].name == "CHRONSTRUCT":
             foundChronstruct = True
-
-    print(tags)
-    print(markedForRemoval)
 
     if len(markedForRemoval) == len(tags):
         print("1. weird thing going on")
-        lonePars = tagParent.findall(".//P")
+        lonePars = tagParent.find_all("P")
         for par in lonePars:
             returnList.append(getOnlyText(par))
     else:
@@ -64,26 +140,29 @@ def getContexts(tagParent):
                     i += 1
                     continue
 
-                if tags[i].tag == "CHRONSTRUCT" and tags[i + 1].tag == "SHORTPROSE" and tags[i + 1].find(
-                        ".//P") is not None:
-                    returnList.append(getOnlyText(tags[i]) + "\n" + getOnlyText(tags[i + 1].find(
-                        ".//P")))
+                thisTag = tags[i]
+                nextTag = tags[i+1]
+                nextTagPar = tags[i+1].find('P')
+
+                if thisTag.name == "CHRONSTRUCT" and nextTag.name == "SHORTPROSE" and nextTagPar is not None:
+
+                    returnList.append(getOnlyText(thisTag) + "\n" + getOnlyText(nextTagPar))
                     print("chronstruct with paragraph next")
                     i += 1
 
 
             # print("index: ",i)
-            # print("isConstruct",deathcnts[i].tag == "CHRONSTRUCT")
-            # print("shortprosenext",deathcnts[i+1].tag == "SHORTPROSE")
+            # print("isConstruct",deathcnts[i].name == "CHRONSTRUCT")
+            # print("shortprosenext",deathcnts[i+1].name == "SHORTPROSE")
             # print("paragraph in shortprose", deathcnts[i+1].find(".//P") != None)
 
 
                 # getch()
-            elif len(tags) == 1 and tags[i].tag == "CHRONSTRUCT":
+            elif len(tags) == 1 and tags[i].name == "CHRONSTRUCT":
                 returnList.append(getOnlyText(tags[i]))
             else:
                 print("2. weird thing going on")
-                lonePars = tagParent.findall(".//P")
+                lonePars = tagParent.find_all("P")
                 for par in lonePars:
                     returnList.append(getOnlyText(par))
                 print("list of Paragraphs2: ", lonePars)
@@ -94,73 +173,28 @@ def getContexts(tagParent):
         print(returnList)
     return returnList
 
-def getPlaceTagContent(place):
-    placeSettlement = ""
-    placeRegion     = ""
-    placeGeog       = ""
-
-    for tag in place.iter():
-        if tag.tag == "SETTLEMENT":
-            if "CURRENT" in tag.attrib:
-                placeSettlement = tag.attrib["CURRENT"]
-            elif "REG" in tag.attrib:
-                placeSettlement = tag.attrib["REG"]
-            else:
-                placeSettlement = tag.text
-
-        elif tag.tag == "REGION":
-            if "CURRENT" in tag.attrib:
-                placeRegion = tag.attrib["CURRENT"]
-            elif "REG" in tag.attrib:
-                placeRegion = tag.attrib["REG"]
-            else:
-                placeRegion = tag.text
-        elif tag.tag == "GEOG":
-            if "CURRENT" in tag.attrib:
-                placeGeog = tag.attrib["CURRENT"]
-            elif "REG" in tag.attrib:
-                placeGeog = tag.attrib["REG"]
-            else:
-                placeGeog = tag.text
-
-    return placeSettlement,placeRegion,placeGeog
-
-def getContextDataMultiTag(tag1,tag2,sourcePerson):
-    names = getAllNames(tag1.iter("NAME"), sourcePerson) + getAllNames(tag2.iter("NAME"), sourcePerson)
-    context = getOnlyText(tag1) + "\n" + getOnlyText(tag2.find(".//P"))
-
-    return PeopleAndContext(names,context)
-
-def getContextData(tag,sourcePerson):
-    names = getAllNames(tag.iter("NAME"),sourcePerson)
-    context = getOnlyText(tag)
-
-    return PeopleAndContext(names,context)
-
 def getContextsAndNames(tagParent,sourcePerson):
-    print(tagParent)
+    # print(tagParent)
     returnList = []
-    tags = tagParent.findall("*")
+    tags = tagChildren(tagParent)
+    # tags = tagParent.findall("*")
     markedForRemoval = []
     foundChronstruct = False
 
     if len(tags) == 2:
-        if tags[0].tag == "SHORTPROSE" and tags[1].tag == "CHRONSTRUCT":
+        if tags[0].name == "SHORTPROSE" and tags[1].name == "CHRONSTRUCT":
             tags[0],tags[1] = tags[1],tags[0]
 
-    tags2 = copy.deepcopy(tags)
+    tags2 = copy.copy(tags)
     for i in range(0, len(tags2)):
-        if foundChronstruct == False and tags2[i].tag != "CHRONSTRUCT":
+        if foundChronstruct == False and tags2[i].name != "CHRONSTRUCT":
             markedForRemoval.append(i)
-        elif tags2[i].tag == "CHRONSTRUCT":
+        elif tags2[i].name == "CHRONSTRUCT":
             foundChronstruct = True
-
-    print("tags: ",tags)
-    print("marked for removal: ",markedForRemoval)
 
     if len(markedForRemoval) == len(tags):
         print("3. No Chronstsruct")
-        lonePars = tagParent.findall(".//P")
+        lonePars = tagParent.find_all("P")
         for par in lonePars:
             returnList.append(getContextData(par,sourcePerson))
     else:
@@ -176,18 +210,21 @@ def getContextsAndNames(tagParent,sourcePerson):
                     i += 1
                     continue
 
-                if tags[i].tag == "CHRONSTRUCT" and tags[i + 1].tag == "SHORTPROSE" and tags[i + 1].find(
-                        ".//P") is not None:
+                thisTag = tags[i]
+                nextTag = tags[i + 1]
+                nextTagPar = tags[i + 1].find('P')
+
+                if thisTag.name == "CHRONSTRUCT" and nextTag.name == "SHORTPROSE" and nextTagPar is not None:
                     print("chronstruct with paragraph next")
                     returnList.append(getContextDataMultiTag(tags[i],tags[i+1],sourcePerson))
                     i += 1
 
-            elif len(tags) == 1 and tags[i].tag == "CHRONSTRUCT":
-                returnList.append(getContextData(tags[i]),sourcePerson)
+            elif len(tags) == 1 and tags[i].name == "CHRONSTRUCT":
+                returnList.append(getContextData(tags[i],sourcePerson))
                 # returnList.append(PeopleAndContext(getAllNames(tags[i].iter("NAME"), sourcePerson),getOnlyText(tags[i])))
             else:
                 print("4. weird thing going on")
-                lonePars = tagParent.findall(".//P")
+                lonePars = tagParent.find_all("P")
                 for par in lonePars:
                     returnList.append(getContextData(par, sourcePerson))
                     # returnList.append(PeopleAndContext(getAllNames(par.iter("NAME"), sourcePerson),getOnlyText(par)))
@@ -232,13 +269,17 @@ def ElemPrint(elem):
 # gets the text from a tag. this includes the text of 
 # all the subtags
 def getOnlyText(tag):
-    paraText = tag.itertext()
-    paragraph = ""
+    unformattedText = tag.get_text()
+    paraText = unformattedText.split()
 
+    paragraph = ""
     for text in paraText:
-        paragraph = paragraph.strip() + " " + text.strip()
+        text = text.strip()
+        if text[0] != ",":
+            text = " " + text
+        paragraph = paragraph.strip() + text
     paragraph = paragraph.strip()
-    
+
     return paragraph
 
 # makes sure the date
@@ -308,7 +349,7 @@ def notParentName(personName,parentList):
 def getAllNames(names, sourcePerson):
     otherNames = []
     for thisName in names:
-        name = thisName.attrib["STANDARD"]
+        name = thisName["STANDARD"]
         # print("looking at :", name)
         if name != sourcePerson:
             otherNames.append(name)
@@ -321,7 +362,7 @@ def getNameOfAssociate(names,sourcePerson):
     foundName = False
     otherName = ""
     for thisName in names:
-        name = thisName.attrib["STANDARD"]
+        name = thisName["STANDARD"]
         # print("looking at :", name)
         if name != sourcePerson :
             foundName = True
@@ -337,18 +378,18 @@ def isUniqueSigAct(newAct, pastActs):
     return True
 def getMemberName(thisTag):
     # FIXME : REMOVED CODE TO MATCH ALLIYYA'S CODE
-    return thisTag.attrib["STANDARD"]
+    return thisTag["STANDARD"]
     # memberName = ""
     #
-    # if ",," in thisTag.attrib['STANDARD']:
-    #     memberName = extractNameFromTitle(thisTag.attrib['STANDARD'])
+    # if ",," in thisTag['STANDARD']:
+    #     memberName = extractNameFromTitle(thisTag['STANDARD'])
     #     # memberName = thisTag.text
-    #     # print(memberRelation,"|,, name|",thisTag.attrib['STANDARD'])
+    #     # print(memberRelation,"|,, name|",thisTag['STANDARD'])
     #     # sys.stdin.read(1)
     #     if "(" in memberName and ")" not in memberName:
     #         memberName += ")"
     # else:
-    #     memberName = thisTag.attrib['STANDARD']
+    #     memberName = thisTag['STANDARD']
     #
     # return memberName
 
@@ -356,32 +397,27 @@ def getMemberJobs(thisTag,memberJobs):
 
     # memberJobs = []
     paidFamilyOccupation = False
-    if "FAMILYBUSINESS" in thisTag.attrib:
-        # print(thisTag.attrib)
-        if thisTag.attrib["FAMILYBUSINESS"] == "FAMILYBUSINESSYES":
+    if "FAMILYBUSINESS" in thisTag.attrs:
+        # print(thisTag.attrs)
+        if thisTag["FAMILYBUSINESS"] == "FAMILYBUSINESSYES":
             paidFamilyOccupation = True
-    # if "HISTORICALTERM" in thisTag.attrib:
-    #     print(thisTag.attrib)
-    # if "HISTORICALTERMCONTEXTDATE" in thisTag.attrib:
-    #     print(thisTag.attrib)
+    # if "HISTORICALTERM" in thisTag.attrs:
+    #     print(thisTag.attrs)
+    # if "HISTORICALTERMCONTEXTDATE" in thisTag.attrs:
+    #     print(thisTag.attrs)
     typeOfOccupation = ""
     if paidFamilyOccupation:
         typeOfOccupation = "familyOccupation"
     else:
         typeOfOccupation = "paidOccupation"
 
-    if 'REG' in thisTag.attrib:
-        memberJobs.append(JobSigAct(typeOfOccupation,thisTag.attrib['REG']))
+    if 'REG' in thisTag.attrs:
+        memberJobs.append(JobSigAct(typeOfOccupation,thisTag['REG']))
 
     elif thisTag.text is '':
         memberJobs.append(JobSigAct(typeOfOccupation,thisTag.text))
     else:
-        paraText = thisTag.itertext()
-        paragraph = ""
-
-        for text in paraText:
-            paragraph = paragraph + " " + text.strip()
-        paragraph = paragraph.strip()
+        paragraph = getOnlyText(thisTag)
         memberJobs.append(JobSigAct(typeOfOccupation,paragraph))
 
     return memberJobs
@@ -395,17 +431,17 @@ def getMemberActs(thisTag,memberSigAct):
 
     philanthropyVolunteer = False
 
-    if "PHILANTHROPYVOLUNTEER" in thisTag.attrib:
+    if "PHILANTHROPYVOLUNTEER" in thisTag.attrs:
         philanthropyVolunteer = True
-        print(thisTag.attrib)
+        print(thisTag.attrs)
 
     if philanthropyVolunteer:
         typeOfOccupation = "volunteerOccupation"
     else:
         typeOfOccupation = "normalOccupation"
 
-    if "REG" in thisTag.attrib:
-        sigAct = thisTag.attrib["REG"]
+    if "REG" in thisTag.attrs:
+        sigAct = thisTag["REG"]
         if isUniqueSigAct(sigAct,memberSigAct):
             memberSigAct.append(JobSigAct(typeOfOccupation,sigAct))
         # numAdded += 1
@@ -476,20 +512,20 @@ def getMemberInfo(familyMember,listOfMembers,SOURCENAME):
     memberName = ""
     memberJobs = []
     memberSigAct = []
-    memberRelation = familyMember.attrib['RELATION']
+    memberRelation = familyMember['RELATION']
 
-    for thisTag in familyMember.iter():
+    for thisTag in familyMember.find_all():
 
         # Get name of family Member by making sure the name is not of the person about whom the biography is about
-        if thisTag.tag == "NAME" and thisTag.attrib['STANDARD'] != SOURCENAME and memberName == "":
+        if thisTag.name == "NAME" and thisTag['STANDARD'] != SOURCENAME and memberName == "":
             memberName = getMemberName(thisTag)
         
         # Get the family member's job
-        elif thisTag.tag == "JOB":
+        elif thisTag.name == "JOB":
             memberJobs = getMemberJobs(thisTag,memberJobs)
             
         # Get the family member's significant activities
-        elif thisTag.tag == "SIGNIFICANTACTIVITY":
+        elif thisTag.name == "SIGNIFICANTACTIVITY":
             memberSigAct = getMemberActs(thisTag,memberSigAct)
 
     # taking care of duplicates for parents
@@ -498,7 +534,7 @@ def getMemberInfo(familyMember,listOfMembers,SOURCENAME):
     return uniqueMemberCheck(newMember,listOfMembers)
 
 def getMemberChildInfo(familyMember,listOfMembers,SOURCENAME):
-    memberRelation = familyMember.attrib['RELATION']
+    memberRelation = familyMember['RELATION']
     memberName = ""
     memberJobs = []
     memberSigAct = []
@@ -512,17 +548,17 @@ def getMemberChildInfo(familyMember,listOfMembers,SOURCENAME):
             # print("added parent")
             # getch()
 
-    for thisTag in familyMember.iter():
+    for thisTag in familyMember.find_all():
         # Get name of family Member by making sure the name is not of the person about whom the biography is about
-        if thisTag.tag == "NAME" and thisTag.attrib['STANDARD'] != SOURCENAME and memberName == "" and notParentName(thisTag.attrib['STANDARD'],listOfParents):
+        if thisTag.name == "NAME" and thisTag['STANDARD'] != SOURCENAME and memberName == "" and notParentName(thisTag['STANDARD'],listOfParents):
             memberName = getMemberName(thisTag)
         
         # Get the family member's job
-        elif thisTag.tag == "JOB":
+        elif thisTag.name == "JOB":
             memberJobs = getMemberJobs(thisTag,memberJobs)
     
         # Get the family member's significant activities
-        elif thisTag.tag == "SIGNIFICANTACTIVITY":
+        elif thisTag.name == "SIGNIFICANTACTIVITY":
             memberSigAct = getMemberActs(thisTag,memberSigAct)
             print("added significant activity")
 
