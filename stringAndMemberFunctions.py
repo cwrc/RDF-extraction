@@ -16,7 +16,7 @@ def allTagsAllChildren(base,tagToGet):
     if base == None:
         return None
     childrenToReturn = []
-    allTags = base.find_all(tagToGet)
+    allTags = base.select(tagToGet)
     for tag in allTags:
         childrenToReturn += tag.find_all(recursive=False)
 
@@ -44,6 +44,13 @@ def iterList(base,tagToGet):
     if base.name == tagToGet:
         returnList.append(base)
     returnList += base.find_all(tagToGet)
+    return returnList
+def iterListAll(base):
+    if base == None:
+        return None
+    returnList = []
+    returnList.append(base)
+    returnList += base.find_all()
     return returnList
 def getPlaceTagContent(place):
     placeSettlement = ""
@@ -509,6 +516,9 @@ def uniqueMemberCheck(newMember, listOfMembers):
     return listOfMembers
 
 def getMemberInfo(familyMember,listOfMembers,SOURCENAME):
+    if len(familyMember.find_all()) == 0:
+        return listOfMembers
+
     memberName = ""
     memberJobs = []
     memberSigAct = []
@@ -534,6 +544,8 @@ def getMemberInfo(familyMember,listOfMembers,SOURCENAME):
     return uniqueMemberCheck(newMember,listOfMembers)
 
 def getMemberChildInfo(familyMember,listOfMembers,SOURCENAME):
+    if len(familyMember.find_all()) == 0:
+        return listOfMembers
     memberRelation = familyMember['RELATION']
     memberName = ""
     memberJobs = []

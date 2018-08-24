@@ -239,7 +239,7 @@ def graphMaker(sourceName, fileName, unfixedSourceName, familyInfo, birthInfo, d
         # g.add((source,predicate,Literal(memberName)))
         g.add((source,predicate,memberSource))
 
-
+    # print(g.serialize(format='turtle').decode())
     # Adding Birth Info to the ttl file
     spList = []
     if birthInfo.birthDate != "":
@@ -338,7 +338,6 @@ def graphMaker(sourceName, fileName, unfixedSourceName, familyInfo, birthInfo, d
             g.add((source, cwrcNamespace.hasReproductiveHistory, cwrcNamespace.childlessness))
 
 
-
     if intmtRelationships != None:
         numIntimateContext = 1
         for relationship in intmtRelationships:
@@ -380,6 +379,8 @@ def graphMaker(sourceName, fileName, unfixedSourceName, familyInfo, birthInfo, d
                                                 source, numIntimateContext, listProperties)
 
 
+    # g = newGraph()
+    # g.add((source, RDF.type, cwrcNamespace.NaturalPerson))
     numFriendContext = 1
     for friend in friendAssociateList:
         if friend != None:
@@ -422,7 +423,7 @@ def graphMaker(sourceName, fileName, unfixedSourceName, familyInfo, birthInfo, d
 
         addContextsNew(fileName, "hasSexualityContext", context,
                                             source, 1, listProperties)
-    print(g.serialize(format='turtle').decode())
+    # print(g.serialize(format='turtle').decode())
 
     # addContexts(fileName,"hasSexualityContext", sexualityContexts, source, 1)
     # print(g.serialize(format='turtle').decode())

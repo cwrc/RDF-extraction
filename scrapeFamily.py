@@ -206,7 +206,7 @@ def getFamilyInfo(xmlString):
     # SOURCENAME = myRoot2.newFindFunc("DIV0 STANDARD").text
     SOURCENAME = findTag(myRoot2,"DIV0 STANDARD").text
     listOfMembers = []
-    
+    fams = myRoot2.find_all('FAMILY')
     for familyTag in myRoot2.find_all('FAMILY'):
         
         #--------------------------------- Get husband and wife ---------------------------------
@@ -227,7 +227,8 @@ def getFamilyInfo(xmlString):
         
         #--------------------------------- get others ---------------------------------
         for familyMember in familyTag.find_all('MEMBER'):
-            if familyMember['RELATION'] in ["HUSBAND","WIFE","SON","DAUGHTER","STEPSON","STEPDAUGHTER"] or len(familyMember.find_all()) == 1:
+            finds = familyMember.find_all()
+            if familyMember['RELATION'] in ["HUSBAND","WIFE","SON","DAUGHTER","STEPSON","STEPDAUGHTER"] or len(iterListAll(familyMember)) == 1:
                 continue
             else:
                 listOfMembers = getMemberInfo(familyMember,listOfMembers,SOURCENAME)
@@ -267,7 +268,7 @@ def main():
     numTriples = 0
     numNamelessPeople = 0
     occupations = getOccupationDict()
-    f = open("namesAndTriples.txt","w")
+    f = open("namesAndTriplesNew.txt","w")
     cntr = -1
     for dirName, subdirlist, files in os.walk(bioFolder):
         for name in files:
@@ -280,11 +281,9 @@ def main():
             #     continue
             # if "larkph-b.xml" not in name:
             #     continue
-            # if "guesch-b.xml" not in name:
+            # if "fielmi-b.xml" not in name:
             #     continue
             # if "woolvi-b.xml" not in name:
-            #     continue
-            # if "pounez-b.xml" not in name:
             #     continue
 
             if printInfo == True:

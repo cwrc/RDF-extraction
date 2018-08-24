@@ -28,12 +28,12 @@ def getBirth(xmlString):
     birthTagParent = treeRoot.BIOGRAPHY.DIV0.BIRTH
     print("---------")
     try:
-        birthTags = birthTagParent.find_all("CHRONSTRUCT")
+        birthTags = iterList(birthTagParent,("CHRONSTRUCT"))
         # birthTags = list(birthTagParent.iter("CHRONSTRUCT"))
         
         if len(birthTags) == 0:
             # print(birthTagParent)
-            birthTags = birthTagParent.find_all("SHORTPROSE")
+            birthTags = iterList(birthTagParent,("SHORTPROSE"))
         if len(birthTags) == 0:
             print("no construct in birth found")
             sys.stdin.read(1)
@@ -106,7 +106,7 @@ def getBirth(xmlString):
     except AttributeError:
         print("no birth place information for this individual")
         # sys.stdin(1)
-    getContextsFrom = birthTagParent.find_all("DIV2")
+    getContextsFrom = tagChildren(birthTagParent)
     birthContexts = []
     for div in getContextsFrom:
         birthContexts += getContexts(div)
@@ -161,7 +161,12 @@ def getDeath(xmlString):
                 # sys.stdin.read(1)
                 return
 
-        allDivs = treeRoot.BIOGRAPHY.select("DIV0 DIV1 DEATH")[0].find_all(recursive=False)
+        # allDeathDivs = treeRoot.BIOGRAPHY.select("DIV0 DIV1 DEATH")
+        # allDivs = []
+        # for deathTag in allDeathDivs:
+        #     allDivs += tagChildren(deathTag)
+            # div.find_all(recursive=False)
+        allDivs = allTagsAllChildren(treeRoot.BIOGRAPHY,"DIV0 DIV1 DEATH")
         for div in allDivs:
             deathContexts += getContexts(div)
         # if type(deathContexts) is list:
