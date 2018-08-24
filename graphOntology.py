@@ -258,7 +258,6 @@ def graphMaker(sourceName, fileName, unfixedSourceName, familyInfo, birthInfo, d
         g.add((source,cwrcNamespace.hasBirthPosition,positionObj))
         spList.append(addDict("cwrc.hasBirthPosition",longFormtoShort(Literal(positionObj)),False))
 
-
     if birthInfo.birthSettlement != "" or birthInfo.birthRegion != "" or birthInfo.birthGeog != "":
         birthPlaceStr = Literal(birthInfo.birthSettlement+", "+birthInfo.birthRegion+", "+birthInfo.birthGeog)
         g.add((source,cwrcNamespace.hasBirthPlace,birthPlaceStr))
@@ -426,11 +425,13 @@ def graphMaker(sourceName, fileName, unfixedSourceName, familyInfo, birthInfo, d
 
     # addContexts(fileName,"hasSexualityContext", sexualityContexts, source, 1)
     # print(g.serialize(format='turtle').decode())
-    officialPath = os.path.expanduser("~/Documents/UoGuelph Projects/CombiningTriples/birthDeathFamily_triples/"+ fileName+ '.txt')
+    # officialPath = os.path.expanduser("~/Documents/UoGuelph Projects/CombiningTriples/birthDeathFamily_triples/"+ fileName+ '.txt')
+    fileTestPath = os.path.expanduser("~/Documents/extraction2/testingFileOld.txt")
     # testingPath = os.path.expanduser('./oldContext/'+ fileName+ '.txt')
     # testingPath = os.path.expanduser('./newContext/'+ fileName+ '.txt')
 
     # g.serialize(destination=officialPath, format='turtle')
+    g.serialize(destination=fileTestPath, format='turtle')
     if cntr == 1369:
         megaGraph.serialize(destination=os.path.expanduser("~/Documents/UoGuelph Projects/"+ "motherGraph2"+ '.txt'), format='turtle')
     else:

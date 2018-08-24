@@ -98,7 +98,7 @@ def getPlaceTagContent(place):
     placeSettlement = ""
     placeRegion     = ""
     placeGeog       = ""
-
+    allPlaceTags = list(place.iter())
     for tag in place.iter():
         if tag.tag == "SETTLEMENT":
             if "CURRENT" in tag.attrib:
@@ -183,7 +183,7 @@ def getContextsAndNames(tagParent,sourcePerson):
                     i += 1
 
             elif len(tags) == 1 and tags[i].tag == "CHRONSTRUCT":
-                returnList.append(getContextData(tags[i]),sourcePerson)
+                returnList.append(getContextData(tags[i],sourcePerson))
                 # returnList.append(PeopleAndContext(getAllNames(tags[i].iter("NAME"), sourcePerson),getOnlyText(tags[i])))
             else:
                 print("4. weird thing going on")

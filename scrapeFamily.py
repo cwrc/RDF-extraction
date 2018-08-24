@@ -142,8 +142,8 @@ def getSexualityContexts(xmlString):
         listToReturn += sexualityContext
     print(listToReturn)
 #    ================================================
-    root = BeautifulSoup(xmlString,'lxml')
-    print(root)
+#     root = BeautifulSoup(xmlString,'lxml')
+#     print(root)
     return listToReturn
 def intimateRelationshipsCheck(xmlString):
     root = xml.etree.ElementTree.fromstring(xmlString)
@@ -168,7 +168,7 @@ def intimateRelationshipsCheck(xmlString):
             intmtContextsAndNames = getContextsAndNames(person,sourcePerson)
             print(intmtContextsAndNames)
             for thisContext in intmtContextsAndNames:
-                if len(thisContext.names) > 1:
+                if len(thisContext.names) >= 1:
                     intimateRelationships.append(IntimateRelationships(thisContext.names[0],attr,thisContext.contexts))
                 else:
                     intimateRelationships.append(IntimateRelationships("intimate relationship",attr,thisContext.contexts))
@@ -206,11 +206,12 @@ def getFamilyInfo(xmlString, sourceFile):
     myRoot2 = xml.etree.ElementTree.fromstring(xmlString)
     SOURCENAME = myRoot2.find("./DIV0/STANDARD").text
     listOfMembers = []
-    
+    fams = myRoot2.findall('.//FAMILY')
     for familyTag in myRoot2.findall('.//FAMILY'):
         
         #--------------------------------- Get husband and wife ---------------------------------
         for familyMember in familyTag.findall("MEMBER"):
+            print(familyMember.attrib["RELATION"])
             if familyMember.attrib['RELATION'] in ["HUSBAND","WIFE"]:
                 if len(list(familyMember.iter())) == 1:
                     continue
@@ -219,6 +220,7 @@ def getFamilyInfo(xmlString, sourceFile):
 
         #--------------------------------- get children ---------------------------------
         for familyMember in familyTag.findall("MEMBER"):
+            print(familyMember.attrib["RELATION"])
             if familyMember.attrib['RELATION'] in ["SON","DAUGHTER","STEPSON","STEPDAUGHTER"]:
                 if len(list(familyMember.iter())) == 1:
                     continue
@@ -227,6 +229,7 @@ def getFamilyInfo(xmlString, sourceFile):
         
         #--------------------------------- get others ---------------------------------
         for familyMember in familyTag.findall('MEMBER'):
+            print(familyMember.attrib["RELATION"])
             if familyMember.attrib['RELATION'] in ["HUSBAND","WIFE","SON","DAUGHTER","STEPSON","STEPDAUGHTER"] or len(list(familyMember.iter())) == 1:
                 continue
             else:
@@ -267,7 +270,7 @@ def main():
     numTriples = 0
     numNamelessPeople = 0
     occupations = getOccupationDict()
-    f = open("namesAndTriples6.txt","w")
+    f = open("namesAndTriples.txt","w")
     cntr = -1
     for dirName, subdirlist, files in os.walk(bioFolder):
         for name in files:
@@ -280,10 +283,10 @@ def main():
             #     continue
             # if "larkph-b.xml" not in name:
             #     continue
-            # if "guesch-b.xml" not in name:
-            #     continue
-            if "woolvi-b.xml" not in name:
+            if "fielmi-b.xml" not in name:
                 continue
+            # if "pounez-b.xml" not in name:
+            #     continue
 
             if printInfo == True:
                 print('\n===========%s=================' % name)
@@ -292,22 +295,23 @@ def main():
                 xmlString = openFile.read()
                 numBiographiesRead += 1
 
+                birthInfo                   = getBirth(xmlString)
+                deathInfo                   = getDeath(xmlString)
                 cohabitantList              = cohabitantsCheck(xmlString, "LIVESWITH")
+                sourceName,familyMembers    = getFamilyInfo(xmlString,os.path.expanduser("\""+bioFolder+name+"\""))
                 friendAssociateList         = friendsAssociateCheck(xmlString, "FRIENDSASSOCIATES")
                 intimateRelationshipsList   = intimateRelationshipsCheck(xmlString)
                 childlessList               = childlessnessCheck(xmlString)
                 childInfo                   = childrenCheck(xmlString,os.path.expanduser("\""+bioFolder+name+"\""))
-                sourceName,familyMembers    = getFamilyInfo(xmlString,os.path.expanduser("\""+bioFolder+name+"\""))
-                birthInfo                   = getBirth(xmlString)
-                deathInfo                   = getDeath(xmlString)
                 sexualityContext            = getSexualityContexts(xmlString)
                 numGraphTriples,numNameless = graphMaker(rearrangeSourceName(sourceName),name[0:-6],sourceName,familyMembers,birthInfo,
                                                          deathInfo,childInfo,childlessList,intimateRelationshipsList,friendAssociateList,
                                                          occupations,cohabitantList,sexualityContext,cntr)
-                if deathInfo != None and deathInfo.deathContexts != None:
-                    f.write("%s:%d\n"%(name,len(deathInfo.deathContexts)))
-                else:
-                    f.write("%s:%d\n" % (name, 0))
+                # if deathInfo != None and deathInfo.deathContexts != None:
+                #     f.write("%s:%d\n"%(name,len(deathInfo.deathContexts)))
+                # else:
+                #     f.write("%s:%d\n" % (name, 0))
+                f.write("%s:%d\n" % (name, numGraphTriples))
                 numTriples += numGraphTriples
                 numNamelessPeople += numNameless
     f.close()

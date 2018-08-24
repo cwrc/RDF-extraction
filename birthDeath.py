@@ -137,7 +137,7 @@ def getDeath(xmlString):
     deathContexts = []
 
     deathTagParent = treeRoot.find("./DIV0/DIV1/DEATH/")
-    
+    print(deathTagParent.tag)
     
     # DEATH DATE
     firstChronstructTag = ""
@@ -185,6 +185,7 @@ def getDeath(xmlString):
         #         print(paragraph)
         #         deathContexts.append(paragraph)
                 # print(paragraph)
+        ElemPrint(deathTagParent)
         getChronstructTags = list(deathTagParent.iter("CHRONSTRUCT"))
         
         if len(getChronstructTags) == 0:
@@ -298,6 +299,7 @@ def getDeath(xmlString):
 
     # place of burial
     # ElemPrint(deathTagParent)
+    print(deathTagParent.tag)
     burialTags = deathTagParent.findall("*")
     print(len(burialTags))
 
