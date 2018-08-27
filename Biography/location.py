@@ -40,7 +40,6 @@ class Location(object):
     def __init__(self, predicate, place, other_attributes=None):
         super(Location, self).__init__()
         self.predicate = predicate
-        # temp_place = Place(place)
         self.value = Place(place).uri
 
         if other_attributes:
@@ -88,29 +87,6 @@ def get_value(tag):
         value = str(tag.text)
         value = ' '.join(value.split())
     return value
-
-
-# bare min event scrape
-def find_event(type, tag, person):
-    event_tag = tag.find_all("CHRONSTRUCT")
-    for x in event_tag:
-        # print(type)
-        # print(event_tag)
-        event_body = ""
-
-        for y in x.find_all("CHRONPROSE"):
-            event_body += str(y)
-
-        date = None
-        for y in x.find_all("DATE"):
-            date = y.text
-        person.add_event(event_body, type, date)
-
-    pass
-
-
-def find_cultural_forms(cf, person):
-    cf_list = []
 
 
 def extract_location_data(bio, person):
