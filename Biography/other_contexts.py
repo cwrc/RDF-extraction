@@ -1,11 +1,11 @@
 import rdflib
 import biography
 from context import Context
+from event import Event
 from log import *
 """
 Status: ~85%
 Events still need to be handled
-Possibly add OtherLifeEvent to list
 """
 # Will remove logging after triples are verified
 log = Log("log/other_contexts/errors")
@@ -16,6 +16,40 @@ turtle_log = Log("log/other_contexts/triples")
 turtle_log.test_name("Other Context extracted Triples")
 
 
+def extract_health_contexts_data(bio, person):
+    issue_map = {
+        "PHYSICAL": "PhysicalHealthContext",
+        "MENTAL": "MentalHealthContext",
+        "FEMALEBODY": "WomensHealthContext",
+    }
+    contexts = bio.find_all("HEALTH")
+    count = 1
+    for context in contexts:
+        context_type = context.get("ISSUE")
+        if context_type:
+            context_type = issue_map[context_type]
+        else:
+            context_type = "HealthContext"
+        paragraphs = context.find_all("P")
+        for paragraph in paragraphs:
+            context_id = person.id + "_" + context_type + str(count)
+
+            temp_context = Context(context_id, paragraph, context_type, "identifying")
+            person.add_context(temp_context)
+            count += 1
+
+        events = context.find_all("CHRONSTRUCT")
+        for event in events:
+            context_id = person.id + "_" + context_type + str(count)
+
+            temp_context = Context(context_id, event, context_type, "identifying")
+            person.add_context(temp_context)
+            count += 1
+            # event_title = person.id +" "+ context_type.split("Context")[0] + " Event"
+            # temp_event = Event(event_title, event)
+            # print(temp_event)
+
+
 def extract_other_contexts_data(bio, person):
     """
         loops through tags within other_context list and creates
@@ -23,42 +57,39 @@ def extract_other_contexts_data(bio, person):
         extracted from these contexts due to there being no unique subtagging
         TODO: after reviewing contexts/events remove uber_graph
     """
-    other_contexts = ["violence", "wealth", "leisureandsociety"]
+    other_contexts = ["VIOLENCE", "WEALTH", "LEISUREANDSOCIETY", "OTHERLIFEEVENT"]
     # other_contexts = ["chronstruct"]
     # TODO: handle chronproses --> events, still unsure quite of the relationship between a context and event
 
-    uber_graph = rdflib.Graph()
-    namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
-    biography.bind_ns(namespace_manager, biography.NS_DICT)
-
     for context in other_contexts:
         contexts = bio.find_all(context)
-        count = 0
+        count = 1
         for x in contexts:
-            id = person.id + "_" + context + "Context"
-            if count > 0:
-                id += str(count)
+            paragraphs = x.find_all("P")
+            for paragraph in paragraphs:
+                context_id = person.id + "_" + Context.context_map[context] + str(count)
 
-            temp_context = Context(id, x, context, "identifying")
+                temp_context = Context(context_id, paragraph, context, "identifying")
+                person.add_context(temp_context)
+                count += 1
 
-            uber_graph += temp_context.to_triple(person)
-            person.add_context(temp_context)
+            events = x.find_all("CHRONSTRUCT")
+            for event in events:
+                context_id = person.id + "_" + Context.context_map[context] + str(count)
 
-            count += 1
+                temp_context = Context(context_id, event, context, "identifying")
+                person.add_context(temp_context)
+                count += 1
 
-    turtle_log.subtitle("Other contexts for " + person.name)
-    turtle_log.subtitle(str(len(uber_graph)) + " triples created")
-    turtle_log.msg(uber_graph.serialize(format="ttl").decode(), stdout=False)
-
-    return uber_graph
+    extract_health_contexts_data(bio, person)
 
 
 def main():
     def get_name(bio):
-        return (bio.biography.div0.standard.text)
+        return (bio.BIOGRAPHY.DIV0.STANDARD.text)
 
     def get_sex(bio):
-        return (bio.biography.get("sex"))
+        return (bio.BIOGRAPHY.get("SEX"))
 
     import os
     from bs4 import BeautifulSoup
@@ -75,7 +106,7 @@ def main():
     # for filename in filelist[-5:]:
     for filename in filelist:
         with open("bio_data/" + filename) as f:
-            soup = BeautifulSoup(f, 'lxml')
+            soup = BeautifulSoup(f, 'lxml-xml')
 
         print(filename)
         test_person = biography.Biography(
