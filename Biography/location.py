@@ -90,37 +90,34 @@ def get_value(tag):
 
 
 def extract_location_data(bio, person):
+    """
+    Notes: Lived and Moved have instructions that depend on the presence of locations in
+    other tags, may have to seek clarification
+    TODO: 
+    1) investigate "LIVED" with multiple places and common words preceding and following places
+    2) same for moved
+    3) Migrated as well
+
+    """
     locations = bio.find_all("LOCATION")
+    location_dict = {
+        "VISITED": "visits",
+        "UNKNOWN": "relatesSpatiallyTo",
+        "TRAVELLED": "travelsTo",
+        "LIVED": "inhabits",
+        "MIGRATED": "migratesTo",
+        "MOVED": "relocatesTo",
+    }
 
     id = 1
     for location in locations:
-        # Create context id
         location_list = []
         location_type = location.get("RELATIONTO")
-
-        location_dict = {
-            "VISITED": "visits",
-            "UNKNOWN": "relatesSpatiallyTo",
-            "TRAVELLED": "travelsTo",
-            "LIVED": "inhabits",
-            "MIGRATED": "migratesTo",
-            "MOVED": "relocatesTo",
-        }
         places = location.find_all("PLACE")
-
-        """
-        Notes: Lived and Moved have instructions that depend on the presence of locations in
-        other tags, may have to seek clarification
-        TODO: 
-        1) investigate "LIVED" with multiple places and common words preceding and following places
-        2) same for moved
-        3) Migrated as well
-
-        """
+        context_id = person.id + "_SpatialContext_" + location_dict[location_type] + "_" + str(id)
 
         if len(places) == 0:
-            temp_context = Context(person.id + "_SpatialContext_" +
-                                   location_dict[location_type] + "_" + str(id), location, "location", "identifying")
+            temp_context = Context(context_id, location, "location", "identifying")
             person.add_context(temp_context)
             continue
 
@@ -142,8 +139,7 @@ def extract_location_data(bio, person):
         elif location_type == "MIGRATED":
             continue
 
-        temp_context = Context(person.id + "_SpatialContext_" +
-                               location_dict[location_type] + "_" + str(id), location, "location")
+        temp_context = Context(context_id, location, "location")
         temp_context.link_triples(location_list)
         person.add_location(location_list)
         person.add_context(temp_context)

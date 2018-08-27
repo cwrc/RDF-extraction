@@ -78,6 +78,11 @@ class Biography(object):
         self.location_list = []
 
         self.occupations = []
+        # self.birth
+        # self.death
+        self.family_member_list = []
+        self.friend_list = []
+        self.intimate_relationship_list = []
 
     def add_context(self, context):
         if context is list:
@@ -132,7 +137,9 @@ class Biography(object):
         g += self.create_triples(self.cf_list)
         g += self.create_triples(self.context_list)
         g += self.create_triples(self.location_list)
-        g += self.create_triples(self.education_context_list)
+        # Something like this
+        # g +=self.birth.to_triples
+        # g += self.create_triples(self.education_context_list)
 
         # g += self.create_triples(self.event_list)
 

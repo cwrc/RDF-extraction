@@ -344,25 +344,6 @@ def find_cultural_forms(cf, person):
     return cf_list
 
 
-# bare min event scrape
-def find_event(type, tag, person):
-    event_tag = tag.find_all("CHRONSTRUCT")
-    for x in event_tag:
-        # print(type)
-        # print(event_tag)
-        event_body = ""
-
-        for y in x.find_all("CHRONPROSE"):
-            event_body += str(y)
-
-        date = None
-        for y in x.find_all("DATE"):
-            date = y.text
-        person.add_event(event_body, type, date)
-
-    pass
-
-
 def extract_culturalforms(tag_list, context_type, person):
     global cf_subelements_count
     forms_found = 0
@@ -387,12 +368,6 @@ def extract_culturalforms(tag_list, context_type, person):
 
 cf_subelements_count = {"CLASSISSUE": 0, "RACEANDETHNICITY": 0, "CULTURALFORMATION": 0,
                         "POLITICS": 0, "NATIONALITYISSUE": 0, "SEXUALITY": 0, "RELIGION": 0}
-
-# 153899
-# 153899
-# 151385
-# 150170
-# 164514
 
 
 def extract_cf_data(bio, person):
@@ -472,12 +447,12 @@ def update_fails(rdf_type, value):
         fail_dict[rdf_type] = {value: 1}
 
 
-# Currently getting exact match ignoring case and "-"
-# TODO:
-# log unmatched term,
-# return literal or uri
-# Make csv of unmapped
 def get_mapped_term(rdf_type, value, retry=False):
+    """
+        Currently getting exact match ignoring case and "-"
+        TODO:
+        Make csv of unmapped
+    """
     global map_attempt
     global map_success
     global map_fail
@@ -511,14 +486,6 @@ def get_mapped_term(rdf_type, value, retry=False):
             else:
                 update_fails(rdf_type, value + "->" + str(possibilites) + "?")
     return term
-
-
-def get_name(bio):
-    return (bio.BIOGRAPHY.DIV0.STANDARD.text)
-
-
-def get_sex(bio):
-    return (bio.BIOGRAPHY.get("SEX"))
 
 
 def log_mapping_fails(main_log, error_log, detail=True):
@@ -556,6 +523,12 @@ def log_mapping_fails(main_log, error_log, detail=True):
 
 
 def main():
+    def get_name(bio):
+        return (bio.BIOGRAPHY.DIV0.STANDARD.text)
+
+    def get_sex(bio):
+        return (bio.BIOGRAPHY.get("SEX"))
+
     import os
     from bs4 import BeautifulSoup
     create_cf_map()
