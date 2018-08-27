@@ -1,19 +1,36 @@
 import rdflib
 from rdflib import RDF, RDFS, Literal
-# from context import Context
-# from culturalForm import CulturalForm
-# from event import Event
 
 NS_DICT = {
     "as": rdflib.Namespace("http://www.w3.org/ns/activitystreams#"),
+    "bibo": rdflib.Namespace("http://purl.org/ontology/bibo/"),
+    "bio": rdflib.Namespace("http://purl.org/vocab/bio/0.1/"),
+    "cc": rdflib.Namespace("http://creativecommons.org/ns#"),
     "cwrc": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/cwrc#"),
     "data": rdflib.Namespace("http://cwrc.ca/cwrcdata/"),
-    "dctypes": rdflib.Namespace("http://purl.org/dc/dcmitype/"),
-    "foaf": rdflib.Namespace('http://xmlns.com/foaf/0.1/'),
-    "oa": rdflib.Namespace("http://www.w3.org/ns/oa#"),
+    "dbpedia": rdflib.Namespace("http://dbpedia.org/resource/"),
     "dcterms": rdflib.Namespace("http://purl.org/dc/terms/"),
+    "dctypes": rdflib.Namespace("http://purl.org/dc/dcmitype/"),
+    "eurovoc": rdflib.Namespace("http://eurovoc.europa.eu/"),
+    "foaf": rdflib.Namespace("http://xmlns.com/foaf/0.1/"),
+    "geonames": rdflib.Namespace("http://sws.geonames.org/"),
+    "gvp": rdflib.Namespace("http://vocab.getty.edu/ontology#"),
+    "loc": rdflib.Namespace("http://id.loc.gov/vocabulary/relators/"),
+    "oa": rdflib.Namespace("http://www.w3.org/ns/oa#"),
     "org": rdflib.Namespace("http://www.w3.org/ns/org#"),
-    "skos": rdflib.Namespace("http://www.w3.org/2004/02/skos/core#")
+    "owl": rdflib.Namespace("http://www.w3.org/2002/07/owl#"),
+    "prov": rdflib.Namespace("http://www.w3.org/ns/prov#"),
+    "rdf": rdflib.Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#"),
+    "rdfs": rdflib.Namespace("http://www.w3.org/2000/01/rdf-schema#"),
+    "sem": rdflib.Namespace("http://semanticweb.cs.vu.nl/2009/11/sem/"),
+    "schema": rdflib.Namespace("http://schema.org/"),
+    "skos": rdflib.Namespace("http://www.w3.org/2004/02/skos/core#"),
+    "skosxl": rdflib.Namespace("http://www.w3.org/2008/05/skos-xl#"),
+    "time": rdflib.Namespace("http://www.w3.org/2006/time#"),
+    "vann": rdflib.Namespace("http://purl.org/vocab/vann/"),
+    "voaf": rdflib.Namespace("http://purl.org/vocommons/voaf#"),
+    "void": rdflib.Namespace("http://rdfs.org/ns/void#"),
+    "vs": rdflib.Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#")
 }
 
 
@@ -46,20 +63,21 @@ class Biography(object):
     def __init__(self, id, name, gender):
         super(Biography, self).__init__()
         self.id = id
+        self.url = "http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id=" + id
+        self.url = rdflib.term.URIRef(self.url)
         self.name = name
-        self.uri = make_standard_uri(name)
         self.gender = gender
-        self.context_list = []
-        self.cf_list = []
+        self.uri = make_standard_uri(name)
 
         # Hold off on events for now
         self.event_list = []
-
         self.education_context_list = []
-        self.occupations = []
+
+        self.context_list = []
+        self.cf_list = []
         self.location_list = []
-        self.other_contexts = []
-        self.other_triples = []
+
+        self.occupations = []
 
     def add_context(self, context):
         if context is list:
@@ -110,6 +128,7 @@ class Biography(object):
         g.add((self.uri, NS_DICT["foaf"].name, Literal(self.name, datatype=rdflib.namespace.XSD.string)))
         g.add((self.uri, RDFS.label, Literal(self.name, datatype=rdflib.namespace.XSD.string)))
         g.add((self.uri, NS_DICT["cwrc"].hasGender, self.gender))
+        g.add((self.uri, NS_DICT["foaf"].isPrimaryTopicOf, self.url))
         g += self.create_triples(self.cf_list)
         g += self.create_triples(self.context_list)
         g += self.create_triples(self.location_list)
@@ -124,7 +143,7 @@ class Biography(object):
 
     def __str__(self):
         string = "id: " + str(self.id) + "\n"
-        string += "name: " + self.name + "\n"
+        string += "name: " + str(self.name) + "\n"
         string += "gender: " + str(self.gender) + "\n"
         if self.context_list:
             string += "Contexts: \n"
