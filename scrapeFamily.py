@@ -268,7 +268,7 @@ def main():
     numTriples = 0
     numNamelessPeople = 0
     occupations = getOccupationDict()
-    f = open("namesAndTriplesNew.txt","w")
+    # f = open("namesAndTriplesNew.txt","w")
     cntr = -1
     for dirName, subdirlist, files in os.walk(bioFolder):
         for name in files:
@@ -314,11 +314,11 @@ def main():
                 # else:
                 #     f.write("%s:%d\n" % (name, 0))
 
-                f.write("%s:%d\n" % (name,numGraphTriples))
+                # f.write("%s:%d\n" % (name,numGraphTriples))
 
                 numTriples += numGraphTriples
                 numNamelessPeople += numNameless
-    f.close()
+    # f.close()
     print(numSigs, " number of significant activities found")
     print(numAdded, " number of significant activities added")
     print("number of triples: ", numTriples)

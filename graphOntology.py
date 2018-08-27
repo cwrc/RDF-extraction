@@ -78,13 +78,13 @@ def addContextsNew(fileName,contextName,context,source,numContexts,propertyDict)
     # if len(contexts) > 1:
     #     print("too many contexts")
     # for context in contexts:
-    snippetURI = URIRef(str(cwrcNamespace) + str(fileName) + contextName +"_snippet"+ str(numContexts))
+    snippetURI = URIRef(str(data) + str(fileName) + contextName +"_snippet"+ str(numContexts))
     # g.add((snippetURI, oa.hasTarget, source))
     g.add((snippetURI, dctypes.description, Literal(context)))
     g.add((snippetURI, RDF.type, oa.TextualBody))
     g.add((snippetURI, rdfs.label, Literal(subjectName + " " + descLabel + " snippet")))
     # ########################################################################################################
-    indentURI = URIRef(str(cwrcNamespace) + str(fileName) + contextName +"identifying"+ str(numContexts))
+    indentURI = URIRef(str(data) + str(fileName) + contextName +"identifying"+ str(numContexts))
     for objs in subsObjs:
         if objs["prsn"] == True:
             g.add((indentURI,oa.hasBody,createPerson(objs["o"])))
@@ -95,7 +95,7 @@ def addContextsNew(fileName,contextName,context,source,numContexts,propertyDict)
     g.add((indentURI,oa.hasTarget,snippetURI))
     g.add((indentURI,oa.motivatedBy,oa.describing))
     # ########################################################################################################
-    descURI = URIRef(str(cwrcNamespace) + str(fileName) + contextName +"_describing"+ str(numContexts))
+    descURI = URIRef(str(data) + str(fileName) + contextName +"_describing"+ str(numContexts))
     g.add((descURI, RDF.type, descType))
     g.add((descURI, rdfs.label, Literal(subjectName + " "+descLabel + " describing annotation")))
 
@@ -106,7 +106,7 @@ def addContextsNew(fileName,contextName,context,source,numContexts,propertyDict)
             g.add((descURI, dcterms.subject, Literal(objs["o"])))
 
     g.add((descURI, dcterms.subject, source))
-    g.add((descURI, cwrcNamespace.hasIdDependencyOn, indentURI))
+    g.add((descURI, cwrcNamespace.hasIDependencyOn, indentURI))
 
     for body in subsObjs:
         bodyURI = BNode()
@@ -372,7 +372,7 @@ def graphMaker(sourceName, fileName, unfixedSourceName, familyInfo, birthInfo, d
             listProperties = {}
             listProperties["subjectName"] = sourceName
             listProperties["unchangedName"] = unfixedSourceName
-            listProperties["descType"] = cwrcNamespace.IntimateRelationshipContext
+            listProperties["descType"] = cwrcNamespace.IntimateRelationshipsContext
             listProperties["subjectsObjects"] = spList
 
             numIntimateContext = addContextsNew(fileName, "hasIntimateRelationshipsContext", relationship.Context,
@@ -395,7 +395,7 @@ def graphMaker(sourceName, fileName, unfixedSourceName, familyInfo, birthInfo, d
             spList = []
             for name in friend.names:
                 dictEntry = {}
-                dictEntry["p"]  = "cwrcNamespace.hasInterpersonalRelationshipWith"
+                dictEntry["p"]  = "cwrc.hasInterpersonalRelationshipWith"
                 dictEntry["o"]     = name
                 dictEntry["prsn"]   = True
                 spList.append(dictEntry)
@@ -414,25 +414,25 @@ def graphMaker(sourceName, fileName, unfixedSourceName, familyInfo, birthInfo, d
 
     # g = newGraph()
     # g.add((source, RDF.type, cwrcNamespace.NaturalPerson))
-    for context in sexualityContexts:
-        listProperties = {}
-        listProperties["subjectName"] = sourceName
-        listProperties["unchangedName"] = unfixedSourceName
-        listProperties["descType"] = cwrcNamespace.hasSexualityContext
-        listProperties["subjectsObjects"] = []
-
-        addContextsNew(fileName, "hasSexualityContext", context,
-                                            source, 1, listProperties)
-    # print(g.serialize(format='turtle').decode())
+    # for context in sexualityContexts:
+    #     listProperties = {}
+    #     listProperties["subjectName"] = sourceName
+    #     listProperties["unchangedName"] = unfixedSourceName
+    #     listProperties["descType"] = cwrcNamespace.hasSexualityContext
+    #     listProperties["subjectsObjects"] = []
+    #
+    #     addContextsNew(fileName, "hasSexualityContext", context,
+    #                                         source, 1, listProperties)
+    print(g.serialize(format='turtle').decode())
 
     # addContexts(fileName,"hasSexualityContext", sexualityContexts, source, 1)
     # print(g.serialize(format='turtle').decode())
-    # officialPath = os.path.expanduser("~/Documents/UoGuelph Projects/CombiningTriples/birthDeathFamily_triples/"+ fileName+ '.txt')
-    fileTestPath = os.path.expanduser("~/Documents/extraction2/testingFileNew.txt")
+    officialPath = os.path.expanduser("~/Documents/UoGuelph Projects/CombiningTriples/birthDeathFamily_triples/"+ fileName+ '.txt')
+    # fileTestPath = os.path.expanduser("~/Documents/extraction2/testingFileNew.txt")
     # testingPath = os.path.expanduser('./oldContext/'+ fileName+ '.txt')
     # testingPath = os.path.expanduser('./newContext/'+ fileName+ '.txt')
 
-    # g.serialize(destination=officialPath, format='turtle')
+    g.serialize(destination=officialPath, format='turtle')
     # g.serialize(destination=fileTestPath, format='turtle')
 
     if cntr == 1369:

@@ -21,6 +21,8 @@ def allTagsAllChildren(base,tagToGet):
         childrenToReturn += tag.find_all(recursive=False)
 
     return childrenToReturn
+
+# find tag that lets you specify a certain path
 def findTag(base,tagPath):
     if base == None:
         return None
@@ -29,22 +31,32 @@ def findTag(base,tagPath):
         return None
     else:
         return instances[0]
+
+# get all the children tags
 def tagChildren(base):
     if base == None:
         return None
     return base.find_all(recursive=False)
+
+# get first child
 def tagChild(base):
     if base == None:
         return None
     return base.find(recursive=False)
+
+# iterate a certain tag in a list
+# equivalent to elementtree's
+# something.iter("something else")
 def iterList(base,tagToGet):
     if base == None:
         return None
     returnList = []
     if base.name == tagToGet:
-        returnList.append(base)
+        returnList.append(base) # in elementtree, if the base is same as tag to get in the .iter() function. the base is also returned
     returnList += base.find_all(tagToGet)
     return returnList
+
+# iterate all children and sub children, including the base tag itself
 def iterListAll(base):
     if base == None:
         return None
@@ -52,6 +64,8 @@ def iterListAll(base):
     returnList.append(base)
     returnList += base.find_all()
     return returnList
+
+
 def getPlaceTagContent(place):
     placeSettlement = ""
     placeRegion     = ""
