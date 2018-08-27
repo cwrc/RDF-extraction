@@ -40,11 +40,8 @@ class Location(object):
     def __init__(self, predicate, place, other_attributes=None):
         super(Location, self).__init__()
         self.predicate = predicate
-        temp_place = Place(place)
-        if temp_place.uri:
-            self.value = rdflib.term.URIRef(temp_place.uri)
-        else:
-            self.value = Literal(temp_place.address)
+        # temp_place = Place(place)
+        self.value = Place(place).uri
 
         if other_attributes:
             self.uri = other_attributes
@@ -73,7 +70,7 @@ class Location(object):
 
 
 def get_reg(tag):
-    return get_attribute(tag, "reg")
+    return get_attribute(tag, "REG")
 
 
 def get_attribute(tag, attribute):
@@ -95,17 +92,17 @@ def get_value(tag):
 
 # bare min event scrape
 def find_event(type, tag, person):
-    event_tag = tag.find_all("chronstruct")
+    event_tag = tag.find_all("CHRONSTRUCT")
     for x in event_tag:
         # print(type)
         # print(event_tag)
         event_body = ""
 
-        for y in x.find_all("chronprose"):
+        for y in x.find_all("CHRONPROSE"):
             event_body += str(y)
 
         date = None
-        for y in x.find_all("date"):
+        for y in x.find_all("DATE"):
             date = y.text
         person.add_event(event_body, type, date)
 
@@ -117,20 +114,23 @@ def find_cultural_forms(cf, person):
 
 
 def extract_location_data(bio, person):
-    locations = bio.find_all("location")
+    locations = bio.find_all("LOCATION")
 
     id = 1
     for location in locations:
         # Create context id
         location_list = []
-        location_type = location.get("relationto")
+        location_type = location.get("RELATIONTO")
 
         location_dict = {
             "VISITED": "visits",
             "UNKNOWN": "relatesSpatiallyTo",
             "TRAVELLED": "travelsTo",
+            "LIVED": "inhabits",
+            "MIGRATED": "migratesTo",
+            "MOVED": "relocatesTo",
         }
-        places = location.find_all("place")
+        places = location.find_all("PLACE")
 
         """
         Notes: Lived and Moved have instructions that depend on the presence of locations in
@@ -143,7 +143,7 @@ def extract_location_data(bio, person):
         """
 
         if len(places) == 0:
-            temp_context = Context(person.id + "_spatial_context_" +
+            temp_context = Context(person.id + "_SpatialContext_" +
                                    location_dict[location_type] + "_" + str(id), location, "location", "identifying")
             person.add_context(temp_context)
             continue
@@ -166,20 +166,12 @@ def extract_location_data(bio, person):
         elif location_type == "MIGRATED":
             continue
 
-        temp_context = Context(person.id + "_spatial_context_" +
+        temp_context = Context(person.id + "_SpatialContext_" +
                                location_dict[location_type] + "_" + str(id), location, "location")
         temp_context.link_triples(location_list)
         person.add_location(location_list)
         person.add_context(temp_context)
         id += 1
-
-
-def get_name(bio):
-    return (bio.biography.div0.standard.text)
-
-
-def get_sex(bio):
-    return (bio.biography.get("sex"))
 
 
 def main():
@@ -188,10 +180,10 @@ def main():
     import culturalForm
 
     def get_name(bio):
-        return (bio.biography.div0.standard.text)
+        return (bio.BIOGRAPHY.DIV0.STANDARD.text)
 
     def get_sex(bio):
-        return (bio.biography.get("sex"))
+        return (bio.BIOGRAPHY.get("SEX"))
 
     filelist = [filename for filename in sorted(os.listdir("bio_data")) if filename.endswith(".xml")]
     entry_num = 1
@@ -204,7 +196,7 @@ def main():
     # for filename in filelist[-5:]:
     for filename in filelist:
         with open("bio_data/" + filename) as f:
-            soup = BeautifulSoup(f, 'lxml')
+            soup = BeautifulSoup(f, 'lxml-xml')
 
         print(filename)
         test_person = biography.Biography(

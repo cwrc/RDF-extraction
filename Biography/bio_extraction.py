@@ -35,11 +35,11 @@ bind_ns(namespace_manager, NS_DICT)
 
 
 def get_name(bio):
-    return (bio.biography.div0.standard.text)
+    return (bio.BIOGRAPHY.DIV0.STANDARD.text)
 
 
 def get_sex(bio):
-    return (bio.biography.get("sex"))
+    return (bio.BIOGRAPHY.get("SEX"))
 
 
 def main():
@@ -49,20 +49,28 @@ def main():
     entry_num = 1
     global uber_graph
 
+    highest_triples = 0
+    least_triples = 0
+    smallest_person = None
+    largest_person = None
+
+    # 328686 triples created
     # for filename in filelist[:200]:
     # for filename in filelist[:2]:
-    # for filename in ["levyam-b.xml","atwoma-b.xml"]:
-    for filename in filelist:
+    # for filename in filelist:
+    for filename in ["levyam-b.xml","atwoma-b.xml","woolvi-b.xml"]:
         with open("bio_data/" + filename) as f:
-            soup = BeautifulSoup(f, 'lxml')
+            soup = BeautifulSoup(f, 'lxml-xml')
 
         print(filename)
         person = Biography(filename[:-6], get_name(soup), cf.get_mapped_term("Gender", get_sex(soup)))
 
-        cf.extract_cf_data(soup, person)
         # education.extract_education_data(soup, person)
-        location.extract_location_data(soup, person)
-        other_contexts.extract_other_contexts_data(soup, person)
+
+        # cf.extract_cf_data(soup, person)
+        other_contexts.extract_health_contexts_data(soup, person)
+        # location.extract_location_data(soup, person)
+        # other_contexts.extract_other_contexts_data(soup, person)
 
         graph = person.to_graph()
 
@@ -73,6 +81,13 @@ def main():
         extract_log.msg(person.to_file(graph))
         extract_log.subtitle("Entry #" + str(entry_num))
         extract_log.msg("\n\n")
+
+        if len(graph) > highest_triples:
+            highest_triples = len(graph)
+            largest_person = filename
+        if least_triples == 0 or len(graph) < least_triples:
+            least_triples = len(graph)
+            smallest_person = filename
 
         # triples to files
         file = open("culturalform_triples/" + str(person.id) + "-cf.txt", "w")
@@ -87,9 +102,17 @@ def main():
     turtle_log.msg(uber_graph.serialize(format="ttl").decode(), stdout=False)
     turtle_log.msg("")
 
+    file = open("all_triples.ttl", "w")
+    file.write("#" + str(len(uber_graph)) + " triples created\n")
+    file.write(uber_graph.serialize(format="ttl").decode())
+
     extract_log.test_name("Cultural Form mapping results")
     cf.log_mapping_fails(extract_log, log, detail=False)
     extract_log.msg("See CF Error Log for more indepth logging about failures:")
+
+    print(largest_person, "produces the most triples(" + str(highest_triples) + ")")
+    print(smallest_person, "produces the least triples(" + str(least_triples) + ")")
+
     exit()
 
 

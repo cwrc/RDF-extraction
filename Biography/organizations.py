@@ -62,20 +62,20 @@ def get_name(bio):
 
 
 def get_org_uri(tag):
-    if tag.get("standard") in org_list:
-        name = tag.get("standard")
-    elif tag.get("reg") in org_list:
-        name = tag.get("reg")
+    if tag.get("STANDARD") in org_list:
+        name = tag.get("STANDARD")
+    elif tag.get("REG") in org_list:
+        name = tag.get("REG")
     else:
-        name = tag.get("standard")
+        name = tag.get("STANDARD")
 
     return make_standard_uri(name + " ORG", ns="cwrc")
 
 
 def get_org(tag):
-    orgs = tag.find_all("orgname")
+    orgs = tag.find_all("ORGNAME")
     if not orgs:
-        if tag.parent.name == "orgname":
+        if tag.parent.name == "ORGNAME":
             return [tag.parent]
 
     return orgs
@@ -84,7 +84,7 @@ def get_org(tag):
 def extract_org_data(bio):
     import culturalForm as cf
     global uber_graph
-    elements = ["politicalaffiliation", "denomination", "school"]
+    elements = ["POLITICALAFFILIATION", "DENOMINATION", "SCHOOL"]
     for element in elements:
         tag = bio.find_all(element)
         for instance in tag:
@@ -119,12 +119,12 @@ def create_org_csv():
     import csv
     w = csv.writer(open("orgNames.csv", "w"))
     with open("scrapes/authority/org_auth.xml") as f:
-        soup = BeautifulSoup(f, 'lxml')
-    items = soup.find_all("authorityitem")
+        soup = BeautifulSoup(f, 'lxml-xml')
+    items = soup.find_all("AUTHORITYITEM")
     for x in items:
-        std = x.get("standard")
-        disp = x.get("display")
-        forms = [form.text for form in x.find_all("form")]
+        std = x.get("STANDARD")
+        disp = x.get("DISPLAY")
+        forms = [form.text for form in x.find_all("FORM")]
         uri = get_org_uri(std)
         csv_item = [uri, std]
         if disp:

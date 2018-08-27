@@ -87,7 +87,7 @@ class CulturalForm(object):
 
 
 def get_reg(tag):
-    return get_attribute(tag, "reg")
+    return get_attribute(tag, "REG")
 
 
 def get_attribute(tag, attribute):
@@ -108,7 +108,7 @@ def get_value(tag):
 
 
 def get_reported(tag):
-    reported = tag.get("self-defined")
+    reported = tag.get("SELF-DEFINED")
     if reported:
         if reported == "SELFYES":
             return "SelfReported"
@@ -125,9 +125,9 @@ def find_cultural_forms(cf, person):
     cf_list = []
 
     def get_class():
-        classes = cf.find_all("class")
+        classes = cf.find_all("CLASS")
         for x in classes:
-            value = x.get("socialrank")
+            value = x.get("SOCIALRANK")
 
             if not value or value == "OTHER":
                 value = get_value(x)
@@ -135,12 +135,12 @@ def find_cultural_forms(cf, person):
             cf_list.append(CulturalForm("hasSocialClass", get_reported(x), get_mapped_term("SocialClass", value)))
 
     def get_language():
-        langs = cf.find_all("language")
+        langs = cf.find_all("LANGUAGE")
         for x in langs:
             value = get_value(x)
 
             # What if nested ethnicity tag?
-            competence = x.get("competence")
+            competence = x.get("COMPETENCE")
             predicate = ""
             if competence == "MOTHER":
                 predicate = "hasNativeLinguisticAbility"
@@ -154,8 +154,8 @@ def find_cultural_forms(cf, person):
             cf_list.append(CulturalForm(predicate, None, get_mapped_term("Language", value)))
 
     def get_other_cfs():
-        tags = {"nationality": ["hasNationality", "NationalIdentity"],
-                "sexualidentity": ["hasSexuality", "Sexuality"]}
+        tags = {"NATIONALITY": ["hasNationality", "NationalIdentity"],
+                "SEXUALIDENTITY": ["hasSexuality", "Sexuality"]}
         for tag in tags.keys():
             instances = cf.find_all(tag)
             for x in instances:
@@ -173,16 +173,16 @@ def find_cultural_forms(cf, person):
                 cf_list.append(CulturalForm(tags[tag][0], get_reported(x), get_mapped_term(tags[tag][1], value)))
 
     def get_geoheritage(tag):
-        places = tag.find_all("place")
+        places = tag.find_all("PLACE")
         if places:
             place_values = []
             for x in places:
                 temp_place = Place(x)
-                if not temp_place.uri:
+                if type(temp_place.uri) is Literal:
                     value = get_mapped_term("GeographicHeritage", temp_place.address)
                     place_values.append(value)
                 else:
-                    place_values.append(rdflib.term.URIRef(temp_place.uri))
+                    place_values.append(temp_place.uri)
             return place_values
         else:
             return get_mapped_term("GeographicHeritage", get_value(tag))
@@ -226,10 +226,10 @@ def find_cultural_forms(cf, person):
             # Create
             pass
 
-        tags = {"racecolour": "RaceColour",
-                "nationalheritage": "NationalHeritage",
-                "geogheritage": "GeographicHeritage",
-                "ethnicity": "Ethnicity"}
+        tags = {"RACECOLOUR": "RaceColour",
+                "NATIONALHERITAGE": "NationalHeritage",
+                "GEOGHERITAGE": "GeographicHeritage",
+                "ETHNICITY": "Ethnicity"}
 
         for tag in tags.keys():
             instances = cf.find_all(tag)
@@ -237,7 +237,7 @@ def find_cultural_forms(cf, person):
                 culturalforms = []
 
                 forebear = get_forebear(x)
-                if tag == "geogheritage":
+                if tag == "GEOGHERITAGE":
                     value = get_geoheritage(x)
                     if type(value) is list:
                         for place in value:
@@ -247,7 +247,7 @@ def find_cultural_forms(cf, person):
 
                 else:
                     value = get_value(x)
-                    if tag == "nationalheritage" and value in ["American-Austrian", "Anglo-Scottish", "Scottish-Irish"]:
+                    if tag == "NATIONALHERITAGE" and value in ["American-Austrian", "Anglo-Scottish", "Scottish-Irish"]:
                         culturalforms.append(CulturalForm(
                             "has" + tags[tag], get_reported(x), get_mapped_term(tags[tag], value.split("-")[0])))
                         culturalforms.append(CulturalForm(
@@ -275,7 +275,7 @@ def find_cultural_forms(cf, person):
         pass
 
     def get_denomination():
-        religions = cf.find_all("denomination")
+        religions = cf.find_all("DENOMINATION")
 
         for x in religions:
             value = get_reg(x)
@@ -302,7 +302,7 @@ def find_cultural_forms(cf, person):
             cf_list.append(religion)
 
     def get_PA():
-        pas = cf.find_all("politicalaffiliation")
+        pas = cf.find_all("POLITICALAFFILIATION")
         for x in pas:
             value = get_reg(x)
             orgName = get_org(x)
@@ -320,21 +320,21 @@ def find_cultural_forms(cf, person):
                 value = get_mapped_term("PoliticalAffiliation", get_value(x))
 
             gender_issue = False
-            if x.get("woman-genderissue") == "GENDERYES":
+            if x.get("WOMAN-GENDERISSUE") == "GENDERYES":
                 cf_list.append(CulturalForm("hasGenderedPoliticalActivity", get_reported(x), value))
                 gender_issue = True
 
-            if x.get("activism") == "ACTIVISTYES":
+            if x.get("ACTIVISM") == "ACTIVISTYES":
                 cf_list.append(CulturalForm("hasActivistInvolvementIn", None, value))
-            elif x.get("membership") == "MEMBERSHIPYES":
+            elif x.get("MEMBERSHIP") == "MEMBERSHIPYES":
                 cf_list.append(CulturalForm("hasPoliticalMembershipIn", None, value))
-            elif x.get("involvement") == "INVOLVEMENTYES":
+            elif x.get("INVOLVEMENT") == "INVOLVEMENTYES":
                 cf_list.append(CulturalForm("hasPoliticalInvolvementIn", None, value))
             else:
                 if not gender_issue:
                     cf_list.append(CulturalForm("hasPoliticalAffiliation", get_reported(x), value))
 
-    if cf.name != "politics":
+    if cf.name != "POLITICS":
         get_forebear_cfs()
         get_class()
         get_language()
@@ -346,82 +346,87 @@ def find_cultural_forms(cf, person):
 
 # bare min event scrape
 def find_event(type, tag, person):
-    event_tag = tag.find_all("chronstruct")
+    event_tag = tag.find_all("CHRONSTRUCT")
     for x in event_tag:
         # print(type)
         # print(event_tag)
         event_body = ""
 
-        for y in x.find_all("chronprose"):
+        for y in x.find_all("CHRONPROSE"):
             event_body += str(y)
 
         date = None
-        for y in x.find_all("date"):
+        for y in x.find_all("DATE"):
             date = y.text
         person.add_event(event_body, type, date)
 
     pass
 
 
-# Also handles politics tag as well
-def extract_cf_data(bio, person):
-    cfs = bio.find_all("culturalformation")
-    cf_subelements = ["classissue", "raceandethnicity", "nationalityissue", "sexuality", "religion"]
-    cf_subelements_count = {"classissue": 0, "raceandethnicity": 0,
-                            "nationalityissue": 0, "sexuality": 0, "religion": 0}
-
-    id = 1
-# TODO clean up naming in this function
-    for cf in cfs:
-        forms_found = 0
-        for context_type in cf_subelements:
-            # find_event(x, cf, person)
-
-            contexts = cf.find_all(context_type)
-            for context in contexts:
-                temp_context = None
-                cf_list = None
-                cf_subelements_count[context_type] += 1
-                temp_context = Context(person.id + "_" + context_type + "_context" +
-                                       str(cf_subelements_count[context_type]), context, context_type)
-                forms_found += 1
-
-                cf_list = find_cultural_forms(context, person)
-                if cf_list:
-                    temp_context.link_triples(cf_list)
-                    person.add_cultural_form(cf_list)
-                person.add_context(temp_context)
-
-        for x in cf.children:
-            if x.name == "div2":
-                temp_context = None
-                cf_list = None
-
-                temp_context = Context(person.id + "_culturalformation" + "_context" + str(id), cf)
-                cf_list = find_cultural_forms(x, person)
-                temp_context.link_triples(cf_list)
-
-                person.add_context(temp_context)
-                person.add_cultural_form(cf_list)
-                id += 1
-
-    elements = bio.find_all("politics")
+def extract_culturalforms(tag_list, context_type, person):
+    global cf_subelements_count
     forms_found = 0
-    for element in elements:
+    for tag in tag_list:
         temp_context = None
         cf_list = None
-        forms_found += 1
-        temp_context = Context(person.id + "_politics_context" + str(forms_found), element, "politics")
+        cf_subelements_count[context_type] += 1
+        context_id = person.id + "_" + \
+            Context.context_map[context_type] + str(cf_subelements_count[context_type])
 
-        cf_list = find_cultural_forms(element, person)
+        cf_list = find_cultural_forms(tag, person)
         if cf_list:
+            temp_context = Context(context_id, tag, context_type)
             temp_context.link_triples(cf_list)
             person.add_cultural_form(cf_list)
         else:
-            temp_context = Context(person.id + "_politics_context" + str(forms_found),
-                                   element, "politics", "identifying")
+            temp_context = Context(context_id, tag, context_type, "identifying")
 
+        forms_found += 1
         person.add_context(temp_context)
+    return forms_found
+
+cf_subelements_count = {"CLASSISSUE": 0, "RACEANDETHNICITY": 0, "CULTURALFORMATION": 0,
+                        "POLITICS": 0, "NATIONALITYISSUE": 0, "SEXUALITY": 0, "RELIGION": 0}
+
+# 153899
+# 153899
+# 151385
+# 150170
+# 164514
+
+
+def extract_cf_data(bio, person):
+    global cf_subelements_count
+    cf_subelements_count = {"CLASSISSUE": 0, "RACEANDETHNICITY": 0, "POLITICS": 0,
+                            "NATIONALITYISSUE": 0, "SEXUALITY": 0, "RELIGION": 0, "CULTURALFORMATION": 0}
+    cfs = bio.find_all("CULTURALFORMATION")
+    cf_subelements = ["CLASSISSUE", "RACEANDETHNICITY", "NATIONALITYISSUE", "SEXUALITY", "RELIGION"]
+    id = 1
+    for cf in cfs:
+        forms_found = 0
+        for context_type in cf_subelements:
+            contexts = cf.find_all(context_type)
+            for context in contexts:
+                # Find triples in paragraphs
+                paragraphs = context.find_all("P")
+                events = context.find_all("CHRONSTRUCT")
+                forms_found += extract_culturalforms(paragraphs, context_type, person)
+                forms_found += extract_culturalforms(events, context_type, person)
+
+        for x in cf.children:
+            if x.name == "DIV2":
+                paragraphs = x.find_all("P")
+                events = x.find_all("CHRONSTRUCT")
+                id += extract_culturalforms(paragraphs, "CULTURALFORMATION", person)
+                id += extract_culturalforms(events, "CULTURALFORMATION", person)
+
+    elements = bio.find_all("POLITICS")
+    forms_found = 0
+    for element in elements:
+        paragraphs = element.find_all("P")
+        events = element.find_all("CHRONSTRUCT")
+        forms_found += extract_culturalforms(paragraphs, "POLITICS", person)
+        forms_found += extract_culturalforms(events, "POLITICS", person)
 
 
 def clean_term(string):
@@ -509,11 +514,11 @@ def get_mapped_term(rdf_type, value, retry=False):
 
 
 def get_name(bio):
-    return (bio.biography.div0.standard.text)
+    return (bio.BIOGRAPHY.DIV0.STANDARD.text)
 
 
 def get_sex(bio):
-    return (bio.biography.get("sex"))
+    return (bio.BIOGRAPHY.get("SEX"))
 
 
 def log_mapping_fails(main_log, error_log, detail=True):
@@ -563,7 +568,7 @@ def main():
     global uber_graph
     for filename in filelist:
         with open("bio_data/" + filename) as f:
-            soup = BeautifulSoup(f, 'lxml')
+            soup = BeautifulSoup(f, 'lxml-xml')
 
         print(filename)
         test_person = biography.Biography(filename[:-6], get_name(soup), get_mapped_term("Gender", get_sex(soup)))

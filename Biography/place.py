@@ -34,11 +34,11 @@ def get_attribute(tag, attribute):
 
 
 def get_value(tag):
-    value = get_attribute(tag, "current")
+    value = get_attribute(tag, "CURRENT")
     if not value:
-        value = get_attribute(tag, "reg")
+        value = get_attribute(tag, "REG")
     if not value:
-        value = get_attribute(tag, "currentalternativeterm")
+        value = get_attribute(tag, "CURRENTALTERNATIVETERM")
     if not value:
         value = str(tag.text)
         value = ' '.join(value.split())
@@ -58,13 +58,13 @@ class Place(object):
     def get_address(self, place_tag):
         # place_
         add_str = ''
-        temp = place_tag.find("settlement")
+        temp = place_tag.find("SETTLEMENT")
         if temp:
             add_str += get_value(temp)
-        temp = place_tag.find("region")
+        temp = place_tag.find("REGION")
         if temp:
             add_str += "," + get_value(temp)
-        temp = place_tag.find("geog")
+        temp = place_tag.find("GEOG")
         if temp:
             add_str += "," + get_value(temp)
         if add_str and add_str[0] == ",":
@@ -76,9 +76,9 @@ class Place(object):
         self.address = self.get_address(place_tag)
 
         if self.address in PLACE_MAP:
-            self.uri = PLACE_MAP[self.address]
+            self.uri = rdflib.term.URIRef(PLACE_MAP[self.address])
         else:
-            self.uri = None
+            self.uri = rdflib.term.Literal(self.address)
 
     # Hopefully won't have to create triples about a place just provide a uri but
     def to_triple(self, person_uri):

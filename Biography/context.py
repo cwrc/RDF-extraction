@@ -27,11 +27,11 @@ def get_attribute(tag, attribute):
 
 
 def get_value(tag):
-    value = get_attribute(tag, "standard")
+    value = get_attribute(tag, "STANDARD")
     if not value:
-        value = get_attribute(tag, "reg")
+        value = get_attribute(tag, "REG")
     if not value:
-        value = get_attribute(tag, "currentalternativeterm")
+        value = get_attribute(tag, "CURRENTALTERNATIVETERM")
     if not value:
         value = str(tag.text)
         value = ' '.join(value.split())
@@ -45,17 +45,14 @@ def strip_all_whitespace(string):
 
 def identifying_motivation(tag):
     identified_subjects = []
-    for x in tag.find_all("place"):
-        temp_place = Place(x)
-        if temp_place.uri:
-            identified_subjects.append(rdflib.term.URIRef(temp_place.uri))
-        else:
-            identified_subjects.append(Literal(temp_place.address))
-    for x in tag.find_all("name"):
-        identified_subjects.append(make_standard_uri(x.get("standard")))
-    for x in tag.find_all("orgname"):
+    for x in tag.find_all("PLACE"):
+        identified_subjects.append(Place(x).uri)
+
+    for x in tag.find_all("NAME"):
+        identified_subjects.append(make_standard_uri(x.get("STANDARD")))
+    for x in tag.find_all("ORGNAME"):
         identified_subjects.append(get_org_uri(x))
-    for x in tag.find_all("title"):
+    for x in tag.find_all("TITLE"):
         title = get_value(x)
         identified_subjects.append(make_standard_uri(title + " TITLE", ns="cwrc"))
 
@@ -66,11 +63,11 @@ def get_heading(tag):
     # TODO: improve heading finding
     # Figure out distance between tag and the two available headings to see which is closest
     # Placeholder for now
-    heading = tag.find("heading")
+    heading = tag.find("HEADING")
     if not heading:
-        heading = tag.findPrevious("heading")
+        heading = tag.findPrevious("HEADING")
     if not heading:
-        heading = tag.findNext("heading")
+        heading = tag.findNext("HEADING")
     if not heading:
         return "Biography"
     return remove_punctuation(strip_all_whitespace(heading.text), True)
@@ -80,12 +77,13 @@ class Context(object):
     """docstring for Context"""
     context_types = ["GenderContext", "PoliticalContext", "SocialClassContext",
                      "SexualityContext", "RaceEthnicityContext", "ReligionContext", "NationalityContext"]
-    context_map = {"classissue": "SocialClassContext", "raceandethnicity": "RaceEthnicityContext",
-                   "nationalityissue": "NationalityContext", "sexuality": "SexualityContext",
-                   "politics": "PoliticalContext", "religion": "ReligionContext",
-                   "culturalformation": "CulturalFormContext", "leisureandsociety": "LeisureContext",
-                   "occupation": "OccupationContext", "location": "SpatialContext",
-                   "violence": "ViolenceContext", "wealth": "WealthContext"}
+    context_map = {"CLASSISSUE": "SocialClassContext", "RACEANDETHNICITY": "RaceEthnicityContext",
+                   "NATIONALITYISSUE": "NationalityContext", "SEXUALITY": "SexualityContext",
+                   "POLITICS": "PoliticalContext", "RELIGION": "ReligionContext",
+                   "CULTURALFORMATION": "CulturalFormContext", "LEISUREANDSOCIETY": "LeisureContext",
+                   "OCCUPATION": "OccupationContext", "LOCATION": "SpatialContext",
+                   "VIOLENCE": "ViolenceContext", "WEALTH": "WealthContext",
+                   "OTHERLIFEEVENT": "BiographyContext"}
 
     def __init__(self, id, tag, context_type="culturalformation", motivation="describing"):
         super(Context, self).__init__()
@@ -163,6 +161,7 @@ class Context(object):
             self.subjects += self.get_subjects(self.triples)
         for x in self.subjects:
             g.add((identifying_uri, NS_DICT["oa"].hasBody, x))
+        g.add((identifying_uri, NS_DICT["oa"].hasBody, person.uri))
 
         # Creating describing context if applicable
         if self.motivation == NS_DICT["oa"].describing:
