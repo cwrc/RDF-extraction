@@ -1,6 +1,14 @@
 import rdflib
 from rdflib import RDF, RDFS, Literal
 
+"""
+TODO: handle 
+WRITER
+BRWWRITER
+IBRWRITER
+
+"""
+
 NS_DICT = {
     "as": rdflib.Namespace("http://www.w3.org/ns/activitystreams#"),
     "bibo": rdflib.Namespace("http://purl.org/ontology/bibo/"),
@@ -115,8 +123,10 @@ class Biography(object):
         else:
             self.education_context_list.append(education_context)
 
-    def add_event(self, title, event_type, date, other_attributes=None):
-        self.event_list.append(Event(title, event_type, date, other_attributes))
+    def add_event(self, event):
+        # self.event_list += event
+        self.event_list.append(event)
+        # self.event_list.append(Event(title, event_type, date, other_attributes))
 
     def create_triples(self, e_list):
         g = rdflib.Graph()
@@ -137,8 +147,9 @@ class Biography(object):
         g += self.create_triples(self.cf_list)
         g += self.create_triples(self.context_list)
         g += self.create_triples(self.location_list)
+        g += self.create_triples(self.event_list)
         # Something like this
-        # g +=self.birth.to_triples
+        # g += self.birth.to_triples()
         # g += self.create_triples(self.education_context_list)
 
         # g += self.create_triples(self.event_list)

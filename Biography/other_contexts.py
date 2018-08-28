@@ -39,15 +39,21 @@ def extract_health_contexts_data(bio, person):
             count += 1
 
         events = context.find_all("CHRONSTRUCT")
+        event_count = 1
         for event in events:
             context_id = person.id + "_" + context_type + str(count)
-
             temp_context = Context(context_id, event, context_type, "identifying")
+
+            event_title = person.name + " - " + context_type.split("Context")[0] + " Event"
+            event_uri = person.id + "_" + context_type.split("Context")[0] + "_Event" + str(event_count)
+            temp_event = Event(event_title, event_uri, event)
+
+            temp_context.link_event(temp_event)
+            person.add_event(temp_event)
             person.add_context(temp_context)
+
             count += 1
-            # event_title = person.id +" "+ context_type.split("Context")[0] + " Event"
-            # temp_event = Event(event_title, event)
-            # print(temp_event)
+            event_count += 1
 
 
 def extract_other_contexts_data(bio, person):
@@ -74,12 +80,22 @@ def extract_other_contexts_data(bio, person):
                 count += 1
 
             events = x.find_all("CHRONSTRUCT")
+            event_count = 1
             for event in events:
                 context_id = person.id + "_" + Context.context_map[context] + str(count)
-
                 temp_context = Context(context_id, event, context, "identifying")
+
+                event_title = person.name + " - " + Context.context_map[context].split("Context")[0] + " Event"
+                event_uri = person.id + "_" + \
+                    Context.context_map[context].split("Context")[0] + "_Event" + str(event_count)
+                temp_event = Event(event_title, event_uri, event)
+
+                temp_context.link_event(temp_event)
+                person.add_event(temp_event)
                 person.add_context(temp_context)
+
                 count += 1
+                event_count += 1
 
     extract_health_contexts_data(bio, person)
 
@@ -104,6 +120,8 @@ def main():
 
     # for filename in filelist[:200]:
     # for filename in filelist[-5:]:
+
+    # for filename in ["levyam-b.xml", "atwoma-b.xml", "woolvi-b.xml", "clifan-b.xml", "bellfr-b.xml"]:
     for filename in filelist:
         with open("bio_data/" + filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')

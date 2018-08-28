@@ -15,7 +15,7 @@ from organizations import get_org, get_org_uri
 from place import Place
 
 """
-Status: ~85%
+Status: ~90%
 Most of cultural forms have been mapped
     TODO: Review missing religions & PAs
 
@@ -23,8 +23,6 @@ Forebear still needs to be handled/attempted with a query
 --> load up gurjap's produced graph and query it  for forebear info to test
 temp solution until endpoint is active
 
-Events need to be created--> bigger issue
-Waiting on event modelling and time
 """
 
 # temp log library for debugging --> to be eventually replaced with proper logging library
@@ -344,9 +342,10 @@ def find_cultural_forms(cf, person):
     return cf_list
 
 
-def extract_culturalforms(tag_list, context_type, person):
+def extract_culturalforms(tag_list, context_type, person, list_type="paragraphs"):
     global cf_subelements_count
     forms_found = 0
+    event_count = 1
     for tag in tag_list:
         temp_context = None
         cf_list = None
@@ -363,8 +362,20 @@ def extract_culturalforms(tag_list, context_type, person):
             temp_context = Context(context_id, tag, context_type, "identifying")
 
         forms_found += 1
+
+        if list_type == "events":
+            event_title = person.name + " - " + Context.context_map[context_type].split("Context")[0] + " Event"
+            event_uri = person.id + "_" + \
+                Context.context_map[context_type].split("Context")[0] + "_Event" + str(event_count)
+            temp_event = Event(event_title, event_uri, tag)
+
+            temp_context.link_event(temp_event)
+            person.add_event(temp_event)
+            event_count += 1
+
         person.add_context(temp_context)
     return forms_found
+
 
 cf_subelements_count = {"CLASSISSUE": 0, "RACEANDETHNICITY": 0, "CULTURALFORMATION": 0,
                         "POLITICS": 0, "NATIONALITYISSUE": 0, "SEXUALITY": 0, "RELIGION": 0}
@@ -386,14 +397,14 @@ def extract_cf_data(bio, person):
                 paragraphs = context.find_all("P")
                 events = context.find_all("CHRONSTRUCT")
                 forms_found += extract_culturalforms(paragraphs, context_type, person)
-                forms_found += extract_culturalforms(events, context_type, person)
+                forms_found += extract_culturalforms(events, context_type, person, "events")
 
         for x in cf.children:
             if x.name == "DIV2":
                 paragraphs = x.find_all("P")
                 events = x.find_all("CHRONSTRUCT")
                 id += extract_culturalforms(paragraphs, "CULTURALFORMATION", person)
-                id += extract_culturalforms(events, "CULTURALFORMATION", person)
+                id += extract_culturalforms(events, "CULTURALFORMATION", person, "events")
 
     elements = bio.find_all("POLITICS")
     forms_found = 0
@@ -401,7 +412,7 @@ def extract_cf_data(bio, person):
         paragraphs = element.find_all("P")
         events = element.find_all("CHRONSTRUCT")
         forms_found += extract_culturalforms(paragraphs, "POLITICS", person)
-        forms_found += extract_culturalforms(events, "POLITICS", person)
+        forms_found += extract_culturalforms(events, "POLITICS", person, "events")
 
 
 def clean_term(string):

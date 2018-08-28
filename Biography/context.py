@@ -89,6 +89,7 @@ class Context(object):
         super(Context, self).__init__()
         self.id = id
         self.triples = []
+        self.event = None
 
         self.tag = tag
         self.src = "http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id="
@@ -123,6 +124,9 @@ class Context(object):
         """
         self.triples += comp_list
 
+    def link_event(self, event):
+        self.event = event.uri
+
     def get_subjects(self, comp_list):
         """
         Dependent on the other other classes functioning similarly to cf
@@ -146,7 +150,7 @@ class Context(object):
         g.add((snippet_uri, RDF.type, NS_DICT["oa"].TextualBody))
         g.add((snippet_uri, RDFS.label, rdflib.term.Literal(snippet_label)))
         g.add((snippet_uri, NS_DICT["oa"].hasSource, source_url))
-        g.add((snippet_uri, NS_DICT["dctypes"].description, rdflib.term.Literal(
+        g.add((snippet_uri, NS_DICT["dcterms"].description, rdflib.term.Literal(
             self.text, datatype=rdflib.namespace.XSD.string)))
 
         # Creating identifying context first and always
@@ -162,6 +166,9 @@ class Context(object):
         for x in self.subjects:
             g.add((identifying_uri, NS_DICT["oa"].hasBody, x))
         g.add((identifying_uri, NS_DICT["oa"].hasBody, person.uri))
+
+        if self.event:
+            g.add((identifying_uri, NS_DICT["cwrc"].hasEvent, self.event))
 
         # Creating describing context if applicable
         if self.motivation == NS_DICT["oa"].describing:
@@ -180,6 +187,9 @@ class Context(object):
             format_str = rdflib.term.Literal("text/turtle", datatype=rdflib.namespace.XSD.string)
             format_uri = rdflib.term.URIRef(str(NS_DICT["dcterms"]) + "format")
             for x in self.triples:
+                # TODO: handle components with multiple triples this only works for simple components
+                # where an item in a list only produces one triple
+                # but for for some thing like death there will be multiple triples
                 triple_str = x.to_triple(person).serialize(format="ttl").decode().splitlines()[-2]
                 triple_str = rdflib.term.Literal(triple_str, datatype=rdflib.namespace.XSD.string)
                 temp_body = rdflib.BNode()
@@ -187,6 +197,9 @@ class Context(object):
                 g.add((temp_body, RDF.type, NS_DICT["oa"].TextualBody))
                 g.add((temp_body, RDF.value, triple_str))
                 g.add((temp_body, format_uri, format_str))
+
+            if self.event:
+                g.add((self.uri, NS_DICT["cwrc"].hasEvent, self.event))
 
         return g
 

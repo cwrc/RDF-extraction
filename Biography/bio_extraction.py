@@ -57,8 +57,8 @@ def main():
     # 328686 triples created
     # for filename in filelist[:200]:
     # for filename in filelist[:2]:
-    # for filename in filelist:
-    for filename in ["levyam-b.xml","atwoma-b.xml","woolvi-b.xml"]:
+    # for filename in ["levyam-b.xml", "atwoma-b.xml", "woolvi-b.xml", "clifan-b.xml"]:
+    for filename in filelist:
         with open("bio_data/" + filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
@@ -67,10 +67,10 @@ def main():
 
         # education.extract_education_data(soup, person)
 
-        # cf.extract_cf_data(soup, person)
-        other_contexts.extract_health_contexts_data(soup, person)
+        cf.extract_cf_data(soup, person)
+        # other_contexts.extract_health_contexts_data(soup, person)
         # location.extract_location_data(soup, person)
-        # other_contexts.extract_other_contexts_data(soup, person)
+        other_contexts.extract_other_contexts_data(soup, person)
 
         graph = person.to_graph()
 
@@ -110,8 +110,9 @@ def main():
     cf.log_mapping_fails(extract_log, log, detail=False)
     extract_log.msg("See CF Error Log for more indepth logging about failures:")
 
-    print(largest_person, "produces the most triples(" + str(highest_triples) + ")")
-    print(smallest_person, "produces the least triples(" + str(least_triples) + ")")
+    log.subtitle(str(len(uber_graph)) + " total triples created")
+    log.msg(str(largest_person) + " produces the most triples(" + str(highest_triples) + ")")
+    log.msg(str(smallest_person) + " produces the least triples(" + str(least_triples) + ")")
 
     exit()
 

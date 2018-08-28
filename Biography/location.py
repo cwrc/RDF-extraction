@@ -98,6 +98,8 @@ def extract_location_data(bio, person):
     2) same for moved
     3) Migrated as well
 
+    Need to be revised with events
+
     """
     locations = bio.find_all("LOCATION")
     location_dict = {
@@ -117,7 +119,7 @@ def extract_location_data(bio, person):
         context_id = person.id + "_SpatialContext_" + location_dict[location_type] + "_" + str(id)
 
         if len(places) == 0:
-            temp_context = Context(context_id, location, "location", "identifying")
+            temp_context = Context(context_id, location, "LOCATION", "identifying")
             person.add_context(temp_context)
             continue
 
