@@ -1,7 +1,7 @@
 import rdflib
 from rdflib import RDF, RDFS, Literal
 import re
-from biography import bind_ns, NS_DICT, make_standard_uri, remove_punctuation
+from biography import bind_ns, NS_DICT, make_standard_uri, remove_punctuation, create_uri
 from place import Place
 from organizations import get_org_uri
 
@@ -43,13 +43,28 @@ def strip_all_whitespace(string):
     return re.sub('[\s+]', '', str(string))
 
 
+def get_people(tag):
+    """Returns all people within a given tag"""
+    people = []
+    for x in tag.find_all("NAME"):
+        people.append(make_standard_uri(x.get("STANDARD")))
+    return people
+
+
+def get_places(tag):
+    """Returns all places within a given tag"""
+    places = []
+    for x in tag.find_all("PLACE"):
+        places.append(Place(x).uri)
+    return places
+
+
 def identifying_motivation(tag):
     identified_subjects = []
-    for x in tag.find_all("PLACE"):
-        identified_subjects.append(Place(x).uri)
 
-    for x in tag.find_all("NAME"):
-        identified_subjects.append(make_standard_uri(x.get("STANDARD")))
+    identified_subjects += get_places(tag)
+    identified_subjects += get_people(tag)
+
     for x in tag.find_all("ORGNAME"):
         identified_subjects.append(get_org_uri(x))
     for x in tag.find_all("TITLE"):
@@ -107,17 +122,17 @@ class Context(object):
             self.text += "..."
 
         if context_type in self.context_map:
-            self.context_type = rdflib.term.URIRef(str(NS_DICT["cwrc"]) + self.context_map[context_type])
-            self.context_label = self.context_map[context_type]
+            self.context_type = create_uri("cwrc", self.context_map[context_type])
+            self.context_label = self.context_map[context_type].split("Context")[0] + " Context"
         else:
-            self.context_label = context_type
-            self.context_type = rdflib.term.URIRef(str(NS_DICT["cwrc"]) + context_type)
+            self.context_type = create_uri("cwrc", context_type)
+            self.context_label = context_type.split("Context")[0] + " Context"
 
-        self.motivation = rdflib.term.URIRef(str(NS_DICT["oa"]) + motivation)
+        self.motivation = create_uri("oa", motivation)
         self.subjects = []
         if motivation == "identifying":
             self.subjects = identifying_motivation(self.tag)
-        self.uri = rdflib.term.URIRef(str(NS_DICT["data"]) + id)
+        self.uri = create_uri("data", id)
 
     def link_triples(self, comp_list):
         """ Adding to list of components to link context to triples
@@ -146,7 +161,7 @@ class Context(object):
         # Creating Textual body first
         snippet_uri = rdflib.term.URIRef(str(self.uri) + "_Snippet")
         source_url = rdflib.term.URIRef(self.src + person.id + "#" + self.heading)
-        snippet_label = person.name + " " + self.context_label + " snippet"
+        snippet_label = person.name + " - " + self.context_label + " snippet"
         g.add((snippet_uri, RDF.type, NS_DICT["oa"].TextualBody))
         g.add((snippet_uri, RDFS.label, rdflib.term.Literal(snippet_label)))
         g.add((snippet_uri, NS_DICT["oa"].hasSource, source_url))
@@ -154,8 +169,8 @@ class Context(object):
             self.text, datatype=rdflib.namespace.XSD.string)))
 
         # Creating identifying context first and always
-        context_label = person.name + " " + self.context_label + " identifying annotation"
-        identifying_uri = rdflib.term.URIRef(str(NS_DICT["data"]) + self.id + "_identifying")
+        context_label = person.name + " - " + self.context_label + " identifying annotation"
+        identifying_uri = create_uri("data", self.id + "_identifying")
         g.add((identifying_uri, RDF.type, self.context_type))
         g.add((identifying_uri, RDFS.label, rdflib.term.Literal(context_label)))
         g.add((identifying_uri, NS_DICT["oa"].hasTarget, snippet_uri))
@@ -172,8 +187,8 @@ class Context(object):
 
         # Creating describing context if applicable
         if self.motivation == NS_DICT["oa"].describing:
-            self.uri = rdflib.term.URIRef(str(NS_DICT["data"]) + self.id + "_describing")
-            context_label = person.name + " " + self.context_label + " describing annotation"
+            self.uri = create_uri("data", self.id + "_describing")
+            context_label = person.name + " - " + self.context_label + " describing annotation"
             g.add((self.uri, RDF.type, self.context_type))
             g.add((self.uri, RDFS.label, rdflib.term.Literal(context_label)))
             g.add((self.uri, NS_DICT["cwrc"].hasIDependencyOn, identifying_uri))
@@ -185,12 +200,19 @@ class Context(object):
                 g.add((self.uri, NS_DICT["dcterms"].subject, x))
 
             format_str = rdflib.term.Literal("text/turtle", datatype=rdflib.namespace.XSD.string)
-            format_uri = rdflib.term.URIRef(str(NS_DICT["dcterms"]) + "format")
+            format_uri = create_uri("dcterms", "format")
             for x in self.triples:
                 # TODO: handle components with multiple triples this only works for simple components
                 # where an item in a list only produces one triple
                 # but for for some thing like death there will be multiple triples
-                triple_str = x.to_triple(person).serialize(format="ttl").decode().splitlines()[-2]
+                # Temporaryily letting the whole chunk of triples be the part of the textual body
+                temp_str = x.to_triple(person).serialize(format="ttl").decode().splitlines()
+                triple_str_test = [y for y in temp_str if "@prefix" not in y and y != '']
+                if len(triple_str_test) == 1:
+                    triple_str = x.to_triple(person).serialize(format="ttl").decode().splitlines()[-2]
+                else:
+                    triple_str = "\n".join(triple_str_test)
+
                 triple_str = rdflib.term.Literal(triple_str, datatype=rdflib.namespace.XSD.string)
                 temp_body = rdflib.BNode()
                 g.add((self.uri, NS_DICT["oa"].hasBody, temp_body))
@@ -200,6 +222,13 @@ class Context(object):
 
             if self.event:
                 g.add((self.uri, NS_DICT["cwrc"].hasEvent, self.event))
+
+        # Creating the mentioned people as natural person
+        for x in self.tag.find_all("NAME"):
+            uri = make_standard_uri(x.get("STANDARD"))
+            g.add((uri, RDF.type, NS_DICT["cwrc"].NaturalPerson))
+            g.add((uri, RDFS.label, Literal(x.get("STANDARD"), datatype=rdflib.namespace.XSD.string)))
+            g.add((uri, NS_DICT["foaf"].name, Literal(x.get("STANDARD"), datatype=rdflib.namespace.XSD.string)))
 
         return g
 

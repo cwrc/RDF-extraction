@@ -57,15 +57,17 @@ class CulturalForm(object):
         if other_attributes:
             self.uri = other_attributes
         elif self.reported:
-            self.uri = str(biography.NS_DICT["cwrc"]) + self.predicate + self.reported
+            self.uri = biography.create_uri("cwrc", self.predicate + self.reported)
         else:
-            self.uri = str(biography.NS_DICT["cwrc"]) + self.predicate
+            self.uri = biography.create_uri("cwrc", self.predicate)
 
         self.uri = rdflib.term.URIRef(self.uri)
 
-    # TODO figure out if i can just return tuple or triple without creating a whole graph
-    # Evaluate efficency of creating this graph or just returning a tuple and have the biography deal with it
     def to_tuple(self, person_uri):
+        """TODO 
+            figure out if i can just return tuple or triple without creating a whole graph
+            Evaluate efficency of creating this graph or just returning a tuple and have the biography deal with it
+        """
         return ((person_uri, self.uri, self.value))
 
     def to_triple(self, person):
@@ -194,6 +196,7 @@ def find_cultural_forms(cf, person):
         # This optional attribute attaches to the elements Ethnicity, Geographical Heritage, National Heritage, or Race, Colour,
         # has ten possible values: Father, Mother, Parents, Grandfather, Grandmother, Grandparents, Aunt, Uncle, Other, and Family.
 
+        # We can only make assumptions about the father, mother, parents, will have to create random relative's otherwise
         def existing_forebear(relation):
             # TODO: sparql query to check if relation exists will also need person's uri
             # also check current uber graph?
@@ -289,6 +292,8 @@ def find_cultural_forms(cf, person):
                                                 other_attributes=biography.NS_DICT["org"].memberOf))
 
             value = get_mapped_term("Religion", get_value(x), True)
+
+            # Checking if religion occurs as a PA if no result as a religion
             if type(value) is rdflib.term.Literal:
                 value = get_mapped_term("PoliticalAffiliation", get_value(x), True)
                 log.msg((value))
@@ -343,6 +348,9 @@ def find_cultural_forms(cf, person):
 
 
 def extract_culturalforms(tag_list, context_type, person, list_type="paragraphs"):
+    """ Creates the cultural forms ascribes them to the person along with the associated
+        contexts and event
+    """
     global cf_subelements_count
     forms_found = 0
     event_count = 1

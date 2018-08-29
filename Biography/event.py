@@ -1,24 +1,20 @@
 import rdflib
 from rdflib import RDF, RDFS, Literal, XSD
-from biography import bind_ns, NS_DICT, make_standard_uri
-from place import Place
+from biography import bind_ns, NS_DICT, make_standard_uri, create_uri
 from organizations import get_org_uri
-from context import get_value
+from context import get_value, get_places
 
 # Leaving this independent of contexts incase we should want to vary events vs contexts
 MAX_WORD_COUNT = 35
 
 
-def get_places(tag):
-    places = []
-    for x in tag.find_all("PLACE"):
-        places.append(Place(x).uri)
-    return places
+def create_cwrc_uri(term):
+    """prepends the cwrc namespace uri to the given term"""
+    return create_uri("cwrc", term)
 
 
 def get_actors(tag):
-    """ Returns actors within an event (any name/org/title mentioned)
-    """
+    """ Returns actors within an event (any name/org/title mentioned)"""
     actors = []
     for x in tag.find_all("NAME"):
         actors.append(make_standard_uri(x.get("STANDARD")))
@@ -32,10 +28,11 @@ def get_actors(tag):
 
 
 def get_event_type(tag):
+    """Returns the types of the event"""
     event_types = []
     event_types.append(Event.event_type_map[tag.get("RELEVANCE")])
     event_types.append(Event.event_type_map[tag.get("CHRONCOLUMN")])
-    return [rdflib.term.URIRef(str(NS_DICT["cwrc"]) + x) for x in event_types]
+    return [create_cwrc_uri(x) for x in event_types]
 
 
 def get_time_type(tag):
@@ -59,10 +56,6 @@ def get_time_certainty(tag):
             return Event.certainty_map[certainty]
 
     return None
-
-
-def make_cwrc_uri(uri):
-    return rdflib.term.URIRef(str(NS_DICT["cwrc"]) + uri)
 
 
 def get_date_tag(tag):
@@ -127,7 +120,7 @@ class Event(object):
         super(Event, self).__init__()
         self.title = title
         self.tag = tag
-        self.uri = rdflib.term.URIRef(str(NS_DICT["data"]) + id)
+        self.uri = create_uri("data", id)
         self.place = get_places(tag)
         self.event_type = get_event_type(tag)
         self.actors = get_actors(tag)
@@ -192,9 +185,9 @@ class Event(object):
             g.add((self.uri, NS_DICT["sem"].hasActor, x))
 
         # Typing of time and attaching certainty
-        g.add((self.uri, NS_DICT["sem"].timeType, make_cwrc_uri(self.time_type)))
+        g.add((self.uri, NS_DICT["sem"].timeType, create_cwrc_uri(self.time_type)))
         if self.time_certainty:
-            g.add((self.uri, NS_DICT["cwrc"].hasTimeCertainty, make_cwrc_uri(self.time_certainty)))
+            g.add((self.uri, NS_DICT["cwrc"].hasTimeCertainty, create_cwrc_uri(self.time_certainty)))
 
         # Attaching the time stamp to the event
         if self.predicate:

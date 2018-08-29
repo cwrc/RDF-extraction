@@ -65,6 +65,11 @@ def make_standard_uri(std_str, ns="data"):
     return rdflib.term.URIRef(str(NS_DICT[ns]) + remove_punctuation(std_str))
 
 
+def create_uri(prefix, term):
+    """prepends the provided namespace uri to the given term"""
+    return rdflib.term.URIRef(str(NS_DICT[prefix]) + term)
+
+
 class Biography(object):
     """docstring for Biography"""
 

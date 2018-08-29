@@ -45,8 +45,7 @@ class Location(object):
         if other_attributes:
             self.uri = other_attributes
 
-        self.uri = str(biography.NS_DICT["cwrc"]) + self.predicate
-        self.uri = rdflib.term.URIRef(self.uri)
+        self.uri = biography.create_uri("cwrc", self.predicate)
 
     # TODO figure out if i can just return tuple or triple without creating a whole graph
     # Evaluate efficency of creating this graph or just returning a tuple and have the biography deal with it
