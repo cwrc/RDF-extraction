@@ -4,8 +4,9 @@ from context import Context
 from event import Event
 from log import *
 """
-Status: ~85%
-Events still need to be handled
+Status: ~89%
+extraction of health context will possibly accompanied by health factors at a later point
+only identifying contexts being created
 """
 # Will remove logging after triples are verified
 log = Log("log/other_contexts/errors")

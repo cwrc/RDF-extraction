@@ -8,12 +8,13 @@ from organizations import get_org_uri
 MAX_WORD_COUNT = 35
 
 """
-Status: ~80%
+Status: ~84%
 TODO: 
-1) Review triples related to identifying contexts
-2) revise mechanism for getting closest heading
-3) Fix up labelling of contexts possibly
-4) Revise text snippet to grab from where the first triple is extracted
+1) Revise mechanism for adding triples as a texual body for less list oriented components ex. Death
+2) Review triples related to identifying contexts
+3) revise mechanism for getting closest heading
+4) Fix up labelling of contexts possibly
+5) Revise text snippet to grab from where the first triple is extracted
     - however sometime for identifying contexts, names/orgs are identified
         prior to triples extracted
 """
@@ -60,6 +61,9 @@ def get_places(tag):
 
 
 def identifying_motivation(tag):
+    """ extracts the identifying components in a given tag
+        to be used for the subjects of the annotation
+    """
     identified_subjects = []
 
     identified_subjects += get_places(tag)
@@ -89,16 +93,37 @@ def get_heading(tag):
 
 
 class Context(object):
-    """docstring for Context"""
-    context_types = ["GenderContext", "PoliticalContext", "SocialClassContext",
-                     "SexualityContext", "RaceEthnicityContext", "ReligionContext", "NationalityContext"]
-    context_map = {"CLASSISSUE": "SocialClassContext", "RACEANDETHNICITY": "RaceEthnicityContext",
-                   "NATIONALITYISSUE": "NationalityContext", "SEXUALITY": "SexualityContext",
-                   "POLITICS": "PoliticalContext", "RELIGION": "ReligionContext",
-                   "CULTURALFORMATION": "CulturalFormContext", "LEISUREANDSOCIETY": "LeisureContext",
-                   "OCCUPATION": "OccupationContext", "LOCATION": "SpatialContext",
-                   "VIOLENCE": "ViolenceContext", "WEALTH": "WealthContext",
-                   "OTHERLIFEEVENT": "BiographyContext"}
+    """given the id for creating a context, the tag, context_type
+    optional argument of motivation: default is describing
+    if motivation is describing then it will also create the associated identifying contexts
+    if only an identifying context is needed motivation="identifying" as arguement is necessary
+    """
+    context_types = ["BiographyContext", "BirthContext", "CulturalFormContext",
+                     "DeathContext", "FamilyContext", "FriendsAndAssociatesContext",
+                     "GenderContext", "IntimateRelationshipsContext", "LeisureContext",
+                     "NationalityContext", "OccupationContext", "PoliticalContext",
+                     "RaceEthnicityContext", "ReligionContext", "SexualityContext",
+                     "SocialClassContext", "SpatialContext", "ViolenceContext",
+                     "WealthContext"]
+    context_map = {"CLASSISSUE": "SocialClassContext",
+                   "RACEANDETHNICITY": "RaceEthnicityContext",
+                   "NATIONALITYISSUE": "NationalityContext",
+                   "SEXUALITY": "SexualityContext",
+                   "POLITICS": "PoliticalContext",
+                   "RELIGION": "ReligionContext",
+                   "CULTURALFORMATION": "CulturalFormContext",
+                   "LEISUREANDSOCIETY": "LeisureContext",
+                   "OCCUPATION": "OccupationContext",
+                   "LOCATION": "SpatialContext",
+                   "VIOLENCE": "ViolenceContext",
+                   "WEALTH": "WealthContext",
+                   "OTHERLIFEEVENT": "BiographyContext",
+                   "FAMILY": "FamilyContext",
+                   "BIRTH": "BirthContext",
+                   "DEATH": "DeathContext",
+                   "FRIENDSASSOCIATES": "FriendsAndAssociatesContext",
+                   "INTIMATERELATIONSHIPS": "IntimateRelationshipsContext"
+                   }
 
     def __init__(self, id, tag, context_type="culturalformation", motivation="describing"):
         super(Context, self).__init__()
@@ -109,9 +134,6 @@ class Context(object):
         self.tag = tag
         self.src = "http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id="
         self.heading = get_heading(tag)
-
-        # rdfs:label "Atwood Education Context 1" ;
-        # self.label = " "
 
         # Making the text the max amount of words
         # TODO: Make snippet start where first triple is extracted from
