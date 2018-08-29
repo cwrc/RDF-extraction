@@ -18,7 +18,7 @@ def create_place_map():
     # if searching takes too long
     # Create better searching mechanism
     # with open('geoghert_places.csv', newline='') as csvfile:
-    with open('places.csv', newline='') as csvfile:
+    with open('places.csv', newline='',encoding='utf-8') as csvfile:
         reader = csv.reader(csvfile)
         next(reader)
         for row in reader:
