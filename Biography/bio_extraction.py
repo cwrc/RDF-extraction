@@ -10,6 +10,10 @@ import culturalForm as cf
 import education
 import location
 import other_contexts
+
+# gurjap's files
+import birthDeath
+import scrapeFamily
 """
 This is a possible temporary main script that creates the biography related triples
 TODO: 
@@ -44,8 +48,8 @@ def get_sex(bio):
 
 def main():
     import os
-    filelist = [filename for filename in sorted(os.listdir("bio_data")) if filename.endswith(".xml")]
-    filelist.remove("fielmi-b.xml")
+    filelist = [filename for filename in sorted(os.listdir("/Users/gurjapsingh/Documents/UoGuelph Projects/biography/")) if filename.endswith(".xml")]
+    numTriples = 0
     entry_num = 1
     global uber_graph
 
@@ -64,16 +68,24 @@ def main():
 
         print(filename)
         person = Biography(filename[:-6], get_name(soup), cf.get_mapped_term("Gender", get_sex(soup)))
-
-        # education.extract_education_data(soup, person)
-
+        education.extract_education_data(soup, person)
         cf.extract_cf_data(soup, person)
-        # other_contexts.extract_health_contexts_data(soup, person)
-        # location.extract_location_data(soup, person)
-        other_contexts.extract_other_contexts_data(soup, person)
+        other_contexts.extract_health_contexts_data(soup, person)
+        birthDeath.getBirth(soup,person)
+        birthDeath.getDeath(soup,person)
+        scrapeFamily.cohabitantsCheck(soup,person)
+        scrapeFamily.getFamilyInfo(soup,person)
+        scrapeFamily.friendsAssociateCheck(soup,person)
+        scrapeFamily.intimateRelationshipsCheck(soup,person)
+        scrapeFamily.childlessnessCheck(soup,person)
+        scrapeFamily.childrenCheck(soup,person)
+        location.extract_location_data(soup, person)
 
         graph = person.to_graph()
 
+        numTriples += len(graph)
+
+        print("length: ",len(graph))
         # Logging bits
         extract_log.subtitle("Entry #" + str(entry_num))
         extract_log.msg(str(person))
@@ -90,19 +102,21 @@ def main():
             smallest_person = filename
 
         # triples to files
-        file = open("culturalform_triples/" + str(person.id) + "-cf.txt", "w")
-        file.write("#" + str(len(graph)) + " triples created\n")
-        file.write(person.to_file(graph))
-        file.close()
+        # file = open("culturalform_triples/" + str(person.id) + "-cf.txt", "w")
+        # file.write("#" + str(len(graph)) + " triples created\n")
+        # file.write(person.to_file(graph))
+        # file.close()
 
         uber_graph += graph
         entry_num += 1
+        # exit()
+
 
     turtle_log.subtitle(str(len(uber_graph)) + " triples created")
     turtle_log.msg(uber_graph.serialize(format="ttl").decode(), stdout=False)
     turtle_log.msg("")
 
-    file = open("all_triples.ttl", "w")
+    file = open("all_triples.ttl", "w",encoding="utf-8")
     file.write("#" + str(len(uber_graph)) + " triples created\n")
     file.write(uber_graph.serialize(format="ttl").decode())
 
@@ -113,7 +127,6 @@ def main():
     log.subtitle(str(len(uber_graph)) + " total triples created")
     log.msg(str(largest_person) + " produces the most triples(" + str(highest_triples) + ")")
     log.msg(str(smallest_person) + " produces the least triples(" + str(least_triples) + ")")
-
     exit()
 
 
