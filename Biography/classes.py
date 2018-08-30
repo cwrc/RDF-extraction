@@ -9,19 +9,25 @@ g = Graph()
 class ChildlessStatus:
     def __init__(self, label):
         self.Label = label
+        self.predicate = None
+        self.value = None
+
+        if label.title() == "Birth Control":
+            self.predicate = NS_DICT["cwrc"].hasReproductiveHistory
+            self.value = NS_DICT["cwrc"].birthControl
+        elif label.title() == "Adoption":
+            self.predicate = NS_DICT["cwrc"].hasReproductiveHistory
+            self.value = NS_DICT["cwrc"].adoption
+        elif label.title() == "Childlessness":
+            self.predicate = NS_DICT["cwrc"].hasReproductiveHistory
+            self.value = NS_DICT["cwrc"].childlessness
+
     def to_triple(self,person):
         global g
         g = rdflib.Graph()
         namespace_manager = rdflib.namespace.NamespaceManager(g)
         bind_ns(namespace_manager, NS_DICT)
-
-        label = self.Label.title()
-        if label == "Birth Control":
-            g.add((person.uri, NS_DICT["cwrc"].hasReproductiveHistory, NS_DICT["cwrc"].birthControl))
-        elif label == "Adoption":
-            g.add((person.uri, NS_DICT["cwrc"].hasReproductiveHistory, NS_DICT["cwrc"].adoption))
-        elif label == "Childlessness":
-            g.add((person.uri, NS_DICT["cwrc"].hasReproductiveHistory, NS_DICT["cwrc"].childlessness))
+        g.add((person.uri,self.predicate,self.value))
         return g
 
 class ChildStatus:

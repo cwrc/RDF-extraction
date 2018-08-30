@@ -50,31 +50,31 @@ def childlessnessCheck(xmlString,person):
     for tag in childrenTag:
         # ElemPrint(tag)
         
-        if any(miscarriageWord in getOnlyText(tag) for miscarriageWord in 
-            ["miscarriage","miscarriages","miscarried"]):
-            childlessList.append(ChildlessStatus("miscarriage"))
-        
-        elif any(stillbirthWord in getOnlyText(tag) for stillbirthWord in 
-            ["stillborn","still birth"]):
-            childlessList.append(ChildlessStatus("stillbirth"))
-            # one still birth
-        
-        elif any(abortionWord in getOnlyText(tag) for abortionWord in 
-            ["abortion","aborted"]):
-            childlessList.append(ChildlessStatus("abortion"))
-            # no entries has this
+        # if any(miscarriageWord in getOnlyText(tag) for miscarriageWord in
+        #     ["miscarriage","miscarriages","miscarried"]):
+        #     childlessList.append(ChildlessStatus("miscarriage"))
+        #
+        # elif any(stillbirthWord in getOnlyText(tag) for stillbirthWord in
+        #     ["stillborn","still birth"]):
+        #     childlessList.append(ChildlessStatus("stillbirth"))
+        #     # one still birth
+        #
+        # elif any(abortionWord in getOnlyText(tag) for abortionWord in
+        #     ["abortion","aborted"]):
+        #     childlessList.append(ChildlessStatus("abortion"))
+        #     # no entries has this
 
-        elif any(birthControlWord in getOnlyText(tag) for birthControlWord in 
+        if any(birthControlWord in getOnlyText(tag) for birthControlWord in
             ["contraception"]):
             childlessList.append(ChildlessStatus("birth control"))
             # no entries has this
         
-        elif any(veneralDisease in getOnlyText(tag) for veneralDisease in 
-            ["syphilis","veneral","VD"]):
-            childlessList.append(ChildlessStatus("venereal disease"))
-            # 2 entries have this
-        
-        elif any(adoptionWord in getOnlyText(tag) for adoptionWord in 
+        # elif any(veneralDisease in getOnlyText(tag) for veneralDisease in
+        #     ["syphilis","veneral","VD"]):
+        #     childlessList.append(ChildlessStatus("venereal disease"))
+        #     # 2 entries have this
+
+        elif any(adoptionWord in getOnlyText(tag) for adoptionWord in
             ["adopted","adoption"]):
             childlessList.append(ChildlessStatus("adoption"))
             # 8 entries have this
