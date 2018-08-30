@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 # from gLoggingInFunctions import *
 from stringAndMemberFunctions import *
 from classes import *
-
+import context
 # from graphOntology import graphMaker
 from birthDeath import getBirth, getDeath
 
@@ -151,24 +151,40 @@ def intimateRelationshipsCheck(xmlString,person):
     irTag = root.find_all('INTIMATERELATIONSHIPS')
     intimateRelationships = []
     sourcePerson = person.name
+    id = 1
     for tag in irTag:
         attr = ""
-        
+
         if "EROTIC" in tag.attrs:
             attr = tag["EROTIC"]
             # print("attr: ", tag.attrib["EROTIC"])
         else:
             attr = "nonErotic"
-        
         for thisPerson in tag.find_all("DIV2"):
             print("======person======")
             print("source: ", sourcePerson)
+
+            context_id = person.id + "_IntimateRelationshipsContext_" + str(id)
+            id += 1
+            names = getAllNames(thisPerson.find_all("NAME"),person.name)
+            if len(names) >= 1:
+                print("========>", names[0])
+                thisRelationship = IntimateRelationships(names[0], attr)
+            else:
+                thisRelationship = IntimateRelationships("intimate relationship", attr)
+
+            tempContext = context.Context(context_id,thisPerson,"INTIMATERELATIONSHIPS")
+            tempContext.link_triples([thisRelationship])
+            intimateRelationships.append(thisRelationship)
+            person.context_list.append(tempContext)
+            continue
             # print(getOnlyText(person))
             intmtContextsAndNames = getContextsAndNames(thisPerson,sourcePerson)
             print(intmtContextsAndNames)
             for thisContext in intmtContextsAndNames:
                 if len(thisContext.names) >= 1:
                     print("========>",thisContext.names[0])
+
                     intimateRelationships.append(IntimateRelationships(thisContext.names[0],attr,thisContext.contexts))
                 else:
                     intimateRelationships.append(IntimateRelationships("intimate relationship",attr,thisContext.contexts))

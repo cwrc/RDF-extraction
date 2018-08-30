@@ -151,6 +151,11 @@ class Biography(object):
         for x in e_list:
             g += x.to_triple(self)
         return g
+    def create_triples2(self, e_list,f_list):
+        g = rdflib.Graph()
+        for x in e_list:
+            g += x.to_triple(self)
+        return g
 
     def to_graph(self):
         g = rdflib.Graph()
@@ -162,7 +167,9 @@ class Biography(object):
         g.add((self.uri, RDFS.label, Literal(self.name, datatype=rdflib.namespace.XSD.string)))
         g.add((self.uri, NS_DICT["cwrc"].hasGender, self.gender))
         g.add((self.uri, NS_DICT["foaf"].isPrimaryTopicOf, self.url))
-        # g += self.create_triples(self.cf_list)
+        # g += self.create_triples2(self.cf_list,self.intimateRelationships_list)
+
+        g += self.create_triples(self.cf_list)
         g += self.create_triples(self.context_list)
         # g += self.create_triples(self.location_list)
         # g += self.create_triples(self.event_list)

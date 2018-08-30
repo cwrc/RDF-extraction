@@ -54,13 +54,11 @@ class PersonAttribute:
         self.PersonName = name;
 
 class IntimateRelationships:
-    def __init__(self, Person, attrValue,context):
+    def __init__(self, Person, attrValue):
         self.PersonName =  Person
-        self.Context = context
         self.AttrValue = attrValue
 
         self.predicate = None
-        self.reported = None
         self.value = None
 
         if self.AttrValue == "EROTICYES":
@@ -82,23 +80,23 @@ class IntimateRelationships:
 
     def to_triple(self,person):
         global g
-        spList = []
         g = rdflib.Graph()
         namespace_manager = rdflib.namespace.NamespaceManager(g)
         bind_ns(namespace_manager, NS_DICT)
-        spList = []
+        g.add((person.uri,self.predicate,self.value))
+        # spList = []
 
         # for relationship in intmtRelationships.Persons:
 
 
-        listProperties = {}
-        listProperties["subjectName"] = getStandardUri(person.name)
-        listProperties["unchangedName"]= person.name
-        listProperties["descType"] = NS_DICT["cwrc"].IntimateRelationshipsContext
-        listProperties["subjectsObjects"] = spList
-
-        person.contextCounts["intimateRelationship"] = addContextsNew(person.id, "hasIntimateRelationshipsContext", self.Context,
-                                            person.uri, person.contextCounts["intimateRelationship"], listProperties)
+        # listProperties = {}
+        # listProperties["subjectName"] = getStandardUri(person.name)
+        # listProperties["unchangedName"]= person.name
+        # listProperties["descType"] = NS_DICT["cwrc"].IntimateRelationshipsContext
+        # listProperties["subjectsObjects"] = spList
+        #
+        # person.contextCounts["intimateRelationship"] = addContextsNew(person.id, "hasIntimateRelationshipsContext", self.Context,
+        #                                     person.uri, person.contextCounts["intimateRelationship"], listProperties)
 
         return g
 
