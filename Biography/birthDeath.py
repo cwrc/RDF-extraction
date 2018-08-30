@@ -7,7 +7,7 @@ import logging
 import copy
 from classes import *
 from stringAndMemberFunctions import *
-
+import context
 
 
 def getBirth(xmlString,person):
@@ -106,10 +106,18 @@ def getBirth(xmlString,person):
     except AttributeError:
         print("no birth place information for this individual")
         # sys.stdin(1)
+    person.birth = birthData(person.name,person.id,person.uri,birthDate, birthPositions, birthPlaceSettlement, birthPlaceRegion, birthPlaceGeog)
     getContextsFrom = tagChildren(birthTagParent)
     birthContexts = []
+
+    id = 1
     for div in getContextsFrom:
-        birthContexts += getContexts(div)
+        # birthContexts += getContexts(div)
+        context_id  = person.id + "_BirthContext_" + str(id)
+        tempContext = context.Context(context_id,div,'BIRTH')
+        # tempContext.link_triples([person.birth])
+        person.context_list.append(tempContext)
+
     # if "DIV" not in getContextsFrom[0].name:
     #     DIV = Element('DIV')
     #     DIV.insert(0,getContextsFrom[0])
@@ -117,7 +125,6 @@ def getBirth(xmlString,person):
     #     # DIV.append(getContextsFrom)
     #     getContextsFrom = [DIV]
     # birthContexts = getContexts(getContextsFrom)
-    person.birth = birthData(person.name,person.id,person.uri,birthDate, birthPositions, birthPlaceSettlement, birthPlaceRegion, birthPlaceGeog,birthContexts)
 
     
 def getDeath(xmlString,person):

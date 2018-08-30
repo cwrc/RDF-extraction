@@ -48,7 +48,7 @@ def get_sex(bio):
 
 def main():
     import os
-    filelist = [filename for filename in sorted(os.listdir("/Users/gurjapsingh/Documents/UoGuelph Projects/biography/")) if filename.endswith(".xml")]
+    filelist = [filename for filename in sorted(os.listdir("bio_data/")) if filename.endswith(".xml")]
     numTriples = 0
     entry_num = 1
     global uber_graph
@@ -62,24 +62,25 @@ def main():
     # for filename in filelist[:200]:
     # for filename in filelist[:2]:
     # for filename in ["levyam-b.xml", "atwoma-b.xml", "woolvi-b.xml", "clifan-b.xml"]:
-    for filename in filelist:
-        with open("bio_data/" + filename) as f:
+    for filename in ["levyam-b.xml"]:
+    # for filename in filelist:
+        with open("bio_data/" + filename,encoding="utf-8") as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
         print(filename)
         person = Biography(filename[:-6], get_name(soup), cf.get_mapped_term("Gender", get_sex(soup)))
-        education.extract_education_data(soup, person)
-        cf.extract_cf_data(soup, person)
-        other_contexts.extract_health_contexts_data(soup, person)
-        birthDeath.getBirth(soup,person)
-        birthDeath.getDeath(soup,person)
-        scrapeFamily.cohabitantsCheck(soup,person)
-        scrapeFamily.getFamilyInfo(soup,person)
-        scrapeFamily.friendsAssociateCheck(soup,person)
+        # education.extract_education_data(soup, person)
+        # cf.extract_cf_data(soup, person)
+        # other_contexts.extract_health_contexts_data(soup, person)
+        # birthDeath.getBirth(soup,person)
+        # birthDeath.getDeath(soup,person)
+        # scrapeFamily.cohabitantsCheck(soup,person)
+        # scrapeFamily.getFamilyInfo(soup,person)
+        # scrapeFamily.friendsAssociateCheck(soup,person)
         scrapeFamily.intimateRelationshipsCheck(soup,person)
-        scrapeFamily.childlessnessCheck(soup,person)
-        scrapeFamily.childrenCheck(soup,person)
-        location.extract_location_data(soup, person)
+        # scrapeFamily.childlessnessCheck(soup,person)
+        # scrapeFamily.childrenCheck(soup,person)
+        # location.extract_location_data(soup, person)
 
         graph = person.to_graph()
 

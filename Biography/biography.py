@@ -100,8 +100,8 @@ class Biography(object):
             "intimateRelationship":1,
             "friendsAssociates":1
         }
-        self.birth = None
-        self.death = None
+        self.birthObj = None
+        self.deathObj = None
         self.cohabitants_list = []
         self.family_list = []
         self.friendsAssociates_list = []
@@ -165,19 +165,19 @@ class Biography(object):
         # g += self.create_triples(self.cf_list)
         g += self.create_triples(self.context_list)
         # g += self.create_triples(self.location_list)
-        g += self.create_triples(self.event_list)
+        # g += self.create_triples(self.event_list)
         
 
         # Something like this
-        g +=self.birth.to_triples()
-        if self.death is not None:
-            g +=self.death.to_triples()
-        g += self.create_triples(self.cohabitants_list)
-        g += self.create_triples(self.family_list)
-        g += self.create_triples(self.friendsAssociates_list)
+        # g +=self.birthObj.to_triple()
+        # if self.death is not None:
+        #     g +=self.death.to_triples()
+        # g += self.create_triples(self.cohabitants_list)
+        # g += self.create_triples(self.family_list)
+        # g += self.create_triples(self.friendsAssociates_list)
         g += self.create_triples(self.intimateRelationships_list)
-        g += self.create_triples(self.childless_list)
-        g +=self.create_triples(self.children_list)
+        # g += self.create_triples(self.childless_list)
+        # g +=self.create_triples(self.children_list)
         # g += self.create_triples(self.education_context_list)
 
         # g += self.create_triples(self.event_list)

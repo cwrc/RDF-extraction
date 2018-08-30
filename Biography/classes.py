@@ -59,6 +59,27 @@ class IntimateRelationships:
         self.Context = context
         self.AttrValue = attrValue
 
+        self.predicate = None
+        self.reported = None
+        self.value = None
+
+        if self.AttrValue == "EROTICYES":
+            self.predicate = NS_DICT["cwrc"].hasEroticRelationshipWith
+            self.value = make_standard_uri(Person)
+        elif self.AttrValue == "EROTICNO":
+            self.predicate = NS_DICT["cwrc"].hasNonEroticRelationshipWith
+            self.value = make_standard_uri(Person)
+        elif self.AttrValue == "EROTICPOSSIBLY":
+            self.predicate = NS_DICT["cwrc"].hasPossiblyEroticRelationshipWith
+            self.value = make_standard_uri(Person)
+        else:
+            if self.PersonName.title() != "Intimate Relationship":
+                self.predicate = NS_DICT["cwrc"].hasIntimateRelationshipWith
+                self.value = make_standard_uri(Person)
+            else:
+                self.predicate = NS_DICT["cwrc"].hasIntimateRelationshipWith
+                self.value = make_standard_uri(Person)
+
     def to_triple(self,person):
         global g
         spList = []
@@ -68,29 +89,7 @@ class IntimateRelationships:
         spList = []
 
         # for relationship in intmtRelationships.Persons:
-        if self.AttrValue == "EROTICYES":
-            g.add((person.uri, NS_DICT["cwrc"].hasEroticRelationshipWith, createPerson(self.PersonName.title())))
-            spList.append(addDict("cwrc.hasEroticRelationshipWith", self.PersonName, True))
-        elif self.AttrValue == "EROTICNO":
-            g.add((person.uri, NS_DICT["cwrc"].hasNonEroticRelationshipWith, createPerson(self.PersonName.title())))
-            spList.append(addDict("cwrc.hasNonEroticRelationshipWith", self.PersonName, True))
 
-
-        elif self.AttrValue == "EROTICPOSSIBLY":
-            g.add((person.uri, NS_DICT["cwrc"].hasPossiblyEroticRelationshipWith,
-                   createPerson(self.PersonName.title())))
-            spList.append(addDict("cwrc.hasPossiblyEroticRelationshipWith", self.PersonName, True))
-
-        else:
-
-            if self.PersonName.title() != "Intimate Relationship":
-                g.add(
-                    (person.uri, NS_DICT["cwrc"].hasIntimateRelationshipWith, createPerson(self.PersonName.title())))
-                spList.append(addDict("cwrc.hasIntimateRelationshipWith", self.PersonName, False))
-
-            else:
-                g.add((person.uri, NS_DICT["cwrc"].hasIntimateRelationshipWith, Literal(self.PersonName.title())))
-                spList.append(addDict("cwrc.hasIntimateRelationshipWith", self.PersonName, True))
 
         listProperties = {}
         listProperties["subjectName"] = getStandardUri(person.name)
@@ -105,7 +104,7 @@ class IntimateRelationships:
 
 
 def getCwrcTag(familyRelation):
-    csvFile = open(os.path.expanduser("~/Google Drive/Term 3 - UoGuelph/mapping2.csv"), "r")
+    csvFile = open(os.path.expanduser("relationshipPredicates.csv"), "r")
 
     cwrcTag = 'CWRC_Tag'
     orlandoTag = 'Orlando_Relation'
@@ -218,7 +217,7 @@ def addContextsNew(fileName,contextName,context,source,numContexts,propertyDict)
     return numContexts
 
 class birthData:
-    def __init__(self, name, id, uri, bDate, bPosition, bSettl, bRegion, bGeog, bContexts):
+    def __init__(self, name, id, uri, bDate, bPosition, bSettl, bRegion, bGeog):
         self.name              = name
         self.id                = id
         self.uri               = uri
@@ -227,9 +226,10 @@ class birthData:
         self.birthSettlement   = bSettl
         self.birthRegion       = bRegion
         self.birthGeog         = bGeog
-        self.birthContexts     = bContexts
+        # self.birthContexts     = bContexts
+        self.birth_list = []
 
-    def to_triples(self):
+    def to_triple(self):
         global g
         spList = []
         g = rdflib.Graph()
@@ -257,15 +257,15 @@ class birthData:
             g.add((self.uri, NS_DICT["cwrc"].hasBirthPlace, birthPlaceStr))
             spList.append(addDict("cwrc.hasBirthPlace", birthPlaceStr, False))
 
-        if self.birthContexts != None and len(self.birthContexts) > 0:
-            listProperties = {}
-            listProperties["subjectName"] = getStandardUri(self.name)
-            listProperties["unchangedName"] = self.name
-            listProperties["descType"] = NS_DICT["cwrc"].FriendsAndAssociatesContext
-            listProperties["subjectsObjects"] = spList
-
-            for context in self.birthContexts:
-                addContextsNew(self.id,"birthContext",context,self.uri,1,listProperties)
+        # if self.birthContexts != None and len(self.birthContexts) > 0:
+        #     listProperties = {}
+        #     listProperties["subjectName"] = getStandardUri(self.name)
+        #     listProperties["unchangedName"] = self.name
+        #     listProperties["descType"] = NS_DICT["cwrc"].FriendsAndAssociatesContext
+        #     listProperties["subjectsObjects"] = spList
+        #
+        #     for context in self.birthContexts:
+        #         addContextsNew(self.id,"birthContext",context,self.uri,1,listProperties)
         return g
 
 

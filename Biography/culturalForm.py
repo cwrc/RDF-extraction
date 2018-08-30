@@ -48,7 +48,7 @@ class CulturalForm(object):
         This being the uri rather the typical cf one
     """
 
-    def __init__(self, predicate, reported, value, other_attributes=None):
+    def __init__(self, predicate, reported, value , other_attributes=None):
         super(CulturalForm, self).__init__()
         self.predicate = predicate
         self.reported = reported
