@@ -94,7 +94,7 @@ class Event(object):
 
     event_type_map = {
         "NATIONALINTERNATIONAL": "PoliticalClimate",
-        "BRITISHWOMENWRITERS": "BritishWomenWriters",
+        "BRITISHWOMENWRITERS": "BritishWomenLiteraryClimate",
         "WRITINGCLIMATE": "LiteraryClimate",
         "SOCIALCLIMATE": "SocialClimate",
         "SELECTIVE": "HistoricSignificance",
