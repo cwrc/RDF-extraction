@@ -47,12 +47,6 @@ class ChildStatus:
         g.add((person.uri, self.predicate, self.value))
         return g
 
-
-class PersonAttribute:
-    def __init__(self,attrValue,name):
-        self.AttrValue = attrValue;
-        self.PersonName = name;
-
 class IntimateRelationships:
     def __init__(self, Person, attrValue):
         self.PersonName =  Person
@@ -416,6 +410,21 @@ class JobSigAct:
         self.predicate  = jobPredicate
         self.job = jobName
 
+class FriendAssociate:
+    def __init__(self,name):
+        self.name = name
+        self.predicate = NS_DICT["cwrc"].hasInterpersonalRelationshipWith
+        self.value = make_standard_uri(name)
+
+    def to_triple(self,person):
+        global g
+        g = rdflib.Graph()
+        namespace_manager = rdflib.namespace.NamespaceManager(g)
+        bind_ns(namespace_manager, NS_DICT)
+
+        g.add((person.uri,self.predicate,self.value))
+        return g
+
 class PeopleAndContext:
     def __init__(self, name, contexts):
         self.names = name
@@ -431,24 +440,20 @@ class PeopleAndContext:
         if self != None:
             for name in self.names:
                 g.add((person.uri,NS_DICT["cwrc"].hasInterpersonalRelationshipWith,createPerson(name)))
-                # break
-            # continue
-            listProperties = {}
-            listProperties["subjectName"] = getStandardUri(person.name)
-            listProperties["unchangedName"]= person.name
-            listProperties["descType"] = NS_DICT["cwrc"].selfsAndAssociatesContext
-            spList = []
-            for name in self.names:
-                dictEntry = {}
-                dictEntry["p"]  = "cwrc.hasInterpersonalRelationshipWith"
-                dictEntry["o"]     = name
-                dictEntry["prsn"]   = True
-                spList.append(dictEntry)
-            listProperties["subjectsObjects"] = spList
-            # listProperties["descPredicate"] = "cwrcNamespace.hasInterpersonalRelationshipWith"
-            # getch()
-            person.contextCounts["friendsAssociates"] = addContextsNew(person.id,"FriendsAndAssociatesContext",self.contexts,person.uri,person.contextCounts["friendsAssociates"],listProperties)
-            # numFriendContext = addContexts(fileName,"friendAssociateContext",friend.contexts,source,numFriendContext)
+            # listProperties = {}
+            # listProperties["subjectName"] = getStandardUri(person.name)
+            # listProperties["unchangedName"]= person.name
+            # listProperties["descType"] = NS_DICT["cwrc"].selfsAndAssociatesContext
+            # spList = []
+            # for name in self.names:
+            #     dictEntry = {}
+            #     dictEntry["p"]  = "cwrc.hasInterpersonalRelationshipWith"
+            #     dictEntry["o"]     = name
+            #     dictEntry["prsn"]   = True
+            #     spList.append(dictEntry)
+            # listProperties["subjectsObjects"] = spList
+            # person.contextCounts["friendsAssociates"] = addContextsNew(person.id,"FriendsAndAssociatesContext",self.contexts,person.uri,person.contextCounts["friendsAssociates"],listProperties)
+
         # print(g.serialize(format='turtle').decode())
         return g
 

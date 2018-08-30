@@ -102,17 +102,20 @@ def friendsAssociateCheck(xmlString,person):
     tagToFind = allTagsAllChildren(root,"FRIENDSASSOCIATES")
 
     listToReturn = []
-
+    id = 1
     for instance in tagToFind:
-        listToReturn+=getContextsAndNames(instance,person.name)
-        # foundNames, names = getAllNames(instance.iter("NAME"), sourcePerson)
-        # if len(names) > 1:
-        #     print(names)
-        # friendContext = getContexts(instance)
-        # if foundNames:
-        #     # listToReturn += names
-        #     listToReturn.append(PeopleAndContext(names, friendContext))
-    # return listToReturn
+        context_id = person.id + "_FriendAndAssociatesContext_" + str(id)
+        id += 1
+        thisInstanceNames = getAllNames(instance.find_all("NAME"), person.name)
+        thisInstanceObjs = []
+
+        for name in thisInstanceNames:
+            thisInstanceObjs.append(FriendAssociate(name))
+        tempContext = context.Context(context_id, instance, "FRIENDSASSOCIATES")
+        tempContext.link_triples(thisInstanceObjs)
+        person.context_list.append(tempContext)
+        listToReturn += thisInstanceObjs
+
     person.friendsAssociates_list = listToReturn
 def cohabitantsCheck(xmlString,person):
     # root = xml.etree.ElementTree.fromstring(xmlString)
@@ -177,31 +180,6 @@ def intimateRelationshipsCheck(xmlString,person):
             tempContext.link_triples([thisRelationship])
             intimateRelationships.append(thisRelationship)
             person.context_list.append(tempContext)
-            continue
-            # print(getOnlyText(person))
-            intmtContextsAndNames = getContextsAndNames(thisPerson,sourcePerson)
-            print(intmtContextsAndNames)
-            for thisContext in intmtContextsAndNames:
-                if len(thisContext.names) >= 1:
-                    print("========>",thisContext.names[0])
-
-                    intimateRelationships.append(IntimateRelationships(thisContext.names[0],attr,thisContext.contexts))
-                else:
-                    intimateRelationships.append(IntimateRelationships("intimate relationship",attr,thisContext.contexts))
-
-            continue
-            foundOtherName,otherNames = getNameOfAssociate(thisPerson.iter("NAME"), sourcePerson)
-            print(thisPerson.findall("*"))
-            intimateContexts += (getContexts(thisPerson))
-
-            if foundOtherName:
-                print("relationship with: ", otherNames)
-                # for name in otherNames:
-                #     personAttrList.append(PersonAttribute(attr,name))
-                personAttrList.append(PersonAttribute(attr,otherNames))
-            else:
-                print("othername not found")
-                personAttrList.append(PersonAttribute(attr, "intimate relationship"))
             # for name in person.iter("NAME"):
             #     print(name.attrib["STANDARD"])
             # getch()
