@@ -163,7 +163,7 @@ class Biography(object):
         g.add((self.uri, NS_DICT["cwrc"].hasGender, self.gender))
         g.add((self.uri, NS_DICT["foaf"].isPrimaryTopicOf, self.url))
         # g += self.create_triples(self.cf_list)
-        # g += self.create_triples(self.context_list)
+        g += self.create_triples(self.context_list)
         # g += self.create_triples(self.location_list)
         g += self.create_triples(self.event_list)
         
