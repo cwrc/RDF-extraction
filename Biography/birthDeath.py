@@ -106,7 +106,7 @@ def getBirth(xmlString,person):
     except AttributeError:
         print("no birth place information for this individual")
         # sys.stdin(1)
-    person.birth = birthData(person.name,person.id,person.uri,birthDate, birthPositions, birthPlaceSettlement, birthPlaceRegion, birthPlaceGeog)
+    person.birthObj = birthData(person.name,person.id,person.uri,birthDate, birthPositions, birthPlaceSettlement, birthPlaceRegion, birthPlaceGeog)
     getContextsFrom = tagChildren(birthTagParent)
     birthContexts = []
 
@@ -115,7 +115,7 @@ def getBirth(xmlString,person):
         # birthContexts += getContexts(div)
         context_id  = person.id + "_BirthContext_" + str(id)
         tempContext = context.Context(context_id,div,'BIRTH')
-        # tempContext.link_triples([person.birth])
+        tempContext.link_triples(person.birthObj.birth_list)
         person.context_list.append(tempContext)
 
     # if "DIV" not in getContextsFrom[0].name:
@@ -173,9 +173,7 @@ def getDeath(xmlString,person):
         # for deathTag in allDeathDivs:
         #     allDivs += tagChildren(deathTag)
             # div.find_all(recursive=False)
-        allDivs = allTagsAllChildren(treeRoot.BIOGRAPHY,"DIV0 DIV1 DEATH")
-        for div in allDivs:
-            deathContexts += getContexts(div)
+
         # if type(deathContexts) is list:
         #     print(deathContexts)
         #     print("this is a list")
@@ -336,4 +334,14 @@ def getDeath(xmlString,person):
             else:
                 print("no buried in the paragraph")
 
-    person.death =  deathData(person.name,person.id,person.uri,deathDate, deathCauses, deathPlaceSettlement, deathPlaceRegion, deathPlaceGeog, deathContexts,burialPlaceSettlement,burialPlaceRegion,burialPlaceGeog)
+    person.deathObj =  deathData(person.name,person.id,person.uri,deathDate, deathCauses, deathPlaceSettlement, deathPlaceRegion, deathPlaceGeog, deathContexts,burialPlaceSettlement,burialPlaceRegion,burialPlaceGeog)
+    allDivs = allTagsAllChildren(treeRoot.BIOGRAPHY, "DIV0 DIV1 DEATH")
+    # for div in allDivs:
+    #     deathContexts += getContexts(div)
+    id = 1
+    for div in allDivs:
+        # birthContexts += getContexts(div)
+        context_id = person.id + "_DeathContext_" + str(id)
+        tempContext = context.Context(context_id, div, 'DEATH')
+        tempContext.link_triples(person.deathObj.death_list)
+        person.context_list.append(tempContext)

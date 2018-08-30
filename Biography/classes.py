@@ -213,6 +213,19 @@ def addContextsNew(fileName,contextName,context,source,numContexts,propertyDict)
     numContexts += 1
 
     return numContexts
+class predicateValue():
+    def __init__(self,predicate,value):
+        self.predicate = predicate
+        self.value = value
+
+    def to_triple(self,person):
+        global g
+        g = rdflib.Graph()
+        namespace_manager = rdflib.namespace.NamespaceManager(g)
+        bind_ns(namespace_manager, NS_DICT)
+
+        g.add((person.uri, self.predicate, self.value))
+        return g
 
 class birthData:
     def __init__(self, name, id, uri, bDate, bPosition, bSettl, bRegion, bGeog):
@@ -224,8 +237,29 @@ class birthData:
         self.birthSettlement   = bSettl
         self.birthRegion       = bRegion
         self.birthGeog         = bGeog
-        # self.birthContexts     = bContexts
         self.birth_list = []
+
+        if self.birthDate != "":
+            self.birth_list.append(predicateValue(NS_DICT["cwrc"].hasBirthDate,Literal(self.birthDate)))
+        for birthPosition in self.birthPositions:
+            if birthPosition == "ONLY":
+                positionObj = NS_DICT["cwrc"].onlyChild
+            elif birthPosition == "ELDEST":
+                positionObj = NS_DICT["cwrc"].eldestChild
+            elif birthPosition == "YOUNGEST":
+                positionObj = NS_DICT["cwrc"].youngestChild
+            elif birthPosition == "MIDDLE:":
+                positionObj = NS_DICT["cwrc"].middleChild
+
+            self.birth_list.append(predicateValue(NS_DICT["cwrc"].hasBirthPosition,positionObj))
+
+
+
+        if self.birthSettlement != "" or self.birthRegion != "" or self.birthGeog != "":
+            birthPlaceStr = Literal(self.birthSettlement + ", " + self.birthRegion + ", " + self.birthGeog)
+
+            self.birth_list.append(predicateValue(NS_DICT["cwrc"].hasBirthPlace,birthPlaceStr))
+
 
     def to_triple(self):
         global g
@@ -284,6 +318,20 @@ class deathData:
         self.burialSettl = dBurialSettl
         self.burialRegion = dBurialRegion
         self.burialGeog = dBurialGeog
+        self.death_list = []
+
+        if self.deathDate != "":
+            self.death_list.append(predicateValue(NS_DICT["cwrc"].hasDeathDate, Literal(self.deathDate)))
+
+        if self.deathSettlement != "" or self.deathRegion != "" or self.deathGeog != "":
+            deathPlaceStr = Literal(
+                self.deathSettlement + ", " + self.deathRegion + ", " + self.deathGeog)
+            self.death_list.append(predicateValue(NS_DICT["cwrc"].hasDeathPlace, deathPlaceStr))
+
+        if self.burialSettl != "" or self.burialRegion != "" or self.burialGeog != "":
+            burialPlaceStr = Literal(
+                self.burialSettl + ", " + self.burialRegion + ", " + self.burialGeog)
+            self.death_list.append(predicateValue(NS_DICT["cwrc"].hasBurialPlace, burialPlaceStr))
 
     def to_triples(self):
         global g
@@ -311,16 +359,16 @@ class deathData:
                 g.add((self.uri, NS_DICT["cwrc"].hasBurialPlace, burialPlaceStr))
                 spList.append(addDict("cwrc.hasBurialPlace", burialPlaceStr, False))
 
-            if self.deathContexts != None and len(self.deathContexts) > 0:
-                listProperties = {}
-                listProperties["subjectName"] = getStandardUri(self.name)
-                listProperties["unchangedName"] = self.name
-                listProperties["descType"] = NS_DICT["cwrc"].FriendsAndAssociatesContext
-                listProperties["subjectsObjects"] = spList
-                for context in self.deathContexts:
-                    addContextsNew(self.id, "deathContext", context, self.uri, 1, listProperties)
-
-                # addContexts(fileName,"hasDeathContext",self.deathContexts,sou
+            # if self.deathContexts != None and len(self.deathContexts) > 0:
+            #     listProperties = {}
+            #     listProperties["subjectName"] = getStandardUri(self.name)
+            #     listProperties["unchangedName"] = self.name
+            #     listProperties["descType"] = NS_DICT["cwrc"].FriendsAndAssociatesContext
+            #     listProperties["subjectsObjects"] = spList
+            #     for context in self.deathContexts:
+            #         addContextsNew(self.id, "deathContext", context, self.uri, 1, listProperties)
+            #
+            #     # addContexts(fileName,"hasDeathContext",self.deathContexts,sou
         return g
 
 class Family:
@@ -466,11 +514,14 @@ class PeopleAndContext:
 class Cohabitant:
     def __init__(self,habitant):
         self.name = habitant
+        self.predicate = NS_DICT["cwrc"].hasCohabitant
+        self.value = make_standard_uri(self.name)
+
 
     def to_triple(self,person):
         global g
         g = rdflib.Graph()
         namespace_manager = rdflib.namespace.NamespaceManager(g)
         bind_ns(namespace_manager, NS_DICT)
-        g.add((person.uri, NS_DICT["cwrc"].hasCohabitant, createPerson(self.name)))
+        g.add((person.uri, self.predicate, self.value))
         return g

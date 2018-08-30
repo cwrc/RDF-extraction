@@ -167,27 +167,26 @@ class Biography(object):
         g.add((self.uri, RDFS.label, Literal(self.name, datatype=rdflib.namespace.XSD.string)))
         g.add((self.uri, NS_DICT["cwrc"].hasGender, self.gender))
         g.add((self.uri, NS_DICT["foaf"].isPrimaryTopicOf, self.url))
-        # g += self.create_triples2(self.cf_list,self.intimateRelationships_list)
 
-        # g += self.create_triples(self.cf_list)
-        # g += self.create_triples(self.context_list)
-        # g += self.create_triples(self.location_list)
-        # g += self.create_triples(self.event_list)
-        
+        g += self.create_triples(self.cf_list)
+        g += self.create_triples(self.context_list)
+        g += self.create_triples(self.location_list)
+        g += self.create_triples(self.event_list)
+        g += self.create_triples(self.education_context_list)
+
 
         # Something like this
-        # g +=self.birthObj.to_triple()
-        # if self.death is not None:
-        #     g +=self.death.to_triples()
-        # g += self.create_triples(self.cohabitants_list)
-        # g += self.create_triples(self.family_list)
-        # g += self.create_triples(self.friendsAssociates_list)
+        g +=self.birthObj.to_triple()
+        if self.deathObj is not None:
+            g +=self.deathObj.to_triples()
+        g += self.create_triples(self.cohabitants_list)
+        g += self.create_triples(self.family_list)
+        g += self.create_triples(self.friendsAssociates_list)
+        g += self.create_triples(self.intimateRelationships_list)
         g += self.create_triples(self.childless_list)
-        # g +=self.create_triples(self.children_list)
-        # g += self.create_triples(self.education_context_list)
+        g +=self.create_triples(self.children_list)
 
         # done putting in new contexts
-        # g += self.create_triples(self.intimateRelationships_list)
 
         # g += self.create_triples(self.event_list)
         # print(g.serialize(format='turtle').decode())
