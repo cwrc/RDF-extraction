@@ -62,8 +62,8 @@ def main():
     # for filename in filelist[:200]:
     # for filename in filelist[:2]:
     # for filename in ["levyam-b.xml", "atwoma-b.xml", "woolvi-b.xml", "clifan-b.xml"]:
-    # for filename in ["levyam-b.xml"]:
-    for filename in filelist:
+    for filename in ["levyam-b.xml"]:
+    # for filename in filelist:
         with open("bio_data/" + filename,encoding="utf-8") as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
@@ -104,10 +104,10 @@ def main():
             smallest_person = filename
 
         # triples to files
-        file = open("Bio_Triples/" + str(person.id) + ".txt", "w",encoding="utf-8")
-        file.write("#" + str(len(graph)) + " triples created\n")
-        file.write(person.to_file(graph))
-        file.close()
+        # file = open("Bio_Triples/" + str(person.id) + ".txt", "w",encoding="utf-8")
+        # file.write("#" + str(len(graph)) + " triples created\n")
+        # file.write(person.to_file(graph))
+        # file.close()
 
         uber_graph += graph
         entry_num += 1
