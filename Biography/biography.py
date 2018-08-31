@@ -91,11 +91,24 @@ class Biography(object):
         self.location_list = []
 
         self.occupations = []
-        # self.birth
-        # self.death
         self.family_member_list = []
         self.friend_list = []
         self.intimate_relationship_list = []
+
+        # Gurjap's files
+        self.contextCounts = {
+            "intimateRelationship":1,
+            "friendsAssociates":1
+        }
+        self.birthObj = None
+        self.deathObj = None
+        self.cohabitants_list = []
+        self.family_list = []
+        self.friendsAssociates_list = []
+        self.intimateRelationships_list = []
+        self.childless_list = []
+        self.children_list =[]
+
 
     def add_context(self, context):
         if context is list:
@@ -138,6 +151,11 @@ class Biography(object):
         for x in e_list:
             g += x.to_triple(self)
         return g
+    def create_triples2(self, e_list,f_list):
+        g = rdflib.Graph()
+        for x in e_list:
+            g += x.to_triple(self)
+        return g
 
     def to_graph(self):
         g = rdflib.Graph()
@@ -149,16 +167,29 @@ class Biography(object):
         g.add((self.uri, RDFS.label, Literal(self.name, datatype=rdflib.namespace.XSD.string)))
         g.add((self.uri, NS_DICT["cwrc"].hasGender, self.gender))
         g.add((self.uri, NS_DICT["foaf"].isPrimaryTopicOf, self.url))
+
         g += self.create_triples(self.cf_list)
         g += self.create_triples(self.context_list)
         g += self.create_triples(self.location_list)
         g += self.create_triples(self.event_list)
+        g += self.create_triples(self.education_context_list)
+
+
         # Something like this
-        # g += self.birth.to_triples()
-        # g += self.create_triples(self.education_context_list)
+        g +=self.birthObj.to_triple()
+        if self.deathObj is not None:
+            g +=self.deathObj.to_triples()
+        g += self.create_triples(self.cohabitants_list)
+        g += self.create_triples(self.family_list)
+        g += self.create_triples(self.friendsAssociates_list)
+        g += self.create_triples(self.intimateRelationships_list)
+        g += self.create_triples(self.childless_list)
+        g +=self.create_triples(self.children_list)
+
+        # done putting in new contexts
 
         # g += self.create_triples(self.event_list)
-
+        # print(g.serialize(format='turtle').decode())
         return g
 
     def to_file(self, graph, serialization="ttl"):
