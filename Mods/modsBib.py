@@ -1,11 +1,13 @@
 from bs4 import BeautifulSoup
 import rdflib, sys
+import os
 
 from rdflib import *
 
 CWRC = rdflib.Namespace( "http://sparql.cwrc.ca/ontologies/cwrc#")
 BF = rdflib.Namespace( "http://id.loc.gov/ontologies/bibframe/")
 XML = rdflib.Namespace("http://www.w3.org/XML/1998/namespace")
+MARCREL = rdflib.Namespace("http://id.loc.gov/vocabulary/relators/")
 
 
 class BibliographyParse():
@@ -14,48 +16,82 @@ class BibliographyParse():
     mainURI = ""
     g=None
     id=""
+    relatedItem=False
 
     type_map = {
         "text": BF.Text,
         "audio": BF.Audio,
+        "sound recording": BF.Audio,
         "cartography": BF.Cartography,
         "dataset": BF.Dataset,
         "mixed material": BF.MixedMaterial,
         "moving image": BF.MovingImage,
         "notated movement": BF.NotatedMovement,
         "multimedia": BF.Multimedia,
+        "software, multimedia": BF.Multimedia,
         "still image": BF.StillImage,
         "object": BF.Object
     }
 
-    def __init__(self, filename, graph):
-        with open(filename) as f:
-            self.soup = BeautifulSoup(f, 'lxml')
+    role_map = {
+        "editor": "edt",
+        "translator": "trl",
+        "compiler": "com",
+        "adapter": "adp",
+        "contributor": "ctb",
+        "illustrator": "ill",
+        "introduction": "win",
+        "revised": "edt",
+        "afterword": "aft",
+        "transcriber": "trc"
+    }
+
+    def __init__(self, filename, graph, resource_name, related_item=False):
+
+        if type(filename) is str:
+            with open(filename) as f:
+                self.soup = BeautifulSoup(f, 'lxml')
+        else:
+            self.soup = filename
 
         self.g = graph
-        self.id = filename.replace(".xml", "")
+        self.id = resource_name.replace(".xml", "")
         self.mainURI = self.id
+        self.relatedItem = related_item
 
 
     def get_type(self):
         if self.soup.typeofresource:
-            resource_type =  self.soup.typeofresource.text.lower()
+            resource_type = self.soup.typeofresource.text.lower()
+
             return self.type_map[resource_type]
         else:
-            return None
+            return BF.Text
 
     def get_genre(self):
         if self.soup.genre:
-            return {'genre': self.soup.genre.text, 'authority': self.soup.genre['authority']}
+            if 'authority' in self.soup.genre:
+                authority = self.soup.genre['authority']
+            else:
+                authority = ""
+            return {'genre': self.soup.genre.text, 'authority': authority}
 
     def get_title(self):
-        title_values = ""
         if self.soup.titleinfo:
-            # for item in self.soup.titleinfo:
-            #     title_values += item.title
+            titleinfo = self.soup.titleinfo
+            if 'usage' in titleinfo.attrs:
+                usage = titleinfo.attrs['usage']
+            else:
+                usage = None
+
             if self.soup.titleinfo.title:
-                return self.soup.titleinfo.title.text
-        return ""
+                title = self.soup.titleinfo.title
+            else:
+                title = None
+        else:
+            return {"title": None, "usage": None}
+
+        return {"title": title, "usage": usage}
 
     def get_record_content_source(self):
         records = []
@@ -114,9 +150,22 @@ class BibliographyParse():
     def get_names(self):
         names = []
         for np in self.soup.find_all('name'):
-            print(np['type'])
-            print(np.namepart.get_text())
-            names.append({"type": np['type'], "name": np.namepart.get_text()})
+            if 'type' in np.attrs:
+                type = np['type']
+
+            else:
+                type = None
+
+            role = None
+            roleTerms = np.find_all('roleterm')
+            for role in roleTerms:
+                if role['type'] == "text":
+                    role = role.text
+
+
+            print(type)
+            #print(np.namepart.get_text())
+            names.append({"type": type, "role": role, "name": np.namepart.get_text()})
 
         return names
 
@@ -147,44 +196,92 @@ class BibliographyParse():
     def origin_info_place(self):
         places = []
         for o in self.soup.find_all('origininfo'):
-            places.append({"term": o.place.placeterm.text})
+            if o.place:
+                places.append({"term": o.place.placeterm.text})
 
         return places
 
     def origin_info_publisher(self):
         publishers = []
         for o in self.soup.find_all('origininfo'):
-            publishers.append({"publisher": o.publisher.text})
+            if o.publisher:
+                publishers.append({"publisher": o.publisher.text})
 
         return publishers
 
     def origin_info_date(self):
         dates = []
         for o in self.soup.find_all("origininfo"):
-            dates.append({"date": o.dateissued.text})
+            if o.dateissued:
+                dates.append({"date": o.dateissued.text})
 
         return dates
+
+    def get_related_items(self):
+        related_items = self.soup.find_all('relateditem')
+        soups = []
+        for item in related_items:
+            try:
+                print("{}".format(item))
+                #sys.exit(0)
+                soups.append(BeautifulSoup("{}".format(item), 'lxml'))
+            except UnicodeError:
+                pass
+
+        return soups
+
 
     def build_graph(self):
         g = self.g
         i = 0
 
+        title = self.get_title()
+
         resource = g.resource(self.mainURI)
         resource.add(RDF.type, BF.Work)
-        resource.add(RDFS.label, Literal(self.get_title()))
+        if title['title'] is not None:
+            resource.add(RDFS.label, Literal(title['title']))
         resource.add(RDF.type, self.get_type())
+
+        instance = g.resource(self.mainURI + "_instance")
+        instance.add(RDF.type, BF.Instance)
+        instance.add(BF.instanceOf, resource)
+
+        if 'usage' in title and title['usage'] is not None:
+            title_res = g.resource("{}_title".format(self.mainURI))
+            title_res.add(RDF.type, BF.Title)
+            title_res.add(BF.mainTitle, Literal(title["title"]))
+            instance.add(BF.title, title_res)
 
         for name in self.get_names():
             contribution_resource = g.resource(self.mainURI + "#contribution_{}".format(i))
             i += 0
             contribution_resource.add(RDF.type, BF.Contribution)
             agent_resource = g.resource(self.mainURI + "#agent_{}".format(i))
-            agent_resource.add(RDF.type, BF.Agent)
+            if name['type'] == 'personal':
+                agent_resource.add(RDF.type, BF.Person)
+            elif name['type'] == 'family':
+                agent_resource.add(RDF.type, BF.Family)
+            elif name['type'] == "corporate":
+                agent_resource.add(RDF.type, BF.Organization)
+            elif name['type'] == "conference":
+                agent_resource.add(RDF.type, BF.Meeting)
+            else:
+                agent_resource.add(RDF.type, BF.Agent)
+
             agent_resource.add(RDFS.label, Literal(name["name"]))
-            agent_resource.add(CWRC.role, URIRef("cwrc:{}".format(name["type"])))
+            role_resource = g.resource("{}#contribution_{}_role".format(self.mainURI, i))
+            role_resource.add(RDF.type, BF.Role)
+
+            if name['role'] in self.role_map:
+                role_resource.add(BF.code, Literal(self.role_map[name['role']]))
+                role_resource.add(BF.source, URIRef("marcrel:{}".format(self.role_map[name['role']])))
+
+            if name['role']:
+                role_resource.add(RDFS.label, Literal(name["role"]))
+                contribution_resource.add(BF.role, role_resource)
 
             contribution_resource.add(BF.agent, agent_resource)
-
             resource.add(BF.contribution, contribution_resource)
 
         for lang in self.get_languages():
@@ -258,18 +355,27 @@ class BibliographyParse():
 
             i += 0
 
+        i = 0
+        if self.relatedItem == False:
+            for part in self.get_related_items():
+                bp = BibliographyParse(part, self.g, "{}_part_{}".format(self.mainURI, i), True)
+                bp.build_graph()
+
+                work = g.resource("{}_part_{}".format(self.mainURI, i))
+                resource.add(BF.hasPart, work)
+                i += 0
+
         resource.add(BF.provisionActivityStatement, originInfo)
 
 
         genre = self.get_genre()
 
-        genre_res = g.resource("{}_genre".format(self.mainURI))
-        genre_res.add(RDF.type, BF.GenreForm)
-        genre_res.add(RDFS.label, Literal(genre['genre']))
+        if genre:
+            genre_res = g.resource("{}_genre".format(self.mainURI))
+            genre_res.add(RDF.type, BF.GenreForm)
+            genre_res.add(RDFS.label, Literal(genre['genre']))
 
-        resource.add(BF.genreForm, genre_res)
-
-
+            resource.add(BF.genreForm, genre_res)
 
 
 if __name__ == "__main__":
@@ -277,11 +383,22 @@ if __name__ == "__main__":
     g.bind("cwrc", CWRC)
     g.bind("bf", BF)
     g.bind("xml", XML, True)
+    g.bind("marcrel", MARCREL)
 
-    filename = sys.argv[1]
+    dirname = sys.argv[1]
 
-    mp = BibliographyParse(filename, g)
+    for fname in os.listdir(dirname):
+        path = os.path.join(dirname, fname)
+        if os.path.isdir(path):
+            continue
 
-    mp.build_graph()
+        print(fname)
+        try:
+            mp = BibliographyParse(path, g, fname)
+            mp.build_graph()
+        except UnicodeError:
+            pass
 
-    g.serialize(destination="output.txt", format="turtle")
+    fname = "Bibliography"
+    output_name = fname.replace(".xml", "")
+    g.serialize(destination="bibrdf/{}.rdf".format(output_name), format="turtle")
