@@ -8,6 +8,7 @@ CWRC = rdflib.Namespace( "http://sparql.cwrc.ca/ontologies/cwrc#")
 BF = rdflib.Namespace( "http://id.loc.gov/ontologies/bibframe/")
 XML = rdflib.Namespace("http://www.w3.org/XML/1998/namespace")
 MARCREL = rdflib.Namespace("http://id.loc.gov/vocabulary/relators/")
+DATA = rdflib.Namespace("http://cwrc.ca/cwrcdata/")
 
 
 class BibliographyParse():
@@ -56,7 +57,7 @@ class BibliographyParse():
 
         self.g = graph
         self.id = resource_name.replace(".xml", "")
-        self.mainURI = self.id
+        self.mainURI = "{}:{}".format("data", self.id)
         self.relatedItem = related_item
 
 
@@ -85,7 +86,7 @@ class BibliographyParse():
                 usage = None
 
             if self.soup.titleinfo.title:
-                title = self.soup.titleinfo.title
+                title = self.soup.titleinfo.title.text
             else:
                 title = None
         else:
@@ -384,6 +385,7 @@ if __name__ == "__main__":
     g.bind("bf", BF)
     g.bind("xml", XML, True)
     g.bind("marcrel", MARCREL)
+    g.bind("data", DATA)
 
     dirname = sys.argv[1]
 
