@@ -9,6 +9,46 @@ BF = rdflib.Namespace( "http://id.loc.gov/ontologies/bibframe/")
 XML = rdflib.Namespace("http://www.w3.org/XML/1998/namespace")
 MARCREL = rdflib.Namespace("http://id.loc.gov/vocabulary/relators/")
 DATA = rdflib.Namespace("http://cwrc.ca/cwrcdata/")
+GENRE = rdflib.Namespace("http://sparql.cwrc.ca/ontologies/genre#")
+
+
+genre_graph = None
+genre_map = {}
+
+class WritingParse():
+
+    matched_documents = None
+    soup = None
+
+    def __init__(self, filename, matched_documents):
+        with open(filename) as f:
+            self.soup = BeautifulSoup(f, 'lxml')
+
+        self.matched_documents = matched_documents
+
+        self.parse_db_refs()
+
+    def parse_db_refs(self):
+        """
+        Maps all genres within a textscope to the given dbref
+        Used to map to blibiography
+        :return: None
+        """
+        textscopes = self.soup.find_all('textscope')
+
+        for ts in textscopes:
+            ts_parent = ts.parent
+            if 'dbref' in ts.attrs:
+                db_ref = ts.attrs['dbref']
+
+                tgenres = ts_parent.find_all('tgenre')
+                genres = []
+                for genre in tgenres:
+                    if 'genrename' in genre.attrs:
+                        name = genre.attrs['genrename']
+                        genres.append(name)
+
+                self.matched_documents[db_ref] = genres
 
 
 class BibliographyParse():
@@ -231,6 +271,22 @@ class BibliographyParse():
 
         return soups
 
+    def get_notes(self):
+        note_items = self.soup.find_all('note')
+
+        notes = []
+        for note in note_items:
+            if 'type' in note.attrs:
+                note_type = note.attrs['type']
+            else:
+                note_type = None
+
+            note_content = note.text
+
+            notes.append({"type": note_type, "content": note_content})
+
+        return notes
+
 
     def build_graph(self):
         g = self.g
@@ -256,7 +312,7 @@ class BibliographyParse():
 
         for name in self.get_names():
             contribution_resource = g.resource(self.mainURI + "#contribution_{}".format(i))
-            i += 0
+
             contribution_resource.add(RDF.type, BF.Contribution)
             agent_resource = g.resource(self.mainURI + "#agent_{}".format(i))
             if name['type'] == 'personal':
@@ -281,9 +337,15 @@ class BibliographyParse():
             if name['role']:
                 role_resource.add(RDFS.label, Literal(name["role"]))
                 contribution_resource.add(BF.role, role_resource)
+            else:
+                role_resource.add(BF.code, Literal("aut"))
+                role_resource.add(BF.source, URIRef("marcrel:aut"))
+                role_resource.add(RDFS.label, Literal("author"))
 
             contribution_resource.add(BF.agent, agent_resource)
             resource.add(BF.contribution, contribution_resource)
+
+            i += 1
 
         for lang in self.get_languages():
             resource.add(XML.lang, Literal(lang['language']))
@@ -366,6 +428,20 @@ class BibliographyParse():
                 resource.add(BF.hasPart, work)
                 i += 0
 
+        i = 0
+
+        # Add notes to the instance
+        for n in self.get_notes():
+            note_r = g.resource("{}_note_{}".format(self.mainURI, i))
+            note_r.add(RDF.type, BF.Note)
+            note_r.add(RDF.value, Literal(n['content']))
+            if n['type']:
+                note_r.add(BF.nodeType, Literal(n['type']))
+
+            i += 0
+
+            instance.add(BF.note, note_r)
+
         resource.add(BF.provisionActivityStatement, originInfo)
 
 
@@ -378,6 +454,15 @@ class BibliographyParse():
 
             resource.add(BF.genreForm, genre_res)
 
+        if self.id in genre_map:
+            genres = genre_map[self.id]
+            for g in genres:
+                gName = g.lower().title()
+                uri = URIRef('http://sparql.cwrc.ca/ontologies/genre#genre{}'.format(gName))
+
+                if genre_graph[uri]:
+                    resource.add(GENRE.hasGenre, GENRE[gName.lower()])
+
 
 if __name__ == "__main__":
     g = Graph()
@@ -386,10 +471,34 @@ if __name__ == "__main__":
     g.bind("xml", XML, True)
     g.bind("marcrel", MARCREL)
     g.bind("data", DATA)
+    g.bind("genre", GENRE)
 
     dirname = sys.argv[1]
 
+    writing_dir = sys.argv[2]
+
+    genre_ontology = sys.argv[3]
+
+    genre_graph = Graph()
+
+    genre_graph.parse(genre_ontology)
+
+    for fname in os.listdir(writing_dir):
+        path = os.path.join(writing_dir, fname)
+        if os.path.isdir(path):
+            continue
+
+        try:
+            genreParse = WritingParse(path, genre_map)
+        except UnicodeError:
+            pass
+
+
+    #print(mapped_genres)
+    #sys.exit(0)
+
     for fname in os.listdir(dirname):
+
         path = os.path.join(dirname, fname)
         if os.path.isdir(path):
             continue
@@ -403,4 +512,5 @@ if __name__ == "__main__":
 
     fname = "Bibliography"
     output_name = fname.replace(".xml", "")
-    g.serialize(destination="bibrdf/{}.rdf".format(output_name), format="turtle")
+    file_format = "turtle"
+    g.serialize(destination="bibrdf/{}.{}".format(output_name, file_format), format=file_format)
