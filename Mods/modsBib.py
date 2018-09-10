@@ -11,12 +11,21 @@ MARCREL = rdflib.Namespace("http://id.loc.gov/vocabulary/relators/")
 DATA = rdflib.Namespace("http://cwrc.ca/cwrcdata/")
 GENRE = rdflib.Namespace("http://sparql.cwrc.ca/ontologies/genre#")
 
-
 genre_graph = None
 genre_map = {}
 
-class WritingParse():
 
+class WritingParse():
+    """
+    Parses Writing files which are files of the model:
+    http://cwrc.ca/schemas/orlando_writing.rng
+
+    and schema type of: http://relaxng.org/ns/structure/1.0
+
+    This specifically is extracting textscopes and searching for dbrefs
+    in this context they are being matched with genre.
+
+    """
     matched_documents = None
     soup = None
 
@@ -100,8 +109,12 @@ class BibliographyParse():
         self.mainURI = "{}:{}".format("data", self.id)
         self.relatedItem = related_item
 
-
     def get_type(self):
+        """
+        Extracts the type of a persons role given one of the MODS types
+        If a type is not mapped then a default of Text from BIBFRAME
+        :return: str|URI
+        """
         if self.soup.typeofresource:
             resource_type = self.soup.typeofresource.text.lower()
 
@@ -110,6 +123,10 @@ class BibliographyParse():
             return BF.Text
 
     def get_genre(self):
+        """
+        Extracts the genre and related authority of that genre
+        :return: dict
+        """
         if self.soup.genre:
             if 'authority' in self.soup.genre:
                 authority = self.soup.genre['authority']
