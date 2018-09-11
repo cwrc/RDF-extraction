@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import rdflib, sys
-import os
+import os, datetime
 
 from rdflib import *
 
@@ -247,20 +247,18 @@ class BibliographyParse:
         names = []
         for np in self.soup.find_all('name'):
             if 'type' in np.attrs:
-                type = np['type']
-
+                name_type = np['type']
             else:
-                type = None
+                name_type = None
 
             role = None
-            roleTerms = np.find_all('roleterm')
-            for role in roleTerms:
+            role_terms = np.find_all('roleterm')
+            for role in role_terms:
                 if role['type'] == "text":
                     role = role.text
 
-            print(type)
-            #print(np.namepart.get_text())
-            names.append({"type": type, "role": role, "name": np.namepart.get_text()})
+            print(name_type)
+            names.append({"type": name_type, "role": role, "name": np.namepart.get_text()})
 
         return names
 
@@ -437,9 +435,17 @@ class BibliographyParse:
         for r in self.get_record_language_catalog():
             adminMetaData.add(BF.descriptionLanguage, Literal(r['language']))
 
+        # Track this transformation
+        cur_date = datetime.datetime.now()
+        generation_process = g.resource("{}_generation_process_cwrc".format(self.mainURI))
+        generation_process.add(RDF.type, BF.GenerationProcess)
+        generation_process.add(RDF.value,
+                               Literal("Converted from MODS to BIBFRAME RDF in" +
+                                       " {} {} using CWRC's modsBib extraction script".format(cur_date.strftime("%B"),
+                                                                                              cur_date.strftime("%Y"))))
+        adminMetaData.add(BF.generationProcess, generation_process)
+
         resource.add(BF.adminMetadata, adminMetaData)
-
-
         originInfo = g.resource("{}_activity_statement".format(self.mainURI))
 
         i = 0
