@@ -14,8 +14,33 @@ GENRE = rdflib.Namespace("http://sparql.cwrc.ca/ontologies/genre#")
 genre_graph = None
 genre_map = {}
 
+# --------- UTILITY FUNCTIONS -------
 
-class WritingParse():
+
+def remove_punctuation(input_str, all_punctuation=False):
+    """
+    Removes punctuation as defined by the Extraction doc
+    This is primarly used for normalizing person URIs so they relate
+    to separately extracted elements
+    :param input_str: the
+    :param all_punctuation: removes all punctuation within pythons string.punctuation
+    otherwise removes only hyphens (-)
+    :return: string with punctuation replaced
+    """
+    import string
+    if all_punctuation:
+        translator = str.maketrans('', '', string.punctuation)
+    else:
+        translator = str.maketrans('', '', string.punctuation.replace("-", ""))
+
+    temp_str = input_str.translate(translator)
+    temp_str = temp_str.replace(" ", "_")
+    return temp_str
+
+# ----------- MAIN CLASSES ----------
+
+
+class WritingParse:
     """
     Parses Writing files which are files of the model:
     http://cwrc.ca/schemas/orlando_writing.rng
@@ -60,14 +85,20 @@ class WritingParse():
                 self.matched_documents[db_ref] = genres
 
 
-class BibliographyParse():
+class BibliographyParse:
+    """
+    Class to parse a single bibliography entry
 
-    soup=None
+    Designed to migrate MODS XML entries to BIBFRAME RDF entries
+    """
+
+    soup = None
     mainURI = ""
-    g=None
-    id=""
-    relatedItem=False
+    g = None
+    id = ""
+    relatedItem = False
 
+    # Maps MODS types to BIBFAME types
     type_map = {
         "text": BF.Text,
         "audio": BF.Audio,
@@ -83,6 +114,7 @@ class BibliographyParse():
         "object": BF.Object
     }
 
+    # Maps MODS roles used in orlando to MARC roles
     role_map = {
         "editor": "edt",
         "translator": "trl",
@@ -97,7 +129,13 @@ class BibliographyParse():
     }
 
     def __init__(self, filename, graph, resource_name, related_item=False):
-
+        """
+        Initializes the parser
+        :param filename: the filename to read from
+        :param graph: an existing RDFLib graph
+        :param resource_name: The name of resource which all sub-resources will be derived from
+        :param related_item: if it is a related item i.e. a sub element within the XML
+        """
         if type(filename) is str:
             with open(filename) as f:
                 self.soup = BeautifulSoup(f, 'lxml')
@@ -220,7 +258,6 @@ class BibliographyParse():
                 if role['type'] == "text":
                     role = role.text
 
-
             print(type)
             #print(np.namepart.get_text())
             names.append({"type": type, "role": role, "name": np.namepart.get_text()})
@@ -304,7 +341,6 @@ class BibliographyParse():
 
         return notes
 
-
     def build_graph(self):
         g = self.g
         i = 0
@@ -353,20 +389,20 @@ class BibliographyParse():
 
             if name['role']:
                 role_resource.add(RDFS.label, Literal(name["role"]))
-                contribution_resource.add(BF.role, role_resource)
             else:
                 role_resource.add(BF.code, Literal("aut"))
                 role_resource.add(BF.source, URIRef("marcrel:aut"))
                 role_resource.add(RDFS.label, Literal("author"))
 
+            agent_resource.add(OWL.sameAs, URIRef("data:{}".format(remove_punctuation(name['name']))))
             contribution_resource.add(BF.agent, agent_resource)
+            contribution_resource.add(BF.role, role_resource)
             resource.add(BF.contribution, contribution_resource)
 
             i += 1
 
         for lang in self.get_languages():
             resource.add(XML.lang, Literal(lang['language']))
-
 
         adminMetaData = g.resource("{}_admin_metatdata".format(self.mainURI))
 
@@ -489,6 +525,7 @@ if __name__ == "__main__":
     g.bind("marcrel", MARCREL)
     g.bind("data", DATA)
     g.bind("genre", GENRE)
+    g.bind("owl", OWL)
 
     dirname = sys.argv[1]
 
