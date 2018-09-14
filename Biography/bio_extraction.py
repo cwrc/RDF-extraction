@@ -42,6 +42,8 @@ bind_ns(namespace_manager, NS_DICT)
 def main():
     import os
     filelist = [filename for filename in sorted(os.listdir("bio_data/")) if filename.endswith(".xml")]
+    filelist.remove("fielmi-b.xml")
+
     numTriples = 0
     entry_num = 1
     global uber_graph
@@ -51,7 +53,6 @@ def main():
     smallest_person = None
     largest_person = None
 
-    # 328686 triples created
     # for filename in filelist[:200]:
     # for filename in filelist[:2]:
     # for filename in ["levyam-b.xml", "atwoma-b.xml", "woolvi-b.xml", "clifan-b.xml"]:
@@ -82,7 +83,7 @@ def main():
 
         numTriples += len(graph)
 
-        print("length: ",len(graph))
+        # print("length: ",len(graph))
         # Logging bits
         extract_log.subtitle("Entry #" + str(entry_num))
         extract_log.msg(str(person))
@@ -108,12 +109,11 @@ def main():
         entry_num += 1
         # exit()
 
-    exit()
     turtle_log.subtitle(str(len(uber_graph)) + " triples created")
     turtle_log.msg(uber_graph.serialize(format="ttl").decode(), stdout=False)
     turtle_log.msg("")
 
-    file = open("all_triples.ttl", "w",encoding="utf-8")
+    file = open("all_triples.ttl", "w", encoding="utf-8")
     file.write("#" + str(len(uber_graph)) + " triples created\n")
     file.write(uber_graph.serialize(format="ttl").decode())
 
@@ -124,11 +124,6 @@ def main():
     log.subtitle(str(len(uber_graph)) + " total triples created")
     log.msg(str(largest_person) + " produces the most triples(" + str(highest_triples) + ")")
     log.msg(str(smallest_person) + " produces the least triples(" + str(least_triples) + ")")
-    exit()
-
-
-def test():
-    exit()
 
 if __name__ == "__main__":
     # auth = [env.env("USER_NAME"), env.env("PASSWORD")]
