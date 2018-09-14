@@ -2,7 +2,7 @@ import rdflib
 from rdflib import RDF, RDFS, Literal, URIRef,BNode, Graph
 from rdflib.namespace import XSD
 import os, csv
-from biography import bind_ns, NS_DICT, make_standard_uri
+from biography import bind_ns, NS_DICT, make_standard_uri,create_uri
 
 g = Graph()
 
@@ -525,3 +525,4 @@ class Cohabitant:
         bind_ns(namespace_manager, NS_DICT)
         g.add((person.uri, self.predicate, self.value))
         return g
+

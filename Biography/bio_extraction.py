@@ -4,16 +4,16 @@
 from bs4 import BeautifulSoup
 import rdflib
 
-from biography import Biography, bind_ns, NS_DICT
+from biography import Biography, bind_ns, NS_DICT,get_name,get_sex
 from log import *
 import culturalForm as cf
 import education
 import location
 import other_contexts
-
+import personname
 # gurjap's files
 import birthDeath
-import scrapeFamily
+import lifeInfo
 """
 This is a possible temporary main script that creates the biography related triples
 TODO: 
@@ -38,13 +38,6 @@ namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
 bind_ns(namespace_manager, NS_DICT)
 
 
-def get_name(bio):
-    return (bio.BIOGRAPHY.DIV0.STANDARD.text)
-
-
-def get_sex(bio):
-    return (bio.BIOGRAPHY.get("SEX"))
-
 
 def main():
     import os
@@ -62,26 +55,28 @@ def main():
     # for filename in filelist[:200]:
     # for filename in filelist[:2]:
     # for filename in ["levyam-b.xml", "atwoma-b.xml", "woolvi-b.xml", "clifan-b.xml"]:
-    for filename in ["levyam-b.xml"]:
-    # for filename in filelist:
+    # for filename in ["levyam-b.xml"]:
+    for filename in filelist:
         with open("bio_data/" + filename,encoding="utf-8") as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
-        print(filename)
+        print("===========",filename,"=============")
         person = Biography(filename[:-6], get_name(soup), cf.get_mapped_term("Gender", get_sex(soup)))
-        education.extract_education_data(soup, person)
-        cf.extract_cf_data(soup, person)
-        person.context_list.clear()
-        other_contexts.extract_health_contexts_data(soup, person)
-        birthDeath.getBirth(soup,person)
-        birthDeath.getDeath(soup,person)
-        scrapeFamily.cohabitantsCheck(soup,person)
-        scrapeFamily.getFamilyInfo(soup,person)
-        scrapeFamily.friendsAssociateCheck(soup,person)
-        scrapeFamily.intimateRelationshipsCheck(soup,person)
-        scrapeFamily.childlessnessCheck(soup,person)
-        scrapeFamily.childrenCheck(soup,person)
-        location.extract_location_data(soup, person)
+        # education.extract_education_data(soup, person)
+        # cf.extract_cf_data(soup, person)
+        # person.context_list.clear()
+        # other_contexts.extract_health_contexts_data(soup, person)
+        personname.extract_person_name(soup,person)
+        continue
+        # birthDeath.extract_birth(soup, person)
+        # birthDeath.extract_death(soup, person)
+        # lifeInfo.extract_cohabitants(soup, person)
+        # lifeInfo.extract_family(soup, person)
+        # lifeInfo.extract_friends_associates(soup, person)
+        # lifeInfo.extract_intimate_relationships(soup, person)
+        # lifeInfo.extract_childlessness(soup, person)
+        # lifeInfo.extract_children(soup, person)
+        # location.extract_location_data(soup, person)
 
         graph = person.to_graph()
 
@@ -113,7 +108,7 @@ def main():
         entry_num += 1
         # exit()
 
-
+    exit()
     turtle_log.subtitle(str(len(uber_graph)) + " triples created")
     turtle_log.msg(uber_graph.serialize(format="ttl").decode(), stdout=False)
     turtle_log.msg("")

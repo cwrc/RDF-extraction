@@ -8,7 +8,7 @@ from stringAndMemberFunctions import *
 from classes import *
 import context
 # from graphOntology import graphMaker
-from birthDeath import getBirth, getDeath
+from birthDeath import extract_birth, extract_death
 
 numSigs = 0
 numAdded = 0
@@ -26,7 +26,7 @@ numtags = 0
 
 
 # checks if child's name is available in children tag
-def childrenCheck(xmlString, person):
+def extract_children(xmlString, person):
     root = xmlString.BIOGRAPHY
     childrenTag = root.find_all('CHILDREN')
     childrenList = []
@@ -42,7 +42,7 @@ def childrenCheck(xmlString, person):
     person.children_list = childrenList
 
 
-def childlessnessCheck(xmlString,person):
+def extract_childlessness(xmlString, person):
     root = xmlString.BIOGRAPHY
     childrenTag = root.find_all('CHILDLESSNESS')
     childlessList = []
@@ -95,7 +95,7 @@ def childlessnessCheck(xmlString,person):
 
     # return childlessList
     person.childless_list = childlessList
-def friendsAssociateCheck(xmlString,person):
+def extract_friends_associates(xmlString, person):
     # root = xml.etree.ElementTree.fromstring(xmlString)
     root = xmlString.BIOGRAPHY
 
@@ -117,7 +117,7 @@ def friendsAssociateCheck(xmlString,person):
         listToReturn += thisInstanceObjs
 
     person.friendsAssociates_list = listToReturn
-def cohabitantsCheck(xmlString,person):
+def extract_cohabitants(xmlString, person):
     # root = xml.etree.ElementTree.fromstring(xmlString)
     root = xmlString.BIOGRAPHY
     sourcePerson = findTag(root,"DIV0 STANDARD").text
@@ -149,7 +149,7 @@ def getSexualityContexts(xmlString):
 #     print(root)
     return listToReturn
 
-def intimateRelationshipsCheck(xmlString,person):
+def extract_intimate_relationships(xmlString, person):
     root = xmlString.BIOGRAPHY
     irTag = root.find_all('INTIMATERELATIONSHIPS')
     intimateRelationships = []
@@ -193,7 +193,7 @@ def intimateRelationshipsCheck(xmlString,person):
 # Relation:  FATHER
 # Jobs: army officer
 # SigAct: lost money, currency committee
-def getFamilyInfo(xmlString,person):
+def extract_family(xmlString, person):
     global numSigs
     global numAdded
 
@@ -256,5 +256,6 @@ def getOccupationDict():
             # break
         # print(len(listToReturn))
     return listToReturn
+
 
     

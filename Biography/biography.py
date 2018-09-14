@@ -41,6 +41,12 @@ NS_DICT = {
     "vs": rdflib.Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#")
 }
 
+def get_name(bio):
+    return (bio.BIOGRAPHY.DIV0.STANDARD.text)
+
+
+def get_sex(bio):
+    return (bio.BIOGRAPHY.get("SEX"))
 
 def bind_ns(namespace_manager, ns_dictionary):
     for x in ns_dictionary.keys():
@@ -96,10 +102,7 @@ class Biography(object):
         self.intimate_relationship_list = []
 
         # Gurjap's files
-        self.contextCounts = {
-            "intimateRelationship":1,
-            "friendsAssociates":1
-        }
+
         self.birthObj = None
         self.deathObj = None
         self.cohabitants_list = []
@@ -108,7 +111,7 @@ class Biography(object):
         self.intimateRelationships_list = []
         self.childless_list = []
         self.children_list =[]
-
+        self.name_list = []
 
     def add_context(self, context):
         if context is list:
@@ -147,11 +150,6 @@ class Biography(object):
         # self.event_list.append(Event(title, event_type, date, other_attributes))
 
     def create_triples(self, e_list):
-        g = rdflib.Graph()
-        for x in e_list:
-            g += x.to_triple(self)
-        return g
-    def create_triples2(self, e_list,f_list):
         g = rdflib.Graph()
         for x in e_list:
             g += x.to_triple(self)
