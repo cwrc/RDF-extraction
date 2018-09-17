@@ -97,8 +97,8 @@ class Biography(object):
 
         # Gurjap's files
         self.contextCounts = {
-            "intimateRelationship":1,
-            "friendsAssociates":1
+            "intimateRelationship": 1,
+            "friendsAssociates": 1
         }
         self.birthObj = None
         self.deathObj = None
@@ -107,8 +107,7 @@ class Biography(object):
         self.friendsAssociates_list = []
         self.intimateRelationships_list = []
         self.childless_list = []
-        self.children_list =[]
-
+        self.children_list = []
 
     def add_context(self, context):
         if context is list:
@@ -151,7 +150,8 @@ class Biography(object):
         for x in e_list:
             g += x.to_triple(self)
         return g
-    def create_triples2(self, e_list,f_list):
+
+    def create_triples2(self, e_list, f_list):
         g = rdflib.Graph()
         for x in e_list:
             g += x.to_triple(self)
@@ -174,17 +174,17 @@ class Biography(object):
         g += self.create_triples(self.event_list)
         g += self.create_triples(self.education_context_list)
 
-
         # Something like this
-        g +=self.birthObj.to_triple()
+        if self.birthObj:
+            g += self.birthObj.to_triple()
         if self.deathObj is not None:
-            g +=self.deathObj.to_triples()
+            g += self.deathObj.to_triples()
         g += self.create_triples(self.cohabitants_list)
         g += self.create_triples(self.family_list)
         g += self.create_triples(self.friendsAssociates_list)
         g += self.create_triples(self.intimateRelationships_list)
         g += self.create_triples(self.childless_list)
-        g +=self.create_triples(self.children_list)
+        g += self.create_triples(self.children_list)
 
         # done putting in new contexts
 

@@ -1,24 +1,68 @@
 #!/usr/bin/python3
-from rdflib import RDF
-from rdflib import Graph, Namespace
 import os
+from rdflib import Graph, Namespace, namespace
+
+NS_DICT = {
+    "as": Namespace("http://www.w3.org/ns/activitystreams#"),
+    "bibo": Namespace("http://purl.org/ontology/bibo/"),
+    "bio": Namespace("http://purl.org/vocab/bio/0.1/"),
+    "cc": Namespace("http://creativecommons.org/ns#"),
+    "cwrc": Namespace("http://sparql.cwrc.ca/ontologies/cwrc#"),
+    "data": Namespace("http://cwrc.ca/cwrcdata/"),
+    "dbpedia": Namespace("http://dbpedia.org/resource/"),
+    "dcterms": Namespace("http://purl.org/dc/terms/"),
+    "dctypes": Namespace("http://purl.org/dc/dcmitype/"),
+    "eurovoc": Namespace("http://eurovoc.europa.eu/"),
+    "foaf": Namespace("http://xmlns.com/foaf/0.1/"),
+    "geonames": Namespace("http://sws.geonames.org/"),
+    "gvp": Namespace("http://vocab.getty.edu/ontology#"),
+    "loc": Namespace("http://id.loc.gov/vocabulary/relators/"),
+    "oa": Namespace("http://www.w3.org/ns/oa#"),
+    "org": Namespace("http://www.w3.org/ns/org#"),
+    "owl": Namespace("http://www.w3.org/2002/07/owl#"),
+    "prov": Namespace("http://www.w3.org/ns/prov#"),
+    "rdf": Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#"),
+    "rdfs": Namespace("http://www.w3.org/2000/01/rdf-schema#"),
+    "sem": Namespace("http://semanticweb.cs.vu.nl/2009/11/sem/"),
+    "schema": Namespace("http://schema.org/"),
+    "skos": Namespace("http://www.w3.org/2004/02/skos/core#"),
+    "skosxl": Namespace("http://www.w3.org/2008/05/skos-xl#"),
+    "time": Namespace("http://www.w3.org/2006/time#"),
+    "vann": Namespace("http://purl.org/vocab/vann/"),
+    "voaf": Namespace("http://purl.org/vocommons/voaf#"),
+    "void": Namespace("http://rdfs.org/ns/void#"),
+    "vs": Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#")
+}
+
+
+def bind_ns(namespace_manager, ns_dictionary):
+    for x in ns_dictionary.keys():
+        namespace_manager.bind(x, ns_dictionary[x], override=False)
+
 
 # root        = "~/Documents/UoGuelph Projects/CombiningTriples/"
-drivePath    = os.path.expanduser("~/Google Drive/Extraction/")
-dtnPath     = os.path.expanduser("CombinedFiles/")
+drivePath = os.path.expanduser("~/Google Drive/Extraction/")
+dtnPath_turtle = os.path.expanduser("CombinedFiles_turtle/")
+dtnPath_rdf = os.path.expanduser("CombinedFiles_rdf/")
 
 # aPath       = os.path.expanduser(drivePath + "culturalform_triples/")
-dPath       = os.path.expanduser(drivePath + "CauseOfDeath_Triples/")
-gPath       = os.path.expanduser("Bio_Triples/")
+# dPath       = os.path.expanduser(drivePath + "CauseOfDeath_Triples/")
+dPath = os.path.expanduser("CauseOfDeath_Triples/")
+gPath = os.path.expanduser("Bio_Triples/")
 
 gFiles = []
 # aFiles = []
 dFiles = []
 
+
 def isFileA(file):
     return file in aFiles
+
+
 def isFileD(file):
     return file in dFiles
+
+
 def updateFileLists():
     global gFiles
     global aFiles
@@ -27,6 +71,7 @@ def updateFileLists():
     gFiles = [filename for filename in sorted(os.listdir(gPath)) if filename.endswith(".txt")]
     # gFiles = [filename for filename in sorted(os.listdir("bio_data/")) if filename.endswith(".xml")]
     dFiles = [filename for filename in sorted(os.listdir(dPath)) if filename.endswith(".txt")]
+
 
 def main():
     global gFiles
@@ -39,7 +84,7 @@ def main():
     print(gPath)
     noWork = []
     missing = []
-    gurjapCounter  = 0
+    gurjapCounter = 0
     megaGraph = Graph()
     # f = open("namesAndTriples6.txt", "w")
 
@@ -49,8 +94,8 @@ def main():
         #     continue
 
         # alGraph = Graph()
-        dGraph  = Graph()
-        gGraph  = Graph()
+        dGraph = Graph()
+        gGraph = Graph()
 
         fileName = name[0:-4]
         # alFileName = aPath + fileName + "-cf.txt"
@@ -59,7 +104,7 @@ def main():
         codExists = False
         # graph.parse(dFileName,format="turtle")
 
-        print(name[0:-4],isFileD(fileName + "-cod.txt"))
+        print(name[0:-4], isFileD(fileName + "-cod.txt"))
         # continue
         # if isFileA(fileName+ "-cf.txt") == False:
         #     continue
@@ -78,19 +123,13 @@ def main():
         # else:
         #     missing.append(fileName + "-cod.txt")
 
-
-        gGraph.parse(gFileName,format="turtle")
+        gGraph.parse(gFileName, format="turtle")
         gurjapCounter += len(gGraph)
         graph = dGraph + gGraph
-        cwrcNamespace   = Namespace('http://sparql.cwrc.ca/ontologies/cwrc#')
-        oa              = Namespace('http://www.w3.org/ns/oa#')
-        data            = Namespace('http://cwrc.ca/cwrcdata/')
-        foaf            = Namespace('http://xmlns.com/foaf/0.1/')
-        graph.bind('cwrc', cwrcNamespace)
-        graph.bind('oa', oa)
-        graph.bind('data', data)
-        graph.bind('foaf', foaf)
-        # print(graph.serialize(format='turtle').decode())
+        namespace_manager = namespace.NamespaceManager(graph)
+        bind_ns(namespace_manager, NS_DICT)
+
+        # # print(graph.serialize(format='turtle').decode())
 
         # f.write("%s:%d\n" % (name, len(graph)))
         # print("Al:",len(alGraph),"d:",len(dGraph),"g:",len(gGraph))
@@ -99,7 +138,8 @@ def main():
         index += 1
         numTriples += len(graph)
         megaGraph += graph
-        # graph.serialize(destination=dtnPath + fileName + '.txt', format='turtle')
+        graph.serialize(destination=dtnPath_turtle + fileName + '.ttl', format='turtle')
+        graph.serialize(destination=dtnPath_rdf + fileName + '.rdf', format='pretty-xml')
 
         # gFiles.remove(name)
         # print(len(aFiles))
@@ -112,7 +152,7 @@ def main():
     # f.close()
     megaGraph.serialize("ALL_TRIPLES" + '.txt', format='turtle')
 
-    print("total Triples: ",numTriples)
+    print("total Triples: ", numTriples)
     print("total Gurjap Triples: ", gurjapCounter)
     print("didnt work ==============")
     for no in noWork:

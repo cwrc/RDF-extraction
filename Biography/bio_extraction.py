@@ -105,10 +105,10 @@ def main():
             smallest_person = filename
 
         # triples to files
-        # file = open("Bio_Triples/" + str(person.id) + ".txt", "w",encoding="utf-8")
-        # file.write("#" + str(len(graph)) + " triples created\n")
-        # file.write(person.to_file(graph))
-        # file.close()
+        file = open("Bio_Triples/" + str(person.id) + ".txt", "w", encoding="utf-8")
+        file.write("#" + str(len(graph)) + " triples created\n")
+        file.write(person.to_file(graph))
+        file.close()
 
         uber_graph += graph
         entry_num += 1

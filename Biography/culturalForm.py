@@ -48,7 +48,7 @@ class CulturalForm(object):
         This being the uri rather the typical cf one
     """
 
-    def __init__(self, predicate, reported, value , other_attributes=None):
+    def __init__(self, predicate, reported, value, other_attributes=None):
         super(CulturalForm, self).__init__()
         self.predicate = predicate
         self.reported = reported
@@ -575,6 +575,16 @@ def main():
         extract_log.msg(test_person.to_file(graph))
         extract_log.subtitle("Entry #" + str(entry_num))
         extract_log.msg("\n\n")
+
+        file = open("cf_turtle/" + filename[:-6] + ".ttl", "w", encoding="utf-8")
+        file.write("#" + str(len(graph)) + " triples created\n")
+        file.write(graph.serialize(format="ttl").decode())
+        file.close()
+
+        file = open("cf_rdf/" + filename[:-6] + ".rdf", "w", encoding="utf-8")
+        file.write("#" + str(len(graph)) + " triples created\n")
+        file.write(graph.serialize(format="pretty-xml").decode())
+        file.close()
 
         uber_graph += graph
         entry_num += 1
