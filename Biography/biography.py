@@ -58,6 +58,10 @@ def remove_punctuation(temp_str, all=False):
     return temp_str
 
 
+def get_name_uri(tag):
+    return make_standard_uri(tag.get("STANDARD"))
+
+
 def make_standard_uri(std_str, ns="data"):
     """Makes uri based of string, removes punctuation and replaces spaces with an underscore
     v2, leaving hypens

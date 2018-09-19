@@ -11,10 +11,14 @@ from context import Context
 from log import *
 from place import Place
 from event import Event
+from organizations import get_org, get_org_uri
 
 
 """
-Status: ~55%
+Status: ~75%
+TODO: 
+ - review unmapped instances 
+ - revise method of capturing failed mappings to be similar to culturalforms
 
 """
 
@@ -39,15 +43,113 @@ class Occupation(object):
     """docstring for Occupation
     """
 
-    def __init__(self, predicate, job, other_attributes=None):
+    def __init__(self, job_tag, other_attributes="None"):
         super(Occupation, self).__init__()
-        self.predicate = predicate
-        self.value = job
+
+        self.predicate = self.get_occupation_predicate(job_tag)
+        if self.predicate == "hasEmployer":
+            self.value = self.get_employer(job_tag)
+        elif self.predicate == "hasOccupationIncome":
+            self.value = Literal(self.get_value(job_tag))
+        else:
+            self.value = self.get_mapped_term(self.get_value(job_tag))
 
         if other_attributes:
             self.uri = other_attributes
 
         self.uri = biography.create_uri("cwrc", self.predicate)
+
+    def get_occupation_predicate(self, tag):
+        if tag.name == "JOB":
+            if self.get_attribute(tag, "FAMILYBUSINESS"):
+                return "hasFamilyBasedOccupation"
+            else:
+                return "hasPaidOccupation"
+        if tag.name == "SIGNIFICANTACTIVITY":
+            if self.get_attribute(tag, "PHILANTHROPYVOLUNTEER"):
+                return "hasVolunteerOccupation"
+            else:
+                return "hasOccupation"
+        if tag.name == "EMPLOYER":
+            return "hasEmployer"
+        if tag.name == "REMUNERATION":
+            return "hasOccupationIncome"
+
+    def get_employer(self, tag):
+        employer = tag.find("NAME")
+        if employer:
+            return biography.get_name_uri(employer)
+        employer = tag.find("ORGNAME")
+        if employer:
+            return get_org_uri(employer)
+        return Literal(self.get_value(tag))
+
+    def get_attribute(self, tag, attribute):
+        value = tag.get(attribute)
+        if value:
+            return value
+        return None
+
+    def get_value(self, tag):
+        value = self.get_attribute(tag, "REG")
+        if not value:
+            value = self.get_attribute(tag, "CURRENTALTERNATIVETERM")
+        if not value:
+            value = str(tag.text)
+            value = ' '.join(value.split())
+        return value
+
+    def get_mapped_term(self, value):
+        if value == "Counsellor":
+            return Literal(value)
+
+        def clean_term(string):
+            string = string.lower().replace("-", " ").strip().replace(" ", "")
+            return string
+
+        def update_fails(rdf_type, value):
+            global fail_dict
+            if rdf_type in fail_dict:
+                if value in fail_dict[rdf_type]:
+                    fail_dict[rdf_type][value] += 1
+                else:
+                    fail_dict[rdf_type][value] = 1
+            else:
+                fail_dict[rdf_type] = {value: 1}
+        """
+            Currently getting exact match ignoring case and "-"
+            TODO:
+            Make csv of unmapped
+        """
+        global map_attempt
+        global map_success
+        global map_fail
+        rdf_type = "http://sparql.cwrc.ca/ontologies/cwrc#Occupation"
+        map_attempt += 1
+        term = None
+        temp_val = clean_term(value)
+        for x in JOB_MAP.keys():
+            if temp_val in JOB_MAP[x]:
+                term = x
+                map_success += 1
+                break
+
+        if "http" in str(term):
+            term = rdflib.term.URIRef(term)
+        elif term:
+            term = rdflib.term.Literal(term, datatype=rdflib.namespace.XSD.string)
+        else:
+            term = rdflib.term.Literal("_" + value.lower() + "_", datatype=rdflib.namespace.XSD.string)
+            map_fail += 1
+            possibilites = []
+            for x in JOB_MAP.keys():
+                if get_close_matches(value.lower(), JOB_MAP[x]):
+                    possibilites.append(x)
+            if type(term) is rdflib.term.Literal:
+                update_fails(rdf_type, value)
+            else:
+                update_fails(rdf_type, value + "->" + str(possibilites) + "?")
+        return term
 
     # TODO figure out if i can just return tuple or triple without creating a whole graph
     # Evaluate efficency of creating this graph or just returning a tuple and have the biography deal with it
@@ -69,12 +171,39 @@ class Occupation(object):
         return string
 
 
+def clean_term(string):
+    string = string.lower().replace("-", " ").strip().replace(" ", "")
+    return string
+
+
+def create_job_map():
+    import csv
+    global JOB_MAP
+    with open('occupation_mapping.csv', newline='') as csvfile:
+        reader = csv.reader(csvfile)
+        next(reader)
+        for row in reader:
+            temp_row = [clean_term(x) for x in row[1:]]
+            JOB_MAP[row[0]] = (list(filter(None, temp_row)))
+
+JOB_MAP = {}
+create_job_map()
+map_attempt = 0
+map_success = 0
+map_fail = 0
+fail_dict = {}
+
+
 def find_occupations(tag):
-    """Creates location list given the tag
+    """Creates a list of occupations given the tag
     """
-    # TODO find alll JOB tags + signAct
-    # Translate them to predicates + uris
-    occupation_list = None
+
+    occupation_list = []
+    jobs_tags = tag.find_all("JOB") + tag.find_all("SIGNIFICANTACTIVITY")
+    jobs_tags += tag.find_all("EMPLOYER") + tag.find_all("REMUNERATION")
+    for x in jobs_tags:
+        occupation_list.append(Occupation(x))
+
     return occupation_list
 
 
@@ -173,6 +302,15 @@ def main():
     turtle_log.msg(uber_graph.serialize(format="ttl").decode(), stdout=False)
     turtle_log.msg("")
 
+    print()
+    job_fail_dict = fail_dict['http://sparql.cwrc.ca/ontologies/cwrc#Occupation']
+    log.msg("Missed Terms: ", len(job_fail_dict.keys()))
+    count = 0
+    for x in job_fail_dict.keys():
+        log.msg(x, ":", job_fail_dict[x])
+        count += job_fail_dict[x]
+    log.msg("Total Terms: ", count)
+
 
 def test():
     exit()
@@ -181,4 +319,5 @@ if __name__ == "__main__":
     # auth = [env.env("USER_NAME"), env.env("PASSWORD")]
     # login.main(auth)
     # test()
+    # print(JOB_MAP)
     main()
