@@ -271,7 +271,10 @@ def main():
 
     # for filename in filelist[:200]:
     # for filename in filelist[-5:]:
-    for filename in filelist:
+    test_cases = ["shakwi-b.xml", "woolvi-b.xml", "seacma-b.xml", "atwoma-b.xml",
+                  "alcolo-b.xml", "bronem-b.xml", "bronch-b.xml", "levyam-b.xml"]
+    for filename in test_cases:
+    # for filename in filelist:
         with open("bio_data/" + filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 

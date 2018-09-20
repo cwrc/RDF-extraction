@@ -347,13 +347,14 @@ def find_cultural_forms(cf, person):
     return cf_list
 
 
-def extract_culturalforms(tag_list, context_type, person, list_type="paragraphs"):
+def extract_culturalforms(tag_list, context_type, person, list_type="paragraphs", event_count=1):
     """ Creates the cultural forms ascribes them to the person along with the associated
         contexts and event
     """
     global cf_subelements_count
+
     forms_found = 0
-    event_count = 1
+    event_count = event_count
     for tag in tag_list:
         temp_context = None
         cf_list = None
@@ -419,8 +420,8 @@ def extract_cf_data(bio, person):
     for element in elements:
         paragraphs = element.find_all("P")
         events = element.find_all("CHRONSTRUCT")
-        forms_found += extract_culturalforms(paragraphs, "POLITICS", person)
-        forms_found += extract_culturalforms(events, "POLITICS", person, "events")
+        extract_culturalforms(paragraphs, "POLITICS", person)
+        forms_found += extract_culturalforms(events, "POLITICS", person, "events", forms_found)
 
 
 def clean_term(string):
@@ -558,7 +559,10 @@ def main():
     # for filename in filelist[:200]:
     # for filename in filelist[-5:]:
     global uber_graph
-    for filename in filelist:
+    test_cases = ["shakwi-b.xml", "woolvi-b.xml", "seacma-b.xml", "atwoma-b.xml",
+                  "alcolo-b.xml", "bronem-b.xml", "bronch-b.xml", "levyam-b.xml"]
+    # for filename in filelist:
+    for filename in test_cases:
         with open("bio_data/" + filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
@@ -576,12 +580,12 @@ def main():
         extract_log.subtitle("Entry #" + str(entry_num))
         extract_log.msg("\n\n")
 
-        file = open("cf_turtle/" + filename[:-6] + ".ttl", "w", encoding="utf-8")
+        file = open("cf_turtle/" + filename[:-6] + "_cf.ttl", "w", encoding="utf-8")
         file.write("#" + str(len(graph)) + " triples created\n")
         file.write(graph.serialize(format="ttl").decode())
         file.close()
 
-        file = open("cf_rdf/" + filename[:-6] + ".rdf", "w", encoding="utf-8")
+        file = open("cf_rdf/" + filename[:-6] + "_cf.rdf", "w", encoding="utf-8")
         file.write("#" + str(len(graph)) + " triples created\n")
         file.write(graph.serialize(format="pretty-xml").decode())
         file.close()
