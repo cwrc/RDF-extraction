@@ -76,6 +76,9 @@ def format_date(date):
     Using normalizing fix from https://github.com/RDFLib/rdflib/issues/806
     Not too sure the side effects of this
     """
+    if date[-1] == "-":
+        date = date.strip("-")
+
     if len(date) == 10:
         return Literal(date, datatype=XSD.date)
     elif len(date) == 7:
