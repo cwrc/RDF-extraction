@@ -59,6 +59,25 @@ class Occupation(object):
 
         self.uri = biography.create_uri("cwrc", self.predicate)
 
+    # TODO figure out if i can just return tuple or triple without creating a whole graph
+    # Evaluate efficency of creating this graph or just returning a tuple and have the biography deal with it
+    def to_tuple(self, person_uri):
+        return ((person_uri, self.uri, self.value))
+
+    def to_triple(self, person):
+        g = rdflib.Graph()
+        namespace_manager = rdflib.namespace.NamespaceManager(g)
+        biography.bind_ns(namespace_manager, biography.NS_DICT)
+        g.add((person.uri, self.uri, self.value))
+        return g
+
+    def __str__(self):
+        string = "\tURI: " + str(self.uri) + "\n"
+        string += "\tpredicate: " + str(self.predicate) + "\n"
+        string += "\tvalue: " + str(self.value) + "\n"
+
+        return string
+
     def get_occupation_predicate(self, tag):
         if tag.name == "JOB":
             if self.get_attribute(tag, "FAMILYBUSINESS"):
@@ -150,25 +169,6 @@ class Occupation(object):
             else:
                 update_fails(rdf_type, value + "->" + str(possibilites) + "?")
         return term
-
-    # TODO figure out if i can just return tuple or triple without creating a whole graph
-    # Evaluate efficency of creating this graph or just returning a tuple and have the biography deal with it
-    def to_tuple(self, person_uri):
-        return ((person_uri, self.uri, self.value))
-
-    def to_triple(self, person):
-        g = rdflib.Graph()
-        namespace_manager = rdflib.namespace.NamespaceManager(g)
-        biography.bind_ns(namespace_manager, biography.NS_DICT)
-        g.add((person.uri, self.uri, self.value))
-        return g
-
-    def __str__(self):
-        string = "\tURI: " + str(self.uri) + "\n"
-        string += "\tpredicate: " + str(self.predicate) + "\n"
-        string += "\tvalue: " + str(self.value) + "\n"
-
-        return string
 
 
 def clean_term(string):
@@ -273,8 +273,8 @@ def main():
     # for filename in filelist[-5:]:
     test_cases = ["shakwi-b.xml", "woolvi-b.xml", "seacma-b.xml", "atwoma-b.xml",
                   "alcolo-b.xml", "bronem-b.xml", "bronch-b.xml", "levyam-b.xml"]
-    for filename in test_cases:
-    # for filename in filelist:
+    # for filename in test_cases:
+    for filename in filelist:
         with open("bio_data/" + filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
@@ -307,12 +307,12 @@ def main():
 
     print()
     job_fail_dict = fail_dict['http://sparql.cwrc.ca/ontologies/cwrc#Occupation']
-    log.msg("Missed Terms: ", len(job_fail_dict.keys()))
+    log.msg("Missed Terms: " + str(len(job_fail_dict.keys())))
     count = 0
     for x in job_fail_dict.keys():
         log.msg(x, ":", job_fail_dict[x])
         count += job_fail_dict[x]
-    log.msg("Total Terms: ", count)
+    log.msg("Total Terms: " + str(count))
 
 
 def test():

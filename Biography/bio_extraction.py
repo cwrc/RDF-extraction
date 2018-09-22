@@ -10,6 +10,7 @@ import culturalForm as cf
 import education
 import location
 import other_contexts
+import occupation
 
 # gurjap's files
 import birthDeath
@@ -72,17 +73,18 @@ def main():
         person = Biography(filename[:-6], get_name(soup), cf.get_mapped_term("Gender", get_sex(soup)))
         cf.extract_cf_data(soup, person)
         other_contexts.extract_other_contexts_data(soup, person)
+        location.extract_location_data(soup, person)
+        occupation.extract_occupation_data(soup, person)
         # education.extract_education_data(soup, person)
-        # location.extract_location_data(soup, person)
-        # person.context_list.clear()
-        birthDeath.getBirth(soup, person)
-        birthDeath.getDeath(soup, person)
-        scrapeFamily.cohabitantsCheck(soup, person)
-        scrapeFamily.getFamilyInfo(soup, person)
-        scrapeFamily.friendsAssociateCheck(soup, person)
-        scrapeFamily.intimateRelationshipsCheck(soup, person)
-        scrapeFamily.childlessnessCheck(soup, person)
-        scrapeFamily.childrenCheck(soup, person)
+        
+        # birthDeath.getBirth(soup, person)
+        # birthDeath.getDeath(soup, person)
+        # scrapeFamily.cohabitantsCheck(soup, person)
+        # scrapeFamily.getFamilyInfo(soup, person)
+        # scrapeFamily.friendsAssociateCheck(soup, person)
+        # scrapeFamily.intimateRelationshipsCheck(soup, person)
+        # scrapeFamily.childlessnessCheck(soup, person)
+        # scrapeFamily.childrenCheck(soup, person)
 
         graph = person.to_graph()
 
