@@ -144,7 +144,11 @@ class BibliographyParse:
 
         self.g = graph
         self.id = resource_name.replace(".xml", "")
-        self.mainURI = "{}:{}".format("data", self.id)
+        if 'data:' in self.id:
+            self.mainURI = self.id
+        else:
+            self.mainURI = "{}:{}".format("data", self.id)
+            
         self.relatedItem = related_item
 
     def get_type(self):
@@ -173,21 +177,28 @@ class BibliographyParse:
             return {'genre': self.soup.genre.text, 'authority': authority}
 
     def get_title(self):
+        titles = []
         if self.soup.titleinfo:
             titleinfo = self.soup.titleinfo
-            if 'usage' in titleinfo.attrs:
-                usage = titleinfo.attrs['usage']
-            else:
-                usage = None
+            for title in self.soup.find_all('titleinfo'):
+                if title.parent.name == "relateditem" and self.relatedItem == False:
+                    continue
 
-            if self.soup.titleinfo.title:
-                title = self.soup.titleinfo.title.text
-            else:
-                title = None
-        else:
-            return {"title": None, "usage": None}
+                if 'usage' in title.attrs:
+                    usage = title.attrs['usage']
+                elif 'type' in title.attrs:
+                    usage = title.attrs['type']
+                else:
+                    usage = None
 
-        return {"title": title, "usage": usage}
+                if title.title:
+                    title_text = title.text
+                else:
+                    title_text = ""
+
+                titles.append({"title": title_text, "usage": usage})
+
+        return titles
 
     def get_record_content_source(self):
         records = []
@@ -246,6 +257,9 @@ class BibliographyParse:
     def get_names(self):
         names = []
         for np in self.soup.find_all('name'):
+            if np.parent.name == "relateditem" and self.relatedItem == False:
+                continue
+
             if 'type' in np.attrs:
                 name_type = np['type']
             else:
@@ -266,12 +280,12 @@ class BibliographyParse:
         origins = []
         if self.soup.origininfo:
             for oi in self.soup.get_all(['origininfo']):
+                if oi.parent.name == 'relateditem' and self.relatedItem == False:
+                    continue
                 place = oi.place.placeterm.text
                 publisher = oi.publisher.text
                 date = oi.dateissued.text
                 date_type = oi.dateissued['encoding']
-
-
 
                 origins.append({'place': place, 'publisher': publisher, 'date': date, 'date_type': date_type})
 
@@ -288,29 +302,47 @@ class BibliographyParse:
 
     def origin_info_place(self):
         places = []
-        for o in self.soup.find_all('origininfo'):
-            if o.place:
-                places.append({"term": o.place.placeterm.text})
+        if self.soup.origininfo:
+            for o in self.soup.find_all('origininfo'):
+                if o.parent.name == 'relateditem' and self.relatedItem == False:
+                    continue
+                if o.place:
+                    places.append({"term": o.place.placeterm.text})
 
         return places
 
     def origin_info_publisher(self):
         publishers = []
-        for o in self.soup.find_all('origininfo'):
-            if o.publisher:
-                publishers.append({"publisher": o.publisher.text})
+        if self.soup.origininfo:
+            for o in self.soup.find_all('origininfo'):
+                if o.parent.name == 'relateditem' and self.relatedItem == False:
+                    continue
+                if o.publisher:
+                    publishers.append({"publisher": o.publisher.text})
 
         return publishers
 
     def origin_info_date(self):
+        """
+        Extracts origin info to relate publisher date information
+        :return: [dict] date as key
+        """
         dates = []
-        for o in self.soup.find_all("origininfo"):
-            if o.dateissued:
-                dates.append({"date": o.dateissued.text})
+        if self.soup.origininfo:
+            for o in self.soup.find_all("origininfo"):
+                if o.parent.name == 'relateditem' and self.relatedItem == False:
+                    continue
+                if o.dateissued:
+                    dates.append({"date": o.dateissued.text})
 
         return dates
 
     def get_related_items(self):
+        """
+        Retrieves related works which are converted to beautifulsoup objects and run through a recursive process
+        to generate the same triples as the parent
+        :return: [BeautifulSoup]
+        """
         related_items = self.soup.find_all('relateditem')
         soups = []
         for item in related_items:
@@ -324,6 +356,10 @@ class BibliographyParse:
         return soups
 
     def get_notes(self):
+        """
+        Retrieves note elements in the xml and to assign to the Work
+        :return: [dict] with type and content keys
+        """
         note_items = self.soup.find_all('note')
 
         notes = []
@@ -339,27 +375,71 @@ class BibliographyParse:
 
         return notes
 
+    def get_parts(self):
+        """
+        Retrieves the parts of an instance
+        From BIBFRAME - It will
+            Concatenate values from subelements start, end, total, list to form the rdf:value
+        :return: list of rdf values for the part sub-elements
+        """
+        part_objects = []
+        if self.soup.part:
+            # Get the values
+            parts = self.soup.find_all('part')
+            for item in parts:
+                if item.parent.name == 'relateditem' and not self.relatedItem:
+                    continue
+                if not item.extent:
+                    continue
+                cur_value = ""
+                if item.extent.start:
+                    cur_value += "{}-".format(item.extent.start.text)
+                else:
+                    cur_value += "--"
+
+                if item.extent.end:
+                    cur_value += "{}".format(item.extent.end.text)
+                else:
+                    cur_value += "-"
+
+                if item.extent.total:
+                    cur_value += "{}".format(item.extent.total.text)
+
+                if item.extent.list:
+                    cur_value += "{}".format(item.extent.total.text)
+                part_objects.append(cur_value)
+
+        return part_objects
+
     def build_graph(self):
         g = self.g
         i = 0
 
-        title = self.get_title()
-
+        titles = self.get_title()
         resource = g.resource(self.mainURI)
         resource.add(RDF.type, BF.Work)
-        if title['title'] is not None:
-            resource.add(RDFS.label, Literal(title['title']))
-        resource.add(RDF.type, self.get_type())
 
         instance = g.resource(self.mainURI + "_instance")
         instance.add(RDF.type, BF.Instance)
         instance.add(BF.instanceOf, resource)
 
-        if 'usage' in title and title['usage'] is not None:
-            title_res = g.resource("{}_title".format(self.mainURI))
-            title_res.add(RDF.type, BF.Title)
-            title_res.add(BF.mainTitle, Literal(title["title"]))
-            instance.add(BF.title, title_res)
+        for item in titles:
+            if 'usage' in item and item['usage'] is not None:
+                title_res = g.resource("{}_title_{}".format(self.mainURI, i))
+
+                title_res.add(BF.mainTitle, Literal(item["title"].strip()))
+                if item['usage'] == 'alternative':
+                    title_res.add(RDF.type, BF.VariantTitle)
+                else:
+                    title_res.add(RDF.type, BF.Title)
+                    resource.add(RDFS.label, Literal(item['title'].strip()))
+                instance.add(BF.title, title_res)
+
+                i += 1
+
+        i = 0
+
+        resource.add(RDF.type, self.get_type())
 
         for name in self.get_names():
             contribution_resource = g.resource(self.mainURI + "#contribution_{}".format(i))
@@ -478,7 +558,7 @@ class BibliographyParse:
             i += 0
 
         i = 0
-        if self.relatedItem == False:
+        if not self.relatedItem:
             for part in self.get_related_items():
                 bp = BibliographyParse(part, self.g, "{}_part_{}".format(self.mainURI, i), True)
                 bp.build_graph()
@@ -501,8 +581,15 @@ class BibliographyParse:
 
             instance.add(BF.note, note_r)
 
-        resource.add(BF.provisionActivityStatement, originInfo)
+        i = 0
+        # Add parts to the instance
+        for p in self.get_parts():
+            extent_resource = g.resource("{}_extent_{}".format(self.mainURI, i))
+            extent_resource.add(RDF.type, BF.Extent)
+            extent_resource.add(RDF.value, Literal(p))
+            instance.add(BF.extent, extent_resource)
 
+        resource.add(BF.provisionActivityStatement, originInfo)
 
         genre = self.get_genre()
 
@@ -552,10 +639,6 @@ if __name__ == "__main__":
             genreParse = WritingParse(path, genre_map)
         except UnicodeError:
             pass
-
-
-    #print(mapped_genres)
-    #sys.exit(0)
 
     for fname in os.listdir(dirname):
 
