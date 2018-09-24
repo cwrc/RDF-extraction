@@ -3,35 +3,36 @@ import os
 from rdflib import Graph, Namespace, namespace
 
 NS_DICT = {
-    "as": Namespace("http://www.w3.org/ns/activitystreams#"),
-    "bibo": Namespace("http://purl.org/ontology/bibo/"),
-    "bio": Namespace("http://purl.org/vocab/bio/0.1/"),
-    "cc": Namespace("http://creativecommons.org/ns#"),
-    "cwrc": Namespace("http://sparql.cwrc.ca/ontologies/cwrc#"),
-    "data": Namespace("http://cwrc.ca/cwrcdata/"),
-    "dbpedia": Namespace("http://dbpedia.org/resource/"),
-    "dcterms": Namespace("http://purl.org/dc/terms/"),
-    "dctypes": Namespace("http://purl.org/dc/dcmitype/"),
-    "eurovoc": Namespace("http://eurovoc.europa.eu/"),
-    "foaf": Namespace("http://xmlns.com/foaf/0.1/"),
-    "geonames": Namespace("http://sws.geonames.org/"),
-    "gvp": Namespace("http://vocab.getty.edu/ontology#"),
-    "loc": Namespace("http://id.loc.gov/vocabulary/relators/"),
-    "oa": Namespace("http://www.w3.org/ns/oa#"),
-    "org": Namespace("http://www.w3.org/ns/org#"),
-    "owl": Namespace("http://www.w3.org/2002/07/owl#"),
-    "prov": Namespace("http://www.w3.org/ns/prov#"),
-    "rdf": Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#"),
-    "rdfs": Namespace("http://www.w3.org/2000/01/rdf-schema#"),
-    "sem": Namespace("http://semanticweb.cs.vu.nl/2009/11/sem/"),
-    "schema": Namespace("http://schema.org/"),
-    "skos": Namespace("http://www.w3.org/2004/02/skos/core#"),
-    "skosxl": Namespace("http://www.w3.org/2008/05/skos-xl#"),
-    "time": Namespace("http://www.w3.org/2006/time#"),
-    "vann": Namespace("http://purl.org/vocab/vann/"),
-    "voaf": Namespace("http://purl.org/vocommons/voaf#"),
-    "void": Namespace("http://rdfs.org/ns/void#"),
-    "vs": Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#")
+    "as": rdflib.Namespace("http://www.w3.org/ns/activitystreams#"),
+    "bibo": rdflib.Namespace("http://purl.org/ontology/bibo/"),
+    "bio": rdflib.Namespace("http://purl.org/vocab/bio/0.1/"),
+    "bf": rdflib.Namespace("http://id.loc.gov/ontologies/bibframe/"),
+    "cc": rdflib.Namespace("http://creativecommons.org/ns#"),
+    "cwrc": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/cwrc#"),
+    "data": rdflib.Namespace("http://cwrc.ca/cwrcdata/"),
+    "dbpedia": rdflib.Namespace("http://dbpedia.org/resource/"),
+    "dcterms": rdflib.Namespace("http://purl.org/dc/terms/"),
+    "dctypes": rdflib.Namespace("http://purl.org/dc/dcmitype/"),
+    "eurovoc": rdflib.Namespace("http://eurovoc.europa.eu/"),
+    "foaf": rdflib.Namespace("http://xmlns.com/foaf/0.1/"),
+    "geonames": rdflib.Namespace("http://sws.geonames.org/"),
+    "gvp": rdflib.Namespace("http://vocab.getty.edu/ontology#"),
+    "loc": rdflib.Namespace("http://id.loc.gov/vocabulary/relators/"),
+    "oa": rdflib.Namespace("http://www.w3.org/ns/oa#"),
+    "org": rdflib.Namespace("http://www.w3.org/ns/org#"),
+    "owl": rdflib.Namespace("http://www.w3.org/2002/07/owl#"),
+    "prov": rdflib.Namespace("http://www.w3.org/ns/prov#"),
+    "rdf": rdflib.Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#"),
+    "rdfs": rdflib.Namespace("http://www.w3.org/2000/01/rdf-schema#"),
+    "sem": rdflib.Namespace("http://semanticweb.cs.vu.nl/2009/11/sem/"),
+    "schema": rdflib.Namespace("http://schema.org/"),
+    "skos": rdflib.Namespace("http://www.w3.org/2004/02/skos/core#"),
+    "skosxl": rdflib.Namespace("http://www.w3.org/2008/05/skos-xl#"),
+    "time": rdflib.Namespace("http://www.w3.org/2006/time#"),
+    "vann": rdflib.Namespace("http://purl.org/vocab/vann/"),
+    "voaf": rdflib.Namespace("http://purl.org/vocommons/voaf#"),
+    "void": rdflib.Namespace("http://rdfs.org/ns/void#"),
+    "vs": rdflib.Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#")
 }
 
 
@@ -86,12 +87,12 @@ def main():
     missing = []
     gurjapCounter = 0
     megaGraph = Graph()
+    megaGraph.parse("organizations.ttl", format="turtle")
+    namespace_manager = namespace.NamespaceManager(megaGraph)
+    bind_ns(namespace_manager, NS_DICT)
     # f = open("namesAndTriples6.txt", "w")
 
     for name in gFiles:
-        # print(name)
-        # if "woolvi" not in name:
-        #     continue
 
         # alGraph = Graph()
         dGraph = Graph()

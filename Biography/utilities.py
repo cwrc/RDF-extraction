@@ -4,6 +4,7 @@ NS_DICT = {
     "as": rdflib.Namespace("http://www.w3.org/ns/activitystreams#"),
     "bibo": rdflib.Namespace("http://purl.org/ontology/bibo/"),
     "bio": rdflib.Namespace("http://purl.org/vocab/bio/0.1/"),
+    "bf": rdflib.Namespace("http://id.loc.gov/ontologies/bibframe/"),
     "cc": rdflib.Namespace("http://creativecommons.org/ns#"),
     "cwrc": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/cwrc#"),
     "data": rdflib.Namespace("http://cwrc.ca/cwrcdata/"),
