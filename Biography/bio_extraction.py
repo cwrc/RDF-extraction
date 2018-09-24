@@ -98,6 +98,7 @@ def main():
         extract_log.msg(person.to_file(graph))
         extract_log.subtitle("Entry #" + str(entry_num))
         extract_log.msg("\n\n")
+        # input()
 
         if len(graph) > highest_triples:
             highest_triples = len(graph)

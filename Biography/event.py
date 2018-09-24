@@ -64,6 +64,7 @@ def get_date_tag(tag):
     for x in children:
         if x.name in date_structures:
             return(x)
+    return None
 
 
 def format_date(date):
