@@ -1,19 +1,20 @@
-import rdflib
-from rdflib import RDF, RDFS, Literal
-import re
 import biography
-from context import Context, get_people, get_places
+import rdflib
+import re
+from context import Context, get_people, get_places, get_titles
+from difflib import get_close_matches
 from event import Event
-from place import Place
-from organizations import get_org, get_org_uri
 from log import *
+from organizations import get_org, get_org_uri
+from place import Place
+from rdflib import RDF, RDFS, Literal
 """
-Status: ~65%
-Basic School class created
-    Scheme for coming up with uris need to be in place
-    and what to do about conflict properties 
-Rough Education context class created
-
+Status: ~75%
+TODO:
+Handle name tags with subject tags
+TEXT tags
+    name within text
+    title within text
 """
 
 log = Log("log/education/errors")
@@ -39,7 +40,7 @@ education_event_count = {
 
 
 def strip_all_whitespace(string):
-# temp function for condensing the context strings for visibility in testing
+    # temp function for condensing the context strings for visibility in testing
     return re.sub('[\s+]', '', str(string))
 
 
@@ -92,6 +93,7 @@ class School(object):
         self.types = [School.school_type_map[x] for x in types]
         self.instructors = self.get_instructors(tag)
         self.locations = self.get_locations(tag)
+        self.studied_subjects = []
 
     def __str__(self):
         string = "\t\tname: " + str(self.name) + "\n"
@@ -136,6 +138,9 @@ class School(object):
         for x in self.locations:
             g.add((self.uri, CWRC.hasLocation, x))
 
+        for x in self.studied_subjects:
+            g.add((self.uri, CWRC.teachesEducationalSubject, x))
+
         return g
 
     def get_instructors(self, tag):
@@ -148,6 +153,72 @@ class School(object):
     def get_locations(self, tag):
         return get_places(tag)
 
+    def add_studied_subjects(self, subject):
+        self.studied_subjects += subject
+
+
+class EducationalAward(object):
+    """docstring for EducationalAward"""
+    award_keywords = ["scholarship", "prize","medal", "fellow","fellowship","essay","bursary","exhibition","distinction","honours","studentship"]
+    award_map = {
+        "scholarship": CWRC.Scholarship,
+        "prize": CWRC.EducationalPrize,
+        "medal": CWRC.EducationalPrize,
+        "fellow": CWRC.Fellowship,
+        "fellowship": CWRC.Fellowship,
+        "essay": CWRC.EssayAward,
+        "bursary": CWRC.Bursary,
+        "exhibition": CWRC.Scholarship,
+        "distinction": CWRC.Distinction,
+        "honours": CWRC.Distinction,
+        "studentship": CWRC.Studentship
+    }
+
+    def __init__(self, name):
+        super(EducationalAward, self).__init__()
+        self.name = name
+        self.award_type = self.get_award_type(name)
+        if not self.award_type:
+            self.award_type = [CWRC.EducationalAward]
+
+        text = ' '.join(str(name).split())
+        words = text.split(" ")
+        text = ' '.join(words[:15])
+        self.uri = biography.create_uri("cwrc", strip_all_whitespace(text))
+
+    def get_award_type(self, name):
+        types = []
+        for x in self.award_keywords:
+            if x in name.lower():
+                types.append(self.award_map[x])
+        return list(set(types))
+
+    def __str__(self):
+        string = "\t\tname: " + str(self.name) + "\n"
+        string += "\t\turi: " + str(self.uri) + "\n"
+        if self.award_type:
+            string += "\t\tTypes:\n"
+            for x in self.award_type:
+                string += "\t\t" + str(x) + "\n"
+        return string
+
+    def to_tuple(self, person):
+        # For future testing
+        p = str(NS_DICT["cwrc"]) + self.predicate + self.reported
+        o = self.value
+        return ((person.uri, rdflib.term.URIRef(p), o))
+
+    def to_triple(self, person):
+        g = rdflib.Graph()
+        namespace_manager = rdflib.namespace.NamespaceManager(g)
+        biography.bind_ns(namespace_manager, biography.NS_DICT)
+
+        g.add((self.uri, biography.NS_DICT["foaf"].name, rdflib.Literal(self.name)))
+        g.add((person.uri, CWRC.hasAward, self.uri))
+        for x in self.award_type:
+            g.add((self.uri, RDF.type, x))
+        return g
+
 
 class Education(object):
     """docstring for Education"""
@@ -159,12 +230,16 @@ class Education(object):
     def __init__(self):
         super(Education, self).__init__()
         self.schools = []
-        self.awards = []
-        self.studied_subjects = []
-        self.texts = []
         self.instructors = []
         self.companions = []
         self.contested_behaviour = []
+        self.studied_subjects = []
+        self.degrees = []
+        self.degree_subjects = []
+        self.awards = []
+
+        self.texts = []
+        self.edu_texts = []
 
     def to_triple(self, person):
         g = rdflib.Graph()
@@ -183,16 +258,23 @@ class Education(object):
         for x in self.contested_behaviour:
             g.add((person.uri, CWRC.hasContestedBehaviour, Literal(x)))
 
-        # TODO
         for x in self.studied_subjects:
-            # NOTE this is temporary as the uri for the study subjects should be provided before
-            subj_uri = str(NS_DICT["cwrc"]) + x
-            g.add((self.uri, CWRC.hasSubjectofStudy, rdflib.term.URIRef(strip_all_whitespace(subj_uri))))
+            g.add((person.uri, CWRC.studies, x))
+
+        for x in self.edu_texts:
+            g.add((x, RDF.type, CWRC.EducationalText))
+            g.add((person.uri, CWRC.studies, x))
+
+        for x in self.degrees:
+            g.add((person.uri, CWRC.hasCredential, x))
+
+        for x in self.degree_subjects:
+            g.add((person.uri, CWRC.hasCredentialSubject, x))
 
         for x in self.awards:
-            # NOTE this is temporary as the uri for the study subjects should be provided before
-            subj_uri = str(NS_DICT["cwrc"]) + x
-            g.add((self.uri, CWRC.hasAward, rdflib.term.URIRef(strip_all_whitespace(subj_uri))))
+            g += x.to_triple(person)
+        
+        # TODO text
 
         return g
 
@@ -210,13 +292,10 @@ class Education(object):
             string += "\tcompanions:\n"
             for x in self.companions:
                 string += "\t\t" + str(x) + "\n"
-
         if self.contested_behaviour:
             string += "\tcontested behaviour:\n"
             for x in self.contested_behaviour:
                 string += "\t\t" + str(x) + "\n"
-
-        # TODO
         if self.awards:
             string += "\tawards:\n"
             for x in self.awards:
@@ -225,6 +304,7 @@ class Education(object):
             string += "\tstudied_subjects:\n"
             for x in self.studied_subjects:
                 string += "\t\t" + str(x) + "\n"
+        # TODO
         if self.texts:
             string += "\ttexts:\n"
             for x in self.texts:
@@ -241,90 +321,23 @@ class Education(object):
     def add_companion(self, companions):
         self.companions += companions
 
-    def add_contestedBehaviour(self, behvaviour):
+    def add_contested_behaviour(self, behvaviour):
         self.contested_behaviour += behvaviour
 
+    def add_studied_subjects(self, subject):
+        self.studied_subjects += subject
 
-class Education2(Context):
-    """"""
-    context_types = ["InstitutionalEducationContext", "SelfTaughtEducationContext", "DomesticEducationContext"]
-    context_map = {"INSTITUTIONAL": "InstitutionalEducationContext", "SELF-TAUGHT": "SelfTaughtEducationContext",
-                   "DOMESTIC": "DomesticEducationContext", None: "EducationContext"}
+    def add_degrees(self, degree):
+        self.degrees += degree
 
-    def __init__(self, id, text, mode, schools, awards, subjects, texts, instructors):
-        self.mode = self.context_map[mode]
-        super().__init__(id, text, self.mode)
-        self.schools = schools
-        self.awards = awards
-        self.studied_subjects = SUBJECTS
-        self.texts = texts
-        self.instructors = instructors
+    def add_degree_subjects(self, subject):
+        self.degree_subjects += subject
 
-    # NOTE: triples need to be redone as some predicates have not been created or well understood
-    def to_triple(self, person):
-        g = rdflib.Graph()
-        namespace_manager = rdflib.namespace.NamespaceManager(g)
-        bind_ns(namespace_manager, NS_DICT)
-        g += super().to_triple(person.uri)
-        for x in self.schools:
-            g += x.to_triple(person.uri)
-            g.add((self.uri, CWRC.hasInstitution, x.uri))
+    def add_awards(self, award):
+        self.awards += award
 
-        for x in self.studied_subjects:
-            # NOTE this is temporary as the uri for the study subjects should be provided before
-            subj_uri = str(NS_DICT["cwrc"]) + x
-            g.add((self.uri, CWRC.hasSubjectofStudy, rdflib.term.URIRef(strip_all_whitespace(subj_uri))))
-
-        for x in self.awards:
-            # NOTE this is temporary as the uri for the study subjects should be provided before
-            subj_uri = str(NS_DICT["cwrc"]) + x
-            g.add((self.uri, CWRC.hasAward, rdflib.term.URIRef(strip_all_whitespace(subj_uri))))
-
-        for x in self.instructors:
-            # NOTE this is temporary as the uri for the study subjects should be provided before
-            subj_uri = str(NS_DICT["cwrc"]) + x
-            g.add((self.uri, CWRC.hasInstructor, rdflib.term.URIRef(strip_all_whitespace(subj_uri))))
-
-        return g
-
-# TODO
-    def __str__(self):
-        string = "\tid: " + str(self.id) + "\n"
-        # text = strip_all_whitespace(str(self.text))
-        string += "\ttype: " + str(self.mode) + "\n"
-        string += "\tmotivation: " + str(self.motivation) + "\n"
-        string += "\ttag: \n\t\t{" + str(self.tag) + "}\n"
-        string += "\ttext: \n\t\t{" + str(self.text) + "}\n"
-        if self.subjects:
-            string += "\tsubjects:\n"
-            for x in self.subjects:
-                string += "\t\t" + str(x) + "\n"
-
-        if self.schools:
-            string += "\tschools:\n"
-            for x in self.schools:
-                string += "\t\t" + str(x) + "\n"
-        if self.awards:
-            string += "\tawards:\n"
-            for x in self.awards:
-                string += "\t\t" + str(x) + "\n"
-        if self.studied_subjects:
-            string += "\tstudied_subjects:\n"
-            for x in self.STUDIED_SUBJECTS:
-                string += "\t\t" + str(x) + "\n"
-        if self.texts:
-            string += "\ttexts:\n"
-            for x in self.texts:
-                string += "\t\t" + str(x) + "\n"
-        if self.instructors:
-            string += "\tinstructors:\n"
-            for x in self.instructors:
-                string += "\t\t" + str(x) + "\n"
-
-        return string + "\n"
-
-    # def context_count(self,type):
-    #     pass
+    def add_edu_texts(self, title):
+        self.edu_texts += title
 
 
 def get_reg(tag):
@@ -348,19 +361,21 @@ def get_value(tag):
     return value
 
 
-# TODO: likely merge these into a generic function that will also include mapping
-# Some may not work to be generic as they may include a <name> tag
-# and a uri for that person will have to be found or created
 def get_study_subjects(subj_tags):
-    return [get_value(x) for x in subj_tags]
+    return [get_mapped_term("Subject", get_value(x)) for x in subj_tags]
+
+
+def get_degrees(subj_tags):
+    return [get_mapped_term("Degree", get_value(x)) for x in subj_tags]
 
 
 def get_awards(award_tags):
-    return [get_value(x) for x in award_tags]
+    return [EducationalAward(get_value(x)) for x in award_tags]
 
 
 def get_texts(text_tags):
-    return [get_value(x) for x in text_tags]
+    return [x for x in text_tags]
+    # return [get_value(x) for x in text_tags]
 
 
 def get_companion(tag):
@@ -380,7 +395,8 @@ def get_school(school_tags):
         school_types = [x for x in [lvl, get_attribute(tag, "STUDENTBODY"), get_attribute(
             tag, "RELIGIOUS"), get_attribute(tag, "INSTITUTION")] if x]
 
-        schools.append(School(name, school_types, lvl, tag))
+        temp_school = School(name, school_types, lvl, tag)
+        temp_school.add_studied_subjects(get_study_subjects(tag.find_all("SUBJECT")))
 
     return schools
 
@@ -389,22 +405,37 @@ def get_contested_behaviour(tag):
     return [limit_words(get_value(x), 20) for x in tag.find_all("CONTESTEDBEHAVIOUR")]
 
 
-def create_education(tag):
+def get_degree_subjects(tag):
+    subjects = []
+    for x in tag.find_all("DEGREE"):
+        subjects += x.find_all("SUBJECT")
+
+    return get_study_subjects(subjects)
+
+
+def create_education(tag, person):
     temp_education = Education()
     temp_education.add_school(get_school(tag.find_all("SCHOOL")))
     temp_education.add_instructor(School.get_instructors(None, tag))
     temp_education.add_companion(get_companion(tag))
+    temp_education.add_contested_behaviour(get_contested_behaviour(tag))
+    temp_education.add_degrees(get_degrees(tag.find_all("DEGREE")))
+    temp_education.add_studied_subjects(get_study_subjects(tag.find_all("SUBJECT")))
+    temp_education.add_degree_subjects(get_degree_subjects(tag))
+    temp_education.add_awards(get_awards(tag.find_all("AWARD")))
+    # print()
 
-    temp_education.add_contestedBehaviour(get_contested_behaviour(tag))
-    # degrees
-    # subject
-    # text
-    # awards
+    texts = get_texts(tag.find_all("TEXT"))
+    works = []
+    titles = []
+    for x in texts:
+        works += get_people(x)
+        titles += get_titles(x)
 
-    # print(temp_education)
-    # subjects = get_study_subjects(education.find_all("subject"))
-    # awards = get_awards(education.find_all("award"))
-    # texts = get_texts(education.find_all("text"))
+    # Add mapping of titles
+    temp_education.add_edu_texts(titles)
+    # temp_education.add_works(work)
+
     return temp_education
 
 
@@ -434,11 +465,9 @@ def extract_education(tag_list, context_type, person, list_type="paragraphs"):
         else:
             context_id = person.id + "_" + Education.context_map[context_type] + "_"
             context_id += str(education_count[context_type])
-        print("x" * 100)
-        print(context_id)
 
-        education_list = create_education(tag)
-        if education_list:
+        education_list = create_education(tag, person)
+        if len(education_list.to_triple(person)) > 0:
             temp_context = Context(context_id, tag, Education.context_map[context_type])
             temp_context.link_triples(education_list)
             person.add_education(education_list)
@@ -447,16 +476,13 @@ def extract_education(tag_list, context_type, person, list_type="paragraphs"):
 
         if list_type == "events":
             education_event_count[context_type] += 1
-            event_title = person.name + " - " + Education.context_map[context_type] + " Event"
-            event_uri = person.id + "_" + \
-                Education.context_map[context_type] + "_Event" + str(education_event_count[context_type])
+            event_type = Education.context_map[context_type].split("Context")[0]
+            event_title = person.name + " - " + event_type + " Event"
+            event_uri = person.id + "_" + event_type + "_Event" + str(education_event_count[context_type])
             temp_event = Event(event_title, event_uri, tag)
             temp_context.link_event(temp_event)
             person.add_event(temp_event)
 
-        # print(temp_context)
-        # get_subjects(education_list, person)
-        # print(temp_context.to_triple(person).serialize(format="ttl").decode())
         person.add_context(temp_context)
 
 
@@ -466,6 +492,82 @@ def get_subjects(component, person):
     subjects += [x for x in temp_graph.objects(None, None)]
 
     return list(set(subjects))
+
+
+def clean_term(string):
+    string = string.lower().replace("-", " ").strip().replace(" ", "")
+    return string
+
+
+def create_edu_map():
+    import csv
+    global EDU_MAP
+    with open('education_mapping.csv', newline='') as csvfile:
+        reader = csv.reader(csvfile)
+        next(reader)
+        for row in reader:
+            if row[0] not in EDU_MAP:
+                EDU_MAP[row[0]] = []
+            temp_row = [clean_term(x) for x in row[2:]]
+            EDU_MAP[row[0]].append(list(filter(None, [row[1], *temp_row])))
+
+
+EDU_MAP = {}
+create_edu_map()
+map_attempt = 0
+map_success = 0
+map_fail = 0
+fail_dict = {}
+
+
+def update_fails(rdf_type, value):
+    global fail_dict
+    if rdf_type in fail_dict:
+        if value in fail_dict[rdf_type]:
+            fail_dict[rdf_type][value] += 1
+        else:
+            fail_dict[rdf_type][value] = 1
+    else:
+        fail_dict[rdf_type] = {value: 1}
+
+
+def get_mapped_term(rdf_type, value, retry=False):
+    """
+        Currently getting exact match ignoring case and "-"
+        TODO:
+        Make csv of unmapped
+    """
+    global map_attempt
+    global map_success
+    global map_fail
+    map_attempt += 1
+    term = None
+    temp_val = clean_term(value)
+    for x in EDU_MAP[rdf_type]:
+        if temp_val in x:
+            term = x[0]
+            map_success += 1
+            break
+
+    if "http" in str(term):
+        term = rdflib.term.URIRef(term)
+    elif term:
+        term = rdflib.term.Literal(term, datatype=rdflib.namespace.XSD.string)
+    else:
+        term = rdflib.term.Literal("_" + value.lower() + "_", datatype=rdflib.namespace.XSD.string)
+        if retry:
+            map_attempt -= 1
+        else:
+            map_fail += 1
+            possibilites = []
+            for x in EDU_MAP[rdf_type]:
+                if get_close_matches(value.lower(), x):
+                    possibilites.append(x[0])
+            if type(term) is rdflib.term.Literal:
+                update_fails(rdf_type, value)
+            else:
+                update_fails(rdf_type, value + "->" + str(possibilites) + "?")
+    return term
 
 
 def extract_education_data(bio, person):
@@ -488,52 +590,11 @@ def extract_education_data(bio, person):
 
     for education in education_hist:
         mode = education.get("MODE")
-        print()
-        print(mode)
         paragraphs = education.find_all("P")
         events = education.find_all("CHRONSTRUCT")
 
         extract_education(paragraphs, mode, person)
         extract_education(events, mode, person, "events")
-        # print(education)
-
-
-def extract_education_data2(bio, person):
-    education_hist = bio.find_all("education")
-    modes = []
-    count = 1
-
-    uber_graph = rdflib.Graph()
-    namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
-    bind_ns(namespace_manager, NS_DICT)
-
-    for education in education_hist:
-        # print(education)
-        mode = education.get("mode")
-        subjects = get_study_subjects(education.find_all("subject"))
-        schools = get_school(education.find_all("school"))
-        awards = get_awards(education.find_all("award"))
-        texts = get_texts(education.find_all("text"))
-        instructors = get_instructors(education.find_all("instructor"))
-        # print(mode)
-        # for x in subjects:
-        #     print(x)
-
-        for x in schools:
-            log.msg(str(x))
-            # print(x)
-
-        if mode in modes:
-            count += 1
-
-        id = person.id + "_" + str(Education.context_map[mode])
-        if count > 1:
-            id += str(count)
-        temp_education = Education(id, education, mode, schools, awards, subjects, texts, instructors)
-        modes.append(mode)
-        uber_graph += temp_education.to_triple(person.uri)
-        extract_log.msg(str(temp_education))
-        person.add_education_context(temp_education)
 
 
 def main():
@@ -558,9 +619,9 @@ def main():
     # for filename in filelist[-5:]:
     test_cases = ["shakwi-b.xml", "woolvi-b.xml", "seacma-b.xml", "atwoma-b.xml",
                   "alcolo-b.xml", "bronem-b.xml", "bronch-b.xml", "levyam-b.xml"]
-    test_cases += ["bankis-b.xml", "burnfr-b.xml"]
-    for filename in test_cases:
-    # for filename in filelist:
+    test_cases += ["bankis-b.xml", "burnfr-b.xml", "annali-b.xml", "carrdo-b.xml"]
+    # for filename in test_cases:
+    for filename in filelist:
         with open("bio_data/" + filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
@@ -572,20 +633,20 @@ def main():
         print()
         graph = test_person.to_graph()
 
-        # extract_log.subtitle("Entry #" + str(entry_num))
-        # extract_log.msg(str(test_person))
-        # extract_log.subtitle(str(len(graph)) + " triples created")
+        extract_log.subtitle("Entry #" + str(entry_num))
+        extract_log.msg(str(test_person))
+        extract_log.subtitle(str(len(graph)) + " triples created")
         extract_log.msg(test_person.to_file(graph))
-        # extract_log.subtitle("Entry #" + str(entry_num))
-        # extract_log.msg("\n\n")
+        extract_log.subtitle("Entry #" + str(entry_num))
+        extract_log.msg("\n\n")
 
-        # file = open("education_turtle/" + filename[:-6] + "_education.ttl", "w", encoding="utf-8")
-        # file.write("#" + str(len(graph)) + " triples created\n")
-        # file.write(graph.serialize(format="ttl").decode())
-        # file.close()
+        file = open("education_turtle/" + filename[:-6] + "_education.ttl", "w", encoding="utf-8")
+        file.write("#" + str(len(graph)) + " triples created\n")
+        file.write(graph.serialize(format="ttl").decode())
+        file.close()
 
-        # uber_graph += graph
-        # entry_num += 1
+        uber_graph += graph
+        entry_num += 1
 
     turtle_log.subtitle(str(len(uber_graph)) + " triples created")
     turtle_log.msg(uber_graph.serialize(format="ttl").decode(), stdout=False)

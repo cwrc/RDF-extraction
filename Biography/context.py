@@ -60,6 +60,14 @@ def get_places(tag):
     return places
 
 
+def get_titles(tag):
+    titles = []
+    for x in tag.find_all("TITLE"):
+        title = get_value(x)
+        titles.append(make_standard_uri(title + " TITLE", ns="cwrc"))
+    return titles
+
+
 def identifying_motivation(tag):
     """ extracts the identifying components in a given tag
         to be used for the subjects of the annotation
@@ -68,12 +76,10 @@ def identifying_motivation(tag):
 
     identified_subjects += get_places(tag)
     identified_subjects += get_people(tag)
+    identified_subjects += get_titles(tag)
 
     for x in tag.find_all("ORGNAME"):
         identified_subjects.append(get_org_uri(x))
-    for x in tag.find_all("TITLE"):
-        title = get_value(x)
-        identified_subjects.append(make_standard_uri(title + " TITLE", ns="cwrc"))
 
     return identified_subjects
 
