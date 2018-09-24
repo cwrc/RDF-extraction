@@ -68,7 +68,7 @@ def updateFileLists():
     global aFiles
     global dFiles
 
-    gFiles = [filename for filename in sorted(os.listdir(gPath)) if filename.endswith(".txt")]
+    gFiles = [filename for filename in sorted(os.listdir(gPath)) if filename.endswith(".ttl")]
     # gFiles = [filename for filename in sorted(os.listdir("bio_data/")) if filename.endswith(".xml")]
     dFiles = [filename for filename in sorted(os.listdir(dPath)) if filename.endswith(".txt")]
 
@@ -150,7 +150,8 @@ def main():
         # print("number of triples",numTriples)
 
     # f.close()
-    megaGraph.serialize("ALL_TRIPLES" + '.txt', format='turtle')
+    megaGraph.serialize("BIOGRAPHY" + '.ttl', format='turtle')
+    megaGraph.serialize("BIOGRAPHY" + '.rdf', format='pretty-xml')
 
     print("total Triples: ", numTriples)
     print("total Gurjap Triples: ", gurjapCounter)
