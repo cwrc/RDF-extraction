@@ -104,7 +104,8 @@ class Context(object):
                      "NationalityContext", "OccupationContext", "PoliticalContext",
                      "RaceEthnicityContext", "ReligionContext", "SexualityContext",
                      "SocialClassContext", "SpatialContext", "ViolenceContext",
-                     "WealthContext"]
+                     "WealthContext", "EducationContext", "InstitutionalEducationContext",
+                     "SelfTaughtEducationContext", "DomesticEducationContext"]
     context_map = {"CLASSISSUE": "SocialClassContext",
                    "RACEANDETHNICITY": "RaceEthnicityContext",
                    "NATIONALITYISSUE": "NationalityContext",
@@ -122,7 +123,7 @@ class Context(object):
                    "BIRTH": "BirthContext",
                    "DEATH": "DeathContext",
                    "FRIENDSASSOCIATES": "FriendsAndAssociatesContext",
-                   "INTIMATERELATIONSHIPS": "IntimateRelationshipsContext"
+                   "INTIMATERELATIONSHIPS": "IntimateRelationshipsContext",
                    }
 
     def __init__(self, id, tag, context_type="culturalformation", motivation="describing"):
@@ -159,19 +160,38 @@ class Context(object):
     def link_triples(self, comp_list):
         """ Adding to list of components to link context to triples
         """
-        self.triples += comp_list
+
+        if type(comp_list) is list:
+            self.triples += comp_list
+        else:
+            self.triples.append(comp_list)
 
     def link_event(self, event):
         self.event = event.uri
 
-    def get_subjects(self, comp_list):
+    def get_subjects2(self, comp_list):
+        subjects = []
+        for x in comp_list:
+            temp_graph = x.to_triple("BOB")
+            subjects.append(temp_graph.objects(None, None))
+
+        return list(set(subjects))
+
+    def get_subject(self, component, person):
+        subjects = []
+        temp_graph = component.to_triple(person)
+        subjects += [x for x in temp_graph.objects(None, None)]
+
+        return list(set(subjects))
+
+    def get_subjects(self, comp_list, person):
         """
         Dependent on the other other classes functioning similarly to cf
         May have to make a variant for more complex components of biography
         """
         subjects = []
         for x in comp_list:
-            subjects.append(x.value)
+            subjects += self.get_subject(x, person)
         return list(set(subjects))
 
     def to_triple(self, person):
@@ -199,7 +219,7 @@ class Context(object):
         g.add((identifying_uri, NS_DICT["oa"].motivatedBy, NS_DICT["oa"].identifying))
         self.subjects += identifying_motivation(self.tag)
         if self.triples:
-            self.subjects += self.get_subjects(self.triples)
+            self.subjects += self.get_subjects(self.triples, person)
         for x in self.subjects:
             g.add((identifying_uri, NS_DICT["oa"].hasBody, x))
         g.add((identifying_uri, NS_DICT["oa"].hasBody, person.uri))

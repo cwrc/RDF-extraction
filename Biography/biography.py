@@ -89,6 +89,7 @@ class Biography(object):
         # Hold off on events for now
         self.event_list = []
         self.education_context_list = []
+        self.education_list = []
 
         self.context_list = []
         self.cf_list = []
@@ -144,6 +145,12 @@ class Biography(object):
         else:
             self.education_context_list.append(education_context)
 
+    def add_education(self, education):
+        if type(education) is list:
+            self.education_list += education
+        else:
+            self.education_list.append(education)
+
     def add_event(self, event):
         # self.event_list += event
         self.event_list.append(event)
@@ -176,7 +183,8 @@ class Biography(object):
         g += self.create_triples(self.context_list)
         g += self.create_triples(self.location_list)
         g += self.create_triples(self.event_list)
-        g += self.create_triples(self.education_context_list)
+        g += self.create_triples(self.education_list)
+        # g += self.create_triples(self.education_context_list)
 
         # Something like this
         if self.birthObj:
@@ -200,6 +208,7 @@ class Biography(object):
         return graph.serialize(format=serialization).decode()
 
     def __str__(self):
+        # TODO: add occupation + education
         string = "id: " + str(self.id) + "\n"
         string += "name: " + str(self.name) + "\n"
         string += "gender: " + str(self.gender) + "\n"
