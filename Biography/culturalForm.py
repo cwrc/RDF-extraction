@@ -596,6 +596,15 @@ def main():
     turtle_log.subtitle(str(len(uber_graph)) + " triples created")
     turtle_log.msg(uber_graph.serialize(format="ttl").decode(), stdout=False)
     turtle_log.msg("")
+
+    file = open("culturalForms.ttl", "w", encoding="utf-8")
+    file.write("#" + str(len(uber_graph)) + " triples created\n")
+    file.write(uber_graph.serialize(format="ttl").decode())
+
+    file = open("culturalForms.rdf", "w", encoding="utf-8")
+    file.write("#" + str(len(uber_graph)) + " triples created\n")
+    file.write(uber_graph.serialize(format="pretty-xml").decode())
+
     log_mapping_fails(extract_log, log)
 
 

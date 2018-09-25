@@ -49,11 +49,12 @@ def getBirth(xmlString, person):
 
     try:
         birthDateTag = get_date_tag(birthTag)
-        if 'VALUE' in birthDateTag.attrs:
-            birthDate = birthDateTag['VALUE']
-        elif 'CERTAINTY' in birthDateTag.attrs and 'FROM' in birthDateTag.attrs and 'TO' in birthDateTag.attrs:
-            # Sometimes the birth date isn't exact so a range is used
-            birthDate = birthDateTag['FROM'] + " to " + birthDateTag['TO']
+        if birthDateTag:
+            if 'VALUE' in birthDateTag.attrs:
+                birthDate = birthDateTag['VALUE']
+            elif 'CERTAINTY' in birthDateTag.attrs and 'FROM' in birthDateTag.attrs and 'TO' in birthDateTag.attrs:
+                # Sometimes the birth date isn't exact so a range is used
+                birthDate = birthDateTag['FROM'] + " to " + birthDateTag['TO']
 
         print("---------Information about person--------------")
         print("birth date: ", birthDate)

@@ -284,6 +284,13 @@ def main():
     turtle_log.msg(uber_graph.serialize(format="ttl").decode(), stdout=False)
     turtle_log.msg("")
 
+    file = open("location.ttl", "w", encoding="utf-8")
+    file.write("#" + str(len(uber_graph)) + " triples created\n")
+    file.write(uber_graph.serialize(format="ttl").decode())
+
+    file = open("location.rdf", "w", encoding="utf-8")
+    file.write("#" + str(len(uber_graph)) + " triples created\n")
+    file.write(uber_graph.serialize(format="pretty-xml").decode())
 
 def test():
     exit()

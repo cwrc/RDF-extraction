@@ -138,6 +138,9 @@ class Context(object):
         self.triples = []
         self.event = None
 
+        bibcits = tag.find_all("BIBCITS")
+        for x in bibcits:
+            x.decompose()
         self.tag = tag
         self.src = "http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id="
         self.heading = get_heading(tag)

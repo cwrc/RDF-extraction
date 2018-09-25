@@ -29,6 +29,7 @@ class Organization(object):
 
         self.altlabels = altlabels
         self.uri = rdflib.term.URIRef(str(NS_DICT["cwrc"]) + uri)
+        # self.uri = rdflib.term.URIRef(uri)
 
     # TODO figure out if i can just return tuple or triple without creating a whole graph
     # Evaluate efficency of creating this graph or just returning a tuple and have the biography deal with it
@@ -150,14 +151,14 @@ def main():
     import os
     global uber_graph
 
-    create_org_csv()
+    # create_org_csv()
     csv_to_triples()
 
     filelist = [filename for filename in sorted(os.listdir("bio_data")) if filename.endswith(".xml")]
 
     for filename in filelist:
         with open("bio_data/" + filename) as f:
-            soup = BeautifulSoup(f, 'lxml')
+            soup = BeautifulSoup(f, 'lxml-xml')
         extract_org_data(soup)
 
     file = open("organizations.ttl", "w")

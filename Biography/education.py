@@ -15,6 +15,7 @@ Handle name tags with subject tags
 TEXT tags
     name within text
     title within text
+evaluate mapping    
 """
 
 log = Log("log/education/errors")
@@ -83,7 +84,7 @@ class School(object):
         if school_org:
             self.uri = get_org_uri(school_org[0])
         else:
-            self.uri = biography.make_standard_uri(strip_all_whitespace(name) + " EduOrg", "cwrc")
+            self.uri = biography.make_standard_uri((name) + " EduOrg", "cwrc")
 
         self.name = name
         self.level = level
@@ -123,6 +124,7 @@ class School(object):
         biography.bind_ns(namespace_manager, biography.NS_DICT)
 
         g.add((self.uri, biography.NS_DICT["foaf"].name, rdflib.Literal(self.name)))
+        g.add((self.uri, biography.NS_DICT["rdfs"].name, rdflib.Literal(self.name)))
         g.add((self.uri, RDF.type, CWRC.EducationalOrganization))
         if self.level:
             g.add((person.uri, self.attending_map[self.level], self.uri))
@@ -184,7 +186,9 @@ class EducationalAward(object):
         text = ' '.join(str(name).split())
         words = text.split(" ")
         text = ' '.join(words[:15])
-        self.uri = biography.create_uri("cwrc", strip_all_whitespace(text))
+        # self.uri = biography.create_uri("cwrc", strip_all_whitespace(text))
+        self.uri = biography.make_standard_uri(text)
+
 
     def get_award_type(self, name):
         types = []
@@ -214,6 +218,7 @@ class EducationalAward(object):
         biography.bind_ns(namespace_manager, biography.NS_DICT)
 
         g.add((self.uri, biography.NS_DICT["foaf"].name, rdflib.Literal(self.name)))
+        g.add((self.uri, biography.NS_DICT["rdfs"].label, rdflib.Literal(self.name)))
         g.add((person.uri, CWRC.hasAward, self.uri))
         for x in self.award_type:
             g.add((self.uri, RDF.type, x))
@@ -239,6 +244,7 @@ class Education(object):
         self.awards = []
 
         self.texts = []
+        self.works = []
         self.edu_texts = []
 
     def to_triple(self, person):
@@ -264,6 +270,14 @@ class Education(object):
         for x in self.edu_texts:
             g.add((x, RDF.type, CWRC.EducationalText))
             g.add((person.uri, CWRC.studies, x))
+
+        for x in self.works:
+            oeuvre_uri = rdflib.term.URIRef(str(x) + "__Oeuvre")
+            g.add((oeuvre_uri, RDF.type, CWRC.Oeuvre))
+            g.add((person.uri, CWRC.studies, oeuvre_uri))
+            # g.add((x, biography.NS_DICT["bf"].role, oeuvre_uri))
+            # TODO label this better
+            # g.add((oeuvre_uri, RDFS.label, Literal(x)))
 
         for x in self.degrees:
             g.add((person.uri, CWRC.hasCredential, x))
@@ -338,6 +352,9 @@ class Education(object):
 
     def add_edu_texts(self, title):
         self.edu_texts += title
+
+    def add_works(self, work):
+        self.works += work
 
 
 def get_reg(tag):
@@ -434,7 +451,7 @@ def create_education(tag, person):
 
     # Add mapping of titles
     temp_education.add_edu_texts(titles)
-    # temp_education.add_works(work)
+    temp_education.add_works(works)
 
     return temp_education
 
@@ -620,8 +637,9 @@ def main():
     test_cases = ["shakwi-b.xml", "woolvi-b.xml", "seacma-b.xml", "atwoma-b.xml",
                   "alcolo-b.xml", "bronem-b.xml", "bronch-b.xml", "levyam-b.xml"]
     test_cases += ["bankis-b.xml", "burnfr-b.xml", "annali-b.xml", "carrdo-b.xml"]
-    # for filename in test_cases:
-    for filename in filelist:
+    test_cases += ["platsy-b.xml"]
+    for filename in test_cases:
+    # for filename in filelist:
         with open("bio_data/" + filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
@@ -651,6 +669,14 @@ def main():
     turtle_log.subtitle(str(len(uber_graph)) + " triples created")
     turtle_log.msg(uber_graph.serialize(format="ttl").decode(), stdout=False)
     turtle_log.msg("")
+
+    file = open("education.ttl", "w", encoding="utf-8")
+    file.write("#" + str(len(uber_graph)) + " triples created\n")
+    file.write(uber_graph.serialize(format="ttl").decode())
+
+    file = open("education.rdf", "w", encoding="utf-8")
+    file.write("#" + str(len(uber_graph)) + " triples created\n")
+    file.write(uber_graph.serialize(format="pretty-xml").decode())
 
 
 def test():

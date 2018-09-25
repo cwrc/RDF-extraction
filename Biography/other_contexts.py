@@ -149,6 +149,15 @@ def main():
     turtle_log.msg(uber_graph.serialize(format="ttl").decode(), stdout=False)
     turtle_log.msg("")
 
+    file = open("other_contexts.ttl", "w", encoding="utf-8")
+    file.write("#" + str(len(uber_graph)) + " triples created\n")
+    file.write(uber_graph.serialize(format="ttl").decode())
+
+    file = open("other_contexts.rdf", "w", encoding="utf-8")
+    file.write("#" + str(len(uber_graph)) + " triples created\n")
+    file.write(uber_graph.serialize(format="pretty-xml").decode())
+
+
 if __name__ == "__main__":
     # auth = [env.env("USER_NAME"), env.env("PASSWORD")]
     # login.main(auth)
