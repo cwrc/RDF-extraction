@@ -10,6 +10,7 @@ XML = rdflib.Namespace("http://www.w3.org/XML/1998/namespace")
 MARCREL = rdflib.Namespace("http://id.loc.gov/vocabulary/relators/")
 DATA = rdflib.Namespace("http://cwrc.ca/cwrcdata/")
 GENRE = rdflib.Namespace("http://sparql.cwrc.ca/ontologies/genre#")
+SCHEMA = rdflib.Namespace("http://schema.org/")
 
 genre_graph = None
 genre_map = {}
@@ -126,6 +127,20 @@ class BibliographyParse:
         "revised": "edt",
         "afterword": "aft",
         "transcriber": "trc"
+    }
+
+    related_item_map = {
+        "host": BF.partOf,
+        "constituent": BF.partOf,
+        "isReferencedBy": BF.referencedBy,
+        "original": BF.original,
+        "otherFormat": BF.otherPhysicalFormat,
+        "otherVersion": BF.otherEdition,
+        "preceding": BF.precededBy,
+        "references": BF.references,
+        "reviewOf": BF.review,
+        "series": BF.hasSeries,
+        "succeeding": BF.succeededBy
     }
 
     def __init__(self, filename, graph, resource_name, related_item=False):
@@ -300,42 +315,34 @@ class BibliographyParse:
 
         return langs
 
-    def origin_info_place(self):
-        places = []
-        if self.soup.origininfo:
-            for o in self.soup.find_all('origininfo'):
-                if o.parent.name == 'relateditem' and self.relatedItem == False:
-                    continue
-                if o.place:
-                    places.append({"term": o.place.placeterm.text})
+    def get_origins(self):
+        origin_infos = []
+        for o in self.soup.find_all('origininfo'):
+            place = None
+            publisher = None
+            date = None
+            edition = None
+            dateOther = None
+            if o.parent.name == 'relateditem' and self.relatedItem == False:
+                continue
+            if o.publisher:
+                publisher = o.publisher.text
+            if o.dateissued:
+                date = o.dateissued.text
+            if o.place:
+                place = o.place.placeterm.text
+            if o.edition:
+                edition = o.edition.text
+            if o.dateother:
+                dateOther = o.dateother.text
 
-        return places
-
-    def origin_info_publisher(self):
-        publishers = []
-        if self.soup.origininfo:
-            for o in self.soup.find_all('origininfo'):
-                if o.parent.name == 'relateditem' and self.relatedItem == False:
-                    continue
-                if o.publisher:
-                    publishers.append({"publisher": o.publisher.text})
-
-        return publishers
-
-    def origin_info_date(self):
-        """
-        Extracts origin info to relate publisher date information
-        :return: [dict] date as key
-        """
-        dates = []
-        if self.soup.origininfo:
-            for o in self.soup.find_all("origininfo"):
-                if o.parent.name == 'relateditem' and self.relatedItem == False:
-                    continue
-                if o.dateissued:
-                    dates.append({"date": o.dateissued.text})
-
-        return dates
+            origin_infos.append({"date": date,
+                                 "dateOther": dateOther,
+                                 "publisher": publisher,
+                                 "edition": edition,
+                                 "place": place
+                                 })
+        return origin_infos
 
     def get_related_items(self):
         """
@@ -346,10 +353,12 @@ class BibliographyParse:
         related_items = self.soup.find_all('relateditem')
         soups = []
         for item in related_items:
+            item_type="host"
+            if 'type' in item.attrs:
+                item_type = item.attrs['type']
             try:
                 print("{}".format(item))
-                #sys.exit(0)
-                soups.append(BeautifulSoup("{}".format(item), 'lxml'))
+                soups.append({"type": item_type, "soup": BeautifulSoup("{}".format(item), 'lxml')})
             except UnicodeError:
                 pass
 
@@ -392,6 +401,9 @@ class BibliographyParse:
                 if not item.extent:
                     continue
                 cur_value = ""
+                issue_num = None
+                volume_num = None
+
                 if item.extent.start:
                     cur_value += "{}-".format(item.extent.start.text)
                 else:
@@ -407,9 +419,22 @@ class BibliographyParse:
 
                 if item.extent.list:
                     cur_value += "{}".format(item.extent.total.text)
-                part_objects.append(cur_value)
+
+                # Check and go through volume and issue numbers
+                if item.detail and 'type' in item.detail.attrs:
+                    for detail in item.find_all('detail'):
+                        detail_type = detail.attrs['type']
+
+                        value = detail.number.text
+                        if detail_type == "volume":
+                            volume_num = value
+                        elif detail_type == "issue":
+                            issue_num = value
+
+                part_objects.append({"issue": issue_num, "volume": volume_num, "value": cur_value})
 
         return part_objects
+
 
     def build_graph(self):
         g = self.g
@@ -526,45 +551,44 @@ class BibliographyParse:
         adminMetaData.add(BF.generationProcess, generation_process)
 
         resource.add(BF.adminMetadata, adminMetaData)
-        originInfo = g.resource("{}_activity_statement".format(self.mainURI))
+
 
         i = 0
 
-        for r in self.origin_info_date():
-            publisher = g.resource("{}_activity_statement_publisher_{}".format(self.mainURI, i))
-            publisher.add(RDF.type, BF.Publication)
-            publisher.add(BF.date, Literal(r['date']))
+        for o in self.get_origins():
+            originInfo = g.resource("{}_activity_statement_{}".format(self.mainURI, i))
+            if o['publisher']:
+                publisher = g.resource("{}_activity_statement_publisher_{}".format(self.mainURI, i))
+                publisher.add(RDF.type, BF.Agent)
+                publisher.add(RDFS.label, Literal(o['publisher']))
 
-            originInfo.add(BF.provisionActivity, publisher)
+                originInfo.add(BF.provisionActivity, publisher)
+            if o['place']:
+                place = g.resource("{}_activity_statement_place_{}".format(self.mainURI, i))
+                place.add(RDF.value, Literal(o['place']))
+                place.add(RDF.type, BF.Place)
+
+                originInfo.add(BF.place, place)
+
+            if o['date']:
+                originInfo.add(RDF.type, BF.Publication)
+                originInfo.add(BF.date, Literal(o['date']))
+
+            if o['edition']:
+                instance.add(BF.editionStatement, Literal(o['edition']))
+
             i += 1
 
-        i = 0
-        for r in self.origin_info_place():
-            place = g.resource("{}_activity_statement_place_{}".format(self.mainURI, i))
-            place.add(RDF.value, Literal(r['term']))
-            place.add(RDF.type, BF.Place)
-
-            originInfo.add(BF.place, place)
-            i += 0
-
-        i = 0
-        for r in self.origin_info_publisher():
-            publisher = g.resource("{}_activity_statement_publisher_{}".format(self.mainURI, i))
-            publisher.add(RDF.type, BF.Agent)
-            publisher.add(RDFS.label, Literal(r['publisher']))
-
-            originInfo.add(BF.agent, publisher)
-
-            i += 0
+            resource.add(BF.provisionActivity, originInfo)
 
         i = 0
         if not self.relatedItem:
             for part in self.get_related_items():
-                bp = BibliographyParse(part, self.g, "{}_part_{}".format(self.mainURI, i), True)
+                bp = BibliographyParse(part['soup'], self.g, "{}_{}_{}".format(self.mainURI, part['type'], i), True)
                 bp.build_graph()
 
                 work = g.resource("{}_part_{}".format(self.mainURI, i))
-                resource.add(BF.hasPart, work)
+                resource.add(self.related_item_map[part['type']], work)
                 i += 0
 
         i = 0
@@ -586,10 +610,16 @@ class BibliographyParse:
         for p in self.get_parts():
             extent_resource = g.resource("{}_extent_{}".format(self.mainURI, i))
             extent_resource.add(RDF.type, BF.Extent)
-            extent_resource.add(RDF.value, Literal(p))
+            if p['value'] != "":
+                extent_resource.add(RDF.value, Literal(p['value']))
+            if p['volume']:
+                extent_resource.add(SCHEMA.volumeNumber, Literal(p['volume']))
+            if p['issue']:
+                extent_resource.add(SCHEMA.issueNumber, Literal(p['issue']))
+
             instance.add(BF.extent, extent_resource)
 
-        resource.add(BF.provisionActivityStatement, originInfo)
+
 
         genre = self.get_genre()
 
@@ -619,6 +649,7 @@ if __name__ == "__main__":
     g.bind("data", DATA)
     g.bind("genre", GENRE)
     g.bind("owl", OWL)
+    g.bind("schema", SCHEMA)
 
     dirname = sys.argv[1]
 
@@ -655,5 +686,6 @@ if __name__ == "__main__":
 
     fname = "Bibliography"
     output_name = fname.replace(".xml", "")
-    file_format = "turtle"
-    g.serialize(destination="bibrdf/{}.{}".format(output_name, file_format), format=file_format)
+    formats = {'ttl': 'turtle', 'xml': 'pretty-xml'}
+    for extension, file_format in formats.items():
+        g.serialize(destination="bibrdf/{}.{}".format(output_name, extension), format=file_format)
