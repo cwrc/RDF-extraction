@@ -3,23 +3,20 @@
 # from Env import env
 # import islandora_auth as login
 
-from difflib import get_close_matches
-from rdflib import RDF, RDFS, Literal
 import rdflib
 import biography
 from context import Context
-from log import *
+from log import Log
 from place import Place
 from event import Event
 
 
 """
 Status: ~80%
-
 """
 
-# temp log library for debugging --> to be eventually replaced with proper logging library
-# from log import *
+# temp log library for debugging -->
+# to be eventually replaced with proper logging library
 log = Log("log/location/errors")
 log.test_name("Location extraction Error Logging")
 extract_log = Log("log/location/extraction")
@@ -73,8 +70,6 @@ class Location(object):
 
         self.uri = biography.create_uri("cwrc", self.predicate)
 
-    # TODO figure out if i can just return tuple or triple without creating a whole graph
-    # Evaluate efficency of creating this graph or just returning a tuple and have the biography deal with it
     def to_tuple(self, person_uri):
         return ((person_uri, self.uri, self.value))
 
@@ -217,17 +212,14 @@ def extract_location_data(bio, person):
         "MIGRATED": 0,
         "MOVED": 0,
     }
-    # id = 1
+
     for location in locations:
-        # forms_found = 0
         location_type = location.get("RELATIONTO")
 
         paragraphs = location.find_all("P")
         events = location.find_all("CHRONSTRUCT")
         extract_locations(paragraphs, location_type, person)
         extract_locations(events, location_type, person, "events")
-
-        # location_count[location_type] += forms_found
 
 
 def main():
@@ -252,8 +244,8 @@ def main():
     # for filename in filelist[-5:]:
     test_cases = ["shakwi-b.xml", "woolvi-b.xml", "seacma-b.xml", "atwoma-b.xml",
                   "alcolo-b.xml", "bronem-b.xml", "bronch-b.xml", "levyam-b.xml"]
-    for filename in test_cases:
     # for filename in filelist:
+    for filename in test_cases:
         with open("bio_data/" + filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
@@ -292,11 +284,6 @@ def main():
     file.write("#" + str(len(uber_graph)) + " triples created\n")
     file.write(uber_graph.serialize(format="pretty-xml").decode())
 
-def test():
-    exit()
 
 if __name__ == "__main__":
-    # auth = [env.env("USER_NAME"), env.env("PASSWORD")]
-    # login.main(auth)
-    # test()
     main()

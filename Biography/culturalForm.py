@@ -25,8 +25,8 @@ temp solution until endpoint is active
 
 """
 
-# temp log library for debugging --> to be eventually replaced with proper logging library
-# from log import *
+# temp log library for debugging
+# to be eventually replaced with proper logging library
 log = Log("log/cf/errors")
 log.test_name("CF extraction Error Logging")
 extract_log = Log("log/cf/extraction")
@@ -41,8 +41,10 @@ biography.bind_ns(namespace_manager, biography.NS_DICT)
 
 class CulturalForm(object):
     """docstring for CulturalForm
-        NOTE: mapping is done prior to creation of cf, no need to include class type then
-        using other_attributes to handle extra predicates that may come up for cfs
+        NOTE: mapping is done prior to creation of cf,
+        no need to include class type then
+        using other_attributes to handle extra predicates
+        that may come up for cfs
         Ex. Organizations
         other_attributes=NS_DICT["org"].memberOf
         This being the uri rather the typical cf one
@@ -64,9 +66,11 @@ class CulturalForm(object):
         self.uri = rdflib.term.URIRef(self.uri)
 
     def to_tuple(self, person_uri):
-        """TODO 
-            figure out if i can just return tuple or triple without creating a whole graph
-            Evaluate efficency of creating this graph or just returning a tuple and have the biography deal with it
+        """TODO
+            figure out if i can just return tuple or triple
+            without creating a whole graph
+            Evaluate efficency of creating this graph or
+            just returning a tuple and have the biography deal with it
         """
         return ((person_uri, self.uri, self.value))
 
@@ -294,10 +298,10 @@ def find_cultural_forms(cf, person):
             value = get_mapped_term("Religion", get_value(x), True)
 
             # Checking if religion occurs as a PA if no result as a religion
-            if type(value) is rdflib.term.Literal:
+            if type(value) is Literal:
                 value = get_mapped_term("PoliticalAffiliation", get_value(x), True)
                 log.msg((value))
-            if type(value) is rdflib.term.Literal:
+            if type(value) is Literal:
                 value = get_mapped_term("Religion", get_value(x))
 
             religion = CulturalForm("hasReligion", get_reported(x), value)
@@ -490,9 +494,9 @@ def get_mapped_term(rdf_type, value, retry=False):
     if "http" in str(term):
         term = rdflib.term.URIRef(term)
     elif term:
-        term = rdflib.term.Literal(term, datatype=rdflib.namespace.XSD.string)
+        term = Literal(term, datatype=rdflib.namespace.XSD.string)
     else:
-        term = rdflib.term.Literal("_" + value.lower() + "_", datatype=rdflib.namespace.XSD.string)
+        term = Literal("_" + value.lower() + "_", datatype=rdflib.namespace.XSD.string)
         if retry:
             map_attempt -= 1
         else:
@@ -501,7 +505,7 @@ def get_mapped_term(rdf_type, value, retry=False):
             for x in CF_MAP[rdf_type]:
                 if get_close_matches(value.lower(), x):
                     possibilites.append(x[0])
-            if type(term) is rdflib.term.Literal:
+            if type(term) is Literal:
                 update_fails(rdf_type, value)
             else:
                 update_fails(rdf_type, value + "->" + str(possibilites) + "?")
@@ -602,17 +606,10 @@ def main():
     file.write(uber_graph.serialize(format="ttl").decode())
 
     file = open("culturalForms.rdf", "w", encoding="utf-8")
-    # file.write("#" + str(len(uber_graph)) + " triples created\n")
     file.write(uber_graph.serialize(format="pretty-xml").decode())
 
     log_mapping_fails(extract_log, log)
 
 
-def test():
-    exit()
-
 if __name__ == "__main__":
-    # auth = [env.env("USER_NAME"), env.env("PASSWORD")]
-    # login.main(auth)
-    # test()
     main()

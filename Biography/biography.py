@@ -2,7 +2,7 @@ import rdflib
 from rdflib import RDF, RDFS, Literal
 
 """
-TODO: handle 
+TODO: handle
 WRITER
 BRWWRITER
 IBRWRITER
@@ -64,8 +64,8 @@ def get_name_uri(tag):
 
 
 def make_standard_uri(std_str, ns="data"):
-    """Makes uri based of string, removes punctuation and replaces spaces with an underscore
-    v2, leaving hypens
+    """Makes uri based of string, removes punctuation and
+    replaces spaces with an underscore v2, leaving hypens
     """
     return rdflib.term.URIRef(str(NS_DICT[ns]) + remove_punctuation(std_str))
 
@@ -87,14 +87,13 @@ class Biography(object):
         self.gender = gender
         self.uri = make_standard_uri(name)
 
-        # Hold off on events for now
-        self.event_list = []
-        self.education_context_list = []
-        self.education_list = []
-
         self.context_list = []
+        self.event_list = []
+
         self.cf_list = []
         self.location_list = []
+        self.education_list = []
+        self.occupation_list = []
 
         self.occupations = []
         self.family_member_list = []
@@ -116,35 +115,28 @@ class Biography(object):
         self.children_list = []
 
     def add_context(self, context):
-        if context is list:
+        if type(context) is list:
             self.context_list += context
         else:
             self.context_list.append(context)
 
-    def create_context(self, id, text, type="culturalformation"):
-        self.context_list.append(Context(id, text, type))
-
     def add_cultural_form(self, culturalform):
-        self.cf_list += culturalform
-        # if culturalform is list:
-            # self.cf_list += culturalform
-            # self.cf_list.extend(culturalform)
-        #     pass
-        # else:
-        #     self.cf_list.append(culturalform)
+        if type(culturalform) is list:
+            self.cf_list += culturalform
+        else:
+            self.cf_list.append(culturalform)
 
     def add_location(self, location):
-        self.location_list += location
-
-    def create_cultural_form(self, predicate, reported, value, other_attributes=None):
-        self.cf_list.append(CulturalForm(predicate, reported, value, other_attributes))
-
-    def add_education_context(self, education_context):
-        # self.education_context_list += [education_context]
-        if education_context is list:
-            self.education_context_list += education_context
+        if type(location) is list:
+            self.location_list += location
         else:
-            self.education_context_list.append(education_context)
+            self.location_list.append(location)
+
+    def add_occupation(self, occupation):
+        if type(occupation) is list:
+            self.occupation_list += occupation
+        else:
+            self.occupation_list.append(occupation)
 
     def add_education(self, education):
         if type(education) is list:
@@ -153,9 +145,10 @@ class Biography(object):
             self.education_list.append(education)
 
     def add_event(self, event):
-        # self.event_list += event
-        self.event_list.append(event)
-        # self.event_list.append(Event(title, event_type, date, other_attributes))
+        if type(event) is list:
+            self.event_list += event
+        else:
+            self.event_list.append(event)
 
     def create_triples(self, e_list):
         g = rdflib.Graph()
@@ -185,9 +178,8 @@ class Biography(object):
         g += self.create_triples(self.location_list)
         g += self.create_triples(self.event_list)
         g += self.create_triples(self.education_list)
-        # g += self.create_triples(self.education_context_list)
+        g += self.create_triples(self.occupation_list)
 
-        # Something like this
         if self.birthObj:
             g += self.birthObj.to_triple()
         if self.deathObj is not None:
@@ -199,10 +191,6 @@ class Biography(object):
         g += self.create_triples(self.childless_list)
         g += self.create_triples(self.children_list)
 
-        # done putting in new contexts
-
-        # g += self.create_triples(self.event_list)
-        # print(g.serialize(format='turtle').decode())
         return g
 
     def to_file(self, graph, serialization="ttl"):

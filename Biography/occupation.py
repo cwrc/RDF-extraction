@@ -4,26 +4,24 @@
 # import islandora_auth as login
 
 from difflib import get_close_matches
-from rdflib import RDF, RDFS, Literal
+from rdflib import Literal
 import rdflib
 import biography
 from context import Context
-from log import *
-from place import Place
+from log import Log
 from event import Event
-from organizations import get_org, get_org_uri
+from organizations import get_org_uri
 
 
 """
 Status: ~75%
-TODO: 
- - review unmapped instances 
+TODO:
+ - review unmapped instances
  - revise method of capturing failed mappings to be similar to culturalforms
-
 """
 
-# temp log library for debugging --> to be eventually replaced with proper logging library
-# from log import *
+# temp log library for debugging
+# --> to be eventually replaced with proper logging library
 log = Log("log/occupation/errors")
 log.test_name("occupation extraction Error Logging")
 extract_log = Log("log/occupation/extraction")
@@ -58,9 +56,13 @@ class Occupation(object):
             self.uri = other_attributes
 
         self.uri = biography.create_uri("cwrc", self.predicate)
+    """
+    TODO figure out if i can just return tuple or triple without creating
+    a whole graph
+    Evaluate efficency of creating this graph or just returning a tuple and
+    have the biography deal with it
+    """
 
-    # TODO figure out if i can just return tuple or triple without creating a whole graph
-    # Evaluate efficency of creating this graph or just returning a tuple and have the biography deal with it
     def to_tuple(self, person_uri):
         return ((person_uri, self.uri, self.value))
 
@@ -156,15 +158,15 @@ class Occupation(object):
         if "http" in str(term):
             term = rdflib.term.URIRef(term)
         elif term:
-            term = rdflib.term.Literal(term, datatype=rdflib.namespace.XSD.string)
+            term = Literal(term, datatype=rdflib.namespace.XSD.string)
         else:
-            term = rdflib.term.Literal("_" + value.lower() + "_", datatype=rdflib.namespace.XSD.string)
+            term = Literal("_" + value.lower() + "_", datatype=rdflib.namespace.XSD.string)
             map_fail += 1
             possibilites = []
             for x in JOB_MAP.keys():
                 if get_close_matches(value.lower(), JOB_MAP[x]):
                     possibilites.append(x)
-            if type(term) is rdflib.term.Literal:
+            if type(term) is Literal:
                 update_fails(rdf_type, value)
             else:
                 update_fails(rdf_type, value + "->" + str(possibilites) + "?")
@@ -208,8 +210,8 @@ def find_occupations(tag):
 
 
 def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
-    """ Creates the location relation and ascribes them to the person along with the associated
-        contexts and event
+    """ Creates the occupation relation and ascribes them to the person along
+        with the associated contexts and event
     """
     global context_count
     global event_count
@@ -223,7 +225,7 @@ def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
         if occupation_list:
             temp_context = Context(context_id, tag, "OccupationContext")
             temp_context.link_triples(occupation_list)
-            person.add_location(occupation_list)
+            person.add_occupation(occupation_list)
         else:
             temp_context = Context(context_id, tag, "OccupationContext", "identifying")
 
@@ -293,7 +295,8 @@ def main():
         extract_log.subtitle("Entry #" + str(entry_num))
         extract_log.msg("\n\n")
 
-        file = open("occupation_turtle/" + filename[:-6] + "_occupation.ttl", "w", encoding="utf-8")
+        filename = "occupation_turtle/" + filename[:-6] + "_occupation.ttl"
+        file = open(filename, "w", encoding="utf-8")
         file.write("#" + str(len(graph)) + " triples created\n")
         file.write(graph.serialize(format="ttl").decode())
         file.close()
@@ -315,12 +318,5 @@ def main():
     log.msg("Total Terms: " + str(count))
 
 
-def test():
-    exit()
-
 if __name__ == "__main__":
-    # auth = [env.env("USER_NAME"), env.env("PASSWORD")]
-    # login.main(auth)
-    # test()
-    # print(JOB_MAP)
     main()

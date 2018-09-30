@@ -17,13 +17,9 @@ import birthDeath
 import scrapeFamily
 """
 This is a possible temporary main script that creates the biography related triples
-TODO: 
+TODO:
 add documentation
-implement location
-implement education
 implement personname
-implement occupation
-
 """
 
 # temp log library for debugging --> to be eventually replaced with proper logging library

@@ -9,7 +9,7 @@ MAX_WORD_COUNT = 35
 
 """
 Status: ~84%
-TODO: 
+TODO:
 1) Revise mechanism for adding triples as a texual body for less list oriented components ex. Death
 2) Review triples related to identifying contexts
 3) revise mechanism for getting closest heading
@@ -40,7 +40,7 @@ def get_value(tag):
 
 
 def strip_all_whitespace(string):
-# temp function for condensing the context strings for visibility in testing
+    # temp function for condensing context strings for visibility in testing
     return re.sub('[\s+]', '', str(string))
 
 
@@ -86,7 +86,8 @@ def identifying_motivation(tag):
 
 def get_heading(tag):
     # TODO: improve heading finding
-    # Figure out distance between tag and the two available headings to see which is closest
+    # Figure out distance between tag and the two available headings
+    # to see which is closest
     # Placeholder for now
     heading = tag.find("HEADING")
     if not heading:
@@ -99,10 +100,13 @@ def get_heading(tag):
 
 
 class Context(object):
-    """given the id for creating a context, the tag, context_type
+    """
+    given the id for creating a context, the tag, context_type
     optional argument of motivation: default is describing
-    if motivation is describing then it will also create the associated identifying contexts
-    if only an identifying context is needed motivation="identifying" as arguement is necessary
+    if motivation is describing then
+        it will also create the associated identifying contexts
+    if only an identifying context is needed
+    motivation="identifying" as argument is necessary
     """
     context_types = ["BiographyContext", "BirthContext", "CulturalFormContext",
                      "DeathContext", "FamilyContext", "FriendsAndAssociatesContext",
