@@ -174,15 +174,16 @@ class Biography(object):
 
 
         # Something like this
-        g +=self.birthObj.to_triple()
-        if self.deathObj is not None:
-            g +=self.deathObj.to_triples()
-        g += self.create_triples(self.cohabitants_list)
-        g += self.create_triples(self.family_list)
-        g += self.create_triples(self.friendsAssociates_list)
-        g += self.create_triples(self.intimateRelationships_list)
-        g += self.create_triples(self.childless_list)
-        g +=self.create_triples(self.children_list)
+        g += self.create_triples(self.name_list)
+        # g +=self.birthObj.to_triple()
+        # if self.deathObj is not None:
+        #     g +=self.deathObj.to_triples()
+        # g += self.create_triples(self.cohabitants_list)
+        # g += self.create_triples(self.family_list)
+        # g += self.create_triples(self.friendsAssociates_list)
+        # g += self.create_triples(self.intimateRelationships_list)
+        # g += self.create_triples(self.childless_list)
+        # g +=self.create_triples(self.children_list)
 
         # done putting in new contexts
 
