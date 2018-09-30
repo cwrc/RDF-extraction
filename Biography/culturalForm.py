@@ -416,7 +416,7 @@ def extract_cf_data(bio, person):
                 id += extract_culturalforms(events, "CULTURALFORMATION", person, "events")
 
     elements = bio.find_all("POLITICS")
-    forms_found = 0
+    forms_found = 1
     for element in elements:
         paragraphs = element.find_all("P")
         events = element.find_all("CHRONSTRUCT")
@@ -561,8 +561,8 @@ def main():
     global uber_graph
     test_cases = ["shakwi-b.xml", "woolvi-b.xml", "seacma-b.xml", "atwoma-b.xml",
                   "alcolo-b.xml", "bronem-b.xml", "bronch-b.xml", "levyam-b.xml"]
-    # for filename in filelist:
-    for filename in test_cases:
+    for filename in filelist:
+    # for filename in test_cases:
         with open("bio_data/" + filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
@@ -602,7 +602,7 @@ def main():
     file.write(uber_graph.serialize(format="ttl").decode())
 
     file = open("culturalForms.rdf", "w", encoding="utf-8")
-    file.write("#" + str(len(uber_graph)) + " triples created\n")
+    # file.write("#" + str(len(uber_graph)) + " triples created\n")
     file.write(uber_graph.serialize(format="pretty-xml").decode())
 
     log_mapping_fails(extract_log, log)

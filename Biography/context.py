@@ -250,26 +250,15 @@ class Context(object):
             for x in self.subjects:
                 g.add((self.uri, NS_DICT["dcterms"].subject, x))
 
-            format_str = rdflib.term.Literal("text/turtle", datatype=rdflib.namespace.XSD.string)
-            format_uri = create_uri("dcterms", "format")
             for x in self.triples:
-                # TODO: handle components with multiple triples this only works for simple components
-                # where an item in a list only produces one triple
-                # but for for some thing like death there will be multiple triples
-                # Temporaryily letting the whole chunk of triples be the part of the textual body
                 temp_str = x.to_triple(person).serialize(format="ttl").decode().splitlines()
                 triple_str_test = [y for y in temp_str if "@prefix" not in y and y != '']
                 if len(triple_str_test) == 1:
                     triple_str = x.to_triple(person).serialize(format="ttl").decode().splitlines()[-2]
+                    g += self.create_ttl_body(triple_str)
                 else:
                     triple_str = "\n".join(triple_str_test)
-
-                triple_str = rdflib.term.Literal(triple_str, datatype=rdflib.namespace.XSD.string)
-                temp_body = rdflib.BNode()
-                g.add((self.uri, NS_DICT["oa"].hasBody, temp_body))
-                g.add((temp_body, RDF.type, NS_DICT["oa"].TextualBody))
-                g.add((temp_body, RDF.value, triple_str))
-                g.add((temp_body, format_uri, format_str))
+                    g += self.create_multiple_triples(x.to_triple(person))
 
             if self.event:
                 g.add((self.uri, NS_DICT["cwrc"].hasEvent, self.event))
@@ -281,6 +270,33 @@ class Context(object):
             g.add((uri, RDFS.label, Literal(x.get("STANDARD"), datatype=rdflib.namespace.XSD.string)))
             g.add((uri, NS_DICT["foaf"].name, Literal(x.get("STANDARD"), datatype=rdflib.namespace.XSD.string)))
 
+        return g
+
+    def create_multiple_triples(self, graph):
+        """handles multitple triples
+        """
+        temp_g = rdflib.Graph()
+        g = rdflib.Graph()
+        namespace_manager = rdflib.namespace.NamespaceManager(temp_g)
+        bind_ns(namespace_manager, NS_DICT)
+        for x in graph[:]:
+            temp_g.add(x)
+            triple_str = temp_g.serialize(format="ttl").decode().splitlines()[-2]
+            temp_g.remove(x)
+            g += self.create_ttl_body(triple_str)
+
+        return g
+
+    def create_ttl_body(self, triple_str):
+        g = rdflib.Graph()
+        format_str = rdflib.term.Literal("text/turtle", datatype=rdflib.namespace.XSD.string)
+        format_uri = create_uri("dcterms", "format")
+        triple_str = rdflib.term.Literal(triple_str, datatype=rdflib.namespace.XSD.string)
+        temp_body = rdflib.BNode()
+        g.add((self.uri, NS_DICT["oa"].hasBody, temp_body))
+        g.add((temp_body, RDF.type, NS_DICT["oa"].TextualBody))
+        g.add((temp_body, RDF.value, triple_str))
+        g.add((temp_body, format_uri, format_str))
         return g
 
     def __str__(self):

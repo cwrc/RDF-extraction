@@ -25,6 +25,7 @@ def extract_health_contexts_data(bio, person):
     }
     contexts = bio.find_all("HEALTH")
     count = 1
+    event_count = 1
     for context in contexts:
         context_type = context.get("ISSUE")
         if context_type:
@@ -40,7 +41,6 @@ def extract_health_contexts_data(bio, person):
             count += 1
 
         events = context.find_all("CHRONSTRUCT")
-        event_count = 1
         for event in events:
             context_id = person.id + "_" + context_type + str(count)
             temp_context = Context(context_id, event, context_type, "identifying")
@@ -65,12 +65,11 @@ def extract_other_contexts_data(bio, person):
         TODO: after reviewing contexts/events remove uber_graph
     """
     other_contexts = ["VIOLENCE", "WEALTH", "LEISUREANDSOCIETY", "OTHERLIFEEVENT"]
-    # other_contexts = ["chronstruct"]
-    # TODO: handle chronproses --> events, still unsure quite of the relationship between a context and event
 
     for context in other_contexts:
         contexts = bio.find_all(context)
         count = 1
+        event_count = 1
         for x in contexts:
             paragraphs = x.find_all("P")
             for paragraph in paragraphs:
@@ -81,7 +80,6 @@ def extract_other_contexts_data(bio, person):
                 count += 1
 
             events = x.find_all("CHRONSTRUCT")
-            event_count = 1
             for event in events:
                 context_id = person.id + "_" + Context.context_map[context] + str(count)
                 temp_context = Context(context_id, event, context, "identifying")
@@ -122,8 +120,9 @@ def main():
     # for filename in filelist[:200]:
     # for filename in filelist[-5:]:
 
+    # for filename in filelist:
     # for filename in ["levyam-b.xml", "atwoma-b.xml", "woolvi-b.xml", "clifan-b.xml", "bellfr-b.xml"]:
-    for filename in filelist:
+    for filename in ["woolvi-b.xml"]:
         with open("bio_data/" + filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
@@ -141,6 +140,11 @@ def main():
         extract_log.msg(test_person.to_file(graph))
         extract_log.subtitle("Entry #" + str(entry_num))
         extract_log.msg("\n\n")
+
+        file = open("other_contexts_turtle/" + filename[:-6] + "_other_contexts.ttl", "w", encoding="utf-8")
+        file.write("#" + str(len(graph)) + " triples created\n")
+        file.write(graph.serialize(format="ttl").decode())
+        file.close()
 
         uber_graph += graph
         entry_num += 1

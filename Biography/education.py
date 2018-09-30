@@ -1,13 +1,12 @@
 import biography
 import rdflib
-import re
+from rdflib import RDF, RDFS, Literal
 from context import Context, get_people, get_places, get_titles
 from difflib import get_close_matches
 from event import Event
-from log import *
+from log import Log
 from organizations import get_org, get_org_uri
 from place import Place
-from rdflib import RDF, RDFS, Literal
 """
 Status: ~75%
 TODO:
@@ -15,8 +14,13 @@ Handle name tags with subject tags
 TEXT tags
     name within text
     title within text
-evaluate mapping    
+evaluate mapping
 """
+EDU_MAP = {}
+map_attempt = 0
+map_success = 0
+map_fail = 0
+fail_dict = {}
 
 log = Log("log/education/errors")
 log.test_name("Education extraction Error Logging")
@@ -41,7 +45,8 @@ education_event_count = {
 
 
 def strip_all_whitespace(string):
-    # temp function for condensing the context strings for visibility in testing
+    # temp function for condensing  context strings for visibility in testing
+    import re
     return re.sub('[\s+]', '', str(string))
 
 
@@ -123,8 +128,8 @@ class School(object):
         namespace_manager = rdflib.namespace.NamespaceManager(g)
         biography.bind_ns(namespace_manager, biography.NS_DICT)
 
-        g.add((self.uri, biography.NS_DICT["foaf"].name, rdflib.Literal(self.name)))
-        g.add((self.uri, biography.NS_DICT["rdfs"].name, rdflib.Literal(self.name)))
+        g.add((self.uri, biography.NS_DICT["foaf"].name, Literal(self.name)))
+        g.add((self.uri, biography.NS_DICT["rdfs"].name, Literal(self.name)))
         g.add((self.uri, RDF.type, CWRC.EducationalOrganization))
         if self.level:
             g.add((person.uri, self.attending_map[self.level], self.uri))
@@ -161,7 +166,9 @@ class School(object):
 
 class EducationalAward(object):
     """docstring for EducationalAward"""
-    award_keywords = ["scholarship", "prize","medal", "fellow","fellowship","essay","bursary","exhibition","distinction","honours","studentship"]
+    award_keywords = ["scholarship", "prize", "medal", "fellow", "fellowship",
+                      "essay", "bursary", "exhibition", "distinction",
+                      "honours", "studentship"]
     award_map = {
         "scholarship": CWRC.Scholarship,
         "prize": CWRC.EducationalPrize,
@@ -186,9 +193,7 @@ class EducationalAward(object):
         text = ' '.join(str(name).split())
         words = text.split(" ")
         text = ' '.join(words[:15])
-        # self.uri = biography.create_uri("cwrc", strip_all_whitespace(text))
         self.uri = biography.make_standard_uri(text)
-
 
     def get_award_type(self, name):
         types = []
@@ -217,8 +222,8 @@ class EducationalAward(object):
         namespace_manager = rdflib.namespace.NamespaceManager(g)
         biography.bind_ns(namespace_manager, biography.NS_DICT)
 
-        g.add((self.uri, biography.NS_DICT["foaf"].name, rdflib.Literal(self.name)))
-        g.add((self.uri, biography.NS_DICT["rdfs"].label, rdflib.Literal(self.name)))
+        g.add((self.uri, biography.NS_DICT["foaf"].name, Literal(self.name)))
+        g.add((self.uri, biography.NS_DICT["rdfs"].label, Literal(self.name)))
         g.add((person.uri, CWRC.hasAward, self.uri))
         for x in self.award_type:
             g.add((self.uri, RDF.type, x))
@@ -228,9 +233,12 @@ class EducationalAward(object):
 class Education(object):
     """docstring for Education"""
 
-    context_types = ["InstitutionalEducationContext", "SelfTaughtEducationContext", "DomesticEducationContext"]
-    context_map = {"INSTITUTIONAL": "InstitutionalEducationContext", "SELF-TAUGHT": "SelfTaughtEducationContext",
-                   "DOMESTIC": "DomesticEducationContext", None: "EducationContext"}
+    context_types = ["InstitutionalEducationContext",
+                     "SelfTaughtEducationContext", "DomesticEducationContext"]
+    context_map = {"INSTITUTIONAL": "InstitutionalEducationContext",
+                   "SELF-TAUGHT": "SelfTaughtEducationContext",
+                   "DOMESTIC": "DomesticEducationContext",
+                   None: "EducationContext"}
 
     def __init__(self):
         super(Education, self).__init__()
@@ -287,7 +295,7 @@ class Education(object):
 
         for x in self.awards:
             g += x.to_triple(person)
-        
+
         # TODO text
 
         return g
@@ -409,8 +417,9 @@ def get_school(school_tags):
         name = get_value(tag)
         lvl = get_attribute(tag, "INSTITUTIONLEVEL")
 
-        school_types = [x for x in [lvl, get_attribute(tag, "STUDENTBODY"), get_attribute(
-            tag, "RELIGIOUS"), get_attribute(tag, "INSTITUTION")] if x]
+        school_types = [x for x in [lvl, get_attribute(tag, "STUDENTBODY"),
+                                    get_attribute(tag, "RELIGIOUS"),
+                                    get_attribute(tag, "INSTITUTION")] if x]
 
         temp_school = School(name, school_types, lvl, tag)
         temp_school.add_studied_subjects(get_study_subjects(tag.find_all("SUBJECT")))
@@ -440,7 +449,6 @@ def create_education(tag, person):
     temp_education.add_studied_subjects(get_study_subjects(tag.find_all("SUBJECT")))
     temp_education.add_degree_subjects(get_degree_subjects(tag))
     temp_education.add_awards(get_awards(tag.find_all("AWARD")))
-    # print()
 
     texts = get_texts(tag.find_all("TEXT"))
     works = []
@@ -451,7 +459,7 @@ def create_education(tag, person):
 
     # Add mapping of titles
     temp_education.add_edu_texts(titles)
-    temp_education.add_works(works)
+    # temp_education.add_works(works)
 
     return temp_education
 
@@ -507,7 +515,6 @@ def get_subjects(component, person):
     subjects = []
     temp_graph = component.to_triple(person)
     subjects += [x for x in temp_graph.objects(None, None)]
-
     return list(set(subjects))
 
 
@@ -529,12 +536,7 @@ def create_edu_map():
             EDU_MAP[row[0]].append(list(filter(None, [row[1], *temp_row])))
 
 
-EDU_MAP = {}
 create_edu_map()
-map_attempt = 0
-map_success = 0
-map_fail = 0
-fail_dict = {}
 
 
 def update_fails(rdf_type, value):
@@ -632,14 +634,14 @@ def main():
     namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
     biography.bind_ns(namespace_manager, biography.NS_DICT)
 
-    # for filename in filelist[:200]:
-    # for filename in filelist[-5:]:
     test_cases = ["shakwi-b.xml", "woolvi-b.xml", "seacma-b.xml", "atwoma-b.xml",
                   "alcolo-b.xml", "bronem-b.xml", "bronch-b.xml", "levyam-b.xml"]
     test_cases += ["bankis-b.xml", "burnfr-b.xml", "annali-b.xml", "carrdo-b.xml"]
     test_cases += ["platsy-b.xml"]
-    for filename in test_cases:
+    # for filename in filelist[:200]:
+    # for filename in filelist[-5:]:
     # for filename in filelist:
+    for filename in test_cases:
         with open("bio_data/" + filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
@@ -665,7 +667,6 @@ def main():
 
         uber_graph += graph
         entry_num += 1
-
     turtle_log.subtitle(str(len(uber_graph)) + " triples created")
     turtle_log.msg(uber_graph.serialize(format="ttl").decode(), stdout=False)
     turtle_log.msg("")
@@ -679,11 +680,5 @@ def main():
     file.write(uber_graph.serialize(format="pretty-xml").decode())
 
 
-def test():
-    exit()
-
 if __name__ == "__main__":
-    # auth = [env.env("USER_NAME"), env.env("PASSWORD")]
-    # login.main(auth)
-    # test()
     main()
