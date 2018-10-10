@@ -67,7 +67,7 @@ def main():
         # cf.extract_cf_data(soup, person)
         # person.context_list.clear()
         # other_contexts.extract_health_contexts_data(soup, person)
-        personname.extract_person_name(soup,person)
+        personname.extract_person_name(soup, person)
         continue
         # birthDeath.extract_birth(soup, person)
         # birthDeath.extract_death(soup, person)

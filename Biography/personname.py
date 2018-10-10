@@ -21,8 +21,8 @@ basic_layout_dict = {
         "PSEUDONYM": "pseudonym",
         "BIRTHNAME": "BirthName",
         # "PROFESSIONALTITLE": None,
-        # "INDEXED": None,
-        "MARRIED": "Married",
+        "INDEXED": "IndexedName",
+        "MARRIED": "MarriedName",
         "RELIGIOUS": "religiousName",
         "ROYAL": "royalName",
         "SELFCONSTRUCTED": "selfConstructedName",
@@ -39,6 +39,7 @@ class BirthName:
 
 class PersonName:
     def __init__(self, types, value, uri=None, extraAttributes=None,parentType=None):
+        self.id = remove_punctuation("NameEnt " + value)
         self.uri = None
         self.value = value
         self.typeLabels = []
@@ -135,7 +136,7 @@ def getGivenAndSurNames(tag):
     return allGivenNames, allSurNames
 
 
-def makePerson(type, tag, personName=None,parentType=None):
+def makePerson(type, tag, existingList,personName=None):
     types = [type]
 
     # usefull for birthnames as you have to send the given and surname to the PersonName class
@@ -173,21 +174,21 @@ def makePerson(type, tag, personName=None,parentType=None):
             if property in name_type_dict:
                 types.append(name_type_dict[property])
                 name_to_send = getTheName(tag)
-    elif "Married" in types:
+    elif "MarriedName" in types:
         types.append("Surname")
         name_to_send = getTheName(tag,ignore_reg_value=True)
-        # fixme: other class
-        #     else:
-        # else:
-        #     personNameList.append(makePerson("Nickname", "nickname"))
+
     else:
         name_to_send = getTheName(tag,ignore_reg_value=True)
-    if otherAttrsReqd:
-        return PersonName(types, name_to_send, extraAttributes=otherAttributes)
-    else:
-        return PersonName(types, name_to_send)
 
-def extract_person_name2(xmlString,person):
+    if any(person.id == remove_punctuation("NameEnt " + name_to_send) for person in existingList) == False:
+        if otherAttrsReqd:
+            return PersonName(types, name_to_send, extraAttributes=otherAttributes)
+        else:
+            return PersonName(types, name_to_send)
+    else:
+        return None
+def extract_person_name(xmlString, person):
     root = xmlString.BIOGRAPHY
     personNameList = []
 
@@ -199,86 +200,22 @@ def extract_person_name2(xmlString,person):
         for tagname in basic_layout_dict:
             if tagname == "BIRTHNAME":
                 for givenName in name.find_all("BIRTHNAME"):
-                    personNameList.append(makePerson("BirthName", (givenName), personName=person.name))
+                    newPerson = makePerson("BirthName", (givenName), personNameList,personName=person.name)
+                    if newPerson:
+                        personNameList.append(newPerson)
             elif tagname == "NICKNAME":
                 for nickname in name.find_all("NICKNAME"):
-                    personNameList.append(makePerson("NickName",nickname))
+                    newPerson = makePerson("NickName",nickname,personNameList)
+                    if newPerson:
+                        personNameList.append(newPerson)
             else:
                 for thisTag in name.find_all(tagname):
-                    personNameList.append(makePerson(basic_layout_dict[tagname], thisTag))
+                    newPerson = makePerson(basic_layout_dict[tagname], thisTag,personNameList)
+                    if newPerson:
+                        personNameList.append(newPerson)
+
 
     person.name_list = personNameList
-
-def extract_person_name(xmlString, person):
-    root = xmlString.BIOGRAPHY
-    personNameList = []
-    name_type_dict = {
-        "ABUSIVE": "AbusiveName",
-        "HONORIFIC": "HonorificName",
-        "CRYPTIC": "CrypticName",
-        "LOCAL": "LocalName",
-        "ROMANCE": "RomanceName",
-        "LITERARY": "LiteraryName",
-        "FAMILIAR": "FamiliarName",
-    }
-    # Subelement : type
-    basic_layout_dict = {
-        "RELIGIOUS": "religiousName",
-        "ROYAL": "royalName",
-        "SELFCONSTRUCTED": "selfConstructedName",
-        "STYLED": "styledName",
-        "TITLE": "titledName"
-    }
-    id = 1
-    for name in root.find_all("PERSONNAME"):
-        # context_id = person.id + "_PersonNameContext_" + str(id)
-        # tempContext = context.Context(context_id, name, 'PERSONNAME')
-        # tempContext.link_triples(person.deathObj.death_list)
-        # person.context_list.append(tempContext)
-
-        for nickName in name.find_all("NICKNAME"):
-            if "NAMECONNOTATION" in nickName.attrs:
-                property = nickName["NAMECONNOTATION"]
-                print("name connotation ", property)
-                if property in name_type_dict:
-                    personNameList.append(makePerson(name_type_dict[property], nickName))
-
-            elif "NAMESIGNIFIER" in nickName.attrs:
-                property = nickName["NAMESIGNIFIER"]
-                print("name signifier ", property)
-                if property in name_type_dict:
-                    personNameList.append(makePerson(name_type_dict[property], nickName))
-
-            elif "NAMETYPE" in nickName.attrs:
-                property = nickName["NAMETYPE"]
-                print("name type ", property)
-                if property in name_type_dict:
-                    personNameList.append(makePerson(name_type_dict[property], nickName))
-
-            #     fixme: other class
-            #     else:
-            # else:
-            #     personNameList.append(makePerson("Nickname", "nickname"))
-
-            # print(nickName.name)
-        for pseudoNym in name.find_all("PSEUDONYM"):
-            personNameList.append(makePerson("pseudonym", pseudoNym))
-
-        for givenName in name.find_all("BIRTHNAME"):
-            personNameList.append(makePerson("BirthName", (givenName), personName=person.name))
-
-        # doing nothing for now as according to the personname spread sheet
-        # for surName in name.find_all("PROFESSIONLTITLE"):
-        #     personNameList.append(makePerson("Surname", (surName)))
-
-        # for surName in name.find_all("INDEXED"):
-        #     personNameList.append(makePerson("Surname", (surName)))
-
-        # for surName in name.find_all("MARRIED"):
-        #     personNameList.append(makePerson("Surname", (surName)))
-
-    person.name_list = personNameList
-
 
 def main():
     import os
@@ -286,22 +223,17 @@ def main():
 
     # for filename in ["abdyma-b.xml","woolvi-b.xml", "blaccl-b.xml"]:
     # for filename in ["blesma-b.xml"]:
-    for filename in ["abdyma-b.xml"]:
-        # for filename in filelist:
+    # for filename in ["abdyma-b.xml"]:
+    # for filename in ["aikejo-b.xml"]:
+    for filename in filelist:
         with open("bio_data/" + filename, encoding="utf-8") as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
         print("===========", filename, "=============")
         person = Biography(filename[:-6], get_name(soup), cf.get_mapped_term("Gender", get_sex(soup)))
-        # education.extract_education_data(soup, person)
-        # cf.extract_cf_data(soup, person)
-        # person.context_list.clear()
-        # other_contexts.extract_health_contexts_data(soup, person)
 
-        # extract_person_name(soup, person)
-        extract_person_name2(soup,person)
+        extract_person_name(soup, person)
 
-        # graph = person.to_graph()
         graph = person.create_triples(person.name_list)
         namespace_manager = rdflib.namespace.NamespaceManager(graph)
         bind_ns(namespace_manager, NS_DICT)
