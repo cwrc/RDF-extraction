@@ -41,6 +41,12 @@ NS_DICT = {
     "vs": rdflib.Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#")
 }
 
+def get_name(bio):
+    return (bio.BIOGRAPHY.DIV0.STANDARD.text)
+
+
+def get_sex(bio):
+    return (bio.BIOGRAPHY.get("SEX"))
 
 def bind_ns(namespace_manager, ns_dictionary):
     for x in ns_dictionary.keys():
@@ -100,6 +106,7 @@ class Biography(object):
         self.intimate_relationship_list = []
 
         # Gurjap's files
+
         self.contextCounts = {
             "intimateRelationship": 1,
             "friendsAssociates": 1
@@ -111,7 +118,9 @@ class Biography(object):
         self.friendsAssociates_list = []
         self.intimateRelationships_list = []
         self.childless_list = []
-        self.children_list = []
+
+        self.children_list =[]
+        self.name_list = []
 
     def add_context(self, context):
         if context is list:
@@ -179,16 +188,17 @@ class Biography(object):
         g += self.create_triples(self.education_context_list)
 
         # Something like this
-        if self.birthObj:
-            g += self.birthObj.to_triple()
-        if self.deathObj is not None:
-            g += self.deathObj.to_triples()
-        g += self.create_triples(self.cohabitants_list)
-        g += self.create_triples(self.family_list)
-        g += self.create_triples(self.friendsAssociates_list)
-        g += self.create_triples(self.intimateRelationships_list)
-        g += self.create_triples(self.childless_list)
-        g += self.create_triples(self.children_list)
+        g += self.create_triples(self.name_list)
+        # if self.birthObj:
+            # g += self.birthObj.to_triple()
+        # if self.deathObj is not None:
+        #     g +=self.deathObj.to_triples()
+        # g += self.create_triples(self.cohabitants_list)
+        # g += self.create_triples(self.family_list)
+        # g += self.create_triples(self.friendsAssociates_list)
+        # g += self.create_triples(self.intimateRelationships_list)
+        # g += self.create_triples(self.childless_list)
+        # g +=self.create_triples(self.children_list)
 
         # done putting in new contexts
 

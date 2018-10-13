@@ -1,4 +1,4 @@
-# this file simply holds functions for scrapeFamily.py
+# this file simply holds functions for lifeInfo.py
 import xml.etree.ElementTree
 from bs4 import BeautifulSoup
 import os
@@ -10,7 +10,7 @@ from stringAndMemberFunctions import *
 import context
 
 
-def getBirth(xmlString,person):
+def extract_birth(xmlString, person):
     # filePath = os.path.expanduser("~/Downloads/laurma-b.xml")
     # getTreeRoot = xml.etree.ElementTree.parse(filePath)
     # treeRoot = getTreeRoot.getroot()
@@ -127,7 +127,7 @@ def getBirth(xmlString,person):
     # birthContexts = getContexts(getContextsFrom)
 
     
-def getDeath(xmlString,person):
+def extract_death(xmlString, person):
 
     # filePath = os.path.expanduser("~/Downloads/laurma-b.xml")
     # getTreeRoot = xml.etree.ElementTree.parse(filePath)

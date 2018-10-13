@@ -104,7 +104,8 @@ class Context(object):
                      "NationalityContext", "OccupationContext", "PoliticalContext",
                      "RaceEthnicityContext", "ReligionContext", "SexualityContext",
                      "SocialClassContext", "SpatialContext", "ViolenceContext",
-                     "WealthContext"]
+                     "WealthContext", "PersonNameContext"]
+
     context_map = {"CLASSISSUE": "SocialClassContext",
                    "RACEANDETHNICITY": "RaceEthnicityContext",
                    "NATIONALITYISSUE": "NationalityContext",
@@ -122,7 +123,8 @@ class Context(object):
                    "BIRTH": "BirthContext",
                    "DEATH": "DeathContext",
                    "FRIENDSASSOCIATES": "FriendsAndAssociatesContext",
-                   "INTIMATERELATIONSHIPS": "IntimateRelationshipsContext"
+                   "INTIMATERELATIONSHIPS": "IntimateRelationshipsContext",
+                   "PERSONNAME": "PersonNameContext"
                    }
 
     def __init__(self, id, tag, context_type="culturalformation", motivation="describing"):
