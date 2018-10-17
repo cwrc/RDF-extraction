@@ -43,6 +43,14 @@ NS_DICT = {
 }
 
 
+def get_name(bio):
+    return (bio.BIOGRAPHY.DIV0.STANDARD.text)
+
+
+def get_sex(bio):
+    return (bio.BIOGRAPHY.get("SEX"))
+
+
 def bind_ns(namespace_manager, ns_dictionary):
     for x in ns_dictionary.keys():
         namespace_manager.bind(x, ns_dictionary[x], override=False)
@@ -101,6 +109,7 @@ class Biography(object):
         self.intimate_relationship_list = []
 
         # Gurjap's files
+
         self.contextCounts = {
             "intimateRelationship": 1,
             "friendsAssociates": 1
@@ -112,7 +121,9 @@ class Biography(object):
         self.friendsAssociates_list = []
         self.intimateRelationships_list = []
         self.childless_list = []
+
         self.children_list = []
+        self.name_list = []
 
     def add_context(self, context):
         if type(context) is list:
@@ -184,12 +195,14 @@ class Biography(object):
             g += self.birthObj.to_triple()
         if self.deathObj is not None:
             g += self.deathObj.to_triples()
+        
         g += self.create_triples(self.cohabitants_list)
         g += self.create_triples(self.family_list)
         g += self.create_triples(self.friendsAssociates_list)
         g += self.create_triples(self.intimateRelationships_list)
         g += self.create_triples(self.childless_list)
         g += self.create_triples(self.children_list)
+        g += self.create_triples(self.name_list)
 
         return g
 

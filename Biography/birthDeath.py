@@ -1,4 +1,4 @@
-# this file simply holds functions for scrapeFamily.py
+# this file simply holds functions for lifeInfo.py
 import xml.etree.ElementTree
 from bs4 import BeautifulSoup
 import os
@@ -12,7 +12,7 @@ from event import get_date_tag, format_date
 from place import Place
 
 
-def getBirth(xmlString, person):
+def extract_birth(xmlString, person):
     # filePath = os.path.expanduser("~/Downloads/laurma-b.xml")
     # getTreeRoot = xml.etree.ElementTree.parse(filePath)
     # treeRoot = getTreeRoot.getroot()
@@ -109,8 +109,7 @@ def getBirth(xmlString, person):
     # birthContexts = getContexts(getContextsFrom)
 
 
-def getDeath(xmlString, person):
-
+def extract_death(xmlString, person):
     # filePath = os.path.expanduser("~/Downloads/laurma-b.xml")
     # getTreeRoot = xml.etree.ElementTree.parse(filePath)
     # treeRoot = getTreeRoot.getroot()
@@ -133,7 +132,7 @@ def getDeath(xmlString, person):
     deathDateTag = ""
 
     try:
-        if deathTagParent == None:
+        if deathTagParent is None:
             # Death tag not found
             deathTagParent = treeRoot.find(".//DEATH/")
             if deathTagParent is not None:
