@@ -1,5 +1,8 @@
 import rdflib
 PLACE_MAP = {}
+# TODO remove circular dependence and add find places to this class
+# from utilities import *
+
 
 """
 Class/series of functions that deal with mapping place to its respective uri
@@ -9,7 +12,6 @@ TODO:
 1)create log of unmapped places
 2)error handling of missing place.csv
 3)review necessity of Place class
-
 """
 
 

@@ -1,8 +1,11 @@
 import rdflib
-import biography
+
+from log import *
+from utilities import *
+
+from biography import Biography
 from context import Context
 from event import Event
-from log import *
 """
 Status: ~89%
 extraction of health context will possibly accompanied by health factors at a later point
@@ -115,36 +118,36 @@ def main():
 
     uber_graph = rdflib.Graph()
     namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
-    biography.bind_ns(namespace_manager, biography.NS_DICT)
+    bind_ns(namespace_manager, NS_DICT)
 
     # for filename in filelist[:200]:
     # for filename in filelist[-5:]:
 
     # for filename in filelist:
-    # for filename in ["levyam-b.xml", "atwoma-b.xml", "woolvi-b.xml", "clifan-b.xml", "bellfr-b.xml"]:
-    for filename in ["woolvi-b.xml"]:
+    test_cases = ["shakwi-b.xml", "woolvi-b.xml", "seacma-b.xml", "atwoma-b.xml",
+                  "alcolo-b.xml", "bronem-b.xml", "bronch-b.xml", "levyam-b.xml"]
+    # for filename in filelist:
+    for filename in test_cases:
         with open("bio_data/" + filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
         print(filename)
-        test_person = biography.Biography(
+        person = Biography(
             filename[:-6], get_name(soup), culturalForm.get_mapped_term("Gender", get_sex(soup)))
 
-        extract_other_contexts_data(soup, test_person)
+        extract_other_contexts_data(soup, person)
 
-        graph = test_person.to_graph()
+        graph = person.to_graph()
 
         extract_log.subtitle("Entry #" + str(entry_num))
-        extract_log.msg(str(test_person))
+        extract_log.msg(str(person))
         extract_log.subtitle(str(len(graph)) + " triples created")
-        extract_log.msg(test_person.to_file(graph))
+        extract_log.msg(person.to_file(graph))
         extract_log.subtitle("Entry #" + str(entry_num))
         extract_log.msg("\n\n")
 
-        file = open("other_contexts_turtle/" + filename[:-6] + "_other_contexts.ttl", "w", encoding="utf-8")
-        file.write("#" + str(len(graph)) + " triples created\n")
-        file.write(graph.serialize(format="ttl").decode())
-        file.close()
+        temp_path = "extracted_triples/other_contexts_turtle/" + filename[:-6] + "_other_contexts.ttl"
+        create_extracted_file(temp_path, person)
 
         uber_graph += graph
         entry_num += 1
@@ -153,13 +156,11 @@ def main():
     turtle_log.msg(uber_graph.serialize(format="ttl").decode(), stdout=False)
     turtle_log.msg("")
 
-    file = open("other_contexts.ttl", "w", encoding="utf-8")
-    file.write("#" + str(len(uber_graph)) + " triples created\n")
-    file.write(uber_graph.serialize(format="ttl").decode())
+    temp_path = "extracted_triples/other_contexts.ttl"
+    create_extracted_uberfile(temp_path, uber_graph)
 
-    file = open("other_contexts.rdf", "w", encoding="utf-8")
-    file.write("#" + str(len(uber_graph)) + " triples created\n")
-    file.write(uber_graph.serialize(format="pretty-xml").decode())
+    temp_path = "extracted_triples/other_contexts.rdf"
+    create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
 
 
 if __name__ == "__main__":

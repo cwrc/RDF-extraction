@@ -1,14 +1,11 @@
 # this file simply holds functions for lifeInfo.py
-import xml.etree.ElementTree
 from bs4 import BeautifulSoup
-import os
 import sys
 import logging
-import copy
 from classes import *
 from stringAndMemberFunctions import *
 import context
-from event import get_date_tag, format_date
+from event import get_date_tag
 from place import Place
 
 
@@ -67,7 +64,7 @@ def extract_birth(xmlString, person):
 
     # Get birth positions
     # Ex. 'Oldest', 'Youngest'
-    birthPositionTags = (birthTag.find_all('BIRTHPOSITION'))
+    birthPositionTags = birthTag.find_all('BIRTHPOSITION')
     for positions in birthPositionTags:
         if 'POSITION' in positions.attrs:
             birthPositions.append(positions['POSITION'])

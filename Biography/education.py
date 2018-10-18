@@ -1,11 +1,15 @@
-import biography
 import rdflib
 from rdflib import RDF, RDFS, Literal
-from context import Context, get_people, get_places, get_titles
 from difflib import get_close_matches
-from event import Event
+
 from log import Log
+
+from utilities import *
 from organizations import get_org, get_org_uri
+
+from biography import Biography
+from context import Context
+from event import Event
 from place import Place
 """
 Status: ~75%
@@ -29,7 +33,7 @@ extract_log.test_name("Education extraction Test Logging")
 turtle_log = Log("log/education/triples")
 turtle_log.test_name("Education extracted Triples")
 
-CWRC = biography.NS_DICT["cwrc"]
+CWRC = NS_DICT["cwrc"]
 education_count = {
     "INSTITUTIONAL": 0,
     "SELF-TAUGHT": 0,
@@ -42,12 +46,6 @@ education_event_count = {
     "DOMESTIC": 0,
     None: 0,
 }
-
-
-def strip_all_whitespace(string):
-    # temp function for condensing  context strings for visibility in testing
-    import re
-    return re.sub('[\s+]', '', str(string))
 
 
 class School(object):
@@ -89,7 +87,7 @@ class School(object):
         if school_org:
             self.uri = get_org_uri(school_org[0])
         else:
-            self.uri = biography.make_standard_uri((name) + " EduOrg", "cwrc")
+            self.uri = make_standard_uri((name) + " EduOrg", "cwrc")
 
         self.name = name
         self.level = level
@@ -126,10 +124,10 @@ class School(object):
     def to_triple(self, person):
         g = rdflib.Graph()
         namespace_manager = rdflib.namespace.NamespaceManager(g)
-        biography.bind_ns(namespace_manager, biography.NS_DICT)
+        bind_ns(namespace_manager, NS_DICT)
 
-        g.add((self.uri, biography.NS_DICT["foaf"].name, Literal(self.name)))
-        g.add((self.uri, biography.NS_DICT["rdfs"].name, Literal(self.name)))
+        g.add((self.uri, NS_DICT["foaf"].name, Literal(self.name)))
+        g.add((self.uri, NS_DICT["rdfs"].name, Literal(self.name)))
         g.add((self.uri, RDF.type, CWRC.EducationalOrganization))
         if self.level:
             g.add((person.uri, self.attending_map[self.level], self.uri))
@@ -190,10 +188,8 @@ class EducationalAward(object):
         if not self.award_type:
             self.award_type = [CWRC.EducationalAward]
 
-        text = ' '.join(str(name).split())
-        words = text.split(" ")
-        text = ' '.join(words[:15])
-        self.uri = biography.make_standard_uri(text)
+        text = limit_words(str(name), 15)
+        self.uri = make_standard_uri(text)
 
     def get_award_type(self, name):
         types = []
@@ -220,10 +216,10 @@ class EducationalAward(object):
     def to_triple(self, person):
         g = rdflib.Graph()
         namespace_manager = rdflib.namespace.NamespaceManager(g)
-        biography.bind_ns(namespace_manager, biography.NS_DICT)
+        bind_ns(namespace_manager, NS_DICT)
 
-        g.add((self.uri, biography.NS_DICT["foaf"].name, Literal(self.name)))
-        g.add((self.uri, biography.NS_DICT["rdfs"].label, Literal(self.name)))
+        g.add((self.uri, NS_DICT["foaf"].name, Literal(self.name)))
+        g.add((self.uri, NS_DICT["rdfs"].label, Literal(self.name)))
         g.add((person.uri, CWRC.hasAward, self.uri))
         for x in self.award_type:
             g.add((self.uri, RDF.type, x))
@@ -258,7 +254,7 @@ class Education(object):
     def to_triple(self, person):
         g = rdflib.Graph()
         namespace_manager = rdflib.namespace.NamespaceManager(g)
-        biography.bind_ns(namespace_manager, biography.NS_DICT)
+        bind_ns(namespace_manager, NS_DICT)
 
         for x in self.schools:
             g += x.to_triple(person)
@@ -283,7 +279,7 @@ class Education(object):
             oeuvre_uri = rdflib.term.URIRef(str(x) + "__Oeuvre")
             g.add((oeuvre_uri, RDF.type, CWRC.Oeuvre))
             g.add((person.uri, CWRC.studies, oeuvre_uri))
-            # g.add((x, biography.NS_DICT["bf"].role, oeuvre_uri))
+            # g.add((x, NS_DICT["bf"].role, oeuvre_uri))
             # TODO label this better
             # g.add((oeuvre_uri, RDFS.label, Literal(x)))
 
@@ -365,27 +361,6 @@ class Education(object):
         self.works += work
 
 
-def get_reg(tag):
-    return get_attribute(tag, "REG")
-
-
-def get_attribute(tag, attribute):
-    value = tag.get(attribute)
-    if value:
-        return value
-    return None
-
-
-def get_value(tag):
-    value = get_reg(tag)
-    if not value:
-        value = get_attribute(tag, "CURRENTALTERNATIVETERM")
-    if not value:
-        value = str(tag.text)
-        value = ' '.join(value.split())
-    return value
-
-
 def get_study_subjects(subj_tags):
     return [get_mapped_term("Subject", get_value(x)) for x in subj_tags]
 
@@ -464,15 +439,6 @@ def create_education(tag, person):
     return temp_education
 
 
-def limit_words(string, word_count):
-    text = ' '.join(str(string).split())
-    words = text.split(" ")
-    text = ' '.join(words[:word_count])
-    if len(words) > word_count:
-        text += "..."
-    return text
-
-
 def extract_education(tag_list, context_type, person, list_type="paragraphs"):
     """ Creates the location relation and ascribes them to the person along with the associated
         contexts and event
@@ -509,13 +475,6 @@ def extract_education(tag_list, context_type, person, list_type="paragraphs"):
             person.add_event(temp_event)
 
         person.add_context(temp_context)
-
-
-def get_subjects(component, person):
-    subjects = []
-    temp_graph = component.to_triple(person)
-    subjects += [x for x in temp_graph.objects(None, None)]
-    return list(set(subjects))
 
 
 def clean_term(string):
@@ -571,9 +530,9 @@ def get_mapped_term(rdf_type, value, retry=False):
     if "http" in str(term):
         term = rdflib.term.URIRef(term)
     elif term:
-        term = rdflib.term.Literal(term, datatype=rdflib.namespace.XSD.string)
+        term = Literal(term, datatype=rdflib.namespace.XSD.string)
     else:
-        term = rdflib.term.Literal("_" + value.lower() + "_", datatype=rdflib.namespace.XSD.string)
+        term = Literal("_" + value.lower() + "_", datatype=rdflib.namespace.XSD.string)
         if retry:
             map_attempt -= 1
         else:
@@ -582,7 +541,7 @@ def get_mapped_term(rdf_type, value, retry=False):
             for x in EDU_MAP[rdf_type]:
                 if get_close_matches(value.lower(), x):
                     possibilites.append(x[0])
-            if type(term) is rdflib.term.Literal:
+            if type(term) is Literal:
                 update_fails(rdf_type, value)
             else:
                 update_fails(rdf_type, value + "->" + str(possibilites) + "?")
@@ -621,64 +580,53 @@ def main():
     from bs4 import BeautifulSoup
     import culturalForm
 
-    def get_name(bio):
-        return (bio.BIOGRAPHY.DIV0.STANDARD.text)
-
-    def get_sex(bio):
-        return (bio.BIOGRAPHY.get("SEX"))
-
     filelist = [filename for filename in sorted(os.listdir("bio_data")) if filename.endswith(".xml")]
     entry_num = 1
 
     uber_graph = rdflib.Graph()
     namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
-    biography.bind_ns(namespace_manager, biography.NS_DICT)
+    bind_ns(namespace_manager, NS_DICT)
 
     test_cases = ["shakwi-b.xml", "woolvi-b.xml", "seacma-b.xml", "atwoma-b.xml",
                   "alcolo-b.xml", "bronem-b.xml", "bronch-b.xml", "levyam-b.xml"]
     test_cases += ["bankis-b.xml", "burnfr-b.xml", "annali-b.xml", "carrdo-b.xml"]
     test_cases += ["platsy-b.xml"]
-    # for filename in filelist[:200]:
-    # for filename in filelist[-5:]:
-    # for filename in filelist:
+
     for filename in test_cases:
+    # for filename in filelist:
         with open("bio_data/" + filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
         print(filename)
-        test_person = biography.Biography(
+        person = Biography(
             filename[:-6], get_name(soup), culturalForm.get_mapped_term("Gender", get_sex(soup)))
 
-        extract_education_data(soup, test_person)
+        extract_education_data(soup, person)
         print()
-        graph = test_person.to_graph()
+        graph = person.to_graph()
 
         extract_log.subtitle("Entry #" + str(entry_num))
-        extract_log.msg(str(test_person))
+        extract_log.msg(str(person))
         extract_log.subtitle(str(len(graph)) + " triples created")
-        extract_log.msg(test_person.to_file(graph))
+        extract_log.msg(person.to_file(graph))
         extract_log.subtitle("Entry #" + str(entry_num))
         extract_log.msg("\n\n")
 
-        file = open("education_turtle/" + filename[:-6] + "_education.ttl", "w", encoding="utf-8")
-        file.write("#" + str(len(graph)) + " triples created\n")
-        file.write(graph.serialize(format="ttl").decode())
-        file.close()
+        temp_path = "extracted_triples/education_turtle/" + filename[:-6] + "_education.ttl"
+        create_extracted_file(temp_path, person)
 
         uber_graph += graph
         entry_num += 1
+
     turtle_log.subtitle(str(len(uber_graph)) + " triples created")
     turtle_log.msg(uber_graph.serialize(format="ttl").decode(), stdout=False)
     turtle_log.msg("")
 
-    file = open("education.ttl", "w", encoding="utf-8")
-    file.write("#" + str(len(uber_graph)) + " triples created\n")
-    file.write(uber_graph.serialize(format="ttl").decode())
+    temp_path = "extracted_triples/education.ttl"
+    create_extracted_uberfile(temp_path, uber_graph)
 
-    file = open("education.rdf", "w", encoding="utf-8")
-    file.write("#" + str(len(uber_graph)) + " triples created\n")
-    file.write(uber_graph.serialize(format="pretty-xml").decode())
-
+    temp_path = "extracted_triples/education.rdf"
+    create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
 
 if __name__ == "__main__":
     main()

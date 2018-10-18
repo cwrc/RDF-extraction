@@ -1,8 +1,7 @@
 import rdflib
 from rdflib import RDF, RDFS, Literal
-import re
-from biography import bind_ns, NS_DICT, make_standard_uri, remove_punctuation, create_uri
-from place import Place
+
+from utilities import *
 from organizations import get_org_uri
 
 MAX_WORD_COUNT = 35
@@ -11,61 +10,12 @@ MAX_WORD_COUNT = 35
 Status: ~84%
 TODO:
 1) Revise mechanism for adding triples as a texual body for less list oriented components ex. Death
-2) Review triples related to identifying contexts
-3) revise mechanism for getting closest heading
-4) Fix up labelling of contexts possibly
-5) Revise text snippet to grab from where the first triple is extracted
+2) revise mechanism for getting closest heading
+3) Fix up labelling of contexts possibly
+4) Revise text snippet to grab from where the first triple is extracted
     - however sometime for identifying contexts, names/orgs are identified
         prior to triples extracted
 """
-
-
-def get_attribute(tag, attribute):
-    value = tag.get(attribute)
-    if value:
-        return value
-    return None
-
-
-def get_value(tag):
-    value = get_attribute(tag, "STANDARD")
-    if not value:
-        value = get_attribute(tag, "REG")
-    if not value:
-        value = get_attribute(tag, "CURRENTALTERNATIVETERM")
-    if not value:
-        value = str(tag.text)
-        value = ' '.join(value.split())
-    return value
-
-
-def strip_all_whitespace(string):
-    # temp function for condensing context strings for visibility in testing
-    return re.sub('[\s+]', '', str(string))
-
-
-def get_people(tag):
-    """Returns all people within a given tag"""
-    people = []
-    for x in tag.find_all("NAME"):
-        people.append(make_standard_uri(x.get("STANDARD")))
-    return people
-
-
-def get_places(tag):
-    """Returns all places within a given tag"""
-    places = []
-    for x in tag.find_all("PLACE"):
-        places.append(Place(x).uri)
-    return places
-
-
-def get_titles(tag):
-    titles = []
-    for x in tag.find_all("TITLE"):
-        title = get_value(x)
-        titles.append(make_standard_uri(title + " TITLE", ns="cwrc"))
-    return titles
 
 
 def identifying_motivation(tag):
@@ -151,13 +101,9 @@ class Context(object):
         self.src = "http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id="
         self.heading = get_heading(tag)
 
-        # Making the text the max amount of words
         # TODO: Make snippet start where first triple is extracted from
-        self.text = ' '.join(str(tag.get_text()).split())
-        words = self.text.split(" ")
-        self.text = ' '.join(words[:MAX_WORD_COUNT])
-        if len(words) > MAX_WORD_COUNT:
-            self.text += "..."
+        # Making the text the max amount of words
+        self.text = limit_words(str(tag.get_text()), MAX_WORD_COUNT)
 
         if context_type in self.context_map:
             self.context_type = create_uri("cwrc", self.context_map[context_type])

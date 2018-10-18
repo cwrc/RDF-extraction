@@ -195,7 +195,7 @@ class Biography(object):
             g += self.birthObj.to_triple()
         if self.deathObj is not None:
             g += self.deathObj.to_triples()
-        
+
         g += self.create_triples(self.cohabitants_list)
         g += self.create_triples(self.family_list)
         g += self.create_triples(self.friendsAssociates_list)
@@ -206,8 +206,11 @@ class Biography(object):
 
         return g
 
-    def to_file(self, graph, serialization="ttl"):
-        return graph.serialize(format=serialization).decode()
+    def to_file(self, graph=None, serialization="ttl"):
+        if graph:
+            return graph.serialize(format=serialization).decode()
+        else:
+            return self.to_graph().serialize(format=serialization).decode()
 
     def __str__(self):
         # TODO: add occupation + education

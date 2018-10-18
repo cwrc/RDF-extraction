@@ -1,18 +1,19 @@
 #!/usr/bin/python3
 
-# from Env import env
-# import islandora_auth as login
-
 from difflib import get_close_matches
 from rdflib import RDF, RDFS, Literal
 import rdflib
 
-import biography
+from log import Log
+
+from utilities import *
+from organizations import get_org, get_org_uri
+
+from biography import Biography
 from context import Context
 from event import Event
-from log import *
-from organizations import get_org, get_org_uri
 from place import Place
+
 
 """
 Status: ~90%
@@ -36,7 +37,7 @@ turtle_log.test_name("CF extracted Triples")
 
 uber_graph = rdflib.Graph()
 namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
-biography.bind_ns(namespace_manager, biography.NS_DICT)
+bind_ns(namespace_manager, NS_DICT)
 
 
 class CulturalForm(object):
@@ -59,9 +60,9 @@ class CulturalForm(object):
         if other_attributes:
             self.uri = other_attributes
         elif self.reported:
-            self.uri = biography.create_uri("cwrc", self.predicate + self.reported)
+            self.uri = create_uri("cwrc", self.predicate + self.reported)
         else:
-            self.uri = biography.create_uri("cwrc", self.predicate)
+            self.uri = create_uri("cwrc", self.predicate)
 
         self.uri = rdflib.term.URIRef(self.uri)
 
@@ -77,7 +78,7 @@ class CulturalForm(object):
     def to_triple(self, person):
         g = rdflib.Graph()
         namespace_manager = rdflib.namespace.NamespaceManager(g)
-        biography.bind_ns(namespace_manager, biography.NS_DICT)
+        bind_ns(namespace_manager, NS_DICT)
         g.add((person.uri, self.uri, self.value))
         return g
 
@@ -88,27 +89,6 @@ class CulturalForm(object):
         string += "\tvalue: " + str(self.value) + "\n"
 
         return string
-
-
-def get_reg(tag):
-    return get_attribute(tag, "REG")
-
-
-def get_attribute(tag, attribute):
-    value = tag.get(attribute)
-    if value:
-        return value
-    return None
-
-
-def get_value(tag):
-    value = get_reg(tag)
-    if not value:
-        value = get_attribute(tag, "CURRENTALTERNATIVETERM")
-    if not value:
-        value = str(tag.text)
-        value = ' '.join(value.split())
-    return value
 
 
 def get_reported(tag):
@@ -277,8 +257,6 @@ def find_cultural_forms(cf, person):
                     # else:
                     #     add_forebear(forebear, culturalform)
 
-        pass
-
     def get_denomination():
         religions = cf.find_all("DENOMINATION")
 
@@ -289,11 +267,11 @@ def find_cultural_forms(cf, person):
             if not value and orgName:
                 for org in orgName:
                     cf_list.append(CulturalForm(None, None, get_org_uri(org),
-                                                other_attributes=biography.NS_DICT["org"].memberOf))
+                                                other_attributes=NS_DICT["org"].memberOf))
             elif orgName:
                 for org in orgName:
                     cf_list.append(CulturalForm(None, None, get_org_uri(org),
-                                                other_attributes=biography.NS_DICT["org"].memberOf))
+                                                other_attributes=NS_DICT["org"].memberOf))
 
             value = get_mapped_term("Religion", get_value(x), True)
 
@@ -316,12 +294,12 @@ def find_cultural_forms(cf, person):
             if not value and orgName:
                 for org in orgName:
                     cf_list.append(CulturalForm(None, None, get_org_uri(org),
-                                                other_attributes=biography.NS_DICT["org"].memberOf))
+                                                other_attributes=NS_DICT["org"].memberOf))
                 value = get_org_uri(org)
             elif orgName:
                 for org in orgName:
                     cf_list.append(CulturalForm(None, None, get_org_uri(org),
-                                                other_attributes=biography.NS_DICT["org"].memberOf))
+                                                other_attributes=NS_DICT["org"].memberOf))
                 value = get_mapped_term("PoliticalAffiliation", get_value(x))
             else:
                 value = get_mapped_term("PoliticalAffiliation", get_value(x))
@@ -547,12 +525,6 @@ def log_mapping_fails(main_log, error_log, detail=True):
 
 
 def main():
-    def get_name(bio):
-        return (bio.BIOGRAPHY.DIV0.STANDARD.text)
-
-    def get_sex(bio):
-        return (bio.BIOGRAPHY.get("SEX"))
-
     import os
     from bs4 import BeautifulSoup
     create_cf_map()
@@ -565,34 +537,29 @@ def main():
     global uber_graph
     test_cases = ["shakwi-b.xml", "woolvi-b.xml", "seacma-b.xml", "atwoma-b.xml",
                   "alcolo-b.xml", "bronem-b.xml", "bronch-b.xml", "levyam-b.xml"]
-    for filename in filelist:
-    # for filename in test_cases:
+    # for filename in filelist:
+    for filename in test_cases:
         with open("bio_data/" + filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
         print(filename)
-        test_person = biography.Biography(filename[:-6], get_name(soup), get_mapped_term("Gender", get_sex(soup)))
+        person = Biography(filename[:-6], get_name(soup), get_mapped_term("Gender", get_sex(soup)))
 
-        extract_cf_data(soup, test_person)
+        extract_cf_data(soup, person)
 
-        graph = test_person.to_graph()
+        graph = person.to_graph()
 
         extract_log.subtitle("Entry #" + str(entry_num))
-        extract_log.msg(str(test_person))
+        extract_log.msg(str(person))
         extract_log.subtitle(str(len(graph)) + " triples created")
-        extract_log.msg(test_person.to_file(graph))
+        extract_log.msg(person.to_file(graph))
         extract_log.subtitle("Entry #" + str(entry_num))
         extract_log.msg("\n\n")
 
-        file = open("cf_turtle/" + filename[:-6] + "_cf.ttl", "w", encoding="utf-8")
-        file.write("#" + str(len(graph)) + " triples created\n")
-        file.write(graph.serialize(format="ttl").decode())
-        file.close()
-
-        file = open("cf_rdf/" + filename[:-6] + "_cf.rdf", "w", encoding="utf-8")
-        file.write("#" + str(len(graph)) + " triples created\n")
-        file.write(graph.serialize(format="pretty-xml").decode())
-        file.close()
+        temp_path = "extracted_triples/cf_turtle/" + filename[:-6] + "_cf.ttl"
+        create_extracted_file(temp_path, person)
+        temp_path = "extracted_triples/cf_rdf/" + filename[:-6] + "_cf.rdf"
+        create_extracted_file(temp_path, person, "pretty-xml")
 
         uber_graph += graph
         entry_num += 1
@@ -601,12 +568,11 @@ def main():
     turtle_log.msg(uber_graph.serialize(format="ttl").decode(), stdout=False)
     turtle_log.msg("")
 
-    file = open("culturalForms.ttl", "w", encoding="utf-8")
-    file.write("#" + str(len(uber_graph)) + " triples created\n")
-    file.write(uber_graph.serialize(format="ttl").decode())
+    temp_path = "extracted_triples/culturalForms.ttl"
+    create_extracted_uberfile(temp_path, uber_graph)
 
-    file = open("culturalForms.rdf", "w", encoding="utf-8")
-    file.write(uber_graph.serialize(format="pretty-xml").decode())
+    temp_path = "extracted_triples/culturalForms.rdf"
+    create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
 
     log_mapping_fails(extract_log, log)
 

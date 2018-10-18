@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 
+import rdflib
 from bs4 import BeautifulSoup
 from rdflib import RDF, RDFS, Literal
-import rdflib
-from biography import bind_ns, NS_DICT, make_standard_uri
+
+from utilities import *
 
 uber_graph = rdflib.Graph()
 namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
@@ -56,10 +57,6 @@ class Organization(object):
         for x in self.altlabels:
             string += "\t\t" + x + "\n"
         return string
-
-
-def get_name(bio):
-    return (bio.biography.div0.standard.text)
 
 
 def get_org_uri(tag):
