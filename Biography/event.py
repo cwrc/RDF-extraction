@@ -150,13 +150,14 @@ class Event(object):
                 self.predicate = NS_DICT["sem"].hasTime
             self.date = format_date(self.date)
 
-    def to_triple(self, person):
+    def to_triple(self, person=None):
         g = rdflib.Graph()
         namespace_manager = rdflib.namespace.NamespaceManager(g)
         bind_ns(namespace_manager, NS_DICT)
 
         # attaching event to person, context will need link event fx
-        g.add((person.uri, NS_DICT["cwrc"].hasEvent, self.uri))
+        if person:
+            g.add((person.uri, NS_DICT["cwrc"].hasEvent, self.uri))
         # Not sure if inverse is necessary atm
         # g.add((self.uri, NS_DICT["cwrc"].eventOf, person.uri))
         # g.add((person.uri, NS_DICT["sem"].actorType, NS_DICT["cwrc"].NaturalPerson))
@@ -176,7 +177,9 @@ class Event(object):
             g.add((self.uri, NS_DICT["sem"].hasPlace, x))
 
         # Attaching actors, including the biographee incase they're not mentioned
-        g.add((self.uri, NS_DICT["sem"].hasActor, person.uri))
+        if person:
+            g.add((self.uri, NS_DICT["sem"].hasActor, person.uri))
+
         for x in self.actors:
             g.add((self.uri, NS_DICT["sem"].hasActor, x))
 

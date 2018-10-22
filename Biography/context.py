@@ -64,7 +64,7 @@ class Context(object):
                      "NationalityContext", "OccupationContext", "PoliticalContext",
                      "RaceEthnicityContext", "ReligionContext", "SexualityContext",
                      "SocialClassContext", "SpatialContext", "ViolenceContext",
-                     "WealthContext", "EducationContext", "PersonNameContext",
+                     "WealthContext", "EducationContext", "NameContext", "Context"
                      "InstitutionalEducationContext", "SelfTaughtEducationContext", "DomesticEducationContext"]
 
     context_map = {"CLASSISSUE": "SocialClassContext",
@@ -85,7 +85,8 @@ class Context(object):
                    "DEATH": "DeathContext",
                    "FRIENDSASSOCIATES": "FriendsAndAssociatesContext",
                    "INTIMATERELATIONSHIPS": "IntimateRelationshipsContext",
-                   "PERSONNAME": "PersonNameContext"
+                   "PERSONNAME": "NameContext",
+                   None: "Context"
                    }
 
     def __init__(self, id, tag, context_type="culturalformation", motivation="describing"):
@@ -94,9 +95,10 @@ class Context(object):
         self.triples = []
         self.event = None
 
-        bibcits = tag.find_all("BIBCITS")
-        for x in bibcits:
+        unwanted_tags = tag.find_all("BIBCITS") + tag.find_all("RESPONSIBILITIES") + tag.find_all("KEYWORDCLASSES")
+        for x in unwanted_tags:
             x.decompose()
+
         self.tag = tag
         self.src = "http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id="
         self.heading = get_heading(tag)
@@ -155,7 +157,7 @@ class Context(object):
             subjects += self.get_subject(x, person)
         return list(set(subjects))
 
-    def to_triple(self, person):
+    def to_triple(self, person=None):
         # if tag is a describing one create the identifying triples
         g = rdflib.Graph()
         namespace_manager = rdflib.namespace.NamespaceManager(g)
@@ -163,8 +165,14 @@ class Context(object):
 
         # Creating Textual body first
         snippet_uri = rdflib.term.URIRef(str(self.uri) + "_Snippet")
-        source_url = rdflib.term.URIRef(self.src + person.id + "#" + self.heading)
-        snippet_label = person.name + " - " + self.context_label + " snippet"
+
+        if person:
+            source_url = rdflib.term.URIRef(self.src + person.id + "#" + self.heading)
+            snippet_label = person.name + " - " + self.context_label + " snippet"
+        else:
+            source_url = rdflib.term.URIRef(self.src + "#FE")
+            snippet_label = "FE" + " - " + self.context_label + " snippet"
+
         g.add((snippet_uri, RDF.type, NS_DICT["oa"].TextualBody))
         g.add((snippet_uri, RDFS.label, rdflib.term.Literal(snippet_label)))
         g.add((snippet_uri, NS_DICT["oa"].hasSource, source_url))
@@ -172,18 +180,24 @@ class Context(object):
             self.text, datatype=rdflib.namespace.XSD.string)))
 
         # Creating identifying context first and always
-        context_label = person.name + " - " + self.context_label + " identifying annotation"
+        if person:
+            context_label = person.name + " - " + self.context_label + " identifying annotation"
+        else:
+            context_label = self.context_label + " identifying annotation"
+
         identifying_uri = create_uri("data", self.id + "_identifying")
         g.add((identifying_uri, RDF.type, self.context_type))
         g.add((identifying_uri, RDFS.label, rdflib.term.Literal(context_label)))
         g.add((identifying_uri, NS_DICT["oa"].hasTarget, snippet_uri))
         g.add((identifying_uri, NS_DICT["oa"].motivatedBy, NS_DICT["oa"].identifying))
         self.subjects += identifying_motivation(self.tag)
-        if self.triples:
+        if self.triples and person:
             self.subjects += self.get_subjects(self.triples, person)
         for x in self.subjects:
             g.add((identifying_uri, NS_DICT["oa"].hasBody, x))
-        g.add((identifying_uri, NS_DICT["oa"].hasBody, person.uri))
+
+        if person:
+            g.add((identifying_uri, NS_DICT["oa"].hasBody, person.uri))
 
         if self.event:
             g.add((identifying_uri, NS_DICT["cwrc"].hasEvent, self.event))
