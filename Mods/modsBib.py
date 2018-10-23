@@ -1,8 +1,21 @@
 from bs4 import BeautifulSoup
 import rdflib, sys
 import os, datetime
-
+import csv
 from rdflib import *
+import logging
+
+# ----------- SETUP LOGGER ------------
+
+logger = logging.getLogger('bibliography_extraction')
+logger.setLevel(logging.INFO)
+
+fh = logging.FileHandler('bibliography_extraction.log')
+fh.setLevel(logging.INFO)
+
+logger.addHandler(fh)
+
+# ---------- SETUP NAMESPACES ----------
 
 CWRC = rdflib.Namespace( "http://sparql.cwrc.ca/ontologies/cwrc#")
 BF = rdflib.Namespace( "http://id.loc.gov/ontologies/bibframe/")
@@ -39,6 +52,23 @@ def remove_punctuation(input_str, all_punctuation=False):
     return temp_str
 
 # ----------- MAIN CLASSES ----------
+
+
+class ParseGeoNamesMapping:
+
+    place_mapper = {}
+
+    def __init__(self, filename):
+        with open(filename) as f:
+            csvfile = csv.reader(f)
+
+            for row in csvfile:
+                placename = row[0].rstrip(',.')
+                url_string = row[1] if 'http://' in row[1] else "http://{0}".format(row[1])
+
+                self.place_mapper[placename] = url_string
+
+
 
 
 class WritingParse:
@@ -162,7 +192,7 @@ class BibliographyParse:
         if 'data:' in self.id:
             self.mainURI = self.id
         else:
-            self.mainURI = "{}:{}".format("data", self.id)
+            self.mainURI = "{}{}".format("http://cwrc.ca/cwrcdata/", self.id)
             
         self.relatedItem = related_item
 
@@ -497,7 +527,7 @@ class BibliographyParse:
                 role_resource.add(BF.source, URIRef("marcrel:aut"))
                 role_resource.add(RDFS.label, Literal("author"))
 
-            agent_resource.add(OWL.sameAs, URIRef("data:{}".format(remove_punctuation(name['name']))))
+            agent_resource.add(OWL.sameAs, URIRef("http://cwrc.ca/cwrcdata/{}".format(remove_punctuation(name['name']))))
             contribution_resource.add(BF.agent, agent_resource)
             contribution_resource.add(BF.role, role_resource)
             resource.add(BF.contribution, contribution_resource)
@@ -584,7 +614,7 @@ class BibliographyParse:
         i = 0
         if not self.relatedItem:
             for part in self.get_related_items():
-                bp = BibliographyParse(part['soup'], self.g, "{}_{}_{}".format(self.mainURI, part['type'], i), True)
+                bp = BibliographyParse(part['soup'], self.g, "{}_{}_{}".format(self.mainURI.replace("http://cwrc.ca/cwrcdata/", ""), part['type'], i), True)
                 bp.build_graph()
 
                 work = g.resource("{}_part_{}".format(self.mainURI, i))
@@ -638,6 +668,8 @@ class BibliographyParse:
 
                 if genre_graph[uri]:
                     resource.add(GENRE.hasGenre, GENRE[gName.lower()])
+                else:
+                    print("NOT FOUND: ")
 
 
 if __name__ == "__main__":
