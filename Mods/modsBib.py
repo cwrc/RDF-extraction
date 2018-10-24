@@ -5,6 +5,8 @@ import csv
 from rdflib import *
 import logging
 
+CONFIG_FILE="./bibparse.config"
+
 # ----------- SETUP LOGGER ------------
 
 logger = logging.getLogger('bibliography_extraction')
@@ -27,6 +29,8 @@ SCHEMA = rdflib.Namespace("http://schema.org/")
 
 genre_graph = None
 genre_map = {}
+
+geoMapper = None
 
 # --------- UTILITY FUNCTIONS -------
 
@@ -68,7 +72,12 @@ class ParseGeoNamesMapping:
 
                 self.place_mapper[placename] = url_string
 
-
+    def get_place(self, place_name):
+        if place_name in self.place_mapper:
+            return self.place_mapper[place_name]
+        else:
+            logger.info("Unable to map Place {0}".format(place_name))
+            return False
 
 
 class WritingParse:
@@ -598,6 +607,11 @@ class BibliographyParse:
                 place.add(RDF.value, Literal(o['place']))
                 place.add(RDF.type, BF.Place)
 
+                place_map = geoMapper.get_place(o['place'].strip())
+
+                if place_map:
+                    place.add(OWL.sameAs, URIRef(place_map))
+
                 originInfo.add(BF.place, place)
 
             if o['date']:
@@ -649,8 +663,6 @@ class BibliographyParse:
 
             instance.add(BF.extent, extent_resource)
 
-
-
         genre = self.get_genre()
 
         if genre:
@@ -669,7 +681,7 @@ class BibliographyParse:
                 if genre_graph[uri]:
                     resource.add(GENRE.hasGenre, GENRE[gName.lower()])
                 else:
-                    print("NOT FOUND: ")
+                    logger.info("GENRE NOT FOUND: {0}".format(gName))
 
 
 if __name__ == "__main__":
@@ -683,11 +695,27 @@ if __name__ == "__main__":
     g.bind("owl", OWL)
     g.bind("schema", SCHEMA)
 
-    dirname = sys.argv[1]
+    config_options = {}
 
-    writing_dir = sys.argv[2]
+    try:
+        with open(CONFIG_FILE) as f:
+            for line in f:
+                variable, value = line.split('=')
+                config_options[variable] = r"{0}".format(value.strip())
+    except Exception as e:
+        print(e)
+        print("Missing config file")
+        print("Need a file with the following variables: ")
+        print("WRITING_FILES=[DIRECTORY OF WRITING FILES]")
+        print("GENRE_ONTOLOGY=[PATH TO GENRE ONTOLOGY]")
+        print("BIBLIOGRAPHY_FILES=[DIRECTORY OF BILBIOGRAPHY FILES]")
 
-    genre_ontology = sys.argv[3]
+    dirname = config_options['BIBLIOGRAPHY_FILES']
+    writing_dir = config_options['WRITING_FILES']
+    genre_ontology = config_options['GENRE_ONTOLOGY']
+    places = config_options['PLACES_CSV']
+
+    geoMapper = ParseGeoNamesMapping(places)
 
     genre_graph = Graph()
 
