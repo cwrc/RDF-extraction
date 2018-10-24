@@ -1,8 +1,23 @@
 from bs4 import BeautifulSoup
 import rdflib, sys
 import os, datetime
-
+import csv
 from rdflib import *
+import logging
+
+CONFIG_FILE="./bibparse.config"
+
+# ----------- SETUP LOGGER ------------
+
+logger = logging.getLogger('bibliography_extraction')
+logger.setLevel(logging.INFO)
+
+fh = logging.FileHandler('bibliography_extraction.log')
+fh.setLevel(logging.INFO)
+
+logger.addHandler(fh)
+
+# ---------- SETUP NAMESPACES ----------
 
 CWRC = rdflib.Namespace( "http://sparql.cwrc.ca/ontologies/cwrc#")
 BF = rdflib.Namespace( "http://id.loc.gov/ontologies/bibframe/")
@@ -14,6 +29,8 @@ SCHEMA = rdflib.Namespace("http://schema.org/")
 
 genre_graph = None
 genre_map = {}
+
+geoMapper = None
 
 # --------- UTILITY FUNCTIONS -------
 
@@ -39,6 +56,28 @@ def remove_punctuation(input_str, all_punctuation=False):
     return temp_str
 
 # ----------- MAIN CLASSES ----------
+
+
+class ParseGeoNamesMapping:
+
+    place_mapper = {}
+
+    def __init__(self, filename):
+        with open(filename) as f:
+            csvfile = csv.reader(f)
+
+            for row in csvfile:
+                placename = row[0].rstrip(',.')
+                url_string = row[1] if 'http://' in row[1] else "http://{0}".format(row[1])
+
+                self.place_mapper[placename] = url_string
+
+    def get_place(self, place_name):
+        if place_name in self.place_mapper:
+            return self.place_mapper[place_name]
+        else:
+            logger.info("Unable to map Place {0}".format(place_name))
+            return False
 
 
 class WritingParse:
@@ -162,7 +201,7 @@ class BibliographyParse:
         if 'data:' in self.id:
             self.mainURI = self.id
         else:
-            self.mainURI = "{}:{}".format("data", self.id)
+            self.mainURI = "{}{}".format("http://cwrc.ca/cwrcdata/", self.id)
             
         self.relatedItem = related_item
 
@@ -497,7 +536,7 @@ class BibliographyParse:
                 role_resource.add(BF.source, URIRef("marcrel:aut"))
                 role_resource.add(RDFS.label, Literal("author"))
 
-            agent_resource.add(OWL.sameAs, URIRef("data:{}".format(remove_punctuation(name['name']))))
+            agent_resource.add(OWL.sameAs, URIRef("http://cwrc.ca/cwrcdata/{}".format(remove_punctuation(name['name']))))
             contribution_resource.add(BF.agent, agent_resource)
             contribution_resource.add(BF.role, role_resource)
             resource.add(BF.contribution, contribution_resource)
@@ -568,6 +607,11 @@ class BibliographyParse:
                 place.add(RDF.value, Literal(o['place']))
                 place.add(RDF.type, BF.Place)
 
+                place_map = geoMapper.get_place(o['place'].strip())
+
+                if place_map:
+                    place.add(OWL.sameAs, URIRef(place_map))
+
                 originInfo.add(BF.place, place)
 
             if o['date']:
@@ -584,7 +628,7 @@ class BibliographyParse:
         i = 0
         if not self.relatedItem:
             for part in self.get_related_items():
-                bp = BibliographyParse(part['soup'], self.g, "{}_{}_{}".format(self.mainURI, part['type'], i), True)
+                bp = BibliographyParse(part['soup'], self.g, "{}_{}_{}".format(self.mainURI.replace("http://cwrc.ca/cwrcdata/", ""), part['type'], i), True)
                 bp.build_graph()
 
                 work = g.resource("{}_part_{}".format(self.mainURI, i))
@@ -619,8 +663,6 @@ class BibliographyParse:
 
             instance.add(BF.extent, extent_resource)
 
-
-
         genre = self.get_genre()
 
         if genre:
@@ -638,6 +680,8 @@ class BibliographyParse:
 
                 if genre_graph[uri]:
                     resource.add(GENRE.hasGenre, GENRE[gName.lower()])
+                else:
+                    logger.info("GENRE NOT FOUND: {0}".format(gName))
 
 
 if __name__ == "__main__":
@@ -651,11 +695,27 @@ if __name__ == "__main__":
     g.bind("owl", OWL)
     g.bind("schema", SCHEMA)
 
-    dirname = sys.argv[1]
+    config_options = {}
 
-    writing_dir = sys.argv[2]
+    try:
+        with open(CONFIG_FILE) as f:
+            for line in f:
+                variable, value = line.split('=')
+                config_options[variable] = r"{0}".format(value.strip())
+    except Exception as e:
+        print(e)
+        print("Missing config file")
+        print("Need a file with the following variables: ")
+        print("WRITING_FILES=[DIRECTORY OF WRITING FILES]")
+        print("GENRE_ONTOLOGY=[PATH TO GENRE ONTOLOGY]")
+        print("BIBLIOGRAPHY_FILES=[DIRECTORY OF BILBIOGRAPHY FILES]")
 
-    genre_ontology = sys.argv[3]
+    dirname = config_options['BIBLIOGRAPHY_FILES']
+    writing_dir = config_options['WRITING_FILES']
+    genre_ontology = config_options['GENRE_ONTOLOGY']
+    places = config_options['PLACES_CSV']
+
+    geoMapper = ParseGeoNamesMapping(places)
 
     genre_graph = Graph()
 
