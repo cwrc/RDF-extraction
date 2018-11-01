@@ -189,21 +189,21 @@ class Biography(object):
 
         # Something like this
         g += self.create_triples(self.name_list)
-        # if self.birthObj:
-            # g += self.birthObj.to_triple()
-        # if self.deathObj is not None:
-        #     g +=self.deathObj.to_triples()
-        # g += self.create_triples(self.cohabitants_list)
-        # g += self.create_triples(self.family_list)
-        # g += self.create_triples(self.friendsAssociates_list)
-        # g += self.create_triples(self.intimateRelationships_list)
-        # g += self.create_triples(self.childless_list)
-        # g +=self.create_triples(self.children_list)
+        if self.birthObj:
+            g += self.birthObj.to_triple()
+        if self.deathObj is not None:
+            g +=self.deathObj.to_triples()
+        g += self.create_triples(self.cohabitants_list)
+        g += self.create_triples(self.family_list)
+        g += self.create_triples(self.friendsAssociates_list)
+        g += self.create_triples(self.intimateRelationships_list)
+        g += self.create_triples(self.childless_list)
+        g +=self.create_triples(self.children_list)
 
         # done putting in new contexts
 
-        # g += self.create_triples(self.event_list)
-        # print(g.serialize(format='turtle').decode())
+        g += self.create_triples(self.event_list)
+        print(g.serialize(format='turtle').decode())
         return g
 
     def to_file(self, graph, serialization="ttl"):

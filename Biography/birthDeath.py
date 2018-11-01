@@ -202,7 +202,7 @@ def extract_death(xmlString, person):
         #         deathContexts.append(paragraph)
                 # print(paragraph)
         # print(deathTagParent.contents)
-        print(deathTagParent.prettify())
+        # print(deathTagParent.prettify())
         getChronstructTags = iterList(deathTagParent,"CHRONSTRUCT")
         
         if len(getChronstructTags) == 0:

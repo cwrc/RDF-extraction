@@ -38,17 +38,17 @@ class BirthName:
 
 
 class PersonName:
-    def __init__(self, types, value, uri=None, extraAttributes=None,parentType=None):
+    def __init__(self, types, value, personName, uri=None, extraAttributes=None,parentType=None,otherTriples=None):
         self.id = remove_punctuation("NameEnt " + value)
         self.uri = None
-        self.value = value
+        self.predicate = NS_DICT["cwrc"].hasName                         # used for body in the context sections
+        self.value = make_standard_uri(personName + " NameEnt " + value) # used for body in context sections
         self.typeLabels = []
-        self.graph = None
-
+        self.personName = Literal(value)
+        self.otherTriples = otherTriples
         for thisType in types:
             self.typeLabels.append(create_uri("cwrc", thisType))
 
-        self.personName = Literal(value)
 
         if uri:
             self.uri = uri
@@ -57,18 +57,18 @@ class PersonName:
         self.spareGraph = None
 
         if "BirthName" in types:
-            self.spareGraph = self.makeBirthGraph(givenNameList=extraAttributes.givenNames,surNameList=extraAttributes.surNames,
-                                                  personName=extraAttributes.personName)
+            self.spareGraph = self.makeBirthGraph(givenNameList=extraAttributes.givenNames,surNameList=extraAttributes.surNames)
             self.hasSpareGraph = True
         if parentType and parentType == "Nickname":
             print("hello")
     #         need to create a mini graph that contains all information regarding their name and stuff
 
-    def makeBirthGraph(self,givenNameList,surNameList,personName):
+    def makeBirthGraph(self,givenNameList,surNameList):
         g = rdflib.Graph()
         namespace_manager = rdflib.namespace.NamespaceManager(g)
         bind_ns(namespace_manager, NS_DICT)
-        thisNameEntity = make_standard_uri(personName + " NameEnt " + self.value)
+        # thisNameEntity = make_standard_uri(personName + " NameEnt " + self.value)
+        thisNameEntity = self.value
 
         numPart = 1
 
@@ -76,6 +76,7 @@ class PersonName:
             thisNamePart = make_standard_uri(thisName)
             g.add((thisNamePart, NS_DICT["rdf"].type, NS_DICT["rdf"].Forename))
             g.add((thisNamePart, NS_DICT["cwrc"].hasSortOrder, Literal(numPart)))
+            g.add((thisNamePart, NS_DICT["rdf"].label, Literal(thisName)))
 
             g.add((thisNameEntity, NS_DICT["cwrc"].hasNamePart, thisNamePart))
             numPart += 1
@@ -84,6 +85,8 @@ class PersonName:
             thisNamePart = make_standard_uri(thisName)
             g.add((thisNamePart, NS_DICT["rdf"].type, NS_DICT["rdf"].Surname))
             g.add((thisNamePart, NS_DICT["cwrc"].hasSortOrder, Literal(numPart)))
+            g.add((thisNamePart, NS_DICT["rdf"].label, Literal(thisName)))
+
 
             g.add((thisNameEntity, NS_DICT["cwrc"].hasNamePart, thisNamePart))
             numPart += 1
@@ -98,12 +101,17 @@ class PersonName:
         namespace_manager = rdflib.namespace.NamespaceManager(g)
         bind_ns(namespace_manager, NS_DICT)
 
-        thisNameEntity = make_standard_uri(person.name + " NameEnt " + self.value)
+        # thisNameEntity = make_standard_uri(person.name + " NameEnt " + self.value)
+        thisNameEntity = self.value
 
         for type in self.typeLabels:
             g.add((thisNameEntity, NS_DICT["rdf"].type, type))
 
         g.add((thisNameEntity, NS_DICT["rdf"].label, self.personName))
+
+        if self.otherTriples is not None:
+            for otherTriple in self.otherTriples:
+                g.add((thisNameEntity,otherTriple["predicate"],Literal(otherTriple["value"])))
 
         g.add((person.uri, NS_DICT["cwrc"].hasName, thisNameEntity))
 
@@ -116,7 +124,7 @@ class PersonName:
 def getTheName(tag,ignore_reg_value=False):
     if "REG" in tag.attrs and ignore_reg_value == False:
         nameRaw = tag["REG"]
-        return tag["REG"]
+        return nameRaw
     else:
         # print(tag.find_all(text=True, recursive=False))
         # print(tag.text)
@@ -142,6 +150,7 @@ def makePerson(type, tag, existingList,personName=None):
     # usefull for birthnames as you have to send the given and surname to the PersonName class
     otherAttributes = None
     otherAttrsReqd = False
+    otherTriples = None
     name_to_send = ""
 
     if "WROTEORPUBLISHEDAS" in tag.attrs:
@@ -177,25 +186,46 @@ def makePerson(type, tag, existingList,personName=None):
     elif "MarriedName" in types:
         types.append("Surname")
         name_to_send = getTheName(tag,ignore_reg_value=True)
-
+    elif "IndexedName" in types:
+        otherTriples = [
+            {
+                "predicate" : NS_DICT["cwrc"].IndexedBy,
+                "value": "Orlando"
+            }
+        ]
+        name_to_send = getTheName(tag, ignore_reg_value=True)
+    elif "PreferredName" in types:
+        docText = getTheName(tag,ignore_reg_value=True)
+        if ":" in docText:
+            name_to_send = docText.split(":")[0]
+        else:
+            name_to_send = docText
     else:
         name_to_send = getTheName(tag,ignore_reg_value=True)
 
     if any(person.id == remove_punctuation("NameEnt " + name_to_send) for person in existingList) == False:
         if otherAttrsReqd:
-            return PersonName(types, name_to_send, extraAttributes=otherAttributes)
+            return PersonName(types, name_to_send, personName, extraAttributes=otherAttributes)
         else:
-            return PersonName(types, name_to_send)
+            return PersonName(types, name_to_send, personName,otherTriples=otherTriples)
     else:
         return None
 def extract_person_name(xmlString, person):
     root = xmlString.BIOGRAPHY
     personNameList = []
+    stdEntry = makePerson("IndexedName",root.find("STANDARD"),personNameList,personName=person.name)
+    if stdEntry:
+        personNameList.append(stdEntry)
 
-    # Subelement : type
+    docTitle = makePerson("PreferredName",root.find("DOCTITLE"),personNameList,personName=person.name)
+    if docTitle:
+        personNameList.append(docTitle)
 
     id = 1
-    for name in root.find_all("PERSONNAME"):
+    personNameTags = root.find_all("PERSONNAME")
+    if personNameTags == None:
+        return
+    for name in personNameTags:
 
         for tagname in basic_layout_dict:
             if tagname == "BIRTHNAME":
@@ -205,27 +235,31 @@ def extract_person_name(xmlString, person):
                         personNameList.append(newPerson)
             elif tagname == "NICKNAME":
                 for nickname in name.find_all("NICKNAME"):
-                    newPerson = makePerson("NickName",nickname,personNameList)
+                    newPerson = makePerson("NickName",nickname,personNameList,personName=person.name)
                     if newPerson:
                         personNameList.append(newPerson)
             else:
                 for thisTag in name.find_all(tagname):
-                    newPerson = makePerson(basic_layout_dict[tagname], thisTag,personNameList)
+                    newPerson = makePerson(basic_layout_dict[tagname], thisTag,personNameList,personName=person.name)
                     if newPerson:
                         personNameList.append(newPerson)
 
 
     person.name_list = personNameList
+    context_id = person.id + "_PersonNameContext" + str(0)
+    tempContext = context.Context(context_id,personNameTags[0],"PersonNameContext")
+    tempContext.link_triples(person.name_list[1:])
+    person.context_list.append(tempContext)
 
 def main():
     import os
     filelist = [filename for filename in sorted(os.listdir("bio_data/")) if filename.endswith(".xml")]
 
-    # for filename in ["abdyma-b.xml","woolvi-b.xml", "blaccl-b.xml"]:
+    for filename in ["woolvi-b.xml"]:
     # for filename in ["blesma-b.xml"]:
     # for filename in ["abdyma-b.xml"]:
     # for filename in ["aikejo-b.xml"]:
-    for filename in filelist:
+    # for filename in filelist:
         with open("bio_data/" + filename, encoding="utf-8") as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
@@ -235,6 +269,7 @@ def main():
         extract_person_name(soup, person)
 
         graph = person.create_triples(person.name_list)
+        # graph += person.create_triples(person.context_list)
         namespace_manager = rdflib.namespace.NamespaceManager(graph)
         bind_ns(namespace_manager, NS_DICT)
         print(graph.serialize(format='turtle').decode())

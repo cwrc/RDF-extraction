@@ -59,31 +59,31 @@ def main():
     # for filename in filelist[:200]:
     # for filename in filelist[:2]:
     # for filename in ["levyam-b.xml", "atwoma-b.xml", "woolvi-b.xml", "clifan-b.xml"]:
-    # for filename in ["levyam-b.xml"]:
-    for filename in filelist:
+    for filename in ["woolvi-b.xml"]:
+    # for filename in filelist:
         with open("bio_data/" + filename,encoding="utf-8") as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
         print("===========",filename,"=============")
         person = Biography(filename[:-6], get_name(soup), cf.get_mapped_term("Gender", get_sex(soup)))
 
-        # cf.extract_cf_data(soup, person)
-        # other_contexts.extract_other_contexts_data(soup, person)
-        # location.extract_location_data(soup, person)
-        # occupation.extract_occupation_data(soup, person)
-        # education.extract_education_data(soup, person)
-        # other_contexts.extract_health_contexts_data(soup, person)
+        cf.extract_cf_data(soup, person)
+        other_contexts.extract_other_contexts_data(soup, person)
+        location.extract_location_data(soup, person)
+        occupation.extract_occupation_data(soup, person)
+        education.extract_education_data(soup, person)
+        other_contexts.extract_health_contexts_data(soup, person)
         # person.context_list.clear()
         personname.extract_person_name(soup, person)
-        continue
-        # birthDeath.extract_birth(soup, person)
-        # birthDeath.extract_death(soup, person)
-        # lifeInfo.extract_cohabitants(soup, person)
-        # lifeInfo.extract_family(soup, person)
-        # lifeInfo.extract_friends_associates(soup, person)
-        # lifeInfo.extract_intimate_relationships(soup, person)
-        # lifeInfo.extract_childlessness(soup, person)
-        # lifeInfo.extract_children(soup, person)
+        # continue
+        birthDeath.extract_birth(soup, person)
+        birthDeath.extract_death(soup, person)
+        lifeInfo.extract_cohabitants(soup, person)
+        lifeInfo.extract_family(soup, person)
+        lifeInfo.extract_friends_associates(soup, person)
+        lifeInfo.extract_intimate_relationships(soup, person)
+        lifeInfo.extract_childlessness(soup, person)
+        lifeInfo.extract_children(soup, person)
 
         graph = person.to_graph()
 
