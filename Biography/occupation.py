@@ -184,7 +184,7 @@ def clean_term(string):
 def create_job_map():
     import csv
     global JOB_MAP
-    with open('occupation_mapping.csv', newline='') as csvfile:
+    with open('occupation_mapping.csv', newline='',encoding="utf8") as csvfile:
         reader = csv.reader(csvfile)
         next(reader)
         for row in reader:
