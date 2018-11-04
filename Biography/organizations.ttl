@@ -1,15 +1,34 @@
-#27803 triples created
+#27821 triples created
 @prefix as: <http://www.w3.org/ns/activitystreams#> .
+@prefix bf: <http://id.loc.gov/ontologies/bibframe/> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix bio: <http://purl.org/vocab/bio/0.1/> .
+@prefix cc: <http://creativecommons.org/ns#> .
 @prefix cwrc: <http://sparql.cwrc.ca/ontologies/cwrc#> .
 @prefix data: <http://cwrc.ca/cwrcdata/> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix dctypes: <http://purl.org/dc/dcmitype/> .
+@prefix eurovoc: <http://eurovoc.europa.eu/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geonames: <http://sws.geonames.org/> .
+@prefix gvp: <http://vocab.getty.edu/ontology#> .
+@prefix loc: <http://id.loc.gov/vocabulary/relators/> .
 @prefix oa: <http://www.w3.org/ns/oa#> .
 @prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix sem: <http://semanticweb.cs.vu.nl/2009/11/sem/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -1427,6 +1446,8 @@ cwrc:Anne_Frank_Foundation_ORG a org:Organization ;
 cwrc:Anne_Sexton_and_Her_Kind_ORG a org:Organization ;
     rdfs:label "Anne Sexton and Her Kind" ;
     foaf:name "Anne Sexton and Her Kind" .
+
+cwrc:Annie_Wright_Episcopal_Boarding_School_ORG a cwrc:EducationalOrganization .
 
 cwrc:Anstey_Physical_Training_College_ORG a cwrc:EducationalOrganization ;
     rdfs:label "Anstey Physical Training College" ;
@@ -3147,6 +3168,8 @@ cwrc:Binghamton_University_ORG a org:Organization ;
 cwrc:Biograph_ORG a org:Organization ;
     rdfs:label "Biograph" ;
     foaf:name "Biograph" .
+
+cwrc:Birkbeck_College_London_University_ORG a cwrc:EducationalOrganization .
 
 cwrc:Birkbeck_College_University_of_London_ORG a org:Organization ;
     rdfs:label "Birkbeck College,, University of London" ;
@@ -5264,6 +5287,8 @@ cwrc:Canterbury_Cathedral_ORG a org:Organization ;
     rdfs:label "Canterbury Cathedral" ;
     foaf:name "Canterbury Cathedral" .
 
+cwrc:Canterbury_College_School_of_Art_ORG a cwrc:EducationalOrganization .
+
 cwrc:Canterbury_Hall_ORG a org:Organization ;
     rdfs:label "Canterbury Hall" ;
     foaf:name "Canterbury Hall" .
@@ -5996,7 +6021,7 @@ cwrc:Chelsea_Physic_Garden_ORG a org:Organization ;
     rdfs:label "Chelsea Physic Garden" ;
     foaf:name "Chelsea Physic Garden" .
 
-cwrc:Chelsea_School_of_Art_ORG a org:Organization ;
+cwrc:Chelsea_School_of_Art_ORG a cwrc:EducationalOrganization ;
     rdfs:label "Chelsea School of Art" ;
     foaf:name "Chelsea School of Art" .
 
@@ -9483,6 +9508,8 @@ cwrc:Elizabeth_Garrett_Anderson_Hospital_ORG a org:Organization ;
         "St Mary's Dispensary" ;
     foaf:name "Elizabeth Garrett Anderson Hospital" .
 
+cwrc:Elizabeth_Garrett_Anderson_ORG a cwrc:EducationalOrganization .
+
 cwrc:Elizabeth_Gaskell_Society_ORG a org:Organization ;
     rdfs:label "Elizabeth Gaskell Society" ;
     foaf:name "Elizabeth Gaskell Society" .
@@ -9524,6 +9551,8 @@ cwrc:Ellis_and_White_ORG a org:Organization ;
 cwrc:Elsevier_International_Press_ORG a org:Organization ;
     rdfs:label "Elsevier International Press" ;
     foaf:name "Elsevier International Press" .
+
+cwrc:Eltham_Hill_Girls_Grammar_School_ORG a cwrc:EducationalOrganization .
 
 cwrc:Elvis_Presley_Club_ORG a org:Organization ;
     rdfs:label "Elvis Presley Club" ;
@@ -10844,6 +10873,8 @@ cwrc:Foreshore_Road_Infant_Centre_ORG a org:Organization ;
     rdfs:label "Foreshore Road Infant Centre" ;
     foaf:name "Foreshore Road Infant Centre" .
 
+cwrc:Forest_Ridge_Highschool_of_the_Sacred_Heart_ORG a cwrc:EducationalOrganization .
+
 cwrc:Forestry_Commission_ORG a org:Organization ;
     rdfs:label "Forestry Commission" ;
     foaf:name "Forestry Commission" .
@@ -11503,7 +11534,7 @@ cwrc:General_Agreement_on_Tariffs_and_Trade_ORG a org:Organization ;
     rdfs:label "General Agreement on Tariffs and Trade" ;
     foaf:name "General Agreement on Tariffs and Trade" .
 
-cwrc:General_Assembly_of_the_Unitarian_and_Free_Christian_Churches_ORG a org:Organization ;
+cwrc:General_Assembly_of_the_Unitarian_and_Free_Christian_Churches_ORG a cwrc:ReligiousOrganization ;
     rdfs:label "General Assembly of the Unitarian and Free Christian Churches" ;
     skos:altLabel "British and Foreign Unitarian Association",
         "Unitarian Association" ;
@@ -11955,6 +11986,8 @@ cwrc:Golden_Cockerel_Press_ORG a org:Organization ;
 cwrc:Goldman_Sachs_ORG a org:Organization ;
     rdfs:label "Goldman Sachs" ;
     foaf:name "Goldman Sachs" .
+
+cwrc:Goldsmiths_College_London_University_ORG a cwrc:EducationalOrganization .
 
 cwrc:Goldsmiths_College_University_of_London_ORG a cwrc:EducationalOrganization ;
     rdfs:label "Goldsmiths' College,, University of London" ;
@@ -13302,6 +13335,8 @@ cwrc:Ho-Ho-Kus_ORG a org:Organization ;
     rdfs:label "Ho-Ho-Kus" ;
     foaf:name "Ho-Ho-Kus" .
 
+cwrc:Hochschule_für_Musik_Berlin_ORG a cwrc:EducationalOrganization .
+
 cwrc:Hockliffe_Project_ORG a org:Organization ;
     rdfs:label "Hockliffe Project" ;
     foaf:name "Hockliffe Project" .
@@ -13901,10 +13936,6 @@ cwrc:Imperial_College_of_Science_Technology_and_Medicine_ORG a org:Organization 
     rdfs:label "Imperial College of Science,, Technology and Medicine" ;
     skos:altLabel "Imperial College of Science, Technology and Medicine" ;
     foaf:name "Imperial College of Science,, Technology and Medicine" .
-
-cwrc:Imperial_Federation_League_ORG a cwrc:PoliticalOrganization ;
-    rdfs:label "Imperial Federation League" ;
-    foaf:name "Imperial Federation League" .
 
 cwrc:Imperial_Industries_Club_ORG a org:Organization ;
     rdfs:label "Imperial Industries Club" ;
@@ -14731,6 +14762,10 @@ cwrc:Intourist_ORG a org:Organization ;
 cwrc:Invalid_Childrens_Aid_Association_ORG a org:Organization ;
     rdfs:label "Invalid Children's Aid Association" ;
     foaf:name "Invalid Children's Aid Association" .
+
+cwrc:Inverness_High_School_ORG a cwrc:EducationalOrganization .
+
+cwrc:Inverness_Royal_Academy_ORG a cwrc:EducationalOrganization .
 
 cwrc:Iolanthe_Trust_ORG a org:Organization ;
     rdfs:label "Iolanthe Trust" ;
@@ -22486,7 +22521,7 @@ cwrc:Open_Road_ORG a org:Organization ;
     rdfs:label "Open Road" ;
     foaf:name "Open Road" .
 
-cwrc:Open_University_ORG a org:Organization ;
+cwrc:Open_University_ORG a cwrc:EducationalOrganization ;
     rdfs:label "Open University" ;
     foaf:name "Open University" .
 
@@ -22868,6 +22903,8 @@ cwrc:Oxford_and_Cambridge_Club_ORG a org:Organization ;
 cwrc:Oxfordshire_Record_Office_ORG a org:Organization ;
     rdfs:label "Oxfordshire Record Office" ;
     foaf:name "Oxfordshire Record Office" .
+
+cwrc:Ozenfant_Academy_of_Fine_Art_ORG a cwrc:EducationalOrganization .
 
 cwrc:PAL_Screenwriting_Lab_ORG a org:Organization ;
     rdfs:label "PAL Screenwriting Lab" ;
@@ -25521,6 +25558,8 @@ cwrc:Room_to_Read_ORG a org:Organization ;
 cwrc:Rosa_Bassett_Grammar_School_ORG a cwrc:EducationalOrganization ;
     rdfs:label "Rosa Bassett Grammar School" ;
     foaf:name "Rosa Bassett Grammar School" .
+
+cwrc:Rose_Bruford_College_ORG a cwrc:EducationalOrganization .
 
 cwrc:Rose_Theatre_ORG a org:Organization ;
     rdfs:label "Rose Theatre" ;
@@ -28555,7 +28594,7 @@ cwrc:Sorbonne_University_of_Paris_ORG a cwrc:EducationalOrganization ;
     skos:altLabel "Sorbonne, University of Paris" ;
     foaf:name "Sorbonne,, University of Paris" .
 
-cwrc:Sorosis_ORG a org:Organization ;
+cwrc:Sorosis_ORG a cwrc:PoliticalOrganization ;
     rdfs:label "Sorosis" ;
     foaf:name "Sorosis" .
 
@@ -28591,6 +28630,8 @@ cwrc:South_African_Student_Movement_ORG a org:Organization ;
 cwrc:South_Bank_Centre_ORG a org:Organization ;
     rdfs:label "South Bank Centre" ;
     foaf:name "South Bank Centre" .
+
+cwrc:South_Hampstead_High_School_ORG a cwrc:EducationalOrganization .
 
 cwrc:South_Hampstead_School_for_Girls_ORG a org:Organization ;
     rdfs:label "South Hampstead School for Girls" ;
@@ -29129,6 +29170,8 @@ cwrc:St_Lucys_Childrens_Hospital_ORG a org:Organization ;
 cwrc:St_Lukes_Boys_School_ORG a org:Organization ;
     rdfs:label "St Luke's Boys School" ;
     foaf:name "St Luke's Boys School" .
+
+cwrc:St_Margarets_College_Christchurch_ORG a cwrc:EducationalOrganization .
 
 cwrc:St_Marks_Church_Florence_ORG a org:Organization ;
     rdfs:label "St Mark's Church,, Florence" ;
@@ -35658,6 +35701,7 @@ cwrc:fascism cwrc:hasOrganization cwrc:Fascist_Party_ORG .
 
 cwrc:feminism cwrc:hasOrganization cwrc:Arab_Women_Solidarity_Association_ORG,
         cwrc:Fawcett_Society_ORG,
+        cwrc:London_School_Board_ORG,
         cwrc:Mouvement_de_libération_des_femmes_ORG,
         cwrc:Womens_Social_and_Political_Union_ORG .
 
@@ -35672,6 +35716,8 @@ cwrc:gayRights cwrc:hasOrganization cwrc:Womens_Defence_of_the_Constitution_Leag
 cwrc:hermeticism cwrc:hasOrganization cwrc:Hermetic_Society_ORG .
 
 cwrc:housingMovement cwrc:hasOrganization cwrc:Shelter_ORG .
+
+cwrc:imperialism cwrc:hasOrganization cwrc:Imperial_Federation_League_ORG .
 
 cwrc:independentMethodistConnexion cwrc:hasOrganization cwrc:Independent_Methodist_Church_ORG .
 
@@ -35708,8 +35754,6 @@ cwrc:labourMovement cwrc:hasOrganization cwrc:Anti-Sweating_League_ORG,
         cwrc:Womens_Labour_League_ORG,
         cwrc:Workers_International_ORG .
 
-cwrc:landReform cwrc:hasOrganization cwrc:Irish_National_League_ORG .
-
 cwrc:left-Wing cwrc:hasOrganization cwrc:Labour_Party_ORG .
 
 cwrc:liberalUnionistParty cwrc:hasOrganization cwrc:Liberal_Unionist_Party_ORG,
@@ -35742,7 +35786,8 @@ cwrc:presbyterianism cwrc:hasOrganization cwrc:Presbyterian_Church_ORG .
 
 cwrc:pro-Catholicism cwrc:hasOrganization cwrc:Roman_Catholic_Church_ORG .
 
-cwrc:propertyLawReform cwrc:hasOrganization cwrc:Married_Womens_Property_Committee_ORG .
+cwrc:propertyLawReform cwrc:hasOrganization cwrc:Irish_National_League_ORG,
+        cwrc:Married_Womens_Property_Committee_ORG .
 
 cwrc:protestantism cwrc:hasOrganization cwrc:Anglican_Church_ORG,
         cwrc:Protestant_Church_ORG .
@@ -35799,7 +35844,8 @@ cwrc:tradeUnionism cwrc:hasOrganization cwrc:British_National_Union_of_Working_W
         cwrc:Lancashire_and_Cheshire_Women_Textile_and_Other_Workers_Representation_Committee_ORG,
         cwrc:Manchester_and_Salford_Womens_Trade_Union_Council_ORG .
 
-cwrc:unitarianism cwrc:hasOrganization cwrc:Unitarian_Church_ORG .
+cwrc:unitarianism cwrc:hasOrganization cwrc:Unitarian_Church_ORG,
+        cwrc:Unitarian_ORG .
 
 cwrc:universalist cwrc:hasOrganization cwrc:Universalist_Church_ORG .
 
@@ -35981,6 +36027,10 @@ cwrc:House_of_Commons_ORG a cwrc:PoliticalOrganization ;
     rdfs:label "House of Commons" ;
     foaf:name "House of Commons" .
 
+cwrc:Imperial_Federation_League_ORG a cwrc:PoliticalOrganization ;
+    rdfs:label "Imperial Federation League" ;
+    foaf:name "Imperial Federation League" .
+
 cwrc:Independent_Anti-Vivisection_League_ORG a cwrc:PoliticalOrganization ;
     rdfs:label "Independent Anti-Vivisection League" ;
     foaf:name "Independent Anti-Vivisection League" .
@@ -36080,10 +36130,6 @@ cwrc:Lollards_ORG a cwrc:ReligiousOrganization ;
 cwrc:London_Revolution_Society_ORG a cwrc:PoliticalOrganization ;
     rdfs:label "London Revolution Society" ;
     foaf:name "London Revolution Society" .
-
-cwrc:London_School_Board_ORG a cwrc:PoliticalOrganization ;
-    rdfs:label "London School Board" ;
-    foaf:name "London School Board" .
 
 cwrc:London_Womens_Suffrage_Society_ORG a cwrc:PoliticalOrganization ;
     rdfs:label "London Women's Suffrage Society" ;
@@ -36245,6 +36291,8 @@ cwrc:Unitarian_Church_ORG a cwrc:ReligiousOrganization ;
     rdfs:label "Unitarian Church" ;
     foaf:name "Unitarian Church" .
 
+cwrc:Unitarian_ORG a cwrc:ReligiousOrganization .
+
 cwrc:United_Nations_Association_of_Great_Britain_and_Northern_Ireland_ORG a cwrc:PoliticalOrganization ;
     rdfs:label "United Nations Association of Great Britain and Northern Ireland" ;
     skos:altLabel "League of Free Nations Association",
@@ -36393,6 +36441,10 @@ cwrc:Liberal_Party_ORG a cwrc:PoliticalOrganization ;
     rdfs:label "Liberal Party" ;
     skos:altLabel "Whig Party" ;
     foaf:name "Liberal Party" .
+
+cwrc:London_School_Board_ORG a cwrc:PoliticalOrganization ;
+    rdfs:label "London School Board" ;
+    foaf:name "London School Board" .
 
 cwrc:Methodist_Church_ORG a cwrc:ReligiousOrganization ;
     rdfs:label "Methodist Church" ;

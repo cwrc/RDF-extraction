@@ -1,8 +1,11 @@
 import rdflib
-import biography
+
+from log import *
+from utilities import *
+
+from biography import Biography
 from context import Context
 from event import Event
-from log import *
 """
 Status: ~89%
 extraction of health context will possibly accompanied by health factors at a later point
@@ -25,6 +28,7 @@ def extract_health_contexts_data(bio, person):
     }
     contexts = bio.find_all("HEALTH")
     count = 1
+    event_count = 1
     for context in contexts:
         context_type = context.get("ISSUE")
         if context_type:
@@ -40,7 +44,6 @@ def extract_health_contexts_data(bio, person):
             count += 1
 
         events = context.find_all("CHRONSTRUCT")
-        event_count = 1
         for event in events:
             context_id = person.id + "_" + context_type + str(count)
             temp_context = Context(context_id, event, context_type, "identifying")
@@ -65,12 +68,11 @@ def extract_other_contexts_data(bio, person):
         TODO: after reviewing contexts/events remove uber_graph
     """
     other_contexts = ["VIOLENCE", "WEALTH", "LEISUREANDSOCIETY", "OTHERLIFEEVENT"]
-    # other_contexts = ["chronstruct"]
-    # TODO: handle chronproses --> events, still unsure quite of the relationship between a context and event
 
     for context in other_contexts:
         contexts = bio.find_all(context)
         count = 1
+        event_count = 1
         for x in contexts:
             paragraphs = x.find_all("P")
             for paragraph in paragraphs:
@@ -81,7 +83,6 @@ def extract_other_contexts_data(bio, person):
                 count += 1
 
             events = x.find_all("CHRONSTRUCT")
-            event_count = 1
             for event in events:
                 context_id = person.id + "_" + Context.context_map[context] + str(count)
                 temp_context = Context(context_id, event, context, "identifying")
@@ -117,30 +118,36 @@ def main():
 
     uber_graph = rdflib.Graph()
     namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
-    biography.bind_ns(namespace_manager, biography.NS_DICT)
+    bind_ns(namespace_manager, NS_DICT)
 
     # for filename in filelist[:200]:
     # for filename in filelist[-5:]:
 
-    # for filename in ["levyam-b.xml", "atwoma-b.xml", "woolvi-b.xml", "clifan-b.xml", "bellfr-b.xml"]:
-    for filename in filelist:
+    # for filename in filelist:
+    test_cases = ["shakwi-b.xml", "woolvi-b.xml", "seacma-b.xml", "atwoma-b.xml",
+                  "alcolo-b.xml", "bronem-b.xml", "bronch-b.xml", "levyam-b.xml"]
+    # for filename in filelist:
+    for filename in test_cases:
         with open("bio_data/" + filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
         print(filename)
-        test_person = biography.Biography(
+        person = Biography(
             filename[:-6], get_name(soup), culturalForm.get_mapped_term("Gender", get_sex(soup)))
 
-        extract_other_contexts_data(soup, test_person)
+        extract_other_contexts_data(soup, person)
 
-        graph = test_person.to_graph()
+        graph = person.to_graph()
 
         extract_log.subtitle("Entry #" + str(entry_num))
-        extract_log.msg(str(test_person))
+        extract_log.msg(str(person))
         extract_log.subtitle(str(len(graph)) + " triples created")
-        extract_log.msg(test_person.to_file(graph))
+        extract_log.msg(person.to_file(graph))
         extract_log.subtitle("Entry #" + str(entry_num))
         extract_log.msg("\n\n")
+
+        temp_path = "extracted_triples/other_contexts_turtle/" + filename[:-6] + "_other_contexts.ttl"
+        create_extracted_file(temp_path, person)
 
         uber_graph += graph
         entry_num += 1
@@ -148,6 +155,13 @@ def main():
     turtle_log.subtitle(str(len(uber_graph)) + " triples created")
     turtle_log.msg(uber_graph.serialize(format="ttl").decode(), stdout=False)
     turtle_log.msg("")
+
+    temp_path = "extracted_triples/other_contexts.ttl"
+    create_extracted_uberfile(temp_path, uber_graph)
+
+    temp_path = "extracted_triples/other_contexts.rdf"
+    create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
+
 
 if __name__ == "__main__":
     # auth = [env.env("USER_NAME"), env.env("PASSWORD")]

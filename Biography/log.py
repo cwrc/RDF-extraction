@@ -48,7 +48,7 @@ class Log(object):
 
         # self.file_name = file_directory+"/"+time.strftime("%H_%M")+ ".txt"
         self.file_name = file_directory + "/" + time.strftime("%I_%M_%S_%p") + ".txt"
-        self.file = open(self.file_name, "w",encoding="utf-8")
+        self.file = open(self.file_name, "w", encoding="utf-8")
 
         self.trap_fails = []
 
@@ -125,7 +125,7 @@ class Log(object):
     def open(self):
         """Reopens file
         """
-        self.file = open(self.file_name, "a",encoding="utf-8")
+        self.file = open(self.file_name, "a", encoding="utf-8")
 
     def msg(self, string, newline=True, stdout=True):
         """Writes string to to log file
@@ -192,10 +192,8 @@ class Log(object):
         return secs
 
 
-from random import randint
-
-
 def main():
+    from random import randint
     log = Log("beta_logs/log/stat_test")
     log.test_name("Stats ftw")
 

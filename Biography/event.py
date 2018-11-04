@@ -1,16 +1,11 @@
 import rdflib
 from rdflib import RDF, RDFS, Literal, XSD
-from biography import bind_ns, NS_DICT, make_standard_uri, create_uri
+
+from utilities import *
 from organizations import get_org_uri
-from context import get_value, get_places
 
 # Leaving this independent of contexts incase we should want to vary events vs contexts
 MAX_WORD_COUNT = 35
-
-
-def create_cwrc_uri(term):
-    """prepends the cwrc namespace uri to the given term"""
-    return create_uri("cwrc", term)
 
 
 def get_actors(tag):
@@ -59,11 +54,13 @@ def get_time_certainty(tag):
 
 
 def get_date_tag(tag):
+    """Will retrieve that existing date related tag that is a child of the given tag """
     date_structures = ["DATE", "DATESTRUCT", "DATERANGE"]
     children = tag.children
     for x in children:
         if x.name in date_structures:
             return(x)
+    return None
 
 
 def format_date(date):
@@ -128,11 +125,7 @@ class Event(object):
         self.event_type = get_event_type(tag)
         self.actors = get_actors(tag)
 
-        self.text = ' '.join(str(tag.CHRONPROSE.get_text()).split())
-        words = self.text.split(" ")
-        self.text = ' '.join(words[:MAX_WORD_COUNT])
-        if len(words) > MAX_WORD_COUNT:
-            self.text += "..."
+        self.text = limit_words(str(tag.CHRONPROSE.get_text()), MAX_WORD_COUNT)
 
         self.date_tag = get_date_tag(tag)
         self.time_type = get_time_type(self.date_tag)

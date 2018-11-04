@@ -1,25 +1,22 @@
 #!/usr/bin/python3
 
-# from Env import env
-# import islandora_auth as login
-
-from difflib import get_close_matches
-from rdflib import RDF, RDFS, Literal
 import rdflib
-import biography
+
+from log import Log
+
+from utilities import *
+
+from biography import Biography
 from context import Context
-from log import *
 from place import Place
 from event import Event
 
-
 """
 Status: ~80%
-
 """
 
-# temp log library for debugging --> to be eventually replaced with proper logging library
-# from log import *
+# temp log library for debugging -->
+# to be eventually replaced with proper logging library
 log = Log("log/location/errors")
 log.test_name("Location extraction Error Logging")
 extract_log = Log("log/location/extraction")
@@ -29,7 +26,7 @@ turtle_log.test_name("Location extracted Triples")
 
 uber_graph = rdflib.Graph()
 namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
-biography.bind_ns(namespace_manager, biography.NS_DICT)
+bind_ns(namespace_manager, NS_DICT)
 
 location_occurences = {}
 location_count = {
@@ -71,17 +68,15 @@ class Location(object):
         if other_attributes:
             self.uri = other_attributes
 
-        self.uri = biography.create_uri("cwrc", self.predicate)
+        self.uri = create_uri("cwrc", self.predicate)
 
-    # TODO figure out if i can just return tuple or triple without creating a whole graph
-    # Evaluate efficency of creating this graph or just returning a tuple and have the biography deal with it
     def to_tuple(self, person_uri):
         return ((person_uri, self.uri, self.value))
 
     def to_triple(self, person):
         g = rdflib.Graph()
         namespace_manager = rdflib.namespace.NamespaceManager(g)
-        biography.bind_ns(namespace_manager, biography.NS_DICT)
+        bind_ns(namespace_manager, NS_DICT)
         g.add((person.uri, self.uri, self.value))
         return g
 
@@ -217,9 +212,8 @@ def extract_location_data(bio, person):
         "MIGRATED": 0,
         "MOVED": 0,
     }
-    # id = 1
+
     for location in locations:
-        # forms_found = 0
         location_type = location.get("RELATIONTO")
 
         paragraphs = location.find_all("P")
@@ -227,55 +221,45 @@ def extract_location_data(bio, person):
         extract_locations(paragraphs, location_type, person)
         extract_locations(events, location_type, person, "events")
 
-        # location_count[location_type] += forms_found
-
 
 def main():
     import os
     from bs4 import BeautifulSoup
     import culturalForm
 
-    def get_name(bio):
-        return (bio.BIOGRAPHY.DIV0.STANDARD.text)
-
-    def get_sex(bio):
-        return (bio.BIOGRAPHY.get("SEX"))
-
     filelist = [filename for filename in sorted(os.listdir("bio_data")) if filename.endswith(".xml")]
     entry_num = 1
 
     uber_graph = rdflib.Graph()
     namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
-    biography.bind_ns(namespace_manager, biography.NS_DICT)
+    bind_ns(namespace_manager, NS_DICT)
 
     # for filename in filelist[:200]:
     # for filename in filelist[-5:]:
     test_cases = ["shakwi-b.xml", "woolvi-b.xml", "seacma-b.xml", "atwoma-b.xml",
                   "alcolo-b.xml", "bronem-b.xml", "bronch-b.xml", "levyam-b.xml"]
-    for filename in test_cases:
     # for filename in filelist:
+    for filename in test_cases:
         with open("bio_data/" + filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
         print(filename)
-        test_person = biography.Biography(
+        person = Biography(
             filename[:-6], get_name(soup), culturalForm.get_mapped_term("Gender", get_sex(soup)))
 
-        extract_location_data(soup, test_person)
+        extract_location_data(soup, person)
 
-        graph = test_person.to_graph()
+        graph = person.to_graph()
 
         extract_log.subtitle("Entry #" + str(entry_num))
-        extract_log.msg(str(test_person))
+        extract_log.msg(str(person))
         extract_log.subtitle(str(len(graph)) + " triples created")
-        extract_log.msg(test_person.to_file(graph))
+        extract_log.msg(person.to_file(graph))
         extract_log.subtitle("Entry #" + str(entry_num))
         extract_log.msg("\n\n")
 
-        file = open("location_turtle/" + filename[:-6] + "_location.ttl", "w", encoding="utf-8")
-        file.write("#" + str(len(graph)) + " triples created\n")
-        file.write(graph.serialize(format="ttl").decode())
-        file.close()
+        temp_path = "extracted_triples/location_turtle/" + filename[:-6] + "_location.ttl"
+        create_extracted_file(temp_path, person)
 
         uber_graph += graph
         entry_num += 1
@@ -284,12 +268,12 @@ def main():
     turtle_log.msg(uber_graph.serialize(format="ttl").decode(), stdout=False)
     turtle_log.msg("")
 
+    temp_path = "extracted_triples/location.ttl"
+    create_extracted_uberfile(temp_path, uber_graph)
 
-def test():
-    exit()
+    temp_path = "extracted_triples/location.rdf"
+    create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
+
 
 if __name__ == "__main__":
-    # auth = [env.env("USER_NAME"), env.env("PASSWORD")]
-    # login.main(auth)
-    # test()
     main()

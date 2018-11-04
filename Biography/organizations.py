@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 
+import rdflib
 from bs4 import BeautifulSoup
 from rdflib import RDF, RDFS, Literal
-import rdflib
-from biography import bind_ns, NS_DICT, make_standard_uri
+
+from utilities import *
 
 uber_graph = rdflib.Graph()
 namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
@@ -29,6 +30,7 @@ class Organization(object):
 
         self.altlabels = altlabels
         self.uri = rdflib.term.URIRef(str(NS_DICT["cwrc"]) + uri)
+        # self.uri = rdflib.term.URIRef(uri)
 
     # TODO figure out if i can just return tuple or triple without creating a whole graph
     # Evaluate efficency of creating this graph or just returning a tuple and have the biography deal with it
@@ -55,10 +57,6 @@ class Organization(object):
         for x in self.altlabels:
             string += "\t\t" + x + "\n"
         return string
-
-
-def get_name(bio):
-    return (bio.biography.div0.standard.text)
 
 
 def get_org_uri(tag):
@@ -125,7 +123,7 @@ def create_org_csv():
         std = x.get("STANDARD")
         disp = x.get("DISPLAY")
         forms = [form.text for form in x.find_all("FORM")]
-        uri = get_org_uri(std)
+        uri = get_org_uri(x)
         csv_item = [uri, std]
         if disp:
             csv_item.append(disp)
@@ -150,14 +148,14 @@ def main():
     import os
     global uber_graph
 
-    csv_to_triples()
     # create_org_csv()
+    csv_to_triples()
 
     filelist = [filename for filename in sorted(os.listdir("bio_data")) if filename.endswith(".xml")]
 
     for filename in filelist:
         with open("bio_data/" + filename) as f:
-            soup = BeautifulSoup(f, 'lxml')
+            soup = BeautifulSoup(f, 'lxml-xml')
         extract_org_data(soup)
 
     file = open("organizations.ttl", "w")

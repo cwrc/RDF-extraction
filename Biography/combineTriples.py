@@ -6,6 +6,7 @@ NS_DICT = {
     "as": Namespace("http://www.w3.org/ns/activitystreams#"),
     "bibo": Namespace("http://purl.org/ontology/bibo/"),
     "bio": Namespace("http://purl.org/vocab/bio/0.1/"),
+    "bf": Namespace("http://id.loc.gov/ontologies/bibframe/"),
     "cc": Namespace("http://creativecommons.org/ns#"),
     "cwrc": Namespace("http://sparql.cwrc.ca/ontologies/cwrc#"),
     "data": Namespace("http://cwrc.ca/cwrcdata/"),
@@ -68,7 +69,7 @@ def updateFileLists():
     global aFiles
     global dFiles
 
-    gFiles = [filename for filename in sorted(os.listdir(gPath)) if filename.endswith(".txt")]
+    gFiles = [filename for filename in sorted(os.listdir(gPath)) if filename.endswith(".ttl")]
     # gFiles = [filename for filename in sorted(os.listdir("bio_data/")) if filename.endswith(".xml")]
     dFiles = [filename for filename in sorted(os.listdir(dPath)) if filename.endswith(".txt")]
 
@@ -86,12 +87,12 @@ def main():
     missing = []
     gurjapCounter = 0
     megaGraph = Graph()
+    megaGraph.parse("organizations.ttl", format="turtle")
+    namespace_manager = namespace.NamespaceManager(megaGraph)
+    bind_ns(namespace_manager, NS_DICT)
     # f = open("namesAndTriples6.txt", "w")
 
     for name in gFiles:
-        # print(name)
-        # if "woolvi" not in name:
-        #     continue
 
         # alGraph = Graph()
         dGraph = Graph()
@@ -129,12 +130,6 @@ def main():
         namespace_manager = namespace.NamespaceManager(graph)
         bind_ns(namespace_manager, NS_DICT)
 
-        # # print(graph.serialize(format='turtle').decode())
-
-        # f.write("%s:%d\n" % (name, len(graph)))
-        # print("Al:",len(alGraph),"d:",len(dGraph),"g:",len(gGraph))
-        # print("index: ",index,"total triples",len(graph))
-
         index += 1
         numTriples += len(graph)
         megaGraph += graph
@@ -150,7 +145,8 @@ def main():
         # print("number of triples",numTriples)
 
     # f.close()
-    megaGraph.serialize("ALL_TRIPLES" + '.txt', format='turtle')
+    megaGraph.serialize("BIOGRAPHY" + '.ttl', format='turtle')
+    megaGraph.serialize("BIOGRAPHY" + '.rdf', format='pretty-xml')
 
     print("total Triples: ", numTriples)
     print("total Gurjap Triples: ", gurjapCounter)

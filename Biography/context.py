@@ -1,63 +1,21 @@
 import rdflib
 from rdflib import RDF, RDFS, Literal
-import re
-from biography import bind_ns, NS_DICT, make_standard_uri, remove_punctuation, create_uri
-from place import Place
+
+from utilities import *
 from organizations import get_org_uri
 
 MAX_WORD_COUNT = 35
 
 """
 Status: ~84%
-TODO: 
+TODO:
 1) Revise mechanism for adding triples as a texual body for less list oriented components ex. Death
-2) Review triples related to identifying contexts
-3) revise mechanism for getting closest heading
-4) Fix up labelling of contexts possibly
-5) Revise text snippet to grab from where the first triple is extracted
+2) revise mechanism for getting closest heading
+3) Fix up labelling of contexts possibly
+4) Revise text snippet to grab from where the first triple is extracted
     - however sometime for identifying contexts, names/orgs are identified
         prior to triples extracted
 """
-
-
-def get_attribute(tag, attribute):
-    value = tag.get(attribute)
-    if value:
-        return value
-    return None
-
-
-def get_value(tag):
-    value = get_attribute(tag, "STANDARD")
-    if not value:
-        value = get_attribute(tag, "REG")
-    if not value:
-        value = get_attribute(tag, "CURRENTALTERNATIVETERM")
-    if not value:
-        value = str(tag.text)
-        value = ' '.join(value.split())
-    return value
-
-
-def strip_all_whitespace(string):
-# temp function for condensing the context strings for visibility in testing
-    return re.sub('[\s+]', '', str(string))
-
-
-def get_people(tag):
-    """Returns all people within a given tag"""
-    people = []
-    for x in tag.find_all("NAME"):
-        people.append(make_standard_uri(x.get("STANDARD")))
-    return people
-
-
-def get_places(tag):
-    """Returns all places within a given tag"""
-    places = []
-    for x in tag.find_all("PLACE"):
-        places.append(Place(x).uri)
-    return places
 
 
 def identifying_motivation(tag):
@@ -68,19 +26,18 @@ def identifying_motivation(tag):
 
     identified_subjects += get_places(tag)
     identified_subjects += get_people(tag)
+    identified_subjects += get_titles(tag)
 
     for x in tag.find_all("ORGNAME"):
         identified_subjects.append(get_org_uri(x))
-    for x in tag.find_all("TITLE"):
-        title = get_value(x)
-        identified_subjects.append(make_standard_uri(title + " TITLE", ns="cwrc"))
 
     return identified_subjects
 
 
 def get_heading(tag):
     # TODO: improve heading finding
-    # Figure out distance between tag and the two available headings to see which is closest
+    # Figure out distance between tag and the two available headings
+    # to see which is closest
     # Placeholder for now
     heading = tag.find("HEADING")
     if not heading:
@@ -93,10 +50,13 @@ def get_heading(tag):
 
 
 class Context(object):
-    """given the id for creating a context, the tag, context_type
+    """
+    given the id for creating a context, the tag, context_type
     optional argument of motivation: default is describing
-    if motivation is describing then it will also create the associated identifying contexts
-    if only an identifying context is needed motivation="identifying" as arguement is necessary
+    if motivation is describing then
+        it will also create the associated identifying contexts
+    if only an identifying context is needed
+    motivation="identifying" as argument is necessary
     """
     context_types = ["BiographyContext", "BirthContext", "CulturalFormContext",
                      "DeathContext", "FamilyContext", "FriendsAndAssociatesContext",
@@ -104,7 +64,8 @@ class Context(object):
                      "NationalityContext", "OccupationContext", "PoliticalContext",
                      "RaceEthnicityContext", "ReligionContext", "SexualityContext",
                      "SocialClassContext", "SpatialContext", "ViolenceContext",
-                     "WealthContext", "PersonNameContext"]
+                     "WealthContext", "EducationContext", "PersonNameContext",
+                     "InstitutionalEducationContext", "SelfTaughtEducationContext", "DomesticEducationContext"]
 
     context_map = {"CLASSISSUE": "SocialClassContext",
                    "RACEANDETHNICITY": "RaceEthnicityContext",
@@ -133,17 +94,16 @@ class Context(object):
         self.triples = []
         self.event = None
 
+        bibcits = tag.find_all("BIBCITS")
+        for x in bibcits:
+            x.decompose()
         self.tag = tag
         self.src = "http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id="
         self.heading = get_heading(tag)
 
-        # Making the text the max amount of words
         # TODO: Make snippet start where first triple is extracted from
-        self.text = ' '.join(str(tag.get_text()).split())
-        words = self.text.split(" ")
-        self.text = ' '.join(words[:MAX_WORD_COUNT])
-        if len(words) > MAX_WORD_COUNT:
-            self.text += "..."
+        # Making the text the max amount of words
+        self.text = limit_words(str(tag.get_text()), MAX_WORD_COUNT)
 
         if context_type in self.context_map:
             self.context_type = create_uri("cwrc", self.context_map[context_type])
@@ -161,19 +121,38 @@ class Context(object):
     def link_triples(self, comp_list):
         """ Adding to list of components to link context to triples
         """
-        self.triples += comp_list
+
+        if type(comp_list) is list:
+            self.triples += comp_list
+        else:
+            self.triples.append(comp_list)
 
     def link_event(self, event):
         self.event = event.uri
 
-    def get_subjects(self, comp_list):
+    def get_subjects2(self, comp_list):
+        subjects = []
+        for x in comp_list:
+            temp_graph = x.to_triple("BOB")
+            subjects.append(temp_graph.objects(None, None))
+
+        return list(set(subjects))
+
+    def get_subject(self, component, person):
+        subjects = []
+        temp_graph = component.to_triple(person)
+        subjects += [x for x in temp_graph.objects(None, None)]
+
+        return list(set(subjects))
+
+    def get_subjects(self, comp_list, person):
         """
         Dependent on the other other classes functioning similarly to cf
         May have to make a variant for more complex components of biography
         """
         subjects = []
         for x in comp_list:
-            subjects.append(x.value)
+            subjects += self.get_subject(x, person)
         return list(set(subjects))
 
     def to_triple(self, person):
@@ -201,7 +180,7 @@ class Context(object):
         g.add((identifying_uri, NS_DICT["oa"].motivatedBy, NS_DICT["oa"].identifying))
         self.subjects += identifying_motivation(self.tag)
         if self.triples:
-            self.subjects += self.get_subjects(self.triples)
+            self.subjects += self.get_subjects(self.triples, person)
         for x in self.subjects:
             g.add((identifying_uri, NS_DICT["oa"].hasBody, x))
         g.add((identifying_uri, NS_DICT["oa"].hasBody, person.uri))
@@ -223,26 +202,15 @@ class Context(object):
             for x in self.subjects:
                 g.add((self.uri, NS_DICT["dcterms"].subject, x))
 
-            format_str = rdflib.term.Literal("text/turtle", datatype=rdflib.namespace.XSD.string)
-            format_uri = create_uri("dcterms", "format")
             for x in self.triples:
-                # TODO: handle components with multiple triples this only works for simple components
-                # where an item in a list only produces one triple
-                # but for for some thing like death there will be multiple triples
-                # Temporaryily letting the whole chunk of triples be the part of the textual body
                 temp_str = x.to_triple(person).serialize(format="ttl").decode().splitlines()
                 triple_str_test = [y for y in temp_str if "@prefix" not in y and y != '']
                 if len(triple_str_test) == 1:
                     triple_str = x.to_triple(person).serialize(format="ttl").decode().splitlines()[-2]
+                    g += self.create_ttl_body(triple_str)
                 else:
                     triple_str = "\n".join(triple_str_test)
-
-                triple_str = rdflib.term.Literal(triple_str, datatype=rdflib.namespace.XSD.string)
-                temp_body = rdflib.BNode()
-                g.add((self.uri, NS_DICT["oa"].hasBody, temp_body))
-                g.add((temp_body, RDF.type, NS_DICT["oa"].TextualBody))
-                g.add((temp_body, RDF.value, triple_str))
-                g.add((temp_body, format_uri, format_str))
+                    g += self.create_multiple_triples(x.to_triple(person))
 
             if self.event:
                 g.add((self.uri, NS_DICT["cwrc"].hasEvent, self.event))
@@ -254,6 +222,33 @@ class Context(object):
             g.add((uri, RDFS.label, Literal(x.get("STANDARD"), datatype=rdflib.namespace.XSD.string)))
             g.add((uri, NS_DICT["foaf"].name, Literal(x.get("STANDARD"), datatype=rdflib.namespace.XSD.string)))
 
+        return g
+
+    def create_multiple_triples(self, graph):
+        """handles multitple triples
+        """
+        temp_g = rdflib.Graph()
+        g = rdflib.Graph()
+        namespace_manager = rdflib.namespace.NamespaceManager(temp_g)
+        bind_ns(namespace_manager, NS_DICT)
+        for x in graph[:]:
+            temp_g.add(x)
+            triple_str = temp_g.serialize(format="ttl").decode().splitlines()[-2]
+            temp_g.remove(x)
+            g += self.create_ttl_body(triple_str)
+
+        return g
+
+    def create_ttl_body(self, triple_str):
+        g = rdflib.Graph()
+        format_str = rdflib.term.Literal("text/turtle", datatype=rdflib.namespace.XSD.string)
+        format_uri = create_uri("dcterms", "format")
+        triple_str = rdflib.term.Literal(triple_str, datatype=rdflib.namespace.XSD.string)
+        temp_body = rdflib.BNode()
+        g.add((self.uri, NS_DICT["oa"].hasBody, temp_body))
+        g.add((temp_body, RDF.type, NS_DICT["oa"].TextualBody))
+        g.add((temp_body, RDF.value, triple_str))
+        g.add((temp_body, format_uri, format_str))
         return g
 
     def __str__(self):

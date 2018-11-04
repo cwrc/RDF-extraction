@@ -1,9 +1,12 @@
 from xml.etree import ElementTree
-import datetime, sys, copy
+import datetime
+import sys
+import copy
 from xml.etree.ElementTree import Element
 # from scrapeFamily import *
 from classes import *
 from bs4 import BeautifulSoup
+from place import Place
 
 
 def getch():
@@ -12,7 +15,9 @@ def getch():
 # used for getting divs
 # equivalent of something like ".//FRIENDSASSOCIATES/"
 # that would get all the divs in all of the friends tags
-def allTagsAllChildren(base,tagToGet):
+
+
+def allTagsAllChildren(base, tagToGet):
     if base == None:
         return None
     childrenToReturn = []
@@ -23,7 +28,9 @@ def allTagsAllChildren(base,tagToGet):
     return childrenToReturn
 
 # find tag that lets you specify a certain path
-def findTag(base,tagPath):
+
+
+def findTag(base, tagPath):
     if base == None:
         return None
     instances = base.select(tagPath)
@@ -33,12 +40,16 @@ def findTag(base,tagPath):
         return instances[0]
 
 # get all the children tags
+
+
 def tagChildren(base):
     if base == None:
         return None
     return base.find_all(recursive=False)
 
 # get first child
+
+
 def tagChild(base):
     if base == None:
         return None
@@ -47,16 +58,21 @@ def tagChild(base):
 # iterate a certain tag in a list
 # equivalent to elementtree's
 # something.iter("something else")
-def iterList(base,tagToGet):
+
+
+def iterList(base, tagToGet):
     if base == None:
         return None
     returnList = []
     if base.name == tagToGet:
-        returnList.append(base) # in elementtree, if the base is same as tag to get in the .iter() function. the base is also returned
+        # in elementtree, if the base is same as tag to get in the .iter() function. the base is also returned
+        returnList.append(base)
     returnList += base.find_all(tagToGet)
     return returnList
 
 # iterate all children and sub children, including the base tag itself
+
+
 def iterListAll(base):
     if base == None:
         return None
@@ -68,8 +84,9 @@ def iterListAll(base):
 
 def getPlaceTagContent(place):
     placeSettlement = ""
-    placeRegion     = ""
-    placeGeog       = ""
+    placeRegion = ""
+    placeGeog = ""
+
     allPlacetags = place.find_all()
     # allPlacetags.prettify()
     for tag in place.find_all():
@@ -96,19 +113,21 @@ def getPlaceTagContent(place):
             else:
                 placeGeog = tag.text
 
-    return placeSettlement,placeRegion,placeGeog
+    return placeSettlement, placeRegion, placeGeog
 
-def getContextDataMultiTag(tag1,tag2,sourcePerson):
+
+def getContextDataMultiTag(tag1, tag2, sourcePerson):
     names = getAllNames(tag1.find_all("NAME"), sourcePerson) + getAllNames(tag2.find_all("NAME"), sourcePerson)
     context = getOnlyText(tag1) + "\n" + getOnlyText(tag2.find("P"))
 
-    return PeopleAndContext(names,context)
+    return PeopleAndContext(names, context)
 
-def getContextData(tag,sourcePerson):
-    names = getAllNames(tag.find_all("NAME"),sourcePerson)
+
+def getContextData(tag, sourcePerson):
+    names = getAllNames(tag.find_all("NAME"), sourcePerson)
     context = getOnlyText(tag)
 
-    return PeopleAndContext(names,context)
+    return PeopleAndContext(names, context)
 
 
 def getContexts(tagParent):
@@ -134,7 +153,7 @@ def getContexts(tagParent):
 
     if len(tags) == 2:
         if tags[0].name == "SHORTPROSE" and tags[1].name == "CHRONSTRUCT":
-            tags[0],tags[1] = tags[1],tags[0]
+            tags[0], tags[1] = tags[1], tags[0]
 
     tags2 = copy.copy(tags)
     for i in range(0, len(tags2)):
@@ -162,8 +181,8 @@ def getContexts(tagParent):
                     continue
 
                 thisTag = tags[i]
-                nextTag = tags[i+1]
-                nextTagPar = tags[i+1].find('P')
+                nextTag = tags[i + 1]
+                nextTagPar = tags[i + 1].find('P')
 
                 if thisTag.name == "CHRONSTRUCT" and nextTag.name == "SHORTPROSE" and nextTagPar is not None:
 
@@ -171,12 +190,10 @@ def getContexts(tagParent):
                     print("chronstruct with paragraph next")
                     i += 1
 
-
             # print("index: ",i)
             # print("isConstruct",deathcnts[i].name == "CHRONSTRUCT")
             # print("shortprosenext",deathcnts[i+1].name == "SHORTPROSE")
             # print("paragraph in shortprose", deathcnts[i+1].find(".//P") != None)
-
 
                 # getch()
             elif len(tags) == 1 and tags[i].name == "CHRONSTRUCT":
@@ -194,7 +211,8 @@ def getContexts(tagParent):
         print(returnList)
     return returnList
 
-def getContextsAndNames(tagParent,sourcePerson):
+
+def getContextsAndNames(tagParent, sourcePerson):
     # print(tagParent)
     returnList = []
     tags = tagChildren(tagParent)
@@ -204,7 +222,7 @@ def getContextsAndNames(tagParent,sourcePerson):
 
     if len(tags) == 2:
         if tags[0].name == "SHORTPROSE" and tags[1].name == "CHRONSTRUCT":
-            tags[0],tags[1] = tags[1],tags[0]
+            tags[0], tags[1] = tags[1], tags[0]
 
     tags2 = copy.copy(tags)
     for i in range(0, len(tags2)):
@@ -217,7 +235,7 @@ def getContextsAndNames(tagParent,sourcePerson):
         print("3. No Chronstsruct")
         lonePars = tagParent.find_all("P")
         for par in lonePars:
-            returnList.append(getContextData(par,sourcePerson))
+            returnList.append(getContextData(par, sourcePerson))
     else:
         i = 0
 
@@ -237,11 +255,11 @@ def getContextsAndNames(tagParent,sourcePerson):
 
                 if thisTag.name == "CHRONSTRUCT" and nextTag.name == "SHORTPROSE" and nextTagPar is not None:
                     print("chronstruct with paragraph next")
-                    returnList.append(getContextDataMultiTag(tags[i],tags[i+1],sourcePerson))
+                    returnList.append(getContextDataMultiTag(tags[i], tags[i + 1], sourcePerson))
                     i += 1
 
             elif len(tags) == 1 and tags[i].name == "CHRONSTRUCT":
-                returnList.append(getContextData(tags[i],sourcePerson))
+                returnList.append(getContextData(tags[i], sourcePerson))
                 # returnList.append(PeopleAndContext(getAllNames(tags[i].iter("NAME"), sourcePerson),getOnlyText(tags[i])))
             else:
                 print("4. weird thing going on")
@@ -257,20 +275,19 @@ def getContextsAndNames(tagParent,sourcePerson):
     return returnList
 
 
-
 # from https://stackoverflow.com/questions/749796/pretty-printing-xml-in-python
 # used for printing out elements nicely
 def indenter(elem, level=0):
-    i = "\n" + level*"  "
-    j = "\n" + (level-1)*"  "
-    
+    i = "\n" + level * "  "
+    j = "\n" + (level - 1) * "  "
+
     if len(elem):
         if not elem.text or not elem.text.strip():
             elem.text = i + "  "
         if not elem.tail or not elem.tail.strip():
             elem.tail = i
         for subelem in elem:
-            indenter(subelem, level+1)
+            indenter(subelem, level + 1)
         if not elem.tail or not elem.tail.strip():
             elem.tail = j
     else:
@@ -278,12 +295,16 @@ def indenter(elem, level=0):
             elem.tail = j
 
 # used for printing out elemetns
+
+
 def ElemPrint(elem):
     indenter(elem)
     ElementTree.dump(elem)
 
-# gets the text from a tag. this includes the text of 
+# gets the text from a tag. this includes the text of
 # all the subtags
+
+
 def getOnlyText(tag):
     unformattedText = tag.get_text()
     paraText = unformattedText.split()
@@ -300,6 +321,8 @@ def getOnlyText(tag):
 
 # makes sure the date
 # is in the correct format
+
+
 def dateValidate(dateStr):
     try:
         datetime.datetime.strptime(dateStr, '%Y-%m-%d')
@@ -310,6 +333,8 @@ def dateValidate(dateStr):
 # prints member information
 # for the list that contains
 # family members
+
+
 def printMemberInfo(memberList):
     for mem in memberList:
         mem.samplePrint()
@@ -317,6 +342,8 @@ def printMemberInfo(memberList):
 # extract source name from reg
 # values which are in the format
 # lastname, firstname
+
+
 def rearrangeSourceName(nameStr):
     # return nameStr
     # FIXME : commenting out as per Alliyya's code
@@ -328,6 +355,8 @@ def rearrangeSourceName(nameStr):
 
 # when titles are in a long format
 # this function extracts name
+
+
 def extractNameFromTitle(nameStr):
     # return nameStr
     # FIXME : commenting out as per Alliyya's code
@@ -352,9 +381,11 @@ def extractNameFromTitle(nameStr):
 
 # when getting children's names, this makes sure
 # we are not getting the parent's name
-def notParentName(personName,parentList):
+
+
+def notParentName(personName, parentList):
     print("welcome to not parent home")
-    print("parent list: ",len(parentList))
+    print("parent list: ", len(parentList))
     for parent in parentList:
         print("compare ", personName, " and ", parent.memberName)
         if parent.memberName == personName:
@@ -362,6 +393,8 @@ def notParentName(personName,parentList):
     return True
 
 # get all names in a tag that are not the subject's
+
+
 def getAllNames(names, sourcePerson):
     otherNames = []
     for thisName in names:
@@ -374,24 +407,30 @@ def getAllNames(names, sourcePerson):
 
 # get a name of a person by getting the first
 # name that is not the source person
-def getNameOfAssociate(names,sourcePerson):
+
+
+def getNameOfAssociate(names, sourcePerson):
     foundName = False
     otherName = ""
     for thisName in names:
         name = thisName["STANDARD"]
         # print("looking at :", name)
-        if name != sourcePerson :
+        if name != sourcePerson:
             foundName = True
             otherName = (name)
             break
 
-    return foundName,otherName
+    return foundName, otherName
+
+
 def isUniqueSigAct(newAct, pastActs):
     for act in pastActs:
         act = act.job
-        if newAct.replace(' ','') == act.replace(' ',''):
+        if newAct.replace(' ', '') == act.replace(' ', ''):
             return False
     return True
+
+
 def getMemberName(thisTag):
     # FIXME : REMOVED CODE TO MATCH ALLIYYA'S CODE
     return thisTag["STANDARD"]
@@ -409,7 +448,8 @@ def getMemberName(thisTag):
     #
     # return memberName
 
-def getMemberJobs(thisTag,memberJobs):
+
+def getMemberJobs(thisTag, memberJobs):
 
     # memberJobs = []
     paidFamilyOccupation = False
@@ -428,18 +468,19 @@ def getMemberJobs(thisTag,memberJobs):
         typeOfOccupation = "paidOccupation"
 
     if 'REG' in thisTag.attrs:
-        memberJobs.append(JobSigAct(typeOfOccupation,thisTag['REG']))
+        memberJobs.append(JobSigAct(typeOfOccupation, thisTag['REG']))
 
     elif thisTag.text is '':
-        memberJobs.append(JobSigAct(typeOfOccupation,thisTag.text))
+        memberJobs.append(JobSigAct(typeOfOccupation, thisTag.text))
     else:
         paragraph = getOnlyText(thisTag)
-        memberJobs.append(JobSigAct(typeOfOccupation,paragraph))
+        memberJobs.append(JobSigAct(typeOfOccupation, paragraph))
 
     return memberJobs
 
-def getMemberActs(thisTag,memberSigAct):
-    
+
+def getMemberActs(thisTag, memberSigAct):
+
     # memberSigAct = []
     # global numSigs
     # global numAdded
@@ -458,8 +499,8 @@ def getMemberActs(thisTag,memberSigAct):
 
     if "REG" in thisTag.attrs:
         sigAct = thisTag["REG"]
-        if isUniqueSigAct(sigAct,memberSigAct):
-            memberSigAct.append(JobSigAct(typeOfOccupation,sigAct))
+        if isUniqueSigAct(sigAct, memberSigAct):
+            memberSigAct.append(JobSigAct(typeOfOccupation, sigAct))
         # numAdded += 1
     else:
         sigAct = getOnlyText(thisTag)
@@ -467,16 +508,20 @@ def getMemberActs(thisTag,memberSigAct):
             memberSigAct.append(JobSigAct(typeOfOccupation, sigAct))
 
     return memberSigAct
+
+
 def incrementLetter(inputLetter):
     return chr(ord(inputLetter) + 1)
+
 
 def uniqueMemberCheck(newMember, listOfMembers):
     uniqueMember = True
     if newMember.memberRelation == "MOTHER" or newMember.memberRelation == "FATHER":
         for addedMember in listOfMembers:
             if addedMember.memberRelation == newMember.memberRelation:
-                addedMember.memberJobs      = list(set(addedMember.memberJobs).union(set(newMember.memberJobs)))
-                addedMember.memberSigActs   = list(set(addedMember.memberSigActs).union(set(newMember.memberSigActs)))
+                addedMember.memberJobs = list(set(addedMember.memberJobs).union(set(newMember.memberJobs)))
+                addedMember.memberSigActs = list(
+                    set(addedMember.memberSigActs).union(set(newMember.memberSigActs)))
                 if addedMember.memberName == "" and newMember.memberName != "":
                     addedMember.memberName = newMember.memberName
                 uniqueMember = False
@@ -510,12 +555,12 @@ def uniqueMemberCheck(newMember, listOfMembers):
         for addedMember in listOfMembers:
             # print(newMember.memberName, "(", newMember.memberRelation,")"," vs ", addedMember.memberName,"(", addedMember.memberRelation,")")
             if newMember.memberRelation == addedMember.memberRelation and newMember.memberName == addedMember.memberName and newMember.noNameLetter == addedMember.noNameLetter:
-                addedMember.memberJobs      = list(set(addedMember.memberJobs).union(set(newMember.memberJobs)))
-                addedMember.memberSigActs   = list(set(addedMember.memberSigActs).union(set(newMember.memberSigActs)))
+                addedMember.memberJobs = list(set(addedMember.memberJobs).union(set(newMember.memberJobs)))
+                addedMember.memberSigActs = list(
+                    set(addedMember.memberSigActs).union(set(newMember.memberSigActs)))
                 uniqueMember = False
                 print("this is not a unique member")
                 # getch()
-
 
     if newMember.memberRelation != "" and uniqueMember == True:
         # print("now adding in the new member")
@@ -524,7 +569,8 @@ def uniqueMemberCheck(newMember, listOfMembers):
 
     return listOfMembers
 
-def getMemberInfo(familyMember,listOfMembers,SOURCENAME):
+
+def getMemberInfo(familyMember, listOfMembers, SOURCENAME):
     if len(familyMember.find_all()) == 0:
         return listOfMembers
 
@@ -538,21 +584,22 @@ def getMemberInfo(familyMember,listOfMembers,SOURCENAME):
         # Get name of family Member by making sure the name is not of the person about whom the biography is about
         if thisTag.name == "NAME" and thisTag['STANDARD'] != SOURCENAME and memberName == "":
             memberName = getMemberName(thisTag)
-        
+
         # Get the family member's job
         elif thisTag.name == "JOB":
-            memberJobs = getMemberJobs(thisTag,memberJobs)
-            
+            memberJobs = getMemberJobs(thisTag, memberJobs)
+
         # Get the family member's significant activities
         elif thisTag.name == "SIGNIFICANTACTIVITY":
-            memberSigAct = getMemberActs(thisTag,memberSigAct)
+            memberSigAct = getMemberActs(thisTag, memberSigAct)
 
     # taking care of duplicates for parents
-    newMember = Family(memberName,memberRelation,memberJobs,memberSigAct)    
-    
-    return uniqueMemberCheck(newMember,listOfMembers)
+    newMember = Family(memberName, memberRelation, memberJobs, memberSigAct)
 
-def getMemberChildInfo(familyMember,listOfMembers,SOURCENAME):
+    return uniqueMemberCheck(newMember, listOfMembers)
+
+
+def getMemberChildInfo(familyMember, listOfMembers, SOURCENAME):
     if len(familyMember.find_all()) == 0:
         return listOfMembers
     memberRelation = familyMember['RELATION']
@@ -571,23 +618,20 @@ def getMemberChildInfo(familyMember,listOfMembers,SOURCENAME):
 
     for thisTag in familyMember.find_all():
         # Get name of family Member by making sure the name is not of the person about whom the biography is about
-        if thisTag.name == "NAME" and thisTag['STANDARD'] != SOURCENAME and memberName == "" and notParentName(thisTag['STANDARD'],listOfParents):
+        if thisTag.name == "NAME" and thisTag['STANDARD'] != SOURCENAME and memberName == "" and notParentName(thisTag['STANDARD'], listOfParents):
             memberName = getMemberName(thisTag)
-        
+
         # Get the family member's job
         elif thisTag.name == "JOB":
-            memberJobs = getMemberJobs(thisTag,memberJobs)
-    
+            memberJobs = getMemberJobs(thisTag, memberJobs)
+
         # Get the family member's significant activities
         elif thisTag.name == "SIGNIFICANTACTIVITY":
-            memberSigAct = getMemberActs(thisTag,memberSigAct)
+            memberSigAct = getMemberActs(thisTag, memberSigAct)
             print("added significant activity")
 
     # taking care of duplicates for parents
-    newMember = Family(memberName,memberRelation,memberJobs,memberSigAct)
+    newMember = Family(memberName, memberRelation, memberJobs, memberSigAct)
     # newMember.samplePrint()
-    
-    return uniqueMemberCheck(newMember,listOfMembers)
 
-
-
+    return uniqueMemberCheck(newMember, listOfMembers)

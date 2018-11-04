@@ -1,13 +1,12 @@
 # this file simply holds functions for lifeInfo.py
-import xml.etree.ElementTree
 from bs4 import BeautifulSoup
-import os
 import sys
 import logging
-import copy
 from classes import *
 from stringAndMemberFunctions import *
 import context
+from event import get_date_tag
+from place import Place
 
 
 def extract_birth(xmlString, person):
@@ -20,20 +19,18 @@ def extract_birth(xmlString, person):
     # print(treeRoot.prettify())
     # BIRTH
     birthDate = ""
-    birthPlaceSettlement = ""
-    birthPlaceRegion = ""
-    birthPlaceGeog = ""
+    birthplace = None
     birthPositions = []
     # print(treeRoot)
     birthTagParent = treeRoot.BIOGRAPHY.DIV0.BIRTH
     print("---------")
     try:
-        birthTags = iterList(birthTagParent,("CHRONSTRUCT"))
+        birthTags = iterList(birthTagParent, ("CHRONSTRUCT"))
         # birthTags = list(birthTagParent.iter("CHRONSTRUCT"))
-        
+
         if len(birthTags) == 0:
             # print(birthTagParent)
-            birthTags = iterList(birthTagParent,("SHORTPROSE"))
+            birthTags = iterList(birthTagParent, ("SHORTPROSE"))
         if len(birthTags) == 0:
             print("no construct in birth found")
             sys.stdin.read(1)
@@ -42,63 +39,45 @@ def extract_birth(xmlString, person):
         birthTag = birthTags[0]
     except Exception as e:
 
-        print(birthTagParent, birthTag,e)
+        print(birthTagParent, birthTag, e)
         print("Construct from Birth not found")
         sys.stdin.read(1)
         return
 
     try:
-        # Get birth date
-        birthDateTags = (birthTag.find_all('DATE'))
-        if len(birthDateTags) == 0:
-            
-            # If no 'DATE' tag, try 'DATERANGE' tag
-            birthDateTags = (birthTag.find_all('DATERANGE'))
-        if len(birthDateTags) == 0:
-            
-            # If no 'DATERANGE' tag, try 'DATESTRUCT' tag
-            birthDateTags = (birthTag.find_all('DATESTRUCT'))
+        birthDateTag = get_date_tag(birthTag)
+        if birthDateTag:
+            if 'VALUE' in birthDateTag.attrs:
+                birthDate = birthDateTag['VALUE']
+            elif 'CERTAINTY' in birthDateTag.attrs and 'FROM' in birthDateTag.attrs and 'TO' in birthDateTag.attrs:
+                # Sometimes the birth date isn't exact so a range is used
+                birthDate = birthDateTag['FROM'] + " to " + birthDateTag['TO']
 
-        birthDateTag = birthDateTags[0]
-
-        if 'VALUE' in birthDateTag.attrs:
-            birthDate = birthDateTag['VALUE']
-        elif 'CERTAINTY' in birthDateTag.attrs and 'FROM' in birthDateTag.attrs and 'TO' in birthDateTag.attrs:
-            # Sometimes the birth date isn't exact so a range is used
-            birthDate = birthDateTag['FROM'] + " to " + birthDateTag['TO']
-        
         print("---------Information about person--------------")
         print("birth date: ", birthDate)
-    
+
     except Exception as e:
         print("&&&& Birth Date error &&&&")
         print("error: ", e)
         sys.stdin.read(1)
         return
-    
+
     # Get birth positions
     # Ex. 'Oldest', 'Youngest'
-    birthPositionTags = (birthTag.find_all('BIRTHPOSITION'))
+    birthPositionTags = birthTag.find_all('BIRTHPOSITION')
     for positions in birthPositionTags:
         if 'POSITION' in positions.attrs:
             birthPositions.append(positions['POSITION'])
     print("birth positions: {}".format(birthPositions))
-    
+
     # Get birth place.
     # Where the subject is born
     birthPlaceTags = (birthTag.find_all('PLACE'))
-    birthPlaceTag = ""
     try:
         if len(birthPlaceTags) > 0:
-            birthPlaceTag = birthPlaceTags[0]
-            # get settlement, region, geog
-            # Current refers to a place where the name has changed.
-            # i.e. Today it is known as something else but during this
-            # subject's time, the name was different
-            birthPlaceSettlement, birthPlaceRegion, birthPlaceGeog = getPlaceTagContent(birthPlaceTag)
+            birthplace = Place(birthPlaceTags[0]).uri
 
-
-            print("birth place: {}, {}, {}".format(birthPlaceSettlement,birthPlaceRegion,birthPlaceGeog))
+            print("birth place: {}".format(birthplace))
         else:
             print("no birthPlaceTag")
             # sys.stdin.read(1)
@@ -106,15 +85,15 @@ def extract_birth(xmlString, person):
     except AttributeError:
         print("no birth place information for this individual")
         # sys.stdin(1)
-    person.birthObj = birthData(person.name,person.id,person.uri,birthDate, birthPositions, birthPlaceSettlement, birthPlaceRegion, birthPlaceGeog)
+    person.birthObj = birthData(person.name, person.id, person.uri, birthDate, birthPositions, birthplace)
     getContextsFrom = tagChildren(birthTagParent)
     birthContexts = []
 
     id = 1
     for div in getContextsFrom:
         # birthContexts += getContexts(div)
-        context_id  = person.id + "_BirthContext_" + str(id)
-        tempContext = context.Context(context_id,div,'BIRTH')
+        context_id = person.id + "_BirthContext_" + str(id)
+        tempContext = context.Context(context_id, div, 'BIRTH')
         tempContext.link_triples(person.birthObj.birth_list)
         person.context_list.append(tempContext)
 
@@ -126,9 +105,8 @@ def extract_birth(xmlString, person):
     #     getContextsFrom = [DIV]
     # birthContexts = getContexts(getContextsFrom)
 
-    
-def extract_death(xmlString, person):
 
+def extract_death(xmlString, person):
     # filePath = os.path.expanduser("~/Downloads/laurma-b.xml")
     # getTreeRoot = xml.etree.ElementTree.parse(filePath)
     # treeRoot = getTreeRoot.getroot()
@@ -136,27 +114,22 @@ def extract_death(xmlString, person):
 
     # DEATH
     deathDate = ""
-    deathPlaceSettlement = ""
-    deathPlaceRegion = ""
-    deathPlaceGeog = ""
-    burialPlaceSettlement = ""
-    burialPlaceRegion = ""
-    burialPlaceGeog = ""
     deathCauses = []
     deathContexts = []
-
+    deathplace = None
+    burialplace = None
     # deathTagParent = treeRoot.find("./DIV0/DIV1/DEATH/")
     # deathTagParent = treeRoot.BIOGRAPHY.DIV0.DEATH.find(recursive=False)
-    deathTagParent = tagChild(findTag(treeRoot,"BIOGRAPHY DIV0 DIV1 DEATH"))
+    deathTagParent = tagChild(findTag(treeRoot, "BIOGRAPHY DIV0 DIV1 DEATH"))
     # childrenOfDeathTag = tagChildren(deathTagParent)
     # print(deathTagParent.name)
-    
+
     # DEATH DATE
     firstChronstructTag = ""
     deathDateTag = ""
-    
+
     try:
-        if deathTagParent == None:
+        if deathTagParent is None:
             # Death tag not found
             deathTagParent = treeRoot.find(".//DEATH/")
             if deathTagParent is not None:
@@ -202,9 +175,10 @@ def extract_death(xmlString, person):
         #         deathContexts.append(paragraph)
                 # print(paragraph)
         # print(deathTagParent.contents)
+
         # print(deathTagParent.prettify())
         getChronstructTags = iterList(deathTagParent,"CHRONSTRUCT")
-        
+
         if len(getChronstructTags) == 0:
             # No chronstruct tag found. Look for a shortprose tag
             getChronstructTags = (deathTagParent.find_all("SHORTPROSE"))
@@ -218,33 +192,19 @@ def extract_death(xmlString, person):
         if len(getChronstructTags) > 0:
             # A tag is found. Either a chronstruct or a shortprose
             firstChronstructTag = getChronstructTags[0]
-            
-            # Iterate through date tags
-            deathDateTags = iterList(firstChronstructTag,'DATE')
-            
-            if len(deathDateTags) == 0:
-                
-                # No date tag found, look for a datestruct tag
-                print("no date found in construct. trying datestruct")
-                deathDateTags = iterList(firstChronstructTag,('DATESTRUCT'))
-            if len(deathDateTags) == 0:
-                
-                # No datestruct tag found, look for a daterange tag
-                print("no datestruct. trying dateRange")
-                deathDateTags = iterList(firstChronstructTag,('DATERANGE'))
-            if len(deathDateTags) == 0:
-                
-                # No daterange tag found either
+            print(getChronstructTags)
+
+            deathDateTags = get_date_tag(firstChronstructTag)
+
+            if not deathDateTags:
                 print("no date range either")
-                # sys.stdin.read(1)
             else:
                 # Found a date tag
-                deathDateTag = deathDateTags[0]
+                deathDateTag = deathDateTags
                 if 'VALUE' in deathDateTag.attrs:
                     deathDate = deathDateTag['VALUE']
                 elif 'CERTAINTY' in deathDateTag.attrs and 'FROM' in deathDateTag.attrs and 'TO' in deathDateTag.attrs:
                     deathDate = deathDateTag['FROM'] + " to " + deathDateTag['TO']
-            
 
     except (AttributeError) as e:
         print("Death information not found. person probably still alive")
@@ -269,15 +229,14 @@ def extract_death(xmlString, person):
                 deathCauses.append(causes['REG'])
             else:
                 deathCauses.append(causes.text)
-        
-        print("death causes: {}".format(deathCauses))          
+
+        print("death causes: {}".format(deathCauses))
 
     # PLACE OF DEATH
     deathPlaceTags = (firstChronstructTag.select('CHRONPROSE PLACE'))
     if len(deathPlaceTags) > 0:
-        deathPlaceSettlement,deathPlaceRegion,deathPlaceGeog = getPlaceTagContent(deathPlaceTags[0])
-    
-        print("death place: {}, {}, {}".format(deathPlaceSettlement,deathPlaceRegion,deathPlaceGeog))
+        deathplace = Place(deathPlaceTags[0]).uri
+        # print("death place: {}, {}, {}".format(deathPlaceSettlement, deathPlaceRegion, deathPlaceGeog))
 
     else:
         allShortprose = firstChronstructTag.find_all('SHORTPROSE')
@@ -285,34 +244,16 @@ def extract_death(xmlString, person):
         if len(allShortprose) > 0:
             for shortprose in allShortprose:
                 for tags in shortprose.find_all('PLACE'):
-                    for placeInfo in tags.find_all():
-                        if placeInfo.name == "SETTLEMENT":
-                            deathPlaceSettlement = placeInfo.text
-                        elif placeInfo.name == "REGION":
-                            try:
-                                deathPlaceRegion = placeInfo['REG']
-                            except KeyError:
-                                deathPlaceRegion = placeInfo.text
-                        elif placeInfo.name == "GEOG":
-                            try:
-                                deathPlaceGeog = placeInfo['REG']
-                            except KeyError:
-                                deathPlaceGeog = placeInfo.text
-                        # fix: some place tags don't have all of the above
-                        if deathPlaceSettlement != "" and deathPlaceRegion != "" and deathPlaceGeog != "":
-                            print("other death info: {}, {}, {}".format(deathPlaceSettlement,deathPlaceRegion,deathPlaceGeog))
-                            deathPlaceSettlement = ""
-                            deathPlaceRegion = ""
-                            deathPlaceGeog = ""
+                    deathplace = Place(tags).uri
         else:
             # chronstructParent = firstChronstructTag.find('./..')
             place = deathTagParent.find('PLACE')
-            if place == None:
+            if place is None:
                 print("no place found")
             if place is not None and len(place) > 0:
                 print("found place")
-                deathPlaceSettlement,deathPlaceRegion,deathPlaceGeog = getPlaceTagContent(place)
-
+                # deathPlaceSettlement, deathPlaceRegion, deathPlaceGeog = getPlaceTagContent(place)
+                deathplace = Place(place).uri
 
     # place of burial
     # ElemPrint(deathTagParent)
@@ -320,21 +261,21 @@ def extract_death(xmlString, person):
     burialTags = tagChildren(deathTagParent)
     print(len(burialTags))
 
-    for i in range(0,len(burialTags)):
-        if i == len(burialTags)-1:
+    for i in range(0, len(burialTags)):
+        if i == len(burialTags) - 1:
             continue
         # print(getOnlyText(burialTags[i+1].find(".//P")))
-        if burialTags[i].name == "CHRONSTRUCT" and burialTags[i+1].name == "SHORTPROSE" and burialTags[i+1].find("PLACE") is not None:
-            paragraph = getOnlyText(burialTags[i+1].find("P"))
+        if burialTags[i].name == "CHRONSTRUCT" and burialTags[i + 1].name == "SHORTPROSE" and burialTags[i + 1].find("PLACE") is not None:
+            paragraph = getOnlyText(burialTags[i + 1].find("P"))
 
             if "buried" in paragraph or "grave" in paragraph or "interred" in paragraph:
-                    burialPlaceSettlement,burialPlaceRegion,burialPlaceGeog = getPlaceTagContent(burialTags[i+1].find("PLACE"))
-                    print(burialPlaceSettlement,burialPlaceRegion,burialPlaceGeog)
+                burialplace = Place(burialTags[i + 1].find("PLACE")).uri
 
             else:
                 print("no buried in the paragraph")
 
-    person.deathObj =  deathData(person.name,person.id,person.uri,deathDate, deathCauses, deathPlaceSettlement, deathPlaceRegion, deathPlaceGeog, deathContexts,burialPlaceSettlement,burialPlaceRegion,burialPlaceGeog)
+    person.deathObj = deathData(person.name, person.id, person.uri, deathDate,
+                                deathCauses, deathplace, deathContexts, burialplace)
     allDivs = allTagsAllChildren(treeRoot.BIOGRAPHY, "DIV0 DIV1 DEATH")
     # for div in allDivs:
     #     deathContexts += getContexts(div)

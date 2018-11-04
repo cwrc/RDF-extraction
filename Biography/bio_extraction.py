@@ -4,8 +4,9 @@
 from bs4 import BeautifulSoup
 import rdflib
 
-from biography import Biography, bind_ns, NS_DICT,get_name,get_sex
+from biography import Biography, bind_ns, NS_DICT, get_name, get_sex
 from log import *
+from utilities import *
 import culturalForm as cf
 import education
 import location
@@ -19,13 +20,9 @@ import birthDeath
 import lifeInfo
 """
 This is a possible temporary main script that creates the biography related triples
-TODO: 
+TODO:
 add documentation
-implement location
-implement education
 implement personname
-implement occupation
-
 """
 
 # temp log library for debugging --> to be eventually replaced with proper logging library
@@ -39,7 +36,6 @@ turtle_log.test_name("Biography extracted Triples")
 uber_graph = rdflib.Graph()
 namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
 bind_ns(namespace_manager, NS_DICT)
-
 
 
 def main():
@@ -64,18 +60,15 @@ def main():
         with open("bio_data/" + filename,encoding="utf-8") as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
-        print("===========",filename,"=============")
+        print("===========", filename, "=============")
         person = Biography(filename[:-6], get_name(soup), cf.get_mapped_term("Gender", get_sex(soup)))
-
         cf.extract_cf_data(soup, person)
         other_contexts.extract_other_contexts_data(soup, person)
         location.extract_location_data(soup, person)
         occupation.extract_occupation_data(soup, person)
         education.extract_education_data(soup, person)
-        other_contexts.extract_health_contexts_data(soup, person)
-        # person.context_list.clear()
+
         personname.extract_person_name(soup, person)
-        # continue
         birthDeath.extract_birth(soup, person)
         birthDeath.extract_death(soup, person)
         lifeInfo.extract_cohabitants(soup, person)
@@ -86,7 +79,6 @@ def main():
         lifeInfo.extract_children(soup, person)
 
         graph = person.to_graph()
-
         numTriples += len(graph)
 
         # print("length: ",len(graph))
@@ -106,22 +98,18 @@ def main():
             smallest_person = filename
 
         # triples to files
-        file = open("Bio_Triples/" + str(person.id) + ".txt", "w", encoding="utf-8")
-        file.write("#" + str(len(graph)) + " triples created\n")
-        file.write(person.to_file(graph))
-        file.close()
+        temp_path = "extracted_triples/Bio_Triples/" + str(person.id) + ".ttl"
+        create_extracted_file(temp_path, person)
 
         uber_graph += graph
         entry_num += 1
-        # exit()
 
     turtle_log.subtitle(str(len(uber_graph)) + " triples created")
     turtle_log.msg(uber_graph.serialize(format="ttl").decode(), stdout=False)
     turtle_log.msg("")
 
-    file = open("all_triples.ttl", "w", encoding="utf-8")
-    file.write("#" + str(len(uber_graph)) + " triples created\n")
-    file.write(uber_graph.serialize(format="ttl").decode())
+    temp_path = "extracted_triples/all_triples.ttl"
+    create_extracted_uberfile(temp_path, uber_graph)
 
     extract_log.test_name("Cultural Form mapping results")
     cf.log_mapping_fails(extract_log, log, detail=False)
@@ -131,8 +119,9 @@ def main():
     log.msg(str(largest_person) + " produces the most triples(" + str(highest_triples) + ")")
     log.msg(str(smallest_person) + " produces the least triples(" + str(least_triples) + ")")
 
+
 if __name__ == "__main__":
+    main()
     # auth = [env.env("USER_NAME"), env.env("PASSWORD")]
     # login.main(auth)
     # test()
-    main()

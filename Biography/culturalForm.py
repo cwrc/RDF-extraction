@@ -1,18 +1,19 @@
 #!/usr/bin/python3
 
-# from Env import env
-# import islandora_auth as login
-
 from difflib import get_close_matches
 from rdflib import RDF, RDFS, Literal
 import rdflib
 
-import biography
+from log import Log
+
+from utilities import *
+from organizations import get_org, get_org_uri
+
+from biography import Biography
 from context import Context
 from event import Event
-from log import *
-from organizations import get_org, get_org_uri
 from place import Place
+
 
 """
 Status: ~90%
@@ -25,8 +26,8 @@ temp solution until endpoint is active
 
 """
 
-# temp log library for debugging --> to be eventually replaced with proper logging library
-# from log import *
+# temp log library for debugging
+# to be eventually replaced with proper logging library
 log = Log("log/cf/errors")
 log.test_name("CF extraction Error Logging")
 extract_log = Log("log/cf/extraction")
@@ -36,13 +37,15 @@ turtle_log.test_name("CF extracted Triples")
 
 uber_graph = rdflib.Graph()
 namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
-biography.bind_ns(namespace_manager, biography.NS_DICT)
+bind_ns(namespace_manager, NS_DICT)
 
 
 class CulturalForm(object):
     """docstring for CulturalForm
-        NOTE: mapping is done prior to creation of cf, no need to include class type then
-        using other_attributes to handle extra predicates that may come up for cfs
+        NOTE: mapping is done prior to creation of cf,
+        no need to include class type then
+        using other_attributes to handle extra predicates
+        that may come up for cfs
         Ex. Organizations
         other_attributes=NS_DICT["org"].memberOf
         This being the uri rather the typical cf one
@@ -57,23 +60,25 @@ class CulturalForm(object):
         if other_attributes:
             self.uri = other_attributes
         elif self.reported:
-            self.uri = biography.create_uri("cwrc", self.predicate + self.reported)
+            self.uri = create_uri("cwrc", self.predicate + self.reported)
         else:
-            self.uri = biography.create_uri("cwrc", self.predicate)
+            self.uri = create_uri("cwrc", self.predicate)
 
         self.uri = rdflib.term.URIRef(self.uri)
 
     def to_tuple(self, person_uri):
-        """TODO 
-            figure out if i can just return tuple or triple without creating a whole graph
-            Evaluate efficency of creating this graph or just returning a tuple and have the biography deal with it
+        """TODO
+            figure out if i can just return tuple or triple
+            without creating a whole graph
+            Evaluate efficency of creating this graph or
+            just returning a tuple and have the biography deal with it
         """
         return ((person_uri, self.uri, self.value))
 
     def to_triple(self, person):
         g = rdflib.Graph()
         namespace_manager = rdflib.namespace.NamespaceManager(g)
-        biography.bind_ns(namespace_manager, biography.NS_DICT)
+        bind_ns(namespace_manager, NS_DICT)
         g.add((person.uri, self.uri, self.value))
         return g
 
@@ -84,27 +89,6 @@ class CulturalForm(object):
         string += "\tvalue: " + str(self.value) + "\n"
 
         return string
-
-
-def get_reg(tag):
-    return get_attribute(tag, "REG")
-
-
-def get_attribute(tag, attribute):
-    value = tag.get(attribute)
-    if value:
-        return value
-    return None
-
-
-def get_value(tag):
-    value = get_reg(tag)
-    if not value:
-        value = get_attribute(tag, "CURRENTALTERNATIVETERM")
-    if not value:
-        value = str(tag.text)
-        value = ' '.join(value.split())
-    return value
 
 
 def get_reported(tag):
@@ -273,8 +257,6 @@ def find_cultural_forms(cf, person):
                     # else:
                     #     add_forebear(forebear, culturalform)
 
-        pass
-
     def get_denomination():
         religions = cf.find_all("DENOMINATION")
 
@@ -285,19 +267,19 @@ def find_cultural_forms(cf, person):
             if not value and orgName:
                 for org in orgName:
                     cf_list.append(CulturalForm(None, None, get_org_uri(org),
-                                                other_attributes=biography.NS_DICT["org"].memberOf))
+                                                other_attributes=NS_DICT["org"].memberOf))
             elif orgName:
                 for org in orgName:
                     cf_list.append(CulturalForm(None, None, get_org_uri(org),
-                                                other_attributes=biography.NS_DICT["org"].memberOf))
+                                                other_attributes=NS_DICT["org"].memberOf))
 
             value = get_mapped_term("Religion", get_value(x), True)
 
             # Checking if religion occurs as a PA if no result as a religion
-            if type(value) is rdflib.term.Literal:
+            if type(value) is Literal:
                 value = get_mapped_term("PoliticalAffiliation", get_value(x), True)
                 log.msg((value))
-            if type(value) is rdflib.term.Literal:
+            if type(value) is Literal:
                 value = get_mapped_term("Religion", get_value(x))
 
             religion = CulturalForm("hasReligion", get_reported(x), value)
@@ -312,12 +294,12 @@ def find_cultural_forms(cf, person):
             if not value and orgName:
                 for org in orgName:
                     cf_list.append(CulturalForm(None, None, get_org_uri(org),
-                                                other_attributes=biography.NS_DICT["org"].memberOf))
+                                                other_attributes=NS_DICT["org"].memberOf))
                 value = get_org_uri(org)
             elif orgName:
                 for org in orgName:
                     cf_list.append(CulturalForm(None, None, get_org_uri(org),
-                                                other_attributes=biography.NS_DICT["org"].memberOf))
+                                                other_attributes=NS_DICT["org"].memberOf))
                 value = get_mapped_term("PoliticalAffiliation", get_value(x))
             else:
                 value = get_mapped_term("PoliticalAffiliation", get_value(x))
@@ -416,7 +398,7 @@ def extract_cf_data(bio, person):
                 id += extract_culturalforms(events, "CULTURALFORMATION", person, "events")
 
     elements = bio.find_all("POLITICS")
-    forms_found = 0
+    forms_found = 1
     for element in elements:
         paragraphs = element.find_all("P")
         events = element.find_all("CHRONSTRUCT")
@@ -490,9 +472,9 @@ def get_mapped_term(rdf_type, value, retry=False):
     if "http" in str(term):
         term = rdflib.term.URIRef(term)
     elif term:
-        term = rdflib.term.Literal(term, datatype=rdflib.namespace.XSD.string)
+        term = Literal(term, datatype=rdflib.namespace.XSD.string)
     else:
-        term = rdflib.term.Literal("_" + value.lower() + "_", datatype=rdflib.namespace.XSD.string)
+        term = Literal("_" + value.lower() + "_", datatype=rdflib.namespace.XSD.string)
         if retry:
             map_attempt -= 1
         else:
@@ -501,7 +483,7 @@ def get_mapped_term(rdf_type, value, retry=False):
             for x in CF_MAP[rdf_type]:
                 if get_close_matches(value.lower(), x):
                     possibilites.append(x[0])
-            if type(term) is rdflib.term.Literal:
+            if type(term) is Literal:
                 update_fails(rdf_type, value)
             else:
                 update_fails(rdf_type, value + "->" + str(possibilites) + "?")
@@ -543,12 +525,6 @@ def log_mapping_fails(main_log, error_log, detail=True):
 
 
 def main():
-    def get_name(bio):
-        return (bio.BIOGRAPHY.DIV0.STANDARD.text)
-
-    def get_sex(bio):
-        return (bio.BIOGRAPHY.get("SEX"))
-
     import os
     from bs4 import BeautifulSoup
     create_cf_map()
@@ -567,28 +543,23 @@ def main():
             soup = BeautifulSoup(f, 'lxml-xml')
 
         print(filename)
-        test_person = biography.Biography(filename[:-6], get_name(soup), get_mapped_term("Gender", get_sex(soup)))
+        person = Biography(filename[:-6], get_name(soup), get_mapped_term("Gender", get_sex(soup)))
 
-        extract_cf_data(soup, test_person)
+        extract_cf_data(soup, person)
 
-        graph = test_person.to_graph()
+        graph = person.to_graph()
 
         extract_log.subtitle("Entry #" + str(entry_num))
-        extract_log.msg(str(test_person))
+        extract_log.msg(str(person))
         extract_log.subtitle(str(len(graph)) + " triples created")
-        extract_log.msg(test_person.to_file(graph))
+        extract_log.msg(person.to_file(graph))
         extract_log.subtitle("Entry #" + str(entry_num))
         extract_log.msg("\n\n")
 
-        file = open("cf_turtle/" + filename[:-6] + "_cf.ttl", "w", encoding="utf-8")
-        file.write("#" + str(len(graph)) + " triples created\n")
-        file.write(graph.serialize(format="ttl").decode())
-        file.close()
-
-        file = open("cf_rdf/" + filename[:-6] + "_cf.rdf", "w", encoding="utf-8")
-        file.write("#" + str(len(graph)) + " triples created\n")
-        file.write(graph.serialize(format="pretty-xml").decode())
-        file.close()
+        temp_path = "extracted_triples/cf_turtle/" + filename[:-6] + "_cf.ttl"
+        create_extracted_file(temp_path, person)
+        temp_path = "extracted_triples/cf_rdf/" + filename[:-6] + "_cf.rdf"
+        create_extracted_file(temp_path, person, "pretty-xml")
 
         uber_graph += graph
         entry_num += 1
@@ -596,14 +567,15 @@ def main():
     turtle_log.subtitle(str(len(uber_graph)) + " triples created")
     turtle_log.msg(uber_graph.serialize(format="ttl").decode(), stdout=False)
     turtle_log.msg("")
+
+    temp_path = "extracted_triples/culturalForms.ttl"
+    create_extracted_uberfile(temp_path, uber_graph)
+
+    temp_path = "extracted_triples/culturalForms.rdf"
+    create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
+
     log_mapping_fails(extract_log, log)
 
 
-def test():
-    exit()
-
 if __name__ == "__main__":
-    # auth = [env.env("USER_NAME"), env.env("PASSWORD")]
-    # login.main(auth)
-    # test()
     main()

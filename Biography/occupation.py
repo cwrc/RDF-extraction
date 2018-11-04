@@ -3,27 +3,28 @@
 # from Env import env
 # import islandora_auth as login
 
-from difflib import get_close_matches
-from rdflib import RDF, RDFS, Literal
 import rdflib
-import biography
-from context import Context
-from log import *
-from place import Place
-from event import Event
-from organizations import get_org, get_org_uri
+from difflib import get_close_matches
+from rdflib import Literal
 
+from log import Log
+
+from utilities import *
+from organizations import get_org_uri
+
+from biography import Biography
+from context import Context
+from event import Event
 
 """
 Status: ~75%
-TODO: 
- - review unmapped instances 
+TODO:
+ - review unmapped instances
  - revise method of capturing failed mappings to be similar to culturalforms
-
 """
 
-# temp log library for debugging --> to be eventually replaced with proper logging library
-# from log import *
+# temp log library for debugging
+# --> to be eventually replaced with proper logging library
 log = Log("log/occupation/errors")
 log.test_name("occupation extraction Error Logging")
 extract_log = Log("log/occupation/extraction")
@@ -33,7 +34,7 @@ turtle_log.test_name("Location extracted Triples")
 
 uber_graph = rdflib.Graph()
 namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
-biography.bind_ns(namespace_manager, biography.NS_DICT)
+bind_ns(namespace_manager, NS_DICT)
 
 context_count = 0
 event_count = 0
@@ -57,17 +58,21 @@ class Occupation(object):
         if other_attributes:
             self.uri = other_attributes
 
-        self.uri = biography.create_uri("cwrc", self.predicate)
+        self.uri = create_uri("cwrc", self.predicate)
+    """
+    TODO figure out if i can just return tuple or triple without creating
+    a whole graph
+    Evaluate efficency of creating this graph or just returning a tuple and
+    have the biography deal with it
+    """
 
-    # TODO figure out if i can just return tuple or triple without creating a whole graph
-    # Evaluate efficency of creating this graph or just returning a tuple and have the biography deal with it
     def to_tuple(self, person_uri):
         return ((person_uri, self.uri, self.value))
 
     def to_triple(self, person):
         g = rdflib.Graph()
         namespace_manager = rdflib.namespace.NamespaceManager(g)
-        biography.bind_ns(namespace_manager, biography.NS_DICT)
+        bind_ns(namespace_manager, NS_DICT)
         g.add((person.uri, self.uri, self.value))
         return g
 
@@ -97,7 +102,7 @@ class Occupation(object):
     def get_employer(self, tag):
         employer = tag.find("NAME")
         if employer:
-            return biography.get_name_uri(employer)
+            return get_name_uri(employer)
         employer = tag.find("ORGNAME")
         if employer:
             return get_org_uri(employer)
@@ -156,15 +161,15 @@ class Occupation(object):
         if "http" in str(term):
             term = rdflib.term.URIRef(term)
         elif term:
-            term = rdflib.term.Literal(term, datatype=rdflib.namespace.XSD.string)
+            term = Literal(term, datatype=rdflib.namespace.XSD.string)
         else:
-            term = rdflib.term.Literal("_" + value.lower() + "_", datatype=rdflib.namespace.XSD.string)
+            term = Literal("_" + value.lower() + "_", datatype=rdflib.namespace.XSD.string)
             map_fail += 1
             possibilites = []
             for x in JOB_MAP.keys():
                 if get_close_matches(value.lower(), JOB_MAP[x]):
                     possibilites.append(x)
-            if type(term) is rdflib.term.Literal:
+            if type(term) is Literal:
                 update_fails(rdf_type, value)
             else:
                 update_fails(rdf_type, value + "->" + str(possibilites) + "?")
@@ -208,8 +213,8 @@ def find_occupations(tag):
 
 
 def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
-    """ Creates the location relation and ascribes them to the person along with the associated
-        contexts and event
+    """ Creates the occupation relation and ascribes them to the person along
+        with the associated contexts and event
     """
     global context_count
     global event_count
@@ -223,7 +228,7 @@ def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
         if occupation_list:
             temp_context = Context(context_id, tag, "OccupationContext")
             temp_context.link_triples(occupation_list)
-            person.add_location(occupation_list)
+            person.add_occupation(occupation_list)
         else:
             temp_context = Context(context_id, tag, "OccupationContext", "identifying")
 
@@ -267,36 +272,34 @@ def main():
 
     uber_graph = rdflib.Graph()
     namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
-    biography.bind_ns(namespace_manager, biography.NS_DICT)
+    bind_ns(namespace_manager, NS_DICT)
 
     # for filename in filelist[:200]:
     # for filename in filelist[-5:]:
     test_cases = ["shakwi-b.xml", "woolvi-b.xml", "seacma-b.xml", "atwoma-b.xml",
                   "alcolo-b.xml", "bronem-b.xml", "bronch-b.xml", "levyam-b.xml"]
-    # for filename in test_cases:
-    for filename in filelist:
+    # for filename in filelist:
+    for filename in test_cases:
         with open("bio_data/" + filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
         print(filename)
-        test_person = biography.Biography(
+        person = Biography(
             filename[:-6], get_name(soup), culturalForm.get_mapped_term("Gender", get_sex(soup)))
 
-        extract_occupation_data(soup, test_person)
+        extract_occupation_data(soup, person)
 
-        graph = test_person.to_graph()
+        graph = person.to_graph()
 
         extract_log.subtitle("Entry #" + str(entry_num))
-        extract_log.msg(str(test_person))
+        extract_log.msg(str(person))
         extract_log.subtitle(str(len(graph)) + " triples created")
-        extract_log.msg(test_person.to_file(graph))
+        extract_log.msg(person.to_file(graph))
         extract_log.subtitle("Entry #" + str(entry_num))
         extract_log.msg("\n\n")
 
-        file = open("occupation_turtle/" + filename[:-6] + "_occupation.ttl", "w", encoding="utf-8")
-        file.write("#" + str(len(graph)) + " triples created\n")
-        file.write(graph.serialize(format="ttl").decode())
-        file.close()
+        temp_path = "extracted_triples/occupation_turtle/" + filename[:-6] + "_occupation.ttl"
+        create_extracted_file(temp_path, person)
 
         uber_graph += graph
         entry_num += 1
@@ -315,12 +318,5 @@ def main():
     log.msg("Total Terms: " + str(count))
 
 
-def test():
-    exit()
-
 if __name__ == "__main__":
-    # auth = [env.env("USER_NAME"), env.env("PASSWORD")]
-    # login.main(auth)
-    # test()
-    # print(JOB_MAP)
     main()
