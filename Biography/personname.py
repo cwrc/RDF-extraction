@@ -255,7 +255,7 @@ def main():
     import os
     filelist = [filename for filename in sorted(os.listdir("bio_data/")) if filename.endswith(".xml")]
 
-    for filename in ["woolvi-b.xml"]:
+    for filename in ["blesma-b.xml"]:
     # for filename in ["blesma-b.xml"]:
     # for filename in ["abdyma-b.xml"]:
     # for filename in ["aikejo-b.xml"]:

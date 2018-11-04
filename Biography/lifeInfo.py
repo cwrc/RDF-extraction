@@ -187,53 +187,7 @@ def extract_intimate_relationships(xmlString, person):
 
     person.intimateRelationships_list = intimateRelationships
 
-# This function obtains family information
-# ------ Example ------
-# Name:  Grant, Josceline Charles Henry
-# Relation:  FATHER
-# Jobs: army officer
-# SigAct: lost money, currency committee
-def extract_family(xmlString, person):
-    global numSigs
-    global numAdded
 
-    myRoot2 = xmlString.BIOGRAPHY
-    # SOURCENAME = myRoot2.newFindFunc("DIV0 STANDARD").text
-    SOURCENAME = findTag(myRoot2,"DIV0 STANDARD").text
-    listOfMembers = []
-    fams = myRoot2.find_all('FAMILY')
-    for familyTag in myRoot2.find_all('FAMILY'):
-        
-        #--------------------------------- Get husband and wife ---------------------------------
-        for familyMember in familyTag.find_all("MEMBER"):
-            if familyMember['RELATION'] in ["HUSBAND","WIFE"]:
-                if len(familyMember.find_all()) == 1:
-                    continue
-                else:
-                    listOfMembers = getMemberInfo(familyMember,listOfMembers,SOURCENAME)
-
-        #--------------------------------- get children ---------------------------------
-        for familyMember in familyTag.find_all("MEMBER"):
-            if familyMember['RELATION'] in ["SON","DAUGHTER","STEPSON","STEPDAUGHTER"]:
-                if len(familyMember.find_all()) == 1:
-                    continue
-                else:
-                    listOfMembers = getMemberChildInfo(familyMember,listOfMembers,SOURCENAME)
-        
-        #--------------------------------- get others ---------------------------------
-        for familyMember in familyTag.find_all('MEMBER'):
-            finds = familyMember.find_all()
-            if familyMember['RELATION'] in ["HUSBAND","WIFE","SON","DAUGHTER","STEPSON","STEPDAUGHTER"] or len(iterListAll(familyMember)) == 1:
-                continue
-            else:
-                listOfMembers = getMemberInfo(familyMember,listOfMembers,SOURCENAME)
-    
-    print("----------- ",SOURCENAME.strip(),"'s Family Members -----------")
-    # printMemberInfo(listOfMembers)
-    # print("")
-    # return rearrangeSourceName(SOURCENAME),listOfMembers
-    # return SOURCENAME,listOfMembers
-    person.family_list = listOfMembers
 
 def getOccupationDict():
     listToReturn = {}

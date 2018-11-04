@@ -1,8 +1,9 @@
 import rdflib
 from rdflib import RDF, RDFS, Literal, URIRef,BNode, Graph
 from rdflib.namespace import XSD
-import os, csv
-from biography import bind_ns, NS_DICT, make_standard_uri,create_uri
+from event import format_date
+
+from biography import bind_ns, NS_DICT, make_standard_uri, create_uri
 
 g = Graph()
 
@@ -101,17 +102,9 @@ class IntimateRelationships:
         return g
 
 
-def getCwrcTag(familyRelation):
-    csvFile = open(os.path.expanduser("relationshipPredicates.csv"), "r")
 
-    cwrcTag = 'CWRC_Tag'
-    orlandoTag = 'Orlando_Relation'
 
-    fileContent = csv.DictReader(csvFile)
 
-    for row in fileContent:
-        if row[orlandoTag] == familyRelation:
-            return row[cwrcTag]
 def getStandardUri(std_str):
     import string
     translator = str.maketrans('', '', string.punctuation.replace("-", ""))
@@ -371,93 +364,6 @@ class deathData:
             #     # addContexts(fileName,"hasDeathContext",self.deathContexts,sou
         return g
 
-class Family:
-    def __init__(self, memName, memRLTN,memJobs,memSigActs):
-        if memName == "":
-            self.isNoName = True
-        else:
-            self.isNoName = False
-        self.noNameLetter = ''
-        self.memberName = memName
-        self.memberRelation = memRLTN
-        self.memberJobs = list(memJobs)
-        self.memberSigActs = list(memSigActs)
-
-    def to_triple(self,person):
-        global g
-        g = rdflib.Graph()
-        namespace_manager = rdflib.namespace.NamespaceManager(g)
-        bind_ns(namespace_manager, NS_DICT)
-        sourceName = getStandardUri(person.name)
-        memberName = self.memberName
-        print("=======", memberName, "=========")
-        # FIXME : name rearranement removed to match alliyya's code
-        # if ',' in memberName:
-        #     splitName = memberName.split(",")
-        #     memberName = splitName[1].strip() + " " + splitName[0].strip()
-        # memberName = getStandardUri(memberName)
-        memberSource = URIRef(str(NS_DICT["data"]) + getStandardUri(memberName))
-        if self.isNoName:
-            if self.noNameLetter == "":
-                # print(sourceName, memberName)
-                # if self.memberRelation == "UNCLE":
-                #     if (source, URIRef(str(NS_DICT["cwrc"]) + "hasUncle"),None) in g:
-                #         print("multipleUncles")
-                #     print(self.memberRelation)
-                memberSource = URIRef(
-                    str(NS_DICT["data"]) + sourceName.replace(" ", "_") + "_" + self.memberRelation.lower().title())
-
-            else:
-                memberSource = URIRef(str(NS_DICT["data"]) + sourceName.replace(" ",
-                                                                     "_") + "_" + self.memberRelation.lower().title() + "_" + self.noNameLetter)
-
-
-        else:
-            g.add((memberSource, NS_DICT["foaf"].name, Literal(memberName)))
-
-        g.add((memberSource, RDF.type, NS_DICT["cwrc"].NaturalPerson))
-
-        for jobs in self.memberJobs:
-            if jobs.job == "":
-                continue
-            if jobs.predicate == "familyOccupation":
-                predicate = NS_DICT["cwrc"].hasFamilyBasedOccupation
-            else:
-                predicate = NS_DICT["cwrc"].hasPaidOccupation
-
-            # FIXME : change jobs to jogs.job in order to make the thing work. right now, it is not functional.
-
-            # if jobs in occupations:
-            #     g.add((memberSource, predicate, Literal(occupations[jobs.job].title())))
-            # else:
-            g.add((memberSource, predicate, Literal(jobs.job.strip().title())))
-            # print("added job ", jobs)
-
-        for sigActs in self.memberSigActs:
-            if sigActs.job == "":
-                continue
-            if sigActs.predicate == "volunteerOccupation":
-                predicate = NS_DICT["cwrc"].hasVolunteerOccupation
-            else:
-                predicate = NS_DICT["cwrc"].hasOccupation
-
-
-            g.add((memberSource, predicate, Literal(sigActs.job.strip().title())))
-            # print("added significant ", sigActs)
-
-        cwrcTag = getCwrcTag(self.memberRelation)
-
-        predicate = URIRef(str(NS_DICT["cwrc"]) + cwrcTag)
-        # g.add((source,predicate,Literal(memberName)))
-        g.add((person.uri, predicate, memberSource))
-        return g
-
-    def samplePrint(self):
-        print("......................\nName: ",self.memberName,"\nRelation: ",self.memberRelation)
-        print("Jobs: ",end="")
-        print(*self.memberJobs,sep=", ")
-        print("SigAct: ",end="")
-        print(*self.memberSigActs,sep=", ")
 
 class JobSigAct:
     def __init__(self,jobPredicate,jobName):
