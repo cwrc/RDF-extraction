@@ -3,7 +3,7 @@ import biography
 from bs4 import BeautifulSoup
 import rdflib
 from rdflib import URIRef
-
+from collections import Counter
 from biography import *
 import culturalForm as cf
 import context
@@ -27,7 +27,7 @@ basic_layout_dict = {
         "ROYAL": "royalName",
         "SELFCONSTRUCTED": "selfConstructedName",
         "STYLED": "styledName",
-        "TITLE": "titledName"
+        "TITLED": "titledName"
     }
 class BirthName:
 
@@ -184,9 +184,12 @@ def makePerson(type, tag, existingList,personName=None):
                 types.append(name_type_dict[property])
                 name_to_send = getTheName(tag)
     elif "MarriedName" in types:
-        types.append("Surname")
-        name_to_send = getTheName(tag,ignore_reg_value=True)
-    elif "IndexedName" in types:
+        if tag.findChildren() == 0 or "REG" in tag.attrs:
+            types.append("Surname")
+        name_to_send = getTheName(tag)
+    elif "StandardName" in types:
+        replaceIndex = types.index("StandardName")
+        types[replaceIndex] = "IndexedName"
         otherTriples = [
             {
                 "predicate" : NS_DICT["cwrc"].IndexedBy,
@@ -200,10 +203,18 @@ def makePerson(type, tag, existingList,personName=None):
             name_to_send = docText.split(":")[0]
         else:
             name_to_send = docText
+        otherTriples = [
+            {
+                "predicate": NS_DICT["cwrc"].IndexedBy,
+                "value": "Orlando"
+            }
+        ]
     else:
-        name_to_send = getTheName(tag,ignore_reg_value=True)
+        name_to_send = getTheName(tag)
 
-    if any(person.id == remove_punctuation("NameEnt " + name_to_send) for person in existingList) == False:
+    possibleMatch = remove_punctuation("NameEnt " + name_to_send)
+
+    if any(person.id ==  possibleMatch and Counter(person.typeLabels) == Counter(types) for person in existingList) == False:
         if otherAttrsReqd:
             return PersonName(types, name_to_send, personName, extraAttributes=otherAttributes)
         else:
@@ -213,7 +224,7 @@ def makePerson(type, tag, existingList,personName=None):
 def extract_person_name(xmlString, person):
     root = xmlString.BIOGRAPHY
     personNameList = []
-    stdEntry = makePerson("IndexedName",root.find("STANDARD"),personNameList,personName=person.name)
+    stdEntry = makePerson("StandardName",root.find("STANDARD"),personNameList,personName=person.name)
     if stdEntry:
         personNameList.append(stdEntry)
 
