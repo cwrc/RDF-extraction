@@ -55,6 +55,94 @@ def remove_punctuation(input_str, all_punctuation=False):
     temp_str = temp_str.replace(" ", "_")
     return temp_str
 
+
+def dateParse(date_string: str):
+
+    # Strip spaces surrounding the date string
+    date_string = date_string.strip().rstrip()
+
+    try:
+        dt = datetime.datetime.strptime(date_string, "%Y-%m-%d")
+        return dt.isoformat().split("T")[0], True
+    except ValueError:
+        pass
+    try:
+        dt = datetime.datetime.strptime(date_string, "%Y--")
+        return dt.isoformat().split("T")[0], True
+    except ValueError:
+        pass
+    try:
+        dt = datetime.datetime.strptime(date_string, "%Y-")
+        return dt.isoformat().split("T")[0], True
+    except ValueError:
+        pass
+
+    try:
+        dt = datetime.datetime.strptime(date_string, "%Y")
+        return dt.isoformat().split("T")[0], True
+    except ValueError:
+        pass
+
+    try:
+        dt = datetime.datetime.strptime(date_string, "%Y-%m-")
+        return dt.isoformat().split("T")[0], True
+    except ValueError:
+        pass
+
+    try:
+        dt = datetime.datetime.strptime(date_string, "%Y-%m")
+        return dt.isoformat().split("T")[0], True
+    except ValueError:
+        pass
+
+    try:
+        dt = datetime.datetime.strptime(date_string, "%Y")
+        return dt.isoformat().split("T")[0], True
+    except ValueError:
+        pass
+
+    try:
+        dt = datetime.datetime.strptime(date_string, "%Y-%m-%d")
+        return dt.isoformat().split("T")[0], True
+    except ValueError:
+        pass
+
+    try:
+        dt = datetime.datetime.strptime(date_string, "%B %Y")
+        return dt.isoformat().split("T")[0], True
+    except ValueError:
+        pass
+
+    try:
+        dt = datetime.datetime.strptime(date_string, "%d %B %Y")
+        return dt.isoformat().split("T")[0], True
+    except ValueError:
+        pass
+
+    try:
+        dt = datetime.datetime.strptime(date_string, "%Y-%m--")
+        return dt.isoformat().split("T")[0], True
+    except ValueError:
+        pass
+
+    try:
+        dt = datetime.datetime.strptime(date_string, "%b %Y")
+        return dt.isoformat().split("T")[0], True
+    except ValueError:
+        pass
+
+    try:
+        dt = datetime.datetime.strptime(date_string, "%d %b %Y")
+        return dt.isoformat().split("T")[0], True
+    except ValueError:
+        pass
+
+
+    return date_string, False
+
+
+
+
 # ----------- MAIN CLASSES ----------
 
 
@@ -565,7 +653,11 @@ class BibliographyParse:
             i += 1
 
         for r in self.get_record_change_date():
-            adminMetaData.add(BF.changeDate, Literal(r['date']))
+
+            dateValue, transformed = dateParse(r['date'])
+            if not transformed:
+                logger.info("MISSING DATE FORMAT: {} on Document {}".format(dateValue, self.mainURI))
+            adminMetaData.add(BF.changeDate, Literal(dateValue, datatype=XSD.date))
 
         i = 0
         for r in self.get_record_origin():
@@ -607,16 +699,19 @@ class BibliographyParse:
                 place.add(RDF.value, Literal(o['place']))
                 place.add(RDF.type, BF.Place)
 
-                place_map = geoMapper.get_place(o['place'].strip())
+                #place_map = geoMapper.get_place(o['place'].strip())
 
-                if place_map:
-                    place.add(OWL.sameAs, URIRef(place_map))
+                #if place_map:
+                #    place.add(OWL.sameAs, URIRef(place_map))
 
                 originInfo.add(BF.place, place)
 
             if o['date']:
                 originInfo.add(RDF.type, BF.Publication)
-                originInfo.add(BF.date, Literal(o['date']))
+                dateValue, transformed = dateParse(o['date'])
+                if not transformed:
+                    logger.info("MISSING DATE FORMAT: {} on Document {}".format(dateValue, self.mainURI))
+                originInfo.add(BF.date, Literal(dateValue, datatype=XSD.date))
 
             if o['edition']:
                 instance.add(BF.editionStatement, Literal(o['edition']))
