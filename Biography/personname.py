@@ -7,6 +7,7 @@ from collections import Counter
 from biography import *
 import culturalForm as cf
 import context
+import sys, os
 
 basic_layout_dict = {
         "NICKNAME": {
@@ -262,8 +263,13 @@ def extract_person_name(xmlString, person):
     tempContext.link_triples(person.name_list[1:])
     person.context_list.append(tempContext)
 
-def main():
-    import os
+def main(args):
+    print(args)
+    if args[0] == "-t":
+        print("test case run")
+    elif args[0] == "-qa":
+        print("QA run")
+    return
     filelist = [filename for filename in sorted(os.listdir("bio_data/")) if filename.endswith(".xml")]
 
     for filename in ["blesma-b.xml"]:
@@ -291,4 +297,5 @@ if __name__ == "__main__":
     # auth = [env.env("USER_NAME"), env.env("PASSWORD")]
     # login.main(auth)
     # test()
-    main()
+    print("hello")
+    main(sys.argv[1:])
