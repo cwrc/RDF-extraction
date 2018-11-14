@@ -284,7 +284,7 @@ class Education(object):
             # g.add((oeuvre_uri, RDFS.label, Literal(x)))
 
         for x in self.degrees:
-            g.add((person.uri, CWRC.hasCredential, x))
+            g.add((person.uri, CWRC.hasCredentialIn, x))
 
         for x in self.degree_subjects:
             g.add((person.uri, CWRC.hasCredentialSubject, x))

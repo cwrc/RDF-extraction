@@ -41,7 +41,7 @@ bind_ns(namespace_manager, NS_DICT)
 def main():
     import os
     filelist = [filename for filename in sorted(os.listdir("bio_data/")) if filename.endswith(".xml")]
-    filelist.remove("fielmi-b.xml")
+    filelist.remove("fielmi-b-transformed.xml")
 
     numTriples = 0
     entry_num = 1
@@ -52,23 +52,28 @@ def main():
     smallest_person = None
     largest_person = None
 
-    # for filename in filelist[:200]:
-    # for filename in filelist[:2]:
-    # for filename in ["levyam-b.xml"]:
-    # for filename in filelist:
-    for filename in ["levyam-b.xml", "atwoma-b.xml", "woolvi-b.xml", "clifan-b.xml"]:
+    test_cases = ["shakwi-b-transformed.xml", "woolvi-b-transformed.xml", "seacma-b-transformed.xml", "atwoma-b-transformed.xml",
+                  "alcolo-b-transformed.xml", "bronem-b-transformed.xml", "bronch-b-transformed.xml", "levyam-b-transformed.xml"]
+
+    # for testing suffrage
+    test_cases += ["taylha-b-transformed.xml"]
+    # for testing Africanist
+    test_cases += ["angema-b-transformed.xml"]
+
+    for filename in filelist:
+    # for filename in test_cases:
         with open("bio_data/" + filename, encoding="utf-8") as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
         print("===========", filename, "=============")
-        person = Biography(filename[:-6], get_name(soup), cf.get_mapped_term("Gender", get_sex(soup)))
+        person = Biography(filename[:6], get_name(soup), cf.get_mapped_term("Gender", get_sex(soup)))
         cf.extract_cf_data(soup, person)
         other_contexts.extract_other_contexts_data(soup, person)
         location.extract_location_data(soup, person)
         occupation.extract_occupation_data(soup, person)
         education.extract_education_data(soup, person)
 
-        personname.extract_person_name(soup, person)
+        # personname.extract_person_name(soup, person)
         birthDeath.extract_birth(soup, person)
         birthDeath.extract_death(soup, person)
         lifeInfo.extract_cohabitants(soup, person)

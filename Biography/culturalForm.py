@@ -474,7 +474,7 @@ def get_mapped_term(rdf_type, value, retry=False):
     elif term:
         term = Literal(term, datatype=rdflib.namespace.XSD.string)
     else:
-        term = Literal("_" + value.lower() + "_", datatype=rdflib.namespace.XSD.string)
+        term = Literal(value, datatype=rdflib.namespace.XSD.string)
         if retry:
             map_attempt -= 1
         else:
@@ -535,15 +535,19 @@ def main():
     # for filename in filelist[:200]:
     # for filename in filelist[-5:]:
     global uber_graph
-    test_cases = ["shakwi-b.xml", "woolvi-b.xml", "seacma-b.xml", "atwoma-b.xml",
-                  "alcolo-b.xml", "bronem-b.xml", "bronch-b.xml", "levyam-b.xml"]
-    # for filename in filelist:
-    for filename in test_cases:
+    test_cases = ["shakwi-b-transformed.xml", "woolvi-b-transformed.xml", "seacma-b-transformed.xml", "atwoma-b-transformed.xml",
+                  "alcolo-b-transformed.xml", "bronem-b-transformed.xml", "bronch-b-transformed.xml", "levyam-b-transformed.xml"]
+
+    # for testing suffrage
+    test_cases += ["taylha-b-transformed.xml"]
+    # for testing Africanist
+    test_cases += ["angema-b-transformed.xml"]
+    for filename in filelist:
+    # for filename in test_cases:
         with open("bio_data/" + filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
-        print(filename)
-        person = Biography(filename[:-6], get_name(soup), get_mapped_term("Gender", get_sex(soup)))
+        person = Biography(filename[:6], get_name(soup), get_mapped_term("Gender", get_sex(soup)))
 
         extract_cf_data(soup, person)
 
