@@ -16,7 +16,7 @@ hasStepFather,STEPFATHER
 hasStepMother,STEPMOTHER
 hasCousin,COUSIN
 hasAncestor,FOREBEAR
-interpersonalRelationship,OTHER
+hasInterpersonalRelationshipWith,OTHER
 hasSon,SON
 hasDaughter,DAUGHTER
 hasStepSon,STEPSON
