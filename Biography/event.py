@@ -53,6 +53,18 @@ def get_time_certainty(tag):
     return None
 
 
+def get_indirect_date_tag(tag):
+    tags = tag.find_all("DATE") + tag.find_all("DATESTRUCT") + tag.find_all("DATERANGE")
+    if len(tags) > 1:
+        print("Multiple date tags detected:")
+        print(*tags, sep="\n")
+        print()
+        # input()
+    if tags:
+        return tags[0]
+    return None
+
+
 def get_date_tag(tag):
     """Will retrieve that existing date related tag that is a child of the given tag """
     date_structures = ["DATE", "DATESTRUCT", "DATERANGE"]
@@ -60,7 +72,7 @@ def get_date_tag(tag):
     for x in children:
         if x.name in date_structures:
             return(x)
-    return None
+    return get_indirect_date_tag(tag)
 
 
 def format_date(date):

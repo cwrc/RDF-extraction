@@ -45,7 +45,7 @@ def get_heading(tag):
     if not heading:
         heading = tag.findNext("HEADING")
     if not heading:
-        return "Biography"
+        return None
     return remove_punctuation(strip_all_whitespace(heading.text), True)
 
 
@@ -100,8 +100,10 @@ class Context(object):
             x.decompose()
 
         self.tag = tag
-        self.src = "http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id="
         self.heading = get_heading(tag)
+        self.src = "http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id="
+        if not self.heading:
+            self.src = "http://orlando.cambridge.org"
 
         # TODO: Make snippet start where first triple is extracted from
         # Making the text the max amount of words
