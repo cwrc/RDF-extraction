@@ -102,6 +102,7 @@ class Biography(object):
         self.location_list = []
         self.education_list = []
         self.occupation_list = []
+        self.birth = None
 
         self.occupations = []
         self.family_member_list = []
@@ -190,6 +191,9 @@ class Biography(object):
         g += self.create_triples(self.event_list)
         g += self.create_triples(self.education_list)
         g += self.create_triples(self.occupation_list)
+
+        if self.birth:
+            g += self.birth.to_triple(self)
 
         if self.birthObj:
             g += self.birthObj.to_triple()

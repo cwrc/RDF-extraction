@@ -4,9 +4,147 @@ import sys
 import logging
 from classes import *
 from stringAndMemberFunctions import *
+
 import context
-from event import get_date_tag
+from context import Context
+from event import get_date_tag, Event
 from place import Place
+from utilities import *
+
+
+class Birth:
+    def __init__(self, bDate, bPositions, birthplace):
+        self.date = bDate
+        self.position = []
+        self.place = birthplace
+
+        for birthPosition in bPositions:
+            if birthPosition == "ONLY":
+                self.position.append(NS_DICT["cwrc"].onlyChild)
+            elif birthPosition == "ELDEST":
+                self.position.append(NS_DICT["cwrc"].eldestChild)
+            elif birthPosition == "YOUNGEST":
+                self.position.append(NS_DICT["cwrc"].youngestChild)
+            elif birthPosition == "MIDDLE:":
+                self.position.append(NS_DICT["cwrc"].middleChild)
+
+    def __str__(self):
+        string = "\tDate: " + str(self.date) + "\n"
+        string += "\tbirthplace: " + str(self.place) + "\n"
+        for x in self.position:
+            string += "\tbirthposition: " + str(x) + "\n"
+        return string
+
+    def to_triple(self, person):
+        g = rdflib.Graph()
+        namespace_manager = rdflib.namespace.NamespaceManager(g)
+        bind_ns(namespace_manager, NS_DICT)
+        if self.date:
+            g.add((person.uri, NS_DICT["cwrc"].hasBirthDate, format_date(self.date)))
+
+        for x in self.position:
+            g.add((person.uri, NS_DICT["cwrc"].hasBirthPosition, x))
+
+        if self.place:
+            g.add((person.uri, NS_DICT["cwrc"].hasBirthPlace, self.place))
+
+        return g
+
+
+def extract_birth_data(xmlString, person):
+    treeroot = xmlString
+    birth_date = None
+    birthplace = None
+    birth_event = None
+    birthPositions = []
+    context_count = 1
+
+    birthTagParent = treeroot.BIOGRAPHY.DIV0.BIRTH
+    if not birthTagParent:
+        return
+        input()
+        exit()
+
+    birthTags = birthTagParent.find_all("CHRONSTRUCT")
+    birthTags += birthTagParent.find_all("SHORTPROSE")
+
+    for x in birthTags:
+        context_id = person.id + "_BirthContext_" + str(context_count)
+        temp_context = Context(context_id, x, "BIRTH")
+
+        if x.name == "CHRONSTRUCT":
+            if not birth_event:
+                # Extract event
+                # grab birthdate/plac
+                print(birthTagParent)
+                print(x.name)
+            else:
+                pass
+                # Create birth related event
+
+        tempBirth = Birth(birth_date, birthPositions, birthplace)
+        temp_context.link_triples(tempBirth)
+        if birth_event:
+            temp_context.link_event(birth_event)
+            person.add_event(birth_event)
+
+        person.add_context(temp_context)
+        person.birth = tempBirth
+
+    # if not birthTags:
+    #     birthTags = birthTagParent.find_all("SHORTPROSE")
+    #     if birthTags:
+    #         if birthTags[0].find_all("BIRTHPOSITION"):
+    #             input(birthTagParent)
+    # else:
+    #     event_title = person.name + " - Birth Event"
+    #     event_uri = person.id + "_Birth_Event1"
+    #     birth_event = Event(event_title, event_uri, birthTags[0])
+
+    #     # print("Event to be extracted")
+        # Extract event
+
+    if not birthTags:
+        # TODO: Log no birth
+        # print(person.id)
+        return
+    if len(birthTags) > 1:
+        print("Many tags")
+        print(*birthTags, sep="\n")
+        # input()
+    birthTag = birthTags[0]
+
+    birth_date_tag = get_date_tag(birthTag)
+
+    # TODO: Figure out what to do with daterange
+    if birth_date_tag.name == "DATERANGE":
+        birth_date = birth_date_tag.get("FROM")
+        print(birth_date_tag)
+        # input()
+    else:
+        birth_date = birth_date_tag.get("VALUE")
+
+    birthPositionTags = birthTag.find_all('BIRTHPOSITION')
+    for positions in birthPositionTags:
+        if 'POSITION' in positions.attrs:
+            birthPositions.append(positions['POSITION'])
+
+    birthPositions = list(set(birthPositions))
+    birthPlaceTags = birthTag.find_all('PLACE')
+    if birthPlaceTags:
+        birthplace = Place(birthPlaceTags[0]).uri
+
+    tempBirth = Birth(birth_date, birthPositions, birthplace)
+    temp_context.link_triples(tempBirth)
+    if birth_event:
+        temp_context.link_event(birth_event)
+        person.add_event(birth_event)
+
+    person.add_context(temp_context)
+    person.birth = tempBirth
+
+    print(tempBirth)
+    # exit()
 
 
 def extract_birth(xmlString, person):
@@ -96,14 +234,6 @@ def extract_birth(xmlString, person):
         tempContext = context.Context(context_id, div, 'BIRTH')
         tempContext.link_triples(person.birthObj.birth_list)
         person.context_list.append(tempContext)
-
-    # if "DIV" not in getContextsFrom[0].name:
-    #     DIV = Element('DIV')
-    #     DIV.insert(0,getContextsFrom[0])
-    #
-    #     # DIV.append(getContextsFrom)
-    #     getContextsFrom = [DIV]
-    # birthContexts = getContexts(getContextsFrom)
 
 
 def extract_death(xmlString, person):
@@ -285,3 +415,116 @@ def extract_death(xmlString, person):
         tempContext = context.Context(context_id, div, 'DEATH')
         tempContext.link_triples(person.deathObj.death_list)
         person.context_list.append(tempContext)
+
+
+def create_testcase_dict():
+    test_case_files = []
+    test_case_desc = []
+
+    # Normal cases
+    test_case_desc += ["chronstruct and chronprose  --> birthdate chronstruct, birthposition chronprose"]
+    test_case_files += ["allima-b-transformed.xml"]
+
+    test_case_desc += ["Just a chronstruct w. both birth Position & birthdate"]
+    test_case_files += ["adcofl-b-transformed.xml"]
+
+    test_case_desc += ["Just a shortprose with date we'll assume is the birthdate"]
+    test_case_files += ["aberfr-b-transformed.xml"]
+
+    test_case_desc += ["birthposition & birthdate in a shortprose, no chronstruct"]
+    test_case_files += ["cuthca-b-transformed.xml"]
+
+    # Atypical cases
+    test_case_desc += ["chronstruct w. date range"]
+    test_case_files += ["askean-b-transformed.xml"]
+
+    test_case_desc += ["Has two dates in shortprose"]
+    test_case_files += ["bootfr-b-transformed.xml"]
+
+    test_case_desc += ["Daterange within shortprose"]
+    test_case_files += ["butls2-b-transformed.xml"]
+
+    return dict(zip(test_case_files, test_case_desc))
+
+
+def main():
+    import os
+    import argparse
+    from bs4 import BeautifulSoup
+    import culturalForm
+    from biography import Biography
+    """
+        TODO: add options for verbosity of output, types of output
+        -o OUTPUTFILE
+        -format [turtle|rdf-xml|all]
+
+    """
+    parser = argparse.ArgumentParser(
+        description='Extract the Birth/Death information from selection of orlando xml documents', add_help=True)
+
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument('-testcases', '-t', action="store_true", help="will run through test case list")
+    modes.add_argument('-qa', action="store_true",
+                       help="will run through qa test cases that are related to https://github.com/cwrc/testData/tree/master/qa")
+    modes.add_argument("-f", "-file", "--file", help="single file to run extraction upon")
+    modes.add_argument("-d", "-directory", "--directory", help="directory of files to run extraction upon")
+    args = parser.parse_args()
+
+    qa_case_files = ["shakwi-b-transformed.xml", "woolvi-b-transformed.xml", "seacma-b-transformed.xml", "atwoma-b-transformed.xml",
+                     "alcolo-b-transformed.xml", "bronem-b-transformed.xml", "bronch-b-transformed.xml", "levyam-b-transformed.xml", "aguigr-b-transformed.xml"]
+    test_cases = create_testcase_dict()
+
+    if args.file:
+        print("Running extraction on " + args.file)
+        filelist = [args.file]
+    elif args.directory:
+        print("Running extraction on files within" + args.directory)
+        if args.directory[-1] != "/":
+            args.directory += "/"
+        filelist = [args.directory +
+                    filename for filename in sorted(os.listdir(args.directory)) if filename.endswith(".xml")]
+    elif args.qa:
+        filelist = sorted(["bio_data/" + filename for filename in qa_case_files])
+    elif args.testcases:
+        filelist = ["bio_data/" + filename for filename in test_cases.keys()]
+    else:
+        filelist = [filename for filename in sorted(os.listdir("bio_data")) if filename.endswith(".xml")]
+
+    entry_num = 1
+
+    uber_graph = rdflib.Graph()
+    namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
+    bind_ns(namespace_manager, NS_DICT)
+
+    for filename in filelist:
+        with open(filename) as f:
+            soup = BeautifulSoup(f, 'lxml-xml')
+        person_id = filename.split("/")[-1][:6]
+
+        print(filename)
+        print(person_id)
+        print("*" * 55)
+
+        person = Biography(person_id, get_name(soup), culturalForm.get_mapped_term("Gender", get_sex(soup)))
+        extract_birth_data(soup, person)
+        graph = person.to_graph()
+
+        print(person.to_file())
+        print()
+
+        temp_path = "extracted_triples/birthdeath_turtle/" + person_id + "_birthdeath.ttl"
+        create_extracted_file(temp_path, person)
+
+        uber_graph += graph
+        entry_num += 1
+
+    print("UberGraph is size:", len(uber_graph))
+    temp_path = "extracted_triples/birthdeath.ttl"
+    create_extracted_uberfile(temp_path, uber_graph)
+
+    temp_path = "extracted_triples/birthdeath.rdf"
+    create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
+
+
+if __name__ == '__main__':
+    main()
