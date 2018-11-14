@@ -3,3 +3,10 @@
 .idea
 venv
 /Biography/bio_data
+/Biography/extracted_triples
+/Biography/freeevents_data
+/Biography/log
+/Biography/scrapes
+*.ttl
+*.xml
+*.rdf
