@@ -263,34 +263,98 @@ def extract_person_name(xmlString, person):
     tempContext.link_triples(person.name_list[1:])
     person.context_list.append(tempContext)
 
-def main(args):
-    print(args)
-    if args[0] == "-t":
-        print("test case run")
-    elif args[0] == "-qa":
-        print("QA run")
-    return
-    filelist = [filename for filename in sorted(os.listdir("bio_data/")) if filename.endswith(".xml")]
-
-    for filename in ["blesma-b.xml"]:
-    # for filename in ["blesma-b.xml"]:
-    # for filename in ["abdyma-b.xml"]:
-    # for filename in ["aikejo-b.xml"]:
-    # for filename in filelist:
+def run_person_name(filename,providedPath=False):
+    if providedPath:
+        with open(filename, encoding="utf-8") as f:
+            soup = BeautifulSoup(f, 'lxml-xml')
+    else:
         with open("bio_data/" + filename, encoding="utf-8") as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
-        print("===========", filename, "=============")
-        person = Biography(filename[:-6], get_name(soup), cf.get_mapped_term("Gender", get_sex(soup)))
+    print("===========", filename, "=============")
+    person = Biography(filename[:-6], get_name(soup), cf.get_mapped_term("Gender", get_sex(soup)))
 
-        extract_person_name(soup, person)
+    extract_person_name(soup, person)
 
-        graph = person.create_triples(person.name_list)
-        # graph += person.create_triples(person.context_list)
-        namespace_manager = rdflib.namespace.NamespaceManager(graph)
-        bind_ns(namespace_manager, NS_DICT)
-        print(graph.serialize(format='turtle').decode())
-        # exit()
+    graph = person.create_triples(person.name_list)
+    # graph += person.create_triples(person.context_list)
+    namespace_manager = rdflib.namespace.NamespaceManager(graph)
+    bind_ns(namespace_manager, NS_DICT)
+    print(graph.serialize(format='turtle').decode())
+    # exit()
+def main(args):
+    # dictionaries for testing and QA
+    qaList = [
+        {
+            "name":"shakwi",
+            "description": "is description"
+        },
+        {
+            "name": "woolvi",
+            "description": "The most triples of produced"
+        },
+        {
+            "name":"seacma",
+            "description": "is description"
+        },
+        {
+            "name":"atwoma",
+            "description": "is description"
+        },
+        {
+            "name":"alcolo",
+            "description": "is description"
+        },
+        {
+            "name":"bronem",
+            "description": "is description"
+        },
+        {
+            "name":"bronch",
+            "description": "is description"
+        },
+        {
+            "name":"levyam",
+            "description": "is description"
+        },
+        {
+            "name":"aguigr",
+            "description": "is description"
+        }
+    ]
+    tests = [
+        {
+            "name": "blesma",
+            "description": "easy to compare to the personname approved graffle."
+        }
+    ]
+    print(args)
+    if len(args) > 0 and args[0] == "-t":
+        print("test case run")
+        for test in tests:
+            thisName = test["name"]
+            if "-b.xml" not in thisName:
+                thisName += "-b.xml"
+            print(thisName)
+            run_person_name(thisName)
+    elif len(args) > 0 and args[0] == "-qa":
+        print("QA run")
+        for qa in qaList:
+            thisName = qa["name"]
+            if "-b.xml" not in thisName:
+                thisName += "-b.xml"
+            print(thisName)
+    elif len(args) == 0:
+        filelist = [filename for filename in sorted(os.listdir("bio_data/")) if filename.endswith(".xml")]
+        for filename in ["blesma-b.xml"]:
+        # for filename in ["blesma-b.xml"]:
+        # for filename in ["abdyma-b.xml"]:
+        # for filename in ["aikejo-b.xml"]:
+        # for filename in filelist:
+            run_person_name(filename)
+    elif os.path.exists(args[0]):
+        print("running on specified file")
+        run_person_name(args[0],providedPath=True)
 
 
 if __name__ == "__main__":
