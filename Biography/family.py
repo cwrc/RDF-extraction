@@ -104,6 +104,220 @@ class Family:
         print(*self.memberSigActs, sep=", ")
 
 
+
+def isUniqueSigAct(newAct, pastActs):
+    for act in pastActs:
+        act = act.job
+        if newAct.replace(' ', '') == act.replace(' ', ''):
+            return False
+    return True
+
+
+def getMemberName(thisTag):
+    # FIXME : REMOVED CODE TO MATCH ALLIYYA'S CODE
+    return thisTag["STANDARD"]
+    # memberName = ""
+    #
+    # if ",," in thisTag['STANDARD']:
+    #     memberName = extractNameFromTitle(thisTag['STANDARD'])
+    #     # memberName = thisTag.text
+    #     # print(memberRelation,"|,, name|",thisTag['STANDARD'])
+    #     # sys.stdin.read(1)
+    #     if "(" in memberName and ")" not in memberName:
+    #         memberName += ")"
+    # else:
+    #     memberName = thisTag['STANDARD']
+    #
+    # return memberName
+
+
+def getMemberJobs(thisTag, memberJobs):
+
+    # memberJobs = []
+    paidFamilyOccupation = False
+    if "FAMILYBUSINESS" in thisTag.attrs:
+        # print(thisTag.attrs)
+        if thisTag["FAMILYBUSINESS"] == "FAMILYBUSINESSYES":
+            paidFamilyOccupation = True
+    # if "HISTORICALTERM" in thisTag.attrs:
+    #     print(thisTag.attrs)
+    # if "HISTORICALTERMCONTEXTDATE" in thisTag.attrs:
+    #     print(thisTag.attrs)
+    typeOfOccupation = ""
+    if paidFamilyOccupation:
+        typeOfOccupation = "familyOccupation"
+    else:
+        typeOfOccupation = "paidOccupation"
+
+    if 'REG' in thisTag.attrs:
+        memberJobs.append(JobSigAct(typeOfOccupation, thisTag['REG']))
+
+    elif thisTag.text is '':
+        memberJobs.append(JobSigAct(typeOfOccupation, thisTag.text))
+    else:
+        paragraph = getOnlyText(thisTag)
+        memberJobs.append(JobSigAct(typeOfOccupation, paragraph))
+
+    return memberJobs
+
+
+def getMemberActs(thisTag, memberSigAct):
+
+    # memberSigAct = []
+    # global numSigs
+    # global numAdded
+    # numSigs += 1
+
+    philanthropyVolunteer = False
+
+    if "PHILANTHROPYVOLUNTEER" in thisTag.attrs:
+        philanthropyVolunteer = True
+        print(thisTag.attrs)
+
+    if philanthropyVolunteer:
+        typeOfOccupation = "volunteerOccupation"
+    else:
+        typeOfOccupation = "normalOccupation"
+
+    if "REG" in thisTag.attrs:
+        sigAct = thisTag["REG"]
+        if isUniqueSigAct(sigAct, memberSigAct):
+            memberSigAct.append(JobSigAct(typeOfOccupation, sigAct))
+        # numAdded += 1
+    else:
+        sigAct = getOnlyText(thisTag)
+        if isUniqueSigAct(sigAct, memberSigAct):
+            memberSigAct.append(JobSigAct(typeOfOccupation, sigAct))
+
+    return memberSigAct
+
+
+def incrementLetter(inputLetter):
+    return chr(ord(inputLetter) + 1)
+
+
+def uniqueMemberCheck(newMember, listOfMembers):
+    uniqueMember = True
+    if newMember.memberRelation == "MOTHER" or newMember.memberRelation == "FATHER":
+        for addedMember in listOfMembers:
+            if addedMember.memberRelation == newMember.memberRelation:
+                addedMember.memberJobs = list(set(addedMember.memberJobs).union(set(newMember.memberJobs)))
+                addedMember.memberSigActs = list(
+                    set(addedMember.memberSigActs).union(set(newMember.memberSigActs)))
+                if addedMember.memberName == "" and newMember.memberName != "":
+                    addedMember.memberName = newMember.memberName
+                uniqueMember = False
+                print("this is not a unique member")
+                # getch()
+    else:
+        if newMember.memberName == "":
+            noNameList = []
+            for member in listOfMembers:
+                if member.memberRelation == newMember.memberRelation and member.isNoName == True:
+                    linkToMember = member
+                    noNameList.append(linkToMember)
+
+            if len(noNameList) == 0:
+                newMember.isNoName = True
+                newMember.noNameLetter = ''
+                newMember.memberName
+
+            elif len(noNameList) == 1:
+                newMember.isNoName = True
+                newMember.noNameLetter = 'B'
+                noNameList[0].noNameLetter = 'A'
+
+            elif len(noNameList) > 1:
+                lastMember = noNameList[-1]
+                newMember.isNoName = True
+                newMember.noNameLetter = incrementLetter(lastMember.noNameLetter)
+
+            # elif len(noNameList) == 1:
+
+        for addedMember in listOfMembers:
+            # print(newMember.memberName, "(", newMember.memberRelation,")"," vs ", addedMember.memberName,"(", addedMember.memberRelation,")")
+            if newMember.memberRelation == addedMember.memberRelation and newMember.memberName == addedMember.memberName and newMember.noNameLetter == addedMember.noNameLetter:
+                addedMember.memberJobs = list(set(addedMember.memberJobs).union(set(newMember.memberJobs)))
+                addedMember.memberSigActs = list(
+                    set(addedMember.memberSigActs).union(set(newMember.memberSigActs)))
+                uniqueMember = False
+                print("this is not a unique member")
+                # getch()
+
+    if newMember.memberRelation != "" and uniqueMember == True:
+        # print("now adding in the new member")
+        listOfMembers.append(newMember)
+        # getch()
+
+    return listOfMembers
+
+
+def getMemberInfo(familyMember, listOfMembers, SOURCENAME):
+    if len(familyMember.find_all()) == 0:
+        return listOfMembers
+
+    memberName = ""
+    memberJobs = []
+    memberSigAct = []
+    memberRelation = familyMember['RELATION']
+
+    for thisTag in familyMember.find_all():
+
+        # Get name of family Member by making sure the name is not of the person about whom the biography is about
+        if thisTag.name == "NAME" and thisTag['STANDARD'] != SOURCENAME and memberName == "":
+            memberName = getMemberName(thisTag)
+
+        # Get the family member's job
+        elif thisTag.name == "JOB":
+            memberJobs = getMemberJobs(thisTag, memberJobs)
+
+        # Get the family member's significant activities
+        elif thisTag.name == "SIGNIFICANTACTIVITY":
+            memberSigAct = getMemberActs(thisTag, memberSigAct)
+
+    # taking care of duplicates for parents
+    newMember = Family(memberName, memberRelation, memberJobs, memberSigAct)
+
+    return uniqueMemberCheck(newMember, listOfMembers)
+
+
+def getMemberChildInfo(familyMember, listOfMembers, SOURCENAME):
+    if len(familyMember.find_all()) == 0:
+        return listOfMembers
+    memberRelation = familyMember['RELATION']
+    memberName = ""
+    memberJobs = []
+    memberSigAct = []
+    listOfParents = []
+
+    for member in listOfMembers:
+        # print("memberName: ", member.memberName)
+        # print("memberRLTN: ", member.memberRelation)
+        if member.memberRelation == "WIFE" or member.memberRelation == "HUSBAND":
+            listOfParents.append(member)
+            # print("added parent")
+            # getch()
+
+    for thisTag in familyMember.find_all():
+        # Get name of family Member by making sure the name is not of the person about whom the biography is about
+        if thisTag.name == "NAME" and thisTag['STANDARD'] != SOURCENAME and memberName == "" and notParentName(thisTag['STANDARD'], listOfParents):
+            memberName = getMemberName(thisTag)
+
+        # Get the family member's job
+        elif thisTag.name == "JOB":
+            memberJobs = getMemberJobs(thisTag, memberJobs)
+
+        # Get the family member's significant activities
+        elif thisTag.name == "SIGNIFICANTACTIVITY":
+            memberSigAct = getMemberActs(thisTag, memberSigAct)
+            print("added significant activity")
+
+    # taking care of duplicates for parents
+    newMember = Family(memberName, memberRelation, memberJobs, memberSigAct)
+    # newMember.samplePrint()
+
+    return uniqueMemberCheck(newMember, listOfMembers)
+
 # This function obtains family information
 # ------ Example ------
 # Name:  Grant, Josceline Charles Henry

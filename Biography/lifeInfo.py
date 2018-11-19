@@ -90,11 +90,11 @@ def extract_childlessness(xmlString, person):
             # 69 entries
         
         print("------------")
-        
-
 
     # return childlessList
     person.childless_list = childlessList
+
+
 def extract_friends_associates(xmlString, person):
     # root = xml.etree.ElementTree.fromstring(xmlString)
     root = xmlString.BIOGRAPHY
@@ -117,6 +117,7 @@ def extract_friends_associates(xmlString, person):
         listToReturn += thisInstanceObjs
 
     person.friends_Associates_list = listToReturn
+
 def extract_cohabitants(xmlString, person):
     # root = xml.etree.ElementTree.fromstring(xmlString)
     root = xmlString.BIOGRAPHY
@@ -131,26 +132,6 @@ def extract_cohabitants(xmlString, person):
             listToReturn.append(Cohabitant(name))
 
     person.cohabitants_list =  listToReturn
-
-def getSexualityContexts(xmlString):
-    # root = xml.etree.ElementTree.fromstring(xmlString)
-    root = xmlString.BIOGRAPHY
-    tagToFind = allTagsAllChildren(root,"SEXUALITY")
-    # tagToFind = root.find_all("SEXUALITY").find_all(recursive=False)
-    listToReturn = []
-
-    for div in tagToFind:
-        # print(div.findall("*"))
-        sexualityContext = getContexts(div)
-        listToReturn += sexualityContext
-    print(listToReturn)
-#    ================================================
-#     root = BeautifulSoup(xmlString,'lxml')
-#     print(root)
-    return listToReturn
-
-
-
 
 def getOccupationDict():
     listToReturn = {}
