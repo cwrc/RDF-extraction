@@ -86,18 +86,58 @@ def extract_intimate_relationships(xmlString, person):
             # getch()
     # intimateRelationships = IntimateRelationships(personAttrList,intimateContexts)
 
-    person.intimateRelationships_list = intimateRelationships
+    person.intimate_relationship_list = intimateRelationships
+
+def create_testcase_dict():
+    return [
+        {
+            "name": "blesma",
+            "description": "easy to compare to the personname approved graffle."
+        }
+    ]
 
 def main():
+    import argparse
 
-    filelist = [filename for filename in sorted(os.listdir("bio_data/")) if filename.endswith(".xml")]
+    parser = argparse.ArgumentParser(
+        description='Extract the Birth/Death information from selection of orlando xml documents', add_help=True)
 
-    for filename in ["blesma-b.xml"]:
-        # for filename in ["blesma-b.xml"]:
-        # for filename in ["abdyma-b.xml"]:
-        # for filename in ["aikejo-b.xml"]:
-        # for filename in filelist:
-        with open("bio_data/" + filename, encoding="utf-8") as f:
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument('-testcases', '-t', action="store_true", help="will run through test case list")
+    modes.add_argument('-qa', action="store_true", help="will run through qa test cases that are related to https://github.com/cwrc/testData/tree/master/qa")
+    modes.add_argument("-f", "-file", "--file", help="single file to run extraction upon")
+    modes.add_argument("-d", "-directory", "--directory", help="directory of files to run extraction upon")
+    args = parser.parse_args()
+
+    qa_case_files = ["shakwi-b-transformed.xml", "woolvi-b-transformed.xml", "seacma-b-transformed.xml",
+                     "atwoma-b-transformed.xml",
+                     "alcolo-b-transformed.xml", "bronem-b-transformed.xml", "bronch-b-transformed.xml",
+                     "levyam-b-transformed.xml", "aguigr-b-transformed.xml"]
+    test_cases = create_testcase_dict()
+
+    if args.file:
+        print("Running extraction on " + args.file)
+        filelist = [args.file]
+    elif args.directory:
+        print("Running extraction on files within" + args.directory)
+        if args.directory[-1] != "/":
+            args.directory += "/"
+        filelist = [args.directory +
+                    filename for filename in sorted(os.listdir(args.directory)) if filename.endswith(".xml")]
+    elif args.qa:
+        filelist = sorted(["bio_data/" + filename for filename in qa_case_files])
+    elif args.testcases:
+        filelist = ["bio_data/" + filename for filename in test_cases.keys()]
+    else:
+        filelist = [filename for filename in sorted(os.listdir("bio_data")) if filename.endswith(".xml")]
+
+    # # for filename in ["blesma-b.xml"]:
+    # # for filename in ["blesma-b.xml"]:
+    # # for filename in ["abdyma-b.xml"]:
+    # # for filename in ["aikejo-b.xml"]:
+    for filename in filelist:
+        print("extract " + filename)
+        with open(filename, encoding="utf-8") as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
         print("===========", filename, "=============")
@@ -105,8 +145,8 @@ def main():
 
         extract_intimate_relationships(soup, person)
 
-        graph = person.create_triples(person.name_list)
-        # graph += person.create_triples(person.context_list)
+        graph = person.create_triples(person.intimate_relationship_list)
+        graph += person.create_triples(person.context_list)
         namespace_manager = rdflib.namespace.NamespaceManager(graph)
         bind_ns(namespace_manager, NS_DICT)
         print(graph.serialize(format='turtle').decode())

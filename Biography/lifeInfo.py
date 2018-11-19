@@ -116,7 +116,7 @@ def extract_friends_associates(xmlString, person):
         person.context_list.append(tempContext)
         listToReturn += thisInstanceObjs
 
-    person.friendsAssociates_list = listToReturn
+    person.friends_Associates_list = listToReturn
 def extract_cohabitants(xmlString, person):
     # root = xml.etree.ElementTree.fromstring(xmlString)
     root = xmlString.BIOGRAPHY

@@ -282,52 +282,17 @@ def run_person_name(filename,providedPath=False):
     bind_ns(namespace_manager, NS_DICT)
     print(graph.serialize(format='turtle').decode())
     # exit()
-def main(args):
-    # dictionaries for testing and QA
-    qaList = [
-        {
-            "name":"shakwi",
-            "description": "is description"
-        },
-        {
-            "name": "woolvi",
-            "description": "The most triples of produced"
-        },
-        {
-            "name":"seacma",
-            "description": "is description"
-        },
-        {
-            "name":"atwoma",
-            "description": "is description"
-        },
-        {
-            "name":"alcolo",
-            "description": "is description"
-        },
-        {
-            "name":"bronem",
-            "description": "is description"
-        },
-        {
-            "name":"bronch",
-            "description": "is description"
-        },
-        {
-            "name":"levyam",
-            "description": "is description"
-        },
-        {
-            "name":"aguigr",
-            "description": "is description"
-        }
-    ]
-    tests = [
+def create_testcase_dict():
+    return [
         {
             "name": "blesma",
             "description": "easy to compare to the personname approved graffle."
         }
     ]
+def main(args):
+    # dictionaries for testing and QA
+    qaList = ["shakwi-b.xml","woolvi-b.xml","seacma-b.xml","atwoma-b.xml","alcolo-b.xml","bronem-b.xml","bronch-b.xml","levyam-b.xml","aguigr-b.xml"]
+    tests = create_testcase_dict()
     print(args)
     if len(args) > 0 and args[0] == "-t":
         print("test case run")

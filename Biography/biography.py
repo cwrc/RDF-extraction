@@ -105,7 +105,7 @@ class Biography(object):
 
         self.occupations = []
         self.family_member_list = []
-        self.friend_list = []
+        # self.friend_list2 = []
         self.intimate_relationship_list = []
 
         # Gurjap's files
@@ -118,8 +118,7 @@ class Biography(object):
         self.deathObj = None
         self.cohabitants_list = []
         self.family_list = []
-        self.friendsAssociates_list = []
-        self.intimateRelationships_list = []
+        self.friends_Associates_list = []
         self.childless_list = []
 
         self.children_list = []
@@ -198,8 +197,8 @@ class Biography(object):
 
         g += self.create_triples(self.cohabitants_list)
         g += self.create_triples(self.family_list)
-        g += self.create_triples(self.friendsAssociates_list)
-        g += self.create_triples(self.intimateRelationships_list)
+        g += self.create_triples(self.friends_Associates_list)
+        g += self.create_triples(self.intimate_relationship_list)
         g += self.create_triples(self.childless_list)
         g += self.create_triples(self.children_list)
         g += self.create_triples(self.name_list)
