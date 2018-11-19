@@ -55,13 +55,14 @@ def main():
     test_cases = ["shakwi-b-transformed.xml", "woolvi-b-transformed.xml", "seacma-b-transformed.xml", "atwoma-b-transformed.xml",
                   "alcolo-b-transformed.xml", "bronem-b-transformed.xml", "bronch-b-transformed.xml", "levyam-b-transformed.xml"]
 
+    test_cases += ["aguigr-b-transformed.xml"]
     # for testing suffrage
     test_cases += ["taylha-b-transformed.xml"]
     # for testing Africanist
     test_cases += ["angema-b-transformed.xml"]
 
-    for filename in filelist:
-    # for filename in test_cases:
+    # for filename in filelist:
+    for filename in test_cases:
         with open("bio_data/" + filename, encoding="utf-8") as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
