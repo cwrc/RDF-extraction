@@ -208,6 +208,7 @@ class Biography(object):
         g += self.create_triples(self.children_list)
         g += self.create_triples(self.name_list)
 
+        print(g.serialize(format='turtle').decode())
         return g
 
     def to_file(self, graph=None, serialization="ttl"):

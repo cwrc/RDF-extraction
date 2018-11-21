@@ -305,8 +305,9 @@ def extract_death(xmlString, person):
         #         deathContexts.append(paragraph)
                 # print(paragraph)
         # print(deathTagParent.contents)
-        print(deathTagParent.prettify())
-        getChronstructTags = iterList(deathTagParent, "CHRONSTRUCT")
+
+        # print(deathTagParent.prettify())
+        getChronstructTags = iterList(deathTagParent,"CHRONSTRUCT")
 
         if len(getChronstructTags) == 0:
             # No chronstruct tag found. Look for a shortprose tag
