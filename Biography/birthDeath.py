@@ -1,4 +1,4 @@
-# this file simply holds functions for lifeInfo.py
+#!/usr/bin/python3
 from bs4 import BeautifulSoup
 import sys
 import logging
@@ -10,7 +10,7 @@ from context import Context
 from event import get_date_tag, Event
 from place import Place
 from utilities import *
-
+# TODO: clean up imports post death
 
 class Birth:
     def __init__(self, bDate, bPositions, birthplace):
@@ -18,14 +18,14 @@ class Birth:
         self.position = []
         self.place = birthplace
 
-        for birthPosition in bPositions:
-            if birthPosition == "ONLY":
+        for birth_position in bPositions:
+            if birth_position == "ONLY":
                 self.position.append(NS_DICT["cwrc"].onlyChild)
-            elif birthPosition == "ELDEST":
+            elif birth_position == "ELDEST":
                 self.position.append(NS_DICT["cwrc"].eldestChild)
-            elif birthPosition == "YOUNGEST":
+            elif birth_position == "YOUNGEST":
                 self.position.append(NS_DICT["cwrc"].youngestChild)
-            elif birthPosition == "MIDDLE:":
+            elif birth_position == "MIDDLE:":
                 self.position.append(NS_DICT["cwrc"].middleChild)
 
     def __str__(self):
@@ -52,18 +52,22 @@ class Birth:
 
 
 def extract_birth_data(xmlString, person):
-    treeroot = xmlString
+    """
+    Revised method of extracting birth information
+    """
     birth_date = None
     birthplace = None
+    birth_events = []
     birth_event = None
-    birthPositions = []
+    birth_positions = []
     context_count = 1
 
-    birthTagParent = treeroot.BIOGRAPHY.DIV0.BIRTH
+    date_found = False
+    place_found = False
+
+    birthTagParent = xmlString.BIOGRAPHY.DIV0.BIRTH
     if not birthTagParent:
         return
-        input()
-        exit()
 
     birthTags = birthTagParent.find_all("CHRONSTRUCT")
     birthTags += birthTagParent.find_all("SHORTPROSE")
@@ -72,168 +76,61 @@ def extract_birth_data(xmlString, person):
         context_id = person.id + "_BirthContext_" + str(context_count)
         temp_context = Context(context_id, x, "BIRTH")
 
+        # creating birth event
         if x.name == "CHRONSTRUCT":
-            if not birth_event:
-                # Extract event
-                # grab birthdate/plac
-                print(birthTagParent)
-                print(x.name)
-            else:
-                pass
-                # Create birth related event
+            event_title = person.name + " - Birth Event"
+            event_uri = person.id + "_Birth_Event"
 
-        tempBirth = Birth(birth_date, birthPositions, birthplace)
-        temp_context.link_triples(tempBirth)
+            if len(birth_events) > 0:
+                # TODO: possibly revise uri as well
+                event_title = person.name + " - Birth Related Event"
+                event_uri = person.id + "_Birth_Event" + str(len(birth_events) + 1)
+
+            birth_event = Event(event_title, event_uri, x)
+            birth_events.append(birth_event)
+
+        # retrieving birthdate
+        if not birth_date:
+            birth_date_tag = get_date_tag(x)
+            # TODO: Figure out what to do with daterange
+            if birth_date_tag.name == "DATERANGE":
+                birth_date = birth_date_tag.get("FROM")
+            else:
+                birth_date = birth_date_tag.get("VALUE")
+
+        # retrieving birthplace
+        if not birthplace:
+            birthPlaceTags = x.find_all('PLACE')
+            if birthPlaceTags:
+                birthplace = Place(birthPlaceTags[0]).uri
+
+        # retrieving birthposition
+        birthPositionTags = x.find_all('BIRTHPOSITION')
+        for positions in birthPositionTags:
+            if 'POSITION' in positions.attrs:
+                birth_positions.append(positions['POSITION'])
+        birth_positions = list(set(birth_positions))
+
+        # creating birth instance
+        tempBirth = Birth(None, birth_positions, None)
+        if not date_found and birth_date:
+            tempBirth.date = birth_date
+            date_found = True
+        if not place_found and birthplace:
+            tempBirth.place = birthplace
+            place_found = True
+
+        # adding birth event to person
         if birth_event:
             temp_context.link_event(birth_event)
             person.add_event(birth_event)
+            birth_event = None
 
+        # adding context and birth to person
+        temp_context.link_triples(tempBirth)
         person.add_context(temp_context)
-        person.birth = tempBirth
-
-    # if not birthTags:
-    #     birthTags = birthTagParent.find_all("SHORTPROSE")
-    #     if birthTags:
-    #         if birthTags[0].find_all("BIRTHPOSITION"):
-    #             input(birthTagParent)
-    # else:
-    #     event_title = person.name + " - Birth Event"
-    #     event_uri = person.id + "_Birth_Event1"
-    #     birth_event = Event(event_title, event_uri, birthTags[0])
-
-    #     # print("Event to be extracted")
-        # Extract event
-
-    if not birthTags:
-        # TODO: Log no birth
-        # print(person.id)
-        return
-    if len(birthTags) > 1:
-        print("Many tags")
-        print(*birthTags, sep="\n")
-        # input()
-    birthTag = birthTags[0]
-
-    birth_date_tag = get_date_tag(birthTag)
-
-    # TODO: Figure out what to do with daterange
-    if birth_date_tag.name == "DATERANGE":
-        birth_date = birth_date_tag.get("FROM")
-        print(birth_date_tag)
-        # input()
-    else:
-        birth_date = birth_date_tag.get("VALUE")
-
-    birthPositionTags = birthTag.find_all('BIRTHPOSITION')
-    for positions in birthPositionTags:
-        if 'POSITION' in positions.attrs:
-            birthPositions.append(positions['POSITION'])
-
-    birthPositions = list(set(birthPositions))
-    birthPlaceTags = birthTag.find_all('PLACE')
-    if birthPlaceTags:
-        birthplace = Place(birthPlaceTags[0]).uri
-
-    tempBirth = Birth(birth_date, birthPositions, birthplace)
-    temp_context.link_triples(tempBirth)
-    if birth_event:
-        temp_context.link_event(birth_event)
-        person.add_event(birth_event)
-
-    person.add_context(temp_context)
-    person.birth = tempBirth
-
-    print(tempBirth)
-    # exit()
-
-
-def extract_birth(xmlString, person):
-    # filePath = os.path.expanduser("~/Downloads/laurma-b.xml")
-    # getTreeRoot = xml.etree.ElementTree.parse(filePath)
-    # treeRoot = getTreeRoot.getroot()
-    # treeRoot = xml.etree.ElementTree.fromstring(xmlString)
-    # treeRoot = BeautifulSoup(xmlString,'lxml-xml')
-    treeRoot = xmlString
-    # print(treeRoot.prettify())
-    # BIRTH
-    birthDate = ""
-    birthplace = None
-    birthPositions = []
-    # print(treeRoot)
-    birthTagParent = treeRoot.BIOGRAPHY.DIV0.BIRTH
-    print("---------")
-    try:
-        birthTags = iterList(birthTagParent, ("CHRONSTRUCT"))
-        # birthTags = list(birthTagParent.iter("CHRONSTRUCT"))
-
-        if len(birthTags) == 0:
-            # print(birthTagParent)
-            birthTags = iterList(birthTagParent, ("SHORTPROSE"))
-        if len(birthTags) == 0:
-            print("no construct in birth found")
-            sys.stdin.read(1)
-            return
-
-        birthTag = birthTags[0]
-    except Exception as e:
-
-        print(birthTagParent, birthTag, e)
-        print("Construct from Birth not found")
-        sys.stdin.read(1)
-        return
-
-    try:
-        birthDateTag = get_date_tag(birthTag)
-        if birthDateTag:
-            if 'VALUE' in birthDateTag.attrs:
-                birthDate = birthDateTag['VALUE']
-            elif 'CERTAINTY' in birthDateTag.attrs and 'FROM' in birthDateTag.attrs and 'TO' in birthDateTag.attrs:
-                # Sometimes the birth date isn't exact so a range is used
-                birthDate = birthDateTag['FROM'] + " to " + birthDateTag['TO']
-
-        print("---------Information about person--------------")
-        print("birth date: ", birthDate)
-
-    except Exception as e:
-        print("&&&& Birth Date error &&&&")
-        print("error: ", e)
-        sys.stdin.read(1)
-        return
-
-    # Get birth positions
-    # Ex. 'Oldest', 'Youngest'
-    birthPositionTags = birthTag.find_all('BIRTHPOSITION')
-    for positions in birthPositionTags:
-        if 'POSITION' in positions.attrs:
-            birthPositions.append(positions['POSITION'])
-    print("birth positions: {}".format(birthPositions))
-
-    # Get birth place.
-    # Where the subject is born
-    birthPlaceTags = (birthTag.find_all('PLACE'))
-    try:
-        if len(birthPlaceTags) > 0:
-            birthplace = Place(birthPlaceTags[0]).uri
-
-            print("birth place: {}".format(birthplace))
-        else:
-            print("no birthPlaceTag")
-            # sys.stdin.read(1)
-
-    except AttributeError:
-        print("no birth place information for this individual")
-        # sys.stdin(1)
-    person.birthObj = birthData(person.name, person.id, person.uri, birthDate, birthPositions, birthplace)
-    getContextsFrom = tagChildren(birthTagParent)
-    birthContexts = []
-
-    id = 1
-    for div in getContextsFrom:
-        # birthContexts += getContexts(div)
-        context_id = person.id + "_BirthContext_" + str(id)
-        tempContext = context.Context(context_id, div, 'BIRTH')
-        tempContext.link_triples(person.birthObj.birth_list)
-        person.context_list.append(tempContext)
+        person.add_birth(tempBirth)
+        context_count += 1
 
 
 def extract_death(xmlString, person):
@@ -307,7 +204,7 @@ def extract_death(xmlString, person):
         # print(deathTagParent.contents)
 
         # print(deathTagParent.prettify())
-        getChronstructTags = iterList(deathTagParent,"CHRONSTRUCT")
+        getChronstructTags = iterList(deathTagParent, "CHRONSTRUCT")
 
         if len(getChronstructTags) == 0:
             # No chronstruct tag found. Look for a shortprose tag
@@ -435,6 +332,10 @@ def create_testcase_dict():
     test_case_desc += ["birthposition & birthdate in a shortprose, no chronstruct"]
     test_case_files += ["cuthca-b-transformed.xml"]
 
+    # this birthposition was orginally not extracted
+    test_case_desc += ["chronstruct(date & place) and shortprose(birthpositions)"]
+    test_case_files += ["acklva-b-transformed.xml"]
+
     # Atypical cases
     test_case_desc += ["chronstruct w. date range"]
     test_case_files += ["askean-b-transformed.xml"]
@@ -444,6 +345,9 @@ def create_testcase_dict():
 
     test_case_desc += ["Daterange within shortprose"]
     test_case_files += ["butls2-b-transformed.xml"]
+
+    test_case_desc += ["has two events in a birthtag(first birth, second christening)"]
+    test_case_files += ["scotsa-b-transformed.xml"]
 
     return dict(zip(test_case_files, test_case_desc))
 
@@ -485,12 +389,18 @@ def main():
         filelist = [args.directory +
                     filename for filename in sorted(os.listdir(args.directory)) if filename.endswith(".xml")]
     elif args.qa:
+        print("Running extraction on qa cases: ", sep=None)
+        print(*qa_case_files, sep=", ")
         filelist = sorted(["bio_data/" + filename for filename in qa_case_files])
     elif args.testcases:
-        filelist = ["bio_data/" + filename for filename in test_cases.keys()]
+        print("Running extraction on test cases: ", sep=None)
+        print(*test_cases.keys(), sep=", ")
+        filelist = sorted(["bio_data/" + filename for filename in test_cases.keys()])
     else:
-        filelist = [filename for filename in sorted(os.listdir("bio_data")) if filename.endswith(".xml")]
+        filelist = ["bio_data/" +
+                    filename for filename in sorted(os.listdir("bio_data")) if filename.endswith(".xml")]
 
+    print("-" * 200)
     entry_num = 1
 
     uber_graph = rdflib.Graph()
@@ -504,20 +414,23 @@ def main():
 
         print(filename)
         print(person_id)
+        if args.testcases:
+            print(test_cases[filename.split("bio_data/")[1]])
         print("*" * 55)
 
         person = Biography(person_id, get_name(soup), culturalForm.get_mapped_term("Gender", get_sex(soup)))
         extract_birth_data(soup, person)
-        graph = person.to_graph()
-
+        # print(person)
+        # print("^" * 200)
         print(person.to_file())
         print()
 
         temp_path = "extracted_triples/birthdeath_turtle/" + person_id + "_birthdeath.ttl"
         create_extracted_file(temp_path, person)
 
-        uber_graph += graph
+        uber_graph += person.to_graph()
         entry_num += 1
+        print("=" * 55)
 
     print("UberGraph is size:", len(uber_graph))
     temp_path = "extracted_triples/birthdeath.ttl"

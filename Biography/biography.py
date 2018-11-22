@@ -102,7 +102,7 @@ class Biography(object):
         self.location_list = []
         self.education_list = []
         self.occupation_list = []
-        self.birth = None
+        self.birth_list = []
 
         self.occupations = []
         self.family_member_list = []
@@ -115,7 +115,6 @@ class Biography(object):
             "intimateRelationship": 1,
             "friendsAssociates": 1
         }
-        self.birthObj = None
         self.deathObj = None
         self.cohabitants_list = []
         self.family_list = []
@@ -131,6 +130,12 @@ class Biography(object):
             self.context_list += context
         else:
             self.context_list.append(context)
+
+    def add_birth(self, birth):
+        if type(birth) is list:
+            self.birth_list += birth
+        else:
+            self.birth_list.append(birth)
 
     def add_cultural_form(self, culturalform):
         if type(culturalform) is list:
@@ -191,12 +196,8 @@ class Biography(object):
         g += self.create_triples(self.event_list)
         g += self.create_triples(self.education_list)
         g += self.create_triples(self.occupation_list)
+        g += self.create_triples(self.birth_list)
 
-        if self.birth:
-            g += self.birth.to_triple(self)
-
-        if self.birthObj:
-            g += self.birthObj.to_triple()
         if self.deathObj is not None:
             g += self.deathObj.to_triples()
 
@@ -208,7 +209,6 @@ class Biography(object):
         g += self.create_triples(self.children_list)
         g += self.create_triples(self.name_list)
 
-        print(g.serialize(format='turtle').decode())
         return g
 
     def to_file(self, graph=None, serialization="ttl"):
@@ -229,6 +229,10 @@ class Biography(object):
         if self.cf_list:
             string += "CulturalForms: \n"
             for x in self.cf_list:
+                string += str(x) + "\n"
+        if self.birth_list:
+            string += "Births: \n"
+            for x in self.birth_list:
                 string += str(x) + "\n"
         if self.location_list:
             string += "Locations: \n"
