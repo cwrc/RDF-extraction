@@ -4,6 +4,7 @@ import os, datetime
 import csv
 from rdflib import *
 import logging
+from fuzzywuzzy import fuzz
 
 CONFIG_FILE="./bibparse.config"
 
@@ -148,7 +149,7 @@ def dateParse(date_string: str):
 
 class ParseGeoNamesMapping:
 
-    place_mapper = {}
+    place_mapper = []
 
     def __init__(self, filename):
         with open(filename) as f:
@@ -157,12 +158,17 @@ class ParseGeoNamesMapping:
             for row in csvfile:
                 placename = row[0].rstrip(',.')
                 url_string = row[1] if 'http://' in row[1] else "http://{0}".format(row[1])
-
-                self.place_mapper[placename] = url_string
+                self.place_mapper.append({"placename": placename, "url": url_string})
 
     def get_place(self, place_name):
-        if place_name in self.place_mapper:
-            return self.place_mapper[place_name]
+        selected_item = None
+        for item in self.place_mapper:
+            ratio = fuzz.ratio(item['placename'], place_name)
+            if ratio >= 50:
+                selected_item = item
+                break
+        if selected_item:
+            return selected_item['url']
         else:
             logger.info("Unable to map Place {0}".format(place_name))
             return False
@@ -699,10 +705,10 @@ class BibliographyParse:
                 place.add(RDF.value, Literal(o['place']))
                 place.add(RDF.type, BF.Place)
 
-                #place_map = geoMapper.get_place(o['place'].strip())
+                place_map = geoMapper.get_place(o['place'].strip())
 
-                #if place_map:
-                #    place.add(OWL.sameAs, URIRef(place_map))
+                if place_map:
+                    place.add(OWL.sameAs, URIRef(place_map))
 
                 originInfo.add(BF.place, place)
 
