@@ -5,6 +5,7 @@ import csv
 from rdflib import *
 import logging
 from fuzzywuzzy import fuzz
+import re
 
 CONFIG_FILE="./bibparse.config"
 
@@ -32,6 +33,8 @@ genre_graph = None
 genre_map = {}
 
 geoMapper = None
+
+UNIQUE_UNMATCHED_PLACES = set()
 
 # --------- UTILITY FUNCTIONS -------
 
@@ -161,17 +164,30 @@ class ParseGeoNamesMapping:
                 self.place_mapper.append({"placename": placename, "url": url_string})
 
     def get_place(self, place_name):
-        selected_item = None
-        for item in self.place_mapper:
-            ratio = fuzz.ratio(item['placename'], place_name)
-            if ratio >= 50:
-                selected_item = item
-                break
-        if selected_item:
-            return selected_item['url']
+        place_name = place_name.strip()
+        matched_places = []
+        if ';' in place_name:
+            place_name_parts = re.split("\s*;\s*", place_name)
+        elif 'and' in place_name:
+            place_name_parts = re.split('\s*and\s*', place_name)
         else:
-            logger.info("Unable to map Place {0}".format(place_name))
-            return False
+            place_name_parts = [place_name]
+
+        for part in place_name_parts:
+            selected_item = None
+            for item in self.place_mapper:
+                ratio = fuzz.ratio(item['placename'], part)
+                if ratio >= 50:
+                    selected_item = item
+                    matched_places.append(item)
+                    break
+            if selected_item:
+                return selected_item['url']
+            else:
+                logger.info("Unable to map Place {0}".format(place_name))
+                UNIQUE_UNMATCHED_PLACES.add(place_name)
+
+        return matched_places
 
 
 class WritingParse:
@@ -708,7 +724,8 @@ class BibliographyParse:
                 place_map = geoMapper.get_place(o['place'].strip())
 
                 if place_map:
-                    place.add(OWL.sameAs, URIRef(place_map))
+                    for item in place_map:
+                        place.add(OWL.sameAs, URIRef(item))
 
                 originInfo.add(BF.place, place)
 
@@ -844,6 +861,11 @@ if __name__ == "__main__":
             mp.build_graph()
         except UnicodeError:
             pass
+
+    with open("unmatchedplaces.csv", "w") as f:
+        writer = csv.writer(f, delimiter='\t', quoting=csv.QUOTE_MINIMAL)
+        for item in UNIQUE_UNMATCHED_PLACES:
+            writer.writerow([item])
 
     fname = "Bibliography"
     output_name = fname.replace(".xml", "")
