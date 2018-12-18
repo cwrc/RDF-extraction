@@ -160,6 +160,7 @@ class ParseGeoNamesMapping:
 
             for row in csvfile:
                 placename = row[0].rstrip(',.')
+                placename = row[0].strip()
                 url_string = row[1] if 'http://' in row[1] else "http://{0}".format(row[1])
                 self.place_mapper.append({"placename": placename, "url": url_string})
 
@@ -524,6 +525,9 @@ class BibliographyParse:
         for note in note_items:
             if 'type' in note.attrs:
                 note_type = note.attrs['type']
+                # Skip over internal notes
+                if note_type == "internal_note":
+                    continue
             else:
                 note_type = None
 
