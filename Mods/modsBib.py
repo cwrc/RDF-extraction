@@ -31,8 +31,8 @@ SCHEMA = rdflib.Namespace("http://schema.org/")
 
 genre_graph = None
 genre_map = {}
-
 geoMapper = None
+STRING_MATCH_RATIO = 50
 
 UNIQUE_UNMATCHED_PLACES = set()
 
@@ -144,12 +144,7 @@ def dateParse(date_string: str):
 
     return date_string, False
 
-
-
-
 # ----------- MAIN CLASSES ----------
-
-
 class ParseGeoNamesMapping:
 
     place_mapper = []
@@ -159,32 +154,51 @@ class ParseGeoNamesMapping:
             csvfile = csv.reader(f)
 
             for row in csvfile:
-                placename = row[0].rstrip(',.')
-                placename = row[0].strip()
+                place_name = row[0].rstrip(',.')
+                place_name = place_name.strip()
                 url_string = row[1] if 'http://' in row[1] else "http://{0}".format(row[1])
-                self.place_mapper.append({"placename": placename, "url": url_string})
+                self.place_mapper.append({"placename": place_name, "url": url_string})
+
+    @staticmethod
+    def split_place_parts(place):
+        place_name_parts = None
+        place = place.strip()
+
+        if ';' in place:
+            place_name_parts = re.split("\s*;\s*", place)
+        elif 'and' in place:
+            place_name_parts = re.split('\s*and\s*', place)
+        else:
+            place_name_parts = [place]
+
+        return place_name_parts
 
     def get_place(self, place_name):
+        """
+        Get the Geonames link given a string of a place
+        This uses fuzzy string search library
+        :param place_name:
+        :return:
+        """
         place_name = place_name.strip()
         matched_places = []
-        if ';' in place_name:
-            place_name_parts = re.split("\s*;\s*", place_name)
-        elif 'and' in place_name:
-            place_name_parts = re.split('\s*and\s*', place_name)
-        else:
-            place_name_parts = [place_name]
+        place_name_parts = ParseGeoNamesMapping.split_place_parts(place_name)
 
         for part in place_name_parts:
             selected_item = None
-            for item in self.place_mapper:
-                ratio = fuzz.ratio(item['placename'], part)
-                if ratio >= 50:
+
+            for place in self.place_mapper:
+                ratio = fuzz.ratio(place['placename'], part)
+
+                if ratio >= STRING_MATCH_RATIO:
                     selected_item = item
                     matched_places.append(item)
                     break
+
             if selected_item:
                 return selected_item['url']
             else:
+                # Log unmatched places
                 logger.info("Unable to map Place {0}".format(place_name))
                 UNIQUE_UNMATCHED_PLACES.add(place_name)
 
@@ -206,6 +220,7 @@ class WritingParse:
     soup = None
 
     def __init__(self, filename, matched_documents):
+
         with open(filename) as f:
             self.soup = BeautifulSoup(f, 'lxml')
 
@@ -223,11 +238,13 @@ class WritingParse:
 
         for ts in textscopes:
             ts_parent = ts.parent
+
             if 'dbref' in ts.attrs:
                 db_ref = ts.attrs['dbref']
 
                 tgenres = ts_parent.find_all('tgenre')
                 genres = []
+
                 for genre in tgenres:
                     if 'genrename' in genre.attrs:
                         name = genre.attrs['genrename']
@@ -344,9 +361,10 @@ class BibliographyParse:
     def get_title(self):
         titles = []
         if self.soup.titleinfo:
-            titleinfo = self.soup.titleinfo
+
             for title in self.soup.find_all('titleinfo'):
-                if title.parent.name == "relateditem" and self.relatedItem == False:
+                # Leave out relateditem types
+                if title.parent.name == "relateditem" and not self.relatedItem:
                     continue
 
                 if 'usage' in title.attrs:
