@@ -2,15 +2,24 @@
 from bs4 import BeautifulSoup
 import sys
 import logging
-from classes import *
-from stringAndMemberFunctions import *
-
-import context
 from context import Context
-from event import get_date_tag, Event
+from event import get_date_tag, Event, format_date
 from place import Place
 from utilities import *
 # TODO: clean up imports post death
+# Should be matched up to deb's contexts somehow
+# otherwise we're looking at duplicate contexts
+# two unique id'd contexts but with the same text and different triples
+# attached but this might fine if we're distinguishing between
+# death context vs cause of death context
+# TODO once resolved: https://github.com/cwrc/ontology/issues/462
+
+logger = logging.getLogger('birthdeath_extraction')
+logger.setLevel(logging.INFO)
+fh = logging.FileHandler('birthdeath_extraction.log')
+fh.setLevel(logging.INFO)
+logger.addHandler(fh)
+
 
 class Birth:
     def __init__(self, bDate, bPositions, birthplace):
@@ -92,8 +101,10 @@ def extract_birth_data(xmlString, person):
         # retrieving birthdate
         if not birth_date:
             birth_date_tag = get_date_tag(x)
+            # logger.info(birth_date_tag)
             # TODO: Figure out what to do with daterange
             if birth_date_tag.name == "DATERANGE":
+                logger.warning("Daterange:" + str(birth_date_tag))
                 birth_date = birth_date_tag.get("FROM")
             else:
                 birth_date = birth_date_tag.get("VALUE")
@@ -110,6 +121,8 @@ def extract_birth_data(xmlString, person):
             if 'POSITION' in positions.attrs:
                 birth_positions.append(positions['POSITION'])
         birth_positions = list(set(birth_positions))
+        if len(birth_positions) > 1:
+            logger.warning("Multiple Birth positions:" + str(birth_positions))
 
         # creating birth instance
         tempBirth = Birth(None, birth_positions, None)
@@ -133,6 +146,7 @@ def extract_birth_data(xmlString, person):
         context_count += 1
 
 
+# TODO: Still need to update this function
 def extract_death(xmlString, person):
     # filePath = os.path.expanduser("~/Downloads/laurma-b.xml")
     # getTreeRoot = xml.etree.ElementTree.parse(filePath)
@@ -321,43 +335,40 @@ def create_testcase_dict():
 
     # Normal cases
     test_case_desc += ["chronstruct and chronprose  --> birthdate chronstruct, birthposition chronprose"]
-    test_case_files += ["allima-b-transformed.xml"]
+    test_case_files += ["allima"]
 
     test_case_desc += ["Just a chronstruct w. both birth Position & birthdate"]
-    test_case_files += ["adcofl-b-transformed.xml"]
+    test_case_files += ["adcofl"]
 
     test_case_desc += ["Just a shortprose with date we'll assume is the birthdate"]
-    test_case_files += ["aberfr-b-transformed.xml"]
+    test_case_files += ["aberfr"]
 
     test_case_desc += ["birthposition & birthdate in a shortprose, no chronstruct"]
-    test_case_files += ["cuthca-b-transformed.xml"]
+    test_case_files += ["cuthca"]
 
     # this birthposition was orginally not extracted
     test_case_desc += ["chronstruct(date & place) and shortprose(birthpositions)"]
-    test_case_files += ["acklva-b-transformed.xml"]
+    test_case_files += ["acklva"]
 
     # Atypical cases
     test_case_desc += ["chronstruct w. date range"]
-    test_case_files += ["askean-b-transformed.xml"]
+    test_case_files += ["askean"]
 
     test_case_desc += ["Has two dates in shortprose"]
-    test_case_files += ["bootfr-b-transformed.xml"]
+    test_case_files += ["bootfr"]
 
     test_case_desc += ["Daterange within shortprose"]
-    test_case_files += ["butls2-b-transformed.xml"]
+    test_case_files += ["butls2"]
 
     test_case_desc += ["has two events in a birthtag(first birth, second christening)"]
-    test_case_files += ["scotsa-b-transformed.xml"]
+    test_case_files += ["scotsa"]
 
     return dict(zip(test_case_files, test_case_desc))
 
 
-def main():
+def parse_args():
     import os
     import argparse
-    from bs4 import BeautifulSoup
-    import culturalForm
-    from biography import Biography
     """
         TODO: add options for verbosity of output, types of output
         -o OUTPUTFILE
@@ -375,8 +386,10 @@ def main():
     modes.add_argument("-d", "-directory", "--directory", help="directory of files to run extraction upon")
     args = parser.parse_args()
 
-    qa_case_files = ["shakwi-b-transformed.xml", "woolvi-b-transformed.xml", "seacma-b-transformed.xml", "atwoma-b-transformed.xml",
-                     "alcolo-b-transformed.xml", "bronem-b-transformed.xml", "bronch-b-transformed.xml", "levyam-b-transformed.xml", "aguigr-b-transformed.xml"]
+    file_ending = "-b-transformed.xml"
+
+    qa_case_files = ["shakwi", "woolvi", "seacma", "atwoma",
+                     "alcolo", "bronem", "bronch", "levyam", "aguigr"]
     test_cases = create_testcase_dict()
 
     if args.file:
@@ -389,7 +402,7 @@ def main():
         filelist = [args.directory +
                     filename for filename in sorted(os.listdir(args.directory)) if filename.endswith(".xml")]
     elif args.qa:
-        print("Running extraction on qa cases: ", sep=None)
+        print("Running extraction on qa cases: ")
         print(*qa_case_files, sep=", ")
         filelist = sorted(["bio_data/" + filename for filename in qa_case_files])
     elif args.testcases:
@@ -400,6 +413,19 @@ def main():
         filelist = ["bio_data/" +
                     filename for filename in sorted(os.listdir("bio_data")) if filename.endswith(".xml")]
 
+    if args.qa or args.testcases:
+        filelist = [x + file_ending for x in filelist]
+
+    return filelist
+
+
+def main():
+    from bs4 import BeautifulSoup
+    import culturalForm
+    import rdflib
+    from biography import Biography
+
+    filelist = parse_args()
     print("-" * 200)
     entry_num = 1
 
@@ -410,18 +436,17 @@ def main():
     for filename in filelist:
         with open(filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
+
         person_id = filename.split("/")[-1][:6]
 
         print(filename)
         print(person_id)
-        if args.testcases:
-            print(test_cases[filename.split("bio_data/")[1]])
         print("*" * 55)
 
         person = Biography(person_id, get_name(soup), culturalForm.get_mapped_term("Gender", get_sex(soup)))
         extract_birth_data(soup, person)
-        # print(person)
-        # print("^" * 200)
+        # get_readable_name(soup)
+        person.name = get_readable_name(soup)
         print(person.to_file())
         print()
 
