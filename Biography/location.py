@@ -1,15 +1,13 @@
 #!/usr/bin/python3
 
-import rdflib
-
-from log import Log
-
-from utilities import *
 
 from biography import Biography
 from context import Context
-from place import Place
 from event import Event
+from log import Log
+from place import Place
+from utilities import *
+import rdflib
 
 """
 Status: ~80%

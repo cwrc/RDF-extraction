@@ -84,6 +84,8 @@ def main():
         lifeInfo.extract_childlessness(soup, person)
         lifeInfo.extract_children(soup, person)
 
+        person.name = get_readable_name(soup)
+
         graph = person.to_graph()
         numTriples += len(graph)
 

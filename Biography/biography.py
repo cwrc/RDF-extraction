@@ -6,7 +6,6 @@ TODO: handle
 WRITER
 BRWWRITER
 IBRWRITER
-
 """
 
 NS_DICT = {
@@ -41,6 +40,8 @@ NS_DICT = {
     "void": rdflib.Namespace("http://rdfs.org/ns/void#"),
     "vs": rdflib.Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#")
 }
+
+# TODO remove these methods and use the ones available in utilities
 
 
 def get_name(bio):

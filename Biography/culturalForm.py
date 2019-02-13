@@ -4,8 +4,9 @@ from difflib import get_close_matches
 from rdflib import RDF, RDFS, Literal
 import rdflib
 
-from log import Log
+# from log import Log
 
+import logging
 from utilities import *
 from organizations import get_org, get_org_uri
 
@@ -26,14 +27,12 @@ temp solution until endpoint is active
 
 """
 
-# temp log library for debugging
-# to be eventually replaced with proper logging library
-log = Log("log/cf/errors")
-log.test_name("CF extraction Error Logging")
-extract_log = Log("log/cf/extraction")
-extract_log.test_name("CF extraction Test Logging")
-turtle_log = Log("log/cf/triples")
-turtle_log.test_name("CF extracted Triples")
+logger = logging.getLogger('culturalform_extraction')
+logger.setLevel(logging.INFO)
+fh = logging.FileHandler('culturalform_extraction.log')
+fh.setLevel(logging.INFO)
+logger.addHandler(fh)
+
 
 uber_graph = rdflib.Graph()
 namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
@@ -101,7 +100,7 @@ def get_reported(tag):
         elif reported == "SELFUNKNOWN":
             return None
         else:
-            log.msg("self-defined attribute RETURNED UNEXPECTED RESULTS:" + str(tag) + "?????")
+            logger.error("self-defined attribute RETURNED UNEXPECTED RESULTS:" + str(tag) + "?????")
     return None
 
 
@@ -278,7 +277,7 @@ def find_cultural_forms(cf, person):
             # Checking if religion occurs as a PA if no result as a religion
             if type(value) is Literal:
                 value = get_mapped_term("PoliticalAffiliation", get_value(x), True)
-                log.msg((value))
+                logger.warning((value))
             if type(value) is Literal:
                 value = get_mapped_term("Religion", get_value(x))
 
@@ -490,37 +489,37 @@ def get_mapped_term(rdf_type, value, retry=False):
     return term
 
 
-def log_mapping_fails(main_log, error_log, detail=True):
-    main_log.subtitle("Attempts: #" + str(map_attempt))
-    main_log.subtitle("Fails: #" + str(map_fail))
-    main_log.subtitle("Success: #" + str(map_success))
-    main_log.separ()
+def log_mapping_fails(main_log, detail=True):
+    main_log.info("Attempts: #" + str(map_attempt))
+    main_log.info("Fails: #" + str(map_fail))
+    main_log.info("Success: #" + str(map_success))
+    main_log.info()
     print()
-    main_log.subtitle("Failure Details:")
+    main_log.info("Failure Details:")
     total_unmapped = 0
     for x in fail_dict.keys():
         num = len(fail_dict[x].keys())
         total_unmapped += num
-        error_log.subtitle(x.split("#")[1] + ":" + str(num))
-    main_log.subtitle("Failed to find " + str(total_unmapped) + " unique terms")
+        main_log.warning(x.split("#")[1] + ":" + str(num))
+    main_log.info("Failed to find " + str(total_unmapped) + " unique terms")
 
     print()
-    error_log.separ("#")
-    if not detail:
-        log_mapping_fails(extract_log, log)
-        return
+    main_log.warning("#")
+    # if not detail:
+    #     log_mapping_fails(extract_log, log)
+    #     return
 
     from collections import OrderedDict
     for x in fail_dict.keys():
-        error_log.msg(x.split("#")[1] + "(" + str(len(fail_dict[x].keys())) + " unique)" + ":")
+        main_log.warning(x.split("#")[1] + "(" + str(len(fail_dict[x].keys())) + " unique)" + ":")
 
         new_dict = OrderedDict(sorted(fail_dict[x].items(), key=lambda t: t[1], reverse=True))
         count = 0
         for y in new_dict.keys():
-            error_log.msg("\t" + str(new_dict[y]) + ": " + y)
+            main_log.warning("\t" + str(new_dict[y]) + ": " + y)
             count += new_dict[y]
-        error_log.msg("Total missed " + x.split("#")[1] + ": " + str(count))
-        error_log.separ()
+        main_log.warning("Total missed " + x.split("#")[1] + ": " + str(count))
+        main_log.warning()
         print()
 
 
@@ -553,12 +552,12 @@ def main():
 
         graph = person.to_graph()
 
-        extract_log.subtitle("Entry #" + str(entry_num))
-        extract_log.msg(str(person))
-        extract_log.subtitle(str(len(graph)) + " triples created")
-        extract_log.msg(person.to_file(graph))
-        extract_log.subtitle("Entry #" + str(entry_num))
-        extract_log.msg("\n\n")
+        # logger.info("Entry #" + str(entry_num))
+        # logger.info(str(person))
+        # logger.info(str(len(graph)) + " triples created")
+        # logger.info(person.to_file(graph))
+        # logger.info("Entry #" + str(entry_num))
+        # logger.info("\n\n")
 
         temp_path = "extracted_triples/cf_turtle/" + filename[:-6] + "_cf.ttl"
         create_extracted_file(temp_path, person)
@@ -568,9 +567,7 @@ def main():
         uber_graph += graph
         entry_num += 1
 
-    turtle_log.subtitle(str(len(uber_graph)) + " triples created")
-    turtle_log.msg(uber_graph.serialize(format="ttl").decode(), stdout=False)
-    turtle_log.msg("")
+    logger.info(str(len(uber_graph)) + " triples created")
 
     temp_path = "extracted_triples/culturalForms.ttl"
     create_extracted_uberfile(temp_path, uber_graph)
@@ -578,7 +575,7 @@ def main():
     temp_path = "extracted_triples/culturalForms.rdf"
     create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
 
-    log_mapping_fails(extract_log, log)
+    log_mapping_fails(logger, log)
 
 
 if __name__ == "__main__":

@@ -575,10 +575,54 @@ def extract_education_data(bio, person):
         extract_education(events, mode, person, "events")
 
 
+def create_testcase_dict():
+    test_case_files = []
+    test_case_desc = []
+
+    # Normal cases
+    test_case_desc += ["TBD"]
+    test_case_files += ["bankis-b-transformed.xml"]
+
+    test_case_desc += ["TBD"]
+    test_case_files += ["burnfr-b-transformed.xml"]
+
+    test_case_desc += ["TBD"]
+    test_case_files += ["annali-b-transformed.xml"]
+
+    test_case_desc += ["TBD"]
+    test_case_files += ["carrdo-b-transformed.xml"]
+
+    test_case_desc += ["TBD"]
+    test_case_files += ["platsy-b-transformed.xml"]
+
+    return dict(zip(test_case_files, test_case_desc))
+
+
 def main():
     import os
     from bs4 import BeautifulSoup
     import culturalForm
+
+    """
+        TODO: add options for verbosity of output, types of output
+        -o OUTPUTFILE
+        -format [turtle|rdf-xml|all]
+
+    """
+    parser = argparse.ArgumentParser(
+        description='Extract the Birth/Death information from selection of orlando xml documents', add_help=True)
+
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument('-testcases', '-t', action="store_true", help="will run through test case list")
+    modes.add_argument('-qa', action="store_true",
+                       help="will run through qa test cases that are related to https://github.com/cwrc/testData/tree/master/qa")
+    modes.add_argument("-f", "-file", "--file", help="single file to run extraction upon")
+    modes.add_argument("-d", "-directory", "--directory", help="directory of files to run extraction upon")
+    args = parser.parse_args()
+
+    qa_case_files = ["shakwi-b-transformed.xml", "woolvi-b-transformed.xml", "seacma-b-transformed.xml", "atwoma-b-transformed.xml",
+                     "alcolo-b-transformed.xml", "bronem-b-transformed.xml", "bronch-b-transformed.xml", "levyam-b-transformed.xml", "aguigr-b-transformed.xml"]
+    test_cases = create_testcase_dict()
 
     filelist = [filename for filename in sorted(os.listdir("bio_data")) if filename.endswith(".xml")]
     entry_num = 1
@@ -587,10 +631,8 @@ def main():
     namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
     bind_ns(namespace_manager, NS_DICT)
 
-    test_cases = ["shakwi-b.xml", "woolvi-b.xml", "seacma-b.xml", "atwoma-b.xml",
-                  "alcolo-b.xml", "bronem-b.xml", "bronch-b.xml", "levyam-b.xml"]
-    test_cases += ["bankis-b.xml", "burnfr-b.xml", "annali-b.xml", "carrdo-b.xml"]
-    test_cases += ["platsy-b.xml"]
+    test_cases = ["shakwi-b-transformed.xml", "woolvi-b-transformed.xml", "seacma-b-transformed.xml", "atwoma-b-transformed.xml",
+                  "alcolo-b-transformed.xml", "bronem-b-transformed.xml", "bronch-b-transformed.xml", "levyam-b-transformed.xml"]
 
     for filename in test_cases:
     # for filename in filelist:

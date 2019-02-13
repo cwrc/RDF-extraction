@@ -150,6 +150,10 @@ def get_name(bio):
     return (bio.BIOGRAPHY.DIV0.STANDARD.text)
 
 
+def get_readable_name(bio):
+    return (bio.BIOGRAPHY.ORLANDOHEADER.FILEDESC.TITLESTMT.DOCTITLE.text).split(":")[0]
+
+
 def get_sex(bio):
     return (bio.BIOGRAPHY.get("SEX"))
 

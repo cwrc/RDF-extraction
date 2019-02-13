@@ -121,8 +121,13 @@ def limit_words(string, word_count):
     return text
 
 
-def get_name(bio):
-    return (bio.BIOGRAPHY.DIV0.STANDARD.text)
+def get_readable_name(bio):
+    return (bio.BIOGRAPHY.ORLANDOHEADER.FILEDESC.TITLESTMT.DOCTITLE.text).split(":")[0]
+
+
+# def get_name(bio):
+#     print(get_readable_name(bio))
+#     return (bio.BIOGRAPHY.DIV0.STANDARD.text)
 
 
 def get_sex(bio):

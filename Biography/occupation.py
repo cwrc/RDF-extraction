@@ -1,20 +1,15 @@
 #!/usr/bin/python3
 
-# from Env import env
-# import islandora_auth as login
-
-import rdflib
-from difflib import get_close_matches
-from rdflib import Literal
-
-from log import Log
-
-from utilities import *
-from organizations import get_org_uri
 
 from biography import Biography
 from context import Context
+from difflib import get_close_matches
 from event import Event
+from log import Log
+from organizations import get_org_uri
+from rdflib import Literal
+from utilities import *
+import rdflib
 
 """
 Status: ~75%
@@ -184,7 +179,7 @@ def clean_term(string):
 def create_job_map():
     import csv
     global JOB_MAP
-    with open('occupation_mapping.csv', newline='',encoding="utf8") as csvfile:
+    with open('occupation_mapping.csv', newline='', encoding="utf8") as csvfile:
         reader = csv.reader(csvfile)
         next(reader)
         for row in reader:

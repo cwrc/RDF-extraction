@@ -230,6 +230,7 @@ class Context(object):
 
             if self.event:
                 g.add((self.uri, NS_DICT["cwrc"].hasEvent, self.event))
+                g.add((self.event, NS_DICT["cwrc"].hasContext, self.uri))
 
         # Creating the mentioned people as natural person
         for x in self.tag.find_all("NAME"):
