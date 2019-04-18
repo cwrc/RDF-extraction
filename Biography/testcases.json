@@ -1,0 +1,30 @@
+{
+    "default directory": "bio_data/",
+    "file ending": "-b-transformed.xml",
+    "qa": {
+        "testcases": {
+            "shakwi": "William Shakespeare - ",
+            "woolvi": "Virginia Woolf - ",
+            "seacma": "Mary Seacole - ",
+            "atwoma": "Margret Atwood - ",
+            "alcolo": "Louisa May Alcott - ",
+            "bronem": "Emily Bronte - Overlapping triples with sister",
+            "bronch": "Charlotte Bronte - Overlapping triples with sister",
+            "levyam": "Amy Levy - ",
+            "aguigr": "Grace Ag - education graffle"
+        }
+    },
+    "birthDeath.py": {
+        "testcases": {
+            "allima": "chronstruct and chronprose  --> birthdate chronstruct, birthposition chronprose",
+            "adcofl": "Just a chronstruct w. both birth Position & birthdate",
+            "aberfr": "Just a shortprose with date we'll assume is the birthdate",
+            "cuthca": "birthposition & birthdate in a shortprose, no chronstruct",
+            "acklva": "chronstruct(date & place) and shortprose(birthpositions)",
+            "askean": "chronstruct w. date range",
+            "bootfr": "Has two dates in shortprose",
+            "butls2": "Daterange within shortprose",
+            "scotsa": "has two events in a birthtag(first birth, second christening)"
+        }
+    }
+}

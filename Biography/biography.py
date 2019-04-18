@@ -1,6 +1,7 @@
 import rdflib
 from rdflib import RDF, RDFS, Literal
-
+from utilities import *
+import culturalForm
 """
 TODO: handle
 WRITER
@@ -41,60 +42,20 @@ NS_DICT = {
     "vs": rdflib.Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#")
 }
 
-# TODO remove these methods and use the ones available in utilities
-
-
-def get_name(bio):
-    return (bio.BIOGRAPHY.DIV0.STANDARD.text)
-
-
-def get_sex(bio):
-    return (bio.BIOGRAPHY.get("SEX"))
-
-
-def bind_ns(namespace_manager, ns_dictionary):
-    for x in ns_dictionary.keys():
-        namespace_manager.bind(x, ns_dictionary[x], override=False)
-
-
-def remove_punctuation(temp_str, all=False):
-    import string
-    if all:
-        translator = str.maketrans('', '', string.punctuation)
-    else:
-        translator = str.maketrans('', '', string.punctuation.replace("-", ""))
-    temp_str = temp_str.translate(translator)
-    temp_str = temp_str.replace(" ", "_")
-    return temp_str
-
-
-def get_name_uri(tag):
-    return make_standard_uri(tag.get("STANDARD"))
-
-
-def make_standard_uri(std_str, ns="data"):
-    """Makes uri based of string, removes punctuation and
-    replaces spaces with an underscore v2, leaving hypens
-    """
-    return rdflib.term.URIRef(str(NS_DICT[ns]) + remove_punctuation(std_str))
-
-
-def create_uri(prefix, term):
-    """prepends the provided namespace uri to the given term"""
-    return rdflib.term.URIRef(str(NS_DICT[prefix]) + term)
-
 
 class Biography(object):
     """docstring for Biography"""
 
-    def __init__(self, id, name, gender):
+    def __init__(self, id, doc):
         super(Biography, self).__init__()
         self.id = id
         self.url = "http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id=" + id
         self.url = rdflib.term.URIRef(self.url)
-        self.name = name
-        self.gender = gender
-        self.uri = make_standard_uri(name)
+        self.name = get_readable_name(doc)
+        self.gender = culturalForm.get_mapped_term("Gender", get_sex(doc))
+        self.uri = make_standard_uri(get_name(doc))
+
+        self.nationalities = []
 
         self.context_list = []
         self.event_list = []

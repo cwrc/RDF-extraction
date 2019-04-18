@@ -1,6 +1,23 @@
 import rdflib
 import os
 from place import Place
+import datetime
+
+"""
+TODO: Add doctests for:
+- strip_all_whitespace
+- remove_punctuation
+- get_name_uri
+- make_standard_uri
+- create_uri
+- create_cwrc_uri
+- get_value
+- get_attribute
+- get_reg
+- get_people
+- get_titles
+- get_places
+"""
 
 NS_DICT = {
     "as": rdflib.Namespace("http://www.w3.org/ns/activitystreams#"),
@@ -36,6 +53,10 @@ NS_DICT = {
 }
 
 
+def get_current_time():
+    return datetime.datetime.now().strftime("%d %b %Y %H:%M:%S")
+
+
 def bind_ns(namespace_manager, ns_dictionary):
     for x in ns_dictionary.keys():
         namespace_manager.bind(x, ns_dictionary[x], override=False)
@@ -62,10 +83,24 @@ def remove_punctuation(temp_str, all=False):
 
 
 def limit_words(string, word_count):
-    """Returns a string of a given word count size"""
-    text = ' '.join(str(string).split())
+    """Returns a string of a given word count size.
+
+    >>> limit_words("This is a sample string", 2)
+    'This is...'
+
+    >>> limit_words("This is a sample string", 10)
+    'This is a sample string'
+
+    >>> limit_words("This is a sample string", -1)
+    Traceback (most recent call last):
+        ...
+    AssertionError: Invalid word count!
+    """
+    assert(word_count > 0), "Invalid word count!"
+
+    text = " ".join(str(string).split())
     words = text.split(" ")
-    text = ' '.join(words[:word_count])
+    text = " ".join(words[:word_count])
     if len(words) > word_count:
         text += "..."
     return text
@@ -111,6 +146,7 @@ def get_value(tag):
 
 
 def get_attribute(tag, attribute):
+    """Extract a specific attribute"""
     value = tag.get(attribute)
     if value:
         return value
@@ -158,12 +194,18 @@ def get_sex(bio):
     return (bio.BIOGRAPHY.get("SEX"))
 
 
+def get_persontype(bio):
+    return bio.BIOGRAPHY.get("PERSON")
+
+
 """
 Creating files of extracted triples
 """
 
 
 def create_extracted_file(filepath, person, serialization=None):
+    """Create file of extracted triples for particular person
+    """
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     with open(filepath, "w", encoding="utf-8") as f:
         if serialization:
@@ -174,6 +216,8 @@ def create_extracted_file(filepath, person, serialization=None):
 
 
 def create_extracted_uberfile(filepath, graph, serialization=None):
+    """Create file of triples for a particular graph
+    """
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     with open(filepath, "w", encoding="utf-8") as f:
         if serialization:
@@ -181,3 +225,82 @@ def create_extracted_uberfile(filepath, graph, serialization=None):
         else:
             f.write("#" + str(len(graph)) + " triples created\n")
             f.write(graph.serialize(format="ttl").decode())
+
+
+def parse_args(script, info_type):
+    """
+        Parses arguments to particular extraction script and creates dictionary of {files,desc}
+        relying on testcase.json for testcases + qa
+
+        ./birthDeath -t returns {testfiles:testcase descriptions}
+
+    """
+    import os
+    import argparse
+    import json
+    from collections import OrderedDict
+    """
+        TODO: add options for verbosity of output, types of output
+        -o OUTPUTFILE
+        -format/ff/fmt [turtle|rdf-xml|all]
+        -v verbose logging
+    """
+    with open("testcases.json", 'r') as f:
+        testcase_data = json.load(f)
+
+    parser = argparse.ArgumentParser(
+        description='Extract the ' + info_type + 'information from selection of orlando xml documents', add_help=True)
+    modes = parser.add_mutually_exclusive_group()
+
+    if script in testcase_data:
+        modes.add_argument('-testcases', '-t', action="store_true",
+                           help="will run through test case list particular to " + script)
+    else:
+        print("No particular testcases available, please add to testcases.json")
+    modes.add_argument('-qa', action="store_true",
+                       help="will run through qa test cases that are related to https://github.com/cwrc/testData/tree/master/qa")
+    modes.add_argument("-f", "-file", "--file", help="single orlando xml document to run extraction upon")
+    modes.add_argument("-d", "-directory", "--directory", help="directory of files to run extraction upon")
+    args = parser.parse_args()
+
+    directory = testcase_data['default directory']
+    file_ending = testcase_data['file ending']
+    filelist = []
+    descriptors = []
+
+    if args.file:
+        assert args.file.endswith(".xml"), "Not an XML file"
+        filelist = [args.file]
+        descriptors = ["Testing single file specified: " + args.file]
+        print("Running extraction on " + args.file)
+    elif args.directory:
+        if args.directory[-1] != "/":
+            args.directory += "/"
+        filenames = [filename for filename in sorted(os.listdir(args.directory)) if filename.endswith(".xml")]
+        filelist = [args.directory + filename for filename in filenames]
+        descriptors = ["Testing on " + filename + " from " + args.directory for filename in filenames]
+        print("Running extraction on files within" + args.directory)
+    elif args.qa:
+        filelist = sorted(testcase_data['qa']['testcases'].keys())
+        descriptors = [testcase_data['qa']['testcases'][desc] for desc in filelist]
+        print("Running extraction on qa cases: ")
+        print(*filelist, sep=", ")
+    elif args.testcases:
+        filelist = sorted(testcase_data[script]['testcases'].keys())
+        descriptors = [testcase_data[script]['testcases'][desc] for desc in filelist]
+        print("Running extraction on test cases: ")
+        print(*filelist, sep=", ")
+    else:
+        print("Running extraction on default folder: " + directory)
+        filelist = [directory +
+                    filename for filename in sorted(os.listdir(directory)) if filename.endswith(".xml")]
+        descriptors = ["Testing on " + filename + " from " + directory for filename in filelist]
+
+    if args.qa or args.testcases:
+        filelist = [directory + file + file_ending for file in filelist]
+
+    return OrderedDict(zip(filelist, descriptors))
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod()
