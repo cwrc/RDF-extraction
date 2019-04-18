@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-from bs4 import BeautifulSoup
 import sys
 import logging
 from context import Context
@@ -16,7 +15,7 @@ from utilities import *
 
 logger = logging.getLogger('birthdeath_extraction')
 logger.setLevel(logging.INFO)
-fh = logging.FileHandler('birthdeath_extraction.log')
+fh = logging.FileHandler('logging/birthdeath_extraction.log', mode="w")
 fh.setLevel(logging.INFO)
 logger.addHandler(fh)
 
@@ -329,103 +328,13 @@ def extract_death(xmlString, person):
         person.context_list.append(tempContext)
 
 
-def create_testcase_dict():
-    test_case_files = []
-    test_case_desc = []
-
-    # Normal cases
-    test_case_desc += ["chronstruct and chronprose  --> birthdate chronstruct, birthposition chronprose"]
-    test_case_files += ["allima"]
-
-    test_case_desc += ["Just a chronstruct w. both birth Position & birthdate"]
-    test_case_files += ["adcofl"]
-
-    test_case_desc += ["Just a shortprose with date we'll assume is the birthdate"]
-    test_case_files += ["aberfr"]
-
-    test_case_desc += ["birthposition & birthdate in a shortprose, no chronstruct"]
-    test_case_files += ["cuthca"]
-
-    # this birthposition was orginally not extracted
-    test_case_desc += ["chronstruct(date & place) and shortprose(birthpositions)"]
-    test_case_files += ["acklva"]
-
-    # Atypical cases
-    test_case_desc += ["chronstruct w. date range"]
-    test_case_files += ["askean"]
-
-    test_case_desc += ["Has two dates in shortprose"]
-    test_case_files += ["bootfr"]
-
-    test_case_desc += ["Daterange within shortprose"]
-    test_case_files += ["butls2"]
-
-    test_case_desc += ["has two events in a birthtag(first birth, second christening)"]
-    test_case_files += ["scotsa"]
-
-    return dict(zip(test_case_files, test_case_desc))
-
-
-def parse_args():
-    import os
-    import argparse
-    """
-        TODO: add options for verbosity of output, types of output
-        -o OUTPUTFILE
-        -format [turtle|rdf-xml|all]
-
-    """
-    parser = argparse.ArgumentParser(
-        description='Extract the Birth/Death information from selection of orlando xml documents', add_help=True)
-
-    modes = parser.add_mutually_exclusive_group()
-    modes.add_argument('-testcases', '-t', action="store_true", help="will run through test case list")
-    modes.add_argument('-qa', action="store_true",
-                       help="will run through qa test cases that are related to https://github.com/cwrc/testData/tree/master/qa")
-    modes.add_argument("-f", "-file", "--file", help="single file to run extraction upon")
-    modes.add_argument("-d", "-directory", "--directory", help="directory of files to run extraction upon")
-    args = parser.parse_args()
-
-    file_ending = "-b-transformed.xml"
-
-    qa_case_files = ["shakwi", "woolvi", "seacma", "atwoma",
-                     "alcolo", "bronem", "bronch", "levyam", "aguigr"]
-    test_cases = create_testcase_dict()
-
-    if args.file:
-        print("Running extraction on " + args.file)
-        filelist = [args.file]
-    elif args.directory:
-        print("Running extraction on files within" + args.directory)
-        if args.directory[-1] != "/":
-            args.directory += "/"
-        filelist = [args.directory +
-                    filename for filename in sorted(os.listdir(args.directory)) if filename.endswith(".xml")]
-    elif args.qa:
-        print("Running extraction on qa cases: ")
-        print(*qa_case_files, sep=", ")
-        filelist = sorted(["bio_data/" + filename for filename in qa_case_files])
-    elif args.testcases:
-        print("Running extraction on test cases: ", sep=None)
-        print(*test_cases.keys(), sep=", ")
-        filelist = sorted(["bio_data/" + filename for filename in test_cases.keys()])
-    else:
-        filelist = ["bio_data/" +
-                    filename for filename in sorted(os.listdir("bio_data")) if filename.endswith(".xml")]
-
-    if args.qa or args.testcases:
-        filelist = [x + file_ending for x in filelist]
-
-    return filelist
-
-
 def main():
     from bs4 import BeautifulSoup
     import culturalForm
     import rdflib
     from biography import Biography
 
-    filelist = parse_args()
+    file_dict = parse_args(__file__, "Birth/Death")
     print("-" * 200)
     entry_num = 1
 
@@ -433,22 +342,22 @@ def main():
     namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
     bind_ns(namespace_manager, NS_DICT)
 
-    for filename in filelist:
+    for filename in file_dict.keys():
         with open(filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
         person_id = filename.split("/")[-1][:6]
 
         print(filename)
+        print(file_dict[filename])
         print(person_id)
         print("*" * 55)
 
-        person = Biography(person_id, get_name(soup), culturalForm.get_mapped_term("Gender", get_sex(soup)))
+        person = Biography(person_id, soup, culturalForm.get_mapped_term("Gender", get_sex(soup)))
         extract_birth_data(soup, person)
-        # get_readable_name(soup)
         person.name = get_readable_name(soup)
-        print(person.to_file())
-        print()
+        # print(person.to_file())
+        # print()
 
         temp_path = "extracted_triples/birthdeath_turtle/" + person_id + "_birthdeath.ttl"
         create_extracted_file(temp_path, person)

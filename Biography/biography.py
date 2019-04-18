@@ -1,7 +1,7 @@
 import rdflib
 from rdflib import RDF, RDFS, Literal
 from utilities import *
-import culturalForm
+
 """
 TODO: handle
 WRITER
@@ -46,13 +46,13 @@ NS_DICT = {
 class Biography(object):
     """docstring for Biography"""
 
-    def __init__(self, id, doc):
+    def __init__(self, id, doc, gender):
         super(Biography, self).__init__()
         self.id = id
         self.url = "http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id=" + id
         self.url = rdflib.term.URIRef(self.url)
         self.name = get_readable_name(doc)
-        self.gender = culturalForm.get_mapped_term("Gender", get_sex(doc))
+        self.gender = gender
         self.uri = make_standard_uri(get_name(doc))
 
         self.nationalities = []

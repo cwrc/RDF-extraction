@@ -249,7 +249,7 @@ def parse_args(script, info_type):
         testcase_data = json.load(f)
 
     parser = argparse.ArgumentParser(
-        description='Extract the ' + info_type + 'information from selection of orlando xml documents', add_help=True)
+        description='Extract the ' + info_type + ' information from selection of orlando xml documents', add_help=True)
     modes = parser.add_mutually_exclusive_group()
 
     if script in testcase_data:
