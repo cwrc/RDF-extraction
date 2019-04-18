@@ -26,5 +26,11 @@
             "butls2": "Daterange within shortprose",
             "scotsa": "has two events in a birthtag(first birth, second christening)"
         }
+    },
+    "culturalForm.py": {
+        "testcases": {
+            "taylha": "Ontology Issue #459: WomensEnfranchisement should map to suffrage",
+            "angema": "RDF-Extraction Issue #4: Ensuring string is rendered the same as src material (Africanist)"
+        }
     }
 }

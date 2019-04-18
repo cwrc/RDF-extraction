@@ -4,8 +4,6 @@ from difflib import get_close_matches
 from rdflib import RDF, RDFS, Literal
 import rdflib
 
-# from log import Log
-
 import logging
 from utilities import *
 from organizations import get_org, get_org_uri
@@ -27,13 +25,9 @@ temp solution until endpoint is active
 
 """
 
-logger = logging.getLogger('culturalform_extraction')
-logger.setLevel(logging.INFO)
-fh = logging.FileHandler('culturalform_extraction.log')
-fh.setLevel(logging.INFO)
-logger.addHandler(fh)
-
-
+# Will likely want to convert logging records to be json formatted and based on external file.
+logging.basicConfig(filename='culturalform_extraction.log', filemode='w',
+                    format='culturalform - %(levelname)s - %(message)s', level=logging.INFO)
 uber_graph = rdflib.Graph()
 namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
 bind_ns(namespace_manager, NS_DICT)
@@ -41,7 +35,7 @@ bind_ns(namespace_manager, NS_DICT)
 
 class CulturalForm(object):
     """docstring for CulturalForm
-        NOTE: mapping is done prior to creation of cf,
+        NOTE: mapping is done prior to creation of cf instance,
         no need to include class type then
         using other_attributes to handle extra predicates
         that may come up for cfs
@@ -100,7 +94,7 @@ def get_reported(tag):
         elif reported == "SELFUNKNOWN":
             return None
         else:
-            logger.error("self-defined attribute RETURNED UNEXPECTED RESULTS:" + str(tag) + "?????")
+            logging.error("self-defined attribute RETURNED UNEXPECTED RESULTS:" + str(tag) + "?????")
     return None
 
 
@@ -153,7 +147,10 @@ def find_cultural_forms(cf, person):
                             x), get_mapped_term(tags[tag][1], value.split("-")[0])))
                         value = value.split("-")[1]
 
-                cf_list.append(CulturalForm(tags[tag][0], get_reported(x), get_mapped_term(tags[tag][1], value)))
+                value = get_mapped_term(tags[tag][1], value)
+                cf_list.append(CulturalForm(tags[tag][0], get_reported(x), value))
+                if tags[tag][1] == "NationalIdentity":
+                    person.nationalities.append(str(value))
 
     def get_geoheritage(tag):
         places = tag.find_all("PLACE")
@@ -277,7 +274,7 @@ def find_cultural_forms(cf, person):
             # Checking if religion occurs as a PA if no result as a religion
             if type(value) is Literal:
                 value = get_mapped_term("PoliticalAffiliation", get_value(x), True)
-                logger.warning((value))
+                # logging.warning("Mapping Religion to PA: " + value)
             if type(value) is Literal:
                 value = get_mapped_term("Religion", get_value(x))
 
@@ -396,6 +393,7 @@ def extract_cf_data(bio, person):
                 id += extract_culturalforms(paragraphs, "CULTURALFORMATION", person)
                 id += extract_culturalforms(events, "CULTURALFORMATION", person, "events")
 
+    # Going through political contexts
     elements = bio.find_all("POLITICS")
     forms_found = 1
     for element in elements:
@@ -403,6 +401,16 @@ def extract_cf_data(bio, person):
         events = element.find_all("CHRONSTRUCT")
         extract_culturalforms(paragraphs, "POLITICS", person)
         forms_found += extract_culturalforms(events, "POLITICS", person, "events", forms_found)
+
+    # Extracting additional information from writer
+    if get_persontype(bio) in ["BRWWRITER", "IBRWRITER"]:
+        if not any(x in ["GB", "GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS", "IE"] for x in person.nationalities):
+            logging.info("Asserting the writer's (" + person.name
+                         + ") nationality as British based on attribute:" + get_persontype(bio))
+            person.add_cultural_form(CulturalForm("hasNationality", None,
+                                                  get_mapped_term("NationalIdentity", "British")))
+
+    print("\n" * 5)
 
 
 def clean_term(string):
@@ -417,6 +425,7 @@ def clean_term(string):
 
 
 def create_cf_map():
+    # TODO: Add exception handling for when file cannot be opened/parsed
     import csv
     global CF_MAP
     with open('cf_mapping.csv', newline='') as csvfile:
@@ -486,88 +495,74 @@ def get_mapped_term(rdf_type, value, retry=False):
                 update_fails(rdf_type, value)
             else:
                 update_fails(rdf_type, value + "->" + str(possibilites) + "?")
+            logging.warning("Unable to find matching " + rdf_type.split("#")[1] + " instance for '" + value + "'")
     return term
 
 
-def log_mapping_fails(main_log, detail=True):
-    main_log.info("Attempts: #" + str(map_attempt))
-    main_log.info("Fails: #" + str(map_fail))
-    main_log.info("Success: #" + str(map_success))
-    main_log.info()
-    print()
-    main_log.info("Failure Details:")
+def log_mapping_fails(detail=True):
+    log_str = "\n\n"
+    log_str += "Attempts: " + str(map_attempt) + "\n"
+    log_str += "Fails: " + str(map_fail) + "\n"
+    log_str += "Success: " + str(map_success) + "\n"
+    log_str += "\nFailure Details:" + "\n"
     total_unmapped = 0
     for x in fail_dict.keys():
         num = len(fail_dict[x].keys())
         total_unmapped += num
-        main_log.warning(x.split("#")[1] + ":" + str(num))
-    main_log.info("Failed to find " + str(total_unmapped) + " unique terms")
-
-    print()
-    main_log.warning("#")
-    # if not detail:
-    #     log_mapping_fails(extract_log, log)
-    #     return
+        log_str += "\t" + x.split("#")[1] + ":" + str(num) + "\n"
+    log_str += "\nFailed to find " + str(total_unmapped) + " unique terms" + "\n"
 
     from collections import OrderedDict
     for x in fail_dict.keys():
-        main_log.warning(x.split("#")[1] + "(" + str(len(fail_dict[x].keys())) + " unique)" + ":")
+        log_str += "\t" + x.split("#")[1] + "(" + str(len(fail_dict[x].keys())) + " unique)" + ":" + "\n"
 
         new_dict = OrderedDict(sorted(fail_dict[x].items(), key=lambda t: t[1], reverse=True))
         count = 0
         for y in new_dict.keys():
-            main_log.warning("\t" + str(new_dict[y]) + ": " + y)
+            log_str += "\t\t" + str(new_dict[y]) + ": " + y + "\n"
             count += new_dict[y]
-        main_log.warning("Total missed " + x.split("#")[1] + ": " + str(count))
-        main_log.warning()
-        print()
+        log_str += "\tTotal missed " + x.split("#")[1] + ": " + str(count) + "\n\n"
+
+    logging.info(log_str)
 
 
 def main():
     import os
     from bs4 import BeautifulSoup
-    create_cf_map()
+    # create_cf_map()
 
-    filelist = [filename for filename in sorted(os.listdir("bio_data")) if filename.endswith(".xml")]
+    file_dict = parse_args(__file__, "CulturalForm")
     entry_num = 1
 
-    # for filename in filelist[:200]:
-    # for filename in filelist[-5:]:
     global uber_graph
-    test_cases = ["shakwi-b-transformed.xml", "woolvi-b-transformed.xml", "seacma-b-transformed.xml", "atwoma-b-transformed.xml",
-                  "alcolo-b-transformed.xml", "bronem-b-transformed.xml", "bronch-b-transformed.xml", "levyam-b-transformed.xml"]
 
-    # for testing suffrage
-    test_cases += ["taylha-b-transformed.xml"]
-    # for testing Africanist
-    test_cases += ["angema-b-transformed.xml"]
-    for filename in filelist:
-    # for filename in test_cases:
-        with open("bio_data/" + filename) as f:
+    logging.info("Time started: " + get_current_time() + "\n")
+
+    for filename in file_dict.keys():
+        with open(filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
-        person = Biography(filename[:6], get_name(soup), get_mapped_term("Gender", get_sex(soup)))
+        person_id = filename.split("/")[-1][:6]
 
+        print("Running on:", filename)
+        logging.info(file_dict[filename])
+        print(file_dict[filename])
+        print("*" * 55)
+
+        person = Biography(person_id, soup, get_mapped_term("Gender", get_sex(soup)))
         extract_cf_data(soup, person)
-
+        person.name = get_readable_name(soup)
         graph = person.to_graph()
 
-        # logger.info("Entry #" + str(entry_num))
-        # logger.info(str(person))
-        # logger.info(str(len(graph)) + " triples created")
-        # logger.info(person.to_file(graph))
-        # logger.info("Entry #" + str(entry_num))
-        # logger.info("\n\n")
-
-        temp_path = "extracted_triples/cf_turtle/" + filename[:-6] + "_cf.ttl"
+        temp_path = "extracted_triples/cf_turtle/" + person_id + "_cf.ttl"
         create_extracted_file(temp_path, person)
-        temp_path = "extracted_triples/cf_rdf/" + filename[:-6] + "_cf.rdf"
+        temp_path = "extracted_triples/cf_rdf/" + person_id + "_cf.rdf"
         create_extracted_file(temp_path, person, "pretty-xml")
 
         uber_graph += graph
         entry_num += 1
 
-    logger.info(str(len(uber_graph)) + " triples created")
+    logging.info(str(len(uber_graph)) + " triples created")
 
     temp_path = "extracted_triples/culturalForms.ttl"
     create_extracted_uberfile(temp_path, uber_graph)
@@ -575,7 +570,8 @@ def main():
     temp_path = "extracted_triples/culturalForms.rdf"
     create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
 
-    log_mapping_fails(logger, log)
+    log_mapping_fails()
+    logging.info("Time completed: " + get_current_time())
 
 
 if __name__ == "__main__":
