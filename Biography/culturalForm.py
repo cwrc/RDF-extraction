@@ -423,7 +423,7 @@ def create_cf_map():
     # TODO: Add exception handling for when file cannot be opened/parsed
     import csv
     global CF_MAP
-    with open('cf_mapping.csv', newline='') as csvfile:
+    with open('../data/cf_mapping.csv', newline='') as csvfile:
         reader = csv.reader(csvfile)
         next(reader)
         for row in reader:
