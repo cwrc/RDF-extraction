@@ -15,12 +15,14 @@ TODO:
 """
 
 
-def create_place_map():
+def create_place_map(path=None):
     import csv
     # if searching takes too long
     # Create better searching mechanism
     # with open('geoghert_places.csv', newline='') as csvfile:
-    with open('places.csv', newline='', encoding='utf-8') as csvfile:
+    if not path:
+        path = '../data/places.csv'
+    with open(path, newline='', encoding='utf-8') as csvfile:
         reader = csv.reader(csvfile)
         next(reader)
         for row in reader:
@@ -45,9 +47,6 @@ def get_value(tag):
         value = str(tag.text)
         value = ' '.join(value.split())
     return value
-
-
-create_place_map()
 
 
 class Place(object):
@@ -100,4 +99,7 @@ def main():
 
 
 if __name__ == "__main__":
+    create_place_map("data/places.csv")
     main()
+else:
+    create_place_map()

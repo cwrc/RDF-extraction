@@ -1,7 +1,11 @@
 import rdflib
 import os
-from place import Place
 import datetime
+
+try:
+    from Utils.place import Place
+except Exception as e:
+    import Place
 
 """
 TODO: Add doctests for:
@@ -55,6 +59,16 @@ NS_DICT = {
 
 def get_current_time():
     return datetime.datetime.now().strftime("%d %b %Y %H:%M:%S")
+
+
+def create_graph():
+    """ Returns graph with necessary namespace
+
+    """
+    g = rdflib.Graph()
+    namespace_manager = rdflib.namespace.NamespaceManager(g)
+    bind_ns(namespace_manager, NS_DICT)
+    return g
 
 
 def bind_ns(namespace_manager, ns_dictionary):
@@ -224,7 +238,28 @@ def create_extracted_uberfile(filepath, graph, serialization=None):
             f.write(graph.serialize(format=serialization).decode())
         else:
             f.write("#" + str(len(graph)) + " triples created\n")
+            f.write("# date extracted: ~" + get_current_time() + "\n")
             f.write(graph.serialize(format="ttl").decode())
+
+
+def config_logger(name, verbose=False):
+    # Will likely want to convert logging records to be json formatted and based on external file.
+    import logging
+    logger = logging.getLogger(name + '_extraction')
+    logger.setLevel(logging.INFO)
+    fh = logging.FileHandler("log/" + name + "_extraction.log", mode="w")
+    fh.setLevel(logging.INFO)
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    fh.setFormatter(formatter)
+    logger.addHandler(fh)
+
+    if verbose:
+        ch = logging.StreamHandler()
+        ch.setLevel(logging.ERROR)
+        ch.setFormatter(formatter)
+        logger.addHandler(ch)
+
+    return logger
 
 
 def parse_args(script, info_type):

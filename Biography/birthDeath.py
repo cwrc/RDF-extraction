@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 import sys
 import logging
-from context import Context
-from event import get_date_tag, Event, format_date
-from place import Place
-from utilities import *
+
+from Utils import utilities
+from Utils.context import Context
+from Utils.place import Place
+from Utils.event import get_date_tag, Event, format_date
+
 # TODO: clean up imports post death
 # Should be matched up to deb's contexts somehow
 # otherwise we're looking at duplicate contexts
@@ -13,11 +15,7 @@ from utilities import *
 # death context vs cause of death context
 # TODO once resolved: https://github.com/cwrc/ontology/issues/462
 
-logger = logging.getLogger('birthdeath_extraction')
-logger.setLevel(logging.INFO)
-fh = logging.FileHandler('logging/birthdeath_extraction.log', mode="w")
-fh.setLevel(logging.INFO)
-logger.addHandler(fh)
+logger = utilities.config_logger("birthdeath")
 
 
 class Birth:
@@ -28,13 +26,13 @@ class Birth:
 
         for birth_position in bPositions:
             if birth_position == "ONLY":
-                self.position.append(NS_DICT["cwrc"].onlyChild)
+                self.position.append(utilities.NS_DICT["cwrc"].onlyChild)
             elif birth_position == "ELDEST":
-                self.position.append(NS_DICT["cwrc"].eldestChild)
+                self.position.append(utilities.NS_DICT["cwrc"].eldestChild)
             elif birth_position == "YOUNGEST":
-                self.position.append(NS_DICT["cwrc"].youngestChild)
+                self.position.append(utilities.NS_DICT["cwrc"].youngestChild)
             elif birth_position == "MIDDLE:":
-                self.position.append(NS_DICT["cwrc"].middleChild)
+                self.position.append(utilities.NS_DICT["cwrc"].middleChild)
 
     def __str__(self):
         string = "\tDate: " + str(self.date) + "\n"
@@ -44,17 +42,15 @@ class Birth:
         return string
 
     def to_triple(self, person):
-        g = rdflib.Graph()
-        namespace_manager = rdflib.namespace.NamespaceManager(g)
-        bind_ns(namespace_manager, NS_DICT)
+        g = utilities.create_graph()
         if self.date:
-            g.add((person.uri, NS_DICT["cwrc"].hasBirthDate, format_date(self.date)))
+            g.add((person.uri, utilities.NS_DICT["cwrc"].hasBirthDate, format_date(self.date)))
 
         for x in self.position:
-            g.add((person.uri, NS_DICT["cwrc"].hasBirthPosition, x))
+            g.add((person.uri, utilities.NS_DICT["cwrc"].hasBirthPosition, x))
 
         if self.place:
-            g.add((person.uri, NS_DICT["cwrc"].hasBirthPlace, self.place))
+            g.add((person.uri, utilities.NS_DICT["cwrc"].hasBirthPlace, self.place))
 
         return g
 
@@ -334,13 +330,11 @@ def main():
     import rdflib
     from biography import Biography
 
-    file_dict = parse_args(__file__, "Birth/Death")
+    file_dict = utilities.parse_args(__file__, "Birth/Death")
     print("-" * 200)
     entry_num = 1
 
-    uber_graph = rdflib.Graph()
-    namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
-    bind_ns(namespace_manager, NS_DICT)
+    uber_graph = utilities.create_graph()
 
     for filename in file_dict.keys():
         with open(filename) as f:
@@ -353,14 +347,14 @@ def main():
         print(person_id)
         print("*" * 55)
 
-        person = Biography(person_id, soup, culturalForm.get_mapped_term("Gender", get_sex(soup)))
+        person = Biography(person_id, soup, culturalForm.get_mapped_term("Gender", utilities.get_sex(soup)))
         extract_birth_data(soup, person)
-        person.name = get_readable_name(soup)
+        person.name = utilities.get_readable_name(soup)
         # print(person.to_file())
         # print()
 
         temp_path = "extracted_triples/birthdeath_turtle/" + person_id + "_birthdeath.ttl"
-        create_extracted_file(temp_path, person)
+        utilities.create_extracted_file(temp_path, person)
 
         uber_graph += person.to_graph()
         entry_num += 1
@@ -368,10 +362,10 @@ def main():
 
     print("UberGraph is size:", len(uber_graph))
     temp_path = "extracted_triples/birthdeath.ttl"
-    create_extracted_uberfile(temp_path, uber_graph)
+    utilities.create_extracted_uberfile(temp_path, uber_graph)
 
     temp_path = "extracted_triples/birthdeath.rdf"
-    create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
+    utilities.create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
 
 
 if __name__ == '__main__':

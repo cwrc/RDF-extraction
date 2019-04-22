@@ -1,8 +1,7 @@
 import rdflib
 from rdflib import RDF, RDFS, Literal
 
-from utilities import *
-from organizations import get_org_uri
+from Utils import utilities, organizations
 
 MAX_WORD_COUNT = 35
 
@@ -24,12 +23,12 @@ def identifying_motivation(tag):
     """
     identified_subjects = []
 
-    identified_subjects += get_places(tag)
-    identified_subjects += get_people(tag)
-    identified_subjects += get_titles(tag)
+    identified_subjects += utilities.get_places(tag)
+    identified_subjects += utilities.get_people(tag)
+    identified_subjects += utilities.get_titles(tag)
 
     for x in tag.find_all("ORGNAME"):
-        identified_subjects.append(get_org_uri(x))
+        identified_subjects.append(organizations.get_org_uri(x))
 
     return identified_subjects
 
@@ -46,7 +45,7 @@ def get_heading(tag):
         heading = tag.findNext("HEADING")
     if not heading:
         return None
-    return remove_punctuation(strip_all_whitespace(heading.text), True)
+    return utilities.remove_punctuation(utilities.strip_all_whitespace(heading.text), True)
 
 
 class Context(object):
@@ -107,20 +106,20 @@ class Context(object):
 
         # TODO: Make snippet start where first triple is extracted from
         # Making the text the max amount of words
-        self.text = limit_words(str(tag.get_text()), MAX_WORD_COUNT)
+        self.text = utilities.limit_words(str(tag.get_text()), MAX_WORD_COUNT)
 
         if context_type in self.context_map:
-            self.context_type = create_uri("cwrc", self.context_map[context_type])
+            self.context_type = utilities.create_uri("cwrc", self.context_map[context_type])
             self.context_label = self.context_map[context_type].split("Context")[0] + " Context"
         else:
-            self.context_type = create_uri("cwrc", context_type)
+            self.context_type = utilities.create_uri("cwrc", context_type)
             self.context_label = context_type.split("Context")[0] + " Context"
 
-        self.motivation = create_uri("oa", motivation)
+        self.motivation = utilities.create_uri("oa", motivation)
         self.subjects = []
         if motivation == "identifying":
             self.subjects = identifying_motivation(self.tag)
-        self.uri = create_uri("data", id)
+        self.uri = utilities.create_uri("data", id)
 
     def link_triples(self, comp_list):
         """ Adding to list of components to link context to triples
@@ -160,10 +159,8 @@ class Context(object):
         return list(set(subjects))
 
     def to_triple(self, person=None):
-        # if tag is a describing one create the identifying triples
-        g = rdflib.Graph()
-        namespace_manager = rdflib.namespace.NamespaceManager(g)
-        bind_ns(namespace_manager, NS_DICT)
+        # if tag is a describing None create the identifying triples
+        g = utilities.create_graph()
 
         # Creating Textual body first
         snippet_uri = rdflib.term.URIRef(str(self.uri) + "_Snippet")
@@ -175,10 +172,10 @@ class Context(object):
             source_url = rdflib.term.URIRef(self.src + "#FE")
             snippet_label = "FE" + " - " + self.context_label + " snippet"
 
-        g.add((snippet_uri, RDF.type, NS_DICT["oa"].TextualBody))
+        g.add((snippet_uri, RDF.type, utilities.NS_DICT["oa"].TextualBody))
         g.add((snippet_uri, RDFS.label, rdflib.term.Literal(snippet_label)))
-        g.add((snippet_uri, NS_DICT["oa"].hasSource, source_url))
-        g.add((snippet_uri, NS_DICT["dcterms"].description, rdflib.term.Literal(
+        g.add((snippet_uri, utilities.NS_DICT["oa"].hasSource, source_url))
+        g.add((snippet_uri, utilities.NS_DICT["dcterms"].description, rdflib.term.Literal(
             self.text, datatype=rdflib.namespace.XSD.string)))
 
         # Creating identifying context first and always
@@ -187,36 +184,36 @@ class Context(object):
         else:
             context_label = self.context_label + " identifying annotation"
 
-        identifying_uri = create_uri("data", self.id + "_identifying")
+        identifying_uri = utilities.create_uri("data", self.id + "_identifying")
         g.add((identifying_uri, RDF.type, self.context_type))
         g.add((identifying_uri, RDFS.label, rdflib.term.Literal(context_label)))
-        g.add((identifying_uri, NS_DICT["oa"].hasTarget, snippet_uri))
-        g.add((identifying_uri, NS_DICT["oa"].motivatedBy, NS_DICT["oa"].identifying))
+        g.add((identifying_uri, utilities.NS_DICT["oa"].hasTarget, snippet_uri))
+        g.add((identifying_uri, utilities.NS_DICT["oa"].motivatedBy, utilities.NS_DICT["oa"].identifying))
         self.subjects += identifying_motivation(self.tag)
         if self.triples and person:
             self.subjects += self.get_subjects(self.triples, person)
         for x in self.subjects:
-            g.add((identifying_uri, NS_DICT["oa"].hasBody, x))
+            g.add((identifying_uri, utilities.NS_DICT["oa"].hasBody, x))
 
         if person:
-            g.add((identifying_uri, NS_DICT["oa"].hasBody, person.uri))
+            g.add((identifying_uri, utilities.NS_DICT["oa"].hasBody, person.uri))
 
         if self.event:
-            g.add((identifying_uri, NS_DICT["cwrc"].hasEvent, self.event))
+            g.add((identifying_uri, utilities.NS_DICT["cwrc"].hasEvent, self.event))
 
         # Creating describing context if applicable
-        if self.motivation == NS_DICT["oa"].describing:
-            self.uri = create_uri("data", self.id + "_describing")
+        if self.motivation == utilities.NS_DICT["oa"].describing:
+            self.uri = utilities.create_uri("data", self.id + "_describing")
             context_label = person.name + " - " + self.context_label + " describing annotation"
             g.add((self.uri, RDF.type, self.context_type))
             g.add((self.uri, RDFS.label, rdflib.term.Literal(context_label)))
-            g.add((self.uri, NS_DICT["cwrc"].hasIDependencyOn, identifying_uri))
-            g.add((self.uri, NS_DICT["oa"].hasTarget, person.uri))
-            g.add((self.uri, NS_DICT["oa"].hasTarget, snippet_uri))
-            g.add((self.uri, NS_DICT["oa"].motivatedBy, self.motivation))
+            g.add((self.uri, utilities.NS_DICT["cwrc"].hasIDependencyOn, identifying_uri))
+            g.add((self.uri, utilities.NS_DICT["oa"].hasTarget, person.uri))
+            g.add((self.uri, utilities.NS_DICT["oa"].hasTarget, snippet_uri))
+            g.add((self.uri, utilities.NS_DICT["oa"].motivatedBy, self.motivation))
 
             for x in self.subjects:
-                g.add((self.uri, NS_DICT["dcterms"].subject, x))
+                g.add((self.uri, utilities.NS_DICT["dcterms"].subject, x))
 
             for x in self.triples:
                 temp_str = x.to_triple(person).serialize(format="ttl").decode().splitlines()
@@ -229,25 +226,24 @@ class Context(object):
                     g += self.create_multiple_triples(x.to_triple(person))
 
             if self.event:
-                g.add((self.uri, NS_DICT["cwrc"].hasEvent, self.event))
-                g.add((self.event, NS_DICT["cwrc"].hasContext, self.uri))
+                g.add((self.uri, utilities.NS_DICT["cwrc"].hasEvent, self.event))
+                g.add((self.event, utilities.NS_DICT["cwrc"].hasContext, self.uri))
 
         # Creating the mentioned people as natural person
         for x in self.tag.find_all("NAME"):
-            uri = make_standard_uri(x.get("STANDARD"))
-            g.add((uri, RDF.type, NS_DICT["cwrc"].NaturalPerson))
+            uri = utilities.make_standard_uri(x.get("STANDARD"))
+            g.add((uri, RDF.type, utilities.NS_DICT["cwrc"].NaturalPerson))
             g.add((uri, RDFS.label, Literal(x.get("STANDARD"), datatype=rdflib.namespace.XSD.string)))
-            g.add((uri, NS_DICT["foaf"].name, Literal(x.get("STANDARD"), datatype=rdflib.namespace.XSD.string)))
+            g.add((uri, utilities.NS_DICT["foaf"].name, Literal(
+                x.get("STANDARD"), datatype=rdflib.namespace.XSD.string)))
 
         return g
 
     def create_multiple_triples(self, graph):
         """handles multitple triples
         """
-        temp_g = rdflib.Graph()
+        temp_g = utilities.create_graph()
         g = rdflib.Graph()
-        namespace_manager = rdflib.namespace.NamespaceManager(temp_g)
-        bind_ns(namespace_manager, NS_DICT)
         for x in graph[:]:
             temp_g.add(x)
             triple_str = temp_g.serialize(format="ttl").decode().splitlines()[-2]
@@ -259,11 +255,11 @@ class Context(object):
     def create_ttl_body(self, triple_str):
         g = rdflib.Graph()
         format_str = rdflib.term.Literal("text/turtle", datatype=rdflib.namespace.XSD.string)
-        format_uri = create_uri("dcterms", "format")
+        format_uri = utilities.create_uri("dcterms", "format")
         triple_str = rdflib.term.Literal(triple_str, datatype=rdflib.namespace.XSD.string)
         temp_body = rdflib.BNode()
-        g.add((self.uri, NS_DICT["oa"].hasBody, temp_body))
-        g.add((temp_body, RDF.type, NS_DICT["oa"].TextualBody))
+        g.add((self.uri, utilities.NS_DICT["oa"].hasBody, temp_body))
+        g.add((temp_body, RDF.type, utilities.NS_DICT["oa"].TextualBody))
         g.add((temp_body, RDF.value, triple_str))
         g.add((temp_body, format_uri, format_str))
         return g

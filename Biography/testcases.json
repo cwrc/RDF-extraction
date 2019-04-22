@@ -1,5 +1,5 @@
 {
-    "default directory": "bio_data/",
+    "default directory": "../data/biography_entries/",
     "file ending": "-b-transformed.xml",
     "qa": {
         "testcases": {

@@ -1,6 +1,6 @@
 import rdflib
 from rdflib import RDF, RDFS, Literal
-from utilities import *
+from Utils import utilities
 
 """
 TODO: handle
@@ -51,9 +51,9 @@ class Biography(object):
         self.id = id
         self.url = "http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id=" + id
         self.url = rdflib.term.URIRef(self.url)
-        self.name = get_readable_name(doc)
+        self.name = utilities.get_readable_name(doc)
         self.gender = gender
-        self.uri = make_standard_uri(get_name(doc))
+        self.uri = utilities.make_standard_uri(utilities.get_name(doc))
 
         self.nationalities = []
 
@@ -144,7 +144,7 @@ class Biography(object):
     def to_graph(self):
         g = rdflib.Graph()
         namespace_manager = rdflib.namespace.NamespaceManager(g)
-        bind_ns(namespace_manager, NS_DICT)
+        utilities.bind_ns(namespace_manager, utilities.NS_DICT)
 
         g.add((self.uri, RDF.type, NS_DICT["cwrc"].NaturalPerson))
         g.add((self.uri, NS_DICT["foaf"].name, Literal(self.name, datatype=rdflib.namespace.XSD.string)))

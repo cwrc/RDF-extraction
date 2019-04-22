@@ -11,3 +11,4 @@ venv
 *.ttl
 *.xml
 *.rdf
+*.log

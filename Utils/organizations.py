@@ -4,11 +4,11 @@ import rdflib
 from bs4 import BeautifulSoup
 from rdflib import RDF, RDFS, Literal
 
-from utilities import *
+try:
+    from Utils import utilities
+except Exception as e:
+    import utilities
 
-uber_graph = rdflib.Graph()
-namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
-bind_ns(namespace_manager, NS_DICT)
 
 # this is temporary list to ensure that the orgname standard is within the auth list
 org_list = []
@@ -29,7 +29,7 @@ class Organization(object):
         self.name = name
 
         self.altlabels = altlabels
-        self.uri = rdflib.term.URIRef(str(NS_DICT["cwrc"]) + uri)
+        self.uri = rdflib.term.URIRef(str(utilities.NS_DICT["cwrc"]) + uri)
         # self.uri = rdflib.term.URIRef(uri)
 
     # TODO figure out if i can just return tuple or triple without creating a whole graph
@@ -39,14 +39,12 @@ class Organization(object):
         # return ((person_uri, self.uri, self.value))
 
     def to_triple(self):
-        g = rdflib.Graph()
-        namespace_manager = rdflib.namespace.NamespaceManager(g)
-        bind_ns(namespace_manager, NS_DICT)
-        g.add((self.uri, NS_DICT["foaf"].name, Literal(self.name)))
+        g = utilities.create_graph()
+        g.add((self.uri, utilities.NS_DICT["foaf"].name, Literal(self.name)))
         g.add((self.uri, RDFS.label, Literal(self.name)))
-        g.add((self.uri, RDF.type, NS_DICT["org"].Organization))
+        g.add((self.uri, RDF.type, utilities.NS_DICT["org"].Organization))
         for x in self.altlabels:
-            g.add((self.uri, NS_DICT["skos"].altLabel, Literal(x)))
+            g.add((self.uri, utilities.NS_DICT["skos"].altLabel, Literal(x)))
         return g
 
     def __str__(self):
@@ -67,7 +65,7 @@ def get_org_uri(tag):
     else:
         name = tag.get("STANDARD")
 
-    return make_standard_uri(name + " ORG", ns="cwrc")
+    return utilities.make_standard_uri(name + " ORG", ns="cwrc")
 
 
 def get_org(tag):
@@ -89,26 +87,26 @@ def extract_org_data(bio):
             org = get_org(instance)
             if org:
                 if element == elements[0]:
-                    org_type = NS_DICT["cwrc"].PoliticalOrganization
+                    org_type = utilities.NS_DICT["cwrc"].PoliticalOrganization
                 elif element == elements[1]:
-                    org_type = NS_DICT["cwrc"].ReligiousOrganization
+                    org_type = utilities.NS_DICT["cwrc"].ReligiousOrganization
                 elif element == elements[2]:
-                    org_type = NS_DICT["cwrc"].EducationalOrganization
+                    org_type = utilities.NS_DICT["cwrc"].EducationalOrganization
 
                 for x in org:
                     org_uri = get_org_uri(x)
                     uber_graph.add((org_uri, RDF.type, org_type))
-                    uber_graph.remove((org_uri, RDF.type, NS_DICT["org"].Organization))
+                    uber_graph.remove((org_uri, RDF.type, utilities.NS_DICT["org"].Organization))
 
                     # Adding the hasOrganization relation
-                    if org_type == NS_DICT["cwrc"].ReligiousOrganization:
+                    if org_type == utilities.NS_DICT["cwrc"].ReligiousOrganization:
                         mapped_value = cf.get_mapped_term("Religion", cf.get_value(instance))
                         if type(mapped_value) is rdflib.term.URIRef:
-                            uber_graph.add((mapped_value, NS_DICT["cwrc"].hasOrganization, org_uri))
-                    elif org_type == NS_DICT["cwrc"].PoliticalOrganization:
+                            uber_graph.add((mapped_value, utilities.NS_DICT["cwrc"].hasOrganization, org_uri))
+                    elif org_type == utilities.NS_DICT["cwrc"].PoliticalOrganization:
                         mapped_value = cf.get_mapped_term("PoliticalAffiliation", cf.get_value(instance))
                         if type(mapped_value) is rdflib.term.URIRef:
-                            uber_graph.add((mapped_value, NS_DICT["cwrc"].hasOrganization, org_uri))
+                            uber_graph.add((mapped_value, utilities.NS_DICT["cwrc"].hasOrganization, org_uri))
 
 
 def create_org_csv():
@@ -165,4 +163,5 @@ def main():
 
 
 if __name__ == "__main__":
+    uber_graph = utilities.create_graph()
     main()

@@ -5,14 +5,13 @@ from rdflib import RDF, RDFS, Literal
 import rdflib
 
 import logging
-from utilities import *
-from organizations import get_org, get_org_uri
+from Utils import utilities
+from Utils.organizations import get_org, get_org_uri
+from Utils.place import Place
+from Utils.event import Event
+from Utils.context import Context
 
 from biography import Biography
-from context import Context
-from event import Event
-from place import Place
-
 
 """
 Status: ~90%
@@ -25,12 +24,9 @@ temp solution until endpoint is active
 
 """
 
-# Will likely want to convert logging records to be json formatted and based on external file.
-logging.basicConfig(filename='culturalform_extraction.log', filemode='w',
-                    format='culturalform - %(levelname)s - %(message)s', level=logging.INFO)
-uber_graph = rdflib.Graph()
-namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
-bind_ns(namespace_manager, NS_DICT)
+logger = utilities.config_logger("culturalform")
+
+uber_graph = utilities.create_graph()
 
 
 class CulturalForm(object):
@@ -40,7 +36,7 @@ class CulturalForm(object):
         using other_attributes to handle extra predicates
         that may come up for cfs
         Ex. Organizations
-        other_attributes=NS_DICT["org"].memberOf
+        other_attributes=utilities.NS_DICT["org"].memberOf
         This being the uri rather the typical cf one
     """
 
@@ -53,9 +49,9 @@ class CulturalForm(object):
         if other_attributes:
             self.uri = other_attributes
         elif self.reported:
-            self.uri = create_uri("cwrc", self.predicate + self.reported)
+            self.uri = utilities.create_uri("cwrc", self.predicate + self.reported)
         else:
-            self.uri = create_uri("cwrc", self.predicate)
+            self.uri = utilities.create_uri("cwrc", self.predicate)
 
         self.uri = rdflib.term.URIRef(self.uri)
 
@@ -69,9 +65,7 @@ class CulturalForm(object):
         return ((person_uri, self.uri, self.value))
 
     def to_triple(self, person):
-        g = rdflib.Graph()
-        namespace_manager = rdflib.namespace.NamespaceManager(g)
-        bind_ns(namespace_manager, NS_DICT)
+        g = utilities.create_graph()
         g.add((person.uri, self.uri, self.value))
         return g
 
@@ -94,7 +88,7 @@ def get_reported(tag):
         elif reported == "SELFUNKNOWN":
             return None
         else:
-            logging.error("self-defined attribute RETURNED UNEXPECTED RESULTS:" + str(tag) + "?????")
+            logger.error("self-defined attribute RETURNED UNEXPECTED RESULTS:" + str(tag) + "?????")
     return None
 
 
@@ -107,14 +101,14 @@ def find_cultural_forms(cf, person):
             value = x.get("SOCIALRANK")
 
             if not value or value == "OTHER":
-                value = get_value(x)
+                value = utilities.get_value(x)
 
             cf_list.append(CulturalForm("hasSocialClass", get_reported(x), get_mapped_term("SocialClass", value)))
 
     def get_language():
         langs = cf.find_all("LANGUAGE")
         for x in langs:
-            value = get_value(x)
+            value = utilities.get_value(x)
 
             # What if nested ethnicity tag?
             competence = x.get("COMPETENCE")
@@ -136,7 +130,7 @@ def find_cultural_forms(cf, person):
         for tag in tags.keys():
             instances = cf.find_all(tag)
             for x in instances:
-                value = get_value(x)
+                value = utilities.get_value(x)
                 if tags[tag][1] == "NationalIdentity":
                     if value == "Indian/English":
                         cf_list.append(CulturalForm(tags[tag][0], get_reported(
@@ -165,14 +159,14 @@ def find_cultural_forms(cf, person):
                     place_values.append(temp_place.uri)
             return place_values
         else:
-            return get_mapped_term("GeographicHeritage", get_value(tag))
+            return get_mapped_term("GeographicHeritage", utilities.get_value(tag))
 
     def get_forebear_cfs():
         # NOTE: This will have to interact will sparql endpoint to check family related triples
         # sparql query to check if person hasMother/hasFather, and there is a valid uri
         # otherwise create the person and familial relation?
         def get_forebear(tag):
-            return get_attribute(tag, "FOREBEAR")
+            return utilities.get_attribute(tag, "FOREBEAR")
         # This optional attribute attaches to the elements Ethnicity, Geographical Heritage, National Heritage, or Race, Colour,
         # has ten possible values: Father, Mother, Parents, Grandfather, Grandmother, Grandparents, Aunt, Uncle, Other, and Family.
 
@@ -227,7 +221,7 @@ def find_cultural_forms(cf, person):
                         culturalforms.append(CulturalForm("has" + tags[tag], get_reported(x), value))
 
                 else:
-                    value = get_value(x)
+                    value = utilities.get_value(x)
                     if tag == "NATIONALHERITAGE" and value in ["American-Austrian", "Anglo-Scottish", "Scottish-Irish"]:
                         culturalforms.append(CulturalForm(
                             "has" + tags[tag], get_reported(x), get_mapped_term(tags[tag], value.split("-")[0])))
@@ -257,26 +251,26 @@ def find_cultural_forms(cf, person):
         religions = cf.find_all("DENOMINATION")
 
         for x in religions:
-            value = get_reg(x)
+            value = utilities.get_reg(x)
             orgName = get_org(x)
 
             if not value and orgName:
                 for org in orgName:
                     cf_list.append(CulturalForm(None, None, get_org_uri(org),
-                                                other_attributes=NS_DICT["org"].memberOf))
+                                                other_attributes=utilities.NS_DICT["org"].memberOf))
             elif orgName:
                 for org in orgName:
                     cf_list.append(CulturalForm(None, None, get_org_uri(org),
-                                                other_attributes=NS_DICT["org"].memberOf))
+                                                other_attributes=utilities.NS_DICT["org"].memberOf))
 
-            value = get_mapped_term("Religion", get_value(x), True)
+            value = get_mapped_term("Religion", utilities.get_value(x), True)
 
             # Checking if religion occurs as a PA if no result as a religion
             if type(value) is Literal:
-                value = get_mapped_term("PoliticalAffiliation", get_value(x), True)
-                # logging.warning("Mapping Religion to PA: " + value)
+                value = get_mapped_term("PoliticalAffiliation", utilities.get_value(x), True)
+                # logger.warning("Mapping Religion to PA: " + value)
             if type(value) is Literal:
-                value = get_mapped_term("Religion", get_value(x))
+                value = get_mapped_term("Religion", utilities.get_value(x))
 
             religion = CulturalForm("hasReligion", get_reported(x), value)
 
@@ -285,20 +279,20 @@ def find_cultural_forms(cf, person):
     def get_PA():
         pas = cf.find_all("POLITICALAFFILIATION")
         for x in pas:
-            value = get_reg(x)
+            value = utilities.get_reg(x)
             orgName = get_org(x)
             if not value and orgName:
                 for org in orgName:
                     cf_list.append(CulturalForm(None, None, get_org_uri(org),
-                                                other_attributes=NS_DICT["org"].memberOf))
+                                                other_attributes=utilities.NS_DICT["org"].memberOf))
                 value = get_org_uri(org)
             elif orgName:
                 for org in orgName:
                     cf_list.append(CulturalForm(None, None, get_org_uri(org),
-                                                other_attributes=NS_DICT["org"].memberOf))
-                value = get_mapped_term("PoliticalAffiliation", get_value(x))
+                                                other_attributes=utilities.NS_DICT["org"].memberOf))
+                value = get_mapped_term("PoliticalAffiliation", utilities.get_value(x))
             else:
-                value = get_mapped_term("PoliticalAffiliation", get_value(x))
+                value = get_mapped_term("PoliticalAffiliation", utilities.get_value(x))
 
             gender_issue = False
             if x.get("WOMAN-GENDERISSUE") == "GENDERYES":
@@ -403,10 +397,11 @@ def extract_cf_data(bio, person):
         forms_found += extract_culturalforms(events, "POLITICS", person, "events", forms_found)
 
     # Extracting additional information from writer
-    if get_persontype(bio) in ["BRWWRITER", "IBRWRITER"]:
+    persontype = utilities.get_persontype(bio)
+    if persontype in ["BRWWRITER", "IBRWRITER"]:
         if not any(x in ["GB", "GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS", "IE"] for x in person.nationalities):
-            logging.info("Asserting the writer's (" + person.name
-                         + ") nationality as British based on attribute:" + get_persontype(bio))
+            logger.info("Asserting the writer's (" + person.name
+                        + ") nationality as British based on attribute:" + persontype)
             person.add_cultural_form(CulturalForm("hasNationality", None,
                                                   get_mapped_term("NationalIdentity", "British")))
 
@@ -495,7 +490,7 @@ def get_mapped_term(rdf_type, value, retry=False):
                 update_fails(rdf_type, value)
             else:
                 update_fails(rdf_type, value + "->" + str(possibilites) + "?")
-            logging.warning("Unable to find matching " + rdf_type.split("#")[1] + " instance for '" + value + "'")
+            logger.warning("Unable to find matching " + rdf_type.split("#")[1] + " instance for '" + value + "'")
     return term
 
 
@@ -523,7 +518,7 @@ def log_mapping_fails(detail=True):
             count += new_dict[y]
         log_str += "\tTotal missed " + x.split("#")[1] + ": " + str(count) + "\n\n"
 
-    logging.info(log_str)
+    logger.info(log_str)
 
 
 def main():
@@ -531,12 +526,12 @@ def main():
     from bs4 import BeautifulSoup
     # create_cf_map()
 
-    file_dict = parse_args(__file__, "CulturalForm")
+    file_dict = utilities.parse_args(__file__, "CulturalForm")
     entry_num = 1
 
     global uber_graph
 
-    logging.info("Time started: " + get_current_time() + "\n")
+    logger.info("Time started: " + utilities.get_current_time() + "\n")
 
     for filename in file_dict.keys():
         with open(filename) as f:
@@ -545,33 +540,33 @@ def main():
         person_id = filename.split("/")[-1][:6]
 
         print("Running on:", filename)
-        logging.info(file_dict[filename])
+        logger.info(file_dict[filename])
         print(file_dict[filename])
         print("*" * 55)
 
-        person = Biography(person_id, soup, get_mapped_term("Gender", get_sex(soup)))
+        person = Biography(person_id, soup, get_mapped_term("Gender", utilities.get_sex(soup)))
         extract_cf_data(soup, person)
-        person.name = get_readable_name(soup)
+        person.name = utilities.get_readable_name(soup)
         graph = person.to_graph()
 
         temp_path = "extracted_triples/cf_turtle/" + person_id + "_cf.ttl"
-        create_extracted_file(temp_path, person)
+        utilities.create_extracted_file(temp_path, person)
         temp_path = "extracted_triples/cf_rdf/" + person_id + "_cf.rdf"
-        create_extracted_file(temp_path, person, "pretty-xml")
+        utilities.create_extracted_file(temp_path, person, "pretty-xml")
 
         uber_graph += graph
         entry_num += 1
 
-    logging.info(str(len(uber_graph)) + " triples created")
+    logger.info(str(len(uber_graph)) + " triples created")
 
     temp_path = "extracted_triples/culturalForms.ttl"
-    create_extracted_uberfile(temp_path, uber_graph)
+    utilities.create_extracted_uberfile(temp_path, uber_graph)
 
     temp_path = "extracted_triples/culturalForms.rdf"
-    create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
+    utilities.create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
 
     log_mapping_fails()
-    logging.info("Time completed: " + get_current_time())
+    logger.info("Time completed: " + utilities.get_current_time())
 
 
 if __name__ == "__main__":
