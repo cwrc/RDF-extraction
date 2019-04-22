@@ -524,7 +524,6 @@ def log_mapping_fails(detail=True):
 def main():
     import os
     from bs4 import BeautifulSoup
-    # create_cf_map()
 
     file_dict = utilities.parse_args(__file__, "CulturalForm")
     entry_num = 1
