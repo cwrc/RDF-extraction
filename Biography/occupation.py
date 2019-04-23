@@ -276,7 +276,7 @@ def main():
 
         graph = person.to_graph()
 
-        temp_path = "extracted_triples/occupation_turtle/" + person_id + "_cf.ttl"
+        temp_path = "extracted_triples/occupation_turtle/" + person_id + "_occupations.ttl"
         utilities.create_extracted_file(temp_path, person)
 
         uber_graph += graph

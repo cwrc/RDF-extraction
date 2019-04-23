@@ -2,29 +2,17 @@
 
 
 from biography import Biography
-from context import Context
-from event import Event
-from log import Log
-from place import Place
-from utilities import *
-import rdflib
+from Utils.context import Context
+from Utils.event import Event
+from Utils.place import Place
+from Utils import utilities
 
 """
 Status: ~80%
 """
 
-# temp log library for debugging -->
-# to be eventually replaced with proper logging library
-log = Log("log/location/errors")
-log.test_name("Location extraction Error Logging")
-extract_log = Log("log/location/extraction")
-extract_log.test_name("Location extraction Test Logging")
-turtle_log = Log("log/location/triples")
-turtle_log.test_name("Location extracted Triples")
-
-uber_graph = rdflib.Graph()
-namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
-bind_ns(namespace_manager, NS_DICT)
+logger = utilities.config_logger("location")
+uber_graph = utilities.create_graph()
 
 location_occurences = {}
 location_count = {
@@ -66,15 +54,13 @@ class Location(object):
         if other_attributes:
             self.uri = other_attributes
 
-        self.uri = create_uri("cwrc", self.predicate)
+        self.uri = utilities.create_uri("cwrc", self.predicate)
 
     def to_tuple(self, person_uri):
         return ((person_uri, self.uri, self.value))
 
     def to_triple(self, person):
-        g = rdflib.Graph()
-        namespace_manager = rdflib.namespace.NamespaceManager(g)
-        bind_ns(namespace_manager, NS_DICT)
+        g = utilities.create_graph()
         g.add((person.uri, self.uri, self.value))
         return g
 
@@ -221,56 +207,43 @@ def extract_location_data(bio, person):
 
 
 def main():
-    import os
     from bs4 import BeautifulSoup
     import culturalForm
 
-    filelist = [filename for filename in sorted(os.listdir("bio_data")) if filename.endswith(".xml")]
+    file_dict = utilities.parse_args(__file__, "Location")
+
     entry_num = 1
 
-    uber_graph = rdflib.Graph()
-    namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
-    bind_ns(namespace_manager, NS_DICT)
+    uber_graph = utilities.create_graph()
 
-    # for filename in filelist[:200]:
-    # for filename in filelist[-5:]:
-    test_cases = ["shakwi-b.xml", "woolvi-b.xml", "seacma-b.xml", "atwoma-b.xml",
-                  "alcolo-b.xml", "bronem-b.xml", "bronch-b.xml", "levyam-b.xml"]
-    # for filename in filelist:
-    for filename in test_cases:
-        with open("bio_data/" + filename) as f:
+    for filename in file_dict.keys():
+        with open(filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
-        print(filename)
-        person = Biography(
-            filename[:-6], get_name(soup), culturalForm.get_mapped_term("Gender", get_sex(soup)))
+        person_id = filename.split("/")[-1][:6]
 
+        print(filename)
+        print(file_dict[filename])
+        print(person_id)
+        print("*" * 55)
+
+        person = Biography(person_id, soup, culturalForm.get_mapped_term("Gender", utilities.get_sex(soup)))
         extract_location_data(soup, person)
 
         graph = person.to_graph()
 
-        extract_log.subtitle("Entry #" + str(entry_num))
-        extract_log.msg(str(person))
-        extract_log.subtitle(str(len(graph)) + " triples created")
-        extract_log.msg(person.to_file(graph))
-        extract_log.subtitle("Entry #" + str(entry_num))
-        extract_log.msg("\n\n")
-
-        temp_path = "extracted_triples/location_turtle/" + filename[:-6] + "_location.ttl"
-        create_extracted_file(temp_path, person)
+        temp_path = "extracted_triples/location_turtle/" + person_id + "_location.ttl"
+        utilities.create_extracted_file(temp_path, person)
 
         uber_graph += graph
         entry_num += 1
 
-    turtle_log.subtitle(str(len(uber_graph)) + " triples created")
-    turtle_log.msg(uber_graph.serialize(format="ttl").decode(), stdout=False)
-    turtle_log.msg("")
-
+    print("UberGraph is size:", len(uber_graph))
     temp_path = "extracted_triples/location.ttl"
-    create_extracted_uberfile(temp_path, uber_graph)
+    utilities.create_extracted_uberfile(temp_path, uber_graph)
 
     temp_path = "extracted_triples/location.rdf"
-    create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
+    utilities.create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
 
 
 if __name__ == "__main__":

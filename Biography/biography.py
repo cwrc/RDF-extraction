@@ -2,46 +2,6 @@ import rdflib
 from rdflib import RDF, RDFS, Literal
 from Utils import utilities
 
-"""
-TODO: handle
-WRITER
-BRWWRITER
-IBRWRITER
-"""
-
-NS_DICT = {
-    "as": rdflib.Namespace("http://www.w3.org/ns/activitystreams#"),
-    "bibo": rdflib.Namespace("http://purl.org/ontology/bibo/"),
-    "bio": rdflib.Namespace("http://purl.org/vocab/bio/0.1/"),
-    "bf": rdflib.Namespace("http://id.loc.gov/ontologies/bibframe/"),
-    "cc": rdflib.Namespace("http://creativecommons.org/ns#"),
-    "cwrc": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/cwrc#"),
-    "data": rdflib.Namespace("http://cwrc.ca/cwrcdata/"),
-    "dbpedia": rdflib.Namespace("http://dbpedia.org/resource/"),
-    "dcterms": rdflib.Namespace("http://purl.org/dc/terms/"),
-    "dctypes": rdflib.Namespace("http://purl.org/dc/dcmitype/"),
-    "eurovoc": rdflib.Namespace("http://eurovoc.europa.eu/"),
-    "foaf": rdflib.Namespace("http://xmlns.com/foaf/0.1/"),
-    "geonames": rdflib.Namespace("http://sws.geonames.org/"),
-    "gvp": rdflib.Namespace("http://vocab.getty.edu/ontology#"),
-    "loc": rdflib.Namespace("http://id.loc.gov/vocabulary/relators/"),
-    "oa": rdflib.Namespace("http://www.w3.org/ns/oa#"),
-    "org": rdflib.Namespace("http://www.w3.org/ns/org#"),
-    "owl": rdflib.Namespace("http://www.w3.org/2002/07/owl#"),
-    "prov": rdflib.Namespace("http://www.w3.org/ns/prov#"),
-    "rdf": rdflib.Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#"),
-    "rdfs": rdflib.Namespace("http://www.w3.org/2000/01/rdf-schema#"),
-    "sem": rdflib.Namespace("http://semanticweb.cs.vu.nl/2009/11/sem/"),
-    "schema": rdflib.Namespace("http://schema.org/"),
-    "skos": rdflib.Namespace("http://www.w3.org/2004/02/skos/core#"),
-    "skosxl": rdflib.Namespace("http://www.w3.org/2008/05/skos-xl#"),
-    "time": rdflib.Namespace("http://www.w3.org/2006/time#"),
-    "vann": rdflib.Namespace("http://purl.org/vocab/vann/"),
-    "voaf": rdflib.Namespace("http://purl.org/vocommons/voaf#"),
-    "void": rdflib.Namespace("http://rdfs.org/ns/void#"),
-    "vs": rdflib.Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#")
-}
-
 
 class Biography(object):
     """docstring for Biography"""
@@ -142,15 +102,13 @@ class Biography(object):
         return g
 
     def to_graph(self):
-        g = rdflib.Graph()
-        namespace_manager = rdflib.namespace.NamespaceManager(g)
-        utilities.bind_ns(namespace_manager, utilities.NS_DICT)
+        g = utilities.create_graph()
 
-        g.add((self.uri, RDF.type, NS_DICT["cwrc"].NaturalPerson))
-        g.add((self.uri, NS_DICT["foaf"].name, Literal(self.name, datatype=rdflib.namespace.XSD.string)))
+        g.add((self.uri, RDF.type, utilities.NS_DICT["cwrc"].NaturalPerson))
+        g.add((self.uri, utilities.NS_DICT["foaf"].name, Literal(self.name, datatype=rdflib.namespace.XSD.string)))
         g.add((self.uri, RDFS.label, Literal(self.name, datatype=rdflib.namespace.XSD.string)))
-        g.add((self.uri, NS_DICT["cwrc"].hasGender, self.gender))
-        g.add((self.uri, NS_DICT["foaf"].isPrimaryTopicOf, self.url))
+        g.add((self.uri, utilities.NS_DICT["cwrc"].hasGender, self.gender))
+        g.add((self.uri, utilities.NS_DICT["foaf"].isPrimaryTopicOf, self.url))
 
         g += self.create_triples(self.cf_list)
         g += self.create_triples(self.context_list)

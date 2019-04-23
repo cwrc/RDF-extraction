@@ -280,9 +280,9 @@ def parse_args(script, info_type):
         -format/ff/fmt [turtle|rdf-xml|all]
         -v verbose logging
     """
+    testcases_available = False
     with open("testcases.json", 'r') as f:
         testcase_data = json.load(f)
-
     parser = argparse.ArgumentParser(
         description='Extract the ' + info_type + ' information from selection of orlando xml documents', add_help=True)
     modes = parser.add_mutually_exclusive_group()
@@ -290,8 +290,10 @@ def parse_args(script, info_type):
     if script in testcase_data:
         modes.add_argument('-testcases', '-t', action="store_true",
                            help="will run through test case list particular to " + script)
+        testcases_available = True
     else:
         print("No particular testcases available, please add to testcases.json")
+
     modes.add_argument('-qa', action="store_true",
                        help="will run through qa test cases that are related to https://github.com/cwrc/testData/tree/master/qa")
     modes.add_argument("-f", "-file", "--file", help="single orlando xml document to run extraction upon")
@@ -320,7 +322,7 @@ def parse_args(script, info_type):
         descriptors = [testcase_data['qa']['testcases'][desc] for desc in filelist]
         print("Running extraction on qa cases: ")
         print(*filelist, sep=", ")
-    elif args.testcases:
+    elif testcases_available and args.testcases:
         filelist = sorted(testcase_data[script]['testcases'].keys())
         descriptors = [testcase_data[script]['testcases'][desc] for desc in filelist]
         print("Running extraction on test cases: ")
@@ -331,7 +333,9 @@ def parse_args(script, info_type):
                     filename for filename in sorted(os.listdir(directory)) if filename.endswith(".xml")]
         descriptors = ["Testing on " + filename + " from " + directory for filename in filelist]
 
-    if args.qa or args.testcases:
+    if not testcases_available and not args.qa:
+        pass
+    elif args.qa or args.testcases:
         filelist = [directory + file + file_ending for file in filelist]
 
     return OrderedDict(zip(filelist, descriptors))

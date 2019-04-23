@@ -1,23 +1,14 @@
-import rdflib
-
-from log import *
-from utilities import *
-
-from biography import Biography
-from context import Context
-from event import Event
+from biography.Biography import Biography
+from Utils.utilities import utilities
+from Utils.context.Context import Context
+from Utils.event.Event import Event
 """
 Status: ~89%
 extraction of health context will possibly accompanied by health factors at a later point
 only identifying contexts being created
 """
-# Will remove logging after triples are verified
-log = Log("log/other_contexts/errors")
-log.test_name("Other Context extraction Error Logging")
-extract_log = Log("log/other_contexts/extraction")
-extract_log.test_name("Other Context extraction Test Logging")
-turtle_log = Log("log/other_contexts/triples")
-turtle_log.test_name("Other Context extracted Triples")
+logger = utilities.config_logger("other_contexts")
+uber_graph = utilities.create_graph()
 
 
 def extract_health_contexts_data(bio, person):
@@ -103,68 +94,45 @@ def extract_other_contexts_data(bio, person):
 
 
 def main():
-    def get_name(bio):
-        return (bio.BIOGRAPHY.DIV0.STANDARD.text)
-
-    def get_sex(bio):
-        return (bio.BIOGRAPHY.get("SEX"))
-
-    import os
     from bs4 import BeautifulSoup
     import culturalForm
 
-    filelist = [filename for filename in sorted(os.listdir("bio_data")) if filename.endswith(".xml")]
+    ext_type = "Violence, Wealth, Leisure and Society, Other Life Event, Health contexts"
+    file_dict = utilities.parse_args(__file__, ext_type)
+
     entry_num = 1
 
-    uber_graph = rdflib.Graph()
-    namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
-    bind_ns(namespace_manager, NS_DICT)
+    uber_graph = utilities.create_graph()
 
-    # for filename in filelist[:200]:
-    # for filename in filelist[-5:]:
-
-    # for filename in filelist:
-    test_cases = ["shakwi-b.xml", "woolvi-b.xml", "seacma-b.xml", "atwoma-b.xml",
-                  "alcolo-b.xml", "bronem-b.xml", "bronch-b.xml", "levyam-b.xml"]
-    # for filename in filelist:
-    for filename in test_cases:
-        with open("bio_data/" + filename) as f:
+    for filename in file_dict.keys():
+        with open(filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
-        print(filename)
-        person = Biography(
-            filename[:-6], get_name(soup), culturalForm.get_mapped_term("Gender", get_sex(soup)))
+        person_id = filename.split("/")[-1][:6]
 
+        print(filename)
+        print(file_dict[filename])
+        print(person_id)
+        print("*" * 55)
+
+        person = Biography(person_id, soup, culturalForm.get_mapped_term("Gender", utilities.get_sex(soup)))
         extract_other_contexts_data(soup, person)
 
         graph = person.to_graph()
 
-        extract_log.subtitle("Entry #" + str(entry_num))
-        extract_log.msg(str(person))
-        extract_log.subtitle(str(len(graph)) + " triples created")
-        extract_log.msg(person.to_file(graph))
-        extract_log.subtitle("Entry #" + str(entry_num))
-        extract_log.msg("\n\n")
-
-        temp_path = "extracted_triples/other_contexts_turtle/" + filename[:-6] + "_other_contexts.ttl"
-        create_extracted_file(temp_path, person)
+        temp_path = "extracted_triples/other_contexts_turtle/" + person_id + "_other_contexts.ttl"
+        utilities.create_extracted_file(temp_path, person)
 
         uber_graph += graph
         entry_num += 1
 
-    turtle_log.subtitle(str(len(uber_graph)) + " triples created")
-    turtle_log.msg(uber_graph.serialize(format="ttl").decode(), stdout=False)
-    turtle_log.msg("")
-
+    print("UberGraph is size:", len(uber_graph))
     temp_path = "extracted_triples/other_contexts.ttl"
-    create_extracted_uberfile(temp_path, uber_graph)
+    utilities.create_extracted_uberfile(temp_path, uber_graph)
 
     temp_path = "extracted_triples/other_contexts.rdf"
-    create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
+    utilities.create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
 
 
 if __name__ == "__main__":
-    # auth = [env.env("USER_NAME"), env.env("PASSWORD")]
-    # login.main(auth)
-    # test()
     main()
