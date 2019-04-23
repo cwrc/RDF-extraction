@@ -1,36 +1,47 @@
 {
     "default directory": "../data/biography_entries/",
     "file ending": "-b-transformed.xml",
+    "ignored files": {
+        "fielmi": "Michael Fields - corresponds to two people and doesn't distinguish between the two"
+    },
     "qa": {
         "testcases": {
-            "shakwi": "William Shakespeare - ",
-            "woolvi": "Virginia Woolf - ",
-            "seacma": "Mary Seacole - ",
-            "atwoma": "Margret Atwood - ",
+            "aguigr": "Grace Ag - education graffle",
             "alcolo": "Louisa May Alcott - ",
-            "bronem": "Emily Bronte - Overlapping triples with sister",
+            "atwoma": "Margaret Atwood - Canadian example often used for demos",
             "bronch": "Charlotte Bronte - Overlapping triples with sister",
+            "bronem": "Emily Bronte - Overlapping triples with sister",
             "levyam": "Amy Levy - ",
-            "aguigr": "Grace Ag - education graffle"
+            "seacma": "Mary Seacole - ",
+            "shakwi": "William Shakespeare - ",
+            "woolvi": "Virginia Woolf - "
         }
     },
     "birthDeath.py": {
         "testcases": {
-            "allima": "chronstruct and chronprose  --> birthdate chronstruct, birthposition chronprose",
-            "adcofl": "Just a chronstruct w. both birth Position & birthdate",
-            "aberfr": "Just a shortprose with date we'll assume is the birthdate",
-            "cuthca": "birthposition & birthdate in a shortprose, no chronstruct",
-            "acklva": "chronstruct(date & place) and shortprose(birthpositions)",
-            "askean": "chronstruct w. date range",
-            "bootfr": "Has two dates in shortprose",
-            "butls2": "Daterange within shortprose",
-            "scotsa": "has two events in a birthtag(first birth, second christening)"
+            "aberfr": "birth: Just a shortprose with date we'll assume is the birthdate",
+            "acklva": "birth: chronstruct(date & place) and shortprose(birthpositions)",
+            "adcofl": "birth: Just a chronstruct w. both birth Position & birthdate",
+            "allima": "birth: chronstruct and chronprose  --> birthdate chronstruct, birthposition chronprose",
+            "askean": "birth: chronstruct w. date range",
+            "bootfr": "birth: Has two dates in shortprose",
+            "butls2": "birth: Daterange within shortprose",
+            "cuthca": "birth: birthposition & birthdate in a shortprose, no chronstruct",
+            "scotsa": "birth: has two events in a birthtag(first birth, second christening)"
         }
     },
     "culturalForm.py": {
         "testcases": {
-            "taylha": "Ontology Issue #459: WomensEnfranchisement should map to suffrage",
-            "angema": "RDF-Extraction Issue #4: Ensuring string is rendered the same as src material (Africanist)"
+            "angema": "RDF-Extraction Issue #4: Ensuring string is rendered the same as src material (Africanist)",
+            "taylha": "Ontology Issue #459: WomensEnfranchisement should map to suffrage"
+        }
+    },
+    "education.py": {
+        "testcases": {
+            "annali": "Anna Livia - Has 2 education contexts(INSTITUTIONAL & No mode specified), 2 chronstructs + 2 shortproses within INSTITUTIONAL, just one chronstruct in other",
+            "bankis": "Isabella Banks - has instructor tags + SELF-TAUGHT mode",
+            "burnfr": "Frances Burney - place info within school tag",
+            "carrdo": "Dora Carrington - companion + awards tag"
         }
     }
 }

@@ -338,7 +338,17 @@ def parse_args(script, info_type):
     elif args.qa or args.testcases:
         filelist = [directory + file + file_ending for file in filelist]
 
+    # TODO: Allow script specific testcases to overwrite ignored files, maybe?
+    if "ignored files" in testcase_data:
+        # Get full filepaths of to be ignored files since it may vary per option chosen
+        ignore_files = [x for x in filelist if any(s in x for s in testcase_data["ignored files"].keys())]
+        for x in ignore_files:
+            index = filelist.index(x)
+            del descriptors[index]
+            del filelist[index]
+
     return OrderedDict(zip(filelist, descriptors))
+
 
 if __name__ == '__main__':
     import doctest
