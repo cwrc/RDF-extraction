@@ -5,7 +5,7 @@ import datetime
 try:
     from Utils.place import Place
 except Exception as e:
-    import Place
+    from place import Place
 
 """
 TODO: Add doctests for:
@@ -352,4 +352,4 @@ def parse_args(script, info_type):
 
 if __name__ == '__main__':
     import doctest
-    doctest.testmod()
+    doctest.testmod(verbose=True)

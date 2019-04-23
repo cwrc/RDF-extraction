@@ -1,7 +1,7 @@
-from biography.Biography import Biography
-from Utils.utilities import utilities
-from Utils.context.Context import Context
-from Utils.event.Event import Event
+from biography import Biography
+from Utils import utilities
+from Utils.context import Context
+from Utils.event import Event
 """
 Status: ~89%
 extraction of health context will possibly accompanied by health factors at a later point
