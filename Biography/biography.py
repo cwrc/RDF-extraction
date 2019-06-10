@@ -15,6 +15,9 @@ class Biography(object):
         self.gender = gender
         self.uri = utilities.make_standard_uri(utilities.get_name(doc))
 
+        # Do something with this later one to replace identifiers
+        self.wd_id = utilities.get_wd_identifier(id)
+
         self.nationalities = []
 
         self.context_list = []
@@ -128,6 +131,9 @@ class Biography(object):
         g += self.create_triples(self.childless_list)
         g += self.create_triples(self.children_list)
         g += self.create_triples(self.name_list)
+
+        if self.wd_id:
+            g.add((self.uri, utilities.NS_DICT["owl"].sameAs, self.wd_id))
 
         return g
 

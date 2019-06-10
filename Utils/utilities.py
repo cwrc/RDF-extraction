@@ -21,7 +21,11 @@ TODO: Add doctests for:
 - get_people
 - get_titles
 - get_places
+
+Do I need a logger for this file --> yes
+
 """
+# Move this to external file?
 
 NS_DICT = {
     "as": rdflib.Namespace("http://www.w3.org/ns/activitystreams#"),
@@ -212,6 +216,42 @@ def get_persontype(bio):
     return bio.BIOGRAPHY.get("PERSON")
 
 
+# TODO: get wikidata identifier:
+def get_sparql_results(endpoint_url, query):
+    from SPARQLWrapper import SPARQLWrapper, JSON
+    sparql = SPARQLWrapper(endpoint_url)
+    sparql.setQuery(query)
+    sparql.setReturnFormat(JSON)
+    return sparql.query().convert()
+
+
+def get_wd_identifier(id):
+
+    endpoint_url = "https://query.wikidata.org/sparql"
+
+    query = """SELECT ?item ?itemLabel
+    WHERE
+    {
+      ?item wdt:P6745 "%s"
+      SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+    }
+    LIMIT 10""" % id
+
+    results = get_sparql_results(endpoint_url, query)
+
+    if len(results["results"]["bindings"]) > 1:
+        logger.info("Multiple wikidata matches found:" + id)
+    elif len(results["results"]["bindings"]) < 1:
+        logger.info("Entry not found in wikidata: " + id)
+    else:
+        for result in results["results"]["bindings"]:
+            if (result["item"]["type"]) == "uri":
+                return rdflib.term.URIRef(result["item"]["value"])
+        # TODO: Validate this against standard name perhaps
+        # result["itemLabel"]
+    return None
+
+
 """
 Creating files of extracted triples
 """
@@ -245,11 +285,14 @@ def create_extracted_uberfile(filepath, graph, serialization=None):
 def config_logger(name, verbose=False):
     # Will likely want to convert logging records to be json formatted and based on external file.
     import logging
-    logger = logging.getLogger(name + '_extraction')
+    if name != "utilities":
+        name += '_extraction'
+
+    logger = logging.getLogger(name)
     logger.setLevel(logging.INFO)
-    fh = logging.FileHandler("log/" + name + "_extraction.log", mode="w")
+    fh = logging.FileHandler("log/" + name + ".log", mode="w")
     fh.setLevel(logging.INFO)
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    formatter = logging.Formatter('%(levelname)s - %(asctime)s {%(module)s.py:%(lineno)d} - %(message)s ')
     fh.setFormatter(formatter)
     logger.addHandler(fh)
 
@@ -262,9 +305,12 @@ def config_logger(name, verbose=False):
     return logger
 
 
+logger = config_logger("utilities")
+
+
 def parse_args(script, info_type):
     """
-        Parses arguments to particular extraction script and creates dictionary of {files,desc}
+        Parses arguments to particular extraction script and creates dictionary of {files:desc}
         relying on testcase.json for testcases + qa
 
         ./birthDeath -t returns {testfiles:testcase descriptions}
@@ -296,6 +342,10 @@ def parse_args(script, info_type):
 
     modes.add_argument('-qa', action="store_true",
                        help="will run through qa test cases that are related to https://github.com/cwrc/testData/tree/master/qa")
+    modes.add_argument('-s', "-special", action="store_true",
+                       help="will run through special cases that are of particular interest atm")
+    modes.add_argument('-i', "-ignored", action="store_true",
+                       help="will run through files that are currently being ignored")
     modes.add_argument("-f", "-file", "--file", help="single orlando xml document to run extraction upon")
     modes.add_argument("-d", "-directory", "--directory", help="directory of files to run extraction upon")
     args = parser.parse_args()
@@ -322,6 +372,16 @@ def parse_args(script, info_type):
         descriptors = [testcase_data['qa']['testcases'][desc] for desc in filelist]
         print("Running extraction on qa cases: ")
         print(*filelist, sep=", ")
+    elif args.s:
+        filelist = sorted(testcase_data['special'].keys())
+        descriptors = [testcase_data['special'][desc] for desc in filelist]
+        print("Running extraction on special cases: ")
+        print(*filelist, sep=", ")
+    elif args.i:
+        filelist = sorted(testcase_data['ignored files'].keys())
+        descriptors = [testcase_data['ignored files'][desc] for desc in filelist]
+        print("Running extraction on ignored files: ")
+        print(*filelist, sep=", ")
     elif testcases_available and args.testcases:
         filelist = sorted(testcase_data[script]['testcases'].keys())
         descriptors = [testcase_data[script]['testcases'][desc] for desc in filelist]
@@ -335,11 +395,11 @@ def parse_args(script, info_type):
 
     if not testcases_available and not args.qa:
         pass
-    elif args.qa or args.testcases:
+    elif args.qa or args.testcases or args.s or args.i:
         filelist = [directory + file + file_ending for file in filelist]
 
     # TODO: Allow script specific testcases to overwrite ignored files, maybe?
-    if "ignored files" in testcase_data:
+    if "ignored files" in testcase_data and not args.s and not args.i:
         # Get full filepaths of to be ignored files since it may vary per option chosen
         ignore_files = [x for x in filelist if any(s in x for s in testcase_data["ignored files"].keys())]
         for x in ignore_files:
