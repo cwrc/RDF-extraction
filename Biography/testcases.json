@@ -2,7 +2,12 @@
     "default directory": "../data/biography_entries/",
     "file ending": "-b-transformed.xml",
     "ignored files": {
-        "fielmi": "Michael Fields - corresponds to two people and doesn't distinguish between the two"
+        "fielmi": "Michael Field - corresponds to two people and doesn't distinguish between the two"
+    },
+    "special": {
+        "fielmi": "Michael Field - corresponds to two people and doesn't distinguish between the two",
+        "clerag": "Agnes Mary Clerke - Multiple Death tags",
+        "tautje": "Jemima Tautphoeus - Multiple Death tags"
     },
     "qa": {
         "testcases": {

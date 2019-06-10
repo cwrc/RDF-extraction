@@ -1,6 +1,4 @@
 #!/usr/bin/python3
-import sys
-import logging
 
 from Utils import utilities
 from Utils.context import Context
@@ -13,18 +11,21 @@ from Utils.event import get_date_tag, Event, format_date
 # two unique id'd contexts but with the same text and different triples
 # attached but this might fine if we're distinguishing between
 # death context vs cause of death context
-# TODO once resolved: https://github.com/cwrc/ontology/issues/462
+# TODO
+# - once resolved: https://github.com/cwrc/ontology/issues/462
+# - handle multiple DEATH/BIRTH tags
+
 
 logger = utilities.config_logger("birthdeath")
 
 
 class Birth:
-    def __init__(self, bDate, bPositions, birthplace):
-        self.date = bDate
+    def __init__(self, date, positions, birthplace):
+        self.date = date
         self.position = []
         self.place = birthplace
 
-        for birth_position in bPositions:
+        for birth_position in positions:
             if birth_position == "ONLY":
                 self.position.append(utilities.NS_DICT["cwrc"].onlyChild)
             elif birth_position == "ELDEST":
@@ -69,9 +70,14 @@ def extract_birth_data(xmlString, person):
     date_found = False
     place_found = False
 
-    birthTagParent = xmlString.BIOGRAPHY.DIV0.BIRTH
+    birthTagParent = xmlString.find_all("BIRTH")
+    if len(birthTagParent) > 1:
+        logger.warning("Multiple Birth tags found: " + person.name + person.id)
+
     if not birthTagParent:
         return
+
+    birthTagParent = birthTagParent[0]
 
     birthTags = birthTagParent.find_all("CHRONSTRUCT")
     birthTags += birthTagParent.find_all("SHORTPROSE")
@@ -96,10 +102,9 @@ def extract_birth_data(xmlString, person):
         # retrieving birthdate
         if not birth_date:
             birth_date_tag = get_date_tag(x)
-            # logger.info(birth_date_tag)
-            # TODO: Figure out what to do with daterange
+            # TODO: Figure out what to do with daterange --> issue#462
             if birth_date_tag.name == "DATERANGE":
-                logger.warning("Daterange:" + str(birth_date_tag))
+                logger.info("Birth: Daterange:" + str(birth_date_tag))
                 birth_date = birth_date_tag.get("FROM")
             else:
                 birth_date = birth_date_tag.get("VALUE")
@@ -117,7 +122,7 @@ def extract_birth_data(xmlString, person):
                 birth_positions.append(positions['POSITION'])
         birth_positions = list(set(birth_positions))
         if len(birth_positions) > 1:
-            logger.warning("Multiple Birth positions:" + str(birth_positions))
+            logger.info("Multiple Birth positions:" + str(birth_positions))
 
         # creating birth instance
         tempBirth = Birth(None, birth_positions, None)
@@ -141,193 +146,121 @@ def extract_birth_data(xmlString, person):
         context_count += 1
 
 
-# TODO: Still need to update this function
-def extract_death(xmlString, person):
-    # filePath = os.path.expanduser("~/Downloads/laurma-b.xml")
-    # getTreeRoot = xml.etree.ElementTree.parse(filePath)
-    # treeRoot = getTreeRoot.getroot()
-    treeRoot = xmlString
+class Death:
+    def __init__(self, date, burialplace, deathplace):
+        self.date = date
+        self.burial = burialplace
+        self.place = deathplace
 
-    # DEATH
-    deathDate = ""
-    deathCauses = []
-    deathContexts = []
+    def __str__(self):
+        string = "\tDate: " + str(self.date) + "\n"
+        string += "\tdeathplace: " + str(self.place) + "\n"
+        string += "\tburial: " + str(self.burial) + "\n"
+        return string
+
+    def to_triple(self, person):
+        g = utilities.create_graph()
+        if self.date:
+            g.add((person.uri, utilities.NS_DICT["cwrc"].hasDeathDate, format_date(self.date)))
+
+        if self.burial:
+            g.add((person.uri, utilities.NS_DICT["cwrc"].hasBurialPlace, self.burial))
+
+        if self.place:
+            g.add((person.uri, utilities.NS_DICT["cwrc"].hasDeathPlace, self.place))
+
+        return g
+
+
+def extract_death_data(xmlString, person):
+    death_date = None
     deathplace = None
-    burialplace = None
-    # deathTagParent = treeRoot.find("./DIV0/DIV1/DEATH/")
-    # deathTagParent = treeRoot.BIOGRAPHY.DIV0.DEATH.find(recursive=False)
-    deathTagParent = tagChild(findTag(treeRoot, "BIOGRAPHY DIV0 DIV1 DEATH"))
-    # childrenOfDeathTag = tagChildren(deathTagParent)
-    # print(deathTagParent.name)
+    death_events = []
+    death_event = None
+    burial = None
+    context_count = 1
 
-    # DEATH DATE
-    firstChronstructTag = ""
-    deathDateTag = ""
+    date_found = False
+    place_found = False
 
-    try:
-        if deathTagParent is None:
-            # Death tag not found
-            deathTagParent = treeRoot.find(".//DEATH/")
-            if deathTagParent is not None:
-                print("used to be none but found death")
-                sys.stdin.read(1)
-            else:
-                # Still no death tag found
-                print("still no death tag found")
-                # sys.stdin.read(1)
-                return
+    # Multiple death tags --> michael field
+    deathTagParent = xmlString.find_all("DEATH")
+    if len(deathTagParent) > 1:
+        logger.warning("Multiple Death tags found: " + person.name + " - " + person.id)
 
-        # allDeathDivs = treeRoot.BIOGRAPHY.select("DIV0 DIV1 DEATH")
-        # allDivs = []
-        # for deathTag in allDeathDivs:
-        #     allDivs += tagChildren(deathTag)
-            # div.find_all(recursive=False)
-
-        # if type(deathContexts) is list:
-        #     print(deathContexts)
-        #     print("this is a list")
-        # getContextsFrom = [deathTagParent]
-        # if "DIV" not in getContextsFrom[0].name:
-        #     DIV = Element('DIV')
-        #     DIV.insert(0, getContextsFrom[0])
-        #
-        #     # DIV.append(getContextsFrom)
-        #     getContextsFrom = [DIV]
-        # deathContexts = getContexts(getContextsFrom)
-
-        # deathParagraphs = list(deathTagParent.iter("P"))
-        # if deathParagraphs != None and len(deathParagraphs) > 0:
-        #     for para in list(deathTagParent.iter("P")):
-        #
-        #         # gets all text in paragraph. creates element iterator
-        #         paraText = para.itertext()
-        #         # the paragraph will be saved as a string in variable below
-        #         paragraph = ""
-        #
-        #         for text in paraText:
-        #             paragraph = paragraph + " " + text.strip()
-        #         paragraph = paragraph.strip()
-        #         print(paragraph)
-        #         deathContexts.append(paragraph)
-                # print(paragraph)
-        # print(deathTagParent.contents)
-
-        # print(deathTagParent.prettify())
-        getChronstructTags = iterList(deathTagParent, "CHRONSTRUCT")
-
-        if len(getChronstructTags) == 0:
-            # No chronstruct tag found. Look for a shortprose tag
-            getChronstructTags = (deathTagParent.find_all("SHORTPROSE"))
-
-        if len(getChronstructTags) == 0:
-            # No shortprose tag found either
-            print("no SHORTPROSE in death found")
-            sys.stdin.read(1)
-            return
-
-        if len(getChronstructTags) > 0:
-            # A tag is found. Either a chronstruct or a shortprose
-            firstChronstructTag = getChronstructTags[0]
-            print(getChronstructTags)
-
-            deathDateTags = get_date_tag(firstChronstructTag)
-
-            if not deathDateTags:
-                print("no date range either")
-            else:
-                # Found a date tag
-                deathDateTag = deathDateTags
-                if 'VALUE' in deathDateTag.attrs:
-                    deathDate = deathDateTag['VALUE']
-                elif 'CERTAINTY' in deathDateTag.attrs and 'FROM' in deathDateTag.attrs and 'TO' in deathDateTag.attrs:
-                    deathDate = deathDateTag['FROM'] + " to " + deathDateTag['TO']
-
-    except (AttributeError) as e:
-        print("Death information not found. person probably still alive")
-        # print("error: ", e)
-        logging.exception(e)
-        sys.stdin.read(1)
+    if not deathTagParent:
         return
+    deathTagParent = deathTagParent[0]
 
-    except NameError as e:
-        print("Name Error")
-        print("error: ", e)
-        sys.stdin.read(1)
-        return
+    deathTags = deathTagParent.find_all("CHRONSTRUCT")
+    deathTags += deathTagParent.find_all("SHORTPROSE")
 
-    print("\ndeath date: ", deathDate)
+    for x in deathTags:
+        context_id = person.id + "_deathContext_" + str(context_count)
+        temp_context = Context(context_id, x, "DEATH")
 
-    # CAUSE OF DEATH
-    deathCauseTags = (firstChronstructTag.select('CHRONPROSE CAUSE'))
-    if len(deathCauseTags) > 0:
-        for causes in deathCauseTags:
-            if "REG" in causes.attrs:
-                deathCauses.append(causes['REG'])
-            else:
-                deathCauses.append(causes.text)
+        # creating death event
+        if x.name == "CHRONSTRUCT":
+            event_title = person.name + " - Death Event"
+            event_uri = person.id + "_death_Event"
 
-        print("death causes: {}".format(deathCauses))
+            if len(death_events) > 0:
+                # TODO: possibly revise uri as well
+                event_title = person.name + " - Death Related Event"
+                event_uri = person.id + "_death_Event" + str(len(death_events) + 1)
 
-    # PLACE OF DEATH
-    deathPlaceTags = (firstChronstructTag.select('CHRONPROSE PLACE'))
-    if len(deathPlaceTags) > 0:
-        deathplace = Place(deathPlaceTags[0]).uri
-        # print("death place: {}, {}, {}".format(deathPlaceSettlement, deathPlaceRegion, deathPlaceGeog))
+            death_event = Event(event_title, event_uri, x)
+            death_events.append(death_event)
 
-    else:
-        allShortprose = firstChronstructTag.find_all('SHORTPROSE')
-        # print(allShortprose)
-        if len(allShortprose) > 0:
-            for shortprose in allShortprose:
-                for tags in shortprose.find_all('PLACE'):
-                    deathplace = Place(tags).uri
-        else:
-            # chronstructParent = firstChronstructTag.find('./..')
-            place = deathTagParent.find('PLACE')
-            if place is None:
-                print("no place found")
-            if place is not None and len(place) > 0:
-                print("found place")
-                # deathPlaceSettlement, deathPlaceRegion, deathPlaceGeog = getPlaceTagContent(place)
-                deathplace = Place(place).uri
+        # retrieving deathdate
+        if not death_date:
+            death_date_tag = get_date_tag(x)
+            if death_date_tag:
+                # TODO: Figure out what to do with daterange --> issue#462
+                if death_date_tag.name == "DATERANGE":
+                    logger.info("Death: Daterange:" + str(death_date_tag) +
+                                " " + person.name + " - " + person.id)
+                    death_date = death_date_tag.get("FROM")
+                else:
+                    death_date = death_date_tag.get("VALUE")
 
-    # place of burial
-    # ElemPrint(deathTagParent)
-    print(deathTagParent.name)
-    burialTags = tagChildren(deathTagParent)
-    print(len(burialTags))
+        # retrieving deathplace
+        if not deathplace:
+            deathPlaceTags = x.find_all('PLACE')
+            if deathPlaceTags:
+                deathplace = Place(deathPlaceTags[0]).uri
 
-    for i in range(0, len(burialTags)):
-        if i == len(burialTags) - 1:
-            continue
-        # print(getOnlyText(burialTags[i+1].find(".//P")))
-        if burialTags[i].name == "CHRONSTRUCT" and burialTags[i + 1].name == "SHORTPROSE" and burialTags[i + 1].find("PLACE") is not None:
-            paragraph = getOnlyText(burialTags[i + 1].find("P"))
+        # potentially retrieving burial place
+        if len(death_events) > 0 and x.name == "SHORTPROSE" and burial is None:
+            if any(word in x.text for word in ["buried", "grave", "interred"]):
+                burialTags = x.find_all('PLACE')
+                if burialTags:
+                    burial = Place(burialTags[0]).uri
 
-            if "buried" in paragraph or "grave" in paragraph or "interred" in paragraph:
-                burialplace = Place(burialTags[i + 1].find("PLACE")).uri
+        tempDeath = Death(None, burial, None)
+        if not date_found and death_date:
+            tempDeath.date = death_date
+            date_found = True
+        if not place_found and deathplace:
+            tempDeath.place = deathplace
+            place_found = True
 
-            else:
-                print("no buried in the paragraph")
+        # adding death event to person
+        if death_event:
+            temp_context.link_event(death_event)
+            person.add_event(death_event)
+            death_event = None
 
-    person.deathObj = deathData(person.name, person.id, person.uri, deathDate,
-                                deathCauses, deathplace, deathContexts, burialplace)
-    allDivs = allTagsAllChildren(treeRoot.BIOGRAPHY, "DIV0 DIV1 DEATH")
-    # for div in allDivs:
-    #     deathContexts += getContexts(div)
-    id = 1
-    for div in allDivs:
-        # birthContexts += getContexts(div)
-        context_id = person.id + "_DeathContext_" + str(id)
-        tempContext = context.Context(context_id, div, 'DEATH')
-        tempContext.link_triples(person.deathObj.death_list)
-        person.context_list.append(tempContext)
+        # adding context and birth to person
+        temp_context.link_triples(tempDeath)
+        person.add_context(temp_context)
+        person.add_birth(tempDeath)
+        context_count += 1
 
 
 def main():
     from bs4 import BeautifulSoup
     import culturalForm
-    import rdflib
     from biography import Biography
 
     file_dict = utilities.parse_args(__file__, "Birth/Death")
@@ -349,9 +282,9 @@ def main():
 
         person = Biography(person_id, soup, culturalForm.get_mapped_term("Gender", utilities.get_sex(soup)))
         extract_birth_data(soup, person)
+        extract_death_data(soup, person)
         person.name = utilities.get_readable_name(soup)
-        # print(person.to_file())
-        # print()
+        print(person.to_file())
 
         temp_path = "extracted_triples/birthdeath_turtle/" + person_id + "_birthdeath.ttl"
         utilities.create_extracted_file(temp_path, person)
