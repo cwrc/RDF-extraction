@@ -88,7 +88,7 @@ class Context(object):
                    None: "Context"
                    }
 
-    def __init__(self, id, tag, context_type="culturalformation", motivation="describing"):
+    def __init__(self, id, tag, context_type="CULTURALFORMATION", motivation="describing"):
         super(Context, self).__init__()
         self.id = id
         self.triples = []
@@ -132,14 +132,6 @@ class Context(object):
 
     def link_event(self, event):
         self.event = event.uri
-
-    def get_subjects2(self, comp_list):
-        subjects = []
-        for x in comp_list:
-            temp_graph = x.to_triple("BOB")
-            subjects.append(temp_graph.objects(None, None))
-
-        return list(set(subjects))
 
     def get_subject(self, component, person):
         subjects = []
