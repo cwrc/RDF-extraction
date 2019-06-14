@@ -349,6 +349,8 @@ def parse_args(script, info_type):
     temp_str += str(list(testcase_data['ignored files']))[1:-1]
     modes.add_argument('-i', "-ignored", action="store_true", help=temp_str)
 
+    modes.add_argument("-id", "-orlando", "--orlando",
+                       help="entry id of a single orlando document to run extraction upon, ex. woolvi")
     modes.add_argument("-f", "-file", "--file", help="single orlando xml document to run extraction upon")
     modes.add_argument("-d", "-directory", "--directory", help="directory of files to run extraction upon")
     args = parser.parse_args()
@@ -357,12 +359,15 @@ def parse_args(script, info_type):
     file_ending = testcase_data['file ending']
     filelist = []
     descriptors = []
-
+    print(args)
     if args.file:
         assert args.file.endswith(".xml"), "Not an XML file"
         filelist = [args.file]
         descriptors = ["Testing single file specified: " + args.file]
-        print("Running extraction on " + args.file)
+    elif args.orlando:
+        filelist = [args.orlando]
+        descriptors = ["Testing single entry specified: " + args.orlando]
+        print("Running extraction on " + args.orlando)
     elif args.directory:
         if args.directory[-1] != "/":
             args.directory += "/"
@@ -398,7 +403,7 @@ def parse_args(script, info_type):
 
     if not testcases_available and not args.qa:
         pass
-    elif args.qa or args.testcases or args.s or args.i:
+    elif args.qa or args.testcases or args.s or args.i or args.orlando:
         filelist = [directory + file + file_ending for file in filelist]
 
     # TODO: Allow script specific testcases to overwrite ignored files, maybe?
