@@ -48,5 +48,13 @@
             "burnfr": "Frances Burney - place info within school tag",
             "carrdo": "Dora Carrington - companion + awards tag"
         }
+    },
+    "personname.py": {
+        "testcases": {
+            "abdyma": "TBD",
+            "aikejo": "TBD",
+            "blesma": "Using graffle as ground truth",
+            "woolvi": "TBD"
+        }
     }
 }
