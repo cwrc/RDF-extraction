@@ -84,7 +84,7 @@ class PersonName:
 
         for thisName in givenNameList:
             thisNamePart = utilities.make_standard_uri(thisName)
-            g.add((thisNamePart, utilities.NS_DICT["rdf"].type, utilities.NS_DICT["rdf"].Forename))
+            g.add((thisNamePart, utilities.NS_DICT["rdf"].type, utilities.NS_DICT["cwrc"].Forename))
             g.add((thisNamePart, utilities.NS_DICT["cwrc"].hasSortOrder, Literal(numPart)))
             g.add((thisNamePart, utilities.NS_DICT["rdf"].label, Literal(thisName)))
 
@@ -93,7 +93,7 @@ class PersonName:
 
         for thisName in surNameList:
             thisNamePart = utilities.make_standard_uri(thisName)
-            g.add((thisNamePart, utilities.NS_DICT["rdf"].type, utilities.NS_DICT["rdf"].Surname))
+            g.add((thisNamePart, utilities.NS_DICT["rdf"].type, utilities.NS_DICT["cwrc"].Surname))
             g.add((thisNamePart, utilities.NS_DICT["cwrc"].hasSortOrder, Literal(numPart)))
             g.add((thisNamePart, utilities.NS_DICT["rdf"].label, Literal(thisName)))
 
