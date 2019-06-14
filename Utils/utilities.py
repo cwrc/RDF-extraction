@@ -22,10 +22,8 @@ TODO: Add doctests for:
 - get_titles
 - get_places
 
-Do I need a logger for this file --> yes
-
+TODO: parse required ns from external files
 """
-# Move this to external file?
 
 NS_DICT = {
     "as": rdflib.Namespace("http://www.w3.org/ns/activitystreams#"),
@@ -216,7 +214,6 @@ def get_persontype(bio):
     return bio.BIOGRAPHY.get("PERSON")
 
 
-# TODO: get wikidata identifier:
 def get_sparql_results(endpoint_url, query):
     from SPARQLWrapper import SPARQLWrapper, JSON
     sparql = SPARQLWrapper(endpoint_url)
@@ -340,12 +337,18 @@ def parse_args(script, info_type):
     else:
         print("No particular testcases available, please add to testcases.json")
 
-    modes.add_argument('-qa', action="store_true",
-                       help="will run through qa test cases that are related to https://github.com/cwrc/testData/tree/master/qa")
-    modes.add_argument('-s', "-special", action="store_true",
-                       help="will run through special cases that are of particular interest atm")
-    modes.add_argument('-i', "-ignored", action="store_true",
-                       help="will run through files that are currently being ignored")
+    temp_str = "will run through qa test cases that are related to www.github.com/cwrc/testData/tree/master/qa, "
+    temp_str += "Which currently are:" + str(list(testcase_data['qa']['testcases']))[1:-1]
+    modes.add_argument('-qa', action="store_true", help=temp_str)
+
+    temp_str = "will run through special cases that are of particular interest atm which currently are: "
+    temp_str += str(list(testcase_data['special']))[1:-1]
+    modes.add_argument('-s', "-special", action="store_true", help=temp_str)
+
+    temp_str = "will run through files that are currently being ignored which currently include: "
+    temp_str += str(list(testcase_data['ignored files']))[1:-1]
+    modes.add_argument('-i', "-ignored", action="store_true", help=temp_str)
+
     modes.add_argument("-f", "-file", "--file", help="single orlando xml document to run extraction upon")
     modes.add_argument("-d", "-directory", "--directory", help="directory of files to run extraction upon")
     args = parser.parse_args()
