@@ -1,10 +1,11 @@
 import rdflib
 from rdflib import RDF, RDFS, Literal, URIRef, BNode, Graph
 from rdflib.namespace import XSD
-from event import format_date
+# from event import format_date
+from Utils.event import get_date_tag, Event, format_date
 import os
 import csv
-from biography import bind_ns, NS_DICT, make_standard_uri, create_uri
+from Utils.utilities import bind_ns, NS_DICT, make_standard_uri, create_uri
 
 g = Graph()
 
@@ -366,6 +367,13 @@ class deathData:
             #
             #     # addContexts(fileName,"hasDeathContext",self.deathContexts,sou
         return g
+
+    def __str__(self):
+        string = ""
+        string += "\tdeathDate: " + str(self.deathDate) + "\n"
+        string += "\tdeathplace: " + str(self.deathplace) + "\n"
+        string += "\tburialplace: " + str(self.burialplace) + "\n"
+        return string
 
 
 class Family:

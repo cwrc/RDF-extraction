@@ -6,7 +6,7 @@ from xml.etree.ElementTree import Element
 # from scrapeFamily import *
 from classes import *
 from bs4 import BeautifulSoup
-from place import Place
+# from place import Place
 
 
 def getch():

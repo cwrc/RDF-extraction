@@ -1,5 +1,10 @@
 import requests
-import sys, xml.etree.ElementTree, os, logging, csv, datetime
+import sys
+import xml.etree.ElementTree
+import os
+import logging
+import csv
+import datetime
 from bs4 import BeautifulSoup
 # from Env import env
 
@@ -8,7 +13,6 @@ from stringAndMemberFunctions import *
 from classes import *
 import context
 # from graphOntology import graphMaker
-from birthDeath import extract_birth, extract_death
 
 numSigs = 0
 numAdded = 0
@@ -36,8 +40,8 @@ def extract_children(xmlString, person):
             print("contains number of child: ", child["NUMBER"])
             childType = "numberOfChildren"
             numChild = child["NUMBER"]
-            
-            childrenList.append(ChildStatus(childType,numChild))
+
+            childrenList.append(ChildStatus(childType, numChild))
 
     person.children_list = childrenList
 
@@ -49,7 +53,7 @@ def extract_childlessness(xmlString, person):
     # global numtags
     for tag in childrenTag:
         # ElemPrint(tag)
-        
+
         # if any(miscarriageWord in getOnlyText(tag) for miscarriageWord in
         #     ["miscarriage","miscarriages","miscarried"]):
         #     childlessList.append(ChildlessStatus("miscarriage"))
@@ -65,22 +69,22 @@ def extract_childlessness(xmlString, person):
         #     # no entries has this
 
         if any(birthControlWord in getOnlyText(tag) for birthControlWord in
-            ["contraception"]):
+               ["contraception"]):
             childlessList.append(ChildlessStatus("birth control"))
             # no entries has this
-        
+
         # elif any(veneralDisease in getOnlyText(tag) for veneralDisease in
         #     ["syphilis","veneral","VD"]):
         #     childlessList.append(ChildlessStatus("venereal disease"))
         #     # 2 entries have this
 
         elif any(adoptionWord in getOnlyText(tag) for adoptionWord in
-            ["adopted","adoption"]):
+                 ["adopted", "adoption"]):
             childlessList.append(ChildlessStatus("adoption"))
             # 8 entries have this
-        
-        elif any(childlessWord in getOnlyText(tag) for childlessWord in 
-            ["childless","no children","no surviving children"]):
+
+        elif any(childlessWord in getOnlyText(tag) for childlessWord in
+                 ["childless", "no children", "no surviving children"]):
             childlessList.append(ChildlessStatus("childlessness"))
             # 131 entries have this
 
@@ -88,18 +92,18 @@ def extract_childlessness(xmlString, person):
             childlessList.append(ChildlessStatus("childlessness"))
             # numtags += 1
             # 69 entries
-        
-        print("------------")
-        
 
+        print("------------")
 
     # return childlessList
     person.childless_list = childlessList
+
+
 def extract_friends_associates(xmlString, person):
     # root = xml.etree.ElementTree.fromstring(xmlString)
     root = xmlString.BIOGRAPHY
 
-    tagToFind = allTagsAllChildren(root,"FRIENDSASSOCIATES")
+    tagToFind = allTagsAllChildren(root, "FRIENDSASSOCIATES")
 
     listToReturn = []
     id = 1
@@ -117,10 +121,12 @@ def extract_friends_associates(xmlString, person):
         listToReturn += thisInstanceObjs
 
     person.friendsAssociates_list = listToReturn
+
+
 def extract_cohabitants(xmlString, person):
     # root = xml.etree.ElementTree.fromstring(xmlString)
     root = xmlString.BIOGRAPHY
-    sourcePerson = findTag(root,"DIV0 STANDARD").text
+    sourcePerson = findTag(root, "DIV0 STANDARD").text
     tagToFind = root.find_all("LIVESWITH")
 
     listToReturn = []
@@ -130,12 +136,13 @@ def extract_cohabitants(xmlString, person):
         for name in names:
             listToReturn.append(Cohabitant(name))
 
-    person.cohabitants_list =  listToReturn
+    person.cohabitants_list = listToReturn
+
 
 def getSexualityContexts(xmlString):
     # root = xml.etree.ElementTree.fromstring(xmlString)
     root = xmlString.BIOGRAPHY
-    tagToFind = allTagsAllChildren(root,"SEXUALITY")
+    tagToFind = allTagsAllChildren(root, "SEXUALITY")
     # tagToFind = root.find_all("SEXUALITY").find_all(recursive=False)
     listToReturn = []
 
@@ -148,6 +155,7 @@ def getSexualityContexts(xmlString):
 #     root = BeautifulSoup(xmlString,'lxml')
 #     print(root)
     return listToReturn
+
 
 def extract_intimate_relationships(xmlString, person):
     root = xmlString.BIOGRAPHY
@@ -169,14 +177,14 @@ def extract_intimate_relationships(xmlString, person):
 
             context_id = person.id + "_IntimateRelationshipsContext_" + str(id)
             id += 1
-            names = getAllNames(thisPerson.find_all("NAME"),person.name)
+            names = getAllNames(thisPerson.find_all("NAME"), person.name)
             if len(names) >= 1:
                 print("========>", names[0])
                 thisRelationship = IntimateRelationships(names[0], attr)
             else:
                 thisRelationship = IntimateRelationships("intimate relationship", attr)
 
-            tempContext = context.Context(context_id,thisPerson,"INTIMATERELATIONSHIPS")
+            tempContext = context.Context(context_id, thisPerson, "INTIMATERELATIONSHIPS")
             tempContext.link_triples([thisRelationship])
             intimateRelationships.append(thisRelationship)
             person.context_list.append(tempContext)
@@ -193,52 +201,55 @@ def extract_intimate_relationships(xmlString, person):
 # Relation:  FATHER
 # Jobs: army officer
 # SigAct: lost money, currency committee
+
+
 def extract_family(xmlString, person):
     global numSigs
     global numAdded
 
     myRoot2 = xmlString.BIOGRAPHY
     # SOURCENAME = myRoot2.newFindFunc("DIV0 STANDARD").text
-    SOURCENAME = findTag(myRoot2,"DIV0 STANDARD").text
+    SOURCENAME = findTag(myRoot2, "DIV0 STANDARD").text
     listOfMembers = []
     fams = myRoot2.find_all('FAMILY')
     for familyTag in myRoot2.find_all('FAMILY'):
-        
+
         #--------------------------------- Get husband and wife ---------------------------------
         for familyMember in familyTag.find_all("MEMBER"):
-            if familyMember['RELATION'] in ["HUSBAND","WIFE"]:
+            if familyMember['RELATION'] in ["HUSBAND", "WIFE"]:
                 if len(familyMember.find_all()) == 1:
                     continue
                 else:
-                    listOfMembers = getMemberInfo(familyMember,listOfMembers,SOURCENAME)
+                    listOfMembers = getMemberInfo(familyMember, listOfMembers, SOURCENAME)
 
         #--------------------------------- get children ---------------------------------
         for familyMember in familyTag.find_all("MEMBER"):
-            if familyMember['RELATION'] in ["SON","DAUGHTER","STEPSON","STEPDAUGHTER"]:
+            if familyMember['RELATION'] in ["SON", "DAUGHTER", "STEPSON", "STEPDAUGHTER"]:
                 if len(familyMember.find_all()) == 1:
                     continue
                 else:
-                    listOfMembers = getMemberChildInfo(familyMember,listOfMembers,SOURCENAME)
-        
+                    listOfMembers = getMemberChildInfo(familyMember, listOfMembers, SOURCENAME)
+
         #--------------------------------- get others ---------------------------------
         for familyMember in familyTag.find_all('MEMBER'):
             finds = familyMember.find_all()
-            if familyMember['RELATION'] in ["HUSBAND","WIFE","SON","DAUGHTER","STEPSON","STEPDAUGHTER"] or len(iterListAll(familyMember)) == 1:
+            if familyMember['RELATION'] in ["HUSBAND", "WIFE", "SON", "DAUGHTER", "STEPSON", "STEPDAUGHTER"] or len(iterListAll(familyMember)) == 1:
                 continue
             else:
-                listOfMembers = getMemberInfo(familyMember,listOfMembers,SOURCENAME)
-    
-    print("----------- ",SOURCENAME.strip(),"'s Family Members -----------")
+                listOfMembers = getMemberInfo(familyMember, listOfMembers, SOURCENAME)
+
+    print("----------- ", SOURCENAME.strip(), "'s Family Members -----------")
     # printMemberInfo(listOfMembers)
     # print("")
     # return rearrangeSourceName(SOURCENAME),listOfMembers
     # return SOURCENAME,listOfMembers
     person.family_list = listOfMembers
 
+
 def getOccupationDict():
     listToReturn = {}
-    with open(os.path.expanduser('~/Documents/UoGuelph Projects/occupation.csv'),encoding='utf8') as csvInput:
-        csvReader = csv.reader(csvInput,delimiter=',')
+    with open(os.path.expanduser('~/Documents/UoGuelph Projects/occupation.csv'), encoding='utf8') as csvInput:
+        csvReader = csv.reader(csvInput, delimiter=',')
 
         skipFirst = True
         for row in csvReader:
@@ -249,13 +260,10 @@ def getOccupationDict():
                 continue
             # print(row)
             # print("to use: ", row[0])
-            for j in range(3,len(row)):
+            for j in range(3, len(row)):
                 if row[j] != "":
                     listToReturn[row[j]] = row[0]
                     # print("alternative: ",row[j])
             # break
         # print(len(listToReturn))
     return listToReturn
-
-
-    
