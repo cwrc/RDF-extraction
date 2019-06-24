@@ -23,7 +23,7 @@ add documentation
 implement personname
 """
 
-logger = utilities.config_logger("biography_extraction")
+logger = utilities.config_logger("biography")
 
 
 def main():

@@ -115,7 +115,6 @@ class School(object):
 
     def to_triple(self, person):
         g = utilities.create_graph()
-
         g.add((self.uri, utilities.NS_DICT["foaf"].name, Literal(self.name)))
         g.add((self.uri, utilities.NS_DICT["rdfs"].name, Literal(self.name)))
         g.add((self.uri, RDF.type, CWRC.EducationalOrganization))
@@ -384,7 +383,7 @@ def get_school(school_tags):
 
         temp_school = School(name, school_types, lvl, tag)
         temp_school.add_studied_subjects(get_study_subjects(tag.find_all("SUBJECT")))
-
+        schools.append(temp_school)
     return schools
 
 
@@ -418,6 +417,7 @@ def create_education(tag, person):
         works += utilities.get_people(x)
         titles += utilities.get_titles(x)
 
+    # print(temp_education)
     # Add mapping of titles
     temp_education.add_edu_texts(titles)
     # temp_education.add_works(works)
