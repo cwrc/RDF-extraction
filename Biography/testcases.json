@@ -46,7 +46,8 @@
             "annali": "Anna Livia - Has 2 education contexts(INSTITUTIONAL & No mode specified), 2 chronstructs + 2 shortproses within INSTITUTIONAL, just one chronstruct in other",
             "bankis": "Isabella Banks - has instructor tags + SELF-TAUGHT mode",
             "burnfr": "Frances Burney - place info within school tag",
-            "carrdo": "Dora Carrington - companion + awards tag"
+            "carrdo": "Dora Carrington - companion + awards tag",
+            "edgema": "Maria Edgeworth - used in education graffle"
         }
     },
     "personname.py": {

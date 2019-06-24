@@ -223,7 +223,10 @@ def get_sparql_results(endpoint_url, query):
 
 
 def get_wd_identifier(id):
-
+    """Given orlando identifier, returns corresponding uri of wikidata should it exist
+        :param id: orlando id
+        :return: corresponding uri of wikidata should it exist, otherwise returns None
+    """
     endpoint_url = "https://query.wikidata.org/sparql"
 
     query = """SELECT ?item ?itemLabel
@@ -331,23 +334,24 @@ def parse_args(script, info_type):
     modes = parser.add_mutually_exclusive_group()
 
     if script in testcase_data:
-        modes.add_argument('-testcases', '-t', action="store_true",
-                           help="will run through test case list particular to " + script)
+        help_str = "will run through test case list particular to " + script
+        help_str += " Which currently are:" + str(list(testcase_data[script]['testcases']))[1:-1]
+        modes.add_argument('-testcases', '-t', action="store_true", help=help_str)
         testcases_available = True
     else:
         print("No particular testcases available, please add to testcases.json")
 
-    temp_str = "will run through qa test cases that are related to www.github.com/cwrc/testData/tree/master/qa, "
-    temp_str += "Which currently are:" + str(list(testcase_data['qa']['testcases']))[1:-1]
-    modes.add_argument('-qa', action="store_true", help=temp_str)
+    help_str = "will run through qa test cases that are related to www.github.com/cwrc/testData/tree/master/qa, "
+    help_str += "Which currently are:" + str(list(testcase_data['qa']['testcases']))[1:-1]
+    modes.add_argument('-qa', action="store_true", help=help_str)
 
-    temp_str = "will run through special cases that are of particular interest atm which currently are: "
-    temp_str += str(list(testcase_data['special']))[1:-1]
-    modes.add_argument('-s', "-special", action="store_true", help=temp_str)
+    help_str = "will run through special cases that are of particular interest atm which currently are: "
+    help_str += str(list(testcase_data['special']))[1:-1]
+    modes.add_argument('-s', "-special", action="store_true", help=help_str)
 
-    temp_str = "will run through files that are currently being ignored which currently include: "
-    temp_str += str(list(testcase_data['ignored files']))[1:-1]
-    modes.add_argument('-i', "-ignored", action="store_true", help=temp_str)
+    help_str = "will run through files that are currently being ignored which currently include: "
+    help_str += str(list(testcase_data['ignored files']))[1:-1]
+    modes.add_argument('-i', "-ignored", action="store_true", help=help_str)
 
     modes.add_argument("-id", "-orlando", "--orlando",
                        help="entry id of a single orlando document to run extraction upon, ex. woolvi")
