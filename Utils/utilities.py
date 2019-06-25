@@ -1,5 +1,6 @@
 import rdflib
 import os
+import re
 import datetime
 
 try:
@@ -83,8 +84,11 @@ def bind_ns(namespace_manager, ns_dictionary):
 
 def strip_all_whitespace(string):
     # temp function for condensing the context strings for visibility in testing
-    import re
     return re.sub('[\s+]', '', str(string))
+
+
+def split_by_casing(string, altmode=None):
+    return " ".join(re.findall('^[a-z]+|[A-Z][^A-Z]*', string))
 
 
 def remove_punctuation(temp_str, all=False):
@@ -191,11 +195,20 @@ def get_titles(tag):
 
 
 def get_places(tag):
-    """Returns all places within a given tag"""
+    """Returns all places uris within a given tag"""
     places = []
     for x in tag.find_all("PLACE"):
         places.append(Place(x).uri)
     return places
+
+
+def get_place_strings(tag):
+    """Returns all places strings within a given tag"""
+    places = []
+    for x in tag.find_all("PLACE"):
+        places.append(x.text)
+    return places
+
 
 
 def get_name(bio):
@@ -219,7 +232,13 @@ def get_sparql_results(endpoint_url, query):
     sparql = SPARQLWrapper(endpoint_url)
     sparql.setQuery(query)
     sparql.setReturnFormat(JSON)
-    return sparql.query().convert()
+    # return sparql.query().convert()
+    try:
+        res = sparql.query().convert()
+    except urllib.error.HTTPError as e:
+        log.error(e)
+        res = None
+    return res
 
 
 def get_wd_identifier(id):
@@ -324,7 +343,8 @@ def parse_args(script, info_type):
         TODO: add options for verbosity of output, types of output
         -o OUTPUTFILE
         -format/ff/fmt [turtle|rdf-xml|all]
-        -v verbose logging
+        -v verbose logging + print out triples to stdout
+        Possible TODO: create extractionmode obj to handle these additional options with 
     """
     testcases_available = False
     with open("testcases.json", 'r') as f:
@@ -405,9 +425,7 @@ def parse_args(script, info_type):
                     filename for filename in sorted(os.listdir(directory)) if filename.endswith(".xml")]
         descriptors = ["Testing on " + filename + " from " + directory for filename in filelist]
 
-    if not testcases_available and not args.qa:
-        pass
-    elif args.qa or args.testcases or args.s or args.i or args.orlando:
+    if args.qa or args.s or args.i or args.orlando or (testcases_available and args.testcases):
         filelist = [directory + file + file_ending for file in filelist]
 
     # TODO: Allow script specific testcases to overwrite ignored files, maybe?

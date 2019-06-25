@@ -73,8 +73,7 @@ def get_date_tag(tag):
             return(x)
     return get_indirect_date_tag(tag)
 
-# TODO: apply '-' if calendar is BC
-#
+# TODO: apply '-' if calendar is BC also log this date
 
 
 def format_date(date):
@@ -130,15 +129,20 @@ class Event(object):
         "NEITHER": "mediumCertainty",
     }
 
-    def __init__(self, title, id, tag, other_attributes=None):
+    def __init__(self, title, id, tag, type="BiographicalEvent"):
         super(Event, self).__init__()
         self.title = title
         self.tag = tag
         self.uri = utilities.create_uri("data", id)
         self.place = utilities.get_places(tag)
+        self.place_str = utilities.get_place_strings(tag)
         self.event_type = get_event_type(tag)
         self.actors = get_actors(tag)
 
+        # NOTE: Event could possibly have multiple types/non cwrc types? may need to revise
+        self.type = utilities.create_cwrc_uri(type)
+
+        # No longer grabing text of title
         self.text = utilities.limit_words(str(tag.CHRONPROSE.get_text()), MAX_WORD_COUNT)
 
         self.date_tag = get_date_tag(tag)
@@ -168,25 +172,29 @@ class Event(object):
         g = utilities.create_graph()
 
         # attaching event to person, context will need link event fx
+        # TODO: review if we are attaching events/context?
         if person:
             g.add((person.uri, utilities.NS_DICT["cwrc"].hasEvent, self.uri))
-        # Not sure if inverse is necessary atm
-        # g.add((self.uri, utilities.NS_DICT["cwrc"].eventOf, person.uri))
-        # g.add((person.uri, utilities.NS_DICT["sem"].actorType, utilities.NS_DICT["cwrc"].NaturalPerson))
 
         # Labelling the event
+        # TODO: figure out label vs description
         g.add((self.uri, RDFS.label, Literal(self.title)))
         text = self.date_tag.text + ": " + self.text
         g.add((self.uri, utilities.NS_DICT["dcterms"].description, Literal(text)))
 
-        # Typing of the event
-        g.add((self.uri, RDF.type, utilities.NS_DICT["sem"].Event))
+        # Typing of the event --> events might have multiple types down the line
+        g.add((self.uri, RDF.type, self.type))
+
         for x in self.event_type:
             g.add((self.uri, utilities.NS_DICT["sem"].eventType, x))
 
-        # Attaching place
-        for x in self.place:
-            g.add((self.uri, utilities.NS_DICT["sem"].hasPlace, x))
+        # Attaching place 
+        for index, place in enumerate(self.place):
+            blanknode = rdflib.BNode()
+            g.add((self.uri, utilities.NS_DICT["sem"].hasPlace, blanknode))
+            g.add((blanknode, RDFS.label, Literal(self.place_str[index])))
+            g.add((blanknode, utilities.NS_DICT["cwrc"].mappedPlace, place))
+            g.add((blanknode, RDF.type, utilities.NS_DICT["cwrc"].MappedPlace))
 
         # Attaching actors, including the biographee incase they're not mentioned
         if person:

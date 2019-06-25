@@ -5,6 +5,9 @@ from Utils import utilities, organizations
 
 MAX_WORD_COUNT = 35
 
+logger = utilities.config_logger("context")
+
+
 """
 Status: ~84%
 TODO:
@@ -44,6 +47,7 @@ def get_heading(tag):
     if not heading:
         heading = tag.findNext("HEADING")
     if not heading:
+        logger.error("Unable to find heading for:" + str(tag))
         return None
     return utilities.remove_punctuation(utilities.strip_all_whitespace(heading.text), True)
 
@@ -56,14 +60,24 @@ class Context(object):
         it will also create the associated identifying contexts
     if only an identifying context is needed
     motivation="identifying" as argument is necessary
+    # TODO: Create possible subclass for necessary other motivations or
+    + logic depending on complexity
+    """
+    """
+    Could put this info in a csv --> to map
+    Orlando tag | context | context relationship predicate
+    Possibly add mode since mode may be a modifying attribute
+    Extend this events quite possibly?
+    Orlando tag | mode  | context | context relationship predicate | event name
+
     """
     context_types = ["BiographyContext", "BirthContext", "CulturalFormContext",
                      "DeathContext", "FamilyContext", "FriendsAndAssociatesContext",
-                     "GenderContext", "IntimateRelationshipsContext", "LeisureContext",
+                     "GenderContext", "IntimateRelationshipContext", "LeisureContext",
                      "NationalityContext", "OccupationContext", "PoliticalContext",
                      "RaceEthnicityContext", "ReligionContext", "SexualityContext",
                      "SocialClassContext", "SpatialContext", "ViolenceContext",
-                     "WealthContext", "EducationContext", "NameContext", "Context"
+                     "EconomicContext", "EducationContext", "NameContext", "Context"
                      "InstitutionalEducationContext", "SelfTaughtEducationContext", "DomesticEducationContext"]
 
     context_map = {"CLASSISSUE": "SocialClassContext",
@@ -77,16 +91,38 @@ class Context(object):
                    "OCCUPATION": "OccupationContext",
                    "LOCATION": "SpatialContext",
                    "VIOLENCE": "ViolenceContext",
-                   "WEALTH": "WealthContext",
+                   "WEALTH": "EconomicContext",
                    "OTHERLIFEEVENT": "BiographyContext",
                    "FAMILY": "FamilyContext",
                    "BIRTH": "BirthContext",
                    "DEATH": "DeathContext",
                    "FRIENDSASSOCIATES": "FriendsAndAssociatesContext",
-                   "INTIMATERELATIONSHIPS": "IntimateRelationshipsContext",
+                   "INTIMATERELATIONSHIPS": "IntimateRelationshipContext",
                    "PERSONNAME": "NameContext",
                    None: "Context"
                    }
+    # context->predicate
+    predicate_map = {
+        "SocialClassContext": "culturalFormRelationship",
+        "RaceEthnicityContext": "culturalFormRelationship",
+        "NationalityContext": "culturalFormRelationship",
+        "SexualityContext": "culturalFormRelationship",
+        "PoliticalContext": "culturalFormRelationship",
+        "ReligionContext": "culturalFormRelationship",
+        "CulturalFormContext": "culturalFormRelationship",
+        "LeisureContext": "leisureRelationship",
+        "OccupationContext": "occupationRelationship",
+        "SpatialContext": "spatialRelationship",
+        "ViolenceContext": "violenceAssociation",
+        "EconomicContext": "economicRelationship",
+        "BiographyContext": "biographyRelationship",
+        "FamilyContext": "familyRelationship",
+        "BirthContext": "birthRelationship",
+        "DeathContext": "deathRelationship",
+        "FriendsAndAssociatesContext": "friendsAndAssociatesRelationship",
+        "IntimateRelationshipContext": "intimateRelationshipRelationship",
+        "NameContext": "nameRelationship"
+    }
 
     def __init__(self, id, tag, context_type="CULTURALFORMATION", motivation="describing"):
         super(Context, self).__init__()
@@ -104,16 +140,17 @@ class Context(object):
         if not self.heading:
             self.src = "http://orlando.cambridge.org"
 
-        # TODO: Make snippet start where first triple is extracted from
+        # TODO: Make snippet start where nearest period to 35 words . . . .
         # Making the text the max amount of words
         self.text = utilities.limit_words(str(tag.get_text()), MAX_WORD_COUNT)
 
+        # Would be nice to use the ontology and not worry about changing labels
         if context_type in self.context_map:
             self.context_type = utilities.create_uri("cwrc", self.context_map[context_type])
-            self.context_label = self.context_map[context_type].split("Context")[0] + " Context"
+            self.context_label = utilities.split_by_casing(self.context_map[context_type])
         else:
             self.context_type = utilities.create_uri("cwrc", context_type)
-            self.context_label = context_type.split("Context")[0] + " Context"
+            self.context_label = utilities.split_by_casing(context_type)
 
         self.motivation = utilities.create_uri("oa", motivation)
         self.subjects = []
@@ -172,9 +209,9 @@ class Context(object):
 
         # Creating identifying context first and always
         if person:
-            context_label = person.name + " - " + self.context_label + " identifying annotation"
+            context_label = person.name + " - " + self.context_label + " (identifying)"
         else:
-            context_label = self.context_label + " identifying annotation"
+            context_label = self.context_label + " (identifying)"
 
         identifying_uri = utilities.create_uri("data", self.id + "_identifying")
         g.add((identifying_uri, RDF.type, self.context_type))
@@ -196,7 +233,7 @@ class Context(object):
         # Creating describing context if applicable
         if self.motivation == utilities.NS_DICT["oa"].describing:
             self.uri = utilities.create_uri("data", self.id + "_describing")
-            context_label = person.name + " - " + self.context_label + " describing annotation"
+            context_label = person.name + " - " + self.context_label + " (describing)"
             g.add((self.uri, RDF.type, self.context_type))
             g.add((self.uri, RDFS.label, rdflib.term.Literal(context_label)))
             g.add((self.uri, utilities.NS_DICT["cwrc"].hasIDependencyOn, identifying_uri))

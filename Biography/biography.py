@@ -108,7 +108,6 @@ class Biography(object):
         g = utilities.create_graph()
 
         g.add((self.uri, RDF.type, utilities.NS_DICT["cwrc"].NaturalPerson))
-        g.add((self.uri, utilities.NS_DICT["foaf"].name, Literal(self.name, datatype=rdflib.namespace.XSD.string)))
         g.add((self.uri, RDFS.label, Literal(self.name, datatype=rdflib.namespace.XSD.string)))
         g.add((self.uri, utilities.NS_DICT["cwrc"].hasGender, self.gender))
         g.add((self.uri, utilities.NS_DICT["foaf"].isPrimaryTopicOf, self.url))
