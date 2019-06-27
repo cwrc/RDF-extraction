@@ -42,16 +42,16 @@ class Birth:
             string += "\tbirthposition: " + str(x) + "\n"
         return string
 
-    def to_triple(self, person):
+    def to_triple(self, context):
         g = utilities.create_graph()
         if self.date:
-            g.add((person.uri, utilities.NS_DICT["cwrc"].hasBirthDate, format_date(self.date)))
+            g.add((context.uri, utilities.NS_DICT["cwrc"].birthDate, format_date(self.date)))
 
         for x in self.position:
-            g.add((person.uri, utilities.NS_DICT["cwrc"].hasBirthPosition, x))
+            g.add((context.uri, utilities.NS_DICT["cwrc"].birthPosition, x))
 
         if self.place:
-            g.add((person.uri, utilities.NS_DICT["cwrc"].hasBirthPlace, self.place))
+            g.add((context.uri, utilities.NS_DICT["cwrc"].birthPlace, self.place))
 
         return g
 
@@ -142,7 +142,7 @@ def extract_birth_data(xmlString, person):
         # adding context and birth to person
         temp_context.link_triples(tempBirth)
         person.add_context(temp_context)
-        person.add_birth(tempBirth)
+        # person.add_birth(tempBirth)
         context_count += 1
 
 
@@ -282,7 +282,7 @@ def main():
 
         person = Biography(person_id, soup, culturalForm.get_mapped_term("Gender", utilities.get_sex(soup)))
         extract_birth_data(soup, person)
-        extract_death_data(soup, person)
+        # extract_death_data(soup, person)
         person.name = utilities.get_readable_name(soup)
         print(person.to_file())
 
