@@ -20,7 +20,7 @@ TODO:
 
 
 def get_xpath(element):
-    """
+    """courtesy: gist.github.com/ergoithz/6cf043e3fdedd1b94fcf
     Generate xpath from BeautifulSoup4 element
     :param element: BeautifulSoup4 element.
     :type element: bs4.element.Tag or bs4.element.NavigableString
@@ -156,7 +156,7 @@ class Context(object):
         self.text = utilities.limit_words(str(tag.get_text()), MAX_WORD_COUNT)
 
         # Would be nice to use the ontology and not worry about changing labels
-        # print(context_type, mode)
+        logger.info(context_type + " " + str(mode))
         self.context_type = get_context_type(context_type, mode)
         self.context_label = utilities.split_by_casing(self.context_type)
         self.context_type = utilities.create_cwrc_uri(self.context_type)
@@ -166,9 +166,6 @@ class Context(object):
 
         if self.named_entities:
             motivation = "describing"
-
-        if motivation == "identifying":
-            self.subjects = get_named_entities(self.tag)
 
         self.motivation = utilities.create_uri("oa", motivation)
         self.uri = utilities.create_uri("data", id)
@@ -251,7 +248,6 @@ class Context(object):
 
         if person:
             g.add((identifying_uri, utilities.NS_DICT["oa"].hasBody, person.uri))
-            # g.add((identifying_uri, utilities.NS_DICT["cwrc"].contextFocus, person.uri))
 
         if self.event:
             g.add((identifying_uri, utilities.NS_DICT["cwrc"].hasEvent, self.event))
@@ -273,6 +269,10 @@ class Context(object):
             if self.event:
                 g.add((self.uri, utilities.NS_DICT["cwrc"].hasEvent, self.event))
 
+            # Remove person from named entities
+            self.named_entities = list(filter(lambda a: a != person.uri, self.named_entities))
+
+            # Adding any named entities with <context>Relationship predicate
             for x in self.named_entities:
                 g.add((self.uri, self.context_predicate, x))
 

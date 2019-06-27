@@ -210,7 +210,6 @@ def get_place_strings(tag):
     return places
 
 
-
 def get_name(bio):
     return (bio.BIOGRAPHY.DIV0.STANDARD.text)
 
