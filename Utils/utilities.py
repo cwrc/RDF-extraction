@@ -2,7 +2,7 @@ import rdflib
 import os
 import re
 import datetime
-
+import urllib
 try:
     from Utils.place import Place
 except Exception as e:
@@ -236,7 +236,7 @@ def get_sparql_results(endpoint_url, query):
     try:
         res = sparql.query().convert()
     except urllib.error.HTTPError as e:
-        log.error(e)
+        logger.error(e)
         res = None
     return res
 
@@ -257,8 +257,9 @@ def get_wd_identifier(id):
     LIMIT 10""" % id
 
     results = get_sparql_results(endpoint_url, query)
-
-    if len(results["results"]["bindings"]) > 1:
+    if not results:
+        return None
+    elif len(results["results"]["bindings"]) > 1:
         logger.info("Multiple wikidata matches found:" + id)
     elif len(results["results"]["bindings"]) < 1:
         logger.info("Entry not found in wikidata: " + id)
