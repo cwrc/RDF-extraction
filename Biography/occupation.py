@@ -6,7 +6,7 @@ from biography import Biography
 from difflib import get_close_matches
 from rdflib import Literal
 from Utils import utilities
-from Utils.context import Context
+from Utils.context import Context, get_context_type
 from Utils.event import Event
 from Utils.organizations import get_org_uri
 """
@@ -14,11 +14,8 @@ Status: ~75%
 TODO:
  - review unmapped instances
  - revise method of capturing failed mappings to be similar to culturalforms
+ - update predicate for employer/employment
 """
-
-# temp log library for debugging
-# --> to be eventually replaced with proper logging library
-
 logger = utilities.config_logger("occupation")
 uber_graph = utilities.create_graph()
 
@@ -38,9 +35,9 @@ class Occupation(object):
             self.value = self.get_mapped_term(job_tag)
         else:
             self.predicate = self.get_occupation_predicate(job_tag)
-            if self.predicate == "hasEmployer":
+            if self.predicate == "employment":
                 self.value = self.get_employer(job_tag)
-            elif self.predicate == "hasOccupationIncome":
+            elif self.predicate == "occupationIncome":
                 self.value = Literal(self.get_value(job_tag))
             else:
                 self.value = self.get_mapped_term(self.get_value(job_tag))
@@ -59,9 +56,9 @@ class Occupation(object):
     def to_tuple(self, person_uri):
         return ((person_uri, self.uri, self.value))
 
-    def to_triple(self, person):
+    def to_triple(self, context):
         g = utilities.create_graph()
-        g.add((person.uri, self.uri, self.value))
+        g.add((context.uri, self.uri, self.value))
         return g
 
     def __str__(self):
@@ -74,18 +71,18 @@ class Occupation(object):
     def get_occupation_predicate(self, tag):
         if tag.name == "JOB":
             if self.get_attribute(tag, "FAMILYBUSINESS"):
-                return "hasFamilyBasedOccupation"
+                return "familyBasedOccupation"
             else:
-                return "hasPaidOccupation"
+                return "paidOccupation"
         if tag.name == "SIGNIFICANTACTIVITY":
             if self.get_attribute(tag, "PHILANTHROPYVOLUNTEER"):
-                return "hasVolunteerOccupation"
+                return "volunteerOccupation"
             else:
-                return "hasOccupation"
+                return "occupation"
         if tag.name == "EMPLOYER":
-            return "hasEmployer"
+            return "employment"
         if tag.name == "REMUNERATION":
-            return "hasOccupationIncome"
+            return "occupationIncome"
 
     def get_employer(self, tag):
         employer = tag.find("NAME")
@@ -207,19 +204,20 @@ def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
     """
     global context_count
     global event_count
+    CONTEXT_TYPE = get_context_type("OCCUPATION")
 
     for tag in tag_list:
         temp_context = None
         occupation_list = None
         context_count += 1
-        context_id = person.id + "_OccupationContext" + str(context_count)
+        context_id = person.id + "_" + CONTEXT_TYPE + str(context_count)
         occupation_list = find_occupations(tag)
         if occupation_list:
-            temp_context = Context(context_id, tag, "OccupationContext")
+            temp_context = Context(context_id, tag, "OCCUPATION")
             temp_context.link_triples(occupation_list)
-            person.add_occupation(occupation_list)
+            # person.add_occupation(occupation_list)
         else:
-            temp_context = Context(context_id, tag, "OccupationContext", "identifying")
+            temp_context = Context(context_id, tag, "OCCUPATION", "identifying")
 
         if list_type == "events":
             event_count += 1
@@ -241,8 +239,8 @@ def extract_occupation_data(bio, person):
     for occupation in occupations:
         paragraphs = occupation.find_all("P")
         events = occupation.find_all("CHRONSTRUCT")
-        extract_occupations(paragraphs, "OccupationContext", person)
-        extract_occupations(events, "OccupationContext", person, "events")
+        extract_occupations(paragraphs, "OCCUPATION", person)
+        extract_occupations(events, "OCCUPATION", person, "events")
 
     # Attaching occupation from PERSON attribute of biography
     # persontype = utilities.get_persontype(bio)
@@ -278,6 +276,8 @@ def main():
 
         temp_path = "extracted_triples/occupation_turtle/" + person_id + "_occupations.ttl"
         utilities.create_extracted_file(temp_path, person)
+
+        print(person.to_file())
 
         uber_graph += graph
         entry_num += 1
