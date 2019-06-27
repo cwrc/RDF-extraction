@@ -108,7 +108,7 @@ class Occupation(object):
             value = ' '.join(value.split())
         return value
 
-    def get_mapped_term(self, value):
+    def get_mapped_term(self, value, id=None):
         if value == "Counsellor":
             return Literal(value)
 
@@ -148,9 +148,11 @@ class Occupation(object):
         elif term:
             term = Literal(term, datatype=rdflib.namespace.XSD.string)
         else:
-            term = Literal("_" + value.lower() + "_", datatype=rdflib.namespace.XSD.string)
+            term = Literal(value, datatype=rdflib.namespace.XSD.string)
             map_fail += 1
             possibilites = []
+            log_str = "Unable to find matching occupation instance for '" + value + "'"
+
             for x in JOB_MAP.keys():
                 if get_close_matches(value.lower(), JOB_MAP[x]):
                     possibilites.append(x)
@@ -158,6 +160,12 @@ class Occupation(object):
                 update_fails(rdf_type, value)
             else:
                 update_fails(rdf_type, value + "->" + str(possibilites) + "?")
+                log_str += "Possible matches" + value + "->" + str(possibilites) + "?"
+
+            if id:
+                logger.warning("In entry: " + id + " " + log_str)
+            else:
+                logger.warning(log_str)
         return term
 
 
@@ -291,12 +299,24 @@ def main():
 
     if 'http://sparql.cwrc.ca/ontologies/cwrc#Occupation' in fail_dict:
         job_fail_dict = fail_dict['http://sparql.cwrc.ca/ontologies/cwrc#Occupation']
-        logger.info("Missed Terms: " + str(len(job_fail_dict.keys())))
+        log_str = "\n\n"
+        log_str += "Attempts: " + str(map_attempt) + "\n"
+        log_str += "Fails: " + str(map_fail) + "\n"
+        log_str += "Success: " + str(map_success) + "\n"
+        log_str += "\nFailure Details:" + "\n"
+        log_str += "\nUnique Missed Terms: " + str(len(job_fail_dict.keys())) + "\n"
+
+        from collections import OrderedDict
+
+        new_dict = OrderedDict(sorted(job_fail_dict.items(), key=lambda t: t[1], reverse=True))
         count = 0
-        for x in job_fail_dict.keys():
-            logger.info(x + " : " + str(job_fail_dict[x]))
-            count += job_fail_dict[x]
-        logger.info("Total Terms: " + str(count))
+        for y in new_dict.keys():
+            log_str += "\t\t" + str(new_dict[y]) + ": " + y + "\n"
+            count += new_dict[y]
+        log_str += "\tTotal missed occupation: " + str(count) + "\n\n"
+
+        print(log_str)
+        logger.info(log_str)
 
 
 if __name__ == "__main__":
