@@ -3,8 +3,8 @@ from rdflib import RDF, RDFS, Literal, XSD
 
 from Utils import utilities, organizations
 
-# Leaving this independent of contexts incase we should want to vary events vs contexts
-MAX_WORD_COUNT = 35
+
+logger = utilities.config_logger("event")
 
 
 def get_actors(tag):
@@ -24,8 +24,18 @@ def get_actors(tag):
 def get_event_type(tag):
     """Returns the types of the event"""
     event_types = []
-    event_types.append(Event.event_type_map[tag.get("RELEVANCE")])
-    event_types.append(Event.event_type_map[tag.get("CHRONCOLUMN")])
+    event_type = tag.get("RELEVANCE")
+    if not event_type:
+        logger.error("Missing RELEVANCE attribute:" + str(tag))
+    else:
+        event_types.append(Event.event_type_map[event_type])
+
+    event_type = tag.get("CHRONCOLUMN")
+    if not event_type:
+        logger.error("Missing CHRONCOLUMN attribute:" + str(tag))
+    else:
+        event_types.append(Event.event_type_map[event_type])
+
     return [utilities.create_cwrc_uri(x) for x in event_types]
 
 
@@ -142,8 +152,8 @@ class Event(object):
         # NOTE: Event could possibly have multiple types/non cwrc types? may need to revise
         self.type = utilities.create_cwrc_uri(type)
 
-        # No longer grabing text of title
-        self.text = utilities.limit_words(str(tag.CHRONPROSE.get_text()), MAX_WORD_COUNT)
+        # No longer grabing text of title, no word limit now
+        self.text = str(tag.CHRONPROSE.get_text())
 
         self.date_tag = get_date_tag(tag)
         self.time_type = get_time_type(self.date_tag)
@@ -171,16 +181,11 @@ class Event(object):
     def to_triple(self, person=None):
         g = utilities.create_graph()
 
-        # attaching event to person, context will need link event fx
-        # TODO: review if we are attaching events/context?
-        if person:
-            g.add((person.uri, utilities.NS_DICT["cwrc"].hasEvent, self.uri))
+        # NOTE: Event will always be attached to a context
 
         # Labelling the event
-        # TODO: figure out label vs description
-        g.add((self.uri, RDFS.label, Literal(self.title)))
         text = self.date_tag.text + ": " + self.text
-        g.add((self.uri, utilities.NS_DICT["dcterms"].description, Literal(text)))
+        g.add((self.uri, RDFS.label, Literal(text)))
 
         # Typing of the event --> events might have multiple types down the line
         g.add((self.uri, RDF.type, self.type))
@@ -188,7 +193,7 @@ class Event(object):
         for x in self.event_type:
             g.add((self.uri, utilities.NS_DICT["sem"].eventType, x))
 
-        # Attaching place 
+        # Attaching place via blank node
         for index, place in enumerate(self.place):
             blanknode = rdflib.BNode()
             g.add((self.uri, utilities.NS_DICT["sem"].hasPlace, blanknode))
@@ -200,6 +205,7 @@ class Event(object):
         if person:
             g.add((self.uri, utilities.NS_DICT["sem"].hasActor, person.uri))
 
+        # TODO: are places actors or just the place
         for x in self.actors:
             g.add((self.uri, utilities.NS_DICT["sem"].hasActor, x))
 
