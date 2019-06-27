@@ -1,6 +1,6 @@
 from biography import Biography
 from Utils import utilities
-from Utils.context import Context
+from Utils.context import Context, get_event_type, get_context_type
 from Utils.event import Event
 """
 Status: ~89%
@@ -12,32 +12,24 @@ uber_graph = utilities.create_graph()
 
 
 def extract_health_contexts_data(bio, person):
-    issue_map = {
-        "PHYSICAL": "PhysicalHealthContext",
-        "MENTAL": "MentalHealthContext",
-        "FEMALEBODY": "WomensHealthContext",
-    }
     contexts = bio.find_all("HEALTH")
     count = 1
     event_count = 1
     for context in contexts:
-        context_type = context.get("ISSUE")
-        if context_type:
-            context_type = issue_map[context_type]
-        else:
-            context_type = "HealthContext"
+        mode = context.get("ISSUE")
+        context_type = get_context_type("HEALTH", mode)
         paragraphs = context.find_all("P")
         for paragraph in paragraphs:
             context_id = person.id + "_" + context_type + str(count)
 
-            temp_context = Context(context_id, paragraph, context_type, "identifying")
+            temp_context = Context(context_id, paragraph, "HEALTH", "identifying", mode)
             person.add_context(temp_context)
             count += 1
 
         events = context.find_all("CHRONSTRUCT")
         for event in events:
             context_id = person.id + "_" + context_type + str(count)
-            temp_context = Context(context_id, event, context_type, "identifying")
+            temp_context = Context(context_id, event, "HEALTH", "identifying", mode)
 
             event_title = person.name + " - " + context_type.split("Context")[0] + " Event"
             event_uri = person.id + "_" + context_type.split("Context")[0] + "_Event" + str(event_count)
@@ -67,7 +59,7 @@ def extract_other_contexts_data(bio, person):
         for x in contexts:
             paragraphs = x.find_all("P")
             for paragraph in paragraphs:
-                context_id = person.id + "_" + Context.context_map[context] + str(count)
+                context_id = person.id + "_" + get_context_type(context) + str(count)
 
                 temp_context = Context(context_id, paragraph, context, "identifying")
                 person.add_context(temp_context)
@@ -75,13 +67,13 @@ def extract_other_contexts_data(bio, person):
 
             events = x.find_all("CHRONSTRUCT")
             for event in events:
-                context_id = person.id + "_" + Context.context_map[context] + str(count)
+                context_id = person.id + "_" + get_context_type(context) + str(count)
                 temp_context = Context(context_id, event, context, "identifying")
 
-                event_title = person.name + " - " + Context.context_map[context].split("Context")[0] + " Event"
+                event_title = person.name + " - " + get_context_type(context).split("Context")[0] + " Event"
                 event_uri = person.id + "_" + \
-                    Context.context_map[context].split("Context")[0] + "_Event" + str(event_count)
-                temp_event = Event(event_title, event_uri, event)
+                    get_context_type(context).split("Context")[0] + "_Event" + str(event_count)
+                temp_event = Event(event_title, event_uri, event, type=get_event_type(context))
 
                 temp_context.link_event(temp_event)
                 person.add_event(temp_event)
@@ -123,6 +115,7 @@ def main():
         temp_path = "extracted_triples/other_contexts_turtle/" + person_id + "_other_contexts.ttl"
         utilities.create_extracted_file(temp_path, person)
 
+        print(person.to_file())
         uber_graph += graph
         entry_num += 1
 
