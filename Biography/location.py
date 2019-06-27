@@ -59,9 +59,9 @@ class Location(object):
     def to_tuple(self, person_uri):
         return ((person_uri, self.uri, self.value))
 
-    def to_triple(self, person):
+    def to_triple(self, context):
         g = utilities.create_graph()
-        g.add((person.uri, self.uri, self.value))
+        g.add((context.uri, self.uri, self.value))
         return g
 
     def __str__(self):
@@ -156,11 +156,11 @@ def extract_locations(tag_list, context_type, person, list_type="paragraphs"):
 
         location_list = find_locations(tag, context_type)
         if location_list:
-            temp_context = Context(context_id, tag, "SpatialContext")
+            temp_context = Context(context_id, tag, "LOCATION")
             temp_context.link_triples(location_list)
             person.add_location(location_list)
         else:
-            temp_context = Context(context_id, tag, "SpatialContext", "identifying")
+            temp_context = Context(context_id, tag, "LOCATION", "identifying")
 
         if list_type == "events":
             location_event_count[context_type] += 1

@@ -115,7 +115,6 @@ class School(object):
 
     def to_triple(self, person):
         g = utilities.create_graph()
-        g.add((self.uri, utilities.NS_DICT["foaf"].name, Literal(self.name)))
         g.add((self.uri, utilities.NS_DICT["rdfs"].name, Literal(self.name)))
         g.add((self.uri, RDF.type, CWRC.EducationalOrganization))
         if self.level:
@@ -204,8 +203,6 @@ class EducationalAward(object):
 
     def to_triple(self, person):
         g = utilities.create_graph()
-
-        g.add((self.uri, utilities.NS_DICT["foaf"].name, Literal(self.name)))
         g.add((self.uri, utilities.NS_DICT["rdfs"].label, Literal(self.name)))
         g.add((person.uri, CWRC.hasAward, self.uri))
         for x in self.award_type:
@@ -591,7 +588,7 @@ def main():
 
         temp_path = "extracted_triples/education_turtle/" + person_id + "_education.ttl"
         utilities.create_extracted_file(temp_path, person)
-
+        print(person.to_file())
         uber_graph += graph
         entry_num += 1
 
