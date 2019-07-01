@@ -46,11 +46,10 @@ def get_xpath(element):
 
 def get_named_entities(tag):
     """ extracts the identifying components in a given tag
-        to be used for the subjects of the annotation
+        to be used for the subjects of the annotation, other than places
     """
     identified_subjects = []
 
-    identified_subjects += utilities.get_places(tag)
     identified_subjects += utilities.get_people(tag)
     identified_subjects += utilities.get_titles(tag)
 
@@ -243,6 +242,11 @@ class Context(object):
         g.add((identifying_uri, utilities.NS_DICT["oa"].hasTarget, target_uri))
         g.add((identifying_uri, utilities.NS_DICT["oa"].motivatedBy, utilities.NS_DICT["oa"].identifying))
 
+        identified_places = utilities.get_places(self.tag)
+        if identified_places:
+            self.named_entities += identified_places
+            g.add((identifying_uri, RDF.type, utilities.create_cwrc_uri("SpatialContext")))
+
         for x in self.named_entities:
             g.add((identifying_uri, utilities.NS_DICT["oa"].hasBody, x))
 
@@ -263,18 +267,29 @@ class Context(object):
             g.add((self.uri, utilities.NS_DICT["oa"].hasTarget, target_uri))
             g.add((self.uri, utilities.NS_DICT["oa"].motivatedBy, self.motivation))
 
-            for x in self.triples:
-                g += x.to_triple(self)
-
             if self.event:
                 g.add((self.uri, utilities.NS_DICT["cwrc"].hasEvent, self.event))
+
+            # Adding extracted triples
+            temp_graph = utilities.create_graph()
+            for x in self.triples:
+                temp_graph += x.to_triple(self)
+            g += temp_graph
 
             # Remove person from named entities
             self.named_entities = list(filter(lambda a: a != person.uri, self.named_entities))
 
+            # Removing named entities if appear within triples
+            for x in temp_graph.objects(None, None):
+                if x in self.named_entities:
+                    self.named_entities.remove(x)
+
             # Adding any named entities with <context>Relationship predicate
             for x in self.named_entities:
                 g.add((self.uri, self.context_predicate, x))
+
+            if identified_places:
+                g.add((self.uri, RDF.type, utilities.create_cwrc_uri("SpatialContext")))
 
         # Creating the mentioned people as natural person
         for x in self.tag.find_all("NAME"):
