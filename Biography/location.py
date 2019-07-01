@@ -2,7 +2,7 @@
 
 
 from biography import Biography
-from Utils.context import Context
+from Utils.context import Context, get_event_type
 from Utils.event import Event
 from Utils.place import Place
 from Utils import utilities
@@ -38,12 +38,12 @@ class Location(object):
     """docstring for Location
     """
     location_dict = {
-        "VISITED": "visits",
-        "UNKNOWN": "relatesSpatiallyTo",
-        "TRAVELLED": "travelsTo",
-        "LIVED": "inhabits",
-        "MIGRATED": "migratesTo",
-        "MOVED": "relocatesTo",
+        "VISITED": "visit",
+        "UNKNOWN": "spatialRelationship",
+        "TRAVELLED": "travel",
+        "LIVED": "habitation",
+        "MIGRATED": "migration",
+        "MOVED": "relocation",
     }
 
     def __init__(self, predicate, place, other_attributes=None):
@@ -100,24 +100,24 @@ def find_locations(tag, relation):
                     place_uri = Place(place).uri
                     location_occurences["MOVED"].remove(place_uri)
                     if not check_occurence(place_uri):
-                        location_list.append(Location("relatesSpatiallyTo", place))
+                        location_list.append(Location("spatialRelationship", place))
                     location_occurences["MOVED"].append(place_uri)
                 else:
-                    location_list.append(Location("relocatesTo", place))
+                    location_list.append(Location("relocation", place))
 
         else:
             for place in places:
-                location_list.append(Location("relocatesTo", place))
+                location_list.append(Location("relocation", place))
     elif location_type == "MIGRATED":
         if len(places) == 1:
-            location_list.append(Location("migratesTo", places[0]))
+            location_list.append(Location("migration", places[0]))
         else:
             for place in places:
                 # TODO: clean up these if statements
                 if "leaving " + place.text in tag.text or "left " + place.text in tag.text or "from " + place.text in tag.text:
-                    location_list.append(Location("migratesFrom", place))
+                    location_list.append(Location("emigration", place))
                 elif "to " + place.text in tag.text or "to the " + place.text in tag.text or "at " + place.text in tag.text:
-                    location_list.append(Location("migratesTo", place))
+                    location_list.append(Location("migration", place))
 
     return location_list
 
@@ -158,16 +158,16 @@ def extract_locations(tag_list, context_type, person, list_type="paragraphs"):
         if location_list:
             temp_context = Context(context_id, tag, "LOCATION")
             temp_context.link_triples(location_list)
-            person.add_location(location_list)
         else:
             temp_context = Context(context_id, tag, "LOCATION", "identifying")
 
         if list_type == "events":
+            event_type = get_event_type("LOCATION", context_type)
             location_event_count[context_type] += 1
             event_title = person.name + " - " + "Spatial (" + Location.location_dict[context_type] + ") Event"
             event_uri = person.id + "_" + \
                 Location.location_dict[context_type] + "_Event" + str(location_event_count[context_type])
-            temp_event = Event(event_title, event_uri, tag)
+            temp_event = Event(event_title, event_uri, tag, type=event_type)
             temp_context.link_event(temp_event)
             person.add_event(temp_event)
 
@@ -231,7 +231,7 @@ def main():
         extract_location_data(soup, person)
 
         graph = person.to_graph()
-
+        print(person.to_file())
         temp_path = "extracted_triples/location_turtle/" + person_id + "_location.ttl"
         utilities.create_extracted_file(temp_path, person)
 

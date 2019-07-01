@@ -50,12 +50,12 @@ def main():
         person = Biography(person_id, soup, cf.get_mapped_term("Gender", utilities.get_sex(soup)))
         cf.extract_cf_data(soup, person)
         other_contexts.extract_other_contexts_data(soup, person)
-        location.extract_location_data(soup, person)
         occupation.extract_occupation_data(soup, person)
-        education.extract_education_data(soup, person)
-
-        # personname.extract_person_name(soup, person)
         birthDeath.extract_birth_data(soup, person)
+        location.extract_location_data(soup, person)
+
+        # education.extract_education_data(soup, person)
+        # personname.extract_person_name(soup, person)
         # birthDeath.extract_death(soup, person)
         # lifeInfo.extract_cohabitants(soup, person)
         # lifeInfo.extract_family(soup, person)
@@ -65,6 +65,7 @@ def main():
         # lifeInfo.extract_children(soup, person)
 
         graph = person.to_graph()
+        print(person.to_file())
         triple_count = len(graph)
 
         if triple_count > highest_triples:

@@ -15,6 +15,9 @@ class Biography(object):
         self.gender = gender
         self.uri = utilities.make_standard_uri(utilities.get_name(doc))
 
+        # TODO: get nickname from file most common acroynm and replace in event/context strings
+        self.nickname = None
+
         # TODO: Read wikidata identifiers from csv
         self.wd_id = None
         # self.wd_id = utilities.get_wd_identifier(id)
@@ -24,7 +27,6 @@ class Biography(object):
         self.context_list = []
         self.event_list = []
 
-        self.location_list = []
         self.education_list = []
 
         # Gurjap's files
@@ -52,12 +54,6 @@ class Biography(object):
             self.context_list += context
         else:
             self.context_list.append(context)
-
-    def add_location(self, location):
-        if type(location) is list:
-            self.location_list += location
-        else:
-            self.location_list.append(location)
 
     def add_education(self, education):
         if type(education) is list:
@@ -92,7 +88,6 @@ class Biography(object):
         g.add((self.uri, utilities.NS_DICT["foaf"].isPrimaryTopicOf, self.url))
 
         g += self.create_triples(self.context_list)
-        g += self.create_triples(self.location_list)
         g += self.create_triples(self.event_list)
         g += self.create_triples(self.education_list)
 

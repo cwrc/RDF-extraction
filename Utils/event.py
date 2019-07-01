@@ -153,6 +153,7 @@ class Event(object):
         self.type = utilities.create_cwrc_uri(type)
 
         # No longer grabing text of title, no word limit now
+        # TODO: replace initials with full name of author where applicable
         self.text = str(tag.CHRONPROSE.get_text())
 
         self.date_tag = get_date_tag(tag)
