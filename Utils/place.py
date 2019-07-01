@@ -1,7 +1,29 @@
 import rdflib
 PLACE_MAP = {}
-# TODO remove circular dependence and add find places to this class
-# from utilities import *
+
+
+def config_logger(name, verbose=False):
+    # Will likely want to convert logging records to be json formatted and based on external file.
+    import logging
+
+    logger = logging.getLogger(name)
+    logger.setLevel(logging.INFO)
+    fh = logging.FileHandler("log/" + name + ".log", mode="w")
+    fh.setLevel(logging.INFO)
+    formatter = logging.Formatter('%(levelname)s - %(asctime)s - %(message)s ')
+    fh.setFormatter(formatter)
+    logger.addHandler(fh)
+
+    if verbose:
+        ch = logging.StreamHandler()
+        ch.setLevel(logging.ERROR)
+        ch.setFormatter(formatter)
+        logger.addHandler(ch)
+
+    return logger
+
+
+logger = config_logger("place")
 
 
 """
@@ -11,7 +33,8 @@ based on the places.csv
 TODO:
 1)create log of unmapped places
 2)error handling of missing place.csv
-3)review necessity of Place class
+3)create a dictionary of places that failed to map with counts
+4)review necessity of Place class
 """
 
 
@@ -19,7 +42,6 @@ def create_place_map(path=None):
     import csv
     # if searching takes too long
     # Create better searching mechanism
-    # with open('geoghert_places.csv', newline='') as csvfile:
     if not path:
         path = '../data/places.csv'
     with open(path, newline='', encoding='utf-8') as csvfile:
@@ -78,7 +100,9 @@ class Place(object):
 
         if self.address in PLACE_MAP:
             self.uri = rdflib.term.URIRef(PLACE_MAP[self.address])
+            # TODO: get place string from uri --> extend csv?
         else:
+            logger.warning("Unable to find matching place instance for: " + self.address)
             self.uri = rdflib.term.Literal(self.address)
 
     # Hopefully won't have to create triples about a place just provide a uri but

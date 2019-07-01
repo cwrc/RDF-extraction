@@ -303,6 +303,7 @@ def create_extracted_uberfile(filepath, graph, serialization=None):
 
 def config_logger(name, verbose=False):
     # Will likely want to convert logging records to be json formatted and based on external file.
+    # Add metadata info about time of extraction run and remove asctime
     import logging
     if name != "utilities":
         name += '_extraction'

@@ -101,7 +101,8 @@ def find_cultural_forms(cf, person):
             if not value or value == "OTHER":
                 value = utilities.get_value(x)
 
-            cf_list.append(CulturalForm("socialClass", get_reported(x), get_mapped_term("SocialClass", value,id=person.id)))
+            cf_list.append(CulturalForm("socialClass", get_reported(
+                x), get_mapped_term("SocialClass", value, id=person.id)))
 
     def get_language():
         langs = cf.find_all("LANGUAGE")
