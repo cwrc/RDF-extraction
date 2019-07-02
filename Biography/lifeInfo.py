@@ -1,23 +1,42 @@
-import requests
-import sys
-import xml.etree.ElementTree
-import os
-import logging
-import csv
-import datetime
-from bs4 import BeautifulSoup
-# from Env import env
-
-# from gLoggingInFunctions import *
-from stringAndMemberFunctions import *
 from classes import *
-import context
-# from graphOntology import graphMaker
-
-numSigs = 0
-numAdded = 0
-session = requests.Session()
+from stringAndMemberFunctions import *
+from Utils import utilities
+from Utils.context import Context, get_context_type, get_event_type
+from Utils.event import get_date_tag, Event, format_date
+from Utils.place import Place
+import csv
+import os
+from occupation import Occupation
+from rdflib import RDF, RDFS, Literal
 numtags = 0
+
+logger = utilities.config_logger("relationships")
+
+
+class Person(object):
+    """docstring for a general Person with a social/familar relation to biographee"""
+
+    def __init__(self, name_tag, relationship, other_attributes=None):
+        super(Person, self).__init__()
+        self.name = name_tag.get("STANDARD")
+        self.uri = utilities.get_name_uri(name_tag)
+        # TODO possibly mapping to get relationship
+        self.predicate = utilities.create_cwrc_uri(relationship)
+
+    def to_triple(self, context):
+        g = utilities.create_graph()
+        g.add((self.uri, RDFS.label, Literal(self.name)))
+        g.add((self.uri, RDF.type, utilities.create_cwrc_uri("NaturalPerson")))
+        g.add((context.uri, self.predicate, self.uri))
+        return g
+
+    def __str__(self):
+        string = "\tURI: " + str(self.uri) + "\n"
+        string += "\tname: " + str(self.name) + "\n"
+        string += "\tpredicate: " + str(self.predicate) + "\n"
+        string += "\tvalue: " + str(self.value) + "\n"
+
+        return string
 
 
 # Get g information about the subject
@@ -25,8 +44,6 @@ numtags = 0
 # birth date:  1873-12-07
 # birth positions: ['ELDEST']
 # birth place: Gore, Virginia, USA
-
-    # o
 
 
 # checks if child's name is available in children tag
@@ -99,32 +116,7 @@ def extract_childlessness(xmlString, person):
     person.childless_list = childlessList
 
 
-def extract_friends_associates(xmlString, person):
-    # root = xml.etree.ElementTree.fromstring(xmlString)
-    root = xmlString.BIOGRAPHY
-
-    tagToFind = allTagsAllChildren(root, "FRIENDSASSOCIATES")
-
-    listToReturn = []
-    id = 1
-    for instance in tagToFind:
-        context_id = person.id + "_FriendAndAssociatesContext_" + str(id)
-        id += 1
-        thisInstanceNames = getAllNames(instance.find_all("NAME"), person.name)
-        thisInstanceObjs = []
-
-        for name in thisInstanceNames:
-            thisInstanceObjs.append(FriendAssociate(name))
-        tempContext = context.Context(context_id, instance, "FRIENDSASSOCIATES")
-        tempContext.link_triples(thisInstanceObjs)
-        person.context_list.append(tempContext)
-        listToReturn += thisInstanceObjs
-
-    person.friendsAssociates_list = listToReturn
-
-
 def extract_cohabitants(xmlString, person):
-    # root = xml.etree.ElementTree.fromstring(xmlString)
     root = xmlString.BIOGRAPHY
     sourcePerson = findTag(root, "DIV0 STANDARD").text
     tagToFind = root.find_all("LIVESWITH")
@@ -140,7 +132,6 @@ def extract_cohabitants(xmlString, person):
 
 
 def getSexualityContexts(xmlString):
-    # root = xml.etree.ElementTree.fromstring(xmlString)
     root = xmlString.BIOGRAPHY
     tagToFind = allTagsAllChildren(root, "SEXUALITY")
     # tagToFind = root.find_all("SEXUALITY").find_all(recursive=False)
@@ -184,7 +175,7 @@ def extract_intimate_relationships(xmlString, person):
             else:
                 thisRelationship = IntimateRelationships("intimate relationship", attr)
 
-            tempContext = context.Context(context_id, thisPerson, "INTIMATERELATIONSHIPS")
+            tempContext = Context(context_id, thisPerson, "INTIMATERELATIONSHIPS")
             tempContext.link_triples([thisRelationship])
             intimateRelationships.append(thisRelationship)
             person.context_list.append(tempContext)
@@ -204,8 +195,6 @@ def extract_intimate_relationships(xmlString, person):
 
 
 def extract_family(xmlString, person):
-    global numSigs
-    global numAdded
 
     myRoot2 = xmlString.BIOGRAPHY
     # SOURCENAME = myRoot2.newFindFunc("DIV0 STANDARD").text
@@ -246,24 +235,114 @@ def extract_family(xmlString, person):
     person.family_list = listOfMembers
 
 
-def getOccupationDict():
-    listToReturn = {}
-    with open(os.path.expanduser('~/Documents/UoGuelph Projects/occupation.csv'), encoding='utf8') as csvInput:
-        csvReader = csv.reader(csvInput, delimiter=',')
+def find_friends(tag, person):
+    friends = []
+    names = tag.find_all("NAME")
+    for x in names:
+        friends.append(Person(x, "interpersonalRelationship"))
+    return list(filter(lambda a: a.uri != person.uri, friends))
 
-        skipFirst = True
-        for row in csvReader:
-            if skipFirst:
-                skipFirst = False
-                continue
-            if row[0] == "":
-                continue
-            # print(row)
-            # print("to use: ", row[0])
-            for j in range(3, len(row)):
-                if row[j] != "":
-                    listToReturn[row[j]] = row[0]
-                    # print("alternative: ",row[j])
-            # break
-        # print(len(listToReturn))
-    return listToReturn
+
+def extract_friends(tag_list, context_type, person, list_type="paragraphs"):
+    """ Creates the interpersonal relation and ascribes them to the person along
+        with the associated contexts and event
+    """
+    global context_count
+    global event_count
+    CONTEXT_TYPE = get_context_type("FRIENDSASSOCIATES")
+    EVENT_TYPE = get_event_type("FRIENDSASSOCIATES")
+
+    for tag in tag_list:
+        temp_context = None
+        friend_list = None
+        context_count += 1
+        context_id = person.id + "_" + CONTEXT_TYPE + str(context_count)
+        friend_list = find_friends(tag, person)
+        if friend_list:
+            temp_context = Context(context_id, tag, "FRIENDSASSOCIATES")
+            temp_context.link_triples(friend_list)
+        else:
+            temp_context = Context(context_id, tag, "FRIENDSASSOCIATES", "identifying")
+
+        if list_type == "events":
+            event_count += 1
+            event_title = person.name + " - " + "Friends and Associates Event"
+            event_uri = person.id + "_Friends_and_Associates_Event" + str(event_count)
+            temp_event = Event(event_title, event_uri, tag, EVENT_TYPE)
+            temp_context.link_event(temp_event)
+            person.add_event(temp_event)
+
+        person.add_context(temp_context)
+
+
+def extract_friend_data(bio, person):
+    friends = bio.find_all("FRIENDSASSOCIATES")
+    global context_count
+    global event_count
+    context_count = 0
+    event_count = 0
+    for friend in friends:
+        paragraphs = friend.find_all("P")
+        events = friend.find_all("CHRONSTRUCT")
+        extract_friends(paragraphs, "FRIENDSASSOCIATES", person)
+        extract_friends(events, "FRIENDSASSOCIATES", person, "events")
+
+
+def extract_family_data(bio, person):
+    family_members = []
+    # for tag in bio.find_all('FAMILY'):
+        # for member in tag.find_all("MEMBER"):
+    # Find all husband wife tags
+    # children
+    # other members
+
+
+def main():
+    from bs4 import BeautifulSoup
+    import culturalForm
+    from biography import Biography
+    file_dict = utilities.parse_args(__file__, "family/friends")
+    print("-" * 200)
+    entry_num = 1
+
+    uber_graph = utilities.create_graph()
+
+    for filename in file_dict.keys():
+        with open(filename) as f:
+            soup = BeautifulSoup(f, 'lxml-xml')
+
+        person_id = filename.split("/")[-1][:6]
+
+        print(filename)
+        print(file_dict[filename])
+        print(person_id)
+        print("*" * 55)
+
+        person = Biography(person_id, soup, culturalForm.get_mapped_term("Gender", utilities.get_sex(soup)))
+        extract_friend_data(soup, person)
+        # extract_cohabitants(soup, person)
+        # extract_family(soup, person)
+        # extract_friends_associates(soup, person)
+        # extract_intimate_relationships(soup, person)
+        # extract_childlessness(soup, person)
+        # extract_children(soup, person)
+
+        person.name = utilities.get_readable_name(soup)
+        print(person.to_file())
+
+        temp_path = "extracted_triples/relationships_turtle/" + person_id + "_relationships.ttl"
+        utilities.create_extracted_file(temp_path, person)
+
+        uber_graph += person.to_graph()
+        entry_num += 1
+        print("=" * 55)
+
+    print("UberGraph is size:", len(uber_graph))
+    temp_path = "extracted_triples/relationships.ttl"
+    utilities.create_extracted_uberfile(temp_path, uber_graph)
+
+    temp_path = "extracted_triples/relationships.rdf"
+    utilities.create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
+
+if __name__ == "__main__":
+    main()
