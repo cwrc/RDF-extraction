@@ -1,10 +1,5 @@
 #!/usr/bin/python3
 
-# from biography import *
-# from bs4 import BeautifulSoup
-# import biography
-# import context
-# import culturalForm as cf
 from rdflib import URIRef, Literal
 from Utils import utilities
 from Utils.context import Context
@@ -31,16 +26,16 @@ basic_layout_dict = {
         "LITERARY": "LiteraryName",
         "FAMILIAR": "FamiliarName",
     },
-    "PSEUDONYM": "pseudonym",
+    "PSEUDONYM": "Pseudonym",
     "BIRTHNAME": "BirthName",
     # "PROFESSIONALTITLE": None,
     "INDEXED": "IndexedName",
     "MARRIED": "MarriedName",
-    "RELIGIOUS": "religiousName",
-    "ROYAL": "royalName",
-    "SELFCONSTRUCTED": "selfConstructedName",
-    "STYLED": "styledName",
-    "TITLE": "titledName"
+    "RELIGIOUS": "ReligiousName",
+    "ROYAL": "RoyalName",
+    "SELFCONSTRUCTED": "SelfConstructedName",
+    "STYLED": "StyledName",
+    "TITLE": "TitledName"
 }
 
 
@@ -246,7 +241,7 @@ def extract_person_name(xmlString, person):
         possible_event = name.find_all("CHRONSTRUCT")
         if possible_event:
             logger.info("Event found in " + person.id + "\n\t" + str(possible_event))
-
+        logger.info("\n" + str(name.prettify()))
         for tagname in basic_layout_dict:
             if tagname == "BIRTHNAME":
                 for givenName in name.find_all("BIRTHNAME"):
