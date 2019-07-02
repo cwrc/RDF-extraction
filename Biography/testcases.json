@@ -5,9 +5,7 @@
         "fielmi": "Michael Field - corresponds to two people and doesn't distinguish between the two"
     },
     "special": {
-        "fielmi": "Michael Field - corresponds to two people and doesn't distinguish between the two",
-        "clerag": "Agnes Mary Clerke - Multiple Death tags",
-        "tautje": "Jemima Tautphoeus - Multiple Death tags"
+        "fielmi": "Michael Field - corresponds to two people and doesn't distinguish between the two"
     },
     "qa": {
         "testcases": {
@@ -32,7 +30,9 @@
             "bootfr": "birth: Has two dates in shortprose",
             "butls2": "birth: Daterange within shortprose",
             "cuthca": "birth: birthposition & birthdate in a shortprose, no chronstruct",
-            "scotsa": "birth: has two events in a birthtag(first birth, second christening)"
+            "scotsa": "birth: has two events in a birthtag(first birth, second christening)",
+            "clerag": "death: Agnes Mary Clerke - Multiple Death tags",
+            "tautje": "death: Jemima Tautphoeus - Multiple Death tags"
         }
     },
     "culturalForm.py": {
@@ -55,7 +55,11 @@
             "abdyma": "TBD",
             "aikejo": "TBD",
             "blesma": "Using graffle as ground truth",
-            "woolvi": "TBD"
+            "woolvi": "TBD",
+            "harwis": "Isabella Neil Harwood - an event and shortprose within personname tag post datastruct",
+            "walkal": "Alice Walker - an event within personname tag post datastruct",
+            "bailjo": "Joanna Baillie - Two Personname tags found",
+            "bulwed": "Edward George Earle Lytton Bulwer-Lytton, first Baron Lytton - Two Personname tags found"
         }
     }
 }

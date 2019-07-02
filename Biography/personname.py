@@ -1,41 +1,46 @@
 #!/usr/bin/python3
 
+# from biography import *
+# from bs4 import BeautifulSoup
+# import biography
+# import context
+# import culturalForm as cf
+from rdflib import URIRef, Literal
 from Utils import utilities
 from Utils.context import Context
-from Utils.place import Place
 from Utils.event import get_date_tag, Event, format_date
-
-
-# import biography
-# from bs4 import BeautifulSoup
+from Utils.place import Place
 import rdflib
-from rdflib import URIRef, Literal
 
-# from biography import *
-# import culturalForm as cf
-# import context
+"""
+    TODO:
+    Handle events, shortprose
+    fix incorrect uris
+    worry about awks redundancy next week
+"""
 
+logger = utilities.config_logger("personname")
 
 basic_layout_dict = {
     "NICKNAME": {
         "ABUSIVE": "AbusiveName",
-            "HONORIFIC": "HonorificName",
-            "CRYPTIC": "CrypticName",
-            "LOCAL": "LocalName",
-            "ROMANCE": "RomanceName",
-            "LITERARY": "LiteraryName",
-            "FAMILIAR": "FamiliarName",
+        "HONORIFIC": "HonorificName",
+        "CRYPTIC": "CrypticName",
+        "LOCAL": "LocalName",
+        "ROMANCE": "RomanceName",
+        "LITERARY": "LiteraryName",
+        "FAMILIAR": "FamiliarName",
     },
     "PSEUDONYM": "pseudonym",
-        "BIRTHNAME": "BirthName",
-        # "PROFESSIONALTITLE": None,
-        "INDEXED": "IndexedName",
-        "MARRIED": "MarriedName",
-        "RELIGIOUS": "religiousName",
-        "ROYAL": "royalName",
-        "SELFCONSTRUCTED": "selfConstructedName",
-        "STYLED": "styledName",
-        "TITLE": "titledName"
+    "BIRTHNAME": "BirthName",
+    # "PROFESSIONALTITLE": None,
+    "INDEXED": "IndexedName",
+    "MARRIED": "MarriedName",
+    "RELIGIOUS": "religiousName",
+    "ROYAL": "royalName",
+    "SELFCONSTRUCTED": "selfConstructedName",
+    "STYLED": "styledName",
+    "TITLE": "titledName"
 }
 
 
@@ -160,6 +165,7 @@ def makePerson(type, tag, existingList, personName=None):
     otherTriples = None
     name_to_send = ""
 
+    print(type)
     if "WROTEORPUBLISHEDAS" in tag.attrs:
         types.append("AuthorialName")
 
@@ -222,11 +228,11 @@ def makePerson(type, tag, existingList, personName=None):
 def extract_person_name(xmlString, person):
     root = xmlString.BIOGRAPHY
     personNameList = []
-    stdEntry = makePerson("IndexedName", root.find("STANDARD"), personNameList, personName=person.name)
+    stdEntry = makePerson("IndexedName", root.find("STANDARD"), personNameList, personName=person.id)
     if stdEntry:
         personNameList.append(stdEntry)
 
-    docTitle = makePerson("PreferredName", root.find("DOCTITLE"), personNameList, personName=person.name)
+    docTitle = makePerson("PreferredName", root.find("DOCTITLE"), personNameList, personName=person.id)
     if docTitle:
         personNameList.append(docTitle)
 
@@ -234,33 +240,37 @@ def extract_person_name(xmlString, person):
     personNameTags = root.find_all("PERSONNAME")
     if personNameTags is None:
         return
+    if len(personNameTags) > 1:
+        logger.info("Multiple Personname tags within: " + person.id)
     for name in personNameTags:
+        possible_event = name.find_all("CHRONSTRUCT")
+        if possible_event:
+            logger.info("Event found in " + person.id + "\n\t" + str(possible_event))
 
         for tagname in basic_layout_dict:
             if tagname == "BIRTHNAME":
                 for givenName in name.find_all("BIRTHNAME"):
-                    newPerson = makePerson("BirthName", (givenName), personNameList, personName=person.name)
+                    newPerson = makePerson("BirthName", (givenName), personNameList, personName=person.id)
                     if newPerson:
                         personNameList.append(newPerson)
             elif tagname == "NICKNAME":
                 for nickname in name.find_all("NICKNAME"):
-                    newPerson = makePerson("NickName", nickname, personNameList, personName=person.name)
+                    newPerson = makePerson("NickName", nickname, personNameList, personName=person.id)
                     if newPerson:
                         personNameList.append(newPerson)
             else:
                 for thisTag in name.find_all(tagname):
                     newPerson = makePerson(basic_layout_dict[tagname],
-                                           thisTag, personNameList, personName=person.name)
+                                           thisTag, personNameList, personName=person.id)
                     if newPerson:
                         personNameList.append(newPerson)
 
-    person.name_list = personNameList
-    context_id = person.id + "_PersonNameContext" + str(0)
-    tempContext = Context(context_id, personNameTags[0], "PersonNameContext")
-    tempContext.link_triples(person.name_list[1:])
-    person.context_list.append(tempContext)
-
-logger = utilities.config_logger("personname")
+    if personNameTags:
+        person.name_list = personNameList
+        context_id = person.id + "_PersonNameContext" + str(0)
+        tempContext = Context(context_id, personNameTags[0], "PERSONNAME")
+        tempContext.link_triples(person.name_list[1:])
+        person.context_list.append(tempContext)
 
 
 def main():
@@ -303,14 +313,6 @@ def main():
 
     temp_path = "extracted_triples/personname.rdf"
     utilities.create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
-
-        # graph = person.create_triples(person.name_list)
-        # graph += person.create_triples(person.context_list)
-        # namespace_manager = rdflib.namespace.NamespaceManager(graph)
-        # bind_ns(namespace_manager, utilities.NS_DICT)
-        # print(graph.serialize(format='turtle').decode())
-        # exit()
-
 
 if __name__ == "__main__":
     main()
