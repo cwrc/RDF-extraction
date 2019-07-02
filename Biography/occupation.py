@@ -6,7 +6,7 @@ from biography import Biography
 from difflib import get_close_matches
 from rdflib import Literal
 from Utils import utilities
-from Utils.context import Context, get_context_type
+from Utils.context import Context, get_context_type, get_event_type
 from Utils.event import Event
 from Utils.organizations import get_org_uri
 """
@@ -213,6 +213,7 @@ def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
     global context_count
     global event_count
     CONTEXT_TYPE = get_context_type("OCCUPATION")
+    EVENT_TYPE = get_event_type("OCCUPATION")
 
     for tag in tag_list:
         temp_context = None
@@ -231,7 +232,7 @@ def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
             event_count += 1
             event_title = person.name + " - " + "Occupation Event"
             event_uri = person.id + "_Occupation_Event" + str(event_count)
-            temp_event = Event(event_title, event_uri, tag)
+            temp_event = Event(event_title, event_uri, tag, EVENT_TYPE)
             temp_context.link_event(temp_event)
             person.add_event(temp_event)
 
