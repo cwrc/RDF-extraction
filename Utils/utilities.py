@@ -126,6 +126,20 @@ def limit_words(string, word_count):
     return text
 
 
+def limit_to_full_sentences(string, max):
+    sentences = string.split(".")
+    text = ""
+    for x in sentences:
+        if text.count(" ") < max:
+            text += x.strip()
+            if text[-1] != ".":
+                text += "."
+        else:
+            break
+
+    return text.replace(".  .", ". ")
+
+
 """
     Series of functions to do with the creation of URI
 """

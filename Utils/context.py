@@ -152,7 +152,7 @@ class Context(object):
 
         # TODO: Make snippet endwhere nearest period to 35 words . . . .
         # Making the text the max amount of words
-        self.text = utilities.limit_words(str(tag.get_text()), MAX_WORD_COUNT)
+        self.text = utilities.limit_to_full_sentences(str(tag.get_text()), MAX_WORD_COUNT)
 
         # Would be nice to use the ontology and not worry about changing labels
         logger.info(context_type + " " + str(mode))
