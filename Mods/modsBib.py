@@ -439,6 +439,7 @@ class BibliographyParse:
 
     def get_names(self):
         names = []
+        print(self.soup.find_all('name'))
         for np in self.soup.find_all('name'):
             if np.parent.name == "relateditem" and self.relatedItem == False:
                 continue
@@ -454,8 +455,14 @@ class BibliographyParse:
                 if role['type'] == "text":
                     role = role.text
 
+            if 'standard' in np.attrs:
+                name = np.attrs['standard']
+            elif np.namepart:
+                name = np.namepart.get_text()
+
+
             print(name_type)
-            names.append({"type": name_type, "role": role, "name": np.namepart.get_text()})
+            names.append({"type": name_type, "role": role, "name": name})
 
         return names
 
@@ -624,11 +631,16 @@ class BibliographyParse:
                 title_res = g.resource("{}_title_{}".format(self.mainURI, i))
 
                 title_res.add(BF.mainTitle, Literal(item["title"].strip()))
+
                 if item['usage'] == 'alternative':
                     title_res.add(RDF.type, BF.VariantTitle)
                 else:
                     title_res.add(RDF.type, BF.Title)
                     resource.add(RDFS.label, Literal(item['title'].strip()))
+                # Schema.org attributes per spreadsheet for BIBFRAME matching
+                title_res.add(RDF.type, SCHEMA.CreativeWork)
+                title_res.add(SCHEMA.name, Literal(item['title'].strip()))
+
                 instance.add(BF.title, title_res)
 
                 i += 1
@@ -742,6 +754,7 @@ class BibliographyParse:
                 place = g.resource("{}_activity_statement_place_{}".format(self.mainURI, i))
                 place.add(RDF.value, Literal(o['place']))
                 place.add(RDF.type, BF.Place)
+                place.add(RDF.type, SCHEMA.Place)
 
                 place_map = geoMapper.get_place(o['place'].strip())
 
@@ -816,7 +829,7 @@ class BibliographyParse:
             genres = genre_map[self.id]
             for g in genres:
                 gName = g.lower().title()
-                uri = URIRef('http://sparql.cwrc.ca/ontologies/genre#genre{}'.format(gName))
+                uri = URIRef('http://sparql.cwrc.ca/ontologies/genre#{}'.format(gName))
 
                 if genre_graph[uri]:
                     resource.add(GENRE.hasGenre, GENRE[gName.lower()])
@@ -878,6 +891,8 @@ if __name__ == "__main__":
             continue
 
         print(fname)
+        if not fname:
+            continue
         try:
             mp = BibliographyParse(path, g, fname)
             mp.build_graph()
