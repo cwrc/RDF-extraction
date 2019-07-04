@@ -127,6 +127,7 @@ def limit_words(string, word_count):
 
 
 def limit_to_full_sentences(string, max):
+    logger.info("\n" + string)
     sentences = string.split(".")
     text = ""
     for x in sentences:
@@ -348,6 +349,10 @@ def parse_args(script, info_type):
         relying on testcase.json for testcases + qa
 
         ./birthDeath -t returns {testfiles:testcase descriptions}
+        TODO: 
+            STOP ADDING MORE PARAMETERS!!!!!!!!!!
+            You're wasting time
+            There's more important things to do.
 
     """
     import os
@@ -384,6 +389,10 @@ def parse_args(script, info_type):
     help_str += str(list(testcase_data['special']))[1:-1]
     modes.add_argument('-s', "-special", action="store_true", help=help_str)
 
+    help_str = "will run through cases related to our graffles"
+    help_str += str(list(testcase_data['graffles']))[1:-1]
+    modes.add_argument('-g', "-graffles", "-graffle", action="store_true", help=help_str)
+
     help_str = "will run through files that are currently being ignored which currently include: "
     help_str += str(list(testcase_data['ignored files']))[1:-1]
     modes.add_argument('-i', "-ignored", action="store_true", help=help_str)
@@ -392,13 +401,13 @@ def parse_args(script, info_type):
                        help="entry id of a single orlando document to run extraction upon, ex. woolvi")
     modes.add_argument("-f", "-file", "--file", help="single orlando xml document to run extraction upon")
     modes.add_argument("-d", "-directory", "--directory", help="directory of files to run extraction upon")
-    args = parser.parse_args()
 
+    args = parser.parse_args()
     directory = testcase_data['default directory']
     file_ending = testcase_data['file ending']
     filelist = []
     descriptors = []
-    print(args)
+
     if args.file:
         assert args.file.endswith(".xml"), "Not an XML file"
         filelist = [args.file]
@@ -424,6 +433,11 @@ def parse_args(script, info_type):
         descriptors = [testcase_data['special'][desc] for desc in filelist]
         print("Running extraction on special cases: ")
         print(*filelist, sep=", ")
+    elif args.g:
+        filelist = sorted(testcase_data['graffles'].keys())
+        descriptors = [testcase_data['graffles'][desc] for desc in filelist]
+        print("Running extraction on graffle examples: ")
+        print(*filelist, sep=", ")
     elif args.i:
         filelist = sorted(testcase_data['ignored files'].keys())
         descriptors = [testcase_data['ignored files'][desc] for desc in filelist]
@@ -440,11 +454,12 @@ def parse_args(script, info_type):
                     filename for filename in sorted(os.listdir(directory)) if filename.endswith(".xml")]
         descriptors = ["Testing on " + filename + " from " + directory for filename in filelist]
 
-    if args.qa or args.s or args.i or args.orlando or (testcases_available and args.testcases):
+    # TODO: clean this maybe using any operator
+    if args.qa or args.s or args.i or args.g or args.orlando or (testcases_available and args.testcases):
         filelist = [directory + file + file_ending for file in filelist]
 
     # TODO: Allow script specific testcases to overwrite ignored files, maybe?
-    if "ignored files" in testcase_data and not args.s and not args.i:
+    if "ignored files" in testcase_data and not args.s and not args.i and not args.g:
         # Get full filepaths of to be ignored files since it may vary per option chosen
         ignore_files = [x for x in filelist if any(s in x for s in testcase_data["ignored files"].keys())]
         for x in ignore_files:

@@ -1,11 +1,17 @@
 {
     "default directory": "../data/biography_entries/",
-    "file ending": "-b-transformed.xml",
+    "file ending": "-b.xml",
     "ignored files": {
         "fielmi": "Michael Field - corresponds to two people and doesn't distinguish between the two"
     },
     "special": {
         "fielmi": "Michael Field - corresponds to two people and doesn't distinguish between the two"
+    },
+    "graffles": {
+        "seacma": "Mary Seacole - Forebear graffle",
+        "lel___": "L.E.L - Death graffle",
+        "edgema": "Maria Edgeworth - Education graffle",
+        "blesma": "Marguerite Gardiner, Countess of Blessington - Personname graffle"
     },
     "qa": {
         "testcases": {
@@ -32,13 +38,15 @@
             "cuthca": "birth: birthposition & birthdate in a shortprose, no chronstruct",
             "scotsa": "birth: has two events in a birthtag(first birth, second christening)",
             "clerag": "death: Agnes Mary Clerke - Multiple Death tags",
-            "tautje": "death: Jemima Tautphoeus - Multiple Death tags"
+            "tautje": "death: Jemima Tautphoeus - Multiple Death tags",
+            "lel___": "death: L.E.L - Example used in death graffles"
         }
     },
     "culturalForm.py": {
         "testcases": {
             "angema": "RDF-Extraction Issue #4: Ensuring string is rendered the same as src material (Africanist)",
-            "taylha": "Ontology Issue #459: WomensEnfranchisement should map to suffrage"
+            "taylha": "Ontology Issue #459: WomensEnfranchisement should map to suffrage",
+            "seacma": "Mary Seacole - Forebear Graffle"
         }
     },
     "education.py": {
@@ -54,8 +62,9 @@
         "testcases": {
             "abdyma": "TBD",
             "aikejo": "TBD",
-            "blesma": "Using graffle as ground truth",
+            "blesma": "Marguerite Gardiner, Countess of Blessington - Using graffle as ground truth",
             "woolvi": "TBD",
+            "ayreru": "Rudy M. Ayres - IndexedBy BL",
             "harwis": "Isabella Neil Harwood - an event and shortprose within personname tag post datastruct",
             "walkal": "Alice Walker - an event within personname tag post datastruct",
             "bailjo": "Joanna Baillie - Two Personname tags found",
