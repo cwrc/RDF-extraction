@@ -89,12 +89,12 @@ def extract_birth_data(xmlString, person):
         # creating birth event
         if x.name == "CHRONSTRUCT":
             event_title = person.name + " - Birth Event"
-            event_uri = person.id + "_Birth_Event"
+            event_uri = person.id + "_BirthEvent"
 
             if len(birth_events) > 0:
                 # TODO: possibly revise uri as well
                 event_title = person.name + " - Birth Related Event"
-                event_uri = person.id + "_Birth_Event" + str(len(birth_events) + 1)
+                event_uri = person.id + "_BirthEvent" + str(len(birth_events) + 1)
 
             birth_event = Event(event_title, event_uri, x)
             birth_events.append(birth_event)
@@ -142,7 +142,6 @@ def extract_birth_data(xmlString, person):
         # adding context and birth to person
         temp_context.link_triples(tempBirth)
         person.add_context(temp_context)
-        # person.add_birth(tempBirth)
         context_count += 1
 
 
@@ -196,18 +195,18 @@ def extract_death_data(xmlString, person):
     deathTags += deathTagParent.find_all("SHORTPROSE")
 
     for x in deathTags:
-        context_id = person.id + "_deathContext_" + str(context_count)
+        context_id = person.id + "_DeathContext_" + str(context_count)
         temp_context = Context(context_id, x, "DEATH")
 
         # creating death event
         if x.name == "CHRONSTRUCT":
             event_title = person.name + " - Death Event"
-            event_uri = person.id + "_death_Event"
+            event_uri = person.id + "_DeathEvent"
 
             if len(death_events) > 0:
                 # TODO: possibly revise uri as well
                 event_title = person.name + " - Death Related Event"
-                event_uri = person.id + "_death_Event" + str(len(death_events) + 1)
+                event_uri = person.id + "_DeathEvent" + str(len(death_events) + 1)
 
             death_event = Event(event_title, event_uri, x)
             death_events.append(death_event)
@@ -254,7 +253,6 @@ def extract_death_data(xmlString, person):
         # adding context and birth to person
         temp_context.link_triples(tempDeath)
         person.add_context(temp_context)
-        person.add_birth(tempDeath)
         context_count += 1
 
 
@@ -281,8 +279,8 @@ def main():
         print("*" * 55)
 
         person = Biography(person_id, soup, culturalForm.get_mapped_term("Gender", utilities.get_sex(soup)))
-        extract_birth_data(soup, person)
-        # extract_death_data(soup, person)
+        # extract_birth_data(soup, person)
+        extract_death_data(soup, person)
         person.name = utilities.get_readable_name(soup)
         print(person.to_file())
 

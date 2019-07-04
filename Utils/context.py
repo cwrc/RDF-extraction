@@ -150,9 +150,12 @@ class Context(object):
         if not self.heading:
             self.src = "http://orlando.cambridge.org"
 
-        # TODO: Make snippet endwhere nearest period to 35 words . . . .
         # Making the text the max amount of words
-        self.text = utilities.limit_to_full_sentences(str(tag.get_text()), MAX_WORD_COUNT)
+        if not tag.get_text():
+            logger.error("Empty tag encountered when creating the context:  " + id + ": " + str(tag))
+            self.text = ""
+        else:
+            self.text = utilities.limit_to_full_sentences(str(tag.get_text()), MAX_WORD_COUNT)
 
         # Would be nice to use the ontology and not worry about changing labels
         logger.info(context_type + " " + str(mode))
@@ -203,7 +206,7 @@ class Context(object):
         g = utilities.create_graph()
 
         # Creating target first
-        target_uri = utilities.create_uri("data", self.id + "_Target")
+        target_uri = rdflib.BNode()
         if person:
             source_url = rdflib.term.URIRef(self.src + person.id + "#" + self.heading)
             target_label = person.name + " - " + self.context_label + " target"
@@ -215,7 +218,7 @@ class Context(object):
         g.add((target_uri, utilities.NS_DICT["oa"].hasSource, source_url))
 
         # Creating xpath selector
-        xpath_uri = utilities.create_uri("data", self.id + "_XPath")
+        xpath_uri = rdflib.BNode()
         xpath_label = target_label.replace(" target", " XPath Selector")
         g.add((target_uri, utilities.NS_DICT["oa"].hasSelector, xpath_uri))
         g.add((xpath_uri, RDFS.label, rdflib.term.Literal(xpath_label)))
@@ -223,7 +226,7 @@ class Context(object):
         g.add((xpath_uri, RDF.value, rdflib.term.Literal(self.xpath)))
 
         # Creating text quote selector
-        textquote_uri = utilities.create_uri("data", self.id + "_TextquoteSelector")
+        textquote_uri = rdflib.BNode()
         textquote_label = target_label.replace(" target", " TextQuote Selector")
         g.add((xpath_uri, utilities.NS_DICT["oa"].refinedBy, textquote_uri))
         g.add((textquote_uri, RDF.type, utilities.NS_DICT["oa"].TextQuoteSelector))
