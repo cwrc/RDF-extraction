@@ -37,9 +37,14 @@
             "butls2": "birth: Daterange within shortprose",
             "cuthca": "birth: birthposition & birthdate in a shortprose, no chronstruct",
             "scotsa": "birth: has two events in a birthtag(first birth, second christening)",
+            "siddel": "birth: Elizabeth Siddal - has 3 events within death",
             "clerag": "death: Agnes Mary Clerke - Multiple Death tags",
             "tautje": "death: Jemima Tautphoeus - Multiple Death tags",
-            "lel___": "death: L.E.L - Example used in death graffles"
+            "lel___": "death: L.E.L - Example used in death graffles",
+            "lambma": "death: Mary Lamb - Has burial place (Same as death place)"
+        },
+        "notes": {
+            "contexts": "Now grabbing the whole DEATH/BIRTH tag as context"
         }
     },
     "culturalForm.py": {

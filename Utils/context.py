@@ -139,8 +139,9 @@ class Context(object):
         super(Context, self).__init__()
         self.id = id
         self.triples = []
-        self.event = None
+        self.events = []
         self.xpath = get_xpath(tag)
+        self.bibcits = tag.find_all("BIBCIT")
 
         remove_unwanted_tags(tag)
         self.tag = tag
@@ -164,6 +165,7 @@ class Context(object):
         self.context_type = utilities.create_cwrc_uri(self.context_type)
 
         self.named_entities = get_named_entities(self.tag)
+
         self.context_predicate = utilities.create_cwrc_uri(get_context_predicate(context_type))
 
         if self.named_entities:
@@ -181,8 +183,11 @@ class Context(object):
         else:
             self.triples.append(comp_list)
 
-    def link_event(self, event):
-        self.event = event.uri
+    def link_event(self, event_list):
+        if type(event_list) is list:
+            self.events += event_list
+        else:
+            self.events.append(event_list)
 
     def get_subject(self, component, person):
         subjects = []
@@ -209,17 +214,17 @@ class Context(object):
         target_uri = rdflib.BNode()
         if person:
             source_url = rdflib.term.URIRef(self.src + person.id + "#" + self.heading)
-            target_label = person.name + " - " + self.context_label + " target"
+            target_label = person.name + " - " + self.context_label + " excerpt"
         else:
             source_url = rdflib.term.URIRef(self.src + "#FE")
-            target_label = "FE" + " - " + self.context_label + " target"
+            target_label = "FE" + " - " + self.context_label + " excerpt"
 
         g.add((target_uri, RDFS.label, rdflib.term.Literal(target_label)))
         g.add((target_uri, utilities.NS_DICT["oa"].hasSource, source_url))
 
         # Creating xpath selector
         xpath_uri = rdflib.BNode()
-        xpath_label = target_label.replace(" target", " XPath Selector")
+        xpath_label = target_label.replace(" excerpt", " XPath Selector")
         g.add((target_uri, utilities.NS_DICT["oa"].hasSelector, xpath_uri))
         g.add((xpath_uri, RDFS.label, rdflib.term.Literal(xpath_label)))
         g.add((xpath_uri, RDF.type, utilities.NS_DICT["oa"].XPathSelector))
@@ -227,7 +232,7 @@ class Context(object):
 
         # Creating text quote selector
         textquote_uri = rdflib.BNode()
-        textquote_label = target_label.replace(" target", " TextQuote Selector")
+        textquote_label = target_label.replace(" excerpt", " TextQuote Selector")
         g.add((xpath_uri, utilities.NS_DICT["oa"].refinedBy, textquote_uri))
         g.add((textquote_uri, RDF.type, utilities.NS_DICT["oa"].TextQuoteSelector))
         g.add((textquote_uri, RDFS.label, rdflib.term.Literal(textquote_label)))
@@ -256,8 +261,8 @@ class Context(object):
         if person:
             g.add((identifying_uri, utilities.NS_DICT["oa"].hasBody, person.uri))
 
-        if self.event:
-            g.add((identifying_uri, utilities.NS_DICT["cwrc"].hasEvent, self.event))
+        for x in self.events:
+            g.add((identifying_uri, utilities.NS_DICT["cwrc"].hasEvent, x.uri))
 
         # Creating describing context if applicable
         if self.motivation == utilities.NS_DICT["oa"].describing:
@@ -270,8 +275,8 @@ class Context(object):
             g.add((self.uri, utilities.NS_DICT["oa"].hasTarget, target_uri))
             g.add((self.uri, utilities.NS_DICT["oa"].motivatedBy, self.motivation))
 
-            if self.event:
-                g.add((self.uri, utilities.NS_DICT["cwrc"].hasEvent, self.event))
+            for x in self.events:
+                g.add((self.uri, utilities.NS_DICT["cwrc"].hasEvent, x.uri))
 
             # Adding extracted triples
             temp_graph = utilities.create_graph()
@@ -298,34 +303,8 @@ class Context(object):
         for x in self.tag.find_all("NAME"):
             uri = utilities.make_standard_uri(x.get("STANDARD"))
             g.add((uri, RDF.type, utilities.NS_DICT["cwrc"].NaturalPerson))
-            g.add((uri, RDFS.label, Literal(x.get("STANDARD"), datatype=rdflib.namespace.XSD.string)))
+            g.add((uri, RDFS.label, Literal(x.get("STANDARD"))))
 
-        return g
-
-# TODO: Remove these functions
-    def create_multiple_triples(self, graph):
-        """handles multitple triples
-        """
-        temp_g = utilities.create_graph()
-        g = rdflib.Graph()
-        for x in graph[:]:
-            temp_g.add(x)
-            triple_str = temp_g.serialize(format="ttl").decode().splitlines()[-2]
-            temp_g.remove(x)
-            g += self.create_ttl_body(triple_str)
-
-        return g
-
-    def create_ttl_body(self, triple_str):
-        g = rdflib.Graph()
-        format_str = rdflib.term.Literal("text/turtle", datatype=rdflib.namespace.XSD.string)
-        format_uri = utilities.create_uri("dcterms", "format")
-        triple_str = rdflib.term.Literal(triple_str, datatype=rdflib.namespace.XSD.string)
-        temp_body = rdflib.BNode()
-        g.add((self.uri, utilities.NS_DICT["oa"].hasBody, temp_body))
-        g.add((temp_body, RDF.type, utilities.NS_DICT["oa"].TextualBody))
-        g.add((temp_body, RDF.value, triple_str))
-        g.add((temp_body, format_uri, format_str))
         return g
 
     def __str__(self):

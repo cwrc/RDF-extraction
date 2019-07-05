@@ -97,7 +97,10 @@ class Place(object):
     def __init__(self, place_tag, other_attributes=None):
         super(Place, self).__init__()
         self.address = self.get_address(place_tag)
+        if self.address == '':
+            self.address = place_tag.text
 
+        # TODO: Use PLACENAME as address perhaps
         if self.address in PLACE_MAP:
             self.uri = rdflib.term.URIRef(PLACE_MAP[self.address])
             # TODO: get place string from uri --> extend csv?
