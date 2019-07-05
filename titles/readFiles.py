@@ -3,10 +3,12 @@ import os
 from os import listdir
 import sys
 import csv
+import codecs
+
 
 def parseFile(xmlFile):
     titleList = []
-    with open(xmlFile, encoding="ISO-8859-1") as f:
+    with codecs.open(xmlFile, "r", encoding="utf8", errors="ignore") as f:
         soup = BeautifulSoup(f, "lxml")
         titles = soup.find_all("title")
         titles_seen = [] # do not duplicate titles that have been seen
@@ -33,7 +35,7 @@ def parseFile(xmlFile):
 
 
 def compareTitleRefs(xmlFile, ref_title):
-    with open(xmlFile, encoding="ISO-8859-1") as f:
+    with codecs.open(xmlFile, "r", encoding="utf8", errors="ignore") as f:
         soup = BeautifulSoup(f, "lxml")
 
         titles = soup.find_all("title")
@@ -91,7 +93,7 @@ def compareTitleRefs(xmlFile, ref_title):
 
 
 def toFile(name, results, fieldnames):
-    with open(name, "w") as f:
+    with codecs.open(name, "w", "utf8") as f:
         listFieldNames = list(fieldnames)
         # print("fieldnames")
         # print(listFieldNames)
@@ -181,20 +183,20 @@ if __name__ == "__main__":
     toFile("titles_matched.csv", matched_titles, matched_columns)      
 
 
-    # for f in orlandoFiles: 
-    #     # Skip -d files
-    #     if f.endswith("-d.xml"):
-    #         continue
-    #     titles = parseFile(f)
-    #     for title in titles: 
-    #         # print(title)
-    #         unique_columns = set(title.keys()).union(unique_columns)
-    #         if title['normalized'] in results: 
-    #             results[title['normalized']]['count'] += 1
-    #             results[title['normalized']]['documents'] += title['documents']
-    #         else:
-    #             title['count'] = 1
-    #             results[title['normalized']] = title
+    for f in orlandoFiles: 
+        # Skip -d files
+        if f.endswith("-d.xml"):
+            continue
+        titles = parseFile(f)
+        for title in titles: 
+            # print(title)
+            unique_columns = set(title.keys()).union(unique_columns)
+            if title['normalized'] in results: 
+                results[title['normalized']]['count'] += 1
+                results[title['normalized']]['documents'] += title['documents']
+            else:
+                title['count'] = 1
+                results[title['normalized']] = title
     
-    # toFile("titles_no_bibliography.csv", results, unique_columns)
+    toFile("titles_no_bibliography.csv", results, unique_columns)
         

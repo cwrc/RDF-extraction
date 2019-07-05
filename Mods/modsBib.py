@@ -182,8 +182,9 @@ class ParseGeoNamesMapping:
         """
         place_name = place_name.strip()
         matched_places = []
-        place_name_parts = ParseGeoNamesMapping.split_place_parts(place_name)
 
+        place_name_parts = ParseGeoNamesMapping.split_place_parts(place_name)
+        print(place_name_parts)
         for part in place_name_parts:
             selected_item = None
 
@@ -191,13 +192,12 @@ class ParseGeoNamesMapping:
                 ratio = fuzz.ratio(place['placename'], part)
 
                 if ratio >= STRING_MATCH_RATIO:
-                    selected_item = item
-                    matched_places.append(item)
+                    selected_item = place
+
+                    matched_places.append(place['url'])
                     break
 
-            if selected_item:
-                return selected_item['url']
-            else:
+            if not selected_item:
                 # Log unmatched places
                 logger.info("Unable to map Place {0}".format(place_name))
                 UNIQUE_UNMATCHED_PLACES.add(place_name)
@@ -360,26 +360,26 @@ class BibliographyParse:
 
     def get_title(self):
         titles = []
-        if self.soup.titleinfo:
 
-            for title in self.soup.find_all('titleinfo'):
-                # Leave out relateditem types
-                if title.parent.name == "relateditem" and not self.relatedItem:
-                    continue
 
-                if 'usage' in title.attrs:
-                    usage = title.attrs['usage']
-                elif 'type' in title.attrs:
-                    usage = title.attrs['type']
-                else:
-                    usage = None
+        for title in self.soup.find_all('titleinfo'):
+            # Leave out relateditem types
+            if title.parent.name == "relateditem" and not self.relatedItem:
+                continue
 
-                if title.title:
-                    title_text = title.text
-                else:
-                    title_text = ""
+            if 'usage' in title.attrs:
+                usage = title.attrs['usage']
+            elif 'type' in title.attrs:
+                usage = title.attrs['type']
+            else:
+                usage = None
 
-                titles.append({"title": title_text, "usage": usage})
+            if title.title:
+                title_text = title.text
+            else:
+                title_text = ""
+
+            titles.append({"title": title_text, "usage": usage})
 
         return titles
 
@@ -439,7 +439,7 @@ class BibliographyParse:
 
     def get_names(self):
         names = []
-        print(self.soup.find_all('name'))
+
         for np in self.soup.find_all('name'):
             if np.parent.name == "relateditem" and self.relatedItem == False:
                 continue
@@ -461,7 +461,7 @@ class BibliographyParse:
                 name = np.namepart.get_text()
 
 
-            print(name_type)
+
             names.append({"type": name_type, "role": role, "name": name})
 
         return names
@@ -627,7 +627,9 @@ class BibliographyParse:
         instance.add(BF.instanceOf, resource)
 
         for item in titles:
+            print(item)
             if 'usage' in item and item['usage'] is not None:
+                print("Usage")
                 title_res = g.resource("{}_title_{}".format(self.mainURI, i))
 
                 title_res.add(BF.mainTitle, Literal(item["title"].strip()))
@@ -671,13 +673,13 @@ class BibliographyParse:
 
             if name['role'] in self.role_map:
                 role_resource.add(BF.code, Literal(self.role_map[name['role']]))
-                role_resource.add(BF.source, URIRef("marcrel:{}".format(self.role_map[name['role']])))
+                role_resource.add(BF.source, MARCREL[self.role_map[name['role']]])
 
             if name['role']:
                 role_resource.add(RDFS.label, Literal(name["role"]))
             else:
                 role_resource.add(BF.code, Literal("aut"))
-                role_resource.add(BF.source, URIRef("marcrel:aut"))
+                role_resource.add(BF.source, MARCREL.aut)
                 role_resource.add(RDFS.label, Literal("author"))
 
             agent_resource.add(OWL.sameAs, URIRef("http://cwrc.ca/cwrcdata/{}".format(remove_punctuation(name['name']))))
@@ -890,7 +892,6 @@ if __name__ == "__main__":
         if os.path.isdir(path):
             continue
 
-        print(fname)
         if not fname:
             continue
         try:
@@ -906,6 +907,6 @@ if __name__ == "__main__":
 
     fname = "Bibliography"
     output_name = fname.replace(".xml", "")
-    formats = {'ttl': 'turtle', 'xml': 'pretty-xml'}
+    formats = {'ttl': 'turtle'} # 'xml': 'pretty-xml'
     for extension, file_format in formats.items():
         g.serialize(destination="bibrdf/{}.{}".format(output_name, extension), format=file_format)
