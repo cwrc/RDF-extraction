@@ -9,7 +9,6 @@ try:
 except Exception as e:
     import utilities
 
-
 # this is temporary list to ensure that the orgname standard is within the auth list
 org_list = []
 
@@ -100,11 +99,11 @@ def extract_org_data(bio):
 
                     # Adding the hasOrganization relation
                     if org_type == utilities.NS_DICT["cwrc"].ReligiousOrganization:
-                        mapped_value = cf.get_mapped_term("Religion", cf.get_value(instance))
+                        mapped_value = cf.get_mapped_term("Religion", utilities.get_value(instance))
                         if type(mapped_value) is rdflib.term.URIRef:
                             uber_graph.add((mapped_value, utilities.NS_DICT["cwrc"].hasOrganization, org_uri))
                     elif org_type == utilities.NS_DICT["cwrc"].PoliticalOrganization:
-                        mapped_value = cf.get_mapped_term("PoliticalAffiliation", cf.get_value(instance))
+                        mapped_value = cf.get_mapped_term("PoliticalAffiliation", utilities.get_value(instance))
                         if type(mapped_value) is rdflib.term.URIRef:
                             uber_graph.add((mapped_value, utilities.NS_DICT["cwrc"].hasOrganization, org_uri))
 
@@ -114,9 +113,10 @@ def create_org_csv():
     """
     import csv
     w = csv.writer(open("orgNames.csv", "w"))
-    with open("scrapes/authority/org_auth.xml") as f:
+    with open("../data/orlando_UTF8ISO8601ExportBuilder_1561501400922003000/authority_xml_orgname/authority_xml_orgname.xml") as f:
         soup = BeautifulSoup(f, 'lxml-xml')
     items = soup.find_all("AUTHORITYITEM")
+
     for x in items:
         std = x.get("STANDARD")
         disp = x.get("DISPLAY")
@@ -146,13 +146,13 @@ def main():
     import os
     global uber_graph
 
-    # create_org_csv()
+    create_org_csv()
     csv_to_triples()
-
-    filelist = [filename for filename in sorted(os.listdir("bio_data")) if filename.endswith(".xml")]
+    filelist = [filename for filename in sorted(os.listdir(
+        "../data/biography_entries")) if filename.endswith(".xml")]
 
     for filename in filelist:
-        with open("bio_data/" + filename) as f:
+        with open("../data/biography_entries/" + filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
         extract_org_data(soup)
 

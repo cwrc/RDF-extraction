@@ -97,13 +97,14 @@ def split_by_casing(string, altmode=None):
 
 def remove_punctuation(temp_str, all=False):
     import string
+    from unidecode import unidecode
     if all:
         translator = str.maketrans('', '', string.punctuation)
     else:
         translator = str.maketrans('', '', string.punctuation.replace("-", ""))
     temp_str = temp_str.translate(translator)
     temp_str = temp_str.replace(" ", "_")
-    return temp_str
+    return unidecode(temp_str)
 
 
 def limit_words(string, word_count):
