@@ -1,10 +1,10 @@
 import rdflib
+from Utils.citation import Citation
 from rdflib import RDF, RDFS, Literal
-
 from Utils import utilities, organizations
 
-MAX_WORD_COUNT = 35
 
+MAX_WORD_COUNT = 35
 logger = utilities.config_logger("context")
 
 
@@ -76,7 +76,6 @@ def get_heading(tag):
 
 
 def create_context_map():
-
     import pandas as pd
     with open('../data/context_mapping.csv', newline='') as csvfile:
         return pd.read_csv(csvfile)
@@ -141,9 +140,11 @@ class Context(object):
         self.triples = []
         self.events = []
         self.xpath = get_xpath(tag)
-        self.bibcits = tag.find_all("BIBCIT")
 
-        remove_unwanted_tags(tag)
+        # Creating citations from bibcit tags
+        bibcits = tag.find_all("BIBCIT")
+        self.citations = [Citation(x) for x in bibcits]
+
         self.tag = tag
 
         self.heading = get_heading(tag)
@@ -151,12 +152,7 @@ class Context(object):
         if not self.heading:
             self.src = "http://orlando.cambridge.org"
 
-        # Making the text the max amount of words
-        if not tag.get_text():
-            logger.error("Empty tag encountered when creating the context:  " + id + ": " + str(tag))
-            self.text = ""
-        else:
-            self.text = utilities.limit_to_full_sentences(str(tag.get_text()), MAX_WORD_COUNT)
+        self.text = tag.get_text()
 
         # Would be nice to use the ontology and not worry about changing labels
         logger.info(context_type + " " + str(mode))
@@ -206,6 +202,15 @@ class Context(object):
             subjects += self.get_subject(x, person)
         return list(set(subjects))
 
+    def get_snippet(self):
+        # removing tags that mess up the snippet
+        remove_unwanted_tags(self.tag)
+        if not self.tag.get_text():
+            logger.error("Empty tag encountered when creating the context:  " + id + ": " + str(tag))
+            self.text = ""
+        else:
+            self.text = utilities.limit_to_full_sentences(str(self.tag.get_text()), MAX_WORD_COUNT)
+
     def to_triple(self, person=None):
         # if tag is a describing None create the identifying triples
         g = utilities.create_graph()
@@ -219,24 +224,28 @@ class Context(object):
             source_url = rdflib.term.URIRef(self.src + "#FE")
             target_label = "FE" + " - " + self.context_label + " excerpt"
 
-        g.add((target_uri, RDFS.label, rdflib.term.Literal(target_label)))
+        g.add((target_uri, RDFS.label, Literal(target_label)))
         g.add((target_uri, utilities.NS_DICT["oa"].hasSource, source_url))
+
+        for x in self.citations:
+            g += x.to_triple(target_uri, source_url)
 
         # Creating xpath selector
         xpath_uri = rdflib.BNode()
         xpath_label = target_label.replace(" excerpt", " XPath Selector")
         g.add((target_uri, utilities.NS_DICT["oa"].hasSelector, xpath_uri))
-        g.add((xpath_uri, RDFS.label, rdflib.term.Literal(xpath_label)))
+        g.add((xpath_uri, RDFS.label, Literal(xpath_label)))
         g.add((xpath_uri, RDF.type, utilities.NS_DICT["oa"].XPathSelector))
-        g.add((xpath_uri, RDF.value, rdflib.term.Literal(self.xpath)))
+        g.add((xpath_uri, RDF.value, Literal(self.xpath)))
 
         # Creating text quote selector
+        self.get_snippet()
         textquote_uri = rdflib.BNode()
         textquote_label = target_label.replace(" excerpt", " TextQuote Selector")
         g.add((xpath_uri, utilities.NS_DICT["oa"].refinedBy, textquote_uri))
         g.add((textquote_uri, RDF.type, utilities.NS_DICT["oa"].TextQuoteSelector))
-        g.add((textquote_uri, RDFS.label, rdflib.term.Literal(textquote_label)))
-        g.add((textquote_uri, utilities.NS_DICT["oa"].exact, rdflib.term.Literal(self.text)))
+        g.add((textquote_uri, RDFS.label, Literal(textquote_label)))
+        g.add((textquote_uri, utilities.NS_DICT["oa"].exact, Literal(self.text)))
 
         # Creating identifying context first and always
         if person:
@@ -246,7 +255,7 @@ class Context(object):
 
         identifying_uri = utilities.create_uri("data", self.id + "_identifying")
         g.add((identifying_uri, RDF.type, self.context_type))
-        g.add((identifying_uri, RDFS.label, rdflib.term.Literal(context_label)))
+        g.add((identifying_uri, RDFS.label, Literal(context_label)))
         g.add((identifying_uri, utilities.NS_DICT["oa"].hasTarget, target_uri))
         g.add((identifying_uri, utilities.NS_DICT["oa"].motivatedBy, utilities.NS_DICT["oa"].identifying))
 
@@ -269,7 +278,7 @@ class Context(object):
             self.uri = utilities.create_uri("data", self.id + "_describing")
             context_label = person.name + " - " + self.context_label + " (describing)"
             g.add((self.uri, RDF.type, self.context_type))
-            g.add((self.uri, RDFS.label, rdflib.term.Literal(context_label)))
+            g.add((self.uri, RDFS.label, Literal(context_label)))
             g.add((self.uri, utilities.NS_DICT["cwrc"].hasIDependencyOn, identifying_uri))
             g.add((self.uri, utilities.NS_DICT["cwrc"].contextFocus, person.uri))
             g.add((self.uri, utilities.NS_DICT["oa"].hasTarget, target_uri))

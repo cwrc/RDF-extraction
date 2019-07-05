@@ -81,7 +81,7 @@ def extract_birth_data(xmlString, person):
                 event_title = person.name + " - Birth Related Event"
                 event_uri = person.id + "_BirthEvent" + str(len(birth_events) + 1)
 
-            birth_events.append(Event(event_title, event_uri, x))
+            birth_events.append(Event(event_title, event_uri, x, "BirthEvent"))
 
         # retrieving birthdate
         if not birth.date:

@@ -1,6 +1,6 @@
 import rdflib
 from rdflib import RDF, RDFS, Literal, XSD
-
+from Utils.citation import Citation
 from Utils import utilities, organizations
 
 
@@ -149,6 +149,10 @@ class Event(object):
         self.event_type = get_event_type(tag)
         self.actors = get_actors(tag)
 
+        # Creating citations from bibcit tags
+        bibcits = tag.find_all("BIBCIT")
+        self.citations = [Citation(x) for x in bibcits]
+
         # NOTE: Event could possibly have multiple types/non cwrc types? may need to revise
         self.type = utilities.create_cwrc_uri(type)
 
@@ -182,7 +186,7 @@ class Event(object):
     def to_triple(self, person=None):
         g = utilities.create_graph()
 
-        # NOTE: Event will always be attached to a context
+        # NOTE: Event will always be attached to a context, possibly multiple event to the same context
 
         # Labelling the event
         text = self.date_tag.text + ": " + self.text
@@ -193,6 +197,9 @@ class Event(object):
 
         for x in self.event_type:
             g.add((self.uri, utilities.NS_DICT["sem"].eventType, x))
+
+        for x in self.citations:
+            g += x.to_triple(self.uri)
 
         # Attaching place via blank node
         for index, place in enumerate(self.place):
@@ -206,7 +213,6 @@ class Event(object):
         if person:
             g.add((self.uri, utilities.NS_DICT["sem"].hasActor, person.uri))
 
-        # TODO: are places actors or just the place
         for x in self.actors:
             g.add((self.uri, utilities.NS_DICT["sem"].hasActor, x))
 

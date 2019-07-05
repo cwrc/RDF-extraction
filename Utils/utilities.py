@@ -29,10 +29,14 @@ TODO: parse required ns from external files
 NS_DICT = {
     "as": rdflib.Namespace("http://www.w3.org/ns/activitystreams#"),
     "bibo": rdflib.Namespace("http://purl.org/ontology/bibo/"),
+    "biro": rdflib.Namespace("http://purl.org/spar/biro/"),
     "bio": rdflib.Namespace("http://purl.org/vocab/bio/0.1/"),
     "bf": rdflib.Namespace("http://id.loc.gov/ontologies/bibframe/"),
     "cc": rdflib.Namespace("http://creativecommons.org/ns#"),
+    "cito": rdflib.Namespace("http://purl.org/spar/cito/"),
     "cwrc": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/cwrc#"),
+    "ii": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/ii#"),
+    "genre": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/genre#"),
     "data": rdflib.Namespace("http://cwrc.ca/cwrcdata/"),
     "dbpedia": rdflib.Namespace("http://dbpedia.org/resource/"),
     "dcterms": rdflib.Namespace("http://purl.org/dc/terms/"),
@@ -46,6 +50,7 @@ NS_DICT = {
     "org": rdflib.Namespace("http://www.w3.org/ns/org#"),
     "owl": rdflib.Namespace("http://www.w3.org/2002/07/owl#"),
     "prov": rdflib.Namespace("http://www.w3.org/ns/prov#"),
+    "prism": rdflib.Namespace("http://prismstandard.org/namespaces/1.2/basic/"),
     "rdf": rdflib.Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#"),
     "rdfs": rdflib.Namespace("http://www.w3.org/2000/01/rdf-schema#"),
     "sem": rdflib.Namespace("http://semanticweb.cs.vu.nl/2009/11/sem/"),
@@ -66,7 +71,6 @@ def get_current_time():
 
 def create_graph():
     """ Returns graph with necessary namespace
-
     """
     g = rdflib.Graph()
     namespace_manager = rdflib.namespace.NamespaceManager(g)
