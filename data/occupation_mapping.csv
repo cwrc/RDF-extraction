@@ -1,397 +1,397 @@
-http://sparql.cwrc.ca/ontologies/cwrc#merchant,merchant,arms dealer,merchant,dealer in stamps,linen merchant,shipping agent,sugar merchant,cattle dealer,corn dealer,potato merchant,book dealer,wine merchant,art dealer,merchant adventurer,cotton merchant,leather merchant,dealer,timber merchant,hardware merchant,corn merchant,silk merchant,tradesman,merchant's apprentice,cosmetics merchant,international exporter,importer,china merchant,merchant in furs,cloth merchant,coal merchant,merchant in liverpool,exported textiles to the west indies
-http://sparql.cwrc.ca/ontologies/cwrc#jacobitism,Jacobitism,jacobites,jacobite,jacobite conspirator
-http://sparql.cwrc.ca/ontologies/cwrc#geographer,geographer,geographer
-http://sparql.cwrc.ca/ontologies/cwrc#optician,optician,ophthalmic optician
-http://sparql.cwrc.ca/ontologies/cwrc#exhibitions,exhibitions,exhibitor,exhibition organiser,bbc drama producer,governor of the bbc
-http://sparql.cwrc.ca/ontologies/cwrc#skinner,skinner
-http://sparql.cwrc.ca/ontologies/cwrc#guardian,guardian,guardian
-http://sparql.cwrc.ca/ontologies/cwrc#draper,draper,master draper,linen draper
-http://sparql.cwrc.ca/ontologies/cwrc#advertising,advertising,publicity officer,press officer,publicity manager,religious publicist,publicist,publicity assistant,public relations specialist,political publicist,literary publicist,assistant press officer,advertising manager,publicity,press assistant,public relations,music publicity,publicity agent,publisher's advertising manager,junior press officer,quaker publicist
-http://sparql.cwrc.ca/ontologies/cwrc#publicSpeaker,public speaker,political speaker,orator,public speaking,public speaker,public lecturer,speaking tour,renowned orator
-http://sparql.cwrc.ca/ontologies/cwrc#lordChamberlain,lord chamberlain,lord chamberlain
-http://sparql.cwrc.ca/ontologies/cwrc#refugeeWork,refugee work,refugee worker,refugee work
-http://sparql.cwrc.ca/ontologies/cwrc#housekeeper,housekeeper,housekeeper,housekeeping,state housekeeper,household management,mistress of a household
-http://sparql.cwrc.ca/ontologies/cwrc#catering,catering,caterer,catering manager,catering assistant
-http://sparql.cwrc.ca/ontologies/cwrc#meteorologist,meteorologist,meteorologist
-http://sparql.cwrc.ca/ontologies/cwrc#socialScientist,social scientist,sociologist,anthropologist,economist,egyptologist,social scientist,academic economist
-http://sparql.cwrc.ca/ontologies/cwrc#editing,editing,founding editor,editorial board member,deputy editor,colonial editor,sub editor,parish magazine editor,co editor,fashion editor,science editor,editorial assistant,foreign editor,magazine editor,proofreader,consulting editor,journal editor,managing editor,assistant editor,publisher's editor,encyclopedia editor,editor,editorial reader,newspaper editor,copy editor,part time editor,poetry editor,periodical editor,literary editor,associate editor,trade journal editor,publishers' editor,editing,edited,editor of the women's page,editorial,edited school texts,newspaper sub editor,news subeditor,editor for religious society,editorship
-http://sparql.cwrc.ca/ontologies/cwrc#beggar,beggar,beggar
-http://sparql.cwrc.ca/ontologies/cwrc#servant,servant,servant
-http://sparql.cwrc.ca/ontologies/cwrc#coopOrganizer,co-op organizer,co op organizer
-http://sparql.cwrc.ca/ontologies/cwrc#timberTrade,timber trade,timber trade,timber manager,sawyer
-http://sparql.cwrc.ca/ontologies/cwrc#prophet,prophet,prophet
-http://sparql.cwrc.ca/ontologies/cwrc#laundryWorker,laundry worker,laundress,washerwoman,laundry manager
-http://sparql.cwrc.ca/ontologies/cwrc#gardener,gardener,gardening,horticulturalist,gardener,horticulturist,garden design,landscape gardener,hedge setter
-http://sparql.cwrc.ca/ontologies/cwrc#hunter,hunter,foxhunter,rabbit shooting,fox hunter,hunting,foxhunting,fox hunting,big game hunting,master of hounds
-http://sparql.cwrc.ca/ontologies/cwrc#sailor,sailor,seaman,purser,ferryman,sailing,sailor,competitive sailor,midshipman,ship's carpenter,ship's purser,ship's officer,deckhand
-http://sparql.cwrc.ca/ontologies/cwrc#slaveOwner,slave owner,slave owner
-http://sparql.cwrc.ca/ontologies/cwrc#criminal,criminal,thief,transported criminal,con man,convict,blackmailer,confidence trickster,blackmailer extortionist
-http://sparql.cwrc.ca/ontologies/cwrc#literaryScholar,literary scholar,literary theorist,literary scholar,literary historian,philologist,literary researcher,literary research,folklorist
-http://sparql.cwrc.ca/ontologies/cwrc#professor,professor,professor of fine arts,professor of english,professor of singing,professor of entomology,assistant lecturer,professor,professor of archaeology,professor of pathology,emeritus professor,professor of divinity,lecturer,professor of psychology,lecturer in modern languages,professor of poetry,law lecturer,professor of english language and literature,university professor,professor of political economy,chichele professor of modern history,an active lecturer,regius professor of divinity,british council lecturer,professor of poetry at oxford,lucasian professor of mathematics,"taught at oxford, then at cambridge",lecture,university teacher of english
-http://sparql.cwrc.ca/ontologies/cwrc#music,music,composer,pianist,organist,jazz musician,amateur pianist,cornet,violinist,music,musician,celloist,choirmistress,concert pianist,church choirmaster,piano tuner,choirmaster,playing the piano,"musician, composer",cathedral chorister
-http://sparql.cwrc.ca/ontologies/cwrc#dairyWork,dairy work,milkwoman,milker
-http://sparql.cwrc.ca/ontologies/cwrc#machineWork,machineWork,mechanician,fitter
-http://sparql.cwrc.ca/ontologies/cwrc#server,server,server,summer waitress,food server,cafe manager,waiter,waitress,receptionist barmaid
-http://sparql.cwrc.ca/ontologies/cwrc#dockyardWork,dockyard work,longshoreman,docks manager,wharfinger,docker,dockyard labourer,dock manager
-http://sparql.cwrc.ca/ontologies/cwrc#copyist,copyist,music copyist,scientific copyist,copyist of illuminated manuscripts,copyist,legal copyist,copyists of illuminated manuscripts
-http://sparql.cwrc.ca/ontologies/cwrc#trustee,trustee,trustee,tate gallery trustee
-http://sparql.cwrc.ca/ontologies/cwrc#drinking,drinking,drinking problem,alcoholic,drinking and chasing women,daily drinking bouts
-http://sparql.cwrc.ca/ontologies/cwrc#computerWork,computer work,database manager,computer programmer
-http://sparql.cwrc.ca/ontologies/cwrc#glassWorker,glass worker,glass stainer,stained glass designer,glazier,glassworks
-http://sparql.cwrc.ca/ontologies/cwrc#foodDistribution,food distribution,food supplier,provision merchant,food distributor,food distribution,provisioner
-http://sparql.cwrc.ca/ontologies/cwrc#model,model,model,artist's model,artists' model,fashion model
-http://sparql.cwrc.ca/ontologies/cwrc#producer,producer,producer,produced,produced and appeared,producing
-http://sparql.cwrc.ca/ontologies/cwrc#regionalGovernment,regional government,county councillor,deputy lord lieutenant,deputy recorder of northamptonshire,assistant secretary for education in northamptonshire,secretary for education in oxfordshire,magistrate for the county of middlesex,director general of the tapu land registry,high sheriff for county antrim,deputy lieutenant of dunbartonshire,lord president of the council of the marches of wales,governor of massachusetts
-http://sparql.cwrc.ca/ontologies/cwrc#mentalHealthProfessional,mental health professional,child psychologist,mental health worker,freudian psychoanalyst,psychiatist,asylum director,psychologist,psychiatrist,psychotherapist,freudian,therapist,pyschoanalyst
-http://sparql.cwrc.ca/ontologies/cwrc#aircraftIndustry,aircraft industry,aeroplane manufacturer,aircraft industry
-http://sparql.cwrc.ca/ontologies/cwrc#statistician,statistician,statistician,medical statistician
-http://sparql.cwrc.ca/ontologies/cwrc#publishing,publishing,journal assistant,reader of manuscripts,publishing,publisher,assistant in publishing,publisher's reader,magazine director,publisherapos;s reader,publisher and bookseller,director of time and tide,member of the editorial advisory committee
-http://sparql.cwrc.ca/ontologies/cwrc#coach,coach,coach,coach of the cambridge rowing crew
-http://sparql.cwrc.ca/ontologies/cwrc#maidOfHonour,maid of honour,maid of honour
-http://sparql.cwrc.ca/ontologies/cwrc#advocate,advocate,sunday school promoter,free speech advocate,maternity advocate,prisoners' advocate,animal rights advocate,campaigner for child welfare,advocate for the poor,campaigner against capital punishment,promotion of women's work,emigration promoter,promote temperance,anti poverty,advocate,civil rights,continued to encourage women to enter politics through various efforts
-http://sparql.cwrc.ca/ontologies/cwrc#decoder,decoder,cipher breaker,cable decoder,cryptologist,code breaker
-http://sparql.cwrc.ca/ontologies/cwrc#lifeScientist,life scientist,anatomist,physiologist,bacteriologist
-http://sparql.cwrc.ca/ontologies/cwrc#italianNationalism,Italian nationalism,mazzinian,Italian nationalist movement,italian nationalist,italian risorgimento
-http://sparql.cwrc.ca/ontologies/cwrc#colonialOfficial,colonial official,colonial official,colonial magistrate,colonial manager,colonial prime minister,colonial administrator,colonial civil servant,colonial organizer,lieutenantGovernor,colonial officer,lord deputy of ireland,chairman of the east india company,viceroy of india,upper canada's first vice chancellor,registrar of the naval prize court in bermuda,viceroy of ireland,india agent
-http://sparql.cwrc.ca/ontologies/cwrc#propagandist,propagandist,war propagandist,propagandist,to spread pro british propaganda
-http://sparql.cwrc.ca/ontologies/cwrc#attorneyGeneral,attorney general,attorney general,attorney general of ireland
-http://sparql.cwrc.ca/ontologies/cwrc#reviewer,reviewer,book reviewer,film reviewer,wrote reviews,reviewer,reviewed books
-http://sparql.cwrc.ca/ontologies/cwrc#warehouseWork,warehouse work,warehousing
-http://sparql.cwrc.ca/ontologies/cwrc#martyr,martyr,martyr
-http://sparql.cwrc.ca/ontologies/cwrc#commissioner,commissioner,commissioner of bankruptcy,excise commissioner,commissioner,bankruptcy commissioner,parliamentary commissioner,commissioner of inland revenue,commissioner of customs,customs commissioner,commissioner of the dockyards
-http://sparql.cwrc.ca/ontologies/cwrc#rebel,rebel,saboteur,freedom fighter,revolutionary,rebel,reformist or revolutionary
-http://sparql.cwrc.ca/ontologies/cwrc#accountant,accountant,agent and accountant,household accountant,management accountant,accountant,book keeper,keeping accounts,family financial manager,family budgeting
-http://sparql.cwrc.ca/ontologies/cwrc#redCross,red cross,red cross aide,red cross representative,red cross worker
-http://sparql.cwrc.ca/ontologies/cwrc#careGiver,care giver,care giver,caregiver,home care giver,home carer,elder care,family carer,devoting herself to the care of her elderly father,attendant to the blind
-http://sparql.cwrc.ca/ontologies/cwrc#pacifist,pacifist,pacifist,conscientious objector,worker for pacifism and the league of nations union
-http://sparql.cwrc.ca/ontologies/cwrc#prospector,prospector,prospector
-http://sparql.cwrc.ca/ontologies/cwrc#elevatorOperator,elevator operator,elevator operator
-http://sparql.cwrc.ca/ontologies/cwrc#nursing,nursing,nurse,nursing supervisor,vad worker,nursing organizer,nursing,carer,nursing aide,vad,fn helped found the east london nursing society.,"in 1877 she nursed george odger, the first parliamentary labour candidate, during his fatal illness.",nurses
-http://sparql.cwrc.ca/ontologies/cwrc#judge,judge,judge,puisne judge,judge of probate,court official,chief justice of the king's bench,county court judgeship,lord chief justice of ireland
-http://sparql.cwrc.ca/ontologies/cwrc#governorGeneral,governor general,governor general,governor general of india,governor general of canada
-http://sparql.cwrc.ca/ontologies/cwrc#fishmonger,fishmonger,fishmonger
-http://sparql.cwrc.ca/ontologies/cwrc#bookbinder,bookbinder,bookbinding,book binder
-http://sparql.cwrc.ca/ontologies/cwrc#salter,salter,salt-worker
-http://sparql.cwrc.ca/ontologies/cwrc#wetNurse,wet nurse,wet nurse
-http://sparql.cwrc.ca/ontologies/cwrc#storyteller,storyteller,raconteur,storyteller
-http://sparql.cwrc.ca/ontologies/cwrc#actorManager,actor manager,actor manager
-http://sparql.cwrc.ca/ontologies/cwrc#orphanageWork,orphanage work,orphanage principal,orphanage manager,orphanage worker
-http://sparql.cwrc.ca/ontologies/cwrc#companion,companion,companion,humble companion,paid companion
-http://sparql.cwrc.ca/ontologies/cwrc#connoisseur,connoisseur,art connoisseur
-http://sparql.cwrc.ca/ontologies/cwrc#pornographer,pornographer,pornographer
-http://sparql.cwrc.ca/ontologies/cwrc#appraiser,appraiser,appraiser,project appraiser
-http://sparql.cwrc.ca/ontologies/cwrc#logger,logger,logger
-http://sparql.cwrc.ca/ontologies/cwrc#radioIndustry,radio industry,educational radio producer,radio performer,radio producer,radio broadcaster,educational radio programmer,radio announcer,recorded programmes assistant
-http://sparql.cwrc.ca/ontologies/cwrc#veterinaryWork,veterinary work,veterinary worker,veterinary doctor
-http://sparql.cwrc.ca/ontologies/cwrc#lobbyist,lobbyist,political lobbyist,lobbyist,international political lobbyist
-http://sparql.cwrc.ca/ontologies/cwrc#finance,finance,financial manager,clerk in a bank,ship broker,bank manager,bank clerk,money lender,bank president,investment banker,banker,bank employee,bank director,merchant banker,financier,director of the bank of england,director and chairman of the bank of new zealand,teller at the bank of england
-http://sparql.cwrc.ca/ontologies/cwrc#interviewer,interviewer,interviewer
-http://sparql.cwrc.ca/ontologies/cwrc#bookclubParticipatant,bookclub participation,bookclub president,book club founder,book club organizer,book society member,member of the new english art club
-http://sparql.cwrc.ca/ontologies/cwrc#manualLabourer,manual labourer,manual labourer,field labourer,manual worker,day labourer,labourer
-http://sparql.cwrc.ca/ontologies/cwrc#bibliophile,bibliophile,bibliophile
-http://sparql.cwrc.ca/ontologies/cwrc#localGovernment,local government,town corporator,local councillor,council member,local government official,city councillor,city counsellor,alderman,local politician,councillor,local government,local government magnate,lieutenant of the tower of london,london county councillor,radicalist member of the london school board,recorder of newcastle under lyme,member of the bury st edmunds borough council,assistant director of education in the london county council,town corporator or councillor
-http://sparql.cwrc.ca/ontologies/cwrc#haberdasher,haberdasher,haberdasher
-http://sparql.cwrc.ca/ontologies/cwrc#socializer,socializer,debutante,socialite,bon viveur,became a debutante,fashionable beauty,"bon viveur, drinker, and speculator"
-http://sparql.cwrc.ca/ontologies/cwrc#fosterParent,foster-parent,foster parent,foster mother
-http://sparql.cwrc.ca/ontologies/cwrc#publicReader,public reader,reader of poetry,poetry readings,performance reader,recitalist,reader,poetry reading,recitateur,poetry reader,poetry recital,reader in public,dramatic readings,reciter,public reader,gave readings,public reading,reader aloud
-http://sparql.cwrc.ca/ontologies/cwrc#skilledTrade,skilled trade,moulder
-http://sparql.cwrc.ca/ontologies/cwrc#transcriber,transcriber,transcriber
-http://sparql.cwrc.ca/ontologies/cwrc#reading,reading,reading,poetry lover
-http://sparql.cwrc.ca/ontologies/cwrc#riding,riding,riding,rode side saddle
-http://sparql.cwrc.ca/ontologies/cwrc#manufacturer,manufacturer,lime manufacturer,co operative manufacturer,tobacco manufacturer,cutler,manufacturer,smallware manufacturing,manufacturer of machinery,manufacturer of fancy goods,jet ornament manufacturer
-http://sparql.cwrc.ca/ontologies/cwrc#mountaineering,mountaineering,climbing,mountaineer,mountaineering,mountain climber,climber or mountaineer
-http://sparql.cwrc.ca/ontologies/cwrc#librarian,librarian,county librarian,cataloguer,keeper of the bodleian library,director of the camps library,royal academy's librarian,vice president of the london library
-http://sparql.cwrc.ca/ontologies/cwrc#ironmaster,ironmaster,ironmaster
-http://sparql.cwrc.ca/ontologies/cwrc#typeSetter,type setter,type setter,typesetter
-http://sparql.cwrc.ca/ontologies/cwrc#adjudicator,adjudicator,adjudicator,contest judge,awards judge,selector for the poetry book society
-http://sparql.cwrc.ca/ontologies/cwrc#illustrator,illustrator,advertisement illustrator,illustrator,illustrator of children's books,creator of etchings to illustrate
-http://sparql.cwrc.ca/ontologies/cwrc#travelling,travelling,traveller,travel agent,travelling,sightseeing,travel guide
-http://sparql.cwrc.ca/ontologies/cwrc#equineActivity,equine activity,horsebreaker,horsewoman,horse trainer,horsemaster,dressage,clerk of the course,horseman,racehorse owner,horse breeder,horse racing
-http://sparql.cwrc.ca/ontologies/cwrc#genealogist,genealogist,genealogical scholar,family genealogist
-http://sparql.cwrc.ca/ontologies/cwrc#biologist,biologist,biologist,conchologist,entomologist
-http://sparql.cwrc.ca/ontologies/cwrc#photography,photography,photographer's assistant,photographer,photography
-http://sparql.cwrc.ca/ontologies/cwrc#manservant,manservant,butler,doorman,groom,chauffeur,footman
-http://sparql.cwrc.ca/ontologies/cwrc#translator,translator,interpreter,translator,free lance translations
-http://sparql.cwrc.ca/ontologies/cwrc#warWork,war work,war duties,war efforts,war effort,war work,war worker,chief of war staff
-http://sparql.cwrc.ca/ontologies/cwrc#chess,chess,chess,international chess master
-http://sparql.cwrc.ca/ontologies/cwrc#propertyOwner,property owner,plantation owner,landowner,hereditary land owner,landlord,shipbuilding owner,landlady,squire,property owner,shipyard owner,sugar estate owner,landlady/proprietor,owned land of his own,emergency landlady
-http://sparql.cwrc.ca/ontologies/cwrc#jeweller,jeweller,jeweller
-http://sparql.cwrc.ca/ontologies/cwrc#liaisonOfficer,liaison officer,liaison officer,"liaison officer, correspondent to cairo"
-http://sparql.cwrc.ca/ontologies/cwrc#performer,performer,entertainer,actor,comedienne,acted,understudy,actress,perform,performer,acting,actors,stage performer,mime,impersonator,cabaret star
-http://sparql.cwrc.ca/ontologies/cwrc#surveyor,surveyor,land surveyor,building surveyor,surveyor of highways,assistant road surveyor,railway surveyor,quantity surveyor,surveyor,assistant surveyor,deputy surveyor of royal parks and palaces
-http://sparql.cwrc.ca/ontologies/cwrc#weaver,weaver,handloom weaver,stocking weaver,power loom weaver,weaver
-http://sparql.cwrc.ca/ontologies/cwrc#matron,matron,matron,school matron,housemother,house mother,workhouse matron
-http://sparql.cwrc.ca/ontologies/cwrc#governess,governess,governess
-http://sparql.cwrc.ca/ontologies/cwrc#dance,dance,choreographer,dancer,ballet dancer,chorus girl,dancer and choreographer
-http://sparql.cwrc.ca/ontologies/cwrc#televisionIndustry,television industry,television director
-http://sparql.cwrc.ca/ontologies/cwrc#naturalist,naturalist,naturalist
-http://sparql.cwrc.ca/ontologies/cwrc#beautician,beautician,barber,beautician,hairdresser,cosmetician
-http://sparql.cwrc.ca/ontologies/cwrc#pollster,pollster
-http://sparql.cwrc.ca/ontologies/cwrc#conservatism,conservatism,conservative
-http://sparql.cwrc.ca/ontologies/cwrc#poetLaureate,poet laureate
-http://sparql.cwrc.ca/ontologies/cwrc#watchmaker,watchmaker,watchmaker
-http://sparql.cwrc.ca/ontologies/cwrc#tailor,tailor,tailor,garment worker
-http://sparql.cwrc.ca/ontologies/cwrc#automobileIndustry,automobileIndustry,car industry,car part manufacturer
-http://sparql.cwrc.ca/ontologies/cwrc#handwritingExpert,handwriting expert,handwriting expert
-http://sparql.cwrc.ca/ontologies/cwrc#astronomer,astronomer,assistant astronomer,amateur astronomer
-http://sparql.cwrc.ca/ontologies/cwrc#artsAdvocate,literature advocate
-http://sparql.cwrc.ca/ontologies/cwrc#teacher,teacher,schoolmistress,home educator,religious teacher,geography teacher,sunday school mistress,giving courses,singing teacher,tutor,school mistress,senior english mistress,teaching,tutor in divinity,bible teaching,creative writing teacher,art teacher,assistant schoolmistress,teacher,teacher's assistant,sunday school teacher,sub preceptor,tutoring,dancing teacher,music teacher,schoolmaster,teaching aide,pupil teacher,piano teacher,weapons instructor,classics teacher,schoolteacher,instructor,tutor in languages and belles lettres,art instructor,writing instructor,classical tutor,elocution teacher,university tutor,housemaster,educational pioneer,french teacher,assistant mistress,first assistant mistress
-http://sparql.cwrc.ca/ontologies/cwrc#lawEnforcement,law enforcement,chief constable,town constable,mounted police,police commissioner,police officer,sheriff,high sheriff of hertfordshire,high sheriff of county cork,sheriff depute,sherif of westmorland,high sheriff of kent,high sherriff of county,high sheriff,under sheriff of suffolk,high sheriff of yorkshire
-http://sparql.cwrc.ca/ontologies/cwrc#alternativeMedicine,alternative medicine,herbalist
-http://sparql.cwrc.ca/ontologies/cwrc#metalWork,metal work,sheet metal worker,iron manufacturer,brass worker,steel worker,metal manufacturer,silver manufacturer
-http://sparql.cwrc.ca/ontologies/cwrc#chemist,chemist,chemist,industrial chemist,chemist and immunologist,research chemist
-http://sparql.cwrc.ca/ontologies/cwrc#upholsterer,upholsterer,upholsterer
-http://sparql.cwrc.ca/ontologies/cwrc#gentleman,gentleman,country gentleman,gentleman
-http://sparql.cwrc.ca/ontologies/cwrc#founder,founder,founder of woman's refuge,founder of club,refuge founder,periodical founder,company founder,founder of benefit society,hospital founder,sunday school founder,founder of arts centre,school founder,health society founder,founder of savings bank,founder of charitable organization,founder of literary prize,founder of literary society,founder of relief organization,founder of convent,college founder,magazine founder,founder of women's organization,nursing home founder,university founder,orphanage founder,library founder,founder of writer' centre,founder of college,hospice founder,society founder,theatre founder,founder of chapel,newspaper founder,founder of educational organization,founder of prostitutes' home,church founder,educational institution founder,co founder of arlen house press,founder of the key west writers' workshop,founder of charitable society,founded a discussion society for ladies,founder or co founder,founding directors,founder of school,"co founder of, and remained closely involved in, the writers' action group",founding member of the london bach choir,founding the irish confederation,charity founder,founded,literary society founder,founder of schools,founder of the magazines vanity fair and the lady
-http://sparql.cwrc.ca/ontologies/cwrc#broadcasting,broadcaster,broadcasting
-http://sparql.cwrc.ca/ontologies/cwrc#orderly,orderly,orderly,hospital ward orderly
-http://sparql.cwrc.ca/ontologies/cwrc#communeOrganizer,commune organizer,commune organizer
-http://sparql.cwrc.ca/ontologies/cwrc#employer,employer,domestic employer
-http://sparql.cwrc.ca/ontologies/cwrc#textiles,textiles,textile mill worker,textile worker
-http://sparql.cwrc.ca/ontologies/cwrc#scientist,scientist,scientist,natural scientist,laboratory assistant,lab demonstrator,laboratory worker,amateur scientist,scientific assistant,"amateur scientist, botanist",astronomical assistant,"scientist, particularly well known for his work in genetics",scientific interests,lab assistant
-http://sparql.cwrc.ca/ontologies/cwrc#houseSitter,house sitter,house sitter
-http://sparql.cwrc.ca/ontologies/cwrc#goldsmith,goldsmith
-http://sparql.cwrc.ca/ontologies/cwrc#governmentOfficial,government official,civic work,coroner,sheriff clerk,distributor of stamps,sanitary inspector,resident magistrate,traffic superintendent,exchequer clerk,local government clerk,queen's champion,custos rotulorum,registrar of births and deaths,town planner,government official,health officer,county court bailiff,government employee,registrar,queen's messenger,sequestrator,senior civil servant,member of the indian civil service,prison guard,secretary to parliamentary commission,civil servant,prison governor,poor law guardian,deputy keeper of her majesty's records,master of the savoy,east india company officer,secretary of the royal united service institution,deputy theatre censor,deputy director of the women's branch of the ministry of agriculture,magistrate for the county of middlesex,secretary to the lord keeper of the great seal of england,director general of the tapu land registry,secretary of the fine arts commission
-http://sparql.cwrc.ca/ontologies/cwrc#hospitality,hospitality,tavern keeper,restaurant manager,hotelier,innkeeper,alehouse keeper,lodging house keeper,hotel manager,coffee house keeper,hotel keeper,inn,guesthouse keeper,cafe manager,restaurant owner,club employee,hotel proprietor,hotel worker,coffee house keeper,hostel forewoman,pot girl
-http://sparql.cwrc.ca/ontologies/cwrc#captain,captain
-http://sparql.cwrc.ca/ontologies/cwrc#insurance,insurance,insurance agent,insurance manager,insurance collector,insurance salesman,insurance clerk,insurance inspector,insurance,insurance broker,insurance underwriter
-http://sparql.cwrc.ca/ontologies/cwrc#journalist,journalist,newspaper assistant,war reporter,journalist,newspaper correspondent,trade journalist,reporter,columnist,media journalist,staff writer,parliamentary reporter,foreign correspondent,women's columnist,crime reporter,free lance journalist,journalism,socialist journalist,war correspondent,clippings clerk
-http://sparql.cwrc.ca/ontologies/cwrc#childcare,childcare,child recreation manager,child minding,au pair,child carer,children's home manager,nursemaid,childcare,child rearing,nursery manager,child care,childcare worker,childcare provider,child recreation manager,childcare guru,worker for children,worker with children
-http://sparql.cwrc.ca/ontologies/cwrc#grocer,grocer,grocer,royal grocer
-http://sparql.cwrc.ca/ontologies/cwrc#navy,naval rating,naval architect,naval censor,naval official,first lord of the admiralty,admiral,naval administrator,naval captain,naval officer,home guard officer,navy commissioner,navy officer,rear admiral,naval engineer,vice admiral,merchant navy captain,naval surgeon,lieutenant royal marines,naval chaplain,us naval commander,united states navy,assistant naval surgeon,commander in chief of the portuguese navy,us navy
-http://sparql.cwrc.ca/ontologies/cwrc#abolitionist,abolitionist,abolitionist activist,abolitionist worker,abolitionist
-http://sparql.cwrc.ca/ontologies/cwrc#student,student,medical student,university student,engineering student,study law,marker,studying,art student,architecture student,theology student,student,apprentice,law student,studied at oxford
-http://sparql.cwrc.ca/ontologies/cwrc#railwayWork,railway work,station master,railway worker,stationmaster,railway promoter,railway guard,railway clerk,worked for the nigerian railway
-http://sparql.cwrc.ca/ontologies/cwrc#mercer,mercer,mercer
-http://sparql.cwrc.ca/ontologies/cwrc#temperanceMovement,temperance movement,temperance worker,temperance work,temperance,temperance supporter,temperance activist
-http://sparql.cwrc.ca/ontologies/cwrc#salesperson,salesperson,ticket seller,real estate salesman,saleswoman,street seller,costermonger,paper salesman,sales staff,pedlar,real estate agent,newsagent,sales director,salesman,salesgirl,wine seller,door to door salesperson,stationer,piano salesman,sales manager,sausage seller,newspaper dealer,fairground salesman,door to door salesman,newspaper deliverer
-http://sparql.cwrc.ca/ontologies/cwrc#geologist,geologist
-http://sparql.cwrc.ca/ontologies/cwrc#politics,politics,election observer,whig party supporter,political campaigner,closet politician,politics,whig leader,political secretary,republican,political agent,political conspirator,political officer,political advisor,left wing politics,political party delegate,parliamentary candidate,political canvasser,political organizing,public health campaigner,politician,political organizer,political party worker,patriot politician,president of the british women's temperance league,advocate of catholic emancipation in the irish parliament,conservative backer of empire,chief adviser on arab affairs,supporter of the ministry,president of the progressive league,politicians,american loyalist
-http://sparql.cwrc.ca/ontologies/cwrc#midwife,midwife,midwifery organizer,midwife
-http://sparql.cwrc.ca/ontologies/cwrc#filmIndustry,film industry,continuity clerk,film producer,documentarian,film performer,film maker,film extra,film director,documentary film maker,documentary maker,film stand in,film actor,film assistant
-http://sparql.cwrc.ca/ontologies/cwrc#firefighter,firefighter,firefighter,fire watcher
-http://sparql.cwrc.ca/ontologies/cwrc#diver,diver,diver
-http://sparql.cwrc.ca/ontologies/cwrc#cooper,cooper,cooper
-http://sparql.cwrc.ca/ontologies/cwrc#dressmaking,dressmaking,dressmaker's apprentice,silk manufacturer,seamstress,textile manufacturer,clothes mending,dressmaking,dressmaking business,dressmaker,dressmaking; seamstress
-http://sparql.cwrc.ca/ontologies/cwrc#unskilledLabourer,unskilled labourer,dishwasher,laundry worker,sweeping the floor
-http://sparql.cwrc.ca/ontologies/cwrc#philanthropist,philanthropist,donor to university,benefactor,benefactor of school,church donor,patron of charities,philanthropist,philanthopic activity,educational philanthropist,private benefactor,philanthropic educationalist,active philanthropist,philanthropy,"patron, philanthropist"
-http://sparql.cwrc.ca/ontologies/cwrc#philosopher,philosopher,academic philosopher,philosophy,philosopher,amateur philosopher
-http://sparql.cwrc.ca/ontologies/cwrc#writingGroupParticipant,writing group participant,writing group president,writing group member
-http://sparql.cwrc.ca/ontologies/cwrc#calligraphy,calligraphy,calligrapher,calligraphist
-http://sparql.cwrc.ca/ontologies/cwrc#businessOwner,business owner,factory owner,mill owner,sex shop owner,newspaper proprietor,barbershop owner,mine owner,colliery owner,shop owner,magazine proprietor,coffee shop owner,store owner,music shop owner,proprietor,newspaper magnate,owner of food outlet,bar owner,pottery magnate,mail order business,news agency proprietor
-http://sparql.cwrc.ca/ontologies/cwrc#monarch,monarch,queen,king
-http://sparql.cwrc.ca/ontologies/cwrc#chaperone,chaperone,chaperone
-http://sparql.cwrc.ca/ontologies/cwrc#pharmacist,pharmacist,druggist,apothecary,pill dispenser,dispensary assistant,pharmacist,dispenser,"apothecary, druggist"
-http://sparql.cwrc.ca/ontologies/cwrc#yeoman-farmer,yeoman farmer,YEOMAN-FARMER,yeoman
-http://sparql.cwrc.ca/ontologies/cwrc#censor,censor,bowdlerizer
-http://sparql.cwrc.ca/ontologies/cwrc#cricket,cricket,cricketer,cricket team captain,cricket
-http://sparql.cwrc.ca/ontologies/cwrc#hypnotist,hypnotist,hypnotism
-http://sparql.cwrc.ca/ontologies/cwrc#transportationWork,transportation work,van driver,cab driver,transportation,bus inspector,driver,bus driver,bus worker,bus conductor
-http://sparql.cwrc.ca/ontologies/cwrc#activist,activist,activist for the disabled,anti poverty activist,social activist,temperance activist,political activist,media activist,human rights activist,labour activist,protest organiser,activist against slavery,peace activist,housing activist,christian social activist,civil rights activist,medical mission activist,resistance activist,anti vivisectionist,activist for dissent,educational activist,library activist,child labour activist,activist,continuing education activist,anti slavery activist,poverty activist,workhouse activist
-http://sparql.cwrc.ca/ontologies/cwrc#hostess,hostess,society hostess,salonnière,entertaining,literary hostess,hostess,salonniere,nightclub hostess,hostess for her father
-http://sparql.cwrc.ca/ontologies/cwrc#theatreWork,theatre work,wardrobe assistant,assistant theatre manager,play reader,theatre president,theatre manager,theatre organiser,usherette,cabaret dresser,theatrical director,theatre dresser,prompter,property mistress,stage manager,theatrical manager,theatrical agent,costume designer,theatre company director,theatre director,theatre designer,theatre producer,theatre,theatre censor,set designer,founded a small theatre group,theatre literary manager,student production of one of her plays,workshopping plays,theatre trust president,men of the theatre
-http://sparql.cwrc.ca/ontologies/cwrc#miner,miner,colliery manager,miner,coalminer
-http://sparql.cwrc.ca/ontologies/cwrc#reformer,reformer,law reformer,agricultural reformer,divorce law reformer,sanitary reformer,language reformer,penal reformer,political reformer,prison reformer,land improver,reformer,religious reformer,health care reformer,army reformer,housing reformer,liturgical reformer,educational reformer,medical reformer,social reformer,publishing reformer,sex reformer
-http://sparql.cwrc.ca/ontologies/cwrc#immunologist,immunologist,immunologist
-http://sparql.cwrc.ca/ontologies/cwrc#baker,baker,baker,pastrycook
-http://sparql.cwrc.ca/ontologies/cwrc#lordChancellor,lord chancellor,lord chancellor
-http://sparql.cwrc.ca/ontologies/cwrc#plumber,plumber,plumber
-http://sparql.cwrc.ca/ontologies/cwrc#metallurgy,metallurgy,assayer,metallurgist
-http://sparql.cwrc.ca/ontologies/cwrc#bankrupt,bankrupt,bankrupt,grande scale bankrupt
-http://sparql.cwrc.ca/ontologies/cwrc#literaryAssistant,literary assistant,writer's assistant,literary assistant
-http://sparql.cwrc.ca/ontologies/cwrc#parishWork,parish work,parish work,parish worker,management of her husband's parish
-http://sparql.cwrc.ca/ontologies/cwrc#headOfState,head of state,president of the usa,prime minister,prime minister of the cape colony,presidents of the united states
-http://sparql.cwrc.ca/ontologies/cwrc#fisherman,fisherman,fisherwoman,fish handler,fisherman
-http://sparql.cwrc.ca/ontologies/cwrc#airForce,airForce,airforce officer
-http://sparql.cwrc.ca/ontologies/cwrc#litigant,litigant
-http://sparql.cwrc.ca/ontologies/cwrc#construction,construction,road construction supervisor,building improver,renovator,carpenter,shipwright,gothic builder bricklayer,construction supervisor,building,house builder,builder,"builder, architect",clerk of the works,clerk of the king's works
-http://sparql.cwrc.ca/ontologies/cwrc#wife,wife,colonial governor's wife,candidate's wife,vicar's wife,headmaster's wife,housemaster's wife,housewife,diplomat's wife
-http://sparql.cwrc.ca/ontologies/cwrc#urbanPlanning,urban planning,urban planning
+http://sparql.cwrc.ca/ontologies/cwrc#whaler,whaler
+http://sparql.cwrc.ca/ontologies/cwrc#literaryConservationist,literary conservationist,literary conservation
+http://sparql.cwrc.ca/ontologies/cwrc#plumber,plumber
+http://sparql.cwrc.ca/ontologies/cwrc#business,business,business entrepreneur,business manager,small businessman,industrialists,business agent,business assistant,entrepreneur,marketing,businesswoman,industrialist,market research,family business,company president,entrepeneur,businessman,industrialist/manager,small entrepreneur,market researcher
+http://sparql.cwrc.ca/ontologies/cwrc#architecture,architecture,architectural restoration,royal architect,draftsman,architect,draughter,architectural draftsman,draughtsman
+http://sparql.cwrc.ca/ontologies/cwrc#aristocrat,aristocrat,baron,baronet
+http://sparql.cwrc.ca/ontologies/cwrc#drinking,drinking,alcoholic,drinking problem,drinking and chasing women,daily drinking bouts
+http://sparql.cwrc.ca/ontologies/cwrc#coach,coach,coach of the cambridge rowing crew
+http://sparql.cwrc.ca/ontologies/cwrc#trustee,trustee,tate gallery trustee
+http://sparql.cwrc.ca/ontologies/cwrc#immunologist,immunologist
+http://sparql.cwrc.ca/ontologies/cwrc#parishWork,parish work,parish worker,management of her husband's parish
 http://sparql.cwrc.ca/ontologies/cwrc#pottery,pottery,pottery manufacturer
-http://sparql.cwrc.ca/ontologies/cwrc#business,business,family business,small businessman,business entrepreneur,businesswoman,businessman,business assistant,market research,entrepeneur,company president,industrialists,industrialist,marketing,business manager,entrepreneur,business agent,small entrepreneur,market researcher,industrialist/manager
-http://sparql.cwrc.ca/ontologies/cwrc#slave,slave,slave,slave nurse
-http://sparql.cwrc.ca/ontologies/cwrc#employmentAgent,employment agent,work force recruiter,employment agent
-http://sparql.cwrc.ca/ontologies/cwrc#administrator,administrator,administration,hospital administrator,administrative officer,administrator,principal of institute
-http://sparql.cwrc.ca/ontologies/cwrc#refugee,refugee,refugee
-http://sparql.cwrc.ca/ontologies/cwrc#printing,printing,printing press manager,printer,printing,in printing,printing and bookselling businesses
-http://sparql.cwrc.ca/ontologies/cwrc#drugUse,drug abuse,laudanum addict,drug addict,drug user
-http://sparql.cwrc.ca/ontologies/cwrc#cartoonist,cartoonist,political cartoonist,caricaturist
-http://sparql.cwrc.ca/ontologies/cwrc#philanthropicVisitor,philanthropic visitor,charitable visitor,visitor of the poor,domestic visitor,benevolent visitor,visiting pensioners and war widows,visiting prisons and orphanages,school visitor,poor visitor,charity visitor,military visitor,colonial health visitor,charitable visiting,parish visitor,prison visitor,sick visitor,health visitor,district visitor,social visitor,visiting the poor,workhouse visitor,hospital visitor,slum visitor,workhouse superintendent,visiting imprisoned catholics,visited the prisoners,visitor of the poor
-http://sparql.cwrc.ca/ontologies/cwrc#engraver,engraver,engraver,wood engraver
-http://sparql.cwrc.ca/ontologies/cwrc#researcher,researcher,research assistant,social researcher,researcher,scholarship,research
-http://sparql.cwrc.ca/ontologies/cwrc#mentor,mentor,mentor
-http://sparql.cwrc.ca/ontologies/cwrc#cooking,cooking,cook,cooking
-http://sparql.cwrc.ca/ontologies/cwrc#charityWorker,charity worker,charitable donation,charity,charity representative,charity administrator,charitable worker,charitable causes,charity work,president of charity,charity organiser,charity campaigner,director of charity,raise funds for a variety of wartime charities,charity co ordinator,charity performer,charity management,charity organizer,charity school supporter,vice president of charity,charity board member,charity speaker,charitable giving,charity worker,church and community work,charity agent,text distributor,charity organization society,running church or charity bazaars,shelter provision,established a soup kitchen for starving peasants during the great famine,childbirth charity organiser,charity organiser,work with women and the poor,charititable activity
-http://sparql.cwrc.ca/ontologies/cwrc#masterOfTheRevels,master or mistress of the revels,master of the revels,mistress of the revels,master of the revels in ireland
-http://sparql.cwrc.ca/ontologies/cwrc#tinker,tinker,tinker
-http://sparql.cwrc.ca/ontologies/cwrc#architecture,architecture,royal architect,draftsman,architectural draftsman,architectural restoration,draughter,draughtsman,architect
-http://sparql.cwrc.ca/ontologies/cwrc#craftsperson,craftsperson,craftsperson,handicraft,handicrafts,craft work,furniture restorer,shellwork,arts and crafts,craftswoman,decorator of reproduction furniture
-http://sparql.cwrc.ca/ontologies/cwrc#botanist,botanist,botanist,assistant botanist,botany,botany enthusiast
-http://sparql.cwrc.ca/ontologies/cwrc#boardMember,board member,board member
-http://sparql.cwrc.ca/ontologies/cwrc#archivist,archivist
-http://sparql.cwrc.ca/ontologies/cwrc#postalWorker,postal worker,postmistress,postmaster general,letter carrier,postmaster,post office worker,postal worker,post office clerk,letter sorter,assistant postmistress,junior assistant to the postmistress
-http://sparql.cwrc.ca/ontologies/cwrc#fashion,fashion,fashion consultant,fashion designer,fashion buyer,leader of fashion
-http://sparql.cwrc.ca/ontologies/cwrc#miser,miser,miser
-http://sparql.cwrc.ca/ontologies/cwrc#whaler,whaler,whaler
-http://sparql.cwrc.ca/ontologies/cwrc#firstAid,first aid,first aid work,first aid
-http://sparql.cwrc.ca/ontologies/cwrc#chairperson,chairperson,committee chair,chair of the greater london arts literature panel,chairman,chairwoman,chair of social anthropology,deputy chairman,chair of society,chair of women's organization,vice chairman,society chair,chair,chair of prize panel,committee chairman,vice chairman of the copyright licensing agency,chairman of the photographic society,vice chair of the british copyright council,chair of academy,chair of international organization,chairman of the authors' lending and copyright society or alcs
-http://sparql.cwrc.ca/ontologies/cwrc#lithographer,lithographer,lithographer
-http://sparql.cwrc.ca/ontologies/cwrc#mining,mining,mine agent,mine work,mining entrepreneur
-http://sparql.cwrc.ca/ontologies/cwrc#settlementWork,settlement work,settlement work,settlement worker
-http://sparql.cwrc.ca/ontologies/cwrc#curator,curator,curator,museum curator,curator of art exhibitions,gallery curator
-http://sparql.cwrc.ca/ontologies/cwrc#fundraiser,fundraiser,educational fundraiser,fundraiser,fundraising,hospital fundraiser
-http://sparql.cwrc.ca/ontologies/cwrc#farming,farming,agricultural adviser,beekeeper,farming,tenant farmer,apricot ranch,shepherd,sugar planter,yeoman farmer,ranch hand,sheep breeder,smallholder,cattleman,dairy farmer,fruit picker,pig farmer,dairying,farm labour,husbandman,cattle breeder,corn inspector,part time farmer,agriculturalist,rancher,farmer,fruit farmer,farm worker,farmers,farm manager,farm labourer,pig breeder
-http://sparql.cwrc.ca/ontologies/cwrc#consultant,consultant,management consultant,drug adviser and consultant
-http://sparql.cwrc.ca/ontologies/cwrc#military,military,lieutenant,military,war hero,military leadership,artillery gunner,lieutenant general,quartermaster,para military officer,captain of militia,major general,military escort,colonel,deputy lieutenant,militia captain,artillery officer,military communications,soldier,military officer,military driver,air raid defence provider,air raid shelter marshal,recruiting officer,captain (later admiral),non commissioned officer,aide de camp,commander of a highland regiment,solider,territorial soldier,half pay officer,camouflage worker,second lieutenant
-http://sparql.cwrc.ca/ontologies/cwrc#coastGuard,coastguard,coastguard,coast guard
-http://sparql.cwrc.ca/ontologies/cwrc#telephoneOperator,telephone operator,telephone operator
-http://sparql.cwrc.ca/ontologies/cwrc#gambling,gambling,gambler,stock exchange gambler
-http://sparql.cwrc.ca/ontologies/cwrc#spinner,spinner,cotton spinner,spinning,spinner
-http://sparql.cwrc.ca/ontologies/cwrc#agent,agent,chief agent
-http://sparql.cwrc.ca/ontologies/cwrc#memberOfParliament,member of parliament,member of parliament,mp,member of parliament and politician,liberal member of parliament,member of parliament for nottingham,labour mp,liberal mp,conservative mp,members of parliament
-http://sparql.cwrc.ca/ontologies/cwrc#dentist,dentist,dentist
-http://sparql.cwrc.ca/ontologies/cwrc#miller,miller,miller
-http://sparql.cwrc.ca/ontologies/cwrc#monarchism,monarchism,monarchist,constitutional monarchist,royalist,royalist politician,active royalists
-http://sparql.cwrc.ca/ontologies/cwrc#shipping,shipping,shipping merchant,shipper,ship owner,shipping owner
+http://sparql.cwrc.ca/ontologies/cwrc#intelligenceWork,intelligence work,intelligence agent,espionage worker,intelligence officer,intelligence,intelligence expert,spying,spy,secret agent
+http://sparql.cwrc.ca/ontologies/cwrc#photography,photography,photographer,photographer's assistant
+http://sparql.cwrc.ca/ontologies/cwrc#geographer,geographer
+http://sparql.cwrc.ca/ontologies/cwrc#connoisseur,connoisseur,art connoisseur
+http://sparql.cwrc.ca/ontologies/cwrc#philosopher,philosopher,amateur philosopher,academic philosopher,philosophy
+http://sparql.cwrc.ca/ontologies/cwrc#merchant,merchant,dealer,merchant in furs,cloth merchant,dealer in stamps,linen merchant,wine merchant,china merchant,cattle dealer,potato merchant,importer,silk merchant,book dealer,sugar merchant,timber merchant,hardware merchant,arms dealer,coal merchant,merchant adventurer,leather merchant,tradesman,corn merchant,international exporter,shipping agent,art dealer,corn dealer,cotton merchant,merchant's apprentice,cosmetics merchant,exported textiles to the west indies,merchant in liverpool
+http://sparql.cwrc.ca/ontologies/cwrc#deliveryPerson,delivery person,messenger girl,newspaper deliverer,errand boy,dispatch rider
+http://sparql.cwrc.ca/ontologies/cwrc#fundraiser,fundraiser,hospital fundraiser,fundraising,educational fundraiser
+http://sparql.cwrc.ca/ontologies/cwrc#captain,captain
+http://sparql.cwrc.ca/ontologies/cwrc#manager,manager,office manager,factory supervisor,factory manager,supervisor,managed,shipping company manager,vice president of beauty without cruelty,supervising
+http://sparql.cwrc.ca/ontologies/cwrc#religiousStudies,religious studies,biblical scholar,theologian,hindu scholar
+http://sparql.cwrc.ca/ontologies/cwrc#postalWorker,postal worker,letter sorter,post office clerk,postmistress,postmaster general,post office worker,assistant postmistress,postmaster,letter carrier,junior assistant to the postmistress
+http://sparql.cwrc.ca/ontologies/cwrc#pilot,pilot
+http://sparql.cwrc.ca/ontologies/cwrc#computerWork,computer work,computer programmer,database manager
+http://sparql.cwrc.ca/ontologies/cwrc#ironmonger,ironmonger
+http://sparql.cwrc.ca/ontologies/cwrc#riding,riding,rode side saddle
+http://sparql.cwrc.ca/ontologies/cwrc#fosterParent,foster-parent,foster parent,foster mother
+http://sparql.cwrc.ca/ontologies/cwrc#courtier,courtier,lady in waiting,keeper of the robes,bed chamber woman,groom of the chamber,lady of the bedchamber,chamberlain to the king of bavaria
+http://sparql.cwrc.ca/ontologies/cwrc#airRaidWarden,air raid warden
+http://sparql.cwrc.ca/ontologies/cwrc#italianNationalism,Italian nationalism,italian risorgimento,mazzinian,italian nationalist,Italian nationalist movement
+http://sparql.cwrc.ca/ontologies/cwrc#railwayWork,railway work,stationmaster,railway promoter,station master,railway clerk,railway worker,railway guard,worked for the nigerian railway
+http://sparql.cwrc.ca/ontologies/cwrc#mercer,mercer
+http://sparql.cwrc.ca/ontologies/cwrc#refugeeWork,refugee work,refugee worker
+http://sparql.cwrc.ca/ontologies/cwrc#propertyAgent,land agent,plantation manager,land steward,estate manager,estate agent,property agent,estate management,rent collector,managing the estates
+http://sparql.cwrc.ca/ontologies/cwrc#fishmonger,fishmonger
 http://sparql.cwrc.ca/ontologies/cwrc#computerScientist,computer scientist
-http://sparql.cwrc.ca/ontologies/cwrc#politicalSpeaker,political speaker,speaker of the house of lords,speaker (parliamentary),speaker of the house of commons,speaker of the legislature,speaker of the senate of northern ireland
-http://sparql.cwrc.ca/ontologies/cwrc#diplomat,diplomat,consul general,foreign service,envoy,diplomatic negotiation,diplomat,diplomatist,british consul,ambassador,attaché,ambassador to constantinople,consul general in london for hawaii,oriental secretary,ambassador to france,ambassador to spain
-http://sparql.cwrc.ca/ontologies/cwrc#literaryConservationist,literary conservationist,literary conservationist,literary conservation
-http://sparql.cwrc.ca/ontologies/cwrc#mayor,mayor,lady mayoress,mayor,lord mayor,mayor of their home town,mayor of cork,lord mayor of london,mayor of norwich
-http://sparql.cwrc.ca/ontologies/cwrc#cobbler,cobbler,shoemaker's assistant,apprentice shoemaker,shoemaker
-http://sparql.cwrc.ca/ontologies/cwrc#saint,saint,saint
-http://sparql.cwrc.ca/ontologies/cwrc#designer,designer,designer,graphic designer,interior design,house decoration,fabric designer,interior designer,gothic designer,housing designer,interior decorator,prosthetics designer
-http://sparql.cwrc.ca/ontologies/cwrc#volunteer,volunteer,food volunteer,civil defence volunteer,school volunteer,volunteer office work,food kitchen volunteer,volunteer counsellor,war volunteer,hospital volunteer,volunteer personnel work,war volunteers,volunteer,volunteer soldier,volunteering for the newly formed babies club,volunteer cook and waitress,voluntary aid detachment
-http://sparql.cwrc.ca/ontologies/cwrc#bookProduction,book production,book production
-http://sparql.cwrc.ca/ontologies/cwrc#bullionCarrier,bullion carrier,bullion carrier
-http://sparql.cwrc.ca/ontologies/cwrc#taxOfficial,tax official,customs inspector,customs officer,commissioner of taxes,exciseman,customs official
-http://sparql.cwrc.ca/ontologies/cwrc#needlework,needlework,embroiderer,needlewoman,knitting,needlework,needlework artist
-http://sparql.cwrc.ca/ontologies/cwrc#ironmonger,ironmonger,ironmonger
-http://sparql.cwrc.ca/ontologies/cwrc#boardingHouseKeeper,boarding house keeper,boarding house manager,boarding house keeper,established boarding houses
-http://sparql.cwrc.ca/ontologies/cwrc#socialWork,social work,social investigation,youth club worker,caseworker,immigrant aid,children's aid worker,social caseworker,welfare worker,welfare supervisor,worker with prostitutes,community worker,organise soup kitchens,humanitarian,child welfare officer,social work,organiser for the poor,unemployment worker,welfare officer,child welfare worker,emigrant aid,social investigator,youth worker,religious social worker,child care officer,social work organizer,social worker,childcare officer,organiser of women's community,chief lady welfare officer,almshouse manager,child's aid worker,poor districts,running a soup kitchen
-http://sparql.cwrc.ca/ontologies/cwrc#archaeologist,archaeologist,paleontologist,palaeontologist,director of archaeology in the department of antiquities
-http://sparql.cwrc.ca/ontologies/cwrc#patriot,patriot,patriot,"irish patriot, nationalist,"
-http://sparql.cwrc.ca/ontologies/cwrc#clericalWork,clerical work,typist,town clerk,receptionist,secretary,college secretary,warehouse clerk,secretarial work,executive secretary,scrivener,clerk,shorthand typist,clerical,factory secretary,stenographer,pay clerk,private secretary,clerical officer,association secretary,legal secretary,club secretary,secretary and registrar
-http://sparql.cwrc.ca/ontologies/cwrc#associationInvolvement,association involvement,clubperson,clubwoman,society director,clubman,society vice president,club president,freemason,president of professional association,vice president of society,president of society,club leader,president of the society of authors,society secretary,secretary of literary society,society president,society member,president of the british club for belgian soldiers,president of the herdwick association,president of the society of women journalists,president of the literary ladies club
-http://sparql.cwrc.ca/ontologies/cwrc#clothingProduction,clothing production,hosier,linen manufacturer,glove manufacturer,woollen manufacturer,weaving manufacturer,cotton manufacturer
-http://sparql.cwrc.ca/ontologies/cwrc#housework,housework,housework
-http://sparql.cwrc.ca/ontologies/cwrc#explorer,explorer,adventurer,explorer
-http://sparql.cwrc.ca/ontologies/cwrc#tourGuide,tour guide,mountain guide,tour guide,youth hostel warden
-http://sparql.cwrc.ca/ontologies/cwrc#lawyer,lawyer,lawyer,solicitor,apprentice attorney,barrister,chancery barrister,attorney,patents lawyer
-http://sparql.cwrc.ca/ontologies/cwrc#domesticWork,domestic work,meal provider,managing her households,domestic work,kitchen work,helping at home,care of parents
-http://sparql.cwrc.ca/ontologies/cwrc#inventor,inventor,technological innovator,inventor,inventing
-http://sparql.cwrc.ca/ontologies/cwrc#legalWork,legal work,legal aid worker,legal clerk,law clerk,legal advisor,legal adviser,lawyer's clerk,legal assistant,solicitor's clerk,legal scholar,legal expert,clerk of the court
-http://sparql.cwrc.ca/ontologies/cwrc#army,army,army colonel,army doctor,cavalry soldier,army surgeon,army commander,army paymaster,army officer,cavalry officer,billetting officer,inspector of army education
-http://sparql.cwrc.ca/ontologies/cwrc#vintner,vintner,wine maker,vintner
-http://sparql.cwrc.ca/ontologies/cwrc#religious,religious,anchoress,lay sister,royal chaplain,evangelical leader,religious publicist,member of religious order,methodist lay preacher,pilgrim,church worker,religious organizer,religious revivalist,religious observance,religious manager,religious leader,church elder,methodist convert,religious administrator,monk,precentor,principal clerk of session,prayer leader,prayer,garrison chaplain,permanent curate,spiritual counsellor,preaching and religious organising activities,"lay leader, or parnas",chancellor and prebendary of hereford cathedral
-http://sparql.cwrc.ca/ontologies/cwrc#socialism,socialism,fabian socialist,owenite socialism,radical socialist,socialist,socialist feminist,militant socialist,socialist and feminist,socialist organizer
-http://sparql.cwrc.ca/ontologies/cwrc#mapping,mapping,topographer,cartographer
-http://sparql.cwrc.ca/ontologies/cwrc#treasurer,treasurer,treasurer,society treasurer,hospital department treasurer,city treasurer,treasurer to the royal society,under treasurer for the navy
-http://sparql.cwrc.ca/ontologies/cwrc#politicalHost,politicalHost,political hostess,political host,official hostess at the government house
-http://sparql.cwrc.ca/ontologies/cwrc#beauty,beauty,beauty,pre raphaelite muse
-http://sparql.cwrc.ca/ontologies/cwrc#singer,singer,opera singer,concert singer,amateur singer,singer
-http://sparql.cwrc.ca/ontologies/cwrc#smuggler,smuggler,arms runner,gun runner
-http://sparql.cwrc.ca/ontologies/cwrc#billCollector,bill collector,bill collector
-http://sparql.cwrc.ca/ontologies/cwrc#healthCareProvider,healthcare provider,hospital almoner,medical assistant,medicine,medical aide,hospital aide,medical administrator,health worker,medical worker,inoculator,hospital worker,dental assistant,hospital director,hospital porter,health service administrator,healthcare worker,medical officer,contact healing,medical pioneer,medical coder,contact healing,support an infirmary,assistant in medical care
-http://sparql.cwrc.ca/ontologies/cwrc#medicalDoctor,medical doctor,medical practitioner,gynaecologist,orthopaedic surgeon,surgeon,obstetrician,general practitioner,homeopathic doctor,doctor,physician,medical doctor,royal physician,surgeon general,immunologist,surgery,medical practice,cardiologist,eye and ear specialist,eye surgeon,gastric surgeon,"physician, surgeon"
-http://sparql.cwrc.ca/ontologies/cwrc#eventOrganizer,event organizer,peace congress organizer,exhibition organizer,bazaar organizer,community organizer,poetry organizer,entertainment organizer,festival organizer,organizer,local organiser,organized evening lectures for women,demonstration organiser
-http://sparql.cwrc.ca/ontologies/cwrc#rescueWork,rescue work,life saving,rescue work,mountain rescue,mountain rescue leader
-http://sparql.cwrc.ca/ontologies/cwrc#sports,sports,yachtsperson,curling,yachtsman,skier,olympic athlete,yachtswoman,athlete,polo player,sportsman,golf,sport,boxer,physical training instructor,oarsman,championship skier
-http://sparql.cwrc.ca/ontologies/cwrc#radicalism,radicalism,radical,political radical,working class radical,radical dissident
-http://sparql.cwrc.ca/ontologies/cwrc#blacksmith,blacksmith,blacksmith
-http://sparql.cwrc.ca/ontologies/cwrc#corporateDirector,corporate or organizational director,honorary director,company director,deputy director,managing director,chairman of railway company,president of the baby and foundling hospital
-http://sparql.cwrc.ca/ontologies/cwrc#literaryExecutor,literary executor,literary executor,literary executrix
-http://sparql.cwrc.ca/ontologies/cwrc#anti-Suffrage,anti-suffrage,non-suffragist,anti-sufffragist,anti-suffragist,anti-suffragist movement,anti-suffrage movement
-http://sparql.cwrc.ca/ontologies/cwrc#technician,technician,technician
-http://sparql.cwrc.ca/ontologies/cwrc#pawnbroker,pawnbroker,pawnbroker
-http://sparql.cwrc.ca/ontologies/cwrc#knight,knight,knight
-http://sparql.cwrc.ca/ontologies/cwrc#education,education,educational popularizer,educationist
-http://sparql.cwrc.ca/ontologies/cwrc#bursar,bursar,bursar
-http://sparql.cwrc.ca/ontologies/cwrc#clothworker,clothworker
-http://sparql.cwrc.ca/ontologies/cwrc#missionaryWork,missionary work,missionary supporter,missionary administrator,missionaries,missionary,missionary worker,founded a church missionary society auxiliary,supporter of missionary activity
+http://sparql.cwrc.ca/ontologies/cwrc#activist,activist,peace activist,christian social activist,activist for the disabled,housing activist,poverty activist,labour activist,workhouse activist,activist against slavery,anti poverty activist,protest organiser,child labour activist,human rights activist,medical mission activist,political activist,continuing education activist,resistance activist,media activist,temperance activist,anti slavery activist,social activist,educational activist,anti vivisectionist,library activist,activist for dissent,civil rights activist
+http://sparql.cwrc.ca/ontologies/cwrc#translator,translator,interpreter,free lance translations
+http://sparql.cwrc.ca/ontologies/cwrc#archivist,archivist
+http://sparql.cwrc.ca/ontologies/cwrc#childcareWork,childcare work,children's home manager,nursery manager,child recreation manager
+http://sparql.cwrc.ca/ontologies/cwrc#warWork,war work,war effort,war efforts,war worker,war duties,chief of war staff
+http://sparql.cwrc.ca/ontologies/cwrc#filmIndustry,film industry,film performer,documentary film maker,film assistant,film actor,film extra,film director,film maker,film producer,documentarian,film stand in,continuity clerk,documentary maker
+http://sparql.cwrc.ca/ontologies/cwrc#litigant,litigant
+http://sparql.cwrc.ca/ontologies/cwrc#dentist,dentist
+http://sparql.cwrc.ca/ontologies/cwrc#miller,miller
+http://sparql.cwrc.ca/ontologies/cwrc#prospector,prospector
+http://sparql.cwrc.ca/ontologies/cwrc#optician,optician,ophthalmic optician
+http://sparql.cwrc.ca/ontologies/cwrc#seaCaptain,sea captain,ship's captain,ferryboat captain,whaling captain
+http://sparql.cwrc.ca/ontologies/cwrc#bookbinder,bookbinder,bookbinding,book binder
+http://sparql.cwrc.ca/ontologies/cwrc#goldsmith,goldsmith
+http://sparql.cwrc.ca/ontologies/cwrc#employmentAgent,employment agent,work force recruiter
+http://sparql.cwrc.ca/ontologies/cwrc#lawyer,lawyer,chancery barrister,barrister,attorney,solicitor,apprentice attorney,patents lawyer
+http://sparql.cwrc.ca/ontologies/cwrc#aircraftIndustry,aircraft industry,aeroplane manufacturer
+http://sparql.cwrc.ca/ontologies/cwrc#illustrator,illustrator,illustrator of children's books,advertisement illustrator,creator of etchings to illustrate
 http://sparql.cwrc.ca/ontologies/cwrc#mason,mason,stonemason
-http://sparql.cwrc.ca/ontologies/cwrc#deliveryPerson,delivery person,messenger girl,delivery person,newspaper deliverer,errand boy,dispatch rider
-http://sparql.cwrc.ca/ontologies/cwrc#literaryPrizeAdjudicator,literary prize adjudicator,judge of literary prize,literary adjudicator,judge of literary award,literary awards judge,literary prize judge,literary judge,adjudicator of literary award,chair of literary prize panel,judge for literary prize,literary competition judge,literary award judge,judge; literary competition
-http://sparql.cwrc.ca/ontologies/cwrc#government,government,government adviser,served in the legislature,representative,elected,government fishery advisor
-http://sparql.cwrc.ca/ontologies/cwrc#settler,settler,pioneer,colonial settler,immigrant,emigrant,managing trading posts,huguenot immigrant
-http://sparql.cwrc.ca/ontologies/cwrc#literaryAgent,literary agent,amateur literary agent,literary agent,literary advisor
-http://sparql.cwrc.ca/ontologies/cwrc#dataProcessing,data processing,data processing,data recorder,encoder
-http://sparql.cwrc.ca/ontologies/cwrc#critic,critic,theatre critic,art critic,music critic,critic,literary critic,television critic,film critic,drama critic,assistant drama critic
-http://sparql.cwrc.ca/ontologies/cwrc#radioOperator,radio operator
-http://sparql.cwrc.ca/ontologies/cwrc#conservationist,conservationist,conservationist
-http://sparql.cwrc.ca/ontologies/cwrc#literaryGroupParticipant,literary group participant,literary group participant,chair of literary society,dramatic society president,running writers' group
+http://sparql.cwrc.ca/ontologies/cwrc#nun,nun,prioress
+http://sparql.cwrc.ca/ontologies/cwrc#censor,censor,bowdlerizer
+http://sparql.cwrc.ca/ontologies/cwrc#slave,slave,slave nurse
+http://sparql.cwrc.ca/ontologies/cwrc#cooking,cooking,cook
+http://sparql.cwrc.ca/ontologies/cwrc#logger,logger
+http://sparql.cwrc.ca/ontologies/cwrc#cartoonist,cartoonist,caricaturist,political cartoonist
+http://sparql.cwrc.ca/ontologies/cwrc#decoder,decoder,code breaker,cipher breaker,cryptologist,cable decoder
+http://sparql.cwrc.ca/ontologies/cwrc#founder,founder,society founder,church founder,health society founder,university founder,company founder,founder of convent,founder of prostitutes' home,founder of literary prize,founder of women's organization,founder of literary society,magazine founder,founder of arts centre,periodical founder,hospital founder,founder of savings bank,school founder,sunday school founder,library founder,newspaper founder,founder of chapel,hospice founder,founder of college,founder of charitable organization,founder of educational organization,nursing home founder,founder of writer' centre,refuge founder,theatre founder,orphanage founder,founder of woman's refuge,founder of relief organization,founder of benefit society,college founder,founder of club,founding directors,founding member of the london bach choir,founding the irish confederation,literary society founder,"co founder of, and remained closely involved in, the writers' action group",co founder of arlen house press,founder of schools,founder of the key west writers' workshop,founder or co founder,founder of school,founded,founded a discussion society for ladies,founder of the magazines vanity fair and the lady,founder of charitable society,charity founder,educational institution founder
+http://sparql.cwrc.ca/ontologies/cwrc#equineActivity,equine activity,horseman,horse trainer,racehorse owner,horse racing,horsemaster,clerk of the course,horse breeder,dressage,horsewoman,horsebreaker
+http://sparql.cwrc.ca/ontologies/cwrc#nursing,nursing,carer,nurse,nursing organizer,vad,nursing aide,nursing supervisor,vad worker,nurses,fn helped found the east london nursing society.,"in 1877 she nursed george odger, the first parliamentary labour candidate, during his fatal illness."
+http://sparql.cwrc.ca/ontologies/cwrc#anti-Suffrage,anti-suffrage,anti-suffrage movement,anti-suffragist,anti-suffragist movement,non-suffragist,anti-sufffragist
+http://sparql.cwrc.ca/ontologies/cwrc#bankrupt,bankrupt,grande scale bankrupt
+http://sparql.cwrc.ca/ontologies/cwrc#rebel,rebel,freedom fighter,revolutionary,saboteur,reformist or revolutionary
+http://sparql.cwrc.ca/ontologies/cwrc#elevatorOperator,elevator operator
+http://sparql.cwrc.ca/ontologies/cwrc#firstAid,first aid,first aid work
+http://sparql.cwrc.ca/ontologies/cwrc#archaeologist,archaeologist,paleontologist,palaeontologist,director of archaeology in the department of antiquities
+http://sparql.cwrc.ca/ontologies/cwrc#abolitionist,abolitionist,abolitionist activist,abolitionist worker
+http://sparql.cwrc.ca/ontologies/cwrc#lifeScientist,life scientist,anatomist,bacteriologist,physiologist
+http://sparql.cwrc.ca/ontologies/cwrc#employer,employer,domestic employer
+http://sparql.cwrc.ca/ontologies/cwrc#smuggler,smuggler,arms runner,gun runner
+http://sparql.cwrc.ca/ontologies/cwrc#theatreWork,theatre work,theatre designer,theatre director,prompter,theatre producer,theatre president,theatre company director,cabaret dresser,assistant theatre manager,usherette,theatrical manager,theatre dresser,play reader,costume designer,property mistress,stage manager,theatrical agent,theatre organiser,theatrical director,wardrobe assistant,theatre,theatre censor,set designer,theatre manager,men of the theatre,workshopping plays,student production of one of her plays,theatre trust president,theatre literary manager,founded a small theatre group
+http://sparql.cwrc.ca/ontologies/cwrc#maidOfHonour,maid of honour
+http://sparql.cwrc.ca/ontologies/cwrc#glover,glover
+http://sparql.cwrc.ca/ontologies/cwrc#mathematics,mathematics,mathematician,amateur mathematician,mathematical interests
+http://sparql.cwrc.ca/ontologies/cwrc#mountaineering,mountaineering,climbing,mountain climber,mountaineer,climber or mountaineer
+http://sparql.cwrc.ca/ontologies/cwrc#urbanPlanning,urban planning
+http://sparql.cwrc.ca/ontologies/cwrc#designer,designer,interior design,fabric designer,interior decorator,house decoration,housing designer,graphic designer,gothic designer,interior designer,prosthetics designer
+http://sparql.cwrc.ca/ontologies/cwrc#cooper,cooper
+http://sparql.cwrc.ca/ontologies/cwrc#witness,witness,character witness,expert witness,witness for the defence
+http://sparql.cwrc.ca/ontologies/cwrc#needlework,needlework,knitting,embroiderer,needlewoman,needlework artist
+http://sparql.cwrc.ca/ontologies/cwrc#housework,housework
+http://sparql.cwrc.ca/ontologies/cwrc#attorneyGeneral,attorney general,attorney general of ireland
+http://sparql.cwrc.ca/ontologies/cwrc#adjudicator,adjudicator,awards judge,contest judge,selector for the poetry book society
+http://sparql.cwrc.ca/ontologies/cwrc#bookProduction,book production
+http://sparql.cwrc.ca/ontologies/cwrc#botanist,botanist,assistant botanist,botany enthusiast,botany
+http://sparql.cwrc.ca/ontologies/cwrc#governess,governess
+http://sparql.cwrc.ca/ontologies/cwrc#regionalGovernment,regional government,deputy recorder of northamptonshire,county councillor,deputy lord lieutenant,assistant secretary for education in northamptonshire,magistrate for the county of middlesex,director general of the tapu land registry,governor of massachusetts,deputy lieutenant of dunbartonshire,lord president of the council of the marches of wales,secretary for education in oxfordshire,high sheriff for county antrim
+http://sparql.cwrc.ca/ontologies/cwrc#manualLabourer,manual labourer,labourer,field labourer,manual worker,day labourer
+http://sparql.cwrc.ca/ontologies/cwrc#server,server,waiter,waitress,summer waitress,cafe manager,food server,receptionist barmaid
+http://sparql.cwrc.ca/ontologies/cwrc#patron,patron,theatre patron,patron of literature,patron of the arts,patron of science,patron of actors,literary patron,charity patron
+http://sparql.cwrc.ca/ontologies/cwrc#martyr,martyr
+http://sparql.cwrc.ca/ontologies/cwrc#orderly,orderly,hospital ward orderly
+http://sparql.cwrc.ca/ontologies/cwrc#publishing,publishing,reader of manuscripts,publisher's reader,assistant in publishing,publisher,magazine director,journal assistant,publisherapos;s reader,publisher and bookseller,director of time and tide,member of the editorial advisory committee
+http://sparql.cwrc.ca/ontologies/cwrc#airForce,airForce,airforce officer
+http://sparql.cwrc.ca/ontologies/cwrc#manufacturer,manufacturer,cutler,tobacco manufacturer,manufacturer of machinery,lime manufacturer,co operative manufacturer,smallware manufacturing,manufacturer of fancy goods,jet ornament manufacturer
+http://sparql.cwrc.ca/ontologies/cwrc#conservatism,conservatism,conservative
+http://sparql.cwrc.ca/ontologies/cwrc#chemist,chemist,industrial chemist,research chemist,chemist and immunologist
+http://sparql.cwrc.ca/ontologies/cwrc#dataProcessing,data processing,encoder,data recorder
+http://sparql.cwrc.ca/ontologies/cwrc#reliefWork,relief work,famine relief,war relief,jewish relief work,relief worker,war relief aid,organized war relief,found the women's defence relief corps,international relief worker,founded a society for the relief of indigent old age,receive evacuees,co organizer of relief efforts
+http://sparql.cwrc.ca/ontologies/cwrc#engineering,engineering,chief engineer,aeronautical engineer,engineering firm,mining engineer,electrical engineer,railway engineer,civil engineer,engineer,marine engineer,radio engineer,motor engineer
+http://sparql.cwrc.ca/ontologies/cwrc#jeweller,jeweller
+http://sparql.cwrc.ca/ontologies/cwrc#literaryPrizeAdjudicator,literary prize adjudicator,literary prize judge,literary adjudicator,judge of literary award,judge of literary prize,chair of literary prize panel,literary awards judge,adjudicator of literary award,literary judge,judge for literary prize,literary competition judge,literary award judge,judge; literary competition
+http://sparql.cwrc.ca/ontologies/cwrc#handwritingExpert,handwriting expert
+http://sparql.cwrc.ca/ontologies/cwrc#monarch,monarch,queen,king
+http://sparql.cwrc.ca/ontologies/cwrc#socialScientist,social scientist,anthropologist,economist,egyptologist,sociologist,academic economist
+http://sparql.cwrc.ca/ontologies/cwrc#reading,reading,poetry lover
+http://sparql.cwrc.ca/ontologies/cwrc#bookclubParticipatant,bookclub participation,book club organizer,bookclub president,book club founder,book society member,member of the new english art club
+http://sparql.cwrc.ca/ontologies/cwrc#retail,retail,cashier,shopkeeper/entrepeneur,newsagent,bookshop manager,bookshop worker,shop work,bookshop assistant,shopkeeper,market seller,retail worker,greengrocer,bookstore clerk,shop manager,storekeeper,retail selling,working in a bookshop,department store clerk,shop assistant,bookseller,manager of bookshop,bookshop partner,tobacconist,print seller,worked with him at running a children's bookshop
+http://sparql.cwrc.ca/ontologies/cwrc#welder,welder
+http://sparql.cwrc.ca/ontologies/cwrc#transportationWork,transportation work,bus conductor,bus worker,bus driver,bus inspector,transportation,van driver,driver,cab driver
+http://sparql.cwrc.ca/ontologies/cwrc#alternativeMedicine,alternative medicine,herbalist
+http://sparql.cwrc.ca/ontologies/cwrc#literaryForger,literary forger
+http://sparql.cwrc.ca/ontologies/cwrc#intellectual,public intellectual,labour intellectual,intellectual,learned woman,polymath,rationalist
+http://sparql.cwrc.ca/ontologies/cwrc#astronomer,astronomer,amateur astronomer,assistant astronomer
+http://sparql.cwrc.ca/ontologies/cwrc#literaryAssistant,literary assistant,writer's assistant
+http://sparql.cwrc.ca/ontologies/cwrc#rescueWork,rescue work,life saving,mountain rescue,mountain rescue leader
+http://sparql.cwrc.ca/ontologies/cwrc#textiles,textiles,textile worker,textile mill worker
+http://sparql.cwrc.ca/ontologies/cwrc#munitionsWorker,munitions worker
+http://sparql.cwrc.ca/ontologies/cwrc#manservant,manservant,butler,groom,doorman,footman,chauffeur
+http://sparql.cwrc.ca/ontologies/cwrc#associationInvolvement,association involvement,president of society,society director,president of professional association,society president,club leader,secretary of literary society,club president,society secretary,clubperson,president of the society of authors,society vice president,vice president of society,society member,freemason,clubman,clubwoman,president of the british club for belgian soldiers,president of the literary ladies club,president of the herdwick association,president of the society of women journalists
+http://sparql.cwrc.ca/ontologies/cwrc#radicalism,radicalism,working class radical,radical,political radical,radical dissident
+http://sparql.cwrc.ca/ontologies/cwrc#director,director,directors
+http://sparql.cwrc.ca/ontologies/cwrc#milliner,milliner,milliner's apprentice,milliner's assistant
 http://sparql.cwrc.ca/ontologies/cwrc#musicologist,musicologist
-http://sparql.cwrc.ca/ontologies/cwrc#brewer,brewer,brewers,brewer
-http://sparql.cwrc.ca/ontologies/cwrc#domesticServant,domestic servant,kitchen scullion,house servant,lady's maid,indentured servant,upper servant,housemaid,valet
-http://sparql.cwrc.ca/ontologies/cwrc#occultism,occultism/theosophism,occultism,magician,Theosophist,Theosophy,spiritualism,Tarot card believer,medium,fortune teller,character reader,spiritualist,astrologer,Occultist,mediumship,vice president of the college of psychic studies,member of the council of the society for psychical research
-http://sparql.cwrc.ca/ontologies/cwrc#leatherWorker,leather worker,tanner,worker in leather,leatherworker,saddler,"saddler, shoemaker"
-http://sparql.cwrc.ca/ontologies/cwrc#historian,historian,family historian,music historian,historical scholar,medievalist,family archivist,historical researcher,historian,furniture historian,irish historian,local historian,architectural historian,art historian,historical expertise,historians
-http://sparql.cwrc.ca/ontologies/cwrc#welder,welder,welder
-http://sparql.cwrc.ca/ontologies/cwrc#ambulanceWorker,ambulance worker,ambulance driver,drove an ambulance,ambulance assistant,ambulance brigade president,ambulance brigade organizer
-http://sparql.cwrc.ca/ontologies/cwrc#physiognomist,physiognomist,phrenologist,physiognomist,physiognomy parlour
-http://sparql.cwrc.ca/ontologies/cwrc#glover,glover,glover
-http://sparql.cwrc.ca/ontologies/cwrc#munitionsWorker,munitions worker,munitions worker
-http://sparql.cwrc.ca/ontologies/cwrc#writerInResidence,writer In residence,resident dramatist,poet in residence,writer in residence
-http://sparql.cwrc.ca/ontologies/cwrc#intellectual,public intellectual,learned woman,public intellectual,intellectual,labour intellectual,rationalist,polymath
-http://sparql.cwrc.ca/ontologies/cwrc#seaCaptain,sea captain,ferryboat captain,ship's captain,sea captain,whaling captain
-http://sparql.cwrc.ca/ontologies/cwrc#manager,manager,supervisor,factory manager,manager,factory supervisor,managed,office manager,vice president of beauty without cruelty,shipping company manager,supervising
-http://sparql.cwrc.ca/ontologies/cwrc#childcareWork,childcare work,child recreation manager,nursery manager,children's home manager
-http://sparql.cwrc.ca/ontologies/cwrc#trader,trader,trader,wool trader,clothes trader,fur trader
-http://sparql.cwrc.ca/ontologies/cwrc#politicalScience,political science,political scientist,political theorist
-http://sparql.cwrc.ca/ontologies/cwrc#magistrate,magistrate,magistrate,judicial officer,justice of the peace
-http://sparql.cwrc.ca/ontologies/cwrc#butcher,butcher,slaughterman,butcher,shochet or ritual butcher
-http://sparql.cwrc.ca/ontologies/cwrc#contractor,contractor
-http://sparql.cwrc.ca/ontologies/cwrc#labourUnion,labour union,trade union organizer,general secretary of the empire press union,trade union leader,union organizer,union member,labour union,union representative,trade unionist,trade union delegate
-http://sparql.cwrc.ca/ontologies/cwrc#feminism,feminism,political issues concerning women,maternal feminist,proto-feminist,New Woman,activist for women and children,proto-feminist consciousness,Equality Feminism,gender egalitarian,non-separatist feminist,feminist,anti-sexist,lobby for the rights of women,women's cause,women's issues,women's rights activist,feminist movement,Women's Liberation,contraceptionist,sexual egalitarian,moderate feminist,advocate of female education,feminist reformer,women's movement,women's rights,worked devotedly for the society for promoting the employment of women,advocate for women's education,worked to establish pay equity
-http://sparql.cwrc.ca/ontologies/cwrc#sexWorker,sex worker,prostitute,courtesan
-http://sparql.cwrc.ca/ontologies/cwrc#higherGovernment,higher government,director general of finance,governor of bombay,lord lieutenant,privy councillor,royal representative,vice chancellor,lord keeper of the great seal of england,colonial secretary,member of congress,governor of tasmania,government minister,lieutenant governor of guernsey,minister of food,royal adviser,senator,state governor,under secretary for the colonies,congressman,lord keeper,president of the united nations general assembly,lord lieutenant of ireland,parliamentary private secretary,secretary of state for war,chancellor of the exchequer,royal lieutenant,member of the house of lords,foreign service,warden of the mint,secretary of state for ireland,cabinet minister,statesman,master of the horse,civil lord of the admiralty,secretary of state,governor of barbados,labour minister,colonial governor,legislator,league of nations delegate,regent,foreign secretary,vice president of the usa,scottish education secretary,served on the royal commission on capital punishment,bavarian minister,ulster king of arms,ambassador and plenipotentiary,high commissioner of south africa
-http://sparql.cwrc.ca/ontologies/cwrc#intelligenceWork,intelligence work,espionage worker,intelligence agent,spying,intelligence expert,intelligence work,intelligence officer,secret agent,spy,intelligence
-http://sparql.cwrc.ca/ontologies/cwrc#auctioneer,auctioneer,auctioneer
-http://sparql.cwrc.ca/ontologies/cwrc#writer,writer,amateur playwright,scholarly writer,poet,commemorative writer,religious writer,political writer,chief copywriter,legal writer,novelist,cookbook writer,feature writer,amateur writer,satirist,travel author,travel writer,diarist,playwright,poetry,blurb writer,children's writer,textbook writer,short story writer,wrote,memoirist,professional writer,scriptwriter,media comedy writer,medical writer,letter writer,polemical writer,author,songwriter,pedagogical author,public relations writer,educational writer,radio scriptwriter,dramatist,screenwriter,contributor,mathematical writer,literary career,biographer,religious poet,literary collaborator,political poet,copywriter,writer,essayist,script writer,art exhibition writer,wrote extensively on india,diarist and memoirist,part time novelist,populariser of poetry,published,published a sermon,published two books of sceptical humanist philosophy,writers,writing pulp fiction,writing small books for indian readers,automatic writing,letter writers,occasional contributors,writing poetry,philanthropic writer,freelance advertising copywriter,amateur drama,quaker writer,vice president of the european writers' congress
-http://sparql.cwrc.ca/ontologies/cwrc#assistant,assistant,personal assistant,administrative assistant,assistant,full time programme assistant
-http://sparql.cwrc.ca/ontologies/cwrc#merchantTaylor,merchant taylor
-http://sparql.cwrc.ca/ontologies/cwrc#academic,academic,scholar,academician,academic,humanist scholar,greek and hebrew examiner,first woman in scotland to earn a university certificate,oxford don,academic and social critic
-http://sparql.cwrc.ca/ontologies/cwrc#unitarianism,Unitarianism,Unitarian Movement,active unitarian,Unitarian Church,Unitarian,unitarianMovement
-http://sparql.cwrc.ca/ontologies/cwrc#slaver,slaver,slaver,slave trader
-http://sparql.cwrc.ca/ontologies/cwrc#composer,composer,composer,composed,composer of church music
-http://sparql.cwrc.ca/ontologies/cwrc#housePainter,house painter,house painter
-http://sparql.cwrc.ca/ontologies/cwrc#director,director,directors,director
-http://sparql.cwrc.ca/ontologies/cwrc#religiousOfficial,religiousOfficial,dissenting minister,synagogue official,anglican bishop,archbishop of canterbury,rector,prebendary,assistant minister of religion,curate,canon,clergymen,episcopalian preacher,official (of religion),clergyperson,preacher,archbishop,minister,chaplain,minister of religion,cardinal,chief rabbi,archdeacon,deacon,jesuit priest,reverend,vicar,anglican priest,anglican clergyman,bishop,clergyman,priest,quaker minister,private almoner,presbyterian minister,archbishop of armagh and primate of all ireland,ministers,chaplain of the lock hospital,rev.,dean of wells,prebendary (a kind of canon or church official),trained for the priesthood,english bishop of natal
-http://sparql.cwrc.ca/ontologies/cwrc#artsAdministrator,arts manager,arts centre director,musical manager,arts administrator,arts festival director,art acquisitions officer,director of the national gallery,joint chairman of the writers' guild of great britain
-http://sparql.cwrc.ca/ontologies/cwrc#committeeMember,committee member,committee president,school board member,committee member,committee man,committee woman
-http://sparql.cwrc.ca/ontologies/cwrc#prisoner,prisoner,prisoner of war,political prisoner,was imprisoned
-http://sparql.cwrc.ca/ontologies/cwrc#airman,airman,flyer,airman
-http://sparql.cwrc.ca/ontologies/cwrc#walking,walking,hiker,walking
-http://sparql.cwrc.ca/ontologies/cwrc#aristocrat,aristocrat,baronet,baron
-http://sparql.cwrc.ca/ontologies/cwrc#fellow,fellow,fellow,creative writing fellowships,visiting fellow,creative writing fellow,fellow of the royal society,creative writing fellowship,fellow of king's college,fellow student at the regent street polytechnic,compton fellow of creative writing,fellow of the institute of hospital administration
-http://sparql.cwrc.ca/ontologies/cwrc#factoryWorker,factory worker,factory worker,factory work,factory hand,mill worker,kiln fireman,assembly line worker,black borderer,worked briefly at a wine bottling plant
-http://sparql.cwrc.ca/ontologies/cwrc#cyclist,bicyclist,bicyclist,bicycling
-http://sparql.cwrc.ca/ontologies/cwrc#mistress,mistress,mistress
-http://sparql.cwrc.ca/ontologies/cwrc#mathematics,mathematics,mathematician,mathematical interests,amateur mathematician
-http://sparql.cwrc.ca/ontologies/cwrc#communism,communism,christian communist,communist
-http://sparql.cwrc.ca/ontologies/cwrc#literaryForger,literary forger,literary forger
-http://sparql.cwrc.ca/ontologies/cwrc#confectioner,confectioner,confectioner,confectionery production and sale
-http://sparql.cwrc.ca/ontologies/cwrc#cleaner,cleaner,domestic cleaner,cleaning lady,cleaner
-http://sparql.cwrc.ca/ontologies/cwrc#courtier,courtier,courtier,bed chamber woman,groom of the chamber,lady in waiting,lady of the bedchamber,keeper of the robes,chamberlain to the king of bavaria
-http://sparql.cwrc.ca/ontologies/cwrc#visualArtist,visual artist,miniaturist,landscape painter,illuminator,amateur artist,artist,commercial artist,historical painter,amateur painter,etcher,sculptor,wax modeller,colourist,craft artist,printmaker,watercolourist,portraitist,painter,"artist, painter","etcher, artist",miniature portrait painter,chinaware painter,feather artisan,illustrator and landscape painter,painter in enamel
+http://sparql.cwrc.ca/ontologies/cwrc#critic,critic,film critic,theatre critic,drama critic,television critic,art critic,music critic,literary critic,assistant drama critic
+http://sparql.cwrc.ca/ontologies/cwrc#coastGuard,coastguard,coast guard
+http://sparql.cwrc.ca/ontologies/cwrc#lawEnforcement,law enforcement,police officer,police commissioner,sheriff,town constable,mounted police,chief constable,sheriff depute,sherif of westmorland,high sheriff of county cork,high sheriff of kent,high sherriff of county,high sheriff of hertfordshire,high sheriff of yorkshire,under sheriff of suffolk,high sheriff
+http://sparql.cwrc.ca/ontologies/cwrc#printing,printing,printing press manager,printer,printing and bookselling businesses,in printing
+http://sparql.cwrc.ca/ontologies/cwrc#pacifist,pacifist,conscientious objector,worker for pacifism and the league of nations union
+http://sparql.cwrc.ca/ontologies/cwrc#consultant,consultant,management consultant,drug adviser and consultant
+http://sparql.cwrc.ca/ontologies/cwrc#dairyWork,dairy work,milker,milkwoman
+http://sparql.cwrc.ca/ontologies/cwrc#dance,dance,ballet dancer,chorus girl,choreographer,dancer,dancer and choreographer
+http://sparql.cwrc.ca/ontologies/cwrc#charityWorker,charity worker,director of charity,charity administrator,charitable giving,charity board member,charity campaigner,charitable donation,president of charity,charitable causes,church and community work,charitable worker,charity co ordinator,charity organizer,charity speaker,charity agent,charity,vice president of charity,charity representative,charity management,charity performer,charity organiser,charity work,raise funds for a variety of wartime charities,charity school supporter,established a soup kitchen for starving peasants during the great famine,running church or charity bazaars,charity organiser,charity organization society,shelter provision,charititable activity,childbirth charity organiser,text distributor,work with women and the poor
+http://sparql.cwrc.ca/ontologies/cwrc#poetLaureate,poet laureate
+http://sparql.cwrc.ca/ontologies/cwrc#typeSetter,type setter,typesetter
+http://sparql.cwrc.ca/ontologies/cwrc#draper,draper,master draper,linen draper
+http://sparql.cwrc.ca/ontologies/cwrc#miser,miser
+http://sparql.cwrc.ca/ontologies/cwrc#telephoneOperator,telephone operator
+http://sparql.cwrc.ca/ontologies/cwrc#pharmacist,pharmacist,dispensary assistant,dispenser,apothecary,pill dispenser,druggist,"apothecary, druggist"
+http://sparql.cwrc.ca/ontologies/cwrc#surveyor,surveyor,assistant surveyor,surveyor of highways,quantity surveyor,railway surveyor,assistant road surveyor,land surveyor,building surveyor,deputy surveyor of royal parks and palaces
+http://sparql.cwrc.ca/ontologies/cwrc#taxOfficial,tax official,commissioner of taxes,customs officer,customs inspector,exciseman,customs official
+http://sparql.cwrc.ca/ontologies/cwrc#clericalWork,clerical work,stenographer,association secretary,secretarial work,legal secretary,shorthand typist,typist,warehouse clerk,clerical officer,private secretary,scrivener,town clerk,clerical,receptionist,pay clerk,clerk,college secretary,executive secretary,factory secretary,club secretary,secretary,secretary and registrar
+http://sparql.cwrc.ca/ontologies/cwrc#radioOperator,radio operator
+http://sparql.cwrc.ca/ontologies/cwrc#communeOrganizer,commune organizer
+http://sparql.cwrc.ca/ontologies/cwrc#finance,finance,money lender,financier,financial manager,bank manager,bank director,banker,investment banker,ship broker,bank president,bank employee,bank clerk,merchant banker,clerk in a bank,director of the bank of england,teller at the bank of england,director and chairman of the bank of new zealand
+http://sparql.cwrc.ca/ontologies/cwrc#bullionCarrier,bullion carrier
+http://sparql.cwrc.ca/ontologies/cwrc#clothingProduction,clothing production,woollen manufacturer,hosier,glove manufacturer,cotton manufacturer,weaving manufacturer,linen manufacturer
+http://sparql.cwrc.ca/ontologies/cwrc#gardener,gardener,horticulturalist,hedge setter,horticulturist,gardening,landscape gardener,garden design
+http://sparql.cwrc.ca/ontologies/cwrc#linguist,linguist,linguistic reader,grammarian,linguistic researcher
+http://sparql.cwrc.ca/ontologies/cwrc#occultism,occultism,occultism/theosophism,spiritualist,character reader,Occultist,Theosophy,spiritualism,medium,magician,astrologer,Theosophist,Tarot card believer,fortune teller,vice president of the college of psychic studies,member of the council of the society for psychical research,mediumship
+http://sparql.cwrc.ca/ontologies/cwrc#slaver,slaver,slave trader
+http://sparql.cwrc.ca/ontologies/cwrc#copyist,copyist,legal copyist,scientific copyist,music copyist,copyist of illuminated manuscripts,copyists of illuminated manuscripts
+http://sparql.cwrc.ca/ontologies/cwrc#airman,airman,flyer
+http://sparql.cwrc.ca/ontologies/cwrc#lordChamberlain,lord chamberlain
+http://sparql.cwrc.ca/ontologies/cwrc#broadcasting,broadcaster,broadcasting
+http://sparql.cwrc.ca/ontologies/cwrc#yeoman-farmer,yeoman farmer,YEOMAN-FARMER,yeoman
+http://sparql.cwrc.ca/ontologies/cwrc#philanthropist,philanthropist,educational philanthropist,patron of charities,active philanthropist,benefactor,private benefactor,philanthropy,philanthopic activity,benefactor of school,church donor,donor to university,philanthropic educationalist,"patron, philanthropist"
+http://sparql.cwrc.ca/ontologies/cwrc#mistress,mistress
+http://sparql.cwrc.ca/ontologies/cwrc#skinner,skinner
+http://sparql.cwrc.ca/ontologies/cwrc#walking,walking,hiker
+http://sparql.cwrc.ca/ontologies/cwrc#missionaryWork,missionary work,missionary administrator,missionary supporter,missionary worker,missionaries,missionary,supporter of missionary activity,founded a church missionary society auxiliary
+http://sparql.cwrc.ca/ontologies/cwrc#medicalDoctor,medical doctor,homeopathic doctor,eye and ear specialist,gastric surgeon,obstetrician,surgeon general,orthopaedic surgeon,immunologist,medical practitioner,surgeon,doctor,general practitioner,cardiologist,eye surgeon,medical practice,royal physician,physician,surgery,gynaecologist,"physician, surgeon"
+http://sparql.cwrc.ca/ontologies/cwrc#reformer,reformer,political reformer,publishing reformer,social reformer,land improver,prison reformer,medical reformer,liturgical reformer,army reformer,religious reformer,health care reformer,law reformer,educational reformer,language reformer,penal reformer,agricultural reformer,divorce law reformer,sanitary reformer,sex reformer,housing reformer
+http://sparql.cwrc.ca/ontologies/cwrc#masterOfTheRevels,master or mistress of the revels,master of the revels,mistress of the revels,master of the revels in ireland
+http://sparql.cwrc.ca/ontologies/cwrc#commissioner,commissioner,excise commissioner,commissioner of bankruptcy,commissioner of customs,commissioner of inland revenue,bankruptcy commissioner,parliamentary commissioner,commissioner of the dockyards,customs commissioner
 http://sparql.cwrc.ca/ontologies/cwrc#elocutionist,elucutionist,elocutionist
-http://sparql.cwrc.ca/ontologies/cwrc#counsellor,counsellor,advisor,counseling,careers advisor,counsellor,counselled hundreds of women
-http://sparql.cwrc.ca/ontologies/cwrc#pilot,pilot,pilot
-http://sparql.cwrc.ca/ontologies/cwrc#linguist,linguist,linguistic reader,linguistic researcher,grammarian,linguist
-http://sparql.cwrc.ca/ontologies/cwrc#investor,investor,stock investor,financial backer,speculator,share holder,market speculator,investor,stockbroker
-http://sparql.cwrc.ca/ontologies/cwrc#religiousStudies,religious studies,hindu scholar,biblical scholar,theologian
-http://sparql.cwrc.ca/ontologies/cwrc#milliner,milliner,milliner's assistant,milliner's apprentice,milliner
-http://sparql.cwrc.ca/ontologies/cwrc#nun,nun,nun,prioress
-http://sparql.cwrc.ca/ontologies/cwrc#gastronome,gastronome,gastronome
-http://sparql.cwrc.ca/ontologies/cwrc#educationalAdministration,educational administration,vice principal,educational theorist,provost,school proprietor,superintendent,education campaigner,school director,school organizer,school governor,superintendent of schools,inspectress of schools,school supervisor,academic programme administrator,headmaster,college vice principal,headmistress,lord rector,principal of institute,educational officer,school management,college principal,education liaison officer,educator,examiner,principal,sunday school superintendent,deputy head of school,school administration,school vice president,university chancellor,marker,education,sunday school worker,dean,external examiner,school monitor,education of her own children,taught,director of the tulsa center for the study of women's literature,principal of the chelsea art school,college vice president,founded the derry and raphoe diocesan institution for the education of the deaf and dumb,pedagogic theorist,principal of queen's college,associate of newnham college,college governor,member of the executive committee of girton college,master of the free school,opened their sunday school,teach,running their school,director of the creative writing program,rector of edinburgh university,founded st boniface school,established a school for english and american boys,"dean of trinity college, oxford",establish schools,demonstrator of anatomy
-http://sparql.cwrc.ca/ontologies/cwrc#witness,witness,expert witness,character witness,witness for the defence
-http://sparql.cwrc.ca/ontologies/cwrc#airRaidWarden,air raid warden,air raid warden
-http://sparql.cwrc.ca/ontologies/cwrc#reliefWork,relief work,relief work,war relief,relief worker,jewish relief work,famine relief,war relief aid,founded a society for the relief of indigent old age,organized war relief,receive evacuees,international relief worker,found the women's defence relief corps,co organizer of relief efforts
-http://sparql.cwrc.ca/ontologies/cwrc#numismatist,numismatist,numismatist
-http://sparql.cwrc.ca/ontologies/cwrc#patron,patron,patron of literature,patron of the arts,patron,patron of actors,literary patron,theatre patron,patron of science,charity patron
-http://sparql.cwrc.ca/ontologies/cwrc#engineering,engineering,railway engineer,mining engineer,motor engineer,marine engineer,aeronautical engineer,civil engineer,radio engineer,engineering firm,electrical engineer,chief engineer,engineer
+http://sparql.cwrc.ca/ontologies/cwrc#fisherman,fisherman,fisherwoman,fish handler
+http://sparql.cwrc.ca/ontologies/cwrc#writerInResidence,writer In residence,writer in residence,resident dramatist,poet in residence
+http://sparql.cwrc.ca/ontologies/cwrc#editing,editing,associate editor,proofreader,colonial editor,assistant editor,journal editor,editorial reader,poetry editor,sub editor,science editor,newspaper editor,managing editor,editor,deputy editor,part time editor,fashion editor,editorial board member,parish magazine editor,co editor,literary editor,editorial assistant,foreign editor,founding editor,trade journal editor,encyclopedia editor,magazine editor,periodical editor,copy editor,publishers' editor,publisher's editor,consulting editor,editor of the women's page,news subeditor,newspaper sub editor,edited school texts,edited,editorial,editor for religious society,editorship
+http://sparql.cwrc.ca/ontologies/cwrc#performer,performer,stage performer,actress,acting,cabaret star,actor,impersonator,mime,acted,entertainer,comedienne,actors,understudy,perform
+http://sparql.cwrc.ca/ontologies/cwrc#laundryWorker,laundry worker,laundry manager,laundress,washerwoman
+http://sparql.cwrc.ca/ontologies/cwrc#housePainter,house painter
+http://sparql.cwrc.ca/ontologies/cwrc#pollster,pollster
+http://sparql.cwrc.ca/ontologies/cwrc#colonialOfficial,colonial official,lieutenantGovernor,colonial manager,colonial officer,colonial administrator,colonial organizer,colonial magistrate,colonial civil servant,colonial prime minister,viceroy of india,lord deputy of ireland,chairman of the east india company,viceroy of ireland,upper canada's first vice chancellor,india agent,registrar of the naval prize court in bermuda
+http://sparql.cwrc.ca/ontologies/cwrc#advertising,advertising,literary publicist,assistant press officer,publicity assistant,press officer,advertising manager,publicity agent,publicity officer,religious publicist,music publicity,public relations,publicist,public relations specialist,political publicist,publicity manager,publicity,press assistant,junior press officer,publisher's advertising manager,quaker publicist
+http://sparql.cwrc.ca/ontologies/cwrc#lithographer,lithographer
+http://sparql.cwrc.ca/ontologies/cwrc#classicist,classicist,amateur classicist,classical scholar
+http://sparql.cwrc.ca/ontologies/cwrc#contractor,contractor
 http://sparql.cwrc.ca/ontologies/cwrc#humanitarianWork,humanitarian work,international aid worker,distribution of medical supplies
-http://sparql.cwrc.ca/ontologies/cwrc#propertyAgent,land agent,estate manager,land agent,property agent,land steward,estate agent,estate management,plantation manager,rent collector,managing the estates
-http://sparql.cwrc.ca/ontologies/cwrc#retail,retail,retail selling,working in a bookshop,retail worker,cashier,storekeeper,shop manager,bookseller,shopkeeper/entrepeneur,greengrocer,department store clerk,shop assistant,shop work,shopkeeper,newsagent,bookshop assistant,bookshop worker,market seller,bookshop manager,bookstore clerk,manager of bookshop,bookshop partner,print seller,worked with him at running a children's bookshop,tobacconist
-http://sparql.cwrc.ca/ontologies/cwrc#collector,collector,art collector,antiquary,coin collector,zoological collector,antiquarian,anthropological collector,collector,book collector,collecting,collect irish folklore,collector of china and paintings
-http://sparql.cwrc.ca/ontologies/cwrc#classicist,classicist,classicist,classical scholar,amateur classicist
+http://sparql.cwrc.ca/ontologies/cwrc#calligraphy,calligraphy,calligrapher,calligraphist
+http://sparql.cwrc.ca/ontologies/cwrc#conservationist,conservationist
+http://sparql.cwrc.ca/ontologies/cwrc#temperanceMovement,temperance movement,temperance activist,temperance work,temperance supporter,temperance worker,temperance
+http://sparql.cwrc.ca/ontologies/cwrc#careGiver,care giver,elder care,caregiver,home care giver,family carer,home carer,devoting herself to the care of her elderly father,attendant to the blind
+http://sparql.cwrc.ca/ontologies/cwrc#settlementWork,settlement work,settlement worker
+http://sparql.cwrc.ca/ontologies/cwrc#teacher,teacher,weapons instructor,religious teacher,art teacher,piano teacher,giving courses,french teacher,home educator,sunday school teacher,housemaster,creative writing teacher,art instructor,schoolmistress,geography teacher,instructor,senior english mistress,classical tutor,teaching aide,schoolteacher,pupil teacher,dancing teacher,classics teacher,music teacher,tutor in divinity,elocution teacher,teacher's assistant,school mistress,educational pioneer,sunday school mistress,tutor,sub preceptor,bible teaching,tutoring,writing instructor,schoolmaster,singing teacher,teaching,assistant schoolmistress,tutor in languages and belles lettres,university tutor,first assistant mistress,assistant mistress
+http://sparql.cwrc.ca/ontologies/cwrc#saint,saint
+http://sparql.cwrc.ca/ontologies/cwrc#ambulanceWorker,ambulance worker,ambulance driver,drove an ambulance,ambulance assistant,ambulance brigade organizer,ambulance brigade president
+http://sparql.cwrc.ca/ontologies/cwrc#philanthropicVisitor,philanthropic visitor,school visitor,poor visitor,prison visitor,social visitor,parish visitor,colonial health visitor,military visitor,visiting the poor,district visitor,visiting pensioners and war widows,charity visitor,slum visitor,benevolent visitor,workhouse visitor,hospital visitor,health visitor,charitable visitor,sick visitor,domestic visitor,charitable visiting,visiting prisons and orphanages,visitor of the poor,visitor of the poor,visiting imprisoned catholics,workhouse superintendent,visited the prisoners
+http://sparql.cwrc.ca/ontologies/cwrc#propagandist,propagandist,war propagandist,to spread pro british propaganda
+http://sparql.cwrc.ca/ontologies/cwrc#headOfState,head of state,president of the usa,prime minister,presidents of the united states,prime minister of the cape colony
+http://sparql.cwrc.ca/ontologies/cwrc#inventor,inventor,technological innovator,inventing
+http://sparql.cwrc.ca/ontologies/cwrc#mapping,mapping,cartographer,topographer
+http://sparql.cwrc.ca/ontologies/cwrc#genealogist,genealogist,genealogical scholar,family genealogist
+http://sparql.cwrc.ca/ontologies/cwrc#biologist,biologist,entomologist,conchologist
+http://sparql.cwrc.ca/ontologies/cwrc#tailor,tailor,garment worker
+http://sparql.cwrc.ca/ontologies/cwrc#technician,technician
+http://sparql.cwrc.ca/ontologies/cwrc#reviewer,reviewer,book reviewer,wrote reviews,film reviewer,reviewed books
+http://sparql.cwrc.ca/ontologies/cwrc#glassWorker,glass worker,glass stainer,glassworks,stained glass designer,glazier
+http://sparql.cwrc.ca/ontologies/cwrc#foodDistribution,food distribution,provisioner,food supplier,food distributor,provision merchant
+http://sparql.cwrc.ca/ontologies/cwrc#dockyardWork,dockyard work,wharfinger,dock manager,docker,docks manager,longshoreman,dockyard labourer
+http://sparql.cwrc.ca/ontologies/cwrc#wife,wife,headmaster's wife,diplomat's wife,candidate's wife,housewife,housemaster's wife,colonial governor's wife,vicar's wife
+http://sparql.cwrc.ca/ontologies/cwrc#mentalHealthProfessional,mental health professional,psychiatrist,child psychologist,psychiatist,mental health worker,psychologist,asylum director,freudian,freudian psychoanalyst,pyschoanalyst,psychotherapist,therapist
+http://sparql.cwrc.ca/ontologies/cwrc#transcriber,transcriber
+http://sparql.cwrc.ca/ontologies/cwrc#automobileIndustry,automobileIndustry,car industry,car part manufacturer
+http://sparql.cwrc.ca/ontologies/cwrc#cyclist,bicyclist,bicycling
+http://sparql.cwrc.ca/ontologies/cwrc#servant,servant
+http://sparql.cwrc.ca/ontologies/cwrc#healthCareProvider,healthcare provider,health service administrator,medical assistant,hospital director,medicine,hospital almoner,dental assistant,medical administrator,contact healing,hospital porter,inoculator,healthcare worker,medical aide,medical worker,hospital worker,medical officer,health worker,hospital aide,assistant in medical care,support an infirmary,contact healing,medical coder,medical pioneer
+http://sparql.cwrc.ca/ontologies/cwrc#literaryScholar,literary scholar,literary historian,literary research,philologist,literary theorist,folklorist,literary researcher
+http://sparql.cwrc.ca/ontologies/cwrc#explorer,explorer,adventurer
+http://sparql.cwrc.ca/ontologies/cwrc#government,government,elected,representative,government adviser,served in the legislature,government fishery advisor
+http://sparql.cwrc.ca/ontologies/cwrc#feminism,feminism,proto-feminist,women's cause,women's rights,activist for women and children,political issues concerning women,advocate of female education,moderate feminist,women's movement,feminist,non-separatist feminist,lobby for the rights of women,contraceptionist,women's issues,Women's Liberation,feminist reformer,anti-sexist,gender egalitarian,proto-feminist consciousness,sexual egalitarian,women's rights activist,New Woman,feminist movement,Equality Feminism,maternal feminist,worked devotedly for the society for promoting the employment of women,worked to establish pay equity,advocate for women's education
+http://sparql.cwrc.ca/ontologies/cwrc#numismatist,numismatist
+http://sparql.cwrc.ca/ontologies/cwrc#bursar,bursar
+http://sparql.cwrc.ca/ontologies/cwrc#firefighter,firefighter,fire watcher
+http://sparql.cwrc.ca/ontologies/cwrc#pornographer,pornographer
+http://sparql.cwrc.ca/ontologies/cwrc#salter,salter,salt-worker
+http://sparql.cwrc.ca/ontologies/cwrc#vintner,vintner,wine maker
+http://sparql.cwrc.ca/ontologies/cwrc#billCollector,bill collector
+http://sparql.cwrc.ca/ontologies/cwrc#weaver,weaver,power loom weaver,stocking weaver,handloom weaver
+http://sparql.cwrc.ca/ontologies/cwrc#shipping,shipping,shipping owner,ship owner,shipping merchant,shipper
+http://sparql.cwrc.ca/ontologies/cwrc#historian,historian,music historian,medievalist,historical scholar,family historian,irish historian,historical researcher,art historian,local historian,furniture historian,family archivist,architectural historian,historians,historical expertise
+http://sparql.cwrc.ca/ontologies/cwrc#publicSpeaker,public speaker,public lecturer,political speaker,speaking tour,public speaking,orator,renowned orator
+http://sparql.cwrc.ca/ontologies/cwrc#blacksmith,blacksmith
+http://sparql.cwrc.ca/ontologies/cwrc#confectioner,confectioner,confectionery production and sale
+http://sparql.cwrc.ca/ontologies/cwrc#localGovernment,local government,local government official,councillor,local politician,local councillor,city counsellor,town corporator,local government magnate,council member,city councillor,alderman,radicalist member of the london school board,town corporator or councillor,assistant director of education in the london county council,lieutenant of the tower of london,london county councillor,member of the bury st edmunds borough council,recorder of newcastle under lyme
+http://sparql.cwrc.ca/ontologies/cwrc#childcare,childcare,child care,au pair,child carer,children's home manager,childcare provider,nursery manager,child minding,child rearing,childcare worker,child recreation manager,nursemaid,child recreation manager,worker for children,worker with children,childcare guru
+http://sparql.cwrc.ca/ontologies/cwrc#accountant,accountant,management accountant,agent and accountant,book keeper,keeping accounts,household accountant,family financial manager,family budgeting
+http://sparql.cwrc.ca/ontologies/cwrc#academic,academic,academician,scholar,humanist scholar,greek and hebrew examiner,first woman in scotland to earn a university certificate,academic and social critic,oxford don
+http://sparql.cwrc.ca/ontologies/cwrc#lobbyist,lobbyist,political lobbyist,international political lobbyist
+http://sparql.cwrc.ca/ontologies/cwrc#agent,agent,chief agent
+http://sparql.cwrc.ca/ontologies/cwrc#naturalist,naturalist
+http://sparql.cwrc.ca/ontologies/cwrc#eventOrganizer,event organizer,festival organizer,community organizer,exhibition organizer,organizer,poetry organizer,peace congress organizer,bazaar organizer,entertainment organizer,local organiser,demonstration organiser,organized evening lectures for women
+http://sparql.cwrc.ca/ontologies/cwrc#politics,politics,political organizing,public health campaigner,political agent,political campaigner,political advisor,political canvasser,political organizer,parliamentary candidate,closet politician,republican,politician,whig party supporter,patriot politician,political party worker,whig leader,political party delegate,election observer,political secretary,left wing politics,political conspirator,political officer,politicians,chief adviser on arab affairs,advocate of catholic emancipation in the irish parliament,president of the progressive league,american loyalist,president of the british women's temperance league,conservative backer of empire,supporter of the ministry
+http://sparql.cwrc.ca/ontologies/cwrc#hospitality,hospitality,cafe manager,restaurant manager,hotel worker,hotel keeper,hotel manager,coffee house keeper,alehouse keeper,guesthouse keeper,club employee,tavern keeper,restaurant owner,hotelier,lodging house keeper,inn,innkeeper,hotel proprietor,hostel forewoman,pot girl,coffee house keeper
+http://sparql.cwrc.ca/ontologies/cwrc#assistant,assistant,personal assistant,administrative assistant,full time programme assistant
+http://sparql.cwrc.ca/ontologies/cwrc#radioIndustry,radio industry,radio announcer,radio broadcaster,radio producer,educational radio programmer,educational radio producer,radio performer,recorded programmes assistant
+http://sparql.cwrc.ca/ontologies/cwrc#hostess,hostess,salonniere,literary hostess,nightclub hostess,society hostess,entertaining,salonnière,hostess for her father
+http://sparql.cwrc.ca/ontologies/cwrc#beggar,beggar
+http://sparql.cwrc.ca/ontologies/cwrc#writer,writer,amateur playwright,political writer,songwriter,script writer,pedagogical author,author,diarist,religious poet,novelist,wrote,medical writer,polemical writer,dramatist,radio scriptwriter,satirist,scholarly writer,children's writer,cookbook writer,poetry,travel writer,short story writer,commemorative writer,memoirist,legal writer,professional writer,religious writer,playwright,letter writer,feature writer,political poet,essayist,literary collaborator,media comedy writer,contributor,screenwriter,literary career,scriptwriter,poet,copywriter,amateur writer,blurb writer,chief copywriter,travel author,mathematical writer,educational writer,textbook writer,biographer,public relations writer,writers,amateur drama,automatic writing,wrote extensively on india,part time novelist,published two books of sceptical humanist philosophy,quaker writer,letter writers,philanthropic writer,published,art exhibition writer,diarist and memoirist,occasional contributors,writing small books for indian readers,writing poetry,vice president of the european writers' congress,writing pulp fiction,populariser of poetry,freelance advertising copywriter,published a sermon
+http://sparql.cwrc.ca/ontologies/cwrc#administrator,administrator,administration,administrative officer,hospital administrator,principal of institute
+http://sparql.cwrc.ca/ontologies/cwrc#appraiser,appraiser,project appraiser
+http://sparql.cwrc.ca/ontologies/cwrc#boardingHouseKeeper,boarding house keeper,boarding house manager,established boarding houses
+http://sparql.cwrc.ca/ontologies/cwrc#artsAdministrator,arts manager,musical manager,arts administrator,arts festival director,art acquisitions officer,arts centre director,joint chairman of the writers' guild of great britain,director of the national gallery
+http://sparql.cwrc.ca/ontologies/cwrc#upholsterer,upholsterer
+http://sparql.cwrc.ca/ontologies/cwrc#spinner,spinner,cotton spinner,spinning
+http://sparql.cwrc.ca/ontologies/cwrc#chaperone,chaperone
+http://sparql.cwrc.ca/ontologies/cwrc#hunter,hunter,hunting,fox hunter,rabbit shooting,foxhunter,big game hunting,foxhunting,fox hunting,master of hounds
+http://sparql.cwrc.ca/ontologies/cwrc#memberOfParliament,member of parliament,mp,members of parliament,conservative mp,liberal mp,labour mp,member of parliament and politician,liberal member of parliament,member of parliament for nottingham
+http://sparql.cwrc.ca/ontologies/cwrc#curator,curator,curator of art exhibitions,gallery curator,museum curator
+http://sparql.cwrc.ca/ontologies/cwrc#skilledTrade,skilled trade,moulder
+http://sparql.cwrc.ca/ontologies/cwrc#housekeeper,housekeeper,household management,housekeeping,state housekeeper,mistress of a household
+http://sparql.cwrc.ca/ontologies/cwrc#socialWork,social work,humanitarian,welfare supervisor,community worker,social investigator,emigrant aid,childcare officer,organise soup kitchens,social work organizer,religious social worker,worker with prostitutes,caseworker,organiser for the poor,social investigation,unemployment worker,welfare worker,child care officer,youth worker,child welfare worker,social caseworker,social worker,child welfare officer,children's aid worker,immigrant aid,welfare officer,youth club worker,organiser of women's community,running a soup kitchen,child's aid worker,poor districts,almshouse manager,chief lady welfare officer
+http://sparql.cwrc.ca/ontologies/cwrc#timberTrade,timber trade,sawyer,timber manager
+http://sparql.cwrc.ca/ontologies/cwrc#chairperson,chairperson,society chair,committee chairman,chairman,chair of social anthropology,chair of prize panel,chairwoman,chair,chair of society,chair of the greater london arts literature panel,deputy chairman,committee chair,vice chairman,chair of women's organization,chair of academy,vice chair of the british copyright council,chairman of the authors' lending and copyright society or alcs,chairman of the photographic society,chair of international organization,vice chairman of the copyright licensing agency
+http://sparql.cwrc.ca/ontologies/cwrc#magistrate,magistrate,justice of the peace,judicial officer
+http://sparql.cwrc.ca/ontologies/cwrc#politicalScience,political science,political scientist,political theorist
+http://sparql.cwrc.ca/ontologies/cwrc#drugUse,drug abuse,drug addict,laudanum addict,drug user
+http://sparql.cwrc.ca/ontologies/cwrc#tinker,tinker
+http://sparql.cwrc.ca/ontologies/cwrc#socializer,socializer,bon viveur,socialite,debutante,fashionable beauty,"bon viveur, drinker, and speculator",became a debutante
+http://sparql.cwrc.ca/ontologies/cwrc#exhibitions,exhibitions,exhibition organiser,exhibitor,bbc drama producer,governor of the bbc
+http://sparql.cwrc.ca/ontologies/cwrc#salesperson,salesperson,wine seller,costermonger,newsagent,ticket seller,salesman,door to door salesperson,real estate agent,saleswoman,sales manager,salesgirl,paper salesman,sales staff,real estate salesman,pedlar,piano salesman,stationer,sales director,street seller,newspaper deliverer,door to door salesman,sausage seller,newspaper dealer,fairground salesman
+http://sparql.cwrc.ca/ontologies/cwrc#literaryGroupParticipant,literary group participant,running writers' group,dramatic society president,chair of literary society
+http://sparql.cwrc.ca/ontologies/cwrc#counsellor,counsellor,advisor,counseling,careers advisor,counselled hundreds of women
+http://sparql.cwrc.ca/ontologies/cwrc#army,army,army officer,cavalry soldier,army commander,army surgeon,army colonel,cavalry officer,army doctor,army paymaster,billetting officer,inspector of army education
+http://sparql.cwrc.ca/ontologies/cwrc#scientist,scientist,laboratory worker,amateur scientist,natural scientist,lab demonstrator,laboratory assistant,scientific assistant,"amateur scientist, botanist","scientist, particularly well known for his work in genetics",astronomical assistant,lab assistant,scientific interests
+http://sparql.cwrc.ca/ontologies/cwrc#gastronome,gastronome
+http://sparql.cwrc.ca/ontologies/cwrc#volunteer,volunteer,civil defence volunteer,hospital volunteer,war volunteer,food volunteer,food kitchen volunteer,volunteer soldier,volunteer personnel work,volunteer counsellor,war volunteers,school volunteer,volunteer office work,voluntary aid detachment,volunteering for the newly formed babies club,volunteer cook and waitress
+http://sparql.cwrc.ca/ontologies/cwrc#advocate,advocate,sunday school promoter,animal rights advocate,civil rights,promotion of women's work,maternity advocate,prisoners' advocate,advocate for the poor,campaigner for child welfare,free speech advocate,anti poverty,emigration promoter,campaigner against capital punishment,promote temperance,continued to encourage women to enter politics through various efforts
+http://sparql.cwrc.ca/ontologies/cwrc#professor,professor,law lecturer,lecturer in modern languages,professor of fine arts,university professor,emeritus professor,professor of archaeology,professor of poetry,professor of singing,professor of political economy,lecturer,professor of divinity,assistant lecturer,professor of pathology,professor of english language and literature,professor of entomology,professor of psychology,professor of english,chichele professor of modern history,professor of poetry at oxford,lecture,british council lecturer,an active lecturer,lucasian professor of mathematics,"taught at oxford, then at cambridge",university teacher of english,regius professor of divinity
+http://sparql.cwrc.ca/ontologies/cwrc#veterinaryWork,veterinary work,veterinary doctor,veterinary worker
+http://sparql.cwrc.ca/ontologies/cwrc#cobbler,cobbler,shoemaker's assistant,apprentice shoemaker,shoemaker
+http://sparql.cwrc.ca/ontologies/cwrc#chess,chess,international chess master
+http://sparql.cwrc.ca/ontologies/cwrc#sports,sports,oarsman,skier,curling,boxer,yachtsman,olympic athlete,golf,sportsman,sport,yachtsperson,athlete,polo player,yachtswoman,physical training instructor,championship skier
+http://sparql.cwrc.ca/ontologies/cwrc#pawnbroker,pawnbroker
+http://sparql.cwrc.ca/ontologies/cwrc#statistician,statistician,medical statistician
+http://sparql.cwrc.ca/ontologies/cwrc#midwife,midwife,midwifery organizer
+http://sparql.cwrc.ca/ontologies/cwrc#mining,mining,mine agent,mine work,mining entrepreneur
+http://sparql.cwrc.ca/ontologies/cwrc#meteorologist,meteorologist
+http://sparql.cwrc.ca/ontologies/cwrc#farming,farming,sugar planter,dairying,husbandman,ranch hand,farm labourer,yeoman farmer,agricultural adviser,cattleman,cattle breeder,farmer,pig farmer,farm worker,smallholder,farm labour,beekeeper,part time farmer,tenant farmer,shepherd,agriculturalist,farmers,fruit farmer,dairy farmer,farm manager,sheep breeder,pig breeder,rancher,corn inspector,fruit picker,apricot ranch
+http://sparql.cwrc.ca/ontologies/cwrc#writingGroupParticipant,writing group participant,writing group president,writing group member
+http://sparql.cwrc.ca/ontologies/cwrc#catering,catering,catering manager,caterer,catering assistant
+http://sparql.cwrc.ca/ontologies/cwrc#higherGovernment,higher government,member of congress,legislator,government minister,president of the united nations general assembly,royal adviser,royal representative,foreign service,labour minister,master of the horse,parliamentary private secretary,governor of tasmania,lord keeper,cabinet minister,royal lieutenant,colonial secretary,chancellor of the exchequer,lieutenant governor of guernsey,state governor,member of the house of lords,colonial governor,lord lieutenant,statesman,vice chancellor,under secretary for the colonies,privy councillor,governor of barbados,minister of food,governor of bombay,director general of finance,league of nations delegate,congressman,secretary of state for ireland,secretary of state for war,lord lieutenant of ireland,senator,warden of the mint,civil lord of the admiralty,foreign secretary,lord keeper of the great seal of england,regent,secretary of state,ulster king of arms,ambassador and plenipotentiary,high commissioner of south africa,served on the royal commission on capital punishment,scottish education secretary,bavarian minister,vice president of the usa
+http://sparql.cwrc.ca/ontologies/cwrc#storyteller,storyteller,raconteur
+http://sparql.cwrc.ca/ontologies/cwrc#researcher,researcher,research assistant,research,scholarship,social researcher
+http://sparql.cwrc.ca/ontologies/cwrc#patriot,patriot,"irish patriot, nationalist,"
+http://sparql.cwrc.ca/ontologies/cwrc#sexWorker,sex worker,prostitute,courtesan
+http://sparql.cwrc.ca/ontologies/cwrc#military,military,soldier,artillery gunner,military officer,military communications,major general,captain of militia,artillery officer,military driver,colonel,quartermaster,deputy lieutenant,militia captain,lieutenant general,lieutenant,military escort,war hero,para military officer,military leadership,non commissioned officer,territorial soldier,aide de camp,air raid defence provider,solider,camouflage worker,second lieutenant,half pay officer,recruiting officer,captain (later admiral),air raid shelter marshal,commander of a highland regiment
+http://sparql.cwrc.ca/ontologies/cwrc#prisoner,prisoner,prisoner of war,political prisoner,was imprisoned
+http://sparql.cwrc.ca/ontologies/cwrc#mayor,mayor,lady mayoress,lord mayor,mayor of their home town,mayor of cork,lord mayor of london,mayor of norwich
+http://sparql.cwrc.ca/ontologies/cwrc#jacobitism,Jacobitism,jacobites,jacobite conspirator,jacobite
+http://sparql.cwrc.ca/ontologies/cwrc#gentleman,gentleman,country gentleman
+http://sparql.cwrc.ca/ontologies/cwrc#education,education,educationist,educational popularizer
+http://sparql.cwrc.ca/ontologies/cwrc#wetNurse,wet nurse
+http://sparql.cwrc.ca/ontologies/cwrc#houseSitter,house sitter
+http://sparql.cwrc.ca/ontologies/cwrc#beautician,beautician,hairdresser,barber,cosmetician
+http://sparql.cwrc.ca/ontologies/cwrc#mentor,mentor
+http://sparql.cwrc.ca/ontologies/cwrc#diplomat,diplomat,british consul,envoy,consul general,foreign service,diplomatist,diplomatic negotiation,attaché,ambassador,consul general in london for hawaii,ambassador to constantinople,ambassador to spain,oriental secretary,ambassador to france
+http://sparql.cwrc.ca/ontologies/cwrc#businessOwner,business owner,store owner,mine owner,magazine proprietor,shop owner,newspaper proprietor,mill owner,factory owner,barbershop owner,colliery owner,coffee shop owner,bar owner,sex shop owner,newspaper magnate,proprietor,music shop owner,owner of food outlet,mail order business,news agency proprietor,pottery magnate
+http://sparql.cwrc.ca/ontologies/cwrc#treasurer,treasurer,city treasurer,hospital department treasurer,society treasurer,under treasurer for the navy,treasurer to the royal society
+http://sparql.cwrc.ca/ontologies/cwrc#dressmaking,dressmaking,dressmaker,silk manufacturer,seamstress,clothes mending,dressmaker's apprentice,textile manufacturer,dressmaking business,dressmaking; seamstress
+http://sparql.cwrc.ca/ontologies/cwrc#publicReader,public reader,reciter,poetry readings,poetry reading,dramatic readings,reader of poetry,recitateur,performance reader,poetry reader,reader,poetry recital,reader in public,recitalist,reader aloud,gave readings,public reading
+http://sparql.cwrc.ca/ontologies/cwrc#investor,investor,stockbroker,market speculator,share holder,financial backer,speculator,stock investor
+http://sparql.cwrc.ca/ontologies/cwrc#warehouseWork,warehouse work,warehousing
+http://sparql.cwrc.ca/ontologies/cwrc#producer,producer,produced,producing,produced and appeared
+http://sparql.cwrc.ca/ontologies/cwrc#music,music,violinist,choirmaster,church choirmaster,concert pianist,pianist,celloist,composer,cornet,organist,jazz musician,piano tuner,amateur pianist,choirmistress,musician,cathedral chorister,"musician, composer",playing the piano
+http://sparql.cwrc.ca/ontologies/cwrc#companion,companion,humble companion,paid companion
+http://sparql.cwrc.ca/ontologies/cwrc#fashion,fashion,fashion designer,fashion buyer,fashion consultant,leader of fashion
+http://sparql.cwrc.ca/ontologies/cwrc#collector,collector,anthropological collector,antiquarian,zoological collector,book collector,coin collector,art collector,antiquary,collect irish folklore,collector of china and paintings,collecting
+http://sparql.cwrc.ca/ontologies/cwrc#factoryWorker,factory worker,mill worker,kiln fireman,assembly line worker,factory hand,factory work,black borderer,worked briefly at a wine bottling plant
+http://sparql.cwrc.ca/ontologies/cwrc#insurance,insurance,insurance clerk,insurance manager,insurance broker,insurance agent,insurance underwriter,insurance salesman,insurance inspector,insurance collector
+http://sparql.cwrc.ca/ontologies/cwrc#judge,judge,court official,puisne judge,judge of probate,county court judgeship,lord chief justice of ireland,chief justice of the king's bench
+http://sparql.cwrc.ca/ontologies/cwrc#gambling,gambling,gambler,stock exchange gambler
+http://sparql.cwrc.ca/ontologies/cwrc#televisionIndustry,television industry,television director
+http://sparql.cwrc.ca/ontologies/cwrc#propertyOwner,property owner,squire,landlady,shipyard owner,shipbuilding owner,landlord,plantation owner,landowner,hereditary land owner,owned land of his own,emergency landlady,sugar estate owner,landlady/proprietor
+http://sparql.cwrc.ca/ontologies/cwrc#engraver,engraver,wood engraver
+http://sparql.cwrc.ca/ontologies/cwrc#diver,diver
+http://sparql.cwrc.ca/ontologies/cwrc#domesticServant,domestic servant,kitchen scullion,lady's maid,house servant,upper servant,indentured servant,housemaid,valet
+http://sparql.cwrc.ca/ontologies/cwrc#auctioneer,auctioneer
+http://sparql.cwrc.ca/ontologies/cwrc#socialism,socialism,socialist feminist,radical socialist,fabian socialist,socialist organizer,owenite socialism,socialist,socialist and feminist,militant socialist
+http://sparql.cwrc.ca/ontologies/cwrc#committeeMember,committee member,committee woman,school board member,committee man,committee president
+http://sparql.cwrc.ca/ontologies/cwrc#butcher,butcher,slaughterman,shochet or ritual butcher
+http://sparql.cwrc.ca/ontologies/cwrc#model,model,artist's model,artists' model,fashion model
+http://sparql.cwrc.ca/ontologies/cwrc#geologist,geologist
+http://sparql.cwrc.ca/ontologies/cwrc#monarchism,monarchism,royalist,constitutional monarchist,monarchist,royalist politician,active royalists
+http://sparql.cwrc.ca/ontologies/cwrc#educationalAdministration,educational administration,university chancellor,dean,academic programme administrator,school supervisor,sunday school superintendent,inspectress of schools,deputy head of school,school proprietor,education campaigner,school monitor,educator,school governor,college vice principal,marker,external examiner,school management,school organizer,vice principal,school administration,sunday school worker,college principal,education liaison officer,education,lord rector,principal,superintendent of schools,educational theorist,principal of institute,headmaster,headmistress,school vice president,provost,examiner,superintendent,educational officer,school director,college governor,rector of edinburgh university,director of the tulsa center for the study of women's literature,member of the executive committee of girton college,master of the free school,taught,founded st boniface school,director of the creative writing program,education of her own children,principal of the chelsea art school,teach,principal of queen's college,established a school for english and american boys,college vice president,"dean of trinity college, oxford",demonstrator of anatomy,opened their sunday school,associate of newnham college,founded the derry and raphoe diocesan institution for the education of the deaf and dumb,pedagogic theorist,establish schools,running their school
+http://sparql.cwrc.ca/ontologies/cwrc#journalist,journalist,free lance journalist,parliamentary reporter,crime reporter,war correspondent,foreign correspondent,socialist journalist,women's columnist,columnist,staff writer,newspaper assistant,journalism,media journalist,reporter,war reporter,trade journalist,newspaper correspondent,clippings clerk
+http://sparql.cwrc.ca/ontologies/cwrc#prophet,prophet
+http://sparql.cwrc.ca/ontologies/cwrc#student,student,architecture student,marker,law student,art student,studying,theology student,engineering student,university student,study law,apprentice,medical student,studied at oxford
+http://sparql.cwrc.ca/ontologies/cwrc#beauty,beauty,pre raphaelite muse
+http://sparql.cwrc.ca/ontologies/cwrc#politicalSpeaker,political speaker,speaker of the legislature,speaker (parliamentary),speaker of the house of lords,speaker of the house of commons,speaker of the senate of northern ireland
+http://sparql.cwrc.ca/ontologies/cwrc#leatherWorker,leather worker,leatherworker,tanner,saddler,worker in leather,"saddler, shoemaker"
+http://sparql.cwrc.ca/ontologies/cwrc#metalWork,metal work,iron manufacturer,metal manufacturer,steel worker,sheet metal worker,silver manufacturer,brass worker
+http://sparql.cwrc.ca/ontologies/cwrc#guardian,guardian
+http://sparql.cwrc.ca/ontologies/cwrc#labourUnion,labour union,trade union delegate,trade union leader,general secretary of the empire press union,trade union organizer,union organizer,trade unionist,union member,union representative
+http://sparql.cwrc.ca/ontologies/cwrc#religious,religious,lay sister,permanent curate,garrison chaplain,anchoress,methodist convert,religious observance,methodist lay preacher,royal chaplain,pilgrim,spiritual counsellor,monk,church worker,religious administrator,prayer,religious leader,principal clerk of session,church elder,member of religious order,religious manager,religious organizer,evangelical leader,prayer leader,precentor,religious revivalist,religious publicist,preaching and religious organising activities,chancellor and prebendary of hereford cathedral,"lay leader, or parnas"
+http://sparql.cwrc.ca/ontologies/cwrc#metallurgy,metallurgy,assayer,metallurgist
+http://sparql.cwrc.ca/ontologies/cwrc#grocer,grocer,royal grocer
+http://sparql.cwrc.ca/ontologies/cwrc#domesticWork,domestic work,helping at home,kitchen work,managing her households,meal provider,care of parents
+http://sparql.cwrc.ca/ontologies/cwrc#merchantTaylor,merchant taylor
+http://sparql.cwrc.ca/ontologies/cwrc#hypnotist,hypnotist,hypnotism
+http://sparql.cwrc.ca/ontologies/cwrc#physiognomist,physiognomist,phrenologist,physiognomy parlour
+http://sparql.cwrc.ca/ontologies/cwrc#sailor,sailor,sailing,ferryman,midshipman,purser,ship's purser,competitive sailor,seaman,ship's officer,deckhand,ship's carpenter
+http://sparql.cwrc.ca/ontologies/cwrc#politicalHost,politicalHost,political hostess,political host,official hostess at the government house
+http://sparql.cwrc.ca/ontologies/cwrc#interviewer,interviewer
+http://sparql.cwrc.ca/ontologies/cwrc#religiousOfficial,religiousOfficial,clergyman,chief rabbi,dissenting minister,quaker minister,deacon,preacher,synagogue official,clergyperson,canon,minister,episcopalian preacher,bishop,rector,archbishop,anglican priest,jesuit priest,clergymen,priest,private almoner,minister of religion,prebendary,chaplain,vicar,archbishop of canterbury,cardinal,presbyterian minister,reverend,official (of religion),curate,anglican clergyman,anglican bishop,archdeacon,assistant minister of religion,trained for the priesthood,prebendary (a kind of canon or church official),rev.,archbishop of armagh and primate of all ireland,english bishop of natal,ministers,dean of wells,chaplain of the lock hospital
+http://sparql.cwrc.ca/ontologies/cwrc#ironmaster,ironmaster
+http://sparql.cwrc.ca/ontologies/cwrc#criminal,criminal,thief,transported criminal,con man,blackmailer,convict,confidence trickster,blackmailer extortionist
+http://sparql.cwrc.ca/ontologies/cwrc#lordChancellor,lord chancellor
+http://sparql.cwrc.ca/ontologies/cwrc#travelling,travelling,sightseeing,traveller,travel guide,travel agent
+http://sparql.cwrc.ca/ontologies/cwrc#governorGeneral,governor general,governor general of canada,governor general of india
+http://sparql.cwrc.ca/ontologies/cwrc#communism,communism,christian communist,communist
+http://sparql.cwrc.ca/ontologies/cwrc#composer,composer,composer of church music,composed
+http://sparql.cwrc.ca/ontologies/cwrc#craftsperson,craftsperson,handicrafts,craft work,handicraft,shellwork,furniture restorer,arts and crafts,craftswoman,decorator of reproduction furniture
+http://sparql.cwrc.ca/ontologies/cwrc#knight,knight
+http://sparql.cwrc.ca/ontologies/cwrc#literaryExecutor,literary executor,literary executrix
+http://sparql.cwrc.ca/ontologies/cwrc#orphanageWork,orphanage work,orphanage principal,orphanage manager,orphanage worker
+http://sparql.cwrc.ca/ontologies/cwrc#cleaner,cleaner,domestic cleaner,cleaning lady
+http://sparql.cwrc.ca/ontologies/cwrc#visualArtist,visual artist,amateur painter,portraitist,illuminator,sculptor,landscape painter,commercial artist,painter,miniaturist,wax modeller,printmaker,colourist,watercolourist,craft artist,etcher,amateur artist,historical painter,artist,miniature portrait painter,feather artisan,illustrator and landscape painter,"etcher, artist",painter in enamel,chinaware painter,"artist, painter"
+http://sparql.cwrc.ca/ontologies/cwrc#construction,construction,gothic builder bricklayer,builder,road construction supervisor,house builder,renovator,construction supervisor,building,shipwright,building improver,carpenter,clerk of the king's works,clerk of the works,"builder, architect"
+http://sparql.cwrc.ca/ontologies/cwrc#corporateDirector,corporate or organizational director,honorary director,company director,managing director,deputy director,president of the baby and foundling hospital,chairman of railway company
+http://sparql.cwrc.ca/ontologies/cwrc#bibliophile,bibliophile
+http://sparql.cwrc.ca/ontologies/cwrc#machineWork,machineWork,fitter,mechanician
+http://sparql.cwrc.ca/ontologies/cwrc#coopOrganizer,co-op organizer,co op organizer
+http://sparql.cwrc.ca/ontologies/cwrc#redCross,red cross,red cross representative,red cross aide,red cross worker
+http://sparql.cwrc.ca/ontologies/cwrc#fellow,fellow,visiting fellow,creative writing fellowships,creative writing fellow,fellow of the royal society,fellow of king's college,fellow of the institute of hospital administration,fellow student at the regent street polytechnic,compton fellow of creative writing,creative writing fellowship
+http://sparql.cwrc.ca/ontologies/cwrc#legalWork,legal work,legal adviser,legal advisor,solicitor's clerk,clerk of the court,legal clerk,legal expert,law clerk,legal aid worker,legal scholar,lawyer's clerk,legal assistant
+http://sparql.cwrc.ca/ontologies/cwrc#slaveOwner,slave owner
+http://sparql.cwrc.ca/ontologies/cwrc#settler,settler,immigrant,colonial settler,emigrant,pioneer,managing trading posts,huguenot immigrant
+http://sparql.cwrc.ca/ontologies/cwrc#liaisonOfficer,liaison officer,"liaison officer, correspondent to cairo"
+http://sparql.cwrc.ca/ontologies/cwrc#clothworker,clothworker
+http://sparql.cwrc.ca/ontologies/cwrc#brewer,brewer,brewers
+http://sparql.cwrc.ca/ontologies/cwrc#unitarianism,Unitarianism,Unitarian,Unitarian Church,active unitarian,unitarianMovement,Unitarian Movement
+http://sparql.cwrc.ca/ontologies/cwrc#governmentOfficial,government official,health officer,secretary to parliamentary commission,member of the indian civil service,custos rotulorum,civil servant,registrar of births and deaths,civic work,coroner,exchequer clerk,prison guard,poor law guardian,government employee,senior civil servant,prison governor,town planner,queen's messenger,registrar,sequestrator,county court bailiff,traffic superintendent,local government clerk,distributor of stamps,queen's champion,resident magistrate,sheriff clerk,sanitary inspector,deputy keeper of her majesty's records,secretary to the lord keeper of the great seal of england,secretary of the fine arts commission,master of the savoy,deputy director of the women's branch of the ministry of agriculture,east india company officer,secretary of the royal united service institution,deputy theatre censor,director general of the tapu land registry,magistrate for the county of middlesex
+http://sparql.cwrc.ca/ontologies/cwrc#matron,matron,housemother,school matron,workhouse matron,house mother
+http://sparql.cwrc.ca/ontologies/cwrc#actorManager,actor manager
+http://sparql.cwrc.ca/ontologies/cwrc#refugee,refugee
+http://sparql.cwrc.ca/ontologies/cwrc#boardMember,board member
+http://sparql.cwrc.ca/ontologies/cwrc#cricket,cricket,cricketer,cricket team captain
+http://sparql.cwrc.ca/ontologies/cwrc#unskilledLabourer,unskilled labourer,dishwasher,laundry worker,sweeping the floor
+http://sparql.cwrc.ca/ontologies/cwrc#librarian,librarian,cataloguer,county librarian,director of the camps library,royal academy's librarian,vice president of the london library,keeper of the bodleian library
+http://sparql.cwrc.ca/ontologies/cwrc#singer,singer,concert singer,amateur singer,opera singer
+http://sparql.cwrc.ca/ontologies/cwrc#artsAdvocate,literature advocate
+http://sparql.cwrc.ca/ontologies/cwrc#miner,miner,colliery manager,coalminer
+http://sparql.cwrc.ca/ontologies/cwrc#haberdasher,haberdasher
+http://sparql.cwrc.ca/ontologies/cwrc#navy,naval rating,naval captain,navy officer,rear admiral,admiral,naval chaplain,first lord of the admiralty,naval surgeon,naval administrator,naval official,naval censor,lieutenant royal marines,naval architect,naval engineer,naval officer,navy commissioner,merchant navy captain,vice admiral,home guard officer,assistant naval surgeon,commander in chief of the portuguese navy,us navy,us naval commander,united states navy
+http://sparql.cwrc.ca/ontologies/cwrc#literaryAgent,literary agent,literary advisor,amateur literary agent
+http://sparql.cwrc.ca/ontologies/cwrc#tourGuide,tour guide,mountain guide,youth hostel warden
+http://sparql.cwrc.ca/ontologies/cwrc#watchmaker,watchmaker
+http://sparql.cwrc.ca/ontologies/cwrc#baker,baker,pastrycook
+http://sparql.cwrc.ca/ontologies/cwrc#trader,trader,clothes trader,fur trader,wool trader

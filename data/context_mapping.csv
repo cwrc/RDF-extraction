@@ -1,5 +1,5 @@
 Orlando Tag,Mode,Context,Context relationship predicate,Event
-OTHERLIFEEVENT,,BiographyContext,biographyRelationship,BiographyEvent
+OTHERLIFEEVENT,,BiographyContext,biographicalRelationship,BiographicalEvent
 BIRTH,,BirthContext,birthRelationship,BirthEvent
 CULTURALFORMATION,,CulturalFormContext,culturalFormRelationship,CulturalFormEvent
 DEATH,,DeathContext,deathRelationship,DeathEvent
