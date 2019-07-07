@@ -248,7 +248,9 @@ def get_persontype(bio):
 
 def get_sparql_results(endpoint_url, query):
     from SPARQLWrapper import SPARQLWrapper, JSON
-    sparql = SPARQLWrapper(endpoint_url)
+    sparql = SPARQLWrapper(
+        endpoint_url, agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11")
+
     sparql.setQuery(query)
     sparql.setReturnFormat(JSON)
     # return sparql.query().convert()
@@ -274,7 +276,6 @@ def get_wd_identifier(id):
       SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
     }
     LIMIT 10""" % id
-
     results = get_sparql_results(endpoint_url, query)
     if not results:
         return None

@@ -2,6 +2,36 @@ import rdflib
 from rdflib import RDF, RDFS, Literal
 from Utils import utilities
 
+WIKIDATA_MAP = {}
+logger = utilities.config_logger("biography")
+
+
+def create_wikidata_map(path=None):
+    import csv
+    # if searching takes too long
+    # Create better searching mechanism
+    if not path:
+        path = '../data/wikidata_ids.csv'
+    with open(path, newline='', encoding='utf-8') as csvfile:
+        reader = csv.reader(csvfile)
+        next(reader)
+        for row in reader:
+            if row[0] not in WIKIDATA_MAP:
+                WIKIDATA_MAP[row[0]] = row[1]
+
+
+create_wikidata_map()
+
+
+def get_wd_identifier(id):
+    if id not in WIKIDATA_MAP:
+        logger.warning("Unable to find wikidata identifier for " + id)
+        return None
+    elif WIKIDATA_MAP[id] == "None":
+        return None
+    else:
+        return WIKIDATA_MAP[id]
+
 
 class Biography(object):
     """docstring for Biography"""
@@ -13,28 +43,27 @@ class Biography(object):
         self.url = rdflib.term.URIRef(self.url)
         self.name = utilities.get_readable_name(doc)
         self.gender = gender
-        self.uri = utilities.make_standard_uri(utilities.get_name(doc))
+        self.std_name = utilities.get_name(doc)
+        self.uri = utilities.make_standard_uri(self.std_name)
 
         # TODO: get nickname from file most common acroynm and replace in event/context strings
         self.nickname = None
 
         # TODO: Read wikidata identifiers from csv
-        self.wd_id = None
-        # self.wd_id = utilities.get_wd_identifier(id)
-
+        # self.wd_id = None
+        self.wd_id = get_wd_identifier(id)
+        print(self.wd_id)
+        input()
         self.nationalities = []
 
         self.context_list = []
         self.event_list = []
-
-        self.education_list = []
 
         # Gurjap's files
         self.occupations = []
         self.family_member_list = []
         self.friend_list = []
         self.intimate_relationship_list = []
-
         self.contextCounts = {
             "intimateRelationship": 1,
             "friendsAssociates": 1
@@ -54,12 +83,6 @@ class Biography(object):
             self.context_list += context
         else:
             self.context_list.append(context)
-
-    def add_education(self, education):
-        if type(education) is list:
-            self.education_list += education
-        else:
-            self.education_list.append(education)
 
     def add_event(self, event):
         if type(event) is list:
@@ -83,13 +106,11 @@ class Biography(object):
         g = utilities.create_graph()
 
         g.add((self.uri, RDF.type, utilities.NS_DICT["cwrc"].NaturalPerson))
-        g.add((self.uri, RDFS.label, Literal(self.name, datatype=rdflib.namespace.XSD.string)))
         g.add((self.uri, utilities.NS_DICT["cwrc"].hasGender, self.gender))
         g.add((self.uri, utilities.NS_DICT["foaf"].isPrimaryTopicOf, self.url))
 
         g += self.create_triples(self.context_list)
         g += self.create_triples(self.event_list)
-        g += self.create_triples(self.education_list)
 
         if self.deathObj is not None:
             g += self.deathObj.to_triples()
@@ -103,7 +124,11 @@ class Biography(object):
         g += self.create_triples(self.name_list)
 
         if self.wd_id:
-            g.add((self.uri, utilities.NS_DICT["owl"].sameAs, self.wd_id))
+            g.add((self.uri, utilities.NS_DICT["owl"].sameAs, rdflib.term.URIRef(self.wd_id)))
+
+        # g.add((self.uri, RDFS.label, Literal(self.name)))
+        # g.remove((self.uri, RDFS.label, Literal(self.std_name)))
+        g.add((self.uri, utilities.NS_DICT["skos"].altLabel, Literal(self.name)))
 
         return g
 
