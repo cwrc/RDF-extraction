@@ -73,13 +73,13 @@ def extract_birth_data(xmlString, person):
         event_tags = birth_tag.find_all("CHRONSTRUCT")
         for x in event_tags:
             event_title = person.name + " - Birth Event"
-            event_uri = person.id + "_BirthEvent"
+            event_uri = person.id + "_BirthEvent_1"
 
             if len(birth_events) > 0:
                 # TODO: possibly revise uri as well
                 logger.info("Multiple Birth events encountered within entry: " + person.id)
                 event_title = person.name + " - Birth Related Event"
-                event_uri = person.id + "_BirthEvent" + str(len(birth_events) + 1)
+                event_uri = person.id + "_BirthEvent_" + str(len(birth_events) + 1)
 
             birth_events.append(Event(event_title, event_uri, x, "BirthEvent"))
 
@@ -163,13 +163,13 @@ def extract_death_data(xmlString, person):
         events_tags = death_tag.find_all("CHRONSTRUCT")
         for x in events_tags:
             event_title = person.name + " - Death Event"
-            event_uri = person.id + "_DeathEvent"
+            event_uri = person.id + "_DeathEvent_1"
 
             if len(death_events) > 0:
                 # TODO: possibly revise uri as well
                 logger.info("Multiple Death events encountered within entry: " + person.id)
                 event_title = person.name + " - Death Related Event"
-                event_uri = person.id + "_DeathEvent" + str(len(death_events) + 1)
+                event_uri = person.id + "_DeathEvent_" + str(len(death_events) + 1)
 
             death_events.append(Event(event_title, event_uri, x, "DeathEvent"))
 

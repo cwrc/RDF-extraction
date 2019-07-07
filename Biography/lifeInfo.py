@@ -239,7 +239,7 @@ def find_friends(tag, person):
     friends = []
     names = tag.find_all("NAME")
     for x in names:
-        friends.append(Person(x, "interpersonalRelationship"))
+        friends.append(Person(x, "interpersonalRelationshipWith"))
     return list(filter(lambda a: a.uri != person.uri, friends))
 
 
@@ -256,7 +256,7 @@ def extract_friends(tag_list, context_type, person, list_type="paragraphs"):
         temp_context = None
         friend_list = None
         context_count += 1
-        context_id = person.id + "_" + CONTEXT_TYPE + str(context_count)
+        context_id = person.id + "_" + CONTEXT_TYPE + "_" + str(context_count)
         friend_list = find_friends(tag, person)
         if friend_list:
             temp_context = Context(context_id, tag, "FRIENDSASSOCIATES")
@@ -267,7 +267,7 @@ def extract_friends(tag_list, context_type, person, list_type="paragraphs"):
         if list_type == "events":
             event_count += 1
             event_title = person.name + " - " + "Friends and Associates Event"
-            event_uri = person.id + "_Friends_and_Associates_Event" + str(event_count)
+            event_uri = person.id + "_FriendsAndAssociatesEvent_" + str(event_count)
             temp_event = Event(event_title, event_uri, tag, EVENT_TYPE)
             temp_context.link_event(temp_event)
             person.add_event(temp_event)

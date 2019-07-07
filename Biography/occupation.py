@@ -219,7 +219,7 @@ def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
         temp_context = None
         occupation_list = None
         context_count += 1
-        context_id = person.id + "_" + CONTEXT_TYPE + str(context_count)
+        context_id = person.id + "_" + CONTEXT_TYPE + "_" + str(context_count)
         occupation_list = find_occupations(tag)
         if occupation_list:
             temp_context = Context(context_id, tag, "OCCUPATION")
@@ -231,7 +231,7 @@ def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
         if list_type == "events":
             event_count += 1
             event_title = person.name + " - " + "Occupation Event"
-            event_uri = person.id + "_Occupation_Event" + str(event_count)
+            event_uri = person.id + "_OccupationEvent_" + str(event_count)
             temp_event = Event(event_title, event_uri, tag, EVENT_TYPE)
             temp_context.link_event(temp_event)
             person.add_event(temp_event)

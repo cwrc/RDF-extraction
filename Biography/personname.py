@@ -265,7 +265,7 @@ def extract_person_name(xmlString, person):
         context_id = person.id + "_PersonNameContext" + str(0)
         tempContext = Context(context_id, personNameTags[0], "PERSONNAME")
         tempContext.link_triples(person.name_list[1:])
-        person.context_list.append(tempContext)
+        person.add_context(tempContext)
 
 
 def main():

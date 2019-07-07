@@ -20,7 +20,7 @@ def extract_health_contexts_data(bio, person):
         context_type = get_context_type("HEALTH", mode)
         paragraphs = context.find_all("P")
         for paragraph in paragraphs:
-            context_id = person.id + "_" + context_type + str(count)
+            context_id = person.id + "_" + context_type + "_" + str(count)
 
             temp_context = Context(context_id, paragraph, "HEALTH", "identifying", mode)
             person.add_context(temp_context)
@@ -28,12 +28,12 @@ def extract_health_contexts_data(bio, person):
 
         events = context.find_all("CHRONSTRUCT")
         for event in events:
-            context_id = person.id + "_" + context_type + str(count)
+            context_id = person.id + "_" + context_type + "_" + str(count)
             temp_context = Context(context_id, event, "HEALTH", "identifying", mode)
 
             event_title = person.name + " - " + context_type.split("Context")[0] + " Event"
-            event_uri = person.id + "_" + context_type.split("Context")[0] + "_Event" + str(event_count)
-            temp_event = Event(event_title, event_uri, event, type=get_event_type("HEALTH", mode))
+            event_uri = person.id + "_" + context_type.split("Context")[0] + "Event_" + str(event_count)
+            temp_event = Event(event_title, event_uri, event, "HealthEvent")
 
             temp_context.link_event(temp_event)
             person.add_event(temp_event)
@@ -61,7 +61,7 @@ def extract_other_contexts_data(bio, person):
         for x in contexts:
             paragraphs = x.find_all("P")
             for paragraph in paragraphs:
-                context_id = person.id + "_" + context_type + str(count)
+                context_id = person.id + "_" + context_type + "_" + str(count)
 
                 temp_context = Context(context_id, paragraph, context, "identifying")
                 person.add_context(temp_context)
@@ -69,12 +69,12 @@ def extract_other_contexts_data(bio, person):
 
             events = x.find_all("CHRONSTRUCT")
             for event in events:
-                context_id = person.id + "_" + context_type + str(count)
+                context_id = person.id + "_" + context_type + "_" + str(count)
                 temp_context = Context(context_id, event, context, "identifying")
 
                 event_title = person.name + " - " + context_type.split("Context")[0] + " Event"
                 event_uri = person.id + "_" + \
-                    context_type.split("Context")[0] + "_Event" + str(event_count)
+                    context_type.split("Context")[0] + "Event_" + str(event_count)
                 temp_event = Event(event_title, event_uri, event, type=event_type)
 
                 temp_context.link_event(temp_event)

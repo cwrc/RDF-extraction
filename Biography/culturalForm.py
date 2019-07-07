@@ -207,6 +207,7 @@ def find_cultural_forms(cf, person):
 
         for tag in tags.keys():
             instances = cf.find_all(tag)
+            predicate = tags[tag][0].lower() + tags[tag][1:]
             for x in instances:
                 culturalforms = []
 
@@ -215,20 +216,22 @@ def find_cultural_forms(cf, person):
                     value = get_geoheritage(x)
                     if type(value) is list:
                         for place in value:
-                            culturalforms.append(CulturalForm("" + tags[tag], get_reported(x), place))
+                            culturalforms.append(CulturalForm(
+                                predicate, get_reported(x), place))
                     else:
-                        culturalforms.append(CulturalForm("" + tags[tag], get_reported(x), value))
+                        culturalforms.append(CulturalForm(
+                            predicate, get_reported(x), value))
 
                 else:
                     value = utilities.get_value(x)
                     if tag == "NATIONALHERITAGE" and value in ["American-Austrian", "Anglo-Scottish", "Scottish-Irish"]:
                         culturalforms.append(CulturalForm(
-                            tags[tag][0].lower() + tags[tag][1:], get_reported(x), get_mapped_term(tags[tag], value.split("-")[0], id=person.id)))
+                            predicate, get_reported(x), get_mapped_term(tags[tag], value.split("-")[0], id=person.id)))
                         culturalforms.append(CulturalForm(
-                            tags[tag][0].lower() + tags[tag][1:], get_reported(x), get_mapped_term(tags[tag], value.split("-")[1], id=person.id)))
+                            predicate, get_reported(x), get_mapped_term(tags[tag], value.split("-")[1], id=person.id)))
                     else:
                         culturalforms.append(CulturalForm(
-                            tags[tag][0].lower() + tags[tag][1:], get_reported(x), get_mapped_term(tags[tag], value, id=person.id)))
+                            predicate, get_reported(x), get_mapped_term(tags[tag], value, id=person.id)))
 
                 for culturalform in culturalforms:
                     cf_list.append(culturalform)
@@ -330,7 +333,7 @@ def extract_culturalforms(tag_list, context_type, person, list_type="paragraphs"
         temp_context = None
         cf_list = None
         cf_subelements_count[context_type] += 1
-        context_id = person.id + "_" + CONTEXT_TYPE + str(cf_subelements_count[context_type])
+        context_id = person.id + "_" + CONTEXT_TYPE + "_" + str(cf_subelements_count[context_type])
 
         cf_list = find_cultural_forms(tag, person)
         if cf_list:
@@ -344,7 +347,7 @@ def extract_culturalforms(tag_list, context_type, person, list_type="paragraphs"
         if list_type == "events":
             event_title = person.name + " - " + CONTEXT_TYPE.split("Context")[0] + " Event"
             event_uri = person.id + "_" + \
-                CONTEXT_TYPE.split("Context")[0] + "_Event" + str(event_count)
+                CONTEXT_TYPE.split("Context")[0] + "Event" + "_" + str(event_count)
             temp_event = Event(event_title, event_uri, tag)
 
             temp_context.link_event(temp_event)
@@ -368,8 +371,6 @@ def reset_count(dictionary):
 def extract_cf_data(bio, person):
     global cf_subelements_count
     cf_subelements_count = reset_count(cf_subelements_count)
-    # cf_subelements_count = {"CLASSISSUE": 0, "RACEANDETHNICITY": 0, "POLITICS": 0,
-    #                         "NATIONALITYISSUE": 0, "SEXUALITY": 0, "RELIGION": 0, "CULTURALFORMATION": 0}
     cfs = bio.find_all("CULTURALFORMATION")
     cf_subelements = ["CLASSISSUE", "RACEANDETHNICITY", "NATIONALITYISSUE", "SEXUALITY", "RELIGION"]
     id = 1
