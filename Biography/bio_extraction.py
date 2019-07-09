@@ -1,20 +1,17 @@
 #!/usr/bin/python3
 from bs4 import BeautifulSoup
-import rdflib
 
-from biography import Biography
-from log import *
-from Utils.utilities import *
 from Utils import utilities
+from biography import Biography
 import culturalForm as cf
-import education
 import location
 import other_contexts
 import occupation
-
-# import personname
-# import lifeInfo
+import lifeInfo
 import birthDeath
+
+import education
+import personname
 
 """
 This is a possible temporary main script that creates the biography related triples
@@ -53,19 +50,20 @@ def main():
         occupation.extract_occupation_data(soup, person)
         birthDeath.extract_birth_data(soup, person)
         location.extract_location_data(soup, person)
-
-        # education.extract_education_data(soup, person)
-        # personname.extract_person_name(soup, person)
-        # birthDeath.extract_death(soup, person)
+        lifeInfo.extract_friend_data(soup, person)
+        birthDeath.extract_death_data(soup, person)
+        # bagnen
+        lifeInfo.extract_family_data(soup, person)
+        lifeInfo.extract_intimate_relationships_data(soup, person)
+        personname.extract_person_name(soup, person)
+        education.extract_education_data(soup, person)
+        
         # lifeInfo.extract_cohabitants(soup, person)
-        # lifeInfo.extract_family(soup, person)
-        # lifeInfo.extract_friends_associates(soup, person)
-        # lifeInfo.extract_intimate_relationships(soup, person)
         # lifeInfo.extract_childlessness(soup, person)
         # lifeInfo.extract_children(soup, person)
 
         graph = person.to_graph()
-        print(person.to_file())
+        # print(person.to_file())
         triple_count = len(graph)
 
         if triple_count > highest_triples:
@@ -83,7 +81,7 @@ def main():
         entry_num += 1
 
     temp_path = "extracted_triples/biography_triples.ttl"
-    create_extracted_uberfile(temp_path, uber_graph)
+    utilities.create_extracted_uberfile(temp_path, uber_graph)
 
     cf.log_mapping_fails()
     logger.info(str(len(uber_graph)) + " total triples created")
