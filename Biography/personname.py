@@ -104,8 +104,7 @@ class PersonName:
 
         return g
 
-    def to_triple(self, person):
-        global g
+    def to_triple(self, context):
         g = utilities.create_graph()
 
         # thisNameEntity = utilities.make_standard_uri(person.name + " NameEnt " + self.value)
@@ -120,7 +119,7 @@ class PersonName:
             for otherTriple in self.otherTriples:
                 g.add((thisNameEntity, otherTriple["predicate"], Literal(otherTriple["value"])))
 
-        g.add((person.uri, utilities.NS_DICT["cwrc"].hasName, thisNameEntity))
+        g.add((context.uri, utilities.NS_DICT["cwrc"].name, thisNameEntity))
 
         if self.hasSpareGraph:
             g += self.spareGraph
@@ -160,7 +159,7 @@ def makePerson(type, tag, existingList, personName=None):
     otherTriples = None
     name_to_send = ""
 
-    print(type)
+    # print(type)
     if "WROTEORPUBLISHEDAS" in tag.attrs:
         types.append("AuthorialName")
 
@@ -173,21 +172,21 @@ def makePerson(type, tag, existingList, personName=None):
         name_type_dict = basic_layout_dict["NICKNAME"]
         if "NAMECONNOTATION" in tag.attrs:
             property = tag["NAMECONNOTATION"]
-            print("name connotation ", property)
+            # print("name connotation ", property)
             if property in name_type_dict:
                 types.append(name_type_dict[property])
                 name_to_send = getTheName(tag)
 
         elif "NAMESIGNIFIER" in tag.attrs:
             property = tag["NAMESIGNIFIER"]
-            print("name signifier ", property)
+            # print("name signifier ", property)
             if property in name_type_dict:
                 types.append(name_type_dict[property])
                 name_to_send = getTheName(tag)
 
         elif "NAMETYPE" in tag.attrs:
             property = tag["NAMETYPE"]
-            print("name type ", property)
+            # print("name type ", property)
             if property in name_type_dict:
                 types.append(name_type_dict[property])
                 name_to_send = getTheName(tag)
