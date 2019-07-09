@@ -206,7 +206,7 @@ class Context(object):
         # removing tags that mess up the snippet
         remove_unwanted_tags(self.tag)
         if not self.tag.get_text():
-            logger.error("Empty tag encountered when creating the context:  " + id + ": " + str(tag))
+            logger.error("Empty tag encountered when creating the context:  " + self.id + ": " + str(self.tag))
             self.text = ""
         else:
             self.text = utilities.limit_to_full_sentences(str(self.tag.get_text()), MAX_WORD_COUNT)

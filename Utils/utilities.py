@@ -132,7 +132,10 @@ def limit_words(string, word_count):
 
 
 def limit_to_full_sentences(string, max):
-    logger.info("\n" + string)
+    # logger.info("\n" + string)
+    string = string.strip()
+    if string == "":
+        return string
     sentences = string.split(".")
     text = ""
     for x in sentences:
@@ -199,10 +202,7 @@ def get_reg(tag):
 
 def get_people(tag):
     """Returns all people within a given tag"""
-    people = []
-    for x in tag.find_all("NAME"):
-        people.append(get_name_uri(x))
-    return people
+    return list(set([get_name_uri(x) for x in tag.find_all("NAME")]))
 
 
 def get_titles(tag):
@@ -216,10 +216,7 @@ def get_titles(tag):
 
 def get_places(tag):
     """Returns all places uris within a given tag"""
-    places = []
-    for x in tag.find_all("PLACE"):
-        places.append(Place(x).uri)
-    return places
+    return [Place(x).uri for x in tag.find_all("PLACE")]
 
 
 def get_place_strings(tag):
