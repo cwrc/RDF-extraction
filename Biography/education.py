@@ -125,8 +125,8 @@ class School(object):
         for x in self.locations:
             g.add((self.uri, CWRC.hasLocation, x))
 
-        # for x in self.studied_subjects:
-        #     g.add((self.uri, CWRC.teachesEducationalSubject, x))
+        for x in self.studied_subjects:
+            g.add((self.uri, CWRC.teachesEducationalSubject, x))
 
         return g
 
@@ -171,8 +171,7 @@ class EducationalAward(object):
             self.award_type = [CWRC.EducationalAward]
 
         text = utilities.limit_words(str(name), 15)
-        # should be blank node
-        self.uri = utilities.make_standard_uri(text)
+        self.uri = rdflib.BNode()
 
     def get_award_type(self, name):
         types = []
@@ -239,8 +238,13 @@ class Education(object):
         for x in self.contested_behaviour:
             g.add((context.uri, CWRC.contestedBehaviour, Literal(x)))
 
+        # TODO: May need to adjust how contexts work for the instructor
         for x in self.studied_subjects:
             g.add((context.uri, CWRC.subjectOfStudy, x))
+            if len(self.schools) == 1:
+                g.add((self.schools[0].uri, CWRC.teachesEducationalSubject, x))
+            if len(self.instructors) == 1:
+                g.add((self.instructors[0], CWRC.teachesEducationalSubject, x))
 
         for x in self.degrees:
             g.add((context.uri, CWRC.credential, x))
@@ -257,12 +261,12 @@ class Education(object):
             g.add((context.uri, CWRC.subjectOfStudy, x))
 
         for x in self.works:
-            oeuvre_uri = rdflib.term.URIRef(str(x) + "__Oeuvre")
+            oeuvre_uri = rdflib.term.URIRef(str(x) + "_Oeuvre")
             g.add((oeuvre_uri, RDF.type, CWRC.Oeuvre))
             g.add((context.uri, CWRC.studies, oeuvre_uri))
-            # g.add((x, utilities.NS_DICT["bf"].role, oeuvre_uri))
-            # TODO label this better
-            # g.add((oeuvre_uri, RDFS.label, Literal(x)))
+            g.add((x, utilities.NS_DICT["bf"].author, oeuvre_uri))
+            label = x.split("/")[-1].split("_")[0] + "'s"
+            g.add((oeuvre_uri, RDFS.label, Literal(label + " oeuvre")))
 
         return g
 
@@ -395,7 +399,7 @@ def create_education(tag, person):
     temp_education.add_degree_subjects(get_degree_subjects(tag))
     temp_education.add_awards(get_awards(tag.find_all("AWARD")))
 
-    texts = get_texts(tag.find_all("TEXT"))
+    texts = tag.find_all("TEXT")
     works = []
     titles = []
     for x in texts:
@@ -405,7 +409,7 @@ def create_education(tag, person):
     # print(temp_education)
     # Add mapping of titles
     temp_education.add_edu_texts(titles)
-    # temp_education.add_works(works)
+    temp_education.add_works(works)
 
     return temp_education
 
