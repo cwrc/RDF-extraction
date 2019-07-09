@@ -409,6 +409,12 @@ def extract_cf_data(bio, person):
     #         person.add_cultural_form(CulturalForm("nationality", None,
     #                                               get_mapped_term("NationalIdentity", "British")))
 
+    # Snippet for gender context is awkward
+    context_id = person.id + "_GenderContext_1"
+    gender_context = Context(context_id, bio.ORLANDOHEADER.FILEDESC, "GENDER")
+    gender_context.link_triples(CulturalForm("gender", None, person.gender))
+    person.add_context(gender_context)
+
     print("\n" * 5)
 
 

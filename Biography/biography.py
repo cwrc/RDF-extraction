@@ -2,6 +2,7 @@ import rdflib
 from rdflib import RDF, RDFS, Literal
 from Utils import utilities
 
+
 WIKIDATA_MAP = {}
 logger = utilities.config_logger("biography")
 
@@ -45,15 +46,12 @@ class Biography(object):
         self.gender = gender
         self.std_name = utilities.get_name(doc)
         self.uri = utilities.make_standard_uri(self.std_name)
-
+        self.document = doc
         # TODO: get nickname from file most common acroynm and replace in event/context strings
         self.nickname = None
 
-        # TODO: Read wikidata identifiers from csv
         # self.wd_id = None
         self.wd_id = get_wd_identifier(id)
-        print(self.wd_id)
-        input()
         self.nationalities = []
 
         self.context_list = []
@@ -68,13 +66,11 @@ class Biography(object):
             "intimateRelationship": 1,
             "friendsAssociates": 1
         }
-        self.deathObj = None
         self.cohabitants_list = []
         self.family_list = []
         self.friendsAssociates_list = []
         self.intimateRelationships_list = []
         self.childless_list = []
-
         self.children_list = []
         self.name_list = []
 
@@ -106,28 +102,26 @@ class Biography(object):
         g = utilities.create_graph()
 
         g.add((self.uri, RDF.type, utilities.NS_DICT["cwrc"].NaturalPerson))
-        g.add((self.uri, utilities.NS_DICT["cwrc"].hasGender, self.gender))
         g.add((self.uri, utilities.NS_DICT["foaf"].isPrimaryTopicOf, self.url))
+        # g.add((self.uri, utilities.NS_DICT["cwrc"].hasGender, person.gender))
 
         g += self.create_triples(self.context_list)
         g += self.create_triples(self.event_list)
 
-        if self.deathObj is not None:
-            g += self.deathObj.to_triples()
-
-        g += self.create_triples(self.cohabitants_list)
-        g += self.create_triples(self.family_list)
-        g += self.create_triples(self.friendsAssociates_list)
-        g += self.create_triples(self.intimateRelationships_list)
-        g += self.create_triples(self.childless_list)
-        g += self.create_triples(self.children_list)
-        g += self.create_triples(self.name_list)
+        # g += self.create_triples(self.cohabitants_list)
+        # g += self.create_triples(self.family_list)
+        # g += self.create_triples(self.friendsAssociates_list)
+        # g += self.create_triples(self.intimateRelationships_list)
+        # g += self.create_triples(self.childless_list)
+        # g += self.create_triples(self.children_list)
+        # g += self.create_triples(self.name_list)
 
         if self.wd_id:
             g.add((self.uri, utilities.NS_DICT["owl"].sameAs, rdflib.term.URIRef(self.wd_id)))
 
         # g.add((self.uri, RDFS.label, Literal(self.name)))
         # g.remove((self.uri, RDFS.label, Literal(self.std_name)))
+        g.add((self.uri, RDFS.label, Literal(self.std_name)))
         g.add((self.uri, utilities.NS_DICT["skos"].altLabel, Literal(self.name)))
 
         return g
