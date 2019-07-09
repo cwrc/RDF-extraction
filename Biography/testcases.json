@@ -47,6 +47,14 @@
             "contexts": "Now grabbing the whole DEATH/BIRTH tag as context"
         }
     },
+    "lifeInfo.py": {
+        "testcases": {
+            "lambma": "Family: Mary Lamb - Has Family context without member tag, CHILDREN & CHILDLESSNESS"
+        },
+        "notes": {
+            "contexts": "Family: Whole member tag is the context"
+        }
+    },
     "culturalForm.py": {
         "testcases": {
             "angema": "RDF-Extraction Issue #4: Ensuring string is rendered the same as src material (Africanist)",
