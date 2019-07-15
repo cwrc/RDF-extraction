@@ -121,7 +121,7 @@ def find_cultural_forms(cf, person):
 
             if value == "hindustani":
                 cf_list.append(CulturalForm(predicate, None, get_mapped_term("Language", "hindi")))
-            cf_list.append(CulturalForm(predicate, None, get_mapped_term("Language", value)))
+            cf_list.append(CulturalForm(predicate, None, get_mapped_term("Language", value, id=person.id)))
 
     def get_other_cfs():
         tags = {"NATIONALITY": ["nationality", "NationalIdentity"],

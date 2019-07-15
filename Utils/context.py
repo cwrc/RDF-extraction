@@ -155,7 +155,7 @@ class Context(object):
         self.text = tag.get_text()
 
         # Would be nice to use the ontology and not worry about changing labels
-        logger.info(context_type + " " + str(mode))
+        # logger.info(context_type + " " + str(mode))
         self.context_type = get_context_type(context_type, mode)
         self.context_label = utilities.split_by_casing(self.context_type)
         self.context_type = utilities.create_cwrc_uri(self.context_type)

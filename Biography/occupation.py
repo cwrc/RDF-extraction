@@ -193,17 +193,36 @@ map_fail = 0
 fail_dict = {}
 
 
+def log_mapping_fails(detail=True):
+    if 'http://sparql.cwrc.ca/ontologies/cwrc#Occupation' in fail_dict:
+        job_fail_dict = fail_dict['http://sparql.cwrc.ca/ontologies/cwrc#Occupation']
+        log_str = "\n\n"
+        log_str += "Attempts: " + str(map_attempt) + "\n"
+        log_str += "Fails: " + str(map_fail) + "\n"
+        log_str += "Success: " + str(map_success) + "\n"
+        log_str += "\nFailure Details:" + "\n"
+        log_str += "\nUnique Missed Terms: " + str(len(job_fail_dict.keys())) + "\n"
+
+        from collections import OrderedDict
+
+        new_dict = OrderedDict(sorted(job_fail_dict.items(), key=lambda t: t[1], reverse=True))
+        count = 0
+        for y in new_dict.keys():
+            log_str += "\t\t" + str(new_dict[y]) + ": " + y + "\n"
+            count += new_dict[y]
+        log_str += "\tTotal missed occupation: " + str(count) + "\n\n"
+
+        print(log_str)
+        logger.info(log_str)
+
+
 def find_occupations(tag):
     """Creates a list of occupations given the tag
     """
 
-    occupation_list = []
     jobs_tags = tag.find_all("JOB") + tag.find_all("SIGNIFICANTACTIVITY")
     jobs_tags += tag.find_all("EMPLOYER") + tag.find_all("REMUNERATION")
-    for x in jobs_tags:
-        occupation_list.append(Occupation(x))
-
-    return occupation_list
+    return [Occupation(x) for x in jobs_tags]
 
 
 def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
@@ -291,33 +310,13 @@ def main():
         uber_graph += graph
         entry_num += 1
 
+    log_mapping_fails()
     print("UberGraph is size:", len(uber_graph))
     temp_path = "extracted_triples/occupations.ttl"
     utilities.create_extracted_uberfile(temp_path, uber_graph)
 
     temp_path = "extracted_triples/occupations.rdf"
     utilities.create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
-
-    if 'http://sparql.cwrc.ca/ontologies/cwrc#Occupation' in fail_dict:
-        job_fail_dict = fail_dict['http://sparql.cwrc.ca/ontologies/cwrc#Occupation']
-        log_str = "\n\n"
-        log_str += "Attempts: " + str(map_attempt) + "\n"
-        log_str += "Fails: " + str(map_fail) + "\n"
-        log_str += "Success: " + str(map_success) + "\n"
-        log_str += "\nFailure Details:" + "\n"
-        log_str += "\nUnique Missed Terms: " + str(len(job_fail_dict.keys())) + "\n"
-
-        from collections import OrderedDict
-
-        new_dict = OrderedDict(sorted(job_fail_dict.items(), key=lambda t: t[1], reverse=True))
-        count = 0
-        for y in new_dict.keys():
-            log_str += "\t\t" + str(new_dict[y]) + ": " + y + "\n"
-            count += new_dict[y]
-        log_str += "\tTotal missed occupation: " + str(count) + "\n\n"
-
-        print(log_str)
-        logger.info(log_str)
 
 
 if __name__ == "__main__":
