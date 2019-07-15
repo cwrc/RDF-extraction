@@ -52,12 +52,11 @@ def main():
         location.extract_location_data(soup, person)
         lifeInfo.extract_friend_data(soup, person)
         birthDeath.extract_death_data(soup, person)
-        # bagnen
         lifeInfo.extract_family_data(soup, person)
         lifeInfo.extract_intimate_relationships_data(soup, person)
         personname.extract_person_name(soup, person)
         education.extract_education_data(soup, person)
-        
+
         # lifeInfo.extract_cohabitants(soup, person)
         # lifeInfo.extract_childlessness(soup, person)
         # lifeInfo.extract_children(soup, person)
@@ -81,9 +80,10 @@ def main():
         entry_num += 1
 
     temp_path = "extracted_triples/biography_triples.ttl"
-    utilities.create_extracted_uberfile(temp_path, uber_graph)
+    utilities.create_extracted_uberfile(temp_path, uber_graph, extra_triples="../data/additional_triples.ttl")
 
     cf.log_mapping_fails()
+    occupation.log_mapping_fails()
     logger.info(str(len(uber_graph)) + " total triples created")
     logger.info(str(largest_person) + " produces the most triples(" + str(highest_triples) + ")")
     logger.info(str(smallest_person) + " produces the least triples(" + str(least_triples) + ")")

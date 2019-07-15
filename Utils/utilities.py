@@ -306,11 +306,15 @@ def create_extracted_file(filepath, person, serialization=None):
             f.write(person.to_file())
 
 
-def create_extracted_uberfile(filepath, graph, serialization=None):
+def create_extracted_uberfile(filepath, graph, serialization=None, extra_triples=None):
     """Create file of triples for a particular graph
     """
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     with open(filepath, "w", encoding="utf-8") as f:
+        if extra_triples:
+            g = rdflib.Graph()
+            g.parse(extra_triples, format="ttl")
+            graph += g
         if serialization:
             f.write(graph.serialize(format=serialization).decode())
         else:

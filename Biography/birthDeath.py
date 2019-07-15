@@ -244,10 +244,13 @@ def main():
 
     print("UberGraph is size:", len(uber_graph))
     temp_path = "extracted_triples/birthdeath.ttl"
-    utilities.create_extracted_uberfile(temp_path, uber_graph)
+    # utilities.create_extracted_uberfile(temp_path, uber_graph)
+    utilities.create_extracted_uberfile(temp_path, uber_graph, extra_triples="../data/additional_triples.ttl")
 
     temp_path = "extracted_triples/birthdeath.rdf"
-    utilities.create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
+    # utilities.create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
+    utilities.create_extracted_uberfile(temp_path, uber_graph, "pretty-xml",
+                                        extra_triples="../data/additional_triples.ttl")
 
 
 if __name__ == '__main__':
