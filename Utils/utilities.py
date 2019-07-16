@@ -409,13 +409,25 @@ def parse_args(script, info_type):
     modes.add_argument("-f", "-file", "--file", help="single orlando xml document to run extraction upon")
     modes.add_argument("-d", "-directory", "--directory", help="directory of files to run extraction upon")
 
+    # TODO:
+    modes.add_argument("-r", "-random", "--random", nargs='?', const=1, type=int, help="chooses a random file(s)")
+    # Add option for random entry
+    # Add option for random x entries
+
     args = parser.parse_args()
     directory = testcase_data['default directory']
     file_ending = testcase_data['file ending']
     filelist = []
     descriptors = []
 
-    if args.file:
+    if args.random:
+        import random
+        filelist = [directory +
+                    filename for filename in sorted(os.listdir(directory)) if filename.endswith(".xml")]
+        filelist = random.sample(filelist, args.random)
+        descriptors = ["Testing on " + filename + " from " + directory for filename in filelist]
+        print("Running extraction on", args.random, "random Orlando file(s)")
+    elif args.file:
         assert args.file.endswith(".xml"), "Not an XML file"
         filelist = [args.file]
         descriptors = ["Testing single file specified: " + args.file]
