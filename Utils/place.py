@@ -1,5 +1,6 @@
 import rdflib
 PLACE_MAP = {}
+UNMAPPED_OCCURENCES = {}
 
 
 def config_logger(name, verbose=False):
@@ -71,6 +72,22 @@ def get_value(tag):
     return value
 
 
+def log_mapping_fails():
+    log_str = "\nUnique Missed Terms: " + str(len(UNMAPPED_OCCURENCES.keys())) + "\n"
+
+    from collections import OrderedDict
+
+    new_dict = OrderedDict(sorted(UNMAPPED_OCCURENCES.items(), key=lambda t: t[1], reverse=True))
+    count = 0
+    for y in new_dict.keys():
+        log_str += "\t" + str(new_dict[y]) + ": " + y + "\n"
+        count += new_dict[y]
+    log_str += "\tTotal missed places: " + str(count) + "\n\n"
+
+    print(log_str)
+    logger.info(log_str)
+
+
 class Place(object):
     """
         Probably will remove this class and just leave the functions for address and uri but for now
@@ -101,12 +118,17 @@ class Place(object):
             self.address = place_tag.text
 
         # TODO: Use PLACENAME as address perhaps
-        if self.address in PLACE_MAP:
+        if self.address in UNMAPPED_OCCURENCES:
+            self.uri = rdflib.term.Literal(self.address)
+            UNMAPPED_OCCURENCES[self.address] += 1
+        elif self.address in PLACE_MAP:
             self.uri = rdflib.term.URIRef(PLACE_MAP[self.address])
             # TODO: get place string from uri --> extend csv?
         else:
-            logger.warning("Unable to find matching place instance for: " + self.address)
+            logger.warning("Unable to find matching place instance for: " +
+                           self.address + "(" + str(place_tag) + ")")
             self.uri = rdflib.term.Literal(self.address)
+            UNMAPPED_OCCURENCES[self.address] = 1
 
     # Hopefully won't have to create triples about a place just provide a uri but
     def to_triple(self, person_uri):

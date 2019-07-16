@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from bs4 import BeautifulSoup
 
-from Utils import utilities
+from Utils import utilities, place
 from biography import Biography
 import culturalForm as cf
 import location
@@ -82,6 +82,7 @@ def main():
     temp_path = "extracted_triples/biography_triples.ttl"
     utilities.create_extracted_uberfile(temp_path, uber_graph, extra_triples="../data/additional_triples.ttl")
 
+    place.log_mapping_fails()
     cf.log_mapping_fails()
     occupation.log_mapping_fails()
     logger.info(str(len(uber_graph)) + " total triples created")
