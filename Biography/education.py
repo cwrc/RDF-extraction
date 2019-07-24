@@ -79,7 +79,7 @@ class School(object):
         if school_org:
             self.uri = get_org_uri(school_org[0])
         else:
-            self.uri = utilities.make_standard_uri((name) + " EduOrg", "cwrc")
+            self.uri = utilities.make_standard_uri((name) + " ORG", "cwrc")
 
         self.name = name
         self.level = level
@@ -444,7 +444,7 @@ def extract_education(tag_list, context_type, person, list_type="paragraphs"):
             event_type = Education.context_map[context_type].split("Context")[0]
             event_title = person.name + " - " + event_type + " Event"
             event_uri = person.id + "_" + event_type + "_Event" + str(education_event_count[context_type])
-            temp_event = Event(event_title, event_uri, tag)
+            temp_event = Event(event_title, event_uri, tag, event_type+"Event")
             temp_context.link_event(temp_event)
             person.add_event(temp_event)
 
