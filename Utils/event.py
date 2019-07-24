@@ -65,10 +65,11 @@ def get_time_certainty(tag):
 def get_indirect_date_tag(tag):
     tags = tag.find_all("DATE") + tag.find_all("DATESTRUCT") + tag.find_all("DATERANGE")
     if len(tags) > 1:
-        print("Multiple date tags detected:")
-        print(*tags, sep="\n")
-        print()
-        # input()
+        msg = "Multiple date tags detected:\n\t" + str(tag) + "\n"
+        for x in tags:
+            msg += "\t" + str(x) + "\n"
+        logger.warning(msg)
+
     if tags:
         return tags[0]
     return None
@@ -112,7 +113,8 @@ def format_date(date):
 class Event(object):
     """docstring for Event
         Given an id, name, chronstruct tag, it will create an event based on the SEM model and our associated predicates (cwrc:hasEvent)
-        Must be linked to a context through temp_context.link_event(temp_event)
+        Must be linked to a context through link_event() method 
+            ex. temp_context.link_event(temp_event)
     """
 
     event_type_map = {

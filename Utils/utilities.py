@@ -326,6 +326,7 @@ def create_extracted_uberfile(filepath, graph, serialization=None, extra_triples
 def config_logger(name, verbose=False):
     # Will likely want to convert logging records to be json formatted and based on external file.
     # Add metadata info about time of extraction run and remove asctime
+    # TODO: Create log folder if non-existent
     import logging
     if name != "utilities":
         name += '_extraction'
@@ -388,31 +389,31 @@ def parse_args(script, info_type):
     else:
         print("No particular testcases available, please add to testcases.json")
 
-    help_str = "will run through qa test cases that are related to www.github.com/cwrc/testData/tree/master/qa, "
-    help_str += "Which currently are:" + str(list(testcase_data['qa']['testcases']))[1:-1]
-    modes.add_argument('-qa', action="store_true", help=help_str)
+    if "qa" in testcase_data:
+        help_str = "will run through qa test cases that are related to www.github.com/cwrc/testData/tree/master/qa, "
+        help_str += "Which currently are:" + str(list(testcase_data['qa']['testcases']))[1:-1]
+        modes.add_argument('-qa', action="store_true", help=help_str)
 
-    help_str = "will run through special cases that are of particular interest atm which currently are: "
-    help_str += str(list(testcase_data['special']))[1:-1]
-    modes.add_argument('-s', "-special", action="store_true", help=help_str)
+    if "special" in testcase_data:
+        help_str = "will run through special cases that are of particular interest atm which currently are: "
+        help_str += str(list(testcase_data['special']))[1:-1]
+        modes.add_argument('-s', "-special", action="store_true", help=help_str)
 
-    help_str = "will run through cases related to our graffles"
-    help_str += str(list(testcase_data['graffles']))[1:-1]
-    modes.add_argument('-g', "-graffles", "-graffle", action="store_true", help=help_str)
+    if "graffles" in testcase_data:
+        help_str = "will run through cases related to our graffles"
+        help_str += str(list(testcase_data['graffles']))[1:-1]
+        modes.add_argument('-g', "-graffles", "-graffle", action="store_true", help=help_str)
 
-    help_str = "will run through files that are currently being ignored which currently include: "
-    help_str += str(list(testcase_data['ignored files']))[1:-1]
-    modes.add_argument('-i', "-ignored", action="store_true", help=help_str)
+    if "ignored files" in testcase_data:
+        help_str = "will run through files that are currently being ignored which currently include: "
+        help_str += str(list(testcase_data['ignored files']))[1:-1]
+        modes.add_argument('-i', "-ignored", action="store_true", help=help_str)
 
     modes.add_argument("-id", "-orlando", "--orlando",
                        help="entry id of a single orlando document to run extraction upon, ex. woolvi")
     modes.add_argument("-f", "-file", "--file", help="single orlando xml document to run extraction upon")
     modes.add_argument("-d", "-directory", "--directory", help="directory of files to run extraction upon")
-
-    # TODO:
     modes.add_argument("-r", "-random", "--random", nargs='?', const=1, type=int, help="chooses a random file(s)")
-    # Add option for random entry
-    # Add option for random x entries
 
     args = parser.parse_args()
     directory = testcase_data['default directory']
@@ -447,17 +448,17 @@ def parse_args(script, info_type):
         descriptors = [testcase_data['qa']['testcases'][desc] for desc in filelist]
         print("Running extraction on qa cases: ")
         print(*filelist, sep=", ")
-    elif args.s:
+    elif "special" in testcase_data and args.s:
         filelist = sorted(testcase_data['special'].keys())
         descriptors = [testcase_data['special'][desc] for desc in filelist]
         print("Running extraction on special cases: ")
         print(*filelist, sep=", ")
-    elif args.g:
+    elif "graffle" in testcase_data and args.g:
         filelist = sorted(testcase_data['graffles'].keys())
         descriptors = [testcase_data['graffles'][desc] for desc in filelist]
         print("Running extraction on graffle examples: ")
         print(*filelist, sep=", ")
-    elif args.i:
+    elif "ignored files" in testcase_data and args.i:
         filelist = sorted(testcase_data['ignored files'].keys())
         descriptors = [testcase_data['ignored files'][desc] for desc in filelist]
         print("Running extraction on ignored files: ")
@@ -474,7 +475,11 @@ def parse_args(script, info_type):
         descriptors = ["Testing on " + filename + " from " + directory for filename in filelist]
 
     # TODO: clean this maybe using any operator
-    if args.qa or args.s or args.i or args.g or args.orlando or (testcases_available and args.testcases):
+    if script == "freestanding_events.py" and (args.qa or args.testcases):
+        filelist = [directory + file + file_ending for file in filelist]
+    elif script == "freestanding_events.py":
+        pass
+    elif args.qa or args.s or args.i or args.g or args.orlando or (testcases_available and args.testcases):
         filelist = [directory + file + file_ending for file in filelist]
 
     # TODO: Allow script specific testcases to overwrite ignored files, maybe?

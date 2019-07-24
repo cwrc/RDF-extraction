@@ -11,6 +11,8 @@ except Exception as e:
 
 # this is temporary list to ensure that the orgname standard is within the auth list
 org_list = []
+ORG_MAP = {}
+logger = utilities.config_logger("organizations")
 
 
 class Organization(object):
@@ -57,6 +59,7 @@ class Organization(object):
 
 
 def get_org_uri(tag):
+    global ORG_MAP
     if tag.get("STANDARD") in org_list:
         name = tag.get("STANDARD")
     elif tag.get("REG") in org_list:
@@ -64,7 +67,27 @@ def get_org_uri(tag):
     else:
         name = tag.get("STANDARD")
 
-    return utilities.make_standard_uri(name + " ORG", ns="cwrc")
+    uri = utilities.make_standard_uri(name + " ORG", ns="cwrc")
+    if str(uri) in ORG_MAP:
+        ORG_MAP[str(uri)] += 1
+    else:
+        ORG_MAP[str(uri)] = 1
+
+    return uri
+
+
+def log_mapping(detail=True):
+    from collections import OrderedDict
+    log_str = "Mentioned Orgnames:\n"
+    new_dict = OrderedDict(sorted(ORG_MAP.items(), key=lambda t: t[1], reverse=True))
+    count = 0
+    for y in new_dict.keys():
+        log_str += "\t\t" + str(new_dict[y]) + ": " + y.split("#")[1] + "\n"
+        count += new_dict[y]
+    log_str += "\tTotal Organizations: " + str(count) + "\n\n"
+
+    print(log_str)
+    logger.info(log_str)
 
 
 def get_org(tag):
