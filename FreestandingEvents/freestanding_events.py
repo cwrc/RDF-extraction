@@ -4,14 +4,11 @@
 from bs4 import BeautifulSoup
 import rdflib
 
-from utilities import *
-from context import Context
-from event import Event
+from Utils import utilities
+from Utils.context import Context
+from Utils.place import Place
+from Utils.event import get_date_tag, Event, format_date
 
-
-uber_graph = rdflib.Graph()
-namespace_manager = rdflib.namespace.NamespaceManager(uber_graph)
-bind_ns(namespace_manager, NS_DICT)
 
 """
 Status: ~75%
@@ -33,10 +30,7 @@ class Freestanding_Event(object):
         self.context.link_event(event)
 
     def to_graph(self):
-        g = rdflib.Graph()
-        namespace_manager = rdflib.namespace.NamespaceManager(g)
-        bind_ns(namespace_manager, NS_DICT)
-
+        g = utilities.create_graph()
         g += self.event.to_triple()
         g += self.context.to_triple()
         return g
@@ -55,6 +49,59 @@ class Freestanding_Event(object):
 
 
 def main():
+    file_dict = utilities.parse_args(__file__, "Freestanding Events")
+    uber_graph = utilities.create_graph()
+    entry_num = 1
+
+    for filename in file_dict.keys():
+        with open(filename) as f:
+            soup = BeautifulSoup(f, 'lxml-xml')
+
+        file_id = filename.split("/")[-1][:-4]
+        print(file_id)
+
+        event_id = "freestanding_event_" + str(file_id)
+        context_id = "freestanding_event_context_" + str(file_id)
+        print("===========", file_id, "=============")
+
+        event_title = "Freestanding Event #" + str(file_id)
+        events = soup.find_all("CHRONSTRUCT")
+        if not events:
+            print(event_title)
+            print(events)
+            input()
+
+        event_tag = soup.find_all("CHRONSTRUCT")
+        context_tag = soup.find_all("FREESTANDING_EVENT")
+
+        if len(event_tag) > 1:
+            logger.warning("Multiple CHRONSTRUCTs found within: " + filename)
+
+        if len(context_tag) > 1:
+            logger.warning("Multiple FREESTANDING_EVENTs found within: " + filename)
+
+        context_tag = context_tag[0]
+        event_tag = event_tag[0]
+
+        temp_context = Context(context_id, context_tag, "FREESTANDING_EVENT", "identifying")
+        temp_event = Event(event_title, event_id, event_tag, "UnknownEvent")
+
+        freestanding_event = Freestanding_Event(temp_event, temp_context)
+
+        uber_graph += freestanding_event.to_graph()
+
+        print(context_tag)
+        print(freestanding_event.to_file())
+
+        entry_num += 1
+        temp_path = "extracted_triples/FE_turtle/" + file_id + "_FE.ttl"
+        utilities.create_extracted_file(temp_path, freestanding_event)
+
+    temp_path = "extracted_triples/all_FE_triples.ttl"
+    utilities.create_extracted_uberfile(temp_path, uber_graph)
+
+
+def main1():
     import os
     filelist = [filename[:-4] for filename in sorted(os.listdir("freeevents_data/")) if filename.endswith(".xml")]
     filelist.sort(key=int)

@@ -1,0 +1,21 @@
+{
+    "default directory": "../data/freeevents_entries/",
+    "file ending": ".xml",
+    "qa": {
+        "testcases": {
+            "1": "Unsure",
+            "10": "Unsure",
+            "100": "Unsure"
+        }
+    },
+    "freestanding_events.py": {
+        "testcases": {
+            "9": "No clue",
+            "1008": "idk",
+            "1203": "idk"
+        },
+        "notes": {
+            "contexts": "testing"
+        }
+    }
+}

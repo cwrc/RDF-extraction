@@ -134,17 +134,17 @@ class Context(object):
     """
     MAPPING = create_context_map()
 
-    def __init__(self, id, tag, context_type="CULTURALFORMATION", motivation="describing", mode=None):
+    def __init__(self, id, tag, context_type="CULTURALFORMATION", motivation="describing", mode=None, person_uri=None):
         super(Context, self).__init__()
         self.id = id
         self.triples = []
         self.events = []
         self.xpath = get_xpath(tag)
+        self.context_focus = person_uri
 
         # Creating citations from bibcit tags
         bibcits = tag.find_all("BIBCIT")
         self.citations = [Citation(x) for x in bibcits]
-
         self.tag = tag
 
         self.heading = get_heading(tag)
@@ -153,18 +153,23 @@ class Context(object):
             self.src = "http://orlando.cambridge.org"
 
         self.text = tag.get_text()
+        self.orlando_tagname = context_type
 
         # Would be nice to use the ontology and not worry about changing labels
         # logger.info(context_type + " " + str(mode))
-        self.context_type = get_context_type(context_type, mode)
+        if context_type != "FREESTANDING_EVENT":
+            self.context_type = get_context_type(context_type, mode)
+            self.context_predicate = utilities.create_cwrc_uri(get_context_predicate(context_type))
+        else:
+            self.context_type = "UnknownContext"
+            self.context_predicate = None
+
         self.context_label = utilities.split_by_casing(self.context_type)
         self.context_type = utilities.create_cwrc_uri(self.context_type)
 
         self.named_entities = get_named_entities(self.tag)
 
-        self.context_predicate = utilities.create_cwrc_uri(get_context_predicate(context_type))
-
-        if self.named_entities:
+        if self.named_entities and context_type != "FREESTANDING_EVENT":
             motivation = "describing"
 
         self.motivation = utilities.create_uri("oa", motivation)
@@ -206,14 +211,18 @@ class Context(object):
         # removing tags that mess up the snippet
         remove_unwanted_tags(self.tag)
         if not self.tag.get_text():
-            logger.error("Empty tag encountered when creating the context:  " + self.id + ": " + str(self.tag))
+            logger.error("Empty tag encountered when creating the context:  " + self.id +
+                         ": Within:  " + self.orlando_tagname + " " + str(self.tag))
             self.text = ""
         else:
             self.text = utilities.limit_to_full_sentences(str(self.tag.get_text()), MAX_WORD_COUNT)
 
     def to_triple(self, person=None):
-        # if tag is a describing None create the identifying triples
+
         g = utilities.create_graph()
+
+        if not self.context_focus and person:
+            self.context_focus = person.uri
 
         # Creating target first
         target_uri = rdflib.BNode()
@@ -223,10 +232,10 @@ class Context(object):
         else:
             source_url = rdflib.term.URIRef(self.src + "#FE")
             target_label = "FE" + " - " + self.context_label + " excerpt"
-
         g.add((target_uri, RDFS.label, Literal(target_label)))
         g.add((target_uri, utilities.NS_DICT["oa"].hasSource, source_url))
 
+        # Adding citations
         for x in self.citations:
             g += x.to_triple(target_uri, source_url)
 
@@ -259,17 +268,19 @@ class Context(object):
         g.add((identifying_uri, utilities.NS_DICT["oa"].hasTarget, target_uri))
         g.add((identifying_uri, utilities.NS_DICT["oa"].motivatedBy, utilities.NS_DICT["oa"].identifying))
 
+        # Creating spatial context if place is mentioned
         identified_places = utilities.get_places(self.tag)
         if identified_places:
             self.named_entities += identified_places
             g.add((identifying_uri, RDF.type, utilities.create_cwrc_uri("SpatialContext")))
 
+        # Adding identifying bodies to annotation
         for x in self.named_entities:
             g.add((identifying_uri, utilities.NS_DICT["oa"].hasBody, x))
-
         if person:
             g.add((identifying_uri, utilities.NS_DICT["oa"].hasBody, person.uri))
 
+        # Attaching event to context
         for x in self.events:
             g.add((identifying_uri, utilities.NS_DICT["cwrc"].hasEvent, x.uri))
 
@@ -280,12 +291,9 @@ class Context(object):
             g.add((self.uri, RDF.type, self.context_type))
             g.add((self.uri, RDFS.label, Literal(context_label)))
             g.add((self.uri, utilities.NS_DICT["cwrc"].hasIDependencyOn, identifying_uri))
-            g.add((self.uri, utilities.NS_DICT["cwrc"].contextFocus, person.uri))
             g.add((self.uri, utilities.NS_DICT["oa"].hasTarget, target_uri))
             g.add((self.uri, utilities.NS_DICT["oa"].motivatedBy, self.motivation))
-
-            for x in self.events:
-                g.add((self.uri, utilities.NS_DICT["cwrc"].hasEvent, x.uri))
+            g.add((self.uri, utilities.NS_DICT["cwrc"].contextFocus, self.context_focus))
 
             # Adding extracted triples
             temp_graph = utilities.create_graph()
