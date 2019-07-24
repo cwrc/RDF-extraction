@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from bs4 import BeautifulSoup
 
-from Utils import utilities, place
+from Utils import utilities, place, organizations
 from biography import Biography
 import culturalForm as cf
 import location
@@ -79,17 +79,18 @@ def main():
         uber_graph += graph
         entry_num += 1
 
-    temp_path = "extracted_triples/biography_triples.ttl"
-    utilities.create_extracted_uberfile(temp_path, uber_graph, extra_triples="../data/additional_triples.ttl")
-
     place.log_mapping_fails()
     cf.log_mapping_fails()
     occupation.log_mapping_fails()
+    organizations.log_mapping()
     logger.info(str(len(uber_graph)) + " total triples created")
     logger.info(str(largest_person) + " produces the most triples(" + str(highest_triples) + ")")
     logger.info(str(smallest_person) + " produces the least triples(" + str(least_triples) + ")")
 
     logger.info("Time completed: " + utilities.get_current_time())
+
+    temp_path = "extracted_triples/biography_triples.ttl"
+    utilities.create_extracted_uberfile(temp_path, uber_graph, extra_triples="../data/additional_triples.ttl")
 
 
 if __name__ == "__main__":
