@@ -2,7 +2,6 @@ import rdflib
 from rdflib import RDF, RDFS, Literal
 from difflib import get_close_matches
 
-from biography import Biography
 from Utils import utilities
 from Utils.organizations import get_org, get_org_uri
 from Utils.place import Place
@@ -444,7 +443,7 @@ def extract_education(tag_list, context_type, person, list_type="paragraphs"):
             event_type = Education.context_map[context_type].split("Context")[0]
             event_title = person.name + " - " + event_type + " Event"
             event_uri = person.id + "_" + event_type + "_Event" + str(education_event_count[context_type])
-            temp_event = Event(event_title, event_uri, tag, event_type+"Event")
+            temp_event = Event(event_title, event_uri, tag, event_type + "Event")
             temp_context.link_event(temp_event)
             person.add_event(temp_event)
 
@@ -550,9 +549,8 @@ def extract_education_data(bio, person):
 
 
 def main():
-    import os
     from bs4 import BeautifulSoup
-    import culturalForm
+    from biography import Biography
 
     file_dict = utilities.parse_args(__file__, "Education")
 
@@ -571,7 +569,7 @@ def main():
         print(person_id)
         print("*" * 55)
 
-        person = Biography(person_id, soup, culturalForm.get_mapped_term("Gender", utilities.get_sex(soup)))
+        person = Biography(person_id, soup)
 
         extract_education_data(soup, person)
         print()

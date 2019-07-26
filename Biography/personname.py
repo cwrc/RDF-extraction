@@ -269,7 +269,6 @@ def extract_person_name(xmlString, person):
 
 def main():
     from bs4 import BeautifulSoup
-    import culturalForm
     from biography import Biography
     file_dict = utilities.parse_args(__file__, "Personname")
     print("-" * 200)
@@ -288,7 +287,7 @@ def main():
         print(person_id)
         print("*" * 55)
 
-        person = Biography(person_id, soup, culturalForm.get_mapped_term("Gender", utilities.get_sex(soup)))
+        person = Biography(person_id, soup)
         extract_person_name(soup, person)
 
         person.name = utilities.get_readable_name(soup)

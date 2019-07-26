@@ -412,7 +412,7 @@ def extract_cf_data(bio, person):
     # Snippet for gender context is awkward
     context_id = person.id + "_GenderContext_1"
     gender_context = Context(context_id, bio.ORLANDOHEADER.FILEDESC, "GENDER")
-    gender_context.link_triples(CulturalForm("gender", None, person.gender))
+    gender_context.link_triples(CulturalForm("gender", None, get_mapped_term("Gender", utilities.get_sex(bio))))
     person.add_context(gender_context)
 
     print("\n" * 5)
@@ -561,7 +561,7 @@ def main():
         print(file_dict[filename])
         print("*" * 55)
 
-        person = Biography(person_id, soup, get_mapped_term("Gender", utilities.get_sex(soup)))
+        person = Biography(person_id, soup)
         extract_cf_data(soup, person)
         person.name = utilities.get_readable_name(soup)
         graph = person.to_graph()

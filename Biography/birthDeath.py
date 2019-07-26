@@ -210,7 +210,6 @@ def extract_death_data(xmlString, person):
 
 def main():
     from bs4 import BeautifulSoup
-    import culturalForm
     from biography import Biography
 
     file_dict = utilities.parse_args(__file__, "Birth/Death")
@@ -230,7 +229,7 @@ def main():
         print(person_id)
         print("*" * 55)
 
-        person = Biography(person_id, soup, culturalForm.get_mapped_term("Gender", utilities.get_sex(soup)))
+        person = Biography(person_id, soup)
         extract_birth_data(soup, person)
         extract_death_data(soup, person)
         print(person.to_file())

@@ -20,7 +20,7 @@ add documentation
 implement personname
 """
 
-logger = utilities.config_logger("biography")
+logger = utilities.config_logger("all bio")
 
 
 def main():
@@ -44,7 +44,7 @@ def main():
         print(person_id)
         print(file_dict[filename])
         print("*" * 55)
-        person = Biography(person_id, soup, cf.get_mapped_term("Gender", utilities.get_sex(soup)))
+        person = Biography(person_id, soup)
         cf.extract_cf_data(soup, person)
         other_contexts.extract_other_contexts_data(soup, person)
         occupation.extract_occupation_data(soup, person)

@@ -3,8 +3,10 @@ from rdflib import RDF, RDFS, Literal
 from Utils import utilities
 
 
-WIKIDATA_MAP = {}
 logger = utilities.config_logger("biography")
+
+# TODO: Move this to utilities?
+WIKIDATA_MAP = {}
 
 
 def create_wikidata_map(path=None):
@@ -37,13 +39,12 @@ def get_wd_identifier(id):
 class Biography(object):
     """docstring for Biography"""
 
-    def __init__(self, id, doc, gender):
+    def __init__(self, id, doc):
         super(Biography, self).__init__()
         self.id = id
         self.url = "http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id=" + id
         self.url = rdflib.term.URIRef(self.url)
         self.name = utilities.get_readable_name(doc)
-        self.gender = gender
         self.std_name = utilities.get_name(doc)
         self.uri = utilities.make_standard_uri(self.std_name)
         self.document = doc

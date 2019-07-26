@@ -2,7 +2,7 @@
 
 
 import rdflib
-from biography import Biography
+
 from difflib import get_close_matches
 from rdflib import Literal
 from Utils import utilities
@@ -278,7 +278,7 @@ def extract_occupation_data(bio, person):
 
 def main():
     from bs4 import BeautifulSoup
-    import culturalForm
+    from biography import Biography
 
     file_dict = utilities.parse_args(__file__, "Occupation")
 
@@ -297,7 +297,7 @@ def main():
         print(person_id)
         print("*" * 55)
 
-        person = Biography(person_id, soup, culturalForm.get_mapped_term("Gender", utilities.get_sex(soup)))
+        person = Biography(person_id, soup)
         extract_occupation_data(soup, person)
 
         graph = person.to_graph()

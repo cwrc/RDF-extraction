@@ -1,4 +1,3 @@
-from biography import Biography
 from Utils import utilities
 from Utils.context import Context, get_event_type, get_context_type
 from Utils.event import Event
@@ -89,7 +88,7 @@ def extract_other_contexts_data(bio, person):
 
 def main():
     from bs4 import BeautifulSoup
-    import culturalForm
+    from biography import Biography
 
     ext_type = "Violence, Wealth, Leisure and Society, Other Life Event, Health contexts"
     file_dict = utilities.parse_args(__file__, ext_type)
@@ -109,7 +108,7 @@ def main():
         print(person_id)
         print("*" * 55)
 
-        person = Biography(person_id, soup, culturalForm.get_mapped_term("Gender", utilities.get_sex(soup)))
+        person = Biography(person_id, soup)
         extract_other_contexts_data(soup, person)
 
         graph = person.to_graph()

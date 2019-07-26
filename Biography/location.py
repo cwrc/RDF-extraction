@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 
-from biography import Biography
 from Utils.context import Context, get_event_type
 from Utils.event import Event
 from Utils.place import Place
@@ -208,13 +207,11 @@ def extract_location_data(bio, person):
 
 def main():
     from bs4 import BeautifulSoup
-    import culturalForm
+    from biography import Biography
 
     file_dict = utilities.parse_args(__file__, "Location")
-
-    entry_num = 1
-
     uber_graph = utilities.create_graph()
+    entry_num = 1
 
     for filename in file_dict.keys():
         with open(filename) as f:
@@ -227,7 +224,7 @@ def main():
         print(person_id)
         print("*" * 55)
 
-        person = Biography(person_id, soup, culturalForm.get_mapped_term("Gender", utilities.get_sex(soup)))
+        person = Biography(person_id, soup)
         extract_location_data(soup, person)
 
         graph = person.to_graph()

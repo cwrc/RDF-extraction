@@ -326,7 +326,6 @@ def extract_family_data(bio, person):
 
 def main():
     from bs4 import BeautifulSoup
-    import culturalForm
     from biography import Biography
     file_dict = utilities.parse_args(__file__, "family/friends")
     print("-" * 200)
@@ -345,7 +344,7 @@ def main():
         print(person_id)
         print("*" * 55)
 
-        person = Biography(person_id, soup, culturalForm.get_mapped_term("Gender", utilities.get_sex(soup)))
+        person = Biography(person_id, soup)
         extract_friend_data(soup, person)
         # bagnen
         extract_family_data(soup, person)
