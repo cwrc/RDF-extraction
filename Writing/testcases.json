@@ -1,0 +1,34 @@
+{
+    "default directory": "../data/writing_entries/",
+    "file ending": "-w.xml",
+    "ignored files": {
+        "fielmi": "Michael Field - corresponds to two people and doesn't distinguish between the two"
+    },
+    "special": {
+        "fielmi": "Michael Field - corresponds to two people and doesn't distinguish between the two"
+    },
+    "graffles": {
+        "russra": "Lady Rachel Russell - Response graffle",
+        "bronch": "Charlotte Bronte - Character graffle"
+    },
+    "qa": {
+        "testcases": {
+            "aguigr": "Grace Ag - education graffle",
+            "alcolo": "Louisa May Alcott - ",
+            "atwoma": "Margaret Atwood - Canadian example often used for demos",
+            "bronem": "Emily Bronte - Overlapping triples with sister",
+            "bronch": "Charlotte Bronte - Overlapping triples with sister",
+            "levyam": "Amy Levy - ",
+            "seacma": "Mary Seacole - ",
+            "woolvi": "Virginia Woolf - "
+        }
+    },
+    "intertextuality.py": {
+        "testcases": {
+            "aguigr": "Grace Ag - has nested intertextuality tag"
+        },
+        "notes": {
+            "contexts": "Now grabbing the whole DEATH/BIRTH tag as context"
+        }
+    }
+}

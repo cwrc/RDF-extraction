@@ -134,13 +134,13 @@ class Context(object):
     """
     MAPPING = create_context_map()
 
-    def __init__(self, id, tag, context_type="CULTURALFORMATION", motivation="describing", mode=None, person_uri=None):
+    def __init__(self, id, tag, context_type="CULTURALFORMATION", motivation="describing", mode=None, subject_uri=None):
         super(Context, self).__init__()
         self.id = id
         self.triples = []
         self.events = []
         self.xpath = get_xpath(tag)
-        self.context_focus = person_uri
+        self.context_focus = subject_uri
 
         # Creating citations from bibcit tags
         bibcits = tag.find_all("BIBCIT")
@@ -325,15 +325,29 @@ class Context(object):
         return g
 
     def __str__(self):
-        string = "\tid: " + str(self.id) + "\n"
-        # text = strip_all_whitespace(str(self.text))
-        string += "\ttype: " + str(self.context_type) + "\n"
-        string += "\tmotivation: " + str(self.motivation) + "\n"
+        string = ""
+        string += "\tcontext_focus: " + str(self.context_focus) + "\n"
+        string += "\tcontext_label: " + str(self.context_label) + "\n"
+        string += "\tcontext_predicate: " + str(self.context_predicate) + "\n"
+        string += "\tcontext_type: " + str(self.context_type) + "\n"
+        string += "\tevents: " + str(self.events) + "\n"
         string += "\theading: " + str(self.heading) + "\n"
-        string += "\ttag: \n\t\t{" + str(self.tag) + "}\n"
-        string += "\ttext: \n\t\t{" + str(self.text) + "}\n"
-        if self.subjects:
-            string += "\tsubjects:\n"
-            for x in self.subjects:
-                string += "\t\t" + str(x) + "\n"
+        string += "\tid: " + str(self.id) + "\n"
+        string += "\tmotivation: " + str(self.motivation) + "\n"
+        string += "\torlando_tagname: " + str(self.orlando_tagname) + "\n"
+        string += "\tsrc: " + str(self.src) + "\n"
+        string += "\ttag: " + str(self.tag) + "\n"
+        string += "\ttext: " + str(self.text) + "\n"
+        string += "\turi: " + str(self.uri) + "\n"
+        string += "\txpath: " + str(self.xpath) + "\n"
+        string += "\n\n"
+        for x in self.citations:
+            string += "\t\t" + str(x) + "\n"
+        string += "\n\n"
+        for x in self.named_entities:
+            string += "\t\t" + str(x) + "\n"
+        string += "\n\n"
+        for x in self.triples:
+            string += "\t\t" + str(x) + "\n"
+
         return string + "\n"

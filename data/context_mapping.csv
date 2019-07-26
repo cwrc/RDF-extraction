@@ -33,3 +33,4 @@ HEALTH,,HealthContext,healthAssociation,HealthEvent
 HEALTH,PHYSICAL,PhysicalHealthContext,healthAssociation,HealthEvent
 HEALTH,MENTAL,MentalHealthContext,healthAssociation,HealthEvent
 HEALTH,FEMALEBODY,WomensHealthContext,healthAssociation,HealthEvent
+AUTHORSUMMARY,,WritingContext,writingRelationship,WritingEvent
