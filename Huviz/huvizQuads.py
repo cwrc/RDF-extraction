@@ -1,3 +1,4 @@
+import argparse
 from rdflib import *
 import rdflib
 from SPARQLWrapper import SPARQLWrapper, JSON, XML, N3, RDFXML
@@ -13,8 +14,9 @@ class HuvizQuads:
 
     conjunctiveGraph = ConjunctiveGraph()
 
-    def __init__(self, instanceUri):
+    def __init__(self, instanceUri, graph):
         self.instanceUri = instanceUri
+        self.graph = graph
         self.contextGraph = self.get_context_graph()
 
         # Do the extraction
@@ -56,7 +58,7 @@ class HuvizQuads:
             ?contextPredicates cwrc:subjectCentricPredicate ?subjectCentricPrecate .
         }} WHERE {{
 
-        GRAPH <http://sparql.cwrc.ca/db/BiographyV2Beta> {{
+        GRAPH {1} {{
             BIND({0} AS ?contextFocus)
                 ?context <http://sparql.cwrc.ca/ontologies/cwrc#contextFocus> ?contextFocus ;
                                 ?contextPredicates ?contextObjects ;
@@ -73,12 +75,9 @@ class HuvizQuads:
             }}
             ?contextPredicates cwrc:subjectCentricPredicate ?subjectCentricPrecate .
         }}
-        """.format(self.instanceUri)
+        """.format(self.instanceUri, self.graph)
 
         sparql.setQuery(query)
-
-        print(query)
-
         sparql.setReturnFormat(RDFXML)
 
         results = sparql.query().convert()
@@ -140,18 +139,43 @@ class HuvizQuads:
                         for pppp, oooo, in self.contextGraph.predicate_objects(ooo):
                             self.conjunctiveGraph.add((ooo, pppp, oooo, context))
 
-    def serialize(self, format="turtle"):
-        return self.conjunctiveGraph.serialize(format=format)
+    def serialize(self, outFile, format="turtle"):
+        
+        return self.conjunctiveGraph.serialize(outFile, format=format)
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Usage:python {0} [instance_uri]")
-        sys.exit(1)
+    # if len(sys.argv) < 2:
+    #     print("Usage:python {0} [instance_uri] [output_file]")
+    #     sys.exit(1)
     
-    instanceUri = sys.argv[1]
+    # instanceUri = sys.argv[1]
+    # if len(sys.argv) > 2:
+    #     outFile = sys.argv[2]
+    # else:
+    #     outFile = "out.ttl"
 
-    hq = HuvizQuads(instanceUri)
 
-    print(hq.serialize())
+    parser = argparse.ArgumentParser(description='Convert context centric triples to subject centric quads ' +
+    'with provenance in each graph with the fourth argument.')
+    parser.add_argument('instanceUri', type=str,
+                    help='The uri of the subject to convert.')
+
+    parser.add_argument('--outfile', default="out.nquads",
+                    help='The name of the output file (default: out.nquads)')
+
+    parser.add_argument('--serialize', default="nquads",
+                    choices=['nquads', 'xml']
+    )
+
+    parser.add_argument('--graph', default="?g", 
+                    help='The graph to search for instanceUri (default: all graphs)')
+
+    args = vars(parser.parse_args())
+
+
+    graph = args['graph'] if args['graph'] == '?g' else "<" + args['graph'] + ">"
+
+    hq = HuvizQuads(args['instanceUri'], graph)
+    hq.serialize(args['outfile'], format=args['serialize'])
 
