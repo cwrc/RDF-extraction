@@ -1,0 +1,29 @@
+Relation,Predicate,Male Inverse, Female Inverse, Neutral, SEX
+AUNT,aunt,nephew,niece,relative,FEMALE
+BROTHER,brother,brother,sister,sibling, MALE
+CHILD,child,father,mother,parent,None
+COUSIN,cousin,cousin,cousin,cousin,None
+DAUGHTER,daughter,father,mother,parent,FEMALE
+FATHER,father,son,daughter,child,MALE
+FOREBEAR,ancestor,descendent,descendent,descendent,None
+GRANDDAUGHTER,grandDaughter,grandFather,grandMother,grandParent,FEMALE
+GRANDFATHER,grandFather,grandSon,grandDaughter,grandChild,MALE
+GRANDMOTHER,grandMother,grandSon,grandDaughter,grandChild,FEMALE
+GRANDSON,grandSon,grandFather,grandMother,grandParent,None
+GUARDIAN,guardian,ward,ward,ward,None
+HUSBAND,husband,husband,wife,partner,MALE
+MOTHER,mother,son,daughter,child,FEMALE
+NEPHEW,nephew,uncle,aunt,relative,MALE
+NIECE,niece,uncle,aunt,relative,FEMALE
+OTHER,interpersonalRelationshipWith,interpersonalRelationshipWith,interpersonalRelationshipWith,interpersonalRelationshipWith,None
+PARTNER,partner,partner,partner,partner,None
+SISTER,sister,brother,sister,sibling,FEMALE
+SON,son,father,mother,parent,MALE
+STEPBROTHER,stepBrother,stepBrother,stepSister,stepSibling,MALE
+STEPDAUGHTER,stepDaughter,stepFather,stepMother,stepParent,FEMALE
+STEPFATHER,stepFather,stepSon,stepDaughter,stepChild,MALE
+STEPMOTHER,stepMother,stepSon,stepDaughter,stepChild,FEMALE
+STEPSISTER,stepSister,stepBrother,stepSister,stepSibling,FEMALE
+STEPSON,stepSon,stepFather,stepMother,stepParent,MALE
+UNCLE,uncle,nephew,niece,relative,MALE
+WIFE,wife,husband,wife,partner,FEMALE
