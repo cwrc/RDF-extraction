@@ -13,16 +13,18 @@ logger = utilities.config_logger("birthdeath")
 
 
 class Birth:
-    def __init__(self, date, positions, birthplace):
+    def __init__(self, date, positions, birthplace, date_certainty=False):
         self.date = date
         self.position = []
         self.place = birthplace
+        self.date_certainty = date_certainty
 
     def __str__(self):
         string = "\tDate: " + str(self.date) + "\n"
         string += "\tbirthplace: " + str(self.place) + "\n"
         for x in self.position:
             string += "\tbirthposition: " + str(x) + "\n"
+        string += "\tdate certainty: " + str(self.date_certainty) + "\n"
         return string
 
     def update_birthposition_uris(self):
@@ -42,24 +44,30 @@ class Birth:
     def to_triple(self, context):
         g = utilities.create_graph()
         if self.date:
-            g.add((context.uri, utilities.NS_DICT["cwrc"].birthDate, format_date(self.date)))
+            if self.date_certainty:
+                g.add(
+                    (context.uri, utilities.NS_DICT["cwrc"].birthDate, format_date(self.date)))
+            else:
+                g.add((context.uri, utilities.NS_DICT["cwrc"].approximateBirthDate, format_date(
+                    self.date)))
 
         self.update_birthposition_uris()
         for x in self.position:
             g.add((context.uri, utilities.NS_DICT["cwrc"].birthPosition, x))
 
         if self.place:
-            g.add((context.uri, utilities.NS_DICT["cwrc"].birthPlace, self.place))
+            g.add(
+                (context.uri, utilities.NS_DICT["cwrc"].birthPlace, self.place))
 
         return g
 
 
-def extract_birth_data(xmlString, person):
+def extract_birth_data(bio, person):
     birth_events = []
     birth_positions = []
     context_count = 1
 
-    birth_tags = xmlString.find_all("BIRTH")
+    birth_tags = bio.find_all("BIRTH")
     if len(birth_tags) > 1:
         logger.warning("Multiple Birth tags found: " + person.name + person.id)
 
@@ -69,7 +77,7 @@ def extract_birth_data(xmlString, person):
         context_id = person.id + "_BirthContext_" + str(context_count)
         temp_context = Context(context_id, birth_tag, "BIRTH")
 
-        # creating death event
+        # creating Birth event
         event_tags = birth_tag.find_all("CHRONSTRUCT")
         for x in event_tags:
             event_title = person.name + " - Birth Event"
@@ -77,21 +85,30 @@ def extract_birth_data(xmlString, person):
 
             if len(birth_events) > 0:
                 # TODO: possibly revise uri as well
-                logger.info("Multiple Birth events encountered within entry: " + person.id)
+                logger.info(
+                    "Multiple Birth events encountered within entry: " + person.id)
                 event_title = person.name + " - Birth Related Event"
-                event_uri = person.id + "_BirthEvent_" + str(len(birth_events) + 1)
+                event_uri = person.id + "_BirthEvent_" + \
+                    str(len(birth_events) + 1)
 
             birth_events.append(Event(event_title, event_uri, x, "BirthEvent"))
 
         # retrieving birthdate
         if not birth.date:
             birth_date_tag = get_date_tag(birth_tag)
-            # TODO: Figure out what to do with daterange --> issue#462
-            if birth_date_tag.name == "DATERANGE":
-                logger.info("Birth: Daterange:" + str(birth_date_tag))
-                birth.date = birth_date_tag.get("FROM")
-            else:
-                birth.date = birth_date_tag.get("VALUE")
+
+            if birth_date_tag:
+                if birth_date_tag.get("CERTAINTY") == "CERT":
+                    birth.date_certainty = True
+
+                # Taking earliest date of date range for birth
+                if birth_date_tag.name == "DATERANGE":
+                    if birth.date_certainty:
+                        logger.warning(
+                            "DATERANGE is certain?: " + str(birth_date_tag))
+                    birth.date = birth_date_tag.get("FROM")
+                else:
+                    birth.date = birth_date_tag.get("VALUE")
 
         # retrieving birthplace
         if not birth.place:
@@ -120,39 +137,50 @@ def extract_birth_data(xmlString, person):
 
 
 class Death:
-    def __init__(self, date, burialplace, deathplace):
+    def __init__(self, date, burialplace, deathplace, date_certainty=False):
         self.date = date
         self.burial = burialplace
         self.place = deathplace
+        self.date_certainty = date_certainty
 
     def __str__(self):
         string = "\tDate: " + str(self.date) + "\n"
         string += "\tdeathplace: " + str(self.place) + "\n"
         string += "\tburial: " + str(self.burial) + "\n"
+        string += "\tdate certainty: " + str(self.date_certainty) + "\n"
         return string
 
-    def to_triple(self, person):
+    def to_triple(self, context):
         g = utilities.create_graph()
+
         if self.date:
-            g.add((person.uri, utilities.NS_DICT["cwrc"].deathDate, format_date(self.date)))
+            if self.date_certainty:
+                g.add(
+                    (context.uri, utilities.NS_DICT["cwrc"].deathDate, format_date(self.date)))
+            else:
+                g.add((context.uri, utilities.NS_DICT["cwrc"].approximateDeathDate, format_date(
+                    self.date)))
 
         if self.burial:
-            g.add((person.uri, utilities.NS_DICT["cwrc"].burialPlace, self.burial))
+            g.add(
+                (context.uri, utilities.NS_DICT["cwrc"].burialPlace, self.burial))
 
         if self.place:
-            g.add((person.uri, utilities.NS_DICT["cwrc"].deathPlace, self.place))
+            g.add(
+                (context.uri, utilities.NS_DICT["cwrc"].deathPlace, self.place))
 
         return g
 
 
-def extract_death_data(xmlString, person):
+def extract_death_data(bio, person):
     death_events = []
     context_count = 1
 
     # Multiple death tags --> michael field
-    death_tags = xmlString.find_all("DEATH")
+    death_tags = bio.find_all("DEATH")
     if len(death_tags) > 1:
-        logger.warning("Multiple Death tags found: " + person.name + " - " + person.id)
+        logger.warning("Multiple Death tags found: " +
+                       person.name + " - " + person.id)
 
     death = Death(None, None, None)
     for death_tag in death_tags:
@@ -167,9 +195,11 @@ def extract_death_data(xmlString, person):
 
             if len(death_events) > 0:
                 # TODO: possibly revise uri as well
-                logger.info("Multiple Death events encountered within entry: " + person.id)
+                logger.info(
+                    "Multiple Death events encountered within entry: " + person.id)
                 event_title = person.name + " - Death Related Event"
-                event_uri = person.id + "_DeathEvent_" + str(len(death_events) + 1)
+                event_uri = person.id + "_DeathEvent_" + \
+                    str(len(death_events) + 1)
 
             death_events.append(Event(event_title, event_uri, x, "DeathEvent"))
 
@@ -184,13 +214,18 @@ def extract_death_data(xmlString, person):
         if not death.date:
             death_date_tag = get_date_tag(death_tag)
             if death_date_tag:
-                # TODO: Figure out what to do with daterange --> issue#462
-                if death_date_tag.name == "DATERANGE":
-                    logger.info("Death: Daterange:" + str(death_date_tag) +
-                                " " + person.name + " - " + person.id)
-                    death.date = death_date_tag.get("FROM")
-                else:
-                    death.date = death_date_tag.get("VALUE")
+                if death_date_tag.get("CERTAINTY") == "CERT":
+                    death.date_certainty = True
+
+                if death_date_tag:
+                    # Using TO value from daterange
+                    if death_date_tag.name == "DATERANGE":
+                        if death.date_certainty:
+                            logger.warning("DATERANGE is certain " + " - " +
+                                           person.id + " : " + str(death_date_tag))
+                        death.date = death_date_tag.get("TO")
+                    else:
+                        death.date = death_date_tag.get("VALUE")
 
         # retrieving deathplace
         if not death.place:
@@ -244,7 +279,8 @@ def main():
     print("UberGraph is size:", len(uber_graph))
     temp_path = "extracted_triples/birthdeath.ttl"
     # utilities.create_extracted_uberfile(temp_path, uber_graph)
-    utilities.create_extracted_uberfile(temp_path, uber_graph, extra_triples="../data/additional_triples.ttl")
+    utilities.create_extracted_uberfile(
+        temp_path, uber_graph, extra_triples="../data/additional_triples.ttl")
 
     temp_path = "extracted_triples/birthdeath.rdf"
     # utilities.create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
