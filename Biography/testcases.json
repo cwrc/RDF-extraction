@@ -1,6 +1,9 @@
 {
     "default directory": "../data/biography_entries/",
     "file ending": "-b.xml",
+    "notes": {
+        "to do": "scrape possible biographers"
+    },
     "ignored files": {
         "fielmi": "Michael Field - corresponds to two people and doesn't distinguish between the two"
     },
@@ -11,11 +14,12 @@
         "seacma": "Mary Seacole - Forebear graffle",
         "lel___": "L.E.L - Death graffle",
         "edgema": "Maria Edgeworth - Education graffle",
-        "blesma": "Marguerite Gardiner, Countess of Blessington - Personname graffle"
+        "blesma": "Marguerite Gardiner, Countess of Blessington - Personname graffle",
+        "leonan": "Anna Leonowens - Open Annotation data model (Race Ethnicity Context)"
     },
     "qa": {
         "testcases": {
-            "aguigr": "Grace Ag - education graffle",
+            "aguigr": "Grace Aguilar - education graffle",
             "alcolo": "Louisa May Alcott - ",
             "atwoma": "Margaret Atwood - Canadian example often used for demos",
             "bronch": "Charlotte Bronte - Overlapping triples with sister",
@@ -41,25 +45,59 @@
             "clerag": "death: Agnes Mary Clerke - Multiple Death tags",
             "tautje": "death: Jemima Tautphoeus - Multiple Death tags",
             "lel___": "death: L.E.L - Example used in death graffles",
-            "lambma": "death: Mary Lamb - Has burial place (Same as death place)"
+            "lambma": "death: Mary Lamb - Has burial place (Same as death place)",
+            "mcwica": "birth: Candia McWilliam - certain birth date",
+            "bellev": "death: Eva Mary Bell - certain death date"
         },
         "notes": {
-            "contexts": "Now grabbing the whole DEATH/BIRTH tag as context"
+            "contexts": "Now grabbing the whole DEATH/BIRTH tag as context",
+            "dates": "using approximate{X}Date for CERTAINTY!= CERT",
+            "daterange": "using FROM value for birthDate, using TO value for deathdate"
         }
     },
     "lifeInfo.py": {
         "testcases": {
-            "lambma": "Family: Mary Lamb - Has Family context without member tag, CHILDREN & CHILDLESSNESS"
+            "lambma": "Family: Mary Lamb - Has Family context without member tag, CHILDREN & CHILDLESSNESS",
+            "abdyma": "Children: - has 1 child",
+            "pulthe": "Children: - has 15 children",
+            "struja": "Children & Marital: - has 3 kids, 1 separation, 2 divorces, 2 marriages",
+            "alcolo": "Childlessness: -Adopted Nephew",
+            "bagnen": "Unsure --> Investigate this"
         },
         "notes": {
-            "contexts": "Family: Whole member tag is the context"
+            "contexts": "Family: Whole member tag is the context",
+            "inverse contexts": "using gender of biographee to apply appropriate family member relationship",
+            "marital status": "creating inverse relationship if occurs in an identifiable spouse tag, creating for any occurence",
+            "for review": [
+                "liveswith",
+                "childlessness"
+            ],
+            "to do": "marital status",
+            "!": "family member contexts are awfully long, we may want to get more granular",
+            "sparql queries": [
+                "How many writers had parents who separated/divorced",
+                "How many writers who separated/divorced also had parents who separated/divorced",
+                "What was the social class of writers who separated/divorced"
+            ]
         }
     },
     "culturalForm.py": {
         "testcases": {
             "angema": "RDF-Extraction Issue #4: Ensuring string is rendered the same as src material (Africanist)",
             "taylha": "Ontology Issue #459: WomensEnfranchisement should map to suffrage",
-            "seacma": "Mary Seacole - Forebear Graffle"
+            "caryma": "Mary Ann Shadd Cary - Nested race colour tag",
+            "seacma": "Mary Seacole - Forebear Graffle",
+            "morrja": "Jan Morris - TRANSGENDERED MALE-TO-FEMALE only bio entry",
+            "wintje": "Jeanette Winterson - Sexuality: Lesbian",
+            "smital": "GENDER ???? MALE & UNDEFINED",
+            "dixosa": "DENOMINATION within POLITICS",
+            "walkal": "Alice Walker - ?",
+            "sultma": "Blackwoman",
+            "leonan": "Anna Leonowens - Open Annotation data model (Race Ethnicity Context)"
+        },
+        "notes": {
+            "contexts": "Per paragraph",
+            "to do": "Forebear relations"
         }
     },
     "education.py": {
@@ -81,7 +119,12 @@
             "harwis": "Isabella Neil Harwood - an event and shortprose within personname tag post datastruct",
             "walkal": "Alice Walker - an event within personname tag post datastruct",
             "bailjo": "Joanna Baillie - Two Personname tags found",
-            "bulwed": "Edward George Earle Lytton Bulwer-Lytton, first Baron Lytton - Two Personname tags found"
+            "bulwed": "Edward George Earle Lytton Bulwer-Lytton, first Baron Lytton - Two Personname tags found",
+            "victqu": "Queen Victoria - Royal name"
+        },
+        "notes": {
+            "contexts": "Unsure",
+            "to do": "Review special cases"
         }
     }
 }
