@@ -7,7 +7,7 @@ logger = utilities.config_logger("biography")
 
 # TODO: Move this to utilities?
 WIKIDATA_MAP = {}
-
+# Also identify biographers
 
 def create_wikidata_map(path=None):
     import csv
@@ -48,10 +48,11 @@ class Biography(object):
         self.std_name = utilities.get_name(doc)
         self.uri = utilities.make_standard_uri(self.std_name)
         self.document = doc
+        
         # TODO: get nickname from file most common acroynm and replace in event/context strings
         self.nickname = None
 
-        # self.wd_id = None
+        self.family_members = {}
         self.wd_id = get_wd_identifier(id)
         self.nationalities = []
 
@@ -137,18 +138,21 @@ class Biography(object):
         # TODO: add occupation + education
         string = "id: " + str(self.id) + "\n"
         string += "name: " + str(self.name) + "\n"
-        string += "gender: " + str(self.gender) + "\n"
+        string += "std_name:" + str(self.std_name) + "\n"
+        string += "url:" + str(self.url) + "\n"
+        string += "uri:" + str(self.uri) + "\n"
+        string += "wd_id:" + str(self.wd_id) + "\n"
         if self.context_list:
             string += "Contexts: \n"
             for x in self.context_list:
-                string += str(x) + "\n"
-        if self.location_list:
-            string += "Locations: \n"
-            for x in self.location_list:
                 string += str(x) + "\n"
         if self.event_list:
             string += "Events: \n"
             for x in self.event_list:
                 string += str(x) + "\n"
-
+        if self.family_members:
+            string += "family: \n"
+            for x in self.family_members:
+                string += str(x) + "\n"
+        
         return string

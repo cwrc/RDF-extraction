@@ -134,25 +134,44 @@ class Context(object):
     """
     MAPPING = create_context_map()
 
-    def __init__(self, id, tag, context_type="CULTURALFORMATION", motivation="describing", mode=None, subject_uri=None):
+    def __init__(self, id, tag, context_type="CULTURALFORMATION", motivation="describing", mode=None, subject_uri=None, target_uri=None, id_context=None, subject_name=None, other_triples=True):
         super(Context, self).__init__()
-        self.id = id
-        self.triples = []
+        self.citations = []
         self.events = []
-        self.xpath = get_xpath(tag)
+        self.heading = None
+        self.src = None
+        self.triples = []
+        self.xpath = None
+        self.other_triples = other_triples
+        self.id = id
         self.context_focus = subject_uri
+        self.identifying_uri = id_context
+        self.uri = utilities.create_uri("data", id)
+        self.label = subject_name
+
+        # allows reuse of target to reduce duplication of target/citations
+        if target_uri:
+            self.target_uri = target_uri
+            self.new_target = False
+        else:
+            self.target_uri = rdflib.BNode()
+            self.new_target = True
 
         # Creating citations from bibcit tags
-        bibcits = tag.find_all("BIBCIT")
-        self.citations = [Citation(x) for x in bibcits]
+        if not self.identifying_uri:
+            self.identifying_uri = utilities.create_uri("data", self.id + "_identifying")
+            self.xpath = get_xpath(tag)
+            bibcits = tag.find_all("BIBCIT")
+            self.citations = [Citation(x) for x in bibcits]
+
+            self.heading = get_heading(tag)
+            self.src = "http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id="
+            if not self.heading:
+                self.src = "http://orlando.cambridge.org"
+
         self.tag = tag
-
-        self.heading = get_heading(tag)
-        self.src = "http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id="
-        if not self.heading:
-            self.src = "http://orlando.cambridge.org"
-
         self.text = tag.get_text()
+
         self.orlando_tagname = context_type
 
         # Would be nice to use the ontology and not worry about changing labels
@@ -160,20 +179,22 @@ class Context(object):
         if context_type != "FREESTANDING_EVENT":
             self.context_type = get_context_type(context_type, mode)
             self.context_predicate = utilities.create_cwrc_uri(get_context_predicate(context_type))
+            self.context_label = utilities.split_by_casing(self.context_type)
         else:
-            self.context_type = "UnknownContext"
+            self.context_type = "Context"
             self.context_predicate = None
+            self.context_label = " ".join(self.id.split("_")).title().replace("Context ", "#") + " Context"
 
-        self.context_label = utilities.split_by_casing(self.context_type)
         self.context_type = utilities.create_cwrc_uri(self.context_type)
 
         self.named_entities = get_named_entities(self.tag)
 
-        if self.named_entities and context_type != "FREESTANDING_EVENT":
-            motivation = "describing"
+        #TODO handle linking motivation
+        # Unsure motivation of following if statement
+        # if self.named_entities and context_type != "FREESTANDING_EVENT":
+        #     motivation = "describing"
 
         self.motivation = utilities.create_uri("oa", motivation)
-        self.uri = utilities.create_uri("data", id)
 
     def link_triples(self, comp_list):
         """ Adding to list of components to link context to triples
@@ -225,36 +246,44 @@ class Context(object):
             self.context_focus = person.uri
 
         # Creating target first
-        target_uri = rdflib.BNode()
-        if person:
-            source_url = rdflib.term.URIRef(self.src + person.id + "#" + self.heading)
-            target_label = person.name + " - " + self.context_label + " excerpt"
-        else:
-            source_url = rdflib.term.URIRef(self.src + "#FE")
-            target_label = "FE" + " - " + self.context_label + " excerpt"
-        g.add((target_uri, RDFS.label, Literal(target_label)))
-        g.add((target_uri, utilities.NS_DICT["oa"].hasSource, source_url))
+    
+        if self.new_target:
+            target_label = None
+            source_url = None
 
-        # Adding citations
-        for x in self.citations:
-            g += x.to_triple(target_uri, source_url)
+            if person:
+                source_url = rdflib.term.URIRef(
+                    self.src + person.id + "#" + self.heading)
+                target_label = person.name + " - " + self.context_label + " Excerpt"
+            else:
+                source_url = rdflib.term.URIRef(
+                    self.src + "#FE" + self.id.split("_")[-1])
+                target_label = self.context_label + " Excerpt"
+        
+            source_url = rdflib.term.URIRef(source_url)
+            g.add((self.target_uri, RDFS.label, Literal(target_label)))
+            g.add((self.target_uri, utilities.NS_DICT["oa"].hasSource, source_url))
 
-        # Creating xpath selector
-        xpath_uri = rdflib.BNode()
-        xpath_label = target_label.replace(" excerpt", " XPath Selector")
-        g.add((target_uri, utilities.NS_DICT["oa"].hasSelector, xpath_uri))
-        g.add((xpath_uri, RDFS.label, Literal(xpath_label)))
-        g.add((xpath_uri, RDF.type, utilities.NS_DICT["oa"].XPathSelector))
-        g.add((xpath_uri, RDF.value, Literal(self.xpath)))
+            # Adding citations
+            for x in self.citations:
+                g += x.to_triple(self.target_uri, source_url)
 
-        # Creating text quote selector
-        self.get_snippet()
-        textquote_uri = rdflib.BNode()
-        textquote_label = target_label.replace(" excerpt", " TextQuote Selector")
-        g.add((xpath_uri, utilities.NS_DICT["oa"].refinedBy, textquote_uri))
-        g.add((textquote_uri, RDF.type, utilities.NS_DICT["oa"].TextQuoteSelector))
-        g.add((textquote_uri, RDFS.label, Literal(textquote_label)))
-        g.add((textquote_uri, utilities.NS_DICT["oa"].exact, Literal(self.text)))
+            # Creating xpath selector
+            xpath_uri = rdflib.BNode()
+            xpath_label = target_label.replace(" excerpt", " XPath Selector")
+            g.add((self.target_uri, utilities.NS_DICT["oa"].hasSelector, xpath_uri))
+            g.add((xpath_uri, RDFS.label, Literal(xpath_label)))
+            g.add((xpath_uri, RDF.type, utilities.NS_DICT["oa"].XPathSelector))
+            g.add((xpath_uri, RDF.value, Literal(self.xpath)))
+
+            # Creating text quote selector
+            self.get_snippet()
+            textquote_uri = rdflib.BNode()
+            textquote_label = target_label.replace(" excerpt", " TextQuote Selector")
+            g.add((xpath_uri, utilities.NS_DICT["oa"].refinedBy, textquote_uri))
+            g.add((textquote_uri, RDF.type, utilities.NS_DICT["oa"].TextQuoteSelector))
+            g.add((textquote_uri, RDFS.label, Literal(textquote_label)))
+            g.add((textquote_uri, utilities.NS_DICT["oa"].exact, Literal(self.text)))
 
         # Creating identifying context first and always
         if person:
@@ -265,7 +294,7 @@ class Context(object):
         identifying_uri = utilities.create_uri("data", self.id + "_identifying")
         g.add((identifying_uri, RDF.type, self.context_type))
         g.add((identifying_uri, RDFS.label, Literal(context_label)))
-        g.add((identifying_uri, utilities.NS_DICT["oa"].hasTarget, target_uri))
+        g.add((identifying_uri, utilities.NS_DICT["oa"].hasTarget, self.target_uri))
         g.add((identifying_uri, utilities.NS_DICT["oa"].motivatedBy, utilities.NS_DICT["oa"].identifying))
 
         # Creating spatial context if place is mentioned
@@ -291,7 +320,7 @@ class Context(object):
             g.add((self.uri, RDF.type, self.context_type))
             g.add((self.uri, RDFS.label, Literal(context_label)))
             g.add((self.uri, utilities.NS_DICT["cwrc"].hasIDependencyOn, identifying_uri))
-            g.add((self.uri, utilities.NS_DICT["oa"].hasTarget, target_uri))
+            g.add((self.uri, utilities.NS_DICT["oa"].hasTarget, self.target_uri))
             g.add((self.uri, utilities.NS_DICT["oa"].motivatedBy, self.motivation))
             g.add((self.uri, utilities.NS_DICT["cwrc"].contextFocus, self.context_focus))
 

@@ -161,7 +161,7 @@ def find_cultural_forms(cf, person):
             return get_mapped_term("GeographicHeritage", utilities.get_value(tag), id=person.id)
 
     def get_forebear_cfs():
-        # NOTE: This will have to interact will sparql endpoint to check family related triples
+        # TODO: Check with Erin on how to map forebear 
         # sparql query to check if person hasMother/hasFather, and there is a valid uri
         # otherwise create the person and familial relation?
         def get_forebear(tag):
@@ -311,12 +311,17 @@ def find_cultural_forms(cf, person):
                 if not gender_issue:
                     cf_list.append(CulturalForm("politicalAffiliation", get_reported(x), value))
 
-    if cf.name != "POLITICS":
-        get_forebear_cfs()
-        get_class()
-        get_language()
-        get_other_cfs()
-        get_denomination()
+    def get_gender():
+        # cf_list += [CulturalForm("gender", None, get_mapped_term("Gender", utilities.get_value(x)))
+        cf_list.extend([CulturalForm("gender", None, get_mapped_term("Gender", utilities.get_value(x)))
+                        for x in cf.find_all("GENDER")])
+
+    get_forebear_cfs()
+    get_class()
+    get_language()
+    get_other_cfs()
+    get_denomination()
+    get_gender()
     get_PA()
     return cf_list
 
@@ -409,13 +414,16 @@ def extract_cf_data(bio, person):
     #         person.add_cultural_form(CulturalForm("nationality", None,
     #                                               get_mapped_term("NationalIdentity", "British")))
 
+    extract_gender_data(bio, person)
+
+
+def extract_gender_data(bio, person):
+    # Possibly use this method get gender information for determining correct predicate?
     # Snippet for gender context is awkward
     context_id = person.id + "_GenderContext_1"
     gender_context = Context(context_id, bio.ORLANDOHEADER.FILEDESC, "GENDER")
     gender_context.link_triples(CulturalForm("gender", None, get_mapped_term("Gender", utilities.get_sex(bio))))
     person.add_context(gender_context)
-
-    print("\n" * 5)
 
 
 def clean_term(string):
@@ -465,8 +473,7 @@ def update_fails(rdf_type, value):
 def get_mapped_term(rdf_type, value, retry=False, id=None):
     """
         Currently getting exact match ignoring case and "-"
-        TODO:
-        Make csv of unmapped
+        TODO: Make csv of unmapped
     """
     global map_attempt
     global map_success
@@ -485,7 +492,9 @@ def get_mapped_term(rdf_type, value, retry=False, id=None):
     if "http" in str(term):
         term = rdflib.term.URIRef(term)
     elif term:
-        term = Literal("ISO-3166-3:" + term, datatype=rdflib.namespace.XSD.string)
+        # Each complete ISO 3166-2 code can then be used to uniquely identify a country subdivision in a global context.
+        # ISO 3166-1 alpha-2 code + The second part is a string of up to three alphanumeric characters
+        term = Literal("ISO-3166-2:" + term, datatype=rdflib.namespace.XSD.string)
     else:
         term = Literal(value, datatype=rdflib.namespace.XSD.string)
         if retry:
@@ -543,8 +552,8 @@ def main():
     from biography import Biography
     from bs4 import BeautifulSoup
 
-    file_dict = utilities.parse_args(__file__, "CulturalForm")
-    entry_num = 1
+    # file_dict = utilities.parse_args(__file__, "CulturalForm")
+    extraction_mode, file_dict = utilities.parse_args(__file__, "Cultural Forms", logger)
 
     global uber_graph
 
@@ -556,33 +565,28 @@ def main():
 
         person_id = filename.split("/")[-1][:6]
 
-        print("Running on:", filename)
         logger.info(file_dict[filename])
-        print(file_dict[filename])
-        print("*" * 55)
+        if extraction_mode.verbosity > 0:
+            print("Running on:", filename)
+            print(file_dict[filename])
+            print("*" * 55)
 
         person = Biography(person_id, soup)
         extract_cf_data(soup, person)
+
         person.name = utilities.get_readable_name(soup)
         graph = person.to_graph()
 
-        temp_path = "extracted_triples/cf_turtle/" + person_id + "_cf.ttl"
-        utilities.create_extracted_file(temp_path, person)
-        temp_path = "extracted_triples/cf_rdf/" + person_id + "_cf.rdf"
-        utilities.create_extracted_file(temp_path, person, "pretty-xml")
-
         uber_graph += graph
-        entry_num += 1
-        print(person.to_file())
+
+        utilities.create_individual_triples(extraction_mode, person, "cf")
+        utilities.manage_mode(extraction_mode, person, graph)
 
     logger.info(str(len(uber_graph)) + " triples created")
+    if extraction_mode.verbosity >= 0:
+        print(str(len(uber_graph)) + " total triples created")
 
-    temp_path = "extracted_triples/culturalForms.ttl"
-    utilities.create_extracted_uberfile(temp_path, uber_graph)
-
-    temp_path = "extracted_triples/culturalForms.rdf"
-    utilities.create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
-
+    utilities.create_uber_triples(extraction_mode, uber_graph, "cf")
     log_mapping_fails()
     logger.info("Time completed: " + utilities.get_current_time())
 

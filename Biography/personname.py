@@ -63,6 +63,8 @@ class PersonName:
 
         if uri:
             self.uri = uri
+        else:
+            self.uri = value
 
         self.hasSpareGraph = False
         self.spareGraph = None
@@ -72,8 +74,8 @@ class PersonName:
                 givenNameList=extraAttributes.givenNames, surNameList=extraAttributes.surNames)
             self.hasSpareGraph = True
         if parentType and parentType == "Nickname":
-            print("hello")
-    #         need to create a mini graph that contains all information regarding their name and stuff
+            pass
+    
 
     def makeBirthGraph(self, givenNameList, surNameList):
         g = utilities.create_graph()
@@ -270,9 +272,8 @@ def extract_person_name(xmlString, person):
 def main():
     from bs4 import BeautifulSoup
     from biography import Biography
-    file_dict = utilities.parse_args(__file__, "Personname")
+    extraction_mode,file_dict = utilities.parse_args(__file__, "Personname",logger)
     print("-" * 200)
-    entry_num = 1
 
     uber_graph = utilities.create_graph()
 
@@ -289,23 +290,20 @@ def main():
 
         person = Biography(person_id, soup)
         extract_person_name(soup, person)
-
         person.name = utilities.get_readable_name(soup)
-        print(person.to_file())
+        graph = person.to_graph()
+        uber_graph += graph
 
-        temp_path = "extracted_triples/personname_turtle/" + person_id + "_personname.ttl"
-        utilities.create_extracted_file(temp_path, person)
+        utilities.create_individual_triples(extraction_mode, person, "cf")
+        utilities.manage_mode(extraction_mode, person, graph)
 
-        uber_graph += person.to_graph()
-        entry_num += 1
-        print("=" * 55)
+    logger.info(str(len(uber_graph)) + " triples created")
+    if extraction_mode.verbosity >= 0:
+        print(str(len(uber_graph)) + " total triples created")
 
-    print("UberGraph is size:", len(uber_graph))
-    temp_path = "extracted_triples/personname.ttl"
-    utilities.create_extracted_uberfile(temp_path, uber_graph)
-
-    temp_path = "extracted_triples/personname.rdf"
-    utilities.create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
+    utilities.create_uber_triples(extraction_mode, uber_graph, "cf")
+    log_mapping_fails()
+    logger.info("Time completed: " + utilities.get_current_time())
 
 if __name__ == "__main__":
     main()

@@ -247,9 +247,9 @@ def main():
     from bs4 import BeautifulSoup
     from biography import Biography
 
-    file_dict = utilities.parse_args(__file__, "Birth/Death")
+    extraction_mode, file_dict = utilities.parse_args(
+        __file__, "BirthDeath", logger)
     print("-" * 200)
-    entry_num = 1
 
     uber_graph = utilities.create_graph()
 
@@ -267,26 +267,20 @@ def main():
         person = Biography(person_id, soup)
         extract_birth_data(soup, person)
         extract_death_data(soup, person)
-        print(person.to_file())
+        graph = person.to_graph()
 
-        temp_path = "extracted_triples/birthdeath_turtle/" + person_id + "_birthdeath.ttl"
-        utilities.create_extracted_file(temp_path, person)
+        utilities.create_individual_triples(
+            extraction_mode, person, "birthDeath")
+        utilities.manage_mode(extraction_mode, person, graph)
 
-        uber_graph += person.to_graph()
-        entry_num += 1
-        print("=" * 55)
+        uber_graph += graph
 
-    print("UberGraph is size:", len(uber_graph))
-    temp_path = "extracted_triples/birthdeath.ttl"
-    # utilities.create_extracted_uberfile(temp_path, uber_graph)
-    utilities.create_extracted_uberfile(
-        temp_path, uber_graph, extra_triples="../data/additional_triples.ttl")
+    logger.info(str(len(uber_graph)) + " triples created")
+    if extraction_mode.verbosity >= 0:
+        print(str(len(uber_graph)) + " total triples created")
 
-    temp_path = "extracted_triples/birthdeath.rdf"
-    # utilities.create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
-    utilities.create_extracted_uberfile(temp_path, uber_graph, "pretty-xml",
-                                        extra_triples="../data/additional_triples.ttl")
-
+    utilities.create_uber_triples(extraction_mode, uber_graph, "birthDeath")
+    logger.info("Time completed: " + utilities.get_current_time())
 
 if __name__ == '__main__':
     main()

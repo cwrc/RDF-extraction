@@ -1,31 +1,39 @@
-from classes import *
-from stringAndMemberFunctions import *
-from Utils import utilities
+from Utils import utilities, event
 from Utils.context import Context, get_context_type, get_event_type
-from Utils.event import get_date_tag, Event, format_date
-from Utils.place import Place
+# from Utils.event import get_date_tag, Event, format_date
+# from Utils.place import Place
 import csv
-import os
-from occupation import Occupation
+# import os
+from bs4 import Tag
+import occupation
 from rdflib import RDF, RDFS, Literal
+from culturalForm import get_mapped_term
+import rdflib
 numtags = 0
 
 logger = utilities.config_logger("relationships")
 
-
 class Person(object):
     """docstring for a general Person with a social/familar relation to biographee"""
 
-    def __init__(self, name_tag, relationship, other_attributes=None):
+    def __init__(self, name, relationship, other_attributes=None):
         super(Person, self).__init__()
-        if other_attributes:
+        if type(name) is rdflib.term.URIRef:
             self.name = None
-            self.uri = name_tag
+            self.alt_name = None
+            self.uri = name
+        elif type(name) is Tag and name.name == "NAME":
+            self.name = name.get("STANDARD")
+            self.alt_name = name.get_text()
+            self.uri = utilities.get_name_uri(name)
         else:
-            self.name = name_tag.get("STANDARD")
-            self.uri = utilities.get_name_uri(name_tag)
+            logger.error("Unexpected type for name parameter:" +
+                         str(type(name)) + ": " + str(name))
 
-        # TODO possibly mapping to get relationship
+        if other_attributes:
+            logger.info("Other Attributes: " +
+                        str(other_attributes) + " is unhandled ")
+
         self.predicate = utilities.create_cwrc_uri(relationship)
 
     def to_triple(self, context):
@@ -34,33 +42,39 @@ class Person(object):
         g.add((context.uri, self.predicate, self.uri))
         if self.name:
             g.add((self.uri, RDFS.label, Literal(self.name)))
+        if self.alt_name:
+            g.add(
+                (self.uri, utilities.NS_DICT["skos"].altLabel, Literal(self.alt_name)))
+
         return g
 
     def __str__(self):
         string = "\tURI: " + str(self.uri) + "\n"
         string += "\tname: " + str(self.name) + "\n"
         string += "\tpredicate: " + str(self.predicate) + "\n"
-        string += "\tvalue: " + str(self.value) + "\n"
-
         return string
 
+def create_marital_status(tagname):
+    return utilities.GeneralRelation(utilities.create_cwrc_uri("maritalStatusChange"), utilities.create_cwrc_uri(tagname.lower()))
 
-# checks if child's name is available in children tag
-def extract_children(xmlString, person):
-    root = xmlString.BIOGRAPHY
-    childrenTag = root.find_all('CHILDREN')
-    childrenList = []
+def find_marital_status(tag):
+    tags = tag.find_all("MARRIAGE", limit=1) + tag.find_all("SEPARATION",
+                                                            limit=1) + tag.find_all("DIVORCE", limit=1)
+    return [create_marital_status(x.name) for x in tags]
 
-    for child in childrenTag:
-        if "NUMBER" in child.attrs:
-            print("contains number of child: ", child["NUMBER"])
-            childType = "numberOfChildren"
-            numChild = child["NUMBER"]
+def find_children(tag):
+    count = []
+    for x in tag.find_all("CHILDREN"):
+        if "NUMBER" in x.attrs:
+            count.append(x["NUMBER"])
 
-            childrenList.append(ChildStatus(childType, numChild))
+    if count == []:
+        return None
+    else:
+        return count
 
-    person.children_list = childrenList
-
+def find_childlessness(tag):
+    pass
 
 def extract_childlessness(xmlString, person):
     root = xmlString.BIOGRAPHY
@@ -177,7 +191,7 @@ def extract_relationships(tag_list, context_type, person, list_type="paragraphs"
             event_count += 1
             event_title = person.name + " - " + "Intimate Relationship Event"
             event_uri = person.id + "_IntimateRelationshipEvent_" + str(event_count)
-            temp_event = Event(event_title, event_uri, tag, EVENT_TYPE)
+            temp_event = event.Event(event_title, event_uri, tag, EVENT_TYPE)
             temp_context.link_event(temp_event)
             person.add_event(temp_event)
 
@@ -252,7 +266,6 @@ def extract_friend_data(bio, person):
 
 
 def create_family_map(path=None):
-    # Create better searching mechanism
     if not path:
         path = '../data/family_mapping.csv'
     with open(path, newline='', encoding='utf-8') as csvfile:
@@ -260,10 +273,13 @@ def create_family_map(path=None):
         next(reader)
         for row in reader:
             if row[0] not in FAMILY_MAP:
-                FAMILY_MAP[row[0]] = row[1]
+                FAMILY_MAP[row[0]] = {"Predicate": row[1], "MALE": row[2],
+                                      "FEMALE": row[3], "NEUTRAL": row[4], "SEX": row[5]}
+
 
 FAMILY_MAP = {}
 create_family_map()
+symmetric_relations = ["interpersonalRelationshipWith", "cousin", "partner"]
 
 
 def extract_family_data(bio, person):
@@ -272,24 +288,89 @@ def extract_family_data(bio, person):
     # TODO: Extract family members in a certain orders
     context_count = 1
     event_count = 1
+    # NOTE: Will need to update this when schema changes
+    sex = utilities.get_sex(bio)
+
+    if sex not in ["FEMALE", "MALE"]:
+        sex = "NEUTRAL"
+
     family_tags = bio.find_all("FAMILY")
+
 
     for family_tag in family_tags:
         member_tags = family_tag.find_all("MEMBER")
 
         for member_tag in member_tags:
             family_members = []
-            relation = FAMILY_MAP[member_tag["RELATION"]]
+            relation = FAMILY_MAP[member_tag["RELATION"]]["Predicate"]
             context_id = person.id + "_FamilyContext_" + str(context_count)
             temp_context = Context(context_id, member_tag, "FAMILY")
 
             # Finding family member
             people_found = utilities.get_people(member_tag)
+            marital_statuses = find_marital_status(member_tag)
+            child_count = find_children(member_tag)
+            childlessness = find_childlessness(member_tag)
+
+            if child_count:
+                for x in child_count:
+                    family_members.append(utilities.GeneralRelation(utilities.create_cwrc_uri(
+                        "children"), rdflib.term.Literal(int(x), datatype=rdflib.namespace.XSD.int)))
+
             if person.uri in people_found:
                 people_found.remove(person.uri)
             if len(people_found) == 1:
-                logger.info(str(people_found[0]) + "-->" + relation + " of " + person.name)
-                family_members.append(Person(people_found[0], relation, True))
+                log_str = person.id + "\n"
+                print(relation)
+                log_str += "\t" + person.uri.split("/")[-1] + " --" + relation + "--> " + \
+                    str(people_found[0]).split("/")[-1] + "\n"
+
+                family_members.append(Person(people_found[0], relation))
+                if relation in person.family_members:
+                    person.family_members[relation].append(people_found[0])
+                else:
+                    person.family_members[relation] = [people_found[0]]
+
+
+                # Creating context for relative
+                relative_triples = occupation.find_occupations(member_tag)
+                if relation in symmetric_relations:
+                    relative_triples.append(Person(person.uri, relation))
+                else:
+                    relation = FAMILY_MAP[member_tag["RELATION"]][sex]
+                    relative_triples.append(Person(person.uri, relation))
+                    logger.warning("Need to invert relation:" + relation)
+
+                log_str += "\t" + str(people_found[0]).split("/")[-1] + " --" + \
+                    relation + "--> " + person.uri.split("/")[-1] + "\n"
+                logger.info(log_str)
+
+                if marital_statuses:
+                    if member_tag["RELATION"] in ["HUSBAND", "WIFE", "PARTNER"]:
+                        family_members += marital_statuses
+                        relative_triples += marital_statuses
+                    else:
+                        relative_triples += marital_statuses
+
+                if FAMILY_MAP[member_tag["RELATION"]]["SEX"] in ["FEMALE", "MALE"]:
+                    gender = get_mapped_term(
+                        "Gender", FAMILY_MAP[member_tag["RELATION"]]["SEX"])
+                    relative_triples.append(utilities.GeneralRelation(
+                        utilities.create_cwrc_uri("gender"), gender))
+
+                if relative_triples:
+                    context_count += 1
+                    context_id = person.id + \
+                        "_FamilyContext_" + str(context_count)
+                    relative_context = Context(context_id, member_tag, "FAMILY",
+                                               subject_uri=people_found[0], target_uri=temp_context.target_uri, id_context=temp_context.identifying_uri)
+                    print("yes")
+                    print(temp_context.identifying_uri)
+                    print(relative_context)
+                    relative_context.link_triples(relative_triples)
+                    person.add_context(relative_context)
+
+                # TODO: handle liveswith
 
             # Creating family events
             events_tags = member_tag.find_all("CHRONSTRUCT")
@@ -297,7 +378,7 @@ def extract_family_data(bio, person):
             for x in events_tags:
                 event_title = person.name + " - Family Event (" + relation + ")"
                 event_uri = person.id + "_FamilyEvent_" + str(event_count)
-                family_events.append(Event(event_title, event_uri, x, "FamilyEvent"))
+                family_events.append(event.Event(event_title, event_uri, x, "FamilyEvent"))
                 event_count += 1
 
             temp_context.link_triples(family_members)
@@ -317,7 +398,7 @@ def extract_family_data(bio, person):
             for x in events_tags:
                 event_title = person.name + " - Family Event"
                 event_uri = person.id + "_FamilyEvent_" + str(event_count)
-                family_events.append(Event(event_title, event_uri, x, "FamilyEvent"))
+                family_events.append(event.Event(event_title, event_uri, x, "FamilyEvent"))
                 event_count += 1
 
             person.add_context(temp_context)
@@ -327,9 +408,10 @@ def extract_family_data(bio, person):
 def main():
     from bs4 import BeautifulSoup
     from biography import Biography
-    file_dict = utilities.parse_args(__file__, "family/friends")
+    extraction_mode, file_dict = utilities.parse_args(
+        __file__, "relationships", logger)
     print("-" * 200)
-    entry_num = 1
+    
 
     uber_graph = utilities.create_graph()
 
@@ -345,31 +427,29 @@ def main():
         print("*" * 55)
 
         person = Biography(person_id, soup)
-        extract_friend_data(soup, person)
-        # bagnen
         extract_family_data(soup, person)
+        extract_friend_data(soup, person)
         extract_intimate_relationships_data(soup, person)
 
         # extract_cohabitants(soup, person)
         # extract_childlessness(soup, person)
         # extract_children(soup, person)
 
-        person.name = utilities.get_readable_name(soup)
+        graph = person.to_graph()
         print(person.to_file())
 
-        temp_path = "extracted_triples/relationships_turtle/" + person_id + "_relationships.ttl"
-        utilities.create_extracted_file(temp_path, person)
+        utilities.create_individual_triples(
+            extraction_mode, person, "relationships")
+        utilities.manage_mode(extraction_mode, person, graph)
 
-        uber_graph += person.to_graph()
-        entry_num += 1
-        print("=" * 55)
+        uber_graph += graph
 
-    print("UberGraph is size:", len(uber_graph))
-    temp_path = "extracted_triples/relationships.ttl"
-    utilities.create_extracted_uberfile(temp_path, uber_graph)
+    logger.info(str(len(uber_graph)) + " triples created")
+    if extraction_mode.verbosity >= 0:
+        print(str(len(uber_graph)) + " total triples created")
 
-    temp_path = "extracted_triples/relationships.rdf"
-    utilities.create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
+    utilities.create_uber_triples(extraction_mode, uber_graph, "relationships")
+    logger.info("Time completed: " + utilities.get_current_time())
 
 if __name__ == "__main__":
     main()

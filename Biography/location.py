@@ -209,9 +209,9 @@ def main():
     from bs4 import BeautifulSoup
     from biography import Biography
 
-    file_dict = utilities.parse_args(__file__, "Location")
+    extraction_mode, file_dict = utilities.parse_args(
+        __file__, "location", logger)
     uber_graph = utilities.create_graph()
-    entry_num = 1
 
     for filename in file_dict.keys():
         with open(filename) as f:
@@ -228,19 +228,20 @@ def main():
         extract_location_data(soup, person)
 
         graph = person.to_graph()
-        print(person.to_file())
-        temp_path = "extracted_triples/location_turtle/" + person_id + "_location.ttl"
-        utilities.create_extracted_file(temp_path, person)
+
+        utilities.create_individual_triples(
+            extraction_mode, person, "location")
+        utilities.manage_mode(extraction_mode, person, graph)
 
         uber_graph += graph
-        entry_num += 1
 
-    print("UberGraph is size:", len(uber_graph))
-    temp_path = "extracted_triples/location.ttl"
-    utilities.create_extracted_uberfile(temp_path, uber_graph)
 
-    temp_path = "extracted_triples/location.rdf"
-    utilities.create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
+    logger.info(str(len(uber_graph)) + " triples created")
+    if extraction_mode.verbosity >= 0:
+        print(str(len(uber_graph)) + " total triples created")
+
+    utilities.create_uber_triples(extraction_mode, uber_graph, "location")
+    logger.info("Time completed: " + utilities.get_current_time())
 
 
 if __name__ == "__main__":

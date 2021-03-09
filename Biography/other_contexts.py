@@ -91,9 +91,8 @@ def main():
     from biography import Biography
 
     ext_type = "Violence, Wealth, Leisure and Society, Other Life Event, Health contexts"
-    file_dict = utilities.parse_args(__file__, ext_type)
-
-    entry_num = 1
+    extraction_mode, file_dict = utilities.parse_args(
+        __file__, ext_type, logger)
 
     uber_graph = utilities.create_graph()
 
@@ -113,19 +112,18 @@ def main():
 
         graph = person.to_graph()
 
-        temp_path = "extracted_triples/other_contexts_turtle/" + person_id + "_other_contexts.ttl"
-        utilities.create_extracted_file(temp_path, person)
+        utilities.create_individual_triples(
+            extraction_mode, person, "other_contexts")
+        utilities.manage_mode(extraction_mode, person, graph)
 
-        print(person.to_file())
         uber_graph += graph
-        entry_num += 1
 
-    print("UberGraph is size:", len(uber_graph))
-    temp_path = "extracted_triples/other_contexts.ttl"
-    utilities.create_extracted_uberfile(temp_path, uber_graph)
+    logger.info(str(len(uber_graph)) + " triples created")
+    if extraction_mode.verbosity >= 0:
+        print(str(len(uber_graph)) + " total triples created")
 
-    temp_path = "extracted_triples/other_contexts.rdf"
-    utilities.create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
+    utilities.create_uber_triples(extraction_mode, uber_graph, "other_contexts")
+    logger.info("Time completed: " + utilities.get_current_time())
 
 
 if __name__ == "__main__":

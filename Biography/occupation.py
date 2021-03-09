@@ -280,9 +280,8 @@ def main():
     from bs4 import BeautifulSoup
     from biography import Biography
 
-    file_dict = utilities.parse_args(__file__, "Occupation")
-
-    entry_num = 1
+    extraction_mode, file_dict = utilities.parse_args(
+        __file__, "Occupation", logger)
 
     uber_graph = utilities.create_graph()
 
@@ -302,21 +301,19 @@ def main():
 
         graph = person.to_graph()
 
-        temp_path = "extracted_triples/occupation_turtle/" + person_id + "_occupations.ttl"
-        utilities.create_extracted_file(temp_path, person)
-
-        print(person.to_file())
+        utilities.create_individual_triples(
+            extraction_mode, person, "occcupation")
+        utilities.manage_mode(extraction_mode, person, graph)
 
         uber_graph += graph
-        entry_num += 1
 
     log_mapping_fails()
-    print("UberGraph is size:", len(uber_graph))
-    temp_path = "extracted_triples/occupations.ttl"
-    utilities.create_extracted_uberfile(temp_path, uber_graph)
+    logger.info(str(len(uber_graph)) + " triples created")
+    if extraction_mode.verbosity >= 0:
+        print(str(len(uber_graph)) + " total triples created")
 
-    temp_path = "extracted_triples/occupations.rdf"
-    utilities.create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
+    utilities.create_uber_triples(extraction_mode, uber_graph, "occcupation")
+    logger.info("Time completed: " + utilities.get_current_time())
 
 
 if __name__ == "__main__":

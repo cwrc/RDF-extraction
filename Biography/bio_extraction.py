@@ -15,18 +15,17 @@ import personname
 
 """
 This is a possible temporary main script that creates the biography related triples
-TODO:
-add documentation
+TODO:add documentation
 implement personname
 """
 
-logger = utilities.config_logger("all bio")
+logger = utilities.config_logger("all_bio")
 
 
 def main():
-    file_dict = utilities.parse_args(__file__, "Majority of biography related data")
+    extraction_mode, file_dict = utilities.parse_args(
+        __file__, "Majority of biography related data", logger)
 
-    entry_num = 1
     uber_graph = utilities.create_graph()
 
     highest_triples = 0
@@ -45,15 +44,15 @@ def main():
         print(file_dict[filename])
         print("*" * 55)
         person = Biography(person_id, soup)
+        lifeInfo.extract_family_data(soup, person)
+        lifeInfo.extract_intimate_relationships_data(soup, person)
+        lifeInfo.extract_friend_data(soup, person)
         cf.extract_cf_data(soup, person)
+        birthDeath.extract_death_data(soup, person)
         other_contexts.extract_other_contexts_data(soup, person)
         occupation.extract_occupation_data(soup, person)
         birthDeath.extract_birth_data(soup, person)
         location.extract_location_data(soup, person)
-        lifeInfo.extract_friend_data(soup, person)
-        birthDeath.extract_death_data(soup, person)
-        lifeInfo.extract_family_data(soup, person)
-        lifeInfo.extract_intimate_relationships_data(soup, person)
         personname.extract_person_name(soup, person)
         education.extract_education_data(soup, person)
 
@@ -62,7 +61,6 @@ def main():
         # lifeInfo.extract_children(soup, person)
 
         graph = person.to_graph()
-        # print(person.to_file())
         triple_count = len(graph)
 
         if triple_count > highest_triples:
@@ -73,11 +71,11 @@ def main():
             smallest_person = filename
 
         # triples to files
-        temp_path = "extracted_triples/biography_turtle/" + person_id + "_biography.ttl"
-        utilities.create_extracted_file(temp_path, person)
+        utilities.create_individual_triples(
+            extraction_mode, person, "biography")
+        utilities.manage_mode(extraction_mode, person, graph)
 
         uber_graph += graph
-        entry_num += 1
 
     place.log_mapping_fails()
     cf.log_mapping_fails()
@@ -91,7 +89,6 @@ def main():
 
     temp_path = "extracted_triples/biography_triples.ttl"
     utilities.create_extracted_uberfile(temp_path, uber_graph, extra_triples="../data/additional_triples.ttl")
-
 
 if __name__ == "__main__":
     main()

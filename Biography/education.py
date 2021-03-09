@@ -256,13 +256,14 @@ class Education(object):
 
         # TODO figure out how texts are to be handled
         for x in self.edu_texts:
+            print(x)
             g.add((x, RDF.type, CWRC.EducationalText))
             g.add((context.uri, CWRC.subjectOfStudy, x))
 
         for x in self.works:
             oeuvre_uri = rdflib.term.URIRef(str(x) + "_Oeuvre")
             g.add((oeuvre_uri, RDF.type, CWRC.Oeuvre))
-            g.add((context.uri, CWRC.studies, oeuvre_uri))
+            g.add((context.uri, CWRC.subjectOfStudy, oeuvre_uri))
             g.add((x, utilities.NS_DICT["bf"].author, oeuvre_uri))
             label = x.split("/")[-1].split("_")[0] + "'s"
             g.add((oeuvre_uri, RDFS.label, Literal(label + " oeuvre")))
@@ -552,9 +553,8 @@ def main():
     from bs4 import BeautifulSoup
     from biography import Biography
 
-    file_dict = utilities.parse_args(__file__, "Education")
-
-    entry_num = 1
+    extraction_mode, file_dict = utilities.parse_args(
+        __file__, "Education", logger)
 
     uber_graph = utilities.create_graph()
 
@@ -570,23 +570,21 @@ def main():
         print("*" * 55)
 
         person = Biography(person_id, soup)
-
         extract_education_data(soup, person)
-        print()
+        
         graph = person.to_graph()
+        utilities.create_individual_triples(
+            extraction_mode, person, "education")
+        utilities.manage_mode(extraction_mode, person, graph)
 
-        temp_path = "extracted_triples/education_turtle/" + person_id + "_education.ttl"
-        utilities.create_extracted_file(temp_path, person)
-        print(person.to_file())
         uber_graph += graph
-        entry_num += 1
 
-    print("UberGraph is size:", len(uber_graph))
-    temp_path = "extracted_triples/education.ttl"
-    utilities.create_extracted_uberfile(temp_path, uber_graph)
+    logger.info(str(len(uber_graph)) + " triples created")
+    if extraction_mode.verbosity >= 0:
+        print(str(len(uber_graph)) + " total triples created")
 
-    temp_path = "extracted_triples/education.rdf"
-    utilities.create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
+    utilities.create_uber_triples(extraction_mode, uber_graph, "education")
+    logger.info("Time completed: " + utilities.get_current_time())
 
 
 if __name__ == "__main__":
