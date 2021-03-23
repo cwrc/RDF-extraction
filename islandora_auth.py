@@ -1,14 +1,20 @@
 import requests
 import sys
+import os
 from Env import env
 
 session = requests.Session()
 
+collections = {
+    "bibliography": "orlando:7397f8b2-10d9-48b6-8af5-6c2cd24f50b5",
+    "person": "orlando:348397a1-6edb-4c23-ba26-59f35e5bc8d6",
+    "events": "orlando:e6b8f85f-5a79-4124-b2a2-3b41c3ddb2cf",
+    "organizations": "orlando:455113b8-703d-4c15-af1e-53ce0a3beef2",
+    "entry": "orlando:c5f53703-1f08-4c72-9425-2874bb7cf544"
+}
 
 def login(auth):
-    #print(auth)
-    response = session.post('http://beta.cwrc.ca/rest/user/login', auth)
-    print(response)
+    response = session.post('https://cwrc.ca/rest/user/login', auth)
     if response.status_code != 200:
         raise ValueError('Invalid response')
 
@@ -17,19 +23,87 @@ def usage():
     print("%s [username] [password]" % sys.argv[0])
 
 
+def get_datastream(file_desc):
+    models = file_desc["models"]
+    if "cwrc:documentCModel" in models:
+        return "CWRC"
+    elif "cwrc:citationCModel" in models:
+        return "MODS"
+    elif "cwrc:person-entityCModel" in models:
+        return "PERSON"
+    elif "cwrc:organization-entityCModel" in models:
+        return "ORGANIZATION"
+    
+    print("Unexpected Models:")
+    print(models)
+    exit()
+
+def download_data(subset="all"):
+    if subset== "all":
+        for key in collections.keys():
+            print(key)
+            r = get_file_description(collections[key])
+            docs = get_document_ids(collections[key])
+            dir = "data/" + key + "_2021"
+            try:
+                os.mkdir(dir)
+            except OSError as error:
+                pass
+            datastream = get_datastream(get_file_description(docs[0]))
+
+            total = len(docs)
+            count = 1
+            for x in docs:
+                print(count, "/", total, ": ", x)
+                count += 1
+                file_id = x.split(":")[1]
+                content = get_file_with_format(x, datastream)
+                f = open(dir+"/"+file_id+".xml", "w")
+                f.write(content)
+                f.close()
+        else:
+            docs = get_document_ids(collections[subset])
+            dir = "data/" + subset + "_2021"
+            try:
+                os.mkdir(dir)
+            except OSError as error:
+                pass
+            datastream = get_datastream(get_file_description(docs[0]))
+
+            total = len(docs)
+            count = 1
+            for x in docs:
+                print(count, "/", total, ": ", x)
+                count += 1
+                file_id = x.split(":")[1]
+                content = get_file_with_format(x, datastream)
+                f = open(dir+"/"+file_id+".xml", "w")
+                f.write(content)
+                f.close()
+
 def main(argv):            
     # Store the session for future requests.
     login({"username": argv[0], "password": argv[1]})
+    # download_data()
 
 
-def get_file_description(uuid):
-    res = session.get('http://beta.cwrc.ca/islandora/rest/v1/object/' + uuid);
+def get_document_ids(collection_id):
+    # Returns list of document IDS given the collection
+    res = session.get(
+        'https://cwrc.ca/islandora/rest/v1/solr/RELS_EXT_isMemberOfCollection_uri_mt:"'+collection_id+'"?fl=PID&rows=999999&start=0&wt=json')
+    res = res.json()
+    docs = [x["PID"] for x in res["response"]["docs"]]
+    return docs
+
+def get_file_description(uuid,json=True):
+    res = session.get('https://cwrc.ca/islandora/rest/v1/object/' + uuid)
+    if json:
+        return res.json()
     return res.text
 
 def get_file_with_format(uuid, format):
-    res = session.get('http://beta.cwrc.ca/islandora/rest/v1/object/' + uuid + '/datastream/' + format)
+    res = session.get('https://cwrc.ca/islandora/rest/v1/object/' + uuid + '/datastream/' + format)
     return res.text
-
 
 
 if __name__ == "__main__":
@@ -38,5 +112,5 @@ if __name__ == "__main__":
     if len(sys.argv) > 2:
         default_user = sys.argv[1]
         default_password = sys.argv[2]
-    argv = [env.env("USER_NAME", default_user), env.env("PASSWORD", default_password)]
+    argv = [env.env("username", default_user), env.env("password", default_password)]
     main(argv)
