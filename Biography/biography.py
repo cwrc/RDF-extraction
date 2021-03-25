@@ -36,6 +36,26 @@ def get_wd_identifier(id):
         return WIKIDATA_MAP[id]
 
 
+def get_possible_biographers(doc):
+    # TODO: Review possible additional phrases/sentence structure to id biographers/cr
+    # possible_phrases = ["biographer ", "biographer, "]
+    # historian?
+    # This might erronously identify someone as a biographer who a writer shares a relationship with
+    # ex. X married biographer Y
+    names = doc.find_all("NAME")
+    biographers = []
+    for x in names:
+        parent_text = x.parent.get_text()      
+        if "biographer " + x.get_text().lower() in parent_text.lower():
+            biographers.append(x)
+        elif "critic " + x.get_text().lower() in parent_text.lower():
+            biographers.append(x)
+        elif "historian " + x.get_text().lower() in parent_text.lower():
+            biographers.append(x)
+    return list(set(biographers))
+
+
+
 class Biography(object):
     """docstring for Biography"""
 
@@ -49,6 +69,16 @@ class Biography(object):
         self.uri = utilities.make_standard_uri(self.std_name)
         self.document = doc
         
+        self.biographers = [
+            utilities.get_name_uri(x) for x in get_possible_biographers(self.document)]
+        self.names_mentioned = utilities.get_people(self.document)
+        self.people_map = {}
+        self.people_map[self.uri] = "self"
+        for x in self.names_mentioned:
+            self.people_map[x] = []
+        for x in self.biographers:
+            self.people_map[x].append("biographer")
+
         # TODO: get nickname from file most common acroynm and replace in event/context strings
         self.nickname = None
 

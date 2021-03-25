@@ -1,9 +1,8 @@
 from Utils import utilities, event
 from Utils.context import Context, get_context_type, get_event_type
-# from Utils.event import get_date_tag, Event, format_date
+from Utils.event import Event
 # from Utils.place import Place
 import csv
-# import os
 from bs4 import Tag
 import occupation
 from rdflib import RDF, RDFS, Literal
@@ -11,7 +10,7 @@ from culturalForm import get_mapped_term
 import rdflib
 numtags = 0
 
-logger = utilities.config_logger("relationships")
+logger = utilities.config_logger("relationships",verbose=0)
 
 class Person(object):
     """docstring for a general Person with a social/familar relation to biographee"""
@@ -74,74 +73,35 @@ def find_children(tag):
         return count
 
 def find_childlessness(tag):
-    pass
+    tags = tag.find_all("CHILDLESSNESS")
+    #never married
+    childlessness_words = {
+        "birthControl": ["contraception", "birth control", "family planning"],
+        "adoption": ["adopted", "adoption"],
+        "childlessness": ["childless", "no children", "no surviving children", "none survived", "no child alive", "did not have any children", "they had none", "decided not to have children"],
+        "miscarriage": ["miscarriage", "miscarriages", "miscarried"],
+        "stillbirth": ["stillborn", "still birth", "stillbirth"],
+        "abortion": ["abortion", "aborted"],
+        "venerealDisease":["syphilis", "venereal", "VD"]
+    }
+    childlessness = []
+    for x in tags:
+        keyword_found = False
+        print(tag)
+        print(x)
+        for reproductiveHistory in childlessness_words.keys():
+            if any(word in x.text for word in childlessness_words[reproductiveHistory]):
+                keyword_found =True
+                childlessness.append(utilities.GeneralRelation(utilities.create_cwrc_uri(
+                    "reproductiveHistory"), utilities.create_cwrc_uri(reproductiveHistory)))
+                print(reproductiveHistory)
 
-def extract_childlessness(xmlString, person):
-    root = xmlString.BIOGRAPHY
-    childrenTag = root.find_all('CHILDLESSNESS')
-    childlessList = []
-    # global numtags
-    for tag in childrenTag:
-        # ElemPrint(tag)
+        if not keyword_found:
+            childlessness.append(utilities.GeneralRelation(utilities.create_cwrc_uri(
+                "unspecifiedReproductiveHistory"), utilities.create_cwrc_uri("unspecifiedReproductiveHistory")))
+            input()
 
-        # if any(miscarriageWord in getOnlyText(tag) for miscarriageWord in
-        #     ["miscarriage","miscarriages","miscarried"]):
-        #     childlessList.append(ChildlessStatus("miscarriage"))
-        #
-        # elif any(stillbirthWord in getOnlyText(tag) for stillbirthWord in
-        #     ["stillborn","still birth"]):
-        #     childlessList.append(ChildlessStatus("stillbirth"))
-        #     # one still birth
-        #
-        # elif any(abortionWord in getOnlyText(tag) for abortionWord in
-        #     ["abortion","aborted"]):
-        #     childlessList.append(ChildlessStatus("abortion"))
-        #     # no entries has this
-
-        if any(birthControlWord in getOnlyText(tag) for birthControlWord in
-               ["contraception"]):
-            childlessList.append(ChildlessStatus("birth control"))
-            # no entries has this
-
-        # elif any(veneralDisease in getOnlyText(tag) for veneralDisease in
-        #     ["syphilis","veneral","VD"]):
-        #     childlessList.append(ChildlessStatus("venereal disease"))
-        #     # 2 entries have this
-
-        elif any(adoptionWord in getOnlyText(tag) for adoptionWord in
-                 ["adopted", "adoption"]):
-            childlessList.append(ChildlessStatus("adoption"))
-            # 8 entries have this
-
-        elif any(childlessWord in getOnlyText(tag) for childlessWord in
-                 ["childless", "no children", "no surviving children"]):
-            childlessList.append(ChildlessStatus("childlessness"))
-            # 131 entries have this
-
-        else:
-            childlessList.append(ChildlessStatus("childlessness"))
-            # numtags += 1
-            # 69 entries
-
-        print("------------")
-
-    # return childlessList
-    person.childless_list = childlessList
-
-
-def extract_cohabitants(xmlString, person):
-    root = xmlString.BIOGRAPHY
-    sourcePerson = findTag(root, "DIV0 STANDARD").text
-    tagToFind = root.find_all("LIVESWITH")
-
-    listToReturn = []
-
-    for instance in tagToFind:
-        names = getAllNames(instance.find_all("NAME"), sourcePerson)
-        for name in names:
-            listToReturn.append(Cohabitant(name))
-
-    person.cohabitants_list = listToReturn
+    return childlessness
 
 
 def find_relationships(tag, person, relation):
@@ -153,9 +113,7 @@ def find_relationships(tag, person, relation):
     }
     relationships = []
     if relation is None:
-        people_found = utilities.get_people(tag)
-        if person.uri in people_found:
-            people_found.remove(person.uri)
+        people_found = utilities.get_other_people(tag,person)
         if len(people_found) == 1:
             logger.info(str(people_found[0]) + "-->" + str(relation) + " of " + person.name)
             relationships.append(Person(people_found[0], predicate_map[relation], True))
@@ -215,9 +173,16 @@ def extract_intimate_relationships_data(bio, person):
 def find_friends(tag, person, predicate="interpersonalRelationshipWith"):
     friends = []
     names = tag.find_all("NAME")
+    companion_tags = tag.find_all("LIVESWITH")
+    companion_names = [y for x in companion_tags for y in x.find_all("NAME")]
+
     for x in names:
-        friends.append(Person(x, predicate))
-    return list(filter(lambda a: a.uri != person.uri, friends))
+        if x not in companion_names:
+            friends.append(Person(x, predicate))
+        else:
+            friends.append(Person(x, "cohabitant"))
+    
+    return list(filter(lambda a: a.uri != person.uri and a.uri not in person.biographers, friends))
 
 
 def extract_friends(tag_list, context_type, person, list_type="paragraphs"):
@@ -281,25 +246,40 @@ FAMILY_MAP = {}
 create_family_map()
 symmetric_relations = ["interpersonalRelationshipWith", "cousin", "partner"]
 
+def get_all_members(bio,person):
+    member_tags = bio.find_all("MEMBER")
+    family_tree = {}
+    for x in member_tags:
+        peeps = utilities.get_other_people(x,person)
+        if x["RELATION"] in family_tree:
+            family_tree[x["RELATION"]].append(peeps)
+        else:
+            family_tree[x["RELATION"]] = (peeps)
 
 def extract_family_data(bio, person):
     # TODO: create duplicate contexts implying inverse operations
-    # Acquire occupations
-    # TODO: Extract family members in a certain orders
+    """
+    TODO: Extract family members in a certain orders
+    Parents, siblings, then partners, other relatives
+    """
+    # 
     context_count = 1
     event_count = 1
-    # NOTE: Will need to update this when schema changes
+
+    # NOTE: Will need to update this when schema changes, sex will be in culturalform tag
     sex = utilities.get_sex(bio)
 
     if sex not in ["FEMALE", "MALE"]:
         sex = "NEUTRAL"
 
+    print(person.uri,"\n")
+    # Revisit this
+    # maybe best approach is to create family tree then go about creating the contexts? 
+    get_all_members(bio, person)
     family_tags = bio.find_all("FAMILY")
-
 
     for family_tag in family_tags:
         member_tags = family_tag.find_all("MEMBER")
-
         for member_tag in member_tags:
             family_members = []
             relation = FAMILY_MAP[member_tag["RELATION"]]["Predicate"]
@@ -307,19 +287,42 @@ def extract_family_data(bio, person):
             temp_context = Context(context_id, member_tag, "FAMILY")
 
             # Finding family member
-            people_found = utilities.get_people(member_tag)
+            people_found = utilities.get_other_people(member_tag,person)
             marital_statuses = find_marital_status(member_tag)
             child_count = find_children(member_tag)
-            childlessness = find_childlessness(member_tag)
+            family_members += find_childlessness(member_tag)
 
             if child_count:
                 for x in child_count:
                     family_members.append(utilities.GeneralRelation(utilities.create_cwrc_uri(
                         "children"), rdflib.term.Literal(int(x), datatype=rdflib.namespace.XSD.int)))
 
+            print(people_found)
+            print(len(people_found))
+            # Cleaning people found
             if person.uri in people_found:
                 people_found.remove(person.uri)
+            print(len(people_found))
+            for x in people_found:
+                if x in person.biographers:
+                    people_found.remove(x)
+
+            # Replace with more sopshisticated mapping
+            if people_found:
+                people_found = [people_found[0]]
             if len(people_found) == 1:
+                print(member_tag["RELATION"])
+                print(people_found[0])
+                print(FAMILY_MAP[member_tag["RELATION"]])
+                if str(people_found[0]) in utilities.WRITER_MAP and utilities.WRITER_MAP[str(people_found[0])]["SEX"] != FAMILY_MAP[member_tag["RELATION"]]["SEX"]:
+                    # Creating placeholder
+                    if relation != "interpersonalRelationshipWith":
+                        people_found[0] = person.uri + "_PLACEHOLDER_"+ relation
+                elif str(people_found[0]) in utilities.WRITER_MAP:
+                    print(utilities.WRITER_MAP[str(people_found[0])])
+                    print(utilities.WRITER_MAP[str(people_found[0])]["SEX"])
+                    print(person.family_members)
+                
                 log_str = person.id + "\n"
                 print(relation)
                 log_str += "\t" + person.uri.split("/")[-1] + " --" + relation + "--> " + \
@@ -331,9 +334,12 @@ def extract_family_data(bio, person):
                 else:
                     person.family_members[relation] = [people_found[0]]
 
-
                 # Creating context for relative
                 relative_triples = occupation.find_occupations(member_tag)
+                cohabitant_tag = member_tag.find("LIVESWITH")
+                if cohabitant_tag:
+                    relative_triples.append(Person(person.uri, "cohabitant"))
+
                 if relation in symmetric_relations:
                     relative_triples.append(Person(person.uri, relation))
                 else:
@@ -364,13 +370,9 @@ def extract_family_data(bio, person):
                         "_FamilyContext_" + str(context_count)
                     relative_context = Context(context_id, member_tag, "FAMILY",
                                                subject_uri=people_found[0], target_uri=temp_context.target_uri, id_context=temp_context.identifying_uri)
-                    print("yes")
-                    print(temp_context.identifying_uri)
-                    print(relative_context)
                     relative_context.link_triples(relative_triples)
                     person.add_context(relative_context)
 
-                # TODO: handle liveswith
 
             # Creating family events
             events_tags = member_tag.find_all("CHRONSTRUCT")
@@ -390,8 +392,19 @@ def extract_family_data(bio, person):
             context_count += 1
 
         if len(member_tags) == 0:
+            triples = []
+            child_count = find_children(family_tag)
+            triples += find_childlessness(family_tag)
+            
+            if child_count:
+                for x in child_count:
+                    triples.append(utilities.GeneralRelation(utilities.create_cwrc_uri(
+                        "children"), rdflib.term.Literal(int(x), datatype=rdflib.namespace.XSD.int)))
+            
             context_id = person.id + "_FamilyContext_" + str(context_count)
             temp_context = Context(context_id, family_tag, "FAMILY")
+            temp_context.link_triples(triples)
+
             events_tags = family_tag.find_all("CHRONSTRUCT")
             family_events = []
 
@@ -403,6 +416,8 @@ def extract_family_data(bio, person):
 
             person.add_context(temp_context)
             context_count += 1
+
+
 
 
 def main():
@@ -431,12 +446,7 @@ def main():
         extract_friend_data(soup, person)
         extract_intimate_relationships_data(soup, person)
 
-        # extract_cohabitants(soup, person)
-        # extract_childlessness(soup, person)
-        # extract_children(soup, person)
-
         graph = person.to_graph()
-        print(person.to_file())
 
         utilities.create_individual_triples(
             extraction_mode, person, "relationships")

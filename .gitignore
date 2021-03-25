@@ -14,3 +14,4 @@ venv
 *.xml
 *.rdf
 *.log
+*.config

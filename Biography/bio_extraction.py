@@ -56,10 +56,6 @@ def main():
         personname.extract_person_name(soup, person)
         education.extract_education_data(soup, person)
 
-        # lifeInfo.extract_cohabitants(soup, person)
-        # lifeInfo.extract_childlessness(soup, person)
-        # lifeInfo.extract_children(soup, person)
-
         graph = person.to_graph()
         triple_count = len(graph)
 
@@ -88,7 +84,7 @@ def main():
     logger.info("Time completed: " + utilities.get_current_time())
 
     temp_path = "extracted_triples/biography_triples.ttl"
-    utilities.create_extracted_uberfile(temp_path, uber_graph, extra_triples="../data/additional_triples.ttl")
+    utilities.create_extracted_uberfile(temp_path, uber_graph,serialization="ttl", extra_triples="../data/additional_triples.ttl")
 
 if __name__ == "__main__":
     main()

@@ -5,8 +5,8 @@ import datetime
 import urllib
 try:
     from Utils.place import Place
-except Exception as e:
-    from place import Place
+except ModuleNotFoundError as e:
+    from . import Place
 
 """
 TODO: Add doctests for:
@@ -25,6 +25,44 @@ TODO: Add doctests for:
 
 TODO: parse required ns from external files
 """
+WRITER_MAP = {}
+NS_DICT = {
+    "as": rdflib.Namespace("http://www.w3.org/ns/activitystreams#"),
+    "bibo": rdflib.Namespace("http://purl.org/ontology/bibo/"),
+    "biro": rdflib.Namespace("http://purl.org/spar/biro/"),
+    "bio": rdflib.Namespace("http://purl.org/vocab/bio/0.1/"),
+    "bf": rdflib.Namespace("http://id.loc.gov/ontologies/bibframe/"),
+    "cc": rdflib.Namespace("http://creativecommons.org/ns#"),
+    "cito": rdflib.Namespace("http://purl.org/spar/cito/"),
+    "cwrc": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/cwrc#"),
+    "ii": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/ii#"),
+    "genre": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/genre#"),
+    "data": rdflib.Namespace("http://cwrc.ca/cwrcdata/"),
+    "dbpedia": rdflib.Namespace("http://dbpedia.org/resource/"),
+    "dcterms": rdflib.Namespace("http://purl.org/dc/terms/"),
+    "dctypes": rdflib.Namespace("http://purl.org/dc/dcmitype/"),
+    "eurovoc": rdflib.Namespace("http://eurovoc.europa.eu/"),
+    "foaf": rdflib.Namespace("http://xmlns.com/foaf/0.1/"),
+    "geonames": rdflib.Namespace("http://sws.geonames.org/"),
+    "gvp": rdflib.Namespace("http://vocab.getty.edu/ontology#"),
+    "loc": rdflib.Namespace("http://id.loc.gov/vocabulary/relators/"),
+    "oa": rdflib.Namespace("http://www.w3.org/ns/oa#"),
+    "org": rdflib.Namespace("http://www.w3.org/ns/org#"),
+    "owl": rdflib.Namespace("http://www.w3.org/2002/07/owl#"),
+    "prov": rdflib.Namespace("http://www.w3.org/ns/prov#"),
+    "prism": rdflib.Namespace("http://prismstandard.org/namespaces/1.2/basic/"),
+    "rdf": rdflib.Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#"),
+    "rdfs": rdflib.Namespace("http://www.w3.org/2000/01/rdf-schema#"),
+    "sem": rdflib.Namespace("http://semanticweb.cs.vu.nl/2009/11/sem/"),
+    "schema": rdflib.Namespace("http://schema.org/"),
+    "skos": rdflib.Namespace("http://www.w3.org/2004/02/skos/core#"),
+    "skosxl": rdflib.Namespace("http://www.w3.org/2008/05/skos-xl#"),
+    "time": rdflib.Namespace("http://www.w3.org/2006/time#"),
+    "vann": rdflib.Namespace("http://purl.org/vocab/vann/"),
+    "voaf": rdflib.Namespace("http://purl.org/vocommons/voaf#"),
+    "void": rdflib.Namespace("http://rdfs.org/ns/void#"),
+    "vs": rdflib.Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#")
+}
 
 class Extraction(object):
     """docstring for Extraction"""
@@ -81,44 +119,21 @@ class GeneralRelation(object):
         return g
 
 
-NS_DICT = {
-    "as": rdflib.Namespace("http://www.w3.org/ns/activitystreams#"),
-    "bibo": rdflib.Namespace("http://purl.org/ontology/bibo/"),
-    "biro": rdflib.Namespace("http://purl.org/spar/biro/"),
-    "bio": rdflib.Namespace("http://purl.org/vocab/bio/0.1/"),
-    "bf": rdflib.Namespace("http://id.loc.gov/ontologies/bibframe/"),
-    "cc": rdflib.Namespace("http://creativecommons.org/ns#"),
-    "cito": rdflib.Namespace("http://purl.org/spar/cito/"),
-    "cwrc": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/cwrc#"),
-    "ii": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/ii#"),
-    "genre": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/genre#"),
-    "data": rdflib.Namespace("http://cwrc.ca/cwrcdata/"),
-    "dbpedia": rdflib.Namespace("http://dbpedia.org/resource/"),
-    "dcterms": rdflib.Namespace("http://purl.org/dc/terms/"),
-    "dctypes": rdflib.Namespace("http://purl.org/dc/dcmitype/"),
-    "eurovoc": rdflib.Namespace("http://eurovoc.europa.eu/"),
-    "foaf": rdflib.Namespace("http://xmlns.com/foaf/0.1/"),
-    "geonames": rdflib.Namespace("http://sws.geonames.org/"),
-    "gvp": rdflib.Namespace("http://vocab.getty.edu/ontology#"),
-    "loc": rdflib.Namespace("http://id.loc.gov/vocabulary/relators/"),
-    "oa": rdflib.Namespace("http://www.w3.org/ns/oa#"),
-    "org": rdflib.Namespace("http://www.w3.org/ns/org#"),
-    "owl": rdflib.Namespace("http://www.w3.org/2002/07/owl#"),
-    "prov": rdflib.Namespace("http://www.w3.org/ns/prov#"),
-    "prism": rdflib.Namespace("http://prismstandard.org/namespaces/1.2/basic/"),
-    "rdf": rdflib.Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#"),
-    "rdfs": rdflib.Namespace("http://www.w3.org/2000/01/rdf-schema#"),
-    "sem": rdflib.Namespace("http://semanticweb.cs.vu.nl/2009/11/sem/"),
-    "schema": rdflib.Namespace("http://schema.org/"),
-    "skos": rdflib.Namespace("http://www.w3.org/2004/02/skos/core#"),
-    "skosxl": rdflib.Namespace("http://www.w3.org/2008/05/skos-xl#"),
-    "time": rdflib.Namespace("http://www.w3.org/2006/time#"),
-    "vann": rdflib.Namespace("http://purl.org/vocab/vann/"),
-    "voaf": rdflib.Namespace("http://purl.org/vocommons/voaf#"),
-    "void": rdflib.Namespace("http://rdfs.org/ns/void#"),
-    "vs": rdflib.Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#")
-}
 
+
+
+def create_writer_map(path=None):
+    import csv
+    if not path:
+        path = '../data/writers_sex.csv'
+    with open(path, newline='', encoding='utf-8') as csvfile:
+        reader = csv.reader(csvfile)
+        next(reader)
+        for row in reader:
+            if row[0] not in WRITER_MAP:
+                WRITER_MAP[row[0]] = {"ID": row[1], "SEX": row[2]}
+
+create_writer_map()
 
 def get_current_time():
     return datetime.datetime.now().strftime("%d %b %Y %H:%M:%S")
@@ -392,7 +407,7 @@ def create_individual_triples(mode, person, script_id):
             x = "pretty-xml"
         create_extracted_file(temp_path, person, x)
 
-def create_extracted_file(filepath, person, serialization=None):
+def create_extracted_file(filepath, person, serialization="ttl"):
     """Create file of extracted triples for particular person
     """
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
@@ -404,7 +419,7 @@ def create_extracted_file(filepath, person, serialization=None):
             f.write(person.to_file(serialization=serialization))
 
 
-def create_extracted_uberfile(filepath, graph, serialization=None, extra_triples=None):
+def create_extracted_uberfile(filepath, graph, serialization="ttl", extra_triples=None):
     """Create file of triples for a particular graph
     """
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
@@ -679,7 +694,6 @@ def parse_args(script, info_type, logger=None):
 
     print(arguments)
 
-    # return arguments.file_dict
     return arguments, arguments.file_dict
 
 

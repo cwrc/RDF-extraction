@@ -59,20 +59,26 @@
         "testcases": {
             "lambma": "Family: Mary Lamb - Has Family context without member tag, CHILDREN & CHILDLESSNESS",
             "abdyma": "Children: - has 1 child",
-            "pulthe": "Children: - has 15 children",
+            "pulthe": "Children: - has 15 children. Daughter listed in Husband's tag + Husband's name is in NATIONALITY <NATIONALITY>Arthur Pulter</NATIONALITY>",
             "struja": "Children & Marital: - has 3 kids, 1 separation, 2 divorces, 2 marriages",
             "alcolo": "Childlessness: -Adopted Nephew",
-            "bagnen": "Unsure --> Investigate this"
+            "fullma":"Family (Member=Husband): Margaret Fuller's husband is Giovanni Angelo Ossoli not Browning, Elizabeth Barrett",
+            "moodsu":"Family (Member=Son): Susanna Moodie's son is not listed, MA is mentioned as a reference",
+            "bagnen": "Unsure --> Investigate this",
+            "thican": "LIVESWITH within Friends, Associates",
+            "montma": "LIVESWITH within Intimate Relationships",
+            "dickma": "LIVESWITH within Family(cousin)",
+            "jewsge": "INTIMATERELATIONSHIPS Erotic :Relationship with an actress who plays characters from Shakespeare plays"
         },
         "notes": {
             "contexts": "Family: Whole member tag is the context",
             "inverse contexts": "using gender of biographee to apply appropriate family member relationship",
             "marital status": "creating inverse relationship if occurs in an identifiable spouse tag, creating for any occurence",
             "for review": [
-                "liveswith",
-                "childlessness"
+                "liveswith --> cohabitant",
+                "childlessness, no cases of abortion/birthControl?"
             ],
-            "to do": "marital status",
+            "to do": "re-do the structuring of family",
             "!": "family member contexts are awfully long, we may want to get more granular",
             "sparql queries": [
                 "How many writers had parents who separated/divorced",
