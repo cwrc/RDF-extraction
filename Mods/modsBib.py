@@ -1,3 +1,4 @@
+from typing import Literal
 from bs4 import BeautifulSoup
 import rdflib
 import sys
@@ -11,6 +12,8 @@ import re
 import urllib.parse
 
 CONFIG_FILE = "./bibparse.config"
+# Count of bf:Agent --> Unique labeled agents
+# 35,767 --> 12,266
 
 # Triple Counts:
 #  158200 - bib files
@@ -19,8 +22,8 @@ CONFIG_FILE = "./bibparse.config"
 # 2403600 - from March 2021 islandora api
 # 2100555 - switching parser to lxml-xml
 # 2403655 - Updates to the parsing
-# 2428208 - Swap to orlando identifiers
-
+# 2428208 - Swap to orlando identifiers 
+# 1995756 - Cidoc-ified
 
 # ----------- SETUP LOGGER ------------
 
@@ -41,6 +44,52 @@ MARCREL = rdflib.Namespace("http://id.loc.gov/vocabulary/relators/")
 DATA = rdflib.Namespace("http://cwrc.ca/cwrcdata/")
 GENRE = rdflib.Namespace("http://sparql.cwrc.ca/ontologies/genre#")
 SCHEMA = rdflib.Namespace("http://schema.org/")
+FRBROO = rdflib.Namespace("http://iflastandards.info/ns/fr/frbr/frbroo/")
+CRM = rdflib.Namespace("http://www.cidoc-crm.org/cidoc-crm/")
+CRMPC = rdflib.Namespace("http://www.cidoc-crm.org/cidoc-crm-pc/")
+
+BF_PROPERTIES = {
+    "change date": BF.changeDate,
+    "variant title":BF.VariantTitle,
+    "generation process":BF.GenerationProcess
+}
+
+# To reduce duplication of admin agents
+ADMIN_AGENTS = {
+    "Orlando Document Archive": DATA.Orlando_Document_Archive,
+    "CaAEU": DATA.CaAEU,
+    "UAB": DATA.UAB,
+    "U3G": DATA.U3G,
+    "Orlando: Women's Writing in the British Isles from the Beginnings to the Present": URIRef("http://www.wikidata.org/entity/Q60672320"),
+}
+
+# TODO: Revise Role URIs once available
+ROLES = {
+    "publisher": URIRef("http://vocab.getty.edu/aat/300025574"),
+    "editor": URIRef("http://vocab.getty.edu/aat/30002552"),
+    "translator": URIRef("http://vocab.getty.edu/aat/300025601"),
+    "compiler": URIRef("http://vocab.getty.edu/aat/300121766"),
+    "adapter": URIRef("http://vocab.getty.edu/aat/300410355"),
+    "illustrator": URIRef("http://vocab.getty.edu/aat/300025123"),
+    "contributor": URIRef("http://vocab.getty.edu/aat/300403974"),
+    "introduction": URIRef("http://vocab.getty.edu/aat/300374882"), # letters of intro: don't know about this one
+    "revised": URIRef("http://vocab.getty.edu/aat/30002552"), # reusued editor
+    "afterword": URIRef("http://vocab.getty.edu/aat/300121766"),
+    "transcriber": URIRef("http://vocab.getty.edu/aat/300440751"),
+}
+
+# role_map = {
+#     "editor": "edt",
+#     "translator": "trl",
+#     "compiler": "com",
+#     "adapter": "adp",
+#     "contributor": "ctb",
+#     "illustrator": "ill",
+#     "introduction": "win",
+#     "revised": "edt",
+#     "afterword": "aft",
+#     "transcriber": "trc"
+# }
 
 genre_graph = None
 genre_map = {}
@@ -87,77 +136,77 @@ def dateParse(date_string: str):
 
     try:
         dt = datetime.datetime.strptime(date_string, "%Y-%m-%d")
-        return dt.isoformat().split("T")[0], True
+        return dt.isoformat(), True
     except ValueError:
         pass
     try:
         dt = datetime.datetime.strptime(date_string, "%Y--")
-        return dt.isoformat().split("T")[0], True
+        return dt.isoformat(), True
     except ValueError:
         pass
     try:
         dt = datetime.datetime.strptime(date_string, "%Y-")
-        return dt.isoformat().split("T")[0], True
+        return dt.isoformat(), True
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%Y")
-        return dt.isoformat().split("T")[0], True
+        return dt.isoformat(), True
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%Y-%m-")
-        return dt.isoformat().split("T")[0], True
+        return dt.isoformat(), True
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%Y-%m")
-        return dt.isoformat().split("T")[0], True
+        return dt.isoformat(), True
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%Y")
-        return dt.isoformat().split("T")[0], True
+        return dt.isoformat(), True
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%Y-%m-%d")
-        return dt.isoformat().split("T")[0], True
+        return dt.isoformat(), True
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%B %Y")
-        return dt.isoformat().split("T")[0], True
+        return dt.isoformat(), True
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%d %B %Y")
-        return dt.isoformat().split("T")[0], True
+        return dt.isoformat(), True
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%Y-%m--")
-        return dt.isoformat().split("T")[0], True
+        return dt.isoformat(), True
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%b %Y")
-        return dt.isoformat().split("T")[0], True
+        return dt.isoformat(), True
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%d %b %Y")
-        return dt.isoformat().split("T")[0], True
+        return dt.isoformat(), True
     except ValueError:
         pass
 
@@ -650,184 +699,218 @@ class BibliographyParse:
 
     def build_graph(self):
         g = self.g
-        i = 0
 
         titles = self.get_title()
         resource = g.resource(self.mainURI)
-        resource.add(RDF.type, BF.Work)
+        resource.add(RDF.type, FRBROO.F1_Work)
+        resource.add(CRM.P2_has_type, self.get_type())
+        
+        for lang in self.get_languages():
+            resource.add(CRM.P72_has_language, Literal(lang['language']))
 
-        instance = g.resource(self.mainURI + "_instance")
-        instance.add(RDF.type, BF.Instance)
-        instance.add(BF.instanceOf, resource)
 
+        instance = g.resource(self.mainURI + "_instance")        
+        instance.add(RDF.type, FRBROO.F2_Expression)
+        instance.add(FRBROO.R3i_realises, resource)
+
+        # CIDOC: Creating titles
+        i = 0
         for item in titles:
             if 'usage' in item and item['usage'] is not None:
                 title_res = g.resource("{}_title_{}".format(self.mainURI, i))
+                title_res.add(RDF.type, CRM.E35_Title)
+                title_res.add(CRM.P190_has_symbolic_content, Literal(item["title"].strip()))
 
-                title_res.add(BF.mainTitle, Literal(item["title"].strip()))
 
                 if item['usage'] == 'alternative':
-                    title_res.add(RDF.type, BF.VariantTitle)
+                    title_res.add(CRM.P2_has_type, BF.VariantTitle)
                 else:
-                    title_res.add(RDF.type, BF.Title)
-                    resource.add(RDFS.label, Literal(item['title'].strip()))
-                # Schema.org attributes per spreadsheet for BIBFRAME matching
-                title_res.add(RDF.type, SCHEMA.CreativeWork)
-                title_res.add(SCHEMA.name, Literal(item['title'].strip()))
+                    title_res.add(CRM.P2_has_type, BF.Title)
+                    resource.add(RDFS.label,
+                                 Literal(item['title'].strip()))
 
-                instance.add(BF.title, title_res)
+                instance.add(CRM.P102_has_title, title_res)
 
                 i += 1
 
-        i = 0
+        
 
-        resource.add(RDF.type, self.get_type())
-
-        for name in self.get_names():
-            contribution_resource = g.resource(
-                self.mainURI + "#contribution_{}".format(i))
-
-            contribution_resource.add(RDF.type, BF.Contribution)
-            agent_resource = g.resource(self.mainURI + "#agent_{}".format(i))
-            if name['type'] == 'personal':
-                agent_resource.add(RDF.type, BF.Person)
-            elif name['type'] == 'family':
-                agent_resource.add(RDF.type, BF.Family)
-            elif name['type'] == "corporate":
-                agent_resource.add(RDF.type, BF.Organization)
-            elif name['type'] == "conference":
-                agent_resource.add(RDF.type, BF.Meeting)
-            else:
-                agent_resource.add(RDF.type, BF.Agent)
-
-            agent_resource.add(RDFS.label, Literal(name["name"]))
-            role_resource = g.resource(
-                "{}#contribution_{}_role".format(self.mainURI, i))
-            role_resource.add(RDF.type, BF.Role)
-
-            if name['role'] in self.role_map:
-                role_resource.add(BF.code, Literal(
-                    self.role_map[name['role']]))
-                role_resource.add(
-                    BF.source, MARCREL[self.role_map[name['role']]])
-
-            if name['role']:
-                role_resource.add(RDFS.label, Literal(name["role"]))
-            else:
-                role_resource.add(BF.code, Literal("aut"))
-                role_resource.add(BF.source, MARCREL.aut)
-                role_resource.add(RDFS.label, Literal("author"))
-
-            # TODO: insert some tests surrounding names
-            temp_name = urllib.parse.quote_plus(remove_punctuation(name['name']))
-            agent_uri = "http://cwrc.ca/cwrcdata/" + temp_name
-            agent_resource.add(OWL.sameAs, URIRef(agent_uri))
-
-            contribution_resource.add(BF.agent, agent_resource)
-            contribution_resource.add(BF.role, role_resource)
-            resource.add(BF.contribution, contribution_resource)
-
-            i += 1
-
-        for lang in self.get_languages():
-            resource.add(XML.lang, Literal(lang['language']))
-
-        adminMetaData = g.resource("{}_admin_metatdata".format(self.mainURI))
+        adminMetaData = g.resource("{}_admin_metadata".format(self.mainURI))
+        adminMetaData.add(RDF.type, CRM.E13_Attribute_Assignment)
 
         i = 0
         for r in self.get_record_content_source():
-            assigner_agent = g.resource(
-                "{}_admin_agent_{}".format(self.mainURI, i))
-            assigner_agent.add(RDF.type, BF.Agent)
+            if r['value'] in ADMIN_AGENTS:
+                assigner_agent = g.resource(ADMIN_AGENTS[r["value"]])
+            else:           
+                assigner_agent = g.resource(
+                    "{}_admin_agent_{}".format(self.mainURI, i))
+
+                i += 1
+            # Note: Authority value unused, values encountered: "marcorg", "oclcorg"
             assigner_agent.add(RDFS.label, Literal(r['value']))
+            assigner_agent.add(RDF.type, CRM.E39_Actor)
+            adminMetaData.add(CRM.P14_carried_out_by, assigner_agent)
 
-            if 'authority' in r:
-                source_agent = g.resource(
-                    "{}_admin_agent_source_{}".format(self.mainURI, i))
-                source_agent.add(RDF.type, BF.Source)
-                source_agent.add(RDF.value, Literal(r['authority']))
-                assigner_agent.add(BF.source, source_agent)
-
-            adminMetaData.add(BF.assigner, assigner_agent)
-
-            i += 1
-
+            
+        
+        #CIDOC: Creating time-spans for record change
         for r in self.get_record_change_date():
-
             dateValue, transformed = dateParse(r['date'])
+            date_bnode = BNode()
+            g.add((date_bnode, RDF.type, CRM["E52_Time-Span"]))
+            g.add((date_bnode, CRM.P2_has_type, BF.changeDate))
             if not transformed:
                 logger.info("MISSING DATE FORMAT: {} on Document {}".format(
                     dateValue, self.mainURI))
-            adminMetaData.add(BF.changeDate, Literal(
-                dateValue, datatype=XSD.date))
+                g.add((date_bnode, CRM.P82a_begin_of_the_begin,
+                       Literal(dateValue)))
+                g.add((date_bnode, CRM.P82b_end_of_the_end,
+                       Literal(dateValue)))
+            else:
+                g.add((date_bnode, CRM.P82a_begin_of_the_begin, Literal(dateValue, datatype=XSD.datetime)))
+                g.add((date_bnode, CRM.P82b_end_of_the_end,Literal(dateValue, datatype=XSD.datetime)))
+            adminMetaData.add(CRM["P4_has_time-span"], date_bnode)
 
+        #CIDOC Creating Generation Process
         i = 0
         for r in self.get_record_origin():
-            generationProcess = g.resource(
+            generation_process = g.resource(
                 "{}_generation_process_{}".format(self.mainURI, i))
-            generationProcess.add(RDF.type, BF.GenerationProcess)
-            generationProcess.add(RDF.value, Literal(r['origin']))
+            generation_process.add(RDF.type, CRM.E29_Design_or_Procedure)
+            generation_process.add(CRM.P2_has_type, BF.GenerationProcess)
+            generation_process.add(RDFS.comment, Literal(r['origin']))
 
-            adminMetaData.add(BF.generationProcess, generationProcess)
+            adminMetaData.add(
+                CRM.P33_used_specific_technique, generation_process)
+            i += 1
 
-        i = 0
-        for r in self.get_record_language_catalog():
-            adminMetaData.add(BF.descriptionLanguage, Literal(r['language']))
 
         # Track this transformation
         cur_date = datetime.datetime.now()
-        generation_process = g.resource(
-            "{}_generation_process_cwrc".format(self.mainURI))
-        generation_process.add(RDF.type, BF.GenerationProcess)
-        generation_process.add(RDF.value,
+        generation_process = g.resource(DATA.generation_process_cwrc)
+        generation_process.add(RDF.type, CRM.E29_Design_or_Procedure)
+        generation_process.add(CRM.P2_has_type, BF.GenerationProcess)
+        generation_process.add(RDFS.comment,
                                Literal("Converted from MODS to BIBFRAME RDF in" +
                                        " {} {} using CWRC's modsBib extraction script".format(cur_date.strftime("%B"),
                                                                                               cur_date.strftime("%Y"))))
-        adminMetaData.add(BF.generationProcess, generation_process)
+        adminMetaData.add(CRM.P33_used_specific_technique, generation_process)
 
-        resource.add(BF.adminMetadata, adminMetaData)
+        resource.add(CRM.P140i_was_attributed_by, adminMetaData)
 
         i = 0
-
+        #CIDOC: Creating publication event
         for o in self.get_origins():
+            
             originInfo = g.resource(
                 "{}_activity_statement_{}".format(self.mainURI, i))
+            originInfo.add(RDF.type, FRBROO.F28_Expression_Creation)
+
+            j = 0
+            for name in self.get_names():                
+                agent_resource = g.resource(self.mainURI + "#agent_{}".format(j))
+                agent_resource.add(RDFS.label, Literal(name["name"]))
+                
+                # TODO: revise these possibly to roles 
+                if name['type'] == 'personal':
+                    agent_resource.add(RDF.type, CRM.E21_Person)
+                else:
+                    agent_resource.add(RDF.type, CRM.E39_Actor)
+                    
+                """             
+               if name['type'] == 'personal':
+                    agent_resource.add(RDF.type, BF.Person)
+                elif name['type'] == 'family':
+                    agent_resource.add(RDF.type, BF.Family)
+                elif name['type'] == "corporate":
+                    agent_resource.add(RDF.type, BF.Organization)
+                elif name['type'] == "conference":
+                    agent_resource.add(RDF.type, BF.Meeting)
+                else:
+                    agent_resource.add(RDF.type, BF.Agent)
+                """
+
+                #Attaching role to the event
+                if name['role'] in ROLES:
+                    agent_bnode = BNode()
+                    g.add((agent_bnode, RDF.type, CRMPC.PC14_carried_out_by))
+                    g.add((agent_bnode, CRMPC.P02_has_range, agent_resource.identifier))
+                    g.add((agent_bnode, URIRef("http://www.cidoc-crm.org/cidoc-crm/P14.1_in_the_role_of"),
+                           ROLES[name['role']]))
+                    originInfo.add(CRMPC.P01i_is_domain_of, agent_bnode)
+                elif name['role'] != None:
+                    logger.warning("Role not handled: "+str(name['role']))
+
+                # TODO: insert some tests surrounding names
+                temp_name = urllib.parse.quote_plus(
+                    remove_punctuation(name['name']))
+                agent_uri = "http://cwrc.ca/cwrcdata/" + temp_name
+                agent_resource.add(OWL.sameAs, URIRef(agent_uri))
+
+                j+=1         
+            
             if o['publisher']:
                 publisher = g.resource(
                     "{}_activity_statement_publisher_{}".format(self.mainURI, i))
-                publisher.add(RDF.type, BF.Agent)
-                publisher.add(RDFS.label, Literal(o['publisher']))
+                publisher.add(RDF.type, CRM.E39_Actor)
 
-                originInfo.add(BF.provisionActivity, publisher)
+                publisher_role_bnode = BNode()
+                
+                g.add((publisher_role_bnode,RDF.type, CRMPC.PC14_carried_out_by))
+                g.add((publisher_role_bnode, CRMPC.P02_has_range, publisher.identifier))
+                g.add((publisher_role_bnode, CRMPC["P14.1_in_the_role_of"],ROLES["publisher"]))
+                originInfo.add(CRMPC.P01i_is_domain_of,publisher_role_bnode)
+        
             if o['place']:
                 place = g.resource(
                     "{}_activity_statement_place_{}".format(self.mainURI, i))
                 place.add(RDF.value, Literal(o['place']))
-                place.add(RDF.type, BF.Place)
-                place.add(RDF.type, SCHEMA.Place)
+                place.add(RDF.type, CRM.E53_Place)
 
+                # TODO: review place mapping
                 place_map = geoMapper.get_place(o['place'].strip())
-
                 if place_map:
                     for item in place_map:
                         place.add(OWL.sameAs, URIRef(item))
 
-                originInfo.add(BF.place, place)
+                originInfo.add(CRM.P7_took_place_at, place)
 
+            
             if o['date']:
-                originInfo.add(RDF.type, BF.Publication)
                 dateValue, transformed = dateParse(o['date'])
+                date_bnode = BNode()
+                g.add((date_bnode, RDF.type, CRM["E52_Time-Span"]))
                 if not transformed:
                     logger.info("MISSING DATE FORMAT: {} on Document {}".format(
                         dateValue, self.mainURI))
-                originInfo.add(BF.date, Literal(dateValue, datatype=XSD.date))
+                    g.add((date_bnode, CRM.P82a_begin_of_the_begin,
+                        Literal(dateValue)))
+                    g.add((date_bnode, CRM.P82b_end_of_the_end,
+                        Literal(dateValue)))
+                else:
+                    g.add((date_bnode, CRM.P82a_begin_of_the_begin, Literal(dateValue, datatype=XSD.datetime)))
+                    g.add((date_bnode, CRM.P82b_end_of_the_end,Literal(dateValue, datatype=XSD.datetime)))
+                
+                originInfo.add(CRM["P4_has_time-span"],date_bnode)
 
+            # CIDOC: Creating a manifestation, given an edition
             if o['edition']:
-                instance.add(BF.editionStatement, Literal(o['edition']))
+                instance_manifestion = g.resource(
+                    self.mainURI + "_instance_manifestation")
+                instance_manifestion.add(RDF.type, FRBROO.F3_Manifestation)
+                instance_manifestion.add(FRBROO.R4_embodies,resource)
+                
+                edition_node = BNode()
+                instance_manifestion.add(CRM.P1_identified_by, edition_node)
+                g.add((edition_node, RDF.type, CRM.E33_E41_Linguistic_Appellation))
+                g.add((edition_node, CRM.P190_has_symbolic_content, Literal(o['edition'])))
+                
+                # TODO: Replace with URI for edition
+                g.add((edition_node, CRM.P2_has_type, Literal("edition")))
 
+            resource.add(FRBROO.R19i_was_realised_through, originInfo)
             i += 1
-
-            resource.add(BF.provisionActivity, originInfo)
 
         i = 0
         if not self.relatedItem:
@@ -837,46 +920,82 @@ class BibliographyParse:
                 bp.build_graph()
 
                 work = g.resource("{}_part_{}".format(self.mainURI, i))
-                resource.add(self.related_item_map[part['type']], work)
-                i += 0
+                
+                work.add(CRM.P2_has_type, self.related_item_map[part['type']])
+                resource.add(FRBROO.R67i_forms_part_of, work)
+                resource.add(FRBROO.R10i_is_member_of, work)
+                i += 1
 
-        i = 0
-
-        # Add notes to the instance
+        # CIDOC: Add notes to the instance
         for n in self.get_notes():
-            note_r = g.resource("{}_note_{}".format(self.mainURI, i))
-            note_r.add(RDF.type, BF.Note)
-            note_r.add(RDF.value, Literal(n['content']))
             if n['type']:
-                note_r.add(BF.nodeType, Literal(n['type']))
+                # NOTE: unsure what to do about note type
+                # values encountered: public_note
+                logger.info("NOTE TYPE: " + str(n['type']))
+                # note_r.add(BF.nodeType, Literal(n['type']))
 
-            i += 0
-
-            instance.add(BF.note, note_r)
+            instance.add(CRM["P3_has_note"], Literal(n['content']))
 
         i = 0
-        # Add parts to the instance
+        # CIDOC: creating identifiers for data sources
+        # Assuming there's a n
+        instance_manifestion = None
+        o = self.get_origins()
+        if o:
+            if o[0]['edition']:
+                instance_manifestion = g.resource(self.mainURI + "_instance_manifestation")
         for p in self.get_parts():
             extent_resource = g.resource(
                 "{}_extent_{}".format(self.mainURI, i))
-            extent_resource.add(RDF.type, BF.Extent)
-            if p['value'] != "":
-                extent_resource.add(RDF.value, Literal(p['value']))
-            if p['volume']:
-                extent_resource.add(SCHEMA.volumeNumber, Literal(p['volume']))
-            if p['issue']:
-                extent_resource.add(SCHEMA.issueNumber, Literal(p['issue']))
+            
+            extent_resource.add(RDF.type, CRM.E33_E41_Linguistic_Appellation)
+            extent_label = ""
 
-            instance.add(BF.extent, extent_resource)
+            # NOTE: Possibly revise these URIs with further guidance
+            if p['volume']:
+                vol_node = BNode()
+                extent_resource.add(CRM.P106_is_composed_of, vol_node)
+                g.add((vol_node, RDF.type, CRM.E33_E41_Linguistic_Appellation))
+                g.add((vol_node, CRM.P190_has_symbolic_content,Literal(p['volume'])))
+                g.add((vol_node, CRM.P2_has_type,SCHEMA.volumeNumber))
+                
+                extent_label += "Volume " + p['volume']
+            if p['issue']:
+                issue_node = BNode()
+                extent_resource.add(CRM.P106_is_composed_of, issue_node)
+                g.add((issue_node, RDF.type, CRM.E33_E41_Linguistic_Appellation))
+                g.add((issue_node, CRM.P190_has_symbolic_content,Literal(p['issue'])))
+                g.add((issue_node, CRM.P2_has_type,SCHEMA.issueNumber))
+                
+                if p['volume']:
+                    extent_label += ", "
+                extent_label += "Issue " + p['issue']
+            if p['value'] != "":
+                page_node = BNode()
+                extent_resource.add(CRM.P106_is_composed_of, page_node)
+                g.add((page_node, RDF.type, CRM.E33_E41_Linguistic_Appellation))
+                g.add((page_node, CRM.P190_has_symbolic_content,Literal(p['value'])))
+                g.add((page_node, CRM.P2_has_type, Literal("page numbers")))
+                
+                if p['volume'] or p['issue']:
+                    extent_label += ", "
+                extent_label += "Page " + p['value']
+
+            extent_resource.add(RDFS.label, Literal(extent_label))
+            # TODO: Clarify if instance needs to be identified by extent:
+            instance.add(CRM.P1_identified_by, extent_resource)
+            if instance_manifestion:
+                instance_manifestion.add(CRM.P1_identified_by, extent_resource)
+
 
         genre = self.get_genre()
 
         if genre:
             genre_res = g.resource("{}_genre".format(self.mainURI))
-            genre_res.add(RDF.type, BF.GenreForm)
+            genre_res.add(CRM.P2i_is_type_of, GENRE.Form)
             genre_res.add(RDFS.label, Literal(genre['genre']))
 
-            resource.add(BF.genreForm, genre_res)
+            resource.add(CRM.P2_has_type, genre_res)
 
 
         if self.id in genre_map:
@@ -886,10 +1005,14 @@ class BibliographyParse:
                 uri = URIRef(uri)
 
                 if genre_graph[uri]:
-                    resource.add(GENRE.hasGenre, uri)
+                    resource.add(CRM.P2_has_type, uri)
                 else:
                     logger.info("GENRE NOT FOUND: {0}".format(g))
-            
+
+def add_types_to_graph(graph,uri,label):
+    term = graph.resource(uri)
+    term.add(RDF.type, CRM.E55_Type)
+    term.add(RDFS.label, Literal(label))            
 
 if __name__ == "__main__":
     g = Graph()
@@ -901,6 +1024,23 @@ if __name__ == "__main__":
     g.bind("genre", GENRE)
     g.bind("owl", OWL)
     g.bind("schema", SCHEMA)
+    g.bind("crm", CRM)
+    g.bind("frbroo", FRBROO)
+    g.bind("crmpc", CRMPC)
+
+    # Adding declaration of references
+    for label, uri in BibliographyParse.type_map.items():
+        add_types_to_graph(g,uri,label)
+
+    for label, uri in BibliographyParse.related_item_map.items():
+        add_types_to_graph(g,uri,label)
+
+    for label, uri in BF_PROPERTIES.items():
+        add_types_to_graph(g,uri,label)
+
+    for label, uri in ROLES.items():
+        add_types_to_graph(g,uri,label)
+
 
     config_options = {}
 
@@ -946,7 +1086,10 @@ if __name__ == "__main__":
         except UnicodeError:
             pass
 
+    test_filenames = ["d75215cb-d102-4256-9538-c44bfbf490d9.xml","2e3e602e-b82c-441d-81bc-883f834b20c1.xml","13f8e71a-def5-41e4-90a0-6ae1092ae446.xml","16d427db-a8a2-4f33-ac53-9f811672584b.xml","4109f3c5-0508-447b-9f86-ea8052ff3981.xml"]
+    # for fname in test_filenames:
     for fname in os.listdir(dirname):
+        print(fname)
 
         path = os.path.join(dirname, fname)
         if os.path.isdir(path):
