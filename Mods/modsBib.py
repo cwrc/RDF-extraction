@@ -913,7 +913,7 @@ class BibliographyParse:
                     self.mainURI.replace("http://cwrc.ca/cwrcdata/", ""), part['type'], i), True)
                 bp.build_graph()
 
-                work = g.resource("{}_part_{}".format(self.mainURI, i))
+                work = g.resource("{}_{}_{}".format(self.mainURI,part['type'], i))
                 
                 work.add(CRM.P2_has_type, self.related_item_map[part['type']])
                 resource.add(FRBROO.R67i_forms_part_of, work)
