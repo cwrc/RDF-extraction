@@ -66,14 +66,14 @@ ADMIN_AGENTS = {
 # TODO: Revise Role URIs once available
 ROLES = {
     "publisher": URIRef("http://vocab.getty.edu/aat/300025574"),
-    "editor": URIRef("http://vocab.getty.edu/aat/30002552"),
+    "editor": URIRef("http://vocab.getty.edu/aat/300025526"),
     "translator": URIRef("http://vocab.getty.edu/aat/300025601"),
     "compiler": URIRef("http://vocab.getty.edu/aat/300121766"),
     "adapter": URIRef("http://vocab.getty.edu/aat/300410355"),
     "illustrator": URIRef("http://vocab.getty.edu/aat/300025123"),
     "contributor": URIRef("http://vocab.getty.edu/aat/300403974"),
     "introduction": URIRef("http://vocab.getty.edu/aat/300374882"), # letters of intro: don't know about this one
-    "revised": URIRef("http://vocab.getty.edu/aat/30002552"), # reusued editor
+    "revised": URIRef("http://vocab.getty.edu/aat/300025526"), # reusued editor
     "afterword": URIRef("http://vocab.getty.edu/aat/300121766"),
     "transcriber": URIRef("http://vocab.getty.edu/aat/300440751"),
 }
@@ -763,10 +763,7 @@ class BibliographyParse:
             if not transformed:
                 logger.info("MISSING DATE FORMAT: {} on Document {}".format(
                     dateValue, self.mainURI))
-                g.add((date_bnode, CRM.P82a_begin_of_the_begin,
-                       Literal(dateValue)))
-                g.add((date_bnode, CRM.P82b_end_of_the_end,
-                       Literal(dateValue)))
+                g.add((date_bnode, RDFS.label, Literal(dateValue)))
             else:
                 g.add((date_bnode, CRM.P82a_begin_of_the_begin, Literal(dateValue, datatype=XSD.datetime)))
                 g.add((date_bnode, CRM.P82b_end_of_the_end,Literal(dateValue, datatype=XSD.datetime)))
@@ -884,10 +881,7 @@ class BibliographyParse:
                 if not transformed:
                     logger.info("MISSING DATE FORMAT: {} on Document {}".format(
                         dateValue, self.mainURI))
-                    g.add((date_bnode, CRM.P82a_begin_of_the_begin,
-                        Literal(dateValue)))
-                    g.add((date_bnode, CRM.P82b_end_of_the_end,
-                        Literal(dateValue)))
+                    g.add((date_bnode, RDFS.label,Literal(dateValue)))
                 else:
                     g.add((date_bnode, CRM.P82a_begin_of_the_begin, Literal(dateValue, datatype=XSD.datetime)))
                     g.add((date_bnode, CRM.P82b_end_of_the_end,Literal(dateValue, datatype=XSD.datetime)))
