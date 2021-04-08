@@ -29,8 +29,9 @@ CONFIG_FILE = "./bibparse.config"
 
 logger = logging.getLogger('bibliography_extraction')
 logger.setLevel(logging.INFO)
-
+formatter = logging.Formatter('%(levelname)s {Line #%(lineno)d} : %(message)s ')
 fh = logging.FileHandler('bibliography_extraction.log')
+fh.setFormatter(formatter)
 fh.setLevel(logging.INFO)
 
 logger.addHandler(fh)
@@ -40,7 +41,7 @@ logger.addHandler(fh)
 CWRC = rdflib.Namespace("http://sparql.cwrc.ca/ontologies/cwrc#")
 BF = rdflib.Namespace("http://id.loc.gov/ontologies/bibframe/")
 XML = rdflib.Namespace("http://www.w3.org/XML/1998/namespace")
-MARCREL = rdflib.Namespace("http://id.loc.gov/vocabulary/relators/")
+MARC_REL = rdflib.Namespace("http://id.loc.gov/vocabulary/relators/")
 DATA = rdflib.Namespace("http://cwrc.ca/cwrcdata/")
 GENRE = rdflib.Namespace("http://sparql.cwrc.ca/ontologies/genre#")
 SCHEMA = rdflib.Namespace("http://schema.org/")
@@ -60,36 +61,37 @@ ADMIN_AGENTS = {
     "CaAEU": DATA.CaAEU,
     "UAB": DATA.UAB,
     "U3G": DATA.U3G,
-    "Orlando: Women's Writing in the British Isles from the Beginnings to the Present": URIRef("http://www.wikidata.org/entity/Q60672320"),
+    "Orlando: Women's Writing in the British Isles from the Beginnings to the Present": DATA.Orlando,
 }
 
-# TODO: Revise Role URIs once available
-ROLES = {
-    "publisher": URIRef("http://vocab.getty.edu/aat/300025574"),
-    "editor": URIRef("http://vocab.getty.edu/aat/300025526"),
-    "translator": URIRef("http://vocab.getty.edu/aat/300025601"),
-    "compiler": URIRef("http://vocab.getty.edu/aat/300121766"),
-    "adapter": URIRef("http://vocab.getty.edu/aat/300410355"),
-    "illustrator": URIRef("http://vocab.getty.edu/aat/300025123"),
-    "contributor": URIRef("http://vocab.getty.edu/aat/300403974"),
-    "introduction": URIRef("http://vocab.getty.edu/aat/300374882"), # letters of intro: don't know about this one
-    "revised": URIRef("http://vocab.getty.edu/aat/300025526"), # reusued editor
-    "afterword": URIRef("http://vocab.getty.edu/aat/300121766"),
-    "transcriber": URIRef("http://vocab.getty.edu/aat/300440751"),
-}
-
-# role_map = {
-#     "editor": "edt",
-#     "translator": "trl",
-#     "compiler": "com",
-#     "adapter": "adp",
-#     "contributor": "ctb",
-#     "illustrator": "ill",
-#     "introduction": "win",
-#     "revised": "edt",
-#     "afterword": "aft",
-#     "transcriber": "trc"
+# TODO: Use as skos:related terms
+# ROLES = {
+#     "publisher": URIRef("http://vocab.getty.edu/aat/300025574"),
+#     "editor": URIRef("http://vocab.getty.edu/aat/300025526"),
+#     "translator": URIRef("http://vocab.getty.edu/aat/300025601"),
+#     "compiler": URIRef("http://vocab.getty.edu/aat/300121766"),
+#     "adapter": URIRef("http://vocab.getty.edu/aat/300410355"),
+#     "illustrator": URIRef("http://vocab.getty.edu/aat/300025123"),
+#     "contributor": URIRef("http://vocab.getty.edu/aat/300403974"),
+#     "introduction": URIRef("http://vocab.getty.edu/aat/300374882"), # letters of intro: don't know about this one
+#     "revised": URIRef("http://vocab.getty.edu/aat/300025526"), # reusued editor
+#     "afterword": URIRef("http://vocab.getty.edu/aat/300121766"),
+#     "transcriber": URIRef("http://vocab.getty.edu/aat/300440751"),
 # }
+
+ROLES = {
+    "publisher": MARC_REL.pbl,
+    "editor": MARC_REL.edt,
+    "translator": MARC_REL.trl,
+    "compiler": MARC_REL.com,
+    "adapter": MARC_REL.adp,
+    "contributor": MARC_REL.ctb,
+    "illustrator": MARC_REL.ill,
+    "introduction": MARC_REL.win,
+    "revised": MARC_REL.edt,
+    "afterword": MARC_REL.aft,
+    "transcriber":MARC_REL.trc
+}
 
 genre_graph = None
 genre_map = {}
@@ -130,7 +132,7 @@ def remove_punctuation(input_str, all_punctuation=False):
 
 
 def dateParse(date_string: str):
-
+    # Currently works for single dates need to examine patterns further for 2 days
     # Strip spaces surrounding the date string
     date_string = date_string.strip().rstrip()
 
@@ -366,19 +368,20 @@ class BibliographyParse:
         "afterword": "aft",
         "transcriber": "trc"
     }
-
+# Currently not handled: "original, otherFormat, otherVersion"
+# See: https://lincs-cfi.slack.com/archives/D016S5Y05K2/p1617723686006600?thread_ts=1617648071.002900&cid=D016S5Y05K2
     related_item_map = {
-        "host": BF.partOf,
-        "constituent": BF.partOf,
-        "isReferencedBy": BF.referencedBy,
-        "original": BF.original,
-        "otherFormat": BF.otherPhysicalFormat,
-        "otherVersion": BF.otherEdition,
-        "preceding": BF.precededBy,
-        "references": BF.references,
-        "reviewOf": BF.review,
-        "series": BF.hasSeries,
-        "succeeding": BF.succeededBy
+        "host": FRBROO.R67i_forms_part_of,
+        "constituent": FRBROO.R5i_is_component_of,
+        "isReferencedBy": CRM.P67i_is_referenced_by,
+        # "original": BF.original,
+        # "otherFormat": BF.otherPhysicalFormat,
+        # "otherVersion": BF.otherEdition,
+        "preceding": FRBROO.R1_is_successor_of,
+        "references": CRM.P67_refers_to,
+        "reviewOf": CRM.P129_is_about,
+        "series": FRBROO.R67i_forms_part_of,
+        "succeeding": FRBROO.R1i_has_successor
     }
 
     def __init__(self, filename, graph, resource_name, related_item=False):
@@ -418,6 +421,10 @@ class BibliographyParse:
         If a type is not mapped then a default of Text from BIBFRAME
         :return: str|URI
         """
+        temp = self.soup.find_all("typeOfResource")
+        if len(temp) > 1:
+            logger.error("Multiple types detected! "+ self.filename)
+        
         if self.soup.typeOfResource:
             resource_type = self.soup.typeOfResource.text.lower()
 
@@ -430,12 +437,15 @@ class BibliographyParse:
         Extracts the genre and related authority of that genre
         :return: dict
         """
-        if self.soup.genre:
-            if 'authority' in self.soup.genre:
-                authority = self.soup.genre['authority']
+        genres = []
+        for genre in self.soup.find_all("genre"):
+            if 'authority' in genre.attrs:
+                authority = genre['authority']
             else:
                 authority = ""
-            return {'genre': self.soup.genre.text, 'authority': authority}
+            genres.append( {'genre': genre.text, 'authority': authority})
+        
+        return genres
 
     def get_title(self):
         titles = []
@@ -913,12 +923,12 @@ class BibliographyParse:
                     self.mainURI.replace("http://cwrc.ca/cwrcdata/", ""), part['type'], i), True)
                 bp.build_graph()
 
-                work = g.resource("{}_{}_{}".format(self.mainURI,part['type'], i))
-                
-                work.add(CRM.P2_has_type, self.related_item_map[part['type']])
-                resource.add(FRBROO.R67i_forms_part_of, work)
-                resource.add(FRBROO.R10i_is_member_of, work)
-                i += 1
+                if part['type'] in self.related_item_map:
+                    work = g.resource("{}_{}_{}".format(self.mainURI,part['type'], i))
+                    resource.add(self.related_item_map[part['type']], work)
+                    i += 1
+                else:
+                    logger.error(F"Related Item type is unmapped: {part['type']} for {self.mainURI}")
 
         # CIDOC: Add notes to the instance
         for n in self.get_notes():
@@ -932,7 +942,6 @@ class BibliographyParse:
 
         i = 0
         # CIDOC: creating identifiers for data sources
-        # Assuming there's a n
         instance_manifestion = None
         o = self.get_origins()
         if o:
@@ -982,20 +991,25 @@ class BibliographyParse:
                 instance_manifestion.add(CRM.P1_identified_by, extent_resource)
 
 
-        genre = self.get_genre()
+        genres = self.get_genre()
+        for genre in genres:
+            if genre["genre"] in genre_mapping:
+                uri = URIRef(genre_mapping[genre["genre"]])
+                if genre_graph[uri]:
+                    resource.add(CRM.P2_has_type, uri)
+                else:
+                    logger.warning("GENRE NOT FOUND: {0}".format(genre["genre"]))
+            else:
+                    logger.warning("GENRE NOT FOUND: {0}".format(genre["genre"]))
 
-        if genre:
-            genre_res = g.resource("{}_genre".format(self.mainURI))
-            genre_res.add(CRM.P2i_is_type_of, GENRE.Form)
-            genre_res.add(RDFS.label, Literal(genre['genre']))
-
-            resource.add(CRM.P2_has_type, genre_res)
-
-
+        # Grabbing genres extracted from Orlando files
         if self.id in genre_map:
             genres = genre_map[self.id]
-            for g in genres:            
-                uri = genre_mapping[g]
+            for g in genres:
+                if g in genre_mapping:            
+                    uri = genre_mapping[g]
+                else:
+                    uri = genre_mapping[g.lower()]
                 uri = URIRef(uri)
 
                 if genre_graph[uri]:
@@ -1013,7 +1027,7 @@ if __name__ == "__main__":
     g.bind("cwrc", CWRC)
     g.bind("bf", BF)
     g.bind("xml", XML, True)
-    g.bind("marcrel", MARCREL)
+    g.bind("marcrel", MARC_REL)
     g.bind("data", DATA)
     g.bind("genre", GENRE)
     g.bind("owl", OWL)
@@ -1064,11 +1078,10 @@ if __name__ == "__main__":
     genre_graph = Graph()
     genre_graph.parse(genre_ontology)
 
-    with open(genre_map_file, 'r') as reader:
-        for line in reader:
-            cols = line.split(",")
-            genre_mapping[cols[0]] = cols[1]
-            
+    with open(genre_map_file) as f:
+        csvfile = csv.reader(f)
+        for row in csvfile:
+            genre_mapping[row[0]] = row[1]
 
     for fname in os.listdir(writing_dir):
         path = os.path.join(writing_dir, fname)
@@ -1083,7 +1096,6 @@ if __name__ == "__main__":
     test_filenames = ["d75215cb-d102-4256-9538-c44bfbf490d9.xml","2e3e602e-b82c-441d-81bc-883f834b20c1.xml","13f8e71a-def5-41e4-90a0-6ae1092ae446.xml","16d427db-a8a2-4f33-ac53-9f811672584b.xml","4109f3c5-0508-447b-9f86-ea8052ff3981.xml"]
     # for fname in test_filenames:
     for fname in os.listdir(dirname):
-        print(fname)
 
         path = os.path.join(dirname, fname)
         if os.path.isdir(path):
