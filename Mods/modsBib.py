@@ -228,8 +228,7 @@ class ParseGeoNamesMapping:
             for row in csvfile:
                 place_name = row[0].rstrip(',.')
                 place_name = place_name.strip()
-                url_string = row[1] if 'http://' in row[1] else "http://{0}".format(
-                    row[1])
+                url_string = row[1] if 'http://' in row[1] else F"http://{row[1]}"
                 self.place_mapper.append(
                     {"placename": place_name, "url": url_string})
 
@@ -272,7 +271,7 @@ class ParseGeoNamesMapping:
 
             if not selected_item:
                 # Log unmatched places
-                logger.info("Unable to map Place {0}".format(place_name))
+                logger.info(F"Unable to map Place {place_name}")
                 UNIQUE_UNMATCHED_PLACES.add(place_name)
 
         return matched_places
@@ -410,10 +409,9 @@ class BibliographyParse:
         if 'data:' in self.id:
             self.mainURI = self.id
         else:
-            self.mainURI = "{}{}".format("http://cwrc.ca/cwrcdata/", self.id)
+            self.mainURI = F"http://cwrc.ca/cwrcdata/{self.id}"
 
         self.relatedItem = related_item
-        print(self.id)
 
     def get_type(self):
         """
@@ -624,9 +622,8 @@ class BibliographyParse:
             if 'type' in item.attrs:
                 item_type = item.attrs['type']
             try:
-                # print("{}".format(item))
                 soups.append(
-                    {"type": item_type, "soup": BeautifulSoup("{}".format(item), 'lxml-xml')})
+                    {"type": item_type, "soup": BeautifulSoup(F"{item}", 'lxml-xml')})
             except UnicodeError:
                 pass
 
@@ -676,20 +673,20 @@ class BibliographyParse:
                 volume_num = None
 
                 if item.extent.start:
-                    cur_value += "{}-".format(item.extent.start.text)
+                    cur_value += F"{item.extent.start.text}-"
                 else:
                     cur_value += "--"
 
                 if item.extent.end:
-                    cur_value += "{}".format(item.extent.end.text)
+                    cur_value += F"{item.extent.end.text}"
                 else:
                     cur_value += "-"
 
                 if item.extent.total:
-                    cur_value += "{}".format(item.extent.total.text)
+                    cur_value += F"{item.extent.total.text}"
 
                 if item.extent.list:
-                    cur_value += "{}".format(item.extent.list.text)
+                    cur_value += F"{item.extent.list.text}"
 
                 # Check and go through volume and issue numbers
                 if item.detail and 'type' in item.detail.attrs:
@@ -727,7 +724,7 @@ class BibliographyParse:
         i = 0
         for item in titles:
             if 'usage' in item and item['usage'] is not None:
-                title_res = g.resource("{}_title_{}".format(self.mainURI, i))
+                title_res = g.resource(F"{self.mainURI}_title_{i}")
                 title_res.add(RDF.type, CRM.E35_Title)
                 title_res.add(CRM.P190_has_symbolic_content, Literal(item["title"].strip()))
 
@@ -744,8 +741,7 @@ class BibliographyParse:
                 i += 1
 
         
-
-        adminMetaData = g.resource("{}_admin_metadata".format(self.mainURI))
+        adminMetaData = g.resource(F"{self.mainURI}_admin_metadata")
         adminMetaData.add(RDF.type, CRM.E13_Attribute_Assignment)
 
         i = 0
@@ -753,8 +749,7 @@ class BibliographyParse:
             if r['value'] in ADMIN_AGENTS:
                 assigner_agent = g.resource(ADMIN_AGENTS[r["value"]])
             else:           
-                assigner_agent = g.resource(
-                    "{}_admin_agent_{}".format(self.mainURI, i))
+                assigner_agent = g.resource(F"{self.mainURI}_admin_agent_{i}")
 
                 i += 1
             # Note: Authority value unused, values encountered: "marcorg", "oclcorg"
@@ -771,8 +766,7 @@ class BibliographyParse:
             g.add((date_bnode, RDF.type, CRM["E52_Time-Span"]))
             g.add((date_bnode, CRM.P2_has_type, BF.changeDate))
             if not transformed:
-                logger.info("MISSING DATE FORMAT: {} on Document {}".format(
-                    dateValue, self.mainURI))
+                logger.info(F"MISSING DATE FORMAT: {dateValue} on Document {self.mainURI}")
                 g.add((date_bnode, RDFS.label, Literal(dateValue)))
             else:
                 g.add((date_bnode, CRM.P82a_begin_of_the_begin, Literal(dateValue, datatype=XSD.datetime)))
@@ -782,8 +776,7 @@ class BibliographyParse:
         #CIDOC Creating Generation Process
         i = 0
         for r in self.get_record_origin():
-            generation_process = g.resource(
-                "{}_generation_process_{}".format(self.mainURI, i))
+            generation_process = g.resource(F"{self.mainURI}_generation_process_{i}")
             generation_process.add(RDF.type, CRM.E29_Design_or_Procedure)
             generation_process.add(CRM.P2_has_type, BF.GenerationProcess)
             generation_process.add(RDFS.comment, Literal(r['origin']))
@@ -798,10 +791,7 @@ class BibliographyParse:
         generation_process = g.resource(DATA.generation_process_cwrc)
         generation_process.add(RDF.type, CRM.E29_Design_or_Procedure)
         generation_process.add(CRM.P2_has_type, BF.GenerationProcess)
-        generation_process.add(RDFS.comment,
-                               Literal("Converted from MODS to BIBFRAME RDF in" +
-                                       " {} {} using CWRC's modsBib extraction script".format(cur_date.strftime("%B"),
-                                                                                              cur_date.strftime("%Y"))))
+        generation_process.add(RDFS.comment,Literal(F"Converted from MODS to BIBFRAME RDF in {cur_date.strftime('%B')} { cur_date.strftime('%Y')} using CWRC's modsBib extraction script"))
         adminMetaData.add(CRM.P33_used_specific_technique, generation_process)
 
         resource.add(CRM.P140i_was_attributed_by, adminMetaData)
@@ -810,13 +800,12 @@ class BibliographyParse:
         #CIDOC: Creating publication event
         for o in self.get_origins():
             
-            originInfo = g.resource(
-                "{}_activity_statement_{}".format(self.mainURI, i))
+            originInfo = g.resource(F"{self.mainURI}_activity_statement_{i}")
             originInfo.add(RDF.type, FRBROO.F28_Expression_Creation)
 
             j = 0
             for name in self.get_names():                
-                agent_resource = g.resource(self.mainURI + "#agent_{}".format(j))
+                agent_resource = g.resource(F"{self.mainURI}#agent_{j}")
                 agent_resource.add(RDFS.label, Literal(name["name"]))
                 
                 # TODO: revise these possibly to roles 
@@ -858,8 +847,7 @@ class BibliographyParse:
                 j+=1         
             
             if o['publisher']:
-                publisher = g.resource(
-                    "{}_activity_statement_publisher_{}".format(self.mainURI, i))
+                publisher = g.resource(F"{self.mainURI}_activity_statement_publisher_{i}")
                 publisher.add(RDF.type, CRM.E39_Actor)
 
                 publisher_role_bnode = BNode()
@@ -870,8 +858,7 @@ class BibliographyParse:
                 originInfo.add(CRMPC.P01i_is_domain_of,publisher_role_bnode)
         
             if o['place']:
-                place = g.resource(
-                    "{}_activity_statement_place_{}".format(self.mainURI, i))
+                place = g.resource(F"{self.mainURI}_activity_statement_place_{i}")
                 place.add(RDF.value, Literal(o['place']))
                 place.add(RDF.type, CRM.E53_Place)
 
@@ -889,8 +876,7 @@ class BibliographyParse:
                 date_bnode = BNode()
                 g.add((date_bnode, RDF.type, CRM["E52_Time-Span"]))
                 if not transformed:
-                    logger.info("MISSING DATE FORMAT: {} on Document {}".format(
-                        dateValue, self.mainURI))
+                    logger.info(F"MISSING DATE FORMAT: {dateValue} on Document {self.mainURI}")
                     g.add((date_bnode, RDFS.label,Literal(dateValue)))
                 else:
                     g.add((date_bnode, CRM.P82a_begin_of_the_begin, Literal(dateValue, datatype=XSD.datetime)))
@@ -900,8 +886,7 @@ class BibliographyParse:
 
             # CIDOC: Creating a manifestation, given an edition
             if o['edition']:
-                instance_manifestion = g.resource(
-                    self.mainURI + "_instance_manifestation")
+                instance_manifestion = g.resource(F"{self.mainURI}_instance_manifestation")
                 instance_manifestion.add(RDF.type, FRBROO.F3_Manifestation)
                 instance_manifestion.add(FRBROO.R4_embodies,resource)
                 
@@ -924,7 +909,7 @@ class BibliographyParse:
                 bp.build_graph()
 
                 if part['type'] in self.related_item_map:
-                    work = g.resource("{}_{}_{}".format(self.mainURI,part['type'], i))
+                    work = g.resource(F"{self.mainURI}_{part['type']}_{i}")
                     resource.add(self.related_item_map[part['type']], work)
                     i += 1
                 else:
@@ -946,10 +931,9 @@ class BibliographyParse:
         o = self.get_origins()
         if o:
             if o[0]['edition']:
-                instance_manifestion = g.resource(self.mainURI + "_instance_manifestation")
+                instance_manifestion = g.resource(F"{self.mainURI}_instance_manifestation")
         for p in self.get_parts():
-            extent_resource = g.resource(
-                "{}_extent_{}".format(self.mainURI, i))
+            extent_resource = g.resource(F"{self.mainURI}_extent_{i}")
             
             extent_resource.add(RDF.type, CRM.E33_E41_Linguistic_Appellation)
             extent_label = ""
@@ -998,9 +982,9 @@ class BibliographyParse:
                 if genre_graph[uri]:
                     resource.add(CRM.P2_has_type, uri)
                 else:
-                    logger.warning("GENRE NOT FOUND: {0}".format(genre["genre"]))
+                    logger.warning(F"GENRE NOT FOUND: {genre['genre']}")
             else:
-                    logger.warning("GENRE NOT FOUND: {0}".format(genre["genre"]))
+                    logger.warning(F"GENRE NOT FOUND: {genre['genre']}")
 
         # Grabbing genres extracted from Orlando files
         if self.id in genre_map:
@@ -1015,7 +999,7 @@ class BibliographyParse:
                 if genre_graph[uri]:
                     resource.add(CRM.P2_has_type, uri)
                 else:
-                    logger.info("GENRE NOT FOUND: {0}".format(g))
+                    logger.info(F"GENRE NOT FOUND: {g}")
 
 def add_types_to_graph(graph,uri,label):
     term = graph.resource(uri)
@@ -1094,8 +1078,8 @@ if __name__ == "__main__":
             pass
 
     test_filenames = ["d75215cb-d102-4256-9538-c44bfbf490d9.xml","2e3e602e-b82c-441d-81bc-883f834b20c1.xml","13f8e71a-def5-41e4-90a0-6ae1092ae446.xml","16d427db-a8a2-4f33-ac53-9f811672584b.xml","4109f3c5-0508-447b-9f86-ea8052ff3981.xml"]
-    # for fname in test_filenames:
-    for fname in os.listdir(dirname):
+    # for fname in os.listdir(dirname):
+    for fname in test_filenames:
 
         path = os.path.join(dirname, fname)
         if os.path.isdir(path):
@@ -1119,5 +1103,4 @@ if __name__ == "__main__":
     formats = {'ttl': 'turtle'}  # 'xml': 'pretty-xml'
     print(len(g))
     for extension, file_format in formats.items():
-        g.serialize(destination="{}.{}".format(output_name,
-                                                      extension), format=file_format)
+        g.serialize(destination=F"{output_name}.{extension}", format=file_format)
