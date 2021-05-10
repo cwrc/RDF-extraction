@@ -74,7 +74,6 @@ def find_children(tag):
 
 def find_childlessness(tag):
     tags = tag.find_all("CHILDLESSNESS")
-    #never married
     childlessness_words = {
         "birthControl": ["contraception", "birth control", "family planning"],
         "adoption": ["adopted", "adoption"],
@@ -87,8 +86,6 @@ def find_childlessness(tag):
     childlessness = []
     for x in tags:
         keyword_found = False
-        print(tag)
-        print(x)
         for reproductiveHistory in childlessness_words.keys():
             if any(word in x.text for word in childlessness_words[reproductiveHistory]):
                 keyword_found =True
@@ -239,7 +236,7 @@ def create_family_map(path=None):
         for row in reader:
             if row[0] not in FAMILY_MAP:
                 FAMILY_MAP[row[0]] = {"Predicate": row[1], "MALE": row[2],
-                                      "FEMALE": row[3], "NEUTRAL": row[4], "SEX": row[5]}
+                                      "FEMALE": row[3], "NEUTRAL": row[4], "SEX": row[5], "CIDOC":row[6]}
 
 
 FAMILY_MAP = {}
@@ -255,6 +252,8 @@ def get_all_members(bio,person):
             family_tree[x["RELATION"]].append(peeps)
         else:
             family_tree[x["RELATION"]] = (peeps)
+    print(family_tree)
+    input()
 
 def extract_family_data(bio, person):
     # TODO: create duplicate contexts implying inverse operations
@@ -267,13 +266,13 @@ def extract_family_data(bio, person):
     event_count = 1
 
     # NOTE: Will need to update this when schema changes, sex will be in culturalform tag
+    # <GENDER GENDERIDENTITY="WOMAN"/>
+
     sex = utilities.get_sex(bio)
 
     if sex not in ["FEMALE", "MALE"]:
         sex = "NEUTRAL"
 
-    print(person.uri,"\n")
-    # Revisit this
     # maybe best approach is to create family tree then go about creating the contexts? 
     get_all_members(bio, person)
     family_tags = bio.find_all("FAMILY")

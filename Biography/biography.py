@@ -7,7 +7,6 @@ logger = utilities.config_logger("biography")
 
 # TODO: Move this to utilities?
 WIKIDATA_MAP = {}
-# Also identify biographers
 
 def create_wikidata_map(path=None):
     import csv
@@ -54,7 +53,33 @@ def get_possible_biographers(doc):
             biographers.append(x)
     return list(set(biographers))
 
+def get_parent_context(tag,):
+    # Might be easier with recursion
+    tags = ["HEALTH", "WEALTH", "VIOLENCE", "LEISUREANDSOCIETY", "FRIENDSASSOCIATES", "PERSONNAME", "FAMILY", "INTIMATERELATIONSHIPS", "CULTURALFORMATION",
+            "LOCATION", "POLITICS", "OCCUPATION", "OTHERLIFEEVENT", "DEATH", "BIRTH", "EDUCATION"]
+    
+    for parent in tag.parents:
+        if parent.name == "MEMBER":
+            if "RELATION" in parent.attrs:
+                return parent["RELATION"]
 
+        if parent.name in tags:
+            return parent.name
+
+    return None
+
+def get_name_context(doc):
+    uri_map = {}
+    for x in doc.find_all("NAME"):
+        print(x)
+        uri = utilities.get_name_uri(x)
+        if uri in uri_map:
+            uri_map[uri].append(get_parent_context(x))
+        else:
+            uri_map[uri] = [get_parent_context(x)]
+    
+    return uri_map
+    
 
 class Biography(object):
     """docstring for Biography"""
@@ -69,9 +94,14 @@ class Biography(object):
         self.uri = utilities.make_standard_uri(self.std_name)
         self.document = doc
         
+        # TODO: Review names and people extraction for more precision
         self.biographers = [
             utilities.get_name_uri(x) for x in get_possible_biographers(self.document)]
         self.names_mentioned = utilities.get_people(self.document)
+        # uris:Orlando tag
+        self.people_contexts = get_name_context(doc)
+        
+        # uri:role
         self.people_map = {}
         self.people_map[self.uri] = "self"
         for x in self.names_mentioned:
@@ -89,7 +119,6 @@ class Biography(object):
         self.context_list = []
         self.event_list = []
 
-        # Gurjap's files
         self.occupations = []
         self.family_member_list = []
         self.friend_list = []
@@ -133,9 +162,10 @@ class Biography(object):
     def to_graph(self):
         g = utilities.create_graph()
 
-        g.add((self.uri, RDF.type, utilities.NS_DICT["cwrc"].NaturalPerson))
-        g.add((self.uri, utilities.NS_DICT["foaf"].isPrimaryTopicOf, self.url))
-        # g.add((self.uri, utilities.NS_DICT["cwrc"].hasGender, person.gender))
+        g.add((self.uri, RDF.type, utilities.NS_DICT["crm"].E21_Person))
+        g.add(
+            (self.uri, utilities.NS_DICT["crm"].P129i_is_subject_of, self.url))
+        
 
         g += self.create_triples(self.context_list)
         g += self.create_triples(self.event_list)
@@ -151,8 +181,6 @@ class Biography(object):
         if self.wd_id:
             g.add((self.uri, utilities.NS_DICT["owl"].sameAs, rdflib.term.URIRef(self.wd_id)))
 
-        # g.add((self.uri, RDFS.label, Literal(self.name)))
-        # g.remove((self.uri, RDFS.label, Literal(self.std_name)))
         g.add((self.uri, RDFS.label, Literal(self.std_name)))
         g.add((self.uri, utilities.NS_DICT["skos"].altLabel, Literal(self.name)))
 
