@@ -704,12 +704,20 @@ class BibliographyParse:
 
         return part_objects
 
-    def build_graph(self):
+    def build_graph(self, part_type=None):
         g = self.g
 
         titles = self.get_title()
         resource = g.resource(self.mainURI)
-        resource.add(RDF.type, FRBROO.F1_Work)
+        
+        if not part_type:
+            resource.add(RDF.type, FRBROO.F1_Work)
+        elif part_type == "constituent":
+            resource.add(RDF.type, FRBROO.F2_Expression)
+        else:
+            resource.add(RDF.type, FRBROO.F1_Work)
+        
+        
         resource.add(CRM.P2_has_type, self.get_type())
         
         for lang in self.get_languages():
@@ -805,9 +813,12 @@ class BibliographyParse:
 
             j = 0
             for name in self.get_names():                
-                agent_resource = g.resource(F"{self.mainURI}#agent_{j}")
+                # TODO: insert some tests surrounding names
+                temp_name = urllib.parse.quote_plus(
+                    remove_punctuation(name['name']))
+                agent_resource=g.resource(DATA[F"{temp_name}"])
                 agent_resource.add(RDFS.label, Literal(name["name"]))
-                
+                                
                 # TODO: revise these possibly to roles 
                 if name['type'] == 'personal':
                     agent_resource.add(RDF.type, CRM.E21_Person)
@@ -825,7 +836,7 @@ class BibliographyParse:
                     agent_resource.add(RDF.type, BF.Meeting)
                 else:
                     agent_resource.add(RDF.type, BF.Agent)
-                """
+                """     
 
                 #Attaching role to the event
                 if name['role'] in ROLES:
@@ -838,11 +849,6 @@ class BibliographyParse:
                 elif name['role'] != None:
                     logger.warning("Role not handled: "+str(name['role']))
 
-                # TODO: insert some tests surrounding names
-                temp_name = urllib.parse.quote_plus(
-                    remove_punctuation(name['name']))
-                agent_uri = "http://cwrc.ca/cwrcdata/" + temp_name
-                agent_resource.add(OWL.sameAs, URIRef(agent_uri))
 
                 j+=1         
             
@@ -906,12 +912,17 @@ class BibliographyParse:
             for part in self.get_related_items():
                 bp = BibliographyParse(part['soup'], self.g, "{}_{}_{}".format(
                     self.mainURI.replace("http://cwrc.ca/cwrcdata/", ""), part['type'], i), True)
-                bp.build_graph()
+                bp.build_graph(part_type=part['type'])
 
                 if part['type'] in self.related_item_map:
                     work = g.resource(F"{self.mainURI}_{part['type']}_{i}")
-                    resource.add(self.related_item_map[part['type']], work)
+                    if part["type"] == "constituent":
+                        work.add(self.related_item_map[part['type']], resource)
+                    else:
+                        resource.add(self.related_item_map[part['type']], work)
                     i += 1
+
+                    
                 else:
                     logger.error(F"Related Item type is unmapped: {part['type']} for {self.mainURI}")
 
@@ -1024,9 +1035,6 @@ if __name__ == "__main__":
     for label, uri in BibliographyParse.type_map.items():
         add_types_to_graph(g,uri,label)
 
-    for label, uri in BibliographyParse.related_item_map.items():
-        add_types_to_graph(g,uri,label)
-
     for label, uri in BF_PROPERTIES.items():
         add_types_to_graph(g,uri,label)
 
@@ -1077,7 +1085,9 @@ if __name__ == "__main__":
         except UnicodeError:
             pass
 
-    test_filenames = ["d75215cb-d102-4256-9538-c44bfbf490d9.xml","2e3e602e-b82c-441d-81bc-883f834b20c1.xml","13f8e71a-def5-41e4-90a0-6ae1092ae446.xml","16d427db-a8a2-4f33-ac53-9f811672584b.xml","4109f3c5-0508-447b-9f86-ea8052ff3981.xml"]
+    # test_filenames = ["d75215cb-d102-4256-9538-c44bfbf490d9.xml","2e3e602e-b82c-441d-81bc-883f834b20c1.xml","13f8e71a-def5-41e4-90a0-6ae1092ae446.xml","16d427db-a8a2-4f33-ac53-9f811672584b.xml","4109f3c5-0508-447b-9f86-ea8052ff3981.xml"]
+    # test_filenames = ["64d3c008-8a9d-415b-b52b-91d232c00952.xml",
+                    #   "e1b2f98f-1001-4787-a711-464f1527e5a7.xml", "15655c66-8c0b-4493-8f68-8d6cf4998303.xml"]
     # for fname in os.listdir(dirname):
     for fname in test_filenames:
 

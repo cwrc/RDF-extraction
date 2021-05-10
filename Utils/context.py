@@ -134,7 +134,7 @@ class Context(object):
     """
     MAPPING = create_context_map()
 
-    def __init__(self, id, tag, context_type="CULTURALFORMATION", motivation="describing", mode=None, subject_uri=None, target_uri=None, id_context=None, subject_name=None, other_triples=True):
+    def __init__(self, id, tag, context_type="CULTURALFORMATION", motivation="describing", mode=None, subject_uri=None, target_uri=None, id_context=None, subject_name=None, other_triples=True,pattern=1):
         super(Context, self).__init__()
         self.citations = []
         self.events = []
@@ -148,6 +148,7 @@ class Context(object):
         self.identifying_uri = id_context
         self.uri = utilities.create_uri("data", id)
         self.label = subject_name
+        self.cidoc_pattern=pattern
 
         # allows reuse of target to reduce duplication of target/citations
         if target_uri:
@@ -189,12 +190,8 @@ class Context(object):
 
         self.named_entities = get_named_entities(self.tag)
 
-        #TODO handle linking motivation
-        # Unsure motivation of following if statement
-        # if self.named_entities and context_type != "FREESTANDING_EVENT":
-        #     motivation = "describing"
-
         self.motivation = utilities.create_uri("oa", motivation)
+
 
     def link_triples(self, comp_list):
         """ Adding to list of components to link context to triples
@@ -245,8 +242,7 @@ class Context(object):
         if not self.context_focus and person:
             self.context_focus = person.uri
 
-        # Creating target first
-    
+        # Creating target first - CIDOCified
         if self.new_target:
             target_label = None
             source_url = None
@@ -261,6 +257,9 @@ class Context(object):
                 target_label = self.context_label + " Excerpt"
         
             source_url = rdflib.term.URIRef(source_url)
+            g.add((self.target_uri, RDF.type,utilities.NS_DICT["oa"].specificResource))
+            g.add((self.target_uri, RDF.type,
+                   utilities.NS_DICT["crm"].E73_Information_Object))
             g.add((self.target_uri, RDFS.label, Literal(target_label)))
             g.add((self.target_uri, utilities.NS_DICT["oa"].hasSource, source_url))
 
@@ -274,6 +273,8 @@ class Context(object):
             g.add((self.target_uri, utilities.NS_DICT["oa"].hasSelector, xpath_uri))
             g.add((xpath_uri, RDFS.label, Literal(xpath_label)))
             g.add((xpath_uri, RDF.type, utilities.NS_DICT["oa"].XPathSelector))
+            g.add((xpath_uri, RDF.type,
+                   utilities.NS_DICT["crm"].E73_Information_Object))
             g.add((xpath_uri, RDF.value, Literal(self.xpath)))
 
             # Creating text quote selector
@@ -282,6 +283,8 @@ class Context(object):
             textquote_label = target_label.replace(" excerpt", " TextQuote Selector")
             g.add((xpath_uri, utilities.NS_DICT["oa"].refinedBy, textquote_uri))
             g.add((textquote_uri, RDF.type, utilities.NS_DICT["oa"].TextQuoteSelector))
+            g.add((textquote_uri, RDF.type,
+                   utilities.NS_DICT["crm"].E33_Linguistic_Object))
             g.add((textquote_uri, RDFS.label, Literal(textquote_label)))
             g.add((textquote_uri, utilities.NS_DICT["oa"].exact, Literal(self.text)))
 
@@ -315,8 +318,8 @@ class Context(object):
 
         # Creating describing context if applicable
         if self.motivation == utilities.NS_DICT["oa"].describing:
-            self.uri = utilities.create_uri("data", self.id + "_describing")
-            context_label = person.name + " - " + self.context_label + " (describing)"
+            self.uri = utilities.create_uri("data", self.id + "_attributing")
+            context_label = person.name + " - " + self.context_label + " (attributing)"
             g.add((self.uri, RDF.type, self.context_type))
             g.add((self.uri, RDFS.label, Literal(context_label)))
             g.add((self.uri, utilities.NS_DICT["cwrc"].hasIDependencyOn, identifying_uri))

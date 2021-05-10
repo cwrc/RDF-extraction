@@ -53,6 +53,31 @@ def create_place_map(path=None):
                 PLACE_MAP[row[0]] = row[1]
 
 
+def create_place_rdf(path=None):
+    import csv
+    
+    g = utilities.create_graph()
+
+    if not path:
+        path = '../data/places.csv'
+    with open(path, newline='', encoding='utf-8') as csvfile:
+        reader = csv.reader(csvfile)
+        next(reader)
+        for row in reader:
+            print(row[0], row[1])
+            place = rdflib.URIRef(row[1])
+            label = rdflib.Literal(row[0].replace(",", ", "))
+            g.add(
+                (place, utilities.NS_DICT["rdf"].type, utilities.NS_DICT["crm"].E53_Type))
+            g.add((place, utilities.NS_DICT["rdfs"].label, label))
+            g.add(
+                (place, utilities.NS_DICT["crm"].P2_has_type, utilities.NS_DICT["cwrc"].MappedPlace))
+
+    with open("places.ttl", "w", encoding="utf-8") as f:
+        f.write("#" + str(len(g)) + " triples created\n")
+        f.write(g.serialize(format="ttl").decode())
+
+
 def get_attribute(tag, attribute):
     value = tag.get(attribute)
     if value:

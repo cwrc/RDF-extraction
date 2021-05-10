@@ -210,6 +210,8 @@ class Event(object):
             g.add((blanknode, RDFS.label, Literal(self.place_str[index])))
             g.add((blanknode, utilities.NS_DICT["cwrc"].hasMappedLocation, place))
             g.add((blanknode, RDF.type, utilities.NS_DICT["cwrc"].MappedPlace))
+            
+
 
         # Attaching actors, including the biographee incase they're not mentioned
         if person:

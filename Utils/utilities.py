@@ -4,9 +4,9 @@ import re
 import datetime
 import urllib
 try:
-    from Utils.place import Place
+    from Utils.place import Place, PLACE_MAP
 except ModuleNotFoundError as e:
-    from . import Place
+    from . import Place, PLACE_MAP
 
 """
 TODO: Add doctests for:
@@ -35,6 +35,7 @@ NS_DICT = {
     "cc": rdflib.Namespace("http://creativecommons.org/ns#"),
     "cito": rdflib.Namespace("http://purl.org/spar/cito/"),
     "cwrc": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/cwrc#"),
+    "crm": rdflib.Namespace("http://www.cidoc-crm.org/cidoc-crm/"),
     "ii": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/ii#"),
     "genre": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/genre#"),
     "data": rdflib.Namespace("http://cwrc.ca/cwrcdata/"),
@@ -407,6 +408,14 @@ def create_individual_triples(mode, person, script_id):
             x = "pretty-xml"
         create_extracted_file(temp_path, person, x)
 
+def create_place_nodes(g):
+    for label, uri in PLACE_MAP.items():
+        uri = rdflib.URIRef(uri)
+        label = label.replace(",",", ")
+        g.add((uri, rdflib.RDF.type, NS_DICT["crm"].E53_Place))
+        g.add((uri, NS_DICT["crm"].P2_has_type, NS_DICT["cwrc"].MappedPlace))
+        g.add((uri, rdflib.RDFS.label, rdflib.Literal(label)))
+
 def create_extracted_file(filepath, person, serialization="ttl"):
     """Create file of extracted triples for particular person
     """
@@ -422,6 +431,7 @@ def create_extracted_file(filepath, person, serialization="ttl"):
 def create_extracted_uberfile(filepath, graph, serialization="ttl", extra_triples=None):
     """Create file of triples for a particular graph
     """
+    create_place_nodes(graph)
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     with open(filepath, "w", encoding="utf-8") as f:
         if extra_triples:
