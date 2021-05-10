@@ -1,0 +1,593 @@
+ORLANDO TERM,Possible URI,Possible URI #2
+à clef,http://sparql.cwrc.ca/ontologies/genre#aClef
+abridgement,http://sparql.cwrc.ca/ontologies/genre#abridgement
+academic writing,http://sparql.cwrc.ca/ontologies/genre#scholarlyWriting
+ACLEF,http://sparql.cwrc.ca/ontologies/genre#aClef
+acrostic,http://sparql.cwrc.ca/ontologies/genre#acrostic
+adaptation,http://sparql.cwrc.ca/ontologies/genre#adaptation
+adventure writing,http://sparql.cwrc.ca/ontologies/genre#adventureWriting
+ADVENTUREWRITING,http://sparql.cwrc.ca/ontologies/genre#adventureWriting
+advertisement,http://sparql.cwrc.ca/ontologies/genre#advertisement
+Advertisement Form,http://sparql.cwrc.ca/ontologies/genre#AdvertisementForm
+advertising copy,http://sparql.cwrc.ca/ontologies/genre#AdvertisementForm
+ADVERTISINGCOPY,http://sparql.cwrc.ca/ontologies/genre#AdvertisementForm
+afterpiece,http://sparql.cwrc.ca/ontologies/genre#afterpiece
+afterword,http://sparql.cwrc.ca/ontologies/genre#afterword
+agitprop,http://sparql.cwrc.ca/ontologies/genre#agitprop
+allegory,http://sparql.cwrc.ca/ontologies/genre#allegory
+almanac,http://sparql.cwrc.ca/ontologies/genre#almanac
+alphabet,http://sparql.cwrc.ca/ontologies/genre#alphabet
+Alphabet Form,http://sparql.cwrc.ca/ontologies/genre#AlphabetForm
+anacreontic,http://sparql.cwrc.ca/ontologies/genre#anacreontic
+anagram,http://sparql.cwrc.ca/ontologies/genre#anagram
+animal story,http://sparql.cwrc.ca/ontologies/genre#animalStory
+animation,http://sparql.cwrc.ca/ontologies/genre#animation
+annotation,http://sparql.cwrc.ca/ontologies/genre#annotation
+announcement,http://sparql.cwrc.ca/ontologies/genre#announcement
+answer,http://sparql.cwrc.ca/ontologies/genre#answer
+anthem,http://sparql.cwrc.ca/ontologies/genre#anthem
+anthology,http://sparql.cwrc.ca/ontologies/genre#anthology
+anti-romance,http://sparql.cwrc.ca/ontologies/genre#antiromance
+ANTIROMANCE,http://sparql.cwrc.ca/ontologies/genre#antiromance
+apology,http://sparql.cwrc.ca/ontologies/genre#apology
+appendix,http://sparql.cwrc.ca/ontologies/genre#appendix
+architectural writing,http://sparql.cwrc.ca/ontologies/genre#architecturalWriting
+architecture,http://sparql.cwrc.ca/ontologies/genre#architecturalWriting
+archival material,http://sparql.cwrc.ca/ontologies/genre#archivalMaterial
+art criticism,http://sparql.cwrc.ca/ontologies/genre#artCriticism
+ARTCRITICISM,http://sparql.cwrc.ca/ontologies/genre#artCriticism
+artist's book,http://sparql.cwrc.ca/ontologies/genre#artistsBook
+atlas,http://sparql.cwrc.ca/ontologies/genre#atlas
+Auditory Medium,http://sparql.cwrc.ca/ontologies/genre#AuditoryMedium
+Autobiographical Genre,http://sparql.cwrc.ca/ontologies/genre#AutobiographicalGenre
+autobiography,http://sparql.cwrc.ca/ontologies/genre#autobiography
+ballad,http://sparql.cwrc.ca/ontologies/genre#ballad
+ballad opera,http://sparql.cwrc.ca/ontologies/genre#balladOpera
+ballade,http://sparql.cwrc.ca/ontologies/genre#ballade
+BALLADOPERA,http://sparql.cwrc.ca/ontologies/genre#balladOpera
+ballet,http://sparql.cwrc.ca/ontologies/genre#ballet
+bergamasque,http://sparql.cwrc.ca/ontologies/genre#bergamasque
+bestiary,http://sparql.cwrc.ca/ontologies/genre#bestiary
+biblical paraphrase,http://sparql.cwrc.ca/ontologies/genre#biblicalParaphrase
+BIBLICALPARAPHRASE,http://sparql.cwrc.ca/ontologies/genre#biblicalParaphrase
+bibliographic record,http://sparql.cwrc.ca/ontologies/genre#bibliographicRecord
+bibliography,http://sparql.cwrc.ca/ontologies/genre#bibliography
+bildungsroman,http://sparql.cwrc.ca/ontologies/genre#bildungsroman
+biographical dictionary,http://sparql.cwrc.ca/ontologies/genre#biographicalDictionary
+BIOGRAPHICALDICTIONARY,http://sparql.cwrc.ca/ontologies/genre#biographicalDictionary
+biography,http://sparql.cwrc.ca/ontologies/genre#biography
+bisexual fiction,http://sparql.cwrc.ca/ontologies/genre#bisexualFiction
+BISEXUALFICTION,http://sparql.cwrc.ca/ontologies/genre#bisexualFiction
+black comedy,http://sparql.cwrc.ca/ontologies/genre#blackComedy
+BLACKCOMEDY,http://sparql.cwrc.ca/ontologies/genre#blackComedy
+book,http://sparql.cwrc.ca/ontologies/genre#book
+book series,http://sparql.cwrc.ca/ontologies/genre#bookSeries
+born digital,http://sparql.cwrc.ca/ontologies/genre#bornDigital
+bouts-rimés,http://sparql.cwrc.ca/ontologies/genre#boutsRimes
+BOUTSRIMES,http://sparql.cwrc.ca/ontologies/genre#boutsRimes
+broadside,http://sparql.cwrc.ca/ontologies/genre#broadside
+burletta,http://sparql.cwrc.ca/ontologies/genre#burletta
+business,http://sparql.cwrc.ca/ontologies/genre#business
+cabaret,http://sparql.cwrc.ca/ontologies/genre#cabaret
+calendar,http://sparql.cwrc.ca/ontologies/genre#calendar
+Calendar Form,http://sparql.cwrc.ca/ontologies/genre#CalendarForm
+camp,http://sparql.cwrc.ca/ontologies/genre#camp
+captivity narrative,http://sparql.cwrc.ca/ontologies/genre#captivityNarrative
+CAPTIVITYNARRATIVE,http://sparql.cwrc.ca/ontologies/genre#captivityNarrative
+cartographic,http://sparql.cwrc.ca/ontologies/genre#CartographicForm
+Cartographic Form,http://sparql.cwrc.ca/ontologies/genre#CartographicForm
+cartographic materials,http://sparql.cwrc.ca/ontologies/genre#cartographicMaterials
+catalog,http://sparql.cwrc.ca/ontologies/genre#catalogue
+catalogue,http://sparql.cwrc.ca/ontologies/genre#catalogue
+Catalogue Form,http://sparql.cwrc.ca/ontologies/genre#CatalogueForm
+catechism,http://sparql.cwrc.ca/ontologies/genre#catechism
+cautionary tale,http://sparql.cwrc.ca/ontologies/genre#cautionaryTale
+chapbook,http://sparql.cwrc.ca/ontologies/genre#chapbook
+chapter,http://sparql.cwrc.ca/ontologies/genre#chapter
+CHARACTER,http://sparql.cwrc.ca/ontologies/genre#characterSketch
+character sketch,http://sparql.cwrc.ca/ontologies/genre#characterSketch
+charade,http://sparql.cwrc.ca/ontologies/genre#charade
+children's book,http://sparql.cwrc.ca/ontologies/genre#childrensLiterature
+childrens literature,http://sparql.cwrc.ca/ontologies/genre#childrensLiterature
+Childrens Literature Genre,http://sparql.cwrc.ca/ontologies/genre#ChildrensLiteratureGenre
+CHILDRENSLITERATURE,http://sparql.cwrc.ca/ontologies/genre#childrensLiterature
+chronology,http://sparql.cwrc.ca/ontologies/genre#chronology
+clerihew,http://sparql.cwrc.ca/ontologies/genre#clerihew
+closet drama,http://sparql.cwrc.ca/ontologies/genre#closetDrama
+CLOSETDRAMA,http://sparql.cwrc.ca/ontologies/genre#closetDrama
+collection,http://sparql.cwrc.ca/ontologies/genre#collection
+Collection Form,http://sparql.cwrc.ca/ontologies/genre#CollectionForm
+collective creation,http://sparql.cwrc.ca/ontologies/genre#collectiveCreation
+colouring book,http://sparql.cwrc.ca/ontologies/genre#colouringBook
+COLOURINGBOOK,http://sparql.cwrc.ca/ontologies/genre#colouringBook
+column,http://sparql.cwrc.ca/ontologies/genre#column
+Comedic Genre,http://sparql.cwrc.ca/ontologies/genre#ComedicGenre
+comedy,http://sparql.cwrc.ca/ontologies/genre#comedy
+comedy of humours,http://sparql.cwrc.ca/ontologies/genre#comedyOfHumours
+comedy of intrigue,http://sparql.cwrc.ca/ontologies/genre#comedyOfIntrigue
+comedy of manners,http://sparql.cwrc.ca/ontologies/genre#comedyOfManners
+comedy of menace,http://sparql.cwrc.ca/ontologies/genre#comedyOfMenace
+COMEDYOFHUMOURS,http://sparql.cwrc.ca/ontologies/genre#comedyOfHumours
+COMEDYOFINTRIGUE,http://sparql.cwrc.ca/ontologies/genre#comedyOfIntrigue
+COMEDYOFMANNERS,http://sparql.cwrc.ca/ontologies/genre#comedyOfManners
+COMEDYOFMENACE,http://sparql.cwrc.ca/ontologies/genre#comedyOfMenace
+comic,http://sparql.cwrc.ca/ontologies/genre#comicbook
+comicbook,http://sparql.cwrc.ca/ontologies/genre#comicbook
+coming out,http://sparql.cwrc.ca/ontologies/genre#comingOut
+COMINGOUT,http://sparql.cwrc.ca/ontologies/genre#comingOut
+commentary,http://sparql.cwrc.ca/ontologies/genre#commentary
+commonplace book,http://sparql.cwrc.ca/ontologies/genre#commonplaceBook
+COMMONPLACEBOOK,http://sparql.cwrc.ca/ontologies/genre#commonplaceBook
+companion,http://sparql.cwrc.ca/ontologies/genre#manual
+computer program,http://sparql.cwrc.ca/ontologies/genre#computerProgram
+COMPUTERPROGRAM,http://sparql.cwrc.ca/ontologies/genre#computerProgram
+condition of england novel,http://sparql.cwrc.ca/ontologies/genre#conditionOfEnglandNovel
+CONDITIONOFENGLANDNOVEL,http://sparql.cwrc.ca/ontologies/genre#conditionOfEnglandNovel
+conduct literature,http://sparql.cwrc.ca/ontologies/genre#conductLiterature
+CONDUCTLITERATURE,http://sparql.cwrc.ca/ontologies/genre#conductLiterature
+conversion narrative,http://sparql.cwrc.ca/ontologies/genre#conversionNarrative
+cookbook,http://sparql.cwrc.ca/ontologies/genre#cookbook
+correspondence,http://sparql.cwrc.ca/ontologies/genre#letter
+costume drama,http://sparql.cwrc.ca/ontologies/genre#costumeDrama
+courtship fiction,http://sparql.cwrc.ca/ontologies/genre#courtshipFiction
+COURTSHIPFICTION,http://sparql.cwrc.ca/ontologies/genre#courtshipFiction
+criminology,http://sparql.cwrc.ca/ontologies/genre#criminology
+criticism,http://sparql.cwrc.ca/ontologies/genre#criticism
+dance,http://sparql.cwrc.ca/ontologies/genre#dance
+dedication,http://sparql.cwrc.ca/ontologies/genre#dedication
+detective,http://sparql.cwrc.ca/ontologies/genre#detective
+detective novel,http://sparql.cwrc.ca/ontologies/genre#detective
+devotional,http://sparql.cwrc.ca/ontologies/genre#devotional
+dialogue of the dead,http://sparql.cwrc.ca/ontologies/genre#dialogueOfTheDead
+dialogue or debate,http://sparql.cwrc.ca/ontologies/genre#dialogueOrDebate
+Dialogue Or Debate Genre,http://sparql.cwrc.ca/ontologies/genre#DialogueOrDebateGenre
+DIALOGUEOFTHEDEAD,http://sparql.cwrc.ca/ontologies/genre#dialogueOfTheDead
+DIALOGUEORDEBATE,http://sparql.cwrc.ca/ontologies/genre#dialogueOrDebate
+diary,http://sparql.cwrc.ca/ontologies/genre#diary
+diaspora,http://sparql.cwrc.ca/ontologies/genre#diasporic
+diasporic,http://sparql.cwrc.ca/ontologies/genre#diasporic
+dictionary,http://sparql.cwrc.ca/ontologies/genre#dictionary
+didactic,http://sparql.cwrc.ca/ontologies/genre#didactic
+Didactic Genre,http://sparql.cwrc.ca/ontologies/genre#DidacticGenre
+digital,http://sparql.cwrc.ca/ontologies/genre#digital
+Digital Medium,http://sparql.cwrc.ca/ontologies/genre#DigitalMedium
+directory,http://sparql.cwrc.ca/ontologies/genre#directory
+dissertation,http://sparql.cwrc.ca/ontologies/genre#dissertation
+document,http://sparql.cwrc.ca/ontologies/genre#document
+documentary,http://sparql.cwrc.ca/ontologies/genre#documentary
+domestic,http://sparql.cwrc.ca/ontologies/genre#domestic
+drama,http://sparql.cwrc.ca/ontologies/genre#drama
+Dramatic Genre,http://sparql.cwrc.ca/ontologies/genre#DramaticGenre
+dramatic monologue,http://sparql.cwrc.ca/ontologies/genre#dramaticMonologue
+DRAMATICMONOLOGUE,http://sparql.cwrc.ca/ontologies/genre#dramaticMonologue
+drawing,http://sparql.cwrc.ca/ontologies/genre#drawing
+dream vision,http://sparql.cwrc.ca/ontologies/genre#dreamVision
+DREAMVISION,http://sparql.cwrc.ca/ontologies/genre#dreamVision
+dub,http://sparql.cwrc.ca/ontologies/genre#dub
+dystopia,http://sparql.cwrc.ca/ontologies/genre#dystopia
+eclogue,http://sparql.cwrc.ca/ontologies/genre#eclogue
+EDITING,http://sparql.cwrc.ca/ontologies/genre#editorialWork
+editorial work,http://sparql.cwrc.ca/ontologies/genre#editorialWork
+elegy,http://sparql.cwrc.ca/ontologies/genre#elegy
+Embedded/Partial Work,http://sparql.cwrc.ca/ontologies/genre#EmbeddedWork
+encyclopaedia,http://sparql.cwrc.ca/ontologies/genre#encyclopaedia
+environmental,http://sparql.cwrc.ca/ontologies/genre#environmental
+ephemera,http://sparql.cwrc.ca/ontologies/genre#ephemera
+epic,http://sparql.cwrc.ca/ontologies/genre#epic
+epic theatre,http://sparql.cwrc.ca/ontologies/genre#epicTheatre
+EPICTHEATRE,http://sparql.cwrc.ca/ontologies/genre#epicTheatre
+epigram,http://sparql.cwrc.ca/ontologies/genre#epigram
+epilogue,http://sparql.cwrc.ca/ontologies/genre#epilogue
+episodic literature,http://sparql.cwrc.ca/ontologies/genre#episodicLiterature
+EPISODICLITERATURE,http://sparql.cwrc.ca/ontologies/genre#episodicLiterature
+epistle,http://sparql.cwrc.ca/ontologies/genre#epistle
+epistolary,http://sparql.cwrc.ca/ontologies/genre#epistolary
+Epistolary Genre,http://sparql.cwrc.ca/ontologies/genre#EpistolaryGenre
+epitaph,http://sparql.cwrc.ca/ontologies/genre#epitaph
+epithalamium,http://sparql.cwrc.ca/ontologies/genre#epithalamium
+epyllion,http://sparql.cwrc.ca/ontologies/genre#epyllion
+erotica,http://sparql.cwrc.ca/ontologies/genre#erotica
+erotica or pornography,http://sparql.cwrc.ca/ontologies/genre#eroticaOrPornography
+EROTICAPORNOGRAPHY,http://sparql.cwrc.ca/ontologies/genre#eroticaOrPornography
+essais,http://sparql.cwrc.ca/ontologies/genre#InformationalGenre
+essay,http://sparql.cwrc.ca/ontologies/genre#essay
+eulogy,http://sparql.cwrc.ca/ontologies/genre#eulogy
+exhibition catalogue,http://sparql.cwrc.ca/ontologies/genre#exhibitionCatalogue
+EXHIBITIONCATALOGUE,http://sparql.cwrc.ca/ontologies/genre#exhibitionCatalogue
+exploration,http://sparql.cwrc.ca/ontologies/genre#exploration
+EXPRESSIONISTWRITING,
+eye-witness,http://sparql.cwrc.ca/ontologies/genre#eyeWitness
+fable,http://sparql.cwrc.ca/ontologies/genre#fable
+fabliau,http://sparql.cwrc.ca/ontologies/genre#fabliau
+fairytale,http://sparql.cwrc.ca/ontologies/genre#fairytale
+fantasy,http://sparql.cwrc.ca/ontologies/genre#fantasy
+farce,http://sparql.cwrc.ca/ontologies/genre#farce
+fascicle,http://sparql.cwrc.ca/ontologies/genre#fascicle
+feminist,http://sparql.cwrc.ca/ontologies/genre#feminist
+Feminist Genre,http://sparql.cwrc.ca/ontologies/genre#FeministGenre
+feminist theory,http://sparql.cwrc.ca/ontologies/genre#feministTheory
+FEMINISTTHEORY,http://sparql.cwrc.ca/ontologies/genre#feministTheory
+fiction,http://sparql.cwrc.ca/ontologies/genre#fiction
+Fictional Genre,http://sparql.cwrc.ca/ontologies/genre#FictionalGenre
+film,http://sparql.cwrc.ca/ontologies/genre#film
+film script,http://sparql.cwrc.ca/ontologies/genre#filmScript
+film tv script,http://sparql.cwrc.ca/ontologies/genre#filmTvScript
+FILMTVSCRIPT,http://sparql.cwrc.ca/ontologies/genre#filmTvScript
+folk song,http://sparql.cwrc.ca/ontologies/genre#folkSong
+folk tale,http://sparql.cwrc.ca/ontologies/genre#folkTale
+FOLKSONG,http://sparql.cwrc.ca/ontologies/genre#folkSong
+folktale,http://sparql.cwrc.ca/ontologies/genre#legend
+Form Genre,http://sparql.cwrc.ca/ontologies/genre#Form
+form of,http://sparql.cwrc.ca/ontologies/genre#formOf
+free verse,http://sparql.cwrc.ca/ontologies/genre#freeVerse
+gardening,http://sparql.cwrc.ca/ontologies/genre#gardening
+GARDENINGBOOK,http://sparql.cwrc.ca/ontologies/genre#gardening
+genealogy,http://sparql.cwrc.ca/ontologies/genre#genealogy
+georgic,http://sparql.cwrc.ca/ontologies/genre#georgic
+ghost story,http://sparql.cwrc.ca/ontologies/genre#ghostStory
+GHOSTSTORY,http://sparql.cwrc.ca/ontologies/genre#ghostStory
+giftbook,http://sparql.cwrc.ca/ontologies/genre#giftbook
+gothic,http://sparql.cwrc.ca/ontologies/genre#gothic
+government report,http://sparql.cwrc.ca/ontologies/genre#governmentReport
+GOVERNMENTREPORT,http://sparql.cwrc.ca/ontologies/genre#governmentReport
+grammar,http://sparql.cwrc.ca/ontologies/genre#grammar
+graphic novel,http://sparql.cwrc.ca/ontologies/genre#graphicNovel
+graveyard poetry,http://sparql.cwrc.ca/ontologies/genre#graveyardPoetry
+GRAVEYARDPOETRY,http://sparql.cwrc.ca/ontologies/genre#graveyardPoetry
+guerilla theatre,http://sparql.cwrc.ca/ontologies/genre#guerillaTheatre
+GUERILLATHEATRE,http://sparql.cwrc.ca/ontologies/genre#guerillaTheatre
+guidebook,http://sparql.cwrc.ca/ontologies/genre#guidebook
+hagiography,http://sparql.cwrc.ca/ontologies/genre#hagiography
+haiku,http://sparql.cwrc.ca/ontologies/genre#haiku
+harlequinade,http://sparql.cwrc.ca/ontologies/genre#harlequinade
+has form,http://sparql.cwrc.ca/ontologies/genre#hasForm
+has genre,http://sparql.cwrc.ca/ontologies/genre#hasGenre
+heroic,http://sparql.cwrc.ca/ontologies/genre#heroic
+HISTORICAL,http://sparql.cwrc.ca/ontologies/genre#historicalWriting
+Historical Genre,http://sparql.cwrc.ca/ontologies/genre#HistoricalGenre
+historical overview,http://sparql.cwrc.ca/ontologies/genre#historicalOverview
+historical writing,http://sparql.cwrc.ca/ontologies/genre#historicalWriting
+history,http://sparql.cwrc.ca/ontologies/genre#history
+hymn,http://sparql.cwrc.ca/ontologies/genre#hymn
+illustrated,http://sparql.cwrc.ca/ontologies/genre#illustrated
+Illustrated Form,http://sparql.cwrc.ca/ontologies/genre#IllustratedForm
+imitation,http://sparql.cwrc.ca/ontologies/genre#imitation
+immigration writing,http://sparql.cwrc.ca/ontologies/genre#migration
+improvisation,http://sparql.cwrc.ca/ontologies/genre#improvisation
+index,http://sparql.cwrc.ca/ontologies/genre#index
+industrial novel,http://sparql.cwrc.ca/ontologies/genre#industrialNovel
+INDUSTRIALNOVEL,http://sparql.cwrc.ca/ontologies/genre#industrialNovel
+Informational Genre,http://sparql.cwrc.ca/ontologies/genre#InformationalGenre
+informational writing,http://sparql.cwrc.ca/ontologies/genre#informationalWriting
+instructional text,http://sparql.cwrc.ca/ontologies/genre#instructionalText
+Intertextual Genre,http://sparql.cwrc.ca/ontologies/genre#IntertextualGenre
+interview,http://sparql.cwrc.ca/ontologies/genre#interview
+introduction,http://sparql.cwrc.ca/ontologies/genre#introduction
+journal,http://sparql.cwrc.ca/ontologies/genre#journal
+Journal Form,http://sparql.cwrc.ca/ontologies/genre#JournalForm
+journalism,http://sparql.cwrc.ca/ontologies/genre#journalism
+journalism and writings,http://sparql.cwrc.ca/ontologies/genre#journalism
+Journalistic Genre,http://sparql.cwrc.ca/ontologies/genre#JournalisticGenre
+juvenile,http://sparql.cwrc.ca/ontologies/genre#juvenile
+juvenilia,http://sparql.cwrc.ca/ontologies/genre#juvenilia
+kitchen sink drama,http://sparql.cwrc.ca/ontologies/genre#kitchenSinkDrama
+KITCHENSINKDRAMA,http://sparql.cwrc.ca/ontologies/genre#kitchenSinkDrama
+KUNSTLERROMAN,http://sparql.cwrc.ca/ontologies/genre#kunstlerroman
+lais,http://sparql.cwrc.ca/ontologies/genre#lais
+lampoon,http://sparql.cwrc.ca/ontologies/genre#lampoon
+lecture,http://sparql.cwrc.ca/ontologies/genre#lecture
+legal writing,http://sparql.cwrc.ca/ontologies/genre#legalWriting
+LEGALWRITING,http://sparql.cwrc.ca/ontologies/genre#legalWriting
+legend,http://sparql.cwrc.ca/ontologies/genre#legend
+legend folktale,http://sparql.cwrc.ca/ontologies/genre#legendFolktale
+LEGENDFOLKTALE,http://sparql.cwrc.ca/ontologies/genre#legendFolktale
+lesbian,http://sparql.cwrc.ca/ontologies/genre#lesbian
+lesbianWriting,http://sparql.cwrc.ca/ontologies/genre#lesbian
+letter,http://sparql.cwrc.ca/ontologies/genre#letter
+letters from the dead to the living,http://sparql.cwrc.ca/ontologies/genre#lettersFromTheDeadToTheLiving
+LETTERSFROMTHEDEADTOTHELIVING,http://sparql.cwrc.ca/ontologies/genre#lettersFromTheDeadToTheLiving
+lgbtq,http://sparql.cwrc.ca/ontologies/genre#lgbtq
+LGBTQ+Genre,http://sparql.cwrc.ca/ontologies/genre#LGBTQPlusGenre
+libretto,http://sparql.cwrc.ca/ontologies/genre#libretto
+life writing,http://sparql.cwrc.ca/ontologies/genre#lifeWriting
+Life Writing Genre,http://sparql.cwrc.ca/ontologies/genre#LifeWritingGenre
+literary criticism,http://sparql.cwrc.ca/ontologies/genre#literaryCriticism
+Literary Genre,http://sparql.cwrc.ca/ontologies/genre#LiteraryGenre
+literary romance,http://sparql.cwrc.ca/ontologies/genre#romance
+LITERARYCRITICISM,http://sparql.cwrc.ca/ontologies/genre#literaryCriticism
+liturgy,http://sparql.cwrc.ca/ontologies/genre#liturgy
+local history,http://sparql.cwrc.ca/ontologies/genre#localHistory
+long poem,http://sparql.cwrc.ca/ontologies/genre#longPoem
+loose-leaf,http://sparql.cwrc.ca/ontologies/genre#looseLeaf
+love,http://sparql.cwrc.ca/ontologies/genre#love
+lullaby,http://sparql.cwrc.ca/ontologies/genre#lullaby
+lyric,http://sparql.cwrc.ca/ontologies/genre#lyric
+ma research paper,http://sparql.cwrc.ca/ontologies/genre#maResearchPaper
+ma thesis,http://sparql.cwrc.ca/ontologies/genre#maThesis
+magic realist,http://sparql.cwrc.ca/ontologies/genre#magicRealist
+MAGICREALIST,http://sparql.cwrc.ca/ontologies/genre#magicRealist
+manifesto,http://sparql.cwrc.ca/ontologies/genre#manifesto
+manual,http://sparql.cwrc.ca/ontologies/genre#manual
+manuscript,http://sparql.cwrc.ca/ontologies/genre#manuscript
+map,http://sparql.cwrc.ca/ontologies/genre#map
+masque,http://sparql.cwrc.ca/ontologies/genre#masque
+medical writing,http://sparql.cwrc.ca/ontologies/genre#medicalWriting
+MEDICALWRITING,http://sparql.cwrc.ca/ontologies/genre#medicalWriting
+Medium,http://sparql.cwrc.ca/ontologies/genre#Medium
+melodrama,http://sparql.cwrc.ca/ontologies/genre#melodrama
+memoir,http://sparql.cwrc.ca/ontologies/genre#memoir
+microfilm,http://sparql.cwrc.ca/ontologies/genre#microform
+microform,http://sparql.cwrc.ca/ontologies/genre#microform
+migration,http://sparql.cwrc.ca/ontologies/genre#migration
+military,http://sparql.cwrc.ca/ontologies/genre#military
+mimeograph,http://sparql.cwrc.ca/ontologies/genre#mimeograph
+mixed materials,http://sparql.cwrc.ca/ontologies/genre#mixedMaterials
+mixed media,http://sparql.cwrc.ca/ontologies/genre#multimedia
+MIXEDMEDIA,http://sparql.cwrc.ca/ontologies/genre#multimedia
+mock forms,http://sparql.cwrc.ca/ontologies/genre#mockForms
+MOCKFORMS,http://sparql.cwrc.ca/ontologies/genre#mockForms
+monologue,http://sparql.cwrc.ca/ontologies/genre#monologue
+morality or mystery play,http://sparql.cwrc.ca/ontologies/genre#moralityOrMysteryPlay
+MORALITYMYSTERYPLAY,http://sparql.cwrc.ca/ontologies/genre#moralityOrMysteryPlay
+Moving Medium,http://sparql.cwrc.ca/ontologies/genre#MovingMedium
+multimedia,http://sparql.cwrc.ca/ontologies/genre#multimedia
+music,http://sparql.cwrc.ca/ontologies/genre#music
+Musical Genre,http://sparql.cwrc.ca/ontologies/genre#MusicalGenre
+Musical Notation Form,http://sparql.cwrc.ca/ontologies/genre#MusicalNotationForm
+musical score,http://sparql.cwrc.ca/ontologies/genre#notatedMusic
+musical verse,http://sparql.cwrc.ca/ontologies/genre#musicalWriting
+musical writing,http://sparql.cwrc.ca/ontologies/genre#musicalWriting
+musicology,http://sparql.cwrc.ca/ontologies/genre#musicology
+mystery,http://sparql.cwrc.ca/ontologies/genre#mystery
+Mystery Genre,http://sparql.cwrc.ca/ontologies/genre#MysteryGenre
+myth,http://sparql.cwrc.ca/ontologies/genre#myth
+Narrative Genre,http://sparql.cwrc.ca/ontologies/genre#NarrativeGenre
+narrative poetry,http://sparql.cwrc.ca/ontologies/genre#narrativePoetry
+NARRATIVEPOETRY,http://sparql.cwrc.ca/ontologies/genre#narrativePoetry
+national tale,http://sparql.cwrc.ca/ontologies/genre#nationalTale
+nationalist,http://sparql.cwrc.ca/ontologies/genre#nationalist
+NATIONALTALE,http://sparql.cwrc.ca/ontologies/genre#nationalTale
+newspaper,http://sparql.cwrc.ca/ontologies/genre#newspaper
+notated music,http://sparql.cwrc.ca/ontologies/genre#notatedMusic
+notebook,http://sparql.cwrc.ca/ontologies/genre#notebook
+novel,http://sparql.cwrc.ca/ontologies/genre#novel
+novel of sensibility,http://sparql.cwrc.ca/ontologies/genre#novelOfSensibility
+novelette,http://sparql.cwrc.ca/ontologies/genre#novella
+Novelistic Genre,http://sparql.cwrc.ca/ontologies/genre#NovelisticGenre
+novella,http://sparql.cwrc.ca/ontologies/genre#novella
+nursery rhyme,http://sparql.cwrc.ca/ontologies/genre#nurseryRhyme
+NURSERYRHYME,http://sparql.cwrc.ca/ontologies/genre#nurseryRhyme
+obituary,http://sparql.cwrc.ca/ontologies/genre#obituary
+occasional poetry,http://sparql.cwrc.ca/ontologies/genre#occasionalPoetry
+OCCASIONALPOETRY,http://sparql.cwrc.ca/ontologies/genre#occasionalPoetry
+ode,http://sparql.cwrc.ca/ontologies/genre#ode
+offprint,http://sparql.cwrc.ca/ontologies/genre#offprint
+one-act-play,http://sparql.cwrc.ca/ontologies/genre#oneActPlay
+ONEACTPLAY,http://sparql.cwrc.ca/ontologies/genre#oneActPlay
+opera,http://sparql.cwrc.ca/ontologies/genre#opera
+Opera Genre,http://sparql.cwrc.ca/ontologies/genre#OperaGenre
+oral history,http://sparql.cwrc.ca/ontologies/genre#oralHistory
+oratorio,http://sparql.cwrc.ca/ontologies/genre#oratorio
+organizational history,http://sparql.cwrc.ca/ontologies/genre#history
+ORIENTAL,http://sparql.cwrc.ca/ontologies/genre#orientalist
+orientalist,http://sparql.cwrc.ca/ontologies/genre#orientalist
+pageant,http://sparql.cwrc.ca/ontologies/genre#pageant
+painting,http://sparql.cwrc.ca/ontologies/genre#painting
+pamphlet,http://sparql.cwrc.ca/ontologies/genre#pamphlet
+panegyric,http://sparql.cwrc.ca/ontologies/genre#panegyric
+pantomime,http://sparql.cwrc.ca/ontologies/genre#pantomime
+parable,http://sparql.cwrc.ca/ontologies/genre#parable
+paranormal,http://sparql.cwrc.ca/ontologies/genre#paranormal
+paratext,http://sparql.cwrc.ca/ontologies/genre#paratext
+PARATEXTS,http://sparql.cwrc.ca/ontologies/genre#paratext
+PARLIAMENTARYREPORT,http://sparql.cwrc.ca/ontologies/genre#governmentReport
+parody,http://sparql.cwrc.ca/ontologies/genre#parody
+part/excerpt,http://sparql.cwrc.ca/ontologies/genre#partExcerpt
+passion play,http://sparql.cwrc.ca/ontologies/genre#passionPlay
+pastoral,http://sparql.cwrc.ca/ontologies/genre#pastoral
+Pedagogical Genre,http://sparql.cwrc.ca/ontologies/genre#PedagogicalGenre
+pedagogy,http://sparql.cwrc.ca/ontologies/genre#pedagogy
+performance,http://sparql.cwrc.ca/ontologies/genre#performance
+Performance Medium,http://sparql.cwrc.ca/ontologies/genre#PerformanceMedium
+performance poetry,http://sparql.cwrc.ca/ontologies/genre#performancePoetry
+PERFORMANCEPOETRY,http://sparql.cwrc.ca/ontologies/genre#performancePoetry
+periodical,http://sparql.cwrc.ca/ontologies/genre#SerialForm
+periodical feature,http://sparql.cwrc.ca/ontologies/genre#periodicalFeature
+petition,http://sparql.cwrc.ca/ontologies/genre#petition
+phd thesis,http://sparql.cwrc.ca/ontologies/genre#phdThesis
+philosophical,http://sparql.cwrc.ca/ontologies/genre#philosophical
+Philosophical Genre,http://sparql.cwrc.ca/ontologies/genre#PhilosophicalGenre
+philosophy,http://sparql.cwrc.ca/ontologies/genre#philosophy
+photo essay,http://sparql.cwrc.ca/ontologies/genre#photoEssay
+photo opy,http://sparql.cwrc.ca/ontologies/genre#photocopy
+photograph,http://sparql.cwrc.ca/ontologies/genre#photograph
+physical theatre,http://sparql.cwrc.ca/ontologies/genre#physicalTheatre
+picaresque,http://sparql.cwrc.ca/ontologies/genre#picaresque
+picture book,http://sparql.cwrc.ca/ontologies/genre#illustrated
+pindaric,http://sparql.cwrc.ca/ontologies/genre#pindaric
+play,http://sparql.cwrc.ca/ontologies/genre#drama
+play script,http://sparql.cwrc.ca/ontologies/genre#playScript
+poetic drama,http://sparql.cwrc.ca/ontologies/genre#poeticDrama
+Poetic Genre,http://sparql.cwrc.ca/ontologies/genre#PoeticGenre
+poetry,http://sparql.cwrc.ca/ontologies/genre#poetry
+polemic,http://sparql.cwrc.ca/ontologies/genre#polemic
+Political Genre,http://sparql.cwrc.ca/ontologies/genre#PoliticalGenre
+political Statement,http://sparql.cwrc.ca/ontologies/genre#politicalStatement
+political writing,http://sparql.cwrc.ca/ontologies/genre#politicalWriting
+POLITICALWRITING,http://sparql.cwrc.ca/ontologies/genre#politicalWriting
+popular,http://sparql.cwrc.ca/ontologies/genre#popular
+pornography,http://sparql.cwrc.ca/ontologies/genre#pornography
+prayer,http://sparql.cwrc.ca/ontologies/genre#prayer
+pre-school,http://sparql.cwrc.ca/ontologies/genre#preSchool
+prefatory piece,http://sparql.cwrc.ca/ontologies/genre#prefatoryPiece
+PREFATORYPIECE,http://sparql.cwrc.ca/ontologies/genre#prefatoryPiece
+Print Medium,http://sparql.cwrc.ca/ontologies/genre#PrintMedium
+profile of author,http://sparql.cwrc.ca/ontologies/genre#profileOfAuthor
+program notes,http://sparql.cwrc.ca/ontologies/genre#programNotes
+PROGRAMNOTES,http://sparql.cwrc.ca/ontologies/genre#programNotes
+proletarian writing,http://sparql.cwrc.ca/ontologies/genre#proletarianWriting
+PROLETARIANWRITING,http://sparql.cwrc.ca/ontologies/genre#proletarianWriting
+prologue,http://sparql.cwrc.ca/ontologies/genre#prologue
+propaganda,http://sparql.cwrc.ca/ontologies/genre#propaganda
+prophecy,http://sparql.cwrc.ca/ontologies/genre#prophecy
+prose poem,http://sparql.cwrc.ca/ontologies/genre#prosePoem
+proverb,http://sparql.cwrc.ca/ontologies/genre#proverb
+Proverb Form,http://sparql.cwrc.ca/ontologies/genre#ProverbForm
+psalm,http://sparql.cwrc.ca/ontologies/genre#psalm
+psychoanalytical,http://sparql.cwrc.ca/ontologies/genre#psychoanalytical
+puppetry,http://sparql.cwrc.ca/ontologies/genre#puppetry
+quest narrative,http://sparql.cwrc.ca/ontologies/genre#questNarrative
+quiz,http://sparql.cwrc.ca/ontologies/genre#quiz
+radio drama,http://sparql.cwrc.ca/ontologies/genre#radioDrama
+radio play,http://sparql.cwrc.ca/ontologies/genre#radioDrama
+radio script,http://sparql.cwrc.ca/ontologies/genre#radioScript
+RADIODRAMA,http://sparql.cwrc.ca/ontologies/genre#radioDrama
+realia,http://sparql.cwrc.ca/ontologies/genre#realia
+realist,http://sparql.cwrc.ca/ontologies/genre#realist
+record,http://sparql.cwrc.ca/ontologies/genre#record
+Record Form,http://sparql.cwrc.ca/ontologies/genre#RecordForm
+Reference Work Genre,http://sparql.cwrc.ca/ontologies/genre#ReferenceWorkGenre
+reflection,http://sparql.cwrc.ca/ontologies/genre#reflection
+regional,http://sparql.cwrc.ca/ontologies/genre#regional
+religious,http://sparql.cwrc.ca/ontologies/genre#religious
+Religious Genre,http://sparql.cwrc.ca/ontologies/genre#ReligiousGenre
+research,http://sparql.cwrc.ca/ontologies/genre#research
+revenge comedy,http://sparql.cwrc.ca/ontologies/genre#revengeComedy
+revenge tragedy,http://sparql.cwrc.ca/ontologies/genre#revengeTragedy
+review,http://sparql.cwrc.ca/ontologies/genre#review
+revue,http://sparql.cwrc.ca/ontologies/genre#revue
+riddle,http://sparql.cwrc.ca/ontologies/genre#riddle
+robinsonades,http://sparql.cwrc.ca/ontologies/genre#robinsonades
+ROMANCE,http://sparql.cwrc.ca/ontologies/genre#romance
+Romance Genre,http://sparql.cwrc.ca/ontologies/genre#RomanceGenre
+rural idyll,http://sparql.cwrc.ca/ontologies/genre#ruralIdyll
+sage writing,http://sparql.cwrc.ca/ontologies/genre#sageWriting
+SAGEWRITING,http://sparql.cwrc.ca/ontologies/genre#sageWriting
+satire,http://sparql.cwrc.ca/ontologies/genre#satire
+Satirical Genre,http://sparql.cwrc.ca/ontologies/genre#SatiricalGenre
+sayings,http://sparql.cwrc.ca/ontologies/genre#ProverbForm
+Scholarly Genre,http://sparql.cwrc.ca/ontologies/genre#ScholarlyGenre
+scholarly writing,http://sparql.cwrc.ca/ontologies/genre#scholarlyWriting
+scholarship,http://sparql.cwrc.ca/ontologies/genre#ScholarlyGenre
+school fiction,http://sparql.cwrc.ca/ontologies/genre#schoolFiction
+SCHOOLFICTION,http://sparql.cwrc.ca/ontologies/genre#schoolFiction
+science,http://sparql.cwrc.ca/ontologies/genre#scientificWriting
+science fiction,http://sparql.cwrc.ca/ontologies/genre#scienceFiction
+SCIENCEFICTION,http://sparql.cwrc.ca/ontologies/genre#scienceFiction
+scientific writing,http://sparql.cwrc.ca/ontologies/genre#scientificWriting
+SCIENTIFICWRITING,http://sparql.cwrc.ca/ontologies/genre#scientificWriting
+scrapbook,http://sparql.cwrc.ca/ontologies/genre#scrapbook
+screenplay,http://sparql.cwrc.ca/ontologies/genre#filmTvScript
+script,http://sparql.cwrc.ca/ontologies/genre#script
+Script Form,http://sparql.cwrc.ca/ontologies/genre#ScriptForm
+scripture,http://sparql.cwrc.ca/ontologies/genre#scripture
+sea story,http://sparql.cwrc.ca/ontologies/genre#seaStory
+sensation novel,http://sparql.cwrc.ca/ontologies/genre#sensationNovel
+sensational,http://sparql.cwrc.ca/ontologies/genre#sensational
+SENSATIONNOVEL,http://sparql.cwrc.ca/ontologies/genre#sensationNovel
+sensibility,http://sparql.cwrc.ca/ontologies/genre#novelOfSensibility
+sentimental,http://sparql.cwrc.ca/ontologies/genre#sentimental
+sequel,http://sparql.cwrc.ca/ontologies/genre#sequel
+serial,http://sparql.cwrc.ca/ontologies/genre#serial
+Serial Form,http://sparql.cwrc.ca/ontologies/genre#SerialForm
+serial periodical,http://sparql.cwrc.ca/ontologies/genre#serialPeriodical
+serial volume,http://sparql.cwrc.ca/ontologies/genre#serialVolume
+Series Form,http://sparql.cwrc.ca/ontologies/genre#SeriesForm
+sermon,http://sparql.cwrc.ca/ontologies/genre#sermon
+sexual awakening fiction,http://sparql.cwrc.ca/ontologies/genre#sexualAwakeningFiction
+SEXUALAWAKENINGFICTION,http://sparql.cwrc.ca/ontologies/genre#sexualAwakeningFiction
+sheet music,http://sparql.cwrc.ca/ontologies/genre#MusicalNotationForm
+short story,http://sparql.cwrc.ca/ontologies/genre#shortStory
+SHORTSTORY,http://sparql.cwrc.ca/ontologies/genre#shortStory
+silver-fork novel,http://sparql.cwrc.ca/ontologies/genre#silverForkNovel
+SILVERFORKNOVEL,http://sparql.cwrc.ca/ontologies/genre#silverForkNovel
+sketch,http://sparql.cwrc.ca/ontologies/genre#sketch
+sketch book,http://sparql.cwrc.ca/ontologies/genre#sketchBook
+SKETCHBOOK,http://sparql.cwrc.ca/ontologies/genre#sketchBook
+slave narrative,http://sparql.cwrc.ca/ontologies/genre#slaveNarrative
+SLAVENARRATIVE,http://sparql.cwrc.ca/ontologies/genre#slaveNarrative
+slavery,http://sparql.cwrc.ca/ontologies/genre#slaveNarrative
+social reform,http://sparql.cwrc.ca/ontologies/genre#socialReform
+social science,http://sparql.cwrc.ca/ontologies/genre#socialScience
+Social Science Genre,http://sparql.cwrc.ca/ontologies/genre#SocialScienceGenre
+SOCIALSCIENCE,http://sparql.cwrc.ca/ontologies/genre#socialScience
+"software, multimedia",http://sparql.cwrc.ca/ontologies/genre#multimedia
+song,http://sparql.cwrc.ca/ontologies/genre#song
+Song Genre,http://sparql.cwrc.ca/ontologies/genre#SongGenre
+sonnet,http://sparql.cwrc.ca/ontologies/genre#sonnet
+sound recording - musical,http://sparql.cwrc.ca/ontologies/genre#soundRecordingMusical
+sound recording – nonmusical,http://sparql.cwrc.ca/ontologies/genre#soundRecordingNonmusical
+Sound Recording Medium,http://sparql.cwrc.ca/ontologies/genre#SoundRecordingMedium
+speech,http://sparql.cwrc.ca/ontologies/genre#speech
+STAGEREVIEW,http://sparql.cwrc.ca/ontologies/genre#criticism
+Standalone Work/Book,http://sparql.cwrc.ca/ontologies/genre#StandaloneWork
+stencil,http://sparql.cwrc.ca/ontologies/genre#mimeograph
+Still Image Medium,http://sparql.cwrc.ca/ontologies/genre#StillImageMedium
+suffragist,http://sparql.cwrc.ca/ontologies/genre#suffragist
+summary,http://sparql.cwrc.ca/ontologies/genre#summary
+sunday school story,http://sparql.cwrc.ca/ontologies/genre#sundaySchoolStory
+survey,http://sparql.cwrc.ca/ontologies/genre#survey
+television,http://sparql.cwrc.ca/ontologies/genre#television
+television broadcast,http://sparql.cwrc.ca/ontologies/genre#television
+television broadcasting,http://sparql.cwrc.ca/ontologies/genre#television
+temperance,http://sparql.cwrc.ca/ontologies/genre#temperance
+testimony,http://sparql.cwrc.ca/ontologies/genre#testimony
+textbook,http://sparql.cwrc.ca/ontologies/genre#textbook
+Textual Medium,http://sparql.cwrc.ca/ontologies/genre#TextualMedium
+The CWRC Literary Genre Ontology,http://sparql.cwrc.ca/ontologies/genre#datasetdefinition
+theatre for young audiences,http://sparql.cwrc.ca/ontologies/genre#theatreForYoungAudiences
+theatre of cruelty,http://sparql.cwrc.ca/ontologies/genre#theatreOfCruelty
+theatre of the absurd,http://sparql.cwrc.ca/ontologies/genre#theatreOfTheAbsurd
+THEATREOFCRUELTY,http://sparql.cwrc.ca/ontologies/genre#theatreOfCruelty
+THEATREOFTHEABSURD,http://sparql.cwrc.ca/ontologies/genre#theatreOfTheAbsurd
+Thematic Genre,http://sparql.cwrc.ca/ontologies/genre#ThematicGenre
+thematic writing,http://sparql.cwrc.ca/ontologies/genre#thematicWriting
+theology,http://sparql.cwrc.ca/ontologies/genre#theology
+thesaurus,http://sparql.cwrc.ca/ontologies/genre#thesaurus
+thesis,http://sparql.cwrc.ca/ontologies/genre#dissertation
+Three Dimensional Medium,http://sparql.cwrc.ca/ontologies/genre#ThreeDimensionalMedium
+three dimensional object,http://sparql.cwrc.ca/ontologies/genre#threeDimensionalObject
+thriller,http://sparql.cwrc.ca/ontologies/genre#thriller
+topographical poetry,http://sparql.cwrc.ca/ontologies/genre#topographicalPoetry
+TOPOGRAPHICALPOETRY,http://sparql.cwrc.ca/ontologies/genre#topographicalPoetry
+tract pamphlet,http://sparql.cwrc.ca/ontologies/genre#tractPamphlet
+TRACTPAMPHLET,http://sparql.cwrc.ca/ontologies/genre#tractPamphlet
+tragedy,http://sparql.cwrc.ca/ontologies/genre#tragedy
+tragicomedy,http://sparql.cwrc.ca/ontologies/genre#tragicomedy
+translation,http://sparql.cwrc.ca/ontologies/genre#translation
+travel writing,http://sparql.cwrc.ca/ontologies/genre#travel
+TRAVELWRITING,http://sparql.cwrc.ca/ontologies/genre#travel
+treatise,http://sparql.cwrc.ca/ontologies/genre#treatise
+tv script,http://sparql.cwrc.ca/ontologies/genre#filmTvScript
+typescript,http://sparql.cwrc.ca/ontologies/genre#manuscript
+unpublished,http://sparql.cwrc.ca/ontologies/genre#Unpublished
+unpublished interview,http://sparql.cwrc.ca/ontologies/genre#interview
+unpublished manuscript,http://sparql.cwrc.ca/ontologies/genre#manuscript
+unpublished palyscript,http://sparql.cwrc.ca/ontologies/genre#playScript
+unpublished typescript,http://sparql.cwrc.ca/ontologies/genre#manuscript
+utopia,http://sparql.cwrc.ca/ontologies/genre#utopia
+verse novel,http://sparql.cwrc.ca/ontologies/genre#verseNovel
+verse poem,http://sparql.cwrc.ca/ontologies/genre#versePoem
+VERSENOVEL,http://sparql.cwrc.ca/ontologies/genre#verseNovel
+video,http://sparql.cwrc.ca/ontologies/genre#videoRecording
+video game,http://sparql.cwrc.ca/ontologies/genre#videoGame
+video recording,http://sparql.cwrc.ca/ontologies/genre#videoRecording
+videorecording,http://sparql.cwrc.ca/ontologies/genre#videoRecording
+vignette,http://sparql.cwrc.ca/ontologies/genre#vignette
+villanelle,http://sparql.cwrc.ca/ontologies/genre#villanelle
+visual art,http://sparql.cwrc.ca/ontologies/genre#visualArt
+Visual Art Medium,http://sparql.cwrc.ca/ontologies/genre#VisualArtMedium
+Visual Medium,http://sparql.cwrc.ca/ontologies/genre#VisualMedium
+voice recording,http://sparql.cwrc.ca/ontologies/genre#soundRecordingNonmusical
+war,http://sparql.cwrc.ca/ontologies/genre#war
+web site,http://sparql.cwrc.ca/ontologies/genre#website
+webpage,http://sparql.cwrc.ca/ontologies/genre#webpage
+website,http://sparql.cwrc.ca/ontologies/genre#website
+western,http://sparql.cwrc.ca/ontologies/genre#western
+young adult writing,http://sparql.cwrc.ca/ontologies/genre#youngAdultWriting
+YOUNGADULTWRITING,http://sparql.cwrc.ca/ontologies/genre#youngAdultWriting
+aphorism,http://sparql.cwrc.ca/ontologies/genre#aphorism
+folklore,http://sparql.cwrc.ca/ontologies/genre#folkTale
+history and criticism,http://sparql.cwrc.ca/ontologies/genre#criticism
+NATIONALISTFICTION,http://sparql.cwrc.ca/ontologies/genre#nationalist
+non-fiction,http://sparql.cwrc.ca/ontologies/genre#nonFiction
