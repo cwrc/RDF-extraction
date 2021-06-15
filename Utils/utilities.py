@@ -36,8 +36,9 @@ NS_DICT = {
     "cito": rdflib.Namespace("http://purl.org/spar/cito/"),
     "cwrc": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/cwrc#"),
     "crm": rdflib.Namespace("http://www.cidoc-crm.org/cidoc-crm/"),
-    "ii": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/ii#"),
-    "genre": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/genre#"),
+    "ii": rdflib.Namespace("https://id.linscproject.ca/vocabularies/ii#"),
+    "genre": rdflib.Namespace("https://id.linscproject.ca/vocabularies/genre#"),
+    "occupation": rdflib.Namespace("https://id.linscproject.ca/vocabularies/occupation#"),
     "data": rdflib.Namespace("http://cwrc.ca/cwrcdata/"),
     "dbpedia": rdflib.Namespace("http://dbpedia.org/resource/"),
     "dcterms": rdflib.Namespace("http://purl.org/dc/terms/"),
@@ -310,7 +311,11 @@ def get_place_strings(tag):
 
 
 def get_name(bio):
-    return bio.find("STANDARD").text
+    name = bio.find("STANDARD")
+    if name:
+        return name.text
+    else:
+        return bio.find("NAME")["STANDARD"]
 
 
 def get_readable_name(bio):

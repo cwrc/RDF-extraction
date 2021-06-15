@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-
+from typing import List
+import rdflib
+from rdflib import RDF, RDFS, Literal
 from Utils import utilities
 from Utils.context import Context
 from Utils.place import Place
@@ -14,10 +16,13 @@ logger = utilities.config_logger("birthdeath")
 
 class Birth:
     def __init__(self, date, positions, birthplace, date_certainty=False):
+        self.label = ""
         self.date = date
         self.position = []
         self.place = birthplace
         self.date_certainty = date_certainty
+        self.person = None
+        self.note = None
 
     def __str__(self):
         string = "\tDate: " + str(self.date) + "\n"
@@ -43,21 +48,42 @@ class Birth:
 
     def to_triple(self, context):
         g = utilities.create_graph()
-        if self.date:
-            if self.date_certainty:
-                g.add(
-                    (context.uri, utilities.NS_DICT["cwrc"].birthDate, format_date(self.date)))
-            else:
-                g.add((context.uri, utilities.NS_DICT["cwrc"].approximateBirthDate, format_date(
-                    self.date)))
+        birth_event = utilities.create_uri("data", context.id.replace("Context","Event"))
+        
+        g.add((birth_event,RDF.type, utilities.NS_DICT["crm"].E67_Birth ))
+        g.add((birth_event,RDFS.label, Literal(self.label) ))
+        g.add((birth_event,utilities.NS_DICT["crm"].P98_brought_into_life, context.context_focus))
 
-        self.update_birthposition_uris()
-        for x in self.position:
-            g.add((context.uri, utilities.NS_DICT["cwrc"].birthPosition, x))
+        # Get father and mother
+        if "FATHER" in self.person.family_members and len(self.person.family_members["FATHER"])==1:
+            father = self.person.family_members["FATHER"][0]
+            if len(father) == 1:
+                father = father[0]
+                if father:
+                    g.add((birth_event,utilities.NS_DICT["crm"].P97_from_father,father ))
+
+        if "MOTHER" in self.person.family_members and len(self.person.family_members["MOTHER"])==1:
+            mother = self.person.family_members["MOTHER"][0]
+            if len(mother) == 1:
+                mother = mother[0]
+                if mother:
+                    g.add((birth_event,utilities.NS_DICT["crm"].P96_by_mother, mother))
+
+        if self.date:
+            time_span = rdflib.BNode()
+            g.add((birth_event, utilities.NS_DICT["crm"]["P4_has_time-span"], time_span))
+            g.add((time_span, utilities.NS_DICT["crm"]["P82a_begin_of_the_begin"], format_date(self.date)))
+            g.add((time_span, utilities.NS_DICT["crm"]["P82b_end_of_the_end"], format_date(self.date))) 
+
+        if self.note:
+            g.add((birth_event,utilities.NS_DICT["crm"].P3_has_note, Literal(self.note)))
 
         if self.place:
-            g.add(
-                (context.uri, utilities.NS_DICT["cwrc"].birthPlace, self.place))
+            g.add((birth_event,utilities.NS_DICT["crm"].P7_took_place_at, self.place))
+
+        birth_context = utilities.create_uri("data", context.id + "_identifying")
+        g.add((birth_event,utilities.NS_DICT["crm"].P129i_is_subject_of, birth_context))
+        
 
         return g
 
@@ -72,15 +98,16 @@ def extract_birth_data(bio, person):
         logger.warning("Multiple Birth tags found: " + person.name + person.id)
 
     birth = Birth(None, None, None)
+    birth.person = person
 
     for birth_tag in birth_tags:
         context_id = person.id + "_BirthContext_" + str(context_count)
-        temp_context = Context(context_id, birth_tag, "BIRTH")
+        temp_context = Context(context_id, birth_tag, "BIRTH",pattern="birth")
 
         # creating Birth event
         event_tags = birth_tag.find_all("CHRONSTRUCT")
         for x in event_tags:
-            event_title = person.name + " - Birth Event"
+            birth.label = person.name + " - Birth Event"
             event_uri = person.id + "_BirthEvent_1"
 
             if len(birth_events) > 0:
@@ -91,7 +118,9 @@ def extract_birth_data(bio, person):
                 event_uri = person.id + "_BirthEvent_" + \
                     str(len(birth_events) + 1)
 
-            birth_events.append(Event(event_title, event_uri, x, "BirthEvent"))
+            temp = Event(birth.label, event_uri, x, "BirthEvent")
+            birth.note = temp.text
+            # birth_events.append()
 
         # retrieving birthdate
         if not birth.date:
@@ -126,9 +155,9 @@ def extract_birth_data(bio, person):
             logger.info("Multiple Birth positions:" + str(birth_positions))
 
         # adding birth event to person
-        for x in birth_events:
-            temp_context.link_event(x)
-            person.add_event(x)
+        # for x in birth_events:
+        #     temp_context.link_event(x)
+        #     person.add_event(x)
 
         # adding context and birth to person
         temp_context.link_triples(birth)
@@ -142,6 +171,9 @@ class Death:
         self.burial = burialplace
         self.place = deathplace
         self.date_certainty = date_certainty
+        self.label = ""
+        self.person = None
+        self.note = ""
 
     def __str__(self):
         string = "\tDate: " + str(self.date) + "\n"
@@ -152,18 +184,37 @@ class Death:
 
     def to_triple(self, context):
         g = utilities.create_graph()
-
+        death_event = utilities.create_uri("data", context.id.replace("Context","Event"))
+        
+        g.add((death_event,RDF.type, utilities.NS_DICT["crm"].E69_Death ))
+        g.add((death_event,RDFS.label, Literal(self.label) ))
+        g.add((death_event,utilities.NS_DICT["crm"].P100_was_death_of, context.context_focus))
+        
         if self.date:
-            if self.date_certainty:
-                g.add(
-                    (context.uri, utilities.NS_DICT["cwrc"].deathDate, format_date(self.date)))
-            else:
-                g.add((context.uri, utilities.NS_DICT["cwrc"].approximateDeathDate, format_date(
-                    self.date)))
+            time_span = rdflib.BNode()
+            g.add((death_event, utilities.NS_DICT["crm"]["P4_has_time-span"], time_span))
+            g.add((time_span, utilities.NS_DICT["crm"]["P82a_begin_of_the_begin"], format_date(self.date)))
+            g.add((time_span, utilities.NS_DICT["crm"]["P82b_end_of_the_end"], format_date(self.date))) 
 
-        if self.burial:
-            g.add(
-                (context.uri, utilities.NS_DICT["cwrc"].burialPlace, self.burial))
+        if self.note:
+            g.add((death_event,utilities.NS_DICT["crm"].P3_has_note, Literal(self.note)))
+
+        if self.place:
+            g.add((death_event,utilities.NS_DICT["crm"].P7_took_place_at, self.place))
+
+        death_context = utilities.create_uri("data", context.id + "_identifying")
+        g.add((death_event,utilities.NS_DICT["crm"].P129i_is_subject_of, death_context))
+        g.add((death_context,utilities.NS_DICT["crm"].P129_is_about,death_event ))
+        
+
+
+        cod_context = utilities.create_uri("data", context.id + "_attributing")
+        g.add((death_event,utilities.NS_DICT["crm"].P140i_was_attributed_by, cod_context))
+            
+
+        # if self.burial:
+        #     g.add(
+        #         (context.uri, utilities.NS_DICT["cwrc"].burialPlace, self.burial))
 
         if self.place:
             g.add(
@@ -185,12 +236,12 @@ def extract_death_data(bio, person):
     death = Death(None, None, None)
     for death_tag in death_tags:
         context_id = person.id + "_DeathContext_" + str(context_count)
-        temp_context = Context(context_id, death_tag, "DEATH")
+        temp_context = Context(context_id, death_tag, "DEATH", pattern="death")
 
         # creating death events
         events_tags = death_tag.find_all("CHRONSTRUCT")
         for x in events_tags:
-            event_title = person.name + " - Death Event"
+            death.label = person.name + " - Death Event"
             event_uri = person.id + "_DeathEvent_1"
 
             if len(death_events) > 0:
@@ -200,8 +251,10 @@ def extract_death_data(bio, person):
                 event_title = person.name + " - Death Related Event"
                 event_uri = person.id + "_DeathEvent_" + \
                     str(len(death_events) + 1)
-
-            death_events.append(Event(event_title, event_uri, x, "DeathEvent"))
+            temp = Event(death.label, event_uri, x, "DeathEvent")
+            death_events.append(temp)
+            if len(death_events) == 1:
+                death.note = death_events[0].text
 
             # Get shortprose after event
             if not death.burial:
@@ -233,9 +286,9 @@ def extract_death_data(bio, person):
             if deathPlaceTag:
                 death.place = Place(deathPlaceTag).uri
 
-        for x in death_events:
-            temp_context.link_event(x)
-            person.add_event(x)
+        # for x in death_events:
+        #     temp_context.link_event(x)
+        #     person.add_event(x)
 
         # adding context and birth to person
         temp_context.link_triples(death)

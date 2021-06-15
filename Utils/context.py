@@ -295,10 +295,12 @@ class Context(object):
             context_label = self.context_label + " (identifying)"
 
         identifying_uri = utilities.create_uri("data", self.id + "_identifying")
-        g.add((identifying_uri, RDF.type, self.context_type))
+        g.add((identifying_uri, RDF.type, utilities.NS_DICT["crm"].E33_Linguistic_Object))
+        g.add((identifying_uri, RDF.type, utilities.NS_DICT["oa"].Annotation))
+        g.add((identifying_uri, utilities.NS_DICT["crm"].P2_has_type, self.context_type))
         g.add((identifying_uri, RDFS.label, Literal(context_label)))
+        
         g.add((identifying_uri, utilities.NS_DICT["oa"].hasTarget, self.target_uri))
-        g.add((identifying_uri, utilities.NS_DICT["oa"].motivatedBy, utilities.NS_DICT["oa"].identifying))
 
         # Creating spatial context if place is mentioned
         identified_places = utilities.get_places(self.tag)
@@ -312,46 +314,48 @@ class Context(object):
         if person:
             g.add((identifying_uri, utilities.NS_DICT["oa"].hasBody, person.uri))
 
-        # Attaching event to context
-        for x in self.events:
-            g.add((identifying_uri, utilities.NS_DICT["cwrc"].hasEvent, x.uri))
-
+        if self.cidoc_pattern not in ["birth","death"]:
         # Creating describing context if applicable
-        if self.motivation == utilities.NS_DICT["oa"].describing:
-            self.uri = utilities.create_uri("data", self.id + "_attributing")
-            context_label = person.name + " - " + self.context_label + " (attributing)"
-            g.add((self.uri, RDF.type, self.context_type))
-            g.add((self.uri, RDFS.label, Literal(context_label)))
-            g.add((self.uri, utilities.NS_DICT["cwrc"].hasIDependencyOn, identifying_uri))
-            g.add((self.uri, utilities.NS_DICT["oa"].hasTarget, self.target_uri))
-            g.add((self.uri, utilities.NS_DICT["oa"].motivatedBy, self.motivation))
-            g.add((self.uri, utilities.NS_DICT["cwrc"].contextFocus, self.context_focus))
+            if self.motivation == utilities.NS_DICT["oa"].describing:
+                self.uri = utilities.create_uri("data", self.id + "_attributing")
+                context_label = person.name + " - " + self.context_label + " (attributing)"
+                g.add((self.uri, RDF.type, self.context_type))
+                g.add((self.uri, RDFS.label, Literal(context_label)))
+                g.add((self.uri, utilities.NS_DICT["cwrc"].hasIDependencyOn, identifying_uri))
+                g.add((self.uri, utilities.NS_DICT["oa"].hasTarget, self.target_uri))
+                g.add((self.uri, utilities.NS_DICT["oa"].motivatedBy, self.motivation))
+                g.add((self.uri, utilities.NS_DICT["cwrc"].contextFocus, self.context_focus))
 
-            # Adding extracted triples
-            temp_graph = utilities.create_graph()
-            for x in self.triples:
-                temp_graph += x.to_triple(self)
-            g += temp_graph
+                # Adding extracted triples
+                temp_graph = utilities.create_graph()
+                for x in self.triples:
+                    temp_graph += x.to_triple(self)
+                g += temp_graph
 
-            # Remove person from named entities
-            self.named_entities = list(filter(lambda a: a != person.uri, self.named_entities))
+                # Remove person from named entities
+                self.named_entities = list(filter(lambda a: a != person.uri, self.named_entities))
 
-            # Removing named entities if appear within triples
-            for x in temp_graph.objects(None, None):
-                if x in self.named_entities:
-                    self.named_entities.remove(x)
+                # Removing named entities if appear within triples
+                for x in temp_graph.objects(None, None):
+                    if x in self.named_entities:
+                        self.named_entities.remove(x)
 
-            # Adding any named entities with <context>Relationship predicate
-            for x in self.named_entities:
-                g.add((self.uri, self.context_predicate, x))
+                # Adding any named entities with <context>Relationship predicate
+                for x in self.named_entities:
+                    g.add((self.uri, self.context_predicate, x))
 
-            if identified_places:
-                g.add((self.uri, RDF.type, utilities.create_cwrc_uri("SpatialContext")))
+                if identified_places:
+                    g.add((self.uri, RDF.type, utilities.create_cwrc_uri("SpatialContext")))
+        else:
+                temp_graph = utilities.create_graph()
+                for x in self.triples:
+                    temp_graph += x.to_triple(self)
+                g += temp_graph
 
         # Creating the mentioned people as natural person
         for x in self.tag.find_all("NAME"):
             uri = utilities.make_standard_uri(x.get("STANDARD"))
-            g.add((uri, RDF.type, utilities.NS_DICT["cwrc"].NaturalPerson))
+            g.add((uri, RDF.type, utilities.NS_DICT["crm"].E21_Person))
             g.add((uri, RDFS.label, Literal(x.get("STANDARD"))))
 
         return g

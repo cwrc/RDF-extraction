@@ -53,6 +53,8 @@ def get_possible_biographers(doc):
             biographers.append(x)
     return list(set(biographers))
 
+
+
 def get_parent_context(tag,):
     # Might be easier with recursion
     tags = ["HEALTH", "WEALTH", "VIOLENCE", "LEISUREANDSOCIETY", "FRIENDSASSOCIATES", "PERSONNAME", "FAMILY", "INTIMATERELATIONSHIPS", "CULTURALFORMATION",
@@ -113,6 +115,8 @@ class Biography(object):
         self.nickname = None
 
         self.family_members = {}
+        self.get_all_members()
+
         self.wd_id = get_wd_identifier(id)
         self.nationalities = []
 
@@ -134,6 +138,19 @@ class Biography(object):
         self.childless_list = []
         self.children_list = []
         self.name_list = []
+
+    def get_all_members(self):
+        member_tags = self.document.find_all("MEMBER")
+        for x in member_tags:
+            peeps = utilities.get_other_people(x,self)
+            peeps = [y for y in peeps if y not in self.biographers]
+            
+            if x["RELATION"] in self.family_members:
+                self.family_members[x["RELATION"]].append(peeps)
+            else:
+                self.family_members[x["RELATION"]] = (peeps)
+        
+         
 
     def add_context(self, context):
         if type(context) is list:

@@ -1,6 +1,6 @@
 {
-    "default directory": "../data/biography_entries/",
-    "file ending": "-b.xml",
+    "default directory": "../data/entry_2021_v2/",
+    "file ending": ".xml",
     "notes": {
         "to do": "scrape possible biographers"
     },

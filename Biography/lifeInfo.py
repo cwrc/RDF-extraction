@@ -248,12 +248,13 @@ def get_all_members(bio,person):
     family_tree = {}
     for x in member_tags:
         peeps = utilities.get_other_people(x,person)
+        peeps = [y for y in peeps if y not in person.biographers]
+        
         if x["RELATION"] in family_tree:
             family_tree[x["RELATION"]].append(peeps)
         else:
             family_tree[x["RELATION"]] = (peeps)
-    print(family_tree)
-    input()
+    person.family_members = family_tree
 
 def extract_family_data(bio, person):
     # TODO: create duplicate contexts implying inverse operations
@@ -261,7 +262,8 @@ def extract_family_data(bio, person):
     TODO: Extract family members in a certain orders
     Parents, siblings, then partners, other relatives
     """
-    # 
+    get_all_members(bio,person)
+
     context_count = 1
     event_count = 1
 
