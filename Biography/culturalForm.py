@@ -53,14 +53,6 @@ class CulturalForm(object):
 
         self.uri = rdflib.term.URIRef(self.uri)
 
-    def to_tuple(self, person_uri):
-        """TODO
-            figure out if i can just return tuple or triple
-            without creating a whole graph
-            Evaluate efficency of creating this graph or
-            just returning a tuple and have the biography deal with it
-        """
-        return ((person_uri, self.uri, self.value))
 
     def to_triple(self, context):
         g = utilities.create_graph()
@@ -478,8 +470,8 @@ def get_mapped_term(rdf_type, value, retry=False, id=None):
     global map_attempt
     global map_success
     global map_fail
-    if "http://sparql.cwrc.ca/ontologies/cwrc#" not in rdf_type:
-        rdf_type = "http://sparql.cwrc.ca/ontologies/cwrc#" + rdf_type
+    if "https://id.linscproject.ca/vocabularies/culturalForm#" not in rdf_type:
+        rdf_type = "https://id.linscproject.ca/vocabularies/culturalForm#" + rdf_type
     map_attempt += 1
     term = None
     temp_val = clean_term(value)
