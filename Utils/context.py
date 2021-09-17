@@ -4,7 +4,6 @@ from rdflib import RDF, RDFS, Literal
 from Utils import utilities, organizations
 
 
-MAX_WORD_COUNT = 35
 logger = utilities.config_logger("context")
 
 
@@ -138,6 +137,7 @@ class Context(object):
         super(Context, self).__init__()
         self.citations = []
         self.events = []
+        self.activities = []
         self.heading = None
         self.src = None
         self.triples = []
@@ -155,7 +155,8 @@ class Context(object):
             self.target_uri = target_uri
             self.new_target = False
         else:
-            self.target_uri = rdflib.BNode()
+            
+            self.target_uri = self.uri +"_target"
             self.new_target = True
 
         # Creating citations from bibcit tags
@@ -172,7 +173,6 @@ class Context(object):
 
         self.tag = tag
         self.text = tag.get_text()
-
         self.orlando_tagname = context_type
 
         # Would be nice to use the ontology and not worry about changing labels
@@ -279,7 +279,7 @@ class Context(object):
                 g += x.to_triple(self.target_uri, source_url)
 
             # Creating xpath selector
-            xpath_uri = rdflib.BNode()
+            xpath_uri = self.uri +"_xpath_selector"
             xpath_label = target_label.replace(" excerpt", " XPath Selector")
             g.add((self.target_uri, utilities.NS_DICT["oa"].hasSelector, xpath_uri))
             g.add((xpath_uri, RDFS.label, Literal(xpath_label)))
@@ -290,7 +290,7 @@ class Context(object):
 
             # Creating text quote selector
             self.get_snippet()
-            textquote_uri = rdflib.BNode()
+            textquote_uri = self.uri +"_textquote_selector"
             textquote_label = target_label.replace(" excerpt", " TextQuote Selector")
             g.add((xpath_uri, utilities.NS_DICT["oa"].refinedBy, textquote_uri))
             g.add((textquote_uri, RDF.type, utilities.NS_DICT["oa"].TextQuoteSelector))
@@ -317,7 +317,7 @@ class Context(object):
         identified_places = utilities.get_places(self.tag)
         if identified_places:
             self.named_entities += identified_places
-            g.add((identifying_uri, RDF.type, utilities.create_cwrc_uri("SpatialContext")))
+            g.add((identifying_uri, utilities.NS_DICT["crm"].P2_has_type, utilities.create_cwrc_uri("SpatialContext")))
 
         # Adding identifying bodies to annotation
         for x in self.named_entities:
@@ -325,11 +325,13 @@ class Context(object):
         if person:
             g.add((identifying_uri, utilities.NS_DICT["oa"].hasBody, person.uri))
 
-        if self.cidoc_pattern not in ["birth","death"]:
+
+
+        if self.cidoc_pattern not in ["birth","death","occupation"]:
         # Creating describing context if applicable
             if self.motivation == utilities.NS_DICT["oa"].describing:
                 self.uri = utilities.create_uri("data", self.id + "_attributing")
-                context_label = person.name + " - " + self.context_label + " (attributing)"
+                context_label = person.name + ": " + self.context_label + " (attributing)"
                 g.add((self.uri, RDF.type, self.context_type))
                 g.add((self.uri, RDFS.label, Literal(context_label)))
                 g.add((self.uri, utilities.NS_DICT["cwrc"].hasIDependencyOn, identifying_uri))
@@ -375,7 +377,7 @@ class Context(object):
             g.add((uri, RDF.type, utilities.NS_DICT["crm"].E21_Person))
             g.add((uri, RDFS.label, Literal(x.get("STANDARD"))))
             altname = x.get_text()
-            if x.get("STANDARD") != altname and altnamenot in generic_names:
+            if x.get("STANDARD") != altname and altname not in generic_names:
                 g.add((uri, utilities.NS_DICT["skos"].altlabel, Literal(altname)))
 
         return g
