@@ -36913,107 +36913,128 @@ crm:P2_has_type cwrc:PoliticalOrganization,
 data:larkph_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:larkph_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:larkph_DeathEvent_1.
 
 data:undeev_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:undeev_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:undeev_DeathEvent_1.
 
 data:butljo_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Alzheimers_disease_dementias;
    crm:P129i_is_subject_of data:butljo_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:butljo_DeathEvent_1.
 
 data:orczem_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_genitourinary_system;
    crm:P129i_is_subject_of data:orczem_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:orczem_DeathEvent_1.
 
 data:lee_ve_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:lee_ve_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:lee_ve_DeathEvent_1.
 
 data:humema_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_breast;
    crm:P129i_is_subject_of data:humema_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:humema_DeathEvent_1.
 
 data:ballrm_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_ear;
    crm:P129i_is_subject_of data:ballrm_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:ballrm_DeathEvent_1.
 
 data:mosshe_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:mosshe_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:mosshe_DeathEvent_1.
 
 data:andeha_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:andeha_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:andeha_DeathEvent_1.
 
 data:cole___DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:cole___DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:cole___DeathEvent_1.
 
 data:portan_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Typhus;
    crm:P129i_is_subject_of data:portan_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:portan_DeathEvent_1.
 
 data:sherfr_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Fever;
    crm:P129i_is_subject_of data:sherfr_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:sherfr_DeathEvent_1.
 
 data:bethma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:bethma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:bethma_DeathEvent_1.
 
 data:forsma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:forsma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:forsma_DeathEvent_1.
 
 data:delaem_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_colon_rectum_and_anus;
    crm:P129i_is_subject_of data:delaem_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:delaem_DeathEvent_1.
 
 data:tomlel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Falls;
    crm:P141_assigned ii:Concussion;
    crm:P129i_is_subject_of data:tomlel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:tomlel_DeathEvent_1.
 
 data:brerja_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Kidney_stones;
    crm:P129i_is_subject_of data:brerja_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:brerja_DeathEvent_1.
 
 data:howeju_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cold;
    crm:P129i_is_subject_of data:howeju_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:howeju_DeathEvent_1.
 
 data:harlbr_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:harlbr_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:harlbr_DeathEvent_1.
 
 data:gonnma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Tuberculosis;
    crm:P129i_is_subject_of data:gonnma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:gonnma_DeathEvent_1.
 
 data:leapma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Measles;
    crm:P129i_is_subject_of data:leapma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:leapma_DeathEvent_1.
 
 data:davire_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
@@ -37021,300 +37042,358 @@ data:davire_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:davire_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:davire_DeathEvent_1.
 
 data:leonan_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:leonan_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:leonan_DeathEvent_1.
 
 data:craidi_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:craidi_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:craidi_DeathEvent_1.
 
 data:greegr_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_blood;
    crm:P129i_is_subject_of data:greegr_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:greegr_DeathEvent_1.
 
 data:elizqu_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:elizqu_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:elizqu_DeathEvent_1.
 
 data:worbem_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Alcohol_use_disorders;
    crm:P129i_is_subject_of data:worbem_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:worbem_DeathEvent_1.
 
 data:streno_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:streno_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:streno_DeathEvent_1.
 
 data:millbe_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Alzheimers_disease_dementias;
    crm:P129i_is_subject_of data:millbe_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:millbe_DeathEvent_1.
 
 data:pastge_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:pastge_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:pastge_DeathEvent_1.
 
 data:renama_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_trachea_bronchus_and_lung;
    crm:P129i_is_subject_of data:renama_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:renama_DeathEvent_1.
 
 data:purcsa_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_central_nervous_system;
    crm:P129i_is_subject_of data:purcsa_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:purcsa_DeathEvent_1.
 
 data:brourh_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:brourh_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:brourh_DeathEvent_1.
 
 data:shorma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Tuberculosis;
    crm:P129i_is_subject_of data:shorma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:shorma_DeathEvent_1.
 
 data:manlde_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_digestive_system;
    crm:P129i_is_subject_of data:manlde_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:manlde_DeathEvent_1.
 
 data:fishan_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Asthma;
    crm:P129i_is_subject_of data:fishan_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:fishan_DeathEvent_1.
 
 data:gildel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cold;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:gildel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:gildel_DeathEvent_1.
 
 data:bainbe_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:bainbe_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:bainbe_DeathEvent_1.
 
 data:cornfr_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Myocardial_infarction_heart_attack;
    crm:P129i_is_subject_of data:cornfr_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:cornfr_DeathEvent_1.
 
 data:riddch_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_breast;
    crm:P129i_is_subject_of data:riddch_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:riddch_DeathEvent_1.
 
 data:youneh_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_trachea_bronchus_and_lung;
    crm:P129i_is_subject_of data:youneh_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:youneh_DeathEvent_1.
 
 data:harwis_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_breast;
    crm:P129i_is_subject_of data:harwis_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:harwis_DeathEvent_1.
 
 data:beetis_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pregnancy_or_childbirth;
    crm:P141_assigned ii:Syphilis;
    crm:P129i_is_subject_of data:beetis_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:beetis_DeathEvent_1.
 
 data:montc2_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pregnancy_or_childbirth;
    crm:P129i_is_subject_of data:montc2_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:montc2_DeathEvent_1.
 
 data:bowema_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Concussion;
    crm:P129i_is_subject_of data:bowema_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:bowema_DeathEvent_1.
 
 data:webbma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Gravess_disease;
    crm:P141_assigned ii:Anaemia;
    crm:P129i_is_subject_of data:webbma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:webbma_DeathEvent_1.
 
 data:jewsma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cholera;
    crm:P129i_is_subject_of data:jewsma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:jewsma_DeathEvent_1.
 
 data:burnf2_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_colon_rectum_and_anus;
    crm:P129i_is_subject_of data:burnf2_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:burnf2_DeathEvent_1.
 
 data:huntvi_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P141_assigned ii:Alzheimers_disease_dementias;
    crm:P129i_is_subject_of data:huntvi_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:huntvi_DeathEvent_1.
 
 data:jewesa_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:jewesa_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:jewesa_DeathEvent_1.
 
 data:beckly_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Diphtheria;
    crm:P129i_is_subject_of data:beckly_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:beckly_DeathEvent_1.
 
 data:bodiba_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:bodiba_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:bodiba_DeathEvent_1.
 
 data:emecbu_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:emecbu_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:emecbu_DeathEvent_1.
 
 data:skinan_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Unspecified_Unknown_Cause_of_Death;
    crm:P129i_is_subject_of data:skinan_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:skinan_DeathEvent_1.
 
 data:markco_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_digestive_system;
    crm:P129i_is_subject_of data:markco_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:markco_DeathEvent_1.
 
 data:howian_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Diphtheria;
    crm:P129i_is_subject_of data:howian_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:howian_DeathEvent_1.
 
 data:dubodo_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:dubodo_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:dubodo_DeathEvent_1.
 
 data:roweel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:roweel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:roweel_DeathEvent_1.
 
 data:jhabru_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P129i_is_subject_of data:jhabru_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:jhabru_DeathEvent_1.
 
 data:alcolo_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P141_assigned ii:Cancer_of_colon_rectum_and_anus;
    crm:P129i_is_subject_of data:alcolo_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:alcolo_DeathEvent_1.
 
 data:bridel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pregnancy_or_childbirth;
    crm:P129i_is_subject_of data:bridel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:bridel_DeathEvent_1.
 
 data:treeir_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Severe_stress_and_adjustment_disorders;
    crm:P129i_is_subject_of data:treeir_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:treeir_DeathEvent_1.
 
 data:austsa_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:austsa_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:austsa_DeathEvent_1.
 
 data:robima_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P129i_is_subject_of data:robima_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:robima_DeathEvent_1.
 
 data:ridlan_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_pancreas;
    crm:P129i_is_subject_of data:ridlan_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:ridlan_DeathEvent_1.
 
 data:shieca_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_breast;
    crm:P129i_is_subject_of data:shieca_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:shieca_DeathEvent_1.
 
 data:mannol_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:mannol_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:mannol_DeathEvent_1.
 
 data:chilly_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Myocardial_infarction_heart_attack;
    crm:P129i_is_subject_of data:chilly_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:chilly_DeathEvent_1.
 
 data:sedgca_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Paralysis;
    crm:P129i_is_subject_of data:sedgca_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:sedgca_DeathEvent_1.
 
 data:marsca_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:marsca_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:marsca_DeathEvent_1.
 
 data:clapja_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:clapja_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:clapja_DeathEvent_1.
 
 data:bostlu_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:bostlu_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:bostlu_DeathEvent_1.
 
 data:byroge_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Fever;
    crm:P129i_is_subject_of data:byroge_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:byroge_DeathEvent_1.
 
 data:bleean_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Severe_stress_and_adjustment_disorders;
    crm:P129i_is_subject_of data:bleean_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:bleean_DeathEvent_1.
 
 data:mitfna_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Hodgkins_lymphoma;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:mitfna_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:mitfna_DeathEvent_1.
 
 data:browma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:browma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:browma_DeathEvent_1.
 
 data:cullha_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:cullha_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:cullha_DeathEvent_1.
 
 data:lyncha_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_digestive_system;
    crm:P129i_is_subject_of data:lyncha_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:lyncha_DeathEvent_1.
 
 data:wollma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pregnancy_or_childbirth;
    crm:P141_assigned ii:Septicaemia;
    crm:P129i_is_subject_of data:wollma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:wollma_DeathEvent_1.
 
 data:stuaar_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
@@ -37322,31 +37401,37 @@ data:stuaar_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_digestive_system;
    crm:P141_assigned ii:Endocrine_nutritional_or_metabolic_disease;
    crm:P129i_is_subject_of data:stuaar_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:stuaar_DeathEvent_1.
 
 data:browfr_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:browfr_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:browfr_DeathEvent_1.
 
 data:brunma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pregnancy_or_childbirth;
    crm:P129i_is_subject_of data:brunma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:brunma_DeathEvent_1.
 
 data:platsy_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Intentional_self-harm;
    crm:P129i_is_subject_of data:platsy_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:platsy_DeathEvent_1.
 
 data:bannhe_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:bannhe_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:bannhe_DeathEvent_1.
 
 data:pfeiem_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:pfeiem_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:pfeiem_DeathEvent_1.
 
 data:simced_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
@@ -37354,332 +37439,396 @@ data:simced_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pleurisy;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:simced_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:simced_DeathEvent_1.
 
 data:morrot_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P141_assigned ii:External_causes;
    crm:P129i_is_subject_of data:morrot_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:morrot_DeathEvent_1.
 
 data:pethem_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Myocardial_infarction_heart_attack;
    crm:P129i_is_subject_of data:pethem_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:pethem_DeathEvent_1.
 
 data:empswi_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Liver_cirrhosis;
    crm:P129i_is_subject_of data:empswi_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:empswi_DeathEvent_1.
 
 data:adamsa_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Tuberculosis;
    crm:P129i_is_subject_of data:adamsa_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:adamsa_DeathEvent_1.
 
 data:tighma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Tuberculosis;
    crm:P129i_is_subject_of data:tighma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:tighma_DeathEvent_1.
 
 data:lawrdh_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Tuberculosis;
    crm:P129i_is_subject_of data:lawrdh_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:lawrdh_DeathEvent_1.
 
 data:allima_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_breast;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:allima_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:allima_DeathEvent_1.
 
 data:pankem_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Jaundice;
    crm:P129i_is_subject_of data:pankem_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:pankem_DeathEvent_1.
 
 data:furlmo_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:furlmo_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:furlmo_DeathEvent_1.
 
 data:fawcmi_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:fawcmi_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:fawcmi_DeathEvent_1.
 
 data:fielmi_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:fielmi_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:fielmi_DeathEvent_1.
 
 data:patmco_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:patmco_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:patmco_DeathEvent_1.
 
 data:adamab_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Typhus;
    crm:P129i_is_subject_of data:adamab_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:adamab_DeathEvent_1.
 
 data:tynaka_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:tynaka_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:tynaka_DeathEvent_1.
 
 data:taylma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:taylma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:taylma_DeathEvent_1.
 
 data:kingan_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Tuberculosis;
    crm:P129i_is_subject_of data:kingan_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:kingan_DeathEvent_1.
 
 data:barban_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Asthma;
    crm:P129i_is_subject_of data:barban_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:barban_DeathEvent_1.
 
 data:mannet_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P141_assigned ii:External_causes;
    crm:P129i_is_subject_of data:mannet_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:mannet_DeathEvent_1.
 
 data:kavaan_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:kavaan_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:kavaan_DeathEvent_1.
 
 data:grieco_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Tuberculosis;
    crm:P129i_is_subject_of data:grieco_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:grieco_DeathEvent_1.
 
 data:cromri_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Myocardial_infarction_heart_attack;
    crm:P129i_is_subject_of data:cromri_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:cromri_DeathEvent_1.
 
 data:sidnph_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Gangrene;
    crm:P129i_is_subject_of data:sidnph_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:sidnph_DeathEvent_1.
 
 data:mathel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Tuberculosis;
    crm:P129i_is_subject_of data:mathel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:mathel_DeathEvent_1.
 
 data:sewema_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P129i_is_subject_of data:sewema_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:sewema_DeathEvent_1.
 
 data:trolan_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:trolan_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:trolan_DeathEvent_1.
 
 data:faitem_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P129i_is_subject_of data:faitem_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:faitem_DeathEvent_1.
 
 data:craied_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:craied_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:craied_DeathEvent_1.
 
 data:haywel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Unspecified_Unknown_Cause_of_Death;
    crm:P129i_is_subject_of data:haywel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:haywel_DeathEvent_1.
 
 data:hoflba_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Erysipelas;
    crm:P141_assigned ii:Falls;
    crm:P129i_is_subject_of data:hoflba_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:hoflba_DeathEvent_1.
 
 data:lingsh_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:lingsh_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:lingsh_DeathEvent_1.
 
 data:sackma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:sackma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:sackma_DeathEvent_1.
 
 data:russra_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:russra_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:russra_DeathEvent_1.
 
 data:leadma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:leadma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:leadma_DeathEvent_1.
 
 data:addijo_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:addijo_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:addijo_DeathEvent_1.
 
 data:westre_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:westre_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:westre_DeathEvent_1.
 
 data:dineis_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Syphilis;
    crm:P141_assigned ii:Malnutrition;
    crm:P129i_is_subject_of data:dineis_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:dineis_DeathEvent_1.
 
 data:shawfl_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:shawfl_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:shawfl_DeathEvent_1.
 
 data:sitwed_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:sitwed_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:sitwed_DeathEvent_1.
 
 data:kanesa_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Intentional_self-harm;
    crm:P129i_is_subject_of data:kanesa_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:kanesa_DeathEvent_1.
 
 data:kingfa_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:kingfa_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:kingfa_DeathEvent_1.
 
 data:gregau_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_breast;
    crm:P129i_is_subject_of data:gregau_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:gregau_DeathEvent_1.
 
 data:cannma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Myocardial_infarction_heart_attack;
    crm:P129i_is_subject_of data:cannma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:cannma_DeathEvent_1.
 
 data:strara_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P141_assigned ii:Complications_of_surgery;
    crm:P129i_is_subject_of data:strara_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:strara_DeathEvent_1.
 
 data:bradma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:bradma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:bradma_DeathEvent_1.
 
 data:beacsy_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Myocardial_infarction_heart_attack;
    crm:P129i_is_subject_of data:beacsy_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:beacsy_DeathEvent_1.
 
 data:thomfl_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:thomfl_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:thomfl_DeathEvent_1.
 
 data:leplal_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_breast;
    crm:P129i_is_subject_of data:leplal_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:leplal_DeathEvent_1.
 
 data:waugev_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Myocardial_infarction_heart_attack;
    crm:P129i_is_subject_of data:waugev_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:waugev_DeathEvent_1.
 
 data:downha_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:downha_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:downha_DeathEvent_1.
 
 data:wintjo_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Falls;
    crm:P141_assigned ii:Complications_of_surgery;
    crm:P129i_is_subject_of data:wintjo_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:wintjo_DeathEvent_1.
 
 data:boweli_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Rheumatoid_Arthritis;
    crm:P129i_is_subject_of data:boweli_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:boweli_DeathEvent_1.
 
 data:swana2_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:swana2_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:swana2_DeathEvent_1.
 
 data:sayedo_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:sayedo_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:sayedo_DeathEvent_1.
 
 data:voynet_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:voynet_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:voynet_DeathEvent_1.
 
 data:ewinju_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:ewinju_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:ewinju_DeathEvent_1.
 
 data:joneeb_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:joneeb_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:joneeb_DeathEvent_1.
 
 data:smytet_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:smytet_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:smytet_DeathEvent_1.
 
 data:malelu_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:malelu_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:malelu_DeathEvent_1.
 
 data:hamici_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:hamici_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:hamici_DeathEvent_1.
 
 data:welteu_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:welteu_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:welteu_DeathEvent_1.
 
 data:cowlha_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_digestive_system;
    crm:P129i_is_subject_of data:cowlha_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:cowlha_DeathEvent_1.
 
 data:bridan_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:bridan_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:bridan_DeathEvent_1.
 
 data:campco_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Rheumatoid_Arthritis;
    crm:P141_assigned ii:Syphilis;
    crm:P129i_is_subject_of data:campco_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:campco_DeathEvent_1.
 
 data:hamnni_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
@@ -37687,113 +37836,135 @@ data:hamnni_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Falls;
    crm:P141_assigned ii:External_cause;
    crm:P129i_is_subject_of data:hamnni_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:hamnni_DeathEvent_1.
 
 data:alexce_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:alexce_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:alexce_DeathEvent_1.
 
 data:piozhe_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Falls;
    crm:P141_assigned ii:Unspecified_Unknown_Cause_of_Death;
    crm:P129i_is_subject_of data:piozhe_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:piozhe_DeathEvent_1.
 
 data:steige_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_colon_rectum_and_anus;
    crm:P129i_is_subject_of data:steige_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:steige_DeathEvent_1.
 
 data:duttto_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Tuberculosis;
    crm:P129i_is_subject_of data:duttto_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:duttto_DeathEvent_1.
 
 data:buchjo_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:buchjo_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:buchjo_DeathEvent_1.
 
 data:cavej2_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Epilepsy;
    crm:P129i_is_subject_of data:cavej2_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:cavej2_DeathEvent_1.
 
 data:bronem_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Tuberculosis;
    crm:P129i_is_subject_of data:bronem_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:bronem_DeathEvent_1.
 
 data:willsa_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:willsa_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:willsa_DeathEvent_1.
 
 data:frerma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:frerma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:frerma_DeathEvent_1.
 
 data:coddcl_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:coddcl_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:coddcl_DeathEvent_1.
 
 data:hillis_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Tuberculosis;
    crm:P129i_is_subject_of data:hillis_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:hillis_DeathEvent_1.
 
 data:delash_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_breast;
    crm:P129i_is_subject_of data:delash_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:delash_DeathEvent_1.
 
 data:sackvi_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_stomach;
    crm:P129i_is_subject_of data:sackvi_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:sackvi_DeathEvent_1.
 
 data:buchro_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:buchro_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:buchro_DeathEvent_1.
 
 data:colema_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Appendicitis;
    crm:P129i_is_subject_of data:colema_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:colema_DeathEvent_1.
 
 data:levede_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:levede_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:levede_DeathEvent_1.
 
 data:blacan_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Unspecified_Unknown_Cause_of_Death;
    crm:P129i_is_subject_of data:blacan_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:blacan_DeathEvent_1.
 
 data:colefr_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Tuberculosis;
    crm:P141_assigned ii:Myocardial_infarction_heart_attack;
    crm:P129i_is_subject_of data:colefr_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:colefr_DeathEvent_1.
 
 data:macaro_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Myocardial_infarction_heart_attack;
    crm:P129i_is_subject_of data:macaro_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:macaro_DeathEvent_1.
 
 data:whitdo_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Fever;
    crm:P129i_is_subject_of data:whitdo_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:whitdo_DeathEvent_1.
 
 data:phelel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:phelel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:phelel_DeathEvent_1.
 
 data:bronch_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
@@ -37801,31 +37972,37 @@ data:bronch_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Tuberculosis;
    crm:P141_assigned ii:Pregnancy_or_childbirth;
    crm:P129i_is_subject_of data:bronch_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:bronch_DeathEvent_1.
 
 data:corema_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:corema_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:corema_DeathEvent_1.
 
 data:dacian_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:dacian_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:dacian_DeathEvent_1.
 
 data:edwaam_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Influenza;
    crm:P129i_is_subject_of data:edwaam_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:edwaam_DeathEvent_1.
 
 data:blaceo_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Fire;
    crm:P129i_is_subject_of data:blaceo_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:blaceo_DeathEvent_1.
 
 data:holmco_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:holmco_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:holmco_DeathEvent_1.
 
 data:lel____DeathContext_1_attributing a crm:E13_Attribute_Assignment;
@@ -37833,75 +38010,89 @@ data:lel____DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:External_cause;
    crm:P141_assigned ii:Intentional_self-harm;
    crm:P129i_is_subject_of data:lel____DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:lel____DeathEvent_1.
 
 data:smedco_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:smedco_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:smedco_DeathEvent_1.
 
 data:fansca_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_musculoskeletal_system;
    crm:P129i_is_subject_of data:fansca_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:fansca_DeathEvent_1.
 
 data:cannjo_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P141_assigned ii:Influenza;
    crm:P129i_is_subject_of data:cannjo_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:cannjo_DeathEvent_1.
 
 data:gaskel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:gaskel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:gaskel_DeathEvent_1.
 
 data:brooem_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:brooem_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:brooem_DeathEvent_1.
 
 data:gilmch_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_breast;
    crm:P141_assigned ii:Intentional_self-harm;
    crm:P129i_is_subject_of data:gilmch_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:gilmch_DeathEvent_1.
 
 data:websau_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:websau_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:websau_DeathEvent_1.
 
 data:goreev_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_colon_rectum_and_anus;
    crm:P129i_is_subject_of data:goreev_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:goreev_DeathEvent_1.
 
 data:goldol_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_genitourinary_system;
    crm:P141_assigned ii:Drug_poisoning;
    crm:P129i_is_subject_of data:goldol_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:goldol_DeathEvent_1.
 
 data:quinan_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Drowning;
    crm:P141_assigned ii:Intentional_self-harm;
    crm:P129i_is_subject_of data:quinan_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:quinan_DeathEvent_1.
 
 data:fanevi_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:fanevi_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:fanevi_DeathEvent_1.
 
 data:bensth_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:bensth_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:bensth_DeathEvent_1.
 
 data:miltjo_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_genitourinary_system;
    crm:P129i_is_subject_of data:miltjo_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:miltjo_DeathEvent_1.
 
 data:heyrel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
@@ -37909,435 +38100,520 @@ data:heyrel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P141_assigned ii:Gastric_and_duodenal_ulcer;
    crm:P129i_is_subject_of data:heyrel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:heyrel_DeathEvent_1.
 
 data:pym_ba_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_ovary;
    crm:P129i_is_subject_of data:pym_ba_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:pym_ba_DeathEvent_1.
 
 data:baldlo_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Unspecified_Unknown_Cause_of_Death;
    crm:P129i_is_subject_of data:baldlo_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:baldlo_DeathEvent_1.
 
 data:laskma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P129i_is_subject_of data:laskma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:laskma_DeathEvent_1.
 
 data:wilsro_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Tuberculosis;
    crm:P129i_is_subject_of data:wilsro_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:wilsro_DeathEvent_1.
 
 data:listan_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Fever;
    crm:P129i_is_subject_of data:listan_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:listan_DeathEvent_1.
 
 data:stopch_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:stopch_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:stopch_DeathEvent_1.
 
 data:hubbca_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:hubbca_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:hubbca_DeathEvent_1.
 
 data:weslma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:weslma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:weslma_DeathEvent_1.
 
 data:radcan_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Asthma;
    crm:P129i_is_subject_of data:radcan_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:radcan_DeathEvent_1.
 
 data:lee_ha_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:lee_ha_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:lee_ha_DeathEvent_1.
 
 data:victqu_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Unspecified_Unknown_Cause_of_Death;
    crm:P129i_is_subject_of data:victqu_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:victqu_DeathEvent_1.
 
 data:steean_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:External_cause;
    crm:P129i_is_subject_of data:steean_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:steean_DeathEvent_1.
 
 data:cavema_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_digestive_system;
    crm:P129i_is_subject_of data:cavema_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:cavema_DeathEvent_1.
 
 data:franpa_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:franpa_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:franpa_DeathEvent_1.
 
 data:catcma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Influenza;
    crm:P129i_is_subject_of data:catcma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:catcma_DeathEvent_1.
 
 data:bronan_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Tuberculosis;
    crm:P129i_is_subject_of data:bronan_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:bronan_DeathEvent_1.
 
 data:arniel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Influenza;
    crm:P129i_is_subject_of data:arniel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:arniel_DeathEvent_1.
 
 data:blaccl_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:blaccl_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:blaccl_DeathEvent_1.
 
 data:cambad_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:cambad_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:cambad_DeathEvent_1.
 
 data:clerag_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P141_assigned ii:Influenza;
    crm:P129i_is_subject_of data:clerag_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:clerag_DeathEvent_1.
 
 data:moorma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:moorma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:moorma_DeathEvent_1.
 
 data:shelma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_central_nervous_system;
    crm:P129i_is_subject_of data:shelma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:shelma_DeathEvent_1.
 
 data:harpfr_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:harpfr_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:harpfr_DeathEvent_1.
 
 data:bretdo_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P129i_is_subject_of data:bretdo_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:bretdo_DeathEvent_1.
 
 data:littja_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_digestive_system;
    crm:P129i_is_subject_of data:littja_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:littja_DeathEvent_1.
 
 data:levyam_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Intentional_self-harm;
    crm:P141_assigned ii:Asphyxiation;
    crm:P129i_is_subject_of data:levyam_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:levyam_DeathEvent_1.
 
 data:pilkla_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_digestive_system;
    crm:P141_assigned ii:Gastric_and_duodenal_ulcer;
    crm:P129i_is_subject_of data:pilkla_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:pilkla_DeathEvent_1.
 
 data:askean_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Fire;
    crm:P129i_is_subject_of data:askean_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:askean_DeathEvent_1.
 
 data:brisam_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P129i_is_subject_of data:brisam_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:brisam_DeathEvent_1.
 
 data:sparmu_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:sparmu_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:sparmu_DeathEvent_1.
 
 data:barche_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:barche_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:barche_DeathEvent_1.
 
 data:struja_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_central_nervous_system;
    crm:P141_assigned ii:Cancer_of_breast;
    crm:P129i_is_subject_of data:struja_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:struja_DeathEvent_1.
 
 data:dougge_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Tuberculosis;
    crm:P129i_is_subject_of data:dougge_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:dougge_DeathEvent_1.
 
 data:woodel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:woodel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:woodel_DeathEvent_1.
 
 data:johnp2_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_breast;
    crm:P129i_is_subject_of data:johnp2_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:johnp2_DeathEvent_1.
 
 data:muirwi_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:muirwi_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:muirwi_DeathEvent_1.
 
 data:mayofl_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:mayofl_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:mayofl_DeathEvent_1.
 
 data:martha_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_ovary;
    crm:P129i_is_subject_of data:martha_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:martha_DeathEvent_1.
 
 data:jewsge_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:jewsge_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:jewsge_DeathEvent_1.
 
 data:syngjm_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:syngjm_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:syngjm_DeathEvent_1.
 
 data:bennar_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Typhoid;
    crm:P129i_is_subject_of data:bennar_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:bennar_DeathEvent_1.
 
 data:blamsu_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Rheumatic_fever;
    crm:P129i_is_subject_of data:blamsu_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:blamsu_DeathEvent_1.
 
 data:granan_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Influenza;
    crm:P129i_is_subject_of data:granan_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:granan_DeathEvent_1.
 
 data:sextan_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Intentional_self-harm;
    crm:P129i_is_subject_of data:sextan_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:sextan_DeathEvent_1.
 
 data:bakeel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Stings;
    crm:P129i_is_subject_of data:bakeel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:bakeel_DeathEvent_1.
 
 data:harrbe_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Alcohol_use_disorders;
    crm:P129i_is_subject_of data:harrbe_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:harrbe_DeathEvent_1.
 
 data:marsem_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:marsem_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:marsem_DeathEvent_1.
 
 data:ropema_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pregnancy_or_childbirth;
    crm:P129i_is_subject_of data:ropema_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:ropema_DeathEvent_1.
 
 data:kingma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Typhoid;
    crm:P129i_is_subject_of data:kingma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:kingma_DeathEvent_1.
 
 data:farrfl_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_breast;
    crm:P129i_is_subject_of data:farrfl_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:farrfl_DeathEvent_1.
 
 data:hopela_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Intentional_self-harm;
    crm:P129i_is_subject_of data:hopela_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:hopela_DeathEvent_1.
 
 data:chisca_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_genitourinary_system;
    crm:P129i_is_subject_of data:chisca_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:chisca_DeathEvent_1.
 
 data:buryel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Fever;
    crm:P129i_is_subject_of data:buryel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:buryel_DeathEvent_1.
 
 data:gerska_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:gerska_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:gerska_DeathEvent_1.
 
 data:britve_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:britve_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:britve_DeathEvent_1.
 
 data:johnpa_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P129i_is_subject_of data:johnpa_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:johnpa_DeathEvent_1.
 
 data:nortca_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Unspecified_Unknown_Cause_of_Death;
    crm:P129i_is_subject_of data:nortca_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:nortca_DeathEvent_1.
 
 data:joscel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pregnancy_or_childbirth;
    crm:P129i_is_subject_of data:joscel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:joscel_DeathEvent_1.
 
 data:martma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pregnancy_or_childbirth;
    crm:P129i_is_subject_of data:martma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:martma_DeathEvent_1.
 
 data:webbbe_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_genitourinary_system;
    crm:P129i_is_subject_of data:webbbe_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:webbbe_DeathEvent_1.
 
 data:pordel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Tuberculosis;
    crm:P129i_is_subject_of data:pordel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:pordel_DeathEvent_1.
 
 data:brooru_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Septicaemia;
    crm:P129i_is_subject_of data:brooru_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:brooru_DeathEvent_1.
 
 data:chatth_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Poisoning;
    crm:P129i_is_subject_of data:chatth_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:chatth_DeathEvent_1.
 
 data:sewean_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Hepatitis;
    crm:P129i_is_subject_of data:sewean_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:sewean_DeathEvent_1.
 
 data:whitel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pregnancy_or_childbirth;
    crm:P129i_is_subject_of data:whitel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:whitel_DeathEvent_1.
 
 data:bevils_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:bevils_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:bevils_DeathEvent_1.
 
 data:dumada_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P141_assigned ii:Mental_and_behavioural_disorders;
    crm:P129i_is_subject_of data:dumada_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:dumada_DeathEvent_1.
 
 data:ros_am_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Falls;
    crm:P129i_is_subject_of data:ros_am_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:ros_am_DeathEvent_1.
 
 data:margna_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:margna_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:margna_DeathEvent_1.
 
 data:audewh_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:audewh_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:audewh_DeathEvent_1.
 
 data:nesbe__DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_trachea_bronchus_and_lung;
    crm:P129i_is_subject_of data:nesbe__DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:nesbe__DeathEvent_1.
 
 data:smitst_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_central_nervous_system;
    crm:P129i_is_subject_of data:smitst_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:smitst_DeathEvent_1.
 
 data:obrich_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:obrich_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:obrich_DeathEvent_1.
 
 data:highpa_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Leukaemia;
    crm:P129i_is_subject_of data:highpa_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:highpa_DeathEvent_1.
 
 data:carero_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P141_assigned ii:Cancer_of_trachea_bronchus_and_lung;
    crm:P129i_is_subject_of data:carero_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:carero_DeathEvent_1.
 
 data:delama_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:delama_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:delama_DeathEvent_1.
 
 data:barkma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:barkma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:barkma_DeathEvent_1.
 
 data:howima_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P129i_is_subject_of data:howima_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:howima_DeathEvent_1.
 
 data:callma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Tuberculosis;
    crm:P129i_is_subject_of data:callma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:callma_DeathEvent_1.
 
 data:rathel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:rathel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:rathel_DeathEvent_1.
 
 data:acklva_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P141_assigned ii:Cancer_of_trachea_bronchus_and_lung;
    crm:P129i_is_subject_of data:acklva_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:acklva_DeathEvent_1.
 
 data:lintel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:lintel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:lintel_DeathEvent_1.
 
 data:hallra_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_colon_rectum_and_anus;
    crm:P129i_is_subject_of data:hallra_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:hallra_DeathEvent_1.
 
 data:clerel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P129i_is_subject_of data:clerel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:clerel_DeathEvent_1.
 
 data:thomdy_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
@@ -38346,322 +38622,385 @@ data:thomdy_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P141_assigned ii:Alcohol_poisoning;
    crm:P129i_is_subject_of data:thomdy_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:thomdy_DeathEvent_1.
 
 data:mortpe_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_trachea_bronchus_and_lung;
    crm:P129i_is_subject_of data:mortpe_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:mortpe_DeathEvent_1.
 
 data:jacsma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Fever;
    crm:P129i_is_subject_of data:jacsma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:jacsma_DeathEvent_1.
 
 data:bellfr_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_breast;
    crm:P129i_is_subject_of data:bellfr_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:bellfr_DeathEvent_1.
 
 data:devoge_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_digestive_system;
    crm:P129i_is_subject_of data:devoge_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:devoge_DeathEvent_1.
 
 data:ayreru_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:ayreru_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:ayreru_DeathEvent_1.
 
 data:sandge_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:sandge_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:sandge_DeathEvent_1.
 
 data:brasan_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Malaria;
    crm:P129i_is_subject_of data:brasan_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:brasan_DeathEvent_1.
 
 data:whipdo_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:whipdo_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:whipdo_DeathEvent_1.
 
 data:mozlan_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cold;
    crm:P129i_is_subject_of data:mozlan_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:mozlan_DeathEvent_1.
 
 data:sincma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Parkinson_disease;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:sincma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:sincma_DeathEvent_1.
 
 data:rossm2_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_central_nervous_system;
    crm:P129i_is_subject_of data:rossm2_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:rossm2_DeathEvent_1.
 
 data:thacwi_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:thacwi_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:thacwi_DeathEvent_1.
 
 data:bagnen_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:bagnen_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:bagnen_DeathEvent_1.
 
 data:fitzpe_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:fitzpe_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:fitzpe_DeathEvent_1.
 
 data:aikilu_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Influenza;
    crm:P129i_is_subject_of data:aikilu_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:aikilu_DeathEvent_1.
 
 data:laffma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:laffma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:laffma_DeathEvent_1.
 
 data:milled_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Falls;
    crm:P141_assigned ii:External_causes;
    crm:P129i_is_subject_of data:milled_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:milled_DeathEvent_1.
 
 data:jay_ha_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Unspecified_Unknown_Cause_of_Death;
    crm:P129i_is_subject_of data:jay_ha_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:jay_ha_DeathEvent_1.
 
 data:macnsa_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Anaemia;
    crm:P129i_is_subject_of data:macnsa_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:macnsa_DeathEvent_1.
 
 data:inneka_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_colon_rectum_and_anus;
    crm:P129i_is_subject_of data:inneka_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:inneka_DeathEvent_1.
 
 data:lownma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_stomach;
    crm:P129i_is_subject_of data:lownma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:lownma_DeathEvent_1.
 
 data:fernfa_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:fernfa_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:fernfa_DeathEvent_1.
 
 data:parrka_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pregnancy_or_childbirth;
    crm:P129i_is_subject_of data:parrka_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:parrka_DeathEvent_1.
 
 data:caffka_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Complications_of_surgery;
    crm:P129i_is_subject_of data:caffka_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:caffka_DeathEvent_1.
 
 data:lickis_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Tuberculosis;
    crm:P129i_is_subject_of data:lickis_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:lickis_DeathEvent_1.
 
 data:marsng_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:marsng_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:marsng_DeathEvent_1.
 
 data:keatjo_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Tuberculosis;
    crm:P129i_is_subject_of data:keatjo_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:keatjo_DeathEvent_1.
 
 data:pembma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Smallpox;
    crm:P129i_is_subject_of data:pembma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:pembma_DeathEvent_1.
 
 data:jennel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:jennel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:jennel_DeathEvent_1.
 
 data:heyege_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_trachea_bronchus_and_lung;
    crm:P129i_is_subject_of data:heyege_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:heyege_DeathEvent_1.
 
 data:lehmro_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:lehmro_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:lehmro_DeathEvent_1.
 
 data:talbca_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:talbca_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:talbca_DeathEvent_1.
 
 data:havefr_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Hepatitis;
    crm:P141_assigned ii:Disease_of_the_digestive_system;
    crm:P129i_is_subject_of data:havefr_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:havefr_DeathEvent_1.
 
 data:dixoel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P129i_is_subject_of data:dixoel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:dixoel_DeathEvent_1.
 
 data:molema_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:molema_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:molema_DeathEvent_1.
 
 data:robeea_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Intentional_self-harm;
    crm:P129i_is_subject_of data:robeea_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:robeea_DeathEvent_1.
 
 data:ecclch_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:ecclch_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:ecclch_DeathEvent_1.
 
 data:holtwi_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_genitourinary_system;
    crm:P129i_is_subject_of data:holtwi_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:holtwi_DeathEvent_1.
 
 data:rhonma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:rhonma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:rhonma_DeathEvent_1.
 
 data:asqucy_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Meningitis;
    crm:P129i_is_subject_of data:asqucy_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:asqucy_DeathEvent_1.
 
 data:tayle2_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:tayle2_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:tayle2_DeathEvent_1.
 
 data:lyaled_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Malaria;
    crm:P129i_is_subject_of data:lyaled_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:lyaled_DeathEvent_1.
 
 data:burtca_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Gangrene;
    crm:P129i_is_subject_of data:burtca_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:burtca_DeathEvent_1.
 
 data:carlma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:External_cause;
    crm:P129i_is_subject_of data:carlma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:carlma_DeathEvent_1.
 
 data:chanla_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:chanla_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:chanla_DeathEvent_1.
 
 data:anspel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Chill;
    crm:P129i_is_subject_of data:anspel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:anspel_DeathEvent_1.
 
 data:loy_mi_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:loy_mi_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:loy_mi_DeathEvent_1.
 
 data:stergb_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:stergb_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:stergb_DeathEvent_1.
 
 data:leavqd_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:leavqd_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:leavqd_DeathEvent_1.
 
 data:townsu_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Diabetes;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:townsu_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:townsu_DeathEvent_1.
 
 data:caryma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_stomach;
    crm:P129i_is_subject_of data:caryma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:caryma_DeathEvent_1.
 
 data:tuckch_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P129i_is_subject_of data:tuckch_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:tuckch_DeathEvent_1.
 
 data:loudja_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:loudja_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:loudja_DeathEvent_1.
 
 data:marsun_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Myocardial_infarction_heart_attack;
    crm:P129i_is_subject_of data:marsun_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:marsun_DeathEvent_1.
 
 data:lothro_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Unspecified_Unknown_Cause_of_Death;
    crm:P129i_is_subject_of data:lothro_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:lothro_DeathEvent_1.
 
 data:willan_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Unspecified_Unknown_Cause_of_Death;
    crm:P129i_is_subject_of data:willan_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:willan_DeathEvent_1.
 
 data:yongch_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pleurisy;
    crm:P129i_is_subject_of data:yongch_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:yongch_DeathEvent_1.
 
 data:philka_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Smallpox;
    crm:P129i_is_subject_of data:philka_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:philka_DeathEvent_1.
 
 data:jamean_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:jamean_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:jamean_DeathEvent_1.
 
 data:shelpe_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Drowning;
    crm:P129i_is_subject_of data:shelpe_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:shelpe_DeathEvent_1.
 
 data:steefl_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:steefl_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:steefl_DeathEvent_1.
 
 data:tonnch_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_breast;
    crm:P129i_is_subject_of data:tonnch_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:tonnch_DeathEvent_1.
 
 data:austja_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
@@ -38669,330 +39008,394 @@ data:austja_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P141_assigned ii:Tuberculosis;
    crm:P129i_is_subject_of data:austja_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:austja_DeathEvent_1.
 
 data:warnsy_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P129i_is_subject_of data:warnsy_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:warnsy_DeathEvent_1.
 
 data:kiplru_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Gastric_and_duodenal_ulcer;
    crm:P129i_is_subject_of data:kiplru_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:kiplru_DeathEvent_1.
 
 data:jamest_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Alzheimers_disease_dementias;
    crm:P129i_is_subject_of data:jamest_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:jamest_DeathEvent_1.
 
 data:abdyma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Unspecified_Unknown_Cause_of_Death;
    crm:P129i_is_subject_of data:abdyma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:abdyma_DeathEvent_1.
 
 data:murreu_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:murreu_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:murreu_DeathEvent_1.
 
 data:trefvi_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Intestinal_malabsorption;
    crm:P129i_is_subject_of data:trefvi_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:trefvi_DeathEvent_1.
 
 data:panksy_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:panksy_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:panksy_DeathEvent_1.
 
 data:swinal_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:swinal_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:swinal_DeathEvent_1.
 
 data:thome2_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P129i_is_subject_of data:thome2_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:thome2_DeathEvent_1.
 
 data:roydna_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_genitourinary_system;
    crm:P129i_is_subject_of data:roydna_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:roydna_DeathEvent_1.
 
 data:dawsje_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:dawsje_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:dawsje_DeathEvent_1.
 
 data:montlm_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Intentional_self-harm;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:montlm_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:montlm_DeathEvent_1.
 
 data:waddhe_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P129i_is_subject_of data:waddhe_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:waddhe_DeathEvent_1.
 
 data:elioge_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Throat_infection;
    crm:P141_assigned ii:Disease_of_the_genitourinary_system;
    crm:P129i_is_subject_of data:elioge_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:elioge_DeathEvent_1.
 
 data:peisma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Gastric_and_duodenal_ulcer;
    crm:P129i_is_subject_of data:peisma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:peisma_DeathEvent_1.
 
 data:carrl2_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:carrl2_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:carrl2_DeathEvent_1.
 
 data:thiran_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Anaemia;
    crm:P129i_is_subject_of data:thiran_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:thiran_DeathEvent_1.
 
 data:scotwa_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Paralysis;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:scotwa_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:scotwa_DeathEvent_1.
 
 data:nighfl_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:nighfl_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:nighfl_DeathEvent_1.
 
 data:rossch_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:rossch_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:rossch_DeathEvent_1.
 
 data:taylha_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:taylha_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:taylha_DeathEvent_1.
 
 data:trisfl_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Typhoid;
    crm:P129i_is_subject_of data:trisfl_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:trisfl_DeathEvent_1.
 
 data:cartan_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_trachea_bronchus_and_lung;
    crm:P129i_is_subject_of data:cartan_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:cartan_DeathEvent_1.
 
 data:barnna_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Coma;
    crm:P129i_is_subject_of data:barnna_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:barnna_DeathEvent_1.
 
 data:scotc__DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Gastric_and_duodenal_ulcer;
    crm:P129i_is_subject_of data:scotc__DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:scotc__DeathEvent_1.
 
 data:blesma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:blesma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:blesma_DeathEvent_1.
 
 data:ouid___DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:ouid___DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:ouid___DeathEvent_1.
 
 data:donnjo_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_stomach;
    crm:P129i_is_subject_of data:donnjo_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:donnjo_DeathEvent_1.
 
 data:kennma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Unspecified_Unknown_Cause_of_Death;
    crm:P129i_is_subject_of data:kennma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:kennma_DeathEvent_1.
 
 data:despch_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Falls;
    crm:P129i_is_subject_of data:despch_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:despch_DeathEvent_1.
 
 data:boylma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:boylma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:boylma_DeathEvent_1.
 
 data:manska_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Tuberculosis;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P129i_is_subject_of data:manska_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:manska_DeathEvent_1.
 
 data:watsro_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_uterus;
    crm:P129i_is_subject_of data:watsro_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:watsro_DeathEvent_1.
 
 data:aguigr_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Tuberculosis;
    crm:P129i_is_subject_of data:aguigr_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:aguigr_DeathEvent_1.
 
 data:barnch_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Typhoid;
    crm:P129i_is_subject_of data:barnch_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:barnch_DeathEvent_1.
 
 data:greeka_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_breast;
    crm:P129i_is_subject_of data:greeka_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:greeka_DeathEvent_1.
 
 data:fletma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P129i_is_subject_of data:fletma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:fletma_DeathEvent_1.
 
 data:procad_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Tuberculosis;
    crm:P129i_is_subject_of data:procad_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:procad_DeathEvent_1.
 
 data:arenha_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Myocardial_infarction_heart_attack;
    crm:P129i_is_subject_of data:arenha_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:arenha_DeathEvent_1.
 
 data:spenel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:spenel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:spenel_DeathEvent_1.
 
 data:stopma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_breast;
    crm:P129i_is_subject_of data:stopma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:stopma_DeathEvent_1.
 
 data:ham_el_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:ham_el_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:ham_el_DeathEvent_1.
 
 data:rubebe_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P129i_is_subject_of data:rubebe_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:rubebe_DeathEvent_1.
 
 data:carrdo_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Intentional_self-harm;
    crm:P129i_is_subject_of data:carrdo_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:carrdo_DeathEvent_1.
 
 data:linsma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:linsma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:linsma_DeathEvent_1.
 
 data:sleael_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_digestive_system;
    crm:P129i_is_subject_of data:sleael_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:sleael_DeathEvent_1.
 
 data:wilset_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Kidney_stones;
    crm:P129i_is_subject_of data:wilset_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:wilset_DeathEvent_1.
 
 data:siddel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Intentional_self-harm;
    crm:P129i_is_subject_of data:siddel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:siddel_DeathEvent_1.
 
 data:mew_ch_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Intentional_self-harm;
    crm:P129i_is_subject_of data:mew_ch_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:mew_ch_DeathEvent_1.
 
 data:harrja_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Leukaemia;
    crm:P129i_is_subject_of data:harrja_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:harrja_DeathEvent_1.
 
 data:brayan_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Severe_stress_and_adjustment_disorders;
    crm:P129i_is_subject_of data:brayan_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:brayan_DeathEvent_1.
 
 data:costlo_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_lip_oral_cavity_and_pharynx;
    crm:P129i_is_subject_of data:costlo_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:costlo_DeathEvent_1.
 
 data:dickem_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_genitourinary_system;
    crm:P129i_is_subject_of data:dickem_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:dickem_DeathEvent_1.
 
 data:bensst_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:bensst_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:bensst_DeathEvent_1.
 
 data:boweel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_trachea_bronchus_and_lung;
    crm:P129i_is_subject_of data:boweel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:boweel_DeathEvent_1.
 
 data:egerge_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Falls;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:egerge_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:egerge_DeathEvent_1.
 
 data:cairmo_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_colon_rectum_and_anus;
    crm:P129i_is_subject_of data:cairmo_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:cairmo_DeathEvent_1.
 
 data:chopka_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:chopka_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:chopka_DeathEvent_1.
 
 data:eliots_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P129i_is_subject_of data:eliots_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:eliots_DeathEvent_1.
 
 data:trouun_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_liver;
    crm:P129i_is_subject_of data:trouun_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:trouun_DeathEvent_1.
 
 data:dufflu_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Tuberculosis;
    crm:P129i_is_subject_of data:dufflu_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:dufflu_DeathEvent_1.
 
 data:bropbr_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P141_assigned ii:Disease_of_the_nervous_system;
    crm:P129i_is_subject_of data:bropbr_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:bropbr_DeathEvent_1.
 
 data:blacca_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_cervix;
    crm:P129i_is_subject_of data:blacca_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:blacca_DeathEvent_1.
 
 data:thurka_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
@@ -39000,314 +39403,375 @@ data:thurka_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Intentional_self-harm;
    crm:P141_assigned ii:Assault;
    crm:P129i_is_subject_of data:thurka_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:thurka_DeathEvent_1.
 
 data:clivca_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Fire;
    crm:P129i_is_subject_of data:clivca_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:clivca_DeathEvent_1.
 
 data:montma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_breast;
    crm:P129i_is_subject_of data:montma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:montma_DeathEvent_1.
 
 data:robiis_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Septicaemia;
    crm:P129i_is_subject_of data:robiis_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:robiis_DeathEvent_1.
 
 data:johnch_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:johnch_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:johnch_DeathEvent_1.
 
 data:newmjo_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:newmjo_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:newmjo_DeathEvent_1.
 
 data:carsca_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pleurisy;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:carsca_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:carsca_DeathEvent_1.
 
 data:mozlha_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Myocardial_infarction_heart_attack;
    crm:P129i_is_subject_of data:mozlha_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:mozlha_DeathEvent_1.
 
 data:hemafe_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cholera;
    crm:P129i_is_subject_of data:hemafe_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:hemafe_DeathEvent_1.
 
 data:radcma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Unspecified_Unknown_Cause_of_Death;
    crm:P129i_is_subject_of data:radcma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:radcma_DeathEvent_1.
 
 data:franju_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Tuberculosis;
    crm:P141_assigned ii:Diabetes;
    crm:P129i_is_subject_of data:franju_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:franju_DeathEvent_1.
 
 data:pardju_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_digestive_system;
    crm:P129i_is_subject_of data:pardju_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:pardju_DeathEvent_1.
 
 data:laurma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Intentional_self-harm;
    crm:P141_assigned ii:Cancer_of_trachea_bronchus_and_lung;
    crm:P129i_is_subject_of data:laurma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:laurma_DeathEvent_1.
 
 data:morgsy_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Chill;
    crm:P129i_is_subject_of data:morgsy_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:morgsy_DeathEvent_1.
 
 data:collm3_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:collm3_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:collm3_DeathEvent_1.
 
 data:buckpe_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_trachea_bronchus_and_lung;
    crm:P129i_is_subject_of data:buckpe_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:buckpe_DeathEvent_1.
 
 data:russdo_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:russdo_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:russdo_DeathEvent_1.
 
 data:tey_jo_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_liver;
    crm:P129i_is_subject_of data:tey_jo_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:tey_jo_DeathEvent_1.
 
 data:meynvi_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_nervous_system;
    crm:P129i_is_subject_of data:meynvi_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:meynvi_DeathEvent_1.
 
 data:drydjo_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Gangrene;
    crm:P129i_is_subject_of data:drydjo_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:drydjo_DeathEvent_1.
 
 data:bailma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Unspecified_Unknown_Cause_of_Death;
    crm:P129i_is_subject_of data:bailma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:bailma_DeathEvent_1.
 
 data:wildja_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P129i_is_subject_of data:wildja_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:wildja_DeathEvent_1.
 
 data:burnel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pleurisy;
    crm:P129i_is_subject_of data:burnel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:burnel_DeathEvent_1.
 
 data:walldo_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:walldo_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:walldo_DeathEvent_1.
 
 data:bowdhe_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Smallpox;
    crm:P129i_is_subject_of data:bowdhe_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:bowdhe_DeathEvent_1.
 
 data:baudch_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Syphilis;
    crm:P129i_is_subject_of data:baudch_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:baudch_DeathEvent_1.
 
 data:wardma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:wardma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:wardma_DeathEvent_1.
 
 data:wickan_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Intentional_self-harm;
    crm:P129i_is_subject_of data:wickan_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:wickan_DeathEvent_1.
 
 data:fullma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Drowning;
    crm:P129i_is_subject_of data:fullma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:fullma_DeathEvent_1.
 
 data:dunmhe_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:dunmhe_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:dunmhe_DeathEvent_1.
 
 data:balfcl_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_uterus;
    crm:P129i_is_subject_of data:balfcl_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:balfcl_DeathEvent_1.
 
 data:plaije_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Unspecified_Unknown_Cause_of_Death;
    crm:P129i_is_subject_of data:plaije_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:plaije_DeathEvent_1.
 
 data:horofr_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:horofr_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:horofr_DeathEvent_1.
 
 data:kellis_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:External_cause;
    crm:P129i_is_subject_of data:kellis_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:kellis_DeathEvent_1.
 
 data:buckhe_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Typhoid;
    crm:P129i_is_subject_of data:buckhe_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:buckhe_DeathEvent_1.
 
 data:treevi_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pleurisy;
    crm:P129i_is_subject_of data:treevi_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:treevi_DeathEvent_1.
 
 data:hobbjo_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:hobbjo_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:hobbjo_DeathEvent_1.
 
 data:olipma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_colon_rectum_and_anus;
    crm:P129i_is_subject_of data:olipma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:olipma_DeathEvent_1.
 
 data:bishel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:bishel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:bishel_DeathEvent_1.
 
 data:sandma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_breast;
    crm:P129i_is_subject_of data:sandma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:sandma_DeathEvent_1.
 
 data:bellge_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Intentional_self-harm;
    crm:P129i_is_subject_of data:bellge_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:bellge_DeathEvent_1.
 
 data:ridila_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Myocardial_infarction_heart_attack;
    crm:P129i_is_subject_of data:ridila_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:ridila_DeathEvent_1.
 
 data:byroau_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_uterus;
    crm:P129i_is_subject_of data:byroau_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:byroau_DeathEvent_1.
 
 data:astema_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_breast;
    crm:P129i_is_subject_of data:astema_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:astema_DeathEvent_1.
 
 data:farjel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_respiratory_system;
    crm:P129i_is_subject_of data:farjel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:farjel_DeathEvent_1.
 
 data:marlch_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Assault;
    crm:P129i_is_subject_of data:marlch_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:marlch_DeathEvent_1.
 
 data:kavaju_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Falls;
    crm:P129i_is_subject_of data:kavaju_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:kavaju_DeathEvent_1.
 
 data:taylja_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_breast;
    crm:P129i_is_subject_of data:taylja_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:taylja_DeathEvent_1.
 
 data:smolto_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Tuberculosis;
    crm:P141_assigned ii:Asthma;
    crm:P129i_is_subject_of data:smolto_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:smolto_DeathEvent_1.
 
 data:lewege_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_digestive_system;
    crm:P129i_is_subject_of data:lewege_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:lewege_DeathEvent_1.
 
 data:wharan_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Convulsions;
    crm:P129i_is_subject_of data:wharan_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:wharan_DeathEvent_1.
 
 data:killan_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Smallpox;
    crm:P129i_is_subject_of data:killan_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:killan_DeathEvent_1.
 
 data:coles2_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_breast;
    crm:P129i_is_subject_of data:coles2_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:coles2_DeathEvent_1.
 
 data:akhman_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Myocardial_infarction_heart_attack;
    crm:P129i_is_subject_of data:akhman_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:akhman_DeathEvent_1.
 
 data:ellisa_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Unspecified_Unknown_Cause_of_Death;
    crm:P129i_is_subject_of data:ellisa_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:ellisa_DeathEvent_1.
 
 data:bradan_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Tuberculosis;
    crm:P129i_is_subject_of data:bradan_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:bradan_DeathEvent_1.
 
 data:richhe_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_stomach;
    crm:P129i_is_subject_of data:richhe_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:richhe_DeathEvent_1.
 
 data:mccama_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_trachea_bronchus_and_lung;
    crm:P129i_is_subject_of data:mccama_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:mccama_DeathEvent_1.
 
 data:falkel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Tuberculosis;
    crm:P129i_is_subject_of data:falkel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:falkel_DeathEvent_1.
 
 data:levead_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:levead_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:levead_DeathEvent_1.
 
 data:stjoch_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P141_assigned ii:Disease_of_the_circulatory_system;
    crm:P129i_is_subject_of data:stjoch_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:stjoch_DeathEvent_1.
 
 data:buttma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
@@ -39315,50 +39779,60 @@ data:buttma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Disease_of_the_digestive_system;
    crm:P141_assigned ii:Unspecified_Unknown_Cause_of_Death;
    crm:P129i_is_subject_of data:buttma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:buttma_DeathEvent_1.
 
 data:harkma_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Unspecified_Unknown_Cause_of_Death;
    crm:P129i_is_subject_of data:harkma_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:harkma_DeathEvent_1.
 
 data:whitan_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer;
    crm:P129i_is_subject_of data:whitan_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:whitan_DeathEvent_1.
 
 data:woolvi_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Intentional_self-harm;
    crm:P129i_is_subject_of data:woolvi_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:woolvi_DeathEvent_1.
 
 data:cathwi_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:cathwi_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:cathwi_DeathEvent_1.
 
 data:mccuca_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cerebrovascular_diseases_stroke;
    crm:P129i_is_subject_of data:mccuca_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:mccuca_DeathEvent_1.
 
 data:huxlel_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_liver;
    crm:P129i_is_subject_of data:huxlel_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:huxlel_DeathEvent_1.
 
 data:duncsa_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Pneumonia;
    crm:P129i_is_subject_of data:duncsa_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:duncsa_DeathEvent_1.
 
 data:leadja_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Cancer_of_stomach;
    crm:P129i_is_subject_of data:leadja_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:leadja_DeathEvent_1.
 
 data:patewa_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P141_assigned ii:Myocardial_infarction_heart_attack;
    crm:P129i_is_subject_of data:patewa_DeathContext_1_identifying;
+   crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:patewa_DeathEvent_1.
 
