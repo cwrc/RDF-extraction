@@ -1,6 +1,7 @@
 import requests
 import sys
 import os
+import datetime
 from Env import env
 
 session = requests.Session()
@@ -20,7 +21,7 @@ def login(auth):
 
 
 def usage():
-    print("%s [username] [password]" % sys.argv[0])
+    print( f"{sys.argv[0]} [username] [password]")
 
 
 def get_datastream(file_desc):
@@ -36,15 +37,18 @@ def get_datastream(file_desc):
     
     print("Unexpected Models:")
     print(models)
-    exit()
+    exit(1)
 
 def download_data(subset="all"):
+    date = str(datetime.date.today())
+    
     if subset== "all":
         for key in collections.keys():
             print(key)
-            r = get_file_description(collections[key])
+            # r = get_file_description(collections[key])  s
             docs = get_document_ids(collections[key])
-            dir = "data/" + key + "_2021"
+            dir =  f"data/{key}_{date}"
+     
             try:
                 os.mkdir(dir)
             except OSError as error:
@@ -61,30 +65,36 @@ def download_data(subset="all"):
                 f = open(dir+"/"+file_id+".xml", "w")
                 f.write(content)
                 f.close()
-        else:
-            docs = get_document_ids(collections[subset])
-            dir = "data/" + subset + "_2021"
-            try:
-                os.mkdir(dir)
-            except OSError as error:
-                pass
-            datastream = get_datastream(get_file_description(docs[0]))
+    else:
+        if subset not in collections:
+            print(f"Invalid subset '{subset}' specified")
+            print(f"Valid subsets include: ",sep="")
+            print(*collections.keys(), sep="\n")
+            exit(1)
+        docs = get_document_ids(collections[subset])
+        dir =  f"data/{subset}_{date}"
 
-            total = len(docs)
-            count = 1
-            for x in docs:
-                print(count, "/", total, ": ", x)
-                count += 1
-                file_id = x.split(":")[1]
-                content = get_file_with_format(x, datastream)
-                f = open(dir+"/"+file_id+".xml", "w")
-                f.write(content)
-                f.close()
+        try:
+            os.mkdir(dir)
+        except OSError as error:
+            pass
+        datastream = get_datastream(get_file_description(docs[0]))
+
+        total = len(docs)
+        count = 1
+        for x in docs:
+            print(count, "/", total, ": ", x)
+            count += 1
+            file_id = x.split(":")[1]
+            content = get_file_with_format(x, datastream)
+            f = open(dir+"/"+file_id+".xml", "w")
+            f.write(content)
+            f.close()
 
 def main(argv):            
     # Store the session for future requests.
     login({"username": argv[0], "password": argv[1]})
-    # download_data()
+    download_data()
 
 
 def get_document_ids(collection_id):

@@ -26,6 +26,8 @@ TODO: Add doctests for:
 TODO: parse required ns from external files
 """
 WRITER_MAP = {}
+MAX_WORD_COUNT = 35
+
 NS_DICT = {
     "as": rdflib.Namespace("http://www.w3.org/ns/activitystreams#"),
     "bibo": rdflib.Namespace("http://purl.org/ontology/bibo/"),
@@ -39,6 +41,7 @@ NS_DICT = {
     "ii": rdflib.Namespace("https://id.linscproject.ca/vocabularies/ii#"),
     "genre": rdflib.Namespace("https://id.linscproject.ca/vocabularies/genre#"),
     "occupation": rdflib.Namespace("https://id.linscproject.ca/vocabularies/occupation#"),
+    "dig": rdflib.Namespace("http://www.ics.forth.gr/isl/CRMdig/"),
     "data": rdflib.Namespace("http://cwrc.ca/cwrcdata/"),
     "dbpedia": rdflib.Namespace("http://dbpedia.org/resource/"),
     "dcterms": rdflib.Namespace("http://purl.org/dc/terms/"),
@@ -121,7 +124,14 @@ class GeneralRelation(object):
         return g
 
 
+def remove_unwanted_tags(tag):
+    unwanted_tag_names = ["BIBCITS", "RESPONSIBILITIES", "KEYWORDCLASSES"]
+    unwanted_tags = []
+    for x in unwanted_tag_names:
+        unwanted_tags += tag.find_all(x)
 
+    for x in unwanted_tags:
+        x.decompose()
 
 
 def create_writer_map(path=None):
@@ -397,7 +407,7 @@ def create_uber_triples(mode, graph, script_id):
         if x == "rdf":
             x = "pretty-xml"
 
-        create_extracted_uberfile(temp_path, graph, x)
+        create_extracted_uberfile(temp_path, graph, x,extra_triples="../data/additional_triples.ttl")
 
 
 def create_individual_triples(mode, person, script_id):
