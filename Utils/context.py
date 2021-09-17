@@ -193,20 +193,26 @@ class Context(object):
         self.motivation = utilities.create_uri("oa", motivation)
 
 
-    def link_triples(self, comp_list):
+    def link_triples(self, components):
         """ Adding to list of components to link context to triples
         """
 
-        if type(comp_list) is list:
-            self.triples += comp_list
+        if type(components) is list:
+            self.triples += components
         else:
-            self.triples.append(comp_list)
+            self.triples.append(components)
 
-    def link_event(self, event_list):
-        if type(event_list) is list:
-            self.events += event_list
+    def link_activity(self, activities):
+        if type(activities) is list:
+            self.activities += activities
         else:
-            self.events.append(event_list)
+            self.activities.append(activities)
+
+    def link_event(self, events):
+        if type(events) is list:
+            self.events += events
+        else:
+            self.events.append(events)
 
     def get_subject(self, component, person):
         subjects = []
@@ -215,13 +221,13 @@ class Context(object):
 
         return list(set(subjects))
 
-    def get_subjects(self, comp_list, person):
+    def get_subjects(self, components, person):
         """
         Dependent on the other other classes functioning similarly to cf
         May have to make a variant for more complex components of biography
         """
         subjects = []
-        for x in comp_list:
+        for x in components:
             subjects += self.get_subject(x, person)
         return list(set(subjects))
 
@@ -233,7 +239,12 @@ class Context(object):
                          ": Within:  " + self.orlando_tagname + " " + str(self.tag))
             self.text = ""
         else:
-            self.text = utilities.limit_to_full_sentences(str(self.tag.get_text()), MAX_WORD_COUNT)
+            self.text = utilities.limit_to_full_sentences(str(self.tag.get_text()), utilities.MAX_WORD_COUNT)
+        
+        date = self.tag.find("DATE")
+        if date:
+            self.text = self.text.replace(date.text, date.text + ": ")
+        
 
     def to_triple(self, person=None):
 
@@ -250,14 +261,14 @@ class Context(object):
             if person:
                 source_url = rdflib.term.URIRef(
                     self.src + person.id + "#" + self.heading)
-                target_label = person.name + " - " + self.context_label + " Excerpt"
+                target_label = person.name + ": " + self.context_label + " Excerpt"
             else:
                 source_url = rdflib.term.URIRef(
                     self.src + "#FE" + self.id.split("_")[-1])
                 target_label = self.context_label + " Excerpt"
         
             source_url = rdflib.term.URIRef(source_url)
-            g.add((self.target_uri, RDF.type,utilities.NS_DICT["oa"].specificResource))
+            g.add((self.target_uri, RDF.type,utilities.NS_DICT["oa"].SpecificResource))
             g.add((self.target_uri, RDF.type,
                    utilities.NS_DICT["crm"].E73_Information_Object))
             g.add((self.target_uri, RDFS.label, Literal(target_label)))
@@ -290,7 +301,7 @@ class Context(object):
 
         # Creating identifying context first and always
         if person:
-            context_label = person.name + " - " + self.context_label + " (identifying)"
+            context_label = person.name + ": " + self.context_label + " (identifying)"
         else:
             context_label = self.context_label + " (identifying)"
 
@@ -352,11 +363,20 @@ class Context(object):
                     temp_graph += x.to_triple(self)
                 g += temp_graph
 
+        for x in self.activities:
+            g.add((identifying_uri,utilities.NS_DICT["crm"].P129_is_about, x.uri))
+            g.add((x.uri,utilities.NS_DICT["crm"].P129i_is_subject_of, identifying_uri))
+
         # Creating the mentioned people as natural person
+        generic_names = ["father", "mother", "sibling", "brother", "sister", "friend"]
+
         for x in self.tag.find_all("NAME"):
             uri = utilities.make_standard_uri(x.get("STANDARD"))
             g.add((uri, RDF.type, utilities.NS_DICT["crm"].E21_Person))
             g.add((uri, RDFS.label, Literal(x.get("STANDARD"))))
+            altname = x.get_text()
+            if x.get("STANDARD") != altname and altnamenot in generic_names:
+                g.add((uri, utilities.NS_DICT["skos"].altlabel, Literal(altname)))
 
         return g
 
