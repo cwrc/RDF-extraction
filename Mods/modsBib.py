@@ -730,6 +730,7 @@ class BibliographyParse:
         # CIDOC: Creating titles
         i = 0
         for item in titles:
+            print(item)
             if 'usage' in item and item['usage'] is not None:
                 title_res = g.resource(F"{self.mainURI}_title_{i}")
                 title_res.add(RDF.type, CRM.E35_Title)
