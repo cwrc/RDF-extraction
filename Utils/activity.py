@@ -1,4 +1,3 @@
-from re import I
 import rdflib
 from rdflib import RDF, RDFS, Literal, XSD
 from Utils.citation import Citation
@@ -51,12 +50,8 @@ def format_date(date):
     if date[-1] == "-":
         date = date.strip("-")
 
-    if len(date) == 10:
+    if len(date) in [10,7,4]:
         return Literal(date, datatype=XSD.date)
-    elif len(date) == 7:
-        return Literal(date, datatype=XSD.gYearMonth, normalize=False)
-    elif len(date) == 4:
-        return Literal(date, datatype=XSD.gYear, normalize=False)
     else:
         return Literal(date)
 
@@ -101,7 +96,20 @@ class Activity(object):
         "death": "E69_Death",
         "generic": "E7_Activity",
         "attribute":"E13_Attribute_Assignment"
+    }
 
+    certainty_map = {
+        "CERT": "highCertainty",
+        "C": "mediumCertainty",
+        "BY": "mediumCertainty",
+        "AFTER": "mediumCertainty",
+        "ROUGHLYDATED": "lowCertainty",
+        "UNKNOWN": "unknownCertainty",
+        "FROM": "highCertainty",
+        "TO": "mediumCertainty",
+        "BOTH": "mediumCertainty",
+        "NEITHER": "mediumCertainty",
+        None: "unknownCertainty",
     }
 
     def get_snippet(self):
@@ -110,7 +118,7 @@ class Activity(object):
         self.text = self.tag.get_text()
         if not self.text:
             logger.error("Empty tag encountered when creating the context:  " + self.id +
-                         ": Within:  " + self.orlando_tagname + " " + str(self.tag))
+                         ": Within:  " + self.tag.name + " " + str(self.tag))
             self.text = ""
         else:
             self.text = utilities.limit_to_full_sentences(str(self.text), utilities.MAX_WORD_COUNT)
@@ -131,19 +139,23 @@ class Activity(object):
         super(Activity, self).__init__()
         self.title = title
         self.tag = tag
+        self.id = id
         self.uri = utilities.create_uri("data", id)
-        self.place = utilities.get_places(tag)
+        self.places = utilities.get_places(tag)
         
 
         self.person = person
         # attributes = {predicate:[objects]}
         self.attributes = attributes
-
+        self.activity_type = None
+        
         if activity_type.lower() in Activity.activity_map:
-            self.activity_type = utilities.NS_DICT["crm"][Activity.activity_map[activity_type.lower()]]
-
+            self.activity_type = utilities.NS_DICT["crm"][Activity.activity_map[activity_type.lower()]]            
 
         self.participants = get_participants(tag)
+        if person.uri in self.participants:
+            self.participants.remove(person.uri)
+        
         self.biographers = []
         for x in self.participants:
             if x in person.biographers:
@@ -162,11 +174,18 @@ class Activity(object):
         self.date_text = None
 
         # self.text = self.date_tag.text+": " + self.text
-        # self.precision = self.date_tag.get("CERTAINTY")
+        self.precision = None 
+        
         if self.date_tag:
             self.date_text = self.date_tag.get_text()
+            self.precision = self.certainty_map[self.date_tag.get("CERTAINTY")]
+            self.precision = utilities.create_uri("cwrc", self.precision)
             if self.date_tag.name == "DATERANGE":
-                self.date = self.date_tag.get("FROM") + ":" + self.date_tag.get("TO")
+                print(self.date_tag)
+                if self.date_tag.get("FROM") and self.date_tag.get("TO"):
+                    self.date = self.date_tag.get("FROM") + ":" + self.date_tag.get("TO")
+                else:
+                    self.date = self.date_tag.get("FROM")
             else:
                 self.date = self.date_tag.get("VALUE")
                 self.date = format_date(self.date)
@@ -177,9 +196,19 @@ class Activity(object):
         g = utilities.create_graph()
         # Create two activities
         activity = g.resource(self.uri)
-
-        activity.add(RDF.type, self.activity_type)
         activity_label = self.person.name +": "+  self.title
+        connection = None
+        if self.activity_type:
+            activity.add(RDF.type, self.activity_type)
+        else:
+            activity.add(RDF.type, utilities.NS_DICT["crm"][self.activity_map["attribute"]])
+            connection = g.resource(f"{self.uri}_connection")
+            connection.add(RDF.type, utilities.NS_DICT["crm"][self.activity_map["generic"]])
+            
+            activity.add(utilities.NS_DICT["crm"].P141_assigned,connection)
+            activity.add(utilities.NS_DICT["crm"].P140_assigned_attribute_to,self.person.uri)
+            connection.add(RDFS.label, Literal(activity_label+" (connection)"))
+        
         activity.add(RDFS.label, Literal(activity_label))
         
         if "Birth" in str(self.activity_type):
@@ -193,7 +222,9 @@ class Activity(object):
             time_span.add(utilities.NS_DICT["crm"]["P82_at_some_time_within"], Literal(self.date_text))
             activity.add(utilities.NS_DICT["crm"]["P4_has_time-span"], time_span)
             time_span.add(RDF.type, utilities.NS_DICT["crm"]["E52_Time-Span"])
-            
+            if self.precision:
+                time_span.add(utilities.NS_DICT["crm"].P2_has_type, self.precision)
+
             if ":" in self.date:
                 time_span.add(utilities.NS_DICT["crm"]["P82a_begin_of_the_begin"], format_date(self.date.split(":")[0]))
                 time_span.add(utilities.NS_DICT["crm"]["P82b_end_of_the_end"], format_date(self.date.split(":")[1]))
@@ -205,7 +236,7 @@ class Activity(object):
         if self.text:
             activity.add(utilities.NS_DICT["crm"].P3_has_note, Literal(self.text))
 
-        for x in self.place:
+        for x in self.places:
             activity.add(utilities.NS_DICT["crm"].P7_took_place_at, x)
             
         if "Attribute" not in str(self.activity_type):
@@ -214,9 +245,14 @@ class Activity(object):
 
         if "Activity" in str(self.activity_type) and self.attributes:
             for pred in self.attributes:
-                for obj in self.attributes[pred]:
-                    activity.add(utilities.NS_DICT["crm"].P2_has_type, pred)
+                activity.add(utilities.NS_DICT["crm"].P2_has_type, pred)
+                for obj in self.attributes[pred]: 
                     activity.add(utilities.NS_DICT["crm"].P2_has_type, obj)
+        elif connection:
+            for pred in self.attributes:
+                connection.add(utilities.NS_DICT["crm"].P2_has_type, pred)
+                for obj in self.attributes[pred]:
+                    connection.add(utilities.NS_DICT["crm"].P129_is_about, obj)
         else:
             print(self.attributes)
             for pred in self.attributes:
@@ -224,6 +260,9 @@ class Activity(object):
                     print(pred, obj)
                     activity.add(pred, obj)
         
+        for x in self.participants:
+            activity.add(utilities.NS_DICT["crm"].P11_had_participant, x)
+
         if "Activity" in str(self.activity_type):
             activity.add(utilities.NS_DICT["crm"].P14_carried_out_by, self.person.uri)
 
