@@ -9,6 +9,8 @@ from Utils import utilities
 from Utils.context import Context, get_context_type, get_event_type
 from Utils.event import Event
 from Utils.organizations import get_org_uri
+from Utils.activity import Activity 
+
 """
 Status: ~75%
 TODO:
@@ -52,9 +54,6 @@ class Occupation(object):
     Evaluate efficency of creating this graph or just returning a tuple and
     have the biography deal with it
     """
-
-    def to_tuple(self, person_uri):
-        return ((person_uri, self.uri, self.value))
 
     def to_triple(self, context):
         g = utilities.create_graph()
@@ -224,6 +223,14 @@ def find_occupations(tag):
     jobs_tags += tag.find_all("EMPLOYER") + tag.find_all("REMUNERATION")
     return [Occupation(x) for x in jobs_tags]
 
+def get_attributes(occupations):
+    attributes = {}
+    for x in occupations:
+        if x.uri in attributes:
+            attributes[x.uri].append(x.value)
+        else:
+            attributes[x.uri] = [x.value]
+    return attributes
 
 def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
     """ Creates the occupation relation and ascribes them to the person along
@@ -232,7 +239,6 @@ def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
     global context_count
     global event_count
     CONTEXT_TYPE = get_context_type("OCCUPATION")
-    EVENT_TYPE = get_event_type("OCCUPATION")
 
     for tag in tag_list:
         temp_context = None
@@ -240,21 +246,30 @@ def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
         context_count += 1
         context_id = person.id + "_" + CONTEXT_TYPE + "_" + str(context_count)
         occupation_list = find_occupations(tag)
+        attributes = get_attributes(occupation_list)
+
         if occupation_list:
-            temp_context = Context(context_id, tag, "OCCUPATION")
-            temp_context.link_triples(occupation_list)
-            # person.add_occupation(occupation_list)
+            temp_context = Context(context_id, tag, "OCCUPATION", pattern="occupation")
+            event_count = 1
+            for x in attributes.keys():
+                temp_attr = {x:attributes[x]}
+                if "employment" in str(x):
+                    temp_attr[x] = []
+                if "Income" in str(x):
+                    pass
+                    # TODO: Review this relationship w. Erin
+                #     temp_attr[utilities.NS_DICT["crm"].P11_had_participant] = attributes[x]
+                
+                activity_id = context_id.replace("Context","Event") + "_"+ str(event_count)
+                label = f"Occupation Event: {utilities.split_by_casing(str(x).split('#')[1]).lower()}"
+                activity = Activity(person, label, activity_id, tag, activity_type="generic", attributes=temp_attr)
+                temp_context.link_activity(activity)
+                person.add_activity(activity)
+                event_count+=1
+            
         else:
             temp_context = Context(context_id, tag, "OCCUPATION", "identifying")
-
-        if list_type == "events":
-            event_count += 1
-            event_title = person.name + " - " + "Occupation Event"
-            event_uri = person.id + "_OccupationEvent_" + str(event_count)
-            temp_event = Event(event_title, event_uri, tag, EVENT_TYPE)
-            temp_context.link_event(temp_event)
-            person.add_event(temp_event)
-
+        
         person.add_context(temp_context)
 
 
@@ -269,11 +284,6 @@ def extract_occupation_data(bio, person):
         events = occupation.find_all("CHRONSTRUCT")
         extract_occupations(paragraphs, "OCCUPATION", person)
         extract_occupations(events, "OCCUPATION", person, "events")
-
-    # Attaching occupation from PERSON attribute of biography
-    # persontype = utilities.get_persontype(bio)
-    # if "WRITER" in persontype:
-    #     person.add_occupation(Occupation("writer", predicate="hasOccupation"))
 
 
 def main():
