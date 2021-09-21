@@ -3,11 +3,11 @@
 from difflib import get_close_matches
 from rdflib import RDF, RDFS, Literal
 import rdflib
-
 import logging
 from Utils import utilities
 from Utils.organizations import get_org, get_org_uri
 from Utils.place import Place
+from Utils.activity import Activity 
 from Utils.event import Event
 from Utils.context import Context, get_event_type, get_context_type
 
@@ -317,6 +317,35 @@ def find_cultural_forms(cf, person):
     get_PA()
     return cf_list
 
+def get_attributes(cfs):
+    attributes = {}
+    for x in cfs:
+        if x.uri in attributes:
+            attributes[x.uri].append(x.value)
+        else:
+            attributes[x.uri] = [x.value]
+    return attributes
+
+def get_event_type(pred):
+    if "religion" in str(pred):
+        return "ReligionEvent"
+    elif "gender" in str(pred):
+        return "GenderEvent"
+    elif "socialClass" in str(pred):
+        return "SocialClassEvent"
+    elif "nationality" in str(pred):
+        return "NationalityEvent"
+    elif "sexuality" in str(pred):
+        return "SexualityEvent"
+    elif "political" in str(pred):
+        return "PoliticsEvent"
+    elif "raceColour" in str(pred):
+        return "RaceEthnicityEvent"
+    elif "ethnicity" in str(pred):
+        return "RaceEthnicityEvent"
+    else:
+        return "CulturalFormEvent"
+
 
 def extract_culturalforms(tag_list, context_type, person, list_type="paragraphs", event_count=1):
     """ Creates the cultural forms ascribes them to the person along with the associated
@@ -333,23 +362,39 @@ def extract_culturalforms(tag_list, context_type, person, list_type="paragraphs"
         context_id = person.id + "_" + CONTEXT_TYPE + "_" + str(cf_subelements_count[context_type])
 
         cf_list = find_cultural_forms(tag, person)
+        attributes = get_attributes(cf_list)
+
         if cf_list:
-            temp_context = Context(context_id, tag, context_type)
-            temp_context.link_triples(cf_list)
+            count = 0
+            temp_context = Context(context_id, tag, context_type,pattern="culturalform")
+            for x in attributes.keys():
+                print(x)
+                # input()
+                temp_attr = {x:attributes[x]}
+            
+                activity_id = context_id.replace("Context","Event") + "_"+ str(count)
+                label = f"{utilities.split_by_casing(CONTEXT_TYPE)}Event: {utilities.split_by_casing(str(x).split('#')[1]).lower()}".replace("Context", "")
+                activity = Activity(person, label, activity_id, tag, activity_type="culturalform", attributes=temp_attr)
+                activity.event_type.append(utilities.create_cwrc_uri(get_event_type(x)))
+                temp_context.link_activity(activity)
+                person.add_activity(activity)
+                count+=1
+
+            # temp_context.link_triples(cf_list)
         else:
             temp_context = Context(context_id, tag, context_type, "identifying")
 
         forms_found += 1
 
-        if list_type == "events":
-            event_title = person.name + " - " + CONTEXT_TYPE.split("Context")[0] + " Event"
-            event_uri = person.id + "_" + \
-                CONTEXT_TYPE.split("Context")[0] + "Event" + "_" + str(event_count)
-            temp_event = Event(event_title, event_uri, tag)
+        # if list_type == "events":
+        #     event_title = person.name + " - " + CONTEXT_TYPE.split("Context")[0] + " Event"
+        #     event_uri = person.id + "_" + \
+        #         CONTEXT_TYPE.split("Context")[0] + "Event" + "_" + str(event_count)
+        #     temp_event = Event(event_title, event_uri, tag)
 
-            temp_context.link_event(temp_event)
-            person.add_event(temp_event)
-            event_count += 1
+        #     temp_context.link_event(temp_event)
+        #     person.add_event(temp_event)
+        #     event_count += 1
 
         person.add_context(temp_context)
     return forms_found
@@ -412,11 +457,46 @@ def extract_cf_data(bio, person):
 def extract_gender_data(bio, person):
     # Possibly use this method get gender information for determining correct predicate?
     # Snippet for gender context is awkward
-    context_id = person.id + "_GenderContext_1"
-    gender_context = Context(context_id, bio.ORLANDOHEADER.FILEDESC, "GENDER")
-    gender_context.link_triples(CulturalForm("gender", None, get_mapped_term("Gender", utilities.get_sex(bio))))
-    person.add_context(gender_context)
+    value = utilities.get_sex(bio)
+    count = 1
+    context_id = f"{person.id}_GenderContext_{count}"
+    if value:
+        gender_context = Context(context_id, bio.ORLANDOHEADER.FILEDESC, "GENDER")
+        gender_context.link_triples(CulturalForm("gender", None, get_mapped_term("Gender", value)))
+        person.add_context(gender_context)
+    else:
+        tags = bio.find_all("GENDER")
+        value = []
+        parent_tag = None
+        for x in tags:
+            if x.get("GENDERIDENTITY"):
+                value.append(x)
+                if parent_tag and parent_tag != x.parent:
+                    print(x)
+                else:
+                    parent_tag = x.parent
+                    
 
+        value = [CulturalForm("gender", None, get_mapped_term("Gender", utilities.get_value(x)))
+                        for x in value]
+        if not value:
+            return
+        
+        print(*value,sep="\n")
+        attributes = get_attributes(value)
+        
+        temp_context = Context(context_id, parent_tag, "GENDER")
+        for x in attributes.keys():
+            temp_attr = {x:attributes[x]}
+        
+            activity_id = context_id.replace("Context","Event") + "_"+ str(count)
+            label = f"Gender Event"
+            activity = Activity(person, label, activity_id, parent_tag, activity_type="culturalform", attributes=temp_attr)
+            temp_context.link_activity(activity)
+            person.add_activity(activity)
+            count+=1
+        person.add_context(temp_context)
+        
 
 def clean_term(string):
     string = string.lower().replace("-", " ").strip().replace(" ", "")
@@ -564,6 +644,7 @@ def main():
             print("*" * 55)
 
         person = Biography(person_id, soup)
+        extract_gender_data(soup, person)
         extract_cf_data(soup, person)
 
         person.name = utilities.get_readable_name(soup)

@@ -456,7 +456,7 @@ https://id.linscproject.ca/vocabularies/culturalForm#Gender,https://id.linscproj
 https://id.linscproject.ca/vocabularies/culturalForm#Gender,https://id.linscproject.ca/vocabularies/culturalForm#woman,woman,female,,,,,,,,,,,,,,,,,,,,,,,,,,,
 https://id.linscproject.ca/vocabularies/culturalForm#Gender,https://id.linscproject.ca/vocabularies/culturalForm#undefinedGender,undefined,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 https://id.linscproject.ca/vocabularies/culturalForm#Gender,https://id.linscproject.ca/vocabularies/culturalForm#man,man,male,,,,,,,,,,,,,,,,,,,,,,,,,,,
-https://id.linscproject.ca/vocabularies/culturalForm#Gender,https://id.linscproject.ca/vocabularies/culturalForm#transGender,transgender,transgendered,,,,,,,,,,,,,,,,,,,,,,,,,,,
+https://id.linscproject.ca/vocabularies/culturalForm#Gender,https://id.linscproject.ca/vocabularies/culturalForm#transGender,transgender,transgendered,trans,,,,,,,,,,,,,,,,,,,,,,,,,,
 https://id.linscproject.ca/vocabularies/culturalForm#Gender,https://id.linscproject.ca/vocabularies/culturalForm#transWoman,trans woman/trans female,transgendered male to female,,,,,,,,,,,,,,,,,,,,,,,,,,,
 https://id.linscproject.ca/vocabularies/culturalForm#Gender,https://id.linscproject.ca/vocabularies/culturalForm#transMan,trans man/trans male,transgendered female to male,,,,,,,,,,,,,,,,,,,,,,,,,,,
 https://id.linscproject.ca/vocabularies/culturalForm#Gender,https://id.linscproject.ca/vocabularies/culturalForm#cisWoman,cis woman/cis female,,,,,,,,,,,,,,,,,,,,,,,,,,,,
