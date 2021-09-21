@@ -1,5 +1,6 @@
 from rdflib import RDF, RDFS, Literal
 from Utils import utilities
+import rdflib
 
 logger = utilities.config_logger("citation")
 
@@ -10,6 +11,7 @@ class Citation(object):
     def __init__(self, bibcit_tag):
         super(Citation, self).__init__()
         self.tag = bibcit_tag
+        print(self.tag)
         self.page = bibcit_tag.text
         self.label = bibcit_tag.get("PLACEHOLDER")
         self.citing_entity = bibcit_tag.get("DBREF")
@@ -18,14 +20,21 @@ class Citation(object):
 
     def to_triple(self, target_uri, source_url=None):
         g = utilities.create_graph()
+
+        uri = None
+        citing_uri = None
+        if self.uri:
+            uri = rdflib.URIRef(self.uri+"_dbref")
+            citing_uri = rdflib.URIRef(self.uri)
+        else:
+            uri = utilities.create_uri("data", "dbref_"+self.citing_entity)
+            citing_uri = utilities.create_uri("data", self.citing_entity)
         
-        uri = utilities.create_uri("data", "dbref_"+self.citing_entity)
         g.add((target_uri, utilities.NS_DICT["crm"].P67_refers_to, uri))
 
         g.add((uri, RDF.type, utilities.NS_DICT["crm"].E33_Linguistic_Object))
         g.add((uri, RDFS.label, Literal(self.label)))
 
-        citing_uri = utilities.create_uri("data", self.citing_entity)
         g.add((uri, utilities.NS_DICT["crm"].P67i_is_referred_to_by, citing_uri))
 
         if source_url:

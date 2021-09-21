@@ -108,7 +108,7 @@ def get_context_type(tag, mode=None):
 
 
 def remove_unwanted_tags(tag):
-    unwanted_tag_names = ["BIBCITS", "RESPONSIBILITIES", "KEYWORDCLASSES"]
+    unwanted_tag_names = ["BIBCITS", "RESPONSIBILITIES", "KEYWORDCLASSES","RESEARCHNOTE"]
     unwanted_tags = []
     for x in unwanted_tag_names:
         unwanted_tags += tag.find_all(x)
@@ -164,7 +164,9 @@ class Context(object):
             self.identifying_uri = utilities.create_uri("data", self.id + "_identifying")
             self.xpath = get_xpath(tag)
             bibcits = tag.find_all("BIBCIT")
+            print(bibcits)
             self.citations = [Citation(x) for x in bibcits]
+
 
             self.heading = get_heading(tag)
             self.src = "http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id="
@@ -327,7 +329,7 @@ class Context(object):
 
 
 
-        if self.cidoc_pattern not in ["birth","death","occupation"]:
+        if self.cidoc_pattern not in ["birth","death","occupation", "location", "culturalform"]:
         # Creating describing context if applicable
             if self.motivation == utilities.NS_DICT["oa"].describing:
                 self.uri = utilities.create_uri("data", self.id + "_attributing")
@@ -368,6 +370,7 @@ class Context(object):
         for x in self.activities:
             g.add((identifying_uri,utilities.NS_DICT["crm"].P129_is_about, x.uri))
             g.add((x.uri,utilities.NS_DICT["crm"].P129i_is_subject_of, identifying_uri))
+
 
         # Creating the mentioned people as natural person
         generic_names = ["father", "mother", "sibling", "brother", "sister", "friend"]
