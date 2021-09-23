@@ -250,13 +250,12 @@ def find_cultural_forms(cf, person):
 
             if not value and orgName:
                 for org in orgName:
-                    cf_list.append(CulturalForm(None, None, get_org_uri(org),
-                                                other_attributes=utilities.NS_DICT["org"].memberOf))
+                    person.add_organization(get_org_uri(org))
+
             elif orgName:
                 for org in orgName:
-                    cf_list.append(CulturalForm(None, None, get_org_uri(org),
-                                                other_attributes=utilities.NS_DICT["org"].memberOf))
-
+                    person.add_organization(get_org_uri(org))
+ 
             value = get_mapped_term("Religion", utilities.get_value(x), True, id=person.id)
 
             # Checking if religion occurs as a PA if no result as a religion
@@ -277,13 +276,12 @@ def find_cultural_forms(cf, person):
             orgName = get_org(x)
             if not value and orgName:
                 for org in orgName:
-                    cf_list.append(CulturalForm(None, None, get_org_uri(org),
-                                                other_attributes=utilities.NS_DICT["org"].memberOf))
+                    person.add_organization(get_org_uri(org))
                 value = get_org_uri(org)
             elif orgName:
                 for org in orgName:
-                    cf_list.append(CulturalForm(None, None, get_org_uri(org),
-                                                other_attributes=utilities.NS_DICT["org"].memberOf))
+                    person.add_organization(get_org_uri(org))
+
                 value = get_mapped_term("PoliticalAffiliation", utilities.get_value(x), id=person.id)
             else:
                 value = get_mapped_term("PoliticalAffiliation", utilities.get_value(x), id=person.id)
@@ -369,7 +367,6 @@ def extract_culturalforms(tag_list, context_type, person, list_type="paragraphs"
             temp_context = Context(context_id, tag, context_type,pattern="culturalform")
             for x in attributes.keys():
                 print(x)
-                # input()
                 temp_attr = {x:attributes[x]}
             
                 activity_id = context_id.replace("Context","Event") + "_"+ str(count)

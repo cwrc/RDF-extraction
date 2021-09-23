@@ -41,6 +41,7 @@ NS_DICT = {
     "ii": rdflib.Namespace("https://id.linscproject.ca/vocabularies/ii#"),
     "genre": rdflib.Namespace("https://id.linscproject.ca/vocabularies/genre#"),
     "occupation": rdflib.Namespace("https://id.linscproject.ca/vocabularies/occupation#"),
+    "culturalform": rdflib.Namespace("https://id.linscproject.ca/vocabularies/culturalForm#"),
     "dig": rdflib.Namespace("http://www.ics.forth.gr/isl/CRMdig/"),
     "data": rdflib.Namespace("http://cwrc.ca/cwrcdata/"),
     "dbpedia": rdflib.Namespace("http://dbpedia.org/resource/"),
@@ -125,7 +126,7 @@ class GeneralRelation(object):
 
 
 def remove_unwanted_tags(tag):
-    unwanted_tag_names = ["BIBCITS", "RESPONSIBILITIES", "KEYWORDCLASSES"]
+    unwanted_tag_names = ["BIBCITS", "RESPONSIBILITIES", "KEYWORDCLASSES","RESEARCHNOTE"]
     unwanted_tags = []
     for x in unwanted_tag_names:
         unwanted_tags += tag.find_all(x)
@@ -173,7 +174,7 @@ def strip_all_whitespace(string):
     return re.sub('[\s+]', '', str(string))
 
 
-def split_by_casing(string, altmode=None):
+def split_by_casing(string):
     return " ".join(re.findall('^[a-z]+|[A-Z][^A-Z]*', string))
 
 
@@ -268,6 +269,8 @@ def create_cwrc_uri(term):
 
 def get_value(tag):
     value = get_attribute(tag, "STANDARD")
+    if tag.name == "GENDER":
+        value = get_attribute(tag, "GENDERIDENTITY")
     if not value:
         value = get_attribute(tag, "REG")
     if not value:

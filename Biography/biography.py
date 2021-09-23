@@ -123,6 +123,7 @@ class Biography(object):
         self.context_list = []
         self.event_list = []
         self.activity_list = []
+        self.organizations = []
 
         self.occupations = []
         self.family_member_list = []
@@ -171,6 +172,12 @@ class Biography(object):
         else:
             self.activity_list.append(activity)
 
+    def add_organization(self, organization):
+        if type(organization) is list:
+            self.organizations += organization
+        else:
+            self.organizations.append(organization)
+
     def create_triples(self, e_list):
         g = rdflib.Graph()
         for x in e_list:
@@ -194,6 +201,9 @@ class Biography(object):
         g += self.create_triples(self.context_list)
         g += self.create_triples(self.event_list)
         g += self.create_triples(self.activity_list)
+
+        for x in self.organizations:
+            g.add((self.uri, utilities.NS_DICT["crm"].P107_has_current_or_former_member, x))
 
         # g += self.create_triples(self.cohabitants_list)
         # g += self.create_triples(self.family_list)
