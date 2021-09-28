@@ -268,8 +268,12 @@ class Activity(object):
                     print(pred, obj)
                     activity.add(pred, obj)
         
-        for x in self.participants:
-            activity.add(utilities.NS_DICT["crm"].P11_had_participant, x)
+        if connection:
+            for x in self.participants:
+                connection.add(utilities.NS_DICT["crm"].P11_had_participant, x)
+        else:            
+            for x in self.participants:
+                activity.add(utilities.NS_DICT["crm"].P11_had_participant, x)
 
         if "Activity" in str(self.activity_type):
             activity.add(utilities.NS_DICT["crm"].P14_carried_out_by, self.person.uri)
