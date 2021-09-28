@@ -366,7 +366,7 @@ def extract_culturalforms(tag_list, context_type, person, list_type="paragraphs"
             count = 0
             temp_context = Context(context_id, tag, context_type,pattern="culturalform")
             for x in attributes.keys():
-                print(x)
+                # temp_attr = {temp_context.context_type:attributes[x]}
                 temp_attr = {x:attributes[x]}
             
                 activity_id = context_id.replace("Context","Event") + "_"+ str(count)
@@ -377,7 +377,6 @@ def extract_culturalforms(tag_list, context_type, person, list_type="paragraphs"
                 person.add_activity(activity)
                 count+=1
 
-            # temp_context.link_triples(cf_list)
         else:
             temp_context = Context(context_id, tag, context_type, "identifying")
 
@@ -458,7 +457,7 @@ def extract_gender_data(bio, person):
     count = 1
     context_id = f"{person.id}_GenderContext_{count}"
     if value:
-        gender_context = Context(context_id, bio.ORLANDOHEADER.FILEDESC, "GENDER")
+        gender_context = Context(context_id, bio.ORLANDOHEADER.FILEDESC, "GENDER",pattern="culturalform")
         gender_context.link_triples(CulturalForm("gender", None, get_mapped_term("Gender", value)))
         person.add_context(gender_context)
     else:
@@ -482,7 +481,7 @@ def extract_gender_data(bio, person):
         print(*value,sep="\n")
         attributes = get_attributes(value)
         
-        temp_context = Context(context_id, parent_tag, "GENDER")
+        temp_context = Context(context_id, parent_tag, "GENDER",pattern="culturalform")
         for x in attributes.keys():
             temp_attr = {x:attributes[x]}
         

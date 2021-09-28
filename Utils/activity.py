@@ -220,7 +220,12 @@ class Activity(object):
             time_span = g.resource(self.uri + "_time-span")
             time_span.add(RDFS.label, Literal(activity_label + " time-span"))
             time_span.add(utilities.NS_DICT["crm"]["P82_at_some_time_within"], Literal(self.date_text))
-            activity.add(utilities.NS_DICT["crm"]["P4_has_time-span"], time_span)
+            
+            if connection:
+                connection.add(utilities.NS_DICT["crm"]["P4_has_time-span"], time_span)
+            else:
+                activity.add(utilities.NS_DICT["crm"]["P4_has_time-span"], time_span)
+            
             time_span.add(RDF.type, utilities.NS_DICT["crm"]["E52_Time-Span"])
             if self.precision:
                 time_span.add(utilities.NS_DICT["crm"].P2_has_type, self.precision)
@@ -251,8 +256,11 @@ class Activity(object):
         elif connection:
             for pred in self.attributes:
                 connection.add(utilities.NS_DICT["crm"].P2_has_type, pred)
+                if "Self" in pred:
+                    connection.add(utilities.NS_DICT["crm"].P14_carried_out_by, self.person.uri)
                 for obj in self.attributes[pred]:
-                    connection.add(utilities.NS_DICT["crm"].P129_is_about, obj)
+                    connection.add(utilities.NS_DICT["crm"].P16_used_specific_object, obj)
+
         else:
             print(self.attributes)
             for pred in self.attributes:
