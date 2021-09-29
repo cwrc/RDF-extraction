@@ -3,6 +3,7 @@
 
 from Utils.context import Context, get_event_type
 from Utils.event import Event
+from Utils.activity import Activity
 from Utils.place import Place
 from Utils import utilities
 
@@ -138,6 +139,14 @@ def get_place_occurences(locations):
         location_occurences[location.get("RELATIONTO")] += ([Place(x).uri for x in places])
     return location_occurences
 
+def get_attributes(locations):
+    attributes = {}
+    for x in locations:
+        if x.uri in attributes:
+            attributes[x.uri].append(x.value)
+        else:
+            attributes[x.uri] = [x.value]
+    return attributes
 
 def extract_locations(tag_list, context_type, person, list_type="paragraphs"):
     """ Creates the location relation and ascribes them to the person along with the associated
@@ -152,23 +161,25 @@ def extract_locations(tag_list, context_type, person, list_type="paragraphs"):
         context_id = person.id + "_SpatialContext" + "-" + str(Location.location_dict[context_type])
         location_count[context_type] += 1
         context_id += "_" + str(location_count[context_type])
-
         location_list = find_locations(tag, context_type)
+        attributes = get_attributes(location_list)
+
+
         if location_list:
-            temp_context = Context(context_id, tag, "LOCATION")
-            temp_context.link_triples(location_list)
+            temp_context = Context(context_id, tag, "LOCATION",pattern="location")
+            count = 1
+
+            #creating separate events for events 
+            for x in attributes.keys():
+                temp_attr = {x:[]}
+                activity_id = context_id.replace("Context","Event") + "_"+ str(count)
+                activity = Activity(person, "Spatial Event: "+str(x).split("#")[1], activity_id, tag, activity_type="generic", attributes=temp_attr)
+                activity.places = attributes[x]
+                temp_context.link_activity(activity)
+                person.add_activity(activity)
+                count+=1
         else:
             temp_context = Context(context_id, tag, "LOCATION", "identifying")
-
-        if list_type == "events":
-            event_type = get_event_type("LOCATION", context_type)
-            location_event_count[context_type] += 1
-            event_title = person.name + " - " + "Spatial (" + Location.location_dict[context_type] + ") Event"
-            event_uri = person.id + "_" + \
-                Location.location_dict[context_type] + "_Event" + str(location_event_count[context_type])
-            temp_event = Event(event_title, event_uri, tag, type=event_type)
-            temp_context.link_event(temp_event)
-            person.add_event(temp_event)
 
         person.add_context(temp_context)
 
