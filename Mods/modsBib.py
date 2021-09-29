@@ -720,7 +720,8 @@ class BibliographyParse:
         resource.add(CRM.P2_has_type, self.get_type())
         
         for lang in self.get_languages():
-            resource.add(CRM.P72_has_language, rdflib.Literal(lang['language']))
+            language_uri = F"http://id.loc.gov/vocabulary/languages/{lang['language']}"
+            resource.add(CRM.P72_has_language, rdflib.URIRef(language_uri))
 
 
         instance = g.resource(self.mainURI + "_instance")        
@@ -730,7 +731,6 @@ class BibliographyParse:
         # CIDOC: Creating titles
         i = 0
         for item in titles:
-            print(item)
             if 'usage' in item and item['usage'] is not None:
                 title_res = g.resource(F"{self.mainURI}_title_{i}")
                 title_res.add(RDF.type, CRM.E35_Title)
@@ -768,18 +768,21 @@ class BibliographyParse:
             
         
         #CIDOC: Creating time-spans for record change
+        r_count = 1
         for r in self.get_record_change_date():
             dateValue, transformed = dateParse(r['date'])
-            date_bnode = rdflib.BNode()
-            g.add((date_bnode, RDF.type, CRM["E52_Time-Span"]))
-            g.add((date_bnode, CRM.P2_has_type, BF.changeDate))
+            time_span = g.resource(F"{self.mainURI}_time-span_{r_count}")
+            time_span.add(RDFS.label, rdflib.Literal("record change time-span"))
+            time_span.add(RDF.type, CRM["E52_Time-Span"])
+            time_span.add(CRM.P2_has_type, BF.changeDate)
             if not transformed:
                 logger.info(F"MISSING DATE FORMAT: {dateValue} on Document {self.mainURI}")
-                g.add((date_bnode, RDFS.label, rdflib.Literal(dateValue)))
             else:
-                g.add((date_bnode, CRM.P82a_begin_of_the_begin, rdflib.Literal(dateValue, datatype=XSD.datetime)))
-                g.add((date_bnode, CRM.P82b_end_of_the_end,rdflib.Literal(dateValue, datatype=XSD.datetime)))
-            adminMetaData.add(CRM["P4_has_time-span"], date_bnode)
+                time_span.add(CRM.P82a_begin_of_the_begin, rdflib.Literal(dateValue, datatype=XSD.datetime))
+                time_span.add(CRM.P82b_end_of_the_end,rdflib.Literal(dateValue, datatype=XSD.datetime))
+            
+            adminMetaData.add(CRM["P4_has_time-span"], time_span)
+            r_count +=1 
 
         #CIDOC Creating Generation Process
         i = 0
@@ -810,6 +813,7 @@ class BibliographyParse:
             
             originInfo = g.resource(F"{self.mainURI}_activity_statement_{i}")
             originInfo.add(RDF.type, FRBROO.F28_Expression_Creation)
+            print(self.mainURI)
             originInfo.add(FRBROO.R17, resource)
 
             j = 0
@@ -841,12 +845,13 @@ class BibliographyParse:
 
                 #Attaching role to the event
                 if name['role'] in ROLES:
-                    agent_bnode = rdflib.BNode()
-                    g.add((agent_bnode, RDF.type, CRMPC.PC14_carried_out_by))
-                    g.add((agent_bnode, CRMPC.P02_has_range, agent_resource.identifier))
-                    g.add((agent_bnode, rdflib.URIRef("http://www.cidoc-crm.org/cidoc-crm/P14.1_in_the_role_of"),
-                           ROLES[name['role']]))
-                    originInfo.add(CRMPC.P01i_is_domain_of, agent_bnode)
+                    agent = g.resource(F"{self.mainURI}_agent")
+                    agent.add(RDFS.label, rdflib.Literal("agent"))
+                    agent.add(RDF.type, CRMPC.PC14_carried_out_by)
+                    agent.add(CRMPC.P02_has_range, agent_resource.identifier)
+                    agent.add(rdflib.URIRef("http://www.cidoc-crm.org/cidoc-crm/P14.1_in_the_role_of"),
+                           ROLES[name['role']])
+                    originInfo.add(CRMPC.P01i_is_domain_of, agent)
                 elif name['role'] != None:
                     logger.warning("Role not handled: "+str(name['role']))
 
@@ -857,12 +862,14 @@ class BibliographyParse:
                 publisher = g.resource(F"{self.mainURI}_activity_statement_publisher_{i}")
                 publisher.add(RDF.type, CRM.E39_Actor)
 
-                publisher_role_bnode = rdflib.BNode()
+                publisher_role = g.resource(F"{self.mainURI}_publisher_role_{i}")
+                publisher_role.add(RDFS.label, rdflib.Literal("publisher role"))
+
+                publisher_role.add(RDF.type, CRMPC.PC14_carried_out_by)
+                publisher_role.add( CRMPC.P02_has_range, publisher.identifier)
+                publisher_role.add( CRMPC["P14.1_in_the_role_of"],ROLES["publisher"])
                 
-                g.add((publisher_role_bnode,RDF.type, CRMPC.PC14_carried_out_by))
-                g.add((publisher_role_bnode, CRMPC.P02_has_range, publisher.identifier))
-                g.add((publisher_role_bnode, CRMPC["P14.1_in_the_role_of"],ROLES["publisher"]))
-                originInfo.add(CRMPC.P01i_is_domain_of,publisher_role_bnode)
+                originInfo.add(CRMPC.P01i_is_domain_of,publisher_role)
         
             if o['place']:
                 place = g.resource(F"{self.mainURI}_activity_statement_place_{i}")
@@ -880,16 +887,18 @@ class BibliographyParse:
             
             if o['date']:
                 dateValue, transformed = dateParse(o['date'])
-                date_bnode = rdflib.BNode()
-                g.add((date_bnode, RDF.type, CRM["E52_Time-Span"]))
+                time_span = g.resource(F"{self.mainURI}_time-span_{i}")
+                time_span.add(RDFS.label, rdflib.Literal("origin time-span"))
+                time_span.add(RDF.type, CRM["E52_Time-Span"])
+                time_span.add(CRM.P2_has_type, BF.changeDate)
                 if not transformed:
                     logger.info(F"MISSING DATE FORMAT: {dateValue} on Document {self.mainURI}")
-                    g.add((date_bnode, RDFS.label,rdflib.Literal(dateValue)))
                 else:
-                    g.add((date_bnode, CRM.P82a_begin_of_the_begin, rdflib.Literal(dateValue, datatype=XSD.datetime)))
-                    g.add((date_bnode, CRM.P82b_end_of_the_end,rdflib.Literal(dateValue, datatype=XSD.datetime)))
+                    time_span.add(CRM.P82a_begin_of_the_begin, rdflib.Literal(dateValue, datatype=XSD.datetime))
+                    time_span.add(CRM.P82b_end_of_the_end,rdflib.Literal(dateValue, datatype=XSD.datetime))
+
                 
-                originInfo.add(CRM["P4_has_time-span"],date_bnode)
+                originInfo.add(CRM["P4_has_time-span"],time_span)
 
             # CIDOC: Creating a manifestation, given an edition
             if o['edition']:
@@ -897,13 +906,13 @@ class BibliographyParse:
                 instance_manifestion.add(RDF.type, FRBROO.F3_Manifestation)
                 instance_manifestion.add(FRBROO.R4_embodies,resource)
                 
-                edition_node = rdflib.BNode()
+                edition_node = g.resource(F"{self.mainURI}_edition")
                 instance_manifestion.add(CRM.P1_identified_by, edition_node)
-                g.add((edition_node, RDF.type, CRM.E33_E41_Linguistic_Appellation))
-                g.add((edition_node, CRM.P190_has_symbolic_content, rdflib.Literal(o['edition'])))
+                edition_node.add(RDF.type, CRM.E33_E41_Linguistic_Appellation)
+                edition_node.add(CRM.P190_has_symbolic_content, rdflib.Literal(o['edition']))
                 
                 # TODO: Replace with URI for edition
-                g.add((edition_node, CRM.P2_has_type, rdflib.Literal("edition")))
+                edition_node.add(CRM.P2_has_type, rdflib.Literal("edition"))
 
             resource.add(FRBROO.R19i_was_realised_through, originInfo)
             i += 1
@@ -952,35 +961,36 @@ class BibliographyParse:
 
             # NOTE: Possibly revise these URIs with further guidance
             if p['volume']:
-                vol_node = rdflib.BNode()
+                vol_node = g.resource(F"{self.mainURI}_extent_{i}_volume")
                 extent_resource.add(CRM.P106_is_composed_of, vol_node)
-                g.add((vol_node, RDF.type, CRM.E33_E41_Linguistic_Appellation))
-                g.add((vol_node, CRM.P190_has_symbolic_content,rdflib.Literal(p['volume'])))
-                g.add((vol_node, CRM.P2_has_type,SCHEMA.volumeNumber))
-                
+                vol_node.add(RDF.type, CRM.E33_E41_Linguistic_Appellation)
+                vol_node.add(CRM.P190_has_symbolic_content,rdflib.Literal(p['volume']))
+                vol_node.add(CRM.P2_has_type,SCHEMA.volumeNumber)
                 extent_label += "Volume " + p['volume']
+            
             if p['issue']:
-                issue_node = rdflib.BNode()
+                issue_node = g.resource(F"{self.mainURI}_extent_{i}_issue")
                 extent_resource.add(CRM.P106_is_composed_of, issue_node)
-                g.add((issue_node, RDF.type, CRM.E33_E41_Linguistic_Appellation))
-                g.add((issue_node, CRM.P190_has_symbolic_content,rdflib.Literal(p['issue'])))
-                g.add((issue_node, CRM.P2_has_type,SCHEMA.issueNumber))
+                issue_node.add(RDF.type, CRM.E33_E41_Linguistic_Appellation)
+                issue_node.add(CRM.P190_has_symbolic_content,rdflib.Literal(p['issue']))
+                issue_node.add(CRM.P2_has_type,SCHEMA.issueNumber)
                 
                 if p['volume']:
                     extent_label += ", "
                 extent_label += "Issue " + p['issue']
             if p['value'] != "":
-                page_node = rdflib.BNode()
+                page_node = g.resource(F"{self.mainURI}_extent_{i}_page")
                 extent_resource.add(CRM.P106_is_composed_of, page_node)
-                g.add((page_node, RDF.type, CRM.E33_E41_Linguistic_Appellation))
-                g.add((page_node, CRM.P190_has_symbolic_content,rdflib.Literal(p['value'])))
-                g.add((page_node, CRM.P2_has_type, rdflib.Literal("page numbers")))
+                page_node.add(RDF.type, CRM.E33_E41_Linguistic_Appellation)
+                page_node.add(CRM.P190_has_symbolic_content,rdflib.Literal(p['value']))
+                page_node.add(CRM.P2_has_type, rdflib.Literal("page numbers"))
                 
                 if p['volume'] or p['issue']:
                     extent_label += ", "
                 extent_label += "Page " + p['value']
 
             extent_resource.add(RDFS.label, rdflib.Literal(extent_label))
+            
             # TODO: Clarify if instance needs to be identified by extent:
             instance.add(CRM.P1_identified_by, extent_resource)
             if instance_manifestion:
