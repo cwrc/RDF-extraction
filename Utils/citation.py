@@ -39,7 +39,7 @@ class Citation(object):
         if source_url:
             g.add((source_url, RDF.type, utilities.NS_DICT["dig"].D1_Digital_Object))
             g.add((source_url, utilities.NS_DICT["crm"].P67_refers_to, citing_uri))
-            g.add((uri, RDFS.label, Literal(source_url.split("=")[-1])))
+            g.add((source_url, RDFS.label, Literal(source_url.split("=")[-1])))
 
         return g
 
