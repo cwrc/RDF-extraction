@@ -108,7 +108,6 @@ def extract_death_data(bio, person):
         # create a death event
         activity_id = context_id.replace("Context","Event")
         death_event = Activity(person, "Death Event", activity_id, death_tag, activity_type="death")
-        print(death_event.place)
 
         # Creating a burial event
         event = death_tag.find("CHRONSTRUCT")
@@ -121,7 +120,7 @@ def extract_death_data(bio, person):
                     burial = [Place(burial_tag).uri]
                 if burial:
                     context_count += 1
-                    death_event.place = [death_event.place[0]]
+                    death_event.places = [death_event.places[0]]
                     context_id2 = person.id + "_DeathContext_" + str(context_count)
                     temp_context2 = Context(context_id2, shortprose, "DEATH", pattern="death")
                     activity_id2 = context_id2.replace("Context","Event")
@@ -130,11 +129,6 @@ def extract_death_data(bio, person):
                     temp_context2.link_activity(burial_event)
                     person.add_activity(burial_event)
                     person.add_context(temp_context2)
-
-        # create one
-        activity_id = context_id.replace("Context","Event")
-        death_event = Activity(person, "Death Event", activity_id, death_tag, activity_type="death")
-        print(death_event.place)
         
         temp_context.link_activity(death_event)
         person.add_activity(death_event)
