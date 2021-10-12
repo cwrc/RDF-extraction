@@ -371,18 +371,6 @@ class Context(object):
             g.add((identifying_uri,utilities.NS_DICT["crm"].P129_is_about, x.uri))
             g.add((x.uri,utilities.NS_DICT["crm"].P129i_is_subject_of, identifying_uri))
 
-
-        # Creating the mentioned people as natural person
-        generic_names = ["father", "mother", "sibling", "brother", "sister", "friend"]
-
-        for x in self.tag.find_all("NAME"):
-            uri = utilities.make_standard_uri(x.get("STANDARD"))
-            g.add((uri, RDF.type, utilities.NS_DICT["crm"].E21_Person))
-            g.add((uri, RDFS.label, Literal(x.get("STANDARD"))))
-            altname = x.get_text()
-            if x.get("STANDARD") != altname and altname not in generic_names:
-                g.add((uri, utilities.NS_DICT["skos"].altlabel, Literal(altname)))
-
         return g
 
     def __str__(self):
