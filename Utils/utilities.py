@@ -563,11 +563,16 @@ def get_file_dict(script, args, testcase_data, testcases_available):
     filelist = []
     descriptors = []
 
-    if args.random:
-        import random
+    if args.random or args.first or args.last:
         filelist = [directory +
-                    filename for filename in sorted(os.listdir(directory)) if filename.endswith(".xml")]
-        filelist = random.sample(filelist, args.random)
+                    filename for filename in sorted(os.listdir(directory)) if filename.endswith(file_ending)]
+        if args.random:
+            import random
+            filelist = random.sample(filelist, args.random)
+        elif args.first:
+            filelist = filelist[:args.first]
+        elif args.last:
+            filelist = filelist[-args.last:]
         descriptors = ["Testing on " + filename + " from " + directory for filename in filelist]
         print("Running extraction on", args.random, "random Orlando file(s)")
     elif args.file:
@@ -581,7 +586,7 @@ def get_file_dict(script, args, testcase_data, testcases_available):
     elif args.directory:
         if args.directory[-1] != "/":
             args.directory += "/"
-        filenames = [filename for filename in sorted(os.listdir(args.directory)) if filename.endswith(".xml")]
+        filenames = [filename for filename in sorted(os.listdir(args.directory)) if filename.endswith(file_ending)]
         filelist = [args.directory + filename for filename in filenames]
         descriptors = ["Testing on " + filename + " from " + args.directory for filename in filenames]
         print("Running extraction on files within" + args.directory)
@@ -613,7 +618,7 @@ def get_file_dict(script, args, testcase_data, testcases_available):
     else:
         print("Running extraction on default folder: " + directory)
         filelist = [directory +
-                    filename for filename in sorted(os.listdir(directory)) if filename.endswith(".xml")]
+                    filename for filename in sorted(os.listdir(directory)) if filename.endswith(file_ending)]
         descriptors = ["Testing on " + filename + " from " + directory for filename in filelist]
 
     # TODO: clean this maybe using any operator
@@ -699,6 +704,10 @@ def parse_args(script, info_type, logger=None):
     modes.add_argument("-d", "-directory", "--directory", help="directory of files to run extraction upon")
     modes.add_argument("-r", "-random", "--random", nargs='?', const=1, type=int,
                        help="chooses {RANDOM} random file(s) to run extraction upon")
+    modes.add_argument("-l", "-last", "--last", nargs='?', const=1, type=int,
+                       help="chooses {last} file(s) to run extraction upon, ex. the last 20 files")
+    modes.add_argument("-fi", "-first", "--first", nargs='?', const=1, type=int,
+                       help="chooses {first} file(s) to run extraction upon, ex. the first 20 files")
 
     parser.add_argument("-v", "--verbosity", default=1, type=int, choices=[0, 1, 2, 3],
                         help="increase output verbosity")
