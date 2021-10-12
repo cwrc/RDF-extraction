@@ -219,6 +219,25 @@ class Biography(object):
         g.add((self.uri, RDFS.label, Literal(self.std_name)))
         g.add((self.uri, utilities.NS_DICT["skos"].altLabel, Literal(self.name)))
 
+
+        generic_names = ["husband","wife","partner" ,"father", "daughter","essay", "son","he","she","they","her","him","them", "sisters","the",  "mother", "sibling", "brother", "sister", "friend"]
+
+        for x in self.document.find_all("NAME"):
+            uri = x.get("REF")
+            if not uri:
+                uri = utilities.make_standard_uri(x.get("STANDARD"))
+            else: 
+                uri = rdflib.term.URIRef(uri)
+            
+            g.add((uri, RDF.type, utilities.NS_DICT["crm"].E21_Person))
+            std_name = x.get("STANDARD")
+            g.add((uri, RDFS.label, Literal(std_name)))
+            altname = x.get_text()
+            if altname and std_name != altname and altname not in generic_names:
+                g.add((uri, utilities.NS_DICT["skos"].altlabel, Literal(altname)))
+
+
+
         return g
 
     def to_file(self, graph=None, serialization="ttl"):
