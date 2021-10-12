@@ -89,12 +89,14 @@ class Biography(object):
     def __init__(self, id, doc):
         super(Biography, self).__init__()
         self.id = id
+        self.document = doc
         self.url = "http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id=" + id
         self.url = rdflib.term.URIRef(self.url)
         self.name = utilities.get_readable_name(doc)
         self.std_name = utilities.get_name(doc)
-        self.uri = utilities.make_standard_uri(self.std_name)
-        self.document = doc
+
+        self.uri =  self.document.ENTRY.DIV0.STANDARD.get("REF")
+        self.uri = rdflib.term.URIRef(self.uri)
         
         # TODO: Review names and people extraction for more precision
         self.biographers = [
