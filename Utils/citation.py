@@ -34,12 +34,12 @@ class Citation(object):
 
         g.add((uri, RDF.type, utilities.NS_DICT["crm"].E33_Linguistic_Object))
         g.add((uri, RDFS.label, Literal(self.label)))
-
         g.add((uri, utilities.NS_DICT["crm"].P67i_is_referred_to_by, citing_uri))
 
         if source_url:
             g.add((source_url, RDF.type, utilities.NS_DICT["dig"].D1_Digital_Object))
             g.add((source_url, utilities.NS_DICT["crm"].P67_refers_to, citing_uri))
+            g.add((uri, RDFS.label, Literal(source_url.split("=")[-1])))
 
         return g
 
