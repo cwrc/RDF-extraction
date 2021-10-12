@@ -81,7 +81,7 @@ def extract_birth_data(bio, person):
             attributes = {utilities.NS_DICT["crm"].P141_assigned: birth_positions}
             attributes[utilities.NS_DICT["crm"].P2_has_type] = [utilities.create_uri("cwrc","birthPosition")]
             activity_id = activity_id.replace("1","2")
-            birth_position_event = Activity(person, "Birth Related Event", activity_id, birth_tag, activity_type="attribute", attributes=attributes)
+            birth_position_event = Activity(person, "Birth Related Event", activity_id, birth_tag, activity_type="attribute", attributes=attributes,related_activity=birth_event.uri)
             temp_context.link_activity(birth_position_event)
             person.add_activity(birth_position_event)
 

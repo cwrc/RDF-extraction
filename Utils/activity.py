@@ -9,7 +9,7 @@ def get_participants(tag):
     """ Returns participants within an event (any name/org mentioned)"""
     participants = []
     for x in tag.find_all("NAME"):
-        participants.append(utilities.make_standard_uri(x.get("STANDARD")))
+        participants.append(utilities.get_name_uri(x))
     for x in tag.find_all("ORGNAME"):
         participants.append(organizations.get_org_uri(x))
     return participants
@@ -135,14 +135,14 @@ class Activity(object):
 
         
 
-    def __init__(self, person, title, id, tag, activity_type="generic", attributes={}):
+    def __init__(self, person, title, id, tag, activity_type="generic", attributes={},related_activity=None):
         super(Activity, self).__init__()
         self.title = title
         self.tag = tag
         self.id = id
         self.uri = utilities.create_uri("data", id)
         self.places = utilities.get_places(tag)
-        
+        self.related_activity = related_activity
 
         self.person = person
         # attributes = {predicate:[objects]}
@@ -277,6 +277,11 @@ class Activity(object):
 
         if "Activity" in str(self.activity_type):
             activity.add(utilities.NS_DICT["crm"].P14_carried_out_by, self.person.uri)
+
+        # consult if this property should be a list
+        if self.related_activity:
+            activity.add(utilities.NS_DICT["crm"].P140_assigned_attribute_to, self.related_activity)
+
 
         return g
 
