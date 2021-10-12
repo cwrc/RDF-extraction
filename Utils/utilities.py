@@ -245,8 +245,12 @@ def limit_to_full_sentences(string, max):
 
 
 def get_name_uri(tag):
-    """Creates a uri based on the standard attribute of a tag"""
-    return make_standard_uri(tag.get("STANDARD"))
+    """Creates a uri based on the standard attribute of a tag if ref attribute not present"""
+    uri = tag.get("REF")
+    if not uri:
+        return make_standard_uri(tag.get("STANDARD"))
+    else:
+        return rdflib.term.URIRef(uri)
 
 
 def make_standard_uri(std_str, ns="data"):
