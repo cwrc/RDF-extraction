@@ -37,173 +37,11 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix crm: <http://www.cidoc-crm.org/cidoc-crm/> .
 
-cwrc:Abbey_School_ORG a crm:E74_Group;
-    crm:P2_has_type cwrc:EducationalOrganization ;
-    rdfs:label "Abbey School" .
-
-cwrc:Anglican_ORG a crm:E74_Group;
-    crm:P2_has_type org:Organization ;
-    rdfs:label "Anglican" ;
-    skos:altLabel "Anglican Church" .
-
-cwrc:Annie_Wright_Episcopal_Boarding_School_ORG a crm:E74_Group;
-    crm:P2_has_type cwrc:EducationalOrganization ;
-    rdfs:label "Annie Wright Episcopal Boarding School" .
-
-cwrc:Birkbeck_College_London_University_ORG a crm:E74_Group;
-    crm:P2_has_type cwrc:EducationalOrganization ;
-    rdfs:label "Birkbeck College,, London University" ;
-    skos:altLabel "Birkbeck College" .
-
-cwrc:Canterbury_College_School_of_Art_ORG a crm:E74_Group;
-    crm:P2_has_type cwrc:EducationalOrganization ;
-    rdfs:label "Canterbury College School of Art" .
-
-cwrc:Catholic_ORG a crm:E74_Group;
-    crm:P2_has_type org:Organization ;
-    rdfs:label "Catholic" ;
-    skos:altLabel "Roman Catholic Church" .
-
-cwrc:Church_of_England_ORG a crm:E74_Group;
-    crm:P2_has_type org:Organization ;
-    rdfs:label "Church of England" ;
-    skos:altLabel "Anglican Church" .
-
-cwrc:Congregational_ORG a crm:E74_Group;
-    crm:P2_has_type org:Organization ;
-    rdfs:label "Congregational" ;
-    skos:altLabel "Congregational Church" .
-
-cwrc:Elizabeth_Garrett_Anderson_ORG a crm:E74_Group;
-    crm:P2_has_type cwrc:EducationalOrganization ;
-    rdfs:label "Elizabeth Garrett Anderson" ;
-    skos:altLabel "Elizabeth Garrett Anderson School" .
-
-cwrc:Eltham_Hill_Girls_Grammar_School_ORG a crm:E74_Group;
-    crm:P2_has_type cwrc:EducationalOrganization ;
-    rdfs:label "Eltham Hill Girls' Grammar School" .
-
-cwrc:Forest_Ridge_Highschool_of_the_Sacred_Heart_ORG a crm:E74_Group;
-    crm:P2_has_type cwrc:EducationalOrganization ;
-    rdfs:label "Forest Ridge Highschool of the Sacred Heart" ;
-    skos:altLabel "Forest Ridge Highschool of the Sacred Heart" .
-
-cwrc:Georgia_College_ORG a crm:E74_Group;
-    crm:P2_has_type cwrc:EducationalOrganization ;
-    rdfs:label "Georgia College" .
-
-cwrc:Georgia_State_College_for_Women_ORG a crm:E74_Group;
-    crm:P2_has_type cwrc:EducationalOrganization ;
-    rdfs:label "Georgia State College for Women" .
-
-cwrc:Goldsmiths_College_London_University_ORG a crm:E74_Group;
-    crm:P2_has_type cwrc:EducationalOrganization ;
-    rdfs:label "Goldsmiths' College,, London University" ;
-    skos:altLabel "Goldmiths' College, University of London" .
-
-cwrc:Hochschule_fur_Musik_Berlin_ORG a crm:E74_Group;
-    crm:P2_has_type cwrc:EducationalOrganization ;
-    rdfs:label "Hochschule für Musik,, Berlin" ;
-    skos:altLabel "Hochschule für Musik" .
-
-cwrc:Independent_ORG a crm:E74_Group;
-    crm:P2_has_type org:Organization ;
-    rdfs:label "Independent" ;
-    skos:altLabel "Independent Church" .
-
-cwrc:Inverness_High_School_ORG a crm:E74_Group;
-    crm:P2_has_type cwrc:EducationalOrganization ;
-    rdfs:label "Inverness High School" .
-
-cwrc:Inverness_Royal_Academy_ORG a crm:E74_Group;
-    crm:P2_has_type cwrc:EducationalOrganization ;
-    rdfs:label "Inverness Royal Academy" .
-
-cwrc:Kings_College_London_University_ORG a crm:E74_Group;
-    crm:P2_has_type cwrc:EducationalOrganization ;
-    rdfs:label "King's College,, London University" ;
-    skos:altLabel "King's College, University of London" .
-
-cwrc:London_School_of_Economics_and_Political_Science_University_of_London_ORG a crm:E74_Group;
-    crm:P2_has_type cwrc:EducationalOrganization ;
-    rdfs:label "London School of Economics and Political Science,, University of London" ;
-    skos:altLabel "LSE",
-        "London School of Economics",
-        "London School of Sociology and Social Economics" .
-
-cwrc:Ozenfant_Academy_of_Fine_Art_ORG a crm:E74_Group;
-    crm:P2_has_type cwrc:EducationalOrganization ;
-    rdfs:label "Ozenfant Academy of Fine Art" .
-
-cwrc:Protestant_ORG a crm:E74_Group;
-    crm:P2_has_type org:Organization ;
-    rdfs:label "Protestant" ;
-    skos:altLabel "Protestant Church" .
-
-cwrc:Radcliffe_Infirmary_ORG a crm:E74_Group;
-    crm:P2_has_type cwrc:EducationalOrganization .
-
-cwrc:Radcliffe_Infirmary_Oxford_ORG a crm:E74_Group;
-    crm:P2_has_type org:Organization ;
-    rdfs:label "Radcliffe Infirmary, Oxford" ;
-    skos:altLabel "Radcliffe Infirmary" .
-
-cwrc:Roman_Catholic_ORG a crm:E74_Group;
-    crm:P2_has_type org:Organization ;
-    rdfs:label "Roman Catholic" ;
-    skos:altLabel "Roman Catholic Church" .
-
-cwrc:Rose_Bruford_College_ORG a crm:E74_Group;
-    crm:P2_has_type cwrc:EducationalOrganization ;
-    rdfs:label "Rose Bruford College" ;
-    skos:altLabel "Rose Bruford College of Speech and Drama" .
-
-cwrc:Royal_College_of_Art_ORG a crm:E74_Group;
-    crm:P2_has_type cwrc:EducationalOrganization .
-
-cwrc:South_Hampstead_High_School_ORG a crm:E74_Group;
-    crm:P2_has_type cwrc:EducationalOrganization ;
-    rdfs:label "South Hampstead High School" ;
-    skos:altLabel "South Hampstead School for Girls" .
-
-cwrc:South_Kensington_School_of_Art_ORG a crm:E74_Group;
-    crm:P2_has_type org:Organization ;
-    rdfs:label "South Kensington School of Art" ;
-    skos:altLabel "Royal College of Art" .
-
-cwrc:St_Andrews_University_ORG a crm:E74_Group;
-    crm:P2_has_type org:Organization ;
-    rdfs:label "St Andrews University" ;
-    skos:altLabel "University of St Andrews" .
-
-cwrc:St_Georges_ORG a crm:E74_Group;
-    crm:P2_has_type cwrc:EducationalOrganization ;
-    rdfs:label "St George's" .
-
-cwrc:St_Margarets_College_Christchurch_ORG a crm:E74_Group;
-    crm:P2_has_type cwrc:EducationalOrganization ;
-    rdfs:label "St Margaret's College,, Christchurch" ;
-    skos:altLabel "St Margaret's College" .
-
-cwrc:St_Marys_Ascot_ORG a crm:E74_Group;
-    crm:P2_has_type cwrc:EducationalOrganization ;
-    rdfs:label "St Mary's, Ascot" ;
-    skos:altLabel "St Mary's Convent,, Ascot" .
-
-cwrc:University_of_St_Andrews_ORG a crm:E74_Group;
-    crm:P2_has_type cwrc:EducationalOrganization .
-
-cwrc:Ursuline_Convent_School_ORG a crm:E74_Group;
-    crm:P2_has_type cwrc:EducationalOrganization ;
-    rdfs:label "Ursuline Convent School" ;
-    skos:altLabel "Ursuline Convent School,, Cork" .
-
 cwrc:aidsActivism cwrc:hasOrganization <https://commons.cwrc.ca/orlando:773fa2c8-d9cc-4137-b476-cde24a70d62b> .
 
 cwrc:americanNationalism cwrc:hasOrganization <https://commons.cwrc.ca/orlando:2df7095e-04e3-46ea-b934-bcba7bba2d8a> .
 
-cwrc:anglicanism cwrc:hasOrganization cwrc:Anglican_Church_ORG,
-        <https://commons.cwrc.ca/orlando:01db7e05-b55a-44c6-94bb-cbf6286abd18>,
+cwrc:anglicanism cwrc:hasOrganization <https://commons.cwrc.ca/orlando:01db7e05-b55a-44c6-94bb-cbf6286abd18>,
         <https://commons.cwrc.ca/orlando:89cb4c5e-ac6e-42aa-a70f-abb543c33fd8> .
 
 cwrc:animalWelfareAdvocacy cwrc:hasOrganization <https://commons.cwrc.ca/orlando:05a7e7fe-4fc9-4baa-a014-d2b50b9ecda2>,
@@ -236,8 +74,7 @@ cwrc:baptistChristianity cwrc:hasOrganization <https://commons.cwrc.ca/orlando:e
 
 cwrc:blackAnti-Oppression cwrc:hasOrganization <https://commons.cwrc.ca/orlando:5eb8fc5f-e3b2-4c55-8bce-b00f1e66f526> .
 
-cwrc:catholicism cwrc:hasOrganization cwrc:Roman_Catholic_Church_ORG,
-        <https://commons.cwrc.ca/orlando:b07fb274-d35b-49ec-b79c-ade8a6545ab1> .
+cwrc:catholicism cwrc:hasOrganization <https://commons.cwrc.ca/orlando:b07fb274-d35b-49ec-b79c-ade8a6545ab1> .
 
 cwrc:childrensWelfare cwrc:hasOrganization <https://commons.cwrc.ca/orlando:c1d74c19-58b5-4de0-a2ad-5f78b254e82b>,
         <https://commons.cwrc.ca/orlando:cee49f24-5245-4949-a120-9912696f5da7> .
@@ -253,9 +90,7 @@ cwrc:civilRights cwrc:hasOrganization <https://commons.cwrc.ca/orlando:345a56e0-
 cwrc:communism cwrc:hasOrganization <https://commons.cwrc.ca/orlando:142305aa-eef6-4b89-9cf8-171398c1b128>,
         <https://commons.cwrc.ca/orlando:af0b96f0-d004-425d-82f0-2b204e0dc884> .
 
-cwrc:congregationalism cwrc:hasOrganization cwrc:Congregational_Church_ORG,
-        cwrc:Independent_Church_ORG,
-        <https://commons.cwrc.ca/orlando:d0da96c2-1744-4206-9357-4a4c7158f47f>,
+cwrc:congregationalism cwrc:hasOrganization <https://commons.cwrc.ca/orlando:d0da96c2-1744-4206-9357-4a4c7158f47f>,
         <https://commons.cwrc.ca/orlando:fbd30f98-311d-441c-b85a-869dced5cf94> .
 
 cwrc:conservatism cwrc:hasOrganization <https://commons.cwrc.ca/orlando:7dd3305c-6a4f-487b-bdf5-94c2cdfbedb7> .
@@ -326,8 +161,7 @@ cwrc:jansenism cwrc:hasOrganization <https://commons.cwrc.ca/orlando:9290d017-4e
 cwrc:judaism cwrc:hasOrganization <https://commons.cwrc.ca/orlando:4d5516ba-1975-4595-a406-8b6ac1e790ae>,
         <https://commons.cwrc.ca/orlando:965f2810-fbad-4c73-bea8-834104c9b975> .
 
-cwrc:labourMovement cwrc:hasOrganization cwrc:Womens_Labour_League_ORG,
-        <https://commons.cwrc.ca/orlando:04acd7f8-0656-4ad3-b2a3-ded97644a6f4>,
+cwrc:labourMovement cwrc:hasOrganization <https://commons.cwrc.ca/orlando:04acd7f8-0656-4ad3-b2a3-ded97644a6f4>,
         <https://commons.cwrc.ca/orlando:15249c66-068f-4a60-9239-81310ad396f3>,
         <https://commons.cwrc.ca/orlando:e82ca682-0de7-4c9e-a3c2-9b941c5c028c>,
         <https://commons.cwrc.ca/orlando:e986d59c-47cf-455f-8105-fe37f06ec73f> .
@@ -367,8 +201,7 @@ cwrc:pro-Catholicism cwrc:hasOrganization <https://commons.cwrc.ca/orlando:b07fb
 cwrc:propertyLawReform cwrc:hasOrganization <https://commons.cwrc.ca/orlando:7473c43b-f6a5-4da1-a35e-b4b11996e047>,
         <https://commons.cwrc.ca/orlando:f27b7618-97a5-4233-b90e-89d72bde1c34> .
 
-cwrc:protestantism cwrc:hasOrganization cwrc:Protestant_Church_ORG,
-        <https://commons.cwrc.ca/orlando:01db7e05-b55a-44c6-94bb-cbf6286abd18>,
+cwrc:protestantism cwrc:hasOrganization <https://commons.cwrc.ca/orlando:01db7e05-b55a-44c6-94bb-cbf6286abd18>,
         <https://commons.cwrc.ca/orlando:1c09f802-3966-4b77-b86c-3882703227d8> .
 
 cwrc:puritanism cwrc:hasOrganization <https://commons.cwrc.ca/orlando:343948d9-3994-414d-b309-1edee8e29c87> .
@@ -397,8 +230,7 @@ cwrc:socialism cwrc:hasOrganization <https://commons.cwrc.ca/orlando:00c70444-b3
 
 cwrc:societyOfFriends cwrc:hasOrganization <https://commons.cwrc.ca/orlando:1776f32b-ecac-4b49-a366-2fa64b72b497> .
 
-cwrc:suffrage cwrc:hasOrganization cwrc:New_England_Woman_Suffrage_Association_ORG,
-        <https://commons.cwrc.ca/orlando:259f26aa-6150-4351-a96a-0a02685aa758>,
+cwrc:suffrage cwrc:hasOrganization <https://commons.cwrc.ca/orlando:259f26aa-6150-4351-a96a-0a02685aa758>,
         <https://commons.cwrc.ca/orlando:41509eb0-b175-4a51-b49b-99006ebdd9f7>,
         <https://commons.cwrc.ca/orlando:7dc3a4d5-cd3d-4df4-b1a2-bf85a4d19211>,
         <https://commons.cwrc.ca/orlando:a318d154-9d81-4076-9483-c71e492120e2>,
@@ -415,12 +247,10 @@ cwrc:taxResistance cwrc:hasOrganization <https://commons.cwrc.ca/orlando:e0b5464
 
 cwrc:tractarianMovement cwrc:hasOrganization <https://commons.cwrc.ca/orlando:cf97cb73-31a4-425b-a871-cf6858c449dd> .
 
-cwrc:tradeUnionism cwrc:hasOrganization cwrc:Lancashire_and_Cheshire_Women_Textile_and_Other_Workers_Representation_Committee_ORG,
-        <https://commons.cwrc.ca/orlando:195dfe49-09fc-495d-bc77-c2d34c3586d5>,
+cwrc:tradeUnionism cwrc:hasOrganization <https://commons.cwrc.ca/orlando:195dfe49-09fc-495d-bc77-c2d34c3586d5>,
         <https://commons.cwrc.ca/orlando:1d5ccf8e-bce0-4a32-ad9e-6ab646e4d85c> .
 
-cwrc:unitarianism cwrc:hasOrganization cwrc:Unitarian_ORG,
-        <https://commons.cwrc.ca/orlando:61d32740-6a34-4d60-bf91-d464e0793548> .
+cwrc:unitarianism cwrc:hasOrganization <https://commons.cwrc.ca/orlando:61d32740-6a34-4d60-bf91-d464e0793548> .
 
 cwrc:universalist cwrc:hasOrganization <https://commons.cwrc.ca/orlando:4956c0cf-1066-46cf-bb44-a1cdb30ae433> .
 
@@ -36256,37 +36086,6 @@ crm:P2_has_type cwrc:PoliticalOrganization ;
 <https://commons.cwrc.ca/orlando:fffe3d01-5a74-461f-ba46-34e4e0ebbafe> a crm:E74_Group;
     crm:P2_has_type org:Organization ;
     rdfs:label "Whiteley's" .
-
-cwrc:Anglican_Church_ORG a crm:E74_Group; 
-    crm:P2_has_type cwrc:ReligiousOrganization .
-
-cwrc:Congregational_Church_ORG a crm:E74_Group; 
-    crm:P2_has_type cwrc:ReligiousOrganization .
-
-cwrc:Independent_Church_ORG a crm:E74_Group; 
-    crm:P2_has_type cwrc:ReligiousOrganization .
-
-cwrc:Lancashire_and_Cheshire_Women_Textile_and_Other_Workers_Representation_Committee_ORG a crm:E74_Group; 
-crm:P2_has_type cwrc:PoliticalOrganization ;
-    rdfs:label "Lancashire and Cheshire Women Textile and Other Workers' Representation Committee" .
-
-cwrc:New_England_Woman_Suffrage_Association_ORG a crm:E74_Group; 
-crm:P2_has_type cwrc:PoliticalOrganization ;
-    rdfs:label "New England Woman Suffrage Association" .
-
-cwrc:Protestant_Church_ORG a crm:E74_Group; 
-    crm:P2_has_type cwrc:ReligiousOrganization .
-
-cwrc:Roman_Catholic_Church_ORG a crm:E74_Group; 
-    crm:P2_has_type cwrc:ReligiousOrganization .
-
-cwrc:Unitarian_ORG a crm:E74_Group; 
-    crm:P2_has_type cwrc:ReligiousOrganization ;
-    rdfs:label "Unitarian" .
-
-cwrc:Womens_Labour_League_ORG a crm:E74_Group; 
-crm:P2_has_type cwrc:PoliticalOrganization ;
-    rdfs:label "Women's Labour League" .
 
 <https://commons.cwrc.ca/orlando:00c70444-b31e-4eb2-8569-5a58ddb5bc18> a crm:E74_Group; 
 crm:P2_has_type cwrc:PoliticalOrganization ;
