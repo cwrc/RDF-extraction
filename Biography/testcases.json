@@ -1,5 +1,5 @@
 {
-    "default directory": "../data/entry_2021_v2/",
+    "default directory": "../data/entry_2021-10-13/",
     "file ending": ".xml",
     "notes": {
         "to do": "scrape possible biographers"
@@ -39,7 +39,7 @@
             "askean": "birth: chronstruct w. date range",
             "bootfr": "birth: Has two dates in shortprose",
             "butls2": "birth: Daterange within shortprose",
-            "cuthca": "birth: birthposition & birthdate in a shortprose, no chronstruct",
+            "cuthca": "birth: birthposition (no attribute) & birthdate in a shortprose, no chronstruct",
             "scotsa": "birth: has two events in a birthtag(first birth, second christening)",
             "siddel": "birth: Elizabeth Siddal - has 3 events within death",
             "clerag": "death: Agnes Mary Clerke - Multiple Death tags",
