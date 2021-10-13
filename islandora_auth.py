@@ -91,7 +91,6 @@ def download_data(subset="all"):
             f = open(dir+"/"+file_id+".xml", "w")
             f.write(content)
             f.close()
-            input()
 
 def main(argv):            
     # Store the session for future requests.
