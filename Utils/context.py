@@ -314,7 +314,8 @@ class Context(object):
         g.add((identifying_uri, RDFS.label, Literal(context_label)))
         
         g.add((identifying_uri, utilities.NS_DICT["oa"].hasTarget, self.target_uri))
-
+        g.add((identifying_uri, utilities.NS_DICT["crm"].P67_refers_to, self.context_focus))
+        
         # Creating spatial context if place is mentioned
         identified_places = utilities.get_places(self.tag)
         if identified_places:
