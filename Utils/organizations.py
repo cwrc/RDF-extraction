@@ -60,14 +60,19 @@ class Organization(object):
 
 def get_org_uri(tag):
     global ORG_MAP
-    if tag.get("STANDARD") in org_list:
-        name = tag.get("STANDARD")
-    elif tag.get("REG") in org_list:
-        name = tag.get("REG")
+    std_name = tag.get("STANDARD")
+    uri = tag.get("REF")
+    if uri:
+        uri = rdflib.term.URIRef(uri)
     else:
-        name = tag.get("STANDARD")
-
-    uri = utilities.make_standard_uri(name + " ORG", ns="cwrc")
+        if std_name in org_list:
+            name = std_name
+        elif tag.get("REG") in org_list:
+            name = tag.get("REG")
+        else:
+            name = std_name
+        uri = utilities.make_standard_uri(name + " ORG", ns="cwrc")
+    
     if str(uri) in ORG_MAP:
         ORG_MAP[str(uri)] += 1
     else:
