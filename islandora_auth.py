@@ -61,6 +61,7 @@ def download_data(subset="all"):
                 print(count, "/", total, ": ", x)
                 count += 1
                 file_id = x.split(":")[1]
+                
                 content = get_file_with_format(x, datastream)
                 f = open(dir+"/"+file_id+".xml", "w")
                 f.write(content)
@@ -90,11 +91,12 @@ def download_data(subset="all"):
             f = open(dir+"/"+file_id+".xml", "w")
             f.write(content)
             f.close()
+            input()
 
 def main(argv):            
     # Store the session for future requests.
     login({"username": argv[0], "password": argv[1]})
-    download_data()
+    download_data("entry")
 
 
 def get_document_ids(collection_id):
@@ -113,6 +115,7 @@ def get_file_description(uuid,json=True):
 
 def get_file_with_format(uuid, format):
     res = session.get('https://cwrc.ca/islandora/rest/v1/object/' + uuid + '/datastream/' + format)
+    res.encoding = "utf-8"
     return res.text
 
 
