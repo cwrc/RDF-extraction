@@ -262,10 +262,8 @@ class Activity(object):
                     connection.add(utilities.NS_DICT["crm"].P16_used_specific_object, obj)
 
         else:
-            print(self.attributes)
             for pred in self.attributes:
                 for obj in self.attributes[pred]:
-                    print(pred, obj)
                     activity.add(pred, obj)
         
         if connection:

@@ -11,7 +11,6 @@ class Citation(object):
     def __init__(self, bibcit_tag):
         super(Citation, self).__init__()
         self.tag = bibcit_tag
-        print(self.tag)
         self.page = bibcit_tag.text
         self.label = bibcit_tag.get("PLACEHOLDER")
         self.citing_entity = bibcit_tag.get("DBREF")

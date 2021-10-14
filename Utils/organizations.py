@@ -87,11 +87,10 @@ def log_mapping(detail=True):
     new_dict = OrderedDict(sorted(ORG_MAP.items(), key=lambda t: t[1], reverse=True))
     count = 0
     for y in new_dict.keys():
-        log_str += "\t\t" + str(new_dict[y]) + ": " + y.split("#")[1] + "\n"
+        log_str += "\t\t" + str(new_dict[y]) + ": " + y.split("#")[0] + "\n"
         count += new_dict[y]
     log_str += "\tTotal Organizations: " + str(count) + "\n\n"
 
-    print(log_str)
     logger.info(log_str)
 
 

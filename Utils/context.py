@@ -164,9 +164,7 @@ class Context(object):
             self.identifying_uri = utilities.create_uri("data", self.id + "_identifying")
             self.xpath = get_xpath(tag)
             bibcits = tag.find_all("BIBCIT")
-            print(bibcits)
             self.citations = [Citation(x) for x in bibcits]
-
 
             self.heading = get_heading(tag)
             self.src = "http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id="

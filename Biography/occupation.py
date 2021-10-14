@@ -211,7 +211,6 @@ def log_mapping_fails(detail=True):
             count += new_dict[y]
         log_str += "\tTotal missed occupation: " + str(count) + "\n\n"
 
-        print(log_str)
         logger.info(log_str)
 
 

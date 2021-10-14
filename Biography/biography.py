@@ -73,7 +73,6 @@ def get_parent_context(tag,):
 def get_name_context(doc):
     uri_map = {}
     for x in doc.find_all("NAME"):
-        print(x)
         uri = utilities.get_name_uri(x)
         if uri in uri_map:
             uri_map[uri].append(get_parent_context(x))
@@ -238,9 +237,6 @@ class Biography(object):
             altname = x.get_text()
             if altname and std_name != altname and altname not in generic_names:
                 g.add((uri, utilities.NS_DICT["skos"].altlabel, Literal(altname)))
-
-
-
         return g
 
     def to_file(self, graph=None, serialization="ttl"):
