@@ -3,7 +3,7 @@ from typing import List
 import rdflib
 from rdflib import RDF, RDFS, Literal
 from Utils import utilities
-from Utils.context import Context
+from Utils.context import Context, get_event_type
 from Utils.place import Place
 from Utils.event import get_date_tag, Event, format_date
 from Utils.activity import Activity 
@@ -54,7 +54,6 @@ def get_birth_position(tag):
     return birth_positions
 
 def extract_birth_data(bio, person):
-    birth_events = []
     context_count = 1
 
     birth_tags = bio.find_all("BIRTH")
@@ -82,6 +81,7 @@ def extract_birth_data(bio, person):
             attributes[utilities.NS_DICT["crm"].P2_has_type] = [utilities.create_uri("cwrc","birthPosition")]
             activity_id = activity_id.replace("1","2")
             birth_position_event = Activity(person, "Birth Related Event", activity_id, birth_tag, activity_type="attribute", attributes=attributes,related_activity=birth_event.uri)
+            birth_position_event.event_type.append(utilities.create_cwrc_uri(get_event_type("BIRTH")))
             temp_context.link_activity(birth_position_event)
             person.add_activity(birth_position_event)
 
@@ -125,7 +125,7 @@ def extract_death_data(bio, person):
                     temp_context2 = Context(context_id2, shortprose, "DEATH", pattern="death")
                     activity_id2 = context_id2.replace("Context","Event")
                     burial_event = Activity(person, "Burial Event", activity_id2, shortprose, activity_type="generic")
-
+                    burial_event.event_type.append(utilities.create_cwrc_uri(get_event_type("DEATH")))
                     temp_context2.link_activity(burial_event)
                     person.add_activity(burial_event)
                     person.add_context(temp_context2)

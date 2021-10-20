@@ -237,7 +237,8 @@ def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
     """
     global context_count
     global event_count
-    CONTEXT_TYPE = get_context_type("OCCUPATION")
+    tag_name = "OCCUPATION"
+    CONTEXT_TYPE = get_context_type(tag_name)
 
     for tag in tag_list:
         temp_context = None
@@ -248,7 +249,7 @@ def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
         attributes = get_attributes(occupation_list)
   
         if occupation_list:
-            temp_context = Context(context_id, tag, "OCCUPATION", pattern="occupation")
+            temp_context = Context(context_id, tag, tag_name, pattern="occupation")
             event_count = 1
             participants = None
             if rdflib.term.URIRef('http://sparql.cwrc.ca/ontologies/cwrc#employment') in attributes:
@@ -261,6 +262,8 @@ def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
                 activity_id = context_id.replace("Context","Event") + "_"+ str(event_count)
                 label = f"Occupation Event: {utilities.split_by_casing(str(x).split('#')[1]).lower()}"
                 activity = Activity(person, label, activity_id, tag, activity_type="generic", attributes=temp_attr)
+                activity.event_type.append(utilities.create_cwrc_uri(get_event_type(tag_name)))
+
                 if participants:
                     activity.participants = participants
                 temp_context.link_activity(activity)
@@ -268,7 +271,7 @@ def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
                 event_count+=1
             
         else:
-            temp_context = Context(context_id, tag, "OCCUPATION", "identifying")
+            temp_context = Context(context_id, tag, tag_name, "identifying")
         
         person.add_context(temp_context)
 
