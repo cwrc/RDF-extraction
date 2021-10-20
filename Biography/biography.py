@@ -236,7 +236,7 @@ class Biography(object):
             g.add((uri, RDFS.label, Literal(std_name)))
             altname = x.get_text()
             if altname and std_name != altname and altname not in generic_names:
-                g.add((uri, utilities.NS_DICT["skos"].altlabel, Literal(altname)))
+                g.add((uri, utilities.NS_DICT["skos"].altLabel, Literal(altname)))
         return g
 
     def to_file(self, graph=None, serialization="ttl"):
