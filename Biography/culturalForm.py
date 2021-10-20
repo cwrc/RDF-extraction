@@ -366,13 +366,11 @@ def extract_culturalforms(tag_list, context_type, person, list_type="paragraphs"
             count = 0
             temp_context = Context(context_id, tag, context_type,pattern="culturalform")
             for x in attributes.keys():
-                # temp_attr = {temp_context.context_type:attributes[x]}
                 temp_attr = {x:attributes[x]}
-            
                 activity_id = context_id.replace("Context","Event") + "_"+ str(count)
                 label = f"{utilities.split_by_casing(CONTEXT_TYPE)}Event: {utilities.split_by_casing(str(x).split('#')[1]).lower()}".replace("Context", "")
                 activity = Activity(person, label, activity_id, tag, activity_type="culturalform", attributes=temp_attr)
-                activity.event_type.append(utilities.create_cwrc_uri(get_event_type(x)))
+                activity.event_type.append(utilities.create_cwrc_uri(CONTEXT_TYPE))
                 temp_context.link_activity(activity)
                 person.add_activity(activity)
                 count+=1
