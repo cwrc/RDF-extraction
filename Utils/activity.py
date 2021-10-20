@@ -194,7 +194,6 @@ class Activity(object):
 
     def to_triple(self, person=None):
         g = utilities.create_graph()
-        # Create two activities
         activity = g.resource(self.uri)
         activity_label = self.person.name +": "+  self.title
         connection = None
@@ -266,10 +265,7 @@ class Activity(object):
                 for obj in self.attributes[pred]:
                     activity.add(pred, obj)
         
-        if connection:
-            for x in self.participants:
-                connection.add(utilities.NS_DICT["crm"].P11_had_participant, x)
-        else:            
+        if not connection:          
             for x in self.participants:
                 activity.add(utilities.NS_DICT["crm"].P11_had_participant, x)
 
