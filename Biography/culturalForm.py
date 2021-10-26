@@ -486,6 +486,7 @@ def extract_gender_data(bio, person):
             activity_id = context_id.replace("Context","Event") + "_"+ str(count)
             label = f"Gender Event"
             activity = Activity(person, label, activity_id, parent_tag, activity_type="culturalform", attributes=temp_attr)
+            activity.event_type.append(utilities.create_cwrc_uri("GenderContext"))
             temp_context.link_activity(activity)
             person.add_activity(activity)
             count+=1

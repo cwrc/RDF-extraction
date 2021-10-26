@@ -207,7 +207,12 @@ class Activity(object):
             activity.add(utilities.NS_DICT["crm"].P141_assigned,connection)
             activity.add(utilities.NS_DICT["crm"].P140_assigned_attribute_to,self.person.uri)
             connection.add(RDFS.label, Literal(activity_label+" (connection)"))
-        
+            
+            if self.event_type:
+                event_type = self.event_type[0].replace("Context","Event")
+                connection.add(utilities.NS_DICT["crm"].P2_has_type, rdflib.term.URIRef(event_type))
+
+
         activity.add(RDFS.label, Literal(activity_label))
         
         if "Birth" in str(self.activity_type):
