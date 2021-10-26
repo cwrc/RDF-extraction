@@ -204,7 +204,7 @@ class Biography(object):
         g += self.create_triples(self.activity_list)
 
         for x in self.organizations:
-            g.add((self.uri, utilities.NS_DICT["crm"].P107_has_current_or_former_member, x))
+            g.add((x, utilities.NS_DICT["crm"].P107_has_current_or_former_member, self.uri))
 
         # g += self.create_triples(self.cohabitants_list)
         # g += self.create_triples(self.family_list)
