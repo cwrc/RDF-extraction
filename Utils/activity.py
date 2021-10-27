@@ -259,8 +259,8 @@ class Activity(object):
                     activity.add(utilities.NS_DICT["crm"].P2_has_type, obj)
         elif connection:
             for pred in self.attributes:
-                connection.add(utilities.NS_DICT["crm"].P2_has_type, pred)
                 if "Self" in pred:
+                    connection.add(utilities.NS_DICT["crm"].P2_has_type, pred)
                     activity.add(utilities.NS_DICT["crm"].P14_carried_out_by, self.person.uri)
                 for obj in self.attributes[pred]:
                     connection.add(utilities.NS_DICT["crm"].P16_used_specific_object, obj)
