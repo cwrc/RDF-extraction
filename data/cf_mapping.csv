@@ -235,8 +235,8 @@ https://id.linscproject.ca/vocabularies/culturalForm#GeographicHeritage,https://
 https://id.linscproject.ca/vocabularies/culturalForm#GeographicHeritage,https://id.linscproject.ca/vocabularies/culturalForm#englishGeographicHeritage,England
 https://id.linscproject.ca/vocabularies/culturalForm#Gender,https://id.linscproject.ca/vocabularies/culturalForm#cisGender,cisgender
 https://id.linscproject.ca/vocabularies/culturalForm#Gender,https://id.linscproject.ca/vocabularies/culturalForm#cisWoman,cis woman/cis female
-https://id.linscproject.ca/vocabularies/culturalForm#Gender,https://id.linscproject.ca/vocabularies/culturalForm#GenderQueer,genderqueer
-https://id.linscproject.ca/vocabularies/culturalForm#Gender,https://id.linscproject.ca/vocabularies/culturalForm#transGender,transgender,transgendered
+https://id.linscproject.ca/vocabularies/culturalForm#Gender,https://id.linscproject.ca/vocabularies/culturalForm#GenderQueer,genderqueer,NONCONFORMING
+https://id.linscproject.ca/vocabularies/culturalForm#Gender,https://id.linscproject.ca/vocabularies/culturalForm#transGender,transgender,transgendered,TRANS
 https://id.linscproject.ca/vocabularies/culturalForm#Gender,https://id.linscproject.ca/vocabularies/culturalForm#woman,woman,female
 https://id.linscproject.ca/vocabularies/culturalForm#Gender,https://id.linscproject.ca/vocabularies/culturalForm#blackWomanRaceColour,blackwoman
 https://id.linscproject.ca/vocabularies/culturalForm#Gender,https://id.linscproject.ca/vocabularies/culturalForm#cisMan,cis man/cis male
@@ -248,7 +248,7 @@ https://id.linscproject.ca/vocabularies/culturalForm#Gender,https://id.linscproj
 https://id.linscproject.ca/vocabularies/culturalForm#Sexuality,https://id.linscproject.ca/vocabularies/culturalForm#frigidity,frigidity,frigid
 https://id.linscproject.ca/vocabularies/culturalForm#Sexuality,https://id.linscproject.ca/vocabularies/culturalForm#libertinism,libertinism,libertine
 https://id.linscproject.ca/vocabularies/culturalForm#Sexuality,https://id.linscproject.ca/vocabularies/culturalForm#asexuality,asexuality,asexual
-https://id.linscproject.ca/vocabularies/culturalForm#Sexuality,https://id.linscproject.ca/vocabularies/culturalForm#lesbian,lesbianism,lesbian
+https://id.linscproject.ca/vocabularies/culturalForm#Sexuality,https://id.linscproject.ca/vocabularies/culturalForm#lesbian,lesbianism,
 https://id.linscproject.ca/vocabularies/culturalForm#Sexuality,https://id.linscproject.ca/vocabularies/culturalForm#celibacy,celibacy,celibate
 https://id.linscproject.ca/vocabularies/culturalForm#Sexuality,https://id.linscproject.ca/vocabularies/culturalForm#promiscuity,promiscuity,promiscuous
 https://id.linscproject.ca/vocabularies/culturalForm#Sexuality,https://id.linscproject.ca/vocabularies/culturalForm#heterosexual,heterosexuality,heterosexual
