@@ -370,6 +370,7 @@ class BibliographyParse:
     related_item_map = {
         "host": FRBROO.R67i_forms_part_of,
         "constituent": FRBROO.R5i_is_component_of,
+        "iconstituent": FRBROO.R5_has_component,
         "isReferencedBy": CRM.P67i_is_referenced_by,
         # "original": BF.original,
         # "otherFormat": BF.otherPhysicalFormat,
@@ -833,8 +834,8 @@ class BibliographyParse:
             originInfo.add(RDF.type, FRBROO.F28_Expression_Creation)
             originInfo.add(RDFS.label, rdflib.Literal(F"activity statement of {self.mainTitle}"))
             if instance:
-                originInfo.add(FRBROO.R17, instance)
-            originInfo.add(FRBROO.R17, resource)
+                originInfo.add(FRBROO.R17_created, instance)
+            originInfo.add(FRBROO.R17_created, resource)
 
             j = 0
             for name in self.get_names():                
@@ -953,6 +954,7 @@ class BibliographyParse:
                     work.add(RDFS.label, rdflib.Literal(F"{part['type']} of {self.mainTitle}"))
                     if part["type"] == "constituent":
                         work.add(self.related_item_map[part['type']], resource)
+                        resource.add(self.related_item_map["i"+part['type']], work)
                     else:
                         resource.add(self.related_item_map[part['type']], work)
                     i += 1
