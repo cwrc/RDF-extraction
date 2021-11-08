@@ -398,6 +398,7 @@ class BibliographyParse:
 
         self.filename = filename
         self.g = graph
+        self.mainTitle = None
 
         # update this to use cwrc identifiers
         if ".xml" in resource_name:
@@ -549,8 +550,12 @@ class BibliographyParse:
                 name = np.attrs['standard']
             elif np.namePart:
                 name = np.namePart.get_text()
+            
+            uri = None
+            if "valueURI" in np.attrs:
+                uri = np.attrs["valueURI"]
 
-            names.append({"type": name_type, "role": role, "name": name})
+            names.append({"type": name_type, "role": role, "name": name, "uri":uri})
 
         return names
 
@@ -707,7 +712,7 @@ class BibliographyParse:
         g = self.g
 
         titles = self.get_title()
-        resource = g.resource(self.mainURI)
+        resource = g.resource(self.mainURI) # The Work
         
         if not part_type:
             resource.add(RDF.type, FRBROO.F1_Work)
@@ -723,13 +728,16 @@ class BibliographyParse:
             language_uri = F"http://id.loc.gov/vocabulary/languages/{lang['language']}"
             resource.add(CRM.P72_has_language, rdflib.URIRef(language_uri))
 
-
-        instance = g.resource(self.mainURI + "_instance")        
-        instance.add(RDF.type, FRBROO.F2_Expression)
-        instance.add(FRBROO.R3i_realises, resource)
+        instance = None
+        # The Expression
+        if not self.relatedItem:
+            instance = g.resource(self.mainURI + "_instance")        
+            instance.add(RDF.type, FRBROO.F2_Expression)
+            instance.add(FRBROO.R3i_realises, resource)
 
         # CIDOC: Creating titles
         i = 0
+        
         for item in titles:
             if 'usage' in item and item['usage'] is not None:
                 title_res = g.resource(F"{self.mainURI}_title_{i}")
@@ -738,19 +746,28 @@ class BibliographyParse:
 
 
                 if item['usage'] == 'alternative':
+                    title_res.add(RDFS.label,rdflib.Literal(F"alternative title of {self.mainTitle}"))
                     title_res.add(CRM.P2_has_type, BF.VariantTitle)
                 else:
                     title_res.add(CRM.P2_has_type, BF.Title)
+                    title_res.add(RDFS.label,rdflib.Literal("title"))
                     resource.add(RDFS.label,
                                  rdflib.Literal(item['title'].strip()))
+                    self.mainTitle = item['title'].strip()
 
-                instance.add(CRM.P102_has_title, title_res)
+                if instance:
+                    instance.add(CRM.P102_has_title, title_res)
+                    instance.add(RDFS.label, rdflib.Literal(F"expression of {self.mainTitle}"))
 
                 i += 1
 
         
         adminMetaData = g.resource(F"{self.mainURI}_admin_metadata")
         adminMetaData.add(RDF.type, CRM.E13_Attribute_Assignment)
+        adminMetaData.add(RDFS.label, rdflib.Literal( (F"admin metadata {'of'+ self.mainTitle}") if self.mainTitle else "admin metadata" ))
+
+        # adminMetaData.add(RDFS.label, rdflib.Literal(F"admin metadata of {self.mainTitle}"))
+        
 
         i = 0
         for r in self.get_record_content_source():
@@ -772,7 +789,7 @@ class BibliographyParse:
         for r in self.get_record_change_date():
             dateValue, transformed = dateParse(r['date'])
             time_span = g.resource(F"{self.mainURI}_time-span_{r_count}")
-            time_span.add(RDFS.label, rdflib.Literal("record change time-span"))
+            time_span.add(RDFS.label, rdflib.Literal(F"record change time-span of {self.mainTitle}"))
             time_span.add(RDF.type, CRM["E52_Time-Span"])
             time_span.add(CRM.P2_has_type, BF.changeDate)
             if not transformed:
@@ -789,6 +806,7 @@ class BibliographyParse:
         for r in self.get_record_origin():
             generation_process = g.resource(F"{self.mainURI}_generation_process_{i}")
             generation_process.add(RDF.type, CRM.E29_Design_or_Procedure)
+            generation_process.add(RDFS.label, rdflib.Literal(F"generation process of {self.mainTitle}"))
             generation_process.add(CRM.P2_has_type, BF.GenerationProcess)
             generation_process.add(RDFS.comment, rdflib.Literal(r['origin']))
 
@@ -808,20 +826,27 @@ class BibliographyParse:
         resource.add(CRM.P140i_was_attributed_by, adminMetaData)
 
         i = 0
-        #CIDOC: Creating publication event
+        #CIDOC: Creating publication event/expression creation
         for o in self.get_origins():
             
             originInfo = g.resource(F"{self.mainURI}_activity_statement_{i}")
             originInfo.add(RDF.type, FRBROO.F28_Expression_Creation)
-            print(self.mainURI)
+            originInfo.add(RDFS.label, rdflib.Literal(F"activity statement of {self.mainTitle}"))
+            if instance:
+                originInfo.add(FRBROO.R17, instance)
             originInfo.add(FRBROO.R17, resource)
 
             j = 0
             for name in self.get_names():                
                 # TODO: insert some tests surrounding names
-                temp_name = urllib.parse.quote_plus(
+                agent_resource = None
+                if "uri" in name:
+                    agent_resource=g.resource(name["uri"])
+                else:
+                    temp_name = urllib.parse.quote_plus(
                     remove_punctuation(name['name']))
-                agent_resource=g.resource(DATA[F"{temp_name}"])
+                    agent_resource=g.resource(DATA[F"{temp_name}"])
+                
                 agent_resource.add(RDFS.label, rdflib.Literal(name["name"]))
                                 
                 # TODO: revise these possibly to roles 
@@ -863,7 +888,7 @@ class BibliographyParse:
                 publisher.add(RDF.type, CRM.E39_Actor)
 
                 publisher_role = g.resource(F"{self.mainURI}_publisher_role_{i}")
-                publisher_role.add(RDFS.label, rdflib.Literal("publisher role"))
+                publisher_role.add(RDFS.label, rdflib.Literal(F"publisher role of {self.mainTitle}"))
 
                 publisher_role.add(RDF.type, CRMPC.PC14_carried_out_by)
                 publisher_role.add( CRMPC.P02_has_range, publisher.identifier)
@@ -872,23 +897,22 @@ class BibliographyParse:
                 originInfo.add(CRMPC.P01i_is_domain_of,publisher_role)
         
             if o['place']:
-                place = g.resource(F"{self.mainURI}_activity_statement_place_{i}")
-                place.add(RDF.value, rdflib.Literal(o['place']))
-                place.add(RDF.type, CRM.E53_Place)
 
                 # TODO: review place mapping
                 place_map = geoMapper.get_place(o['place'].strip())
                 if place_map:
                     for item in place_map:
-                        place.add(OWL.sameAs, rdflib.URIRef(item))
+                        originInfo.add(CRM.P7_took_place_at, rdflib.URIRef(item))
+                        place = g.resource(item)
+                        place.add(RDFS.label, rdflib.Literal(o['place']))
+                        place.add(RDF.type, CRM.E53_Place)
 
-                originInfo.add(CRM.P7_took_place_at, place)
 
             
             if o['date']:
                 dateValue, transformed = dateParse(o['date'])
                 time_span = g.resource(F"{self.mainURI}_time-span_{i}")
-                time_span.add(RDFS.label, rdflib.Literal("origin time-span"))
+                time_span.add(RDFS.label, rdflib.Literal( (F"origin time-span {'of'+ self.mainTitle}") if self.mainTitle else "origin time-span" ))
                 time_span.add(RDF.type, CRM["E52_Time-Span"])
                 time_span.add(CRM.P2_has_type, BF.changeDate)
                 if not transformed:
@@ -926,6 +950,7 @@ class BibliographyParse:
 
                 if part['type'] in self.related_item_map:
                     work = g.resource(F"{self.mainURI}_{part['type']}_{i}")
+                    work.add(RDFS.label, rdflib.Literal(F"{part['type']} of {self.mainTitle}"))
                     if part["type"] == "constituent":
                         work.add(self.related_item_map[part['type']], resource)
                     else:
@@ -943,8 +968,8 @@ class BibliographyParse:
                 # values encountered: public_note
                 logger.info("NOTE TYPE: " + str(n['type']))
                 # note_r.add(BF.nodeType, rdflib.Literal(n['type']))
-
-            instance.add(CRM["P3_has_note"], rdflib.Literal(n['content']))
+            if instance:
+                instance.add(CRM["P3_has_note"], rdflib.Literal(n['content']))
 
         i = 0
         # CIDOC: creating identifiers for data sources
@@ -992,7 +1017,8 @@ class BibliographyParse:
             extent_resource.add(RDFS.label, rdflib.Literal(extent_label))
             
             # TODO: Clarify if instance needs to be identified by extent:
-            instance.add(CRM.P1_identified_by, extent_resource)
+            if instance:
+                instance.add(CRM.P1_identified_by, extent_resource)
             if instance_manifestion:
                 instance_manifestion.add(CRM.P1_identified_by, extent_resource)
 
