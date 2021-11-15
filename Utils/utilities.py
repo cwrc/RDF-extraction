@@ -414,7 +414,7 @@ def create_uber_triples(mode, graph, script_id):
         if x == "rdf":
             x = "pretty-xml"
 
-        create_extracted_uberfile(temp_path, graph, x,extra_triples="../data/additional_triples.ttl")
+        create_extracted_uberfile(temp_path, graph, x)
 
 
 def create_individual_triples(mode, person, script_id):
@@ -665,9 +665,7 @@ def parse_args(script, info_type, logger=None):
         description='Extract the ' + info_type + ' information from selection of orlando xml documents', add_help=True)
     modes = parser.add_mutually_exclusive_group()
 
-    # print(testcase_data)
     script = script.split("/")[-1]
-    # print()
 
     if script in testcase_data:
         # TODO: expand test case prints to expose reasons for testing
@@ -701,6 +699,8 @@ def parse_args(script, info_type, logger=None):
     modes.add_argument("-id", "-orlando", "--orlando",
                        help="entry id of a single orlando document to run extraction upon, ex. woolvi")
     modes.add_argument("-f", "-file", "--file", help="single orlando xml document to run extraction upon")
+    # modes.add_argument("-id+", "-orlando+", "--orlando+",
+                    #    help="entry id of a single orlando document to run extraction upon and the files proceeding, ex. woolvi")
     modes.add_argument("-d", "-directory", "--directory", help="directory of files to run extraction upon")
     modes.add_argument("-r", "-random", "--random", nargs='?', const=1, type=int,
                        help="chooses {RANDOM} random file(s) to run extraction upon")
@@ -727,13 +727,10 @@ def parse_args(script, info_type, logger=None):
     if args.random and args.random < 1:
         parser.error("Minimum file count is 1")
 
-    print(args)
     file_dict = get_file_dict(script, args, testcase_data, testcases_available)
 
     arguments = Extraction(file_dict, info_type, verbosity=args.verbosity,
                            logger=logger, format=args.format, pause=args.pause)
-
-    print(arguments)
 
     return arguments, arguments.file_dict
 
