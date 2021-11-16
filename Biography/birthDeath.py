@@ -5,7 +5,6 @@ from rdflib import RDF, RDFS, Literal
 from Utils import utilities
 from Utils.context import Context, get_event_type
 from Utils.place import Place
-from Utils.event import get_date_tag, Event, format_date
 from Utils.activity import Activity 
 
 # TODO

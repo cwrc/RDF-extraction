@@ -747,14 +747,12 @@ class BibliographyParse:
 
 
                 if item['usage'] == 'alternative':
-                    title_res.add(RDFS.label,rdflib.Literal(F"alternative title of {self.mainTitle}"))
+                    title_res.add(RDFS.label,rdflib.Literal(F"Alternative title of {self.mainTitle}"))
                     title_res.add(CRM.P2_has_type, BF.VariantTitle)
                 else:
-                    title_res.add(CRM.P2_has_type, BF.Title)
-                    title_res.add(RDFS.label,rdflib.Literal("title"))
-                    resource.add(RDFS.label,
-                                 rdflib.Literal(item['title'].strip()))
                     self.mainTitle = item['title'].strip()
+                    title_res.add(CRM.P2_has_type, BF.Title)
+                    title_res.add(RDFS.label,rdflib.Literal(F"Title of {self.mainTitle}"))
 
                 if instance:
                     instance.add(CRM.P102_has_title, title_res)
@@ -928,7 +926,7 @@ class BibliographyParse:
             # CIDOC: Creating a manifestation, given an edition
             if o['edition']:
                 instance_manifestion = g.resource(F"{self.mainURI}_instance_manifestation")
-                instance_manifestion.add(RDF.type, FRBROO.F3_Manifestation)
+                instance_manifestion.add(RDF.type, FRBROO.F4_Manifestation_Singleton)
                 instance_manifestion.add(FRBROO.R4_embodies,resource)
                 
                 edition_node = g.resource(F"{self.mainURI}_edition")
@@ -1010,7 +1008,7 @@ class BibliographyParse:
                 extent_resource.add(CRM.P106_is_composed_of, page_node)
                 page_node.add(RDF.type, CRM.E33_E41_Linguistic_Appellation)
                 page_node.add(CRM.P190_has_symbolic_content,rdflib.Literal(p['value']))
-                page_node.add(CRM.P2_has_type, rdflib.Literal("page numbers"))
+                page_node.add(CRM.P2_has_type, rdflib.URIRef("http://www.wikidata.org/entity/Q11325816"))
                 
                 if p['volume'] or p['issue']:
                     extent_label += ", "
