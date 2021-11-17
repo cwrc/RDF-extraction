@@ -41,7 +41,7 @@ BF = rdflib.Namespace("http://id.loc.gov/ontologies/bibframe/")
 XML = rdflib.Namespace("http://www.w3.org/XML/1998/namespace")
 MARC_REL = rdflib.Namespace("http://id.loc.gov/vocabulary/relators/")
 DATA = rdflib.Namespace("http://cwrc.ca/cwrcdata/")
-GENRE = rdflib.Namespace("http://sparql.cwrc.ca/ontologies/genre#")
+GENRE = rdflib.Namespace("https://id.linscproject.ca/vocabularies/genre#")
 SCHEMA = rdflib.Namespace("http://schema.org/")
 FRBROO = rdflib.Namespace("http://iflastandards.info/ns/fr/frbr/frbroo/")
 CRM = rdflib.Namespace("http://www.cidoc-crm.org/cidoc-crm/")
@@ -50,6 +50,7 @@ CRMPC = rdflib.Namespace("http://www.cidoc-crm.org/cidoc-crm-pc/")
 BF_PROPERTIES = {
     "change date": BF.changeDate,
     "variant title":BF.VariantTitle,
+    "title":BF.Title,
     "generation process":BF.GenerationProcess
 }
 
@@ -467,7 +468,7 @@ class BibliographyParse:
                 title_text = ""
 
             titles.append({"title": title_text, "usage": usage})
-
+        
         return titles
 
     def get_record_content_source(self):
@@ -763,7 +764,7 @@ class BibliographyParse:
         
         adminMetaData = g.resource(F"{self.mainURI}_admin_metadata")
         adminMetaData.add(RDF.type, CRM.E13_Attribute_Assignment)
-        adminMetaData.add(RDFS.label, rdflib.Literal( (F"admin metadata {'of'+ self.mainTitle}") if self.mainTitle else "admin metadata" ))
+        adminMetaData.add(RDFS.label, rdflib.Literal( (F"admininstrative metadata {'of the creation of'+ self.mainTitle}") if self.mainTitle else "admininstrative metadata" ))
 
         # adminMetaData.add(RDFS.label, rdflib.Literal(F"admin metadata of {self.mainTitle}"))
         
@@ -790,6 +791,7 @@ class BibliographyParse:
             time_span = g.resource(F"{self.mainURI}_time-span_{r_count}")
             time_span.add(RDFS.label, rdflib.Literal(F"record change time-span of {self.mainTitle}"))
             time_span.add(RDF.type, CRM["E52_Time-Span"])
+            time_span.add(CRM["P82_at_some_time_within"], rdflib.Literal(r['date']))
             time_span.add(CRM.P2_has_type, BF.changeDate)
             if not transformed:
                 logger.info(F"MISSING DATE FORMAT: {dateValue} on Document {self.mainURI}")
@@ -803,14 +805,22 @@ class BibliographyParse:
         #CIDOC Creating Generation Process
         i = 0
         for r in self.get_record_origin():
-            generation_process = g.resource(F"{self.mainURI}_generation_process_{i}")
-            generation_process.add(RDF.type, CRM.E29_Design_or_Procedure)
-            generation_process.add(RDFS.label, rdflib.Literal(F"generation process of {self.mainTitle}"))
-            generation_process.add(CRM.P2_has_type, BF.GenerationProcess)
-            generation_process.add(RDFS.comment, rdflib.Literal(r['origin']))
+            if r['origin'] == "Record has been transformed into MODS from an XML Orlando record using an XSLT stylesheet. Metadata originally created in Orlando Document Archive's bibliographic database formerly available at nifflheim.arts.ualberta.ca/wwp.":
+                generation_process = g.resource(DATA.generation_process_xslt)
+                generation_process.add(RDF.type, CRM.E29_Design_or_Procedure)
+                generation_process.add(CRM.P2_has_type, BF.GenerationProcess)
+                generation_process.add(RDFS.comment,rdflib.Literal(r['origin']))
+                generation_process.add(RDFS.label, rdflib.Literal(F"generation process of {self.mainTitle}"))
+                adminMetaData.add(CRM.P33_used_specific_technique, generation_process)
+            else:
+                generation_process = g.resource(F"{self.mainURI}_generation_process_{i}")
+                generation_process.add(RDF.type, CRM.E29_Design_or_Procedure)
+                generation_process.add(RDFS.label, rdflib.Literal(F"generation process of {self.mainTitle}"))
+                generation_process.add(CRM.P2_has_type, BF.GenerationProcess)
+                generation_process.add(RDFS.comment, rdflib.Literal(r['origin']))
 
-            adminMetaData.add(
-                CRM.P33_used_specific_technique, generation_process)
+                adminMetaData.add(
+                    CRM.P33_used_specific_technique, generation_process)
             i += 1
 
 
@@ -830,13 +840,13 @@ class BibliographyParse:
             
             originInfo = g.resource(F"{self.mainURI}_activity_statement_{i}")
             originInfo.add(RDF.type, FRBROO.F28_Expression_Creation)
-            originInfo.add(RDFS.label, rdflib.Literal(F"activity statement of {self.mainTitle}"))
+            originInfo.add(RDFS.label, rdflib.Literal(F"Creation of {self.mainTitle}"))
             if instance:
                 originInfo.add(FRBROO.R17_created, instance)
             originInfo.add(FRBROO.R17_created, resource)
 
             j = 0
-            for name in self.get_names():                
+            for name in self.get_names():          
                 # TODO: insert some tests surrounding names
                 agent_resource = None
                 if "uri" in name:
@@ -870,7 +880,7 @@ class BibliographyParse:
                 #Attaching role to the event
                 if name['role'] in ROLES:
                     agent = g.resource(F"{self.mainURI}_agent")
-                    agent.add(RDFS.label, rdflib.Literal("agent"))
+                    agent.add(RDFS.label, rdflib.Literal(F"{name['name']} in role of {name['role']}"))
                     agent.add(RDF.type, CRMPC.PC14_carried_out_by)
                     agent.add(CRMPC.P02_has_range, agent_resource.identifier)
                     agent.add(rdflib.URIRef("http://www.cidoc-crm.org/cidoc-crm/P14.1_in_the_role_of"),
@@ -883,11 +893,12 @@ class BibliographyParse:
                 j+=1         
             
             if o['publisher']:
+                print(o['publisher'])
                 publisher = g.resource(F"{self.mainURI}_activity_statement_publisher_{i}")
                 publisher.add(RDF.type, CRM.E39_Actor)
 
                 publisher_role = g.resource(F"{self.mainURI}_publisher_role_{i}")
-                publisher_role.add(RDFS.label, rdflib.Literal(F"publisher role of {self.mainTitle}"))
+                publisher_role.add(RDFS.label, rdflib.Literal(F"{o['publisher']} in the role of publisher"))
 
                 publisher_role.add(RDF.type, CRMPC.PC14_carried_out_by)
                 publisher_role.add( CRMPC.P02_has_range, publisher.identifier)
@@ -913,6 +924,7 @@ class BibliographyParse:
                 time_span = g.resource(F"{self.mainURI}_time-span_{i}")
                 time_span.add(RDFS.label, rdflib.Literal( (F"origin time-span {'of'+ self.mainTitle}") if self.mainTitle else "origin time-span" ))
                 time_span.add(RDF.type, CRM["E52_Time-Span"])
+                time_span.add(CRM["P82_at_some_time_within"], rdflib.Literal(o['date']))
                 time_span.add(CRM.P2_has_type, BF.changeDate)
                 if not transformed:
                     logger.info(F"MISSING DATE FORMAT: {dateValue} on Document {self.mainURI}")
@@ -1123,8 +1135,8 @@ if __name__ == "__main__":
             pass
 
     # test_filenames = ["d75215cb-d102-4256-9538-c44bfbf490d9.xml","2e3e602e-b82c-441d-81bc-883f834b20c1.xml","13f8e71a-def5-41e4-90a0-6ae1092ae446.xml","16d427db-a8a2-4f33-ac53-9f811672584b.xml","4109f3c5-0508-447b-9f86-ea8052ff3981.xml"]
-    test_filenames = ["64d3c008-8a9d-415b-b52b-91d232c00952.xml",
-                      "e1b2f98f-1001-4787-a711-464f1527e5a7.xml", "15655c66-8c0b-4493-8f68-8d6cf4998303.xml"]
+    test_filenames = ["64d3c008-8a9d-415b-b52b-91d232c00952.xml"]
+                    #   "e1b2f98f-1001-4787-a711-464f1527e5a7.xml", "15655c66-8c0b-4493-8f68-8d6cf4998303.xml"]
     # for fname in os.listdir(dirname):
     for fname in test_filenames:
 
