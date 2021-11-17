@@ -841,15 +841,6 @@ class BibliographyParse:
                     CRM.P33_used_specific_technique, generation_process)
             i += 1
 
-
-        # Track this transformation
-        cur_date = datetime.datetime.now()
-        generation_process = g.resource(DATA.generation_process_cwrc)
-        generation_process.add(RDF.type, CRM.E29_Design_or_Procedure)
-        generation_process.add(CRM.P2_has_type, BF.GenerationProcess)
-        generation_process.add(RDFS.comment,rdflib.Literal(F"Converted from MODS to BIBFRAME RDF in {cur_date.strftime('%B')} { cur_date.strftime('%Y')} using CWRC's modsBib extraction script"))
-        adminMetaData.add(CRM.P33_used_specific_technique, generation_process)
-
         resource.add(CRM.P140i_was_attributed_by, adminMetaData)
 
         i = 0
