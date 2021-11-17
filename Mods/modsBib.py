@@ -43,6 +43,7 @@ MARC_REL = rdflib.Namespace("http://id.loc.gov/vocabulary/relators/")
 DATA = rdflib.Namespace("http://cwrc.ca/cwrcdata/")
 GENRE = rdflib.Namespace("https://id.linscproject.ca/vocabularies/genre#")
 SCHEMA = rdflib.Namespace("http://schema.org/")
+SKOS = rdflib.Namespace("http://www.w3.org/2004/02/skos/core#")
 FRBROO = rdflib.Namespace("http://iflastandards.info/ns/fr/frbr/frbroo/")
 CRM = rdflib.Namespace("http://www.cidoc-crm.org/cidoc-crm/")
 CRMPC = rdflib.Namespace("http://www.cidoc-crm.org/cidoc-crm-pc/")
@@ -99,6 +100,7 @@ genre_mapping = {}
 STRING_MATCH_RATIO = 50
 
 UNIQUE_UNMATCHED_PLACES = set()
+AGENTS = {}
 
 # --------- UTILITY FUNCTIONS -------
 
@@ -553,11 +555,15 @@ class BibliographyParse:
             elif np.namePart:
                 name = np.namePart.get_text()
             
+            alt = None
+            if np.displayForm:
+                alt = np.displayForm.get_text()
+
             uri = None
             if "valueURI" in np.attrs:
                 uri = np.attrs["valueURI"]
 
-            names.append({"type": name_type, "role": role, "name": name, "uri":uri})
+            names.append({"type": name_type, "role": role, "name": name, "uri":uri, "altname":alt})
 
         return names
 
@@ -863,7 +869,11 @@ class BibliographyParse:
                     agent_resource.add(RDF.type, CRM.E21_Person)
                 else:
                     agent_resource.add(RDF.type, CRM.E39_Actor)
-                    
+                
+                if "altname" in name:
+                    agent_resource.add(SKOS.altLabel, rdflib.Literal(name["altname"]))
+
+
                 """             
                if name['type'] == 'personal':
                     agent_resource.add(RDF.type, BF.Person)
@@ -879,8 +889,17 @@ class BibliographyParse:
 
                 #Attaching role to the event
                 if name['role'] in ROLES:
-                    agent = g.resource(F"{self.mainURI}_agent")
-                    agent.add(RDFS.label, rdflib.Literal(F"{name['name']} in role of {name['role']}"))
+                    agent_label = F"{name['name']} in role of {name['role']}"
+                    uri = None
+                    if agent_label in AGENTS:
+                        uri = AGENTS[agent_label]
+                    else:
+                        temp = DATA[f"{agent_resource.identifier.split('orlando:')[1]}_{name['role']}"]                        
+                        AGENTS[agent_label] = temp
+                        uri = temp
+                        
+                    agent = g.resource(uri)
+                    agent.add(RDFS.label, rdflib.Literal(agent_label))
                     agent.add(RDF.type, CRMPC.PC14_carried_out_by)
                     agent.add(CRMPC.P02_has_range, agent_resource.identifier)
                     agent.add(rdflib.URIRef("http://www.cidoc-crm.org/cidoc-crm/P14.1_in_the_role_of"),
@@ -893,7 +912,6 @@ class BibliographyParse:
                 j+=1         
             
             if o['publisher']:
-                print(o['publisher'])
                 publisher = g.resource(F"{self.mainURI}_activity_statement_publisher_{i}")
                 publisher.add(RDF.type, CRM.E39_Actor)
 
