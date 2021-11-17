@@ -46,7 +46,7 @@ SCHEMA = rdflib.Namespace("http://schema.org/")
 SKOS = rdflib.Namespace("http://www.w3.org/2004/02/skos/core#")
 FRBROO = rdflib.Namespace("http://iflastandards.info/ns/fr/frbr/frbroo/")
 CRM = rdflib.Namespace("http://www.cidoc-crm.org/cidoc-crm/")
-CRMPC = rdflib.Namespace("http://www.cidoc-crm.org/cidoc-crm-pc/")
+CRMPC = rdflib.Namespace("http://www.cidoc-crm.org/cidoc-crm/")
 
 BF_PROPERTIES = {
     "change date": BF.changeDate,
@@ -597,6 +597,7 @@ class BibliographyParse:
         for o in self.soup.find_all('originInfo'):
             place = None
             publisher = None
+            publisher_uri = None
             date = None
             edition = None
             dateOther = None
@@ -604,6 +605,8 @@ class BibliographyParse:
                 continue
             if o.publisher:
                 publisher = o.publisher.text
+                if "valueURI" in o.publisher.attrs:
+                    publisher_uri = o.publisher["valueURI"]
             if o.dateIssued:
                 date = o.dateIssued.text
             if o.place:
@@ -616,6 +619,7 @@ class BibliographyParse:
             origin_infos.append({"date": date,
                                  "dateOther": dateOther,
                                  "publisher": publisher,
+                                 "publisher uri": publisher_uri,
                                  "edition": edition,
                                  "place": place
                                  })
@@ -716,12 +720,21 @@ class BibliographyParse:
 
         return part_objects
 
+
+    def get_main_title(self, titles):
+        for x in titles:
+            if x['usage'] == 'primary':
+                self.mainTitle = x['title'].strip()
+                return
     def build_graph(self, part_type=None):
         g = self.g
 
         titles = self.get_title()
+        self.get_main_title(titles)
         resource = g.resource(self.mainURI) # The Work
         
+        print(titles)
+
         if not part_type:
             resource.add(RDF.type, FRBROO.F1_Work)
         elif part_type == "constituent":
@@ -746,6 +759,8 @@ class BibliographyParse:
         # CIDOC: Creating titles
         i = 0
         
+
+
         for item in titles:
             if 'usage' in item and item['usage'] is not None:
                 title_res = g.resource(F"{self.mainURI}_title_{i}")
@@ -757,7 +772,6 @@ class BibliographyParse:
                     title_res.add(RDFS.label,rdflib.Literal(F"Alternative title of {self.mainTitle}"))
                     title_res.add(CRM.P2_has_type, BF.VariantTitle)
                 else:
-                    self.mainTitle = item['title'].strip()
                     title_res.add(CRM.P2_has_type, BF.Title)
                     title_res.add(RDFS.label,rdflib.Literal(F"Title of {self.mainTitle}"))
 
@@ -770,10 +784,8 @@ class BibliographyParse:
         
         adminMetaData = g.resource(F"{self.mainURI}_admin_metadata")
         adminMetaData.add(RDF.type, CRM.E13_Attribute_Assignment)
-        adminMetaData.add(RDFS.label, rdflib.Literal( (F"admininstrative metadata {'of the creation of'+ self.mainTitle}") if self.mainTitle else "admininstrative metadata" ))
+        adminMetaData.add(RDFS.label, rdflib.Literal( (F"administrative metadata {'of the creation of the MODS record for '+ self.mainTitle}") if self.mainTitle else "administrative metadata of MODS record" ))
 
-        # adminMetaData.add(RDFS.label, rdflib.Literal(F"admin metadata of {self.mainTitle}"))
-        
 
         i = 0
         for r in self.get_record_content_source():
@@ -795,7 +807,7 @@ class BibliographyParse:
         for r in self.get_record_change_date():
             dateValue, transformed = dateParse(r['date'])
             time_span = g.resource(F"{self.mainURI}_time-span_{r_count}")
-            time_span.add(RDFS.label, rdflib.Literal(F"record change time-span of {self.mainTitle}"))
+            time_span.add(RDFS.label, rdflib.Literal(F"time-span of modification of MODS record for {self.mainTitle}"))
             time_span.add(RDF.type, CRM["E52_Time-Span"])
             time_span.add(CRM["P82_at_some_time_within"], rdflib.Literal(r['date']))
             time_span.add(CRM.P2_has_type, BF.changeDate)
@@ -816,12 +828,12 @@ class BibliographyParse:
                 generation_process.add(RDF.type, CRM.E29_Design_or_Procedure)
                 generation_process.add(CRM.P2_has_type, BF.GenerationProcess)
                 generation_process.add(RDFS.comment,rdflib.Literal(r['origin']))
-                generation_process.add(RDFS.label, rdflib.Literal(F"generation process of {self.mainTitle}"))
+                generation_process.add(RDFS.label, rdflib.Literal(F"generation process of the MODS Record for {self.mainTitle}"))
                 adminMetaData.add(CRM.P33_used_specific_technique, generation_process)
             else:
                 generation_process = g.resource(F"{self.mainURI}_generation_process_{i}")
                 generation_process.add(RDF.type, CRM.E29_Design_or_Procedure)
-                generation_process.add(RDFS.label, rdflib.Literal(F"generation process of {self.mainTitle}"))
+                generation_process.add(RDFS.label, rdflib.Literal(F"generation process of the MODS Record for {self.mainTitle}"))
                 generation_process.add(CRM.P2_has_type, BF.GenerationProcess)
                 generation_process.add(RDFS.comment, rdflib.Literal(r['origin']))
 
@@ -846,10 +858,9 @@ class BibliographyParse:
             
             originInfo = g.resource(F"{self.mainURI}_activity_statement_{i}")
             originInfo.add(RDF.type, FRBROO.F28_Expression_Creation)
-            originInfo.add(RDFS.label, rdflib.Literal(F"Creation of {self.mainTitle}"))
+            originInfo.add(RDFS.label, rdflib.Literal(F"creation of {self.mainTitle}"))
             if instance:
                 originInfo.add(FRBROO.R17_created, instance)
-            originInfo.add(FRBROO.R17_created, resource)
 
             j = 0
             for name in self.get_names():          
@@ -912,9 +923,14 @@ class BibliographyParse:
                 j+=1         
             
             if o['publisher']:
-                publisher = g.resource(F"{self.mainURI}_activity_statement_publisher_{i}")
+                print(o)
+                if o['publisher uri']:
+                    publisher = g.resource(o['publisher uri'])
+                else:
+                    publisher = g.resource(F"{self.mainURI}_activity_statement_publisher_{i}")
+                
                 publisher.add(RDF.type, CRM.E39_Actor)
-
+                publisher.add(RDFS.label, rdflib.Literal(F"{o['publisher']}"))
                 publisher_role = g.resource(F"{self.mainURI}_publisher_role_{i}")
                 publisher_role.add(RDFS.label, rdflib.Literal(F"{o['publisher']} in the role of publisher"))
 
@@ -940,7 +956,7 @@ class BibliographyParse:
             if o['date']:
                 dateValue, transformed = dateParse(o['date'])
                 time_span = g.resource(F"{self.mainURI}_time-span_{i}")
-                time_span.add(RDFS.label, rdflib.Literal( (F"origin time-span {'of'+ self.mainTitle}") if self.mainTitle else "origin time-span" ))
+                time_span.add(RDFS.label, rdflib.Literal( (F"origin time-span {'of '+ self.mainTitle}") if self.mainTitle else "origin time-span" ))
                 time_span.add(RDF.type, CRM["E52_Time-Span"])
                 time_span.add(CRM["P82_at_some_time_within"], rdflib.Literal(o['date']))
                 time_span.add(CRM.P2_has_type, BF.changeDate)
@@ -1154,7 +1170,8 @@ if __name__ == "__main__":
             pass
 
     # test_filenames = ["d75215cb-d102-4256-9538-c44bfbf490d9.xml","2e3e602e-b82c-441d-81bc-883f834b20c1.xml","13f8e71a-def5-41e4-90a0-6ae1092ae446.xml","16d427db-a8a2-4f33-ac53-9f811672584b.xml","4109f3c5-0508-447b-9f86-ea8052ff3981.xml"]
-    test_filenames = ["64d3c008-8a9d-415b-b52b-91d232c00952.xml"]
+    test_filenames = ["0d0e00bf-3224-4286-8ec4-f389ec6cc7bb.xml"] # VW, the wave
+    # test_filenames = ["64d3c008-8a9d-415b-b52b-91d232c00952.xml"]
                     #   "e1b2f98f-1001-4787-a711-464f1527e5a7.xml", "15655c66-8c0b-4493-8f68-8d6cf4998303.xml"]
     # for fname in os.listdir(dirname):
     for fname in test_filenames:
