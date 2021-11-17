@@ -855,7 +855,7 @@ class BibliographyParse:
             for name in self.get_names():          
                 # TODO: insert some tests surrounding names
                 agent_resource = None
-                if "uri" in name:
+                if "uri" in name and name["uri"]:
                     agent_resource=g.resource(name["uri"])
                 else:
                     temp_name = urllib.parse.quote_plus(
@@ -870,7 +870,7 @@ class BibliographyParse:
                 else:
                     agent_resource.add(RDF.type, CRM.E39_Actor)
                 
-                if "altname" in name:
+                if "altname" in name and name["altname"] :
                     agent_resource.add(SKOS.altLabel, rdflib.Literal(name["altname"]))
 
 
@@ -1097,6 +1097,7 @@ if __name__ == "__main__":
     g.bind("crm", CRM)
     g.bind("frbroo", FRBROO)
     g.bind("crmpc", CRMPC)
+    g.bind("skos", SKOS)
 
     # Adding declaration of references
     for label, uri in BibliographyParse.type_map.items():
