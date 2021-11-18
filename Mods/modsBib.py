@@ -203,30 +203,7 @@ def dateParse(date_string: str):
         pass
 
     try:
-        dt = datetime.datetime.strptime(date_string, "%Y")
-        print(date_string)
-        print(dt.isoformat())
-        end_dt = dt
-        print(end_dt.isoformat())
-        input("G")
-        return dt.isoformat(), True
-    except ValueError:
-        pass
-
-    try:
-        dt = datetime.datetime.strptime(date_string, "%Y-%m-%d")
-        print(date_string)
-        print(dt.isoformat())
-        end_dt = dt
-        print(end_dt.isoformat())
-        input("f")
-        return dt.isoformat(), True
-    except ValueError:
-        pass
-
-    try:
         dt = datetime.datetime.strptime(date_string, "%B %Y")
-        # dt = datetime.datetime.strptime("December 2019", "%B %Y")
         end_dt = get_next_month(dt) - datetime.timedelta(seconds=1)
         return dt.isoformat(), True
     except ValueError:
@@ -248,11 +225,7 @@ def dateParse(date_string: str):
 
     try:
         dt = datetime.datetime.strptime(date_string, "%b %Y")
-        print(date_string)
-        print(dt.isoformat())
-        end_dt = dt
-        print(end_dt.isoformat())
-        input("c")
+        end_dt = get_next_month(dt) - datetime.timedelta(seconds=1)
         return dt.isoformat(), True
     except ValueError:
         pass
@@ -1220,10 +1193,11 @@ if __name__ == "__main__":
 
     # test_filenames = ["d75215cb-d102-4256-9538-c44bfbf490d9.xml","2e3e602e-b82c-441d-81bc-883f834b20c1.xml","13f8e71a-def5-41e4-90a0-6ae1092ae446.xml","16d427db-a8a2-4f33-ac53-9f811672584b.xml","4109f3c5-0508-447b-9f86-ea8052ff3981.xml"]
     # test_filenames = ["0d0e00bf-3224-4286-8ec4-f389ec6cc7bb.xml"] # VW, the wave
+    test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"] # VW, the wave
     # test_filenames = ["64d3c008-8a9d-415b-b52b-91d232c00952.xml"]
                     #   "e1b2f98f-1001-4787-a711-464f1527e5a7.xml", "15655c66-8c0b-4493-8f68-8d6cf4998303.xml"]
-    for fname in os.listdir(dirname):
-    # for fname in test_filenames:
+    # for fname in os.listdir(dirname):
+    for fname in test_filenames:
 
         path = os.path.join(dirname, fname)
         if os.path.isdir(path):
