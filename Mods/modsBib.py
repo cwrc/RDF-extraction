@@ -45,8 +45,8 @@ GENRE = rdflib.Namespace("https://id.linscproject.ca/vocabularies/genre#")
 SCHEMA = rdflib.Namespace("http://schema.org/")
 SKOS = rdflib.Namespace("http://www.w3.org/2004/02/skos/core#")
 FRBROO = rdflib.Namespace("http://iflastandards.info/ns/fr/frbr/frbroo/")
-CRM = rdflib.Namespace("http://www.cidoc-crm.org/cidoc-crm/")
 CRMPC = rdflib.Namespace("http://www.cidoc-crm.org/cidoc-crm/")
+CRM = rdflib.Namespace("http://www.cidoc-crm.org/cidoc-crm/")
 
 BF_PROPERTIES = {
     "change date": BF.changeDate,
@@ -325,7 +325,19 @@ class WritingParse:
 
                 self.matched_documents[db_ref] = genres
 
-
+def get_end_date(f_date, date_string):
+    start_date = f_date.split("T")[0]
+    end_date = None
+    day_end = "23:59:59"
+            
+    print(f_date)
+    print(start_date)
+    print(date_string)
+    if (start_date == date_string):
+        end_date = f"{start_date}T{day_end}"
+    else:
+        input()
+    return end_date
 class BibliographyParse:
     """
     Class to parse a single bibliography entry
@@ -465,7 +477,7 @@ class BibliographyParse:
                 usage = None
 
             if title.title:
-                title_text = title.text
+                title_text = title.text.strip()
             else:
                 title_text = ""
 
@@ -814,6 +826,7 @@ class BibliographyParse:
             if not transformed:
                 logger.info(F"MISSING DATE FORMAT: {dateValue} on Document {self.mainURI}")
             else:
+                temp = get_end_date(dateValue, r['date'])
                 time_span.add(CRM.P82a_begin_of_the_begin, rdflib.Literal(dateValue, datatype=XSD.datetime))
                 time_span.add(CRM.P82b_end_of_the_end,rdflib.Literal(dateValue, datatype=XSD.datetime))
             
@@ -896,9 +909,16 @@ class BibliographyParse:
                     if agent_label in AGENTS:
                         uri = AGENTS[agent_label]
                     else:
-                        temp = DATA[f"{agent_resource.identifier.split('orlando:')[1]}_{name['role']}"]                        
-                        AGENTS[agent_label] = temp
-                        uri = temp
+                        if "orlando" in str(agent_resource.identifier):
+                            temp = DATA[f"{agent_resource.identifier.split('orlando:')[1]}_{name['role']}"]                        
+                            AGENTS[agent_label] = temp
+                            uri = temp
+                        else:
+                            uri = f"{agent_resource.identifier}_{name['role']}"
+                            print(agent_resource.identifier)
+                            print(name)
+                            print(uri)
+                            
                         
                     agent = g.resource(uri)
                     agent.add(RDFS.label, rdflib.Literal(agent_label))
@@ -914,7 +934,6 @@ class BibliographyParse:
                 j+=1         
             
             if o['publisher']:
-                print(o)
                 if o['publisher uri']:
                     publisher = g.resource(o['publisher uri'])
                 else:
@@ -1150,22 +1169,22 @@ if __name__ == "__main__":
         for row in csvfile:
             genre_mapping[row[0]] = row[1]
 
-    for fname in os.listdir(writing_dir):
-        path = os.path.join(writing_dir, fname)
-        if os.path.isdir(path):
-            continue
+    # for fname in os.listdir(writing_dir):
+    #     path = os.path.join(writing_dir, fname)
+    #     if os.path.isdir(path):
+    #         continue
 
-        try:
-            genreParse = WritingParse(path, genre_map)
-        except UnicodeError:
-            pass
+    #     try:
+    #         genreParse = WritingParse(path, genre_map)
+    #     except UnicodeError:
+    #         pass
 
     # test_filenames = ["d75215cb-d102-4256-9538-c44bfbf490d9.xml","2e3e602e-b82c-441d-81bc-883f834b20c1.xml","13f8e71a-def5-41e4-90a0-6ae1092ae446.xml","16d427db-a8a2-4f33-ac53-9f811672584b.xml","4109f3c5-0508-447b-9f86-ea8052ff3981.xml"]
-    test_filenames = ["0d0e00bf-3224-4286-8ec4-f389ec6cc7bb.xml"] # VW, the wave
+    # test_filenames = ["0d0e00bf-3224-4286-8ec4-f389ec6cc7bb.xml"] # VW, the wave
     # test_filenames = ["64d3c008-8a9d-415b-b52b-91d232c00952.xml"]
                     #   "e1b2f98f-1001-4787-a711-464f1527e5a7.xml", "15655c66-8c0b-4493-8f68-8d6cf4998303.xml"]
-    # for fname in os.listdir(dirname):
-    for fname in test_filenames:
+    for fname in os.listdir(dirname):
+    # for fname in test_filenames:
 
         path = os.path.join(dirname, fname)
         if os.path.isdir(path):
@@ -1187,6 +1206,5 @@ if __name__ == "__main__":
     fname = "bibliography_full"
     output_name = fname.replace(".xml", "")
     formats = {'ttl': 'turtle'}
-    print(len(g))
     for extension, file_format in formats.items():
         g.serialize(destination=F"{output_name}.{extension}", format=file_format)
