@@ -149,6 +149,13 @@ def get_end_date(f_date, date_string):
     print(end_date)
     print("-"*30)
     return end_date
+
+def get_next_month(date):
+    # Returns date with next occurring month, ex. 2019-10-1 --> 2019-11-1, or 2012-12-01 --> 2013-01-01, 
+    # note this only guaranteed to work for date.days <= 28, and may fail for dates later than so. 
+    return datetime.datetime(date.year+1 if date.month == 12 else date.year, 1 if date.month == 12 else date.month +1,date.day)
+
+
 def dateParse(date_string: str):
     # Currently works for single dates need to examine patterns further for 2 days
     # Strip spaces surrounding the date string
@@ -157,28 +164,19 @@ def dateParse(date_string: str):
 
     try:
         dt = datetime.datetime.strptime(date_string, "%Y-%m-%d")
-        end_dt = dt + datetime.timedelta(days=1) - datetime.timedelta(seconds=1)
+        end_dt = dt + datetime.timedelta(days=1,seconds=-1)
         return dt.isoformat(), True
     except ValueError:
         pass
     try:
         dt = datetime.datetime.strptime(date_string, "%Y--")
-        print(date_string)
-        print(dt.isoformat())
-        end_dt = dt
-        print(end_dt.isoformat())
-        input()
+        end_dt = dt.replace(year=dt.year+1) - datetime.timedelta(seconds=1)
         return dt.isoformat(), True
     except ValueError:
         pass
     try:
         dt = datetime.datetime.strptime(date_string, "%Y-")
-        print(date_string)
-        print(dt.isoformat())
-        end_dt = dt
-        print(end_dt.isoformat())
-        input()
-
+        end_dt = dt.replace(year=dt.year+1) - datetime.timedelta(seconds=1)
         return dt.isoformat(), True
     except ValueError:
         pass
@@ -192,22 +190,14 @@ def dateParse(date_string: str):
 
     try:
         dt = datetime.datetime.strptime(date_string, "%Y-%m-")
-        print(date_string)
-        print(dt.isoformat())
-        end_dt = dt
-        print(end_dt.isoformat())
-        input()
+        end_dt = get_next_month(dt) - datetime.timedelta(seconds=1)
         return dt.isoformat(), True
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%Y-%m")
-        print(date_string)
-        print(dt.isoformat())
-        end_dt = dt
-        print(end_dt.isoformat())
-        input()
+        end_dt = get_next_month(dt) - datetime.timedelta(seconds=1)
         return dt.isoformat(), True
     except ValueError:
         pass
@@ -218,7 +208,7 @@ def dateParse(date_string: str):
         print(dt.isoformat())
         end_dt = dt
         print(end_dt.isoformat())
-        input()
+        input("G")
         return dt.isoformat(), True
     except ValueError:
         pass
@@ -229,40 +219,29 @@ def dateParse(date_string: str):
         print(dt.isoformat())
         end_dt = dt
         print(end_dt.isoformat())
-        input()
+        input("f")
         return dt.isoformat(), True
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%B %Y")
-        print(date_string)
-        print(dt.isoformat())
-        end_dt = dt
-        print(end_dt.isoformat())
-        input("bro")
+        # dt = datetime.datetime.strptime("December 2019", "%B %Y")
+        end_dt = get_next_month(dt) - datetime.timedelta(seconds=1)
         return dt.isoformat(), True
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%d %B %Y")
-        print(date_string)
-        print(dt.isoformat())
-        end_dt = dt
-        print(end_dt.isoformat())
-        input()
+        end_dt = dt + datetime.timedelta(days=1,seconds=-1)
         return dt.isoformat(), True
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%Y-%m--")
-        print(date_string)
-        print(dt.isoformat())
-        end_dt = dt
-        print(end_dt.isoformat())
-        input()
+        end_dt = get_next_month(dt) - datetime.timedelta(seconds=1)
         return dt.isoformat(), True
     except ValueError:
         pass
@@ -273,18 +252,14 @@ def dateParse(date_string: str):
         print(dt.isoformat())
         end_dt = dt
         print(end_dt.isoformat())
-        input()
+        input("c")
         return dt.isoformat(), True
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%d %b %Y")
-        print(date_string)
-        print(dt.isoformat())
-        end_dt = dt
-        print(end_dt.isoformat())
-        input()
+        end_dt = dt + datetime.timedelta(days=1,seconds=-1)
         return dt.isoformat(), True
     except ValueError:
         pass
