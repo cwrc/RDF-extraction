@@ -131,84 +131,160 @@ def remove_punctuation(input_str, all_punctuation=False):
     input_str = input_str.replace(">>", "")
     return unidecode(input_str)
 
-
+def get_end_date(f_date, date_string):
+    return
+    start_date = f_date.split("T")[0]
+    end_date = None
+    day_end = "23:59:59"
+            
+    
+    print(start_date)
+    print(date_string)
+    if start_date == date_string:
+        end_date = f"{start_date}T{day_end}"
+    elif date_string == start_date[:4]:
+        end_date = f"{date_string}-12-31T{day_end}"
+    else:
+        input()
+    print(end_date)
+    print("-"*30)
+    return end_date
 def dateParse(date_string: str):
     # Currently works for single dates need to examine patterns further for 2 days
     # Strip spaces surrounding the date string
     date_string = date_string.strip().rstrip()
+    end_dt = None
 
     try:
         dt = datetime.datetime.strptime(date_string, "%Y-%m-%d")
+        end_dt = dt + datetime.timedelta(days=1) - datetime.timedelta(seconds=1)
         return dt.isoformat(), True
     except ValueError:
         pass
     try:
         dt = datetime.datetime.strptime(date_string, "%Y--")
+        print(date_string)
+        print(dt.isoformat())
+        end_dt = dt
+        print(end_dt.isoformat())
+        input()
         return dt.isoformat(), True
     except ValueError:
         pass
     try:
         dt = datetime.datetime.strptime(date_string, "%Y-")
+        print(date_string)
+        print(dt.isoformat())
+        end_dt = dt
+        print(end_dt.isoformat())
+        input()
+
         return dt.isoformat(), True
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%Y")
+        end_dt = dt.replace(year=dt.year+1) - datetime.timedelta(seconds=1)
         return dt.isoformat(), True
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%Y-%m-")
+        print(date_string)
+        print(dt.isoformat())
+        end_dt = dt
+        print(end_dt.isoformat())
+        input()
         return dt.isoformat(), True
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%Y-%m")
+        print(date_string)
+        print(dt.isoformat())
+        end_dt = dt
+        print(end_dt.isoformat())
+        input()
         return dt.isoformat(), True
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%Y")
+        print(date_string)
+        print(dt.isoformat())
+        end_dt = dt
+        print(end_dt.isoformat())
+        input()
         return dt.isoformat(), True
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%Y-%m-%d")
+        print(date_string)
+        print(dt.isoformat())
+        end_dt = dt
+        print(end_dt.isoformat())
+        input()
         return dt.isoformat(), True
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%B %Y")
+        print(date_string)
+        print(dt.isoformat())
+        end_dt = dt
+        print(end_dt.isoformat())
+        input("bro")
         return dt.isoformat(), True
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%d %B %Y")
+        print(date_string)
+        print(dt.isoformat())
+        end_dt = dt
+        print(end_dt.isoformat())
+        input()
         return dt.isoformat(), True
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%Y-%m--")
+        print(date_string)
+        print(dt.isoformat())
+        end_dt = dt
+        print(end_dt.isoformat())
+        input()
         return dt.isoformat(), True
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%b %Y")
+        print(date_string)
+        print(dt.isoformat())
+        end_dt = dt
+        print(end_dt.isoformat())
+        input()
         return dt.isoformat(), True
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%d %b %Y")
+        print(date_string)
+        print(dt.isoformat())
+        end_dt = dt
+        print(end_dt.isoformat())
+        input()
         return dt.isoformat(), True
     except ValueError:
         pass
@@ -325,19 +401,7 @@ class WritingParse:
 
                 self.matched_documents[db_ref] = genres
 
-def get_end_date(f_date, date_string):
-    start_date = f_date.split("T")[0]
-    end_date = None
-    day_end = "23:59:59"
-            
-    print(f_date)
-    print(start_date)
-    print(date_string)
-    if (start_date == date_string):
-        end_date = f"{start_date}T{day_end}"
-    else:
-        input()
-    return end_date
+
 class BibliographyParse:
     """
     Class to parse a single bibliography entry
@@ -973,9 +1037,9 @@ class BibliographyParse:
                 if not transformed:
                     logger.info(F"MISSING DATE FORMAT: {dateValue} on Document {self.mainURI}")
                 else:
+                    temp = get_end_date(dateValue, o['date'])
                     time_span.add(CRM.P82a_begin_of_the_begin, rdflib.Literal(dateValue, datatype=XSD.datetime))
                     time_span.add(CRM.P82b_end_of_the_end,rdflib.Literal(dateValue, datatype=XSD.datetime))
-
                 
                 originInfo.add(CRM["P4_has_time-span"],time_span)
 
