@@ -28,11 +28,12 @@ CONFIG_FILE = "./bibparse.config"
 logger = logging.getLogger('bibliography_extraction')
 logger.setLevel(logging.INFO)
 formatter = logging.Formatter('%(levelname)s {Line #%(lineno)d} : %(message)s ')
-fh = logging.FileHandler('bibliography_extraction.log')
+fh = logging.FileHandler('bibliography_extraction.log', mode="w")
 fh.setFormatter(formatter)
 fh.setLevel(logging.INFO)
 
 logger.addHandler(fh)
+logger.info(F"Started extraction: {datetime.datetime.now().strftime('%d %b %Y %H:%M:%S')}")
 
 # ---------- SETUP NAMESPACES ----------
 
@@ -131,32 +132,13 @@ def remove_punctuation(input_str, all_punctuation=False):
     input_str = input_str.replace(">>", "")
     return unidecode(input_str)
 
-def get_end_date(f_date, date_string):
-    return
-    start_date = f_date.split("T")[0]
-    end_date = None
-    day_end = "23:59:59"
-            
-    
-    print(start_date)
-    print(date_string)
-    if start_date == date_string:
-        end_date = f"{start_date}T{day_end}"
-    elif date_string == start_date[:4]:
-        end_date = f"{date_string}-12-31T{day_end}"
-    else:
-        input()
-    print(end_date)
-    print("-"*30)
-    return end_date
-
 def get_next_month(date):
     # Returns date with next occurring month, ex. 2019-10-1 --> 2019-11-1, or 2012-12-01 --> 2013-01-01, 
     # note this only guaranteed to work for date.days <= 28, and may fail for dates later than so. 
     return datetime.datetime(date.year+1 if date.month == 12 else date.year, 1 if date.month == 12 else date.month +1,date.day)
 
 
-def dateParse(date_string: str):
+def dateParse(date_string: str, both=True):
     # Currently works for single dates need to examine patterns further for 2 days
     # Strip spaces surrounding the date string
     date_string = date_string.strip().rstrip()
@@ -165,79 +147,79 @@ def dateParse(date_string: str):
     try:
         dt = datetime.datetime.strptime(date_string, "%Y-%m-%d")
         end_dt = dt + datetime.timedelta(days=1,seconds=-1)
-        return dt.isoformat(), True
+        return dt.isoformat(), True, end_dt.isoformat()
     except ValueError:
         pass
     try:
         dt = datetime.datetime.strptime(date_string, "%Y--")
         end_dt = dt.replace(year=dt.year+1) - datetime.timedelta(seconds=1)
-        return dt.isoformat(), True
+        return dt.isoformat(), True, end_dt.isoformat()
     except ValueError:
         pass
     try:
         dt = datetime.datetime.strptime(date_string, "%Y-")
         end_dt = dt.replace(year=dt.year+1) - datetime.timedelta(seconds=1)
-        return dt.isoformat(), True
+        return dt.isoformat(), True, end_dt.isoformat()
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%Y")
         end_dt = dt.replace(year=dt.year+1) - datetime.timedelta(seconds=1)
-        return dt.isoformat(), True
+        return dt.isoformat(), True, end_dt.isoformat()
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%Y-%m-")
         end_dt = get_next_month(dt) - datetime.timedelta(seconds=1)
-        return dt.isoformat(), True
+        return dt.isoformat(), True, end_dt.isoformat()
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%Y-%m")
         end_dt = get_next_month(dt) - datetime.timedelta(seconds=1)
-        return dt.isoformat(), True
+        return dt.isoformat(), True, end_dt.isoformat()
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%B %Y")
         end_dt = get_next_month(dt) - datetime.timedelta(seconds=1)
-        return dt.isoformat(), True
+        return dt.isoformat(), True, end_dt.isoformat()
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%d %B %Y")
         end_dt = dt + datetime.timedelta(days=1,seconds=-1)
-        return dt.isoformat(), True
+        return dt.isoformat(), True, end_dt.isoformat()
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%Y-%m--")
         end_dt = get_next_month(dt) - datetime.timedelta(seconds=1)
-        return dt.isoformat(), True
+        return dt.isoformat(), True, end_dt.isoformat()
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%b %Y")
         end_dt = get_next_month(dt) - datetime.timedelta(seconds=1)
-        return dt.isoformat(), True
+        return dt.isoformat(), True, end_dt.isoformat()
     except ValueError:
         pass
 
     try:
         dt = datetime.datetime.strptime(date_string, "%d %b %Y")
         end_dt = dt + datetime.timedelta(days=1,seconds=-1)
-        return dt.isoformat(), True
+        return dt.isoformat(), True, end_dt.isoformat()
     except ValueError:
         pass
 
-    return date_string, False
+    return date_string, False, date_string
 
 # ----------- MAIN CLASSES ----------
 
@@ -616,7 +598,28 @@ class BibliographyParse:
 
         return langs
 
+
+            
+
+
     def get_origins(self):
+        def get_dates(tag):
+            # will return String, start, end_date
+            date_string =None
+            start_date =None
+            end_date =None
+            print(tag)
+            for x in tag.find_all("dateIssued"):
+                if x.get("type") == "start":
+                    start_date = x.text
+                elif x.get("type") == "end":
+                    end_date = x.text
+                else:
+                    date_string = x.text
+            
+            return date_string, start_date, end_date
+
+
         origin_infos = []
         for o in self.soup.find_all('originInfo'):
             place = None
@@ -625,6 +628,9 @@ class BibliographyParse:
             date = None
             edition = None
             dateOther = None
+            start_date =None
+            end_date =None
+            date_string =None
             if o.parent.name == 'relatedItem' and self.relatedItem == False:
                 continue
             if o.publisher:
@@ -632,6 +638,7 @@ class BibliographyParse:
                 if "valueURI" in o.publisher.attrs:
                     publisher_uri = o.publisher["valueURI"]
             if o.dateIssued:
+                date_string, start_date, end_date = get_dates(o)
                 date = o.dateIssued.text
             if o.place:
                 place = o.place.placeTerm.text
@@ -645,7 +652,10 @@ class BibliographyParse:
                                  "publisher": publisher,
                                  "publisher uri": publisher_uri,
                                  "edition": edition,
-                                 "place": place
+                                 "place": place,
+                                 "date string": date_string, 
+                                 "start date": start_date, 
+                                 "end date": end_date
                                  })
         return origin_infos
 
@@ -829,18 +839,18 @@ class BibliographyParse:
         #CIDOC: Creating time-spans for record change
         r_count = 1
         for r in self.get_record_change_date():
-            dateValue, transformed = dateParse(r['date'])
+            start_date, transformed, end_date = dateParse(r['date'])
             time_span = g.resource(F"{self.mainURI}_time-span_{r_count}")
             time_span.add(RDFS.label, rdflib.Literal(F"time-span of modification of MODS record for {self.mainTitle}"))
             time_span.add(RDF.type, CRM["E52_Time-Span"])
             time_span.add(CRM["P82_at_some_time_within"], rdflib.Literal(r['date']))
             time_span.add(CRM.P2_has_type, BF.changeDate)
             if not transformed:
-                logger.info(F"MISSING DATE FORMAT: {dateValue} on Document {self.mainURI}")
+                logger.info(F"MISSING DATE FORMAT: {start_date} on Document {self.mainURI}")
             else:
-                temp = get_end_date(dateValue, r['date'])
-                time_span.add(CRM.P82a_begin_of_the_begin, rdflib.Literal(dateValue, datatype=XSD.datetime))
-                time_span.add(CRM.P82b_end_of_the_end,rdflib.Literal(dateValue, datatype=XSD.datetime))
+                
+                time_span.add(CRM.P82a_begin_of_the_begin, rdflib.Literal(start_date, datatype=XSD.datetime))
+                time_span.add(CRM.P82b_end_of_the_end,rdflib.Literal(end_date, datatype=XSD.datetime))
             
             adminMetaData.add(CRM["P4_has_time-span"], time_span)
             r_count +=1 
@@ -941,6 +951,8 @@ class BibliographyParse:
                     originInfo.add(CRMPC.P01i_is_domain_of, agent)
                 elif name['role'] != None:
                     logger.warning("Role not handled: "+str(name['role']))
+                else:
+                    pass #assuming authorship
 
 
                 j+=1         
@@ -976,18 +988,24 @@ class BibliographyParse:
 
             
             if o['date']:
-                dateValue, transformed = dateParse(o['date'])
+                if o['start date']:
+                    start_date, transformed, end_date = dateParse(o['start date'], o)
+                else:
+                    start_date, transformed, end_date = dateParse(o['date'], o)
+
+                if o['end date']:
+                    end_date, transformed, dump = dateParse(o['end date'], o)
+
                 time_span = g.resource(F"{self.mainURI}_time-span_{i}")
                 time_span.add(RDFS.label, rdflib.Literal( (F"origin time-span {'of '+ self.mainTitle}") if self.mainTitle else "origin time-span" ))
                 time_span.add(RDF.type, CRM["E52_Time-Span"])
                 time_span.add(CRM["P82_at_some_time_within"], rdflib.Literal(o['date']))
                 time_span.add(CRM.P2_has_type, BF.changeDate)
                 if not transformed:
-                    logger.info(F"MISSING DATE FORMAT: {dateValue} on Document {self.mainURI}")
+                    logger.info(F"MISSING DATE FORMAT: {start_date} on Document {self.mainURI}")
                 else:
-                    temp = get_end_date(dateValue, o['date'])
-                    time_span.add(CRM.P82a_begin_of_the_begin, rdflib.Literal(dateValue, datatype=XSD.datetime))
-                    time_span.add(CRM.P82b_end_of_the_end,rdflib.Literal(dateValue, datatype=XSD.datetime))
+                    time_span.add(CRM.P82a_begin_of_the_begin, rdflib.Literal(start_date, datatype=XSD.datetime))
+                    time_span.add(CRM.P82b_end_of_the_end,rdflib.Literal(end_date, datatype=XSD.datetime))
                 
                 originInfo.add(CRM["P4_has_time-span"],time_span)
 
@@ -1105,22 +1123,23 @@ class BibliographyParse:
         # Grabbing genres extracted from Orlando files
         if self.id in genre_map:
             genres = genre_map[self.id]
-            for g in genres:
-                if g in genre_mapping:            
-                    uri = genre_mapping[g]
+            for genre in genres:
+                if genre in genre_mapping:            
+                    uri = genre_mapping[genre]
                 else:
-                    uri = genre_mapping[g.lower()]
+                    uri = genre_mapping[genre.lower()]
                 uri = rdflib.URIRef(uri)
 
                 if genre_graph[uri]:
                     resource.add(CRM.P2_has_type, uri)
                 else:
-                    logger.info(F"GENRE NOT FOUND: {g}")
+                    logger.info(F"GENRE NOT FOUND: {genre}")
 
 def add_types_to_graph(graph,uri,label):
     term = graph.resource(uri)
     term.add(RDF.type, CRM.E55_Type)
     term.add(RDFS.label, rdflib.Literal(label))            
+
 
 if __name__ == "__main__":
     g = rdflib.Graph()
@@ -1193,11 +1212,11 @@ if __name__ == "__main__":
 
     # test_filenames = ["d75215cb-d102-4256-9538-c44bfbf490d9.xml","2e3e602e-b82c-441d-81bc-883f834b20c1.xml","13f8e71a-def5-41e4-90a0-6ae1092ae446.xml","16d427db-a8a2-4f33-ac53-9f811672584b.xml","4109f3c5-0508-447b-9f86-ea8052ff3981.xml"]
     # test_filenames = ["0d0e00bf-3224-4286-8ec4-f389ec6cc7bb.xml"] # VW, the wave
-    test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"] # VW, the wave
+    # test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"] # VW, the wave
     # test_filenames = ["64d3c008-8a9d-415b-b52b-91d232c00952.xml"]
                     #   "e1b2f98f-1001-4787-a711-464f1527e5a7.xml", "15655c66-8c0b-4493-8f68-8d6cf4998303.xml"]
-    # for fname in os.listdir(dirname):
-    for fname in test_filenames:
+    for fname in os.listdir(dirname):
+    # for fname in test_filenames:
 
         path = os.path.join(dirname, fname)
         if os.path.isdir(path):
@@ -1221,3 +1240,5 @@ if __name__ == "__main__":
     formats = {'ttl': 'turtle'}
     for extension, file_format in formats.items():
         g.serialize(destination=F"{output_name}.{extension}", format=file_format)
+
+logger.info(F"Finished extraction: {datetime.datetime.now().strftime('%d %b %Y %H:%M:%S')}")
