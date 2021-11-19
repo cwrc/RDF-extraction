@@ -1155,7 +1155,7 @@ if __name__ == "__main__":
     g.bind("schema", SCHEMA)
     g.bind("crm", CRM)
     g.bind("frbroo", FRBROO)
-    g.bind("crmpc", CRMPC)
+    g.bind("crmpc", CRM)
     g.bind("skos", SKOS)
 
     # Adding declaration of references
