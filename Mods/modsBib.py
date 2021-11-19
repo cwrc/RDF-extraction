@@ -612,7 +612,6 @@ class BibliographyParse:
             start_date =None
             end_date =None
 
-            print(tag)
             for x in tag.find_all("dateIssued"):
                 if x.get("type") == "start":
                     start_date = x.text
@@ -771,8 +770,6 @@ class BibliographyParse:
         titles = self.get_title()
         self.get_main_title(titles)
         resource = g.resource(self.mainURI) # The Work
-        
-        print(titles)
 
         if not part_type:
             resource.add(RDF.type, FRBROO.F1_Work)
@@ -817,7 +814,8 @@ class BibliographyParse:
                 if instance:
                     instance.add(CRM.P102_has_title, title_res)
                     instance.add(RDFS.label, rdflib.Literal(F"expression of {self.mainTitle}"))
-
+                else:
+                    resource.add(CRM.P102_has_title, title_res)
                 i += 1
 
         
@@ -944,9 +942,6 @@ class BibliographyParse:
                             uri = temp
                         else:
                             uri = f"{agent_resource.identifier}_{name['role']}"
-                            print(agent_resource.identifier)
-                            print(name)
-                            print(uri)
                             
                         
                     agent = g.resource(uri)
@@ -1207,15 +1202,15 @@ if __name__ == "__main__":
         for row in csvfile:
             genre_mapping[row[0]] = row[1]
 
-    # for fname in os.listdir(writing_dir):
-    #     path = os.path.join(writing_dir, fname)
-    #     if os.path.isdir(path):
-    #         continue
+    for fname in os.listdir(writing_dir):
+        path = os.path.join(writing_dir, fname)
+        if os.path.isdir(path):
+            continue
 
-    #     try:
-    #         genreParse = WritingParse(path, genre_map)
-    #     except UnicodeError:
-    #         pass
+        try:
+            genreParse = WritingParse(path, genre_map)
+        except UnicodeError:
+            pass
 
     # test_filenames = ["d75215cb-d102-4256-9538-c44bfbf490d9.xml","2e3e602e-b82c-441d-81bc-883f834b20c1.xml","13f8e71a-def5-41e4-90a0-6ae1092ae446.xml","16d427db-a8a2-4f33-ac53-9f811672584b.xml","4109f3c5-0508-447b-9f86-ea8052ff3981.xml"]
     # test_filenames = ["0d0e00bf-3224-4286-8ec4-f389ec6cc7bb.xml"] # VW, the wave
