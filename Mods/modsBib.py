@@ -86,12 +86,15 @@ ROLES = {
     "translator": MARC_REL.trl,
     "compiler": MARC_REL.com,
     "adapter": MARC_REL.adp,
+    "adaptor": MARC_REL.adp,
     "contributor": MARC_REL.ctb,
     "illustrator": MARC_REL.ill,
     "introduction": MARC_REL.win,
     "revised": MARC_REL.edt,
     "afterword": MARC_REL.aft,
-    "transcriber":MARC_REL.trc
+    "transcriber":MARC_REL.trc,
+    "author":MARC_REL.aut,
+    "recipient":MARC_REL.rcp
 }
 
 genre_graph = None
@@ -608,14 +611,16 @@ class BibliographyParse:
             date_string =None
             start_date =None
             end_date =None
+
             print(tag)
             for x in tag.find_all("dateIssued"):
                 if x.get("type") == "start":
                     start_date = x.text
                 elif x.get("type") == "end":
                     end_date = x.text
-                else:
+                elif x.get("encoding")== "iso8601":
                     date_string = x.text
+
             
             return date_string, start_date, end_date
 
@@ -925,7 +930,9 @@ class BibliographyParse:
                 """     
 
                 #Attaching role to the event
-                if name['role'] in ROLES:
+                if name['role'] in ROLES or name['role'] == None:
+                    if name['role'] == None:
+                        name['role'] = "author"
                     agent_label = F"{name['name']} in role of {name['role']}"
                     uri = None
                     if agent_label in AGENTS:
@@ -951,9 +958,6 @@ class BibliographyParse:
                     originInfo.add(CRMPC.P01i_is_domain_of, agent)
                 elif name['role'] != None:
                     logger.warning("Role not handled: "+str(name['role']))
-                else:
-                    pass #assuming authorship
-
 
                 j+=1         
             
@@ -988,6 +992,9 @@ class BibliographyParse:
 
             
             if o['date']:
+                start_date= None
+                transformed= None
+                end_date =None
                 if o['start date']:
                     start_date, transformed, end_date = dateParse(o['start date'], o)
                 else:
@@ -1213,10 +1220,10 @@ if __name__ == "__main__":
     # test_filenames = ["d75215cb-d102-4256-9538-c44bfbf490d9.xml","2e3e602e-b82c-441d-81bc-883f834b20c1.xml","13f8e71a-def5-41e4-90a0-6ae1092ae446.xml","16d427db-a8a2-4f33-ac53-9f811672584b.xml","4109f3c5-0508-447b-9f86-ea8052ff3981.xml"]
     # test_filenames = ["0d0e00bf-3224-4286-8ec4-f389ec6cc7bb.xml"] # VW, the wave
     # test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"] # VW, the wave
-    # test_filenames = ["64d3c008-8a9d-415b-b52b-91d232c00952.xml"]
-                    #   "e1b2f98f-1001-4787-a711-464f1527e5a7.xml", "15655c66-8c0b-4493-8f68-8d6cf4998303.xml"]
-    for fname in os.listdir(dirname):
-    # for fname in test_filenames:
+    test_filenames = ["64d3c008-8a9d-415b-b52b-91d232c00952.xml",
+                      "e1b2f98f-1001-4787-a711-464f1527e5a7.xml", "15655c66-8c0b-4493-8f68-8d6cf4998303.xml"]
+    # for fname in os.listdir(dirname):
+    for fname in test_filenames:
 
         path = os.path.join(dirname, fname)
         if os.path.isdir(path):
