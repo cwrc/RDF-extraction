@@ -101,7 +101,7 @@ genre_graph = None
 genre_map = {}
 geoMapper = None
 genre_mapping = {}
-STRING_MATCH_RATIO = 50
+STRING_MATCH_RATIO = 80
 
 UNIQUE_UNMATCHED_PLACES = set()
 AGENTS = {}
@@ -576,22 +576,6 @@ class BibliographyParse:
 
         return names
 
-    def get_places(self):
-        origins = []
-        if self.soup.originInfo:
-            for oi in self.soup.get_all(['originInfo']):
-                if oi.parent.name == 'relatedItem' and self.relatedItem == False:
-                    continue
-                place = oi.place.placeTerm.text
-                publisher = oi.publisher.text
-                date = oi.dateIssued.text
-                date_type = oi.dateIssued['encoding']
-
-                origins.append(
-                    {'place': place, 'publisher': publisher, 'date': date, 'date_type': date_type})
-
-        return origins
-
     def get_languages(self):
         langs = []
         for l in self.soup.find_all('language'):
@@ -599,11 +583,7 @@ class BibliographyParse:
                 if 'authority' in t.attrs and t['authority'] == "iso639-2b":
                     langs.append({'language': t.text, 'type': t['type']})
 
-        return langs
-
-
-            
-
+        return langs        
 
     def get_origins(self):
         def get_dates(tag):
@@ -978,6 +958,9 @@ class BibliographyParse:
                 # TODO: review place mapping
                 place_map = geoMapper.get_place(o['place'].strip())
                 if place_map:
+                    print(o['place'])
+                    print(place_map)
+                    input()
                     for item in place_map:
                         originInfo.add(CRM.P7_took_place_at, rdflib.URIRef(item))
                         place = g.resource(item)
