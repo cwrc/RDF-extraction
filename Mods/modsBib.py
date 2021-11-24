@@ -958,9 +958,6 @@ class BibliographyParse:
                 # TODO: review place mapping
                 place_map = geoMapper.get_place(o['place'].strip())
                 if place_map:
-                    print(o['place'])
-                    print(place_map)
-                    input()
                     for item in place_map:
                         originInfo.add(CRM.P7_took_place_at, rdflib.URIRef(item))
                         place = g.resource(item)
