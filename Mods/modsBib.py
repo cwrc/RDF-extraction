@@ -35,6 +35,14 @@ SCHEMA = rdflib.Namespace("http://schema.org/")
 SKOS = rdflib.Namespace("http://www.w3.org/2004/02/skos/core#")
 XML = rdflib.Namespace("http://www.w3.org/XML/1998/namespace")
 
+# To reduce duplication of admin agents
+ADMIN_AGENTS = {
+    "Orlando Document Archive": DATA.Orlando_Document_Archive,
+    "CaAEU": DATA.CaAEU,
+    "UAB": DATA.UAB,
+    "U3G": DATA.U3G,
+    "Orlando: Women's Writing in the British Isles from the Beginnings to the Present": DATA.Orlando,
+}
 
 genre_graph = None
 genre_map = {}
@@ -398,7 +406,7 @@ class BibliographyParse:
                 usage = None
 
             if title.title:
-                title_text = title.text
+                title_text = title.text.strip()
             else:
                 title_text = ""
 
@@ -691,7 +699,19 @@ class BibliographyParse:
             contribution_resource = g.resource(self.mainURI + "#contribution_{}".format(i))
 
             contribution_resource.add(RDF.type, BF.Contribution)
-            agent_resource = g.resource(self.mainURI + "#agent_{}".format(i))
+            
+            agent_resource = None
+            
+            if "uri" in name and name["uri"]:
+                agent_resource=g.resource(name["uri"])
+            else:
+                temp_name = urllib.parse.quote_plus(
+                remove_punctuation(name['name']))
+                agent_resource=g.resource(DATA[F"{temp_name}"])
+            
+            
+            
+            # agent_resource = g.resource(self.mainURI + "#agent_{}".format(i))
             if name['type'] == 'personal':
                 agent_resource.add(RDF.type, BF.Person)
             elif name['type'] == 'family':
@@ -704,23 +724,26 @@ class BibliographyParse:
                 agent_resource.add(RDF.type, BF.Agent)
 
             agent_resource.add(RDFS.label, Literal(name["name"]))
-            role_resource = g.resource("{}#contribution_{}_role".format(self.mainURI, i))
-            role_resource.add(RDF.type, BF.Role)
+            # role_resource = g.resource("{}#contribution_{}_role".format(self.mainURI, i))
+            # role_resource.add(RDF.type, BF.Role)
 
             if name['role'] in self.role_map:
-                role_resource.add(BF.code, Literal(self.role_map[name['role']]))
-                role_resource.add(BF.source, MARCREL[self.role_map[name['role']]])
-
+                # role_resource.add(BF.code, Literal(self.role_map[name['role']]))
+                # role_resource.add(BF.source, MARCREL[self.role_map[name['role']]])
+                contribution_resource.add(BF.role,MARCREL[self.role_map[name['role']]])
             if name['role']:
-                role_resource.add(RDFS.label, Literal(name["role"]))
+                # role_resource.add(RDFS.label, Literal(name["role"]))
+                contribution_resource.add(BF.role,Literal(name["role"]))
             else:
-                role_resource.add(BF.code, Literal("aut"))
-                role_resource.add(BF.source, MARCREL.aut)
-                role_resource.add(RDFS.label, Literal("author"))
+                contribution_resource.add(BF.role,MARCREL.aut)
+                # role_resource.add(BF.code, Literal("aut"))
+                # role_resource.add(BF.source, MARCREL.aut)
+                # role_resource.add(RDFS.label, Literal("author"))
 
             agent_resource.add(OWL.sameAs, URIRef("http://cwrc.ca/cwrcdata/{}".format(remove_punctuation(name['name']))))
             contribution_resource.add(BF.agent, agent_resource)
-            contribution_resource.add(BF.role, role_resource)
+            # bf:role marcrel:aut
+            # contribution_resource.add(BF.role, role_resource)
             resource.add(BF.contribution, contribution_resource)
 
             i += 1
@@ -732,19 +755,26 @@ class BibliographyParse:
 
         i = 0
         for r in self.get_record_content_source():
-            assigner_agent = g.resource("{}_admin_agent_{}".format(self.mainURI, i))
-            assigner_agent.add(RDF.type, BF.Agent)
-            assigner_agent.add(RDFS.label, Literal(r['value']))
+            if r['value'] in ADMIN_AGENTS:
+                assigner_agent = g.resource(ADMIN_AGENTS[r["value"]])
+            else:           
+                assigner_agent = g.resource(F"{self.mainURI}_admin_agent_{i}")
 
-            if 'authority' in r:
-                source_agent = g.resource("{}_admin_agent_source_{}".format(self.mainURI, i))
-                source_agent.add(RDF.type, BF.Source)
-                source_agent.add(RDF.value, Literal(r['authority']))
-                assigner_agent.add(BF.source, source_agent)
+                i += 1
+            
+            assigner_agent.add(RDFS.label, rdflib.Literal(r['value']))
+            assigner_agent.add(RDF.type, BF.Agent)
+
+
+
+            # if 'authority' in r:
+            #     source_agent = g.resource("{}_admin_agent_source_{}".format(self.mainURI, i))
+            #     source_agent.add(RDF.type, BF.Source)
+            #     source_agent.add(RDF.value, Literal(r['authority']))
+            #     assigner_agent.add(BF.source, source_agent)
 
             adminMetaData.add(BF.assigner, assigner_agent)
 
-            i += 1
 
         for r in self.get_record_change_date():
 
@@ -755,25 +785,28 @@ class BibliographyParse:
 
         i = 0
         for r in self.get_record_origin():
-            generationProcess = g.resource("{}_generation_process_{}".format(self.mainURI, i))
-            generationProcess.add(RDF.type, BF.GenerationProcess)
-            generationProcess.add(RDF.value, Literal(r['origin']))
+            if r['origin'] == "Record has been transformed into MODS from an XML Orlando record using an XSLT stylesheet. Metadata originally created in Orlando Document Archive's bibliographic database formerly available at nifflheim.arts.ualberta.ca/wwp.":
+                generation_process = g.resource(DATA.generation_process_xslt)
+                generation_process.add(RDF.type, BF.GenerationProcess)
+                generation_process.add(RDF.value, Literal(r['origin']))
+                generation_process.add(RDFS.comment,rdflib.Literal(r['origin']))
+                generation_process.add(RDFS.label, rdflib.Literal(F"generation process of the MODS Record of Orlando bibiliographic records"))
 
-            adminMetaData.add(BF.generationProcess, generationProcess)
+            else:
+                generation_Process = g.resource("{}_generation_process_{}".format(self.mainURI, i))
+                generation_process.add(RDF.type, BF.GenerationProcess)
+                generation_process.add(RDF.value, Literal(r['origin']))
+
+            adminMetaData.add(BF.generationProcess, generation_process)
 
         i = 0
         for r in self.get_record_language_catalog():
-            adminMetaData.add(BF.descriptionLanguage, Literal(r['language']))
+            if (len(r['language'])) < 5:
+                adminMetaData.add(BF.descriptionLanguage, rdflib.URIRef(F"http://id.loc.gov/vocabulary/languages/{lang['language']}"))
+            else:
+                adminMetaData.add(BF.descriptionLanguage, Literal(r['language']))
 
-        # Track this transformation
-        cur_date = datetime.datetime.now()
-        generation_process = g.resource("{}_generation_process_cwrc".format(self.mainURI))
-        generation_process.add(RDF.type, BF.GenerationProcess)
-        generation_process.add(RDF.value,
-                               Literal("Converted from MODS to BIBFRAME RDF in" +
-                                       " {} {} using CWRC's modsBib extraction script".format(cur_date.strftime("%B"),
-                                                                                              cur_date.strftime("%Y"))))
-        adminMetaData.add(BF.generationProcess, generation_process)
+
 
         resource.add(BF.adminMetadata, adminMetaData)
 
@@ -922,20 +955,20 @@ if __name__ == "__main__":
             genre_mapping[row[0]] = row[1]
 
 
-    for fname in os.listdir(writing_dir):
-        path = os.path.join(writing_dir, fname)
-        if os.path.isdir(path):
-            continue
+    # for fname in os.listdir(writing_dir):
+    #     path = os.path.join(writing_dir, fname)
+    #     if os.path.isdir(path):
+    #         continue
 
-        try:
-            genreParse = WritingParse(path, genre_map)
-        except UnicodeError:
-            pass
+    #     try:
+    #         genreParse = WritingParse(path, genre_map)
+    #     except UnicodeError:
+    #         pass
 
-    # test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"]
-    # for fname in test_filenames:
+    test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"]
+    for fname in test_filenames:
 
-    for fname in os.listdir(dirname):
+    # for fname in os.listdir(dirname):
 
         path = os.path.join(dirname, fname)
         if os.path.isdir(path):
