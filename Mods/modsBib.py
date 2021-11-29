@@ -23,16 +23,22 @@ logger.info(
 
 # ---------- SETUP NAMESPACES ----------
 
-CWRC = rdflib.Namespace( "http://sparql.cwrc.ca/ontologies/cwrc#")
-BF = rdflib.Namespace( "http://id.loc.gov/ontologies/bibframe/")
-XML = rdflib.Namespace("http://www.w3.org/XML/1998/namespace")
-MARCREL = rdflib.Namespace("http://id.loc.gov/vocabulary/relators/")
+
+BF = rdflib.Namespace("http://id.loc.gov/ontologies/bibframe/")
+CWRC = rdflib.Namespace("http://sparql.cwrc.ca/ontologies/cwrc#")
 DATA = rdflib.Namespace("http://cwrc.ca/cwrcdata/")
+FRBROO = rdflib.Namespace("http://iflastandards.info/ns/fr/frbr/frbroo/")
 GENRE = rdflib.Namespace("http://sparql.cwrc.ca/ontologies/genre#")
+MARC_REL = rdflib.Namespace("http://id.loc.gov/vocabulary/relators/")
+MARCREL = rdflib.Namespace("http://id.loc.gov/vocabulary/relators/")
 SCHEMA = rdflib.Namespace("http://schema.org/")
+SKOS = rdflib.Namespace("http://www.w3.org/2004/02/skos/core#")
+XML = rdflib.Namespace("http://www.w3.org/XML/1998/namespace")
+
 
 genre_graph = None
 genre_map = {}
+genre_mapping = {}
 geoMapper = None
 STRING_MATCH_RATIO = 80
 
@@ -225,7 +231,7 @@ class WritingParse:
     def __init__(self, filename, matched_documents):
 
         with open(filename) as f:
-            self.soup = BeautifulSoup(f, 'lxml')
+            self.soup = BeautifulSoup(f, 'lxml-xml')
 
         self.matched_documents = matched_documents
 
@@ -237,20 +243,20 @@ class WritingParse:
         Used to map to blibiography
         :return: None
         """
-        textscopes = self.soup.find_all('textscope')
+        textscopes = self.soup.find_all('TEXTSCOPE')
 
         for ts in textscopes:
             ts_parent = ts.parent
 
-            if 'dbref' in ts.attrs:
-                db_ref = ts.attrs['dbref']
+            if 'DBREF' in ts.attrs:
+                db_ref = ts.attrs['DBREF']
 
-                tgenres = ts_parent.find_all('tgenre')
+                tgenres = ts_parent.find_all('TGENRE')
                 genres = []
 
                 for genre in tgenres:
-                    if 'genrename' in genre.attrs:
-                        name = genre.attrs['genrename']
+                    if 'GENRENAME' in genre.attrs:
+                        name = genre.attrs['GENRENAME']
                         genres.append(name)
 
                 self.matched_documents[db_ref] = genres
@@ -323,12 +329,22 @@ class BibliographyParse:
         """
         if type(filename) is str:
             with open(filename) as f:
-                self.soup = BeautifulSoup(f, 'lxml')
+                self.soup = BeautifulSoup(f, 'lxml-xml')
         else:
             self.soup = filename
 
+
+        self.filename = filename
+        self.mainTitle = None
         self.g = graph
         self.id = resource_name.replace(".xml", "")
+        
+        if ".xml" in resource_name:
+            self.id = self.soup.find("recordIdentifier", source="Orlando").text
+        else:
+            self.id = resource_name.replace(".xml", "")
+
+        
         if 'data:' in self.id:
             self.mainURI = self.id
         else:
@@ -342,8 +358,12 @@ class BibliographyParse:
         If a type is not mapped then a default of Text from BIBFRAME
         :return: str|URI
         """
-        if self.soup.typeofresource:
-            resource_type = self.soup.typeofresource.text.lower()
+        temp = self.soup.find_all("typeOfResource")
+        if len(temp) > 1:
+            logger.error("Multiple types detected! "+ self.filename)
+        
+        if self.soup.typeOfResource:
+            resource_type = self.soup.typeOfResource.text.lower()
 
             return self.type_map[resource_type]
         else:
@@ -365,9 +385,9 @@ class BibliographyParse:
         titles = []
 
 
-        for title in self.soup.find_all('titleinfo'):
+        for title in self.soup.find_all('titleInfo'):
             # Leave out relateditem types
-            if title.parent.name == "relateditem" and not self.relatedItem:
+            if title.parent.name == "relatedItem" and not self.relatedItem:
                 continue
 
             if 'usage' in title.attrs:
@@ -388,7 +408,7 @@ class BibliographyParse:
 
     def get_record_content_source(self):
         records = []
-        for record in self.soup.find_all('recordcontentsource'):
+        for record in self.soup.find_all('recordContentSource'):
             if 'authority' in record.attrs:
                 records.append({"value": record.text, "authority": record['authority']})
             else:
@@ -399,7 +419,7 @@ class BibliographyParse:
     def get_record_language_catalog(self):
         records = []
 
-        for r in self.soup.find_all("languageterm"):
+        for r in self.soup.find_all("languageTerm"):
             if 'type' in r.attrs and  r['type'] == "code":
                 records.append({"language": r.text, "authority": r['authority'], "type": r['type']})
             else:
@@ -410,7 +430,7 @@ class BibliographyParse:
     def get_record_origin(self):
         records = []
 
-        for r in self.soup.find_all('recordorigin'):
+        for r in self.soup.find_all('recordOrigin'):
             records.append({"origin": r.text})
 
         return records
@@ -418,23 +438,23 @@ class BibliographyParse:
     def get_record_change_date(self):
         records = []
 
-        for r in self.soup.find_all('recordchangedate'):
+        for r in self.soup.find_all('recordChangeDate'):
             records.append({"date": r.text})
 
         return records
 
     def get_records(self):
         records = []
-        for r in self.soup.find_all('recordinfo'):
+        for r in self.soup.find_all('recordInfo'):
             record = {}
             record['sources'] = []
-            for source in r.find_all('recordcontentsource'):
+            for source in r.find_all('recordContentSource'):
                 if 'authority' in source:
                     record['sources'].append({'source': source.text, 'authority': source['authority']})
                 else:
                     record['sources'].append({'source': source.text, 'authority': ""})
             record['id'] = {'id': r.recordidentifier, 'source': r.source}
-            record['creationdate'] = {'date': r.creationdate.text, 'encoding': r.creationdate['encoding']}
+            record['creationDate'] = {'date': r.creationdate.text, 'encoding': r.creationdate['encoding']}
             record['origin'] = {'origin': r.recordorigin.text}
 
             records.append(record)
@@ -444,7 +464,7 @@ class BibliographyParse:
         names = []
 
         for np in self.soup.find_all('name'):
-            if np.parent.name == "relateditem" and self.relatedItem == False:
+            if np.parent.name == "relatedItem" and self.relatedItem == False:
                 continue
 
             if 'type' in np.attrs:
@@ -453,7 +473,7 @@ class BibliographyParse:
                 name_type = None
 
             role = None
-            role_terms = np.find_all('roleterm')
+            role_terms = np.find_all('roleTerm')
             for role in role_terms:
                 if role['type'] == "text":
                     role = role.text
@@ -463,17 +483,22 @@ class BibliographyParse:
             elif np.namepart:
                 name = np.namepart.get_text()
 
+            alt = None
+            if np.displayForm:
+                alt = np.displayForm.get_text()
 
+            uri = None
+            if "valueURI" in np.attrs:
+                uri = np.attrs["valueURI"]
 
-            names.append({"type": name_type, "role": role, "name": name})
-
+            names.append({"type": name_type, "role": role, "name": name, "uri":uri, "altname":alt})
         return names
 
     def get_places(self):
         origins = []
         if self.soup.origininfo:
-            for oi in self.soup.get_all(['origininfo']):
-                if oi.parent.name == 'relateditem' and self.relatedItem == False:
+            for oi in self.soup.get_all(['originInfo']):
+                if oi.parent.name == 'relatedItem' and self.relatedItem == False:
                     continue
                 place = oi.place.placeterm.text
                 publisher = oi.publisher.text
@@ -487,7 +512,7 @@ class BibliographyParse:
     def get_languages(self):
         langs = []
         for l in self.soup.find_all('language'):
-            for t in l.find_all('languageterm'):
+            for t in l.find_all('languageTerm'):
                 if 'authority' in t.attrs and t['authority'] == "iso639-2b":
                     langs.append({'language': t.text, 'type': t['type']})
 
@@ -495,13 +520,13 @@ class BibliographyParse:
 
     def get_origins(self):
         origin_infos = []
-        for o in self.soup.find_all('origininfo'):
+        for o in self.soup.find_all('originInfo'):
             place = None
             publisher = None
             date = None
             edition = None
             dateOther = None
-            if o.parent.name == 'relateditem' and self.relatedItem == False:
+            if o.parent.name == 'relatedItem' and self.relatedItem == False:
                 continue
             if o.publisher:
                 publisher = o.publisher.text
@@ -528,15 +553,14 @@ class BibliographyParse:
         to generate the same triples as the parent
         :return: [BeautifulSoup]
         """
-        related_items = self.soup.find_all('relateditem')
+        related_items = self.soup.find_all('relatedItem')
         soups = []
         for item in related_items:
             item_type="host"
             if 'type' in item.attrs:
                 item_type = item.attrs['type']
             try:
-                print("{}".format(item))
-                soups.append({"type": item_type, "soup": BeautifulSoup("{}".format(item), 'lxml')})
+                soups.append({"type": item_type, "soup": BeautifulSoup(F"{item}", 'lxml-xml')})
             except UnicodeError:
                 pass
 
@@ -577,7 +601,7 @@ class BibliographyParse:
             # Get the values
             parts = self.soup.find_all('part')
             for item in parts:
-                if item.parent.name == 'relateditem' and not self.relatedItem:
+                if item.parent.name == 'relatedItem' and not self.relatedItem:
                     continue
                 if not item.extent:
                     continue
@@ -586,20 +610,20 @@ class BibliographyParse:
                 volume_num = None
 
                 if item.extent.start:
-                    cur_value += "{}-".format(item.extent.start.text)
+                    cur_value += F"{item.extent.start.text}-"
                 else:
                     cur_value += "--"
 
                 if item.extent.end:
-                    cur_value += "{}".format(item.extent.end.text)
+                    cur_value += F"{item.extent.end.text}"
                 else:
                     cur_value += "-"
 
                 if item.extent.total:
-                    cur_value += "{}".format(item.extent.total.text)
+                    cur_value += F"{item.extent.total.text}"
 
                 if item.extent.list:
-                    cur_value += "{}".format(item.extent.total.text)
+                    cur_value += F"{item.extent.list.text}"
 
                 # Check and go through volume and issue numbers
                 if item.detail and 'type' in item.detail.attrs:
@@ -616,6 +640,12 @@ class BibliographyParse:
 
         return part_objects
 
+
+    def get_main_title(self, titles):
+        for x in titles:
+            if x['usage'] == 'primary':
+                self.mainTitle = x['title'].strip()
+                return
 
     def build_graph(self):
         g = self.g
@@ -843,16 +873,19 @@ class BibliographyParse:
 
 
 if __name__ == "__main__":
-    g = Graph()
-    g.bind("cwrc", CWRC)
+    g = rdflib.Graph()
     g.bind("bf", BF)
-    g.bind("xml", XML, True)
-    g.bind("marcrel", MARCREL)
+    g.bind("crm", CRM)
+    g.bind("cwrc", CWRC)
     g.bind("data", DATA)
+    g.bind("frbroo", FRBROO)
     g.bind("genre", GENRE)
+    g.bind("marcrel", MARC_REL)
+    g.bind("marcrel", MARCREL)
     g.bind("owl", OWL)
     g.bind("schema", SCHEMA)
-
+    g.bind("skos", SKOS)
+    g.bind("xml", XML, True)
     config_options = {}
 
     try:
@@ -867,17 +900,25 @@ if __name__ == "__main__":
         print("WRITING_FILES=[DIRECTORY OF WRITING FILES]")
         print("GENRE_ONTOLOGY=[PATH TO GENRE ONTOLOGY]")
         print("BIBLIOGRAPHY_FILES=[DIRECTORY OF BILBIOGRAPHY FILES]")
+        print("GENRE_CSV=[PATH TO GENRE MAPPING]")
 
     dirname = config_options['BIBLIOGRAPHY_FILES']
     writing_dir = config_options['WRITING_FILES']
     genre_ontology = config_options['GENRE_ONTOLOGY']
     places = config_options['PLACES_CSV']
+    genre_map_file = config_options['GENRE_CSV']
+
 
     geoMapper = ParseGeoNamesMapping(places)
 
-    genre_graph = Graph()
-
+    genre_graph = rdflib.Graph()
     genre_graph.parse(genre_ontology)
+
+    with open(genre_map_file) as f:
+        csvfile = csv.reader(f)
+        for row in csvfile:
+            genre_mapping[row[0]] = row[1]
+
 
     for fname in os.listdir(writing_dir):
         path = os.path.join(writing_dir, fname)
@@ -888,6 +929,9 @@ if __name__ == "__main__":
             genreParse = WritingParse(path, genre_map)
         except UnicodeError:
             pass
+
+    # test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"]
+    # for fname in test_filenames:
 
     for fname in os.listdir(dirname):
 
@@ -908,8 +952,10 @@ if __name__ == "__main__":
         for item in UNIQUE_UNMATCHED_PLACES:
             writer.writerow([item])
 
-    fname = "Bibliography"
+    fname = "bibliography"
     output_name = fname.replace(".xml", "")
     formats = {'ttl': 'turtle'} # 'xml': 'pretty-xml'
     for extension, file_format in formats.items():
-        g.serialize(destination="bibrdf/{}.{}".format(output_name, extension), format=file_format)
+        g.serialize(destination=F"{output_name}.{extension}", format=file_format)
+
+logger.info(F"Finished extraction: {datetime.datetime.now().strftime('%d %b %Y %H:%M:%S')}")
