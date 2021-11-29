@@ -1,6 +1,9 @@
+*.swp
+.DS_STORE
 *.pyc
 .env
 .idea
+.venv
 venv
 /Biography/bio_data
 /Biography/extracted_triples
@@ -12,3 +15,4 @@ venv
 *.xml
 *.rdf
 *.log
+*.config
