@@ -13,11 +13,13 @@ CONFIG_FILE="./bibparse.config"
 
 logger = logging.getLogger('bibliography_extraction')
 logger.setLevel(logging.INFO)
-
-fh = logging.FileHandler('bibliography_extraction.log')
+formatter = logging.Formatter(
+    '%(levelname)s {Line #%(lineno)d} : %(message)s ')
+fh = logging.FileHandler('bibliography_extraction.log', mode="w")
 fh.setLevel(logging.INFO)
-
 logger.addHandler(fh)
+logger.info(
+    F"Started extraction: {datetime.datetime.now().strftime('%d %b %Y %H:%M:%S')}")
 
 # ---------- SETUP NAMESPACES ----------
 
@@ -32,7 +34,7 @@ SCHEMA = rdflib.Namespace("http://schema.org/")
 genre_graph = None
 genre_map = {}
 geoMapper = None
-STRING_MATCH_RATIO = 50
+STRING_MATCH_RATIO = 80
 
 UNIQUE_UNMATCHED_PLACES = set()
 
@@ -50,14 +52,21 @@ def remove_punctuation(input_str, all_punctuation=False):
     :return: string with punctuation replaced
     """
     import string
-    if all_punctuation:
+    from unidecode import unidecode
+    if all:
         translator = str.maketrans('', '', string.punctuation)
     else:
         translator = str.maketrans('', '', string.punctuation.replace("-", ""))
+    input_str = input_str.translate(translator)
+    input_str = input_str.replace(" ", "_")
+    # TODO: Need to revise this method to handle titles with weird unicode ex.
+    # Public Confessions of a Middle-Aged Woman Aged 55 ¾
+    input_str = input_str.replace("¾", "3-4")
+    input_str = input_str.replace("¼", "1-4")
+    input_str = input_str.replace("<<", "")
+    input_str = input_str.replace(">>", "")
+    return unidecode(input_str)
 
-    temp_str = input_str.translate(translator)
-    temp_str = temp_str.replace(" ", "_")
-    return temp_str
 
 
 def dateParse(date_string: str):
