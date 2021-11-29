@@ -480,9 +480,12 @@ class BibliographyParse:
 
             if 'standard' in np.attrs:
                 name = np.attrs['standard']
-            elif np.namepart:
-                name = np.namepart.get_text()
-
+            elif np.namePart:
+                name = np.namePart.get_text()
+            else:
+                name = None
+                logger.warning(F"No name found: {np}")
+                
             alt = None
             if np.displayForm:
                 alt = np.displayForm.get_text()
@@ -500,10 +503,10 @@ class BibliographyParse:
             for oi in self.soup.get_all(['originInfo']):
                 if oi.parent.name == 'relatedItem' and self.relatedItem == False:
                     continue
-                place = oi.place.placeterm.text
+                place = oi.place.placeTerm.text
                 publisher = oi.publisher.text
-                date = oi.dateissued.text
-                date_type = oi.dateissued['encoding']
+                date = oi.dateIssued.text
+                date_type = oi.dateIssued['encoding']
 
                 origins.append({'place': place, 'publisher': publisher, 'date': date, 'date_type': date_type})
 
@@ -531,13 +534,13 @@ class BibliographyParse:
             if o.publisher:
                 publisher = o.publisher.text
             if o.dateissued:
-                date = o.dateissued.text
+                date = o.dateIssued.text
             if o.place:
-                place = o.place.placeterm.text
+                place = o.place.placeTerm.text
             if o.edition:
                 edition = o.edition.text
             if o.dateother:
-                dateOther = o.dateother.text
+                dateOther = o.dateOther.text
 
             origin_infos.append({"date": date,
                                  "dateOther": dateOther,
@@ -875,7 +878,6 @@ class BibliographyParse:
 if __name__ == "__main__":
     g = rdflib.Graph()
     g.bind("bf", BF)
-    g.bind("crm", CRM)
     g.bind("cwrc", CWRC)
     g.bind("data", DATA)
     g.bind("frbroo", FRBROO)
