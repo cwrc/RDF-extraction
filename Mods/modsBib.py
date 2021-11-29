@@ -115,12 +115,6 @@ def dateParse(date_string: str):
         pass
 
     try:
-        dt = datetime.datetime.strptime(date_string, "%Y-%m-%d")
-        return dt.isoformat().split("T")[0], True
-    except ValueError:
-        pass
-
-    try:
         dt = datetime.datetime.strptime(date_string, "%B %Y")
         return dt.isoformat().split("T")[0], True
     except ValueError:
