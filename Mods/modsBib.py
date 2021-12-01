@@ -385,13 +385,15 @@ class BibliographyParse:
         Extracts the genre and related authority of that genre
         :return: dict
         """
-        if self.soup.genre:
-            if 'authority' in self.soup.genre:
-                authority = self.soup.genre['authority']
+        genres = []
+        for genre in self.soup.find_all("genre"):
+            if 'authority' in genre.attrs:
+                authority = genre['authority']
             else:
                 authority = ""
-            return {'genre': self.soup.genre.text, 'authority': authority}
-
+            genres.append( {'genre': genre.text, 'authority': authority})
+        
+        return genres
     def get_title(self):
         titles = []
 
@@ -921,25 +923,38 @@ class BibliographyParse:
 
             instance.add(BF.extent, extent_resource)
 
-        genre = self.get_genre()
+        genres = self.get_genre()
+        print(genres)
+        print(genre_graph)
+        
+        for genre in genres:
+            print(genre)
+            if genre["genre"] in genre_mapping:
+                uri = rdflib.URIRef(genre_mapping[genre["genre"]])
+                if genre_graph[uri]:
+                    for x in genre_graph[uri]:
+                        print(x)
+                    resource.add(GENRE.hasGenre, uri)
+                else:
+                    logger.warning(F"GENRE NOT FOUND: {genre['genre']}")
+            else:
+                    logger.warning(F"GENRE NOT FOUND: {genre['genre']}")
 
-        if genre:
-            genre_res = g.resource("{}_genre".format(self.mainURI))
-            genre_res.add(RDF.type, BF.GenreForm)
-            genre_res.add(RDFS.label, Literal(genre['genre']))
-
-            resource.add(BF.genreForm, genre_res)
 
         if self.id in genre_map:
             genres = genre_map[self.id]
-            for g in genres:
-                gName = g.lower().title()
-                uri = URIRef('http://sparql.cwrc.ca/ontologies/genre#{}'.format(gName))
+            for genre in genres:
+                if genre in genre_mapping:            
+                    uri = genre_mapping[genre]
+                else:
+                    uri = genre_mapping[genre.lower()]
+                uri = rdflib.URIRef(uri)
 
                 if genre_graph[uri]:
-                    resource.add(GENRE.hasGenre, GENRE[gName.lower()])
+                    resource.add(GENRE.hasGenre, uri)
                 else:
-                    logger.info("GENRE NOT FOUND: {0}".format(gName))
+                    logger.info(F"GENRE NOT FOUND: {genre}")
+
 
 
 if __name__ == "__main__":
@@ -1002,7 +1017,7 @@ if __name__ == "__main__":
     # test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"]
     # for fname in test_filenames:
 
-    for fname in os.listdir(dirname):
+    for fname in os.listdir(dirname)[:10]:
 
         path = os.path.join(dirname, fname)
         if os.path.isdir(path):
