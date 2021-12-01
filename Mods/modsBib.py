@@ -51,6 +51,7 @@ geoMapper = None
 STRING_MATCH_RATIO = 80
 
 UNIQUE_UNMATCHED_PLACES = set()
+AGENTS = {}
 
 # --------- UTILITY FUNCTIONS -------
 
@@ -310,7 +311,9 @@ class BibliographyParse:
         "introduction": "win",
         "revised": "edt",
         "afterword": "aft",
-        "transcriber": "trc"
+        "transcriber": "trc",
+        "recipient":"rcp",
+        "rcp":"rcp"
     }
 
     related_item_map = {
@@ -485,6 +488,10 @@ class BibliographyParse:
             for role in role_terms:
                 if role['type'] == "text":
                     role = role.text
+                else:
+                    role = role.text
+                    # continue
+
 
             if 'standard' in np.attrs:
                 name = np.attrs['standard']
@@ -685,7 +692,6 @@ class BibliographyParse:
                     resource.add(RDFS.label, Literal(item['title'].strip()))
                 # Schema.org attributes per spreadsheet for BIBFRAME matching
                 title_res.add(RDF.type, SCHEMA.CreativeWork)
-                title_res.add(SCHEMA.name, Literal(item['title'].strip()))
 
                 instance.add(BF.title, title_res)
 
@@ -696,19 +702,47 @@ class BibliographyParse:
         resource.add(RDF.type, self.get_type())
 
         for name in self.get_names():
-            contribution_resource = g.resource(self.mainURI + "#contribution_{}".format(i))
+            # contribution_resource = g.resource(self.mainURI + "#contribution_{}".format(i))
 
-            contribution_resource.add(RDF.type, BF.Contribution)
+
             
             agent_resource = None
-            
             if "uri" in name and name["uri"]:
                 agent_resource=g.resource(name["uri"])
             else:
-                temp_name = urllib.parse.quote_plus(
-                remove_punctuation(name['name']))
+                temp_name = remove_punctuation(name['name'])
                 agent_resource=g.resource(DATA[F"{temp_name}"])
+         
+
+            if name['role'] in self.role_map:
+                role = MARCREL[self.role_map[name['role']]]
+            elif name['role']:
+                role = Literal(name["role"])
+            else:
+                role = MARCREL.aut
             
+            if role and "id.loc" in role:
+                role = role.split("/")[-1]
+                
+            
+            agent_label = F"{name['name']} in role of {role}"
+            uri = None
+            if agent_label in AGENTS:
+                uri = AGENTS[agent_label]
+            else:
+                if "orlando" in str(agent_resource.identifier):
+                    temp = DATA[f"{agent_resource.identifier.split('orlando:')[1]}_{role}"]                        
+                    AGENTS[agent_label] = temp
+                    uri = temp
+                else:
+                    uri = f"{agent_resource.identifier}_{role}"
+            
+          
+            print(uri)
+            contribution_resource = g.resource(uri)
+            contribution_resource.add(RDF.type, BF.Contribution)
+
+      
             
             
             # agent_resource = g.resource(self.mainURI + "#agent_{}".format(i))
@@ -744,6 +778,7 @@ class BibliographyParse:
             contribution_resource.add(BF.agent, agent_resource)
             # bf:role marcrel:aut
             # contribution_resource.add(BF.role, role_resource)
+
             resource.add(BF.contribution, contribution_resource)
 
             i += 1
@@ -802,7 +837,7 @@ class BibliographyParse:
         i = 0
         for r in self.get_record_language_catalog():
             if (len(r['language'])) < 5:
-                adminMetaData.add(BF.descriptionLanguage, rdflib.URIRef(F"http://id.loc.gov/vocabulary/languages/{lang['language']}"))
+                adminMetaData.add(BF.descriptionLanguage, rdflib.URIRef(F"http://id.loc.gov/vocabulary/languages/{r['language']}"))
             else:
                 adminMetaData.add(BF.descriptionLanguage, Literal(r['language']))
 
@@ -825,7 +860,6 @@ class BibliographyParse:
                 place = g.resource("{}_activity_statement_place_{}".format(self.mainURI, i))
                 place.add(RDF.value, Literal(o['place']))
                 place.add(RDF.type, BF.Place)
-                place.add(RDF.type, SCHEMA.Place)
 
                 place_map = geoMapper.get_place(o['place'].strip())
 
@@ -965,10 +999,10 @@ if __name__ == "__main__":
     #     except UnicodeError:
     #         pass
 
-    test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"]
-    for fname in test_filenames:
+    # test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"]
+    # for fname in test_filenames:
 
-    # for fname in os.listdir(dirname):
+    for fname in os.listdir(dirname):
 
         path = os.path.join(dirname, fname)
         if os.path.isdir(path):
