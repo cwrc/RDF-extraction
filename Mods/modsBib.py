@@ -51,6 +51,7 @@ geoMapper = None
 STRING_MATCH_RATIO = 80
 
 UNIQUE_UNMATCHED_PLACES = set()
+FORMS = []
 AGENTS = {}
 
 # --------- UTILITY FUNCTIONS -------
@@ -202,7 +203,6 @@ class ParseGeoNamesMapping:
         matched_places = []
 
         place_name_parts = ParseGeoNamesMapping.split_place_parts(place_name)
-        print(place_name_parts)
         for part in place_name_parts:
             selected_item = None
 
@@ -680,9 +680,7 @@ class BibliographyParse:
         instance.add(BF.instanceOf, resource)
 
         for item in titles:
-            print(item)
             if 'usage' in item and item['usage'] is not None:
-                print("Usage")
                 title_res = g.resource("{}_title_{}".format(self.mainURI, i))
 
                 title_res.add(BF.mainTitle, Literal(item["title"].strip()))
@@ -740,7 +738,6 @@ class BibliographyParse:
                     uri = f"{agent_resource.identifier}_{role}"
             
           
-            print(uri)
             contribution_resource = g.resource(uri)
             contribution_resource.add(RDF.type, BF.Contribution)
 
@@ -788,7 +785,7 @@ class BibliographyParse:
         for lang in self.get_languages():
             resource.add(XML.lang, Literal(lang['language']))
 
-        adminMetaData = g.resource("{}_admin_metatdata".format(self.mainURI))
+        adminMetaData = g.resource("{}_admin_metadata".format(self.mainURI))
 
         i = 0
         for r in self.get_record_content_source():
@@ -924,17 +921,18 @@ class BibliographyParse:
             instance.add(BF.extent, extent_resource)
 
         genres = self.get_genre()
-        print(genres)
-        print(genre_graph)
-        
+
+
         for genre in genres:
-            print(genre)
             if genre["genre"] in genre_mapping:
                 uri = rdflib.URIRef(genre_mapping[genre["genre"]])
                 if genre_graph[uri]:
-                    for x in genre_graph[uri]:
-                        print(x)
-                    resource.add(GENRE.hasGenre, uri)
+
+                    if uri in FORMS:
+                        resource.add(GENRE.hasForm, uri)
+                    else:
+                        resource.add(GENRE.hasGenre, uri)
+
                 else:
                     logger.warning(F"GENRE NOT FOUND: {genre['genre']}")
             else:
@@ -951,7 +949,10 @@ class BibliographyParse:
                 uri = rdflib.URIRef(uri)
 
                 if genre_graph[uri]:
-                    resource.add(GENRE.hasGenre, uri)
+                    if uri in FORMS:
+                        resource.add(GENRE.hasForm, uri)
+                    else:
+                        resource.add(GENRE.hasGenre, uri)
                 else:
                     logger.info(F"GENRE NOT FOUND: {genre}")
 
@@ -1002,6 +1003,11 @@ if __name__ == "__main__":
         csvfile = csv.reader(f)
         for row in csvfile:
             genre_mapping[row[0]] = row[1]
+
+    # Retrieving genre:Forms to determine correct predicate to use
+    res = genre_graph.query("""SELECT ?s WHERE { ?s rdf:type*/rdfs:subClassOf* <http://sparql.cwrc.ca/ontologies/genre#Form>
+. }""")
+    FORMS = [ row.s for row in res]
 
 
     # for fname in os.listdir(writing_dir):
