@@ -68,7 +68,8 @@ def remove_punctuation(input_str, all_punctuation=False):
     :return: string with punctuation replaced
     """
     import string
-    from unidecode import unidecode
+    # from unidecode import unidecode
+    import urllib.parse
     if all:
         translator = str.maketrans('', '', string.punctuation)
     else:
@@ -81,7 +82,7 @@ def remove_punctuation(input_str, all_punctuation=False):
     input_str = input_str.replace("¼", "1-4")
     input_str = input_str.replace("<<", "")
     input_str = input_str.replace(">>", "")
-    return unidecode(input_str)
+    return urllib.parse.quote_plus(input_str)
 
 
 
@@ -543,6 +544,7 @@ class BibliographyParse:
         for o in self.soup.find_all('originInfo'):
             place = None
             publisher = None
+            publisher_uri = None
             date = None
             edition = None
             dateOther = None
@@ -550,17 +552,20 @@ class BibliographyParse:
                 continue
             if o.publisher:
                 publisher = o.publisher.text
-            if o.dateissued:
+                if "valueURI" in o.publisher.attrs:
+                    publisher_uri = o.publisher["valueURI"]
+            if o.dateIssued:
                 date = o.dateIssued.text
             if o.place:
                 place = o.place.placeTerm.text
             if o.edition:
                 edition = o.edition.text
-            if o.dateother:
+            if o.dateOther:
                 dateOther = o.dateOther.text
 
             origin_infos.append({"date": date,
                                  "dateOther": dateOther,
+                                 "publisher uri": publisher_uri,
                                  "publisher": publisher,
                                  "edition": edition,
                                  "place": place
@@ -850,9 +855,15 @@ class BibliographyParse:
         for o in self.get_origins():
             originInfo = g.resource("{}_activity_statement_{}".format(self.mainURI, i))
             if o['publisher']:
-                publisher = g.resource("{}_activity_statement_publisher_{}".format(self.mainURI, i))
+                if o['publisher uri']:
+                    publisher = g.resource(o['publisher uri'])
+                else:
+                    publisher = g.resource(DATA[remove_punctuation(o['publisher'])])
+                    publisher = g.resource("{}_activity_statement_publisher_{}".format(self.mainURI, i))
+                
                 publisher.add(RDF.type, BF.Agent)
                 publisher.add(RDFS.label, rdflib.Literal(o['publisher']))
+                publisher.add(BF.role, MARCREL.pbl)
 
                 originInfo.add(BF.provisionActivity, publisher)
             if o['place']:
@@ -1020,10 +1031,11 @@ if __name__ == "__main__":
         except UnicodeError:
             pass
 
-    test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"]
-    for fname in test_filenames:
+    # test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"]
+    # test_filenames = ["0d0e00bf-3224-4286-8ec4-f389ec6cc7bb.xml"]
+    # for fname in test_filenames:
 
-    # for fname in os.listdir(dirname)[:100]:
+    for fname in os.listdir(dirname):
 
         path = os.path.join(dirname, fname)
         if os.path.isdir(path):
