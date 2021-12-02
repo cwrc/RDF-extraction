@@ -155,7 +155,6 @@ class Context(object):
             self.target_uri = target_uri
             self.new_target = False
         else:
-            
             self.target_uri = self.uri +"_target"
             self.new_target = True
 
