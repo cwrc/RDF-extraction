@@ -6,7 +6,7 @@ from Utils import utilities, organizations
 
 MAX_WORD_COUNT = 35
 logger = utilities.config_logger("context")
-
+GENERIC_NAMES = ["king","King","mother-in-law" , "Queen", "queen","husband","wife","partner" ,"father", "daughter","essay", "son","he","she","they","her","him","them", "sisters","the",  "mother", "sibling", "brother", "sister", "friend"]
 
 """
 Status: ~84%
@@ -334,12 +334,30 @@ class Context(object):
             if identified_places:
                 g.add((self.uri, RDF.type, utilities.create_cwrc_uri("SpatialContext")))
 
+        for x in self.tag.find_all("TITLE"):
+            uri = utilities.get_title_uri(x)
+            uri = rdflib.term.URIRef(uri)
+            g.add((uri, RDF.type, utilities.NS_DICT["bf"].Work))
+            std_name = utilities.get_value(x)
+            g.add((uri, RDFS.label, Literal(std_name)))
+
+
+
+
         # Creating the mentioned people as natural person
         for x in self.tag.find_all("NAME"):
-            uri = utilities.make_standard_uri(x.get("STANDARD"))
+            uri = x.get("REF")
+            if not uri:
+                uri = utilities.make_standard_uri(x.get("STANDARD"))
+            else: 
+                uri = rdflib.term.URIRef(uri)
+            
             g.add((uri, RDF.type, utilities.NS_DICT["cwrc"].NaturalPerson))
-            g.add((uri, RDFS.label, Literal(x.get("STANDARD"))))
-
+            std_name = x.get("STANDARD")
+            g.add((uri, RDFS.label, Literal(std_name)))
+            altname = x.get_text()
+            if altname and std_name != altname and altname not in GENERIC_NAMES:
+                g.add((uri, utilities.NS_DICT["skos"].altLabel, Literal(altname)))
         return g
 
     def __str__(self):

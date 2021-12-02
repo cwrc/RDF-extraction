@@ -234,9 +234,14 @@ def limit_to_full_sentences(string, max):
 """
 
 
+
 def get_name_uri(tag):
-    """Creates a uri based on the standard attribute of a tag"""
-    return make_standard_uri(tag.get("STANDARD"))
+    """Creates a uri based on the standard attribute of a tag if ref attribute not present"""
+    uri = tag.get("REF")
+    if not uri:
+        return make_standard_uri(tag.get("STANDARD"))
+    else:
+        return rdflib.term.URIRef(uri)
 
 
 def make_standard_uri(std_str, ns="data"):
@@ -285,12 +290,13 @@ def get_other_people(tag, author):
 
 def get_people(tag):
     """Returns all people within a given tag"""
-    people = []
-    for x in tag.find_all("NAME"):
-        people.append(get_name_uri(x))
-    return people
+    return list(set([get_name_uri(x) for x in tag.find_all("NAME")]))
 
 
+
+def get_title_uri(tag):
+    title = get_value(tag)
+    return make_standard_uri(title + " TITLE", ns="cwrc")
 def get_titles(tag):
     """Returns all titles within a given tag TODO Mapping"""
     titles = []
