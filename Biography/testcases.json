@@ -1,61 +1,68 @@
 {
-    "default directory": "../data/biography_entries/",
-    "file ending": "-b-transformed.xml",
-    "ignored files": {
-        "fielmi": "Michael Field - corresponds to two people and doesn't distinguish between the two"
-    },
-    "special": {
-        "fielmi": "Michael Field - corresponds to two people and doesn't distinguish between the two",
-        "clerag": "Agnes Mary Clerke - Multiple Death tags",
-        "tautje": "Jemima Tautphoeus - Multiple Death tags"
-    },
-    "qa": {
-        "testcases": {
-            "aguigr": "Grace Ag - education graffle",
-            "alcolo": "Louisa May Alcott - ",
-            "atwoma": "Margaret Atwood - Canadian example often used for demos",
-            "bronch": "Charlotte Bronte - Overlapping triples with sister",
-            "bronem": "Emily Bronte - Overlapping triples with sister",
-            "levyam": "Amy Levy - ",
-            "seacma": "Mary Seacole - ",
-            "shakwi": "William Shakespeare - ",
-            "woolvi": "Virginia Woolf - "
-        }
-    },
-    "birthDeath.py": {
-        "testcases": {
-            "aberfr": "birth: Just a shortprose with date we'll assume is the birthdate",
-            "acklva": "birth: chronstruct(date & place) and shortprose(birthpositions)",
-            "adcofl": "birth: Just a chronstruct w. both birth Position & birthdate",
-            "allima": "birth: chronstruct and chronprose  --> birthdate chronstruct, birthposition chronprose",
-            "askean": "birth: chronstruct w. date range",
-            "bootfr": "birth: Has two dates in shortprose",
-            "butls2": "birth: Daterange within shortprose",
-            "cuthca": "birth: birthposition & birthdate in a shortprose, no chronstruct",
-            "scotsa": "birth: has two events in a birthtag(first birth, second christening)"
-        }
-    },
-    "culturalForm.py": {
-        "testcases": {
-            "angema": "RDF-Extraction Issue #4: Ensuring string is rendered the same as src material (Africanist)",
-            "taylha": "Ontology Issue #459: WomensEnfranchisement should map to suffrage"
-        }
-    },
-    "education.py": {
-        "testcases": {
-            "annali": "Anna Livia - Has 2 education contexts(INSTITUTIONAL & No mode specified), 2 chronstructs + 2 shortproses within INSTITUTIONAL, just one chronstruct in other",
-            "bankis": "Isabella Banks - has instructor tags + SELF-TAUGHT mode",
-            "burnfr": "Frances Burney - place info within school tag",
-            "carrdo": "Dora Carrington - companion + awards tag",
-            "edgema": "Maria Edgeworth - used in education graffle"
-        }
-    },
-    "personname.py": {
-        "testcases": {
-            "abdyma": "TBD",
-            "aikejo": "TBD",
-            "blesma": "Using graffle as ground truth",
-            "woolvi": "TBD"
-        }
+  "default directory": "/Users/alliyya/Desktop/RDF-extraction/RDF-extraction/data/entry_2021-11-29/",
+  "file ending": ".xml",
+  "ignored files": {
+    "fielmi": "Michael Field - corresponds to two people and doesn't distinguish between the two"
+  },
+  "special": {
+    "fielmi": "Michael Field - corresponds to two people and doesn't distinguish between the two",
+    "clerag": "Agnes Mary Clerke - Multiple Death tags",
+    "tautje": "Jemima Tautphoeus - Multiple Death tags"
+  },
+  "graffles": {
+    "seacma": "Mary Seacole - Forebear graffle",
+    "lel___": "L.E.L - Death graffle",
+    "edgema": "Maria Edgeworth - Education graffle",
+    "blesma": "Marguerite Gardiner, Countess of Blessington - Personname graffle",
+    "leonan": "Anna Leonowens - Open Annotation data model (Race Ethnicity Context)"
+  },
+  "qa": {
+    "testcases": {
+      "aguigr": "Grace Ag - education graffle",
+      "alcolo": "Louisa May Alcott - ",
+      "atwoma": "Margaret Atwood - Canadian example often used for demos",
+      "bronch": "Charlotte Bronte - Overlapping triples with sister",
+      "bronem": "Emily Bronte - Overlapping triples with sister",
+      "levyam": "Amy Levy - ",
+      "seacma": "Mary Seacole - ",
+      "shakwi": "William Shakespeare - ",
+      "woolvi": "Virginia Woolf - "
     }
+  },
+  "birthDeath.py": {
+    "testcases": {
+      "aberfr": "birth: Just a shortprose with date we'll assume is the birthdate",
+      "acklva": "birth: chronstruct(date & place) and shortprose(birthpositions)",
+      "adcofl": "birth: Just a chronstruct w. both birth Position & birthdate",
+      "allima": "birth: chronstruct and chronprose  --> birthdate chronstruct, birthposition chronprose",
+      "askean": "birth: chronstruct w. date range",
+      "bootfr": "birth: Has two dates in shortprose",
+      "butls2": "birth: Daterange within shortprose",
+      "cuthca": "birth: birthposition & birthdate in a shortprose, no chronstruct",
+      "scotsa": "birth: has two events in a birthtag(first birth, second christening)"
+    }
+  },
+  "culturalForm.py": {
+    "testcases": {
+      "angema": "RDF-Extraction Issue #4: Ensuring string is rendered the same as src material (Africanist)",
+      "taylha": "Ontology Issue #459: WomensEnfranchisement should map to suffrage"
+    }
+  },
+  "education.py": {
+    "testcases": {
+      "annali": "Anna Livia - Has 2 education contexts(INSTITUTIONAL & No mode specified), 2 chronstructs + 2 shortproses within INSTITUTIONAL, just one chronstruct in other",
+      "bankis": "Isabella Banks - has instructor tags + SELF-TAUGHT mode",
+      "burnfr": "Frances Burney - place info within school tag",
+      "carrdo": "Dora Carrington - companion + awards tag",
+      "edgema": "Maria Edgeworth - used in education graffle"
+    }
+  },
+  "personname.py": {
+    "testcases": {
+      "abdyma": "TBD",
+      "aikejo": "TBD",
+      "blesma": "Using graffle as ground truth",
+      "woolvi": "TBD"
+    }
+  }
 }

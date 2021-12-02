@@ -683,13 +683,13 @@ class BibliographyParse:
             if 'usage' in item and item['usage'] is not None:
                 title_res = g.resource("{}_title_{}".format(self.mainURI, i))
 
-                title_res.add(BF.mainTitle, Literal(item["title"].strip()))
+                title_res.add(BF.mainTitle, rdflib.Literal(item["title"].strip()))
 
                 if item['usage'] == 'alternative':
                     title_res.add(RDF.type, BF.VariantTitle)
                 else:
                     title_res.add(RDF.type, BF.Title)
-                    resource.add(RDFS.label, Literal(item['title'].strip()))
+                    resource.add(RDFS.label, rdflib.Literal(item['title'].strip()))
                 # Schema.org attributes per spreadsheet for BIBFRAME matching
                 title_res.add(RDF.type, SCHEMA.CreativeWork)
 
@@ -717,7 +717,7 @@ class BibliographyParse:
             if name['role'] in self.role_map:
                 role = MARCREL[self.role_map[name['role']]]
             elif name['role']:
-                role = Literal(name["role"])
+                role = rdflib.Literal(name["role"])
             else:
                 role = MARCREL.aut
             
@@ -756,22 +756,22 @@ class BibliographyParse:
             else:
                 agent_resource.add(RDF.type, BF.Agent)
 
-            agent_resource.add(RDFS.label, Literal(name["name"]))
+            agent_resource.add(RDFS.label, rdflib.Literal(name["name"]))
             # role_resource = g.resource("{}#contribution_{}_role".format(self.mainURI, i))
             # role_resource.add(RDF.type, BF.Role)
 
             if name['role'] in self.role_map:
-                # role_resource.add(BF.code, Literal(self.role_map[name['role']]))
+                # role_resource.add(BF.code, rdflib.Literal(self.role_map[name['role']]))
                 # role_resource.add(BF.source, MARCREL[self.role_map[name['role']]])
                 contribution_resource.add(BF.role,MARCREL[self.role_map[name['role']]])
             if name['role']:
-                # role_resource.add(RDFS.label, Literal(name["role"]))
+                # role_resource.add(RDFS.label, rdflib.Literal(name["role"]))
                 contribution_resource.add(BF.role,Literal(name["role"]))
             else:
                 contribution_resource.add(BF.role,MARCREL.aut)
-                # role_resource.add(BF.code, Literal("aut"))
+                # role_resource.add(BF.code, rdflib.Literal("aut"))
                 # role_resource.add(BF.source, MARCREL.aut)
-                # role_resource.add(RDFS.label, Literal("author"))
+                # role_resource.add(RDFS.label, rdflib.Literal("author"))
 
             agent_resource.add(OWL.sameAs, URIRef("http://cwrc.ca/cwrcdata/{}".format(remove_punctuation(name['name']))))
             contribution_resource.add(BF.agent, agent_resource)
@@ -783,7 +783,7 @@ class BibliographyParse:
             i += 1
 
         for lang in self.get_languages():
-            resource.add(XML.lang, Literal(lang['language']))
+            resource.add(XML.lang, rdflib.Literal(lang['language']))
 
         adminMetaData = g.resource("{}_admin_metadata".format(self.mainURI))
 
@@ -804,7 +804,7 @@ class BibliographyParse:
             # if 'authority' in r:
             #     source_agent = g.resource("{}_admin_agent_source_{}".format(self.mainURI, i))
             #     source_agent.add(RDF.type, BF.Source)
-            #     source_agent.add(RDF.value, Literal(r['authority']))
+            #     source_agent.add(RDF.value, rdflib.Literal(r['authority']))
             #     assigner_agent.add(BF.source, source_agent)
 
             adminMetaData.add(BF.assigner, assigner_agent)
@@ -815,21 +815,21 @@ class BibliographyParse:
             dateValue, transformed = dateParse(r['date'])
             if not transformed:
                 logger.info("MISSING DATE FORMAT: {} on Document {}".format(dateValue, self.mainURI))
-            adminMetaData.add(BF.changeDate, Literal(dateValue, datatype=XSD.date))
+            adminMetaData.add(BF.changeDate, rdflib.Literal(dateValue, datatype=XSD.date))
 
         i = 0
         for r in self.get_record_origin():
             if r['origin'] == "Record has been transformed into MODS from an XML Orlando record using an XSLT stylesheet. Metadata originally created in Orlando Document Archive's bibliographic database formerly available at nifflheim.arts.ualberta.ca/wwp.":
                 generation_process = g.resource(DATA.generation_process_xslt)
                 generation_process.add(RDF.type, BF.GenerationProcess)
-                generation_process.add(RDF.value, Literal(r['origin']))
+                generation_process.add(RDF.value, rdflib.Literal(r['origin']))
                 generation_process.add(RDFS.comment,rdflib.Literal(r['origin']))
                 generation_process.add(RDFS.label, rdflib.Literal(F"generation process of the MODS Record of Orlando bibiliographic records"))
 
             else:
                 generation_Process = g.resource("{}_generation_process_{}".format(self.mainURI, i))
                 generation_process.add(RDF.type, BF.GenerationProcess)
-                generation_process.add(RDF.value, Literal(r['origin']))
+                generation_process.add(RDF.value, rdflib.Literal(r['origin']))
 
             adminMetaData.add(BF.generationProcess, generation_process)
 
@@ -838,7 +838,7 @@ class BibliographyParse:
             if (len(r['language'])) < 5:
                 adminMetaData.add(BF.descriptionLanguage, rdflib.URIRef(F"http://id.loc.gov/vocabulary/languages/{r['language']}"))
             else:
-                adminMetaData.add(BF.descriptionLanguage, Literal(r['language']))
+                adminMetaData.add(BF.descriptionLanguage, rdflib.Literal(r['language']))
 
 
 
@@ -852,12 +852,12 @@ class BibliographyParse:
             if o['publisher']:
                 publisher = g.resource("{}_activity_statement_publisher_{}".format(self.mainURI, i))
                 publisher.add(RDF.type, BF.Agent)
-                publisher.add(RDFS.label, Literal(o['publisher']))
+                publisher.add(RDFS.label, rdflib.Literal(o['publisher']))
 
                 originInfo.add(BF.provisionActivity, publisher)
             if o['place']:
                 place = g.resource("{}_activity_statement_place_{}".format(self.mainURI, i))
-                place.add(RDF.value, Literal(o['place']))
+                place.add(RDF.value, rdflib.Literal(o['place']))
                 place.add(RDF.type, BF.Place)
 
                 place_map = geoMapper.get_place(o['place'].strip())
@@ -873,10 +873,10 @@ class BibliographyParse:
                 dateValue, transformed = dateParse(o['date'])
                 if not transformed:
                     logger.info("MISSING DATE FORMAT: {} on Document {}".format(dateValue, self.mainURI))
-                originInfo.add(BF.date, Literal(dateValue, datatype=XSD.date))
+                originInfo.add(BF.date, rdflib.Literal(dateValue, datatype=XSD.date))
 
             if o['edition']:
-                instance.add(BF.editionStatement, Literal(o['edition']))
+                instance.add(BF.editionStatement, rdflib.Literal(o['edition']))
 
             i += 1
 
@@ -898,9 +898,9 @@ class BibliographyParse:
         for n in self.get_notes():
             note_r = g.resource("{}_note_{}".format(self.mainURI, i))
             note_r.add(RDF.type, BF.Note)
-            note_r.add(RDF.value, Literal(n['content']))
+            note_r.add(RDF.value, rdflib.Literal(n['content']))
             if n['type']:
-                note_r.add(BF.nodeType, Literal(n['type']))
+                note_r.add(BF.nodeType, rdflib.Literal(n['type']))
 
             i += 0
 
@@ -912,11 +912,11 @@ class BibliographyParse:
             extent_resource = g.resource("{}_extent_{}".format(self.mainURI, i))
             extent_resource.add(RDF.type, BF.Extent)
             if p['value'] != "":
-                extent_resource.add(RDF.value, Literal(p['value']))
+                extent_resource.add(RDF.value, rdflib.Literal(p['value']))
             if p['volume']:
-                extent_resource.add(SCHEMA.volumeNumber, Literal(p['volume']))
+                extent_resource.add(SCHEMA.volumeNumber, rdflib.Literal(p['volume']))
             if p['issue']:
-                extent_resource.add(SCHEMA.issueNumber, Literal(p['issue']))
+                extent_resource.add(SCHEMA.issueNumber, rdflib.Literal(p['issue']))
 
             instance.add(BF.extent, extent_resource)
 
@@ -1010,20 +1010,20 @@ if __name__ == "__main__":
     FORMS = [ row.s for row in res]
 
 
-    # for fname in os.listdir(writing_dir):
-    #     path = os.path.join(writing_dir, fname)
-    #     if os.path.isdir(path):
-    #         continue
+    for fname in os.listdir(writing_dir):
+        path = os.path.join(writing_dir, fname)
+        if os.path.isdir(path):
+            continue
 
-    #     try:
-    #         genreParse = WritingParse(path, genre_map)
-    #     except UnicodeError:
-    #         pass
+        try:
+            genreParse = WritingParse(path, genre_map)
+        except UnicodeError:
+            pass
 
-    # test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"]
-    # for fname in test_filenames:
+    test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"]
+    for fname in test_filenames:
 
-    for fname in os.listdir(dirname)[:10]:
+    # for fname in os.listdir(dirname)[:100]:
 
         path = os.path.join(dirname, fname)
         if os.path.isdir(path):

@@ -24,6 +24,8 @@ TODO: Add doctests for:
 
 TODO: parse required ns from external files
 """
+WRITER_MAP = {}
+MAX_WORD_COUNT = 35
 
 NS_DICT = {
     "as": rdflib.Namespace("http://www.w3.org/ns/activitystreams#"),
@@ -57,6 +59,41 @@ NS_DICT = {
     "void": rdflib.Namespace("http://rdfs.org/ns/void#"),
     "vs": rdflib.Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#")
 }
+
+
+class Extraction(object):
+    """docstring for Extraction"""
+
+    def __init__(self, file_dict, name, verbosity=None, format=None, output=None, pause=None, sparql_endpoint=None, logger=None):
+        super(Extraction, self).__init__()
+        self.file_dict = file_dict
+        self.verbosity = verbosity
+        self.format = format or "ttl"
+        self.output = output
+        self.pause = pause
+
+        self.sparql_endpoint = sparql_endpoint
+
+        if logger:
+            self.logger = logger
+        else:
+            self.logger = config_logger2(name, verbosity)
+
+        if self.format in ["rdf", "rdf/xml"]:
+            self.format = "pretty-xml"
+        elif self.format == "turtle":
+            self.format = "ttl"
+
+    def __str__(self):
+        string = ""
+        string += "file_dict: " + str(self.file_dict) + "\n"
+        string += "verbosity: " + str(self.verbosity) + "\n"
+        string += "format: " + str(self.format) + "\n"
+        string += "output: " + str(self.output) + "\n"
+        string += "pause: " + str(self.pause) + "\n"
+        string += "sparql_endpoint: " + str(self.sparql_endpoint) + "\n"
+        string += "logger: " + str(self.logger) + "\n"
+        return string
 
 
 def get_current_time():
@@ -172,6 +209,9 @@ def get_attribute(tag, attribute):
 def get_reg(tag):
     return get_attribute(tag, "REG")
 
+def get_other_people(tag, author):
+    """returns all people other than author"""
+    return list(filter(lambda a: a != author.uri, get_people(tag)))
 
 def get_people(tag):
     """Returns all people within a given tag"""
@@ -198,16 +238,23 @@ def get_places(tag):
     return places
 
 
-def get_name(bio):
-    return (bio.BIOGRAPHY.DIV0.STANDARD.text)
-
+def get_name(entry):
+    name = entry.find("STANDARD")
+    if name:
+        return name.text
+    else:
+        return entry.find("NAME")["STANDARD"]
 
 def get_readable_name(bio):
-    return (bio.BIOGRAPHY.ORLANDOHEADER.FILEDESC.TITLESTMT.DOCTITLE.text).split(":")[0]
-
+    return bio.find("DOCTITLE").text.split(":")[0]
 
 def get_sex(bio):
-    return (bio.BIOGRAPHY.get("SEX"))
+    tag = bio.contents[-1]
+    if tag.name not in ["BIOGRAPHY", "WRITING"]:
+        logger.error("Unexpected last tag: " + tag.name)
+    else:
+        return (tag.get("SEX"))
+    return None
 
 
 def get_persontype(bio):
@@ -285,8 +332,71 @@ def create_extracted_uberfile(filepath, graph, serialization=None):
 def config_logger(name, verbose=False):
     # Will likely want to convert logging records to be json formatted and based on external file.
     import logging
+    import os
+    if not os.path.exists("log"):
+        os.makedirs("log")
+
     if name != "utilities":
         name += '_extraction'
+
+    name = name.lower()
+    logger = logging.getLogger(name)
+    
+    logger.setLevel(logging.INFO)
+    fh = logging.FileHandler("log/" + name + ".log", mode="w")
+    fh.setLevel(logging.INFO)
+    formatter = logging.Formatter('%(levelname)s - %(asctime)s {%(module)s.py:%(lineno)d} - %(message)s ')
+    fh.setFormatter(formatter)
+    logger.addHandler(fh)
+
+    if verbose == 0:
+        ch = logging.StreamHandler()
+        ch.setLevel(logging.ERROR)
+        ch.setFormatter(formatter)
+        logger.addHandler(ch)
+    elif verbose == 1:
+        ch = logging.StreamHandler()
+        ch.setLevel(logging.WARNING)
+        ch.setFormatter(formatter)
+        logger.addHandler(ch)
+    elif verbose > 2:
+        ch = logging.StreamHandler()
+        ch.setLevel(logging.INFO)
+        ch.setFormatter(formatter)
+        logger.addHandler(ch)
+
+    return logger
+
+
+logger = config_logger("utilities")
+
+def manage_mode(mode, person, graph):
+    if mode.verbosity == 3:
+        print(person)
+    if mode.verbosity >= 2:
+        print(person.to_file())
+    if mode.verbosity > 0:
+        print(str(len(graph)) + " triples created")
+        print("\n" * 3)
+
+    if mode.pause:
+        res = input("Enter q/quit to exit or any key to continue\n")
+        if res in ["q", "quit"]:
+            exit()
+
+def config_logger2(name, verbose=False):
+    # Will likely want to convert logging records to be json formatted and based on external file.
+    # Add metadata info about time of extraction run and remove asctime
+    # TODO: Deprecate this
+    import logging
+    import os
+    if not os.path.exists("log"):
+        os.makedirs("log")
+
+    if name != "utilities":
+        name += '_extraction'
+
+    name = name.lower()
 
     logger = logging.getLogger(name)
     logger.setLevel(logging.INFO)
@@ -305,66 +415,26 @@ def config_logger(name, verbose=False):
     return logger
 
 
-logger = config_logger("utilities")
-
-
-def parse_args(script, info_type):
-    """
-        Parses arguments to particular extraction script and creates dictionary of {files:desc}
-        relying on testcase.json for testcases + qa
-
-        ./birthDeath -t returns {testfiles:testcase descriptions}
-
-    """
-    import os
-    import argparse
-    import json
+def get_file_dict(script, args, testcase_data, testcases_available):
     from collections import OrderedDict
-    """
-        TODO: add options for verbosity of output, types of output
-        -o OUTPUTFILE
-        -format/ff/fmt [turtle|rdf-xml|all]
-        -v verbose logging
-    """
-    testcases_available = False
-    with open("testcases.json", 'r') as f:
-        testcase_data = json.load(f)
-    parser = argparse.ArgumentParser(
-        description='Extract the ' + info_type + ' information from selection of orlando xml documents', add_help=True)
-    modes = parser.add_mutually_exclusive_group()
-
-    if script in testcase_data:
-        help_str = "will run through test case list particular to " + script
-        help_str += " Which currently are:" + str(list(testcase_data[script]['testcases']))[1:-1]
-        modes.add_argument('-testcases', '-t', action="store_true", help=help_str)
-        testcases_available = True
-    else:
-        print("No particular testcases available, please add to testcases.json")
-
-    help_str = "will run through qa test cases that are related to www.github.com/cwrc/testData/tree/master/qa, "
-    help_str += "Which currently are:" + str(list(testcase_data['qa']['testcases']))[1:-1]
-    modes.add_argument('-qa', action="store_true", help=help_str)
-
-    help_str = "will run through special cases that are of particular interest atm which currently are: "
-    help_str += str(list(testcase_data['special']))[1:-1]
-    modes.add_argument('-s', "-special", action="store_true", help=help_str)
-
-    help_str = "will run through files that are currently being ignored which currently include: "
-    help_str += str(list(testcase_data['ignored files']))[1:-1]
-    modes.add_argument('-i', "-ignored", action="store_true", help=help_str)
-
-    modes.add_argument("-id", "-orlando", "--orlando",
-                       help="entry id of a single orlando document to run extraction upon, ex. woolvi")
-    modes.add_argument("-f", "-file", "--file", help="single orlando xml document to run extraction upon")
-    modes.add_argument("-d", "-directory", "--directory", help="directory of files to run extraction upon")
-    args = parser.parse_args()
-
     directory = testcase_data['default directory']
     file_ending = testcase_data['file ending']
     filelist = []
     descriptors = []
-    print(args)
-    if args.file:
+
+    if args.random or args.first or args.last:
+        filelist = [directory +
+                    filename for filename in sorted(os.listdir(directory)) if filename.endswith(file_ending)]
+        if args.random:
+            import random
+            filelist = random.sample(filelist, args.random)
+        elif args.first:
+            filelist = filelist[:args.first]
+        elif args.last:
+            filelist = filelist[-args.last:]
+        descriptors = ["Testing on " + filename + " from " + directory for filename in filelist]
+        print("Running extraction on", args.random, "random Orlando file(s)")
+    elif args.file:
         assert args.file.endswith(".xml"), "Not an XML file"
         filelist = [args.file]
         descriptors = ["Testing single file specified: " + args.file]
@@ -375,7 +445,7 @@ def parse_args(script, info_type):
     elif args.directory:
         if args.directory[-1] != "/":
             args.directory += "/"
-        filenames = [filename for filename in sorted(os.listdir(args.directory)) if filename.endswith(".xml")]
+        filenames = [filename for filename in sorted(os.listdir(args.directory)) if filename.endswith(file_ending)]
         filelist = [args.directory + filename for filename in filenames]
         descriptors = ["Testing on " + filename + " from " + args.directory for filename in filenames]
         print("Running extraction on files within" + args.directory)
@@ -384,12 +454,17 @@ def parse_args(script, info_type):
         descriptors = [testcase_data['qa']['testcases'][desc] for desc in filelist]
         print("Running extraction on qa cases: ")
         print(*filelist, sep=", ")
-    elif args.s:
+    elif "special" in testcase_data and args.s:
         filelist = sorted(testcase_data['special'].keys())
         descriptors = [testcase_data['special'][desc] for desc in filelist]
         print("Running extraction on special cases: ")
         print(*filelist, sep=", ")
-    elif args.i:
+    elif "graffles" in testcase_data and args.g:
+        filelist = sorted(testcase_data['graffles'].keys())
+        descriptors = [testcase_data['graffles'][desc] for desc in filelist]
+        print("Running extraction on graffle examples: ")
+        print(*filelist, sep=", ")
+    elif "ignored files" in testcase_data and args.i:
         filelist = sorted(testcase_data['ignored files'].keys())
         descriptors = [testcase_data['ignored files'][desc] for desc in filelist]
         print("Running extraction on ignored files: ")
@@ -402,24 +477,121 @@ def parse_args(script, info_type):
     else:
         print("Running extraction on default folder: " + directory)
         filelist = [directory +
-                    filename for filename in sorted(os.listdir(directory)) if filename.endswith(".xml")]
+                    filename for filename in sorted(os.listdir(directory)) if filename.endswith(file_ending)]
         descriptors = ["Testing on " + filename + " from " + directory for filename in filelist]
 
-    if not testcases_available and not args.qa:
+    # TODO: clean this maybe using any operator
+    if script == "freestanding_events.py" and (args.qa or args.testcases):
+        filelist = [directory + file + file_ending for file in filelist]
+    elif script == "freestanding_events.py":
         pass
-    elif args.qa or args.testcases or args.s or args.i or args.orlando:
+    elif args.qa or args.s or args.i or args.g or args.orlando or (testcases_available and args.testcases):
         filelist = [directory + file + file_ending for file in filelist]
 
     # TODO: Allow script specific testcases to overwrite ignored files, maybe?
-    if "ignored files" in testcase_data and not args.s and not args.i:
+    if "ignored files" in testcase_data and not args.s and not args.i and not args.g:
         # Get full filepaths of to be ignored files since it may vary per option chosen
         ignore_files = [x for x in filelist if any(s in x for s in testcase_data["ignored files"].keys())]
         for x in ignore_files:
             index = filelist.index(x)
             del descriptors[index]
             del filelist[index]
-
     return OrderedDict(zip(filelist, descriptors))
+
+def parse_args(script, info_type, logger=None):
+    """
+        Parses arguments to particular extraction script and creates dictionary of {files:desc}
+        relying on testcase.json for testcases + qa
+
+        ./birthDeath -t returns {testfiles:testcase descriptions}
+
+    """
+    import os
+    import argparse
+    import json
+    print(script, info_type, logger)
+    """
+        TODO: add options for verbosity of output, types of output
+        -o OUTPUTFILE
+        -format/ff/fmt [turtle|rdf-xml|all]
+        -v verbose logging + print out triples to stdout
+        Possible TODO: create extractionmode obj to handle these additional options with 
+    """
+    testcases_available = False
+    with open("testcases.json", 'r') as f:
+        testcase_data = json.load(f)
+    parser = argparse.ArgumentParser(
+        description='Extract the ' + info_type + ' information from selection of orlando xml documents', add_help=True)
+    modes = parser.add_mutually_exclusive_group()
+
+    script = script.split("/")[-1]
+
+    if script in testcase_data:
+        # TODO: expand test case prints to expose reasons for testing
+        help_str = "will run through test case list particular to " + script
+        help_str += " Which currently are:" + str(list(testcase_data[script]['testcases']))[1:-1]
+        modes.add_argument('-testcases', '-t', action="store_true", help=help_str)
+        testcases_available = True
+    else:
+        print("No particular testcases available, please add to testcases.json")
+
+    if "qa" in testcase_data:
+        help_str = "will run through qa test cases that are related to www.github.com/cwrc/testData/tree/master/qa, "
+        help_str += "Which currently are:" + str(list(testcase_data['qa']['testcases']))[1:-1]
+        modes.add_argument('-qa', action="store_true", help=help_str)
+
+    if "special" in testcase_data:
+        help_str = "will run through special cases that are of particular interest atm which currently are: "
+        help_str += str(list(testcase_data['special']))[1:-1]
+        modes.add_argument('-s', "-special", action="store_true", help=help_str)
+
+    if "graffles" in testcase_data:
+        help_str = "will run through cases related to our graffles"
+        help_str += str(list(testcase_data['graffles']))[1:-1]
+        modes.add_argument('-g', "-graffles", "-graffle", action="store_true", help=help_str)
+
+    if "ignored files" in testcase_data:
+        help_str = "will run through files that are currently being ignored which currently include: "
+        help_str += str(list(testcase_data['ignored files']))[1:-1]
+        modes.add_argument('-i', "-ignored", action="store_true", help=help_str)
+
+    modes.add_argument("-id", "-orlando", "--orlando",
+                       help="entry id of a single orlando document to run extraction upon, ex. woolvi")
+    modes.add_argument("-f", "-file", "--file", help="single orlando xml document to run extraction upon")
+    # modes.add_argument("-id+", "-orlando+", "--orlando+",
+                    #    help="entry id of a single orlando document to run extraction upon and the files proceeding, ex. woolvi")
+    modes.add_argument("-d", "-directory", "--directory", help="directory of files to run extraction upon")
+    modes.add_argument("-r", "-random", "--random", nargs='?', const=1, type=int,
+                       help="chooses {RANDOM} random file(s) to run extraction upon")
+    modes.add_argument("-l", "-last", "--last", nargs='?', const=1, type=int,
+                       help="chooses {last} file(s) to run extraction upon, ex. the last 20 files")
+    modes.add_argument("-fi", "-first", "--first", nargs='?', const=1, type=int,
+                       help="chooses {first} file(s) to run extraction upon, ex. the first 20 files")
+
+    parser.add_argument("-v", "--verbosity", default=1, type=int, choices=[0, 1, 2, 3],
+                        help="increase output verbosity")
+    parser.add_argument("-fmt", "--format", default="ttl",
+                        choices=["rdf", "rdf/xml", "ttl", "turtle", "json-ld", "nt", "trix", "n3", "all"])
+    parser.add_argument("-u", "-update", "--update", "-update-sparqlendpoint",
+                        help="url of sparql endpoint to update")
+
+    # NOTE: could make this to pause after ever n entries? #uselessfeature?
+    parser.add_argument("-p", "-pause", "--pause", action="store_true",
+                        help="pause after every entry to examine output and be prompted to continue/quit")
+
+    # TODO: Add option for only large graph not individual triples
+
+    args = parser.parse_args()
+    
+    if args.random and args.random < 1:
+        parser.error("Minimum file count is 1")
+
+    file_dict = get_file_dict(script, args, testcase_data, testcases_available)
+
+    arguments = Extraction(file_dict, info_type, verbosity=args.verbosity,
+                           logger=logger, format=args.format, pause=args.pause)
+
+    return arguments, arguments.file_dict
 
 
 if __name__ == '__main__':
