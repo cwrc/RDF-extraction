@@ -240,8 +240,9 @@ class WritingParse:
 
     def __init__(self, filename, matched_documents):
 
-        with open(filename) as f:
+        with open(filename,encoding='utf-8') as f:
             self.soup = BeautifulSoup(f, 'lxml-xml')
+        
 
         self.matched_documents = matched_documents
 
@@ -340,11 +341,10 @@ class BibliographyParse:
         :param related_item: if it is a related item i.e. a sub element within the XML
         """
         if type(filename) is str:
-            with open(filename) as f:
+            with open(filename, 'r',encoding='utf-8') as f:
                 self.soup = BeautifulSoup(f, 'lxml-xml')
         else:
             self.soup = filename
-
 
         self.filename = filename
         self.mainTitle = None
@@ -689,7 +689,6 @@ class BibliographyParse:
                 title_res = g.resource("{}_title_{}".format(self.mainURI, i))
 
                 title_res.add(BF.mainTitle, rdflib.Literal(item["title"].strip()))
-
                 if item['usage'] == 'alternative':
                     title_res.add(RDF.type, BF.VariantTitle)
                 else:
@@ -1033,6 +1032,7 @@ if __name__ == "__main__":
 
     # test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"]
     # test_filenames = ["0d0e00bf-3224-4286-8ec4-f389ec6cc7bb.xml"]
+    # test_filenames = ["55aff3fb-8ea9-4e95-9e04-0f3e630896e3.xml", "0c133817-f55e-4a8f-a9b4-474566418d9b.xml"]
     # for fname in test_filenames:
 
     for fname in os.listdir(dirname):
@@ -1058,6 +1058,6 @@ if __name__ == "__main__":
     output_name = fname.replace(".xml", "")
     formats = {'ttl': 'turtle'} # 'xml': 'pretty-xml'
     for extension, file_format in formats.items():
-        g.serialize(destination=F"{output_name}.{extension}", format=file_format)
+        g.serialize(destination=F"{output_name}.{extension}", format=file_format,encoding="utf-8")
 
 logger.info(F"Finished extraction: {datetime.datetime.now().strftime('%d %b %Y %H:%M:%S')}")
