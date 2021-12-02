@@ -104,8 +104,7 @@ def extract_birth_data(bio, person):
                 # Taking earliest date of date range for birth
                 if birth_date_tag.name == "DATERANGE":
                     if birth.date_certainty:
-                        logger.warning(
-                            "DATERANGE is certain?: " + str(birth_date_tag))
+                        logger.warning(F"DATERANGE is certain?:{birth_date_tag} -- {person.name}-{person.id}")
                     birth.date = birth_date_tag.get("FROM")
                 else:
                     birth.date = birth_date_tag.get("VALUE")
@@ -123,7 +122,7 @@ def extract_birth_data(bio, person):
                 birth_positions.append(positions['POSITION'])
         birth.position = list(set(birth_positions))
         if len(birth_positions) > 1:
-            logger.info("Multiple Birth positions:" + str(birth_positions))
+            logger.info(F"Multiple Birth positions:{birth_positions} -- {person.name}-{person.id}")
 
         # adding birth event to person
         for x in birth_events:
@@ -280,7 +279,7 @@ def main():
         print(str(len(uber_graph)) + " total triples created")
 
     utilities.create_uber_triples(extraction_mode, uber_graph, "birthDeath",extra_triples="../data/additional_triples.ttl")
-    logger.info("Time completed: " + utilities.get_current_time())
+    logger.info(F"Time completed: " + utilities.get_current_time())
 
 if __name__ == '__main__':
     main()

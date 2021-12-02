@@ -101,6 +101,49 @@ class Extraction(object):
         string += "logger: " + str(self.logger) + "\n"
         return string
 
+class GeneralRelation(object):
+    """docstring for GeneralRelation"""
+
+    def __init__(self, pred, obj):
+        super(GeneralRelation, self).__init__()
+        self.predicate = pred
+        self.object = obj
+
+    def __str__(self):
+        string = ""
+        string += "\t\tPredicate: " + str(self.predicate) + "\n"
+        string += "\t\tObject: " + str(self.object) + "\n"
+        return string
+
+    def to_triple(self, context):
+        g = create_graph()
+        g.add((context.uri, self.predicate, self.object))
+        return g
+
+
+def remove_unwanted_tags(tag):
+    unwanted_tag_names = ["BIBCITS", "RESPONSIBILITIES", "KEYWORDCLASSES","RESEARCHNOTE"]
+    unwanted_tags = []
+    for x in unwanted_tag_names:
+        unwanted_tags += tag.find_all(x)
+
+    for x in unwanted_tags:
+        x.decompose()
+
+
+def create_writer_map(path=None):
+    import csv
+    if not path:
+        path = '../data/writers_sex.csv'
+    with open(path, newline='', encoding='utf-8') as csvfile:
+        reader = csv.reader(csvfile)
+        next(reader)
+        for row in reader:
+            if row[0] not in WRITER_MAP:
+                WRITER_MAP[row[0]] = {"ID": row[1], "SEX": row[2]}
+
+create_writer_map()
+
 
 def get_current_time():
     return datetime.datetime.now().strftime("%d %b %Y %H:%M:%S")

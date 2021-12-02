@@ -134,24 +134,42 @@ class Context(object):
     """
     MAPPING = create_context_map()
 
-    def __init__(self, id, tag, context_type="CULTURALFORMATION", motivation="describing", mode=None, subject_uri=None):
+    def __init__(self, id, tag, context_type="CULTURALFORMATION", motivation="describing", mode=None, subject_uri=None, target_uri=None, id_context=None, subject_name=None, other_triples=True):
         super(Context, self).__init__()
-        self.id = id
-        self.triples = []
+        self.citations = []
         self.events = []
-        self.xpath = get_xpath(tag)
+        self.heading = None
+        self.src = None
+        self.triples = []
+        self.xpath = None
+        self.other_triples = other_triples
+        self.id = id
         self.context_focus = subject_uri
+        self.identifying_uri = id_context
+        self.uri = utilities.create_uri("data", id)
+        self.label = subject_name
+
+        # allows reuse of target to reduce duplication of target/citations
+        if target_uri:
+            self.target_uri = target_uri
+            self.new_target = False
+        else:
+            self.target_uri = rdflib.BNode()
+            self.new_target = True
 
         # Creating citations from bibcit tags
-        bibcits = tag.find_all("BIBCIT")
-        self.citations = [Citation(x) for x in bibcits]
-        self.tag = tag
+        if not self.identifying_uri:
+            self.identifying_uri = utilities.create_uri("data", self.id + "_identifying")
+            self.xpath = get_xpath(tag)
+            bibcits = tag.find_all("BIBCIT")
+            self.citations = [Citation(x) for x in bibcits]
 
         self.heading = get_heading(tag)
         self.src = "http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id="
         if not self.heading:
             self.src = "http://orlando.cambridge.org"
 
+        self.tag = tag
         self.text = tag.get_text()
         self.orlando_tagname = context_type
 

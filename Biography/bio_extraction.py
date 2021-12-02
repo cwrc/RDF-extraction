@@ -49,15 +49,13 @@ def main():
         birthDeath.extract_death_data(soup, person)
         birthDeath.extract_birth_data(soup, person)
         location.extract_location_data(soup, person)
-
-
-        # cf.extract_cf_data(soup, person)
-        # lifeInfo.extract_family_data(soup, person)
-        # lifeInfo.extract_intimate_relationships_data(soup, person)
-        # lifeInfo.extract_friend_data(soup, person)
-        # other_contexts.extract_other_contexts_data(soup, person)
+        cf.extract_cf_data(soup, person)
+        lifeInfo.extract_family_data(soup, person)
+        lifeInfo.extract_intimate_relationships_data(soup, person)
+        lifeInfo.extract_friend_data(soup, person)
+        other_contexts.extract_other_contexts_data(soup, person)
         # personname.extract_person_name(soup, person)
-        # education.extract_education_data(soup, person)
+        education.extract_education_data(soup, person)
 
         graph = person.to_graph()
         triple_count = len(graph)

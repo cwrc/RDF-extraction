@@ -19,10 +19,10 @@ class Citation(object):
     def to_triple(self, target_uri, source_url=None):
         g = utilities.create_graph()
         if not self.citing_entity:
-            logger.warning("Missing DBREF attribute: {self.tag}")
+            logger.warning(F"Missing DBREF attribute: {self.tag}")
             return g
         if not self.label:
-            logger.warning("Missing PLACEHOLDER attribute: {self.tag}")
+            logger.warning(F"Missing PLACEHOLDER attribute: {self.tag}")
             return g
         
         
