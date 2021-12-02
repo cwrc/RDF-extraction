@@ -27,9 +27,9 @@ logger = utilities.config_logger("biography")
 
 
 def main():
-    file_dict = utilities.parse_args(__file__, "Majority of biography related data")
+    extraction_mode, file_dict = utilities.parse_args(
+        __file__, "Majority of biography related data", logger)
 
-    entry_num = 1
     uber_graph = utilities.create_graph()
 
     highest_triples = 0
@@ -47,22 +47,20 @@ def main():
         print(person_id)
         print(file_dict[filename])
         print("*" * 55)
-        person = Biography(person_id, soup, cf.get_mapped_term("Gender", utilities.get_sex(soup)))
-        cf.extract_cf_data(soup, person)
-        other_contexts.extract_other_contexts_data(soup, person)
-        location.extract_location_data(soup, person)
+        person = Biography(person_id, soup)
         occupation.extract_occupation_data(soup, person)
-        education.extract_education_data(soup, person)
-
-        # personname.extract_person_name(soup, person)
+        birthDeath.extract_death_data(soup, person)
         birthDeath.extract_birth_data(soup, person)
-        # birthDeath.extract_death(soup, person)
-        # lifeInfo.extract_cohabitants(soup, person)
-        # lifeInfo.extract_family(soup, person)
-        # lifeInfo.extract_friends_associates(soup, person)
-        # lifeInfo.extract_intimate_relationships(soup, person)
-        # lifeInfo.extract_childlessness(soup, person)
-        # lifeInfo.extract_children(soup, person)
+        location.extract_location_data(soup, person)
+
+
+        # cf.extract_cf_data(soup, person)
+        # lifeInfo.extract_family_data(soup, person)
+        # lifeInfo.extract_intimate_relationships_data(soup, person)
+        # lifeInfo.extract_friend_data(soup, person)
+        # other_contexts.extract_other_contexts_data(soup, person)
+        # personname.extract_person_name(soup, person)
+        # education.extract_education_data(soup, person)
 
         graph = person.to_graph()
         triple_count = len(graph)
@@ -75,21 +73,24 @@ def main():
             smallest_person = filename
 
         # triples to files
-        temp_path = "extracted_triples/biography_turtle/" + person_id + "_biography.ttl"
-        utilities.create_extracted_file(temp_path, person)
+        utilities.create_individual_triples(
+            extraction_mode, person, "biography")
+        utilities.manage_mode(extraction_mode, person, graph)
 
         uber_graph += graph
-        entry_num += 1
 
-    temp_path = "extracted_triples/biography_triples.ttl"
-    create_extracted_uberfile(temp_path, uber_graph)
-
+    place.log_mapping_fails()
     cf.log_mapping_fails()
+    occupation.log_mapping_fails()
+    organizations.log_mapping()
     logger.info(str(len(uber_graph)) + " total triples created")
     logger.info(str(largest_person) + " produces the most triples(" + str(highest_triples) + ")")
     logger.info(str(smallest_person) + " produces the least triples(" + str(least_triples) + ")")
 
     logger.info("Time completed: " + utilities.get_current_time())
+
+    temp_path = "extracted_triples/biography_triples.ttl"
+    utilities.create_extracted_uberfile(temp_path, uber_graph,serialization="ttl", extra_triples="../data/additional_triples.ttl")
 
 
 if __name__ == "__main__":
