@@ -161,8 +161,10 @@ class Event(object):
         # No longer grabing text of title, no word limit now
         # TODO: replace initials with full name of author where applicable
         self.text = str(tag.CHRONPROSE.get_text())
-
         self.date_tag = get_date_tag(tag)
+
+        self.text = self.date_tag.text+": " + self.text
+        
         self.time_type = get_time_type(self.date_tag)
         self.precision = self.date_tag.get("CERTAINTY")
         self.time_certainty = get_time_certainty(self.date_tag)
@@ -186,6 +188,68 @@ class Event(object):
             self.date = format_date(self.date)
 
     def to_triple(self, person=None):
+        g = utilities.create_graph()
+
+        # NOTE: Event will always be attached to a context, possibly multiple event to the same context
+
+        # Labelling the event
+        text = self.date_tag.text + ": " + self.text
+        g.add((self.uri, RDFS.label, Literal(text)))
+
+        # Typing of the event --> events might have multiple types down the line
+        g.add((self.uri, RDF.type, self.type))
+
+        for x in self.event_type:
+            g.add((self.uri, utilities.NS_DICT["sem"].eventType, x))
+
+        for x in self.citations:
+            g += x.to_triple(self.uri)
+
+        # Attaching place via blank node
+        for index, place in enumerate(self.place):
+            blanknode = rdflib.BNode()
+            g.add((self.uri, utilities.NS_DICT["sem"].hasPlace, blanknode))
+            g.add((blanknode, RDFS.label, Literal(self.place_str[index])))
+            g.add((blanknode, utilities.NS_DICT["cwrc"].hasMappedLocation, place))
+            g.add((blanknode, RDF.type, utilities.NS_DICT["cwrc"].MappedPlace))
+            
+
+
+        # Attaching actors, including the biographee incase they're not mentioned
+        if person:
+            g.add((self.uri, utilities.NS_DICT["sem"].hasActor, person.uri))
+
+        for x in self.actors:
+            g.add((self.uri, utilities.NS_DICT["sem"].hasActor, x))
+
+        # Typing of time and attaching certainty
+        g.add((self.uri, utilities.NS_DICT["sem"].timeType, utilities.create_cwrc_uri(self.time_type)))
+        if self.time_certainty:
+            g.add((self.uri, utilities.NS_DICT["cwrc"].hasTimeCertainty,
+                   utilities.create_cwrc_uri(self.time_certainty)))
+
+        # Attaching the time stamp to the event
+        if self.predicate:
+            g.add((self.uri, self.predicate, self.date))
+        else:
+            if self.time_type == "PunctiveTime":
+                g.add((self.uri, utilities.NS_DICT["sem"].hasEarliestBeginTimeStamp,
+                       format_date(self.date.split(":")[0])))
+                g.add((self.uri, utilities.NS_DICT["sem"].hasLatestEndTimeStamp,
+                       format_date(self.date.split(":")[1])))
+            elif self.time_type == "IntervalTime":
+                g.add((self.uri, utilities.NS_DICT["sem"].hasBeginTimeStamp, format_date(self.date.split(":")[0])))
+                g.add((self.uri, utilities.NS_DICT["sem"].hasEndTimeStamp, format_date(self.date.split(":")[1])))
+
+        if self.date_tag.name == "DATESTRUCT":
+            g.add((self.uri, utilities.NS_DICT["sem"].hasTime, Literal(
+                ' '.join(str(self.date_tag.get_text()).split()))))
+
+        return g
+
+
+
+    def to_triple_1(self, person=None):
         g = utilities.create_graph()
 
         # NOTE: Event will always be attached to a context, possibly multiple event to the same context

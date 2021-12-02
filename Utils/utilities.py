@@ -327,12 +327,12 @@ def get_place_strings(tag):
     return places
 
 
-def get_name(bio):
-    name = bio.find("STANDARD")
+def get_name(entry):
+    name = entry.find("STANDARD")
     if name:
         return name.text
     else:
-        return bio.find("NAME")["STANDARD"]
+        return entry.find("NAME")["STANDARD"]
 
 
 def get_readable_name(bio):
@@ -647,7 +647,6 @@ def parse_args(script, info_type, logger=None):
         ./birthDeath -t returns {testfiles:testcase descriptions}
 
     """
-    import os
     import argparse
     import json
     print(script, info_type, logger)

@@ -31,7 +31,6 @@ formatter = logging.Formatter('%(levelname)s {Line #%(lineno)d} : %(message)s ')
 fh = logging.FileHandler('bibliography_extraction.log', mode="w")
 fh.setFormatter(formatter)
 fh.setLevel(logging.INFO)
-
 logger.addHandler(fh)
 logger.info(F"Started extraction: {datetime.datetime.now().strftime('%d %b %Y %H:%M:%S')}")
 
@@ -563,6 +562,9 @@ class BibliographyParse:
                 name = np.attrs['standard']
             elif np.namePart:
                 name = np.namePart.get_text()
+            else:
+                name = "None"
+                logger.warning(F"No name found: {np}")
             
             alt = None
             if np.displayForm:
@@ -1135,7 +1137,6 @@ if __name__ == "__main__":
     g.bind("schema", SCHEMA)
     g.bind("crm", CRM)
     g.bind("frbroo", FRBROO)
-    g.bind("crmpc", CRM)
     g.bind("skos", SKOS)
 
     # Adding declaration of references
