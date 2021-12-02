@@ -1,497 +1,520 @@
-RDF Type,uri,Label,alt label #1,alt label #2,alt label #3,alt label #4,alt label #5,alt label #6,alt label #7,alt label #8,alt label #9,alt label #10,alt label #11,alt label #12,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/eng,english,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/fre,french,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/ger,german,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/ben,bengali,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/wel,welsh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/san,sanskrit,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/hin,hindi,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/urdu,hindustani,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/gle,irish,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/ara,arabic,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/ita,italian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/kan,kanarese,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/heb,hebrew,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/per,persian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/bul,bulgarian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/lat,latin,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/spa,spanish,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/chi,chinese,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/guj,gujarati,guzerati,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/gla,gaelic,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/cze,czech,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/tha,thai,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/may,malay,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/pli,pali,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/rus,russian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/mar,marathi,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,AT,austrian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,AT-9,viennese,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,BG,bulgarian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,CA,canadian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,CH,swiss,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,CU,cuban,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,DE,german,germany,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,DK,danish,denmark,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,GB-ENG,english,englishwoman,england,english born,english father,half english,northern english,anglo,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,ES,spanish,spain,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,FR,french,french extraction,french mother,half french,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,FR-COR,corsican,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,GB,british,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,GB-EDH,edinburgh,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,GB-NIR,northern irish,northern ireland,ulster irish protestants,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,GB-SCT,scottish,scots,scotswoman,scotland,half scots,scotch,shetland,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,GH,ghanaian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,HU,hungarian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,IE,irish,irishwoman,half irish,ireland,irishness,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,IN,indian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,IT,italian,italy,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,JM,jamaican,jamaica,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,LT,lithuanian,lithuania,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,LV,latvian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,NG,nigerian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,NL,netherlands,the netherlands,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,NZ,new zealander,new zealand,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,PE,peruvian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,PL,polish,pollish,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,PT,portuguese,portugal,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,RO,romania,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,RU,russian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,SE,swedish,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,TR,turkish,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,UA,ukrainian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,US,american,usa,united states,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,GB-WLS,welsh,welsh extraction,Welsh lineage (ancient descent though little money on both sides of her family).,Walsh,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,AU,australian,australia,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,CA,canadian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,CN,chinese,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,DE,german,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,DK,danish,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,DZ,algerian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,GB-ENG,english,england,englishwoman,engllish,anglo,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,ES,spanish,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,FR,french,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,GB,british,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,GB-NIR,northern irish,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,GB-SCT,scottish,scotswoman,scots,scotland,scot,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,GB-WLS,welsh,welshwoman,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,GY,guyanan,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,HU,hungarian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,IE,irish,ireland,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,IN,indian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,IT-GE,genoese,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,JM,jamaican,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,KE,kenyan,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,NG,nigerian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,NZ,new zealander,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,RU,russian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,US,american,america,usa,us,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,ZA,south african,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://vocab.getty.edu/tgn/7000198,India,Indian,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://vocab.getty.edu/tgn/7004550,West Indian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://vocab.getty.edu/tgn/7017283,Glaswegians,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://www.geonames.org/11609047,Lancastrian,Lancashire,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://www.geonames.org/2186224,New Zealand,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://www.geonames.org/2510769,Spanish,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://www.geonames.org/2634895,Wales,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://www.geonames.org/2638010,Shetland,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://www.geonames.org/2638360,Scotland,Scottish,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://www.geonames.org/2641364,Northern Irish,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://www.geonames.org/2652355,Cornish,Cornwall,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://www.geonames.org/2661886,Sweden,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://www.geonames.org/2750405,Dutch,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://www.geonames.org/2921044,Germany,German,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://www.geonames.org/2963597,Ireland,Irish,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://www.geonames.org/3017382,France,French,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://www.geonames.org/3077311,Czech Republic,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://www.geonames.org/6252001,USA,American,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://www.geonames.org/6255148,European,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://www.geonames.org/6269131,England,English,north of England,northern English,London,Londoner,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://www.geonames.org/6951102,Italy,Italian,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://www.geonames.org/7729891,Caribbean,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://www.geonames.org/8502102,New England,New Englander,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://www.geonames.org/8581589,Yorkshirewoman,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#nobility,nobility,royal descent,"royal, but not expected to become queen",royalty,royal,NOBILITY,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#skilledCraftpersonArtisan,artisan,SKILLEDCRAFTPERSON-ARTISAN,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#shopkeepers,shopkeepers,SHOPKEEPERS,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#upper-middleClass,upper-middle class,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#managerial,managerial,MANAGERIAL,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#middleClass,middle class,middling sort,middling ranks,bourgeois,middle,middle classes,middle ranks,middle-class,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#bohemianism,Bohemianism,bohemian with upper-class connections,"alternative society of young artists, dropouts, and nonconformists",classlessness,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#slave-forced-labourer,slave or forced labourer,slave,serf,bonded labourer,serfs,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#lowerMiddleClass,lower-middle class,LOWER-MIDDLECLASS,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#servants,servant,SERVANTS,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#gentry,gentry,gentility,GENTRY,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#brahmin,Brahmin,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#urban-industrialUnskilled,urban unskilled,URBAN-INDUSTRIALUNSKILLED,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#rural-unskilled,rural unskilled,RURAL-UNSKILLED,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#indigent,indigent,poverty,impoverished,INDIGENT,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#workingClass,working class,working classes,urban working class,rural working class parents,working woman,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#professional,professional,professional classes,professional class,PROFESSIONAL,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#entrepreneurial-industrialist,entrepreneurial,ENTREPRENEURIAL-INDUSTRIALIST,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#yeoman-farmer,yeoman farmer,yeoman,YEOMAN-FARMER,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Gender,http://sparql.cwrc.ca/ontologies/cwrc#transMan,transman/transmale,transgendered female to male,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Gender,http://sparql.cwrc.ca/ontologies/cwrc#transGender,transgender,transgendered,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Gender,http://sparql.cwrc.ca/ontologies/cwrc#cisMan,cisman,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Gender,http://sparql.cwrc.ca/ontologies/cwrc#GenderQueer,genderqueer,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Gender,http://sparql.cwrc.ca/ontologies/cwrc#cisGender,cisgender,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Gender,http://sparql.cwrc.ca/ontologies/cwrc#transWoman,transwoman/transfemale,transgendered male to female,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Gender,http://sparql.cwrc.ca/ontologies/cwrc#undefinedGender,undefined,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Gender,http://sparql.cwrc.ca/ontologies/cwrc#man,man,male,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Gender,http://sparql.cwrc.ca/ontologies/cwrc#woman,woman,female,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Gender,http://sparql.cwrc.ca/ontologies/cwrc#Androgynous,androgynous,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Gender,http://sparql.cwrc.ca/ontologies/cwrc#blackWomanRaceColour,blackwoman,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Gender,http://sparql.cwrc.ca/ontologies/cwrc#cisWoman,ciswoman,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#spanishRepublicanism,Spanish republicanism,spanish republican,spanish republican supporter,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#socialism,socialism,socialist,fabian socialist,socialist organizer,militant socialist,socialist and feminist,radical socialist,owenite socialism,socialist feminist,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#democrat,democrat,democratic,pro-democracy,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#fascism,fascism,fascist,fascist party,pro-fascist,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#oppositionPolitics,opposition politics,Opposition,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#freeTradeMovement,free trade movement,free trader,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-European,anti-European politics,anti-European,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#philosophicalRadicals,Philosophical Radicals,Philosophic Radicals,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#animalWelfareAdvocacy,animal welfare advocacy,animal rights,animal rights activist,anti-cruelty,anti-hunting,anti-cruelty to animals,animal welfare activist,anti-blood-sports,animal rights advocate,animal activist,animal welfare,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Caste,anti-caste movement,worked against the caste system,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#labourMovement,labour movement,Labour party,factory reformer,labour organizer,industrial reformer,Labour Party activist,labour activism,labour feminist,women's labour activist,labour activist,labour advocate,labour,anti-sweated labour,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#pro-Catholicism,pro-Catholicism,catholic,roman catholic,pro-Catholic,non-compounder,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-British,anti-British politics,anti-British,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#individualism,individualism,individualist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#imperialism,imperialism,colonialist,imperialist,commonwealth supporter,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#italianNationalism,Italian nationalism,italian risorgimento,Italian nationalist movement,italian nationalist,mazzinian,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#multiracialism,multiracialism,multi-racialist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#radicalism,radicalism,working class radical,political radical,radical,radical dissident,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#sexualReform,sexual reform,sexual liberationist,sexual reformer,sex-trade activist,sex-trade reformer,sexual libertarian,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#elderRights,elder rights,elder care activist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#irishHomeRuleMovement,Irish Home Rule Movement,home ruler (ireland),irish home ruler,home ruler,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#rationalism,rationalism,rationalist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#nationalism,nationalism,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Trade-Unionism,anti-trade-unionism,anti-Union,anti-trade-unionist,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#parliamentaryReform,parliamentary reform,pro-reform,parliamentary reformer,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#bolshevism,Bolshevism,pro-bolshevik,Bolshevist,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#polishNationalism,Polish nationalism,Polish nationalism,polish nationalist,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-ContagiousDiseasesAct,anti-Contagious Diseases Act,anti-contagious diseases act activist,anti-contagious diseases acts,against the Contagious Diseases Acts,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#racialEquality,racial equality,racial integrationist,racial equality activist,activist for racial equality,race equality,racial integration,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-American,anti-American politics,anti-American,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#irishNationalism,Irish nationalism,irish patriotism,parnellite,irish nationalist,cultural nationalist,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#chartism,Chartist,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-LandLeague,Anti-Irish National Land League,anti-Irish Home Rule,anti-Land League,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#humanRights,human rights,humanitarian,human rights activist,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#indigenousRights,Indigenous rights movement,indigenous rights,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Catholicism,anti-catholicism,anti-catholic-emancipation,anti-catholic,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#nihilism,nihilism,nihilist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#neo-Conservatism,neo-conservatism,neo-Conservative,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#pro-American,pro-American,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#urbanReform,urban reform,urban reformer,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#co-operativeMovement,co-operative movement,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#taxResistance,tax resistance,tax withholder,tax resister,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#left-Wing,left-wing,anti-conservative,leftist,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#separatism,separatism,Separatist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#childrensWelfare,children's welfare,children's rights advocate,campaigner against child prostitution,children's rights,children's rights activist,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#marriageLawReform,marriage law reform,maternal wage activist,divorce reform activist,custody rights,marriage law reformer,marriage reformer,married women's property supporter,pro-divorce,divorce reformer,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#pacifism,pacifism,peace movement,peace campaigner,pacifist,socialist pacifist,pacifist supporter,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#capitalism,capitalism,capitalist,free market capitalism,capitalism,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#environmentalism,environmentalism,environmentalist,green,nature conservationist,ecologist,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#womanism,womanism,womanist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#civilRights,civil rights movement,civil rights activist,pro civil rights,civil rights,personal rights advocate,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#newDealer,new dealer,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#blackAnti-Oppression,black anti-oppression movement,black power,black liberation,black liberationist,black activist,anti-segregationist,black pride,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#wilkite,Wilkite,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#irishUnionism,Irish unionism,anti-home rule,unionist,anti-irish,anti-home ruler,anti-irish nationalist,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Suffrage,anti-suffrage,anti-suffrage movement,non-suffragist,anti-suffragist,anti-suffragist movement,anti-sufffragist,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#welshNationalism,Welsh nationalism,welsh nationalist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Jacobite,anti-Jacobite,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#britishNationalism,British nationalism,pro-British,british nationalist,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#christianSocialism,Christian socialism,christian socialist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-War,anti-war movement,anti-militarism,vietnam war protester,anti-war,anti-Vietnam-War demonstrations,anti-war activism,anti-militaristic,anti Vietnam war,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Vivisection,anti-vivisection,anti-vivisectionist,anti-vivisection movement,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#feministAnti-ViolenceActivism,feminist anti-violence activism,anti-female-genital-mutilation,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Federalism,Anti-Federalism,anti-federalist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#germanNationalism,German nationalism,pro-German,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#humanism,humanism,humanist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Conscriptionism,anti-conscriptionism,anti-conscriptionist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#parliamentarianism,parliamentarianism,parliamentarianism,parliamentarian,pro-parliamentarian,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Fascism,anti-fascism,anti-nazi,strongly opposed Fascism,anti-fascist,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Communism,anti-communism,anti-communist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#civilLibertarianism,civil libertarianism,civil libertarian,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#hanoverian,Hanoverian,House of Hanover,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#pro-Choice,pro-choice,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#antidisestablishmentarianism,antidisestablishmentarianism,antidisestablishmentarian,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#feminism,feminism,women's rights activist,women's rights,women's movement,proto-feminist,lobby for the rights of women,feminist,women's cause,Women's Liberation,anti-sexist,maternal feminist,New Woman,political issues concerning women,sexual egalitarian,Equality Feminism,women's issues,contraceptionist,advocate of female education,non-separatist feminist,feminist movement,proto-feminist consciousness,gender egalitarian,feminist reformer,activist for women and children,moderate feminist,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#birthControlActivism,birth control activism,supporter of contraception,pro-contraception,birth control campaigner,birth-control activist,pro-birth control,birth control movement,contraceptionist,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#communism,communism,communist,christian communist,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#housingMovement,housing movement,housing charity,housing activism,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#maoism,Maoism,chinese communism,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#gayRights,gay rights movement,pro-sexual preference,gay rights advocate,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#tradeUnionism,trade unionism,unionism,union movement,trade unionist,women's trade unions,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#dissentProtestant,Dissent (Protestant),Dissenter,Nonconformist,Dissenting Presbyterian,Rational Dissent,Dissenting Churches,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#secularism,secularism,secularist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#girondin,Girondin,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Monarchism,anti-monarchism,anti-royalist,anti-monarchist,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#egalitarianism,egalitarianism,egalitarian,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#sabbatarianism,Sabbatarianism,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#scottishNationalism,Scottish nationalism,scots nationalist,scottish nationalist,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Bolshevism,anti-Bolshevism,anti-bolshevik,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#conscientiousObjection,conscientious objection,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Urbanism,anti-urbanism,pro-countryside,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#highToryism,High Toryism,High Tory,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#patriotism,patriotism,patriot,patriotism,patriotic,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#vegetarianism,vegetarianism,vegetarian,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#militarism,militarism,militarist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#prisonReform,prison reform,prison reform,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Feminism,anti-feminism,antifeminist,gender conservative,misogynist,non-feminist,anti-women's liberation,anti-feminist,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#temperanceMovement,temperance movement,temperance work,temperance,temperance activist,temperance supporter,temperance worker,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#womensEducationReform,women's education reform,female education,women's medical education,education for women,women's education reformer,activist for women's education,women's higher education,female education advocate,campaigner for women's education,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#indianIndependence,Indian independence movement,Indian independence,pro-independence (indian),Indian self-government,indian nationalist,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#boulangism,boulangism,boulangist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#irishRepublicanism,Irish republicanism,irish republican,anti-unionist,irish republic,irish independence,irish resistance,irish republicanism,liberty for Ireland,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#libertarianism,Libertarianism,religious libertarian,libertarian,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#sanitaryMovement,sanitary movement,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#poorAdvocacy,poor advocacy,advocate for the poor,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Boer,anti-Boer politics,anti-Boer,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#jacobitism,Jacobitism,jacobite conspirator,jacobite,jacobites,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#protestantRule,Protestant rule,protestant,protestantism,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#pro-BoerWar,pro-Boer War,pro-Boer,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#lesbianFeminism,lesbian feminism,lesbian feminist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anarchism,anarchism,anarchist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#isolationism,isolationism,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#italianUnification,Italian unification,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#constitutionalism,constitutionalism,constitutionalist,constitutional feminist,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#antisemitism,antisemitism,antisemitic,anti-semitism,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#jewishEmancipation,Jewish emancipation,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#highChurchParty,High Church Party,High-Church party,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#conservatism,conservatism,conservative,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#americanNationalism,American nationalism,us patriotism,(us) nationalist,us nationalist,american nationalist,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#stalinism,Stalinism,totalitarian,stalinist,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Socialism,anti-socialism,anti-socialist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#newUnionism,New Unionism,New Trade Unionism,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#frenchNationalism,French nationalism,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Racism,anti-racism,anti-racist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#homeRule,Home rule,Home Rule movement,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#paternalism,paternalism,paternalist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#egyptianNationalism,Egyptian nationalism,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#multiculturalism,multiculturalism,multiculturalist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Pacifism,anti-pacifism,conscriptionist,anti-appeasement,war supporter,non-pacifist,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#utilitarianism,utilitarianism,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#conservativeFeminism,conservative feminism,conservative feminism,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#revolutionaryPolitics,revolutionary,pro-revolutionary,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#nonjurorsMovement,nonjurors movement,Non-jurors,nonjurors,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-CapitalPunishment,anti-capital punishment,anti-capital-punishment,against capital punishment,opposition to capital punishment,opponent of capital punishment,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Globalism,anti-globalism,anti-globalization,anti-globalist,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#greekNationalist,Greek nationalism,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#suffrage,suffrage movement,suffragettes,non-militant suffragist,International Suffrage Congress,suffrage,suffrage politics,suffrage organizer,moderate suffragist,supporter of the women's suffrage movement,female suffrage,suffrage demonstrator,suffrage leader,women's suffrage,suffrage organisations,suffragist,Woman Suffrage,Women's Enfranchisement,suffragette,christian suffragist,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Bonapartism,anti-Bonapartism,anti-bonapartist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Apartheid,anti-apartheid,the struggle to end Apartheid,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#conservativePartyUk,Conservative Party (UK),disaffected Tories,Tory Party (Britain),Tory radical,tory,conservative party,Tory Party,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#monarchism,monarchism,monarchist,royalist,constitutional monarchist,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-PovertyMovement,anti-poverty movement,anti-poverty movement,poverty activist,anti-poverty activist,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#antiClericalism,anti-clericalism,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#communalism,communalism,communalist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#jacobinism,Jacobinism,jacobin,pro-Jacobin,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Jacobin,anti-Jacobin,anti-revolutionary,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Dreyfusard,anti-Dreyfusard,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#dressReform,dress reform,dress reformer,Rational Dress Movement,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-CorporalPunishment,anti-corporal punishment,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#liberalism,liberalism,liberal,radical liberal,British Liberalism,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#aidsActivism,AIDS activism,aids activist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#liberalUnionistParty,Liberal Unionist Party,liberal unionist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#societyOfFriends,Society of Friends,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#christianPacifism,Christian pacifism,christian pacifist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#pro-Slavery,pro-slavery,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#socialPurity,social purity,purity movement,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#republicanism,republicanism,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#zionism,Zionism,proto-Zionist,zionist,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#landReform,land reform,Irish land nationalization,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#catholicEmancipation,Catholic emancipation,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-masonry,anti-masonry,anti-masonic,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#whiggism,whiggism,opposition whig,foxite whig,dissident whig,whig,pittite whig,whigs,williamite,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#blackNationalism,Black nationalism,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Censorship,anti-censorship movement,Freedom of Speech,free speech advocate,intellectual property activist,pro-free speech,anti-censorship,pro free speech,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#bonapartism,Bonapartism,pro-bonapartist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-NuclearMovement,anti-nuclear movement,anti-nuclear war,anti-nuclear weapons,anti-nuclear activist,nuclear disarmament,nuclear disarmament campaigner,anti-atomic,pro nuclear disarmament,anti-nuclear,Campaign for Nuclear Disarmament,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#propertyLawReform,property law reform,land reform,property reform,land reformer,illegitimacy reformer,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Zionism,anti-Zionism,anti-zionist,anti-israel,anti-Israeli,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#malthusianism,Malthusianism,neo-Malthusianism,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#abolitionism,abolitionism,abolition,sugar boycotter,anti-slavery,abolitionist,integrationism,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#marxism,Marxism,marxist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Antisemitism,anti-antisemitism,anti-antisemitic,anti-antisemitist,anti-anti-semitism,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#guelphPartyFlorence,Guelph party (Florence),Guelph,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#pro-European,pro-European,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#eugenics,eugenics,eugenicist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#yorkist,Yorkist,Yorkist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#socialReform,social reform,social reformer,social and legal reform,reformist,progressivism,reform,reformers,reformer,social welfare,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#existentialism,existentialism,existentialist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#womensEmploymentReform,women's employment reform,equal rights in the work place,female employment,women's employment reformer,employment activist,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#indianUnification,Indian unification,Indian national unity,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#disestablishmentarianism,disestablishmentarianism,anti-anglican,anti-episcopalian,anti-episcopal,anti-tithes,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#covenanters,Covenanters,Covenanting,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#poorLawReform,poor law reform,Poor Law reform,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#racism,racism,racist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Capitalism,anti-capitalism,anti-capitalist,anti-property,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Vaccination,anti-vaccination movement,movement against compulsory vaccination,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#artsAdvocacy,arts advocacy,advocate for the arts,artists' advocate,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#internationalism,internationalism,internationalist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#dreyfusard,Dreyfusard,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#feministPacifism,feminist pacifism,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#nazism,Nazism,nazi,pro-nazi,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#educationReform,education reform,educational reformer,education reformer,state education movement,educationalist,educational reform,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#appeasement,appeasement,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Imperialism,Anti-imperialism,anti-colonialism,anti-colonialist,anti-imperial,Zulu resistance to colonial rule,anti-colonial,anti-imperialist,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#feministInternationalism,feminist internationalism,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#RaceColour,http://sparql.cwrc.ca/ontologies/cwrc#scottishRaceColour,Scottish,Scotch,Scottish,Scots,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#RaceColour,http://sparql.cwrc.ca/ontologies/cwrc#blackWomanRaceColour,blackwoman,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#RaceColour,http://sparql.cwrc.ca/ontologies/cwrc#asianRaceColour,Asian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#RaceColour,http://sparql.cwrc.ca/ontologies/cwrc#anglo-IrishRaceColour,Anglo-Irish,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#RaceColour,http://sparql.cwrc.ca/ontologies/cwrc#englishRaceColour,English,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#RaceColour,http://sparql.cwrc.ca/ontologies/cwrc#mixedRaceColour,mixed-race,racially mixed,mixed,mixed-race,mixed-blood,"mixed white and black (or, in her own word, colored)",red mulatto,coloured (mixed-race),,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#RaceColour,http://sparql.cwrc.ca/ontologies/cwrc#creoleRaceColour,Creole,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#RaceColour,http://sparql.cwrc.ca/ontologies/cwrc#blackRaceColour,black,blackwoman,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#RaceColour,http://sparql.cwrc.ca/ontologies/cwrc#jewishRaceColour,Jewish,jew,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#RaceColour,http://sparql.cwrc.ca/ontologies/cwrc#eurasianRaceColour,eurasian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#RaceColour,http://sparql.cwrc.ca/ontologies/cwrc#whiteRaceColour,white,presumably white,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#RaceColour,http://sparql.cwrc.ca/ontologies/cwrc#indianRaceColour,Indian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#RaceColour,http://sparql.cwrc.ca/ontologies/cwrc#indigenousPeoplesOfAmericasRaceColour,Indigenous (of the Americas),Native American,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#RaceColour,http://sparql.cwrc.ca/ontologies/cwrc#afro-CaribbeanRaceColour,Afro-Caribbean,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,http://sparql.cwrc.ca/ontologies/cwrc#anglo-IrishNationalHeritage,Anglo-Irish,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,http://sparql.cwrc.ca/ontologies/cwrc#jewishNationalHeritage,Jewish,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,http://sparql.cwrc.ca/ontologies/cwrc#huguenotNationalHeritage,Huguenot,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,http://sparql.cwrc.ca/ontologies/cwrc#africanNationalHeritage,African,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,http://sparql.cwrc.ca/ontologies/cwrc#bengaliNationalHeritage,bengali,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,http://sparql.cwrc.ca/ontologies/cwrc#normanNationalHeritage,Norman,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,http://sparql.cwrc.ca/ontologies/cwrc#tatarNationalHeritage,Tatar,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,http://sparql.cwrc.ca/ontologies/cwrc#mohawkNationalHeritage,Mohawk,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,http://sparql.cwrc.ca/ontologies/cwrc#dutchNationalHeritage,Dutch,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,http://sparql.cwrc.ca/ontologies/cwrc#flemishNationalHeritage,Flemish,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,http://sparql.cwrc.ca/ontologies/cwrc#iroquoisNationalHeritage,Iroquois,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,http://sparql.cwrc.ca/ontologies/cwrc#westIndianNationalHeritage,West Indian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,http://sparql.cwrc.ca/ontologies/cwrc#europeanNationalHeritage,European,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,http://sparql.cwrc.ca/ontologies/cwrc#cornishNationalHeritage,Cornish,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#europeanEthnicity,European,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#jewishEthnicity,Jewish,Jew,Jewish,a Jewish,Jewry,Jews,Judaism,one-quarter Jewish,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#punjabiEthnicity,Punjabi,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#wendishEthnicity,Wendish,Wends or Sorbs,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#african-AmericanEthnicity,African-American,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#anglo-NormanEthnicity,Anglo-Norman,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#celticEthnicity,Celtic,Highland (that is Celtic),Highland,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#thracianEthnicity,Thracian,Thracians,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#scottishEthnicity,Scottish,highland,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#westIndianEthnicity,West Indian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#gaelEthnicity,Gael,highland,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#blackEthnicity,black,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#parsiEthnicity,Parsi,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#whiteEthnicity,white,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#jamaicanEthnicity,Jamaican,Jamaican-born,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#romaniEthnicity,Romani,gypsy,gypsies,gipsy,Roma,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#englishEthnicity,English,England,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#creoleEthnicity,Creole,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#ashkenaziJewishEthnicity,Ashkenazi Jewish,"Ashkenazim, or German Jewish",Ashkenazim,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#irishEthnicity,Irish,irish ancestry,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#sephardicJewishEthnicity,Sephardic Jewish,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#arabEthnicity,Arab,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#slavEthnicity,Slav,Slavic,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#chineseEthnicity,Chinese,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#africanEthnicity,African,black African descent,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#indigenousPeoplesOfAmericasEthnicity,Indigenous (of the Americas),Amer-Indians,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#anglo-IrishEthnicity,Anglo-Irish,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#igboEthnicity,Igbo,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#bengaliEthnicity,Bengali,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#vitalism,vitalism,vitalist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#agnosticism,agnosticism,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#socinianism,Socinianism,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#christianScience,Christian Science,Church of Christ Scientist,Christian Scientist,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#camisards,Camisards,French Prophets,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#benedictineOrder,Benedictine Order,Benedictine,Benedictine Order,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#methodistEpiscopalian,Methodist Episcopalian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#zoroastrianism,Zoroastrianism,Parsi,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#obeah,Obeah,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#gnosticism,Gnosticism,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#presbyterianism,Presbyterianism,Free Church of Scotland,Presbyterian Church,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#newThought,New Thought,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#hermeticism,Hermeticism,Hermetic,Hermetism,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#islam,Islamism,Islamic,Mahometans,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#rosicrucianism,Rosicrucianism,Rosicrucian,Rosicrucianism,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#faithHealing,faith healing,faith-healing,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#neo-thomism,Neo-thomism,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#protoZionism,Proto-Zionism,proto-Zionist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#socialGospel,Social Gospel,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#abrahamicReligions,Abrahamic religions,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#millenarianism,millenarianism,milleniarian,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#pentecostalism,Pentecostalism,Pentecostal Evangelists,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#cartesianism,Cartesianism,Cartesian,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#naturalReligion,Natural Religion,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#judaism,Judaism,Orthodox Judaism,Jewish,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#atheism,atheism,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#freethought,freethought,free-thinker,sceptic,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#seekers,Seekers,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#methodism,Methodism,Methodist Church,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#catholicism,Roman Catholicism,Catholic Church,Catholicism,Roman Catholic Church,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#mysticism,mysticism,mystic,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#freemasonry,Freemasonry,Freemason,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#tractarianMovement,Tractarian Movement,Tractarian,Oxford Movement,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#evangelicalism,Evangelicalism,Evangelicism,Evangelical Church,Evangelical,Evangelical Christian,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#deism,deism,deist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#theism,theism,theist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#reincarnation,reincarnation,reincarnationist,believer in reincarnation,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#ecumenism,ecumenism,ecumenical,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#christianity,Christianity,Christian,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#wesleyanism,Wesleyanism,Wesleyan Methodist,Wesleyan,Wesleyan Independent,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#darwinism,Darwinism,evolutionist,Darwinist,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#huguenotNationalHeritage,Huguenot,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#occultism,occultism,occultism/theosophism,Occultist,astrologer,Theosophy,Tarot card believer,magician,character reader,medium,spiritualism,fortune teller,Theosophist,spiritualist,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#hinduism,Hinduism,Hindoos,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#sufism,Sufism,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#puritanism,Puritanism,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#easternReligions,eastern religions,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#baptistChristianity,Baptist Christianity,Baptist,Particular Baptist,Baptist Church,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#buddhism,Buddhism,Buddhist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#universalist,Universalist,universal salvation,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#dominicanOrder,Dominican,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#asceticism,asceticism,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#shinto,Shinto,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#pantheism,pantheism,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#antiClericalism,anti-clericalism,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#fifthMonarchists,Fifth Monarchists,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#monism,monism,Monist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#swedenborgianism,Swedenborgianism,New Church,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#zen,Zen,Zen Buddhism,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#spiritualism,spiritualism,psychic,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#plymouthBrethren,Plymouth Brethren,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#congregationalism,Congregationalism,Independent,Independent Church,Separatist,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#behemenism,Behemenism,Behmenist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#lollardy,Lollardy,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#dissentProtestant,Dissent (Protestant),Dissenter,Nonconformist,Dissenting Presbyterian,Rational Dissent,Dissenting Churches,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#determinism,determinism,predestinarianism,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#paganism,Paganism,pagan (Greek),,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#anglicanism,Anglicanism,Low-Church,Anglican Church,High Church,Church of England,Episcopalian,High Anglican,Low Church,Church of Ireland,Anglo-Catholic,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#protestantism,Protestantism,provincial English Protestantism,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#moravian,Moravian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#independentMethodistConnexion,Independent Methodist Connexion,Independent Methodist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#adventism,Adventism,Second Adventist,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#unitarianism,Unitarianism,active unitarian,Unitarian Church,Unitarian,Unitarian Movement,unitarianMovement,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#jansenism,Jansenism,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#quakerism,Quakerism,Society of Friends,"Friends, Society of",,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#calvinism,Calvinism,Reformed,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#fatalism,fatalism,fatalist,Necessarian,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#bushido,Bushido,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#latitudinarianism,Latitudinarianism,Latitudinarian,latudinarian,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sparql.cwrc.ca/ontologies/cwrc#englishGeographicHeritage,England,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sparql.cwrc.ca/ontologies/cwrc#jewishGeographicHeritage,Jewish,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Sexuality,http://sparql.cwrc.ca/ontologies/cwrc#sexualityPromiscuity,promiscuity,promiscuous,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Sexuality,http://sparql.cwrc.ca/ontologies/cwrc#sexualityFrigidity,frigidity,frigid,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Sexuality,http://sparql.cwrc.ca/ontologies/cwrc#lesbian,lesbianism,lesbianism,lesbian,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Sexuality,http://sparql.cwrc.ca/ontologies/cwrc#sexualityBisexuality,bisexuality,bisexual,bisexuality,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Sexuality,http://sparql.cwrc.ca/ontologies/cwrc#homosexual,homosexuality,male HOMOSEXUAL,homosexual,homosexuality,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Sexuality,http://sparql.cwrc.ca/ontologies/cwrc#heterosexual,heterosexuality,heterosexuality,heterosexual,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Sexuality,http://sparql.cwrc.ca/ontologies/cwrc#sexualityCelibacy,celibacy,celibate,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#Sexuality,http://sparql.cwrc.ca/ontologies/cwrc#sexualityLibertinism,libertinism,libertinism,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,http://sparql.cwrc.ca/ontologies/cwrc#anglo-IrishNationalIdentity,Anglo-Irish,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,http://sparql.cwrc.ca/ontologies/cwrc#mohawkNationalIdentity,Mohawk,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,http://sparql.cwrc.ca/ontologies/cwrc#jewishNationalIdentity,Jewish,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,http://sparql.cwrc.ca/ontologies/cwrc#sephardicJewishNationalIdentity,Sephardic Jewish,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,http://sparql.cwrc.ca/ontologies/cwrc#florentineNationalIdentity,Florentine,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,http://sparql.cwrc.ca/ontologies/cwrc#europeanNationalIdentity,European,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,http://sparql.cwrc.ca/ontologies/cwrc#hanoverianNationalIdentity,Hanoverian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,http://sparql.cwrc.ca/ontologies/cwrc#anglo-IndianNationalIdentity,Anglo-Indian,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,http://sparql.cwrc.ca/ontologies/cwrc#britishNationalIdentity,British,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,http://sparql.cwrc.ca/ontologies/cwrc#statelessNationalIdentity,stateless,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,http://sparql.cwrc.ca/ontologies/cwrc#saxonNationalIdentity,Saxon,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,http://sparql.cwrc.ca/ontologies/cwrc#africanNationalIdentity,African,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+RDF Type,uri,Label,alt label #1,alt label #2,alt label #3,alt label #4,alt label #5,alt label #6,alt label #7,alt label #8,alt label #9,alt label #10,alt label #11,alt label #12
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/ara,arabic,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/ben,bengali,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/bul,bulgarian,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/chi,chinese,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/cze,czech,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/eng,english,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/fre,french,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/ger,german,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/gla,gaelic,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/gle,irish,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/guj,gujarati,guzerati,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/heb,hebrew,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/hin,hindi,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/ita,italian,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/jpn,Japanese,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/kan,kanarese,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/lat,latin,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/mar,marathi,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/may,malay,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/per,persian,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/pli,pali,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/pol,Polish,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/rus,russian,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/san,sanskrit,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/spa,spanish,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/tha,thai,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/ukr,Ukrainian,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/urdu,hindustani,Urdu,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Language,http://id.loc.gov/vocabulary/languages/wel,welsh,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,AT,austrian,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,AT-9,viennese,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,BG,bulgarian,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,BE,Belgian,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,BR,Brazilian,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,CA,canadian,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,CH,swiss,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,CU,cuban,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,DE,german,germany,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,DK,danish,denmark,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,ES,spanish,spain,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,FR,french,french extraction,french mother,half french,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,FR-COR,corsican,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,GB,british,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,GB-EDH,edinburgh,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,GB-ENG,english,englishwoman,england,english born,english father,half english,northern english,anglo,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,GB-NIR,northern irish,northern ireland,ulster irish protestants,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,GB-SCT,scottish,scots,scotswoman,scotland,half scots,scotch,shetland,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,GB-WLS,welsh,welsh extraction,Welsh lineage (ancient descent though little money on both sides of her family).,Walsh,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,GH,ghanaian,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,HU,hungarian,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,IE,irish,irishwoman,half irish,ireland,irishness,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,IN,indian,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,IT,italian,italy,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,JM,jamaican,jamaica,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,LT,lithuanian,lithuania,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,LV,latvian,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,NG,nigerian,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,NL,netherlands,the netherlands,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,NZ,new zealander,new zealand,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,PK,Pakistani,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,PE,peruvian,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,PL,polish,pollish,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,PT,portuguese,portugal,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,RO,romania,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,RU,russian,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,SE,swedish,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,TR,turkish,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,UA,ukrainian,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,US,american,usa,united states,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,AU,australian,australia,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,CA,canadian,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,CN,chinese,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,DE,german,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,DK,danish,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,DZ,algerian,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,GB-ENG,english,england,englishwoman,engllish,anglo,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,ES,spanish,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,IT,italian,italy,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,FR,french,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,MX,Mexico,Mexican,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,GB,british,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,GB-NIR,northern irish,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,GB-SCT,scottish,scotswoman,scots,scotland,scot,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,GB-WLS,welsh,welshwoman,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,GY,guyanan,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,HU,hungarian,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,IE,irish,ireland,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,IN,indian,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,IT-GE,genoese,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,JM,jamaican,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,PK,Pakistani,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,KE,kenyan,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,NG,nigerian,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,NZ,new zealander,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,RU,russian,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,US,american,america,usa,us,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,ZA,south african,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/11609047,Lancastrian,Lancashire,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/2186224,New Zealand,,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/2510769,Spanish,,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/2782113,Austria,,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/2635167,British,,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/2634895,Wales,Welsh,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/2638010,Shetland,,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/2638360,Scotland,Scottish,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/2641364,Northern Irish,,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/2652355,Cornish,Cornwall,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/2661886,Sweden,Swedish,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/2750405,Dutch,,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/2921044,Germany,German,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/2963597,Ireland,Irish,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/3017382,France,French,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/3077311,Czech Republic,,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/6252001,USA,American,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/6255148,European,,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/6269131,England,English,north of England,northern English,London,Londoner,northern england,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/357994,Egypt,Egyptian,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/3489940,Jamaica,,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/6255146,Africa,,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/953987,South Africa,,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/6252001,America,,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/5128581,New Yorker,,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/4662168,Tennessee,,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/4736286,Texas,Texan,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/6951102,Italy,Italian,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/3164603,Venice,Venetian,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/7729891,Caribbean,,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/8502102,New England,New Englander,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sws.geonames.org/8581589,Yorkshirewoman,,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://vocab.getty.edu/tgn/300008880,"Prairies,Canada",,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://vocab.getty.edu/tgn/7000198,India,Indian,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://vocab.getty.edu/tgn/7004550,West Indian,,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://vocab.getty.edu/tgn/7017283,Glaswegians,,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://vocab.getty.edu/tgn/7032932,East Africa,,,,,,,,,,,,,,,,,,
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#darwinism,Darwinism,evolutionist,Darwinist
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#naturalReligion,Natural Religion
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#zen,Zen,Zen Buddhism
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#pentecostalism,Pentecostalism,Pentecostal Evangelists
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#cartesianism,Cartesianism,Cartesian
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#sufism,Sufism
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#vitalism,vitalism,vitalist
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#asceticism,asceticism
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#rosicrucianism,Rosicrucianism,Rosicrucian
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#dissentProtestant,Dissent (Protestant),Nonconformist,Dissenter,Rational Dissent,Dissenting Churches,Dissenting Presbyterian
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#antiClericalism,anti-clericalism
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#fifthMonarchists,Fifth Monarchists
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#anglicanism,Anglicanism,Church of Ireland,Episcopalian,Low-Church,Church of England,Anglo-Catholic,Low Church,High Anglican,Anglican Church,High Church
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#zoroastrianism,Zoroastrianism,Parsi
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#swedenborgianism,Swedenborgianism,New Church
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#huguenotNationalHeritage,Huguenot
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#adventism,Adventism,Second Adventist
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#wesleyanism,Wesleyanism,Wesleyan Independent,Wesleyan Methodist,Wesleyan
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#judaism,Judaism,Jewish,Orthodox Judaism
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#obeah,Obeah
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#presbyterianism,Presbyterianism,Presbyterian Church,Free Church of Scotland
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#independentMethodistConnexion,Independent Methodist Connexion,Independent Methodist
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#easternReligions,eastern religions
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#methodistEpiscopalian,Methodist Episcopalian,African Methodist Episcopal,African Methodist Episcopal Church
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#freethought,freethought,free-thinker,sceptic
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#christianScience,Christian Science,Church of Christ Scientist,Christian Scientist
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#socialGospel,Social Gospel
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#quakerism,Quakerism,"Friends, Society of",Society of Friends
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#theism,theism,theist
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#evangelicalism,Evangelicalism,Evangelical Christian,Evangelical Church,Evangelical,Evangelicism,Evangelical Protestantism
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#jansenism,Jansenism
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#tractarianMovement,Tractarian Movement,Tractarian,Oxford Movement
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#universalist,Universalist,universal salvation
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#ecumenism,ecumenism,ecumenical
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#neo-thomism,Neo-thomism
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#hermeticism,Hermeticism,Hermetic,Hermetism
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#catholicism,Roman Catholicism,Catholicism,Roman Catholic Church,Catholic Church
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#pantheism,pantheism
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#latitudinarianism,Latitudinarianism,latudinarian,Latitudinarian
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#hinduism,Hinduism,Hindoos
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#seekers,Seekers
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#calvinism,Calvinism,Reformed
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#methodism,Methodism,Methodist Church,Methodist New Connection
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#protestantism,Protestantism,Labadists,provincial English Protestantism
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#monism,monism,Monist
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#lollardy,Lollardy
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#socinianism,Socinianism
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#shinto,Shinto
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#islam,Islamism,Muslim,Islamic,Mahometans
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#atheism,atheism
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#determinism,determinism,predestinarianism
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#puritanism,Puritanism
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#deism,deism,deist
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#protoZionism,Proto-Zionism,proto-Zionist
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#reincarnation,reincarnation,reincarnationist,believer in reincarnation
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#behemenism,Behemenism,Behmenist
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#baptistChristianity,Baptist Christianity,Particular Baptist,Baptist,Baptist Church
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#occultism,occultism,occultism/theosophism,spiritualist,fortune teller,spiritualism,Theosophy,Tarot card believer,magician,medium,Theosophist,character reader,astrologer,Occultist
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#buddhism,Buddhism,Buddhist
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#camisards,Camisards,French Prophets
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#plymouthBrethren,Plymouth Brethren
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#spiritualism,spiritualism,psychic
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#congregationalism,Congregationalism,Independent,Separatist,Independent Church
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#christianity,Christianity,Free Christian Church,Russian Orthodox,Greek Orthodox,orthodox Christianity,Christian
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#moravian,Moravian
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#bushido,Bushido
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#newThought,New Thought
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#agnosticism,agnosticism
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#abrahamicReligions,Abrahamic religions
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#dominicanOrder,Dominican
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#benedictineOrder,Benedictine Order,Benedictine
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#freemasonry,Freemasonry,Freemason
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#faithHealing,faith healing,faith-healing
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#mysticism,mysticism,mystic,Eastern mysticism
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#fatalism,fatalism,fatalist,Necessarian
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#gnosticism,Gnosticism
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#paganism,Paganism,pagan (Greek)
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#unitarianism,Unitarianism,Unitarian,Unitarian Movement,unitarianMovement,active unitarian,Unitarian Church
+http://sparql.cwrc.ca/ontologies/cwrc#Religion,http://sparql.cwrc.ca/ontologies/cwrc#millenarianism,millenarianism,milleniarian
+http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#lowerMiddleClass,lower-middle class,genteel poverty,LOWER-MIDDLECLASS
+http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#professional,professional,professional class,professional classes,PROFESSIONAL
+http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#servants,servant,SERVANTS
+http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#gentry,gentry,gentility,GENTRY
+http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#nobility,nobility,royal,royal descent,royalty,"royal, but not expected to become queen",NOBILITY
+http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#rural-unskilled,rural unskilled,RURAL-UNSKILLED
+http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#indigent,indigent,poverty,impoverished,INDIGENT
+http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#urban-industrialUnskilled,urban unskilled,URBAN-INDUSTRIALUNSKILLED
+http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#brahmin,Brahmin
+http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#managerial,managerial,MANAGERIAL
+http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#bohemianism,Bohemianism,classlessness,bohemian with upper-class connections,"alternative society of young artists, dropouts, and nonconformists"
+http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#yeoman-farmer,yeoman farmer,yeoman,YEOMAN-FARMER
+http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#middleClass,middle class,middling sort,middle ranks,middling ranks,middle-class,bourgeois,middle,middle classes,urban middle class
+http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#workingClass,working class,rural working class parents,working woman,working classes,urban working class
+http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#upper-middleClass,upper-middle class
+http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#entrepreneurial-industrialist,entrepreneurial,ENTREPRENEURIAL-INDUSTRIALIST
+http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#slave-forced-labourer,slave or forced labourer,bonded labourer,serf,serfs,slave
+http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#shopkeepers,shopkeepers,SHOPKEEPERS
+http://sparql.cwrc.ca/ontologies/cwrc#SocialClass,http://sparql.cwrc.ca/ontologies/cwrc#skilledCraftpersonArtisan,artisan,SKILLEDCRAFTPERSON-ARTISAN
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sparql.cwrc.ca/ontologies/cwrc#jewishGeographicHeritage,Jewish
+http://sparql.cwrc.ca/ontologies/cwrc#GeographicHeritage,http://sparql.cwrc.ca/ontologies/cwrc#englishGeographicHeritage,England
+http://sparql.cwrc.ca/ontologies/cwrc#Gender,http://sparql.cwrc.ca/ontologies/cwrc#cisGender,cisgender
+http://sparql.cwrc.ca/ontologies/cwrc#Gender,http://sparql.cwrc.ca/ontologies/cwrc#cisWoman,cis woman/cis female
+http://sparql.cwrc.ca/ontologies/cwrc#Gender,http://sparql.cwrc.ca/ontologies/cwrc#GenderQueer,genderqueer,NONCONFORMING
+http://sparql.cwrc.ca/ontologies/cwrc#Gender,http://sparql.cwrc.ca/ontologies/cwrc#transGender,transgender,transgendered,TRANS
+http://sparql.cwrc.ca/ontologies/cwrc#Gender,http://sparql.cwrc.ca/ontologies/cwrc#woman,woman,female,girl
+http://sparql.cwrc.ca/ontologies/cwrc#Gender,http://sparql.cwrc.ca/ontologies/cwrc#blackWomanRaceColour,blackwoman
+http://sparql.cwrc.ca/ontologies/cwrc#Gender,http://sparql.cwrc.ca/ontologies/cwrc#cisMan,cis man/cis male
+http://sparql.cwrc.ca/ontologies/cwrc#Gender,http://sparql.cwrc.ca/ontologies/cwrc#transWoman,trans woman/trans female,transgendered male to female
+http://sparql.cwrc.ca/ontologies/cwrc#Gender,http://sparql.cwrc.ca/ontologies/cwrc#Androgynous,androgynous
+http://sparql.cwrc.ca/ontologies/cwrc#Gender,http://sparql.cwrc.ca/ontologies/cwrc#man,man,male,boy
+http://sparql.cwrc.ca/ontologies/cwrc#Gender,http://sparql.cwrc.ca/ontologies/cwrc#transMan,trans man/trans male,transgendered female to male
+http://sparql.cwrc.ca/ontologies/cwrc#Gender,http://sparql.cwrc.ca/ontologies/cwrc#undefinedGender,undefined
+http://sparql.cwrc.ca/ontologies/cwrc#Sexuality,http://sparql.cwrc.ca/ontologies/cwrc#frigidity,frigidity,frigid
+http://sparql.cwrc.ca/ontologies/cwrc#Sexuality,http://sparql.cwrc.ca/ontologies/cwrc#libertinism,libertinism,libertine
+http://sparql.cwrc.ca/ontologies/cwrc#Sexuality,http://sparql.cwrc.ca/ontologies/cwrc#asexuality,asexuality,asexual
+http://sparql.cwrc.ca/ontologies/cwrc#Sexuality,http://sparql.cwrc.ca/ontologies/cwrc#lesbian,lesbianism,
+http://sparql.cwrc.ca/ontologies/cwrc#Sexuality,http://sparql.cwrc.ca/ontologies/cwrc#celibacy,celibacy,celibate
+http://sparql.cwrc.ca/ontologies/cwrc#Sexuality,http://sparql.cwrc.ca/ontologies/cwrc#promiscuity,promiscuity,promiscuous
+http://sparql.cwrc.ca/ontologies/cwrc#Sexuality,http://sparql.cwrc.ca/ontologies/cwrc#heterosexual,heterosexuality,heterosexual
+http://sparql.cwrc.ca/ontologies/cwrc#Sexuality,http://sparql.cwrc.ca/ontologies/cwrc#bisexuality,bisexuality,bisexual
+http://sparql.cwrc.ca/ontologies/cwrc#Sexuality,http://sparql.cwrc.ca/ontologies/cwrc#homosexual,homosexuality,homosexual,male HOMOSEXUAL
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#communalism,communalism,communalist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#irishHomeRuleMovement,Irish Home Rule Movement,home ruler (ireland),irish home ruler,home ruler
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#racialEquality,racial equality,racial integration,racial equality activist,racial integrationist,race equality,activist for racial equality
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#educationReform,education reform,educational reform,education reformer,state education movement,educational reformer,educationalist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#multiculturalism,multiculturalism,multiculturalist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#feministPacifism,feminist pacifism
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Vaccination,anti-vaccination movement,movement against compulsory vaccination
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#gayRights,gay rights movement,pro-sexual preference,gay rights advocate
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#italianUnification,Italian unification
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#lesbianFeminism,lesbian feminism,lesbian feminist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Caste,anti-caste movement,worked against the caste system
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#christianPacifism,Christian pacifism,christian pacifist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#conscientiousObjection,conscientious objection
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#socialPurity,social purity,purity movement
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Capitalism,anti-capitalism,anti-capitalist,anti-property
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Urbanism,anti-urbanism,pro-countryside
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#housingMovement,housing movement,housing charity,housing activism
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#humanRights,human rights,humanitarian,human rights activist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#highChurchParty,High Church Party,High-Church party
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#indianIndependence,Indian independence movement,Indian self-government,Indian independence,pro-independence (indian),indian nationalist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#monarchism,monarchism,monarchist,royalist,constitutional monarchist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#dreyfusard,Dreyfusard
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#capitalism,capitalism,free market capitalism,capitalist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#catholicEmancipation,Catholic emancipation
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#parliamentaryReform,parliamentary reform,pro-reform,parliamentary reformer
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Zionism,anti-Zionism,anti-israel,anti-Israeli,anti-zionist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#boulangism,boulangism,boulangist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#internationalism,internationalism,internationalist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#appeasement,appeasement
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#civilLibertarianism,civil libertarianism,civil libertarian
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#pro-Catholicism,pro-Catholicism,roman catholic,catholic,non-compounder,pro-Catholic
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#radicalism,radicalism,political radical,radical,radical dissident,working class radical
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#indigenousRights,Indigenous rights movement,indigenous rights
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-PovertyMovement,anti-poverty movement,anti-poverty activist,poverty activist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#welshNationalism,Welsh nationalism,welsh nationalist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#jewishEmancipation,Jewish emancipation
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#paternalism,paternalism,paternalist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Antisemitism,anti-antisemitism,anti-antisemitic,anti-anti-semitism,anti-antisemitist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#isolationism,isolationism
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anarchism,anarchism,anarchist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Monarchism,anti-monarchism,anti-monarchist,anti-royalist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#parliamentarianism,parliamentarianism,parliamentarian,pro-parliamentarian
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#patriotism,patriotism,patriot,patriotic
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#oppositionPolitics,opposition politics,Opposition
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Communism,anti-communism,anti-communist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#christianSocialism,Christian socialism,christian socialist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#americanNationalism,American nationalism,american nationalist,us nationalist,us patriotism,(us) nationalist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#newUnionism,New Unionism,New Trade Unionism
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#nazism,Nazism,pro-nazi,nazi
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#disestablishmentarianism,disestablishmentarianism,anti-episcopal,anti-episcopalian,anti-tithes,anti-anglican
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Dreyfusard,anti-Dreyfusard
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#multiracialism,multiracialism,multi-racialist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#egalitarianism,egalitarianism,egalitarian
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#environmentalism,environmentalism,ecologist,climate activist,nature conservationist,environmentalist,green
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-CorporalPunishment,anti-corporal punishment
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#blackAnti-Oppression,black anti-oppression movement,black power,black liberationist,black liberation,anti-segregationist,black activist,black pride
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#pro-American,pro-American
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Catholicism,anti-catholicism,anti-catholic-emancipation,anti-catholic
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#indianUnification,Indian unification,Indian national unity
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#landReform,land reform,Irish land nationalization
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-masonry,anti-masonry,anti-masonic
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#guelphPartyFlorence,Guelph party (Florence),Guelph
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#taxResistance,tax resistance,tax resister,tax withholder
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#nihilism,nihilism,nihilist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#marxism,Marxism,marxist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#jacobinism,Jacobinism,pro-Jacobin,jacobin
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#prisonReform,prison reform
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#irishUnionism,Irish unionism,anti-irish nationalist,anti-irish,anti-home rule,anti-home ruler,unionist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#homeRule,Home rule,Home Rule movement
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#irishRepublicanism,Irish republicanism,irish republic,anti-unionist,irish republicanism,liberty for Ireland,irish republican,Sinn Fein,irish resistance,irish independence
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#dissentProtestant,Dissent (Protestant),Nonconformist,Dissenter,Rational Dissent,Dissenting Churches,Dissenting Presbyterian
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#freeTradeMovement,free trade movement,free trader
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#republicanism,republicanism
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Apartheid,anti-apartheid,the struggle to end Apartheid
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#socialReform,social reform,social welfare,reformist,reform,reformer,social and legal reform,progressivism,social reformer,reformers
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#antiClericalism,anti-clericalism
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#polishNationalism,Polish nationalism,polish nationalist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-European,anti-European politics,anti-European
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#egyptianNationalism,Egyptian nationalism
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#spanishRepublicanism,Spanish republicanism,spanish republican,spanish republican supporter
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#conservativePartyUk,Conservative Party (UK),conservative party,Tory Party (Britain),Tory Party,tory,disaffected Tories,Tory radical
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Bolshevism,anti-Bolshevism,anti-bolshevik
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#zionism,Zionism,proto-Zionist,zionist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#womensEmploymentReform,women's employment reform,women's employment reformer,salary reform,employment activist,female employment,equal rights in the work place
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#dressReform,dress reform,Rational Dress Movement,dress reformer
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#malthusianism,Malthusianism,neo-Malthusianism
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#conservatism,conservatism,conservative
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#chartism,Chartist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-NuclearMovement,anti-nuclear movement,pro nuclear disarmament,anti-nuclear,Campaign for Nuclear Disarmament,anti-nuclear weapons,anti-atomic,nuclear disarmament,anti-nuclear war,anti-nuclear activist,nuclear disarmament campaigner
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#separatism,separatism,Separatist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-ContagiousDiseasesAct,anti-Contagious Diseases Act,anti-contagious diseases acts,against the Contagious Diseases Acts,anti-contagious diseases act activist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#communism,communism,Communist Party,christian communist,communist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#feministAnti-ViolenceActivism,feminist anti-violence activism,anti-female-genital-mutilation,against violence to women
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Federalism,Anti-Federalism,anti-federalist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#socialism,socialism,fabian socialist,owenite socialism,Social Democrat,socialist,socialist and feminist,Social Democrats,militant socialist,socialist organizer,Independent Socialist,radical socialist,Social Democratic Foundation,Social Democratic Party,Fabian,socialist feminist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#feministInternationalism,feminist internationalism
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#pro-BoerWar,pro-Boer War,pro-Boer
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#liberalUnionistParty,Liberal Unionist Party,liberal unionist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#utilitarianism,utilitarianism
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Feminism,anti-feminism,antifeminist,non-feminist,misogynist,anti-women's liberation,gender conservative,anti-feminist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#frenchNationalism,French nationalism
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#sexualReform,sexual reform,sex-trade reformer,sexual liberationist,sexual libertarian,sexual reformer,sex-trade activist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#labourMovement,labour movement,women's labour activist,labour,International Labour Party,labour advocate,labour activism,Labour party,labour feminist,Independent Labour Party,factory reformer,Labour Party activist,labour activist,anti-sweated labour,labour organizer,industrial reformer
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#antisemitism,antisemitism,antisemitic,anti-semitism
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#tradeUnionism,trade unionism,unionism,trade unionist,women's trade unions,union movement
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#militarism,militarism,militarist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#eugenics,eugenics,eugenicist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#birthControlActivism,birth control activism,pro-birth control,supporter of contraception,birth-control activist,pro-contraception,contraceptionist,birth control campaigner,birth control movement
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#urbanReform,urban reform,urban reformer
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#poorLawReform,poor law reform,Poor Law reform
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#fascism,fascism,fascist party,pro-fascist,fascist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Conscriptionism,anti-conscriptionism,anti-conscriptionist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#revolutionaryPolitics,revolutionary,pro-revolutionary
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#newDealer,new dealer
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Socialism,anti-socialism,anti-socialist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#democrat,democrat,democratic,pro-democracy,Democrat (US)
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#protestantRule,Protestant rule,protestantism,protestant
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-British,anti-British politics,anti-British
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Pacifism,anti-pacifism,non-pacifist,war supporter,conscriptionist,anti-appeasement
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#elderRights,elder rights,elder care activist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#suffrage,suffrage movement,christian suffragist,suffragettes,suffrage organizer,women's franchise,International Suffrage Congress,suffrage,suffrage demonstrator,moderate suffragist,women's suffrage,suffragist,supporter of the women's suffrage movement,suffrage politics,Women's Enfranchisement,suffrage processions,suffrage leader,suffrage organisations,female suffrage,suffragette,non-militant suffragist,Woman Suffrage
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#covenanters,Covenanters,Covenanting
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Imperialism,Anti-imperialism,anti-colonial,anti-colonialist,Zulu resistance to colonial rule,anti-colonialism,anti-imperial,anti-imperialist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Trade-Unionism,anti-trade-unionism,anti-trade-unionist,anti-Union
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#pro-Slavery,pro-slavery
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#propertyLawReform,property law reform,illegitimacy reformer,land reform,land reformer,property reform
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Globalism,anti-globalism,anti-globalist,anti-globalization
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Jacobin,anti-Jacobin,anti-revolutionary
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#liberalism,liberalism,Liberal Party,British Liberalism,ultra liberals,liberal,radical liberal
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#rationalism,rationalism,rationalist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Fascism,anti-fascism,strongly opposed Fascism,anti-nazi,anti-fascist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#womensEducationReform,women's education reform,women's medical education,activist for women's education,education for women,female education,women's higher education,women's education reformer,women educators,female education advocate,campaigner for women's education
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#individualism,individualism,individualist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#irishNationalism,Irish nationalism,irish patriotism,irish nationalist,parnellite,cultural nationalist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#girondin,Girondin
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#animalWelfareAdvocacy,animal welfare advocacy,anti-cruelty to animals,animal rights advocate,anti-blood-sports,animal welfare activist,animal rights,animal activist,animal rights activist,animal welfare,anti-hunting,anti-cruelty
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#conservativeFeminism,conservative feminism
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Racism,anti-racism,anti-racist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#italianNationalism,Italian nationalism,mazzinian,italian nationalist,Italian nationalist movement,italian risorgimento
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#jacobitism,Jacobitism,jacobites,jacobite conspirator,jacobite
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#nationalism,nationalism
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Suffrage,anti-suffrage,anti-sufffragist,anti-suffragist movement,non-suffragist,anti-suffragist,anti-suffrage movement
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#britishNationalism,British nationalism,british nationalist,pro-British
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Bonapartism,anti-Bonapartism,anti-bonapartist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-War,anti-war movement,anti-militarism,anti-war,anti-Vietnam-War demonstrations,anti-militaristic,vietnam war protester,anti-war activism,anti Vietnam war
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#marriageLawReform,marriage law reform,custody rights,marriage law reformer,maternal wage activist,pro-divorce,marriage reformer,divorce reformer,married women's property supporter,divorce reform activist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Vivisection,anti-vivisection,anti-vivisectionist,anti-vivisection movement
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#pacifism,pacifism,peace campaigner,peace movement,socialist pacifist,pacifist supporter,pacifist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#wilkite,Wilkite
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#scottishNationalism,Scottish nationalism,scots nationalist,scottish nationalist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#womanism,womanism,womanist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#left-Wing,left-wing,leftist,anti-conservative
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Censorship,anti-censorship movement,intellectual property activist,pro free speech,Freedom of Speech,pro-free speech,free speech advocate,anti-censorship
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#artsAdvocacy,arts advocacy,artists' advocate,advocate for the arts
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#pro-European,pro-European,Europeanist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-CapitalPunishment,anti-capital punishment,opposition to capital punishment,against capital punishment,anti-capital-punishment,opponent of capital punishment
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#racism,racism,racist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#germanNationalism,German nationalism,pro-German
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#whiggism,whiggism,foxite whig,pittite whig,whigs,williamite,whig,opposition whig,dissident whig
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#imperialism,imperialism,colonialist,commonwealth supporter,imperialist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#bolshevism,Bolshevism,pro-bolshevik,Bolshevist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#existentialism,existentialism,existentialist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#sabbatarianism,Sabbatarianism
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#childrensWelfare,children's welfare,campaigner against child prostitution,children's rights activist,children's rights,children's rights advocate
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#antidisestablishmentarianism,antidisestablishmentarianism,antidisestablishmentarian
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#highToryism,High Toryism,High Tory
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#stalinism,Stalinism,stalinist,totalitarian
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#maoism,Maoism,chinese communism
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#co-operativeMovement,co-operative movement,Women's Co-operative Guild
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#bonapartism,Bonapartism,pro-bonapartist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#blackNationalism,Black nationalism
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#aidsActivism,AIDS activism,aids activist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#abolitionism,abolitionism,abolitionist,integrationism,abolition,sugar boycotter,anti-slavery
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Boer,anti-Boer politics,anti-Boer
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#nonjurorsMovement,nonjurors movement,Non-jurors,nonjurors
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-American,anti-American politics,anti-American
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#feminism,feminism,feminist movement,political issues concerning women,sexual egalitarian,activist for women and children,lobby for the rights of women,contraceptionist,maternal feminist,women's rights,feminist,women's issues,New Woman,non-separatist feminist,feminist reformer,Equality Feminism,moderate feminist,anti-sexist,proto-feminist consciousness,Women's Liberation,advocate of female education,gender egalitarian,proto-feminist,women's cause,women's movement,women's rights activist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#neo-Conservatism,neo-conservatism,neo-Conservative
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#societyOfFriends,Society of Friends
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-LandLeague,Anti-Irish National Land League,Unionist (Irish),anti-Land League,anti-Irish Home Rule
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#anti-Jacobite,anti-Jacobite
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#temperanceMovement,temperance movement,temperance activist,temperance worker,temperance work,temperance supporter,temperance
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#hanoverian,Hanoverian,House of Hanover
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#philosophicalRadicals,Philosophical Radicals,Philosophic Radicals
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#yorkist,Yorkist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#libertarianism,Libertarianism,libertarian,religious libertarian
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#humanism,humanism,humanist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#secularism,secularism,secularist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#sanitaryMovement,sanitary movement
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#pro-Choice,pro-choice
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#greekNationalist,Greek nationalism
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#civilRights,civil rights movement,pro civil rights,civil rights,personal rights advocate,civil rights activist
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#vegetarianism,vegetarianism,vegetarian
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#poorAdvocacy,poor advocacy,advocate for the poor
+http://sparql.cwrc.ca/ontologies/cwrc#PoliticalAffiliation,http://sparql.cwrc.ca/ontologies/cwrc#constitutionalism,constitutionalism,constitutional feminist,constitutionalist
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,http://sparql.cwrc.ca/ontologies/cwrc#florentineNationalIdentity,Florentine
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,http://sparql.cwrc.ca/ontologies/cwrc#africanNationalIdentity,African
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,http://sparql.cwrc.ca/ontologies/cwrc#saxonNationalIdentity,Saxon
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,http://sparql.cwrc.ca/ontologies/cwrc#mohawkNationalIdentity,Mohawk
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,http://sparql.cwrc.ca/ontologies/cwrc#jewishNationalIdentity,Jewish
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,http://sparql.cwrc.ca/ontologies/cwrc#britishNationalIdentity,British
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,http://sparql.cwrc.ca/ontologies/cwrc#anglo-IndianNationalIdentity,Anglo-Indian
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,http://sparql.cwrc.ca/ontologies/cwrc#statelessNationalIdentity,stateless
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,http://sparql.cwrc.ca/ontologies/cwrc#hanoverianNationalIdentity,Hanoverian
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,http://sparql.cwrc.ca/ontologies/cwrc#anglo-IrishNationalIdentity,Anglo-Irish
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,http://sparql.cwrc.ca/ontologies/cwrc#europeanNationalIdentity,European
+http://sparql.cwrc.ca/ontologies/cwrc#NationalIdentity,http://sparql.cwrc.ca/ontologies/cwrc#sephardicJewishNationalIdentity,Sephardic Jewish
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,http://sparql.cwrc.ca/ontologies/cwrc#tatarNationalHeritage,Tatar
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,http://sparql.cwrc.ca/ontologies/cwrc#anglo-IrishNationalHeritage,Anglo-Irish
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,http://sparql.cwrc.ca/ontologies/cwrc#europeanNationalHeritage,European
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,http://sparql.cwrc.ca/ontologies/cwrc#dutchNationalHeritage,Dutch
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,http://sparql.cwrc.ca/ontologies/cwrc#jewishNationalHeritage,Jewish
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,http://sparql.cwrc.ca/ontologies/cwrc#iroquoisNationalHeritage,Iroquois
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,http://sparql.cwrc.ca/ontologies/cwrc#normanNationalHeritage,Norman
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,http://sparql.cwrc.ca/ontologies/cwrc#mohawkNationalHeritage,Mohawk
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,http://sparql.cwrc.ca/ontologies/cwrc#huguenotNationalHeritage,Huguenot
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,http://sparql.cwrc.ca/ontologies/cwrc#bengaliNationalHeritage,bengali
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,http://sparql.cwrc.ca/ontologies/cwrc#cornishNationalHeritage,Cornish
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,http://sparql.cwrc.ca/ontologies/cwrc#westIndianNationalHeritage,West Indian
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,http://sparql.cwrc.ca/ontologies/cwrc#africanNationalHeritage,African
+http://sparql.cwrc.ca/ontologies/cwrc#NationalHeritage,http://sparql.cwrc.ca/ontologies/cwrc#flemishNationalHeritage,Flemish
+http://sparql.cwrc.ca/ontologies/cwrc#RaceColour,http://sparql.cwrc.ca/ontologies/cwrc#afro-CaribbeanRaceColour,Afro-Caribbean
+http://sparql.cwrc.ca/ontologies/cwrc#RaceColour,http://sparql.cwrc.ca/ontologies/cwrc#asianRaceColour,Asian
+http://sparql.cwrc.ca/ontologies/cwrc#RaceColour,http://sparql.cwrc.ca/ontologies/cwrc#whiteRaceColour,white,presumably white
+http://sparql.cwrc.ca/ontologies/cwrc#RaceColour,http://sparql.cwrc.ca/ontologies/cwrc#blackRaceColour,black,blackwoman
+http://sparql.cwrc.ca/ontologies/cwrc#RaceColour,http://sparql.cwrc.ca/ontologies/cwrc#englishRaceColour,English
+http://sparql.cwrc.ca/ontologies/cwrc#RaceColour,http://sparql.cwrc.ca/ontologies/cwrc#indigenousPeoplesOfAmericasRaceColour,Indigenous (of the Americas),Native American
+http://sparql.cwrc.ca/ontologies/cwrc#RaceColour,http://sparql.cwrc.ca/ontologies/cwrc#anglo-IrishRaceColour,Anglo-Irish
+http://sparql.cwrc.ca/ontologies/cwrc#RaceColour,http://sparql.cwrc.ca/ontologies/cwrc#scottishRaceColour,Scottish,Scotch,Scots
+http://sparql.cwrc.ca/ontologies/cwrc#RaceColour,http://sparql.cwrc.ca/ontologies/cwrc#mixedRaceColour,mixed-race,red mulatto,mixed,racially mixed,mixed-blood,"mixed white and black (or, in her own word, colored)",coloured (mixed-race)
+http://sparql.cwrc.ca/ontologies/cwrc#RaceColour,http://sparql.cwrc.ca/ontologies/cwrc#creoleRaceColour,Creole
+http://sparql.cwrc.ca/ontologies/cwrc#RaceColour,http://sparql.cwrc.ca/ontologies/cwrc#eurasianRaceColour,eurasian
+http://sparql.cwrc.ca/ontologies/cwrc#RaceColour,http://sparql.cwrc.ca/ontologies/cwrc#jewishRaceColour,Jewish,jew
+http://sparql.cwrc.ca/ontologies/cwrc#RaceColour,http://sparql.cwrc.ca/ontologies/cwrc#indianRaceColour,Indian
+http://sparql.cwrc.ca/ontologies/cwrc#RaceColour,http://sparql.cwrc.ca/ontologies/cwrc#blackWomanRaceColour,blackwoman
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#african-AmericanEthnicity,African-American
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#wendishEthnicity,Wendish,Wends or Sorbs
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#irishEthnicity,Irish,irish ancestry
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#indigenousPeoplesOfAmericasEthnicity,Indigenous (of the Americas),Amer-Indians
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#westIndianEthnicity,West Indian
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#sephardicJewishEthnicity,Sephardic Jewish, 
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#anglo-NormanEthnicity,Anglo-Norman
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#gaelEthnicity,Gael,highland
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#blackEthnicity,black
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#slavEthnicity,Slav,Slavic
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#celticEthnicity,Celtic,Highland (that is Celtic),Highland
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#europeanEthnicity,European
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#jewishEthnicity,Jewish,a Jewish,Jewry,Jews,Jew,Judaism,one-quarter Jewish
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#punjabiEthnicity,Punjabi
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#bengaliEthnicity,Bengali
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#arabEthnicity,Arab
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#chineseEthnicity,Chinese
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#jamaicanEthnicity,Jamaican,Jamaican-born
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#scottishEthnicity,Scottish,highland
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#englishEthnicity,English,England
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#creoleEthnicity,Creole
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#parsiEthnicity,Parsi
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#whiteEthnicity,white
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#romaniEthnicity,Romani,gypsy,gypsies,gipsy,Roma
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#anglo-IrishEthnicity,Anglo-Irish
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#ashkenaziJewishEthnicity,Ashkenazi Jewish,"Ashkenazim, or German Jewish",Ashkenazim
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#thracianEthnicity,Thracian,Thracians
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#africanEthnicity,African,black African descent
+http://sparql.cwrc.ca/ontologies/cwrc#Ethnicity,http://sparql.cwrc.ca/ontologies/cwrc#igboEthnicity,Igbo
