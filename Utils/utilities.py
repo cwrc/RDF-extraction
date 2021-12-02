@@ -1,11 +1,12 @@
 import rdflib
 import os
+import re
 import datetime
-
+import urllib
 try:
     from Utils.place import Place
-except Exception as e:
-    from place import Place
+except ModuleNotFoundError as e:
+    from . import Place
 
 """
 TODO: Add doctests for:
@@ -30,10 +31,14 @@ MAX_WORD_COUNT = 35
 NS_DICT = {
     "as": rdflib.Namespace("http://www.w3.org/ns/activitystreams#"),
     "bibo": rdflib.Namespace("http://purl.org/ontology/bibo/"),
+    "biro": rdflib.Namespace("http://purl.org/spar/biro/"),
     "bio": rdflib.Namespace("http://purl.org/vocab/bio/0.1/"),
     "bf": rdflib.Namespace("http://id.loc.gov/ontologies/bibframe/"),
     "cc": rdflib.Namespace("http://creativecommons.org/ns#"),
+    "cito": rdflib.Namespace("http://purl.org/spar/cito/"),
     "cwrc": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/cwrc#"),
+    "ii": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/ii#"),
+    "genre": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/genre#"),
     "data": rdflib.Namespace("http://cwrc.ca/cwrcdata/"),
     "dbpedia": rdflib.Namespace("http://dbpedia.org/resource/"),
     "dcterms": rdflib.Namespace("http://purl.org/dc/terms/"),
@@ -47,6 +52,7 @@ NS_DICT = {
     "org": rdflib.Namespace("http://www.w3.org/ns/org#"),
     "owl": rdflib.Namespace("http://www.w3.org/2002/07/owl#"),
     "prov": rdflib.Namespace("http://www.w3.org/ns/prov#"),
+    "prism": rdflib.Namespace("http://prismstandard.org/namespaces/1.2/basic/"),
     "rdf": rdflib.Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#"),
     "rdfs": rdflib.Namespace("http://www.w3.org/2000/01/rdf-schema#"),
     "sem": rdflib.Namespace("http://semanticweb.cs.vu.nl/2009/11/sem/"),
@@ -124,6 +130,10 @@ def strip_all_whitespace(string):
     return re.sub('[\s+]', '', str(string))
 
 
+def split_by_casing(string, altmode=None):
+    return " ".join(re.findall('^[a-z]+|[A-Z][^A-Z]*', string))
+
+
 def remove_punctuation(temp_str, all=False):
     import string
     if all:
@@ -157,6 +167,23 @@ def limit_words(string, word_count):
     if len(words) > word_count:
         text += "..."
     return text
+
+def limit_to_full_sentences(string, max):
+    # logger.info("\n" + string)
+    string = string.strip()
+    if string == "":
+        return string
+    sentences = string.split(".")
+    text = ""
+    for x in sentences:
+        if text.count(" ") < max:
+            text += x.strip()
+            if text[-1] != ".":
+                text += "."
+        else:
+            break
+
+    return text.replace(".  .", ". ")
 
 
 """
@@ -231,12 +258,13 @@ def get_titles(tag):
 
 
 def get_places(tag):
-    """Returns all places within a given tag"""
-    places = []
-    for x in tag.find_all("PLACE"):
-        places.append(Place(x).uri)
-    return places
+    """Returns all places uris within a given tag"""
+    return [Place(x).uri for x in tag.find_all("PLACE")]
 
+
+def get_place_strings(tag):
+    """Returns all places strings within a given tag"""
+    return [x.text for x in tag.find_all("PLACE")]
 
 def get_name(entry):
     name = entry.find("STANDARD")
@@ -304,29 +332,65 @@ Creating files of extracted triples
 """
 
 
-def create_extracted_file(filepath, person, serialization=None):
+"""
+Creating files of extracted triples
+"""
+
+def create_uber_triples(mode, graph, script_id, extra_triples=None):
+    fmt = [mode.format]
+    if fmt == ["pretty-xml"]:
+        fmt = ["rdf"]
+    elif fmt == ["all"]:
+        fmt = ["ttl", "rdf"]
+
+    for x in fmt:
+        temp_path = "extracted_triples/" + script_id + "." + x
+        if x == "rdf":
+            x = "pretty-xml"
+
+        create_extracted_uberfile(temp_path, graph, x, extra_triples=extra_triples)
+
+
+def create_individual_triples(mode, person, script_id):
+    fmt = [mode.format]
+    if fmt == ["pretty-xml"]:
+        fmt = ["rdf"]
+    elif fmt == ["all"]:
+        fmt = ["ttl", "rdf"]
+
+    for x in fmt:
+        temp_path = "extracted_triples/" + script_id + "_" + x + "/" + person.id + "_" + script_id + "." + x
+        if x == "rdf":
+            x = "pretty-xml"
+        create_extracted_file(temp_path, person, x)
+
+def create_extracted_file(filepath, person, serialization="ttl"):
     """Create file of extracted triples for particular person
     """
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     with open(filepath, "w", encoding="utf-8") as f:
-        if serialization:
-            f.write(person.to_file(serialization=serialization))
-        else:
+        if serialization == "ttl":
             f.write("#" + str(len(person.to_graph())) + " triples created\n")
             f.write(person.to_file())
+        elif serialization:
+            f.write(person.to_file(serialization=serialization))
 
 
-def create_extracted_uberfile(filepath, graph, serialization=None):
+def create_extracted_uberfile(filepath, graph, serialization="ttl", extra_triples=None):
     """Create file of triples for a particular graph
     """
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     with open(filepath, "w", encoding="utf-8") as f:
-        if serialization:
-            f.write(graph.serialize(format=serialization).decode())
-        else:
+        if extra_triples:
+            g = rdflib.Graph()
+            g.parse(extra_triples, format="ttl")
+            graph += g
+        if serialization == "ttl":
             f.write("#" + str(len(graph)) + " triples created\n")
             f.write("# date extracted: ~" + get_current_time() + "\n")
-            f.write(graph.serialize(format="ttl").decode())
+            f.write(graph.serialize(format="ttl"))
+        elif serialization:
+            f.write(graph.serialize(format=serialization))
 
 
 def config_logger(name, verbose=False):

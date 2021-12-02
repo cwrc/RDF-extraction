@@ -2,11 +2,11 @@
 
 
 import rdflib
-from biography import Biography
+
 from difflib import get_close_matches
 from rdflib import Literal
 from Utils import utilities
-from Utils.context import Context
+from Utils.context import Context, get_context_type, get_event_type
 from Utils.event import Event
 from Utils.organizations import get_org_uri
 """
@@ -14,11 +14,8 @@ Status: ~75%
 TODO:
  - review unmapped instances
  - revise method of capturing failed mappings to be similar to culturalforms
+ - update predicate for employer/employment
 """
-
-# temp log library for debugging
-# --> to be eventually replaced with proper logging library
-
 logger = utilities.config_logger("occupation")
 uber_graph = utilities.create_graph()
 
@@ -38,9 +35,9 @@ class Occupation(object):
             self.value = self.get_mapped_term(job_tag)
         else:
             self.predicate = self.get_occupation_predicate(job_tag)
-            if self.predicate == "hasEmployer":
+            if self.predicate == "employment":
                 self.value = self.get_employer(job_tag)
-            elif self.predicate == "hasOccupationIncome":
+            elif self.predicate == "occupationIncome":
                 self.value = Literal(self.get_value(job_tag))
             else:
                 self.value = self.get_mapped_term(self.get_value(job_tag))
@@ -59,9 +56,9 @@ class Occupation(object):
     def to_tuple(self, person_uri):
         return ((person_uri, self.uri, self.value))
 
-    def to_triple(self, person):
+    def to_triple(self, context):
         g = utilities.create_graph()
-        g.add((person.uri, self.uri, self.value))
+        g.add((context.uri, self.uri, self.value))
         return g
 
     def __str__(self):
@@ -74,18 +71,18 @@ class Occupation(object):
     def get_occupation_predicate(self, tag):
         if tag.name == "JOB":
             if self.get_attribute(tag, "FAMILYBUSINESS"):
-                return "hasFamilyBasedOccupation"
+                return "familyBasedOccupation"
             else:
-                return "hasPaidOccupation"
+                return "paidOccupation"
         if tag.name == "SIGNIFICANTACTIVITY":
             if self.get_attribute(tag, "PHILANTHROPYVOLUNTEER"):
-                return "hasVolunteerOccupation"
+                return "volunteerOccupation"
             else:
-                return "hasOccupation"
+                return "occupation"
         if tag.name == "EMPLOYER":
-            return "hasEmployer"
+            return "employment"
         if tag.name == "REMUNERATION":
-            return "hasOccupationIncome"
+            return "occupationIncome"
 
     def get_employer(self, tag):
         employer = tag.find("NAME")
@@ -111,7 +108,7 @@ class Occupation(object):
             value = ' '.join(value.split())
         return value
 
-    def get_mapped_term(self, value):
+    def get_mapped_term(self, value, id=None):
         if value == "Counsellor":
             return Literal(value)
 
@@ -151,9 +148,11 @@ class Occupation(object):
         elif term:
             term = Literal(term, datatype=rdflib.namespace.XSD.string)
         else:
-            term = Literal("_" + value.lower() + "_", datatype=rdflib.namespace.XSD.string)
+            term = Literal(value, datatype=rdflib.namespace.XSD.string)
             map_fail += 1
             possibilites = []
+            log_str = "Unable to find matching occupation instance for '" + value + "'"
+
             for x in JOB_MAP.keys():
                 if get_close_matches(value.lower(), JOB_MAP[x]):
                     possibilites.append(x)
@@ -161,6 +160,12 @@ class Occupation(object):
                 update_fails(rdf_type, value)
             else:
                 update_fails(rdf_type, value + "->" + str(possibilites) + "?")
+                log_str += "Possible matches" + value + "->" + str(possibilites) + "?"
+
+            if id:
+                logger.warning("In entry: " + id + " " + log_str)
+            else:
+                logger.warning(log_str)
         return term
 
 
@@ -188,17 +193,36 @@ map_fail = 0
 fail_dict = {}
 
 
+def log_mapping_fails(detail=True):
+    if 'http://sparql.cwrc.ca/ontologies/cwrc#Occupation' in fail_dict:
+        job_fail_dict = fail_dict['http://sparql.cwrc.ca/ontologies/cwrc#Occupation']
+        log_str = "\n\n"
+        log_str += "Attempts: " + str(map_attempt) + "\n"
+        log_str += "Fails: " + str(map_fail) + "\n"
+        log_str += "Success: " + str(map_success) + "\n"
+        log_str += "\nFailure Details:" + "\n"
+        log_str += "\nUnique Missed Terms: " + str(len(job_fail_dict.keys())) + "\n"
+
+        from collections import OrderedDict
+
+        new_dict = OrderedDict(sorted(job_fail_dict.items(), key=lambda t: t[1], reverse=True))
+        count = 0
+        for y in new_dict.keys():
+            log_str += "\t\t" + str(new_dict[y]) + ": " + y + "\n"
+            count += new_dict[y]
+        log_str += "\tTotal missed occupation: " + str(count) + "\n\n"
+
+        print(log_str)
+        logger.info(log_str)
+
+
 def find_occupations(tag):
     """Creates a list of occupations given the tag
     """
 
-    occupation_list = []
     jobs_tags = tag.find_all("JOB") + tag.find_all("SIGNIFICANTACTIVITY")
     jobs_tags += tag.find_all("EMPLOYER") + tag.find_all("REMUNERATION")
-    for x in jobs_tags:
-        occupation_list.append(Occupation(x))
-
-    return occupation_list
+    return [Occupation(x) for x in jobs_tags]
 
 
 def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
@@ -207,25 +231,27 @@ def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
     """
     global context_count
     global event_count
+    CONTEXT_TYPE = get_context_type("OCCUPATION")
+    EVENT_TYPE = get_event_type("OCCUPATION")
 
     for tag in tag_list:
         temp_context = None
         occupation_list = None
         context_count += 1
-        context_id = person.id + "_OccupationContext" + str(context_count)
+        context_id = person.id + "_" + CONTEXT_TYPE + "_" + str(context_count)
         occupation_list = find_occupations(tag)
         if occupation_list:
-            temp_context = Context(context_id, tag, "OccupationContext")
+            temp_context = Context(context_id, tag, "OCCUPATION")
             temp_context.link_triples(occupation_list)
-            person.add_occupation(occupation_list)
+            # person.add_occupation(occupation_list)
         else:
-            temp_context = Context(context_id, tag, "OccupationContext", "identifying")
+            temp_context = Context(context_id, tag, "OCCUPATION", "identifying")
 
         if list_type == "events":
             event_count += 1
             event_title = person.name + " - " + "Occupation Event"
-            event_uri = person.id + "_Occupation_Event" + str(event_count)
-            temp_event = Event(event_title, event_uri, tag)
+            event_uri = person.id + "_OccupationEvent_" + str(event_count)
+            temp_event = Event(event_title, event_uri, tag, EVENT_TYPE)
             temp_context.link_event(temp_event)
             person.add_event(temp_event)
 
@@ -241,8 +267,8 @@ def extract_occupation_data(bio, person):
     for occupation in occupations:
         paragraphs = occupation.find_all("P")
         events = occupation.find_all("CHRONSTRUCT")
-        extract_occupations(paragraphs, "OccupationContext", person)
-        extract_occupations(events, "OccupationContext", person, "events")
+        extract_occupations(paragraphs, "OCCUPATION", person)
+        extract_occupations(events, "OCCUPATION", person, "events")
 
     # Attaching occupation from PERSON attribute of biography
     # persontype = utilities.get_persontype(bio)
@@ -252,11 +278,10 @@ def extract_occupation_data(bio, person):
 
 def main():
     from bs4 import BeautifulSoup
-    import culturalForm
+    from biography import Biography
 
-    file_dict = utilities.parse_args(__file__, "Occupation")
-
-    entry_num = 1
+    extraction_mode, file_dict = utilities.parse_args(
+        __file__, "Occupation", logger)
 
     uber_graph = utilities.create_graph()
 
@@ -271,32 +296,24 @@ def main():
         print(person_id)
         print("*" * 55)
 
-        person = Biography(person_id, soup, culturalForm.get_mapped_term("Gender", utilities.get_sex(soup)))
+        person = Biography(person_id, soup)
         extract_occupation_data(soup, person)
 
         graph = person.to_graph()
 
-        temp_path = "extracted_triples/occupation_turtle/" + person_id + "_occupations.ttl"
-        utilities.create_extracted_file(temp_path, person)
+        utilities.create_individual_triples(
+            extraction_mode, person, "occcupation")
+        utilities.manage_mode(extraction_mode, person, graph)
 
         uber_graph += graph
-        entry_num += 1
 
-    print("UberGraph is size:", len(uber_graph))
-    temp_path = "extracted_triples/occupations.ttl"
-    utilities.create_extracted_uberfile(temp_path, uber_graph)
+    log_mapping_fails()
+    logger.info(str(len(uber_graph)) + " triples created")
+    if extraction_mode.verbosity >= 0:
+        print(str(len(uber_graph)) + " total triples created")
 
-    temp_path = "extracted_triples/occupations.rdf"
-    utilities.create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
-
-    if 'http://sparql.cwrc.ca/ontologies/cwrc#Occupation' in fail_dict:
-        job_fail_dict = fail_dict['http://sparql.cwrc.ca/ontologies/cwrc#Occupation']
-        logger.info("Missed Terms: " + str(len(job_fail_dict.keys())))
-        count = 0
-        for x in job_fail_dict.keys():
-            logger.info(x + " : " + str(job_fail_dict[x]))
-            count += job_fail_dict[x]
-        logger.info("Total Terms: " + str(count))
+    utilities.create_uber_triples(extraction_mode, uber_graph, "occcupation")
+    logger.info("Time completed: " + utilities.get_current_time())
 
 
 if __name__ == "__main__":

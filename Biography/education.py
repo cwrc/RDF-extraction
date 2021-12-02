@@ -2,7 +2,6 @@ import rdflib
 from rdflib import RDF, RDFS, Literal
 from difflib import get_close_matches
 
-from biography import Biography
 from Utils import utilities
 from Utils.organizations import get_org, get_org_uri
 from Utils.place import Place
@@ -68,9 +67,9 @@ class School(object):
     }
 
     attending_map = {
-        CWRC.PrimarySchool: CWRC.attendsPrimarySchool,
-        CWRC.SecondarySchool: CWRC.attendsSecondarySchool,
-        CWRC.PostSecondarySchool: CWRC.attendsPostSecondarySchool,
+        CWRC.PrimarySchool: CWRC.primarySchool,
+        CWRC.SecondarySchool: CWRC.secondarySchool,
+        CWRC.PostSecondarySchool: CWRC.postSecondarySchool,
     }
 
     def __init__(self, name, types, level, tag):
@@ -79,7 +78,7 @@ class School(object):
         if school_org:
             self.uri = get_org_uri(school_org[0])
         else:
-            self.uri = utilities.make_standard_uri((name) + " EduOrg", "cwrc")
+            self.uri = utilities.make_standard_uri((name) + " ORG", "cwrc")
 
         self.name = name
         self.level = level
@@ -107,21 +106,14 @@ class School(object):
                 string += "\t\t" + str(x) + "\n"
         return string
 
-    def to_tuple(self, person):
-        # For future testing
-        p = str(utilities.NS_DICT["cwrc"]) + self.predicate + self.reported
-        o = self.value
-        return ((person.uri, rdflib.term.URIRef(p), o))
-
-    def to_triple(self, person):
+    def to_triple(self, context):
         g = utilities.create_graph()
-        g.add((self.uri, utilities.NS_DICT["foaf"].name, Literal(self.name)))
-        g.add((self.uri, utilities.NS_DICT["rdfs"].name, Literal(self.name)))
+        g.add((self.uri, utilities.NS_DICT["rdfs"].label, Literal(self.name)))
         g.add((self.uri, RDF.type, CWRC.EducationalOrganization))
         if self.level:
-            g.add((person.uri, self.attending_map[self.level], self.uri))
+            g.add((context.uri, self.attending_map[self.level], self.uri))
         else:
-            g.add((person.uri, CWRC.attends, self.uri))
+            g.add((context.uri, CWRC.schoolAttended, self.uri))
 
         for x in self.types:
             g.add((self.uri, RDF.type, x))
@@ -178,7 +170,7 @@ class EducationalAward(object):
             self.award_type = [CWRC.EducationalAward]
 
         text = utilities.limit_words(str(name), 15)
-        self.uri = utilities.make_standard_uri(text)
+        self.uri = rdflib.BNode()
 
     def get_award_type(self, name):
         types = []
@@ -196,18 +188,10 @@ class EducationalAward(object):
                 string += "\t\t" + str(x) + "\n"
         return string
 
-    def to_tuple(self, person):
-        # For future testing
-        p = str(utilities.NS_DICT["cwrc"]) + self.predicate + self.reported
-        o = self.value
-        return ((person.uri, rdflib.term.URIRef(p), o))
-
-    def to_triple(self, person):
+    def to_triple(self, context):
         g = utilities.create_graph()
-
-        g.add((self.uri, utilities.NS_DICT["foaf"].name, Literal(self.name)))
         g.add((self.uri, utilities.NS_DICT["rdfs"].label, Literal(self.name)))
-        g.add((person.uri, CWRC.hasAward, self.uri))
+        g.add((context.uri, CWRC.award, self.uri))
         for x in self.award_type:
             g.add((self.uri, RDF.type, x))
         return g
@@ -238,46 +222,51 @@ class Education(object):
         self.works = []
         self.edu_texts = []
 
-    def to_triple(self, person):
+    def to_triple(self, context):
         g = utilities.create_graph()
 
         for x in self.schools:
-            g += x.to_triple(person)
+            g += x.to_triple(context)
 
         for x in self.instructors:
-            g.add((person.uri, CWRC.hasInstructor, x))
+            g.add((context.uri, CWRC.instructor, x))
 
         for x in self.companions:
-            g.add((person.uri, CWRC.hasCompanion, x))
+            g.add((context.uri, CWRC.companion, x))
 
         for x in self.contested_behaviour:
-            g.add((person.uri, CWRC.hasContestedBehaviour, Literal(x)))
+            g.add((context.uri, CWRC.contestedBehaviour, Literal(x)))
 
+        # TODO: May need to adjust how contexts work for the instructor
         for x in self.studied_subjects:
-            g.add((person.uri, CWRC.studies, x))
-
-        for x in self.edu_texts:
-            g.add((x, RDF.type, CWRC.EducationalText))
-            g.add((person.uri, CWRC.studies, x))
-
-        for x in self.works:
-            oeuvre_uri = rdflib.term.URIRef(str(x) + "__Oeuvre")
-            g.add((oeuvre_uri, RDF.type, CWRC.Oeuvre))
-            g.add((person.uri, CWRC.studies, oeuvre_uri))
-            # g.add((x, utilities.NS_DICT["bf"].role, oeuvre_uri))
-            # TODO label this better
-            # g.add((oeuvre_uri, RDFS.label, Literal(x)))
+            g.add((context.uri, CWRC.subjectOfStudy, x))
+            if len(self.schools) == 1:
+                g.add((self.schools[0].uri, CWRC.teachesEducationalSubject, x))
+            if len(self.instructors) == 1:
+                g.add((self.instructors[0], CWRC.teachesEducationalSubject, x))
 
         for x in self.degrees:
-            g.add((person.uri, CWRC.hasCredentialIn, x))
+            g.add((context.uri, CWRC.credential, x))
 
         for x in self.degree_subjects:
-            g.add((person.uri, CWRC.hasCredentialSubject, x))
+            g.add((context.uri, CWRC.credentialSubject, x))
 
         for x in self.awards:
-            g += x.to_triple(person)
+            g += x.to_triple(context)
 
-        # TODO text
+        # TODO figure out how texts are to be handled
+        for x in self.edu_texts:
+            print(x)
+            g.add((x, RDF.type, CWRC.EducationalText))
+            g.add((context.uri, CWRC.subjectOfStudy, x))
+
+        for x in self.works:
+            oeuvre_uri = rdflib.term.URIRef(str(x) + "_Oeuvre")
+            g.add((oeuvre_uri, RDF.type, CWRC.Oeuvre))
+            g.add((context.uri, CWRC.subjectOfStudy, oeuvre_uri))
+            g.add((x, utilities.NS_DICT["bf"].author, oeuvre_uri))
+            label = x.split("/")[-1].split("_")[0] + "'s"
+            g.add((oeuvre_uri, RDFS.label, Literal(label + " oeuvre")))
 
         return g
 
@@ -410,7 +399,7 @@ def create_education(tag, person):
     temp_education.add_degree_subjects(get_degree_subjects(tag))
     temp_education.add_awards(get_awards(tag.find_all("AWARD")))
 
-    texts = get_texts(tag.find_all("TEXT"))
+    texts = tag.find_all("TEXT")
     works = []
     titles = []
     for x in texts:
@@ -420,7 +409,7 @@ def create_education(tag, person):
     # print(temp_education)
     # Add mapping of titles
     temp_education.add_edu_texts(titles)
-    # temp_education.add_works(works)
+    temp_education.add_works(works)
 
     return temp_education
 
@@ -445,18 +434,17 @@ def extract_education(tag_list, context_type, person, list_type="paragraphs"):
 
         education_list = create_education(tag, person)
         if len(education_list.to_triple(person)) > 0:
-            temp_context = Context(context_id, tag, Education.context_map[context_type])
+            temp_context = Context(context_id, tag, "EDUCATION", mode=context_type)
             temp_context.link_triples(education_list)
-            person.add_education(education_list)
         else:
-            temp_context = Context(context_id, tag, Education.context_map[context_type], "identifying")
+            temp_context = Context(context_id, tag, "EDUCATION", "identifying", mode=context_type)
 
         if list_type == "events":
             education_event_count[context_type] += 1
             event_type = Education.context_map[context_type].split("Context")[0]
             event_title = person.name + " - " + event_type + " Event"
             event_uri = person.id + "_" + event_type + "_Event" + str(education_event_count[context_type])
-            temp_event = Event(event_title, event_uri, tag)
+            temp_event = Event(event_title, event_uri, tag, event_type + "Event")
             temp_context.link_event(temp_event)
             person.add_event(temp_event)
 
@@ -562,13 +550,11 @@ def extract_education_data(bio, person):
 
 
 def main():
-    import os
     from bs4 import BeautifulSoup
-    import culturalForm
+    from biography import Biography
 
-    file_dict = utilities.parse_args(__file__, "Education")
-
-    entry_num = 1
+    extraction_mode, file_dict = utilities.parse_args(
+        __file__, "Education", logger)
 
     uber_graph = utilities.create_graph()
 
@@ -583,24 +569,22 @@ def main():
         print(person_id)
         print("*" * 55)
 
-        person = Biography(person_id, soup, culturalForm.get_mapped_term("Gender", utilities.get_sex(soup)))
-
+        person = Biography(person_id, soup)
         extract_education_data(soup, person)
-        print()
+        
         graph = person.to_graph()
-
-        temp_path = "extracted_triples/education_turtle/" + person_id + "_education.ttl"
-        utilities.create_extracted_file(temp_path, person)
+        utilities.create_individual_triples(
+            extraction_mode, person, "education")
+        utilities.manage_mode(extraction_mode, person, graph)
 
         uber_graph += graph
-        entry_num += 1
 
-    print("UberGraph is size:", len(uber_graph))
-    temp_path = "extracted_triples/education.ttl"
-    utilities.create_extracted_uberfile(temp_path, uber_graph)
+    logger.info(str(len(uber_graph)) + " triples created")
+    if extraction_mode.verbosity >= 0:
+        print(str(len(uber_graph)) + " total triples created")
 
-    temp_path = "extracted_triples/education.rdf"
-    utilities.create_extracted_uberfile(temp_path, uber_graph, "pretty-xml")
+    utilities.create_uber_triples(extraction_mode, uber_graph, "education")
+    logger.info("Time completed: " + utilities.get_current_time())
 
 
 if __name__ == "__main__":

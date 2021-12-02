@@ -1,10 +1,10 @@
 import rdflib
 from rdflib import RDF, RDFS, Literal, XSD
-
+from Utils.citation import Citation
 from Utils import utilities, organizations
 
-# Leaving this independent of contexts incase we should want to vary events vs contexts
-MAX_WORD_COUNT = 35
+
+logger = utilities.config_logger("event")
 
 
 def get_actors(tag):
@@ -24,8 +24,18 @@ def get_actors(tag):
 def get_event_type(tag):
     """Returns the types of the event"""
     event_types = []
-    event_types.append(Event.event_type_map[tag.get("RELEVANCE")])
-    event_types.append(Event.event_type_map[tag.get("CHRONCOLUMN")])
+    event_type = tag.get("RELEVANCE")
+    if not event_type:
+        logger.error("Missing RELEVANCE attribute:" + str(tag))
+    else:
+        event_types.append(Event.event_type_map[event_type])
+
+    event_type = tag.get("CHRONCOLUMN")
+    if not event_type:
+        logger.error("Missing CHRONCOLUMN attribute:" + str(tag))
+    else:
+        event_types.append(Event.event_type_map[event_type])
+
     return [utilities.create_cwrc_uri(x) for x in event_types]
 
 
@@ -55,10 +65,11 @@ def get_time_certainty(tag):
 def get_indirect_date_tag(tag):
     tags = tag.find_all("DATE") + tag.find_all("DATESTRUCT") + tag.find_all("DATERANGE")
     if len(tags) > 1:
-        print("Multiple date tags detected:")
-        print(*tags, sep="\n")
-        print()
-        # input()
+        msg = "Multiple date tags detected:\n\t" + str(tag) + "\n"
+        for x in tags:
+            msg += "\t" + str(x) + "\n"
+        logger.warning(msg)
+
     if tags:
         return tags[0]
     return None
@@ -73,8 +84,7 @@ def get_date_tag(tag):
             return(x)
     return get_indirect_date_tag(tag)
 
-# TODO: apply '-' if calendar is BC
-#
+# TODO: apply '-' if calendar is BC also log this date
 
 
 def format_date(date):
@@ -103,7 +113,8 @@ def format_date(date):
 class Event(object):
     """docstring for Event
         Given an id, name, chronstruct tag, it will create an event based on the SEM model and our associated predicates (cwrc:hasEvent)
-        Must be linked to a context through temp_context.link_event(temp_event)
+        Must be linked to a context through link_event() method 
+            ex. temp_context.link_event(temp_event)
     """
 
     event_type_map = {
@@ -130,16 +141,26 @@ class Event(object):
         "NEITHER": "mediumCertainty",
     }
 
-    def __init__(self, title, id, tag, other_attributes=None):
+    def __init__(self, title, id, tag, type="BiographicalEvent"):
         super(Event, self).__init__()
         self.title = title
         self.tag = tag
         self.uri = utilities.create_uri("data", id)
         self.place = utilities.get_places(tag)
+        self.place_str = utilities.get_place_strings(tag)
         self.event_type = get_event_type(tag)
         self.actors = get_actors(tag)
 
-        self.text = utilities.limit_words(str(tag.CHRONPROSE.get_text()), MAX_WORD_COUNT)
+        # Creating citations from bibcit tags
+        bibcits = tag.find_all("BIBCIT")
+        self.citations = [Citation(x) for x in bibcits]
+
+        # NOTE: Event could possibly have multiple types/non cwrc types? may need to revise
+        self.type = utilities.create_cwrc_uri(type)
+
+        # No longer grabing text of title, no word limit now
+        # TODO: replace initials with full name of author where applicable
+        self.text = str(tag.CHRONPROSE.get_text())
 
         self.date_tag = get_date_tag(tag)
         self.time_type = get_time_type(self.date_tag)
@@ -167,26 +188,28 @@ class Event(object):
     def to_triple(self, person=None):
         g = utilities.create_graph()
 
-        # attaching event to person, context will need link event fx
-        if person:
-            g.add((person.uri, utilities.NS_DICT["cwrc"].hasEvent, self.uri))
-        # Not sure if inverse is necessary atm
-        # g.add((self.uri, utilities.NS_DICT["cwrc"].eventOf, person.uri))
-        # g.add((person.uri, utilities.NS_DICT["sem"].actorType, utilities.NS_DICT["cwrc"].NaturalPerson))
+        # NOTE: Event will always be attached to a context, possibly multiple event to the same context
 
         # Labelling the event
-        g.add((self.uri, RDFS.label, Literal(self.title)))
         text = self.date_tag.text + ": " + self.text
-        g.add((self.uri, utilities.NS_DICT["dcterms"].description, Literal(text)))
+        g.add((self.uri, RDFS.label, Literal(text)))
 
-        # Typing of the event
-        g.add((self.uri, RDF.type, utilities.NS_DICT["sem"].Event))
+        # Typing of the event --> events might have multiple types down the line
+        g.add((self.uri, RDF.type, self.type))
+
         for x in self.event_type:
             g.add((self.uri, utilities.NS_DICT["sem"].eventType, x))
 
-        # Attaching place
-        for x in self.place:
-            g.add((self.uri, utilities.NS_DICT["sem"].hasPlace, x))
+        for x in self.citations:
+            g += x.to_triple(self.uri)
+
+        # Attaching place via blank node
+        for index, place in enumerate(self.place):
+            blanknode = rdflib.BNode()
+            g.add((self.uri, utilities.NS_DICT["sem"].hasPlace, blanknode))
+            g.add((blanknode, RDFS.label, Literal(self.place_str[index])))
+            g.add((blanknode, utilities.NS_DICT["cwrc"].hasMappedLocation, place))
+            g.add((blanknode, RDF.type, utilities.NS_DICT["cwrc"].MappedPlace))
 
         # Attaching actors, including the biographee incase they're not mentioned
         if person:

@@ -1,20 +1,17 @@
 #!/usr/bin/python3
 from bs4 import BeautifulSoup
-import rdflib
 
+from Utils import utilities, place, organizations
 from biography import Biography
-from log import *
-from Utils.utilities import *
-from Utils import utilities
 import culturalForm as cf
-import education
 import location
 import other_contexts
 import occupation
-
-# import personname
-# import lifeInfo
+import lifeInfo
 import birthDeath
+
+import education
+import personname
 
 """
 This is a possible temporary main script that creates the biography related triples

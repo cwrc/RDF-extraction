@@ -222,35 +222,19 @@ class Biography(object):
 
         g.add((self.uri, utilities.NS_DICT["foaf"].isPrimaryTopicOf, self.url))
 
-        g += self.create_triples(self.cf_list)
         g += self.create_triples(self.context_list)
-        g += self.create_triples(self.location_list)
         g += self.create_triples(self.event_list)
-        g += self.create_triples(self.education_list)
-        g += self.create_triples(self.occupation_list)
-        g += self.create_triples(self.birth_list)
-
-        if self.deathObj is not None:
-            g += self.deathObj.to_triples()
-
-        g += self.create_triples(self.cohabitants_list)
-        g += self.create_triples(self.family_list)
-        g += self.create_triples(self.friendsAssociates_list)
-        g += self.create_triples(self.intimateRelationships_list)
-        g += self.create_triples(self.childless_list)
-        g += self.create_triples(self.children_list)
-        g += self.create_triples(self.name_list)
 
         if self.wd_id:
-            g.add((self.uri, utilities.NS_DICT["owl"].sameAs, self.wd_id))
+            g.add((self.uri, utilities.NS_DICT["owl"].sameAs, rdflib.term.URIRef(self.wd_id)))
 
         return g
 
     def to_file(self, graph=None, serialization="ttl"):
         if graph:
-            return graph.serialize(format=serialization).decode()
+            return graph.serialize(format=serialization)
         else:
-            return self.to_graph().serialize(format=serialization).decode()
+            return self.to_graph().serialize(format=serialization)
 
     def __str__(self):
         # TODO: add occupation + education
