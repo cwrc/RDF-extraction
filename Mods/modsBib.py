@@ -350,9 +350,12 @@ class BibliographyParse:
         self.mainTitle = None
         self.g = graph
         self.id = resource_name.replace(".xml", "")
-        
         if ".xml" in resource_name:
-            self.id = self.soup.find("recordIdentifier", source="Orlando").text
+            self.id = self.soup.find("recordIdentifier", source="Orlando")
+            if self.id:
+                self.id = self.id.text
+            else:
+                self.id = resource_name.replace(".xml", "")    
         else:
             self.id = resource_name.replace(".xml", "")
 
@@ -831,7 +834,7 @@ class BibliographyParse:
                 generation_process.add(RDFS.label, rdflib.Literal(F"generation process of the MODS Record of Orlando bibiliographic records"))
 
             else:
-                generation_Process = g.resource("{}_generation_process_{}".format(self.mainURI, i))
+                generation_process = g.resource("{}_generation_process_{}".format(self.mainURI, i))
                 generation_process.add(RDF.type, BF.GenerationProcess)
                 generation_process.add(RDF.value, rdflib.Literal(r['origin']))
 
