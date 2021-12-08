@@ -10,18 +10,6 @@ import re
 import urllib.parse
 
 CONFIG_FILE = "./bibparse.config"
-# Count of bf:Agent --> Unique labeled agents
-# 35,767 --> 12,266
-
-# Triple Counts:
-#  158200 - bib files
-#  657830 - mods from https://gitlab.com/calincs/conversion/metadata-conversion/-/tree/master/Original_Datasets/CWRC/BIBLIFO_MODS
-# 2240072 - http://sparql.cwrc.ca/db/BibliographyV1 / http://sparql.cwrc.ca/storage/Orlando_Bibliography_Subset_Version_1-01.ttl extracted ~2018
-# 2403600 - from March 2021 islandora api
-# 2100555 - switching parser to lxml-xml
-# 2403655 - Updates to the parsing
-# 2428208 - Swap to orlando identifiers 
-# 1995756 - Cidoc-ified
 
 # ----------- SETUP LOGGER ------------
 
@@ -63,21 +51,6 @@ ADMIN_AGENTS = {
     "U3G": DATA.U3G,
     "Orlando: Women's Writing in the British Isles from the Beginnings to the Present": DATA.Orlando,
 }
-
-# TODO: Use as skos:related terms
-# ROLES = {
-#     "publisher": rdflib.URIRef("http://vocab.getty.edu/aat/300025574"),
-#     "editor": rdflib.URIRef("http://vocab.getty.edu/aat/300025526"),
-#     "translator": rdflib.URIRef("http://vocab.getty.edu/aat/300025601"),
-#     "compiler": rdflib.URIRef("http://vocab.getty.edu/aat/300121766"),
-#     "adapter": rdflib.URIRef("http://vocab.getty.edu/aat/300410355"),
-#     "illustrator": rdflib.URIRef("http://vocab.getty.edu/aat/300025123"),
-#     "contributor": rdflib.URIRef("http://vocab.getty.edu/aat/300403974"),
-#     "introduction": rdflib.URIRef("http://vocab.getty.edu/aat/300374882"), # letters of intro: don't know about this one
-#     "revised": rdflib.URIRef("http://vocab.getty.edu/aat/300025526"), # reusued editor
-#     "afterword": rdflib.URIRef("http://vocab.getty.edu/aat/300121766"),
-#     "transcriber": rdflib.URIRef("http://vocab.getty.edu/aat/300440751"),
-# }
 
 ROLES = {
     "publisher": MARC_REL.pbl,
@@ -473,7 +446,7 @@ class BibliographyParse:
                 usage = None
 
             if title.title:
-                title_text = title.text.strip()
+                title_text = title.text.strip().replace("\n"," ").replace("\t"," ")
             else:
                 title_text = ""
 
@@ -744,7 +717,7 @@ class BibliographyParse:
     def get_main_title(self, titles):
         for x in titles:
             if x['usage'] == 'primary':
-                self.mainTitle = x['title'].strip()
+                self.mainTitle = x['title'].strip().replace("\n"," ").replace("\t"," ")
                 return
     def build_graph(self, part_type=None):
         g = self.g
@@ -759,6 +732,7 @@ class BibliographyParse:
             resource.add(RDF.type, FRBROO.F2_Expression)
         else:
             resource.add(RDF.type, FRBROO.F1_Work)
+        resource.add(RDFS.label, rdflib.Literal(self.mainTitle))
         
         
         resource.add(CRM.P2_has_type, self.get_type())
@@ -981,7 +955,7 @@ class BibliographyParse:
                     end_date, transformed, dump = dateParse(o['end date'], o)
 
                 time_span = g.resource(F"{self.mainURI}_time-span_{i}")
-                time_span.add(RDFS.label, rdflib.Literal( (F"origin time-span {'of '+ self.mainTitle}") if self.mainTitle else "origin time-span" ))
+                time_span.add(RDFS.label, rdflib.Literal( (F"time-span {'of the publishing of '+ self.mainTitle}") if self.mainTitle else "creation time-span" ))
                 time_span.add(RDF.type, CRM["E52_Time-Span"])
                 time_span.add(CRM["P82_at_some_time_within"], rdflib.Literal(o['date']))
                 time_span.add(CRM.P2_has_type, BF.changeDate)
@@ -1197,9 +1171,12 @@ if __name__ == "__main__":
     # test_filenames = ["0d0e00bf-3224-4286-8ec4-f389ec6cc7bb.xml"] # VW, the wave
     # test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"] # VW, the wave
     # test_filenames = ["64d3c008-8a9d-415b-b52b-91d232c00952.xml",
+    test_filenames = ["55aff3fb-8ea9-4e95-9e04-0f3e630896e3.xml", "0c133817-f55e-4a8f-a9b4-474566418d9b.xml"]
+
+
     #                   "e1b2f98f-1001-4787-a711-464f1527e5a7.xml", "15655c66-8c0b-4493-8f68-8d6cf4998303.xml"]
-    for fname in os.listdir(dirname):
-    # for fname in test_filenames:
+    # for fname in os.listdir(dirname):
+    for fname in test_filenames:
 
         path = os.path.join(dirname, fname)
         if os.path.isdir(path):
