@@ -279,7 +279,7 @@ class Context(object):
 
             # Creating xpath selector
             xpath_uri = self.uri +"_xpath_selector"
-            xpath_label = target_label.replace(" excerpt", " XPath Selector")
+            xpath_label = target_label.replace(" Excerpt", " XPath Selector")
             g.add((self.target_uri, utilities.NS_DICT["oa"].hasSelector, xpath_uri))
             g.add((xpath_uri, RDFS.label, Literal(xpath_label)))
             g.add((xpath_uri, RDF.type, utilities.NS_DICT["oa"].XPathSelector))
@@ -290,7 +290,7 @@ class Context(object):
             # Creating text quote selector
             self.get_snippet()
             textquote_uri = self.uri +"_textquote_selector"
-            textquote_label = target_label.replace(" excerpt", " TextQuote Selector")
+            textquote_label = target_label.replace(" Excerpt", " TextQuote Selector")
             g.add((xpath_uri, utilities.NS_DICT["oa"].refinedBy, textquote_uri))
             g.add((textquote_uri, RDF.type, utilities.NS_DICT["oa"].TextQuoteSelector))
             g.add((textquote_uri, RDF.type,
