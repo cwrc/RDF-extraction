@@ -41,6 +41,9 @@ class Occupation(object):
                 self.value = Literal(self.get_value(job_tag))
             else:
                 self.value = self.get_mapped_term(self.get_value(job_tag))
+                if(type(self.value) == rdflib.term.Literal):
+                    logger.info(F"Full tag:{job_tag}")
+                
 
         if other_attributes:
             self.uri = other_attributes

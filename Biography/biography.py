@@ -92,7 +92,7 @@ class Biography(object):
         self.std_name = utilities.get_name(doc)
         self.uri =  self.document.ENTRY.DIV0.STANDARD.get("REF")
         self.uri = rdflib.term.URIRef(self.uri)
-
+        logger.info(F"{self.id}|{self.uri}|{self.std_name}|{self.std_name}")
         # TODO: Review names and people extraction for more precision
         self.biographers = [
             utilities.get_name_uri(x) for x in get_possible_biographers(self.document)]

@@ -140,7 +140,7 @@ def create_writer_map(path=None):
         next(reader)
         for row in reader:
             if row[0] not in WRITER_MAP:
-                WRITER_MAP[row[0]] = {"ID": row[1], "SEX": row[2]}
+                WRITER_MAP[row[0]] = {"ID": row[1],"NAME": row[2] , "SEX": row[3]}
 
 create_writer_map()
 

@@ -314,6 +314,7 @@ def extract_family_data(bio, person):
                 print(member_tag["RELATION"])
                 print(people_found[0])
                 print(FAMILY_MAP[member_tag["RELATION"]])
+                print(people_found[0])
                 if str(people_found[0]) in utilities.WRITER_MAP and utilities.WRITER_MAP[str(people_found[0])]["SEX"] != FAMILY_MAP[member_tag["RELATION"]]["SEX"]:
                     # Creating placeholder
                     if relation != "interpersonalRelationshipWith":
