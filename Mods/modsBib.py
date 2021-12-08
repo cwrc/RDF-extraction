@@ -377,19 +377,24 @@ class BibliographyParse:
         if type(filename) is str:
             with open(filename) as f:
                 self.soup = BeautifulSoup(f, 'lxml-xml')
-            self.id = self.soup.find("recordIdentifier", source="Orlando").text
         else:
             self.soup = filename
 
         self.filename = filename
         self.g = graph
         self.mainTitle = None
+        self.id = resource_name.replace(".xml", "")
 
         # update this to use cwrc identifiers
         if ".xml" in resource_name:
-            self.id = self.soup.find("recordIdentifier", source="Orlando").text
+            self.id = self.soup.find("recordIdentifier", source="Orlando")
+            if self.id:
+                self.id = self.id.text
+            else:
+                self.id = resource_name.replace(".xml", "")
         else:
             self.id = resource_name.replace(".xml", "")
+
 
         if 'data:' in self.id:
             self.mainURI = self.id
@@ -990,8 +995,7 @@ class BibliographyParse:
         i = 0
         if not self.relatedItem:
             for part in self.get_related_items():
-                bp = BibliographyParse(part['soup'], self.g, "{}_{}_{}".format(
-                    self.mainURI.replace("http://cwrc.ca/cwrcdata/", ""), part['type'], i), True)
+                bp = BibliographyParse(part['soup'], self.g, F"{self.mainURI.replace('http://cwrc.ca/cwrcdata/', '')}_{part['type']}_{i}", True)
                 bp.build_graph(part_type=part['type'])
 
                 if part['type'] in self.related_item_map:
