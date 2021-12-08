@@ -732,7 +732,9 @@ class BibliographyParse:
             resource.add(RDF.type, FRBROO.F2_Expression)
         else:
             resource.add(RDF.type, FRBROO.F1_Work)
-        resource.add(RDFS.label, rdflib.Literal(self.mainTitle))
+        
+        if self.mainTitle != None:
+            resource.add(RDFS.label, rdflib.Literal(self.mainTitle))
         
         
         resource.add(CRM.P2_has_type, self.get_type())
@@ -971,6 +973,7 @@ class BibliographyParse:
             if o['edition']:
                 instance_manifestion = g.resource(F"{self.mainURI}_instance_manifestation")
                 instance_manifestion.add(RDF.type, FRBROO.F4_Manifestation_Singleton)
+                instance_manifestion.add(RDFS.label, rdflib.Literal(F"manifestation of {self.mainTitle}"))
                 instance_manifestion.add(FRBROO.R4_embodies,resource)
                 
                 edition_node = g.resource(F"{self.mainURI}_edition")
@@ -993,7 +996,8 @@ class BibliographyParse:
 
                 if part['type'] in self.related_item_map:
                     work = g.resource(F"{self.mainURI}_{part['type']}_{i}")
-                    work.add(RDFS.label, rdflib.Literal(F"{part['type']} of {self.mainTitle}"))
+                    if bp.mainTitle == None: 
+                        work.add(RDFS.label, rdflib.Literal(F"{part['type']} of {self.mainTitle}"))
                     if part["type"] == "constituent":
                         work.add(self.related_item_map[part['type']], resource)
                         resource.add(self.related_item_map["i"+part['type']], work)
@@ -1167,16 +1171,15 @@ if __name__ == "__main__":
         except UnicodeError:
             pass
 
-    # test_filenames = ["d75215cb-d102-4256-9538-c44bfbf490d9.xml","2e3e602e-b82c-441d-81bc-883f834b20c1.xml","13f8e71a-def5-41e4-90a0-6ae1092ae446.xml","16d427db-a8a2-4f33-ac53-9f811672584b.xml","4109f3c5-0508-447b-9f86-ea8052ff3981.xml"]
-    # test_filenames = ["0d0e00bf-3224-4286-8ec4-f389ec6cc7bb.xml"] # VW, the wave
-    # test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"] # VW, the wave
+    # test_filenames = ["d75215cb-d102-4256-9538-c44bfbf490d9.xml","2e3e602e-b82c-441d-81bc-883f834b20c1.xml","13f8e71a-def5-41e4-90a0-6ae1092ae446.xml","16d427db-a8a2-4f33-ac53-9f811672584b.xml","4109f3c5-0508-447b-9f86-ea8052ff3981.xml",
+    #                   "e1b2f98f-1001-4787-a711-464f1527e5a7.xml", "15655c66-8c0b-4493-8f68-8d6cf4998303.xml","0d0e00bf-3224-4286-8ec4-f389ec6cc7bb.xml"] # VW, the wave
+    # test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"] 
     # test_filenames = ["64d3c008-8a9d-415b-b52b-91d232c00952.xml",
-    test_filenames = ["55aff3fb-8ea9-4e95-9e04-0f3e630896e3.xml", "0c133817-f55e-4a8f-a9b4-474566418d9b.xml"]
+    # test_filenames = ["55aff3fb-8ea9-4e95-9e04-0f3e630896e3.xml", "0c133817-f55e-4a8f-a9b4-474566418d9b.xml"]
 
 
-    #                   "e1b2f98f-1001-4787-a711-464f1527e5a7.xml", "15655c66-8c0b-4493-8f68-8d6cf4998303.xml"]
-    # for fname in os.listdir(dirname):
-    for fname in test_filenames:
+    # for fname in test_filenames:
+    for fname in os.listdir(dirname):
 
         path = os.path.join(dirname, fname)
         if os.path.isdir(path):
