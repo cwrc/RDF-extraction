@@ -219,7 +219,7 @@ def find_occupations(tag):
     """
 
     jobs_tags = tag.find_all("JOB") + tag.find_all("SIGNIFICANTACTIVITY")
-    jobs_tags += tag.find_all("EMPLOYER") #+ tag.find_all("REMUNERATION")
+    # jobs_tags += tag.find_all("EMPLOYER") #+ tag.find_all("REMUNERATION")
     return [Occupation(x) for x in jobs_tags]
 
 def get_attributes(occupations):
