@@ -2,7 +2,7 @@ import rdflib
 from rdflib import RDF, RDFS, Literal, XSD
 from Utils.citation import Citation
 from Utils import utilities, organizations
-
+import datetime
 logger = utilities.config_logger("activity")
 
 def get_participants(tag):
@@ -47,13 +47,110 @@ def format_date(date):
     Using normalizing fix from https://github.com/RDFLib/rdflib/issues/806
     Not too sure the side effects of this
     """
+
+
+    formatted_date = None
+
     if date[-1] == "-":
         date = date.strip("-")
 
     if len(date) in [10,7,4]:
-        return Literal(date, datatype=XSD.date)
+        formatted_date = Literal(date, datatype=XSD.dateTime)
     else:
-        return Literal(date)
+        formatted_date = Literal(date)
+
+
+    return formatted_date
+
+
+def get_next_month(date):
+    # Returns date with next occurring month, ex. 2019-10-1 --> 2019-11-1, or 2012-12-01 --> 2013-01-01,
+    # note this only guaranteed to work for date.days <= 28, and may fail for dates later than so.
+    return datetime.datetime(date.year+1 if date.month == 12 else date.year, 1 if date.month == 12 else date.month + 1, date.day)
+
+
+def date_parse(date_string: str, both=True):
+    # Strip spaces surrounding the date string
+    date_string = date_string.strip().rstrip()
+    end_dt = None
+
+    try:
+        dt = datetime.datetime.strptime(date_string, "%Y-%m-%d")
+        end_dt = dt + datetime.timedelta(days=1, seconds=-1)
+        return dt.isoformat(), True, end_dt.isoformat()
+    except ValueError:
+        pass
+    try:
+        dt = datetime.datetime.strptime(date_string, "%Y--")
+        end_dt = dt.replace(year=dt.year+1) - datetime.timedelta(seconds=1)
+        return dt.isoformat(), True, end_dt.isoformat()
+    except ValueError:
+        pass
+    try:
+        dt = datetime.datetime.strptime(date_string, "%Y-")
+        end_dt = dt.replace(year=dt.year+1) - datetime.timedelta(seconds=1)
+        return dt.isoformat(), True, end_dt.isoformat()
+    except ValueError:
+        pass
+
+    try:
+        dt = datetime.datetime.strptime(date_string, "%Y")
+        end_dt = dt.replace(year=dt.year+1) - datetime.timedelta(seconds=1)
+        return dt.isoformat(), True, end_dt.isoformat()
+    except ValueError:
+        pass
+
+    try:
+        dt = datetime.datetime.strptime(date_string, "%Y-%m-")
+        end_dt = get_next_month(dt) - datetime.timedelta(seconds=1)
+        return dt.isoformat(), True, end_dt.isoformat()
+    except ValueError:
+        pass
+
+    try:
+        dt = datetime.datetime.strptime(date_string, "%Y-%m")
+        end_dt = get_next_month(dt) - datetime.timedelta(seconds=1)
+        return dt.isoformat(), True, end_dt.isoformat()
+    except ValueError:
+        pass
+
+    try:
+        dt = datetime.datetime.strptime(date_string, "%B %Y")
+        end_dt = get_next_month(dt) - datetime.timedelta(seconds=1)
+        return dt.isoformat(), True, end_dt.isoformat()
+    except ValueError:
+        pass
+
+    try:
+        dt = datetime.datetime.strptime(date_string, "%d %B %Y")
+        end_dt = dt + datetime.timedelta(days=1, seconds=-1)
+        return dt.isoformat(), True, end_dt.isoformat()
+    except ValueError:
+        pass
+
+    try:
+        dt = datetime.datetime.strptime(date_string, "%Y-%m--")
+        end_dt = get_next_month(dt) - datetime.timedelta(seconds=1)
+        return dt.isoformat(), True, end_dt.isoformat()
+    except ValueError:
+        pass
+
+    try:
+        dt = datetime.datetime.strptime(date_string, "%b %Y")
+        end_dt = get_next_month(dt) - datetime.timedelta(seconds=1)
+        return dt.isoformat(), True, end_dt.isoformat()
+    except ValueError:
+        pass
+
+    try:
+        dt = datetime.datetime.strptime(date_string, "%d %b %Y")
+        end_dt = dt + datetime.timedelta(days=1, seconds=-1)
+        return dt.isoformat(), True, end_dt.isoformat()
+    except ValueError:
+        pass
+
+    return date_string, False, date_string
+
 
 
 def get_indirect_date_tag(tag):
@@ -172,7 +269,9 @@ class Activity(object):
         self.get_snippet()
         self.date_tag = get_date_tag(tag)
         self.date_text = None
-
+        self.start_date = None
+        self.end_date = None
+        self.date = None
         # self.text = self.date_tag.text+": " + self.text
         self.precision = None 
         
@@ -181,14 +280,14 @@ class Activity(object):
             self.precision = self.certainty_map[self.date_tag.get("CERTAINTY")]
             self.precision = utilities.create_uri("cwrc", self.precision)
             if self.date_tag.name == "DATERANGE":
-                print(self.date_tag)
                 if self.date_tag.get("FROM") and self.date_tag.get("TO"):
-                    self.date = self.date_tag.get("FROM") + ":" + self.date_tag.get("TO")
+                    self.start_date = self.date_tag.get("FROM")
+                    self.end_date = self.date_tag.get("TO")
                 else:
                     self.date = self.date_tag.get("FROM")
             else:
                 self.date = self.date_tag.get("VALUE")
-                self.date = format_date(self.date)
+                self.start_date, status, self.end_date = date_parse(self.date)
         else: 
             self.date= None
 
@@ -234,12 +333,12 @@ class Activity(object):
             if self.precision:
                 time_span.add(utilities.NS_DICT["crm"].P2_has_type, self.precision)
 
-            if ":" in self.date:
-                time_span.add(utilities.NS_DICT["crm"]["P82a_begin_of_the_begin"], format_date(self.date.split(":")[0]))
-                time_span.add(utilities.NS_DICT["crm"]["P82b_end_of_the_end"], format_date(self.date.split(":")[1]))
-            else:
-                time_span.add(utilities.NS_DICT["crm"]["P82a_begin_of_the_begin"], format_date(self.date))
-                time_span.add(utilities.NS_DICT["crm"]["P82b_end_of_the_end"], format_date(self.date))
+            # if ":" in self.date:
+            #     time_span.add(utilities.NS_DICT["crm"]["P82a_begin_of_the_begin"], format_date(self.date.split(":")[0]))
+            #     time_span.add(utilities.NS_DICT["crm"]["P82b_end_of_the_end"], format_date(self.date.split(":")[1]))
+            # else:
+            time_span.add(utilities.NS_DICT["crm"]["P82a_begin_of_the_begin"], format_date(self.start_date))
+            time_span.add(utilities.NS_DICT["crm"]["P82b_end_of_the_end"], format_date(self.end_date))
 
 
         if self.text:
