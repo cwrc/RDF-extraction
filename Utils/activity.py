@@ -276,7 +276,6 @@ class Activity(object):
         self.precision = None 
         
         if self.date_tag:
-            print(self.date_tag)
             self.date_text = self.date_tag.get_text()
             self.precision = self.certainty_map[self.date_tag.get("CERTAINTY")]
             self.precision = utilities.create_uri("cwrc", self.precision)
