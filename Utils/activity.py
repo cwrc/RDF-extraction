@@ -276,14 +276,17 @@ class Activity(object):
         self.precision = None 
         
         if self.date_tag:
+            print(self.date_tag)
             self.date_text = self.date_tag.get_text()
             self.precision = self.certainty_map[self.date_tag.get("CERTAINTY")]
             self.precision = utilities.create_uri("cwrc", self.precision)
             if self.date_tag.name == "DATERANGE":
                 if self.date_tag.get("FROM") and self.date_tag.get("TO"):
-                    self.start_date = self.date_tag.get("FROM")
-                    self.end_date = self.date_tag.get("TO")
+                    self.start_date, status, status = date_parse(self.date_tag.get("FROM"))
+                    self.end_date, status, status = date_parse(self.date_tag.get("TO"))
+                    self.date = self.date_tag.get("FROM") +" : "+self.date_tag.get("TO")
                 else:
+                    self.start_date, status, self.end_date = date_parse(self.date_tag.get("FROM"))
                     self.date = self.date_tag.get("FROM")
             else:
                 self.date = self.date_tag.get("VALUE")
@@ -319,7 +322,7 @@ class Activity(object):
         elif "Death" in str(self.activity_type):
             activity.add(utilities.NS_DICT["crm"].P100_was_death_of, self.person.uri)
 
-        if self.date:
+        if self.date != None:
             time_span = g.resource(self.uri + "_time-span")
             time_span.add(RDFS.label, Literal(activity_label + " time-span"))
             time_span.add(utilities.NS_DICT["crm"]["P82_at_some_time_within"], Literal(self.date_text))
