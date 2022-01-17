@@ -16,3 +16,4 @@ venv
 *.rdf
 *.log
 *.config
+.dccache
