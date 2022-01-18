@@ -11,6 +11,7 @@ from Utils.event import get_date_tag, Event, format_date
 
 logger = utilities.config_logger("birthdeath")
 
+BURIAL_KEYWORDS = ["buried", "grave", "interred"]
 
 class Birth:
     def __init__(self, date, positions, birthplace, date_certainty=False):
@@ -205,7 +206,7 @@ def extract_death_data(bio, person):
             # Get shortprose after event
             if not death.burial:
                 shortprose = x.find_next_sibling("SHORTPROSE")
-                if shortprose and any(word in shortprose.text for word in ["buried", "grave", "interred"]):
+                if shortprose and any(word in shortprose.text for word in BURIAL_KEYWORDS):
                     burial_tag = shortprose.find('PLACE')
                     if burial_tag:
                         death.burial = Place(burial_tag).uri

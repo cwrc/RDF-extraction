@@ -308,6 +308,8 @@ def extract_family_data(bio, person):
                     people_found.remove(x)
 
             # Replace with more sopshisticated mapping
+            print("HELLOOOO",member_tag["RELATION"] )
+            print(*people_found,sep="\n")
             if people_found:
                 people_found = [people_found[0]]
             if len(people_found) == 1:

@@ -292,7 +292,20 @@ def get_people(tag):
     """Returns all people within a given tag"""
     return list(set([get_name_uri(x) for x in tag.find_all("NAME")]))
 
-
+def get_people_names(tag):
+    """Returns all URIs mapped to names from all name tags within a given tag"""
+    people = {}
+    for x in tag.find_all("NAME"):
+        uri = get_name_uri(x)
+        name = get_value(x)
+        if uri in people and name not in people[uri]:
+            people[uri].append(name)
+        else:
+            people[uri]=[name]
+        print(uri,"====>", name)
+    for x in people:
+        print(x, people[x])
+    return people
 
 def get_title_uri(tag):
     title = get_value(tag)

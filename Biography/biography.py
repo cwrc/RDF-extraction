@@ -6,6 +6,7 @@ logger = utilities.config_logger("biography")
 
 # TODO: Move this to utilities?
 WIKIDATA_MAP = {}
+ROLE_KEYWORDS = ["biographer","critic", "historian"]
 
 def create_wikidata_map(path=None):
     import csv
@@ -34,20 +35,17 @@ def get_wd_identifier(id):
 
 def get_possible_biographers(doc):
     # TODO: Review possible additional phrases/sentence structure to id biographers/cr
-    # possible_phrases = ["biographer ", "biographer, "]
-    # historian?
     # This might erronously identify someone as a biographer who a writer shares a relationship with
     # ex. X married biographer Y
     names = doc.find_all("NAME")
     biographers = []
     for x in names:
-        parent_text = x.parent.get_text()      
-        if "biographer " + x.get_text().lower() in parent_text.lower():
+        parent_text = x.parent.get_text().lower()     
+        role_text = [f"{role} {x.get_text().lower()}" for role in ROLE_KEYWORDS]
+
+        if any(role in parent_text for role in role_text):
             biographers.append(x)
-        elif "critic " + x.get_text().lower() in parent_text.lower():
-            biographers.append(x)
-        elif "historian " + x.get_text().lower() in parent_text.lower():
-            biographers.append(x)
+            
     return list(set(biographers))
 
 
@@ -112,8 +110,11 @@ class Biography(object):
         # TODO: get nickname from file most common acroynm and replace in event/context strings
         self.nickname = None
 
+        self.people_mentioned= utilities.get_people_names(self.document)
+
         self.family_members = {}
         self.get_all_members()
+
 
         self.wd_id = get_wd_identifier(id)
         
@@ -158,7 +159,16 @@ class Biography(object):
                 self.family_members[x["RELATION"]]+=peeps
             else:
                 self.family_members[x["RELATION"]] = peeps
-      
+        for x in self.family_members:
+            print(x, self.family_members[x])
+        print()
+        for x in self.people_mentioned:
+            print(x, self.people_mentioned[x])
+        
+        # for x in self.family_members["MOTHER"]:
+        #     print(x, "-->", self.people_mentioned[x])
+        # input()
+
     def add_context(self, context):
         if type(context) is list:
             self.context_list += context
