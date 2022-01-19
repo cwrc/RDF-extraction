@@ -285,11 +285,17 @@ def get_reg(tag):
     return get_attribute(tag, "REG")
 
 def get_other_people(tag, author):
-    """returns all people other than author"""
-    return list(filter(lambda a: a != author.uri, get_people(tag)))
+    """returns all unique people other than author, does not return in order"""
+    return [x for x in get_people(tag) if x != author.uri]
+def get_all_other_people(tag, author):
+    """returns all people other than author, does return in order"""
+    return [x for x in get_all_people(tag) if x != author.uri]
 
-def get_people(tag):
+def get_all_people(tag):
     """Returns all people within a given tag"""
+    return [get_name_uri(x) for x in tag.find_all("NAME")]
+def get_people(tag):
+    """Returns all unique people within a given tag, no order guaranteed due to use of set()"""
     return list(set([get_name_uri(x) for x in tag.find_all("NAME")]))
 
 def get_people_names(tag):
@@ -302,9 +308,6 @@ def get_people_names(tag):
             people[uri].append(name)
         else:
             people[uri]=[name]
-        print(uri,"====>", name)
-    for x in people:
-        print(x, people[x])
     return people
 
 def get_title_uri(tag):
