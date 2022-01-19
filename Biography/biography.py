@@ -159,15 +159,6 @@ class Biography(object):
                 self.family_members[x["RELATION"]]+=peeps
             else:
                 self.family_members[x["RELATION"]] = peeps
-        for x in self.family_members:
-            print(x, self.family_members[x])
-        print()
-        for x in self.people_mentioned:
-            print(x, self.people_mentioned[x])
-        
-        # for x in self.family_members["MOTHER"]:
-        #     print(x, "-->", self.people_mentioned[x])
-        # input()
 
     def add_context(self, context):
         if type(context) is list:

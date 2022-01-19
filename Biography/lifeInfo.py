@@ -87,8 +87,6 @@ def find_childlessness(tag):
     childlessness = []
     for x in tags:
         keyword_found = False
-        print(tag)
-        print(x)
         for reproductiveHistory in childlessness_words.keys():
             if any(word in x.text for word in childlessness_words[reproductiveHistory]):
                 keyword_found =True
@@ -100,7 +98,6 @@ def find_childlessness(tag):
             childlessness.append(utilities.GeneralRelation(utilities.create_cwrc_uri(
                 "unspecifiedReproductiveHistory"), utilities.create_cwrc_uri("unspecifiedReproductiveHistory")))
             
-
     return childlessness
 
 
@@ -287,7 +284,7 @@ def extract_family_data(bio, person):
             temp_context = Context(context_id, member_tag, "FAMILY")
 
             # Finding family member
-            people_found = utilities.get_other_people(member_tag,person)
+            people_found = utilities.get_all_other_people(member_tag,person)
             marital_statuses = find_marital_status(member_tag)
             child_count = find_children(member_tag)
             family_members += find_childlessness(member_tag)
@@ -297,45 +294,49 @@ def extract_family_data(bio, person):
                     family_members.append(utilities.GeneralRelation(utilities.create_cwrc_uri(
                         "children"), rdflib.term.Literal(int(x), datatype=rdflib.namespace.XSD.int)))
 
-            print(people_found)
-            print(len(people_found))
-            # Cleaning people found
             if person.uri in people_found:
                 people_found.remove(person.uri)
-            print(len(people_found))
             for x in people_found:
                 if x in person.biographers:
                     people_found.remove(x)
 
-            # Replace with more sopshisticated mapping
-            print("HELLOOOO",member_tag["RELATION"] )
-            print(*people_found,sep="\n")
-            if people_found:
+            #TODO: Can we do family members in a particular order?
+
+            # Assuming first person mentioned other than other is the relative of interest
+            if len(people_found) > 1:
+                # print(relation)
+                # print(*people_found,sep="\n")
+                # print("?")
+                # more_people = utilities.get_people_names(member_tag)
+                # for q in more_people:
+                #     print(q, more_people[q])
+                # all_people = [x for x in member_tag.find_all("NAME")]
+                # print("?")
+                # print(*all_people,sep="\n")
+                # print("?")
+                # print()
+                # input()
                 people_found = [people_found[0]]
             if len(people_found) == 1:
-                print(member_tag["RELATION"])
-                print(people_found[0])
-                print(FAMILY_MAP[member_tag["RELATION"]])
-                print(people_found[0])
                 if str(people_found[0]) in utilities.WRITER_MAP and utilities.WRITER_MAP[str(people_found[0])]["SEX"] != FAMILY_MAP[member_tag["RELATION"]]["SEX"]:
                     # Creating placeholder
                     if relation != "interpersonalRelationshipWith":
                         people_found[0] = person.uri + "_PLACEHOLDER_"+ relation
                 elif str(people_found[0]) in utilities.WRITER_MAP:
                     print(utilities.WRITER_MAP[str(people_found[0])])
-                    print(utilities.WRITER_MAP[str(people_found[0])]["SEX"])
-                    print(person.family_members)
                 
                 log_str = person.id + "\n"
-                print(relation)
-                log_str += "\t" + person.uri.split("/")[-1] + " --" + relation + "--> " + \
-                    str(people_found[0]).split("/")[-1] + "\n"
+                log_str += "\t" + str(person.uri) + " --" + relation + "--> " + \
+                    str(people_found[0]) + "\n"
 
+
+                # updating family member map
                 family_members.append(Person(people_found[0], relation))
                 if relation in person.family_members:
                     person.family_members[relation].append(people_found[0])
                 else:
                     person.family_members[relation] = [people_found[0]]
+
 
                 # Creating context for relative
                 relative_triples = occupation.find_occupations(member_tag)
@@ -350,8 +351,8 @@ def extract_family_data(bio, person):
                     relative_triples.append(Person(person.uri, relation))
                     logger.warning("Need to invert relation:" + relation)
 
-                log_str += "\t" + str(people_found[0]).split("/")[-1] + " --" + \
-                    relation + "--> " + person.uri.split("/")[-1] + "\n"
+                log_str += "\t" + str(people_found[0]) + " --" + \
+                    relation + "--> " + str(person.uri) + "\n"
                 logger.info(log_str)
 
                 if marital_statuses:
