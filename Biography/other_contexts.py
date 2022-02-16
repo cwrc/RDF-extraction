@@ -1,6 +1,8 @@
 from Utils import utilities
 from Utils.context import Context, get_event_type, get_context_type
 from Utils.event import Event
+from Utils.activity import Activity 
+
 """
 Status: ~89%
 extraction of health context will possibly accompanied by health factors at a later point
@@ -30,16 +32,18 @@ def extract_health_contexts_data(bio, person):
             context_id = person.id + "_" + context_type + "_" + str(count)
             temp_context = Context(context_id, event, "HEALTH", "identifying", mode)
 
-            event_title = person.name + " - " + context_type.split("Context")[0] + " Event"
-            event_uri = person.id + "_" + context_type.split("Context")[0] + "Event_" + str(event_count)
-            temp_event = Event(event_title, event_uri, event, "HealthEvent")
 
-            temp_context.link_event(temp_event)
-            person.add_event(temp_event)
+
+            # event_title = person.name + " - " + context_type.split("Context")[0] + " Event"
+            # event_uri = person.id + "_" + context_type.split("Context")[0] + "Event_" + str(event_count)
+            # temp_event = Event(event_title, event_uri, event, "HealthEvent")
+
+            # temp_context.link_event(temp_event)
+            # person.add_event(temp_event)
             person.add_context(temp_context)
 
             count += 1
-            event_count += 1
+            # event_count += 1
 
 
 def extract_other_contexts_data(bio, person):
@@ -71,13 +75,20 @@ def extract_other_contexts_data(bio, person):
                 context_id = person.id + "_" + context_type + "_" + str(count)
                 temp_context = Context(context_id, event, context, "identifying")
 
-                event_title = person.name + " - " + context_type.split("Context")[0] + " Event"
-                event_uri = person.id + "_" + \
-                    context_type.split("Context")[0] + "Event_" + str(event_count)
-                temp_event = Event(event_title, event_uri, event, type=event_type)
+                activity_id = context_id.replace("Context","Event") + "_"+ str(event_count)
+                label = f"{utilities.split_by_casing(event_type)}"
+                activity = Activity(person, label, activity_id, event, activity_type="generic")
+                activity.event_type.append(utilities.create_cwrc_uri(event_type))
+                # temp_context.link_activity(activity)
+                # person.add_activity(activity)
 
-                temp_context.link_event(temp_event)
-                person.add_event(temp_event)
+                # event_title = person.name + " - " + context_type.split("Context")[0] + " Event"
+                # event_uri = person.id + "_" + \
+                #     context_type.split("Context")[0] + "Event_" + str(event_count)
+                # temp_event = Event(event_title, event_uri, event, type=event_type)
+
+                # temp_context.link_event(temp_event)
+                # person.add_event(temp_event)
                 person.add_context(temp_context)
 
                 count += 1
