@@ -228,6 +228,7 @@ class Activity(object):
             self.text = self.text.replace(date.text, date.text + ": ")
         
         # todo: add smarter method to clean up period spacing.
+        self.text = self.text.replace("\n", " ").strip()
         self.text = self.text.replace(".", ". ").strip()
 
         
@@ -241,7 +242,10 @@ class Activity(object):
         self.places = utilities.get_places(tag)
         self.related_activity = related_activity
 
-        self.person = person
+        if not person:
+            self.person = None
+        else:
+            self.person = person
         # attributes = {predicate:[objects]}
         self.attributes = attributes
         self.activity_type = None
@@ -250,20 +254,19 @@ class Activity(object):
             self.activity_type = utilities.NS_DICT["crm"][Activity.activity_map[activity_type.lower()]]            
 
         self.participants = get_participants(tag)
-        if person.uri in self.participants:
-            self.participants.remove(person.uri)
-        
         self.biographers = []
-        for x in self.participants:
-            if x in person.biographers:
-                self.participants.remove(x)
-                self.biographers.append(x)
         
+        if self.person:
+            if person.uri in self.participants:
+                self.participants.remove(person.uri)
+            
+            for x in self.participants:
+                if x in person.biographers:
+                    self.participants.remove(x)
+                    self.biographers.append(x)
+            
         self.event_type = get_event_type(tag)
 
-
-        # NOTE: Event could possibly have multiple types/non cwrc types? may need to revise
-        # self.type = utilities.create_cwrc_uri(type)
 
         # TODO: replace initials with full name of author where applicable
         self.get_snippet()
@@ -296,7 +299,10 @@ class Activity(object):
     def to_triple(self, person=None):
         g = utilities.create_graph()
         activity = g.resource(self.uri)
-        activity_label = self.person.name +": "+  self.title
+        activity_label = self.title
+        if self.person:
+            activity_label = self.person.name +": "+  self.title
+
         connection = None
         if self.activity_type:
             activity.add(RDF.type, self.activity_type)
@@ -321,7 +327,7 @@ class Activity(object):
         elif "Death" in str(self.activity_type):
             activity.add(utilities.NS_DICT["crm"].P100_was_death_of, self.person.uri)
 
-        if self.date != None:
+        if self.date is not None:
             time_span = g.resource(self.uri + "_time-span")
             time_span.add(RDFS.label, Literal(activity_label + " time-span"))
             time_span.add(utilities.NS_DICT["crm"]["P82_at_some_time_within"], Literal(self.date_text))
@@ -335,10 +341,6 @@ class Activity(object):
             if self.precision:
                 time_span.add(utilities.NS_DICT["crm"].P2_has_type, self.precision)
 
-            # if ":" in self.date:
-            #     time_span.add(utilities.NS_DICT["crm"]["P82a_begin_of_the_begin"], format_date(self.date.split(":")[0]))
-            #     time_span.add(utilities.NS_DICT["crm"]["P82b_end_of_the_end"], format_date(self.date.split(":")[1]))
-            # else:
             time_span.add(utilities.NS_DICT["crm"]["P82a_begin_of_the_begin"], format_date(self.start_date))
             time_span.add(utilities.NS_DICT["crm"]["P82b_end_of_the_end"], format_date(self.end_date))
 
@@ -377,7 +379,7 @@ class Activity(object):
             for x in self.participants:
                 activity.add(utilities.NS_DICT["crm"].P11_had_participant, x)
 
-        if "Activity" in str(self.activity_type):
+        if self.person and "Activity" in str(self.activity_type):
             activity.add(utilities.NS_DICT["crm"].P14_carried_out_by, self.person.uri)
 
         # consult if this property should be a list

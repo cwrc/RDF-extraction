@@ -176,14 +176,14 @@ class Context(object):
 
         # Would be nice to use the ontology and not worry about changing labels
         # logger.info(context_type + " " + str(mode))
-        if context_type != "FREESTANDING_EVENT":
+        if context_type != "CHRONEVENT":
             self.context_type = get_context_type(context_type, mode)
             self.context_predicate = utilities.create_cwrc_uri(get_context_predicate(context_type))
             self.context_label = utilities.split_by_casing(self.context_type)
         else:
             self.context_type = "Context"
             self.context_predicate = None
-            self.context_label = " ".join(self.id.split("_")).title().replace("Context ", "#") + " Context"
+            self.context_label = " ".join(self.id.split("_")).title().replace(" Context", ":") + " Context"
 
         self.context_type = utilities.create_cwrc_uri(self.context_type)
 
@@ -244,6 +244,8 @@ class Context(object):
         if date:
             self.text = self.text.replace(date.text, date.text + ": ")
         
+        self.text= self.text.replace("\n"," ")
+        
 
     def to_triple(self, person=None):
 
@@ -251,6 +253,10 @@ class Context(object):
 
         if not self.context_focus and person:
             self.context_focus = person.uri
+
+        if not self.context_focus:
+            self.context_focus = None
+
 
         # Creating target first - CIDOCified
         if self.new_target:
@@ -311,7 +317,9 @@ class Context(object):
         g.add((identifying_uri, RDFS.label, Literal(context_label)))
         
         g.add((identifying_uri, utilities.NS_DICT["oa"].hasTarget, self.target_uri))
-        g.add((identifying_uri, utilities.NS_DICT["crm"].P67_refers_to, self.context_focus))
+        
+        if self.context_focus:
+            g.add((identifying_uri, utilities.NS_DICT["crm"].P67_refers_to, self.context_focus))
         
         # Creating spatial context if place is mentioned
         identified_places = utilities.get_places(self.tag)
@@ -322,6 +330,18 @@ class Context(object):
         # Adding identifying bodies to annotation
         for x in self.named_entities:
             g.add((identifying_uri, utilities.NS_DICT["oa"].hasBody, x))
+        
+        if not person:
+            for x in self.tag.find_all("NAME"):
+                entity_uri = utilities.get_name_uri(x)
+                g.add((entity_uri,RDFS.label,Literal(utilities.get_value(x))))
+                g.add((entity_uri,RDF.type,utilities.NS_DICT["crm"].E21_Person))
+            for x in self.tag.find_all("ORG"):
+                entity_uri = utilities.get_name_uri(x)
+                g.add((entity_uri,RDFS.label,Literal(utilities.get_value(x))))
+                g.add((entity_uri,RDF.type,utilities.NS_DICT["crm"].E74_Group))
+
+
         if person:
             g.add((identifying_uri, utilities.NS_DICT["oa"].hasBody, person.uri))
 
