@@ -38,7 +38,13 @@ def main():
         with open(filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
+        samples = soup.find_all("PANTHOLOGIZATION")
         person_id = filename.split("/")[-1][:6]
+        for x in samples:
+            print(person_id,";",x)
+
+        continue
+
 
         print(person_id)
         print(file_dict[filename])

@@ -119,27 +119,11 @@ class Biography(object):
         self.get_all_members()
 
         self.wd_id = get_wd_identifier(id)
-        self.nationalities = []
 
         self.context_list = []
         self.event_list = []
         self.activity_list = []
         self.organizations = []
-
-        self.occupations = []
-        self.family_member_list = []
-        self.friend_list = []
-        self.intimate_relationship_list = []
-        self.contextCounts = {
-            "intimateRelationship": 1,
-            "friendsAssociates": 1
-        }
-        self.cohabitants_list = []
-        self.family_list = []
-        self.friendsAssociates_list = []
-        self.intimateRelationships_list = []
-        self.childless_list = []
-        self.children_list = []
         self.name_list = []
 
     def get_all_members(self):
@@ -185,12 +169,6 @@ class Biography(object):
             g += x.to_triple(self)
         return g
 
-    def create_triples2(self, e_list, f_list):
-        g = rdflib.Graph()
-        for x in e_list:
-            g += x.to_triple(self)
-        return g
-
     def to_graph(self):
         g = utilities.create_graph()
 
@@ -205,14 +183,6 @@ class Biography(object):
 
         for x in self.organizations:
             g.add((x, utilities.NS_DICT["crm"].P107_has_current_or_former_member, self.uri))
-
-        # g += self.create_triples(self.cohabitants_list)
-        # g += self.create_triples(self.family_list)
-        # g += self.create_triples(self.friendsAssociates_list)
-        # g += self.create_triples(self.intimateRelationships_list)
-        # g += self.create_triples(self.childless_list)
-        # g += self.create_triples(self.children_list)
-        # g += self.create_triples(self.name_list)
 
         if self.wd_id:
             g.add((self.uri, utilities.NS_DICT["owl"].sameAs, rdflib.term.URIRef(self.wd_id)))

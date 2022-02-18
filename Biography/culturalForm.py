@@ -134,8 +134,7 @@ def find_cultural_forms(cf, person):
 
                 value = get_mapped_term(tags[tag][1], value, id=person.id)
                 cf_list.append(CulturalForm(tags[tag][0], get_reported(x), value))
-                if tags[tag][1] == "NationalIdentity":
-                    person.nationalities.append(str(value))
+
 
     def get_geoheritage(tag):
         places = tag.find_all("PLACE")
