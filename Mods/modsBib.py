@@ -384,22 +384,24 @@ class BibliographyParse:
         self.g = graph
         self.mainTitle = None
         self.id = resource_name.replace(".xml", "")
-
+        self.old_id = self.id
         # update this to use cwrc identifiers
         if ".xml" in resource_name:
-            self.id = self.soup.find("recordIdentifier", source="Orlando")
-            if self.id:
-                self.id = self.id.text
+            self.old_id = self.soup.find("recordIdentifier", source="Orlando")
+            if self.old_id:
+                self.old_id = self.old_id.text
             else:
-                self.id = resource_name.replace(".xml", "")
+                self.old_id = resource_name.replace(".xml", "")
         else:
-            self.id = resource_name.replace(".xml", "")
+            self.old_id = resource_name.replace(".xml", "")
 
 
         if 'data:' in self.id:
             self.mainURI = self.id
+        elif "https://commons.cwrc.ca/orlando:" in self.id:
+            self.mainURI = self.id
         else:
-            self.mainURI = F"http://cwrc.ca/cwrcdata/{self.id}"
+            self.mainURI = F"https://commons.cwrc.ca/orlando:{self.id}"
 
         self.relatedItem = related_item
 
@@ -1165,15 +1167,15 @@ if __name__ == "__main__":
         for row in csvfile:
             genre_mapping[row[0]] = row[1]
 
-    for fname in os.listdir(writing_dir):
-        path = os.path.join(writing_dir, fname)
-        if os.path.isdir(path):
-            continue
+    # for fname in os.listdir(writing_dir):
+    #     path = os.path.join(writing_dir, fname)
+    #     if os.path.isdir(path):
+    #         continue
 
-        try:
-            genreParse = WritingParse(path, genre_map)
-        except UnicodeError:
-            pass
+    #     try:
+    #         genreParse = WritingParse(path, genre_map)
+    #     except UnicodeError:
+    #         pass
 
     # test_filenames = ["d75215cb-d102-4256-9538-c44bfbf490d9.xml","2e3e602e-b82c-441d-81bc-883f834b20c1.xml","13f8e71a-def5-41e4-90a0-6ae1092ae446.xml","16d427db-a8a2-4f33-ac53-9f811672584b.xml","4109f3c5-0508-447b-9f86-ea8052ff3981.xml",
     #                   "e1b2f98f-1001-4787-a711-464f1527e5a7.xml", "15655c66-8c0b-4493-8f68-8d6cf4998303.xml","0d0e00bf-3224-4286-8ec4-f389ec6cc7bb.xml"] # VW, the wave
