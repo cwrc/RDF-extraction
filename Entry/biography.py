@@ -88,7 +88,8 @@ class Biography(object):
         self.name = utilities.get_readable_name(doc)
         self.std_name = utilities.get_name(doc)
         self.uri =  rdflib.term.URIRef(self.document.ENTRY.DIV0.STANDARD.get("REF"))
-        
+        self.oeuvre_uri = rdflib.term.URIRef(self.uri + "_Oeuvre")
+
         logger.info(F"{self.id}|{self.uri}|{self.std_name}|")
         # TODO: Review names and people extraction for more precision
         self.biographers = [
@@ -165,6 +166,12 @@ class Biography(object):
 
         if self.wd_id:
             g.add((self.uri, utilities.NS_DICT["owl"].sameAs, rdflib.term.URIRef(self.wd_id)))
+
+        # Adding ouevre
+        g.add((self.oeuvre_uri, RDF.type, utilities.NS_DICT["cwrc"].Oeuvre))
+        g.add((self.uri, utilities.NS_DICT["bf"].author, self.oeuvre_uri))
+        label = self.uri.split("/")[-1].split("_")[0] + "'s"
+        g.add((self.oeuvre_uri, RDFS.label, Literal(label + " Oeuvre")))
 
         return g
 

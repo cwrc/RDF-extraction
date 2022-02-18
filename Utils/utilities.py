@@ -188,7 +188,7 @@ def remove_punctuation(temp_str, all=False):
     return temp_str
 
 
-def limit_words(string, word_count):
+def limit_words(string, word_count=MAX_WORD_COUNT):
     """Returns a string of a given word count size.
 
     >>> limit_words("This is a sample string", 2)

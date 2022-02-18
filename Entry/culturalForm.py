@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 from difflib import get_close_matches
-from rdflib import RDF, RDFS, Literal
+from rdflib import Literal
 import rdflib
 
 import logging
@@ -563,7 +563,6 @@ def log_mapping_fails(detail=True):
 
 
 def main():
-    import os
     from biography import Biography
     from bs4 import BeautifulSoup
 
