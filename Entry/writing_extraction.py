@@ -55,7 +55,61 @@ def extract_general_info(doc, person, count):
 
 
 def main():
-    from biography import Biography
+    extraction_mode, file_dict = utilities.parse_args(
+        __file__, "Majority of Writing related data", logger)
+
+    uber_graph = utilities.create_graph()
+
+    highest_triples = 0
+    least_triples = 0
+    smallest_person = None
+    largest_person = None
+    logger.info("Time started: " + utilities.get_current_time() + "\n")
+
+    for filename in file_dict.keys():
+        with open(filename) as f:
+            soup = BeautifulSoup(f, 'lxml-xml')
+
+        person_id = filename.split("/")[-1][:6]
+
+        print(person_id)
+        print(file_dict[filename])
+        print("*" * 55)
+        person = Biography(person_id, soup)
+        
+        extract_general_info(soup, person, 1)
+        # occupation.extract_occupation_data(soup, person)
+ 
+
+        graph = person.to_graph()
+        triple_count = len(graph)
+
+        if triple_count > highest_triples:
+            highest_triples = triple_count
+            largest_person = filename
+        if least_triples == 0 or triple_count < least_triples:
+            least_triples = triple_count
+            smallest_person = filename
+
+        # triples to files
+        utilities.create_individual_triples(
+            extraction_mode, person, "writing")
+        utilities.manage_mode(extraction_mode, person, graph)
+
+        uber_graph += graph
+
+    place.log_mapping_fails()
+    organizations.log_mapping()
+
+    logger.info(str(len(uber_graph)) + " total triples created")
+    logger.info(str(largest_person) + " produces the most triples(" + str(highest_triples) + ")")
+    logger.info(str(smallest_person) + " produces the least triples(" + str(least_triples) + ")")
+
+    logger.info("Time completed: " + utilities.get_current_time())
+
+    temp_path = "extracted_triples/writing_triples.ttl"
+    utilities.create_extracted_uberfile(temp_path, uber_graph,serialization="ttl", extra_triples="../data/additional_triples.ttl")
+
     
   
 
