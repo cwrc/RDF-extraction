@@ -84,13 +84,12 @@ class Biography(object):
         super(Biography, self).__init__()
         self.id = id
         self.document = doc
-        self.url = "http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id=" + id
-        self.url = rdflib.term.URIRef(self.url)
+        self.url = rdflib.term.URIRef("http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id=" + id)
         self.name = utilities.get_readable_name(doc)
         self.std_name = utilities.get_name(doc)
-        self.uri =  self.document.ENTRY.DIV0.STANDARD.get("REF")
-        self.uri = rdflib.term.URIRef(self.uri)
-        logger.info(F"{self.id}|{self.uri}|{self.std_name}|{self.std_name}")
+        self.uri =  rdflib.term.URIRef(self.document.ENTRY.DIV0.STANDARD.get("REF"))
+        
+        logger.info(F"{self.id}|{self.uri}|{self.std_name}|")
         # TODO: Review names and people extraction for more precision
         self.biographers = [
             utilities.get_name_uri(x) for x in get_possible_biographers(self.document)]
@@ -111,43 +110,16 @@ class Biography(object):
         self.nickname = None
 
         self.people_mentioned= utilities.get_people_names(self.document)
-
         self.family_members = {}
         self.get_all_members()
 
 
         self.wd_id = get_wd_identifier(id)
         
-        self.nationalities = []
         self.context_list = []
         self.event_list = []
 
-        self.cf_list = []
-        self.location_list = []
-        self.education_list = []
-        self.occupation_list = []
-        self.birth_list = []
 
-        self.occupations = []
-        self.family_member_list = []
-        self.friend_list = []
-        self.intimate_relationship_list = []
-
-        # Gurjap's files
-
-        self.contextCounts = {
-            "intimateRelationship": 1,
-            "friendsAssociates": 1
-        }
-        self.deathObj = None
-        self.cohabitants_list = []
-        self.family_list = []
-        self.friendsAssociates_list = []
-        self.intimateRelationships_list = []
-        self.childless_list = []
-
-        self.children_list = []
-        self.name_list = []
 
     def get_all_members(self):
         member_tags = self.document.find_all("MEMBER")
@@ -166,35 +138,6 @@ class Biography(object):
         else:
             self.context_list.append(context)
 
-    def add_birth(self, birth):
-        if type(birth) is list:
-            self.birth_list += birth
-        else:
-            self.birth_list.append(birth)
-
-    def add_cultural_form(self, culturalform):
-        if type(culturalform) is list:
-            self.cf_list += culturalform
-        else:
-            self.cf_list.append(culturalform)
-
-    def add_location(self, location):
-        if type(location) is list:
-            self.location_list += location
-        else:
-            self.location_list.append(location)
-
-    def add_occupation(self, occupation):
-        if type(occupation) is list:
-            self.occupation_list += occupation
-        else:
-            self.occupation_list.append(occupation)
-
-    def add_education(self, education):
-        if type(education) is list:
-            self.education_list += education
-        else:
-            self.education_list.append(education)
 
     def add_event(self, event):
         if type(event) is list:
@@ -203,12 +146,6 @@ class Biography(object):
             self.event_list.append(event)
 
     def create_triples(self, e_list):
-        g = rdflib.Graph()
-        for x in e_list:
-            g += x.to_triple(self)
-        return g
-
-    def create_triples2(self, e_list, f_list):
         g = rdflib.Graph()
         for x in e_list:
             g += x.to_triple(self)
@@ -241,22 +178,9 @@ class Biography(object):
         # TODO: add occupation + education
         string = "id: " + str(self.id) + "\n"
         string += "name: " + str(self.name) + "\n"
-        string += "gender: " + str(self.gender) + "\n"
         if self.context_list:
             string += "Contexts: \n"
             for x in self.context_list:
-                string += str(x) + "\n"
-        if self.cf_list:
-            string += "CulturalForms: \n"
-            for x in self.cf_list:
-                string += str(x) + "\n"
-        if self.birth_list:
-            string += "Births: \n"
-            for x in self.birth_list:
-                string += str(x) + "\n"
-        if self.location_list:
-            string += "Locations: \n"
-            for x in self.location_list:
                 string += str(x) + "\n"
         if self.event_list:
             string += "Events: \n"

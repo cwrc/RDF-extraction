@@ -223,14 +223,14 @@ def makePerson(type, tag, existingList, personName=None):
 
 def extract_person_name(xmlString, person):
     root = xmlString.BIOGRAPHY
-    personNameList = []
-    stdEntry = makePerson("IndexedName", root.find("STANDARD"), personNameList, personName=person.id)
+    personname_entities = []
+    stdEntry = makePerson("IndexedName", root.find("STANDARD"), personname_entities, personName=person.id)
     if stdEntry:
-        personNameList.append(stdEntry)
+        personname_entities.append(stdEntry)
 
-    docTitle = makePerson("PreferredName", root.find("DOCTITLE"), personNameList, personName=person.id)
+    docTitle = makePerson("PreferredName", root.find("DOCTITLE"), personname_entities, personName=person.id)
     if docTitle:
-        personNameList.append(docTitle)
+        personname_entities.append(docTitle)
 
     id = 1
     personNameTags = root.find_all("PERSONNAME")
@@ -246,26 +246,25 @@ def extract_person_name(xmlString, person):
         for tagname in basic_layout_dict:
             if tagname == "BIRTHNAME":
                 for givenName in name.find_all("BIRTHNAME"):
-                    newPerson = makePerson("BirthName", (givenName), personNameList, personName=person.id)
+                    newPerson = makePerson("BirthName", (givenName), personname_entities, personName=person.id)
                     if newPerson:
-                        personNameList.append(newPerson)
+                        personname_entities.append(newPerson)
             elif tagname == "NICKNAME":
                 for nickname in name.find_all("NICKNAME"):
-                    newPerson = makePerson("NickName", nickname, personNameList, personName=person.id)
+                    newPerson = makePerson("NickName", nickname, personname_entities, personName=person.id)
                     if newPerson:
-                        personNameList.append(newPerson)
+                        personname_entities.append(newPerson)
             else:
                 for thisTag in name.find_all(tagname):
                     newPerson = makePerson(basic_layout_dict[tagname],
-                                           thisTag, personNameList, personName=person.id)
+                                           thisTag, personname_entities, personName=person.id)
                     if newPerson:
-                        personNameList.append(newPerson)
+                        personname_entities.append(newPerson)
 
     if personNameTags:
-        person.name_list = personNameList
         context_id = person.id + "_PersonNameContext" + str(0)
         tempContext = Context(context_id, personNameTags[0], "PERSONNAME")
-        tempContext.link_triples(person.name_list[1:])
+        tempContext.link_triples(personname_entities[1:])
         person.add_context(tempContext)
 
 
