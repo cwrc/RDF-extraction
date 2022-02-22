@@ -19,30 +19,6 @@ TODO:
 """
 
 
-def get_xpath(element):
-    """courtesy: gist.github.com/ergoithz/6cf043e3fdedd1b94fcf
-    Generate xpath from BeautifulSoup4 element
-    :param element: BeautifulSoup4 element.
-    :type element: bs4.element.Tag or bs4.element.NavigableString
-    :return: xpath as string
-    :rtype: str
-    """
-    components = []
-    child = element if element.name else element.parent
-    for parent in child.parents:
-        """
-        @type parent: bs4.element.Tag
-        """
-        siblings = parent.find_all(child.name, recursive=False)
-        components.append(
-            child.name
-            if siblings == [child] else
-            '%s[%d]' % (child.name, 1 + siblings.index(child))
-        )
-        child = parent
-    components.reverse()
-    return '/%s' % '/'.join(components)
-
 
 def get_named_entities(tag):
     """ extracts the identifying components in a given tag
@@ -160,7 +136,7 @@ class Context(object):
         # Creating citations from bibcit tags
         if not self.identifying_uri:
             self.identifying_uri = utilities.create_uri("data", self.id + "_identifying")
-            self.xpath = get_xpath(tag)
+            self.xpath = utilities.get_xpath(tag)
             bibcits = tag.find_all("BIBCIT")
             self.citations = [Citation(x) for x in bibcits]
 
