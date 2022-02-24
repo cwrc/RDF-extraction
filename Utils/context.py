@@ -287,7 +287,12 @@ class Context(object):
             g.add((self.uri, utilities.NS_DICT["cwrc"].hasIDependencyOn, identifying_uri))
             g.add((self.uri, utilities.NS_DICT["oa"].hasTarget, target_uri))
             g.add((self.uri, utilities.NS_DICT["oa"].motivatedBy, self.motivation))
-            g.add((self.uri, utilities.NS_DICT["cwrc"].contextFocus, self.context_focus))
+            
+            if type(self.context_focus) is list:
+                for x in self.context_focus:
+                    g.add((self.uri, utilities.NS_DICT["cwrc"].contextFocus, x))
+            else:
+                g.add((self.uri, utilities.NS_DICT["cwrc"].contextFocus, self.context_focus))
 
             # Adding extracted triples
             temp_graph = utilities.create_graph()

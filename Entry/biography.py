@@ -50,7 +50,7 @@ def get_possible_biographers(doc):
 
 
 
-def get_parent_context(tag,):
+def get_parent_context(tag):
     # Might be easier with recursion
     tags = ["HEALTH", "WEALTH", "VIOLENCE", "LEISUREANDSOCIETY", "FRIENDSASSOCIATES", "PERSONNAME", "FAMILY", "INTIMATERELATIONSHIPS", "CULTURALFORMATION",
             "LOCATION", "POLITICS", "OCCUPATION", "OTHERLIFEEVENT", "DEATH", "BIRTH", "EDUCATION"]
@@ -89,8 +89,10 @@ class Biography(object):
         self.std_name = utilities.get_name(doc)
         self.uri =  rdflib.term.URIRef(self.document.ENTRY.DIV0.STANDARD.get("REF"))
         self.oeuvre_uri = rdflib.term.URIRef(self.uri + "_Oeuvre")
+        self.wd_id = get_wd_identifier(id)
 
-        logger.info(F"{self.id}|{self.uri}|{self.std_name}|")
+        logger.info(F"{self.id}|{self.uri}|{self.std_name}")
+        
         # TODO: Review names and people extraction for more precision
         self.biographers = [
             utilities.get_name_uri(x) for x in get_possible_biographers(self.document)]
@@ -106,16 +108,12 @@ class Biography(object):
         for x in self.biographers:
             self.people_map[x].append("biographer")
 
-
         # TODO: get nickname from file most common acroynm and replace in event/context strings
         self.nickname = None
 
         self.people_mentioned= utilities.get_people_names(self.document)
         self.family_members = {}
         self.get_all_members()
-
-
-        self.wd_id = get_wd_identifier(id)
         
         self.context_list = []
         self.event_list = []
