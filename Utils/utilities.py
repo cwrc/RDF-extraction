@@ -120,6 +120,30 @@ class GeneralRelation(object):
         g.add((context.uri, self.predicate, self.object))
         return g
 
+def get_xpath(element):
+    """courtesy: gist.github.com/ergoithz/6cf043e3fdedd1b94fcf
+    Generate xpath from BeautifulSoup4 element
+    :param element: BeautifulSoup4 element.
+    :type element: bs4.element.Tag or bs4.element.NavigableString
+    :return: xpath as string
+    :rtype: str
+    """
+    components = []
+    child = element if element.name else element.parent
+    for parent in child.parents:
+        """
+        @type parent: bs4.element.Tag
+        """
+        siblings = parent.find_all(child.name, recursive=False)
+        components.append(
+            child.name
+            if siblings == [child] else
+            '%s[%d]' % (child.name, 1 + siblings.index(child))
+        )
+        child = parent
+    components.reverse()
+    return '/%s' % '/'.join(components)
+
 
 def remove_unwanted_tags(tag):
     unwanted_tag_names = ["BIBCITS", "RESPONSIBILITIES", "KEYWORDCLASSES","RESEARCHNOTE"]
