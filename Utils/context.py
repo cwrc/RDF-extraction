@@ -140,10 +140,10 @@ class Context(object):
             bibcits = tag.find_all("BIBCIT")
             self.citations = [Citation(x) for x in bibcits]
 
-        self.heading = get_heading(tag)
-        self.src = "http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id="
-        if not self.heading:
-            self.src = "http://orlando.cambridge.org"
+            self.heading = get_heading(tag)
+            self.src = "http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id="
+            if not self.heading:
+                self.src = "http://orlando.cambridge.org"
 
         self.tag = tag
         self.text = tag.get_text()
@@ -252,7 +252,9 @@ class Context(object):
             g.add((textquote_uri, utilities.NS_DICT["oa"].exact, Literal(self.text)))
 
             # Creating identifying context first and always
-            if person:
+            if self.label:
+                context_label = self.label + " - " + self.context_label + " (identifying)"
+            elif person:
                 context_label = person.name + " - " + self.context_label + " (identifying)"
             else:
                 context_label = self.context_label + " (identifying)"
@@ -280,7 +282,11 @@ class Context(object):
         # Creating describing context if applicable
         if self.motivation == utilities.NS_DICT["oa"].describing:
             self.uri = utilities.create_uri("data", self.id + "_describing")
-            context_label = person.name + " - " + self.context_label + " (describing)"
+            if self.label:
+                context_label = self.label + " - " + self.context_label + " (identifying)"
+            else:
+                context_label = person.name + " - " + self.context_label + " (describing)"
+            
             g.add((self.uri, RDF.type, self.context_type))
             g.add((self.uri, RDFS.label, Literal(context_label)))
             g.add((self.uri, utilities.NS_DICT["cwrc"].hasIDependencyOn, self.identifying_uri))
