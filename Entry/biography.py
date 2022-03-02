@@ -168,7 +168,7 @@ class Biography(object):
         # Adding ouevre
         g.add((self.oeuvre_uri, RDF.type, utilities.NS_DICT["cwrc"].Oeuvre))
         g.add((self.uri, utilities.NS_DICT["bf"].author, self.oeuvre_uri))
-        label = self.uri.split("/")[-1].split("_")[0] + "'s"
+        label = self.std_name.split(", ")[0] + "'s"
         g.add((self.oeuvre_uri, RDFS.label, Literal(label + " Oeuvre")))
 
         return g

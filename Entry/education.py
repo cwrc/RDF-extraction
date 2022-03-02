@@ -219,7 +219,8 @@ class Education(object):
         self.awards = []
 
         self.texts = []
-        self.works = []
+        # NOTE: Use when author's names are invoked as a metonym for their works, as in "She studied <NAME>Shakespeare</NAME>" within a   Education SUBJECT tag.
+        self.works = {}
         self.edu_texts = []
 
     def to_triple(self, context):
@@ -260,12 +261,13 @@ class Education(object):
             g.add((x, RDF.type, CWRC.EducationalText))
             g.add((context.uri, CWRC.subjectOfStudy, x))
 
+
         for x in self.works:
             oeuvre_uri = rdflib.term.URIRef(str(x) + "_Oeuvre")
             g.add((oeuvre_uri, RDF.type, CWRC.Oeuvre))
             g.add((context.uri, CWRC.subjectOfStudy, oeuvre_uri))
             g.add((x, utilities.NS_DICT["bf"].author, oeuvre_uri))
-            label = x.split("/")[-1].split("_")[0] + "'s"
+            label = self.works[x][0].split(", ")[0] + "'s"
             g.add((oeuvre_uri, RDFS.label, Literal(label + " oeuvre")))
 
         return g
@@ -303,7 +305,7 @@ class Education(object):
                 string += "\t\t" + str(x) + "\n"
 
         return string + "\n"
-
+# TODO: Review all below methods for duplication of efforts
     def add_school(self, schools):
         self.schools += schools
 
@@ -332,7 +334,7 @@ class Education(object):
         self.edu_texts += title
 
     def add_works(self, work):
-        self.works += work
+        self.works = self.works | work
 
 
 def get_study_subjects(subj_tags):
@@ -400,10 +402,10 @@ def create_education(tag, person):
     temp_education.add_awards(get_awards(tag.find_all("AWARD")))
 
     texts = tag.find_all("TEXT")
-    works = []
+    works = {}
     titles = []
     for x in texts:
-        works += utilities.get_people(x)
+        works = works | utilities.get_people_names(x,exclude=person.uri)
         titles += utilities.get_titles(x)
 
     # print(temp_education)
