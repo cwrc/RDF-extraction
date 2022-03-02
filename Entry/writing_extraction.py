@@ -5,6 +5,7 @@ from Utils import utilities, place, organizations
 from Utils.context import Context, get_context_type, get_event_type
 from Utils.event import Event
 from Utils.organizations import get_org_uri
+import intertextuality
 import rdflib
 logger = utilities.config_logger("writing")
 
@@ -86,7 +87,7 @@ def main():
         person = Biography(person_id, soup)
         
         extract_general_info(soup, person, 1)
-
+        extract_intertextuality_data(soup, person)
         graph = person.to_graph()
         triple_count = len(graph)
 

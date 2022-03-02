@@ -14,19 +14,11 @@ INTERTEXTTYPE_MAPPING = {
     None: "intertextualRelationship",
     "ADAPTATION-UPDATE": "adaptation",
     # Others are just in lower case
-    # "QUOTATION": "quotation",
-    # "MISQUOTATION": "misquotation",
-    # "PARODY": "parody",
-    # "SATIRE": "satire",
-    # "IMITATION": "imitation",
-    # "ANSWER": "",
-
 }
 
 
 def get_div2(tag):
     # NOTE: Might be easier with recursion
-
     for parent in tag.parents:
         if parent.name == "DIV2":
             return parent
@@ -67,7 +59,7 @@ def extract_intertextuality_data(doc, person):
         #     person.add_event(temp_event)
 
 
-    
+
 
 
 def extract_intertextuality(tag, person, context):
