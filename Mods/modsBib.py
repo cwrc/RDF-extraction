@@ -52,6 +52,7 @@ STRING_MATCH_RATIO = 80
 
 UNIQUE_UNMATCHED_PLACES = set()
 FORMS = []
+MEDIUMS = []
 AGENTS = {}
 
 # --------- UTILITY FUNCTIONS -------
@@ -937,12 +938,15 @@ class BibliographyParse:
 
 
         for genre in genres:
+            genre["genre"] = genre["genre"].lower()
             if genre["genre"] in genre_mapping:
                 uri = rdflib.URIRef(genre_mapping[genre["genre"]])
                 if genre_graph[uri]:
 
                     if uri in FORMS:
                         resource.add(GENRE.hasForm, uri)
+                    elif uri in MEDIUMS:
+                        resource.add(GENRE.hasMedium, uri)
                     else:
                         resource.add(GENRE.hasGenre, uri)
 
@@ -1021,6 +1025,9 @@ if __name__ == "__main__":
     res = genre_graph.query("""SELECT ?s WHERE { ?s rdf:type*/rdfs:subClassOf* <http://sparql.cwrc.ca/ontologies/genre#Form>
 . }""")
     FORMS = [ row.s for row in res]
+    res = genre_graph.query("""SELECT ?s WHERE { ?s rdf:type*/rdfs:subClassOf* <http://sparql.cwrc.ca/ontologies/genre#Medium>
+. }""")
+    MEDIUMS = [ row.s for row in res]
 
 
     for fname in os.listdir(writing_dir):
