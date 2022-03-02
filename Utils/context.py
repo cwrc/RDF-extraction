@@ -162,6 +162,7 @@ class Context(object):
         self.context_type = utilities.create_cwrc_uri(self.context_type)
 
         self.named_entities = get_named_entities(self.tag)
+        self.identified_places = utilities.get_places(self.tag)
 
         if self.named_entities and context_type != "FREESTANDING_EVENT":
             motivation = "describing"
@@ -219,64 +220,62 @@ class Context(object):
             self.context_focus = person.uri
 
         # Creating target first
-        target_uri = rdflib.BNode()
-        if person:
-            source_url = rdflib.term.URIRef(self.src + person.id + "#" + self.heading)
-            target_label = person.name + " - " + self.context_label + " excerpt"
-        else:
-            source_url = rdflib.term.URIRef(self.src + "#FE")
-            target_label = "FE" + " - " + self.context_label + " excerpt"
-        g.add((target_uri, RDFS.label, Literal(target_label)))
-        g.add((target_uri, utilities.NS_DICT["oa"].hasSource, source_url))
+        if self.new_target:
+            if person:
+                source_url = rdflib.term.URIRef(self.src + person.id + "#" + self.heading)
+                target_label = person.name + " - " + self.context_label + " excerpt"
+            else:
+                source_url = rdflib.term.URIRef(self.src + "#FE")
+                target_label = "FE" + " - " + self.context_label + " excerpt"
+            g.add((self.target_uri, RDFS.label, Literal(target_label)))
+            g.add((self.target_uri, utilities.NS_DICT["oa"].hasSource, source_url))
 
-        # Adding citations
-        for x in self.citations:
-            g += x.to_triple(target_uri, source_url)
+            # Adding citations
+            for x in self.citations:
+                g += x.to_triple(self.target_uri, source_url)
 
-        # Creating xpath selector
-        xpath_uri = rdflib.BNode()
-        xpath_label = target_label.replace(" excerpt", " XPath Selector")
-        g.add((target_uri, utilities.NS_DICT["oa"].hasSelector, xpath_uri))
-        g.add((xpath_uri, RDFS.label, Literal(xpath_label)))
-        g.add((xpath_uri, RDF.type, utilities.NS_DICT["oa"].XPathSelector))
-        g.add((xpath_uri, RDF.value, Literal(self.xpath)))
+            # Creating xpath selector
+            xpath_uri = rdflib.BNode()
+            xpath_label = target_label.replace(" excerpt", " XPath Selector")
+            g.add((self.target_uri, utilities.NS_DICT["oa"].hasSelector, xpath_uri))
+            g.add((xpath_uri, RDFS.label, Literal(xpath_label)))
+            g.add((xpath_uri, RDF.type, utilities.NS_DICT["oa"].XPathSelector))
+            g.add((xpath_uri, RDF.value, Literal(self.xpath)))
 
-        # Creating text quote selector
-        self.get_snippet()
-        textquote_uri = rdflib.BNode()
-        textquote_label = target_label.replace(" excerpt", " TextQuote Selector")
-        g.add((xpath_uri, utilities.NS_DICT["oa"].refinedBy, textquote_uri))
-        g.add((textquote_uri, RDF.type, utilities.NS_DICT["oa"].TextQuoteSelector))
-        g.add((textquote_uri, RDFS.label, Literal(textquote_label)))
-        g.add((textquote_uri, utilities.NS_DICT["oa"].exact, Literal(self.text)))
+            # Creating text quote selector
+            self.get_snippet()
+            textquote_uri = rdflib.BNode()
+            textquote_label = target_label.replace(" excerpt", " TextQuote Selector")
+            g.add((xpath_uri, utilities.NS_DICT["oa"].refinedBy, textquote_uri))
+            g.add((textquote_uri, RDF.type, utilities.NS_DICT["oa"].TextQuoteSelector))
+            g.add((textquote_uri, RDFS.label, Literal(textquote_label)))
+            g.add((textquote_uri, utilities.NS_DICT["oa"].exact, Literal(self.text)))
 
-        # Creating identifying context first and always
-        if person:
-            context_label = person.name + " - " + self.context_label + " (identifying)"
-        else:
-            context_label = self.context_label + " (identifying)"
+            # Creating identifying context first and always
+            if person:
+                context_label = person.name + " - " + self.context_label + " (identifying)"
+            else:
+                context_label = self.context_label + " (identifying)"
 
-        identifying_uri = utilities.create_uri("data", self.id + "_identifying")
-        g.add((identifying_uri, RDF.type, self.context_type))
-        g.add((identifying_uri, RDFS.label, Literal(context_label)))
-        g.add((identifying_uri, utilities.NS_DICT["oa"].hasTarget, target_uri))
-        g.add((identifying_uri, utilities.NS_DICT["oa"].motivatedBy, utilities.NS_DICT["oa"].identifying))
+            g.add((self.identifying_uri, RDF.type, self.context_type))
+            g.add((self.identifying_uri, RDFS.label, Literal(context_label)))
+            g.add((self.identifying_uri, utilities.NS_DICT["oa"].hasTarget, self.target_uri))
+            g.add((self.identifying_uri, utilities.NS_DICT["oa"].motivatedBy, utilities.NS_DICT["oa"].identifying))
 
-        # Creating spatial context if place is mentioned
-        identified_places = utilities.get_places(self.tag)
-        if identified_places:
-            self.named_entities += identified_places
-            g.add((identifying_uri, RDF.type, utilities.create_cwrc_uri("SpatialContext")))
+            # Creating spatial context if place is mentioned
+            if self.identified_places:
+                self.named_entities += self.identified_places
+                g.add((self.identifying_uri, RDF.type, utilities.create_cwrc_uri("SpatialContext")))
 
-        # Adding identifying bodies to annotation
-        for x in self.named_entities:
-            g.add((identifying_uri, utilities.NS_DICT["oa"].hasBody, x))
-        if person:
-            g.add((identifying_uri, utilities.NS_DICT["oa"].hasBody, person.uri))
+            # Adding identifying bodies to annotation
+            for x in self.named_entities:
+                g.add((self.identifying_uri, utilities.NS_DICT["oa"].hasBody, x))
+            if person:
+                g.add((self.identifying_uri, utilities.NS_DICT["oa"].hasBody, person.uri))
 
-        # Attaching event to context
-        for x in self.events:
-            g.add((identifying_uri, utilities.NS_DICT["cwrc"].hasEvent, x.uri))
+            # Attaching event to context
+            for x in self.events:
+                g.add((self.identifying_uri, utilities.NS_DICT["cwrc"].hasEvent, x.uri))
 
         # Creating describing context if applicable
         if self.motivation == utilities.NS_DICT["oa"].describing:
@@ -284,8 +283,8 @@ class Context(object):
             context_label = person.name + " - " + self.context_label + " (describing)"
             g.add((self.uri, RDF.type, self.context_type))
             g.add((self.uri, RDFS.label, Literal(context_label)))
-            g.add((self.uri, utilities.NS_DICT["cwrc"].hasIDependencyOn, identifying_uri))
-            g.add((self.uri, utilities.NS_DICT["oa"].hasTarget, target_uri))
+            g.add((self.uri, utilities.NS_DICT["cwrc"].hasIDependencyOn, self.identifying_uri))
+            g.add((self.uri, utilities.NS_DICT["oa"].hasTarget, self.target_uri))
             g.add((self.uri, utilities.NS_DICT["oa"].motivatedBy, self.motivation))
             
             if type(self.context_focus) is list:
@@ -312,7 +311,7 @@ class Context(object):
             for x in self.named_entities:
                 g.add((self.uri, self.context_predicate, x))
 
-            if identified_places:
+            if self.identified_places:
                 g.add((self.uri, RDF.type, utilities.create_cwrc_uri("SpatialContext")))
 
         for x in self.tag.find_all("TITLE"):
