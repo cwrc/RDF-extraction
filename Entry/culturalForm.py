@@ -248,6 +248,7 @@ def find_cultural_forms(cf, person):
                     # else:
                     #     add_forebear(forebear, culturalform)
 
+# TODO: Review this function and org related if/elif
     def get_denomination():
         religions = cf.find_all("DENOMINATION")
 
