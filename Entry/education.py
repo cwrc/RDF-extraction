@@ -268,7 +268,7 @@ class Education(object):
             g.add((context.uri, CWRC.subjectOfStudy, oeuvre_uri))
             g.add((x, utilities.NS_DICT["bf"].author, oeuvre_uri))
             label = self.works[x][0].split(", ")[0] + "'s"
-            g.add((oeuvre_uri, RDFS.label, Literal(label + " oeuvre")))
+            g.add((oeuvre_uri, RDFS.label, Literal(label + " Oeuvre")))
 
         return g
 
