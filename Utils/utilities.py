@@ -364,13 +364,18 @@ def get_people_names(tag, exclude=None):
 
 def get_title_uri(tag):
     title = get_value(tag)
+    if title in TITLE_MAPPING:
+        return rdflib.URIRef(TITLE_MAPPING[title])
     return make_standard_uri(title + " TITLE", ns="cwrc")
 def get_titles(tag):
-    """Returns all titles within a given tag TODO Mapping"""
+    """Returns all titles within a given tag temporory Mapping"""
     titles = []
     for x in tag.find_all("TITLE"):
         title = get_value(x)
-        titles.append(make_standard_uri(title + " TITLE", ns="cwrc"))
+        if title in TITLE_MAPPING:
+            titles.append(rdflib.URIRef(TITLE_MAPPING[title]))
+        else:
+            titles.append(make_standard_uri(title + " TITLE", ns="cwrc"))
     return titles
 
 

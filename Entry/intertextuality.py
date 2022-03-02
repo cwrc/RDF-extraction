@@ -1,4 +1,3 @@
-from cgitb import text
 import rdflib
 from rdflib import Literal
 from Utils import utilities
@@ -22,10 +21,6 @@ INTERTEXTTYPE_MAPPING = {
 
 }
 
-ENTITY_TO_EXTRACT_MAP = {
-    "prequel": "title",
-    "continuation": "title",
-}
 
 def get_div2(tag):
     # NOTE: Might be easier with recursion
@@ -45,61 +40,64 @@ def get_textscopes(tag):
     return textscopes
 
 
-def extract_relations(doc, person):
-    paragraphs = doc.find_all("P")
-    events = doc.find_all("CHRONSTRUCT")
+def extract_intertextuality_data(doc, person):
     context_count = 0
     event_count = 0
 
+    contexts = doc.find_all("TINTERTEXTUALITY")
 
-    for p in paragraphs:
+    for context in contexts:
         context_id = F"{person.id}_Intertextuality_{context_count}"
-        temp_context = Context(context_id, p, "TINTERTEXTUALITY")
-        extract_intertextuality_data(p,person,temp_context)
-        if temp_context.context_focus and len(temp_context.context_focus) > 1:
-            print(temp_context)
-            input()
-        # if temp_context.context_focus is not None:
-        #     input()
+        temp_context = Context(context_id, context, "TINTERTEXTUALITY")
+        extract_intertextuality(context,person,temp_context)
         context_count += 1
         person.add_context(temp_context)
+        
+        # for e in events:
+        #     context_id = F"{person.id}_Intertextuality_{context_count}"
+        #     temp_context = Context(context_id, e, "TINTERTEXTUALITY")
+        #     extract_intertextuality_data(e,person,temp_context)
+
+        #     event_title = person.name + " - " + "Intertextuality Event"
+        #     event_uri = person.id + "_IntertextualityEvent_" + str(event_count)
+        #     temp_event = Event(event_title, event_uri, e, "IntertextualityEvent")
+        #     temp_context.link_event(temp_event)
+        #     person.add_event(temp_event)
+
+
     
-    # for e in events:
-    #     context_id = F"{person.id}_Intertextuality_{context_count}"
-    #     extract_intertextuality_data(e,person)
-    #     event_count += 1
 
-def extract_intertextuality_data(doc, person, context):
-    tags = doc.find_all("TINTERTEXTUALITY")
-    for tag in tags:
-        textscopes = get_textscopes(tag)
-        typing = tag.get("INTERTEXTTYPE")
-        predicate = None
-        if typing in INTERTEXTTYPE_MAPPING:
-            predicate = INTERTEXTTYPE_MAPPING[typing]
-        else:
-            predicate = typing.lower()
 
-        # Determining what type of entity to extract as object
-        entities = utilities.get_titles(tag)
-        if predicate not in ["continuation", "prequel"]:
-            entities += utilities.get_all_other_people(tag,person)
+def extract_intertextuality(tag, person, context):
+    textscopes = get_textscopes(tag)
+    typing = tag.get("INTERTEXTTYPE")
+    predicate = None
+    if typing in INTERTEXTTYPE_MAPPING:
+        predicate = INTERTEXTTYPE_MAPPING[typing]
+    else:
+        predicate = typing.lower()
 
-        intertextuality_triples = [ utilities.GeneralRelation(utilities.create_uri("cwrc",predicate), x) for x in entities ]
+    # Determining what type of entity to extract as object
+    entities = utilities.get_titles(tag)
+    if predicate not in ["continuation", "prequel"]:
+        entities += utilities.get_all_other_people(tag,person)
 
-        authorGender = tag.get("GENDEROFAUTHOR")
+    #NOTE that i'm ignoring: NB: extract ORGNAME and PLACES but use a receptionRelationship to the author or text
+    intertextuality_triples = [ utilities.GeneralRelation(utilities.create_uri("cwrc",predicate), x) for x in entities ]
 
-        # print(tag)
-        # print(textscopes)
-        # print(typing)
-        # print(predicate)
+    authorGender = tag.get("GENDEROFAUTHOR")
 
-        if textscopes:
-            context.context_focus = textscopes
-            print(context.context_focus)
-            # input()
+    # print(tag)
+    # print(textscopes)
+    # print(typing)
+    # print(predicate)
 
-        context.link_triples(intertextuality_triples)
+    if textscopes:
+        context.context_focus = textscopes
+        print(context.context_focus)
+        # input()
+    
+    context.link_triples(intertextuality_triples)
 
 
 
@@ -127,12 +125,12 @@ def main():
         print("*" * 55)
 
         person = Biography(person_id, soup)
-        extract_relations(soup, person)
+        extract_intertextuality_data(soup, person)
 
         graph = person.to_graph()
 
         utilities.create_individual_triples(
-            extraction_mode, person, "occcupation")
+            extraction_mode, person, "intertexuality")
         utilities.manage_mode(extraction_mode, person, graph)
 
         uber_graph += graph
@@ -141,7 +139,7 @@ def main():
     if extraction_mode.verbosity >= 0:
         print(str(len(uber_graph)) + " total triples created")
 
-    utilities.create_uber_triples(extraction_mode, uber_graph, "occcupation")
+    utilities.create_uber_triples(extraction_mode, uber_graph, "intertexuality")
     logger.info("Time completed: " + utilities.get_current_time())
 
 
