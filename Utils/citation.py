@@ -25,7 +25,6 @@ class Citation(object):
             logger.warning(F"Missing PLACEHOLDER attribute: {self.tag}")
             return g
         
-        
         uri = None
 
         if self.uri:
@@ -44,7 +43,6 @@ class Citation(object):
             g.add((uri, utilities.NS_DICT["prism"].startingPage, Literal(self.page)))
             g.add((uri, utilities.NS_DICT["prism"].endingPage, Literal(self.page)))
 
-        citing_uri = utilities.create_cwrc_uri(self.citing_entity)
         g.add((uri, utilities.NS_DICT["cito"].hasCitingEntity, citing_uri))
 
         if source_url:
