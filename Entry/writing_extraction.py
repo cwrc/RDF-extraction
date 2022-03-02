@@ -33,19 +33,26 @@ def extract_general_info(doc, person, count):
         genre_tags += x.find_all("TGENRE")
 
     genres = [x["GENRENAME"] for x in genre_tags]
+    genres = [utilities.GENRE_MAPPING[x.lower()] for x in genres if x.lower() in utilities.GENRE_MAPPING ]
+    
     for x in genres:
-        general_relations.append(utilities.GeneralRelation(cwrc.genericRangeIncludes, rdflib.Literal(x)))
-
-    print(genres)
+        general_relations.append(utilities.GeneralRelation(cwrc.genericRangeIncludes, rdflib.URIRef(x)))
 
     extent = tag.find_all("EXTENTOFOEUVRE")
+    titles = utilities.get_titles(tag)
     for x in extent:
         general_relations.append(utilities.GeneralRelation(cwrc.extent, rdflib.Literal(utilities.limit_words(x.text, 35))))
 
+    # TODO!: Make Oeuvre into it's own class similar to titles so that more properties can be attached
+    for x in titles:
+        general_relations.append(utilities.GeneralRelation(utilities.NS_DICT["bf"].hasPart, x))
+
+
+    # Reusing above Context's target uri/snippet
     context_id = person.id + "_WritingContext_" + str(count)
-    temp_context = Context(context_id, tag, "AUTHORSUMMARY", subject_uri=person.oeuvre_uri)
-    temp_context.link_triples(general_relations)
-    person.add_context(temp_context)
+    temp_context2 = Context(context_id, tag, "AUTHORSUMMARY", subject_uri=person.oeuvre_uri, target_uri=temp_context.target_uri,id_context=temp_context.identifying_uri)
+    temp_context2.link_triples(general_relations)
+    person.add_context(temp_context2)
 
     events = tag.find("CHRONSTRUCT")
     if events:
@@ -75,11 +82,10 @@ def main():
         print(person_id)
         print(file_dict[filename])
         print("*" * 55)
+
         person = Biography(person_id, soup)
         
         extract_general_info(soup, person, 1)
-        # occupation.extract_occupation_data(soup, person)
- 
 
         graph = person.to_graph()
         triple_count = len(graph)
