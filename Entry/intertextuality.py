@@ -4,6 +4,8 @@ from Utils import utilities
 from Utils.context import Context, get_context_type, get_event_type
 from Utils.event import Event
 from Utils.organizations import get_org_uri
+from culturalForm import get_mapped_term
+
 logger = utilities.config_logger("intertextuality")
 
 INTERTEXTTYPE_MAPPING = {
@@ -80,12 +82,24 @@ def extract_intertextuality(tag, person, context):
     # Determining what type of entity to extract as object
     entities = utilities.get_titles(tag)
     if predicate not in ["continuation", "prequel"]:
-        entities += utilities.get_all_other_people(tag,person)
+        people = utilities.get_all_other_people(tag,person)
+        entities += people
+        if len(people) == 1:
+            authorGender = tag.get("GENDEROFAUTHOR")
+            author_name = tag.find("NAME").get_text()
+            print(author_name)
+            gender_triple = utilities.GeneralRelation(utilities.create_uri("cwrc","genderReported"), get_mapped_term("Gender",authorGender))
+            context_id =  context.id.replace("_Intertextuality_", "_Intertextuality_CulturalForm_")
+            print(context_id)
+            g_context = Context(context_id, tag, "GENDER",subject_name=author_name, subject_uri=people[0], target_uri=context.target_uri,id_context=context.identifying_uri )
+            g_context.link_triples(gender_triple)
+            person.add_context(g_context)
+
+
 
     #NOTE that i'm ignoring: NB: extract ORGNAME and PLACES but use a receptionRelationship to the author or text
     intertextuality_triples = [ utilities.GeneralRelation(utilities.create_uri("cwrc",predicate), x) for x in entities ]
 
-    authorGender = tag.get("GENDEROFAUTHOR")
 
     # print(tag)
     # print(textscopes)
