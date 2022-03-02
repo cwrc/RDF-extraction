@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import rdflib, sys
 import os, datetime
 import csv
+# TODO: Clean up messy import
 from rdflib import *
 import logging
 from fuzzywuzzy import fuzz
@@ -48,7 +49,7 @@ genre_graph = None
 genre_map = {}
 genre_mapping = {}
 geoMapper = None
-STRING_MATCH_RATIO = 80
+STRING_MATCH_RATIO = 90
 
 UNIQUE_UNMATCHED_PLACES = set()
 FORMS = []
@@ -351,21 +352,25 @@ class BibliographyParse:
         self.mainTitle = None
         self.g = graph
         self.id = resource_name.replace(".xml", "")
+        self.old_id = self.id
+        #TODO: update this to use cwrc identifiers
         if ".xml" in resource_name:
-            self.id = self.soup.find("recordIdentifier", source="Orlando")
-            if self.id:
-                self.id = self.id.text
+            self.old_id = self.soup.find("recordIdentifier", source="Orlando")
+            if self.old_id:
+                self.old_id = self.old_id.text
             else:
-                self.id = resource_name.replace(".xml", "")    
+                self.old_id = resource_name.replace(".xml", "")
         else:
-            self.id = resource_name.replace(".xml", "")
+            self.old_id = resource_name.replace(".xml", "")
 
-        
+
         if 'data:' in self.id:
             self.mainURI = self.id
+        elif "https://commons.cwrc.ca/orlando:" in self.id:
+            self.mainURI = self.id
         else:
-            self.mainURI = "{}{}".format("http://cwrc.ca/cwrcdata/", self.id)
-            
+            self.mainURI = F"https://commons.cwrc.ca/orlando:{self.id}"
+    
         self.relatedItem = related_item
 
     def get_type(self):
@@ -673,20 +678,22 @@ class BibliographyParse:
     def get_main_title(self, titles):
         for x in titles:
             if x['usage'] == 'primary':
-                self.mainTitle = x['title'].strip()
+                self.mainTitle = x['title'].strip().replace("\n"," ").replace("\t"," ")
                 return
-
     def build_graph(self):
         g = self.g
         i = 0
 
         titles = self.get_title()
+        self.get_main_title(titles)
         resource = g.resource(self.mainURI)
         resource.add(RDF.type, BF.Work)
-
         instance = g.resource(self.mainURI + "_instance")
         instance.add(RDF.type, BF.Instance)
         instance.add(BF.instanceOf, resource)
+
+        if self.mainTitle is not None:
+            resource.add(RDFS.label, rdflib.Literal(self.mainTitle))
 
         for item in titles:
             if 'usage' in item and item['usage'] is not None:
@@ -1045,7 +1052,10 @@ if __name__ == "__main__":
     # test_filenames = ["55aff3fb-8ea9-4e95-9e04-0f3e630896e3.xml", "0c133817-f55e-4a8f-a9b4-474566418d9b.xml"]
     # for fname in test_filenames:
 
+    count = 0
+    total = len(os.listdir(dirname))
     for fname in os.listdir(dirname):
+        print(F"{count}/{total} files extracted")
 
         path = os.path.join(dirname, fname)
         if os.path.isdir(path):
@@ -1058,6 +1068,7 @@ if __name__ == "__main__":
             mp.build_graph()
         except UnicodeError:
             pass
+        count +=1
 
     with open("unmatchedplaces.csv", "w") as f:
         writer = csv.writer(f, delimiter='\t', quoting=csv.QUOTE_MINIMAL)
