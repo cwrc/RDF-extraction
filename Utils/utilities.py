@@ -25,8 +25,11 @@ TODO: Add doctests for:
 
 TODO: parse required ns from external files
 """
+# TODO Review variables/function names and refactor
 WRITER_MAP = {}
 MAX_WORD_COUNT = 35
+GENRE_MAPPING = {}
+TITLE_MAPPING = {}
 
 NS_DICT = {
     "as": rdflib.Namespace("http://www.w3.org/ns/activitystreams#"),
@@ -168,7 +171,30 @@ def create_writer_map(path=None):
 
 create_writer_map()
 
+def create_genre_map(path=None):
+    import csv
+    if not path:
+        path = "../data/genre_mapping.csv"
+    with open(path) as f:
+        csvfile = csv.reader(f)
+        next(csvfile)
+        for row in csvfile:
+            GENRE_MAPPING[row[0]] = row[1]
 
+create_genre_map()
+
+def create_title_map(path=None):
+    # TODO: Review more efficient mapping + using fuzzy matching
+    import csv
+    if not path:
+        path = "../data/title_mapping.csv"
+    with open(path) as f:
+        reader = csv.reader(f)
+        for row in reader:
+            if ";" not in row[1]:
+                TITLE_MAPPING[row[0]] = row[1]
+
+create_title_map()
 def get_current_time():
     return datetime.datetime.now().strftime("%d %b %Y %H:%M:%S")
 
@@ -322,13 +348,15 @@ def get_people(tag):
     """Returns all unique people within a given tag, no order guaranteed due to use of set()"""
     return list(set([get_name_uri(x) for x in tag.find_all("NAME")]))
 
-def get_people_names(tag):
+def get_people_names(tag, exclude=None):
     """Returns all URIs mapped to names from all name tags within a given tag"""
     people = {}
     for x in tag.find_all("NAME"):
         uri = get_name_uri(x)
         name = get_value(x)
-        if uri in people and name not in people[uri]:
+        if uri == exclude:
+            continue
+        elif uri in people and name not in people[uri]:
             people[uri].append(name)
         else:
             people[uri]=[name]
