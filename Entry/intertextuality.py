@@ -17,6 +17,7 @@ INTERTEXTTYPE_MAPPING = {
 }
 
 
+
 def get_div2(tag):
     # NOTE: Might be easier with recursion
     for parent in tag.parents:
@@ -32,7 +33,50 @@ def get_textscopes(tag):
     else:
         textscopes = [rdflib.term.URIRef(x.get("REF")) for x in textscopes ]
     return textscopes
+def extract_influence_data(doc, person):
+    context_count = 0
+    event_count = 0
 
+    contexts = doc.find_all("PINFLUENCESHER")
+    for context in contexts:
+        context_id = F"{person.id}_Influence_{context_count}"
+        temp_context = Context(context_id, context, "PINFLUENCESHER")
+        extract_subject_influenced(context,person,temp_context)
+        person.add_context(temp_context)
+        context_count += 1
+
+    contexts = doc.find_all("RSHEINFLUENCED")
+    for context in contexts:
+        context_id = F"{person.id}_Influence_{context_count}"
+        temp_context = Context(context_id, context, "RSHEINFLUENCED")
+        extract_influenced_subject(context,person,temp_context)
+        person.add_context(temp_context)
+        context_count += 1
+
+def extract_influenced_subject(tag, person, context):
+    named_entities = []
+    named_entities += utilities.get_all_other_people(tag,person)
+    named_entities += utilities.get_titles(tag)
+    named_entities += utilities.get_places(tag)
+    named_entities += [get_org_uri(x) for x in tag.find_all("ORGNAME")]
+    influence_triples = [ utilities.GeneralRelation(utilities.create_uri("cwrc","influence"), x) for x in named_entities ]
+    context.link_triples(influence_triples)
+
+
+   
+def extract_subject_influenced(tag, person, context):
+    named_entities = []
+    named_entities += utilities.get_all_other_people(tag,person)
+    named_entities += utilities.get_titles(tag)
+    named_entities += utilities.get_places(tag)
+    named_entities += [get_org_uri(x) for x in tag.find_all("ORGNAME")]
+    attribute = tag.get("INFLUENCETYPE")
+    if attribute:
+        influence_triples = [ utilities.GeneralRelation(utilities.create_uri("cwrc",F"{attribute.lower()}Influence"), x) for x in named_entities ]
+    else:
+        influence_triples = [ utilities.GeneralRelation(utilities.create_uri("cwrc",F"influenceBy"), x) for x in named_entities ]
+
+    context.link_triples(influence_triples)
 
 def extract_intertextuality_data(doc, person):
     context_count = 0
@@ -46,6 +90,8 @@ def extract_intertextuality_data(doc, person):
         extract_intertextuality(context,person,temp_context)
         context_count += 1
         person.add_context(temp_context)
+    
+
         
         # for e in events:
         #     context_id = F"{person.id}_Intertextuality_{context_count}"
@@ -57,8 +103,6 @@ def extract_intertextuality_data(doc, person):
         #     temp_event = Event(event_title, event_uri, e, "IntertextualityEvent")
         #     temp_context.link_event(temp_event)
         #     person.add_event(temp_event)
-
-
 
 
 
@@ -100,8 +144,6 @@ def extract_intertextuality(tag, person, context):
 
     if textscopes:
         context.context_focus = textscopes
-        print(context.context_focus)
-        # input()
     
     context.link_triples(intertextuality_triples)
 
@@ -131,8 +173,9 @@ def main():
         print("*" * 55)
 
         person = Biography(person_id, soup)
-        extract_intertextuality_data(soup, person)
-
+        # extract_intertextuality_data(soup, person)
+        extract_influence_data(soup, person)
+        
         graph = person.to_graph()
 
         utilities.create_individual_triples(
