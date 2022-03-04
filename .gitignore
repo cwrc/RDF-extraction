@@ -18,3 +18,4 @@ venv
 .dccache
 *.txt
 *.csv
+*.code-workspace
