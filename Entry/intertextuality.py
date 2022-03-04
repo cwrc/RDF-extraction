@@ -16,8 +16,100 @@ INTERTEXTTYPE_MAPPING = {
     # Others are just in lower case
 }
 
+class Response(object):
+    """docstring for Response
+    """
+    RESPONSE_MAP = {
+    "ADFEMINAM": "AdfeminamResponse",
+    "GENDEREDYES": "Gendered",
+    "GENDEREDNO": "NonGendered",
+    "RECENT": "LaterResponse",
+    "RE-EVALUATION": "ReEvaluationResponse",
+    "INITIAL": "InitialResponse",
+    "FORMAL": "FormalResponse",
+    "INFORMAL": "InformalResponse"
+    }
+    def __init__(self, response_tag, label, other_attributes=None):
+        super(Response, self).__init__()
+        
+        self.types = [
+        response_tag.get("GENDEREDRESPONSE"),
+        response_tag.get("FORMALITY"),
+        response_tag.get("RESPONSETYPE"),
+        ]
+
+        self.types = [ self.RESPONSE_MAP[x] for x in self.types if x in self.RESPONSE_MAP ]
+
+        self.label = label
+
+        self.named_entities = []
+        self.named_entities += utilities.get_all_people(response_tag)
+        self.named_entities += utilities.get_titles(response_tag)
+        self.named_entities += utilities.get_places(response_tag)
+        self.named_entities += [get_org_uri(x) for x in response_tag.find_all("ORGNAME")]
+
+             
+    def to_triple(self, context):
+        g = utilities.create_graph()
+        response = rdflib.BNode()
+        g.add((context.uri, utilities.create_uri("cwrc","response"),response))
+        g.add((response, utilities.create_uri("rdfs","label"),rdflib.Literal(self.label)))
+        for x in self.types:
+            g.add((response, utilities.create_uri("rdf","type"),utilities.create_uri("cwrc",x)))
+
+        if context.context_focus in self.named_entities:
+            self.named_entities.remove(context.context_focus)
+        
+        for x in self.named_entities:
+            g.add((response, utilities.create_uri("cwrc","hasResponseRelationTo"),x))
+
+        return g
+
+    def __str__(self):
+        string = "\tURI: " + str(self.uri) + "\n"
+        string += "\tpredicate: " + str(self.predicate) + "\n"
+        string += "\tvalue: " + str(self.value) + "\n"
+
+        return string
 
 
+
+def extract_response_data(doc, person):
+    context_count = 0
+    event_count = 0
+
+    contexts = doc.find_all("RRESPONSES")
+    for context in contexts:
+        context_id = F"{person.id}_Response_{context_count}"
+        temp_context = Context(context_id, context, "RRESPONSES")
+        extract_response(context,person,temp_context)
+        person.add_context(temp_context)
+        context_count += 1
+
+
+def extract_response(tag, person,context):
+    textscopes = get_textscopes(tag)
+    label = ""
+    if textscopes:
+        textscopes_texts = get_textscopes_text(tag)            
+        label = "Response to "
+        for x in range(len(textscopes)): 
+            title = " ".join(textscopes_texts[x].split(", ")[1:-1])
+            label += title + ", "
+
+        if label[-2:] == ", ":
+            label = label[:-2]
+        
+        context.context_focus = textscopes
+    else:
+        label = F"Response to {person.name}"
+
+    responses = [Response(tag,label)]
+    context.link_triples(responses)
+
+
+    
+    
 def get_div2(tag):
     # NOTE: Might be easier with recursion
     for parent in tag.parents:
@@ -25,13 +117,22 @@ def get_div2(tag):
             return parent
 
     return None
-def get_textscopes(tag):
+
+def get_textscopes_text(tag):
     tag = get_div2(tag)
     textscopes = tag.find_all("TEXTSCOPE")
     if textscopes == []:
         logger.info(F"No corresponding textscope: {tag}")
     else:
-        textscopes = [rdflib.term.URIRef(x.get("REF")) for x in textscopes ]
+        textscopes = [x.get("PLACEHOLDER") for x in textscopes ]
+    return textscopes
+def get_textscopes(tag):
+    tag = get_div2(tag)
+    textscopes = tag.find_all("TEXTSCOPE")
+    if textscopes == [] or textscopes is None:
+        logger.info(F"No corresponding textscope: {tag}")
+    else:
+        textscopes = [rdflib.term.URIRef(x.get("REF")) for x in textscopes if x.get("REF") ]
     return textscopes
 def extract_influence_data(doc, person):
     context_count = 0
@@ -122,14 +223,14 @@ def extract_intertextuality(tag, person, context):
         entities += people
         if len(people) == 1:
             authorGender = tag.get("GENDEROFAUTHOR")
-            author_name = tag.find("NAME").get_text()
-            print(author_name)
-            gender_triple = utilities.GeneralRelation(utilities.create_uri("cwrc","genderReported"), get_mapped_term("Gender",authorGender))
-            context_id =  context.id.replace("_Intertextuality_", "_Intertextuality_CulturalForm_")
-            print(context_id)
-            g_context = Context(context_id, tag, "GENDER",subject_name=author_name, subject_uri=people[0], target_uri=context.target_uri,id_context=context.identifying_uri )
-            g_context.link_triples(gender_triple)
-            person.add_context(g_context)
+            if authorGender:
+                author_name = tag.find("NAME").get_text()
+                gender_triple = utilities.GeneralRelation(utilities.create_uri("cwrc","genderReported"), get_mapped_term("Gender",authorGender))
+                context_id =  context.id.replace("_Intertextuality_", "_Intertextuality_CulturalForm_")
+                
+                g_context = Context(context_id, tag, "GENDER",subject_name=author_name, subject_uri=people[0], target_uri=context.target_uri,id_context=context.identifying_uri )
+                g_context.link_triples(gender_triple)
+                person.add_context(g_context)
 
 
 
@@ -173,8 +274,9 @@ def main():
         print("*" * 55)
 
         person = Biography(person_id, soup)
-        # extract_intertextuality_data(soup, person)
+        extract_intertextuality_data(soup, person)
         extract_influence_data(soup, person)
+        extract_response_data(soup,person)
         
         graph = person.to_graph()
 
