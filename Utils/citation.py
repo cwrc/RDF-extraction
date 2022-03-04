@@ -15,6 +15,11 @@ class Citation(object):
         self.label = bibcit_tag.get("PLACEHOLDER")
         self.citing_entity = bibcit_tag.get("DBREF")
         self.uri = bibcit_tag.get("REF")
+        
+        if self.citing_entity:
+            if " " in self.citing_entity:
+                logger.error(F"Space encountered in DBREF attribute: {bibcit_tag}")
+                self.citing_entity = self.citing_entity.replace(" ","")
 
     def to_triple(self, target_uri, source_url=None):
         g = utilities.create_graph()
