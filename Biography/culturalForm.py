@@ -437,14 +437,14 @@ def extract_cf_data(bio, person):
         forms_found += extract_culturalforms(events, "POLITICS", person, "events", forms_found)
 
     # Extracting additional information from writer
-    persontype = utilities.get_persontype(bio)
+    # persontype = utilities.get_persontype(bio)
     # TODO: figure out what context to attach this nationality + genre
     # if persontype in ["BRWWRITER", "IBRWRITER"]:
     #     if not any(x in ["GB", "GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS", "IE"] for x in person.nationalities):
     #         person.add_cultural_form(CulturalForm("nationality", None,
     #                                               get_mapped_term("NationalIdentity", "British")))
 
-    extract_gender_data(bio, person)
+    # extract_gender_data(bio, person)
 
 
 def extract_gender_data(bio, person):
@@ -468,7 +468,9 @@ def extract_gender_data(bio, person):
                     print(x)
                 else:
                     parent_tag = x.parent
-                    
+
+        if tags == [ ]:
+            logger.error(F"Missing <GENDER> TAG: {person.id}")
 
         value = [CulturalForm("gender", None, get_mapped_term("Gender", utilities.get_value(x)))
                         for x in value]
@@ -544,8 +546,8 @@ def get_mapped_term(rdf_type, value, retry=False, id=None):
     global map_attempt
     global map_success
     global map_fail
-    if "https://id.linscproject.ca/vocabularies/culturalForm#" not in rdf_type:
-        rdf_type = "https://id.linscproject.ca/vocabularies/culturalForm#" + rdf_type
+    if "http://vocab.lincsproject.ca/cwrc#" not in rdf_type:
+        rdf_type = "http://vocab.lincsproject.ca/cwrc#" + rdf_type
     map_attempt += 1
     term = None
     temp_val = clean_term(value)
@@ -586,32 +588,38 @@ def get_mapped_term(rdf_type, value, retry=False, id=None):
     return term
 
 
-def log_mapping_fails(detail=True):
+def log_mapping_fails(detail=True,toFile=False):
+    from collections import OrderedDict
+    file_str = ""
     log_str = "\n\n"
-    log_str += "Attempts: " + str(map_attempt) + "\n"
-    log_str += "Fails: " + str(map_fail) + "\n"
-    log_str += "Success: " + str(map_success) + "\n"
-    log_str += "\nFailure Details:" + "\n"
+    log_str += F"Attempts: {map_attempt}\n"
+    log_str += F"Fails: {map_fail}\n"
+    log_str += F"Success: {map_success}\n"
+    log_str += F"\nFailure Details:\n"
     total_unmapped = 0
     for x in fail_dict.keys():
         num = len(fail_dict[x].keys())
         total_unmapped += num
         log_str += "\t" + x.split("#")[1] + ":" + str(num) + "\n"
-    log_str += "\nFailed to find " + str(total_unmapped) + " unique terms" + "\n"
+    log_str += F"\nFailed to find {total_unmapped} unique terms\n"
 
-    from collections import OrderedDict
     for x in fail_dict.keys():
-        log_str += "\t" + x.split("#")[1] + "(" + str(len(fail_dict[x].keys())) + " unique)" + ":" + "\n"
+        entity_class = x.split("#")[1] 
+        log_str += F"\t{entity_class} ({len(fail_dict[x].keys())}  unique) :\n"
 
         new_dict = OrderedDict(sorted(fail_dict[x].items(), key=lambda t: t[1], reverse=True))
         count = 0
         for y in new_dict.keys():
-            log_str += "\t\t" + str(new_dict[y]) + ": " + y + "\n"
+            file_str += F"{entity_class}\t{new_dict[y]}\t{y}\n"
+            log_str += F"\t\t{new_dict[y]}: {y}\n"
             count += new_dict[y]
-        log_str += "\tTotal missed " + x.split("#")[1] + ": " + str(count) + "\n\n"
+        log_str += F"\tTotal missed {entity_class}:{count})\n\n"
 
     logger.info(log_str)
 
+    if toFile:
+        with open("culturalForms","w") as f:
+            f.write(file_str)
 
 def main():
     import os
@@ -654,7 +662,7 @@ def main():
         print(str(len(uber_graph)) + " total triples created")
 
     utilities.create_uber_triples(extraction_mode, uber_graph, "cf")
-    log_mapping_fails()
+    log_mapping_fails(toFile=True)
     logger.info("Time completed: " + utilities.get_current_time())
 
 
