@@ -385,7 +385,7 @@ class BibliographyParse:
         self.mainTitle = None
         self.id = resource_name.replace(".xml", "")
         self.old_id = self.id
-        # update this to use cwrc identifiers
+        #TODO: update this to use cwrc identifiers
         if ".xml" in resource_name:
             self.old_id = self.soup.find("recordIdentifier", source="Orlando")
             if self.old_id:
@@ -740,7 +740,7 @@ class BibliographyParse:
         else:
             resource.add(RDF.type, FRBROO.F1_Work)
         
-        if self.mainTitle != None:
+        if self.mainTitle is not None:
             resource.add(RDFS.label, rdflib.Literal(self.mainTitle))
         
         
@@ -893,8 +893,8 @@ class BibliographyParse:
                 """     
 
                 #Attaching role to the event
-                if name['role'] in ROLES or name['role'] == None:
-                    if name['role'] == None:
+                if name['role'] in ROLES or name['role'] is None:
+                    if name['role'] is None:
                         name['role'] = "author"
                     agent_label = F"{name['name']} in role of {name['role']}"
                     uri = None
@@ -916,7 +916,7 @@ class BibliographyParse:
                     agent.add(rdflib.URIRef("http://www.cidoc-crm.org/cidoc-crm/P14.1_in_the_role_of"),
                            ROLES[name['role']])
                     originInfo.add(CRMPC.P01i_is_domain_of, agent)
-                elif name['role'] != None:
+                elif name['role'] is None:
                     logger.warning("Role not handled: "+str(name['role']))
 
                 j+=1         
@@ -1002,7 +1002,7 @@ class BibliographyParse:
 
                 if part['type'] in self.related_item_map:
                     work = g.resource(F"{self.mainURI}_{part['type']}_{i}")
-                    if bp.mainTitle == None: 
+                    if bp.mainTitle is None: 
                         work.add(RDFS.label, rdflib.Literal(F"{part['type']} of {self.mainTitle}"))
                     if part["type"] == "constituent":
                         work.add(self.related_item_map[part['type']], resource)
@@ -1079,6 +1079,7 @@ class BibliographyParse:
 
         genres = self.get_genre()
         for genre in genres:
+            genre["genre"] = genre["genre"].lower()
             if genre["genre"] in genre_mapping:
                 uri = rdflib.URIRef(genre_mapping[genre["genre"]])
                 if genre_graph[uri]:
@@ -1185,8 +1186,10 @@ if __name__ == "__main__":
 
 
     # for fname in test_filenames:
+    count = 0
+    total = len(os.listdir(dirname))
     for fname in os.listdir(dirname):
-
+        print(F"{count}/{total} files extracted")
         path = os.path.join(dirname, fname)
         if os.path.isdir(path):
             continue
@@ -1198,6 +1201,7 @@ if __name__ == "__main__":
             mp.build_graph()
         except UnicodeError:
             pass
+        count+=1
 
     with open("unmatchedplaces.csv", "w") as f:
         writer = csv.writer(f, delimiter='\t', quoting=csv.QUOTE_MINIMAL)
