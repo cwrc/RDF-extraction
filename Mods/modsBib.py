@@ -1186,7 +1186,7 @@ if __name__ == "__main__":
 
 
     # for fname in test_filenames:
-    count = 0
+    count = 1
     total = len(os.listdir(dirname))
     for fname in os.listdir(dirname):
         print(F"{count}/{total} files extracted")
