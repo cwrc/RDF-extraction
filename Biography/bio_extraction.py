@@ -50,12 +50,10 @@ def main():
         birthDeath.extract_death_data(soup, person)
         birthDeath.extract_birth_data(soup, person)
         location.extract_location_data(soup, person)
+        cf.extract_cf_data(soup, person)
         
         # Not yet reviewed
-        other_contexts.extract_other_contexts_data(soup, person)
-
-
-        # cf.extract_cf_data(soup, person)
+        # other_contexts.extract_other_contexts_data(soup, person)
         # lifeInfo.extract_family_data(soup, person)
         # lifeInfo.extract_intimate_relationships_data(soup, person)
         # lifeInfo.extract_friend_data(soup, person)
@@ -86,8 +84,8 @@ def main():
     avg = total_triples / len(file_dict.keys())
     logger.info(F"{len(file_dict.keys())} files have been converted")
     logger.info(F"{total_triples} total triples created")
-    logger.info(F"{largest_person} produces the most triples({highest_triples}")
-    logger.info(F"{smallest_person} produces the least triples({least_triples}")
+    logger.info(F"{largest_person} produces the most triples({highest_triples})")
+    logger.info(F"{smallest_person} produces the least triples({least_triples})")
     logger.info(F"{avg} avg amount of triples per file")
 
     logger.info(F"Time completed: {utilities.get_current_time()}")
