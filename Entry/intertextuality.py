@@ -175,7 +175,7 @@ def extract_subject_influenced(tag, person, context):
     if attribute:
         influence_triples = [ utilities.GeneralRelation(utilities.create_uri("cwrc",F"{attribute.lower()}Influence"), x) for x in named_entities ]
     else:
-        influence_triples = [ utilities.GeneralRelation(utilities.create_uri("cwrc",F"influenceBy"), x) for x in named_entities ]
+        influence_triples = [ utilities.GeneralRelation(utilities.create_uri("cwrc",F"influencedBy"), x) for x in named_entities ]
 
     context.link_triples(influence_triples)
 
