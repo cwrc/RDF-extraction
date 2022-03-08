@@ -84,11 +84,12 @@ class Biography(object):
         super(Biography, self).__init__()
         self.id = id
         self.document = doc
-        self.url = rdflib.term.URIRef("http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id=" + id)
+        self.old_url = rdflib.term.URIRef("http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id=" + id)
+        self.url = rdflib.term.URIRef(F"https://orlando.cambridge.org/profiles/{id}")
         self.name = utilities.get_readable_name(doc)
         self.std_name = utilities.get_name(doc)
         self.uri =  rdflib.term.URIRef(self.document.ENTRY.DIV0.STANDARD.get("REF"))
-        self.oeuvre_uri = rdflib.term.URIRef(self.uri + "_Oeuvre")
+        self.oeuvre_uri = rdflib.term.URIRef(F"{self.uri}_Oeuvre")
         self.wd_id = get_wd_identifier(id)
 
         logger.info(F"{self.id}|{self.uri}|{self.std_name}")
@@ -156,7 +157,6 @@ class Biography(object):
         g.add((self.uri, RDF.type, utilities.NS_DICT["cwrc"].NaturalPerson))
         g.add((self.uri, RDFS.label, Literal(self.std_name)))
         g.add((self.uri, utilities.NS_DICT["skos"].altLabel, Literal(self.name)))
-
         g.add((self.uri, utilities.NS_DICT["foaf"].isPrimaryTopicOf, self.url))
 
         g += self.create_triples(self.context_list)
@@ -165,7 +165,7 @@ class Biography(object):
         if self.wd_id:
             g.add((self.uri, utilities.NS_DICT["owl"].sameAs, rdflib.term.URIRef(self.wd_id)))
 
-        # Adding ouevre
+        # Adding Ouevre
         g.add((self.oeuvre_uri, RDF.type, utilities.NS_DICT["cwrc"].Oeuvre))
         g.add((self.uri, utilities.NS_DICT["bf"].author, self.oeuvre_uri))
         label = self.std_name.split(", ")[0] + "'s"
