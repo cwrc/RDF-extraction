@@ -24,12 +24,12 @@ logger.info(F"Started extraction: {datetime.datetime.now().strftime('%d %b %Y %H
 
 # ---------- SETUP NAMESPACES ----------
 
-CWRC = rdflib.Namespace("http://sparql.cwrc.ca/ontologies/cwrc#")
+CWRC = rdflib.Namespace("https://id.linscproject.ca/vocabularies/cwrc#")
 BF = rdflib.Namespace("http://id.loc.gov/ontologies/bibframe/")
 XML = rdflib.Namespace("http://www.w3.org/XML/1998/namespace")
 MARC_REL = rdflib.Namespace("http://id.loc.gov/vocabulary/relators/")
 DATA = rdflib.Namespace("http://cwrc.ca/cwrcdata/")
-GENRE = rdflib.Namespace("https://id.linscproject.ca/vocabularies/genre#")
+GENRE = rdflib.Namespace("http://id.linscproject.ca/vocabularies/genre#")
 SCHEMA = rdflib.Namespace("http://schema.org/")
 SKOS = rdflib.Namespace("http://www.w3.org/2004/02/skos/core#")
 FRBROO = rdflib.Namespace("http://iflastandards.info/ns/fr/frbr/frbroo/")
