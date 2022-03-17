@@ -36,6 +36,8 @@ class Citation(object):
             uri = rdflib.URIRef(self.uri+"_dbref")
             citing_uri = rdflib.URIRef(self.uri)
         else:
+            logger.error(F"BIBCIT tag missing ref attribute: {self.tag}")
+
             uri = utilities.create_uri("data", "dbref_"+self.citing_entity)
             citing_uri = utilities.create_uri("data", self.citing_entity)
         
