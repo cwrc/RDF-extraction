@@ -283,13 +283,16 @@ def limit_to_full_sentences(string, max):
     Series of functions to do with the creation of URI
 """
 
+def get_entry_id(tag):
+    return tag.find_parent("ENTRY").get("ID")
 
 
 def get_name_uri(tag):
     """Creates a uri based on the standard attribute of a tag if ref attribute not present"""
     uri = tag.get("REF")
     if not uri:
-        logger.error(F"NAME tag missing ref attribute: {tag}")
+        id = get_entry_id(tag)
+        logger.error(F"In entry: {id}- NAME tag missing ref attribute: {tag}")
         return make_standard_uri(tag.get("STANDARD"))
     else:
         return rdflib.term.URIRef(uri)
@@ -401,7 +404,7 @@ def get_readable_name(bio):
 
 def get_sex(bio):
     tag = bio.contents[-1]
-    if tag.name not in ["BIOGRAPHY", "WRITING"]:
+    if tag.name not in ["BIOGRAPHY", "WRITING","ENTRY"]:
         logger.error("Unexpected last tag: " + tag.name)
     else:
         return (tag.get("SEX"))
