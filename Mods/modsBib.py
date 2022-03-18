@@ -788,7 +788,6 @@ class BibliographyParse:
                 # role_resource.add(BF.source, MARCREL.aut)
                 # role_resource.add(RDFS.label, rdflib.Literal("author"))
 
-            agent_resource.add(OWL.sameAs, URIRef("http://cwrc.ca/cwrcdata/{}".format(remove_punctuation(name['name']))))
             contribution_resource.add(BF.agent, agent_resource)
             # bf:role marcrel:aut
             # contribution_resource.add(BF.role, role_resource)
