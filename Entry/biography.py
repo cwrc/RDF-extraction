@@ -35,7 +35,7 @@ def get_wd_identifier(id):
 
 def get_possible_biographers(doc):
     # TODO: Review possible additional phrases/sentence structure to id biographers/cr
-    # This might erronously identify someone as a biographer who a writer shares a relationship with
+    # This might erroneously identify someone as a biographer who a writer shares a relationship with
     # ex. X married biographer Y
     names = doc.find_all("NAME")
     biographers = []

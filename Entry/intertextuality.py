@@ -21,8 +21,8 @@ class Response(object):
     """
     RESPONSE_MAP = {
     "ADFEMINAM": "AdfeminamResponse",
-    "GENDEREDYES": "Gendered",
-    "GENDEREDNO": "NonGendered",
+    "GENDEREDYES": "GenderedResponse",
+    "GENDEREDNO": "NonGenderedResponse",
     "RECENT": "LaterResponse",
     "RE-EVALUATION": "ReEvaluationResponse",
     "INITIAL": "InitialResponse",
