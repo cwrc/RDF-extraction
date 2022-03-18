@@ -78,7 +78,6 @@ def get_org_uri(tag):
     global ORG_MAP
     uri = None
     if "REF" in tag.attrs: 
-        logger.error(F"In entry: {utilities.get_entry_id(tag)} - ORG tag missing REF attribute: {tag} ")
         uri = rdflib.term.URIRef(tag.get("REF"))
     elif "STANDARD" in tag.attrs:
         name = tag.get("STANDARD")
@@ -88,6 +87,7 @@ def get_org_uri(tag):
         name = tag.get("STANDARD")
     
     if not uri:
+        logger.error(F"In entry: {utilities.get_entry_id(tag)} - ORG tag missing REF attribute: {tag} ")
         uri = utilities.make_standard_uri(name + " ORG", ns="cwrc")
 
     
