@@ -74,19 +74,13 @@ def create_place_map(path=None):
                 PLACE_MAP[row[0]] = row[1]
 
 
-def get_attribute(tag, attribute):
-    value = tag.get(attribute)
-    if value:
-        return value
-    return None
-
 
 def get_value(tag):
-    value = get_attribute(tag, "CURRENT")
+    value = tag.get("CURRENT")
     if not value:
-        value = get_attribute(tag, "REG")
+        value = tag.get("REG")
     if not value:
-        value = get_attribute(tag, "CURRENTALTERNATIVETERM")
+        value = tag.get("CURRENTALTERNATIVETERM")
     if not value:
         value = str(tag.text)
         value = ' '.join(value.split())

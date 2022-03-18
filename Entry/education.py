@@ -366,11 +366,11 @@ def get_school(school_tags):
     schools = []
     for tag in school_tags:
         name = utilities.get_value(tag)
-        lvl = utilities.get_attribute(tag, "INSTITUTIONLEVEL")
+        lvl = tag.get("INSTITUTIONLEVEL")
 
-        school_types = [x for x in [lvl, utilities.get_attribute(tag, "STUDENTBODY"),
-                                    utilities.get_attribute(tag, "RELIGIOUS"),
-                                    utilities.get_attribute(tag, "INSTITUTION")] if x]
+        school_types = [x for x in [lvl, tag.get("STUDENTBODY"),
+                                    tag.get("RELIGIOUS"),
+                                    tag.get("INSTITUTION")] if x]
 
         temp_school = School(name, school_types, lvl, tag)
         temp_school.add_studied_subjects(get_study_subjects(tag.find_all("SUBJECT")))
