@@ -18,3 +18,4 @@ venv
 *.config
 .dccache
 /Mods/unmatchedplaces.csv
+.vscode
