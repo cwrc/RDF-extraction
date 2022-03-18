@@ -164,7 +164,7 @@ def find_cultural_forms(cf, person):
         # sparql query to check if person hasMother/hasFather, and there is a valid uri
         # otherwise create the person and familial relation?
         def get_forebear(tag):
-            return utilities.get_attribute(tag, "FOREBEAR")
+            return tag.get("FOREBEAR")
         # This optional attribute attaches to the elements Ethnicity, Geographical Heritage, National Heritage, or Race, Colour,
         # has ten possible values: Father, Mother, Parents, Grandfather, Grandmother, Grandparents, Aunt, Uncle, Other, and Family.
 
@@ -333,7 +333,6 @@ def extract_culturalforms(tag_list, context_type, person, list_type="paragraphs"
     global cf_subelements_count
     CONTEXT_TYPE = get_context_type(context_type)
     forms_found = 0
-    event_count = event_count
     for tag in tag_list:
         temp_context = None
         cf_list = None

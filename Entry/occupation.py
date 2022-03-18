@@ -73,12 +73,12 @@ class Occupation(object):
 
     def get_occupation_predicate(self, tag):
         if tag.name == "JOB":
-            if self.get_attribute(tag, "FAMILYBUSINESS"):
+            if tag.get("FAMILYBUSINESS"):
                 return "familyBasedOccupation"
             else:
                 return "paidOccupation"
         if tag.name == "SIGNIFICANTACTIVITY":
-            if self.get_attribute(tag, "PHILANTHROPYVOLUNTEER"):
+            if tag.get("PHILANTHROPYVOLUNTEER"):
                 return "volunteerOccupation"
             else:
                 return "occupation"
@@ -96,16 +96,10 @@ class Occupation(object):
             return get_org_uri(employer)
         return Literal(self.get_value(tag))
 
-    def get_attribute(self, tag, attribute):
-        value = tag.get(attribute)
-        if value:
-            return value
-        return None
-
     def get_value(self, tag):
-        value = self.get_attribute(tag, "REG")
+        value = tag.get("REG")
         if not value:
-            value = self.get_attribute(tag, "CURRENTALTERNATIVETERM")
+            value = tag.get("CURRENTALTERNATIVETERM")
         if not value:
             value = str(tag.text)
             value = ' '.join(value.split())
@@ -153,17 +147,17 @@ class Occupation(object):
         else:
             term = Literal(value, datatype=rdflib.namespace.XSD.string)
             map_fail += 1
-            possibilites = []
+            possibilities = []
             log_str = "Unable to find matching occupation instance for '" + value + "'"
 
             for x in JOB_MAP.keys():
                 if get_close_matches(value.lower(), JOB_MAP[x]):
-                    possibilites.append(x)
+                    possibilities.append(x)
             if type(term) is Literal:
                 update_fails(rdf_type, value)
             else:
-                update_fails(rdf_type, value + "->" + str(possibilites) + "?")
-                log_str += "Possible matches" + value + "->" + str(possibilites) + "?"
+                update_fails(rdf_type, value + "->" + str(possibilities) + "?")
+                log_str += "Possible matches" + value + "->" + str(possibilities) + "?"
 
             if id:
                 logger.warning("In entry: " + id + " " + log_str)

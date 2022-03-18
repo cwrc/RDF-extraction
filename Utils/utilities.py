@@ -17,7 +17,6 @@ TODO: Add doctests for:
 - create_uri
 - create_cwrc_uri
 - get_value
-- get_attribute
 - get_reg
 - get_people
 - get_titles
@@ -316,27 +315,20 @@ def create_cwrc_uri(term):
 
 
 def get_value(tag):
-    value = get_attribute(tag, "STANDARD")
+    value = tag.get("STANDARD")
     if not value:
-        value = get_attribute(tag, "REG")
+        value = tag.get("REG")
     if not value:
-        value = get_attribute(tag, "CURRENTALTERNATIVETERM")
+        value = tag.get("CURRENTALTERNATIVETERM")
     if not value:
         value = str(tag.text)
         value = ' '.join(value.split())
     return value
 
 
-def get_attribute(tag, attribute):
-    """Extract a specific attribute"""
-    value = tag.get(attribute)
-    if value:
-        return value
-    return None
-
-
 def get_reg(tag):
-    return get_attribute(tag, "REG")
+    # TODO: Remove this function
+    return tag.get("REG")
 
 def get_other_people(tag, author):
     """returns all unique people other than author, does not return in order"""
