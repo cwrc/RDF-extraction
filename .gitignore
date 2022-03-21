@@ -19,3 +19,4 @@ venv
 *.txt
 *.csv
 *.code-workspace
+.vscode
