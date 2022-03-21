@@ -47,7 +47,7 @@ class Occupation(object):
         if other_attributes:
             self.uri = other_attributes
 
-        self.uri = utilities.create_uri("occupation", self.predicate)
+        self.uri = utilities.create_uri("cwrc", self.predicate)
     """
     TODO figure out if i can just return tuple or triple without creating
     a whole graph
