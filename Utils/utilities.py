@@ -463,9 +463,9 @@ def create_extracted_uberfile(filepath, graph, serialization="ttl", extra_triple
         if serialization == "ttl":
             f.write("#" + str(len(graph)) + " triples created\n")
             f.write("# date extracted: ~" + get_current_time() + "\n")
-            f.write(graph.serialize(format="ttl").decode())
+            f.write(graph.serialize(format="ttl")) #.decode())
         elif serialization:
-            f.write(graph.serialize(format=serialization).decode())
+            f.write(graph.serialize(format=serialization)) #.decode())
 
 
 
