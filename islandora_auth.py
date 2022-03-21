@@ -92,10 +92,35 @@ def download_data(subset="all"):
             f.write(content)
             f.close()
 
+def get_modified_entities(subset="all"):
+    if subset== "all":
+        for key in collections.keys():
+            print(key)
+            # r = get_file_description(collections[key])  s
+            docs = get_document_ids(collections[key])
+            for x in docs:
+                file_desc = get_file_description(x)
+                print(F'{x},{file_desc["modified"]}')
+    else:
+        if subset not in collections:
+            print(f"Invalid subset '{subset}' specified")
+            print(f"Valid subsets include: ",sep="")
+            print(*collections.keys(), sep="\n")
+            exit(1)
+        docs = get_document_ids(collections[subset])
+
+        for x in docs:
+            file_desc = get_file_description(x)
+            print(F'{x},{file_desc["modified"]}')
+
+
 def main(argv):            
     # Store the session for future requests.
     login({"username": argv[0], "password": argv[1]})
-    download_data("entry")
+    
+    get_modified_entities("entry")
+    
+    # download_data("entry")
 
 
 def get_document_ids(collection_id):
