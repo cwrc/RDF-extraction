@@ -46,14 +46,15 @@ def main():
         print(file_dict[filename])
         print("*" * 55)
         person = Biography(person_id, soup)
+        
         occupation.extract_occupation_data(soup, person)
         birthDeath.extract_death_data(soup, person)
         birthDeath.extract_birth_data(soup, person)
         location.extract_location_data(soup, person)
         cf.extract_cf_data(soup, person)
+        other_contexts.extract_other_contexts_data(soup, person)
         
         # Not yet reviewed
-        # other_contexts.extract_other_contexts_data(soup, person)
         # lifeInfo.extract_family_data(soup, person)
         # lifeInfo.extract_intimate_relationships_data(soup, person)
         # lifeInfo.extract_friend_data(soup, person)
@@ -75,7 +76,7 @@ def main():
         utilities.manage_mode(extraction_mode, person, graph)
 
         uber_graph += graph
-
+    
     place.log_mapping_fails()
     cf.log_mapping_fails()
     occupation.log_mapping_fails()
@@ -89,8 +90,6 @@ def main():
     logger.info(F"{avg} avg amount of triples per file")
 
     logger.info(F"Time completed: {utilities.get_current_time()}")
-
-
 
     temp_path = "extracted_triples/biography_triples.ttl"
     utilities.create_extracted_uberfile(temp_path, uber_graph,serialization="ttl", extra_triples="../data/additional_triples.ttl")
