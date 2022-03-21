@@ -25,6 +25,7 @@ logger.info(F"Started extraction: {datetime.datetime.now().strftime('%d %b %Y %H
 # ---------- SETUP NAMESPACES ----------
 
 CWRC = rdflib.Namespace("https://id.linscproject.ca/vocabularies/cwrc#")
+ORLANDO= rdflib.Namespace("https://commons.cwrc.ca/orlando:")
 BF = rdflib.Namespace("http://id.loc.gov/ontologies/bibframe/")
 XML = rdflib.Namespace("http://www.w3.org/XML/1998/namespace")
 MARC_REL = rdflib.Namespace("http://id.loc.gov/vocabulary/relators/")
@@ -395,13 +396,15 @@ class BibliographyParse:
         else:
             self.old_id = resource_name.replace(".xml", "")
 
-
         if 'data:' in self.id:
             self.mainURI = self.id
+            self.placeholderURI = self.id
         elif "https://commons.cwrc.ca/orlando:" in self.id:
             self.mainURI = self.id
+            self.placeholderURI = DATA[F"{self.id.split(':')[0]}"]
         else:
             self.mainURI = F"https://commons.cwrc.ca/orlando:{self.id}"
+            self.placeholderURI = DATA[F"{self.id}"]
 
         self.relatedItem = related_item
 
@@ -753,7 +756,7 @@ class BibliographyParse:
         instance = None
         # The Expression
         if not self.relatedItem:
-            instance = g.resource(self.mainURI + "_instance")        
+            instance = g.resource(self.placeholderURI + "_instance")        
             instance.add(RDF.type, FRBROO.F2_Expression)
             instance.add(FRBROO.R3i_realises, resource)
 
@@ -764,7 +767,7 @@ class BibliographyParse:
 
         for item in titles:
             if 'usage' in item and item['usage'] is not None:
-                title_res = g.resource(F"{self.mainURI}_title_{i}")
+                title_res = g.resource(F"{self.placeholderURI}_title_{i}")
                 title_res.add(RDF.type, CRM.E35_Title)
                 title_res.add(CRM.P190_has_symbolic_content, rdflib.Literal(item["title"].strip()))
 
@@ -784,7 +787,7 @@ class BibliographyParse:
                 i += 1
 
         
-        adminMetaData = g.resource(F"{self.mainURI}_admin_metadata")
+        adminMetaData = g.resource(F"{self.placeholderURI}_admin_metadata")
         adminMetaData.add(RDF.type, CRM.E13_Attribute_Assignment)
         adminMetaData.add(RDFS.label, rdflib.Literal( (F"administrative metadata {'of the creation of the MODS record for '+ self.mainTitle}") if self.mainTitle else "administrative metadata of MODS record" ))
 
@@ -794,7 +797,7 @@ class BibliographyParse:
             if r['value'] in ADMIN_AGENTS:
                 assigner_agent = g.resource(ADMIN_AGENTS[r["value"]])
             else:           
-                assigner_agent = g.resource(F"{self.mainURI}_admin_agent_{i}")
+                assigner_agent = g.resource(F"{self.placeholderURI}_admin_agent_{i}")
 
                 i += 1
             # Note: Authority value unused, values encountered: "marcorg", "oclcorg"
@@ -808,7 +811,7 @@ class BibliographyParse:
         r_count = 1
         for r in self.get_record_change_date():
             start_date, transformed, end_date = dateParse(r['date'])
-            time_span = g.resource(F"{self.mainURI}_time-span_{r_count}")
+            time_span = g.resource(F"{self.placeholderURI}_time-span_{r_count}")
             time_span.add(RDFS.label, rdflib.Literal(F"time-span of modification of MODS record for {self.mainTitle}"))
             time_span.add(RDF.type, CRM["E52_Time-Span"])
             time_span.add(CRM["P82_at_some_time_within"], rdflib.Literal(r['date']))
@@ -834,7 +837,7 @@ class BibliographyParse:
                 generation_process.add(RDFS.label, rdflib.Literal(F"generation process of the MODS Record of Orlando bibiliographic records"))
                 adminMetaData.add(CRM.P33_used_specific_technique, generation_process)
             else:
-                generation_process = g.resource(F"{self.mainURI}_generation_process_{i}")
+                generation_process = g.resource(F"{self.placeholderURI}_generation_process_{i}")
                 generation_process.add(RDF.type, CRM.E29_Design_or_Procedure)
                 generation_process.add(RDFS.label, rdflib.Literal(F"generation process of the MODS Record for {self.mainTitle}"))
                 generation_process.add(CRM.P2_has_type, BF.GenerationProcess)
@@ -850,7 +853,7 @@ class BibliographyParse:
         #CIDOC: Creating publication event/expression creation
         for o in self.get_origins():
             
-            originInfo = g.resource(F"{self.mainURI}_activity_statement_{i}")
+            originInfo = g.resource(F"{self.placeholderURI}_activity_statement_{i}")
             originInfo.add(RDF.type, FRBROO.F28_Expression_Creation)
             originInfo.add(RDFS.label, rdflib.Literal(F"creation of {self.mainTitle}"))
             if instance:
@@ -925,11 +928,11 @@ class BibliographyParse:
                 if o['publisher uri']:
                     publisher = g.resource(o['publisher uri'])
                 else:
-                    publisher = g.resource(F"{self.mainURI}_activity_statement_publisher_{i}")
+                    publisher = g.resource(F"{self.placeholderURI}_activity_statement_publisher_{i}")
                 
                 publisher.add(RDF.type, CRM.E39_Actor)
                 publisher.add(RDFS.label, rdflib.Literal(F"{o['publisher']}"))
-                publisher_role = g.resource(F"{self.mainURI}_publisher_role_{i}")
+                publisher_role = g.resource(F"{self.placeholderURI}_publisher_role_{i}")
                 publisher_role.add(RDFS.label, rdflib.Literal(F"{o['publisher']} in the role of publisher"))
 
                 publisher_role.add(RDF.type, CRMPC.PC14_carried_out_by)
@@ -963,7 +966,7 @@ class BibliographyParse:
                 if o['end date']:
                     end_date, transformed, dump = dateParse(o['end date'], o)
 
-                time_span = g.resource(F"{self.mainURI}_time-span_{i}")
+                time_span = g.resource(F"{self.placeholderURI}_time-span_{i}")
                 time_span.add(RDFS.label, rdflib.Literal( (F"time-span {'of the publishing of '+ self.mainTitle}") if self.mainTitle else "creation time-span" ))
                 time_span.add(RDF.type, CRM["E52_Time-Span"])
                 time_span.add(CRM["P82_at_some_time_within"], rdflib.Literal(o['date']))
@@ -978,12 +981,12 @@ class BibliographyParse:
 
             # CIDOC: Creating a manifestation, given an edition
             if o['edition']:
-                instance_manifestion = g.resource(F"{self.mainURI}_instance_manifestation")
+                instance_manifestion = g.resource(F"{self.placeholderURI}_instance_manifestation")
                 instance_manifestion.add(RDF.type, FRBROO.F4_Manifestation_Singleton)
                 instance_manifestion.add(RDFS.label, rdflib.Literal(F"manifestation of {self.mainTitle}"))
                 instance_manifestion.add(FRBROO.R4_embodies,resource)
                 
-                edition_node = g.resource(F"{self.mainURI}_edition")
+                edition_node = g.resource(F"{self.placeholderURI}_edition")
                 instance_manifestion.add(CRM.P1_identified_by, edition_node)
                 edition_node.add(RDF.type, CRM.E33_E41_Linguistic_Appellation)
                 edition_node.add(CRM.P190_has_symbolic_content, rdflib.Literal(o['edition']))
@@ -1001,7 +1004,7 @@ class BibliographyParse:
                 bp.build_graph(part_type=part['type'])
 
                 if part['type'] in self.related_item_map:
-                    work = g.resource(F"{self.mainURI}_{part['type']}_{i}")
+                    work = g.resource(F"{self.placeholderURI}_{part['type']}_{i}")
                     if bp.mainTitle is None: 
                         work.add(RDFS.label, rdflib.Literal(F"{part['type']} of {self.mainTitle}"))
                     if part["type"] == "constituent":
@@ -1031,16 +1034,16 @@ class BibliographyParse:
         o = self.get_origins()
         if o:
             if o[0]['edition']:
-                instance_manifestion = g.resource(F"{self.mainURI}_instance_manifestation")
+                instance_manifestion = g.resource(F"{self.placeholderURI}_instance_manifestation")
         for p in self.get_parts():
-            extent_resource = g.resource(F"{self.mainURI}_extent_{i}")
+            extent_resource = g.resource(F"{self.placeholderURI}_extent_{i}")
             
             extent_resource.add(RDF.type, CRM.E33_E41_Linguistic_Appellation)
             extent_label = ""
 
             # NOTE: Possibly revise these URIs with further guidance
             if p['volume']:
-                vol_node = g.resource(F"{self.mainURI}_extent_{i}_volume")
+                vol_node = g.resource(F"{self.placeholderURI}_extent_{i}_volume")
                 extent_resource.add(CRM.P106_is_composed_of, vol_node)
                 vol_node.add(RDF.type, CRM.E33_E41_Linguistic_Appellation)
                 vol_node.add(CRM.P190_has_symbolic_content,rdflib.Literal(p['volume']))
@@ -1048,7 +1051,7 @@ class BibliographyParse:
                 extent_label += "Volume " + p['volume']
             
             if p['issue']:
-                issue_node = g.resource(F"{self.mainURI}_extent_{i}_issue")
+                issue_node = g.resource(F"{self.placeholderURI}_extent_{i}_issue")
                 extent_resource.add(CRM.P106_is_composed_of, issue_node)
                 issue_node.add(RDF.type, CRM.E33_E41_Linguistic_Appellation)
                 issue_node.add(CRM.P190_has_symbolic_content,rdflib.Literal(p['issue']))
@@ -1058,7 +1061,7 @@ class BibliographyParse:
                     extent_label += ", "
                 extent_label += "Issue " + p['issue']
             if p['value'] != "":
-                page_node = g.resource(F"{self.mainURI}_extent_{i}_page")
+                page_node = g.resource(F"{self.placeholderURI}_extent_{i}_page")
                 extent_resource.add(CRM.P106_is_composed_of, page_node)
                 page_node.add(RDF.type, CRM.E33_E41_Linguistic_Appellation)
                 page_node.add(CRM.P190_has_symbolic_content,rdflib.Literal(p['value']))
@@ -1123,6 +1126,7 @@ if __name__ == "__main__":
     g.bind("crm", CRM)
     g.bind("frbroo", FRBROO)
     g.bind("skos", SKOS)
+    g.bind("orlando", ORLANDO)
 
     # Adding declaration of references
     for label, uri in BibliographyParse.type_map.items():
@@ -1168,15 +1172,15 @@ if __name__ == "__main__":
         for row in csvfile:
             genre_mapping[row[0]] = row[1]
 
-    # for fname in os.listdir(writing_dir):
-    #     path = os.path.join(writing_dir, fname)
-    #     if os.path.isdir(path):
-    #         continue
+    for fname in os.listdir(writing_dir):
+        path = os.path.join(writing_dir, fname)
+        if os.path.isdir(path):
+            continue
 
-    #     try:
-    #         genreParse = WritingParse(path, genre_map)
-    #     except UnicodeError:
-    #         pass
+        try:
+            genreParse = WritingParse(path, genre_map)
+        except UnicodeError:
+            pass
 
     # test_filenames = ["d75215cb-d102-4256-9538-c44bfbf490d9.xml","2e3e602e-b82c-441d-81bc-883f834b20c1.xml","13f8e71a-def5-41e4-90a0-6ae1092ae446.xml","16d427db-a8a2-4f33-ac53-9f811672584b.xml","4109f3c5-0508-447b-9f86-ea8052ff3981.xml",
     #                   "e1b2f98f-1001-4787-a711-464f1527e5a7.xml", "15655c66-8c0b-4493-8f68-8d6cf4998303.xml","0d0e00bf-3224-4286-8ec4-f389ec6cc7bb.xml"] # VW, the wave
