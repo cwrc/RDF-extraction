@@ -1,5 +1,5 @@
 {
-  "default directory": "../../../test/RDF-extraction/data/entry_2022-02-22/",
+  "default directory": "../data/entry_2022-03-20/",
   "file ending": ".xml",
   "notes": {
     "to do": "scrape possible biographers"
