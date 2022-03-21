@@ -89,8 +89,8 @@ class Biography(object):
         super(Biography, self).__init__()
         self.id = id
         self.document = doc
-        self.url = "http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id=" + id
-        self.url = rdflib.term.URIRef(self.url)
+        self.old_url = rdflib.term.URIRef(F"http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id={id}")
+        self.url = rdflib.term.URIRef(F"https://orlando.cambridge.org/profiles/{id}")
         self.name = utilities.get_readable_name(doc)
         self.std_name = utilities.get_name(doc)
 
@@ -211,9 +211,9 @@ class Biography(object):
 
     def to_file(self, graph=None, serialization="ttl"):
         if graph:
-            return graph.serialize(format=serialization).decode()
+            return graph.serialize(format=serialization)#.decode()
         else:
-            return self.to_graph().serialize(format=serialization).decode()
+            return self.to_graph().serialize(format=serialization)#.decode()
 
     def __str__(self):
         # TODO: add occupation + education
