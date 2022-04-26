@@ -1,6 +1,7 @@
 from Utils import utilities, event
 from Utils.context import Context, get_context_type, get_event_type
 from Utils.event import Event
+from Utils.activity import Activity
 # from Utils.place import Place
 import csv
 from bs4 import Tag
@@ -120,6 +121,15 @@ def find_relationships(tag, person, relation):
 
     return relationships
 
+def get_attributes(entities):
+    attributes = {}
+    for x in entities:
+        print(x)
+        if x.predicate in attributes:
+            attributes[x.predicate].append(x.uri)
+        else:
+            attributes[x.predicate] = [x.uri]
+    return attributes
 
 def extract_relationships(tag_list, context_type, person, list_type="paragraphs"):
     """ Creates the interpersonal relation and ascribes them to the person along
@@ -127,8 +137,10 @@ def extract_relationships(tag_list, context_type, person, list_type="paragraphs"
     """
     global context_count
     global event_count
-    CONTEXT_TYPE = get_context_type("INTIMATERELATIONSHIPS")
-    EVENT_TYPE = get_event_type("INTIMATERELATIONSHIPS")
+    tag_name = "INTIMATERELATIONSHIPS"
+
+    CONTEXT_TYPE = get_context_type(tag_name)
+    EVENT_TYPE = get_event_type(tag_name)
 
     for tag in tag_list:
         temp_context = None
@@ -136,19 +148,33 @@ def extract_relationships(tag_list, context_type, person, list_type="paragraphs"
         context_count += 1
         context_id = person.id + "_" + CONTEXT_TYPE + "_" + str(context_count)
         relationship_list = find_relationships(tag, person, context_type)
-        if relationship_list:
-            temp_context = Context(context_id, tag, "INTIMATERELATIONSHIPS")
-            temp_context.link_triples(relationship_list)
-        else:
-            temp_context = Context(context_id, tag, "INTIMATERELATIONSHIPS", "identifying")
+        attributes = get_attributes(relationship_list)
 
-        if list_type == "events":
-            event_count += 1
-            event_title = person.name + " - " + "Intimate Relationship Event"
-            event_uri = person.id + "_IntimateRelationshipEvent_" + str(event_count)
-            temp_event = event.Event(event_title, event_uri, tag, EVENT_TYPE)
-            temp_context.link_event(temp_event)
-            person.add_event(temp_event)
+
+        if relationship_list:
+            temp_context = Context(context_id, tag, tag_name,pattern="relationships")
+            event_count = 1
+            participants = None
+            
+            for x in attributes.keys():
+                temp_attr = {x:attributes[x]}
+       
+                activity_id = context_id.replace("Context","Event") + "_"+ str(event_count)
+                label = f"Intimate Relationship Event: {utilities.split_by_casing(str(x).split('#')[1]).lower()}"
+                activity = Activity(person, label, activity_id, tag, activity_type="generic+", attributes=temp_attr)
+                activity.event_type.append(utilities.create_cwrc_uri(get_event_type(tag_name)))
+                print(temp_attr)
+                print(activity.event_type)
+
+                if participants:
+                    activity.participants = participants
+                temp_context.link_activity(activity)
+                person.add_activity(activity)
+                event_count+=1
+            
+        else:
+            temp_context = Context(context_id, tag, tag_name, "identifying")
+
 
         person.add_context(temp_context)
 
@@ -443,8 +469,8 @@ def main():
         print("*" * 55)
 
         person = Biography(person_id, soup)
-        extract_family_data(soup, person)
-        extract_friend_data(soup, person)
+        # extract_family_data(soup, person)
+        # extract_friend_data(soup, person)
         extract_intimate_relationships_data(soup, person)
 
         graph = person.to_graph()

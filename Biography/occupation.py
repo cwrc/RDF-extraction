@@ -250,6 +250,7 @@ def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
   
         if occupation_list:
             temp_context = Context(context_id, tag, tag_name, pattern="occupation")
+            # TODO Review this variable assignment
             event_count = 1
             participants = None
             if rdflib.term.URIRef('http://sparql.cwrc.ca/ontologies/cwrc#employment') in attributes:

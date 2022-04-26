@@ -347,7 +347,7 @@ class Context(object):
 
 
 
-        if self.cidoc_pattern not in ["birth","death","occupation", "location", "culturalform"]:
+        if self.cidoc_pattern not in ["birth","death","occupation", "location", "culturalform","relationships"]:
         # Creating describing context if applicable
             if self.motivation == utilities.NS_DICT["oa"].describing:
                 self.uri = utilities.create_uri("data", self.id + "_attributing")
