@@ -987,7 +987,7 @@ class BibliographyParse:
                 instance_manifestion.add(FRBROO.R4_embodies,resource)
                 
                 edition_node = g.resource(F"{self.placeholderURI}_edition")
-                instance_manifestion.add(CRM.P1_identified_by, edition_node)
+                instance_manifestion.add(CRM.P1_is_identified_by, edition_node)
                 edition_node.add(RDF.type, CRM.E33_E41_Linguistic_Appellation)
                 edition_node.add(CRM.P190_has_symbolic_content, rdflib.Literal(o['edition']))
                 
@@ -1075,9 +1075,9 @@ class BibliographyParse:
             
             # TODO: Clarify if instance needs to be identified by extent:
             if instance:
-                instance.add(CRM.P1_identified_by, extent_resource)
+                instance.add(CRM.P1_is_identified_by, extent_resource)
             if instance_manifestion:
-                instance_manifestion.add(CRM.P1_identified_by, extent_resource)
+                instance_manifestion.add(CRM.P1_is_identified_by, extent_resource)
 
 
         genres = self.get_genre()
