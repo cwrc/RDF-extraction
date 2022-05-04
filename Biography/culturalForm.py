@@ -19,6 +19,8 @@ Most of cultural forms have been mapped
 Forebear still needs to be handled/attempted with a query
 --> load up gurjap's produced graph and query it  for forebear info to test
 temp solution until endpoint is active
+TODO: review labels Gender Label Connection (woman)
+
 
 """
 
