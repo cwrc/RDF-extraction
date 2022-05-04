@@ -1,9 +1,9 @@
 from bs4 import BeautifulSoup
 import rdflib, sys
+from rdflib import RDF, RDFS, OWL, XSD
 import os, datetime
 import csv
-# TODO: Clean up messy import
-from rdflib import *
+
 import logging
 from fuzzywuzzy import fuzz
 import re
@@ -781,7 +781,7 @@ class BibliographyParse:
                 contribution_resource.add(BF.role,MARCREL[self.role_map[name['role']]])
             if name['role']:
                 # role_resource.add(RDFS.label, rdflib.Literal(name["role"]))
-                contribution_resource.add(BF.role,Literal(name["role"]))
+                contribution_resource.add(BF.role,rdflib.Literal(name["role"]))
             else:
                 contribution_resource.add(BF.role,MARCREL.aut)
                 # role_resource.add(BF.code, rdflib.Literal("aut"))
@@ -884,7 +884,7 @@ class BibliographyParse:
 
                 if place_map:
                     for item in place_map:
-                        place.add(OWL.sameAs, URIRef(item))
+                        place.add(OWL.sameAs, rdflib.URIRef(item))
 
                 originInfo.add(BF.place, place)
 
@@ -1048,12 +1048,12 @@ if __name__ == "__main__":
 
     # test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"]
     # test_filenames = ["0d0e00bf-3224-4286-8ec4-f389ec6cc7bb.xml"]
-    # test_filenames = ["55aff3fb-8ea9-4e95-9e04-0f3e630896e3.xml", "0c133817-f55e-4a8f-a9b4-474566418d9b.xml"]
-    # for fname in test_filenames:
+    test_filenames = ["55aff3fb-8ea9-4e95-9e04-0f3e630896e3.xml", "0c133817-f55e-4a8f-a9b4-474566418d9b.xml"]
 
     count = 0
     total = len(os.listdir(dirname))
-    for fname in os.listdir(dirname):
+    # for fname in os.listdir(dirname):
+    for fname in test_filenames:
         print(F"{count}/{total} files extracted")
 
         path = os.path.join(dirname, fname)
