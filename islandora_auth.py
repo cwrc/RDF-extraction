@@ -79,20 +79,24 @@ def download_data(subset="all"):
             os.mkdir(dir)
         except OSError as error:
             pass
-        datastream = get_datastream(get_file_description(docs[0]))
 
+        # filenames = os.listdir(dir)
+        datastream = get_datastream(get_file_description(docs[0]))
         total = len(docs)
         count = 1
         for x in docs:
+            file_id = x.split(":")[1]
+            filename =  F"{file_id}.xml"
+            
             print(count, "/", total, ": ", x)
             count += 1
-            file_id = x.split(":")[1]
             content = get_file_with_format(x, datastream)
-            f = open(dir+"/"+file_id+".xml", "w")
+            f = open(F"{dir}/{filename}", "w")
             f.write(content)
             f.close()
 
 def get_modified_entities(subset="all"):
+    
     if subset== "all":
         for key in collections.keys():
             print(key)
@@ -109,18 +113,29 @@ def get_modified_entities(subset="all"):
             exit(1)
         docs = get_document_ids(collections[subset])
 
+        dates = {}
         for x in docs:
             file_desc = get_file_description(x)
             print(F'{x},{file_desc["modified"]}')
+            date = file_desc["modified"].split("T")[0] 
+            
+            if date in dates:
+                dates[date].append(x)
+            else:
+                dates[date] = [x]
+            
+        print(dates)
+        
 
 
 def main(argv):            
     # Store the session for future requests.
     login({"username": argv[0], "password": argv[1]})
     
-    get_modified_entities("entry")
-    
+    # get_modified_entities("entry")
+
     # download_data("entry")
+    download_data("bibliography")
 
 
 def get_document_ids(collection_id):
