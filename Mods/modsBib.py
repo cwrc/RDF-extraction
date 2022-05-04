@@ -974,6 +974,8 @@ class BibliographyParse:
                 if genre_graph[uri]:
                     if uri in FORMS:
                         resource.add(GENRE.hasForm, uri)
+                    elif uri in MEDIUMS:
+                        resource.add(GENRE.hasMedium, uri)
                     else:
                         resource.add(GENRE.hasGenre, uri)
                 else:
@@ -1050,11 +1052,11 @@ if __name__ == "__main__":
     # test_filenames = ["0d0e00bf-3224-4286-8ec4-f389ec6cc7bb.xml"]
     test_filenames = ["55aff3fb-8ea9-4e95-9e04-0f3e630896e3.xml", "0c133817-f55e-4a8f-a9b4-474566418d9b.xml"]
 
-    count = 0
+    count = 1
     total = len(os.listdir(dirname))
-    # for fname in os.listdir(dirname):
-    for fname in test_filenames:
-        print(F"{count}/{total} files extracted")
+    # for fname in test_filenames:
+    for fname in os.listdir(dirname):
+        print(F"{count}/{total} files extracted ({fname})")
 
         path = os.path.join(dirname, fname)
         if os.path.isdir(path):
