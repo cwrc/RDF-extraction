@@ -23,13 +23,7 @@ class Citation(object):
 
     def to_triple(self, target_uri, source_url=None):
         g = utilities.create_graph()
-        if not self.citing_entity:
-            logger.warning(F"In entry: {self.entry_id} - BIBCIT: Missing DBREF attribute: {self.tag}")
-            return g
-        if not self.label:
-            logger.warning(F"In entry: {self.entry_id} - BIBCIT: Missing PLACEHOLDER attribute: {self.tag}")
-            return g
-        
+
         uri = None
 
         if self.uri:
@@ -40,12 +34,19 @@ class Citation(object):
 
             uri = utilities.create_uri("data", "dbref_"+self.citing_entity)
             citing_uri = utilities.create_uri("data", self.citing_entity)
-        
+
+        if not self.citing_entity:
+            logger.warning(F"In entry: {self.entry_id} - BIBCIT: Missing DBREF attribute: {self.tag}")
+            return g
+        if not self.label:
+            logger.warning(F"In entry: {self.entry_id} - BIBCIT: Missing PLACEHOLDER attribute: {self.tag}")
+            return g
+
 
         g.add((target_uri, utilities.NS_DICT["cito"].cites, uri))
-
         g.add((uri, RDF.type, utilities.NS_DICT["cito"].Citation))
         g.add((uri, RDFS.label, Literal(self.label)))
+
         if self.page:
             g.add((uri, utilities.NS_DICT["prism"].startingPage, Literal(self.page)))
             g.add((uri, utilities.NS_DICT["prism"].endingPage, Literal(self.page)))
