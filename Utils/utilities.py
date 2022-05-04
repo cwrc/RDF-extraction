@@ -124,6 +124,8 @@ class GeneralRelation(object):
         g.add((context.uri, self.predicate, self.object))
         return g
 
+def get_entry_id(tag):
+    return tag.find_parent("ENTRY").get("ID")
 
 def remove_unwanted_tags(tag):
     unwanted_tag_names = ["BIBCITS", "RESPONSIBILITIES", "KEYWORDCLASSES","RESEARCHNOTE"]
