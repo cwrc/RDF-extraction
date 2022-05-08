@@ -46,8 +46,8 @@ ADMIN_AGENTS = {
 }
 
 genre_graph = None
-genre_map = {}
-genre_mapping = {}
+genre_map = {} # from writing parsing
+genre_mapping = {} # genre mapping from CSV
 geoMapper = None
 STRING_MATCH_RATIO = 90
 
@@ -220,7 +220,7 @@ class ParseGeoNamesMapping:
 
             if not selected_item:
                 # Log unmatched places
-                logger.info("Unable to map Place {0}".format(place_name))
+                logger.warning("Unable to map place: {0}".format(place_name))
                 UNIQUE_UNMATCHED_PLACES.add(place_name)
 
         return matched_places
@@ -249,7 +249,8 @@ class WritingParse:
         self.matched_documents = matched_documents
 
         self.parse_db_refs()
-
+        # print(self.matched_documents)
+        # input()
     def parse_db_refs(self):
         """
         Maps all genres within a textscope to the given dbref
@@ -272,7 +273,21 @@ class WritingParse:
                         name = genre.attrs['GENRENAME']
                         genres.append(name)
 
+                temp = 0
+                if db_ref in self.matched_documents:
+                    print("pre:",self.matched_documents[db_ref])
+                    temp = 1
+                
                 self.matched_documents[db_ref] = genres
+                
+                if db_ref in self.matched_documents:
+                    print("post:",self.matched_documents[db_ref])
+                
+                if temp:
+                    input()
+
+                print("\n"*3)
+                temp = 0
 
 
 class BibliographyParse:
