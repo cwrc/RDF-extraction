@@ -25,6 +25,13 @@ class Citation(object):
         g = utilities.create_graph()
 
         uri = None
+        
+        if not self.citing_entity:
+            logger.warning(F"In entry: {self.entry_id} - BIBCIT: Missing DBREF attribute: {self.tag}")
+            return g
+        if not self.label:
+            logger.warning(F"In entry: {self.entry_id} - BIBCIT: Missing PLACEHOLDER attribute: {self.tag}")
+            return g
 
         if self.uri:
             uri = rdflib.URIRef(self.uri+"_dbref")
@@ -35,12 +42,6 @@ class Citation(object):
             uri = utilities.create_uri("data", "dbref_"+self.citing_entity)
             citing_uri = utilities.create_uri("data", self.citing_entity)
 
-        if not self.citing_entity:
-            logger.warning(F"In entry: {self.entry_id} - BIBCIT: Missing DBREF attribute: {self.tag}")
-            return g
-        if not self.label:
-            logger.warning(F"In entry: {self.entry_id} - BIBCIT: Missing PLACEHOLDER attribute: {self.tag}")
-            return g
 
 
         g.add((target_uri, utilities.NS_DICT["cito"].cites, uri))
