@@ -253,17 +253,22 @@ class WritingParse:
         # input()
     def parse_db_refs(self):
         """
-        Maps all genres within a textscope to the given dbref
-        Used to map to blibiography
+        Maps all genres within a textscope to the given ref/dbref
+        Used to map to bibliography
         :return: None
         """
         textscopes = self.soup.find_all('TEXTSCOPE')
 
         for ts in textscopes:
             ts_parent = ts.parent
+            rec_id = None
+            if 'REF' in ts.attrs:
+                rec_id = ts.attrs['REF'].split(":")[2]
+                
+            elif 'DBREF' in ts.attrs:
+                rec_id = ts.attrs['DBREF']
 
-            if 'DBREF' in ts.attrs:
-                db_ref = ts.attrs['DBREF']
+            if rec_id:
 
                 tgenres = ts_parent.find_all('TGENRE')
                 genres = []
@@ -273,22 +278,10 @@ class WritingParse:
                         name = genre.attrs['GENRENAME']
                         genres.append(name)
 
-                temp = 0
-                if db_ref in self.matched_documents:
-                    print("pre:",self.matched_documents[db_ref])
-                    temp = 1
+                self.matched_documents[rec_id] = genres
+            else:
+                logger.error("TEXTSCOPE missing REF & DBREF attribute")
                 
-                self.matched_documents[db_ref] = genres
-                
-                if db_ref in self.matched_documents:
-                    print("post:",self.matched_documents[db_ref])
-                
-                if temp:
-                    input()
-
-                print("\n"*3)
-                temp = 0
-
 
 class BibliographyParse:
     """
@@ -975,7 +968,6 @@ class BibliographyParse:
                     logger.warning(F"GENRE NOT FOUND: {genre['genre']}")
             else:
                     logger.warning(F"GENRE NOT FOUND: {genre['genre']}")
-
 
         if self.id in genre_map:
             genres = genre_map[self.id]
