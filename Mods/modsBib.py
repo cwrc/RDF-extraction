@@ -24,13 +24,14 @@ logger.info(F"Started extraction: {datetime.datetime.now().strftime('%d %b %Y %H
 
 # ---------- SETUP NAMESPACES ----------
 
-CWRC = rdflib.Namespace("https://id.linscproject.ca/vocabularies/cwrc#")
+CWRC = rdflib.Namespace("http://id.lincsproject.ca/cwrc#")
 ORLANDO= rdflib.Namespace("https://commons.cwrc.ca/orlando:")
 BF = rdflib.Namespace("http://id.loc.gov/ontologies/bibframe/")
 XML = rdflib.Namespace("http://www.w3.org/XML/1998/namespace")
 MARC_REL = rdflib.Namespace("http://id.loc.gov/vocabulary/relators/")
 DATA = rdflib.Namespace("http://cwrc.ca/cwrcdata/")
-GENRE = rdflib.Namespace("http://id.linscproject.ca/vocabularies/genre#")
+
+GENRE = rdflib.Namespace("http://id.lincsproject.ca/genre#")
 SCHEMA = rdflib.Namespace("http://schema.org/")
 SKOS = rdflib.Namespace("http://www.w3.org/2004/02/skos/core#")
 FRBROO = rdflib.Namespace("http://iflastandards.info/ns/fr/frbr/frbroo/")
@@ -1202,7 +1203,7 @@ if __name__ == "__main__":
     test_filenames = ["d75215cb-d102-4256-9538-c44bfbf490d9.xml","2e3e602e-b82c-441d-81bc-883f834b20c1.xml","13f8e71a-def5-41e4-90a0-6ae1092ae446.xml","16d427db-a8a2-4f33-ac53-9f811672584b.xml","4109f3c5-0508-447b-9f86-ea8052ff3981.xml",
                       "e1b2f98f-1001-4787-a711-464f1527e5a7.xml", "15655c66-8c0b-4493-8f68-8d6cf4998303.xml","0d0e00bf-3224-4286-8ec4-f389ec6cc7bb.xml"] # VW, the wave
     # test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"] 
-    test_filenames = ["e35f16d8-d8f6-414d-b465-2a8a916ba53a.xml"] 
+    # test_filenames = ["e35f16d8-d8f6-414d-b465-2a8a916ba53a.xml"] 
     # test_filenames = ["64d3c008-8a9d-415b-b52b-91d232c00952.xml",
     # test_filenames = ["55aff3fb-8ea9-4e95-9e04-0f3e630896e3.xml", "0c133817-f55e-4a8f-a9b4-474566418d9b.xml"]
 
