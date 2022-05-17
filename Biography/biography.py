@@ -191,7 +191,7 @@ class Biography(object):
         g.add((self.uri, utilities.NS_DICT["skos"].altLabel, Literal(self.name)))
 
 
-        generic_names = ["king","King","mother-in-law" , "Queen", "queen","husband","wife","partner" ,"father", "daughter","essay", "son","he","she","they","her","him","them", "sisters","the",  "mother", "sibling", "brother", "sister", "friend"]
+        generic_names = ["king","King","mother-in-law" , "Queen", "queen","husband","wife","partner" ,"father", "daughter","essay", "son","he","she","they","her","him","them", "sisters","the",  "mother", "sibling", "brother", "sister", "friend", "his wife", "her husband","his husband", "her wife", "their husband", "their wife", "lover"]
 
         for x in self.document.find_all("NAME"):
             uri = x.get("REF")
