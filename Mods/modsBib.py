@@ -286,17 +286,23 @@ class WritingParse:
     def parse_db_refs(self):
         """
         Maps all genres within a textscope to the given DBREF
-        Used to map to blibiography
+        Used to map to bibliography
         :return: None
         """
         textscopes = self.soup.find_all('TEXTSCOPE')
 
         for ts in textscopes:
             ts_parent = ts.parent
+            rec_id = None
+            
+            # Using REF attribute over DBREF
+            if 'REF' in ts.attrs:
+                rec_id = ts.attrs['REF'].split(":")[2]                
+            elif 'DBREF' in ts.attrs:
+                rec_id = ts.attrs['DBREF']
 
-            if 'DBREF' in ts.attrs:
-                db_ref = ts.attrs['DBREF']
-
+            # Extracting Genres
+            if rec_id:
                 tgenres = ts_parent.find_all('TGENRE')
                 genres = []
 
@@ -305,7 +311,18 @@ class WritingParse:
                         name = genre.attrs['GENRENAME']
                         genres.append(name)
 
-                self.matched_documents[db_ref] = genres
+                
+                if rec_id in self.matched_documents:
+                    for x in genres:
+                        if x not in self.matched_documents[rec_id]:
+                            self.matched_documents[rec_id].append(x)
+                else:
+                        self.matched_documents[rec_id] = list(set(genres))
+            
+            
+            else:
+                logger.error("TEXTSCOPE missing REF & DBREF attribute")
+                
 
 
 class BibliographyParse:
@@ -1185,6 +1202,7 @@ if __name__ == "__main__":
     test_filenames = ["d75215cb-d102-4256-9538-c44bfbf490d9.xml","2e3e602e-b82c-441d-81bc-883f834b20c1.xml","13f8e71a-def5-41e4-90a0-6ae1092ae446.xml","16d427db-a8a2-4f33-ac53-9f811672584b.xml","4109f3c5-0508-447b-9f86-ea8052ff3981.xml",
                       "e1b2f98f-1001-4787-a711-464f1527e5a7.xml", "15655c66-8c0b-4493-8f68-8d6cf4998303.xml","0d0e00bf-3224-4286-8ec4-f389ec6cc7bb.xml"] # VW, the wave
     # test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"] 
+    test_filenames = ["e35f16d8-d8f6-414d-b465-2a8a916ba53a.xml"] 
     # test_filenames = ["64d3c008-8a9d-415b-b52b-91d232c00952.xml",
     # test_filenames = ["55aff3fb-8ea9-4e95-9e04-0f3e630896e3.xml", "0c133817-f55e-4a8f-a9b4-474566418d9b.xml"]
 
