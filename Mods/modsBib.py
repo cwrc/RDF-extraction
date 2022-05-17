@@ -419,7 +419,7 @@ class BibliographyParse:
             self.placeholderURI = self.id
         elif "https://commons.cwrc.ca/orlando:" in self.id:
             self.mainURI = self.id
-            self.placeholderURI = DATA[F"{self.id.split(':')[0]}"]
+            self.placeholderURI = DATA[F"{self.id.split('orlando:')[1]}"]
         else:
             self.mainURI = F"https://commons.cwrc.ca/orlando:{self.id}"
             self.placeholderURI = DATA[F"{self.id}"]
@@ -804,7 +804,6 @@ class BibliographyParse:
                     resource.add(CRM.P102_has_title, title_res)
                 i += 1
 
-        
         adminMetaData = g.resource(F"{self.placeholderURI}_admin_metadata")
         adminMetaData.add(RDF.type, CRM.E13_Attribute_Assignment)
         adminMetaData.add(RDFS.label, rdflib.Literal( (F"administrative metadata {'of the creation of the MODS record for '+ self.mainTitle}") if self.mainTitle else "administrative metadata of MODS record" ))
