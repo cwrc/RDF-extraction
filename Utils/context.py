@@ -64,6 +64,8 @@ def get_heading(tag):
     # to see which is closest
     # Placeholder for now
     heading = tag.find("HEADING")
+    heading_text = ""
+    
     if not heading:
         heading = tag.findPrevious("HEADING")
     if not heading:
@@ -71,7 +73,15 @@ def get_heading(tag):
     if not heading:
         logger.error("Unable to find heading for:" + str(tag))
         return None
-    return utilities.remove_punctuation(utilities.strip_all_whitespace(heading.text), True)
+
+    if heading.parent.name == "DIV1":
+        heading_text = "-chapter-"
+    else:
+        heading_text = "-subchapter-"
+    
+    heading_text += utilities.remove_punctuation(utilities.strip_all_whitespace(heading.text.lower()),True)
+    
+    return heading_text
 
 
 def create_context_map():
@@ -166,7 +176,7 @@ class Context(object):
             self.citations = [Citation(x) for x in bibcits]
 
             self.heading = get_heading(tag)
-            self.src = "http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id="
+            self.src = "https://orlando.cambridge.org/profiles/"
             if not self.heading:
                 self.src = "http://orlando.cambridge.org"
 
@@ -264,15 +274,17 @@ class Context(object):
             source_url = None
 
             if person:
-                source_url = rdflib.term.URIRef(
-                    self.src + person.id + "#" + self.heading)
+                src_uri = f"{self.src}{person.id}#{person.id}{self.heading}"
+                source_url = rdflib.term.URIRef(src_uri)
                 target_label = person.name + ": " + self.context_label + " Excerpt"
+
             else:
                 source_url = rdflib.term.URIRef(
                     self.src + "#FE" + self.id.split("_")[-1])
                 target_label = self.context_label + " Excerpt"
         
             source_url = rdflib.term.URIRef(source_url)
+
             g.add((self.target_uri, RDF.type,utilities.NS_DICT["oa"].SpecificResource))
             g.add((self.target_uri, RDF.type,
                    utilities.NS_DICT["crm"].E73_Information_Object))
