@@ -341,18 +341,18 @@ class BibliographyParse:
 
     # Maps MODS types to BIBFRAME types
     type_map = {
-        "text": BF.Text,
-        "audio": BF.Audio,
-        "sound recording": BF.Audio,
-        "cartography": BF.Cartography,
-        "dataset": BF.Dataset,
-        "mixed material": BF.MixedMaterial,
-        "moving image": BF.MovingImage,
-        "notated movement": BF.NotatedMovement,
-        "multimedia": BF.Multimedia,
-        "software, multimedia": BF.Multimedia,
-        "still image": BF.StillImage,
-        "object": BF.Object
+        "text": GENRE.TextualMedium,
+        "audio": GENRE.AuditoryMedium,
+        "sound recording": GENRE.SoundRecordingMedium,
+        "cartography": GENRE.CartographicForm,
+        "dataset": GENRE.DigitalMedium,
+        "mixed material": GENRE.mixedMaterials,
+        "moving image": GENRE.MovingMedium,
+        "notated movement": GENRE.PerformanceMedium,
+        "multimedia": GENRE.multimedia,
+        "software, multimedia": GENRE.multimedia,
+        "still image": GENRE.StillImageMedium,
+        "object": GENRE.threeDimensionalObject
     }
 
     # Maps MODS roles used in orlando to MARC roles
@@ -1209,8 +1209,8 @@ if __name__ == "__main__":
 
     count = 1
     total = len(os.listdir(dirname))
-    # for fname in os.listdir(dirname):
-    for fname in test_filenames:
+    # for fname in test_filenames:
+    for fname in os.listdir(dirname):
         print(F"{count}/{total} files extracted")
         path = os.path.join(dirname, fname)
         if os.path.isdir(path):
