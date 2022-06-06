@@ -86,7 +86,7 @@ AGENTS = {}
 def remove_punctuation(input_str, all_punctuation=False):
     """
     Removes punctuation as defined by the Extraction doc
-    This is primarly used for normalizing person URIs so they relate
+    This is primarily used for normalizing person URIs so they relate
     to separately extracted elements
     :param input_str: the
     :param all_punctuation: removes all punctuation within pythons string.punctuation
@@ -533,7 +533,7 @@ class BibliographyParse:
                 else:
                     record['sources'].append(
                         {'source': source.text, 'authority': ""})
-            record['id'] = {'id': r.recordidentifier, 'source': r.source}
+            record['id'] = {'id': r.recordIdentifier, 'source': r.source}
             record['creationDate'] = {
                 'date': r.creationDate.text, 'encoding': r.creationDate['encoding']}
             record['origin'] = {'origin': r.recordOrigin.text}
@@ -780,8 +780,6 @@ class BibliographyParse:
 
         # CIDOC: Creating titles
         i = 0
-        
-
 
         for item in titles:
             if 'usage' in item and item['usage'] is not None:
@@ -970,7 +968,6 @@ class BibliographyParse:
                         place.add(RDF.type, CRM.E53_Place)
 
 
-            
             if o['date']:
                 start_date= None
                 transformed= None
