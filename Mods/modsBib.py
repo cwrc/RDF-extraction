@@ -493,9 +493,9 @@ class BibliographyParse:
                     record['sources'].append({'source': source.text, 'authority': source['authority']})
                 else:
                     record['sources'].append({'source': source.text, 'authority': ""})
-            record['id'] = {'id': r.recordidentifier, 'source': r.source}
-            record['creationDate'] = {'date': r.creationdate.text, 'encoding': r.creationdate['encoding']}
-            record['origin'] = {'origin': r.recordorigin.text}
+            record['id'] = {'id': r.recordIdentifier, 'source': r.source}
+            record['creationDate'] = {'date': r.creationDate.text, 'encoding': r.creationDate['encoding']}
+            record['origin'] = {'origin': r.recordOrigin.text}
 
             records.append(record)
         return records
@@ -1000,18 +1000,18 @@ class BibliographyParse:
 
 
 if __name__ == "__main__":
-    g = rdflib.Graph()
-    g.bind("bf", BF)
-    g.bind("cwrc", CWRC)
-    g.bind("data", DATA)
-    g.bind("frbroo", FRBROO)
-    g.bind("genre", GENRE)
-    g.bind("marcrel", MARC_REL)
-    g.bind("marcrel", MARCREL)
-    g.bind("owl", OWL)
-    g.bind("schema", SCHEMA)
-    g.bind("skos", SKOS)
-    g.bind("xml", XML, True)
+#     g = rdflib.Graph()
+#     g.bind("bf", BF)
+#     g.bind("cwrc", CWRC)
+#     g.bind("data", DATA)
+#     g.bind("frbroo", FRBROO)
+#     g.bind("genre", GENRE)
+#     g.bind("marcrel", MARC_REL)
+#     g.bind("marcrel", MARCREL)
+#     g.bind("owl", OWL)
+#     g.bind("schema", SCHEMA)
+#     g.bind("skos", SKOS)
+#     g.bind("xml", XML, True)
     config_options = {}
 
     try:
@@ -1035,44 +1035,44 @@ if __name__ == "__main__":
     genre_map_file = config_options['GENRE_CSV']
 
 
-    geoMapper = ParseGeoNamesMapping(places)
+#     geoMapper = ParseGeoNamesMapping(places)
 
-    genre_graph = rdflib.Graph()
-    genre_graph.parse(genre_ontology)
+#     genre_graph = rdflib.Graph()
+#     genre_graph.parse(genre_ontology)
 
-    with open(genre_map_file) as f:
-        csvfile = csv.reader(f)
-        for row in csvfile:
-            genre_mapping[row[0]] = row[1]
+#     with open(genre_map_file) as f:
+#         csvfile = csv.reader(f)
+#         for row in csvfile:
+#             genre_mapping[row[0]] = row[1]
 
-    # Retrieving genre:Forms to determine correct predicate to use
-    res = genre_graph.query("""SELECT ?s WHERE { ?s rdf:type*/rdfs:subClassOf* <http://sparql.cwrc.ca/ontologies/genre#Form>
-. }""")
-    FORMS = [ row.s for row in res]
-    res = genre_graph.query("""SELECT ?s WHERE { ?s rdf:type*/rdfs:subClassOf* <http://sparql.cwrc.ca/ontologies/genre#Medium>
-. }""")
-    MEDIUMS = [ row.s for row in res]
+#     # Retrieving genre:Forms to determine correct predicate to use
+#     res = genre_graph.query("""SELECT ?s WHERE { ?s rdf:type*/rdfs:subClassOf* <http://sparql.cwrc.ca/ontologies/genre#Form>
+# . }""")
+#     FORMS = [ row.s for row in res]
+#     res = genre_graph.query("""SELECT ?s WHERE { ?s rdf:type*/rdfs:subClassOf* <http://sparql.cwrc.ca/ontologies/genre#Medium>
+# . }""")
+#     MEDIUMS = [ row.s for row in res]
 
 
-    for fname in os.listdir(writing_dir):
-        path = os.path.join(writing_dir, fname)
-        if os.path.isdir(path):
-            continue
+#     for fname in os.listdir(writing_dir):
+#         path = os.path.join(writing_dir, fname)
+#         if os.path.isdir(path):
+#             continue
 
-        try:
-            genreParse = WritingParse(path, genre_map)
-        except UnicodeError:
-            pass
+#         try:
+#             genreParse = WritingParse(path, genre_map)
+#         except UnicodeError:
+#             pass
 
-    # test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"]
-    # test_filenames = ["0d0e00bf-3224-4286-8ec4-f389ec6cc7bb.xml"]
-    test_filenames = ["55aff3fb-8ea9-4e95-9e04-0f3e630896e3.xml", "0c133817-f55e-4a8f-a9b4-474566418d9b.xml"]
+#     # test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"]
+#     # test_filenames = ["0d0e00bf-3224-4286-8ec4-f389ec6cc7bb.xml"]
+#     test_filenames = ["55aff3fb-8ea9-4e95-9e04-0f3e630896e3.xml", "0c133817-f55e-4a8f-a9b4-474566418d9b.xml"]
 
     count = 1
     total = len(os.listdir(dirname))
     # for fname in test_filenames:
     for fname in os.listdir(dirname):
-        print(F"{count}/{total} files extracted ({fname})")
+        # print(F"{count}/{total} files extracted ({fname})")
 
         path = os.path.join(dirname, fname)
         if os.path.isdir(path):
@@ -1080,12 +1080,23 @@ if __name__ == "__main__":
 
         if not fname:
             continue
-        try:
-            mp = BibliographyParse(path, g, fname)
-            mp.build_graph()
-        except UnicodeError:
-            pass
+        with open(path,encoding='utf-8') as f:
+            soup = BeautifulSoup(f, 'lxml-xml')
+            genres = soup.find_all("genre")
+            for x in genres:
+                if x.text == "article":
+                    # print (x.text)
+                    print(soup)
+                    print("<!--  Next Record below  -->")
+            # input()
+        # try:
+        #     mp = BibliographyParse(path, g, fname)
+        #     mp.build_graph()
+        # except UnicodeError:
+        #     pass
         count +=1
+
+    exit()
 
     with open("unmatchedplaces.csv", "w") as f:
         writer = csv.writer(f, delimiter='\t', quoting=csv.QUOTE_MINIMAL)
