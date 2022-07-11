@@ -255,6 +255,10 @@ class Context(object):
             self.text = self.text.replace(date.text, date.text + ": ")
         
         self.text= self.text.replace("\n"," ")
+        self.text= self.text.replace(".",". ")
+        self.text= self.text.replace("  "," ")
+
+        self.text=self.text.strip()
         
 
     def to_triple(self, person=None):
