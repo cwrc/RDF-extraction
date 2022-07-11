@@ -51,6 +51,7 @@ def main():
         birthDeath.extract_death_data(soup, person)
         birthDeath.extract_birth_data(soup, person)
         location.extract_location_data(soup, person)
+        cf.extract_gender_data(soup, person)
         cf.extract_cf_data(soup, person)
         other_contexts.extract_other_contexts_data(soup, person)
         
