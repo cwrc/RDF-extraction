@@ -29,6 +29,11 @@ WRITER_MAP = {}
 MAX_WORD_COUNT = 35
 
 NS_DICT = {
+    "cwrc": rdflib.Namespace("http://id.linscproject.ca/vocabularies/cwrc#"),
+    "ii": rdflib.Namespace("http://id.linscproject.ca/vocabularies/ii#"),
+    "genre": rdflib.Namespace("http://id.linscproject.ca/vocabularies/genre#"),
+    "cwrc_temp": rdflib.Namespace("http://temp.lincsproject.ca/cwrc/"),
+    "frbroo": rdflib.Namespace("http://iflastandards.info/ns/fr/frbr/frbroo/"),
     "as": rdflib.Namespace("http://www.w3.org/ns/activitystreams#"),
     "bibo": rdflib.Namespace("http://purl.org/ontology/bibo/"),
     "biro": rdflib.Namespace("http://purl.org/spar/biro/"),
@@ -36,12 +41,7 @@ NS_DICT = {
     "bf": rdflib.Namespace("http://id.loc.gov/ontologies/bibframe/"),
     "cc": rdflib.Namespace("http://creativecommons.org/ns#"),
     "cito": rdflib.Namespace("http://purl.org/spar/cito/"),
-    "cwrc": rdflib.Namespace("http://vocab.lincsproject.ca/cwrc#"),
     "crm": rdflib.Namespace("http://www.cidoc-crm.org/cidoc-crm/"),
-    "ii": rdflib.Namespace("https://id.linscproject.ca/vocabularies/ii#"),
-    "genre": rdflib.Namespace("https://id.linscproject.ca/vocabularies/genre#"),
-    "occupation": rdflib.Namespace("https://id.linscproject.ca/vocabularies/occupation#"),
-    "culturalform": rdflib.Namespace("http://vocab.lincsproject.ca/cwrc#"),
     "dig": rdflib.Namespace("http://www.ics.forth.gr/isl/CRMdig/"),
     "data": rdflib.Namespace("http://cwrc.ca/cwrcdata/"),
     "dbpedia": rdflib.Namespace("http://dbpedia.org/resource/"),
@@ -307,12 +307,14 @@ def get_people(tag):
     return list(set([get_name_uri(x) for x in tag.find_all("NAME")]))
 
 
+def get_title_uri(tag):
+    title = get_value(tag)
+    return make_standard_uri(title + " TITLE", ns="data")
 def get_titles(tag):
     """Returns all titles within a given tag TODO Mapping"""
     titles = []
     for x in tag.find_all("TITLE"):
-        title = get_value(x)
-        titles.append(make_standard_uri(title + " TITLE", ns="cwrc"))
+        titles.append(get_title_uri(x))
     return titles
 
 
