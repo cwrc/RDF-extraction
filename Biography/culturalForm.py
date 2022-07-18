@@ -548,8 +548,8 @@ def get_mapped_term(rdf_type, value, retry=False, id=None):
     global map_attempt
     global map_success
     global map_fail
-    if "http://vocab.lincsproject.ca/cwrc#" not in rdf_type:
-        rdf_type = "http://vocab.lincsproject.ca/cwrc#" + rdf_type
+    if "http://id.linscproject.ca/vocabularies/cwrc#" not in rdf_type:
+        rdf_type = "http://id.linscproject.ca/vocabularies/cwrc#" + rdf_type
     map_attempt += 1
     term = None
     temp_val = clean_term(value)
