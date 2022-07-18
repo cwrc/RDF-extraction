@@ -191,8 +191,8 @@ class Biography(object):
         g.add((self.uri, utilities.NS_DICT["skos"].altLabel, Literal(self.name)))
 
 
+        # Adding names for all the people mentioned in an entry
         generic_names = ["king","King","mother-in-law" , "Queen", "queen","husband","wife","partner" ,"father", "daughter","essay", "son","he","she","they","her","him","them", "sisters","the",  "mother", "sibling", "brother", "sister", "friend", "his wife", "her husband","his husband", "her wife", "their husband", "their wife", "lover"]
-
         for x in self.document.find_all("NAME"):
             uri = x.get("REF")
             if not uri:
@@ -207,6 +207,19 @@ class Biography(object):
             altname = x.get_text()
             if altname and std_name != altname and altname not in generic_names:
                 g.add((uri, utilities.NS_DICT["skos"].altLabel, Literal(altname)))
+        
+        for x in self.document.find_all("TITLE"):
+            entity_uri = utilities.get_title_uri(x)
+
+            g.add((entity_uri,RDFS.label,Literal(utilities.get_value(x))))
+            g.add((entity_uri,RDF.type,utilities.NS_DICT["frbroo"].F1_Work))
+            
+            # TODO: Fix alternate names duplicating
+            altname = x.get_text()
+            if altname:
+                g.add((entity_uri, utilities.NS_DICT["skos"].altLabel, Literal(altname)))
+    
+        
         return g
 
     def to_file(self, graph=None, serialization="ttl"):
