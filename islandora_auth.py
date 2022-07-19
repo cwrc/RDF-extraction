@@ -6,6 +6,7 @@ from Env import env
 
 session = requests.Session()
 
+# TODO add arguments to download particular collections
 collections = {
     "bibliography": "orlando:7397f8b2-10d9-48b6-8af5-6c2cd24f50b5",
     "person": "orlando:348397a1-6edb-4c23-ba26-59f35e5bc8d6",
