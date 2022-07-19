@@ -493,9 +493,9 @@ class BibliographyParse:
                     record['sources'].append({'source': source.text, 'authority': source['authority']})
                 else:
                     record['sources'].append({'source': source.text, 'authority': ""})
-            record['id'] = {'id': r.recordidentifier, 'source': r.source}
-            record['creationDate'] = {'date': r.creationdate.text, 'encoding': r.creationdate['encoding']}
-            record['origin'] = {'origin': r.recordorigin.text}
+            record['id'] = {'id': r.recordIdentifier, 'source': r.source}
+            record['creationDate'] = {'date': r.creationDate.text, 'encoding': r.creationDate['encoding']}
+            record['origin'] = {'origin': r.recordOrigin.text}
 
             records.append(record)
         return records
