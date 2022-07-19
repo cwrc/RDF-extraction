@@ -46,7 +46,6 @@ ADMIN_AGENTS = {
 }
 
 genre_graph = None
-
 genre_map = {} # from writing parsing
 genre_mapping = {} # genre mapping from CSV
 geoMapper = None
@@ -56,8 +55,6 @@ UNIQUE_UNMATCHED_PLACES = set()
 FORMS = []
 MEDIUMS = []
 AGENTS = {}
-
-
 
 # --------- UTILITY FUNCTIONS -------
 
@@ -242,6 +239,7 @@ class WritingParse:
     """
     matched_documents = None
     soup = None
+
     def __init__(self, filename, matched_documents):
 
         with open(filename,encoding='utf-8') as f:
@@ -251,7 +249,8 @@ class WritingParse:
         self.matched_documents = matched_documents
 
         self.parse_db_refs()
-
+        # print(self.matched_documents)
+        # input()
     def parse_db_refs(self):
         """
         Maps all genres within a textscope to the given ref/dbref
@@ -279,15 +278,7 @@ class WritingParse:
                         name = genre.attrs['GENRENAME']
                         genres.append(name)
 
-                
-                if rec_id in self.matched_documents:
-                    for x in genres:
-                        if x not in self.matched_documents[rec_id]:
-                            self.matched_documents[rec_id].append(x)
-                else:
-                        self.matched_documents[rec_id] = list(set(genres))
-            
-            
+                self.matched_documents[rec_id] = genres
             else:
                 logger.error("TEXTSCOPE missing REF & DBREF attribute")
                 
@@ -697,12 +688,9 @@ class BibliographyParse:
             if x['usage'] == 'primary':
                 self.mainTitle = x['title'].strip().replace("\n"," ").replace("\t"," ")
                 return
-    
-   
     def build_graph(self):
         g = self.g
         i = 0
-
 
         titles = self.get_title()
         self.get_main_title(titles)
@@ -738,6 +726,8 @@ class BibliographyParse:
 
         for name in self.get_names():
             # contribution_resource = g.resource(self.mainURI + "#contribution_{}".format(i))
+
+
             
             agent_resource = None
             if "uri" in name and name["uri"]:
@@ -775,6 +765,7 @@ class BibliographyParse:
             contribution_resource.add(RDF.type, BF.Contribution)
 
       
+            
             
             # agent_resource = g.resource(self.mainURI + "#agent_{}".format(i))
             if name['type'] == 'personal':
