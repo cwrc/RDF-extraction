@@ -1,6 +1,6 @@
 # RDF-extraction
 
-Extraction scripts for transforming the Orlando XML data into Linked Data
+Extraction scripts for transforming the Orlando XML data into Linked Data (CIDOC edition) (cidoc-revisions branch)
 
 
 
@@ -14,6 +14,8 @@ In Root folder:
 
 1. Create a Virtual Environment:
 `python3 -m venv venv`
+1. Start Virtual Environment:
+`source ./venv/bin/activate` 
 2. Install modules:
 `pip install -r requirements.txt`
 3. Create an `.env` file with `username=XXX` and `password=yyy`, replacing `xxx` and `yyy` with the respective credentials.
@@ -36,6 +38,8 @@ These commands take place in `Entry` folder (`cd Entry`)
 1. Update `default directory` field within `testcases.json` to match where your source data files are
 2. Create a Virtual Environment:
 `python3 -m venv venv`
+1. Start Virtual environment:
+`source ./venv/bin/activate`
 3. Install modules:
 `pip install -r requirements.txt`
 4. Run script `python3 bio_extraction.py` 
