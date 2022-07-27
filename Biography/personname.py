@@ -302,7 +302,6 @@ def main():
         print(str(len(uber_graph)) + " total triples created")
 
     utilities.create_uber_triples(extraction_mode, uber_graph, "cf")
-    log_mapping_fails()
     logger.info("Time completed: " + utilities.get_current_time())
 
 if __name__ == "__main__":

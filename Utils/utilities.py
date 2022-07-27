@@ -284,7 +284,8 @@ def get_value(tag):
     if not value:
         value = str(tag.text)
         value = ' '.join(value.split())
-    return value
+    
+    return value.strip()
 
 
 def get_attribute(tag, attribute):
@@ -653,7 +654,7 @@ def parse_args(script, info_type, logger=None):
     """
     import argparse
     import json
-    print(script, info_type, logger)
+
     """
         TODO: add options for verbosity of output, types of output
         -o OUTPUTFILE

@@ -240,10 +240,21 @@ class Activity(object):
         self.tag = tag
         self.id = id
         self.uri = utilities.create_uri("data", id)
+        self.connection_uri = None
+
+        # TODO: populate this variable with different possibilities similar to the activity map
+        self.activity_path = activity_type
+        self.activity_type = None
+        
+        if self.activity_path == "generic+":
+            self.uri = utilities.create_uri("data", id+"_Context")
+            self.connection_uri = utilities.create_uri("data", id)
+        else:
+            self.uri = utilities.create_uri("data", id)
+
+        
         self.places = utilities.get_places(tag)
-        self.related_activity = related_activity
-
-
+        self.related_activity = related_activity #TODO: Review Usage
 
         if not person:
             self.person = None
@@ -252,16 +263,13 @@ class Activity(object):
         # attributes = {predicate:[objects]}
         self.attributes = attributes
         
-        # TODO: populate this variable with different possibilities similar to the activity map
-        self.activity_path = activity_type
-        self.activity_type = None
-        
         if activity_type.lower() in Activity.activity_map:
             self.activity_type = utilities.NS_DICT["crm"][Activity.activity_map[activity_type.lower()]]            
 
         self.participants = get_participants(tag)
         self.biographers = []
         
+        # Cleaning list of participants
         if self.person:
             if person.uri in self.participants:
                 self.participants.remove(person.uri)
@@ -302,9 +310,40 @@ class Activity(object):
         else: 
             self.date= None
 
+    def __str__(self):
+        string = F"""
+title: {self.title}
+tag: {self.tag}
+id: {self.id}
+uri: {self.uri}
+places: {self.places}
+related_activity: {self.related_activity}
+attributes: {self.attributes}
+activity_path: {self.activity_path}
+activity_type: {self.activity_type}
+participants: {self.participants}
+biographers: {self.biographers}
+event_type: {self.event_type}
+date_tag: {self.date_tag}
+date_text: {self.date_text}
+start_date: {self.start_date}
+end_date: {self.end_date}
+date: {self.date}
+precision: {self.precision}
+>\nperson: {self.person}
+        """
+        return string
+
     def to_triple(self, person=None):
         g = utilities.create_graph()
-        activity = g.resource(self.uri)
+        activity = None
+
+        if self.activity_path == "generic+":
+            activity = g.resource(self.uri)
+        else:
+            activity = g.resource(self.uri)
+
+
         activity_label = self.title
         if self.person:
             activity_label = self.person.name +": "+  self.title
@@ -354,25 +393,49 @@ class Activity(object):
         if self.text:
             activity.add(utilities.NS_DICT["crm"].P3_has_note, Literal(self.text))
 
-        for x in self.places:
-            activity.add(utilities.NS_DICT["crm"].P7_took_place_at, x)
+
+        if self.activity_path != "generic+":
+            for x in self.places:
+                activity.add(utilities.NS_DICT["crm"].P7_took_place_at, x)
             
         if "Attribute" not in str(self.activity_type):
             for x in self.event_type:
                 activity.add(utilities.NS_DICT["crm"].P2_has_type, x)
 
-        print(self.participants)
 
-        if self.activity_path == "generic+":
-            
-            connection = g.resource(f"{self.uri}_context")
+        if self.activity_path == "generic+":            
+            connection = g.resource(f"{self.connection_uri}")
             connection.add(RDFS.label, Literal(activity_label+" (??)"))
-            activity.add(RDF.type, utilities.NS_DICT["crm"][self.activity_map["attribute"]])
             connection.add(RDF.type, utilities.NS_DICT["crm"][self.activity_map["generic"]])
+            connection.add(utilities.NS_DICT["crm"].P14_carried_out_by, self.person.uri)
+            connection.add(utilities.NS_DICT["crm"].P140i_was_attributed_by,activity)
+
+            for x in self.places:
+                connection.add(utilities.NS_DICT["crm"].P7_took_place_at, x)
+
+            activity.add(RDF.type, utilities.NS_DICT["crm"][self.activity_map["attribute"]])
             
-            activity.add(utilities.NS_DICT["crm"].P141_assigned,connection)
-            activity.add(utilities.NS_DICT["crm"].P140_assigned_attribute_to,self.person.uri)
+            # TODO: REMOVE THIS AFTER TESTING
+            if len(self.attributes.keys()) > 1:
+                logger.warning(F"Multiple types of attributes: {self.attributes}")
             
+            for x in self.attributes.keys():
+                activity.add(utilities.NS_DICT["crm"].P141_assigned,x)
+
+                
+                # TODO: REMOVE THIS AFTER TESTING, there should only be one participant
+                if len(self.attributes[x])>1:
+                    logger.warning(F"Multiple participants: {self.attributes[x]}")
+
+                for y in self.attributes[x]:
+                   connection.add(utilities.NS_DICT["crm"].P11_had_participant, y)
+
+
+
+            
+            activity.add(utilities.NS_DICT["crm"].P140_assigned_attribute_to,connection)
+            
+
             if self.event_type:
                 event_type = self.event_type[0].replace("Context","Event")
                 connection.add(utilities.NS_DICT["crm"].P2_has_type, rdflib.term.URIRef(event_type))
@@ -402,10 +465,16 @@ class Activity(object):
             for x in self.participants:
                 activity.add(utilities.NS_DICT["crm"].P11_had_participant, x)
 
-        if self.person and "Activity" in str(self.activity_type):
+        if self.activity_path == "generic+":
+            # Relationship is posed by biographer
+            for x in self.biographers:
+                activity.add(utilities.NS_DICT["crm"].P14_carried_out_by, x)
+
+
+        elif self.person and "Activity" in str(self.activity_type):
             activity.add(utilities.NS_DICT["crm"].P14_carried_out_by, self.person.uri)
 
-        # consult if this property should be a list
+        #TODO: consult if this property should be a list & review usage
         if self.related_activity:
             activity.add(utilities.NS_DICT["crm"].P140_assigned_attribute_to, self.related_activity)
 

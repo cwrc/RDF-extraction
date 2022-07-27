@@ -49,9 +49,13 @@ class Person(object):
         return g
 
     def __str__(self):
-        string = "\tURI: " + str(self.uri) + "\n"
-        string += "\tname: " + str(self.name) + "\n"
-        string += "\tpredicate: " + str(self.predicate) + "\n"
+        string = F"""
+name: {self.name}
+alt_name: {self.alt_name}
+uri: {self.uri}
+predicate: {self.predicate}
+        """
+
         return string
 
 def create_marital_status(tagname):
@@ -124,7 +128,6 @@ def find_relationships(tag, person, relation):
 def get_attributes(entities):
     attributes = {}
     for x in entities:
-        print(x)
         if x.predicate in attributes:
             attributes[x.predicate].append(x.uri)
         else:
@@ -148,23 +151,29 @@ def extract_relationships(tag_list, context_type, person, list_type="paragraphs"
         context_count += 1
         context_id = person.id + "_" + CONTEXT_TYPE + "_" + str(context_count)
         relationship_list = find_relationships(tag, person, context_type)
+        
+        # Sometimes includes cohabitant as well
         attributes = get_attributes(relationship_list)
 
+        if len(attributes.keys())>1:
+            print(attributes)
+            input()
 
         if relationship_list:
             temp_context = Context(context_id, tag, tag_name,pattern="relationships")
             event_count = 1
             participants = None
             
+
             for x in attributes.keys():
+                # need to loop inner list
                 temp_attr = {x:attributes[x]}
        
                 activity_id = context_id.replace("Context","Event") + "_"+ str(event_count)
                 label = f"Intimate Relationship Event: {utilities.split_by_casing(str(x).split('#')[1]).lower()}"
                 activity = Activity(person, label, activity_id, tag, activity_type="generic+", attributes=temp_attr)
                 activity.event_type.append(utilities.create_cwrc_uri(get_event_type(tag_name)))
-                print(temp_attr)
-                print(activity.event_type)
+
 
                 if participants:
                     activity.participants = participants
@@ -214,8 +223,10 @@ def extract_friends(tag_list, context_type, person, list_type="paragraphs"):
     """
     global context_count
     global event_count
-    CONTEXT_TYPE = get_context_type("FRIENDSASSOCIATES")
-    EVENT_TYPE = get_event_type("FRIENDSASSOCIATES")
+    tag_name = "FRIENDSASSOCIATES"
+
+    CONTEXT_TYPE = get_context_type(tag_name)
+    EVENT_TYPE = get_event_type(tag_name)
 
     for tag in tag_list:
         temp_context = None
@@ -223,11 +234,15 @@ def extract_friends(tag_list, context_type, person, list_type="paragraphs"):
         context_count += 1
         context_id = person.id + "_" + CONTEXT_TYPE + "_" + str(context_count)
         friend_list = find_friends(tag, person)
+        attributes = get_attributes(friend_list)
+
+
+
         if friend_list:
-            temp_context = Context(context_id, tag, "FRIENDSASSOCIATES")
+            temp_context = Context(context_id, tag, tag_name)
             temp_context.link_triples(friend_list)
         else:
-            temp_context = Context(context_id, tag, "FRIENDSASSOCIATES", "identifying")
+            temp_context = Context(context_id, tag, tag_name, "identifying")
 
         if list_type == "events":
             event_count += 1

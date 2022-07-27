@@ -210,15 +210,15 @@ class Biography(object):
         
         for x in self.document.find_all("TITLE"):
             entity_uri = utilities.get_title_uri(x)
-
-            g.add((entity_uri,RDFS.label,Literal(utilities.get_value(x))))
+            label = utilities.get_value(x)
+            g.add((entity_uri,RDFS.label,Literal(label)))
             g.add((entity_uri,RDF.type,utilities.NS_DICT["frbroo"].F1_Work))
             
             # TODO: Fix alternate names duplicating
             altname = x.get_text()
-            if altname:
+
+            if altname and altname != label:
                 g.add((entity_uri, utilities.NS_DICT["skos"].altLabel, Literal(altname)))
-    
         
         return g
 

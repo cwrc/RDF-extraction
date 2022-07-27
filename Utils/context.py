@@ -405,6 +405,9 @@ class Context(object):
             g.add((identifying_uri,utilities.NS_DICT["crm"].P129_is_about, x.uri))
             g.add((x.uri,utilities.NS_DICT["crm"].P129i_is_subject_of, identifying_uri))
 
+            if x.connection_uri:
+                g.add((x.connection_uri,utilities.NS_DICT["crm"].P129i_is_subject_of, identifying_uri))
+
         return g
 
     def __str__(self):
