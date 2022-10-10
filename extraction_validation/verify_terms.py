@@ -21,7 +21,7 @@ NS_DICT = {
     "bibo": rdflib.Namespace("http://purl.org/ontology/bibo/"),
     "bio": rdflib.Namespace("http://purl.org/vocab/bio/0.1/"),
     "cc": rdflib.Namespace("http://creativecommons.org/ns#"),
-    "cwrc": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/cwrc#"),
+    "cwrc": rdflib.Namespace("http://id.lincsproject.ca/cwrc#"),
     "data": rdflib.Namespace("http://cwrc.ca/cwrcdata/"),
     "dbpedia": rdflib.Namespace("http://dbpedia.org/resource/"),
     "dcterms": rdflib.Namespace("http://purl.org/dc/terms/"),
@@ -66,7 +66,7 @@ ontology = rdflib.Graph()
 ontology.parse("https://raw.githubusercontent.com/cwrc/ontology/master/cwrc.rdf", format='xml')
 namespace_manager = rdflib.namespace.NamespaceManager(ontology)
 
-cwrc_uri = "http://sparql.cwrc.ca/ontologies/cwrc#"
+cwrc_uri = "http://id.lincsproject.ca/cwrc#"
 cwrc_terms = []
 
 # find cwrc predicates and objects within the datafile

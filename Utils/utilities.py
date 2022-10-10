@@ -29,7 +29,7 @@ WRITER_MAP = {}
 MAX_WORD_COUNT = 35
 
 NS_DICT = {
-    "cwrc": rdflib.Namespace("http://id.linscproject.ca/vocabularies/cwrc#"),
+    "cwrc": rdflib.Namespace("http://id.lincsproject.ca/cwrc#"),
     "ii": rdflib.Namespace("http://id.linscproject.ca/vocabularies/ii#"),
     "genre": rdflib.Namespace("http://id.linscproject.ca/vocabularies/genre#"),
     "cwrc_temp": rdflib.Namespace("http://temp.lincsproject.ca/cwrc/"),

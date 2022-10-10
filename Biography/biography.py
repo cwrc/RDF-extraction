@@ -190,7 +190,7 @@ class Biography(object):
         g.add((self.uri, RDFS.label, Literal(self.std_name)))
         g.add((self.uri, utilities.NS_DICT["skos"].altLabel, Literal(self.name)))
 
-
+        # TODO  test this to see if this what's making random people with no names
         # Adding names for all the people mentioned in an entry
         generic_names = ["king","King","mother-in-law" , "Queen", "queen","husband","wife","partner" ,"father", "daughter","essay", "son","he","she","they","her","him","them", "sisters","the",  "mother", "sibling", "brother", "sister", "friend", "his wife", "her husband","his husband", "her wife", "their husband", "their wife", "lover"]
         for x in self.document.find_all("NAME"):

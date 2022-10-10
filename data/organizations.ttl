@@ -6,7 +6,7 @@
 @prefix biro: <http://purl.org/spar/biro/> .
 @prefix cc: <http://creativecommons.org/ns#> .
 @prefix cito: <http://purl.org/spar/cito/> .
-@prefix cwrc: <http://sparql.cwrc.ca/ontologies/cwrc#> .
+@prefix cwrc: <http://id.lincsproject.ca/cwrc#> .
 @prefix data: <http://cwrc.ca/cwrcdata/> .
 @prefix dbpedia: <http://dbpedia.org/resource/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
@@ -37,64 +37,64 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://sparql.cwrc.ca/ontologies/cwrc#10-80_Committee_ORG> a org:Organization ;
+<http://id.lincsproject.ca/cwrc#10-80_Committee_ORG> a org:Organization ;
     rdfs:label "10-80 Committee" .
 
-<http://sparql.cwrc.ca/ontologies/cwrc#10th_Hussars_ORG> a org:Organization ;
+<http://id.lincsproject.ca/cwrc#10th_Hussars_ORG> a org:Organization ;
     rdfs:label "10th Hussars" .
 
-<http://sparql.cwrc.ca/ontologies/cwrc#14th_Sikhs_ORG> a org:Organization ;
+<http://id.lincsproject.ca/cwrc#14th_Sikhs_ORG> a org:Organization ;
     rdfs:label "14th Sikhs" .
 
-<http://sparql.cwrc.ca/ontologies/cwrc#17th_Lancers_ORG> a org:Organization ;
+<http://id.lincsproject.ca/cwrc#17th_Lancers_ORG> a org:Organization ;
     rdfs:label "17th Lancers" .
 
-<http://sparql.cwrc.ca/ontologies/cwrc#18th_Royal_Irish_Regiment_ORG> a org:Organization ;
+<http://id.lincsproject.ca/cwrc#18th_Royal_Irish_Regiment_ORG> a org:Organization ;
     rdfs:label "18th Royal Irish Regiment" .
 
-<http://sparql.cwrc.ca/ontologies/cwrc#1916_Veterans_Association_ORG> a org:Organization ;
+<http://id.lincsproject.ca/cwrc#1916_Veterans_Association_ORG> a org:Organization ;
     rdfs:label "1916 Veterans' Association" .
 
-<http://sparql.cwrc.ca/ontologies/cwrc#1917_Club_ORG> a org:Organization ;
+<http://id.lincsproject.ca/cwrc#1917_Club_ORG> a org:Organization ;
     rdfs:label "1917 Club" .
 
-<http://sparql.cwrc.ca/ontologies/cwrc#1930_Players_ORG> a org:Organization ;
+<http://id.lincsproject.ca/cwrc#1930_Players_ORG> a org:Organization ;
     rdfs:label "1930 Players" .
 
-<http://sparql.cwrc.ca/ontologies/cwrc#19th_Light_Dragoons_ORG> a org:Organization ;
+<http://id.lincsproject.ca/cwrc#19th_Light_Dragoons_ORG> a org:Organization ;
     rdfs:label "19th Light Dragoons" .
 
-<http://sparql.cwrc.ca/ontologies/cwrc#1st_West_India_Regiment_ORG> a org:Organization ;
+<http://id.lincsproject.ca/cwrc#1st_West_India_Regiment_ORG> a org:Organization ;
     rdfs:label "1st West India Regiment" .
 
-<http://sparql.cwrc.ca/ontologies/cwrc#2-way_Mirror_Theatre_Company_ORG> a org:Organization ;
+<http://id.lincsproject.ca/cwrc#2-way_Mirror_Theatre_Company_ORG> a org:Organization ;
     rdfs:label "2-way Mirror Theatre Company" .
 
-<http://sparql.cwrc.ca/ontologies/cwrc#202_Squadron_Royal_Air_Force_ORG> a org:Organization ;
+<http://id.lincsproject.ca/cwrc#202_Squadron_Royal_Air_Force_ORG> a org:Organization ;
     rdfs:label "202 Squadron,, Royal Air Force" ;
     skos:altLabel "202 Squadron, Royal Air Force" .
 
-<http://sparql.cwrc.ca/ontologies/cwrc#24_General_Hospital_ORG> a org:Organization ;
+<http://id.lincsproject.ca/cwrc#24_General_Hospital_ORG> a org:Organization ;
     rdfs:label "24 General Hospital" .
 
-<http://sparql.cwrc.ca/ontologies/cwrc#300_Group_ORG> a org:Organization ;
+<http://id.lincsproject.ca/cwrc#300_Group_ORG> a org:Organization ;
     rdfs:label "300 Group" .
 
-<http://sparql.cwrc.ca/ontologies/cwrc#48th_Street_Theatre_ORG> a org:Organization ;
+<http://id.lincsproject.ca/cwrc#48th_Street_Theatre_ORG> a org:Organization ;
     rdfs:label "48th Street Theatre" .
 
-<http://sparql.cwrc.ca/ontologies/cwrc#784_ORG> a org:Organization ;
+<http://id.lincsproject.ca/cwrc#784_ORG> a org:Organization ;
     rdfs:label "7:84" .
 
-<http://sparql.cwrc.ca/ontologies/cwrc#8th_Kings_Liverpool_Regiment_ORG> a org:Organization ;
+<http://id.lincsproject.ca/cwrc#8th_Kings_Liverpool_Regiment_ORG> a org:Organization ;
     rdfs:label "8th King's Liverpool Regiment" .
 
-<http://sparql.cwrc.ca/ontologies/cwrc#8th_Royal_Irish_Hussars_ORG> a org:Organization ;
+<http://id.lincsproject.ca/cwrc#8th_Royal_Irish_Hussars_ORG> a org:Organization ;
     rdfs:label "8th Royal Irish Hussars" ;
     skos:altLabel "8th King's Royal Irish Hussars",
         "Eight Hussars" .
 
-<http://sparql.cwrc.ca/ontologies/cwrc#91_Club_ORG> a org:Organization ;
+<http://id.lincsproject.ca/cwrc#91_Club_ORG> a org:Organization ;
     rdfs:label "91 Club" .
 
 cwrc:A19_ORG a org:Organization ;

@@ -22,17 +22,17 @@ And prior to making a dataset publically available. For a large dataset, suggest
 
 ```
 224 Triples in provided data file
-Term not found: http://sparql.cwrc.ca/ontologies/cwrc#monArchism
-Term has been deprecated: http://sparql.cwrc.ca/ontologies/cwrc#hasReligionSelfDefined
-Term not found: http://sparql.cwrc.ca/ontologies/cwrc#anglicanist
+Term not found: http://id.lincsproject.ca/cwrc#monArchism
+Term has been deprecated: http://id.lincsproject.ca/cwrc#hasReligionSelfDefined
+Term not found: http://id.lincsproject.ca/cwrc#anglicanist
 
 Results:
 Number of deprecated terms: 1
      deprecated term --> possible replacement
-     http://sparql.cwrc.ca/ontologies/cwrc#hasReligionSelfDefined --> http://sparql.cwrc.ca/ontologies/cwrc#hasReligionSelfReported
+     http://id.lincsproject.ca/cwrc#hasReligionSelfDefined --> http://id.lincsproject.ca/cwrc#hasReligionSelfReported
 Number of invalid terms: 2
-     http://sparql.cwrc.ca/ontologies/cwrc#monArchism
-     http://sparql.cwrc.ca/ontologies/cwrc#anglicanist
+     http://id.lincsproject.ca/cwrc#monArchism
+     http://id.lincsproject.ca/cwrc#anglicanist
 ```
 
 ### Future

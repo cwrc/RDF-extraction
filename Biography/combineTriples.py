@@ -8,7 +8,7 @@ NS_DICT = {
     "bio": Namespace("http://purl.org/vocab/bio/0.1/"),
     "bf": Namespace("http://id.loc.gov/ontologies/bibframe/"),
     "cc": Namespace("http://creativecommons.org/ns#"),
-    "cwrc": Namespace("http://sparql.cwrc.ca/ontologies/cwrc#"),
+    "cwrc": Namespace("http://id.lincsproject.ca/cwrc#"),
     "data": Namespace("http://cwrc.ca/cwrcdata/"),
     "dbpedia": Namespace("http://dbpedia.org/resource/"),
     "dcterms": Namespace("http://purl.org/dc/terms/"),

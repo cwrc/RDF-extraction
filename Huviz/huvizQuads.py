@@ -6,7 +6,7 @@ import json
 import sys
 
 
-CWRC = rdflib.Namespace( "http://sparql.cwrc.ca/ontologies/cwrc#")
+CWRC = rdflib.Namespace( "http://id.lincsproject.ca/cwrc#")
 
 class HuvizQuads:
 
@@ -37,14 +37,14 @@ class HuvizQuads:
         sparql = SPARQLWrapper("http://sparql.cwrc.ca/sparql")
         sparql.setMethod("POST")
         query = """
-        PREFIX cwrc: <http://sparql.cwrc.ca/ontologies/cwrc#>
+        PREFIX cwrc: <http://id.lincsproject.ca/cwrc#>
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         PREFIX data: <http://cwrc.ca/cwrcdata/>
         PREFIX oa: <http://www.w3.org/ns/oa#>
 
         CONSTRUCT {{
-            ?context <http://sparql.cwrc.ca/ontologies/cwrc#contextFocus> ?contextFocus ;
+            ?context <http://id.lincsproject.ca/cwrc#contextFocus> ?contextFocus ;
                             ?contextPredicates ?contextObjects ;
                             oa:hasTarget ?target ;
                             .
@@ -60,7 +60,7 @@ class HuvizQuads:
 
         GRAPH {1} {{
             BIND({0} AS ?contextFocus)
-                ?context <http://sparql.cwrc.ca/ontologies/cwrc#contextFocus> ?contextFocus ;
+                ?context <http://id.lincsproject.ca/cwrc#contextFocus> ?contextFocus ;
                                 ?contextPredicates ?contextObjects ;
                                 oa:hasTarget ?target ;
                                 .

@@ -344,7 +344,7 @@ while (my $file = readdir(DIR)) {
 #  Prefixes
 #
       print $fh "\@prefix as: <http://www.w3.org/ns/activitystreams#> . \n";
-      print $fh "\@prefix cwrc: <http://sparql.cwrc.ca/ontologies/cwrc#> . \n";
+      print $fh "\@prefix cwrc: <http://id.lincsproject.ca/cwrc#> . \n";
       print $fh "\@prefix data: <http://cwrc.ca/cwrcdata/> . \n";
       print $fh "\@prefix dcterms: <http://purl.org/dc/terms/> . \n";
       print $fh "\@prefix dctypes: <http://purl.org/dc/dcmitype/> . \n";

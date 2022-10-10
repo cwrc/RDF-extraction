@@ -6,7 +6,7 @@ import csv
 import rdflib, sys
 from rdflib import *
 
-CWRC = rdflib.Namespace( "http://sparql.cwrc.ca/ontologies/cwrc#")
+CWRC = rdflib.Namespace( "http://id.lincsproject.ca/cwrc#")
 BF = rdflib.Namespace( "http://id.loc.gov/ontologies/bibframe/")
 XML = rdflib.Namespace("http://www.w3.org/XML/1998/namespace")
 MARCREL = rdflib.Namespace("http://id.loc.gov/vocabulary/relators/")

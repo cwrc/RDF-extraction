@@ -132,7 +132,7 @@ class Occupation(object):
         global map_attempt
         global map_success
         global map_fail
-        rdf_type = "http://sparql.cwrc.ca/ontologies/cwrc#Occupation"
+        rdf_type = "http://id.lincsproject.ca/cwrc#Occupation"
         map_attempt += 1
         term = None
         temp_val = clean_term(value)
@@ -193,8 +193,8 @@ fail_dict = {}
 
 
 def log_mapping_fails(detail=True):
-    if 'http://sparql.cwrc.ca/ontologies/cwrc#Occupation' in fail_dict:
-        job_fail_dict = fail_dict['http://sparql.cwrc.ca/ontologies/cwrc#Occupation']
+    if 'http://id.lincsproject.ca/cwrc#Occupation' in fail_dict:
+        job_fail_dict = fail_dict['http://id.lincsproject.ca/cwrc#Occupation']
         log_str = "\n\n"
         log_str += "Attempts: " + str(map_attempt) + "\n"
         log_str += "Fails: " + str(map_fail) + "\n"
@@ -253,9 +253,9 @@ def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
             # TODO Review this variable assignment
             event_count = 1
             participants = None
-            if rdflib.term.URIRef('http://sparql.cwrc.ca/ontologies/cwrc#employment') in attributes:
-                participants = attributes[rdflib.term.URIRef('http://sparql.cwrc.ca/ontologies/cwrc#employment')]
-                del attributes[rdflib.term.URIRef('http://sparql.cwrc.ca/ontologies/cwrc#employment')]
+            if rdflib.term.URIRef('http://id.lincsproject.ca/cwrc#employment') in attributes:
+                participants = attributes[rdflib.term.URIRef('http://id.lincsproject.ca/cwrc#employment')]
+                del attributes[rdflib.term.URIRef('http://id.lincsproject.ca/cwrc#employment')]
 
             for x in attributes.keys():
                 temp_attr = {x:attributes[x]}

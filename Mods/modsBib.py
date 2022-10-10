@@ -1228,6 +1228,7 @@ if __name__ == "__main__":
             writer.writerow([item])
 
     fname = "bibliography_full"
+    fname = F"bibliography_{datetime.datetime.now().strftime('%d-%m-%Y')}"
     output_name = fname.replace(".xml", "")
     formats = {'ttl': 'turtle'}
     for extension, file_format in formats.items():
