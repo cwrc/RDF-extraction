@@ -1,3 +1,4 @@
+from time import clock_getres
 import rdflib
 from rdflib import RDF, RDFS, Literal
 from Utils import utilities
@@ -190,14 +191,13 @@ class Biography(object):
         g.add((self.uri, RDFS.label, Literal(self.std_name)))
         g.add((self.uri, utilities.NS_DICT["skos"].altLabel, Literal(self.name)))
 
-        # TODO  test this to see if this what's making random people with no names
         # Adding names for all the people mentioned in an entry
         generic_names = ["king","King","mother-in-law" , "Queen", "queen","husband","wife","partner" ,"father", "daughter","essay", "son","he","she","they","her","him","them", "sisters","the",  "mother", "sibling", "brother", "sister", "friend", "his wife", "her husband","his husband", "her wife", "their husband", "their wife", "lover"]
         for x in self.document.find_all("NAME"):
-            uri = x.get("REF")
+            uri = utilities.get_name_uri(x)
             if not uri:
+                logger.warning(F"URI not found for: {x} within entry: {id}")
                 continue
-                # uri = utilities.make_standard_uri(x.get("STANDARD"))
             else: 
                 uri = rdflib.term.URIRef(uri)
             

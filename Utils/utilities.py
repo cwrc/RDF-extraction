@@ -30,8 +30,8 @@ MAX_WORD_COUNT = 35
 
 NS_DICT = {
     "cwrc": rdflib.Namespace("http://id.lincsproject.ca/cwrc#"),
-    "ii": rdflib.Namespace("http://id.linscproject.ca/vocabularies/ii#"),
-    "genre": rdflib.Namespace("http://id.linscproject.ca/vocabularies/genre#"),
+    "ii": rdflib.Namespace("http://id.lincsproject.ca/ii#"),
+    "genre": rdflib.Namespace("http://id.lincsproject.ca/genre#"),
     "cwrc_temp": rdflib.Namespace("http://temp.lincsproject.ca/cwrc/"),
     "frbroo": rdflib.Namespace("http://iflastandards.info/ns/fr/frbr/frbroo/"),
     "as": rdflib.Namespace("http://www.w3.org/ns/activitystreams#"),
@@ -42,7 +42,7 @@ NS_DICT = {
     "cc": rdflib.Namespace("http://creativecommons.org/ns#"),
     "cito": rdflib.Namespace("http://purl.org/spar/cito/"),
     "crm": rdflib.Namespace("http://www.cidoc-crm.org/cidoc-crm/"),
-    "dig": rdflib.Namespace("http://www.ics.forth.gr/isl/CRMdig/"),
+    "crmdig": rdflib.Namespace("http://www.ics.forth.gr/isl/CRMdig/"),
     "data": rdflib.Namespace("http://cwrc.ca/cwrcdata/"),
     "dbpedia": rdflib.Namespace("http://dbpedia.org/resource/"),
     "dcterms": rdflib.Namespace("http://purl.org/dc/terms/"),

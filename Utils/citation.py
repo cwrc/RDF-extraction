@@ -51,7 +51,7 @@ class Citation(object):
         g.add((uri, utilities.NS_DICT["crm"].P67i_is_referred_to_by, citing_uri))
 
         if source_url:
-            g.add((source_url, RDF.type, utilities.NS_DICT["dig"].D1_Digital_Object))
+            g.add((source_url, RDF.type, utilities.NS_DICT["crmdig"].D1_Digital_Object))
             g.add((source_url, utilities.NS_DICT["crm"].P67_refers_to, citing_uri))
             g.add((source_url, RDFS.label, Literal(source_url.split("/")[-1])))
 
