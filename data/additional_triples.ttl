@@ -40356,3 +40356,1422 @@ data:patewa_DeathContext_1_attributing a crm:E13_Attribute_Assignment;
    crm:P2_has_type cwrc:causeOfDeath;
    crm:P140_assigned_attribute_to data:patewa_DeathEvent_1.
 
+
+data:pym_ba_DeathContext_1_attributing
+        rdfs:label  "Barbara Pym: Death Event: Cause of Death" .
+
+data:devoge_DeathContext_1_attributing
+        rdfs:label  "Georgiana Cavendish, Duchess of Devonshire: Death Event: Cause of Death" .
+
+data:brisam_DeathContext_1_attributing
+        rdfs:label  "Amelia Bristow: Death Event: Cause of Death" .
+
+data:thome2_DeathContext_1_attributing
+        rdfs:label  "Elizabeth Thomas, b. 1771: Death Event: Cause of Death" .
+
+data:clerel_DeathContext_1_attributing
+        rdfs:label  "Ellen Mary Clerke: Death Event: Cause of Death" .
+
+data:sewean_DeathContext_1_attributing
+        rdfs:label  "Anna Sewell: Death Event: Cause of Death" .
+
+data:cannma_DeathContext_1_attributing
+        rdfs:label  "May Cannan: Death Event: Cause of Death" .
+
+data:fansca_DeathContext_1_attributing
+        rdfs:label  "Catherine Fanshawe: Death Event: Cause of Death" .
+
+data:chopka_DeathContext_1_attributing
+        rdfs:label  "Kate Chopin: Death Event: Cause of Death" .
+
+data:downha_DeathContext_1_attributing
+        rdfs:label  "Harriet Downing: Death Event: Cause of Death" .
+
+data:weslma_DeathContext_1_attributing
+        rdfs:label  "Mary Wesley: Death Event: Cause of Death" .
+
+data:wardma_DeathContext_1_attributing
+        rdfs:label  "Mary Augusta Ward: Death Event: Cause of Death" .
+
+data:keatjo_DeathContext_1_attributing
+        rdfs:label  "John Keats: Death Event: Cause of Death" .
+
+data:goldol_DeathContext_1_attributing
+        rdfs:label  "Oliver Goldsmith: Death Event: Cause of Death" .
+
+data:clapja_DeathContext_1_attributing
+        rdfs:label  "Jane Hume Clapperton: Death Event: Cause of Death" .
+
+data:blaccl_DeathContext_1_attributing
+        rdfs:label  "Clementina Black: Death Event: Cause of Death" .
+
+data:goreev_DeathContext_1_attributing
+        rdfs:label  "Eva Gore-Booth: Death Event: Cause of Death" .
+
+data:watsro_DeathContext_1_attributing
+        rdfs:label  "Rosamund Marriott Watson: Death Event: Cause of Death" .
+
+data:sackvi_DeathContext_1_attributing
+        rdfs:label  "Vita Sackville-West: Death Event: Cause of Death" .
+
+data:adamsa_DeathContext_1_attributing
+        rdfs:label  "Sarah Flower Adams: Death Event: Cause of Death" .
+
+data:astema_DeathContext_1_attributing
+        rdfs:label  "Mary Astell: Death Event: Cause of Death" .
+
+data:radcan_DeathContext_1_attributing
+        rdfs:label  "Ann Radcliffe: Death Event: Cause of Death" .
+
+data:jacsma_DeathContext_1_attributing
+        rdfs:label  "Maria Elizabetha Jacson: Death Event: Cause of Death" .
+
+data:roydna_DeathContext_1_attributing
+        rdfs:label  "Naomi Royde-Smith: Death Event: Cause of Death" .
+
+data:tayle2_DeathContext_1_attributing
+        rdfs:label  "Elizabeth Taylor: Death Event: Cause of Death" .
+
+data:balfcl_DeathContext_1_attributing
+        rdfs:label  "Clara Balfour: Death Event: Cause of Death" .
+
+data:shorma_DeathContext_1_attributing
+        rdfs:label  "Margaret Emily Shore: Death Event: Cause of Death" .
+
+data:bagnen_DeathContext_1_attributing
+        rdfs:label  "Enid Bagnold: Death Event: Cause of Death" .
+
+data:bretdo_DeathContext_1_attributing
+        rdfs:label  "Dorothy Brett: Death Event: Cause of Death" .
+
+data:collm3_DeathContext_1_attributing
+        rdfs:label  "Mary Maria Colling: Death Event: Cause of Death" .
+
+data:dougge_DeathContext_1_attributing
+        rdfs:label  "George Douglas: Death Event: Cause of Death" .
+
+data:levede_DeathContext_1_attributing
+        rdfs:label  "Denise Levertov: Death Event: Cause of Death" .
+
+data:howima_DeathContext_1_attributing
+        rdfs:label  "Mary Howitt: Death Event: Cause of Death" .
+
+data:arniel_DeathContext_1_attributing
+        rdfs:label  "Elizabeth von Arnim: Death Event: Cause of Death" .
+
+data:undeev_DeathContext_1_attributing
+        rdfs:label  "Evelyn Underhill: Death Event: Cause of Death" .
+
+data:hoflba_DeathContext_1_attributing
+        rdfs:label  "Barbara Hofland: Death Event: Cause of Death" .
+
+data:harlbr_DeathContext_1_attributing
+        rdfs:label  "Brilliana, Lady Harley: Death Event: Cause of Death" .
+
+data:steefl_DeathContext_1_attributing
+        rdfs:label  "Flora Annie Steel: Death Event: Cause of Death" .
+
+data:blaceo_DeathContext_1_attributing
+        rdfs:label  "E. Owens Blackburne: Death Event: Cause of Death" .
+
+data:dickem_DeathContext_1_attributing
+        rdfs:label  "Emily Dickinson: Death Event: Cause of Death" .
+
+data:macaro_DeathContext_1_attributing
+        rdfs:label  "Rose Macaulay: Death Event: Cause of Death" .
+
+data:kiplru_DeathContext_1_attributing
+        rdfs:label  "Rudyard Kipling: Death Event: Cause of Death" .
+
+data:gildel_DeathContext_1_attributing
+        rdfs:label  "Elizabeth Gilding: Death Event: Cause of Death" .
+
+data:duttto_DeathContext_1_attributing
+        rdfs:label  "Toru Dutt: Death Event: Cause of Death" .
+
+data:lickis_DeathContext_1_attributing
+        rdfs:label  "Isabella Lickbarrow: Death Event: Cause of Death" .
+
+data:scotc__DeathContext_1_attributing
+        rdfs:label  "Catharine Amy Dawson Scott: Death Event: Cause of Death" .
+
+data:holmco_DeathContext_1_attributing
+        rdfs:label  "Constance Holme: Death Event: Cause of Death" .
+
+data:smytet_DeathContext_1_attributing
+        rdfs:label  "Ethel Smyth: Death Event: Cause of Death" .
+
+data:miltjo_DeathContext_1_attributing
+        rdfs:label  "John Milton: Death Event: Cause of Death" .
+
+data:hamnni_DeathContext_1_attributing
+        rdfs:label  "Nina Hamnett: Death Event: Cause of Death" .
+
+data:dineis_DeathContext_1_attributing
+        rdfs:label  "Isak Dinesen: Death Event: Cause of Death" .
+
+data:leadma_DeathContext_1_attributing
+        rdfs:label  "Mary Leadbeater: Death Event: Cause of Death" .
+
+data:stergb_DeathContext_1_attributing
+        rdfs:label  "G. B. Stern: Death Event: Cause of Death" .
+
+data:pethem_DeathContext_1_attributing
+        rdfs:label  "Emmeline Pethick-Lawrence: Death Event: Cause of Death" .
+
+data:horofr_DeathContext_1_attributing
+        rdfs:label  "Frances Horovitz: Death Event: Cause of Death" .
+
+data:harrja_DeathContext_1_attributing
+        rdfs:label  "Jane Ellen Harrison: Death Event: Cause of Death" .
+
+data:roweel_DeathContext_1_attributing
+        rdfs:label  "Elizabeth Singer Rowe: Death Event: Cause of Death" .
+
+data:welteu_DeathContext_1_attributing
+        rdfs:label  "Eudora Welty: Death Event: Cause of Death" .
+
+data:leavqd_DeathContext_1_attributing
+        rdfs:label  "Q. D. Leavis: Death Event: Cause of Death" .
+
+data:furlmo_DeathContext_1_attributing
+        rdfs:label  "Monica Furlong: Death Event: Cause of Death" .
+
+data:trolan_DeathContext_1_attributing
+        rdfs:label  "Anthony Trolllope: Death Event: Cause of Death" .
+
+data:cole___DeathContext_1_attributing
+        rdfs:label  "Colette: Death Event: Cause of Death" .
+
+data:huntvi_DeathContext_1_attributing
+        rdfs:label  "Violet Hunt: Death Event: Cause of Death" .
+
+data:townsu_DeathContext_1_attributing
+        rdfs:label  "Sue Townsend: Death Event: Cause of Death" .
+
+data:ridlan_DeathContext_1_attributing
+        rdfs:label  "Anne Ridler: Death Event: Cause of Death" .
+
+data:colema_DeathContext_1_attributing
+        rdfs:label  "Mary Elizabeth Coleridge: Death Event: Cause of Death" .
+
+data:hubbca_DeathContext_1_attributing
+        rdfs:label  "Catherine Hubback: Death Event: Cause of Death" .
+
+data:steean_DeathContext_1_attributing
+        rdfs:label  "Anna Steele: Death Event: Cause of Death" .
+
+data:ham_el_DeathContext_1_attributing
+        rdfs:label  "Elizabeth Ham: Death Event: Cause of Death" .
+
+data:kennma_DeathContext_1_attributing
+        rdfs:label  "Margaret Kennedy: Death Event: Cause of Death" .
+
+data:emecbu_DeathContext_1_attributing
+        rdfs:label  "Buchi Emecheta: Death Event: Cause of Death" .
+
+data:granan_DeathContext_1_attributing
+        rdfs:label  "Anne Grant: Death Event: Cause of Death" .
+
+data:cullha_DeathContext_1_attributing
+        rdfs:label  "Hannah Cullwick: Death Event: Cause of Death" .
+
+data:dumada_DeathContext_1_attributing
+        rdfs:label  "Daphne Du Maurier: Death Event: Cause of Death" .
+
+data:colefr_DeathContext_1_attributing
+        rdfs:label  "Frances Colenso: Death Event: Cause of Death" .
+
+data:pilkla_DeathContext_1_attributing
+        rdfs:label  "Laetitia Pilkington: Death Event: Cause of Death" .
+
+data:andeha_DeathContext_1_attributing
+        rdfs:label  "Hans Christian Andersen: Death Event: Cause of Death" .
+
+data:callma_DeathContext_1_attributing
+        rdfs:label  "Maria Callcott: Death Event: Cause of Death" .
+
+data:bridan_DeathContext_1_attributing
+        rdfs:label  "Ann Bridge: Death Event: Cause of Death" .
+
+data:sidnph_DeathContext_1_attributing
+        rdfs:label  "Sir Philip Sidney: Death Event: Cause of Death" .
+
+data:byroge_DeathContext_1_attributing
+        rdfs:label  "George Gordon, sixth Baron Byron: Death Event: Cause of Death" .
+
+data:elizqu_DeathContext_1_attributing
+        rdfs:label  "Queen Elizabeth I: Death Event: Cause of Death" .
+
+data:brayan_DeathContext_1_attributing
+        rdfs:label  "Anna Eliza Bray: Death Event: Cause of Death" .
+
+data:fanevi_DeathContext_1_attributing
+        rdfs:label  "Violet Fane: Death Event: Cause of Death" .
+
+data:gerska_DeathContext_1_attributing
+        rdfs:label  "Karen Gershon: Death Event: Cause of Death" .
+
+data:lewege_DeathContext_1_attributing
+        rdfs:label  "George Henry Lewes: Death Event: Cause of Death" .
+
+data:loudja_DeathContext_1_attributing
+        rdfs:label  "Jane Loudon: Death Event: Cause of Death" .
+
+data:kingan_DeathContext_1_attributing
+        rdfs:label  "Anna Kingsford: Death Event: Cause of Death" .
+
+data:trouun_DeathContext_1_attributing
+        rdfs:label  "Una Troubridge: Death Event: Cause of Death" .
+
+data:craied_DeathContext_1_attributing
+        rdfs:label  "Edith Craig: Death Event: Cause of Death" .
+
+data:laffma_DeathContext_1_attributing
+        rdfs:label  "May Laffan: Death Event: Cause of Death" .
+
+data:patmco_DeathContext_1_attributing
+        rdfs:label  "Coventry Patmore: Death Event: Cause of Death" .
+
+data:burnf2_DeathContext_1_attributing
+        rdfs:label  "Frances Hodgson Burnett: Death Event: Cause of Death" .
+
+data:newmjo_DeathContext_1_attributing
+        rdfs:label  "John Henry Newman: Death Event: Cause of Death" .
+
+data:hallra_DeathContext_1_attributing
+        rdfs:label  "Radclyffe Hall: Death Event: Cause of Death" .
+
+data:woodel_DeathContext_1_attributing
+        rdfs:label  "Ellen Wood: Death Event: Cause of Death" .
+
+data:patewa_DeathContext_1_attributing
+        rdfs:label  "Walter Pater: Death Event: Cause of Death" .
+
+data:barban_DeathContext_1_attributing
+        rdfs:label  "Anna Letitia Barbauld: Death Event: Cause of Death" .
+
+data:mosshe_DeathContext_1_attributing
+        rdfs:label  "Henrietta Rouviere Mosse: Death Event: Cause of Death" .
+
+data:bropbr_DeathContext_1_attributing
+        rdfs:label  "Brigid Brophy: Death Event: Cause of Death" .
+
+data:woolvi_DeathContext_1_attributing
+        rdfs:label  "Virginia Woolf: Death Event: Cause of Death" .
+
+data:cambad_DeathContext_1_attributing
+        rdfs:label  "Ada Cambridge: Death Event: Cause of Death" .
+
+data:jewsma_DeathContext_1_attributing
+        rdfs:label  "Maria Jane Jewsbury: Death Event: Cause of Death" .
+
+data:swinal_DeathContext_1_attributing
+        rdfs:label  "Algernon Charles Swinburne: Death Event: Cause of Death" .
+
+data:phelel_DeathContext_1_attributing
+        rdfs:label  "Elizabeth Stuart Phelps: Death Event: Cause of Death" .
+
+data:pankem_DeathContext_1_attributing
+        rdfs:label  "Emmeline Pankhurst: Death Event: Cause of Death" .
+
+data:robima_DeathContext_1_attributing
+        rdfs:label  "Mary Robinson: Death Event: Cause of Death" .
+
+data:anspel_DeathContext_1_attributing
+        rdfs:label  "Elizabeth, Margravine of Anspach: Death Event: Cause of Death" .
+
+data:huxlel_DeathContext_1_attributing
+        rdfs:label  "Elspeth Huxley: Death Event: Cause of Death" .
+
+data:tomlel_DeathContext_1_attributing
+        rdfs:label  "Elizabeth Sophia Tomlins: Death Event: Cause of Death" .
+
+data:martma_DeathContext_1_attributing
+        rdfs:label  "Mary Martin: Death Event: Cause of Death" .
+
+data:whitan_DeathContext_1_attributing
+        rdfs:label  "Antonia White: Death Event: Cause of Death" .
+
+data:dufflu_DeathContext_1_attributing
+        rdfs:label  "Lucie Duff Gordon: Death Event: Cause of Death" .
+
+data:harkma_DeathContext_1_attributing
+        rdfs:label  "Margaret Harkness: Death Event: Cause of Death" .
+
+data:murreu_DeathContext_1_attributing
+        rdfs:label  "Eunice Guthrie Murray: Death Event: Cause of Death" .
+
+data:chanla_DeathContext_1_attributing
+        rdfs:label  "Laura Ormiston Chant: Death Event: Cause of Death" .
+
+data:ayreru_DeathContext_1_attributing
+        rdfs:label  "Rudy M. Ayres: Death Event: Cause of Death" .
+
+data:bellfr_DeathContext_1_attributing
+        rdfs:label  "Frances Bellerby: Death Event: Cause of Death" .
+
+data:coddcl_DeathContext_1_attributing
+        rdfs:label  "Clara Codd: Death Event: Cause of Death" .
+
+data:bradma_DeathContext_1_attributing
+        rdfs:label  "Mary Elizabeth Braddon: Death Event: Cause of Death" .
+
+data:meynvi_DeathContext_1_attributing
+        rdfs:label  "Viola Meynell: Death Event: Cause of Death" .
+
+data:millbe_DeathContext_1_attributing
+        rdfs:label  "Betty Miller: Death Event: Cause of Death" .
+
+data:eliots_DeathContext_1_attributing
+        rdfs:label  "T. S. Eliot: Death Event: Cause of Death" .
+
+data:taylja_DeathContext_1_attributing
+        rdfs:label  "Jane Taylor: Death Event: Cause of Death" .
+
+data:scotwa_DeathContext_1_attributing
+        rdfs:label  "Sir Walter Scot: Death Event: Cause of Death" .
+
+data:askean_DeathContext_1_attributing
+        rdfs:label  "Anne Askew: Death Event: Cause of Death" .
+
+data:parrka_DeathContext_1_attributing
+        rdfs:label  "Katherine Parr: Death Event: Cause of Death" .
+
+data:baudch_DeathContext_1_attributing
+        rdfs:label  "Charles Baudelaire: Death Event: Cause of Death" .
+
+data:coles2_DeathContext_1_attributing
+        rdfs:label  "Sara Coleridge: Death Event: Cause of Death" .
+
+data:jewsge_DeathContext_1_attributing
+        rdfs:label  "Geraldine Jewsbury: Death Event: Cause of Death" .
+
+data:davire_DeathContext_1_attributing
+        rdfs:label  "Rebecca Harding Davis: Death Event: Cause of Death" .
+
+data:fernfa_DeathContext_1_attributing
+        rdfs:label  "Fanny Fern: Death Event: Cause of Death" .
+
+data:bellge_DeathContext_1_attributing
+        rdfs:label  "Gertrude Bell: Death Event: Cause of Death" .
+
+data:sedgca_DeathContext_1_attributing
+        rdfs:label  "Catharine Maria Sedgwick: Death Event: Cause of Death" .
+
+data:waugev_DeathContext_1_attributing
+        rdfs:label  "Evelyn Waugh: Death Event: Cause of Death" .
+
+data:treeir_DeathContext_1_attributing
+        rdfs:label  "Iris Tree: Death Event: Cause of Death" .
+
+data:carero_DeathContext_1_attributing
+        rdfs:label  "Rosa Nouchette Carey: Death Event: Cause of Death" .
+
+data:gonnma_DeathContext_1_attributing
+        rdfs:label  "Maud Gonne: Death Event: Cause of Death" .
+
+data:worbem_DeathContext_1_attributing
+        rdfs:label  "Emma Jane Worboise: Death Event: Cause of Death" .
+
+data:philka_DeathContext_1_attributing
+        rdfs:label  "Katherine Philips: Death Event: Cause of Death" .
+
+data:craidi_DeathContext_1_attributing
+        rdfs:label  "Dinah Mulock Craik: Death Event: Cause of Death" .
+
+data:montc2_DeathContext_1_attributing
+        rdfs:label  "Charlotte Montefiore: Death Event: Cause of Death" .
+
+data:franpa_DeathContext_1_attributing
+        rdfs:label  "Pamela Frankau: Death Event: Cause of Death" .
+
+data:mozlha_DeathContext_1_attributing
+        rdfs:label  "Harriett Mozley: Death Event: Cause of Death" .
+
+data:leplal_DeathContext_1_attributing
+        rdfs:label  "Alice Dixon Le Plongeon: Death Event: Cause of Death" .
+
+data:drydjo_DeathContext_1_attributing
+        rdfs:label  "John Dryden: Death Event: Cause of Death" .
+
+data:blacan_DeathContext_1_attributing
+        rdfs:label  "Antoinette Brown Blackwell: Death Event: Cause of Death" .
+
+data:johnch_DeathContext_1_attributing
+        rdfs:label  "Christian Isobel Johnstone: Death Event: Cause of Death" .
+
+data:allima_DeathContext_1_attributing
+        rdfs:label  "Margery Allingham: Death Event: Cause of Death" .
+
+data:taylha_DeathContext_1_attributing
+        rdfs:label  "Harriet Taylor: Death Event: Cause of Death" .
+
+data:sparmu_DeathContext_1_attributing
+        rdfs:label  "Muriel Spark: Death Event: Cause of Death" .
+
+data:butljo_DeathContext_1_attributing
+        rdfs:label  "Josephine Butler: Death Event: Cause of Death" .
+
+data:robeea_DeathContext_1_attributing
+        rdfs:label  "E. Arnot Robertson: Death Event: Cause of Death" .
+
+data:lel____DeathContext_1_attributing
+        rdfs:label  "L. E. L.: Death Event: Cause of Death" .
+
+data:richhe_DeathContext_1_attributing
+        rdfs:label  "Henry Handel Richardson: Death Event: Cause of Death" .
+
+data:martha_DeathContext_1_attributing
+        rdfs:label  "Harriet Martineau: Death Event: Cause of Death" .
+
+data:treevi_DeathContext_1_attributing
+        rdfs:label  "Viola Tree: Death Event: Cause of Death" .
+
+data:kavaju_DeathContext_1_attributing
+        rdfs:label  "Julia Kavanagh: Death Event: Cause of Death" .
+
+data:howeju_DeathContext_1_attributing
+        rdfs:label  "Julia Ward Howe: Death Event: Cause of Death" .
+
+data:obrich_DeathContext_1_attributing
+        rdfs:label  "Charlotte Grace O'Brien: Death Event: Cause of Death" .
+
+data:mitfna_DeathContext_1_attributing
+        rdfs:label  "Nancy Mitford: Death Event: Cause of Death" .
+
+data:havefr_DeathContext_1_attributing
+        rdfs:label  "Frances Ridley Havergal: Death Event: Cause of Death" .
+
+data:aguigr_DeathContext_1_attributing
+        rdfs:label  "Grace Aguilar: Death Event: Cause of Death" .
+
+data:sitwed_DeathContext_1_attributing
+        rdfs:label  "Edith Sitwell: Death Event: Cause of Death" .
+
+data:waddhe_DeathContext_1_attributing
+        rdfs:label  "Helen Waddell: Death Event: Cause of Death" .
+
+data:marlch_DeathContext_1_attributing
+        rdfs:label  "Christopher Marlowe: Death Event: Cause of Death" .
+
+data:victqu_DeathContext_1_attributing
+        rdfs:label  "Queen Victoria: Death Event: Cause of Death" .
+
+data:wildja_DeathContext_1_attributing
+        rdfs:label  "Jane Francesca, Lady Wilde: Death Event: Cause of Death" .
+
+data:listan_DeathContext_1_attributing
+        rdfs:label  "Anne Lister: Death Event: Cause of Death" .
+
+data:ros_am_DeathContext_1_attributing
+        rdfs:label  "Amanda McKittrick Ros: Death Event: Cause of Death" .
+
+data:steige_DeathContext_1_attributing
+        rdfs:label  "Gertrude Stein: Death Event: Cause of Death" .
+
+data:brooem_DeathContext_1_attributing
+        rdfs:label  "Emma Frances Brooke: Death Event: Cause of Death" .
+
+data:milled_DeathContext_1_attributing
+        rdfs:label  "Edna St Vincent Millay: Death Event: Cause of Death" .
+
+data:lehmro_DeathContext_1_attributing
+        rdfs:label  "Rosamond Lehmann: Death Event: Cause of Death" .
+
+data:hemafe_DeathContext_1_attributing
+        rdfs:label  "Felicia Hemans: Death Event: Cause of Death" .
+
+data:panksy_DeathContext_1_attributing
+        rdfs:label  "Sylvia Pankhurst: Death Event: Cause of Death" .
+
+data:bakeel_DeathContext_1_attributing
+        rdfs:label  "Ella Baker: Death Event: Cause of Death" .
+
+data:smolto_DeathContext_1_attributing
+        rdfs:label  "Tobias Smollett: Death Event: Cause of Death" .
+
+data:sewema_DeathContext_1_attributing
+        rdfs:label  "Mary Sewell: Death Event: Cause of Death" .
+
+data:buckpe_DeathContext_1_attributing
+        rdfs:label  "Pearl S. Buck: Death Event: Cause of Death" .
+
+data:manska_DeathContext_1_attributing
+        rdfs:label  "Katherine Mansfield: Death Event: Cause of Death" .
+
+data:campco_DeathContext_1_attributing
+        rdfs:label  "Lady Colin Campbell: Death Event: Cause of Death" .
+
+data:dunmhe_DeathContext_1_attributing
+        rdfs:label  "Helen Dunmore: Death Event: Cause of Death" .
+
+data:haywel_DeathContext_1_attributing
+        rdfs:label  "Eliza Haywood: Death Event: Cause of Death" .
+
+data:morrot_DeathContext_1_attributing
+        rdfs:label  "Lady Ottoline Morrell: Death Event: Cause of Death" .
+
+data:fishan_DeathContext_1_attributing
+        rdfs:label  "Ann Fisher: Death Event: Cause of Death" .
+
+data:egerge_DeathContext_1_attributing
+        rdfs:label  "George Egerton: Death Event: Cause of Death" .
+
+data:boweli_DeathContext_1_attributing
+        rdfs:label  "Lilian Bowes Lyon: Death Event: Cause of Death" .
+
+data:leonan_DeathContext_1_attributing
+        rdfs:label  "Anna Leonowens: Death Event: Cause of Death" .
+
+data:cannjo_DeathContext_1_attributing
+        rdfs:label  "Joanna Cannan: Death Event: Cause of Death" .
+
+data:elioge_DeathContext_1_attributing
+        rdfs:label  "George Eliot: Death Event: Cause of Death" .
+
+data:rubebe_DeathContext_1_attributing
+        rdfs:label  "Bernice Rubens: Death Event: Cause of Death" .
+
+data:tey_jo_DeathContext_1_attributing
+        rdfs:label  "Josephine Tey: Death Event: Cause of Death" .
+
+data:abdyma_DeathContext_1_attributing
+        rdfs:label  "Maria Abdy: Death Event: Cause of Death" .
+
+data:radcma_DeathContext_1_attributing
+        rdfs:label  "Mary Ann Radcliffe: Death Event: Cause of Death" .
+
+data:lingsh_DeathContext_1_attributing
+        rdfs:label  "Ling Shuhua: Death Event: Cause of Death" .
+
+data:delaem_DeathContext_1_attributing
+        rdfs:label  "E. M. Delafield: Death Event: Cause of Death" .
+
+data:sayedo_DeathContext_1_attributing
+        rdfs:label  "Dorothy L. Sayers: Death Event: Cause of Death" .
+
+data:voynet_DeathContext_1_attributing
+        rdfs:label  "Ethel Lilian Voynich: Death Event: Cause of Death" .
+
+data:cavema_DeathContext_1_attributing
+        rdfs:label  "Margaret Cavendish: Death Event: Cause of Death" .
+
+data:bodiba_DeathContext_1_attributing
+        rdfs:label  "Barbara Leigh Smith Bodichon: Death Event: Cause of Death" .
+
+data:hopela_DeathContext_1_attributing
+        rdfs:label  "Laurence Hope: Death Event: Cause of Death" .
+
+data:carrdo_DeathContext_1_attributing
+        rdfs:label  "Dora Carrington: Death Event: Cause of Death" .
+
+data:swana2_DeathContext_1_attributing
+        rdfs:label  "Annie S. Swan: Death Event: Cause of Death" .
+
+data:delama_DeathContext_1_attributing
+        rdfs:label  "Mary Delany: Death Event: Cause of Death" .
+
+data:dawsje_DeathContext_1_attributing
+        rdfs:label  "Jennifer Dawson: Death Event: Cause of Death" .
+
+data:despch_DeathContext_1_attributing
+        rdfs:label  "Charlotte Despard: Death Event: Cause of Death" .
+
+data:jewesa_DeathContext_1_attributing
+        rdfs:label  "Sarah Orne Jewett: Death Event: Cause of Death" .
+
+data:fletma_DeathContext_1_attributing
+        rdfs:label  "Mary Bosanquet Fletcher: Death Event: Cause of Death" .
+
+data:harrbe_DeathContext_1_attributing
+        rdfs:label  "Beatrice Harraden: Death Event: Cause of Death" .
+
+data:renama_DeathContext_1_attributing
+        rdfs:label  "Mary Renault: Death Event: Cause of Death" .
+
+data:barnna_DeathContext_1_attributing
+        rdfs:label  "Natalie Clifford Barney: Death Event: Cause of Death" .
+
+data:taylma_DeathContext_1_attributing
+        rdfs:label  "Mary Taylor: Death Event: Cause of Death" .
+
+data:trisfl_DeathContext_1_attributing
+        rdfs:label  "Flora Tristan: Death Event: Cause of Death" .
+
+data:thurka_DeathContext_1_attributing
+        rdfs:label  "Katherine Cecil Thurston: Death Event: Cause of Death" .
+
+data:hamici_DeathContext_1_attributing
+        rdfs:label  "Cicely Hamilton: Death Event: Cause of Death" .
+
+data:chisca_DeathContext_1_attributing
+        rdfs:label  "Caroline Chisholm: Death Event: Cause of Death" .
+
+data:morgsy_DeathContext_1_attributing
+        rdfs:label  "Sydney Owenson, Lady Morgan: Death Event: Cause of Death" .
+
+data:gregau_DeathContext_1_attributing
+        rdfs:label  "Augusta Gregory: Death Event: Cause of Death" .
+
+data:beckly_DeathContext_1_attributing
+        rdfs:label  "Lydia Becker: Death Event: Cause of Death" .
+
+data:clivca_DeathContext_1_attributing
+        rdfs:label  "Caroline Clive: Death Event: Cause of Death" .
+
+data:shawfl_DeathContext_1_attributing
+        rdfs:label  "Flora Shaw: Death Event: Cause of Death" .
+
+data:jamest_DeathContext_1_attributing
+        rdfs:label  "Storm Jameson: Death Event: Cause of Death" .
+
+data:lawrdh_DeathContext_1_attributing
+        rdfs:label  "D. H. Lawrence: Death Event: Cause of Death" .
+
+data:warnsy_DeathContext_1_attributing
+        rdfs:label  "Sylvia Townsend Warner: Death Event: Cause of Death" .
+
+data:hobbjo_DeathContext_1_attributing
+        rdfs:label  "John Oliver Hobbes: Death Event: Cause of Death" .
+
+data:thomdy_DeathContext_1_attributing
+        rdfs:label  "Dylan Thomas: Death Event: Cause of Death" .
+
+data:laurma_DeathContext_1_attributing
+        rdfs:label  "Margaret Laurence: Death Event: Cause of Death" .
+
+data:bronan_DeathContext_1_attributing
+        rdfs:label  "Anne Brontë: Death Event: Cause of Death" .
+
+data:rossch_DeathContext_1_attributing
+        rdfs:label  "Christina Rossetti: Death Event: Cause of Death" .
+
+data:johnp2_DeathContext_1_attributing
+        rdfs:label  "Pauline Johnson: Death Event: Cause of Death" .
+
+data:montlm_DeathContext_1_attributing
+        rdfs:label  "L. M. Montgomery: Death Event: Cause of Death" .
+
+data:fitzpe_DeathContext_1_attributing
+        rdfs:label  "Penelope Fitzgerald: Death Event: Cause of Death" .
+
+data:lee_ha_DeathContext_1_attributing
+        rdfs:label  "Harriet Lee: Death Event: Cause of Death" .
+
+data:frerma_DeathContext_1_attributing
+        rdfs:label  "Mary Frere: Death Event: Cause of Death" .
+
+data:dacian_DeathContext_1_attributing
+        rdfs:label  "Anne Dacier: Death Event: Cause of Death" .
+
+data:sackma_DeathContext_1_attributing
+        rdfs:label  "Lady Margaret Sackville: Death Event: Cause of Death" .
+
+data:leapma_DeathContext_1_attributing
+        rdfs:label  "Mary Leapor: Death Event: Cause of Death" .
+
+data:alcolo_DeathContext_1_attributing
+        rdfs:label  "Louisa May Alcott: Death Event: Cause of Death" .
+
+data:yongch_DeathContext_1_attributing
+        rdfs:label  "Charlotte Yonge: Death Event: Cause of Death" .
+
+data:rossm2_DeathContext_1_attributing
+        rdfs:label  "Martin Ross: Death Event: Cause of Death" .
+
+data:willsa_DeathContext_1_attributing
+        rdfs:label  "Sarah Williams: Death Event: Cause of Death" .
+
+data:buttma_DeathContext_1_attributing
+        rdfs:label  "Mary Butts: Death Event: Cause of Death" .
+
+data:shelpe_DeathContext_1_attributing
+        rdfs:label  "Percy Bysshe Shelley: Death Event: Cause of Death" .
+
+data:moorma_DeathContext_1_attributing
+        rdfs:label  "Marianne Moore: Death Event: Cause of Death" .
+
+data:heyrel_DeathContext_1_attributing
+        rdfs:label  "Elizabeth Heyrick: Death Event: Cause of Death" .
+
+data:kingma_DeathContext_1_attributing
+        rdfs:label  "Mary Kingsley: Death Event: Cause of Death" .
+
+data:buchjo_DeathContext_1_attributing
+        rdfs:label  "John Buchan: Death Event: Cause of Death" .
+
+data:bostlu_DeathContext_1_attributing
+        rdfs:label  "Lucy Boston: Death Event: Cause of Death" .
+
+data:costlo_DeathContext_1_attributing
+        rdfs:label  "Louisa Stuart Costello: Death Event: Cause of Death" .
+
+data:brooru_DeathContext_1_attributing
+        rdfs:label  "Rupert Brooke: Death Event: Cause of Death" .
+
+data:falkel_DeathContext_1_attributing
+        rdfs:label  "Elizabeth Cary, Viscountess Falkland: Death Event: Cause of Death" .
+
+data:caryma_DeathContext_1_attributing
+        rdfs:label  "Mary Ann Shadd Cary: Death Event: Cause of Death" .
+
+data:whitdo_DeathContext_1_attributing
+        rdfs:label  "Dorothy White: Death Event: Cause of Death" .
+
+data:webbbe_DeathContext_1_attributing
+        rdfs:label  "Beatrice Webb: Death Event: Cause of Death" .
+
+data:thacwi_DeathContext_1_attributing
+        rdfs:label  "William Makepeace Thackeray: Death Event: Cause of Death" .
+
+data:marsun_DeathContext_1_attributing
+        rdfs:label  "Una Marson: Death Event: Cause of Death" .
+
+data:johnpa_DeathContext_1_attributing
+        rdfs:label  "Pamela Hansford Johnson: Death Event: Cause of Death" .
+
+data:bronch_DeathContext_1_attributing
+        rdfs:label  "Charlotte Brontë: Death Event: Cause of Death" .
+
+data:beetis_DeathContext_1_attributing
+        rdfs:label  "Isabella Beeton: Death Event: Cause of Death" .
+
+data:greeka_DeathContext_1_attributing
+        rdfs:label  "Kate Greenaway: Death Event: Cause of Death" .
+
+data:cowlha_DeathContext_1_attributing
+        rdfs:label  "Hannah Cowley: Death Event: Cause of Death" .
+
+data:brunma_DeathContext_1_attributing
+        rdfs:label  "Mary Brunton: Death Event: Cause of Death" .
+
+data:robiis_DeathContext_1_attributing
+        rdfs:label  "Isabella Hamilton Robinson: Death Event: Cause of Death" .
+
+data:byroau_DeathContext_1_attributing
+        rdfs:label  "Augusta Ada Byron: Death Event: Cause of Death" .
+
+data:harpfr_DeathContext_1_attributing
+        rdfs:label  "Frances E. W. Harper: Death Event: Cause of Death" .
+
+data:catcma_DeathContext_1_attributing
+        rdfs:label  "Margaret Catchpole: Death Event: Cause of Death" .
+
+data:farrfl_DeathContext_1_attributing
+        rdfs:label  "Florence Farr: Death Event: Cause of Death" .
+
+data:gaskel_DeathContext_1_attributing
+        rdfs:label  "Elizabeth Gaskell: Death Event: Cause of Death" .
+
+data:jennel_DeathContext_1_attributing
+        rdfs:label  "Elizabeth Jennings: Death Event: Cause of Death" .
+
+data:russra_DeathContext_1_attributing
+        rdfs:label  "Lady Rachel Russell: Death Event: Cause of Death" .
+
+data:smitst_DeathContext_1_attributing
+        rdfs:label  "Stevie Smith: Death Event: Cause of Death" .
+
+data:sleael_DeathContext_1_attributing
+        rdfs:label  "Eleanor Sleath: Death Event: Cause of Death" .
+
+data:shieca_DeathContext_1_attributing
+        rdfs:label  "Carol Shields: Death Event: Cause of Death" .
+
+data:websau_DeathContext_1_attributing
+        rdfs:label  "Augusta Webster: Death Event: Cause of Death" .
+
+data:malelu_DeathContext_1_attributing
+        rdfs:label  "Lucas Malet: Death Event: Cause of Death" .
+
+data:laskma_DeathContext_1_attributing
+        rdfs:label  "Marghanita Laski: Death Event: Cause of Death" .
+
+data:cairmo_DeathContext_1_attributing
+        rdfs:label  "Mona Caird: Death Event: Cause of Death" .
+
+data:corema_DeathContext_1_attributing
+        rdfs:label  "Marie Corelli: Death Event: Cause of Death" .
+
+data:hillis_DeathContext_1_attributing
+        rdfs:label  "Isabel Hill: Death Event: Cause of Death" .
+
+data:brasan_DeathContext_1_attributing
+        rdfs:label  "Anna Brassey: Death Event: Cause of Death" .
+
+data:aikilu_DeathContext_1_attributing
+        rdfs:label  "Lucy Aikin: Death Event: Cause of Death" .
+
+data:piozhe_DeathContext_1_attributing
+        rdfs:label  "Hester Lynch Piozzi: Death Event: Cause of Death" .
+
+data:austsa_DeathContext_1_attributing
+        rdfs:label  "Sarah Austin: Death Event: Cause of Death" .
+
+data:inneka_DeathContext_1_attributing
+        rdfs:label  "Kathleen E. Innes: Death Event: Cause of Death" .
+
+data:barche_DeathContext_1_attributing
+        rdfs:label  "Hélène Barcynska: Death Event: Cause of Death" .
+
+data:orczem_DeathContext_1_attributing
+        rdfs:label  "Emmuska, Baroness Orczy: Death Event: Cause of Death" .
+
+data:jamean_DeathContext_1_attributing
+        rdfs:label  "Anna Brownell Jameson: Death Event: Cause of Death" .
+
+data:stjoch_DeathContext_1_attributing
+        rdfs:label  "Christopher St John: Death Event: Cause of Death" .
+
+data:sextan_DeathContext_1_attributing
+        rdfs:label  "Anne Sexton: Death Event: Cause of Death" .
+
+data:dixoel_DeathContext_1_attributing
+        rdfs:label  "Ella Hepworth Dixon: Death Event: Cause of Death" .
+
+data:jay_ha_DeathContext_1_attributing
+        rdfs:label  "Harriett Jay: Death Event: Cause of Death" .
+
+data:linsma_DeathContext_1_attributing
+        rdfs:label  "Mary Linskill: Death Event: Cause of Death" .
+
+data:delash_DeathContext_1_attributing
+        rdfs:label  "Shelagh Delaney: Death Event: Cause of Death" .
+
+data:burtca_DeathContext_1_attributing
+        rdfs:label  "Catharine Burton: Death Event: Cause of Death" .
+
+data:russdo_DeathContext_1_attributing
+        rdfs:label  "Dora Russell: Death Event: Cause of Death" .
+
+data:rathel_DeathContext_1_attributing
+        rdfs:label  "Eleanor Rathbone: Death Event: Cause of Death" .
+
+data:bishel_DeathContext_1_attributing
+        rdfs:label  "Elizabeth Bishop: Death Event: Cause of Death" .
+
+data:sincma_DeathContext_1_attributing
+        rdfs:label  "May Sinclair: Death Event: Cause of Death" .
+
+data:littja_DeathContext_1_attributing
+        rdfs:label  "Janet Little: Death Event: Cause of Death" .
+
+data:bridel_DeathContext_1_attributing
+        rdfs:label  "Elizabeth (Cavendish) Egerton, Countess of Bridgewater: Death Event: Cause of Death" .
+
+data:ewinju_DeathContext_1_attributing
+        rdfs:label  "Juliana Horatia Ewing: Death Event: Cause of Death" .
+
+data:grieco_DeathContext_1_attributing
+        rdfs:label  "Constantia Grierson: Death Event: Cause of Death" .
+
+data:bradan_DeathContext_1_attributing
+        rdfs:label  "Anne Bradstreet: Death Event: Cause of Death" .
+
+data:ropema_DeathContext_1_attributing
+        rdfs:label  "Margaret Roper: Death Event: Cause of Death" .
+
+data:montma_DeathContext_1_attributing
+        rdfs:label  "Lady Mary Wortley Montagu: Death Event: Cause of Death" .
+
+data:brourh_DeathContext_1_attributing
+        rdfs:label  "Rhoda Broughton: Death Event: Cause of Death" .
+
+data:bainbe_DeathContext_1_attributing
+        rdfs:label  "Beryl Bainbridge: Death Event: Cause of Death" .
+
+data:siddel_DeathContext_1_attributing
+        rdfs:label  "Elizabeth Siddal: Death Event: Cause of Death" .
+
+data:dubodo_DeathContext_1_attributing
+        rdfs:label  "Dorothea Du Bois: Death Event: Cause of Death" .
+
+data:platsy_DeathContext_1_attributing
+        rdfs:label  "Sylvia Plath: Death Event: Cause of Death" .
+
+data:talbca_DeathContext_1_attributing
+        rdfs:label  "Catherine Talbot: Death Event: Cause of Death" .
+
+data:stopch_DeathContext_1_attributing
+        rdfs:label  "Charlotte Stopes: Death Event: Cause of Death" .
+
+data:muirwi_DeathContext_1_attributing
+        rdfs:label  "Willa Muir: Death Event: Cause of Death" .
+
+data:larkph_DeathContext_1_attributing
+        rdfs:label  "Philip Larkin: Death Event: Cause of Death" .
+
+data:akhman_DeathContext_1_attributing
+        rdfs:label  "Anna Akhmatova: Death Event: Cause of Death" .
+
+data:thiran_DeathContext_1_attributing
+        rdfs:label  "Angela Thirkell: Death Event: Cause of Death" .
+
+data:bensst_DeathContext_1_attributing
+        rdfs:label  "Stella Benson: Death Event: Cause of Death" .
+
+data:smedco_DeathContext_1_attributing
+        rdfs:label  "Constance Smedley: Death Event: Cause of Death" .
+
+data:webbma_DeathContext_1_attributing
+        rdfs:label  "Mary Webb: Death Event: Cause of Death" .
+
+data:pfeiem_DeathContext_1_attributing
+        rdfs:label  "Emily Jane Pfeiffer: Death Event: Cause of Death" .
+
+data:killan_DeathContext_1_attributing
+        rdfs:label  "Anne Killigrew: Death Event: Cause of Death" .
+
+data:chilly_DeathContext_1_attributing
+        rdfs:label  "Lydia Maria Child: Death Event: Cause of Death" .
+
+data:barkma_DeathContext_1_attributing
+        rdfs:label  "Mary Anne Barker: Death Event: Cause of Death" .
+
+data:simced_DeathContext_1_attributing
+        rdfs:label  "Edith J. Simcox: Death Event: Cause of Death" .
+
+data:procad_DeathContext_1_attributing
+        rdfs:label  "Adelaide Procter: Death Event: Cause of Death" .
+
+data:whitel_DeathContext_1_attributing
+        rdfs:label  "Elizabeth White: Death Event: Cause of Death" .
+
+data:holtwi_DeathContext_1_attributing
+        rdfs:label  "Winifred Holtby: Death Event: Cause of Death" .
+
+data:pembma_DeathContext_1_attributing
+        rdfs:label  "Mary Sidney Herbert, Countess of Pembroke: Death Event: Cause of Death" .
+
+data:edwaam_DeathContext_1_attributing
+        rdfs:label  "Amelia B. Edwards: Death Event: Cause of Death" .
+
+data:beacsy_DeathContext_1_attributing
+        rdfs:label  "Sylvia Beach: Death Event: Cause of Death" .
+
+data:jhabru_DeathContext_1_attributing
+        rdfs:label  "Ruth Prawer Jhabvala: Death Event: Cause of Death" .
+
+data:bowema_DeathContext_1_attributing
+        rdfs:label  "Marjorie Bowen: Death Event: Cause of Death" .
+
+data:portan_DeathContext_1_attributing
+        rdfs:label  "Anna Maria Porter: Death Event: Cause of Death" .
+
+data:howian_DeathContext_1_attributing
+        rdfs:label  "Anna Mary Howitt: Death Event: Cause of Death" .
+
+data:mannol_DeathContext_1_attributing
+        rdfs:label  "Olivia Manning: Death Event: Cause of Death" .
+
+data:wilsro_DeathContext_1_attributing
+        rdfs:label  "Romer Wilson: Death Event: Cause of Death" .
+
+data:sandge_DeathContext_1_attributing
+        rdfs:label  "George Sand: Death Event: Cause of Death" .
+
+data:browma_DeathContext_1_attributing
+        rdfs:label  "Mary Ann Browne: Death Event: Cause of Death" .
+
+data:bowdhe_DeathContext_1_attributing
+        rdfs:label  "Henrietta Maria Bowdler: Death Event: Cause of Death" .
+
+data:cornfr_DeathContext_1_attributing
+        rdfs:label  "Frances Cornford: Death Event: Cause of Death" .
+
+data:farjel_DeathContext_1_attributing
+        rdfs:label  "Eleanor Farjeon: Death Event: Cause of Death" .
+
+data:alexce_DeathContext_1_attributing
+        rdfs:label  "Cecil Frances Alexander: Death Event: Cause of Death" .
+
+data:blesma_DeathContext_1_attributing
+        rdfs:label  "Marguerite Gardiner, Countess of Blessington: Death Event: Cause of Death" .
+
+data:sherfr_DeathContext_1_attributing
+        rdfs:label  "Frances Sheridan: Death Event: Cause of Death" .
+
+data:whipdo_DeathContext_1_attributing
+        rdfs:label  "Dorothy Whipple: Death Event: Cause of Death" .
+
+data:tynaka_DeathContext_1_attributing
+        rdfs:label  "Katharine Tynan: Death Event: Cause of Death" .
+
+data:tonnch_DeathContext_1_attributing
+        rdfs:label  "Charlotte Elizabeth Tonna: Death Event: Cause of Death" .
+
+data:lee_ve_DeathContext_1_attributing
+        rdfs:label  "Vernon Lee: Death Event: Cause of Death" .
+
+data:skinan_DeathContext_1_attributing
+        rdfs:label  "Ann Masterman Skinn: Death Event: Cause of Death" .
+
+data:mathel_DeathContext_1_attributing
+        rdfs:label  "Eliza Kirkham Mathews: Death Event: Cause of Death" .
+
+data:levead_DeathContext_1_attributing
+        rdfs:label  "Ada Leverson: Death Event: Cause of Death" .
+
+data:clerag_DeathContext_1_attributing
+        rdfs:label  "Agnes Mary Clerke: Death Event: Cause of Death" .
+
+data:tighma_DeathContext_1_attributing
+        rdfs:label  "Mary Tighe: Death Event: Cause of Death" .
+
+data:syngjm_DeathContext_1_attributing
+        rdfs:label  "John Millington Synge: Death Event: Cause of Death" .
+
+data:thomfl_DeathContext_1_attributing
+        rdfs:label  "Flora Thompson: Death Event: Cause of Death" .
+
+data:ballrm_DeathContext_1_attributing
+        rdfs:label  "R. M. Ballantyne: Death Event: Cause of Death" .
+
+data:bailma_DeathContext_1_attributing
+        rdfs:label  "Mary Bailey: Death Event: Cause of Death" .
+
+data:lothro_DeathContext_1_attributing
+        rdfs:label  "Roxburghe Lothian: Death Event: Cause of Death" .
+
+data:humema_DeathContext_1_attributing
+        rdfs:label  "Mary Catherine Hume: Death Event: Cause of Death" .
+
+data:mannet_DeathContext_1_attributing
+        rdfs:label  "Ethel Mannin: Death Event: Cause of Death" .
+
+data:levyam_DeathContext_1_attributing
+        rdfs:label  "Amy Levy: Death Event: Cause of Death" .
+
+data:greegr_DeathContext_1_attributing
+        rdfs:label  "Graham Greene: Death Event: Cause of Death" .
+
+data:willan_DeathContext_1_attributing
+        rdfs:label  "Anna Williams: Death Event: Cause of Death" .
+
+data:peisma_DeathContext_1_attributing
+        rdfs:label  "Mary Peisley: Death Event: Cause of Death" .
+
+data:gilmch_DeathContext_1_attributing
+        rdfs:label  "Charlotte Perkins Gilman: Death Event: Cause of Death" .
+
+data:britve_DeathContext_1_attributing
+        rdfs:label  "Vera Brittain: Death Event: Cause of Death" .
+
+data:margna_DeathContext_1_attributing
+        rdfs:label  "Marguerite de Navarre: Death Event: Cause of Death" .
+
+data:blacca_DeathContext_1_attributing
+        rdfs:label  "Caroline Blackwood: Death Event: Cause of Death" .
+
+data:faitem_DeathContext_1_attributing
+        rdfs:label  "Emily Faithfull: Death Event: Cause of Death" .
+
+data:heyege_DeathContext_1_attributing
+        rdfs:label  "Georgette Heyer: Death Event: Cause of Death" .
+
+data:forsma_DeathContext_1_attributing
+        rdfs:label  "Margaret Forster: Death Event: Cause of Death" .
+
+data:nighfl_DeathContext_1_attributing
+        rdfs:label  "Florence Nightingale: Death Event: Cause of Death" .
+
+data:tuckch_DeathContext_1_attributing
+        rdfs:label  "Charlotte Maria Tucker: Death Event: Cause of Death" .
+
+data:bensth_DeathContext_1_attributing
+        rdfs:label  "Theodora Benson: Death Event: Cause of Death" .
+
+data:joscel_DeathContext_1_attributing
+        rdfs:label  "Elizabeth Joscelin: Death Event: Cause of Death" .
+
+data:bevils_DeathContext_1_attributing
+        rdfs:label  "L. S. Bevington: Death Event: Cause of Death" .
+
+data:struja_DeathContext_1_attributing
+        rdfs:label  "Jan Struther: Death Event: Cause of Death" .
+
+data:trefvi_DeathContext_1_attributing
+        rdfs:label  "Violet Trefusis: Death Event: Cause of Death" .
+
+data:riddch_DeathContext_1_attributing
+        rdfs:label  "Charlotte Riddell: Death Event: Cause of Death" .
+
+data:boweel_DeathContext_1_attributing
+        rdfs:label  "Elizabeth Bowen: Death Event: Cause of Death" .
+
+data:manlde_DeathContext_1_attributing
+        rdfs:label  "Delarivier Manley: Death Event: Cause of Death" .
+
+data:rhonma_DeathContext_1_attributing
+        rdfs:label  "Margaret Haig, Viscountess Rhondda: Death Event: Cause of Death" .
+
+data:lownma_DeathContext_1_attributing
+        rdfs:label  "Marie Belloc Lowndes: Death Event: Cause of Death" .
+
+data:bronem_DeathContext_1_attributing
+        rdfs:label  "Emily Brontë: Death Event: Cause of Death" .
+
+data:stuaar_DeathContext_1_attributing
+        rdfs:label  "Lady Arbella Stuart: Death Event: Cause of Death" .
+
+data:wickan_DeathContext_1_attributing
+        rdfs:label  "Anna Wickham: Death Event: Cause of Death" .
+
+data:pardju_DeathContext_1_attributing
+        rdfs:label  "Julia Pardoe: Death Event: Cause of Death" .
+
+data:markco_DeathContext_1_attributing
+        rdfs:label  "Constance, Countess Markievicz: Death Event: Cause of Death" .
+
+data:cromri_DeathContext_1_attributing
+        rdfs:label  "Richmal Crompton: Death Event: Cause of Death" .
+
+data:ouid___DeathContext_1_attributing
+        rdfs:label  "Ouida: Death Event: Cause of Death" .
+
+data:purcsa_DeathContext_1_attributing
+        rdfs:label  "Sally Purcell: Death Event: Cause of Death" .
+
+data:lyaled_DeathContext_1_attributing
+        rdfs:label  "Edna Lyall: Death Event: Cause of Death" .
+
+data:loy_mi_DeathContext_1_attributing
+        rdfs:label  "Mina Loy: Death Event: Cause of Death" .
+
+data:fullma_DeathContext_1_attributing
+        rdfs:label  "Margaret Fuller: Death Event: Cause of Death" .
+
+data:olipma_DeathContext_1_attributing
+        rdfs:label  "Margaret Oliphant: Death Event: Cause of Death" .
+
+data:mozlan_DeathContext_1_attributing
+        rdfs:label  "Anne Mozley: Death Event: Cause of Death" .
+
+data:duncsa_DeathContext_1_attributing
+        rdfs:label  "Sara Jeanette Duncan: Death Event: Cause of Death" .
+
+data:highpa_DeathContext_1_attributing
+        rdfs:label  "Patricia Highsmith: Death Event: Cause of Death" .
+
+data:bannhe_DeathContext_1_attributing
+        rdfs:label  "Helen Bannerman: Death Event: Cause of Death" .
+
+data:streno_DeathContext_1_attributing
+        rdfs:label  "Noel Streatfeild: Death Event: Cause of Death" .
+
+data:brerja_DeathContext_1_attributing
+        rdfs:label  "Jane Brereton: Death Event: Cause of Death" .
+
+data:nortca_DeathContext_1_attributing
+        rdfs:label  "Caroline Norton: Death Event: Cause of Death" .
+
+data:carsca_DeathContext_1_attributing
+        rdfs:label  "Catherine Carswell: Death Event: Cause of Death" .
+
+data:donnjo_DeathContext_1_attributing
+        rdfs:label  "John Donne: Death Event: Cause of Death" .
+
+data:carlma_DeathContext_1_attributing
+        rdfs:label  "Mary Carleton: Death Event: Cause of Death" .
+
+data:marsca_DeathContext_1_attributing
+        rdfs:label  "Catherine Marsh: Death Event: Cause of Death" .
+
+data:mayofl_DeathContext_1_attributing
+        rdfs:label  "Flora Macdonald Mayor: Death Event: Cause of Death" .
+
+data:boylma_DeathContext_1_attributing
+        rdfs:label  "Mary Boyle: Death Event: Cause of Death" .
+
+data:marsng_DeathContext_1_attributing
+        rdfs:label  "Ngaio Marsh: Death Event: Cause of Death" .
+
+data:cartan_DeathContext_1_attributing
+        rdfs:label  "Angela Carter: Death Event: Cause of Death" .
+
+data:franju_DeathContext_1_attributing
+        rdfs:label  "Julia Frankau: Death Event: Cause of Death" .
+
+data:cathwi_DeathContext_1_attributing
+        rdfs:label  "Willa Cather: Death Event: Cause of Death" .
+
+data:mccuca_DeathContext_1_attributing
+        rdfs:label  "Carson McCullers: Death Event: Cause of Death" .
+
+data:asqucy_DeathContext_1_attributing
+        rdfs:label  "Lady Cynthia Asquith: Death Event: Cause of Death" .
+
+data:acklva_DeathContext_1_attributing
+        rdfs:label  "Valentine Ackland: Death Event: Cause of Death" .
+
+data:walldo_DeathContext_1_attributing
+        rdfs:label  "Doreen Wallace: Death Event: Cause of Death" .
+
+data:kellis_DeathContext_1_attributing
+        rdfs:label  "Isabella Kelly: Death Event: Cause of Death" .
+
+data:shelma_DeathContext_1_attributing
+        rdfs:label  "Mary Shelley: Death Event: Cause of Death" .
+
+data:molema_DeathContext_1_attributing
+        rdfs:label  "Mary Louisa Molesworth: Death Event: Cause of Death" .
+
+data:buryel_DeathContext_1_attributing
+        rdfs:label  "Elizabeth Bury: Death Event: Cause of Death" .
+
+data:kingfa_DeathContext_1_attributing
+        rdfs:label  "Fanny Kingsley: Death Event: Cause of Death" .
+
+data:ecclch_DeathContext_1_attributing
+        rdfs:label  "Charlotte O'Conor Eccles: Death Event: Cause of Death" .
+
+data:ellisa_DeathContext_1_attributing
+        rdfs:label  "Sarah Stickney Ellis: Death Event: Cause of Death" .
+
+data:plaije_DeathContext_1_attributing
+        rdfs:label  "Jean Plaidy: Death Event: Cause of Death" .
+
+data:buchro_DeathContext_1_attributing
+        rdfs:label  "Robert Williams Buchanan: Death Event: Cause of Death" .
+
+data:lyncha_DeathContext_1_attributing
+        rdfs:label  "Hannah Lynch: Death Event: Cause of Death" .
+
+data:kavaan_DeathContext_1_attributing
+        rdfs:label  "Anna Kavan: Death Event: Cause of Death" .
+
+data:caffka_DeathContext_1_attributing
+        rdfs:label  "Kathleen Caffyn: Death Event: Cause of Death" .
+
+data:leadja_DeathContext_1_attributing
+        rdfs:label  "Jane Lead: Death Event: Cause of Death" .
+
+data:barnch_DeathContext_1_attributing
+        rdfs:label  "Charlotte Barnard: Death Event: Cause of Death" .
+
+data:arenha_DeathContext_1_attributing
+        rdfs:label  "Hannah Arendt: Death Event: Cause of Death" .
+
+data:macnsa_DeathContext_1_attributing
+        rdfs:label  "Sarah Macnaughtan: Death Event: Cause of Death" .
+
+data:bennar_DeathContext_1_attributing
+        rdfs:label  "Arnold Bennett: Death Event: Cause of Death" .
+
+data:joneeb_DeathContext_1_attributing
+        rdfs:label  "E. B. C. Jones: Death Event: Cause of Death" .
+
+data:blamsu_DeathContext_1_attributing
+        rdfs:label  "Susanna Blamire: Death Event: Cause of Death" .
+
+data:mew_ch_DeathContext_1_attributing
+        rdfs:label  "Charlotte Mew: Death Event: Cause of Death" .
+
+data:addijo_DeathContext_1_attributing
+        rdfs:label  "Joseph Addison: Death Event: Cause of Death" .
+
+data:wintjo_DeathContext_1_attributing
+        rdfs:label  "John Strange Winter: Death Event: Cause of Death" .
+
+data:adamab_DeathContext_1_attributing
+        rdfs:label  "Abigail Adams: Death Event: Cause of Death" .
+
+data:wharan_DeathContext_1_attributing
+        rdfs:label  "Anne Wharton: Death Event: Cause of Death" .
+
+data:strara_DeathContext_1_attributing
+        rdfs:label  "Ray Strachey: Death Event: Cause of Death" .
+
+data:sandma_DeathContext_1_attributing
+        rdfs:label  "Margaret Sandbach: Death Event: Cause of Death" .
+
+data:cavej2_DeathContext_1_attributing
+        rdfs:label  "Lady Jane Cavendish: Death Event: Cause of Death" .
+
+data:carrl2_DeathContext_1_attributing
+        rdfs:label  "Leonora Carrington: Death Event: Cause of Death" .
+
+data:empswi_DeathContext_1_attributing
+        rdfs:label  "William Empson: Death Event: Cause of Death" .
+
+data:marsem_DeathContext_1_attributing
+        rdfs:label  "Emma Marshall: Death Event: Cause of Death" .
+
+data:bethma_DeathContext_1_attributing
+        rdfs:label  "Matilda Betham-Edwards: Death Event: Cause of Death" .
+
+data:mortpe_DeathContext_1_attributing
+        rdfs:label  "Penelope Mortimer: Death Event: Cause of Death" .
+
+data:kanesa_DeathContext_1_attributing
+        rdfs:label  "Sarah Kane: Death Event: Cause of Death" .
+
+data:bleean_DeathContext_1_attributing
+        rdfs:label  "Ann Eliza Bleecker: Death Event: Cause of Death" .
+
+data:youneh_DeathContext_1_attributing
+        rdfs:label  "E. H. Young: Death Event: Cause of Death" .
+
+data:pastge_DeathContext_1_attributing
+        rdfs:label  "George Paston: Death Event: Cause of Death" .
+
+data:mccama_DeathContext_1_attributing
+        rdfs:label  "Mary McCarthy: Death Event: Cause of Death" .
+
+data:nesbe__DeathContext_1_attributing
+        rdfs:label  "E. Nesbit: Death Event: Cause of Death" .
+
+data:ridila_DeathContext_1_attributing
+        rdfs:label  "Laura Riding: Death Event: Cause of Death" .
+
+data:pordel_DeathContext_1_attributing
+        rdfs:label  "Eleanor Anne Porden: Death Event: Cause of Death" .
+
+data:fawcmi_DeathContext_1_attributing
+        rdfs:label  "Millicent Garrett Fawcett: Death Event: Cause of Death" .
+
+data:baldlo_DeathContext_1_attributing
+        rdfs:label  "Louisa Baldwin: Death Event: Cause of Death" .
+
+data:stopma_DeathContext_1_attributing
+        rdfs:label  "Marie Stopes: Death Event: Cause of Death" .
+
+data:quinan_DeathContext_1_attributing
+        rdfs:label  "Ann Quin: Death Event: Cause of Death" .
+
+data:harwis_DeathContext_1_attributing
+        rdfs:label  "Isabella Neil Harwood: Death Event: Cause of Death" .
+
+data:chatth_DeathContext_1_attributing
+        rdfs:label  "Thomas Chatterton: Death Event: Cause of Death" .
+
+data:wollma_DeathContext_1_attributing
+        rdfs:label  "Mary Wollstonecraft: Death Event: Cause of Death" .
+
+data:buckhe_DeathContext_1_attributing
+        rdfs:label  "Henry Thomas Buckle: Death Event: Cause of Death" .
+
+data:wilset_DeathContext_1_attributing
+        rdfs:label  "Ethel Wilson: Death Event: Cause of Death" .
+
+data:spenel_DeathContext_1_attributing
+        rdfs:label  "Elizabeth Isabella Spence: Death Event: Cause of Death" .
+
+data:westre_DeathContext_1_attributing
+        rdfs:label  "Rebecca West: Death Event: Cause of Death" .
+
+data:audewh_DeathContext_1_attributing
+        rdfs:label  "W. H. Auden: Death Event: Cause of Death" .
+
+data:austja_DeathContext_1_attributing
+        rdfs:label  "Jane Austen: Death Event: Cause of Death" .
+
+data:lintel_DeathContext_1_attributing
+        rdfs:label  "Eliza Lynn Linton: Death Event: Cause of Death" .
+
+data:browfr_DeathContext_1_attributing
+        rdfs:label  "Frances Browne: Death Event: Cause of Death" .
+
+data:burnel_DeathContext_1_attributing
+        rdfs:label  "Elizabeth Burnet: Death Event: Cause of Death" .
