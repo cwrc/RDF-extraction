@@ -3,6 +3,7 @@ import os
 import re
 import datetime
 import urllib
+
 try:
     from Utils.place import Place, PLACE_MAP
 except ModuleNotFoundError as e:
@@ -180,6 +181,8 @@ def split_by_casing(string):
     return " ".join(re.findall('^[a-z]+|[A-Z][^A-Z]*', string))
 
 
+
+# TODO: May want to use: urllib.parse.quote_plus(string) to encode string
 def remove_punctuation(temp_str, all=False):
     import string
     from unidecode import unidecode
@@ -192,6 +195,8 @@ def remove_punctuation(temp_str, all=False):
     # TODO: Need to revise this method to handle titles with weird unicode ex.
     # Public Confessions of a Middle-Aged Woman Aged 55 ¾
     temp_str = temp_str.replace("¾", "3-4")
+    temp_str = temp_str.replace("©", "c")
+    temp_str = temp_str.replace("Ã", "A")
     return unidecode(temp_str)
 
 
@@ -344,6 +349,7 @@ def get_readable_name(bio):
     return bio.find("DOCTITLE").text.split(":")[0]
 
 
+# TODO: Remove call to this function as it's likely no longer needed with new schema
 def get_sex(bio):
     tag = bio.contents[-1]
     if tag.name not in ["BIOGRAPHY", "WRITING"]:
