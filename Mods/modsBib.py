@@ -784,7 +784,7 @@ class BibliographyParse:
         for item in titles:
             if 'usage' in item and item['usage'] is not None:
                 title_res = g.resource(F"{self.placeholderURI}_title_{i}")
-                title_res.add(RDF.type, CRM.E35_Title)
+                title_res.add(RDF.type, CRM.E33_E41_Linguistic_Appellation)
                 title_res.add(CRM.P190_has_symbolic_content, rdflib.Literal(item["title"].strip()))
 
 
@@ -796,10 +796,10 @@ class BibliographyParse:
                     title_res.add(RDFS.label,rdflib.Literal(F"Title of {self.mainTitle}"))
 
                 if instance:
-                    instance.add(CRM.P102_has_title, title_res)
+                    instance.add(CRM.P1_is_identified_by, title_res)
                     instance.add(RDFS.label, rdflib.Literal(F"expression of {self.mainTitle}"))
                 else:
-                    resource.add(CRM.P102_has_title, title_res)
+                    resource.add(CRM.P1_is_identified_by, title_res)
                 i += 1
 
         adminMetaData = g.resource(F"{self.placeholderURI}_admin_metadata")
@@ -835,8 +835,8 @@ class BibliographyParse:
                 logger.info(F"MISSING DATE FORMAT: {start_date} on Document {self.mainURI}")
             else:
                 
-                time_span.add(CRM.P82a_begin_of_the_begin, rdflib.Literal(start_date, datatype=XSD.datetime))
-                time_span.add(CRM.P82b_end_of_the_end,rdflib.Literal(end_date, datatype=XSD.datetime))
+                time_span.add(CRM.P82a_begin_of_the_begin, rdflib.Literal(start_date, datatype=XSD.dateTime))
+                time_span.add(CRM.P82b_end_of_the_end,rdflib.Literal(end_date, datatype=XSD.dateTime))
             
             adminMetaData.add(CRM["P4_has_time-span"], time_span)
             r_count +=1 
@@ -988,8 +988,8 @@ class BibliographyParse:
                 if not transformed:
                     logger.info(F"MISSING DATE FORMAT: {start_date} on Document {self.mainURI}")
                 else:
-                    time_span.add(CRM.P82a_begin_of_the_begin, rdflib.Literal(start_date, datatype=XSD.datetime))
-                    time_span.add(CRM.P82b_end_of_the_end,rdflib.Literal(end_date, datatype=XSD.datetime))
+                    time_span.add(CRM.P82a_begin_of_the_begin, rdflib.Literal(start_date, datatype=XSD.dateTime))
+                    time_span.add(CRM.P82b_end_of_the_end,rdflib.Literal(end_date, datatype=XSD.dateTime))
                 
                 originInfo.add(CRM["P4_has_time-span"],time_span)
 
