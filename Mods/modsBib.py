@@ -414,15 +414,16 @@ class BibliographyParse:
         else:
             self.old_id = resource_name.replace(".xml", "")
 
-        if 'data:' in self.id:
+        if 'data:' in self.id or "cwrcdata" in self.id: #What's wrong with this?
             self.mainURI = self.id
             self.placeholderURI = self.id
         elif "https://commons.cwrc.ca/orlando:" in self.id:
             self.mainURI = self.id
             self.placeholderURI = DATA[F"{self.id.split('orlando:')[1]}"]
-        else:
+        else: # Level 1 work
             self.mainURI = F"https://commons.cwrc.ca/orlando:{self.id}"
             self.placeholderURI = DATA[F"{self.id}"]
+
 
         self.relatedItem = related_item
 
@@ -1014,9 +1015,12 @@ class BibliographyParse:
         i = 0
         if not self.relatedItem:
             for part in self.get_related_items():
-                bp = BibliographyParse(part['soup'], self.g, F"{self.mainURI.replace('http://cwrc.ca/cwrcdata/', '')}_{part['type']}_{i}", True)
-                bp.build_graph(part_type=part['type'])
 
+                # use placeholder uri for related works
+                bp = BibliographyParse(
+                    part['soup'], self.g, F"{self.placeholderURI}_{part['type']}_{i}", True)
+                bp.build_graph(part_type=part['type'])
+                
                 if part['type'] in self.related_item_map:
                     work = g.resource(F"{self.placeholderURI}_{part['type']}_{i}")
                     if bp.mainTitle is None: 
