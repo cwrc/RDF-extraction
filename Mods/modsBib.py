@@ -585,7 +585,19 @@ class BibliographyParse:
         for l in self.soup.find_all('language'):
             for t in l.find_all('languageTerm'):
                 if 'authority' in t.attrs and t['authority'] == "iso639-2b":
-                    langs.append({'language': t.text, 'type': t['type']})
+                    label = t.text
+                    if label == "eng":
+                        label = "English"
+                    elif label == "fre":
+                        label = "French"
+                    elif label == "ger":
+                        label = "German"
+                    elif label == "lat":
+                        label = "Latin"
+                    elif label == "spa":
+                        label = "Spanish"
+                    
+                    langs.append({'language': t.text, 'type': t['type'], 'label':label})
 
         return langs        
 
@@ -769,8 +781,12 @@ class BibliographyParse:
         resource.add(CRM.P2_has_type, self.get_type())
         
         for lang in self.get_languages():
-            language_uri = F"http://id.loc.gov/vocabulary/languages/{lang['language']}"
-            resource.add(CRM.P72_has_language, rdflib.URIRef(language_uri))
+            language_uri = rdflib.URIRef(F"http://id.loc.gov/vocabulary/languages/{lang['language']}")
+            resource.add(CRM.P72_has_language, language_uri)
+            # TODO may want to add this to biography extraction instead
+            add_types_to_graph(
+                g, language_uri, lang['label'], CRM.E56_Language)
+            
 
         instance = None
         # The Expression
@@ -1125,9 +1141,10 @@ class BibliographyParse:
                 else:
                     logger.info(F"GENRE NOT FOUND: {genre}")
 
-def add_types_to_graph(graph,uri,label):
+
+def add_types_to_graph(graph, uri, label, rdf_type=CRM.E55_Type):
     term = graph.resource(uri)
-    term.add(RDF.type, CRM.E55_Type)
+    term.add(RDF.type, rdf_type)
     term.add(RDFS.label, rdflib.Literal(label))            
 
 
