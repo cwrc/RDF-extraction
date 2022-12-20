@@ -1027,8 +1027,7 @@ class BibliographyParse:
                 edition_node.add(RDF.type, CRM.E33_E41_Linguistic_Appellation)
                 edition_node.add(CRM.P190_has_symbolic_content, rdflib.Literal(o['edition']))
                 
-                # TODO: Replace with URI for edition
-                edition_node.add(CRM.P2_has_type, rdflib.Literal("edition"))
+                edition_node.add(CRM.P2_has_type, GETTY["300121294"])
 
             resource.add(CRM.P94i_was_created_by, originInfo)
             i += 1
