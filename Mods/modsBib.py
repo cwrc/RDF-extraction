@@ -378,7 +378,7 @@ class BibliographyParse:
         # "original": BF.original,
         # "otherFormat": BF.otherPhysicalFormat,
         # "otherVersion": BF.otherEdition,
-        "preceding": FRBROO.R1_is_successor_of,
+        "preceding": FRBROO.R1_is_logical_successor_of,
         "references": CRM.P67_refers_to,
         "reviewOf": CRM.P129_is_about,
         "series": FRBROO.R67i_forms_part_of,
