@@ -1030,7 +1030,7 @@ class BibliographyParse:
                 # TODO: Replace with URI for edition
                 edition_node.add(CRM.P2_has_type, rdflib.Literal("edition"))
 
-            resource.add(FRBROO.R19i_was_realised_through, originInfo)
+            resource.add(CRM.P94i_was_created_by, originInfo)
             i += 1
 
         i = 0
