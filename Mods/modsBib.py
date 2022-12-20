@@ -792,10 +792,12 @@ class BibliographyParse:
 
         instance = None
         # The Expression
-        if not self.relatedItem:
+        # if not self.relatedItem:
+        instance = g.resource(self.placeholderURI + "_instance")        
             instance = g.resource(self.placeholderURI + "_instance")        
-            instance.add(RDF.type, FRBROO.F2_Expression)
-            instance.add(FRBROO.R3i_realises, resource)
+        instance = g.resource(self.placeholderURI + "_instance")        
+        instance.add(RDF.type, FRBROO.F2_Expression)
+        instance.add(FRBROO.R3i_realises, resource)
 
         # CIDOC: Creating titles
         i = 0
@@ -1017,17 +1019,20 @@ class BibliographyParse:
 
             # CIDOC: Creating a manifestation, given an edition
             if o['edition']:
-                instance_manifestion = g.resource(F"{self.placeholderURI}_instance_manifestation")
-                instance_manifestion.add(RDF.type, FRBROO.F4_Manifestation_Singleton)
-                instance_manifestion.add(RDFS.label, rdflib.Literal(F"manifestation of {self.mainTitle}"))
-                instance_manifestion.add(FRBROO.R4_embodies,resource)
+                # instance_manifestion = g.resource(F"{self.placeholderURI}_instance_manifestation")
+                # instance_manifestion.add(RDF.type, FRBROO.F4_Manifestation_Singleton)
+                # instance_manifestion.add(RDFS.label, rdflib.Literal(F"manifestation of {self.mainTitle}"))
+                # instance_manifestion.add(FRBROO.R4_embodies,resource)
+
                 
                 edition_node = g.resource(F"{self.placeholderURI}_edition")
-                instance_manifestion.add(CRM.P1_is_identified_by, edition_node)
+
+                instance.add(CRM.P1_is_identified_by, edition_node)
                 edition_node.add(RDF.type, CRM.E33_E41_Linguistic_Appellation)
                 edition_node.add(CRM.P190_has_symbolic_content, rdflib.Literal(o['edition']))
                 
                 edition_node.add(CRM.P2_has_type, GETTY["300121294"])
+
 
             resource.add(CRM.P94i_was_created_by, originInfo)
             i += 1
@@ -1068,11 +1073,13 @@ class BibliographyParse:
 
         i = 0
         # CIDOC: creating identifiers for data sources
+        
+        #TODO: Extent is only connected to instances, what happens to other versions?
+        
         instance_manifestion = None
+
         o = self.get_origins()
-        if o:
-            if o[0]['edition']:
-                instance_manifestion = g.resource(F"{self.placeholderURI}_instance_manifestation")
+
         for p in self.get_parts():
             extent_resource = g.resource(F"{self.placeholderURI}_extent_{i}")
             
@@ -1114,8 +1121,6 @@ class BibliographyParse:
             # TODO: Clarify if instance needs to be identified by extent:
             if instance:
                 instance.add(CRM.P1_is_identified_by, extent_resource)
-            if instance_manifestion:
-                instance_manifestion.add(CRM.P1_is_identified_by, extent_resource)
 
 
         genres = self.get_genre()
@@ -1224,7 +1229,12 @@ if __name__ == "__main__":
 
     test_filenames = ["d75215cb-d102-4256-9538-c44bfbf490d9.xml","2e3e602e-b82c-441d-81bc-883f834b20c1.xml","13f8e71a-def5-41e4-90a0-6ae1092ae446.xml","16d427db-a8a2-4f33-ac53-9f811672584b.xml","4109f3c5-0508-447b-9f86-ea8052ff3981.xml",
                       "e1b2f98f-1001-4787-a711-464f1527e5a7.xml", "15655c66-8c0b-4493-8f68-8d6cf4998303.xml","0d0e00bf-3224-4286-8ec4-f389ec6cc7bb.xml"] # VW, the wave
-    # test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"] 
+    test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"] 
+    
+    # Part of series, then host has an edition, an edition
+    test_filenames = ["e6180094-ba76-4020-991d-1e8c68a9d20a.xml",
+                      "005eb7df-fada-4d13-8206-8c30ec309ece.xml", "73bddacf-9be7-49a9-bc6b-05f5928f823d.xml"]
+    
     # test_filenames = ["e35f16d8-d8f6-414d-b465-2a8a916ba53a.xml"] 
     # test_filenames = ["64d3c008-8a9d-415b-b52b-91d232c00952.xml",
     # test_filenames = ["55aff3fb-8ea9-4e95-9e04-0f3e630896e3.xml", "0c133817-f55e-4a8f-a9b4-474566418d9b.xml"]
@@ -1232,6 +1242,7 @@ if __name__ == "__main__":
 
     count = 1
     total = len(os.listdir(dirname))
+    # for fname in os.listdir(dirname)[:1000]:
     # for fname in test_filenames:
     for fname in os.listdir(dirname):
         print(F"{count}/{total} files extracted")
