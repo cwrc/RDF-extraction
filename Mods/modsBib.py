@@ -373,7 +373,7 @@ class BibliographyParse:
 # Currently not handled: "original, otherFormat, otherVersion"
 # See: https://lincs-cfi.slack.com/archives/D016S5Y05K2/p1617723686006600?thread_ts=1617648071.002900&cid=D016S5Y05K2
     related_item_map = {
-        "host": FRBROO.R67i_forms_part_of,
+        "host": CRM.P148_has_component,
         "constituent": FRBROO.R5i_is_component_of,
         "iconstituent": FRBROO.R5_has_component,
         "isReferencedBy": CRM.P67i_is_referenced_by,
@@ -383,7 +383,7 @@ class BibliographyParse:
         "preceding": FRBROO.R1_is_logical_successor_of,
         "references": CRM.P67_refers_to,
         "reviewOf": CRM.P129_is_about,
-        "series": FRBROO.R67i_forms_part_of,
+        "series": CRM.P148i_is_component_of,
         "succeeding": FRBROO.R1i_has_successor
     }
 
