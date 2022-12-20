@@ -38,6 +38,8 @@ FRBROO = rdflib.Namespace("http://iflastandards.info/ns/fr/frbr/frbroo/")
 CRMPC = rdflib.Namespace("http://www.cidoc-crm.org/cidoc-crm/")
 CRM = rdflib.Namespace("http://www.cidoc-crm.org/cidoc-crm/")
 
+GETTY = rdflib.Namespace("https://vocab.getty.edu/aat/")
+
 BF_PROPERTIES = {
     "change date": BF.changeDate,
     "variant title":BF.VariantTitle,
@@ -806,10 +808,10 @@ class BibliographyParse:
 
 
                 if item['usage'] == 'alternative':
-                    title_res.add(RDFS.label,rdflib.Literal(F"Alternative title of {self.mainTitle}"))
-                    title_res.add(CRM.P2_has_type, BF.VariantTitle)
+                    title_res.add(RDFS.label,rdflib.Literal(F"Alternate title of {self.mainTitle}"))
+                    title_res.add(CRM.P2_has_type, GETTY["300417227"])
                 else:
-                    title_res.add(CRM.P2_has_type, BF.Title)
+                    title_res.add(CRM.P2_has_type, GETTY["300417193"])
                     title_res.add(RDFS.label,rdflib.Literal(F"Title of {self.mainTitle}"))
 
                 if instance:
@@ -1162,6 +1164,7 @@ if __name__ == "__main__":
     g.bind("frbroo", FRBROO)
     g.bind("skos", SKOS)
     g.bind("orlando", ORLANDO)
+    g.bind("aat", GETTY)
 
     # Adding declaration of references
     for label, uri in BibliographyParse.type_map.items():
