@@ -888,10 +888,13 @@ class BibliographyParse:
         for o in self.get_origins():
             
             originInfo = g.resource(F"{self.placeholderURI}_activity_statement_{i}")
-            originInfo.add(RDF.type, FRBROO.F28_Expression_Creation)
+            originInfo.add(RDF.type, CRM.E65_Creation)
+            originInfo.add(CRM.P2_has_type, CWRC.ProductionEvent)
+            originInfo.add(CRM.P2_has_type, CWRC.PublishingEvent)
+            
             originInfo.add(RDFS.label, rdflib.Literal(F"creation of {self.mainTitle}"))
             if instance:
-                originInfo.add(FRBROO.R17_created, instance)
+                originInfo.add(CRM.P94_has_created, instance)
 
             j = 0
             for name in self.get_names():          
