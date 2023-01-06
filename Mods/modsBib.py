@@ -792,9 +792,6 @@ class BibliographyParse:
 
         instance = None
         # The Expression
-        # if not self.relatedItem:
-        instance = g.resource(self.placeholderURI + "_instance")        
-            instance = g.resource(self.placeholderURI + "_instance")        
         instance = g.resource(self.placeholderURI + "_instance")        
         instance.add(RDF.type, FRBROO.F2_Expression)
         instance.add(FRBROO.R3i_realises, resource)
@@ -1051,8 +1048,8 @@ class BibliographyParse:
                     if bp.mainTitle is None: 
                         work.add(RDFS.label, rdflib.Literal(F"{part['type']} of {self.mainTitle}"))
                     if part["type"] == "constituent":
-                        work.add(self.related_item_map[part['type']], resource)
-                        resource.add(self.related_item_map["i"+part['type']], work)
+                        work.add(self.related_item_map[part['type']], instance)
+                        instance.add(self.related_item_map["i"+part['type']], work)
                     else:
                         resource.add(self.related_item_map[part['type']], work)
                     i += 1
