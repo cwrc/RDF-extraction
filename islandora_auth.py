@@ -3,6 +3,7 @@ import sys
 import os
 import datetime
 from Env import env
+from bs4 import BeautifulSoup
 
 session = requests.Session()
 
@@ -34,6 +35,9 @@ def get_datastream(file_desc):
         return "PERSON"
     elif "cwrc:organization-entityCModel" in models:
         return "ORGANIZATION"
+    elif "islandora:sp_basic_image" in models:
+        return "MODS"
+        
     
     print("Unexpected Models:")
     print(models)
@@ -96,6 +100,7 @@ def download_data(subset="all"):
             f.close()
 
 def get_modified_entities(subset="all"):
+    # TODO: update this function to actually work
     
     if subset== "all":
         for key in collections.keys():
@@ -126,17 +131,61 @@ def get_modified_entities(subset="all"):
             
         print(dates)
         
+def get_author_id(xml):
+    try:
+        return xml.subject.get_text().strip()
+    except AttributeError:
+        return "No id???"
+def get_image_url(xml,id):
+    url = None
+    
+    try:
+        return xml.location.url.string
+    except AttributeError:
+        pass
+    
+    try:
+        return xml.titleInfo["valueURI"]
+    except KeyError:
+        return id
+    
+def get_images():
+    collection_id = "orlando:images-entries"
+    docs = get_document_ids(collection_id)
 
+    total = len(docs)
+    count = 1
+    datastream = get_datastream(get_file_description(docs[0]))
+    for x in docs:
+        file_id = x.split(":")[1]
+        filename = F"{file_id}.xml"
+
+        print("count:", count, "/", total, ": ", x)
+        count += 1
+        content = get_file_with_format(x, datastream)
+
+
+        xml = BeautifulSoup(content, 'lxml-xml')
+
+        print(get_author_id(xml), ",", get_image_url(xml, x), ",", file_id)
+
+        
+
+    print(docs)
+    print()
 
 def main(argv):            
     # Store the session for future requests.
     login({"username": argv[0], "password": argv[1]})
     
-    # get_modified_entities("entry")
+    get_modified_entities("entry")
+
+
 
     # download_data("entry")
-    download_data("bibliography")
+    # download_data("bibliography")
 
+    # get_images()
 
 def get_document_ids(collection_id):
     # Returns list of document IDS given the collection
