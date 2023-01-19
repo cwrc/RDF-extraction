@@ -7,6 +7,8 @@ from bs4 import BeautifulSoup
 
 session = requests.Session()
 
+DATE_FORMAT = "%Y-%m-%d"
+
 collections = {
     "bibliography": "orlando:7397f8b2-10d9-48b6-8af5-6c2cd24f50b5",
     "person": "orlando:348397a1-6edb-4c23-ba26-59f35e5bc8d6",
@@ -43,62 +45,70 @@ def get_datastream(file_desc):
     print(models)
     exit(1)
 
-def download_data(subset="all"):
+
+def download_files(date, collection_key, latest_date):
+    docs = get_document_ids(collections[collection_key])
+    dir = f"data/{collection_key}_{date}"
+    print(collection_key)
+
+    try:
+        os.mkdir(dir)
+    except OSError as error:
+        pass
+
+    datastream = get_datastream(get_file_description(docs[0]))
+
+    total = len(docs)
+    count = 0
+    
+    for x in docs:
+        count += 1
+        
+        file_id = x.split(":")[1]
+        
+        
+        if latest_date:        
+            
+            file_desc = get_file_description(x)
+            file_date = file_desc["modified"].split("T")[0] 
+            file_date = datetime.datetime.strptime(file_date, DATE_FORMAT)
+
+            if latest_date <= file_date:
+                print(count, "/", total, ": ", x)
+                print("File date:", file_date)
+                continue
+            else:
+                print("Not Downloading:",count, "/", total, ": ", x)
+        else:
+                print(count, "/", total, ": ", x)
+
+        content = get_file_with_format(x, datastream)
+        f = open(dir+"/"+file_id+".xml", "w")
+        f.write(content)
+        f.close()
+        print()
+
+def download_data(subset="all", latest_date=None):
     date = str(datetime.date.today())
+    
+    if latest_date:
+        latest_date = datetime.datetime.strptime(latest_date, DATE_FORMAT)
+
     
     if subset== "all":
         for key in collections.keys():
-            print(key)
-            # r = get_file_description(collections[key])  s
-            docs = get_document_ids(collections[key])
-            dir =  f"data/{key}_{date}"
-     
-            try:
-                os.mkdir(dir)
-            except OSError as error:
-                pass
-            datastream = get_datastream(get_file_description(docs[0]))
-
-            total = len(docs)
-            count = 1
-            for x in docs:
-                print(count, "/", total, ": ", x)
-                count += 1
-                file_id = x.split(":")[1]
-                
-                content = get_file_with_format(x, datastream)
-                f = open(dir+"/"+file_id+".xml", "w")
-                f.write(content)
-                f.close()
+            download_files(date, key, latest_date)
+            
     else:
         if subset not in collections:
             print(f"Invalid subset '{subset}' specified")
             print(f"Valid subsets include: ",sep="")
             print(*collections.keys(), sep="\n")
             exit(1)
-        docs = get_document_ids(collections[subset])
-        dir =  f"data/{subset}_{date}"
-
-        try:
-            os.mkdir(dir)
-        except OSError as error:
-            pass
-
-        # filenames = os.listdir(dir)
-        datastream = get_datastream(get_file_description(docs[0]))
-        total = len(docs)
-        count = 1
-        for x in docs:
-            file_id = x.split(":")[1]
-            filename =  F"{file_id}.xml"
-            
-            print(count, "/", total, ": ", x)
-            count += 1
-            content = get_file_with_format(x, datastream)
-            f = open(F"{dir}/{filename}", "w")
-            f.write(content)
-            f.close()
-
+        
+        download_files(date, subset, latest_date)
+        
+        
 def get_modified_entities(subset="all"):
     # TODO: update this function to actually work
     
@@ -178,12 +188,10 @@ def main(argv):
     # Store the session for future requests.
     login({"username": argv[0], "password": argv[1]})
     
-    get_modified_entities("entry")
-
-
-
-    # download_data("entry")
-    # download_data("bibliography")
+    # get_modified_entities("entry")
+    # download_data("entry", "2022-05-04")
+    # download_data()
+    download_data("bibliography", "2022-05-04")
 
     # get_images()
 
