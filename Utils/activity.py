@@ -71,6 +71,9 @@ def get_next_month(date):
 
 def date_parse(date_string: str, both=True):
     # Strip spaces surrounding the date string
+    if not date_string:
+        return date_string, False, date_string
+    
     date_string = date_string.strip().rstrip()
     end_dt = None
 
@@ -306,7 +309,8 @@ class Activity(object):
                     self.date = self.date_tag.get("FROM")
             else:
                 self.date = self.date_tag.get("VALUE")
-                self.start_date, status, self.end_date = date_parse(self.date)
+                if self.date:
+                    self.start_date, status, self.end_date = date_parse(self.date)
         else: 
             self.date= None
 
@@ -358,15 +362,15 @@ precision: {self.precision}
             
             activity.add(utilities.NS_DICT["crm"].P141_assigned,connection)
             activity.add(utilities.NS_DICT["crm"].P140_assigned_attribute_to,self.person.uri)
-            connection.add(RDFS.label, Literal(activity_label+" (connection)"))
+            connection.add(RDFS.label, Literal(
+                activity_label+" (connection)", lang="en"))
             
             if self.event_type:
                 event_type = self.event_type[0].replace("Context","Event")
                 connection.add(utilities.NS_DICT["crm"].P2_has_type, rdflib.term.URIRef(event_type))
 
+        activity.add(RDFS.label, Literal(activity_label, lang="en"))
 
-        activity.add(RDFS.label, Literal(activity_label))
-        
         if "Birth" in str(self.activity_type):
             activity.add(utilities.NS_DICT["crm"].P98_brought_into_life, self.person.uri)
         elif "Death" in str(self.activity_type):
@@ -374,8 +378,10 @@ precision: {self.precision}
 
         if self.date is not None:
             time_span = g.resource(self.uri + "_time-span")
-            time_span.add(RDFS.label, Literal(activity_label + " time-span"))
-            time_span.add(utilities.NS_DICT["crm"]["P82_at_some_time_within"], Literal(self.date_text))
+            time_span.add(RDFS.label, Literal(
+                activity_label + " time-span", lang="en"))
+            time_span.add(utilities.NS_DICT["crm"]["P82_at_some_time_within"], Literal(
+                self.date_text, lang="en"))
             
             if connection:
                 connection.add(utilities.NS_DICT["crm"]["P4_has_time-span"], time_span)
@@ -391,7 +397,8 @@ precision: {self.precision}
 
 
         if self.text:
-            activity.add(utilities.NS_DICT["crm"].P3_has_note, Literal(self.text))
+            activity.add(utilities.NS_DICT["crm"].P3_has_note, Literal(
+                self.text, lang="en"))
 
 
         if self.activity_path != "generic+":
@@ -404,6 +411,7 @@ precision: {self.precision}
 
 
         if self.activity_path == "generic+":            
+            # TODO Review this portion of code
             connection = g.resource(f"{self.connection_uri}")
             connection.add(RDFS.label, Literal(activity_label+" (??)"))
             connection.add(RDF.type, utilities.NS_DICT["crm"][self.activity_map["generic"]])
