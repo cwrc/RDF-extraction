@@ -194,7 +194,7 @@ class Event(object):
 
         # Labelling the event
         text = self.date_tag.text + ": " + self.text
-        g.add((self.uri, RDFS.label, Literal(text)))
+        g.add((self.uri, RDFS.label, Literal(text, lang="en")))
 
         # Typing of the event --> events might have multiple types down the line
         g.add((self.uri, RDF.type, self.type))

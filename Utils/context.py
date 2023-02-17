@@ -292,7 +292,7 @@ class Context(object):
             g.add((self.target_uri, RDF.type,utilities.NS_DICT["oa"].SpecificResource))
             g.add((self.target_uri, RDF.type,
                    utilities.NS_DICT["crm"].E73_Information_Object))
-            g.add((self.target_uri, RDFS.label, Literal(target_label)))
+            g.add((self.target_uri, RDFS.label, Literal(target_label, lang="en")))
             g.add((self.target_uri, utilities.NS_DICT["oa"].hasSource, source_url))
 
             # Adding citations
@@ -303,7 +303,7 @@ class Context(object):
             xpath_uri = self.uri +"_xpath_selector"
             xpath_label = target_label.replace(" Excerpt", " XPath Selector")
             g.add((self.target_uri, utilities.NS_DICT["oa"].hasSelector, xpath_uri))
-            g.add((xpath_uri, RDFS.label, Literal(xpath_label)))
+            g.add((xpath_uri, RDFS.label, Literal(xpath_label, lang="en")))
             g.add((xpath_uri, RDF.type, utilities.NS_DICT["oa"].XPathSelector))
             g.add((xpath_uri, RDF.type,
                    utilities.NS_DICT["crm"].E73_Information_Object))
@@ -317,8 +317,9 @@ class Context(object):
             g.add((textquote_uri, RDF.type, utilities.NS_DICT["oa"].TextQuoteSelector))
             g.add((textquote_uri, RDF.type,
                    utilities.NS_DICT["crm"].E33_Linguistic_Object))
-            g.add((textquote_uri, RDFS.label, Literal(textquote_label)))
-            g.add((textquote_uri, utilities.NS_DICT["oa"].exact, Literal(self.text)))
+            g.add((textquote_uri, RDFS.label, Literal(textquote_label, lang="en")))
+            g.add((textquote_uri, utilities.NS_DICT["oa"].exact, Literal(
+                self.text, lang="en")))
 
         # Creating identifying context first and always
         if person:
@@ -330,7 +331,7 @@ class Context(object):
         g.add((identifying_uri, RDF.type, utilities.NS_DICT["crm"].E33_Linguistic_Object))
         g.add((identifying_uri, RDF.type, utilities.NS_DICT["oa"].Annotation))
         g.add((identifying_uri, utilities.NS_DICT["crm"].P2_has_type, self.context_type))
-        g.add((identifying_uri, RDFS.label, Literal(context_label)))
+        g.add((identifying_uri, RDFS.label, Literal(context_label, lang="en")))
         
         g.add((identifying_uri, utilities.NS_DICT["oa"].hasTarget, self.target_uri))
         
@@ -369,7 +370,7 @@ class Context(object):
                 self.uri = utilities.create_uri("data", self.id + "_attributing")
                 context_label = person.name + ": " + self.context_label + " (attributing)"
                 g.add((self.uri, RDF.type, self.context_type))
-                g.add((self.uri, RDFS.label, Literal(context_label)))
+                g.add((self.uri, RDFS.label, Literal(context_label, lang="en")))
                 g.add((self.uri, utilities.NS_DICT["cwrc"].hasIDependencyOn, identifying_uri))
                 g.add((self.uri, utilities.NS_DICT["oa"].hasTarget, self.target_uri))
                 g.add((self.uri, utilities.NS_DICT["oa"].motivatedBy, self.motivation))
