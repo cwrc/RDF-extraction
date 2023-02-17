@@ -377,14 +377,14 @@ class BibliographyParse:
         "constituent": FRBROO.R5i_is_component_of,
         "iconstituent": FRBROO.R5_has_component,
         "isReferencedBy": CRM.P67i_is_referenced_by,
-        # "original": BF.original,
-        # "otherFormat": BF.otherPhysicalFormat,
-        # "otherVersion": BF.otherEdition,
         "preceding": FRBROO.R1_is_logical_successor_of,
         "references": CRM.P67_refers_to,
         "reviewOf": CRM.P129_is_about,
         "series": CRM.P148i_is_component_of,
         "succeeding": FRBROO.R1i_has_successor
+        # "original": BF.original,
+        # "otherFormat": BF.otherPhysicalFormat,
+        # "otherVersion": BF.otherEdition,
     }
 
     def __init__(self, filename, graph, resource_name, related_item=False):
@@ -406,6 +406,11 @@ class BibliographyParse:
         self.mainTitle = None
         self.id = resource_name.replace(".xml", "")
         self.old_id = self.id
+        
+        # print("===")
+        # print(filename, graph, resource_name, related_item)
+        # print("===")
+        
         #TODO: update this to use cwrc identifiers
         if ".xml" in resource_name:
             self.old_id = self.soup.find("recordIdentifier", source="Orlando")
@@ -807,15 +812,15 @@ class BibliographyParse:
 
 
                 if item['usage'] == 'alternative':
-                    title_res.add(RDFS.label,rdflib.Literal(F"Alternate title of {self.mainTitle}"))
+                    title_res.add(RDFS.label,rdflib.Literal(F"Alternate title of {self.mainTitle}",lang="en"))
                     title_res.add(CRM.P2_has_type, GETTY["300417227"])
                 else:
                     title_res.add(CRM.P2_has_type, GETTY["300417193"])
-                    title_res.add(RDFS.label,rdflib.Literal(F"Title of {self.mainTitle}"))
+                    title_res.add(RDFS.label,rdflib.Literal(F"Title of {self.mainTitle}",lang="en"))
 
                 if instance:
                     instance.add(CRM.P1_is_identified_by, title_res)
-                    instance.add(RDFS.label, rdflib.Literal(F"expression of {self.mainTitle}"))
+                    instance.add(RDFS.label, rdflib.Literal(F"expression of {self.mainTitle}",lang="en"))
                 else:
                     resource.add(CRM.P1_is_identified_by, title_res)
                 i += 1
@@ -847,7 +852,7 @@ class BibliographyParse:
             time_span = g.resource(F"{self.placeholderURI}_time-span_{r_count}")
             time_span.add(RDFS.label, rdflib.Literal(F"time-span of modification of MODS record for {self.mainTitle}"))
             time_span.add(RDF.type, CRM["E52_Time-Span"])
-            time_span.add(CRM["P82_at_some_time_within"], rdflib.Literal(r['date']))
+            time_span.add(CRM["P82_at_some_time_within"], rdflib.Literal(r['date'],lang="en"))
             time_span.add(CRM.P2_has_type, BF.changeDate)
             if not transformed:
                 logger.info(F"MISSING DATE FORMAT: {start_date} on Document {self.mainURI}")
@@ -867,12 +872,13 @@ class BibliographyParse:
                 generation_process.add(RDF.type, CRM.E29_Design_or_Procedure)
                 generation_process.add(CRM.P2_has_type, BF.GenerationProcess)
                 generation_process.add(RDFS.comment,rdflib.Literal(r['origin']))
-                generation_process.add(RDFS.label, rdflib.Literal(F"generation process of the MODS Record of Orlando bibiliographic records"))
+                generation_process.add(RDFS.label, rdflib.Literal(F"generation process of the MODS Record of Orlando bibiliographic records",lang="en"))
                 adminMetaData.add(CRM.P33_used_specific_technique, generation_process)
             else:
                 generation_process = g.resource(F"{self.placeholderURI}_generation_process_{i}")
                 generation_process.add(RDF.type, CRM.E29_Design_or_Procedure)
-                generation_process.add(RDFS.label, rdflib.Literal(F"generation process of the MODS Record for {self.mainTitle}"))
+                generation_process.add(RDFS.label, rdflib.Literal(
+                    F"generation process of the MODS Record for {self.mainTitle}", lang="en"))
                 generation_process.add(CRM.P2_has_type, BF.GenerationProcess)
                 generation_process.add(RDFS.comment, rdflib.Literal(r['origin']))
 
@@ -891,7 +897,8 @@ class BibliographyParse:
             originInfo.add(CRM.P2_has_type, CWRC.ProductionEvent)
             originInfo.add(CRM.P2_has_type, CWRC.PublishingEvent)
             
-            originInfo.add(RDFS.label, rdflib.Literal(F"creation of {self.mainTitle}"))
+            originInfo.add(RDFS.label, rdflib.Literal(
+                F"creation of {self.mainTitle}", lang="en"))
             if instance:
                 originInfo.add(CRM.P94_has_created, instance)
 
@@ -969,7 +976,8 @@ class BibliographyParse:
                 publisher.add(RDF.type, CRM.E39_Actor)
                 publisher.add(RDFS.label, rdflib.Literal(F"{o['publisher']}"))
                 publisher_role = g.resource(F"{self.placeholderURI}_publisher_role_{i}")
-                publisher_role.add(RDFS.label, rdflib.Literal(F"{o['publisher']} in the role of publisher"))
+                publisher_role.add(RDFS.label, rdflib.Literal(
+                    F"{o['publisher']} in the role of publisher", lang="en"))
 
                 publisher_role.add(RDF.type, CRMPC.PC14_carried_out_by)
                 publisher_role.add( CRMPC.P02_has_range, publisher.identifier)
@@ -1004,7 +1012,8 @@ class BibliographyParse:
                 time_span = g.resource(F"{self.placeholderURI}_time-span_{i}")
                 time_span.add(RDFS.label, rdflib.Literal( (F"time-span {'of the publishing of '+ self.mainTitle}") if self.mainTitle else "creation time-span" ))
                 time_span.add(RDF.type, CRM["E52_Time-Span"])
-                time_span.add(CRM["P82_at_some_time_within"], rdflib.Literal(o['date']))
+                time_span.add(CRM["P82_at_some_time_within"],
+                              rdflib.Literal(o['date'], lang="en"))
                 time_span.add(CRM.P2_has_type, BF.changeDate)
                 if not transformed:
                     logger.info(F"MISSING DATE FORMAT: {start_date} on Document {self.mainURI}")
@@ -1046,7 +1055,8 @@ class BibliographyParse:
                 if part['type'] in self.related_item_map:
                     work = g.resource(F"{self.placeholderURI}_{part['type']}_{i}")
                     if bp.mainTitle is None: 
-                        work.add(RDFS.label, rdflib.Literal(F"{part['type']} of {self.mainTitle}"))
+                        work.add(RDFS.label, rdflib.Literal(
+                            F"{part['type']} of {self.mainTitle}", lang="en"))
                     if part["type"] == "constituent":
                         work.add(self.related_item_map[part['type']], instance)
                         instance.add(self.related_item_map["i"+part['type']], work)
@@ -1151,7 +1161,7 @@ class BibliographyParse:
 def add_types_to_graph(graph, uri, label, rdf_type=CRM.E55_Type):
     term = graph.resource(uri)
     term.add(RDF.type, rdf_type)
-    term.add(RDFS.label, rdflib.Literal(label))            
+    term.add(RDFS.label, rdflib.Literal(label,lang="en"))            
 
 
 if __name__ == "__main__":
@@ -1224,12 +1234,12 @@ if __name__ == "__main__":
         except UnicodeError:
             pass
 
-    test_filenames = ["d75215cb-d102-4256-9538-c44bfbf490d9.xml","2e3e602e-b82c-441d-81bc-883f834b20c1.xml","13f8e71a-def5-41e4-90a0-6ae1092ae446.xml","16d427db-a8a2-4f33-ac53-9f811672584b.xml","4109f3c5-0508-447b-9f86-ea8052ff3981.xml",
-                      "e1b2f98f-1001-4787-a711-464f1527e5a7.xml", "15655c66-8c0b-4493-8f68-8d6cf4998303.xml","0d0e00bf-3224-4286-8ec4-f389ec6cc7bb.xml"] # VW, the wave
-    test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"] 
+    # test_filenames = ["d75215cb-d102-4256-9538-c44bfbf490d9.xml","2e3e602e-b82c-441d-81bc-883f834b20c1.xml","13f8e71a-def5-41e4-90a0-6ae1092ae446.xml","16d427db-a8a2-4f33-ac53-9f811672584b.xml","4109f3c5-0508-447b-9f86-ea8052ff3981.xml",
+    # test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"] 
     
     # Part of series, then host has an edition, an edition
     test_filenames = ["e6180094-ba76-4020-991d-1e8c68a9d20a.xml",
+                      "e1b2f98f-1001-4787-a711-464f1527e5a7.xml", "15655c66-8c0b-4493-8f68-8d6cf4998303.xml","0d0e00bf-3224-4286-8ec4-f389ec6cc7bb.xml", # VW, the wave
                       "005eb7df-fada-4d13-8206-8c30ec309ece.xml", "73bddacf-9be7-49a9-bc6b-05f5928f823d.xml"]
     
     # test_filenames = ["e35f16d8-d8f6-414d-b465-2a8a916ba53a.xml"] 
