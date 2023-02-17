@@ -69,8 +69,11 @@ def get_org_uri(tag):
             name = std_name
         elif tag.get("REG") in org_list:
             name = tag.get("REG")
-        else:
+        elif std_name:
             name = std_name
+        else:
+            logger.warn(F"No standard name or URI: {tag}")
+            name = tag.get_text()
         uri = utilities.make_standard_uri(name + " ORG", ns="cwrc")
     
     if str(uri) in ORG_MAP:

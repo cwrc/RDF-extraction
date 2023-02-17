@@ -255,7 +255,13 @@ def get_name_uri(tag):
     """Creates a uri based on the standard attribute of a tag if ref attribute not present"""
     uri = tag.get("REF")
     if not uri:
-        return make_standard_uri(tag.get("STANDARD"))
+        try:
+            return make_standard_uri(tag.get("STANDARD"))
+        except AttributeError:
+            if tag.get_text():
+                logger.warning(F"Name missing identifier: {tag}")
+                return make_standard_uri(tag.get_text())
+                
     else:
         return rdflib.term.URIRef(uri)
 
@@ -403,6 +409,7 @@ def get_wd_identifier(id):
     else:
         for result in results["results"]["bindings"]:
             if (result["item"]["type"]) == "uri":
+                logger.info(F"Wikidata Identifier found: {id} | {result['item']['value']}")
                 return rdflib.term.URIRef(result["item"]["value"])
         # TODO: Validate this against standard name perhaps
         # result["itemLabel"]
