@@ -454,7 +454,7 @@ def create_place_nodes(g):
         label = label.replace(",",", ")
         g.add((uri, rdflib.RDF.type, NS_DICT["crm"].E53_Place))
         g.add((uri, NS_DICT["crm"].P2_has_type, NS_DICT["cwrc"].MappedPlace))
-        g.add((uri, rdflib.RDFS.label, rdflib.Literal(label)))
+        g.add((uri, rdflib.SKOS.hiddenLabel, rdflib.Literal(label)))
 
 def create_extracted_file(filepath, person, serialization="ttl"):
     """Create file of extracted triples for particular person
@@ -471,7 +471,8 @@ def create_extracted_file(filepath, person, serialization="ttl"):
 def create_extracted_uberfile(filepath, graph, serialization="ttl", extra_triples=None):
     """Create file of triples for a particular graph
     """
-    create_place_nodes(graph)
+    create_place_nodes(graph) #TODO: Review if needed?
+    
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     with open(filepath, "w", encoding="utf-8") as f:
         if extra_triples:

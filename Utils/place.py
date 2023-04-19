@@ -68,7 +68,7 @@ def create_place_rdf(path=None):
             place = rdflib.URIRef(row[1])
             label = rdflib.Literal(row[0].replace(",", ", "))
             g.add(
-                (place, utilities.NS_DICT["rdf"].type, utilities.NS_DICT["crm"].E53_Type))
+                (place, utilities.NS_DICT["rdf"].type, utilities.NS_DICT["crm"].E53_Place))
             g.add((place, utilities.NS_DICT["rdfs"].label, label))
             g.add(
                 (place, utilities.NS_DICT["crm"].P2_has_type, utilities.NS_DICT["cwrc"].MappedPlace))
