@@ -1,4 +1,7 @@
 @prefix crm: <http://www.cidoc-crm.org/cidoc-crm/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix crmdig: <http://www.ics.forth.gr/isl/CRMdig/> .
 
 <https://commons.cwrc.ca/orlando:c40ca90f-ad4c-4072-a146-263b2a1b49a4> crm:P138i_has_representation <https://cwrc.ca/islandora/object/orlando:d13d3ffc-84cf-4af7-9053-b954f297943b/datastream/OBJ/download> .
 
@@ -1528,4 +1531,2299 @@
 
 <https://commons.cwrc.ca/orlando:c42f5e75-e3e6-49d6-b09a-d2c3329ff69a> crm:P138i_has_representation <https://cwrc.ca/islandora/object/orlando:bffdbe3d-4cd9-43a8-b69d-49ae8e228991/datastream/OBJ/download> .
 
-<https://commons.cwrc.ca/orlando:49ace287-2905-40f9-a3bc-08e09af98426> crm:P138i_has_representation <https://cwrc.ca/islandora/object/orlando:8ebfe381-56ad-4c01-ae95-18a54b42e456/datastream/OBJ/downlo>ad
+<https://commons.cwrc.ca/orlando:49ace287-2905-40f9-a3bc-08e09af98426> crm:P138i_has_representation <https://cwrc.ca/islandora/object/orlando:8ebfe381-56ad-4c01-ae95-18a54b42e456/datastream/OBJ/download> .
+
+<https://cwrc.ca/islandora/object/orlando:d13d3ffc-84cf-4af7-9053-b954f297943b/datastream/OBJ/download>	rdfs:label "image representation for Abdy, Maria"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f397f805-c937-4c99-8238-ab7e5964c444/datastream/OBJ/download>	rdfs:label "image representation for Ackland, Valentine"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:af4faabb-9ea2-4c36-b85e-7a2f207c2c9c/datastream/OBJ/download>	rdfs:label "image representation for Adams, Abigail"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a1187030-92ce-4bfd-a2f4-da2645f53988/datastream/OBJ/download>	rdfs:label "image representation for Adams, Henry Brooks"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:e3e0db14-579a-43bb-af9b-9dd893f4dadd/datastream/OBJ/download>	rdfs:label "image representation for Adams, Sarah Flower"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:743c320c-11b1-4bba-9c9d-e7c75629f426/datastream/OBJ/download>	rdfs:label "image representation for Addison, Joseph"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:75beab2a-253b-41e9-9705-890dff03d59e/datastream/OBJ/download>	rdfs:label "image representation for Aguilar, Grace"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:42cc9612-7e09-460a-af6b-a70e7fc00702/datastream/OBJ/download>	rdfs:label "image representation for Aiken, Joan"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d46b615c-0374-4f62-8fc4-04ef39851b2e/datastream/OBJ/download>	rdfs:label "image representation for Aikin, Lucy"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:1ea3994a-943d-4a47-85bc-c4d4c53d51d7/datastream/OBJ/download>	rdfs:label "image representation for Akhmatova, Anna"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:16f36145-ced4-47d9-b850-1ba56f15be85/datastream/OBJ/download>	rdfs:label "image representation for Alcott, Louisa May"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f9840be1-fe82-433d-a112-fb7d81510e00/datastream/OBJ/download>	rdfs:label "image representation for Alcott, Louisa May"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ba1cc755-a1cf-468d-913f-f45b3a4c617b/datastream/OBJ/download>	rdfs:label "image representation for Alexander, Cecil Frances"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c901f655-68dc-4137-9fba-8c68ba168753/datastream/OBJ/download>	rdfs:label "image representation for Alexander, Mrs"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c03afa69-524b-4dd2-890f-eaf44024b6aa/datastream/OBJ/download>	rdfs:label "image representation for Allen, Grant"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:3261e900-4623-4c4e-819d-8ff73a163d90/datastream/OBJ/download>	rdfs:label "image representation for Allingham, Margery"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:93efbd92-61d0-4d5d-8813-95a66619fe3a/datastream/OBJ/download>	rdfs:label "image representation for Allingham, Margery"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f57b5283-6064-4e7d-be81-e0615504792b/datastream/OBJ/download>	rdfs:label "image representation for Allnutt, Gillian"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:330bcec1-de8e-4c9d-ab0d-eda6b705daf1/datastream/OBJ/download>	rdfs:label "image representation for Alma-Tadema, Laurence"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6ee58aed-2008-461b-8547-e7ac98d39826/datastream/OBJ/download>	rdfs:label "image representation for Amiel, Henri-Frédéric"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:977e42b3-5f47-447a-9813-1ced8e16f5ce/datastream/OBJ/download>	rdfs:label "image representation for Andersen, Hans Christian"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:910c3896-97b0-4bb6-bccc-475c44f38011/datastream/OBJ/download>	rdfs:label "image representation for Angelou, Maya"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:282b6411-f1f1-4916-a49d-fbd9cc1609c7/datastream/OBJ/download>	rdfs:label "image representation for Anna Livia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:0c5484a6-bac8-4bcb-a6ea-10e088a5c9f9/datastream/OBJ/download>	rdfs:label "image representation for Anspach, Elizabeth,,, Margravine of"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:69897e94-4a1f-4e1d-b50e-e9bbb79d1022/datastream/OBJ/download>	rdfs:label "image representation for Arendt, Hannah"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:1ce42c69-e835-4799-9756-e2eaa333b0fc/datastream/OBJ/download>	rdfs:label "image representation for von Arnim, Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:2b2c3c51-f295-48fb-a123-9f046ff0d419/datastream/OBJ/download>	rdfs:label "image representation for Ashbridge, Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:3eb67d99-7e50-41fa-bc83-3972321abf2c/datastream/OBJ/download>	rdfs:label "image representation for Ashford, Daisy"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c7b6bbfc-6b73-4fa5-afc6-e8aa5801ab02/datastream/OBJ/download>	rdfs:label "image representation for Askew, Anne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:e39676eb-1ba7-4fcc-855d-c8b518ed53c1/datastream/OBJ/download>	rdfs:label "image representation for Asquith, Lady Cynthia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c64dce5c-e29c-4b92-887b-3353b9864369/datastream/OBJ/download>	rdfs:label "image representation for Astell, Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:5561f8b7-1553-40e4-8d97-d4638c575d34/datastream/OBJ/download>	rdfs:label "image representation for Aulnoy, Marie-Catherine d'"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:29f408e6-f1a3-4bff-afa1-7c3123bce130/datastream/OBJ/download>	rdfs:label "image representation for Austen, Jane"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:815cc53a-bcc0-4794-8587-424f9d08cbc5/datastream/OBJ/download>	rdfs:label "image representation for Austin, Sarah"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a0d944ab-510a-4568-91f1-2ee2daa00a68/datastream/OBJ/download>	rdfs:label "image representation for Avery, Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c700a961-f2bb-4e70-8d2c-08750a5faa92/datastream/OBJ/download>	rdfs:label "image representation for Ayres, Ruby M."@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:988d3de4-0836-4739-a3b9-a2a4cf68a3f5/datastream/OBJ/download>	rdfs:label "image representation for Aytoun, William Edmonstoune"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:63d9ce4c-389e-44f6-b0db-6e1ccdf0a4c9/datastream/OBJ/download>	rdfs:label "image representation for Bacon, Anne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:fe7a6db3-d63e-42cd-a141-26cba7e4c65c/datastream/OBJ/download>	rdfs:label "image representation for Bagnold, Enid"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:50252293-a680-41aa-8a07-81f0a1d516cf/datastream/OBJ/download>	rdfs:label "image representation for Bainbridge, Beryl"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:84bd9743-eaea-446a-820e-9b4505205697/datastream/OBJ/download>	rdfs:label "image representation for Baldwin, Louisa"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:b2c93e54-af93-4fc5-bcea-3342eeccc2b4/datastream/OBJ/download>	rdfs:label "image representation for Balfour, Clara"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6851a242-aa93-403e-b3f1-3b764fe7187a/datastream/OBJ/download>	rdfs:label "image representation for Balzac, Honoré de"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:30fc74c1-734f-44dc-aa2f-c7b6477362d1/datastream/OBJ/download>	rdfs:label "image representation for Banks, Isabella"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:201a8146-754a-4916-ab7c-4da563468a11/datastream/OBJ/download>	rdfs:label "image representation for Bannerman, Anne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:903413c8-9884-4f85-996d-c70ad2db5998/datastream/OBJ/download>	rdfs:label "image representation for Bannerman, Helen"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d7a50d7b-0091-4506-b8ce-5a0e34d49d0e/datastream/OBJ/download>	rdfs:label "image representation for Barbauld, Anna Letitia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c3341dd6-1333-4bf0-9f81-332c18bc38cf/datastream/OBJ/download>	rdfs:label "image representation for Barham, Richard Harris"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9d492425-759a-45ad-b19a-09d603ad23ac/datastream/OBJ/download>	rdfs:label "image representation for Barker, Jane"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:1d73e5ec-8195-45b9-a8e5-08fe81fb9abc/datastream/OBJ/download>	rdfs:label "image representation for Barker, Mary Anne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:69b8e3b5-5eeb-4005-a1d0-e4716f7b6ffe/datastream/OBJ/download>	rdfs:label "image representation for Barker, Pat"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ba6c0703-010d-4b3f-b54e-125032f6350a/datastream/OBJ/download>	rdfs:label "image representation for Barnard, Lady Anne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d51abfb9-600c-4459-8a8b-8fbcb6eacf87/datastream/OBJ/download>	rdfs:label "image representation for Barnes, Djuna"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:7258a857-a9ad-458f-a64c-d2298d4efd13/datastream/OBJ/download>	rdfs:label "image representation for Barney, Natalie Clifford"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:082bdf8e-e574-4ea3-b1ab-04e148e32e89/datastream/OBJ/download>	rdfs:label "image representation for Barrie, Sir J. M."@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9295edcf-a12e-4319-8702-88abd9066e45/datastream/OBJ/download>	rdfs:label "image representation for Baudelaire, Charles"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:fab2fd2f-ac4a-440e-a94b-0fc6be57cb3f/datastream/OBJ/download>	rdfs:label "image representation for Beach, Sylvia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9848b6b9-097b-4a52-8028-544d5b0ead94/datastream/OBJ/download>	rdfs:label "image representation for Beaumont, Agnes"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a9666873-b3db-4628-8ea5-f1da74ea14f0/datastream/OBJ/download>	rdfs:label "image representation for Beauvoir, Simone de"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6d2b6177-1095-4001-b627-c83b735d1c8d/datastream/OBJ/download>	rdfs:label "image representation for Becker, Lydia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a6d2bff0-8e58-46cc-889c-ae0ea05ec4fe/datastream/OBJ/download>	rdfs:label "image representation for Beckett, Samuel"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6455ee50-dc79-4846-8932-091f52829c20/datastream/OBJ/download>	rdfs:label "image representation for Bedford, Sybille"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:8fc6f062-3941-4dcf-89e7-50c57992deae/datastream/OBJ/download>	rdfs:label "image representation for Beeton, Isabella"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:dcfe775e-40f3-40cf-917a-7f50294f6350/datastream/OBJ/download>	rdfs:label "image representation for Bellerby, Frances"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:92bad53c-601a-4fcd-8e8d-44f970581662/datastream/OBJ/download>	rdfs:label "image representation for Bell, Gertrude"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:84a77d0a-5afe-4fd6-9f38-f964f472ec9c/datastream/OBJ/download>	rdfs:label "image representation for Belli, Giuseppe Gioachino"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:8f23f8f3-2abd-443f-9cdf-eb2bfcb14a8a/datastream/OBJ/download>	rdfs:label "image representation for Benger, Elizabeth Ogilvy"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:3b59b862-a051-409d-b8ea-9ecd3aa96526/datastream/OBJ/download>	rdfs:label "image representation for Benger, Elizabeth Ogilvy"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f81689fe-42a6-4c83-8f7a-3bfb430ad2d4/datastream/OBJ/download>	rdfs:label "image representation for Benger, Elizabeth Ogilvy"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:5efbccdc-44ef-4e71-9f67-a01b32231d75/datastream/OBJ/download>	rdfs:label "image representation for Bennett, Arnold"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:3fa872f7-b3d6-429d-81df-cdb3d96ba99d/datastream/OBJ/download>	rdfs:label "image representation for Bensusan, Inez"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a1497e52-eec5-4f82-b440-38788b825f3c/datastream/OBJ/download>	rdfs:label "image representation for Benson, Stella"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:3855cba9-0103-4661-aa6a-69bcfef37cc8/datastream/OBJ/download>	rdfs:label "image representation for Benson, Theodora"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:fabe9799-af96-4d36-8286-5c8a3a18c461/datastream/OBJ/download>	rdfs:label "image representation for Bentley, Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:804f3ea6-853f-4ccb-87eb-378a499453c3/datastream/OBJ/download>	rdfs:label "image representation for Besant, Annie"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a6a25761-d58e-4823-8f9e-26a4ea003b7d/datastream/OBJ/download>	rdfs:label "image representation for Besant, Sir Walter"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:69836f0f-a8cc-4f02-bf76-fe8e7fd11dda/datastream/OBJ/download>	rdfs:label "image representation for Betham, Mary Matilda"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:b9b287b6-81a3-4e15-8c38-d517f397653e/datastream/OBJ/download>	rdfs:label "image representation for Betham-Edwards, Matilda"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:12c45f12-2051-4ea8-807d-2d013dacf06a/datastream/OBJ/download>	rdfs:label "image representation for Betjeman, John"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d0f9e328-2dc2-438f-8808-f4c91a6fa866/datastream/OBJ/download>	rdfs:label "image representation for Billington, Mary Frances"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c996ee9f-8491-494c-b5e6-0d252b45207a/datastream/OBJ/download>	rdfs:label "image representation for Bird, Isabella"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:b36fc82c-c1b2-4be8-bf4e-49574d8b423c/datastream/OBJ/download>	rdfs:label "image representation for Bishop, Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:5542d7e9-fcef-4505-8f34-f1fce855593c/datastream/OBJ/download>	rdfs:label "image representation for Blackwell, Antoinette Brown"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:eb755b4f-b582-431c-b5c9-566b099387ed/datastream/OBJ/download>	rdfs:label "image representation for Blackwood, Caroline"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ff18c563-c120-4de3-94ab-facf2379cee0/datastream/OBJ/download>	rdfs:label "image representation for Black, Clementina"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:516b5ff1-48ea-4931-bfb7-773138b1e2e0/datastream/OBJ/download>	rdfs:label "image representation for Blackburne, E. Owens"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a737ccad-de6b-4f26-8916-ca5fc3fee2f9/datastream/OBJ/download>	rdfs:label "image representation for Blackman, Malorie"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ef244a20-dce9-4474-9473-c9e623d0d084/datastream/OBJ/download>	rdfs:label "image representation for Blagden, Isa"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:dcb95857-7da8-4716-9fd4-d438d132988e/datastream/OBJ/download>	rdfs:label "image representation for Blake, William"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:4d50bfbd-0c68-4b7c-8714-5b3b47425fd1/datastream/OBJ/download>	rdfs:label "image representation for Blamire, Susanna"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:54dcad20-e1f1-41ff-8b1d-19c10e951411/datastream/OBJ/download>	rdfs:label "image representation for Bleecker, Ann Eliza"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c43491bd-23a4-4b7d-a443-cc7b555cc893/datastream/OBJ/download>	rdfs:label "image representation for Blessington, Marguerite Gardiner,,, Countess of"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:037378ad-8f90-4cec-8f9e-7ac160fc6387/datastream/OBJ/download>	rdfs:label "image representation for Blind, Mathilde"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:979431fa-b9cb-43cd-b9dc-63d5173c0ed5/datastream/OBJ/download>	rdfs:label "image representation for Blyton, Enid"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:2babda47-d116-4136-9020-bd164d339e67/datastream/OBJ/download>	rdfs:label "image representation for Boccaccio, Giovanni"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f4597975-cdcc-45d5-b11d-16d34eb86bee/datastream/OBJ/download>	rdfs:label "image representation for Bodichon, Barbara Leigh Smith"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:7c762ead-257a-41dc-a9e9-8fc0baf2e59a/datastream/OBJ/download>	rdfs:label "image representation for Bonhote, Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:4bf26b58-a6cc-44bc-b735-91c8ae01ee34/datastream/OBJ/download>	rdfs:label "image representation for Boothby, Frances"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a67baa95-8f76-40fc-b4a1-7fc1dbe7578c/datastream/OBJ/download>	rdfs:label "image representation for Bottome, Phyllis"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:41fa67fd-e00a-4b9c-8441-6d22a1ceda1e/datastream/OBJ/download>	rdfs:label "image representation for Boucicault, Dion"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a748758c-9f5b-45f9-8631-997e4477949c/datastream/OBJ/download>	rdfs:label "image representation for Boucherett, Jessie"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f11db0fd-f600-40da-8f82-d2751ff1a000/datastream/OBJ/download>	rdfs:label "image representation for Boulger, Dorothy"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:09bb62ce-21ee-4018-8f29-d19e5088d7b1/datastream/OBJ/download>	rdfs:label "image representation for Bowdler, Henrietta Maria"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d4bb0b4a-273c-448f-929b-ec4489512b5a/datastream/OBJ/download>	rdfs:label "image representation for Bowen, Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:8d087d4a-0be5-436e-b7ad-00beba91c3a8/datastream/OBJ/download>	rdfs:label "image representation for Bowes Lyon, Lilian"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:5089d0a2-59ca-48af-a226-b6be84586ae1/datastream/OBJ/download>	rdfs:label "image representation for Bowen, Marjorie"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:7790ff96-fb5f-4a0a-8c91-519e006983eb/datastream/OBJ/download>	rdfs:label "image representation for Bowles, Caroline"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:2a9932a1-cd45-4282-8f66-ba04ad2232f0/datastream/OBJ/download>	rdfs:label "image representation for Box, Muriel"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:e9b4b78e-d7d6-41b4-b779-9f8e5eacd828/datastream/OBJ/download>	rdfs:label "image representation for Boyd, Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:4286ae08-febf-446c-ada4-26360e7b4885/datastream/OBJ/download>	rdfs:label "image representation for Boyle, Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:26c77ece-f2e7-4ef4-9418-c6e0922630fd/datastream/OBJ/download>	rdfs:label "image representation for Bradstreet, Anne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:405719c8-a1f3-4408-8f54-db15ae59502d/datastream/OBJ/download>	rdfs:label "image representation for Bradshaw, Mary Ann Cavendish"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9c58b980-d766-4ef7-b880-4335c5e28c82/datastream/OBJ/download>	rdfs:label "image representation for Braddon, Mary Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9ef15aa6-59d2-4ea7-aa4c-d0bed08f5e7f/datastream/OBJ/download>	rdfs:label "image representation for Brame, Charlotte Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:5a61198c-0087-4045-a26e-eca3048e6a4f/datastream/OBJ/download>	rdfs:label "image representation for Brassey, Anna"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:00ed9558-6f28-499f-9469-63e00c68571d/datastream/OBJ/download>	rdfs:label "image representation for Brazil, Angela"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c2bb895a-f7b4-427e-b00e-7bc2f5cc9355/datastream/OBJ/download>	rdfs:label "image representation for Brett, Dorothy"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:5c4fba9f-e283-4124-8b4f-ed6169cd3552/datastream/OBJ/download>	rdfs:label "image representation for Bristow, Amelia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:780c611c-d023-4dcf-954c-bc26ed79c2ee/datastream/OBJ/download>	rdfs:label "image representation for Brittain, Vera"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:137a0073-5fc0-4daa-bdda-d61dc4948602/datastream/OBJ/download>	rdfs:label "image representation for Brontë, Anne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:2982c7d7-a6a3-41cf-b474-737ca3e75a22/datastream/OBJ/download>	rdfs:label "image representation for Brontë, Charlotte"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ca700eda-199a-45c6-b41b-2fdd1cb88dd7/datastream/OBJ/download>	rdfs:label "image representation for Brontë, Emily"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6ad532a4-c6c5-470b-b562-45f80f9e9d7f/datastream/OBJ/download>	rdfs:label "image representation for Brontë, Emily"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d4fb7ba1-7f2c-4476-9f83-76fa469960fe/datastream/OBJ/download>	rdfs:label "image representation for Brooke-Rose, Christine"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:70439017-b1a6-4f0f-b58c-cd60109490de/datastream/OBJ/download>	rdfs:label "image representation for Brooke, Emma Frances"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:b9a289fc-4a95-4f81-b407-3a60e4d33a90/datastream/OBJ/download>	rdfs:label "image representation for Brooke, Frances"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:4af1334c-59dc-4446-b37a-fd073e5ad2bd/datastream/OBJ/download>	rdfs:label "image representation for Brooke, Rupert"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:80974e2d-49d4-471f-8ee0-f3c7bbf5b666/datastream/OBJ/download>	rdfs:label "image representation for Brophy, Brigid"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:97c837dc-e30a-418e-b21a-dcc62ce624db/datastream/OBJ/download>	rdfs:label "image representation for Broughton, Rhoda"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:8237a532-08b8-47f9-b722-4242e71383a6/datastream/OBJ/download>	rdfs:label "image representation for Browne, Frances"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ee122971-036a-4f96-8dab-8884af169323/datastream/OBJ/download>	rdfs:label "image representation for Brown, John,, 1810 - 1882"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:5dd97058-b84f-43c2-a27b-7fc20f20ac2e/datastream/OBJ/download>	rdfs:label "image representation for Brunton, Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:8d28fcee-a043-4992-8e42-4ac172418c3a/datastream/OBJ/download>	rdfs:label "image representation for Bryan, Margaret"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:27f94211-ffd5-4f69-978e-49bcb64bed8c/datastream/OBJ/download>	rdfs:label "image representation for Bryher"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:168b9dda-bdf1-46b9-9536-83547986c111/datastream/OBJ/download>	rdfs:label "image representation for Buchanan, Robert Williams"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:5189415c-ab77-4f42-9f15-42520fd9038c/datastream/OBJ/download>	rdfs:label "image representation for Buckle, Henry Thomas"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f4a21745-6d84-4199-9dfb-14b381d09fd6/datastream/OBJ/download>	rdfs:label "image representation for Buck, Pearl S."@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:8348555d-07b1-4c98-8683-276a2711f6a1/datastream/OBJ/download>	rdfs:label "image representation for Burnet, Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6d52cf6a-9a61-4b50-9046-b9844acc7399/datastream/OBJ/download>	rdfs:label "image representation for Burnett, Frances Hodgson"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:28642ca2-4b96-4373-a231-973573f164e2/datastream/OBJ/download>	rdfs:label "image representation for Burney, Frances"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:2fa1181b-a679-44eb-83d0-86d2cfe48ac8/datastream/OBJ/download>	rdfs:label "image representation for Burns, Robert"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ebdf3e53-84eb-481f-88fa-db41ce9ab177/datastream/OBJ/download>	rdfs:label "image representation for Bury, Lady Charlotte"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:e7fd1268-c561-4ee7-b859-4cd0e77dce05/datastream/OBJ/download>	rdfs:label "image representation for Bury, Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:5f2526e7-0fbc-4375-8c41-4b69b737e52e/datastream/OBJ/download>	rdfs:label "image representation for Bussy, Dorothy"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:4fe00328-9979-4ca6-9f5a-86e1bce7deb3/datastream/OBJ/download>	rdfs:label "image representation for Butler, Josephine"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:fa4ebb4b-c9b0-4b87-a0ea-ae34cc87bf5d/datastream/OBJ/download>	rdfs:label "image representation for Butts, Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c64ccab1-2465-4fc6-9c74-260de54c17ec/datastream/OBJ/download>	rdfs:label "image representation for Byatt, A. S."@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6cb816ab-9aeb-4be8-a532-8beb41a17e0e/datastream/OBJ/download>	rdfs:label "image representation for Byron, Augusta Ada"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6ac51454-fb3b-48b6-9784-17ad7ec28aeb/datastream/OBJ/download>	rdfs:label "image representation for Calderwood, Margaret"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:5c2c30e1-67be-49e9-b5cf-a81c2b43bdac/datastream/OBJ/download>	rdfs:label "image representation for Callcott, Maria"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f7cff5a4-eb08-432f-9729-f77502862b4a/datastream/OBJ/download>	rdfs:label "image representation for Cambridge, Ada"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:fcb90328-10ee-419f-90c4-bf4118133e2c/datastream/OBJ/download>	rdfs:label "image representation for Campbell, Lady Colin"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:20d65be8-06c6-4d0d-a0ae-24cccc89aebc/datastream/OBJ/download>	rdfs:label "image representation for Campbell, Dorothea Primrose"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:07559243-b728-4bd4-964a-5c8de41c94fd/datastream/OBJ/download>	rdfs:label "image representation for Carlyle, Jane Welsh"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:0452d95c-32b5-446f-8e98-6d67d903f63f/datastream/OBJ/download>	rdfs:label "image representation for Carleton, Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:914dff2d-efd1-4980-a328-e2a4f62c9416/datastream/OBJ/download>	rdfs:label "image representation for Carlyle, Thomas"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f4573f21-c601-4c95-9160-b2db938da55c/datastream/OBJ/download>	rdfs:label "image representation for Carpenter, Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:fac55488-bc39-4c56-af61-ef35c92eb8fb/datastream/OBJ/download>	rdfs:label "image representation for Carrington, Dora"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:50716185-7fc7-41f1-a0af-162ea0f0cfb5/datastream/OBJ/download>	rdfs:label "image representation for Carroll, Lewis"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:b22329d6-66dc-4633-bcf3-046110e44fe1/datastream/OBJ/download>	rdfs:label "image representation for Cartland, Barbara"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:fa17050a-797b-4e8e-b5b3-a10fe3b57fb0/datastream/OBJ/download>	rdfs:label "image representation for Carter, Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:bc3cfd64-e95f-4072-a22e-98ee079f851c/datastream/OBJ/download>	rdfs:label "image representation for Cary, Mary Ann Shadd"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d0450dea-8d12-4323-a1c5-dc60c4f2df52/datastream/OBJ/download>	rdfs:label "image representation for Catchpole, Margaret"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d15a004c-b45b-4693-b6d0-7af8dfef4861/datastream/OBJ/download>	rdfs:label "image representation for Cather, Willa"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:312f3e18-d1bd-4e29-8b4a-5dd16919fa50/datastream/OBJ/download>	rdfs:label "image representation for Cavendish, Lady Jane"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:16873a6e-426f-479b-8b69-53ed6701757f/datastream/OBJ/download>	rdfs:label "image representation for Cave, Jane"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:fa231049-aa22-4e7e-80c2-5c2488e4d5f6/datastream/OBJ/download>	rdfs:label "image representation for Cavendish, Margaret"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:1157a5ce-8d52-45aa-8fd8-be01e19f7ee2/datastream/OBJ/download>	rdfs:label "image representation for Celesia, Dorothea"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d12d18e9-65a5-4f10-8a17-6a2aa5174282/datastream/OBJ/download>	rdfs:label "image representation for Centlivre, Susanna"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f44f5351-a543-46ed-86b0-33bf0a61870a/datastream/OBJ/download>	rdfs:label "image representation for Chant, Laura Ormiston"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ae44fbb9-5c4f-43a3-9676-0ba1ead3bde3/datastream/OBJ/download>	rdfs:label "image representation for Chandler, Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:601382e4-2d7f-40d0-a388-2fa9e70d64ca/datastream/OBJ/download>	rdfs:label "image representation for Chapone, Hester Mulso"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:2ea02f43-60a1-4a46-92c0-58b2f72805cb/datastream/OBJ/download>	rdfs:label "image representation for Chapone, Sarah"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a7056d96-5d4c-4bb0-8397-a36437b925f6/datastream/OBJ/download>	rdfs:label "image representation for Chapone, Sarah"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c6ef4ebf-2d48-4a6e-9ebe-25b1ba17378c/datastream/OBJ/download>	rdfs:label "image representation for Charke, Charlotte"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9d1541a7-a607-4d45-92e9-9f2708832839/datastream/OBJ/download>	rdfs:label "image representation for Chatterton, Thomas"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:172c9a38-e71d-43dd-836d-a34185b4176f/datastream/OBJ/download>	rdfs:label "image representation for Chaucer, Geoffrey"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6b8131bf-289d-41e6-8295-4464ff231a41/datastream/OBJ/download>	rdfs:label "image representation for Child, Lydia Maria"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:cc1e60cc-1fb0-467d-b82d-1e401cf40fd1/datastream/OBJ/download>	rdfs:label "image representation for Chisholm, Caroline"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a6b33e1c-f8a9-47c1-bfe1-3cfa360c44e3/datastream/OBJ/download>	rdfs:label "image representation for Chopin, Kate"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:362855ff-7c72-441e-aeab-8a4e69899b43/datastream/OBJ/download>	rdfs:label "image representation for Christie, Agatha"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:651de7b7-c82c-41ab-8eef-0584fb3b7e22/datastream/OBJ/download>	rdfs:label "image representation for Christine de Pisan"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:adb65dc2-8eec-4144-aecf-f1c1867838b8/datastream/OBJ/download>	rdfs:label "image representation for Chudleigh, Mary,,, Lady"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:57bfffb7-031d-4ddf-ad6f-bbee71cbceee/datastream/OBJ/download>	rdfs:label "image representation for Cixous, Hélène"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d3ecbd08-d182-49d8-b4f2-7f6fdd53d8d0/datastream/OBJ/download>	rdfs:label "image representation for Clapperton, Jane Hume"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:2763f00a-484a-44c7-aedd-5950af4c2456/datastream/OBJ/download>	rdfs:label "image representation for Clarke, Gillian"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:403410ed-cc38-4afe-a8f8-bb6042890674/datastream/OBJ/download>	rdfs:label "image representation for Clarke, Mary Cowden"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:0a21904e-85c5-4946-a441-c13103e943f7/datastream/OBJ/download>	rdfs:label "image representation for Clerke, Agnes Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ca0de320-6d4c-4a87-9798-cafe508fbd84/datastream/OBJ/download>	rdfs:label "image representation for Clerke, Agnes Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:0bb56826-31a2-4a87-915e-42dc3e1f44e5/datastream/OBJ/download>	rdfs:label "image representation for Clifford, Lady Anne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:bdb7d280-9767-46b2-a46e-ca3d6ad4cfa2/datastream/OBJ/download>	rdfs:label "image representation for Clough, Arthur Hugh"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:4d14ed04-6b81-4c3a-b8fb-a1a002dd67cf/datastream/OBJ/download>	rdfs:label "image representation for Cobbold, Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:e588e3f6-8623-4713-8d51-79153e87c573/datastream/OBJ/download>	rdfs:label "image representation for Cobbe, Frances Power"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:076d8992-dd7f-4edf-9891-1b4f92ea59fe/datastream/OBJ/download>	rdfs:label "image representation for Codd, Clara"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:887bb264-a11d-4d62-9ea7-919979271cf9/datastream/OBJ/download>	rdfs:label "image representation for Colette"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6900edfa-29e2-4a8e-8986-2e3b281de377/datastream/OBJ/download>	rdfs:label "image representation for Colenso, Frances"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ddbe1e82-0716-4e91-bec1-7bda89880a05/datastream/OBJ/download>	rdfs:label "image representation for Coleridge, Mary Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:8885f60a-fa8a-4e3e-b9cb-ae32c75565fa/datastream/OBJ/download>	rdfs:label "image representation for Coleridge, Sara"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:1cab9091-a520-484d-aa58-316df6bdfb23/datastream/OBJ/download>	rdfs:label "image representation for Coleridge, Samuel Taylor"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9d1ea1d3-face-44db-a58b-c78ab86cba75/datastream/OBJ/download>	rdfs:label "image representation for Collier, Jane"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9eb80020-5a38-4548-89fa-19b69143b22c/datastream/OBJ/download>	rdfs:label "image representation for Collier, Jane"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:7c3730a0-b7ab-4689-8968-532ecee761ec/datastream/OBJ/download>	rdfs:label "image representation for Collier, Jane"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:41d9b8ac-b408-44dc-bdce-4b4ee7fd8515/datastream/OBJ/download>	rdfs:label "image representation for Collier, Jane"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:87a5f0ef-8031-44e7-993b-340af9d683ca/datastream/OBJ/download>	rdfs:label "image representation for Colling, Mary Maria"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:39c549f1-be14-498d-88f5-f4fe1f4854e3/datastream/OBJ/download>	rdfs:label "image representation for Collier, Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:12283653-cb3b-42f9-8a6a-1b2a76696bcb/datastream/OBJ/download>	rdfs:label "image representation for Collins, Wilkie"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:db39087e-4407-40af-8369-c822a0364292/datastream/OBJ/download>	rdfs:label "image representation for Comte, Auguste"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:fc19ff04-2bd7-42e5-a455-27c5da7b454f/datastream/OBJ/download>	rdfs:label "image representation for Conrad, Joseph"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:212e0901-dc72-4518-a499-e3c12d9bc716/datastream/OBJ/download>	rdfs:label "image representation for Conway, Anne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:91155601-517d-4ef3-ae50-771f70d65183/datastream/OBJ/download>	rdfs:label "image representation for Cooke, Cassandra"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:1904165b-43bc-4e0b-b30e-2c3d9b732833/datastream/OBJ/download>	rdfs:label "image representation for Cook, Eliza"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f26a5240-fb91-4e50-8aaf-1e985aee0b83/datastream/OBJ/download>	rdfs:label "image representation for Cooper, Lettice"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:41db24ee-9aad-4694-a9a6-8290ed976f84/datastream/OBJ/download>	rdfs:label "image representation for Corelli, Marie"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ca5885a1-539d-480d-9b43-6b19aa9b550c/datastream/OBJ/download>	rdfs:label "image representation for Costello, Louisa Stuart"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:3ddc2d72-fb1a-46b7-9a0a-331bc594dd9e/datastream/OBJ/download>	rdfs:label "image representation for Cowley, Hannah"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:df7aa17d-ce5b-486f-992b-e680fa01a015/datastream/OBJ/download>	rdfs:label "image representation for Cowper, Mary,,, Countess"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:1df66152-9883-465c-9b1d-712b1e1d5531/datastream/OBJ/download>	rdfs:label "image representation for Cowper, Sarah,,, Lady"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:32984839-8193-45de-b3cf-0bfc087b1493/datastream/OBJ/download>	rdfs:label "image representation for Craik, Dinah Mulock"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:fef615d3-beb1-4c52-a727-be914f8c5d5c/datastream/OBJ/download>	rdfs:label "image representation for Craig, Edith"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:028551a5-09e8-44a8-8e65-7e870d904088/datastream/OBJ/download>	rdfs:label "image representation for Craik, Helen"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9eff71fa-54db-429c-a366-0ef419764af4/datastream/OBJ/download>	rdfs:label "image representation for Cullwick, Hannah"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:88b6293e-666f-4f8b-935b-efafb5d8e9be/datastream/OBJ/download>	rdfs:label "image representation for Cunard, Nancy"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:04b427fe-d102-4a39-a61a-5b681fcda8f3/datastream/OBJ/download>	rdfs:label "image representation for Dacier, Anne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:fe7b1d1f-9a27-4c8d-a167-e97b4a5837e6/datastream/OBJ/download>	rdfs:label "image representation for Dacre, Barbarina Brand,,, Baroness"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:79f1f347-4aec-45e2-84e0-c1a6482b2e2d/datastream/OBJ/download>	rdfs:label "image representation for Dacre, Charlotte"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6f118134-fd14-4d63-946b-8a6b16ac0295/datastream/OBJ/download>	rdfs:label "image representation for Damer, Anne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:291aff0a-9546-49c1-bd25-0261ab15f289/datastream/OBJ/download>	rdfs:label "image representation for Dane, Clemence"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:1335b49e-c59d-4e25-9ac8-53ae7cf7a8d1/datastream/OBJ/download>	rdfs:label "image representation for Dante Alighieri"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:e6f58aa7-f0bd-4a50-8871-8844d8404cdc/datastream/OBJ/download>	rdfs:label "image representation for Darwin, Charles"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:b0f8659c-362f-42a5-9a0a-3cb5d65f62a4/datastream/OBJ/download>	rdfs:label "image representation for Davies, Emily"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:7d43fad4-95d1-4de4-978c-75cb9e68ed87/datastream/OBJ/download>	rdfs:label "image representation for Davis, Rebecca Harding"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ca9e24ae-9668-4e25-8478-3051f5b3b95f/datastream/OBJ/download>	rdfs:label "image representation for Defoe, Daniel"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d21a3662-ec9e-4141-a8a9-f2abf453fa0f/datastream/OBJ/download>	rdfs:label "image representation for De la Pasture, Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ce0509c7-00b2-44f6-bb52-384147f2b4a0/datastream/OBJ/download>	rdfs:label "image representation for Delany, Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:8d83e7e0-3afd-4282-aaea-9303f10280e0/datastream/OBJ/download>	rdfs:label "image representation for De Quincey, Thomas"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f52f50fc-24f3-4fa9-a34a-427e175c74da/datastream/OBJ/download>	rdfs:label "image representation for Devlin, Anne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:69cd2988-ee8c-4f50-97b6-1d4cfb894ef9/datastream/OBJ/download>	rdfs:label "image representation for Devonshire, Elizabeth Cavendish,,, Duchess of"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:877a7d78-afba-44a4-ab4b-5f8066853084/datastream/OBJ/download>	rdfs:label "image representation for Devonshire, Georgiana Cavendish,,, Duchess of"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:12db5809-fc7b-4f82-aa85-2f12e2cef7f0/datastream/OBJ/download>	rdfs:label "image representation for Devonshire, Georgiana Cavendish,,, Duchess of"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a9cf402b-8f09-411e-9587-dc3051a02eab/datastream/OBJ/download>	rdfs:label "image representation for Devonshire, Georgiana Cavendish,,, Duchess of"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:82cb3fe0-429d-4d85-8acd-fb24525bce9f/datastream/OBJ/download>	rdfs:label "image representation for Dickens, Charles"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:768a48dc-9d30-4ccf-b1cb-0a80ec44e420/datastream/OBJ/download>	rdfs:label "image representation for Dickinson, Emily"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d7900143-30cd-42b5-9f14-d0077911baff/datastream/OBJ/download>	rdfs:label "image representation for Dickens, Mary Angela"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:7356d694-cf36-4dc4-83da-366d70ae31cb/datastream/OBJ/download>	rdfs:label "image representation for Dinesen, Isak"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:5c55e0fe-f223-4b69-acc6-f1a1d2620e12/datastream/OBJ/download>	rdfs:label "image representation for Dixie, Florence"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6023d1c1-9b1a-454f-99dd-c7b52975f369/datastream/OBJ/download>	rdfs:label "image representation for Dixon, Ella Hepworth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:5f6753db-5582-4acf-acc5-bbf8946e51ea/datastream/OBJ/download>	rdfs:label "image representation for Dobell, Sydney Thompson"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:0e729e93-bf94-4a68-811d-f9dd8314ba48/datastream/OBJ/download>	rdfs:label "image representation for Dostoevsky, Fyodor Mikhailovich"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:cae0e58f-61b5-4462-b0a9-f2973c52020d/datastream/OBJ/download>	rdfs:label "image representation for Dowie, Ménie Muriel"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a935ed34-39bc-4512-9997-5dd00167d7c0/datastream/OBJ/download>	rdfs:label "image representation for Dowriche, Anne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:36968a13-0d30-4c13-965f-b70a1f68d805/datastream/OBJ/download>	rdfs:label "image representation for Doyle, Sir Arthur Conan"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f6b59314-b43e-4a17-bf9d-2999f8aed1e0/datastream/OBJ/download>	rdfs:label "image representation for Drabble, Margaret"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:0fdcd5da-a37c-4f6e-b1bc-5ee1401048e6/datastream/OBJ/download>	rdfs:label "image representation for Dryden, John"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:756067ea-357c-49cb-9516-1144d2326cbc/datastream/OBJ/download>	rdfs:label "image representation for Duffy, Carol Ann"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:809e1435-5469-49a9-a61a-1ba03ef9a35c/datastream/OBJ/download>	rdfs:label "image representation for Duff Gordon, Lucie"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:aae57594-2abd-4841-853b-9a00948f8186/datastream/OBJ/download>	rdfs:label "image representation for Duffy, Maureen"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f4a2f754-a260-4d31-a0b4-0b5ff1e4296e/datastream/OBJ/download>	rdfs:label "image representation for Dumas, Alexandre,, père"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c87cedb1-1041-4806-946b-6be4f1822ddd/datastream/OBJ/download>	rdfs:label "image representation for Du Maurier, Daphne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9d284f0a-719e-4191-a1a9-91c22d5c11f8/datastream/OBJ/download>	rdfs:label "image representation for Duncan, Sara Jeannette"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:8e2fca53-fd95-4876-a2af-4c568c51f1a5/datastream/OBJ/download>	rdfs:label "image representation for Dunmore, Helen"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6d9cf856-17b8-4951-b793-922e18e8d1d4/datastream/OBJ/download>	rdfs:label "image representation for Dutt, Toru"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:1649bc91-5186-43dc-ade0-2aba32d7ed93/datastream/OBJ/download>	rdfs:label "image representation for Eden, Emily"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:1c100d17-a624-46f5-b4ef-317de29d6eec/datastream/OBJ/download>	rdfs:label "image representation for Edgeworth, Maria"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:96caf42c-b6e2-4f81-a403-aaafac5779db/datastream/OBJ/download>	rdfs:label "image representation for Edwards, Amelia B."@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c29ce53e-db01-486f-9f03-7da3e5ae9ec8/datastream/OBJ/download>	rdfs:label "image representation for Elizabeth I, Queen"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c8a69b0f-749b-489e-908b-4e1e60fa5543/datastream/OBJ/download>	rdfs:label "image representation for Elliott, Charlotte"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:481c4606-1afe-4f05-a3d5-96e876f6a007/datastream/OBJ/download>	rdfs:label "image representation for Elliott, Grace"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:8fa1f2f8-cfb2-4ebb-bda4-73dba45a2dc4/datastream/OBJ/download>	rdfs:label "image representation for Ellis, Sarah Stickney"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:11bc2faf-1dc4-4fd8-8e33-2bf7b61d5a5f/datastream/OBJ/download>	rdfs:label "image representation for El Saadawi, Nawal"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:dee83c91-afcb-46d7-90c9-bb95242be3e7/datastream/OBJ/download>	rdfs:label "image representation for Elstob, Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:83e95aa7-11e2-4eed-ab9e-453bdd9c8c17/datastream/OBJ/download>	rdfs:label "image representation for Enright, Anne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:53b49a5c-d3d3-4297-9f2b-b3d52378503b/datastream/OBJ/download>	rdfs:label "image representation for Ephelia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:5355d222-c92d-4416-aa3f-a8742f7df9d8/datastream/OBJ/download>	rdfs:label "image representation for Ephelia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:5b2ed34b-a166-4820-927c-0159ad890002/datastream/OBJ/download>	rdfs:label "image representation for Evans, Margiad"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:447e34c7-4917-476a-829f-02f686ba907f/datastream/OBJ/download>	rdfs:label "image representation for Ewing, Juliana Horatia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:bf4a044b-db04-4c77-809f-cb57857b4dd4/datastream/OBJ/download>	rdfs:label "image representation for Faithfull, Emily"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:fe54eb17-c280-4b03-80c3-6ccd3b393620/datastream/OBJ/download>	rdfs:label "image representation for Falkland, Elizabeth Cary,,, Viscountess"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:7dae0085-ddb7-49e7-bbca-5c76ca0633bb/datastream/OBJ/download>	rdfs:label "image representation for Fanshawe, Ann,,, Lady"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:55fc0900-50c8-4294-b3ad-fb622804add5/datastream/OBJ/download>	rdfs:label "image representation for Fanthorpe, U. A."@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:2abdcc54-074a-498f-9637-a4364908b867/datastream/OBJ/download>	rdfs:label "image representation for Farjeon, Eleanor"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:8d8351e1-96b0-49c6-9ecf-8a5043f36edf/datastream/OBJ/download>	rdfs:label "image representation for Farr, Florence"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:16e7bde9-0542-4da2-bad2-48c452f3e038/datastream/OBJ/download>	rdfs:label "image representation for Fawcett, Millicent Garrett"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:2f3f987e-c327-48f7-9188-9ea4bbdd3b9a/datastream/OBJ/download>	rdfs:label "image representation for Feinstein, Elaine"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:853199f3-d36b-4037-bb74-a25cd7c8ca45/datastream/OBJ/download>	rdfs:label "image representation for Ferguson, Elizabeth Graeme"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:36047627-b7b2-4f78-a494-07b4dcd5ea66/datastream/OBJ/download>	rdfs:label "image representation for Fern, Fanny"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:bad2ea34-8e31-4b8f-8feb-c393651c1966/datastream/OBJ/download>	rdfs:label "image representation for Ferrier, Susan"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:7cbbcfc8-35b6-41e6-9ad7-fdba537dadcb/datastream/OBJ/download>	rdfs:label "image representation for Fidelia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ab6790d2-32c7-4506-90a2-72d91d775620/datastream/OBJ/download>	rdfs:label "image representation for Fielding, Henry"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:8e3c30ab-7c9a-4f32-a974-1cce0c1ca69b/datastream/OBJ/download>	rdfs:label "image representation for Finch, Anne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:19b5bbe7-6762-45be-88ce-1e1adf5e4413/datastream/OBJ/download>	rdfs:label "image representation for Fisher, Ann"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ff0556c5-2d33-4f77-af95-cdbe1c4d13f5/datastream/OBJ/download>	rdfs:label "image representation for Fisher, Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:eaefaf92-5d51-41d7-87ea-ca290b469dd8/datastream/OBJ/download>	rdfs:label "image representation for FitzGerald, Edward"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:8277b65d-3f8a-4203-9219-05a2b50ebcb0/datastream/OBJ/download>	rdfs:label "image representation for Fletcher, Mary Bosanquet"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:006fcf91-b6bd-44f4-a998-d5ab5d3c156d/datastream/OBJ/download>	rdfs:label "image representation for Forbes, Rosita"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d0a3992b-6ce6-4d34-a24f-73dec7e713b9/datastream/OBJ/download>	rdfs:label "image representation for Ford, Isabella Ormston"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:2d7fb01c-1468-494d-bbcd-2cf7241a69c4/datastream/OBJ/download>	rdfs:label "image representation for Forster, E. M."@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9fbf495a-e7f3-4a5b-b48b-8a3635dcf3b1/datastream/OBJ/download>	rdfs:label "image representation for Foster, Hannah Webster"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:bc4c180c-b84f-40fa-ab2a-f5b42143ef0c/datastream/OBJ/download>	rdfs:label "image representation for Fothergill, Jessie"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:39b48c55-c0bb-4c2a-a102-2e64c2abada1/datastream/OBJ/download>	rdfs:label "image representation for Francis, Anne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9a503c43-700e-4c96-ad41-771bc3cb35e3/datastream/OBJ/download>	rdfs:label "image representation for Frankau, Julia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:0753c6ed-ffd5-4a6b-8c6c-9f559454d7ef/datastream/OBJ/download>	rdfs:label "image representation for Fullerton, Georgiana"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:5666aa22-bdc6-45f7-ae39-68f271789518/datastream/OBJ/download>	rdfs:label "image representation for Fuller, Margaret"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f414811f-9bd2-4835-9f32-f6d0376e06c8/datastream/OBJ/download>	rdfs:label "image representation for Galsworthy, John"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d0852686-2093-4f14-b420-9f7f64c374c3/datastream/OBJ/download>	rdfs:label "image representation for Garnett, Constance"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:90d62851-3b46-4bba-b39f-444d567b522e/datastream/OBJ/download>	rdfs:label "image representation for Gaskell, Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:4c803a19-32aa-443f-940c-d8d2c11300d3/datastream/OBJ/download>	rdfs:label "image representation for Gatty, Margaret"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:1cc3ee31-2c09-4715-8e1c-a1abcfedd23e/datastream/OBJ/download>	rdfs:label "image representation for Gautier, Théophile"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:87fcb3fc-f435-4d84-8511-4a4c9ddcf250/datastream/OBJ/download>	rdfs:label "image representation for Gawthorpe, Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9c9227e0-59d9-4ecb-abf3-fcd678d7bae3/datastream/OBJ/download>	rdfs:label "image representation for Genlis, Stéphanie-Félicité de"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ac0522c0-3f1e-4d4e-b6fe-b0266f41e527/datastream/OBJ/download>	rdfs:label "image representation for Gershon, Karen"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d5cf26c6-db1b-414d-bc92-a66317904685/datastream/OBJ/download>	rdfs:label "image representation for Gilbert, Ann Taylor"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:431b36f6-62fb-4ee4-9ed8-f7ec5124f887/datastream/OBJ/download>	rdfs:label "image representation for Gilman, Charlotte Perkins"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:347d7d2e-e11d-4558-bb66-3c792f47e5df/datastream/OBJ/download>	rdfs:label "image representation for Glasse, Hannah"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d8dd26a1-6ec6-4ff6-8c16-14d4b4ba10d6/datastream/OBJ/download>	rdfs:label "image representation for Glasier, Katharine Bruce"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:689aa1c4-d5c1-4f6c-a7a0-d2d6d763abe2/datastream/OBJ/download>	rdfs:label "image representation for Glyn, Elinor"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:639c1bbe-b295-4701-9c41-5d790882d9cb/datastream/OBJ/download>	rdfs:label "image representation for Godley, Charlotte"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a76d0b26-ddc0-4438-b979-b0d2f46af88e/datastream/OBJ/download>	rdfs:label "image representation for Gonne, Maud"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:719002d4-4a0d-41c6-bbf6-5a923b543519/datastream/OBJ/download>	rdfs:label "image representation for Gooch, Elizabeth Sarah"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:e9f00d2c-0b2f-4a0b-815b-7e86e104dc94/datastream/OBJ/download>	rdfs:label "image representation for Gordimer, Nadine"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:5772caf2-10d8-41bc-91ec-adab8901045a/datastream/OBJ/download>	rdfs:label "image representation for Gore, Catherine"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:488c7dc0-24d6-489c-873a-cfd2e5885209/datastream/OBJ/download>	rdfs:label "image representation for Gore-Booth, Eva"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:0c280650-c362-4f98-8bf9-b0f7f9d6ef6e/datastream/OBJ/download>	rdfs:label "image representation for Graffigny, Françoise de"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a7680b82-c2a4-4a72-9f83-6c63f28e6a18/datastream/OBJ/download>	rdfs:label "image representation for Grant, Anne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:0ef8799b-297b-4fc2-bf56-41b1918e0b0e/datastream/OBJ/download>	rdfs:label "image representation for Grand, Sarah"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:8cd8e38f-8d9e-48aa-a1c3-02ca8a296e1d/datastream/OBJ/download>	rdfs:label "image representation for Green, Henry"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:692259f8-d424-4bdb-92ab-9f168cb765f8/datastream/OBJ/download>	rdfs:label "image representation for Greenaway, Kate"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:723d3655-1877-4609-b5bd-faf435cbeda8/datastream/OBJ/download>	rdfs:label "image representation for Gregory, Augusta"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9bbdb686-9b34-4b64-a935-c396c81bfb48/datastream/OBJ/download>	rdfs:label "image representation for Grey, Maria"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:95620820-da31-46c6-abe9-859a823ea6be/datastream/OBJ/download>	rdfs:label "image representation for Griffith, Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:035794c1-2b44-4a7c-bbbc-ed0920e9f602/datastream/OBJ/download>	rdfs:label "image representation for Guest, Charlotte"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f8a7325c-dc25-48c9-984b-d43452b988bb/datastream/OBJ/download>	rdfs:label "image representation for Hale, Sarah Josepha"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:aa49c444-85e2-467a-a5d1-e4b0ce8f1af2/datastream/OBJ/download>	rdfs:label "image representation for Halkett, Anne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:8e165a9e-7dce-4e42-9f7d-256f11f97c90/datastream/OBJ/download>	rdfs:label "image representation for Hall, Anna Maria"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c49984e2-9cac-4a6d-bfe2-3bb951fb71af/datastream/OBJ/download>	rdfs:label "image representation for Hall, Radclyffe"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6ca57c67-4c38-4614-84e2-d2d1aa834214/datastream/OBJ/download>	rdfs:label "image representation for Ham, Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:b236d522-634a-4903-964b-6a27d16025d2/datastream/OBJ/download>	rdfs:label "image representation for Hamilton, Cicely"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d2139853-5fbd-411c-9d06-08aae8063eba/datastream/OBJ/download>	rdfs:label "image representation for Hamilton, Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:0c732815-de42-492d-bf37-10ef5c25e12d/datastream/OBJ/download>	rdfs:label "image representation for Hamilton, Mary Agnes"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:75bcf526-6504-47ab-8911-41e167fbe2fa/datastream/OBJ/download>	rdfs:label "image representation for Hamnett, Nina"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:31c22dc9-c13b-41fa-aab1-28abe40f0cd7/datastream/OBJ/download>	rdfs:label "image representation for Harcourt, Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:b01dd2f2-b891-40a2-ac1d-01e1830eabae/datastream/OBJ/download>	rdfs:label "image representation for Hardy, Iza Duffus"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:04eaadb1-b1e4-4cfe-94c7-b20a078b3bce/datastream/OBJ/download>	rdfs:label "image representation for Hardy, Mary Anne Duffus"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:bbe4430f-5ffd-4581-93ab-f02b599577fb/datastream/OBJ/download>	rdfs:label "image representation for Hardy, Thomas"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:cef18337-9722-479f-b275-d8e3ef1d520f/datastream/OBJ/download>	rdfs:label "image representation for Harkness, Margaret"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:981a72e0-ab0f-4ae3-b10e-c6df6eae5480/datastream/OBJ/download>	rdfs:label "image representation for Harley, Brilliana,,, Lady"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:4931fed6-c82c-4e05-bb5b-90f86779032d/datastream/OBJ/download>	rdfs:label "image representation for Harper, Frances E. W."@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:aa35e3ad-200e-48bd-be43-7716e0eec5fd/datastream/OBJ/download>	rdfs:label "image representation for Harraden, Beatrice"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:762cf1e0-4c63-43ab-80d0-eee98a3a07f7/datastream/OBJ/download>	rdfs:label "image representation for Harrison, Jane Ellen"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:183853ff-e08a-4b2e-b8ad-69ce1308f092/datastream/OBJ/download>	rdfs:label "image representation for Harvey, Jane"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:434a40be-8526-4a07-a679-76e99991b935/datastream/OBJ/download>	rdfs:label "image representation for Harwood, Isabella Neil"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:aedf3fab-9aa2-4cb3-889f-341948714d12/datastream/OBJ/download>	rdfs:label "image representation for Hatton, Ann"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:cba72bf7-33e6-42ee-9e35-ddfa8945acc3/datastream/OBJ/download>	rdfs:label "image representation for Havergal, Frances Ridley"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:4940db2d-3ea0-4ad9-8430-07430b334875/datastream/OBJ/download>	rdfs:label "image representation for Hawke, Cassandra,,, Lady"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:476ec281-661b-40c2-af54-2ea0d6419521/datastream/OBJ/download>	rdfs:label "image representation for Hawkins, Laetitia-Matilda"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:1cb2cab4-868e-490e-bbee-c6e78323365d/datastream/OBJ/download>	rdfs:label "image representation for Hays, Matilda"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:37b4bd4b-ba43-4a51-b99f-5a2d86d2a1a2/datastream/OBJ/download>	rdfs:label "image representation for Haywood, Eliza"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:83e55457-1f4e-415f-a054-961133e789fe/datastream/OBJ/download>	rdfs:label "image representation for Hazlitt, William"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:4b979e2e-dfe1-4090-9026-320087cca83a/datastream/OBJ/download>	rdfs:label "image representation for Heaney, Seamus"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f2b5be6a-b7c2-4b77-b34e-36e194ba3df0/datastream/OBJ/download>	rdfs:label "image representation for Helme, Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:3b8dfd46-d862-481d-ae22-3e255d856b77/datastream/OBJ/download>	rdfs:label "image representation for Héloïse"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:b425f066-b005-409f-8e1c-5856fdc0bc06/datastream/OBJ/download>	rdfs:label "image representation for Héloïse"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:778af5c9-eaee-40e4-b757-2f0a8ea48d08/datastream/OBJ/download>	rdfs:label "image representation for Hemans, Felicia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:082933ab-0746-409f-9538-20b4625fbeca/datastream/OBJ/download>	rdfs:label "image representation for Herbert, Lady Lucy"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:7362d8e8-9b9f-4faf-95f2-cc08b28ec0d4/datastream/OBJ/download>	rdfs:label "image representation for Herberts, Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a65075d8-e1d5-4671-b752-ad2150779d45/datastream/OBJ/download>	rdfs:label "image representation for Herschel, Caroline"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:bb408146-0cef-4c23-a2ab-ed12d6b88109/datastream/OBJ/download>	rdfs:label "image representation for Hertford, Frances Seymour,,, Countess of"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:178b82e9-563a-4a5a-9006-630c4d86550e/datastream/OBJ/download>	rdfs:label "image representation for Heyer, Georgette"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:56ecf6cf-0495-4f17-a790-beeead66e1fe/datastream/OBJ/download>	rdfs:label "image representation for Hickey, Emily"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ab56772e-1ec8-47b2-886d-b0dc68cf91af/datastream/OBJ/download>	rdfs:label "image representation for Hickman, Rose"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6e569e5e-9879-4c24-b12d-a6f11df87d0a/datastream/OBJ/download>	rdfs:label "image representation for Hildegarde of Bingen"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6b5d6e60-2355-4af6-848a-2efbffad0c91/datastream/OBJ/download>	rdfs:label "image representation for Hill, Isabel"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:fb6c25c3-ba79-45c5-8772-b3500c0804dc/datastream/OBJ/download>	rdfs:label "image representation for Hincks, Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9954b1c9-5b20-43ce-b40b-dcba26446173/datastream/OBJ/download>	rdfs:label "image representation for Hobbes, John Oliver"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:b264861c-b968-4dc2-b852-c93a7c85622b/datastream/OBJ/download>	rdfs:label "image representation for Hoey, Frances Sarah"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:333fe523-2a69-4128-bfd3-472ce69e4499/datastream/OBJ/download>	rdfs:label "image representation for Hofland, Barbara"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:441539e4-7997-489a-9fd9-77ea6ffeb6d1/datastream/OBJ/download>	rdfs:label "image representation for Holford, Margaret,, the younger"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f695817a-ef96-4619-9a18-2b1cbb1ca948/datastream/OBJ/download>	rdfs:label "image representation for Hope, Laurence"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:27438d4f-9611-46c9-8688-3835d3d036f4/datastream/OBJ/download>	rdfs:label "image representation for Houstoun, Matilda Charlotte"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:5a52b714-466b-4d3e-b041-5a953d7fdff0/datastream/OBJ/download>	rdfs:label "image representation for Howe, Julia Ward"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:0c6051a6-55bb-4f61-8567-00e8c9eeb17c/datastream/OBJ/download>	rdfs:label "image representation for Howitt, Anna Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:1dba844a-9076-4d38-8a0e-7264c9914206/datastream/OBJ/download>	rdfs:label "image representation for Howitt, Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ba176586-53c7-4f83-a362-ed3570c5eabd/datastream/OBJ/download>	rdfs:label "image representation for Hrotsvit of Gandersheim"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:2b2c19db-9f0c-4500-b016-bc65455c8667/datastream/OBJ/download>	rdfs:label "image representation for Hubback, Catherine"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:00ea1e40-bfcf-4c38-8462-9f970f234661/datastream/OBJ/download>	rdfs:label "image representation for Hull, E. M."@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c544b001-04c9-4903-a65d-f5fbf7e16d3e/datastream/OBJ/download>	rdfs:label "image representation for Hume, Mary Catherine"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:7cc64800-7ee7-4c04-bb92-964b8062b4fa/datastream/OBJ/download>	rdfs:label "image representation for Hume, Sophia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:757e9be9-04eb-4a24-916f-24a98acb84d3/datastream/OBJ/download>	rdfs:label "image representation for Hunter, Rachel"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:cab6f6ab-eb53-49d6-ac0a-00621bcc9213/datastream/OBJ/download>	rdfs:label "image representation for Hunt, Violet"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f28a818c-034e-4707-be76-6016efe53065/datastream/OBJ/download>	rdfs:label "image representation for Hurston, Zora Neale"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:fc1ea3c0-6c83-423a-835b-a4e5176a042a/datastream/OBJ/download>	rdfs:label "image representation for Hutchinson, Lucy"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:02471292-b110-4129-9278-e64c6c7640d1/datastream/OBJ/download>	rdfs:label "image representation for Hutton, Catherine"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ca7653ea-36a1-446b-8c13-c412d6c76f80/datastream/OBJ/download>	rdfs:label "image representation for Hutton, Lucy"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:1bed2e7b-dd18-46b7-a441-12e084e32b51/datastream/OBJ/download>	rdfs:label "image representation for Huxley, Elspeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:e8d60b65-9ab0-4ea0-8b02-a8e2f993f29f/datastream/OBJ/download>	rdfs:label "image representation for Ibsen, Henrik"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:dc4d8493-b66c-4978-bae1-21c91d2475bf/datastream/OBJ/download>	rdfs:label "image representation for Inchbald, Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:1f80539d-2233-4745-b1ec-9153140b7bf4/datastream/OBJ/download>	rdfs:label "image representation for Ingelow, Jean"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:37ef01da-020b-4f01-833b-0e1aa5e07b92/datastream/OBJ/download>	rdfs:label "image representation for Iremonger, Lucille"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:/datastream/OBJ/download>	rdfs:label "image representation for Irwin, Anne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:79d3da34-52f5-450b-b3e6-f978323b1dcb/datastream/OBJ/download>	rdfs:label "image representation for Jacobs, Harriet"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:1e3a06e9-a5ea-4e48-8104-b90cc7ce9247/datastream/OBJ/download>	rdfs:label "image representation for Jacson, Frances"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6f1d3262-aa59-45da-a8eb-edf4c8603016/datastream/OBJ/download>	rdfs:label "image representation for Jacson, Maria Elizabetha"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:88a4af93-94d6-40b3-b8e0-f58fede5916f/datastream/OBJ/download>	rdfs:label "image representation for Jameson, Anna Brownell"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:03e2811b-f2e0-4400-9dee-da78ce4d5310/datastream/OBJ/download>	rdfs:label "image representation for James, Elinor"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:3aae26b3-5fd8-4035-888d-58cab0ab1a92/datastream/OBJ/download>	rdfs:label "image representation for James, Henry"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f3426166-d70f-47c5-b0f9-027e8a5ad27d/datastream/OBJ/download>	rdfs:label "image representation for James, Henry"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:27c28f11-9d9f-4df3-9fe9-dceb0918ef06/datastream/OBJ/download>	rdfs:label "image representation for James, P. D."@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:e20786bb-5d57-4812-8e4f-9bfba33d49e4/datastream/OBJ/download>	rdfs:label "image representation for Jay, Harriett"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6a4bd010-bbab-4a7b-a73e-1adedc00f1c6/datastream/OBJ/download>	rdfs:label "image representation for Jebb, Ann"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:8c68d338-a2a1-4e0c-97f7-24d6a0fe8084/datastream/OBJ/download>	rdfs:label "image representation for Jenkin, Henrietta Camilla"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:cf4f98dc-333b-44a5-89c2-4bdf684485fb/datastream/OBJ/download>	rdfs:label "image representation for Jesse, F. Tennyson"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:e64a9ec8-3c01-4cf3-bfb7-ee42e0c5e9b4/datastream/OBJ/download>	rdfs:label "image representation for Jevons, Mary Anne,, the elder"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:2517a028-b008-429f-ac34-1b7f1aba816a/datastream/OBJ/download>	rdfs:label "image representation for Jewett, Sarah Orne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:03e5da6a-befc-4129-88c5-d80c3feb02ce/datastream/OBJ/download>	rdfs:label "image representation for Jewsbury, Geraldine"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d32257ed-b5ec-4b2b-8c62-8e862b93ac8f/datastream/OBJ/download>	rdfs:label "image representation for Jewsbury, Maria Jane"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:09b43002-9036-4f8b-b17c-bcd9562d5967/datastream/OBJ/download>	rdfs:label "image representation for Jex-Blake, Sophia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:82f6a0fb-bfb0-4246-9ec2-f86eed42cb45/datastream/OBJ/download>	rdfs:label "image representation for Johnston, Ellen"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:1c75eb1f-de3a-4f77-8545-546989a86276/datastream/OBJ/download>	rdfs:label "image representation for Johnston, Ellen"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6ab0e7aa-87ba-4017-b078-c062bd073a67/datastream/OBJ/download>	rdfs:label "image representation for Johnson, Pauline"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:826e4757-6acf-442e-b244-35ad1c69abb7/datastream/OBJ/download>	rdfs:label "image representation for Johnson, Pamela Hansford"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:df21730f-b5c9-4d12-93f3-4c6cbf8bec24/datastream/OBJ/download>	rdfs:label "image representation for Johnson, Samuel"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:b36aa6d7-30ed-4ee5-8a37-cb54c226d325/datastream/OBJ/download>	rdfs:label "image representation for Julian of Norwich"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:8c61a5b3-7463-4cb2-b510-cec5c0bf42a5/datastream/OBJ/download>	rdfs:label "image representation for Kantaris, Sylvia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f20db8ea-8151-4d43-9ae0-cd3e97f04211/datastream/OBJ/download>	rdfs:label "image representation for Kavanagh, Julia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9a400f34-41b9-45b1-bdb7-ba824de009b4/datastream/OBJ/download>	rdfs:label "image representation for Kaye-Smith, Sheila"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:80c06657-f105-4723-995d-56fbe139dbb2/datastream/OBJ/download>	rdfs:label "image representation for Kazantzis, Judith"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:af5ecc69-06ba-4154-b6f3-0a2001f62a0b/datastream/OBJ/download>	rdfs:label "image representation for Keats, John"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:cddccf74-8090-4349-b454-42531488fc08/datastream/OBJ/download>	rdfs:label "image representation for Keats, John"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a002a9b0-98e9-4e4f-a95e-af454c7bcfdb/datastream/OBJ/download>	rdfs:label "image representation for Kemble, Adelaide"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:5d453fd1-103c-41b8-aa5d-eee22a712518/datastream/OBJ/download>	rdfs:label "image representation for Kemble, Fanny"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:61944156-f286-4540-88a9-ec643a772777/datastream/OBJ/download>	rdfs:label "image representation for Kemble, Maria Theresa"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9e5a7ac5-4a24-4da8-9cf2-9f59f8bb982f/datastream/OBJ/download>	rdfs:label "image representation for Kennedy, Margaret"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6b648b97-00f0-48a3-adeb-81cff2ee3aa1/datastream/OBJ/download>	rdfs:label "image representation for Kingsford, Anna"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:487dedd4-6e33-48b9-9b8a-ac304a7d78ca/datastream/OBJ/download>	rdfs:label "image representation for Kingsley, Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9fdcda76-0dbe-40fb-9df5-18206aa6f7d6/datastream/OBJ/download>	rdfs:label "image representation for Kipling, Rudyard"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:311ce1f0-148e-4a2e-9dd4-887b86fb84b0/datastream/OBJ/download>	rdfs:label "image representation for Knight, Ellis Cornelia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d9e2777b-7b47-4021-a04a-62af654d1b0e/datastream/OBJ/download>	rdfs:label "image representation for Kristeva, Julia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c5d59a4d-dc8a-40c0-866e-196dbff1a9ea/datastream/OBJ/download>	rdfs:label "image representation for Kristeva, Julia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:90bd69c0-ce25-4815-9538-bd52356d0591/datastream/OBJ/download>	rdfs:label "image representation for Lafayette, Marie-Madeleine de"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f6ef6cdd-add6-4d12-9eef-1e73d23d049f/datastream/OBJ/download>	rdfs:label "image representation for Lambert, Anne-Thérèse de"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:e5060e8b-970f-4423-89d3-b57e31aba7a5/datastream/OBJ/download>	rdfs:label "image representation for Lamb, Lady Caroline"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:bd716a44-415c-4fd5-bfb9-d812c6f5a99e/datastream/OBJ/download>	rdfs:label "image representation for Lamb, Mary,, 1764 - 1847"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9e476e1a-dd5a-447e-b95d-7a52d6d49e0f/datastream/OBJ/download>	rdfs:label "image representation for Lanyer, Aemilia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:edc0a7f2-16c3-431d-8e56-7f9db057d3aa/datastream/OBJ/download>	rdfs:label "image representation for Larkin, Philip"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:fb16ec42-0abc-4a02-9f95-83f49e5c89a9/datastream/OBJ/download>	rdfs:label "image representation for Larpent, Anna Margaretta"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:51c0e2fa-b331-4af2-97fd-946a2609d549/datastream/OBJ/download>	rdfs:label "image representation for Lavin, Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:1579dc52-32bb-4bf4-87f7-86a1bd3f8af1/datastream/OBJ/download>	rdfs:label "image representation for Lawrence, D. H."@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:70509efc-9c8d-451b-8ca0-b7918b56f099/datastream/OBJ/download>	rdfs:label "image representation for Lee, Sophia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:514cb17e-1102-4d00-b0c0-be33cae945fb/datastream/OBJ/download>	rdfs:label "image representation for Lee, Vernon"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f5f53d90-9178-4861-b8e1-f1c89ac7017e/datastream/OBJ/download>	rdfs:label "image representation for Le Guin, Ursula K."@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d32bd259-cbc8-4644-8a5f-9306117cbafb/datastream/OBJ/download>	rdfs:label "image representation for L. E. L."@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:056bce2b-15ed-497f-97d4-b186bb46416b/datastream/OBJ/download>	rdfs:label "image representation for Leonowens, Anna"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:83ee73b7-4d7e-442c-859d-62a8690da00f/datastream/OBJ/download>	rdfs:label "image representation for Le Plongeon, Alice Dixon"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6b50a219-a4c1-46ca-abae-7e039fd8e6d3/datastream/OBJ/download>	rdfs:label "image representation for Lessing, Doris"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6342d990-53f7-46c8-8aa9-9d988e9010db/datastream/OBJ/download>	rdfs:label "image representation for Leverson, Ada"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:18bd99bd-c4eb-4661-b24e-224cad76a775/datastream/OBJ/download>	rdfs:label "image representation for Levy, Amy"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:aee8bac2-68f8-4b1c-95b3-bb5e34b5fd12/datastream/OBJ/download>	rdfs:label "image representation for Lewes, George Henry"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ec19409c-d662-4f97-8340-a0e3f17b079a/datastream/OBJ/download>	rdfs:label "image representation for Lewis, Wyndham"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:115f27ed-d660-4fa6-9ad4-25ad33456552/datastream/OBJ/download>	rdfs:label "image representation for Lewis, Wyndham"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:76baf426-3882-4bcc-9888-14c97269ae7e/datastream/OBJ/download>	rdfs:label "image representation for Ling Shuhua"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:3ec982cb-2b95-4949-ba02-2ef36784bb89/datastream/OBJ/download>	rdfs:label "image representation for Linton, Eliza Lynn"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:cf24552a-0648-427f-b517-aed63f927a51/datastream/OBJ/download>	rdfs:label "image representation for Lister, Anne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:2299c6b6-eb15-419f-935a-892669cd8e64/datastream/OBJ/download>	rdfs:label "image representation for Lively, Penelope"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9fb0d064-cc87-4603-b7c4-8b9543329eda/datastream/OBJ/download>	rdfs:label "image representation for Locke, John"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:385cae0a-029a-451c-ac1e-faf9222e85f4/datastream/OBJ/download>	rdfs:label "image representation for Longworth, Maria Theresa"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:e6238e8b-e9a8-434e-8a52-9c58ba3b1b5c/datastream/OBJ/download>	rdfs:label "image representation for Loudon, Jane"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c2a43de4-3427-4cc6-a540-c05bf67f7de6/datastream/OBJ/download>	rdfs:label "image representation for Lowndes, Marie Belloc"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a38e7947-b81f-44c5-b81f-41fe4857a0b2/datastream/OBJ/download>	rdfs:label "image representation for Lucan, Margaret Bingham,,, Countess"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a4cc7f34-d889-4949-a05d-fce97047ae32/datastream/OBJ/download>	rdfs:label "image representation for Lumley, Lady Jane"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:5e1ed0ce-1382-4dc5-9884-77d2b32584fc/datastream/OBJ/download>	rdfs:label "image representation for Lyall, Edna"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6f6cdd2b-98a4-4c9e-be64-47a7a61f5d73/datastream/OBJ/download>	rdfs:label "image representation for Lytton, Constance"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:866059f5-338a-4e8c-b45f-420c8d77a3ed/datastream/OBJ/download>	rdfs:label "image representation for Lyttelton, Edith"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d7b1a262-5dfc-4e0d-b8bf-16573dabf1c9/datastream/OBJ/download>	rdfs:label "image representation for Lytton, Rosina Bulwer Lytton,,, Baroness"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:07a3f5cc-5afd-453e-8ef7-dbb658321c17/datastream/OBJ/download>	rdfs:label "image representation for Macaulay, Catharine"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:71188e15-37c6-4f48-8e7a-749546efc8af/datastream/OBJ/download>	rdfs:label "image representation for Macaulay, Rose"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:046fb8e5-87b6-4cf9-a8a9-2d589beb5bfb/datastream/OBJ/download>	rdfs:label "image representation for Machar, Agnes Maule"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:08acda81-c2fb-4f26-b3e2-50e342f52d46/datastream/OBJ/download>	rdfs:label "image representation for Macquoid, Katharine S."@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:5d7773cd-1ca0-4904-b8d4-5f9ebdb9a9dd/datastream/OBJ/download>	rdfs:label "image representation for Makin, Bathsua"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:8ef5c99b-359d-4b70-ae7c-c554b93e7915/datastream/OBJ/download>	rdfs:label "image representation for Malet, Lucas"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:afd2dbd1-d310-4206-bb77-a99f6a6c99d5/datastream/OBJ/download>	rdfs:label "image representation for Mandeville, Bernard"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a3030ec0-c3fe-457b-bf7f-68100fb4763b/datastream/OBJ/download>	rdfs:label "image representation for Manley, Delarivier"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:87aaf3ea-558f-4e43-8dd9-b027ded55031/datastream/OBJ/download>	rdfs:label "image representation for Mannin, Ethel"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:05c2cff4-f5ea-4b2a-9389-d25a36fadcc9/datastream/OBJ/download>	rdfs:label "image representation for Mansfield, Katherine"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:efe4de28-b56f-4cf7-8f9c-0bdc774834f4/datastream/OBJ/download>	rdfs:label "image representation for Marcet, Jane"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ee80097b-5f56-4233-adc0-09aa974b6e3b/datastream/OBJ/download>	rdfs:label "image representation for Marguerite de Navarre"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:00aa5d6d-b0db-4748-ba4c-21c684f1d415/datastream/OBJ/download>	rdfs:label "image representation for Marie de France"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f1906f93-cc6c-45ea-8539-a128831e3331/datastream/OBJ/download>	rdfs:label "image representation for Mario, Jessie White"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a4755e30-dc16-493e-bc08-121514d00f20/datastream/OBJ/download>	rdfs:label "image representation for Markievicz, Constance,,, Countess"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:b70e4dfb-3988-414a-ad56-ac1e8c958605/datastream/OBJ/download>	rdfs:label "image representation for Marlowe, Christopher"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:bc248d12-afa4-4737-83b0-e2248bf16785/datastream/OBJ/download>	rdfs:label "image representation for Marryat, Florence"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:0ad50fbe-58a0-4cc1-80e5-6a722f1486c7/datastream/OBJ/download>	rdfs:label "image representation for Marsh, Anne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:7fc11cf6-0bc0-42b8-9719-a8518365869a/datastream/OBJ/download>	rdfs:label "image representation for Marsh, Catherine"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:2ec42860-5657-498d-b0ec-a196a66930d2/datastream/OBJ/download>	rdfs:label "image representation for Marsh, Catherine"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:085b6993-9ee4-4be4-b60b-3892181f3184/datastream/OBJ/download>	rdfs:label "image representation for Marsden, Dora"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:bc55321b-3a95-4a6b-a8d2-01cbd124ba69/datastream/OBJ/download>	rdfs:label "image representation for Marsden, Kate"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:4b1b2378-7939-49b4-aa4f-f54ad76d7bad/datastream/OBJ/download>	rdfs:label "image representation for Marsh, Ngaio"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:791efd43-b23f-4b25-9435-3bfe8457ebd6/datastream/OBJ/download>	rdfs:label "image representation for Martineau, Harriet"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:cec85eec-739f-46f9-9f73-c354e634b562/datastream/OBJ/download>	rdfs:label "image representation for Marx, Karl"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:1bddf18e-6627-4e79-9167-e5547bef5c06/datastream/OBJ/download>	rdfs:label "image representation for Masters, Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:112822a0-582a-4922-8b4c-0e2cbe5fb722/datastream/OBJ/download>	rdfs:label "image representation for Mathers, Helen,, 1851 - 1920"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:37e5019f-0aba-43b8-ab66-6f2f2773d8e6/datastream/OBJ/download>	rdfs:label "image representation for Mayhew, Henry"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c563398e-df14-4296-945b-fcf79fc4fe0a/datastream/OBJ/download>	rdfs:label "image representation for McCullers, Carson"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c85637de-5996-418c-b06c-28b1e6b60448/datastream/OBJ/download>	rdfs:label "image representation for Meade, L. T."@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:42f0ab46-5521-4468-9d65-cd8ea18404da/datastream/OBJ/download>	rdfs:label "image representation for Mead, Margaret"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:fdd3a96a-aa78-4ea1-aef8-c116eaf7bffd/datastream/OBJ/download>	rdfs:label "image representation for Melville, Herman"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:b03b10f2-01a8-47ae-b26d-85a0c2433f2d/datastream/OBJ/download>	rdfs:label "image representation for Meredith, George"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:63414d62-fae2-46ef-abb2-e4e496938cb0/datastream/OBJ/download>	rdfs:label "image representation for Meredith, Louisa Anne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f543f6b0-c975-4817-922f-a08d7c960df4/datastream/OBJ/download>	rdfs:label "image representation for Meynell, Alice"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:0a2aa3d4-200c-48ad-a0dd-90662b654a0c/datastream/OBJ/download>	rdfs:label "image representation for Millay, Edna St Vincent"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:498f0885-3378-482c-ae9d-689324f68f32/datastream/OBJ/download>	rdfs:label "image representation for Mill, John Stuart"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:80c6e4ce-bf46-466a-aff9-14d98b8130a9/datastream/OBJ/download>	rdfs:label "image representation for Milton, John"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:49738e6a-b782-48d7-b26a-c5b6ee0ae100/datastream/OBJ/download>	rdfs:label "image representation for Mitford, Mary Russell"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:cf9217bf-ad53-46d7-bee8-1adce792bdab/datastream/OBJ/download>	rdfs:label "image representation for Mitford, Nancy"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:4f83067f-8d61-42f4-802e-5d87ce4489a1/datastream/OBJ/download>	rdfs:label "image representation for Montagu, Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:04d58eab-8c7e-4783-9751-c9ac5893963a/datastream/OBJ/download>	rdfs:label "image representation for Montgomery, L. M."@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:7fa6c726-658f-43c3-a8dd-8879445c5cda/datastream/OBJ/download>	rdfs:label "image representation for Montagu, Lady Mary Wortley"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a0ba9214-ee2f-4613-9747-a81e23cfe5bf/datastream/OBJ/download>	rdfs:label "image representation for Moore, Marianne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:474a3783-18ec-4386-9bdc-482bbb363dde/datastream/OBJ/download>	rdfs:label "image representation for Moore, Thomas"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:afbd86a7-e24b-4063-9493-0e883b00d6c9/datastream/OBJ/download>	rdfs:label "image representation for Moore, Thomas"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ae9b935e-7893-42aa-bc46-18a84e3c0dff/datastream/OBJ/download>	rdfs:label "image representation for Moore, Thomas"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:31d5a592-da11-4990-85e8-211e4f574aba/datastream/OBJ/download>	rdfs:label "image representation for More, Hannah"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:bae46119-35a9-4a29-9976-cb165703c1c3/datastream/OBJ/download>	rdfs:label "image representation for More, Hannah"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ebdca083-0bfa-4a7f-ae35-bf2d3c9db20a/datastream/OBJ/download>	rdfs:label "image representation for Morgan, Sydney Owenson,,, Lady"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:504aa970-e6b6-4505-a12c-eea575e0d132/datastream/OBJ/download>	rdfs:label "image representation for Morgan, Sydney Owenson,,, Lady"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:203f9cdb-37ef-4e87-ad99-74d7d315c556/datastream/OBJ/download>	rdfs:label "image representation for Morrell, Lady Ottoline"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6b02c0dc-209f-4f81-85f5-d4775a0d7f08/datastream/OBJ/download>	rdfs:label "image representation for Morrison, Toni"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:153f4691-6aeb-469f-a287-dcea1d3aa58e/datastream/OBJ/download>	rdfs:label "image representation for Morris, William"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:14569ee5-117e-45d9-875c-ee54d384fbb3/datastream/OBJ/download>	rdfs:label "image representation for Morton, Sarah Wentworth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:935f6a85-8308-4cf8-9bde-fa9688800a46/datastream/OBJ/download>	rdfs:label "image representation for Munro, Alice"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:07ac3700-4114-465d-95bc-afd2e74f1c8b/datastream/OBJ/download>	rdfs:label "image representation for Murray, Judith Sargent"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:017140e0-7b2d-4173-93c0-aa67eb94bd1e/datastream/OBJ/download>	rdfs:label "image representation for Naidu, Sarojini"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:407fb19f-ae6f-43bd-94bb-d533e6980cc8/datastream/OBJ/download>	rdfs:label "image representation for Nairne, Carolina Oliphant,,, Lady"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:b7cb4414-bd3c-4559-a20d-34034e650c0c/datastream/OBJ/download>	rdfs:label "image representation for Newman, John Henry"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:20ea2ea4-cf78-450b-8265-9e58d9b48423/datastream/OBJ/download>	rdfs:label "image representation for Newton, Sir Isaac"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:95d22ea2-d916-4780-bc00-00ad3a2afa85/datastream/OBJ/download>	rdfs:label "image representation for Nietzsche, Friedrich Wilhelm"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c4b38ba6-d7bf-41b1-89ff-1ee980fdab23/datastream/OBJ/download>	rdfs:label "image representation for Nightingale, Florence"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:abef432c-c175-4354-8801-1c78c2818f50/datastream/OBJ/download>	rdfs:label "image representation for Nihell, Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:b95784cb-e41a-45f6-ae8e-f91a1ea2d07a/datastream/OBJ/download>	rdfs:label "image representation for Nithsdale, Winifred Maxwell,,, Countess of"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:52810c43-7418-466a-b5cc-20293c431492/datastream/OBJ/download>	rdfs:label "image representation for Norton, Caroline"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f598e9de-3ab4-452a-a861-0e37ec12bdfe/datastream/OBJ/download>	rdfs:label "image representation for Norton, Caroline"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:38b21125-047b-42ef-bc00-b057f636657c/datastream/OBJ/download>	rdfs:label "image representation for O'Brien, Edna"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f9f1bf22-7e45-42c4-95c7-4104c2df0a64/datastream/OBJ/download>	rdfs:label "image representation for O'Brien, Kate"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:44b13d28-bb10-43ff-8931-c27e1185e814/datastream/OBJ/download>	rdfs:label "image representation for Oliphant, Margaret"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:183a8bd9-80c5-4c0b-9685-87547bb03046/datastream/OBJ/download>	rdfs:label "image representation for Olsen, Tillie"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:1a0402e2-8610-497b-a9ad-5a44e5e79ebe/datastream/OBJ/download>	rdfs:label "image representation for Opie, Amelia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:5d030831-a43f-4185-9a7e-041ba19830df/datastream/OBJ/download>	rdfs:label "image representation for Orczy, Emmuska,,, Baroness"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f0ddae97-deea-4ba4-9cf9-442f847e2ac5/datastream/OBJ/download>	rdfs:label "image representation for Osborne, Dorothy"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9e03f018-4376-48e3-8574-770c919db635/datastream/OBJ/download>	rdfs:label "image representation for Padel, Ruth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:81c186fd-1ce0-40fc-85b4-4c5fece912d9/datastream/OBJ/download>	rdfs:label "image representation for Paine, Thomas,, 1737 - 1809"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:b3cdd4d0-ed5c-43a4-b5cf-fd635618e942/datastream/OBJ/download>	rdfs:label "image representation for Pankhurst, Christabel"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:778b1fd4-445b-4f02-905c-e51b4d87591b/datastream/OBJ/download>	rdfs:label "image representation for Pankhurst, Emmeline"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ecb5a4ba-e526-4215-b1f7-cce5f4be2444/datastream/OBJ/download>	rdfs:label "image representation for Pankhurst, Sylvia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6a6b44c1-8ab1-4529-834d-49b397e393ff/datastream/OBJ/download>	rdfs:label "image representation for Pardoe, Julia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:cd5eb406-51df-4874-ab97-0bdba54f51b7/datastream/OBJ/download>	rdfs:label "image representation for Parkes, Bessie Rayner"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6ddacb60-2d22-44b1-a66d-c2d0959755cb/datastream/OBJ/download>	rdfs:label "image representation for Parr, Katherine"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:1a32bc45-e930-47f8-a6dd-145f0a21d21e/datastream/OBJ/download>	rdfs:label "image representation for Patmore, Coventry"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9bef982b-1730-4a4d-9cce-8ce45d0955b8/datastream/OBJ/download>	rdfs:label "image representation for Pembroke, Mary Sidney Herbert,,, Countess of"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:7af2f732-413f-4c01-9984-81d10b4fba1d/datastream/OBJ/download>	rdfs:label "image representation for Pethick-Lawrence, Emmeline"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:40c8269b-0ed4-41c2-8791-0904f5e26cf9/datastream/OBJ/download>	rdfs:label "image representation for Pfeiffer, Emily Jane"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:b71a4a47-927f-49ff-a160-9c8b51e81ff4/datastream/OBJ/download>	rdfs:label "image representation for Phelps, Elizabeth Stuart"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6d70a226-0016-469d-842a-6785d5770bf3/datastream/OBJ/download>	rdfs:label "image representation for Philips, Katherine"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:0b52ad8c-d7c7-41ae-94a0-0c02a99b427c/datastream/OBJ/download>	rdfs:label "image representation for Philips, Katherine"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:83899dc6-49cf-4bba-b893-c5defee0c7a9/datastream/OBJ/download>	rdfs:label "image representation for Philips, Katherine"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d134275a-de29-41f1-b4b5-bd0d61baba1c/datastream/OBJ/download>	rdfs:label "image representation for Phillips, Teresia Constantia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:373ee1fc-9fa3-492e-809c-4cdb30142374/datastream/OBJ/download>	rdfs:label "image representation for Piozzi, Hester Lynch"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f24d0f0f-9277-4434-88ee-f03ebdb87433/datastream/OBJ/download>	rdfs:label "image representation for Pix, Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:3a76f47d-bba8-4015-911f-a98a2871f51a/datastream/OBJ/download>	rdfs:label "image representation for Poe, Edgar Allan"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9d261658-c7f8-4c92-8c07-e3b14165b658/datastream/OBJ/download>	rdfs:label "image representation for Poe, Edgar Allan"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:1965ebbf-deed-4e8a-88ff-05115e734b24/datastream/OBJ/download>	rdfs:label "image representation for Pope, Alexander"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c52f2f3f-c760-4279-9dd4-482f089a1034/datastream/OBJ/download>	rdfs:label "image representation for Porter, Anna Maria"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9c54b455-5c1b-4873-9f05-1a21ebc491c8/datastream/OBJ/download>	rdfs:label "image representation for Porter, Jane"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:def1c5e1-bbd8-4092-b184-27c134fff459/datastream/OBJ/download>	rdfs:label "image representation for Potter, Beatrix"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c022d4d0-374b-4476-a819-b824f8b36549/datastream/OBJ/download>	rdfs:label "image representation for Pound, Ezra"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:0497f097-bc17-4749-b1b4-1067e689edb2/datastream/OBJ/download>	rdfs:label "image representation for Prince, Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:7c1a099b-29e7-48b8-a284-5a5b6211f7a2/datastream/OBJ/download>	rdfs:label "image representation for Procter, Adelaide"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:2a966169-1924-4fd6-b90d-3a5c2b1ca8c1/datastream/OBJ/download>	rdfs:label "image representation for Proust, Marcel"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:7ec30f90-1307-4356-aec6-d2bae2b4dab0/datastream/OBJ/download>	rdfs:label "image representation for Pugh, Sheenagh"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d992eb49-06ca-4c61-a220-f903dcf37f02/datastream/OBJ/download>	rdfs:label "image representation for Radcliffe, Ann"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:2c31dc71-b9f6-4e99-bdda-0c196bf2f5d2/datastream/OBJ/download>	rdfs:label "image representation for Ramabai, Pandita"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:39653ff5-f534-478c-9a4b-df0e9e64f417/datastream/OBJ/download>	rdfs:label "image representation for Rathbone, Eleanor"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:7b310c5b-0e8e-45c1-95af-e7266351153b/datastream/OBJ/download>	rdfs:label "image representation for Reeve, Clara"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:85df79d2-e9f6-4123-beef-49fe7d308816/datastream/OBJ/download>	rdfs:label "image representation for Rendell, Ruth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:71939627-628d-4d99-a55a-42a3d04f9c0a/datastream/OBJ/download>	rdfs:label "image representation for Rhondda, Margaret Haig,,, Viscountess"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ada945f2-f6a2-4000-abc6-62188df9a92d/datastream/OBJ/download>	rdfs:label "image representation for Rhys, Jean"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c3d1d5e0-06fc-413b-8198-db298862660b/datastream/OBJ/download>	rdfs:label "image representation for Rich, Adrienne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:b77ff3fd-7d9a-4353-8463-8ef20061dba0/datastream/OBJ/download>	rdfs:label "image representation for Richardson, Dorothy"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:52ad6077-8a9c-412e-a96b-c87080a1a46c/datastream/OBJ/download>	rdfs:label "image representation for Richardson, Henry Handel"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:4a118631-d0c8-4de5-b8f1-338c77397120/datastream/OBJ/download>	rdfs:label "image representation for Richardson, Samuel"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:b5429148-5662-456f-9060-dd9354e6c090/datastream/OBJ/download>	rdfs:label "image representation for Riddell, Charlotte"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:573953da-a761-492f-97ac-3d5f94fccffc/datastream/OBJ/download>	rdfs:label "image representation for Riddell, Maria"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:8c06a5a4-717c-45b3-9838-3cc8b723bff1/datastream/OBJ/download>	rdfs:label "image representation for Rigby, Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:755f2eb8-13a7-4c9f-80c7-711a579fc449/datastream/OBJ/download>	rdfs:label "image representation for Ritchie, Anne Thackeray"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c9cc06a5-938a-4f05-a75c-aa822bf75bde/datastream/OBJ/download>	rdfs:label "image representation for Robins, Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:de7fc85e-2ba7-42d2-b05e-c933a36601d5/datastream/OBJ/download>	rdfs:label "image representation for Robinson, Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a47bdf97-19d6-4250-ac14-044d15a9a5ef/datastream/OBJ/download>	rdfs:label "image representation for Rochester, John Wilmot,,, second Earl of"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f6a4316d-ef41-47d6-9f00-b70b0c0ceb60/datastream/OBJ/download>	rdfs:label "image representation for Roper, Margaret"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9a81f92b-61b2-4982-8db2-5f24b8b4a297/datastream/OBJ/download>	rdfs:label "image representation for Rossetti, Christina"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6b7bb7a0-af04-41c8-8de3-19450ed98508/datastream/OBJ/download>	rdfs:label "image representation for Rossetti, Dante Gabriel"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:dca2c7a8-392e-4bff-a1c7-412a5cf3427b/datastream/OBJ/download>	rdfs:label "image representation for Rossetti, Dante Gabriel"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:08833e4f-b394-47b7-b6e0-0a9f7ccf1d83/datastream/OBJ/download>	rdfs:label "image representation for Ross, Martin"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:071b0519-7616-43fc-b5bc-694b7a7575b5/datastream/OBJ/download>	rdfs:label "image representation for Rousseau, Jean-Jacques"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d31fa1bb-7bbc-4696-b46d-c2577ff6d362/datastream/OBJ/download>	rdfs:label "image representation for Rowe, Elizabeth Singer"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:84bc4eb3-b425-4f8d-ab89-b05a9636fed6/datastream/OBJ/download>	rdfs:label "image representation for Rowe, Elizabeth Singer"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:04dba518-9d5c-4c98-b061-0ee01df8744b/datastream/OBJ/download>	rdfs:label "image representation for Rowling, J. K."@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ccd8a1f2-c382-45b1-aec4-d4dc3f67b731/datastream/OBJ/download>	rdfs:label "image representation for Rowson, Susanna Haswell"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:8f587247-6f08-491a-8ae2-6c6de850ba59/datastream/OBJ/download>	rdfs:label "image representation for Royden, Maude"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d75edb90-3bdc-447b-99bd-8b6f3922e757/datastream/OBJ/download>	rdfs:label "image representation for Ruskin, John"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a740e26f-2714-405b-af64-1148b698a408/datastream/OBJ/download>	rdfs:label "image representation for Russell, Dora"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ba2f1dba-bc87-495a-8206-5f682b6dd602/datastream/OBJ/download>	rdfs:label "image representation for Russell, Lady Rachel"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:8d8e3d5b-2387-4427-abea-4b89557f78d8/datastream/OBJ/download>	rdfs:label "image representation for Sackville, Lady Margaret"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:fae27f80-d65a-4df0-b40b-664f4c9f53ba/datastream/OBJ/download>	rdfs:label "image representation for Sackville-West, Vita"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:3bbadf89-7300-47f6-98ef-4bfbd2575e59/datastream/OBJ/download>	rdfs:label "image representation for Sand, George"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:fd1a6cb7-d0f6-4798-be9f-4f3fd8f0e091/datastream/OBJ/download>	rdfs:label "image representation for Sandbach, Margaret"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ed5f70ba-029f-4d00-a1e2-3cda3cd44fff/datastream/OBJ/download>	rdfs:label "image representation for Sayers, Dorothy L."@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:0850f16b-2a02-4f24-a6e1-859273c53c9f/datastream/OBJ/download>	rdfs:label "image representation for Schimmelpenninck, Mary Anne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:5bb1400d-b0f7-46f8-924d-988a2537273a/datastream/OBJ/download>	rdfs:label "image representation for Schreiner, Olive"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:2b2d0044-c67e-47ad-b95f-9e7fb1048481/datastream/OBJ/download>	rdfs:label "image representation for Schreiner, Olive"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:13c7f77f-1f11-4613-8cd5-d46c3d19d7da/datastream/OBJ/download>	rdfs:label "image representation for Schurman, Anna Maria van"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:178634a1-ee13-4343-a677-8910803dd60e/datastream/OBJ/download>	rdfs:label "image representation for Scott, Catharine Amy Dawson"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c2f64dd0-8ccb-4381-adda-60b2fc9bcc5f/datastream/OBJ/download>	rdfs:label "image representation for Scott, Sir Walter"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:503b285b-0d4f-4c1c-aeb0-b979bcad905a/datastream/OBJ/download>	rdfs:label "image representation for Scovell, E. J."@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:828d714e-a56e-48a5-b104-52f9d8bf6f04/datastream/OBJ/download>	rdfs:label "image representation for Scudéry, Madeleine de"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:3d475121-2c43-46ca-9157-f3a6481f37ba/datastream/OBJ/download>	rdfs:label "image representation for Seacole, Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:bbc26ce1-0b0c-49da-82fe-674506fa425c/datastream/OBJ/download>	rdfs:label "image representation for Sedgwick, Catharine Maria"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:72b23b18-1906-45c4-bcd8-cd2ae9aed277/datastream/OBJ/download>	rdfs:label "image representation for Sévigné, Marie de"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:1024b86e-a015-40fa-be73-235212e6e715/datastream/OBJ/download>	rdfs:label "image representation for Seward, Anna"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:81ee2e12-10c8-442e-a823-187f3cf77471/datastream/OBJ/download>	rdfs:label "image representation for Sewell, Anna"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:059ad5fa-2d53-4df9-81f8-cc50f1b5141c/datastream/OBJ/download>	rdfs:label "image representation for Sewell, Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:bb5b2088-f4c1-4508-ae22-11c495a6240c/datastream/OBJ/download>	rdfs:label "image representation for Sexton, Anne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c8d67d01-76bb-45a3-a0e0-b6869ce84913/datastream/OBJ/download>	rdfs:label "image representation for Shakespeare, William"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:bf7890d9-9c0b-4cc1-a74b-643a45d28c9c/datastream/OBJ/download>	rdfs:label "image representation for Shamsie, Kamila"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:0fb5b639-f7e2-41fb-ae64-73f7f447c80c/datastream/OBJ/download>	rdfs:label "image representation for Sharp, Jane"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c3ea9cdc-30a8-4ec8-a405-b79e80ae698a/datastream/OBJ/download>	rdfs:label "image representation for Shaw, Flora"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f64a0d5a-17fa-4fd2-b937-b5c2547106fd/datastream/OBJ/download>	rdfs:label "image representation for Shaw, George Bernard"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:480493df-083e-4af9-934d-592d2af1bb5e/datastream/OBJ/download>	rdfs:label "image representation for Shelley, Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:4f1d58e4-5e8f-4b07-9524-acc19a39716f/datastream/OBJ/download>	rdfs:label "image representation for Shelley, Percy Bysshe"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:1a775fe5-91aa-491d-8d28-6713d1b9a9c0/datastream/OBJ/download>	rdfs:label "image representation for Sherwood, Mary Martha"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:760781ee-057e-4ccf-a3ec-199330a3c02d/datastream/OBJ/download>	rdfs:label "image representation for Sheridan, Richard Brinsley"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:8b46af51-48d9-4f9b-b3fc-253121f584df/datastream/OBJ/download>	rdfs:label "image representation for Sheridan, Richard Brinsley"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d2db3cc3-a072-497d-b17b-d71508fd3153/datastream/OBJ/download>	rdfs:label "image representation for Shore, Margaret Emily"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9bece554-75ca-47b3-ac50-44ccf468c164/datastream/OBJ/download>	rdfs:label "image representation for Sidney, Sir Philip"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:db997332-f184-4723-8f0d-d05b1933ded6/datastream/OBJ/download>	rdfs:label "image representation for Sigerson, Dora"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:608b3b0f-6f9e-4eca-ad14-f3d4db355ba1/datastream/OBJ/download>	rdfs:label "image representation for Sigourney, Lydia Howard"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:3aa68ed2-2389-47d0-996e-43a1c004d10b/datastream/OBJ/download>	rdfs:label "image representation for Simcoe, Elizabeth Postuma"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:cbd7fa14-80ac-471d-a15e-ab6a6430fb2e/datastream/OBJ/download>	rdfs:label "image representation for Sinclair, Catherine"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:2a831030-0b24-4a83-b318-e2fe3f40eaad/datastream/OBJ/download>	rdfs:label "image representation for Sinclair, May"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9437d313-6094-45a6-b559-0f4d0571d1ec/datastream/OBJ/download>	rdfs:label "image representation for Sitwell, Edith"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:0c0c8af4-880e-4b48-afcf-ad37c23804bd/datastream/OBJ/download>	rdfs:label "image representation for Smith, Ali"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:e83b1d69-7be4-43d8-b191-d5354cb564da/datastream/OBJ/download>	rdfs:label "image representation for Smith, Charlotte"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a3c487ea-27e5-47bf-98c8-a46829f8f92d/datastream/OBJ/download>	rdfs:label "image representation for Smith, Dodie"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:602732e7-ad98-4da8-a701-0972299b466e/datastream/OBJ/download>	rdfs:label "image representation for Smith, Elizabeth,, 1776 - 1806"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:4ca856f8-c804-4be9-b561-116de5417b52/datastream/OBJ/download>	rdfs:label "image representation for Smith, Stevie"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:2ffc6c4a-3e7d-40d8-bc03-3aaf380307cf/datastream/OBJ/download>	rdfs:label "image representation for Smith, Zadie"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:8ea8cc6f-f53e-43f4-bc07-13b6f8f08d01/datastream/OBJ/download>	rdfs:label "image representation for Smollett, Tobias"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:5862a232-c943-4eef-969b-12e9e22e28ce/datastream/OBJ/download>	rdfs:label "image representation for Smyth, Ethel"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f0479b8a-5a21-4b60-a8f5-41d777bcffe9/datastream/OBJ/download>	rdfs:label "image representation for Somerville, Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:de4de4b7-4004-4ee1-a245-c0fb4a2d8504/datastream/OBJ/download>	rdfs:label "image representation for Southcott, Joanna"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c56038bc-7971-4099-8537-97fc54fc59ba/datastream/OBJ/download>	rdfs:label "image representation for Southey, Robert"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a5e412d9-44e8-4fdb-91cd-ab36fc3bf6bf/datastream/OBJ/download>	rdfs:label "image representation for Sowerby, Githa"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a5903399-9045-407b-86c5-c6fb684d74cc/datastream/OBJ/download>	rdfs:label "image representation for Spenser, Edmund"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:b9da5635-1887-4502-bd3e-e6062ac7da0b/datastream/OBJ/download>	rdfs:label "image representation for Spence, Elizabeth Isabella"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:7f08b8c1-8236-4bd1-af6f-31f714935f49/datastream/OBJ/download>	rdfs:label "image representation for Spencer, Herbert"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d6d842cf-8407-4c19-9f23-e7e8486f9c80/datastream/OBJ/download>	rdfs:label "image representation for Staël, Germaine de"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a7ed9c6f-f4ac-412e-a471-9c7050dbf857/datastream/OBJ/download>	rdfs:label "image representation for Stark, Freya"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:7d6a2893-88a9-4e21-90da-7580523d83b6/datastream/OBJ/download>	rdfs:label "image representation for Stead, Christina"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:dcbcda2e-48ab-4e5d-b4a4-b3f6a35d678b/datastream/OBJ/download>	rdfs:label "image representation for Steel, Flora Annie"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:119c9a0d-b14c-4f8c-907b-683dcdca0ec3/datastream/OBJ/download>	rdfs:label "image representation for Stein, Gertrude"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:561781c8-5e36-42d3-91af-ec9ca6b45741/datastream/OBJ/download>	rdfs:label "image representation for Stevenson, Anne"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:74d600cf-1a6c-410c-825a-2a4c64baf105/datastream/OBJ/download>	rdfs:label "image representation for Stopes, Marie"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:af13e846-bc7f-46ba-89ef-d0765b4fc73e/datastream/OBJ/download>	rdfs:label "image representation for Stowe, Harriet Beecher"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:409acd18-388d-45f1-96c7-70ec7a5b8a5f/datastream/OBJ/download>	rdfs:label "image representation for Strachey, Julia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:0e8b8b49-87e4-4443-a958-d4dc7e26f466/datastream/OBJ/download>	rdfs:label "image representation for Strathmore, Mary Eleanor Bowes,,, Countess of"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:48d023ca-189e-4005-805c-b0d769c44f83/datastream/OBJ/download>	rdfs:label "image representation for Strachey, Ray"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:860424ea-a663-417c-a529-52bcda129024/datastream/OBJ/download>	rdfs:label "image representation for Stretton, Hesba"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:3f310d36-1c8a-4156-bed8-4d513da49a60/datastream/OBJ/download>	rdfs:label "image representation for Strickland, Agnes"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:692c6319-65e7-4f6e-aaa9-2a2ffbe1dfe9/datastream/OBJ/download>	rdfs:label "image representation for Stuart, Lady Arbella"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:daf4fba2-b0fc-4482-bec6-2d4ef708282c/datastream/OBJ/download>	rdfs:label "image representation for Stuart, Lady Louisa"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:188e32df-a4ec-4a52-af6b-39e122a1041e/datastream/OBJ/download>	rdfs:label "image representation for Sumbel, Leah"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:e0b4e214-93ed-420b-aec9-a8286204443a/datastream/OBJ/download>	rdfs:label "image representation for Swan, Annie S."@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:aba34da8-3c37-416a-9a82-369e4c1bb8dd/datastream/OBJ/download>	rdfs:label "image representation for Swanwick, Anna"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:eca7e755-e73f-4773-a958-c1aee40a293e/datastream/OBJ/download>	rdfs:label "image representation for Swift, Jonathan"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9f9ffcd5-2fcf-4d40-8b59-5214257a5ea3/datastream/OBJ/download>	rdfs:label "image representation for Swift, Jonathan"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:39e46db7-a114-4ceb-a9a5-8ddd0a85c54b/datastream/OBJ/download>	rdfs:label "image representation for Swinburne, Algernon Charles"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:1e42a87c-c980-4edc-a006-638cbefaf451/datastream/OBJ/download>	rdfs:label "image representation for Synge, John Millington"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:62b02d83-2965-498d-88c9-877cdb0376bf/datastream/OBJ/download>	rdfs:label "image representation for Talbot, Catherine"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9635b3f9-b3cb-434c-a6cc-0ba93431140b/datastream/OBJ/download>	rdfs:label "image representation for Tautphoeus, Jemima"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:db1a529d-cd3c-4fa7-b75a-94be5f9ea0e5/datastream/OBJ/download>	rdfs:label "image representation for Taylor, Ann Martin"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:65e55dac-6b1d-4a3c-aa02-9608cb184422/datastream/OBJ/download>	rdfs:label "image representation for Taylor, Harriet"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ba59a049-235a-447a-98ba-14d204566850/datastream/OBJ/download>	rdfs:label "image representation for Taylor, Helen"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:2558a641-ffad-4465-b950-3968edd97f99/datastream/OBJ/download>	rdfs:label "image representation for Taylor, Jane"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:1e93b61a-7329-4024-b268-738af58ac937/datastream/OBJ/download>	rdfs:label "image representation for Tennyson, Alfred"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:61b6a456-f633-4a7b-8f16-f0a82080b078/datastream/OBJ/download>	rdfs:label "image representation for Tenney, Tabitha"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:456abca4-8ca7-4873-8028-c0f30cfba337/datastream/OBJ/download>	rdfs:label "image representation for Thicknesse, Ann"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d042449e-df72-43c6-8af4-49853de2fda9/datastream/OBJ/download>	rdfs:label "image representation for Thirkell, Angela"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:2110592d-5ca4-41fc-88e8-a602ec66a182/datastream/OBJ/download>	rdfs:label "image representation for Thornton, Alice"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:5a0a7dd8-3d4d-4836-b2ae-2c3dbc6df233/datastream/OBJ/download>	rdfs:label "image representation for Thurston, Katherine Cecil"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:cc498426-def8-4cb1-8b00-aad002ba8cba/datastream/OBJ/download>	rdfs:label "image representation for Tighe, Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:39f860a6-223b-4647-98a4-31c87be1376a/datastream/OBJ/download>	rdfs:label "image representation for Tonna, Charlotte Elizabeth"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9387a506-5fa0-4fb3-9f71-57e5c889f5e5/datastream/OBJ/download>	rdfs:label "image representation for Traill, Catharine Parr"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:0207b47b-95af-47a3-982c-24d35953edea/datastream/OBJ/download>	rdfs:label "image representation for Trapnel, Anna"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:31bf44a2-f2c7-445b-8859-dd666eee92e1/datastream/OBJ/download>	rdfs:label "image representation for Travers, P. L."@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:b289e5dd-232c-46be-95fa-cfd7be7e497d/datastream/OBJ/download>	rdfs:label "image representation for Tree, Viola"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9d923e07-a6c4-4678-8cac-2492cc808646/datastream/OBJ/download>	rdfs:label "image representation for Trefusis, Violet"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:61de37ee-79e6-48ea-9e16-5a31effea993/datastream/OBJ/download>	rdfs:label "image representation for Trefusis, Violet"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:3df16228-2575-48f6-950b-c9cbecd57450/datastream/OBJ/download>	rdfs:label "image representation for Trench, Melesina"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f1125cdb-1ba9-4adc-b583-e3f4c95afcff/datastream/OBJ/download>	rdfs:label "image representation for Trimmer, Sarah"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:82001af0-3fff-4107-b760-2baef05448f9/datastream/OBJ/download>	rdfs:label "image representation for Tristan, Flora"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:22fa77b9-9e70-4940-a164-f5e438ae1b01/datastream/OBJ/download>	rdfs:label "image representation for Trollope, Anthony"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:bf43cc08-bb52-4cc6-af21-ba1f95484aad/datastream/OBJ/download>	rdfs:label "image representation for Trollope, Frances"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:054ad7cf-efb4-4060-8bef-e128e8882617/datastream/OBJ/download>	rdfs:label "image representation for Trollope, Joanna"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:722b9bcb-bad6-47e4-b061-530b054072ca/datastream/OBJ/download>	rdfs:label "image representation for Trotter, Catharine"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d7b85f82-6d17-4d47-bfff-a42f991626e8/datastream/OBJ/download>	rdfs:label "image representation for Troubridge, Una"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:02c50372-d25e-4825-9ca2-c1e15c4c0a7c/datastream/OBJ/download>	rdfs:label "image representation for Truth, Sojourner"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:63212552-d1c1-4d79-b478-ac026852baf3/datastream/OBJ/download>	rdfs:label "image representation for Tucker, Charlotte Maria"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9a99fb8c-2091-4963-a27f-0b3f0c551b21/datastream/OBJ/download>	rdfs:label "image representation for Tweedsmuir, Susan"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:9f4b2523-fc04-4faa-8eaf-0cdbc63a0f64/datastream/OBJ/download>	rdfs:label "image representation for Tynan, Katharine"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d64f15df-c0cc-4c5d-b0b9-500a2f56fc45/datastream/OBJ/download>	rdfs:label "image representation for Tytler, Harriet"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c51bcc36-ff39-4358-94d1-32c760ef22d1/datastream/OBJ/download>	rdfs:label "image representation for Underhill, Evelyn"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:77afca09-2273-46cb-bfb6-66664ca1749f/datastream/OBJ/download>	rdfs:label "image representation for Uttley, Alison"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:60d5d9b4-f673-4177-acdc-14dc8cc55b2c/datastream/OBJ/download>	rdfs:label "image representation for Vardill, Anna Jane"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:5db011fa-9b34-44f3-8c62-fd438984e80b/datastream/OBJ/download>	rdfs:label "image representation for Victoria, Queen"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:22972b20-2096-4ef5-bc22-c14ae7d029b3/datastream/OBJ/download>	rdfs:label "image representation for Villedieu, Marie-Catherine de"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:848aaaa0-4b74-49c5-81dd-9088ea5a8553/datastream/OBJ/download>	rdfs:label "image representation for Vokins, Joan"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:5b369aab-98e6-4342-bd85-2262829aa478/datastream/OBJ/download>	rdfs:label "image representation for Voynich, Ethel Lilian"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:a65ae315-4c83-4dd6-b089-21cfe0e53c03/datastream/OBJ/download>	rdfs:label "image representation for Wakefield, Priscilla"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:94220cc1-d5b4-4e96-a18d-0657f98b6228/datastream/OBJ/download>	rdfs:label "image representation for Walford, Lucy"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d841ff99-cbed-421c-95c2-ffdb9a2ea830/datastream/OBJ/download>	rdfs:label "image representation for Walker, Alice"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:ddf160c0-7b18-4d63-bce8-433760a1da95/datastream/OBJ/download>	rdfs:label "image representation for Walker, Lady Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:45a4b43a-7ec5-4b9d-a037-f0648caa7f15/datastream/OBJ/download>	rdfs:label "image representation for Ward, Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:afbfdc67-e47e-4cb3-8273-1f5ff38836d1/datastream/OBJ/download>	rdfs:label "image representation for Ward, Mary Augusta"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:3964ddc0-a7f8-4b4d-bb4b-9a487e8e3eb3/datastream/OBJ/download>	rdfs:label "image representation for Warner, Marina"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:307171ad-02a7-42be-8fd8-ae4f11d110a3/datastream/OBJ/download>	rdfs:label "image representation for Warren, Mercy Otis"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:79c172db-bc17-4a3e-8a08-ce9e05636f43/datastream/OBJ/download>	rdfs:label "image representation for Warwick, Mary Rich,,, Countess of"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:873a2646-11ad-4a7d-a9fb-89cab435591a/datastream/OBJ/download>	rdfs:label "image representation for Waters, Sarah"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:4959a69c-8f7b-45a2-b7ca-901ae06676a9/datastream/OBJ/download>	rdfs:label "image representation for Waugh, Evelyn"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6dd1f8f0-30f6-4c3d-88eb-be1b79dba7b0/datastream/OBJ/download>	rdfs:label "image representation for Webb, Beatrice"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:b8bdf698-ac8b-4b7d-8279-b0aad07b7389/datastream/OBJ/download>	rdfs:label "image representation for Webb, Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6e4311d1-dfa4-4bdd-921d-bf8b1af5e40a/datastream/OBJ/download>	rdfs:label "image representation for Webster, Augusta"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:dc9d8469-a04d-4472-92c8-a49da1744b8d/datastream/OBJ/download>	rdfs:label "image representation for Welty, Eudora"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:0bf2dd47-f16d-4f05-8561-b29ea5d4aef4/datastream/OBJ/download>	rdfs:label "image representation for Wesley, Susanna"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:4e4169dc-0223-4784-8f29-d00788019016/datastream/OBJ/download>	rdfs:label "image representation for West, Rebecca"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:51fbce82-b565-4817-a1f9-c6778237e1b0/datastream/OBJ/download>	rdfs:label "image representation for Wharton, Edith"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c81c1328-04c3-4ebf-8f48-d3aff0732e99/datastream/OBJ/download>	rdfs:label "image representation for Wheatley, Phillis"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:898897d0-0241-427a-8b4f-113b28eccefe/datastream/OBJ/download>	rdfs:label "image representation for Whipple, Dorothy"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:545d93e4-03f2-46d9-94b0-dea1c36a56c9/datastream/OBJ/download>	rdfs:label "image representation for Wilde, Jane Francesca,,, Lady"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f4f98701-31cb-4518-9c94-e8b86fb8b629/datastream/OBJ/download>	rdfs:label "image representation for Wilde, Oscar"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:3f954d08-aaee-41c6-a6f9-ae55f4b6e500/datastream/OBJ/download>	rdfs:label "image representation for Williams, Anna"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:5b93f20e-bb99-496b-a22f-13df56c8d028/datastream/OBJ/download>	rdfs:label "image representation for Williams, Helen Maria"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:b6eb5cf2-a4c0-48a6-80c2-f1e3a9390f1e/datastream/OBJ/download>	rdfs:label "image representation for Wilson, Harriette"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:34391c7f-260b-44dc-bea2-76df6573d6da/datastream/OBJ/download>	rdfs:label "image representation for Wilson, Harriette"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:7c07c9f2-341d-44a9-ad12-23fb04bde4cd/datastream/OBJ/download>	rdfs:label "image representation for Winterson, Jeanette"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:581f2307-5c93-48d6-832b-78d27d5093fb/datastream/OBJ/download>	rdfs:label "image representation for Winter, John Strange"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:35f29380-1fb8-4217-9c4d-65e1470e1c48/datastream/OBJ/download>	rdfs:label "image representation for Wollstonecraft, Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:d60d3c01-7222-4a46-aabc-e250a28f93d2/datastream/OBJ/download>	rdfs:label "image representation for Wood, Ellen"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:f54d90b5-cdd6-43eb-ba31-b2ac83db4f8d/datastream/OBJ/download>	rdfs:label "image representation for Woolf, Virginia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:c28ed5d1-4c4a-43b0-b1a7-71522534f4c5/datastream/OBJ/download>	rdfs:label "image representation for Woolf, Virginia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:5b8be8ab-ae8f-42a4-9d48-7682b0a6d278/datastream/OBJ/download>	rdfs:label "image representation for Worboise, Emma Jane"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:2451067e-83b9-42af-9bd4-157c124eb637/datastream/OBJ/download>	rdfs:label "image representation for Wordsworth, Dorothy"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:6ab99cf4-7989-4127-b9e0-3911645b8e11/datastream/OBJ/download>	rdfs:label "image representation for Wordsworth, William"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:38f2f362-d7ef-456a-bae9-f4c546b7b6d9/datastream/OBJ/download>	rdfs:label "image representation for Wright, Frances"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:bb721ae2-e876-4b13-b906-a280f432065f/datastream/OBJ/download>	rdfs:label "image representation for Wright, Susanna"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:fe9b5829-fcbf-492a-9af6-aae9fb08365c/datastream/OBJ/download>	rdfs:label "image representation for Wroth, Lady Mary"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:21b8b40c-df77-418f-aa65-d83f08a0c894/datastream/OBJ/download>	rdfs:label "image representation for Yearsley, Ann"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:eec021a8-a4a9-4b00-8977-09eab0654a65/datastream/OBJ/download>	rdfs:label "image representation for Yonge, Charlotte"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:bffdbe3d-4cd9-43a8-b69d-49ae8e228991/datastream/OBJ/download>	rdfs:label "image representation for Young, E. H."@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
+    
+<https://cwrc.ca/islandora/object/orlando:8ebfe381-56ad-4c01-ae95-18a54b42e456/datastream/OBJ/download>	rdfs:label "image representation for Young, Mary Julia"@en ;
+    a crm:E36_Visual_Item, crmdig:D1_Digital_Object. 
