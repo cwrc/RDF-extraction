@@ -1,593 +1,660 @@
 ORLANDO TERM,Possible URI,Possible URI #2
-à clef,http://id.lincsproject.ca/genre#aClef
-abridgement,http://id.lincsproject.ca/genre#abridgement
-academic writing,http://id.lincsproject.ca/genre#scholarlyWriting
-ACLEF,http://id.lincsproject.ca/genre#aClef
-acrostic,http://id.lincsproject.ca/genre#acrostic
-adaptation,http://id.lincsproject.ca/genre#adaptation
-adventure writing,http://id.lincsproject.ca/genre#adventureWriting
-ADVENTUREWRITING,http://id.lincsproject.ca/genre#adventureWriting
-advertisement,http://id.lincsproject.ca/genre#advertisement
-Advertisement Form,http://id.lincsproject.ca/genre#AdvertisementForm
-advertising copy,http://id.lincsproject.ca/genre#AdvertisementForm
-ADVERTISINGCOPY,http://id.lincsproject.ca/genre#AdvertisementForm
-afterpiece,http://id.lincsproject.ca/genre#afterpiece
-afterword,http://id.lincsproject.ca/genre#afterword
-agitprop,http://id.lincsproject.ca/genre#agitprop
-allegory,http://id.lincsproject.ca/genre#allegory
-almanac,http://id.lincsproject.ca/genre#almanac
-alphabet,http://id.lincsproject.ca/genre#alphabet
-Alphabet Form,http://id.lincsproject.ca/genre#AlphabetForm
-anacreontic,http://id.lincsproject.ca/genre#anacreontic
-anagram,http://id.lincsproject.ca/genre#anagram
-animal story,http://id.lincsproject.ca/genre#animalStory
-animation,http://id.lincsproject.ca/genre#animation
-annotation,http://id.lincsproject.ca/genre#annotation
-announcement,http://id.lincsproject.ca/genre#announcement
-answer,http://id.lincsproject.ca/genre#answer
-anthem,http://id.lincsproject.ca/genre#anthem
-anthology,http://id.lincsproject.ca/genre#anthology
-anti-romance,http://id.lincsproject.ca/genre#antiromance
-ANTIROMANCE,http://id.lincsproject.ca/genre#antiromance
-apology,http://id.lincsproject.ca/genre#apology
-appendix,http://id.lincsproject.ca/genre#appendix
-architectural writing,http://id.lincsproject.ca/genre#architecturalWriting
-architecture,http://id.lincsproject.ca/genre#architecturalWriting
-archival material,http://id.lincsproject.ca/genre#archivalMaterial
-art criticism,http://id.lincsproject.ca/genre#artCriticism
-ARTCRITICISM,http://id.lincsproject.ca/genre#artCriticism
-artist's book,http://id.lincsproject.ca/genre#artistsBook
-atlas,http://id.lincsproject.ca/genre#atlas
-Auditory Medium,http://id.lincsproject.ca/genre#AuditoryMedium
-Autobiographical Genre,http://id.lincsproject.ca/genre#AutobiographicalGenre
-autobiography,http://id.lincsproject.ca/genre#autobiography
-ballad,http://id.lincsproject.ca/genre#ballad
-ballad opera,http://id.lincsproject.ca/genre#balladOpera
-ballade,http://id.lincsproject.ca/genre#ballade
-BALLADOPERA,http://id.lincsproject.ca/genre#balladOpera
-ballet,http://id.lincsproject.ca/genre#ballet
-bergamasque,http://id.lincsproject.ca/genre#bergamasque
-bestiary,http://id.lincsproject.ca/genre#bestiary
-biblical paraphrase,http://id.lincsproject.ca/genre#biblicalParaphrase
-BIBLICALPARAPHRASE,http://id.lincsproject.ca/genre#biblicalParaphrase
-bibliographic record,http://id.lincsproject.ca/genre#bibliographicRecord
-bibliography,http://id.lincsproject.ca/genre#bibliography
-bildungsroman,http://id.lincsproject.ca/genre#bildungsroman
-biographical dictionary,http://id.lincsproject.ca/genre#biographicalDictionary
-BIOGRAPHICALDICTIONARY,http://id.lincsproject.ca/genre#biographicalDictionary
-biography,http://id.lincsproject.ca/genre#biography
-bisexual fiction,http://id.lincsproject.ca/genre#bisexualFiction
-BISEXUALFICTION,http://id.lincsproject.ca/genre#bisexualFiction
-black comedy,http://id.lincsproject.ca/genre#blackComedy
-BLACKCOMEDY,http://id.lincsproject.ca/genre#blackComedy
-book,http://id.lincsproject.ca/genre#book
-book series,http://id.lincsproject.ca/genre#bookSeries
-born digital,http://id.lincsproject.ca/genre#bornDigital
-bouts-rimés,http://id.lincsproject.ca/genre#boutsRimes
-BOUTSRIMES,http://id.lincsproject.ca/genre#boutsRimes
-broadside,http://id.lincsproject.ca/genre#broadside
-burletta,http://id.lincsproject.ca/genre#burletta
-business,http://id.lincsproject.ca/genre#business
-cabaret,http://id.lincsproject.ca/genre#cabaret
-calendar,http://id.lincsproject.ca/genre#calendar
-Calendar Form,http://id.lincsproject.ca/genre#CalendarForm
-camp,http://id.lincsproject.ca/genre#camp
-captivity narrative,http://id.lincsproject.ca/genre#captivityNarrative
-CAPTIVITYNARRATIVE,http://id.lincsproject.ca/genre#captivityNarrative
-cartographic,http://id.lincsproject.ca/genre#CartographicForm
-Cartographic Form,http://id.lincsproject.ca/genre#CartographicForm
-cartographic materials,http://id.lincsproject.ca/genre#cartographicMaterials
-catalog,http://id.lincsproject.ca/genre#catalogue
-catalogue,http://id.lincsproject.ca/genre#catalogue
-Catalogue Form,http://id.lincsproject.ca/genre#CatalogueForm
-catechism,http://id.lincsproject.ca/genre#catechism
-cautionary tale,http://id.lincsproject.ca/genre#cautionaryTale
-chapbook,http://id.lincsproject.ca/genre#chapbook
-chapter,http://id.lincsproject.ca/genre#chapter
-CHARACTER,http://id.lincsproject.ca/genre#characterSketch
-character sketch,http://id.lincsproject.ca/genre#characterSketch
-charade,http://id.lincsproject.ca/genre#charade
-children's book,http://id.lincsproject.ca/genre#childrensLiterature
-childrens literature,http://id.lincsproject.ca/genre#childrensLiterature
-Childrens Literature Genre,http://id.lincsproject.ca/genre#ChildrensLiteratureGenre
-CHILDRENSLITERATURE,http://id.lincsproject.ca/genre#childrensLiterature
-chronology,http://id.lincsproject.ca/genre#chronology
-clerihew,http://id.lincsproject.ca/genre#clerihew
-closet drama,http://id.lincsproject.ca/genre#closetDrama
-CLOSETDRAMA,http://id.lincsproject.ca/genre#closetDrama
-collection,http://id.lincsproject.ca/genre#collection
-Collection Form,http://id.lincsproject.ca/genre#CollectionForm
-collective creation,http://id.lincsproject.ca/genre#collectiveCreation
-colouring book,http://id.lincsproject.ca/genre#colouringBook
-COLOURINGBOOK,http://id.lincsproject.ca/genre#colouringBook
-column,http://id.lincsproject.ca/genre#column
-Comedic Genre,http://id.lincsproject.ca/genre#ComedicGenre
-comedy,http://id.lincsproject.ca/genre#comedy
-comedy of humours,http://id.lincsproject.ca/genre#comedyOfHumours
-comedy of intrigue,http://id.lincsproject.ca/genre#comedyOfIntrigue
-comedy of manners,http://id.lincsproject.ca/genre#comedyOfManners
-comedy of menace,http://id.lincsproject.ca/genre#comedyOfMenace
-COMEDYOFHUMOURS,http://id.lincsproject.ca/genre#comedyOfHumours
-COMEDYOFINTRIGUE,http://id.lincsproject.ca/genre#comedyOfIntrigue
-COMEDYOFMANNERS,http://id.lincsproject.ca/genre#comedyOfManners
-COMEDYOFMENACE,http://id.lincsproject.ca/genre#comedyOfMenace
-comic,http://id.lincsproject.ca/genre#comicbook
-comicbook,http://id.lincsproject.ca/genre#comicbook
-coming out,http://id.lincsproject.ca/genre#comingOut
-COMINGOUT,http://id.lincsproject.ca/genre#comingOut
-commentary,http://id.lincsproject.ca/genre#commentary
-commonplace book,http://id.lincsproject.ca/genre#commonplaceBook
-COMMONPLACEBOOK,http://id.lincsproject.ca/genre#commonplaceBook
-companion,http://id.lincsproject.ca/genre#manual
-computer program,http://id.lincsproject.ca/genre#computerProgram
-COMPUTERPROGRAM,http://id.lincsproject.ca/genre#computerProgram
-condition of england novel,http://id.lincsproject.ca/genre#conditionOfEnglandNovel
-CONDITIONOFENGLANDNOVEL,http://id.lincsproject.ca/genre#conditionOfEnglandNovel
-conduct literature,http://id.lincsproject.ca/genre#conductLiterature
-CONDUCTLITERATURE,http://id.lincsproject.ca/genre#conductLiterature
-conversion narrative,http://id.lincsproject.ca/genre#conversionNarrative
-cookbook,http://id.lincsproject.ca/genre#cookbook
-correspondence,http://id.lincsproject.ca/genre#letter
-costume drama,http://id.lincsproject.ca/genre#costumeDrama
-courtship fiction,http://id.lincsproject.ca/genre#courtshipFiction
-COURTSHIPFICTION,http://id.lincsproject.ca/genre#courtshipFiction
-criminology,http://id.lincsproject.ca/genre#criminology
-criticism,http://id.lincsproject.ca/genre#criticism
-dance,http://id.lincsproject.ca/genre#dance
-dedication,http://id.lincsproject.ca/genre#dedication
-detective,http://id.lincsproject.ca/genre#detective
-detective novel,http://id.lincsproject.ca/genre#detective
-devotional,http://id.lincsproject.ca/genre#devotional
-dialogue of the dead,http://id.lincsproject.ca/genre#dialogueOfTheDead
-dialogue or debate,http://id.lincsproject.ca/genre#dialogueOrDebate
-Dialogue Or Debate Genre,http://id.lincsproject.ca/genre#DialogueOrDebateGenre
-DIALOGUEOFTHEDEAD,http://id.lincsproject.ca/genre#dialogueOfTheDead
-DIALOGUEORDEBATE,http://id.lincsproject.ca/genre#dialogueOrDebate
-diary,http://id.lincsproject.ca/genre#diary
-diaspora,http://id.lincsproject.ca/genre#diasporic
-diasporic,http://id.lincsproject.ca/genre#diasporic
-dictionary,http://id.lincsproject.ca/genre#dictionary
-didactic,http://id.lincsproject.ca/genre#didactic
-Didactic Genre,http://id.lincsproject.ca/genre#DidacticGenre
-digital,http://id.lincsproject.ca/genre#digital
-Digital Medium,http://id.lincsproject.ca/genre#DigitalMedium
-directory,http://id.lincsproject.ca/genre#directory
-dissertation,http://id.lincsproject.ca/genre#dissertation
-document,http://id.lincsproject.ca/genre#document
-documentary,http://id.lincsproject.ca/genre#documentary
-domestic,http://id.lincsproject.ca/genre#domestic
-drama,http://id.lincsproject.ca/genre#drama
-Dramatic Genre,http://id.lincsproject.ca/genre#DramaticGenre
-dramatic monologue,http://id.lincsproject.ca/genre#dramaticMonologue
-DRAMATICMONOLOGUE,http://id.lincsproject.ca/genre#dramaticMonologue
-drawing,http://id.lincsproject.ca/genre#drawing
-dream vision,http://id.lincsproject.ca/genre#dreamVision
-DREAMVISION,http://id.lincsproject.ca/genre#dreamVision
-dub,http://id.lincsproject.ca/genre#dub
-dystopia,http://id.lincsproject.ca/genre#dystopia
-eclogue,http://id.lincsproject.ca/genre#eclogue
-EDITING,http://id.lincsproject.ca/genre#editorialWork
-editorial work,http://id.lincsproject.ca/genre#editorialWork
-elegy,http://id.lincsproject.ca/genre#elegy
-Embedded/Partial Work,http://id.lincsproject.ca/genre#EmbeddedWork
-encyclopaedia,http://id.lincsproject.ca/genre#encyclopaedia
-environmental,http://id.lincsproject.ca/genre#environmental
-ephemera,http://id.lincsproject.ca/genre#ephemera
-epic,http://id.lincsproject.ca/genre#epic
-epic theatre,http://id.lincsproject.ca/genre#epicTheatre
-EPICTHEATRE,http://id.lincsproject.ca/genre#epicTheatre
-epigram,http://id.lincsproject.ca/genre#epigram
-epilogue,http://id.lincsproject.ca/genre#epilogue
-episodic literature,http://id.lincsproject.ca/genre#episodicLiterature
-EPISODICLITERATURE,http://id.lincsproject.ca/genre#episodicLiterature
-epistle,http://id.lincsproject.ca/genre#epistle
-epistolary,http://id.lincsproject.ca/genre#epistolary
-Epistolary Genre,http://id.lincsproject.ca/genre#EpistolaryGenre
-epitaph,http://id.lincsproject.ca/genre#epitaph
-epithalamium,http://id.lincsproject.ca/genre#epithalamium
-epyllion,http://id.lincsproject.ca/genre#epyllion
-erotica,http://id.lincsproject.ca/genre#erotica
-erotica or pornography,http://id.lincsproject.ca/genre#eroticaOrPornography
-EROTICAPORNOGRAPHY,http://id.lincsproject.ca/genre#eroticaOrPornography
-essais,http://id.lincsproject.ca/genre#InformationalGenre
-essay,http://id.lincsproject.ca/genre#essay
-eulogy,http://id.lincsproject.ca/genre#eulogy
-exhibition catalogue,http://id.lincsproject.ca/genre#exhibitionCatalogue
-EXHIBITIONCATALOGUE,http://id.lincsproject.ca/genre#exhibitionCatalogue
-exploration,http://id.lincsproject.ca/genre#exploration
-EXPRESSIONISTWRITING,
-eye-witness,http://id.lincsproject.ca/genre#eyeWitness
-fable,http://id.lincsproject.ca/genre#fable
-fabliau,http://id.lincsproject.ca/genre#fabliau
-fairytale,http://id.lincsproject.ca/genre#fairytale
-fantasy,http://id.lincsproject.ca/genre#fantasy
-farce,http://id.lincsproject.ca/genre#farce
-fascicle,http://id.lincsproject.ca/genre#fascicle
-feminist,http://id.lincsproject.ca/genre#feminist
-Feminist Genre,http://id.lincsproject.ca/genre#FeministGenre
-feminist theory,http://id.lincsproject.ca/genre#feministTheory
-FEMINISTTHEORY,http://id.lincsproject.ca/genre#feministTheory
-fiction,http://id.lincsproject.ca/genre#fiction
-Fictional Genre,http://id.lincsproject.ca/genre#FictionalGenre
-film,http://id.lincsproject.ca/genre#film
-film script,http://id.lincsproject.ca/genre#filmScript
-film tv script,http://id.lincsproject.ca/genre#filmTvScript
-FILMTVSCRIPT,http://id.lincsproject.ca/genre#filmTvScript
-folk song,http://id.lincsproject.ca/genre#folkSong
-folk tale,http://id.lincsproject.ca/genre#folkTale
-FOLKSONG,http://id.lincsproject.ca/genre#folkSong
-folktale,http://id.lincsproject.ca/genre#legend
-Form Genre,http://id.lincsproject.ca/genre#Form
-form of,http://id.lincsproject.ca/genre#formOf
-free verse,http://id.lincsproject.ca/genre#freeVerse
-gardening,http://id.lincsproject.ca/genre#gardening
-GARDENINGBOOK,http://id.lincsproject.ca/genre#gardening
-genealogy,http://id.lincsproject.ca/genre#genealogy
-georgic,http://id.lincsproject.ca/genre#georgic
-ghost story,http://id.lincsproject.ca/genre#ghostStory
-GHOSTSTORY,http://id.lincsproject.ca/genre#ghostStory
-giftbook,http://id.lincsproject.ca/genre#giftbook
-gothic,http://id.lincsproject.ca/genre#gothic
-government report,http://id.lincsproject.ca/genre#governmentReport
-GOVERNMENTREPORT,http://id.lincsproject.ca/genre#governmentReport
-grammar,http://id.lincsproject.ca/genre#grammar
-graphic novel,http://id.lincsproject.ca/genre#graphicNovel
-graveyard poetry,http://id.lincsproject.ca/genre#graveyardPoetry
-GRAVEYARDPOETRY,http://id.lincsproject.ca/genre#graveyardPoetry
-guerilla theatre,http://id.lincsproject.ca/genre#guerillaTheatre
-GUERILLATHEATRE,http://id.lincsproject.ca/genre#guerillaTheatre
-guidebook,http://id.lincsproject.ca/genre#guidebook
-hagiography,http://id.lincsproject.ca/genre#hagiography
-haiku,http://id.lincsproject.ca/genre#haiku
-harlequinade,http://id.lincsproject.ca/genre#harlequinade
-has form,http://id.lincsproject.ca/genre#hasForm
-has genre,http://id.lincsproject.ca/genre#hasGenre
-heroic,http://id.lincsproject.ca/genre#heroic
-HISTORICAL,http://id.lincsproject.ca/genre#historicalWriting
-Historical Genre,http://id.lincsproject.ca/genre#HistoricalGenre
-historical overview,http://id.lincsproject.ca/genre#historicalOverview
-historical writing,http://id.lincsproject.ca/genre#historicalWriting
-history,http://id.lincsproject.ca/genre#history
-hymn,http://id.lincsproject.ca/genre#hymn
-illustrated,http://id.lincsproject.ca/genre#illustrated
-Illustrated Form,http://id.lincsproject.ca/genre#IllustratedForm
-imitation,http://id.lincsproject.ca/genre#imitation
-immigration writing,http://id.lincsproject.ca/genre#migration
-improvisation,http://id.lincsproject.ca/genre#improvisation
-index,http://id.lincsproject.ca/genre#index
-industrial novel,http://id.lincsproject.ca/genre#industrialNovel
-INDUSTRIALNOVEL,http://id.lincsproject.ca/genre#industrialNovel
-Informational Genre,http://id.lincsproject.ca/genre#InformationalGenre
-informational writing,http://id.lincsproject.ca/genre#informationalWriting
-instructional text,http://id.lincsproject.ca/genre#instructionalText
-Intertextual Genre,http://id.lincsproject.ca/genre#IntertextualGenre
-interview,http://id.lincsproject.ca/genre#interview
-introduction,http://id.lincsproject.ca/genre#introduction
-journal,http://id.lincsproject.ca/genre#journal
-Journal Form,http://id.lincsproject.ca/genre#JournalForm
-journalism,http://id.lincsproject.ca/genre#journalism
-journalism and writings,http://id.lincsproject.ca/genre#journalism
-Journalistic Genre,http://id.lincsproject.ca/genre#JournalisticGenre
-juvenile,http://id.lincsproject.ca/genre#juvenile
-juvenilia,http://id.lincsproject.ca/genre#juvenilia
-kitchen sink drama,http://id.lincsproject.ca/genre#kitchenSinkDrama
-KITCHENSINKDRAMA,http://id.lincsproject.ca/genre#kitchenSinkDrama
-KUNSTLERROMAN,http://id.lincsproject.ca/genre#kunstlerroman
-lais,http://id.lincsproject.ca/genre#lais
-lampoon,http://id.lincsproject.ca/genre#lampoon
-lecture,http://id.lincsproject.ca/genre#lecture
-legal writing,http://id.lincsproject.ca/genre#legalWriting
-LEGALWRITING,http://id.lincsproject.ca/genre#legalWriting
-legend,http://id.lincsproject.ca/genre#legend
-legend folktale,http://id.lincsproject.ca/genre#legendFolktale
-LEGENDFOLKTALE,http://id.lincsproject.ca/genre#legendFolktale
-lesbian,http://id.lincsproject.ca/genre#lesbian
-lesbianWriting,http://id.lincsproject.ca/genre#lesbian
-letter,http://id.lincsproject.ca/genre#letter
-letters from the dead to the living,http://id.lincsproject.ca/genre#lettersFromTheDeadToTheLiving
-LETTERSFROMTHEDEADTOTHELIVING,http://id.lincsproject.ca/genre#lettersFromTheDeadToTheLiving
-lgbtq,http://id.lincsproject.ca/genre#lgbtq
-LGBTQ+Genre,http://id.lincsproject.ca/genre#LGBTQPlusGenre
-libretto,http://id.lincsproject.ca/genre#libretto
-life writing,http://id.lincsproject.ca/genre#lifeWriting
-Life Writing Genre,http://id.lincsproject.ca/genre#LifeWritingGenre
-literary criticism,http://id.lincsproject.ca/genre#literaryCriticism
-Literary Genre,http://id.lincsproject.ca/genre#LiteraryGenre
-literary romance,http://id.lincsproject.ca/genre#romance
-LITERARYCRITICISM,http://id.lincsproject.ca/genre#literaryCriticism
-liturgy,http://id.lincsproject.ca/genre#liturgy
-local history,http://id.lincsproject.ca/genre#localHistory
-long poem,http://id.lincsproject.ca/genre#longPoem
-loose-leaf,http://id.lincsproject.ca/genre#looseLeaf
-love,http://id.lincsproject.ca/genre#love
-lullaby,http://id.lincsproject.ca/genre#lullaby
-lyric,http://id.lincsproject.ca/genre#lyric
-ma research paper,http://id.lincsproject.ca/genre#maResearchPaper
-ma thesis,http://id.lincsproject.ca/genre#maThesis
-magic realist,http://id.lincsproject.ca/genre#magicRealist
-MAGICREALIST,http://id.lincsproject.ca/genre#magicRealist
-manifesto,http://id.lincsproject.ca/genre#manifesto
-manual,http://id.lincsproject.ca/genre#manual
-manuscript,http://id.lincsproject.ca/genre#manuscript
-map,http://id.lincsproject.ca/genre#map
-masque,http://id.lincsproject.ca/genre#masque
-medical writing,http://id.lincsproject.ca/genre#medicalWriting
-MEDICALWRITING,http://id.lincsproject.ca/genre#medicalWriting
-Medium,http://id.lincsproject.ca/genre#Medium
-melodrama,http://id.lincsproject.ca/genre#melodrama
-memoir,http://id.lincsproject.ca/genre#memoir
-microfilm,http://id.lincsproject.ca/genre#microform
-microform,http://id.lincsproject.ca/genre#microform
-migration,http://id.lincsproject.ca/genre#migration
-military,http://id.lincsproject.ca/genre#military
-mimeograph,http://id.lincsproject.ca/genre#mimeograph
-mixed materials,http://id.lincsproject.ca/genre#mixedMaterials
-mixed media,http://id.lincsproject.ca/genre#multimedia
-MIXEDMEDIA,http://id.lincsproject.ca/genre#multimedia
-mock forms,http://id.lincsproject.ca/genre#mockForms
-MOCKFORMS,http://id.lincsproject.ca/genre#mockForms
-monologue,http://id.lincsproject.ca/genre#monologue
-morality or mystery play,http://id.lincsproject.ca/genre#moralityOrMysteryPlay
-MORALITYMYSTERYPLAY,http://id.lincsproject.ca/genre#moralityOrMysteryPlay
-Moving Medium,http://id.lincsproject.ca/genre#MovingMedium
-multimedia,http://id.lincsproject.ca/genre#multimedia
-music,http://id.lincsproject.ca/genre#music
-Musical Genre,http://id.lincsproject.ca/genre#MusicalGenre
-Musical Notation Form,http://id.lincsproject.ca/genre#MusicalNotationForm
-musical score,http://id.lincsproject.ca/genre#notatedMusic
-musical verse,http://id.lincsproject.ca/genre#musicalWriting
-musical writing,http://id.lincsproject.ca/genre#musicalWriting
-musicology,http://id.lincsproject.ca/genre#musicology
-mystery,http://id.lincsproject.ca/genre#mystery
-Mystery Genre,http://id.lincsproject.ca/genre#MysteryGenre
-myth,http://id.lincsproject.ca/genre#myth
-Narrative Genre,http://id.lincsproject.ca/genre#NarrativeGenre
-narrative poetry,http://id.lincsproject.ca/genre#narrativePoetry
-NARRATIVEPOETRY,http://id.lincsproject.ca/genre#narrativePoetry
-national tale,http://id.lincsproject.ca/genre#nationalTale
-nationalist,http://id.lincsproject.ca/genre#nationalist
-NATIONALTALE,http://id.lincsproject.ca/genre#nationalTale
-newspaper,http://id.lincsproject.ca/genre#newspaper
-notated music,http://id.lincsproject.ca/genre#notatedMusic
-notebook,http://id.lincsproject.ca/genre#notebook
-novel,http://id.lincsproject.ca/genre#novel
-novel of sensibility,http://id.lincsproject.ca/genre#novelOfSensibility
-novelette,http://id.lincsproject.ca/genre#novella
-Novelistic Genre,http://id.lincsproject.ca/genre#NovelisticGenre
-novella,http://id.lincsproject.ca/genre#novella
-nursery rhyme,http://id.lincsproject.ca/genre#nurseryRhyme
-NURSERYRHYME,http://id.lincsproject.ca/genre#nurseryRhyme
-obituary,http://id.lincsproject.ca/genre#obituary
-occasional poetry,http://id.lincsproject.ca/genre#occasionalPoetry
-OCCASIONALPOETRY,http://id.lincsproject.ca/genre#occasionalPoetry
-ode,http://id.lincsproject.ca/genre#ode
-offprint,http://id.lincsproject.ca/genre#offprint
-one-act-play,http://id.lincsproject.ca/genre#oneActPlay
-ONEACTPLAY,http://id.lincsproject.ca/genre#oneActPlay
-opera,http://id.lincsproject.ca/genre#opera
-Opera Genre,http://id.lincsproject.ca/genre#OperaGenre
-oral history,http://id.lincsproject.ca/genre#oralHistory
-oratorio,http://id.lincsproject.ca/genre#oratorio
-organizational history,http://id.lincsproject.ca/genre#history
-ORIENTAL,http://id.lincsproject.ca/genre#orientalist
-orientalist,http://id.lincsproject.ca/genre#orientalist
-pageant,http://id.lincsproject.ca/genre#pageant
-painting,http://id.lincsproject.ca/genre#painting
-pamphlet,http://id.lincsproject.ca/genre#pamphlet
-panegyric,http://id.lincsproject.ca/genre#panegyric
-pantomime,http://id.lincsproject.ca/genre#pantomime
-parable,http://id.lincsproject.ca/genre#parable
-paranormal,http://id.lincsproject.ca/genre#paranormal
-paratext,http://id.lincsproject.ca/genre#paratext
-PARATEXTS,http://id.lincsproject.ca/genre#paratext
-PARLIAMENTARYREPORT,http://id.lincsproject.ca/genre#governmentReport
-parody,http://id.lincsproject.ca/genre#parody
-part/excerpt,http://id.lincsproject.ca/genre#partExcerpt
-passion play,http://id.lincsproject.ca/genre#passionPlay
-pastoral,http://id.lincsproject.ca/genre#pastoral
-Pedagogical Genre,http://id.lincsproject.ca/genre#PedagogicalGenre
-pedagogy,http://id.lincsproject.ca/genre#pedagogy
-performance,http://id.lincsproject.ca/genre#performance
-Performance Medium,http://id.lincsproject.ca/genre#PerformanceMedium
-performance poetry,http://id.lincsproject.ca/genre#performancePoetry
-PERFORMANCEPOETRY,http://id.lincsproject.ca/genre#performancePoetry
-periodical,http://id.lincsproject.ca/genre#SerialForm
-periodical feature,http://id.lincsproject.ca/genre#periodicalFeature
-petition,http://id.lincsproject.ca/genre#petition
-phd thesis,http://id.lincsproject.ca/genre#phdThesis
-philosophical,http://id.lincsproject.ca/genre#philosophical
-Philosophical Genre,http://id.lincsproject.ca/genre#PhilosophicalGenre
-philosophy,http://id.lincsproject.ca/genre#philosophy
-photo essay,http://id.lincsproject.ca/genre#photoEssay
-photo opy,http://id.lincsproject.ca/genre#photocopy
-photograph,http://id.lincsproject.ca/genre#photograph
-physical theatre,http://id.lincsproject.ca/genre#physicalTheatre
-picaresque,http://id.lincsproject.ca/genre#picaresque
-picture book,http://id.lincsproject.ca/genre#illustrated
-pindaric,http://id.lincsproject.ca/genre#pindaric
-play,http://id.lincsproject.ca/genre#drama
-play script,http://id.lincsproject.ca/genre#playScript
-poetic drama,http://id.lincsproject.ca/genre#poeticDrama
-Poetic Genre,http://id.lincsproject.ca/genre#PoeticGenre
-poetry,http://id.lincsproject.ca/genre#poetry
-polemic,http://id.lincsproject.ca/genre#polemic
-Political Genre,http://id.lincsproject.ca/genre#PoliticalGenre
-political Statement,http://id.lincsproject.ca/genre#politicalStatement
-political writing,http://id.lincsproject.ca/genre#politicalWriting
-POLITICALWRITING,http://id.lincsproject.ca/genre#politicalWriting
-popular,http://id.lincsproject.ca/genre#popular
-pornography,http://id.lincsproject.ca/genre#pornography
-prayer,http://id.lincsproject.ca/genre#prayer
-pre-school,http://id.lincsproject.ca/genre#preSchool
-prefatory piece,http://id.lincsproject.ca/genre#prefatoryPiece
-PREFATORYPIECE,http://id.lincsproject.ca/genre#prefatoryPiece
-Print Medium,http://id.lincsproject.ca/genre#PrintMedium
-profile of author,http://id.lincsproject.ca/genre#profileOfAuthor
-program notes,http://id.lincsproject.ca/genre#programNotes
-PROGRAMNOTES,http://id.lincsproject.ca/genre#programNotes
-proletarian writing,http://id.lincsproject.ca/genre#proletarianWriting
-PROLETARIANWRITING,http://id.lincsproject.ca/genre#proletarianWriting
-prologue,http://id.lincsproject.ca/genre#prologue
-propaganda,http://id.lincsproject.ca/genre#propaganda
-prophecy,http://id.lincsproject.ca/genre#prophecy
-prose poem,http://id.lincsproject.ca/genre#prosePoem
-proverb,http://id.lincsproject.ca/genre#proverb
-Proverb Form,http://id.lincsproject.ca/genre#ProverbForm
-psalm,http://id.lincsproject.ca/genre#psalm
-psychoanalytical,http://id.lincsproject.ca/genre#psychoanalytical
-puppetry,http://id.lincsproject.ca/genre#puppetry
-quest narrative,http://id.lincsproject.ca/genre#questNarrative
-quiz,http://id.lincsproject.ca/genre#quiz
-radio drama,http://id.lincsproject.ca/genre#radioDrama
-radio play,http://id.lincsproject.ca/genre#radioDrama
-radio script,http://id.lincsproject.ca/genre#radioScript
-RADIODRAMA,http://id.lincsproject.ca/genre#radioDrama
-realia,http://id.lincsproject.ca/genre#realia
-realist,http://id.lincsproject.ca/genre#realist
-record,http://id.lincsproject.ca/genre#record
-Record Form,http://id.lincsproject.ca/genre#RecordForm
-Reference Work Genre,http://id.lincsproject.ca/genre#ReferenceWorkGenre
-reflection,http://id.lincsproject.ca/genre#reflection
-regional,http://id.lincsproject.ca/genre#regional
-religious,http://id.lincsproject.ca/genre#religious
-Religious Genre,http://id.lincsproject.ca/genre#ReligiousGenre
-research,http://id.lincsproject.ca/genre#research
-revenge comedy,http://id.lincsproject.ca/genre#revengeComedy
-revenge tragedy,http://id.lincsproject.ca/genre#revengeTragedy
-review,http://id.lincsproject.ca/genre#review
-revue,http://id.lincsproject.ca/genre#revue
-riddle,http://id.lincsproject.ca/genre#riddle
-robinsonades,http://id.lincsproject.ca/genre#robinsonades
-ROMANCE,http://id.lincsproject.ca/genre#romance
-Romance Genre,http://id.lincsproject.ca/genre#RomanceGenre
-rural idyll,http://id.lincsproject.ca/genre#ruralIdyll
-sage writing,http://id.lincsproject.ca/genre#sageWriting
-SAGEWRITING,http://id.lincsproject.ca/genre#sageWriting
-satire,http://id.lincsproject.ca/genre#satire
-Satirical Genre,http://id.lincsproject.ca/genre#SatiricalGenre
-sayings,http://id.lincsproject.ca/genre#ProverbForm
-Scholarly Genre,http://id.lincsproject.ca/genre#ScholarlyGenre
-scholarly writing,http://id.lincsproject.ca/genre#scholarlyWriting
-scholarship,http://id.lincsproject.ca/genre#ScholarlyGenre
-school fiction,http://id.lincsproject.ca/genre#schoolFiction
-SCHOOLFICTION,http://id.lincsproject.ca/genre#schoolFiction
-science,http://id.lincsproject.ca/genre#scientificWriting
-science fiction,http://id.lincsproject.ca/genre#scienceFiction
-SCIENCEFICTION,http://id.lincsproject.ca/genre#scienceFiction
-scientific writing,http://id.lincsproject.ca/genre#scientificWriting
-SCIENTIFICWRITING,http://id.lincsproject.ca/genre#scientificWriting
-scrapbook,http://id.lincsproject.ca/genre#scrapbook
-screenplay,http://id.lincsproject.ca/genre#filmTvScript
-script,http://id.lincsproject.ca/genre#script
-Script Form,http://id.lincsproject.ca/genre#ScriptForm
-scripture,http://id.lincsproject.ca/genre#scripture
-sea story,http://id.lincsproject.ca/genre#seaStory
-sensation novel,http://id.lincsproject.ca/genre#sensationNovel
-sensational,http://id.lincsproject.ca/genre#sensational
-SENSATIONNOVEL,http://id.lincsproject.ca/genre#sensationNovel
-sensibility,http://id.lincsproject.ca/genre#novelOfSensibility
-sentimental,http://id.lincsproject.ca/genre#sentimental
-sequel,http://id.lincsproject.ca/genre#sequel
-serial,http://id.lincsproject.ca/genre#serial
-Serial Form,http://id.lincsproject.ca/genre#SerialForm
-serial periodical,http://id.lincsproject.ca/genre#serialPeriodical
-serial volume,http://id.lincsproject.ca/genre#serialVolume
-Series Form,http://id.lincsproject.ca/genre#SeriesForm
-sermon,http://id.lincsproject.ca/genre#sermon
-sexual awakening fiction,http://id.lincsproject.ca/genre#sexualAwakeningFiction
-SEXUALAWAKENINGFICTION,http://id.lincsproject.ca/genre#sexualAwakeningFiction
-sheet music,http://id.lincsproject.ca/genre#MusicalNotationForm
-short story,http://id.lincsproject.ca/genre#shortStory
-SHORTSTORY,http://id.lincsproject.ca/genre#shortStory
-silver-fork novel,http://id.lincsproject.ca/genre#silverForkNovel
-SILVERFORKNOVEL,http://id.lincsproject.ca/genre#silverForkNovel
-sketch,http://id.lincsproject.ca/genre#sketch
-sketch book,http://id.lincsproject.ca/genre#sketchBook
-SKETCHBOOK,http://id.lincsproject.ca/genre#sketchBook
-slave narrative,http://id.lincsproject.ca/genre#slaveNarrative
-SLAVENARRATIVE,http://id.lincsproject.ca/genre#slaveNarrative
-slavery,http://id.lincsproject.ca/genre#slaveNarrative
-social reform,http://id.lincsproject.ca/genre#socialReform
-social science,http://id.lincsproject.ca/genre#socialScience
-Social Science Genre,http://id.lincsproject.ca/genre#SocialScienceGenre
-SOCIALSCIENCE,http://id.lincsproject.ca/genre#socialScience
-"software, multimedia",http://id.lincsproject.ca/genre#multimedia
-song,http://id.lincsproject.ca/genre#song
-Song Genre,http://id.lincsproject.ca/genre#SongGenre
-sonnet,http://id.lincsproject.ca/genre#sonnet
-sound recording - musical,http://id.lincsproject.ca/genre#soundRecordingMusical
-sound recording – nonmusical,http://id.lincsproject.ca/genre#soundRecordingNonmusical
-Sound Recording Medium,http://id.lincsproject.ca/genre#SoundRecordingMedium
-speech,http://id.lincsproject.ca/genre#speech
-STAGEREVIEW,http://id.lincsproject.ca/genre#criticism
-Standalone Work/Book,http://id.lincsproject.ca/genre#StandaloneWork
-stencil,http://id.lincsproject.ca/genre#mimeograph
-Still Image Medium,http://id.lincsproject.ca/genre#StillImageMedium
-suffragist,http://id.lincsproject.ca/genre#suffragist
-summary,http://id.lincsproject.ca/genre#summary
-sunday school story,http://id.lincsproject.ca/genre#sundaySchoolStory
-survey,http://id.lincsproject.ca/genre#survey
-television,http://id.lincsproject.ca/genre#television
-television broadcast,http://id.lincsproject.ca/genre#television
-television broadcasting,http://id.lincsproject.ca/genre#television
-temperance,http://id.lincsproject.ca/genre#temperance
-testimony,http://id.lincsproject.ca/genre#testimony
-textbook,http://id.lincsproject.ca/genre#textbook
-Textual Medium,http://id.lincsproject.ca/genre#TextualMedium
-The CWRC Literary Genre Ontology,http://id.lincsproject.ca/genre#datasetdefinition
-theatre for young audiences,http://id.lincsproject.ca/genre#theatreForYoungAudiences
-theatre of cruelty,http://id.lincsproject.ca/genre#theatreOfCruelty
-theatre of the absurd,http://id.lincsproject.ca/genre#theatreOfTheAbsurd
-THEATREOFCRUELTY,http://id.lincsproject.ca/genre#theatreOfCruelty
-THEATREOFTHEABSURD,http://id.lincsproject.ca/genre#theatreOfTheAbsurd
-Thematic Genre,http://id.lincsproject.ca/genre#ThematicGenre
-thematic writing,http://id.lincsproject.ca/genre#thematicWriting
-theology,http://id.lincsproject.ca/genre#theology
-thesaurus,http://id.lincsproject.ca/genre#thesaurus
-thesis,http://id.lincsproject.ca/genre#dissertation
-Three Dimensional Medium,http://id.lincsproject.ca/genre#ThreeDimensionalMedium
-three dimensional object,http://id.lincsproject.ca/genre#threeDimensionalObject
-thriller,http://id.lincsproject.ca/genre#thriller
-topographical poetry,http://id.lincsproject.ca/genre#topographicalPoetry
-TOPOGRAPHICALPOETRY,http://id.lincsproject.ca/genre#topographicalPoetry
-tract pamphlet,http://id.lincsproject.ca/genre#tractPamphlet
-TRACTPAMPHLET,http://id.lincsproject.ca/genre#tractPamphlet
-tragedy,http://id.lincsproject.ca/genre#tragedy
-tragicomedy,http://id.lincsproject.ca/genre#tragicomedy
-translation,http://id.lincsproject.ca/genre#translation
-travel writing,http://id.lincsproject.ca/genre#travel
-TRAVELWRITING,http://id.lincsproject.ca/genre#travel
-treatise,http://id.lincsproject.ca/genre#treatise
-tv script,http://id.lincsproject.ca/genre#filmTvScript
-typescript,http://id.lincsproject.ca/genre#manuscript
-unpublished,http://id.lincsproject.ca/genre#Unpublished
-unpublished interview,http://id.lincsproject.ca/genre#interview
-unpublished manuscript,http://id.lincsproject.ca/genre#manuscript
-unpublished palyscript,http://id.lincsproject.ca/genre#playScript
-unpublished typescript,http://id.lincsproject.ca/genre#manuscript
-utopia,http://id.lincsproject.ca/genre#utopia
-verse novel,http://id.lincsproject.ca/genre#verseNovel
-verse poem,http://id.lincsproject.ca/genre#versePoem
-VERSENOVEL,http://id.lincsproject.ca/genre#verseNovel
-video,http://id.lincsproject.ca/genre#videoRecording
-video game,http://id.lincsproject.ca/genre#videoGame
-video recording,http://id.lincsproject.ca/genre#videoRecording
-videorecording,http://id.lincsproject.ca/genre#videoRecording
-vignette,http://id.lincsproject.ca/genre#vignette
-villanelle,http://id.lincsproject.ca/genre#villanelle
-visual art,http://id.lincsproject.ca/genre#visualArt
-Visual Art Medium,http://id.lincsproject.ca/genre#VisualArtMedium
-Visual Medium,http://id.lincsproject.ca/genre#VisualMedium
-voice recording,http://id.lincsproject.ca/genre#soundRecordingNonmusical
-war,http://id.lincsproject.ca/genre#war
-web site,http://id.lincsproject.ca/genre#website
-webpage,http://id.lincsproject.ca/genre#webpage
-website,http://id.lincsproject.ca/genre#website
-western,http://id.lincsproject.ca/genre#western
-young adult writing,http://id.lincsproject.ca/genre#youngAdultWriting
-YOUNGADULTWRITING,http://id.lincsproject.ca/genre#youngAdultWriting
-aphorism,http://id.lincsproject.ca/genre#aphorism
-folklore,http://id.lincsproject.ca/genre#folkTale
-history and criticism,http://id.lincsproject.ca/genre#criticism
-NATIONALISTFICTION,http://id.lincsproject.ca/genre#nationalist
-non-fiction,http://id.lincsproject.ca/genre#nonFiction
+bisexuelle,http://id.lincsproject.ca/genre/bisexual
+"mémoire, thèse",http://id.lincsproject.ca/genre/dissertation
+Advertisement Form,http://id.lincsproject.ca/genre/AdvertisementForm
+Alphabet Form,http://id.lincsproject.ca/genre/AlphabetForm
+Auditory Medium,http://id.lincsproject.ca/genre/AuditoryMedium
+Autobiographical Genre,http://id.lincsproject.ca/genre/AutobiographicalGenre
+CHARACTER,http://id.lincsproject.ca/genre/characterSketch
+Calendar Form,http://id.lincsproject.ca/genre/CalendarForm
+Cartographic Form,http://id.lincsproject.ca/genre/CartographicForm
+Catalogue Form,http://id.lincsproject.ca/genre/CatalogueForm
+Childrens Literature Genre,http://id.lincsproject.ca/genre/ChildrensLiteratureGenre
+Collection Form,http://id.lincsproject.ca/genre/CollectionForm
+Comedic Genre,http://id.lincsproject.ca/genre/ComedicGenre
+Dialogue Or Debate Genre,http://id.lincsproject.ca/genre/DialogueOrDebateGenre
+Didactic Genre,http://id.lincsproject.ca/genre/DidacticGenre
+Digital Medium,http://id.lincsproject.ca/genre/DigitalMedium
+Dramatic Genre,http://id.lincsproject.ca/genre/DramaticGenre
+EDITING,http://id.lincsproject.ca/genre/editorialWork
+EROTICAPORNOGRAPHY,http://id.lincsproject.ca/genre/eroticaOrPornography
+Embedded/Partial Work,http://id.lincsproject.ca/genre/EmbeddedWork
+Epistolary Genre,http://id.lincsproject.ca/genre/EpistolaryGenre
+Feminist Genre,http://id.lincsproject.ca/genre/FeministGenre
+Fictional Genre,http://id.lincsproject.ca/genre/FictionalGenre
+Financial Records Genre,http://id.lincsproject.ca/genre/FinancialRecordsGenre
+Form,http://id.lincsproject.ca/genre/Form
+GARDENINGBOOK,http://id.lincsproject.ca/genre/gardening
+Genre,http://id.lincsproject.ca/genre/Genre
+Government Records Genre,http://id.lincsproject.ca/genre/GovernmentRecordsGenre
+HISTORICAL,http://id.lincsproject.ca/genre/historicalWriting
+Historical Genre,http://id.lincsproject.ca/genre/HistoricalGenre
+Illustrated Form,http://id.lincsproject.ca/genre/IllustratedForm
+Informational Genre,http://id.lincsproject.ca/genre/InformationalGenre
+Intertextual Genre,http://id.lincsproject.ca/genre/IntertextualGenre
+Journal Form,http://id.lincsproject.ca/genre/JournalForm
+Journalistic Genre,http://id.lincsproject.ca/genre/JournalisticGenre
+KUNSTLERROMAN,http://id.lincsproject.ca/genre/kunstlerroman
+LGBTQ+Genre,http://id.lincsproject.ca/genre/LGBTQPlusGenre
+Legal Documents Genre,http://id.lincsproject.ca/genre/LegalDocumentsGenre
+Life Writing Genre,http://id.lincsproject.ca/genre/LifeWritingGenre
+Literary Genre,http://id.lincsproject.ca/genre/LiteraryGenre
+M.A. research paper,http://id.lincsproject.ca/genre/M.A.ResearchPaper
+M.A. thesis,http://id.lincsproject.ca/genre/maThesis
+MORALITYMYSTERYPLAY,http://id.lincsproject.ca/genre/moralityOrMysteryPlay
+Medium,http://id.lincsproject.ca/genre/Medium
+Moving Medium,http://id.lincsproject.ca/genre/MovingMedium
+Musical Genre,http://id.lincsproject.ca/genre/MusicalGenre
+Musical Notation Form,http://id.lincsproject.ca/genre/MusicalNotationForm
+Mystery Genre,http://id.lincsproject.ca/genre/MysteryGenre
+NATIONALISTFICTION,http://id.lincsproject.ca/genre/fiction
+NATIONALISTFICTION,http://id.lincsproject.ca/genre/nationalist
+Narrative Genre,http://id.lincsproject.ca/genre/NarrativeGenre
+Novelistic Genre,http://id.lincsproject.ca/genre/NovelisticGenre
+ORIENTAL,http://id.lincsproject.ca/genre/orientalist
+Opera Genre,http://id.lincsproject.ca/genre/OperaGenre
+PARATEXTS,http://id.lincsproject.ca/genre/paratext
+PARLIAMENTARYREPORT,http://id.lincsproject.ca/genre/governmentReport
+Pedagogical Genre,http://id.lincsproject.ca/genre/PedagogicalGenre
+Performance Medium,http://id.lincsproject.ca/genre/PerformanceMedium
+Ph.D. dissertation,http://id.lincsproject.ca/genre/phdThesis
+Ph.D. thesis,http://id.lincsproject.ca/genre/phdThesis
+Philosophical Genre,http://id.lincsproject.ca/genre/PhilosophicalGenre
+Poetic Genre,http://id.lincsproject.ca/genre/PoeticGenre
+Political Genre,http://id.lincsproject.ca/genre/PoliticalGenre
+Print Medium,http://id.lincsproject.ca/genre/PrintMedium
+Proverb Form,http://id.lincsproject.ca/genre/ProverbForm
+Record Form,http://id.lincsproject.ca/genre/RecordForm
+Reference Work Genre,http://id.lincsproject.ca/genre/ReferenceWorkGenre
+Religious Genre,http://id.lincsproject.ca/genre/ReligiousGenre
+Romance Genre,http://id.lincsproject.ca/genre/RomanceGenre
+Satirical Genre,http://id.lincsproject.ca/genre/SatiricalGenre
+Scholarly Genre,http://id.lincsproject.ca/genre/ScholarlyGenre
+Script Form,http://id.lincsproject.ca/genre/ScriptForm
+Serial Form,http://id.lincsproject.ca/genre/SerialForm
+Series Form,http://id.lincsproject.ca/genre/SeriesForm
+Social Science Genre,http://id.lincsproject.ca/genre/SocialScienceGenre
+Song Genre,http://id.lincsproject.ca/genre/SongGenre
+Sound Recording Medium,http://id.lincsproject.ca/genre/SoundRecordingMedium
+Standalone Work/Book,http://id.lincsproject.ca/genre/StandaloneWork
+Still Image Medium,http://id.lincsproject.ca/genre/StillImageMedium
+Textual Medium,http://id.lincsproject.ca/genre/TextualMedium
+Thematic Genre,http://id.lincsproject.ca/genre/ThematicGenre
+Three-Dimensional Medium,http://id.lincsproject.ca/genre/ThreeDimensionalMedium
+Visual Art Medium,http://id.lincsproject.ca/genre/VisualArtMedium
+Visual Medium,http://id.lincsproject.ca/genre/VisualMedium
+abridgement,http://id.lincsproject.ca/genre/abridgement
+academic writing,http://id.lincsproject.ca/genre/scholarlyWriting
+account book,http://id.lincsproject.ca/genre/accountBook
+adaptation,http://id.lincsproject.ca/genre/adaptation
+administrative decision,http://id.lincsproject.ca/genre/administrativeDecision
+adventure writing,http://id.lincsproject.ca/genre/adventureWriting
+advertisement,http://id.lincsproject.ca/genre/advertisement
+advertising copy,http://id.lincsproject.ca/genre/AdvertisementForm
+afterpiece,http://id.lincsproject.ca/genre/afterpiece
+afterword,http://id.lincsproject.ca/genre/afterword
+agitprop,http://id.lincsproject.ca/genre/agitprop
+album,http://id.lincsproject.ca/genre/scrapbook
+allegory,http://id.lincsproject.ca/genre/allegory
+allégorie,http://id.lincsproject.ca/genre/allegory
+almanac,http://id.lincsproject.ca/genre/almanac
+alphabet,http://id.lincsproject.ca/genre/alphabet
+amour,http://id.lincsproject.ca/genre/love
+anacreontic,http://id.lincsproject.ca/genre/acrostic
+anacreontic,http://id.lincsproject.ca/genre/anacreontic
+anagram,http://id.lincsproject.ca/genre/anagram
+anagramme,http://id.lincsproject.ca/genre/anagram
+animal story,http://id.lincsproject.ca/genre/animalStory
+animation,http://id.lincsproject.ca/genre/animation
+annotation,http://id.lincsproject.ca/genre/annotation
+announcement,http://id.lincsproject.ca/genre/announcement
+answer,http://id.lincsproject.ca/genre/answer
+anthem,http://id.lincsproject.ca/genre/anthem
+anthologie,http://id.lincsproject.ca/genre/anthology
+anthology,http://id.lincsproject.ca/genre/anthology
+anti-romance,http://id.lincsproject.ca/genre/antiromance
+aphorism,http://id.lincsproject.ca/genre/ProverbForm
+aphorism,http://id.lincsproject.ca/genre/aphorism
+aphorisme,http://id.lincsproject.ca/genre/aphorism
+apologie,http://id.lincsproject.ca/genre/apology
+apology,http://id.lincsproject.ca/genre/apology
+appendix,http://id.lincsproject.ca/genre/appendix
+architectural writing,http://id.lincsproject.ca/genre/architecturalWriting
+architecture,http://id.lincsproject.ca/genre/architecturalWriting
+archival material,http://id.lincsproject.ca/genre/archivalMaterial
+art criticism,http://id.lincsproject.ca/genre/artCriticism
+artist's book,http://id.lincsproject.ca/genre/artistsBook
+atlas,http://id.lincsproject.ca/genre/atlas
+autobiographie,http://id.lincsproject.ca/genre/autobiography
+autobiography,http://id.lincsproject.ca/genre/autobiography
+ballad opera ou opéra-ballade,http://id.lincsproject.ca/genre/balladOpera
+ballad opera,http://id.lincsproject.ca/genre/balladOpera
+ballad,http://id.lincsproject.ca/genre/ballad
+ballade,http://id.lincsproject.ca/genre/ballad
+ballade,http://id.lincsproject.ca/genre/ballade
+ballet,http://id.lincsproject.ca/genre/ballet
+bande dessinée,http://id.lincsproject.ca/genre/comicBook
+bergamasque,http://id.lincsproject.ca/genre/bergamasque
+bestiaire,http://id.lincsproject.ca/genre/bestiary
+bestiary,http://id.lincsproject.ca/genre/bestiary
+biblical paraphrase,http://id.lincsproject.ca/genre/biblicalParaphrase
+bibliographic record,http://id.lincsproject.ca/genre/bibliographicRecord
+bibliography,http://id.lincsproject.ca/genre/bibliography
+bildungsroman,http://id.lincsproject.ca/genre/bildungsroman
+biographical dictionary,http://id.lincsproject.ca/genre/biographicalDictionary
+biographie ,http://id.lincsproject.ca/genre/biography
+biography,http://id.lincsproject.ca/genre/biography
+bisexual,http://id.lincsproject.ca/genre/bisexual
+black comedy,http://id.lincsproject.ca/genre/blackComedy
+book series,http://id.lincsproject.ca/genre/bookSeries
+book,http://id.lincsproject.ca/genre/book
+born digital,http://id.lincsproject.ca/genre/bornDigital
+bout-rimé,http://id.lincsproject.ca/genre/boutsRimes
+bouts-rimés,http://id.lincsproject.ca/genre/boutsRimes
+broadside,http://id.lincsproject.ca/genre/broadside
+burletta,http://id.lincsproject.ca/genre/burletta
+business,http://id.lincsproject.ca/genre/business
+cabaret,http://id.lincsproject.ca/genre/cabaret
+calendar,http://id.lincsproject.ca/genre/calendar
+camp,http://id.lincsproject.ca/genre/camp
+captivity narrative,http://id.lincsproject.ca/genre/captivityNarrative
+carnet de croquis,http://id.lincsproject.ca/genre/sketchBook
+carnet ou journal,http://id.lincsproject.ca/genre/notebook
+carte,http://id.lincsproject.ca/genre/map
+cartographic materials,http://id.lincsproject.ca/genre/cartographicMaterials
+cartographic,http://id.lincsproject.ca/genre/CartographicForm
+catalogue d'exposition,http://id.lincsproject.ca/genre/exhibitionCatalogue
+catalogue,http://id.lincsproject.ca/genre/catalogue
+catechism,http://id.lincsproject.ca/genre/catechism
+catéchisme,http://id.lincsproject.ca/genre/catechism
+cautionary tale,http://id.lincsproject.ca/genre/cautionaryTale
+chanson populaire,http://id.lincsproject.ca/genre/folkSong
+chanson,http://id.lincsproject.ca/genre/song
+chapbook,http://id.lincsproject.ca/genre/chapbook
+chapter,http://id.lincsproject.ca/genre/chapter
+character sketch,http://id.lincsproject.ca/genre/characterSketch
+charade,http://id.lincsproject.ca/genre/charade
+childrens literature,http://id.lincsproject.ca/genre/childrensLiterature
+chronology,http://id.lincsproject.ca/genre/chronology
+church order,http://id.lincsproject.ca/genre/churchOrder
+clerihew,http://id.lincsproject.ca/genre/clerihew
+closet drama,http://id.lincsproject.ca/genre/closetDrama
+collection,http://id.lincsproject.ca/genre/collection
+collective creation,http://id.lincsproject.ca/genre/collectiveCreation
+colouring book,http://id.lincsproject.ca/genre/colouringBook
+column,http://id.lincsproject.ca/genre/column
+comedy of humours,http://id.lincsproject.ca/genre/comedyOfHumours
+comedy of intrigue,http://id.lincsproject.ca/genre/comedyOfIntrigue
+comedy of manners,http://id.lincsproject.ca/genre/comedyOfManners
+comedy of menace,http://id.lincsproject.ca/genre/comedyOfMenace
+comedy,http://id.lincsproject.ca/genre/comedy
+comic book,http://id.lincsproject.ca/genre/comicBook
+coming out,http://id.lincsproject.ca/genre/comingOut
+commentary,http://id.lincsproject.ca/genre/commentary
+commonplace book,http://id.lincsproject.ca/genre/commonplaceBook
+companion,http://id.lincsproject.ca/genre/manual
+computer program,http://id.lincsproject.ca/genre/computerProgram
+comédie d'intrigue,http://id.lincsproject.ca/genre/comedyOfIntrigue
+comédie de menace,http://id.lincsproject.ca/genre/comedyOfMenace
+comédie,http://id.lincsproject.ca/genre/comedy
+condition of england novel,http://id.lincsproject.ca/genre/conditionOfEnglandNovel
+conduct literature,http://id.lincsproject.ca/genre/conductLiterature
+conte de fées,http://id.lincsproject.ca/genre/fairytale
+conversion narrative,http://id.lincsproject.ca/genre/conversionNarrative
+cookbook,http://id.lincsproject.ca/genre/cookbook
+correspondence,http://id.lincsproject.ca/genre/letter
+costume drama,http://id.lincsproject.ca/genre/costumeDrama
+court decision,http://id.lincsproject.ca/genre/courtDecision
+courtship fiction,http://id.lincsproject.ca/genre/courtshipFiction
+criminologie,http://id.lincsproject.ca/genre/criminology
+criminology,http://id.lincsproject.ca/genre/criminology
+criticism,http://id.lincsproject.ca/genre/criticism
+critique d'art,http://id.lincsproject.ca/genre/artCriticism
+critique littéraire,http://id.lincsproject.ca/genre/literaryCriticism
+critique,http://id.lincsproject.ca/genre/review
+croquis,http://id.lincsproject.ca/genre/sketch
+dance,http://id.lincsproject.ca/genre/dance
+dedication,http://id.lincsproject.ca/genre/dedication
+detective,http://id.lincsproject.ca/genre/detective
+devotional,http://id.lincsproject.ca/genre/devotional
+dialogue des morts,http://id.lincsproject.ca/genre/dialogueOfTheDead
+dialogue of the dead,http://id.lincsproject.ca/genre/dialogueOfTheDead
+dialogue or debate,http://id.lincsproject.ca/genre/dialogueOrDebate
+dialogue ou débat,http://id.lincsproject.ca/genre/dialogueOrDebate
+diary,http://id.lincsproject.ca/genre/diary
+diaspora,http://id.lincsproject.ca/genre/diasporic
+diasporic,http://id.lincsproject.ca/genre/diasporic
+dictionaire biographique,http://id.lincsproject.ca/genre/biographicalDictionary
+dictionary,http://id.lincsproject.ca/genre/dictionary
+dictionnaire,http://id.lincsproject.ca/genre/dictionary
+didactic,http://id.lincsproject.ca/genre/didactic
+digital,http://id.lincsproject.ca/genre/digital
+directory,http://id.lincsproject.ca/genre/directory
+discours,http://id.lincsproject.ca/genre/speech
+dissertation,http://id.lincsproject.ca/genre/dissertation
+document,http://id.lincsproject.ca/genre/document
+documentaire,http://id.lincsproject.ca/genre/documentary
+documentary,http://id.lincsproject.ca/genre/documentary
+domestic,http://id.lincsproject.ca/genre/domestic
+drama,http://id.lincsproject.ca/genre/drama
+dramatic monologue,http://id.lincsproject.ca/genre/dramaticMonologue
+drawing,http://id.lincsproject.ca/genre/drawing
+dream vision,http://id.lincsproject.ca/genre/dreamVision
+dub,http://id.lincsproject.ca/genre/dub
+dystopia,http://id.lincsproject.ca/genre/dystopia
+dystopie,http://id.lincsproject.ca/genre/dystopia
+dédicace,http://id.lincsproject.ca/genre/dedication
+eclogue,http://id.lincsproject.ca/genre/eclogue
+editorial work,http://id.lincsproject.ca/genre/editorialWork
+elegy,http://id.lincsproject.ca/genre/elegy
+encyclopaedia,http://id.lincsproject.ca/genre/encyclopaedia
+encyclopédie,http://id.lincsproject.ca/genre/encyclopaedia
+environmental,http://id.lincsproject.ca/genre/environmental
+ephemera,http://id.lincsproject.ca/genre/ephemera
+epic theatre,http://id.lincsproject.ca/genre/epicTheatre
+epic,http://id.lincsproject.ca/genre/epic
+epigram,http://id.lincsproject.ca/genre/epigram
+epilogue,http://id.lincsproject.ca/genre/epilogue
+episodic literature,http://id.lincsproject.ca/genre/episodicLiterature
+epistle,http://id.lincsproject.ca/genre/epistle
+epistolary,http://id.lincsproject.ca/genre/epistolary
+epitaph,http://id.lincsproject.ca/genre/epitaph
+epithalamium,http://id.lincsproject.ca/genre/epithalamium
+epyllion,http://id.lincsproject.ca/genre/epyllion
+erotica or pornography,http://id.lincsproject.ca/genre/eroticaOrPornography
+erotica,http://id.lincsproject.ca/genre/erotica
+essai,http://id.lincsproject.ca/genre/essay
+essais,http://id.lincsproject.ca/genre/InformationalGenre
+essay,http://id.lincsproject.ca/genre/essay
+eulogy,http://id.lincsproject.ca/genre/eulogy
+exhibition catalogue,http://id.lincsproject.ca/genre/exhibitionCatalogue
+exploration,http://id.lincsproject.ca/genre/exploration
+eye-witness,http://id.lincsproject.ca/genre/eyeWitness
+fable,http://id.lincsproject.ca/genre/fable
+fabliau,http://id.lincsproject.ca/genre/fabliau
+fairytale,http://id.lincsproject.ca/genre/fairytale
+fantasy,http://id.lincsproject.ca/genre/fantasy
+farce,http://id.lincsproject.ca/genre/farce
+fascicle,http://id.lincsproject.ca/genre/fascicle
+feminist theory,http://id.lincsproject.ca/genre/feministTheory
+feminist,http://id.lincsproject.ca/genre/feminist
+fiction scolaire,http://id.lincsproject.ca/genre/schoolFiction
+fiction,http://id.lincsproject.ca/genre/fiction
+film script,http://id.lincsproject.ca/genre/filmScript
+film tv script,http://id.lincsproject.ca/genre/filmTvScript
+film,http://id.lincsproject.ca/genre/film
+folk song,http://id.lincsproject.ca/genre/folkSong
+folk tale,http://id.lincsproject.ca/genre/folkTale
+folklore,http://id.lincsproject.ca/genre/folkTale
+folktale,http://id.lincsproject.ca/genre/legend
+foreword,http://id.lincsproject.ca/genre/prefatoryPiece
+free verse,http://id.lincsproject.ca/genre/freeVerse
+féministe,http://id.lincsproject.ca/genre/feminist
+gardening,http://id.lincsproject.ca/genre/gardening
+genealogy,http://id.lincsproject.ca/genre/genealogy
+genre dramatique,http://id.lincsproject.ca/genre/drama
+genre épistolaire,http://id.lincsproject.ca/genre/epistolary
+georgic,http://id.lincsproject.ca/genre/georgic
+ghost story,http://id.lincsproject.ca/genre/ghostStory
+giftbook,http://id.lincsproject.ca/genre/giftbook
+gothic,http://id.lincsproject.ca/genre/gothic
+gothique,http://id.lincsproject.ca/genre/gothic
+government report,http://id.lincsproject.ca/genre/governmentReport
+grammaire,http://id.lincsproject.ca/genre/grammar
+grammar,http://id.lincsproject.ca/genre/grammar
+graphic novel,http://id.lincsproject.ca/genre/graphicNovel
+graveyard poetry,http://id.lincsproject.ca/genre/graveyardPoetry
+guerilla theatre,http://id.lincsproject.ca/genre/guerillaTheatre
+guide de voyage,http://id.lincsproject.ca/genre/guidebook
+guidebook,http://id.lincsproject.ca/genre/guidebook
+généalogie,http://id.lincsproject.ca/genre/genealogy
+géorgique,http://id.lincsproject.ca/genre/georgic
+hagiography,http://id.lincsproject.ca/genre/hagiography
+haiku,http://id.lincsproject.ca/genre/haiku
+harlequinade,http://id.lincsproject.ca/genre/harlequinade
+haïku,http://id.lincsproject.ca/genre/haiku
+heroic,http://id.lincsproject.ca/genre/heroic
+histoire,http://id.lincsproject.ca/genre/history
+historical overview,http://id.lincsproject.ca/genre/historicalOverview
+historical,http://id.lincsproject.ca/genre/historicalWriting
+historique,http://id.lincsproject.ca/genre/historicalWriting
+history,http://id.lincsproject.ca/genre/history
+humour noir,http://id.lincsproject.ca/genre/blackComedy
+hymn,http://id.lincsproject.ca/genre/hymn
+hymne (politique),http://id.lincsproject.ca/genre/anthem
+hymne (poétique),http://id.lincsproject.ca/genre/hymn
+illustrated,http://id.lincsproject.ca/genre/illustrated
+imitation,http://id.lincsproject.ca/genre/imitation
+imitations parodiques,http://id.lincsproject.ca/genre/mockForms
+immigration writing,http://id.lincsproject.ca/genre/migration
+improvisation,http://id.lincsproject.ca/genre/improvisation
+index,http://id.lincsproject.ca/genre/index
+industrial novel,http://id.lincsproject.ca/genre/industrialNovel
+informational writing,http://id.lincsproject.ca/genre/informationalWriting
+instructional text,http://id.lincsproject.ca/genre/instructionalText
+interview,http://id.lincsproject.ca/genre/interview
+introduction,http://id.lincsproject.ca/genre/introduction
+jardinage,http://id.lincsproject.ca/genre/gardening
+journal intime,http://id.lincsproject.ca/genre/diary
+journal issue,http://id.lincsproject.ca/genre/serialIssue
+journal volume,http://id.lincsproject.ca/genre/serialVolume
+journal,http://id.lincsproject.ca/genre/journal
+journalism,http://id.lincsproject.ca/genre/journalism
+journalisme,http://id.lincsproject.ca/genre/journalism
+juvenile,http://id.lincsproject.ca/genre/juvenile
+juvenilia,http://id.lincsproject.ca/genre/juvenilia
+kitchen sink drama,http://id.lincsproject.ca/genre/kitchenSinkDrama
+kunstlerroman,http://id.lincsproject.ca/genre/kunstlerroman
+lai,http://id.lincsproject.ca/genre/lais
+lais,http://id.lincsproject.ca/genre/lais
+lampoon,http://id.lincsproject.ca/genre/lampoon
+lecture,http://id.lincsproject.ca/genre/lecture
+legal instrument,http://id.lincsproject.ca/genre/legalInstrument
+legal writing,http://id.lincsproject.ca/genre/legalWriting
+legend,http://id.lincsproject.ca/genre/legend
+lesbian,http://id.lincsproject.ca/genre/lesbian
+lesbianWriting,http://id.lincsproject.ca/genre/lesbian
+letter,http://id.lincsproject.ca/genre/letter
+letters from the dead to the living,http://id.lincsproject.ca/genre/lettersFromTheDeadToTheLiving
+lettre,http://id.lincsproject.ca/genre/letter
+lettres des morts aux vivants,http://id.lincsproject.ca/genre/lettersFromTheDeadToTheLiving
+lgbtq,http://id.lincsproject.ca/genre/lgbtqPlus
+libelle,http://id.lincsproject.ca/genre/lampoon
+libretto,http://id.lincsproject.ca/genre/libretto
+life writing,http://id.lincsproject.ca/genre/lifeWriting
+literary criticism,http://id.lincsproject.ca/genre/literaryCriticism
+littérature de dévotion,http://id.lincsproject.ca/genre/devotional
+littérature de jeunesse,http://id.lincsproject.ca/genre/childrensLiterature
+littérature jeunes adultes,http://id.lincsproject.ca/genre/youngAdultWriting
+littérature pastorale,http://id.lincsproject.ca/genre/pastoral
+littérature prolétarienne,http://id.lincsproject.ca/genre/proletarianWriting
+littérature régionale,http://id.lincsproject.ca/genre/regional
+littérature sentimentale,http://id.lincsproject.ca/genre/sentimental
+liturgie,http://id.lincsproject.ca/genre/liturgy
+liturgy,http://id.lincsproject.ca/genre/liturgy
+livre d'étrenne,http://id.lincsproject.ca/genre/giftbook
+livre de coloriage,http://id.lincsproject.ca/genre/colouringBook
+livre de conduite,http://id.lincsproject.ca/genre/conductLiterature
+local history,http://id.lincsproject.ca/genre/localHistory
+long poem,http://id.lincsproject.ca/genre/longPoem
+loose-leaf,http://id.lincsproject.ca/genre/looseLeaf
+love,http://id.lincsproject.ca/genre/love
+lullaby,http://id.lincsproject.ca/genre/lullaby
+lyric,http://id.lincsproject.ca/genre/lyric
+lyrique,http://id.lincsproject.ca/genre/lyric
+magic realist,http://id.lincsproject.ca/genre/magicRealist
+manifeste,http://id.lincsproject.ca/genre/manifesto
+manifesto,http://id.lincsproject.ca/genre/manifesto
+manual,http://id.lincsproject.ca/genre/manual
+manuel scolaire,http://id.lincsproject.ca/genre/textbook
+manuel,http://id.lincsproject.ca/genre/manual
+manuscript,http://id.lincsproject.ca/genre/manuscript
+map,http://id.lincsproject.ca/genre/map
+masque,http://id.lincsproject.ca/genre/masque
+medical writing,http://id.lincsproject.ca/genre/medicalWriting
+melodrama,http://id.lincsproject.ca/genre/melodrama
+memoir,http://id.lincsproject.ca/genre/memoir
+microform,http://id.lincsproject.ca/genre/microform
+micronouvelle,http://id.lincsproject.ca/genre/vignette
+migration,http://id.lincsproject.ca/genre/migration
+military,http://id.lincsproject.ca/genre/military
+mimeograph,http://id.lincsproject.ca/genre/mimeograph
+mixed materials,http://id.lincsproject.ca/genre/mixedMaterials
+mixed media,http://id.lincsproject.ca/genre/multimedia
+mock forms,http://id.lincsproject.ca/genre/mockForms
+monologue,http://id.lincsproject.ca/genre/monologue
+morality or mystery play,http://id.lincsproject.ca/genre/moralityOrMysteryPlay
+multimedia,http://id.lincsproject.ca/genre/multimedia
+multimédia,http://id.lincsproject.ca/genre/multimedia
+municipal ordinance,http://id.lincsproject.ca/genre/municipalOrdinance
+music,http://id.lincsproject.ca/genre/music
+musical writing,http://id.lincsproject.ca/genre/musicalWriting
+musicologie,http://id.lincsproject.ca/genre/musicology
+musicology,http://id.lincsproject.ca/genre/musicology
+musique,http://id.lincsproject.ca/genre/music
+mystery,http://id.lincsproject.ca/genre/mystery
+myth,http://id.lincsproject.ca/genre/myth
+mélodrame,http://id.lincsproject.ca/genre/melodrama
+narrative poetry,http://id.lincsproject.ca/genre/narrativePoetry
+national tale,http://id.lincsproject.ca/genre/nationalTale
+nationalist,http://id.lincsproject.ca/genre/nationalist
+newspaper,http://id.lincsproject.ca/genre/newspaper
+non-fiction,http://id.lincsproject.ca/genre/nonFiction
+notated music,http://id.lincsproject.ca/genre/notatedMusic
+notebook,http://id.lincsproject.ca/genre/notebook
+notice,http://id.lincsproject.ca/genre/record
+nouvelle,http://id.lincsproject.ca/genre/shortStory
+novel of sensibility,http://id.lincsproject.ca/genre/novelOfSensibility
+novel,http://id.lincsproject.ca/genre/novel
+novella,http://id.lincsproject.ca/genre/novella
+nursery rhyme,http://id.lincsproject.ca/genre/nurseryRhyme
+obituary,http://id.lincsproject.ca/genre/obituary
+occasional poetry,http://id.lincsproject.ca/genre/occasionalPoetry
+ode pindarique,http://id.lincsproject.ca/genre/pindaric
+ode,http://id.lincsproject.ca/genre/ode
+oeuvres de jeunesse,http://id.lincsproject.ca/genre/juvenilia
+oeuvres en série,http://id.lincsproject.ca/genre/sequel
+offprint,http://id.lincsproject.ca/genre/offprint
+one-act-play,http://id.lincsproject.ca/genre/oneActPlay
+opera,http://id.lincsproject.ca/genre/opera
+opéra,http://id.lincsproject.ca/genre/opera
+oral history,http://id.lincsproject.ca/genre/oralHistory
+oratorio,http://id.lincsproject.ca/genre/oratorio
+orientalisme,http://id.lincsproject.ca/genre/orientalist
+orientalist,http://id.lincsproject.ca/genre/orientalist
+ouvrage didactique,http://id.lincsproject.ca/genre/didactic
+pageant,http://id.lincsproject.ca/genre/pageant
+painting,http://id.lincsproject.ca/genre/painting
+pamphlet,http://id.lincsproject.ca/genre/pamphlet
+panegyric,http://id.lincsproject.ca/genre/panegyric
+pantomime,http://id.lincsproject.ca/genre/pantomime
+panégyrique,http://id.lincsproject.ca/genre/panegyric
+parable,http://id.lincsproject.ca/genre/parable
+paranormal,http://id.lincsproject.ca/genre/paranormal
+paraphrase biblique,http://id.lincsproject.ca/genre/biblicalParaphrase
+paratext,http://id.lincsproject.ca/genre/paratext
+paratextes,http://id.lincsproject.ca/genre/paratext
+parody,http://id.lincsproject.ca/genre/parody
+part/excerpt,http://id.lincsproject.ca/genre/partExcerpt
+passion play,http://id.lincsproject.ca/genre/passionPlay
+pastoral,http://id.lincsproject.ca/genre/pastoral
+pedagogy,http://id.lincsproject.ca/genre/pedagogy
+performance poetry,http://id.lincsproject.ca/genre/performancePoetry
+performance,http://id.lincsproject.ca/genre/performance
+periodical feature,http://id.lincsproject.ca/genre/periodicalFeature
+periodical,http://id.lincsproject.ca/genre/SerialForm
+petition,http://id.lincsproject.ca/genre/petition
+philosophical,http://id.lincsproject.ca/genre/philosophical
+philosophie,http://id.lincsproject.ca/genre/philosophy
+philosophique,http://id.lincsproject.ca/genre/philosophical
+philosophy,http://id.lincsproject.ca/genre/philosophy
+photo essay,http://id.lincsproject.ca/genre/photoEssay
+photograph,http://id.lincsproject.ca/genre/photograph
+physical theatre,http://id.lincsproject.ca/genre/physicalTheatre
+picaresque,http://id.lincsproject.ca/genre/picaresque
+pindaric,http://id.lincsproject.ca/genre/pindaric
+pièce en chambre,http://id.lincsproject.ca/genre/closetDrama
+play script,http://id.lincsproject.ca/genre/playScript
+poetic drama,http://id.lincsproject.ca/genre/poeticDrama
+poetry,http://id.lincsproject.ca/genre/poetry
+polemic,http://id.lincsproject.ca/genre/polemic
+political statement,http://id.lincsproject.ca/genre/politicalStatement
+political writing,http://id.lincsproject.ca/genre/politicalWriting
+populaire,http://id.lincsproject.ca/genre/popular
+popular,http://id.lincsproject.ca/genre/popular
+pornography,http://id.lincsproject.ca/genre/pornography
+postface,http://id.lincsproject.ca/genre/afterword
+poème épique,http://id.lincsproject.ca/genre/heroic
+poésie de circonstance,http://id.lincsproject.ca/genre/occasionalPoetry
+poésie des lieux,http://id.lincsproject.ca/genre/topographicalPoetry
+poésie,http://id.lincsproject.ca/genre/poetry
+prayer,http://id.lincsproject.ca/genre/prayer
+pre-school,http://id.lincsproject.ca/genre/preSchool
+prefatory piece,http://id.lincsproject.ca/genre/prefatoryPiece
+prière,http://id.lincsproject.ca/genre/prayer
+procession,http://id.lincsproject.ca/genre/pageant
+profile of author,http://id.lincsproject.ca/genre/profileOfAuthor
+program notes,http://id.lincsproject.ca/genre/programNotes
+programme informatique,http://id.lincsproject.ca/genre/computerProgram
+proletarian writing,http://id.lincsproject.ca/genre/proletarianWriting
+prologue,http://id.lincsproject.ca/genre/prologue
+propaganda,http://id.lincsproject.ca/genre/propaganda
+propagande,http://id.lincsproject.ca/genre/propaganda
+prophecy,http://id.lincsproject.ca/genre/prophecy
+prose poem,http://id.lincsproject.ca/genre/prosePoem
+proverb,http://id.lincsproject.ca/genre/proverb
+préface,http://id.lincsproject.ca/genre/prefatoryPiece
+psalm,http://id.lincsproject.ca/genre/psalm
+psaume,http://id.lincsproject.ca/genre/psalm
+psychoanalytical,http://id.lincsproject.ca/genre/psychoanalytical
+psychoanalytique,http://id.lincsproject.ca/genre/psychoanalytical
+published,http://id.lincsproject.ca/genre/Published
+puppetry,http://id.lincsproject.ca/genre/puppetry
+pédagogie,http://id.lincsproject.ca/genre/pedagogy
+pétition,http://id.lincsproject.ca/genre/petition
+quest narrative,http://id.lincsproject.ca/genre/questNarrative
+quiz,http://id.lincsproject.ca/genre/quiz
+radio drama,http://id.lincsproject.ca/genre/radioDrama
+radio script,http://id.lincsproject.ca/genre/radioScript
+rapport gouvernemental,http://id.lincsproject.ca/genre/governmentReport
+realia,http://id.lincsproject.ca/genre/realia
+realist,http://id.lincsproject.ca/genre/realist
+record,http://id.lincsproject.ca/genre/record
+reflection,http://id.lincsproject.ca/genre/reflection
+regional,http://id.lincsproject.ca/genre/regional
+register,http://id.lincsproject.ca/genre/register
+religieux,http://id.lincsproject.ca/genre/religious
+religious,http://id.lincsproject.ca/genre/religious
+représentation,http://id.lincsproject.ca/genre/performance
+research,http://id.lincsproject.ca/genre/research
+revenge comedy,http://id.lincsproject.ca/genre/revengeComedy
+revenge tragedy,http://id.lincsproject.ca/genre/revengeTragedy
+review,http://id.lincsproject.ca/genre/review
+revue (variétés),http://id.lincsproject.ca/genre/revue
+revue,http://id.lincsproject.ca/genre/revue
+riddle,http://id.lincsproject.ca/genre/riddle
+robinsonades,http://id.lincsproject.ca/genre/robinsonades
+roman d'aventures,http://id.lincsproject.ca/genre/adventureWriting
+roman en vers,http://id.lincsproject.ca/genre/verseNovel
+roman industriel,http://id.lincsproject.ca/genre/industrialNovel
+roman policier,http://id.lincsproject.ca/genre/detective
+roman à clefs,http://id.lincsproject.ca/genre/aClef
+roman à énigme,http://id.lincsproject.ca/genre/mystery
+roman,http://id.lincsproject.ca/genre/novel
+romance,http://id.lincsproject.ca/genre/romance
+rural idyll,http://id.lincsproject.ca/genre/ruralIdyll
+réalisme domestique,http://id.lincsproject.ca/genre/domestic
+réalisme magique,http://id.lincsproject.ca/genre/magicRealist
+réaliste,http://id.lincsproject.ca/genre/realist
+récit d'esclave,http://id.lincsproject.ca/genre/slaveNarrative
+récit de captivité,http://id.lincsproject.ca/genre/captivityNarrative
+rédaction juridique,http://id.lincsproject.ca/genre/legalWriting
+répertoire,http://id.lincsproject.ca/genre/directory
+réponse,http://id.lincsproject.ca/genre/answer
+résumé,http://id.lincsproject.ca/genre/abridgement
+sage writing,http://id.lincsproject.ca/genre/sageWriting
+satire,http://id.lincsproject.ca/genre/satire
+sayings,http://id.lincsproject.ca/genre/ProverbForm
+scholarly writing,http://id.lincsproject.ca/genre/scholarlyWriting
+scholarship,http://id.lincsproject.ca/genre/ScholarlyGenre
+school fiction,http://id.lincsproject.ca/genre/schoolFiction
+science fiction,http://id.lincsproject.ca/genre/scienceFiction
+science,http://id.lincsproject.ca/genre/scientificWriting
+sciences sociales,http://id.lincsproject.ca/genre/socialScience
+scientific writing,http://id.lincsproject.ca/genre/scientificWriting
+scrapbook,http://id.lincsproject.ca/genre/scrapbook
+script,http://id.lincsproject.ca/genre/filmTvScript
+script,http://id.lincsproject.ca/genre/script
+scripture,http://id.lincsproject.ca/genre/scripture
+sea story,http://id.lincsproject.ca/genre/seaStory
+sensation novel,http://id.lincsproject.ca/genre/sensationNovel
+sensational,http://id.lincsproject.ca/genre/sensational
+sensibility,http://id.lincsproject.ca/genre/novelOfSensibility
+sentimental,http://id.lincsproject.ca/genre/sentimental
+sequel,http://id.lincsproject.ca/genre/sequel
+serial issue,http://id.lincsproject.ca/genre/serialIssue
+serial periodical,http://id.lincsproject.ca/genre/serialPeriodical
+serial volume,http://id.lincsproject.ca/genre/serialVolume
+serial,http://id.lincsproject.ca/genre/serial
+sermon,http://id.lincsproject.ca/genre/sermon
+sexual awakening fiction,http://id.lincsproject.ca/genre/sexualAwakeningFiction
+sheet music,http://id.lincsproject.ca/genre/MusicalNotationForm
+short story,http://id.lincsproject.ca/genre/shortStory
+silver-fork novel,http://id.lincsproject.ca/genre/silverForkNovel
+sketch book,http://id.lincsproject.ca/genre/sketchBook
+sketch,http://id.lincsproject.ca/genre/sketch
+slave narrative,http://id.lincsproject.ca/genre/slaveNarrative
+slavery,http://id.lincsproject.ca/genre/slaveNarrative
+social reform,http://id.lincsproject.ca/genre/socialReform
+social science,http://id.lincsproject.ca/genre/socialScience
+song,http://id.lincsproject.ca/genre/song
+sonnet,http://id.lincsproject.ca/genre/sonnet
+sound recording - musical,http://id.lincsproject.ca/genre/soundRecordingMusical
+sound recording – nonmusical,http://id.lincsproject.ca/genre/soundRecordingNonmusical
+spectacle de cabaret,http://id.lincsproject.ca/genre/cabaret
+speech,http://id.lincsproject.ca/genre/speech
+stencil,http://id.lincsproject.ca/genre/mimeograph
+suffragist,http://id.lincsproject.ca/genre/suffragist
+summary,http://id.lincsproject.ca/genre/summary
+sunday school story,http://id.lincsproject.ca/genre/sundaySchoolStory
+survey,http://id.lincsproject.ca/genre/survey
+temperance,http://id.lincsproject.ca/genre/temperance
+testimony,http://id.lincsproject.ca/genre/testimony
+textbook,http://id.lincsproject.ca/genre/textbook
+theatre for young audiences,http://id.lincsproject.ca/genre/theatreForYoungAudiences
+theatre of cruelty,http://id.lincsproject.ca/genre/theatreOfCruelty
+theatre of the absurd,http://id.lincsproject.ca/genre/theatreOfTheAbsurd
+thematic writing,http://id.lincsproject.ca/genre/thematicWriting
+theology,http://id.lincsproject.ca/genre/theology
+thesaurus,http://id.lincsproject.ca/genre/thesaurus
+three-dimensional object,http://id.lincsproject.ca/genre/threeDimensionalObject
+thriller,http://id.lincsproject.ca/genre/thriller
+théologie,http://id.lincsproject.ca/genre/theology
+théorie féministe,http://id.lincsproject.ca/genre/feministTheory
+théâtre de l'absurde,http://id.lincsproject.ca/genre/theatreOfTheAbsurd
+théâtre de la cruauté,http://id.lincsproject.ca/genre/theatreOfCruelty
+théâtre radiophonique,http://id.lincsproject.ca/genre/radioDrama
+topographical poetry,http://id.lincsproject.ca/genre/topographicalPoetry
+tract pamphlet,http://id.lincsproject.ca/genre/tractPamphlet
+tract,http://id.lincsproject.ca/genre/tractPamphlet
+traduction,http://id.lincsproject.ca/genre/translation
+tragedy,http://id.lincsproject.ca/genre/tragedy
+tragicomedy,http://id.lincsproject.ca/genre/tragicomedy
+tragédie,http://id.lincsproject.ca/genre/tragedy
+traité médical,http://id.lincsproject.ca/genre/medicalWriting
+translation,http://id.lincsproject.ca/genre/translation
+travel writing,http://id.lincsproject.ca/genre/travel
+treatise,http://id.lincsproject.ca/genre/treatise
+tv script,http://id.lincsproject.ca/genre/filmTvScript
+témoignage,http://id.lincsproject.ca/genre/testimony
+unpublished,http://id.lincsproject.ca/genre/Unpublished
+utopia,http://id.lincsproject.ca/genre/utopia
+utopie,http://id.lincsproject.ca/genre/utopia
+verse novel,http://id.lincsproject.ca/genre/verseNovel
+verse poem,http://id.lincsproject.ca/genre/versePoem
+video game,http://id.lincsproject.ca/genre/videoGame
+video recording,http://id.lincsproject.ca/genre/videoRecording
+vignette,http://id.lincsproject.ca/genre/vignette
+villanelle,http://id.lincsproject.ca/genre/villanelle
+vision onirique,http://id.lincsproject.ca/genre/dreamVision
+visual art,http://id.lincsproject.ca/genre/visualArt
+voyage,http://id.lincsproject.ca/genre/travel
+war,http://id.lincsproject.ca/genre/war
+webpage,http://id.lincsproject.ca/genre/webpage
+website,http://id.lincsproject.ca/genre/website
+western,http://id.lincsproject.ca/genre/western
+young adult writing,http://id.lincsproject.ca/genre/youngAdultWriting
+à clef,http://id.lincsproject.ca/genre/aClef
+écrits politiques,http://id.lincsproject.ca/genre/politicalWriting
+écrits scientifiques,http://id.lincsproject.ca/genre/scientificWriting
+écriture thématique,http://id.lincsproject.ca/genre/thematicWriting
+élégie,http://id.lincsproject.ca/genre/elegy
+élégie,http://id.lincsproject.ca/genre/obituary
+éngime,http://id.lincsproject.ca/genre/riddle
+épilogue,http://id.lincsproject.ca/genre/epilogue
+épique,http://id.lincsproject.ca/genre/epic
+épitaphe,http://id.lincsproject.ca/genre/epitaph
+épître>,http://id.lincsproject.ca/genre/epistle
+érudition,http://id.lincsproject.ca/genre/scholarlyWriting
+éveil à la sexualité,http://id.lincsproject.ca/genre/sexualAwakeningFiction
+ôde,http://id.lincsproject.ca/genre/ode
