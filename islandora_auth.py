@@ -46,7 +46,7 @@ def get_datastream(file_desc):
     exit(1)
 
 
-def download_files(date, collection_key, latest_date):
+def download_files(date, collection_key, latest_date=None):
     docs = get_document_ids(collections[collection_key])
     dir = f"data/{collection_key}_{date}"
     print(collection_key)
@@ -72,13 +72,12 @@ def download_files(date, collection_key, latest_date):
             file_desc = get_file_description(x)
             file_date = file_desc["modified"].split("T")[0] 
             file_date = datetime.datetime.strptime(file_date, DATE_FORMAT)
-
             if latest_date <= file_date:
                 print(count, "/", total, ": ", x)
                 print("File date:", file_date)
-                continue
             else:
-                print("Not Downloading:",count, "/", total, ": ", x)
+                print(F"Not Downloading: {count}/{total}: {x} ({file_date})")
+                continue
         else:
                 print(count, "/", total, ": ", x)
 
@@ -190,8 +189,10 @@ def main(argv):
     
     # get_modified_entities("entry")
     # download_data("entry", "2022-05-04")
+    # download_data("entry")
     # download_data()
     download_data("bibliography", "2022-05-04")
+    # download_data("bibliography")
 
     # get_images()
 

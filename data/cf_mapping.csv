@@ -1,520 +1,389 @@
 RDF Type,uri,Label,alt label #1,alt label #2,alt label #3,alt label #4,alt label #5,alt label #6,alt label #7,alt label #8,alt label #9,alt label #10,alt label #11,alt label #12,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/ara,arabic,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/ben,bengali,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/bul,bulgarian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/chi,chinese,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/cze,czech,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/eng,english,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/fre,french,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/ger,german,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/gla,gaelic,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/gle,irish,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/guj,gujarati,guzerati,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/heb,hebrew,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/hin,hindi,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/ita,italian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/jpn,Japanese,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/kan,kanarese,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/lat,latin,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/mar,marathi,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/may,malay,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/per,persian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/pli,pali,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/pol,Polish,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/rus,russian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/san,sanskrit,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/spa,spanish,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/tha,thai,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/ukr,Ukrainian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/urdu,hindustani,Urdu,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Language,http://id.loc.gov/vocabulary/languages/wel,welsh,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,AT,austrian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,AT-9,viennese,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,BG,bulgarian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,BE,Belgian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,BR,Brazilian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,CA,canadian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,CH,swiss,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,CU,cuban,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,DE,german,germany,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,DK,danish,denmark,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,ES,spanish,spain,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,FR,french,french extraction,french mother,half french,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,FR-COR,corsican,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,GB,british,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,GB-EDH,edinburgh,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,GB-ENG,english,englishwoman,england,english born,english father,half english,northern english,anglo,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,GB-NIR,northern irish,northern ireland,ulster irish protestants,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,GB-SCT,scottish,scots,scotswoman,scotland,half scots,scotch,shetland,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,GB-WLS,welsh,welsh extraction,Welsh lineage (ancient descent though little money on both sides of her family).,Walsh,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,GH,ghanaian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,HU,hungarian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,IE,irish,irishwoman,half irish,ireland,irishness,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,IN,indian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,IT,italian,italy,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,JM,jamaican,jamaica,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,LT,lithuanian,lithuania,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,LV,latvian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,NG,nigerian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,NL,netherlands,the netherlands,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,NZ,new zealander,new zealand,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,PK,Pakistani,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,PE,peruvian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,PL,polish,pollish,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,PT,portuguese,portugal,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,RO,romania,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,RU,russian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,SE,swedish,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,TR,turkish,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,UA,ukrainian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,US,american,usa,united states,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,AU,australian,australia,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,CA,canadian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,CN,chinese,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,DE,german,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,DK,danish,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,DZ,algerian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,GB-ENG,english,england,englishwoman,engllish,anglo,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,ES,spanish,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,IT,italian,italy,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,FR,french,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,MX,Mexico,Mexican,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,GB,british,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,GB-NIR,northern irish,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,GB-SCT,scottish,scotswoman,scots,scotland,scot,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,GB-WLS,welsh,welshwoman,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,GY,guyanan,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,HU,hungarian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,IE,irish,ireland,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,IN,indian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,IT-GE,genoese,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,JM,jamaican,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,PK,Pakistani,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,KE,kenyan,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,NG,nigerian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,NZ,new zealander,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,RU,russian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,US,american,america,usa,us,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,ZA,south african,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/11609047,Lancastrian,Lancashire,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/2186224,New Zealand,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/2510769,Spanish,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/2782113,Austria,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/2635167,British,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/2634895,Wales,Welsh,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/2638010,Shetland,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/2638360,Scotland,Scottish,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/2641364,Northern Irish,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/2652355,Cornish,Cornwall,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/2661886,Sweden,Swedish,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/2750405,Dutch,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/2921044,Germany,German,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/2963597,Ireland,Irish,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/3017382,France,French,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/3077311,Czech Republic,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/6252001,USA,American,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/6255148,European,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/6269131,England,English,north of England,northern English,London,Londoner,northern england,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/357994,Egypt,Egyptian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/3489940,Jamaica,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/6255146,Africa,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/953987,South Africa,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/6252001,America,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/5128581,New Yorker,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/4662168,Tennessee,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/4736286,Texas,Texan,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/6951102,Italy,Italian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/3164603,Venice,Venetian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/7729891,Caribbean,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/8502102,New England,New Englander,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://sws.geonames.org/8581589,Yorkshirewoman,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://vocab.getty.edu/tgn/300008880,"Prairies,Canada",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://vocab.getty.edu/tgn/7000198,India,Indian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://vocab.getty.edu/tgn/7004550,West Indian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://vocab.getty.edu/tgn/7017283,Glaswegians,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://vocab.getty.edu/tgn/7032932,East Africa,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#RaceColour,http://id.lincsproject.ca/cwrc#mixedRaceColour,mixed-race,racially mixed,mixed,"mixed white and black (or, in her own word, colored)",mixed-blood,coloured (mixed-race),red mulatto,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#RaceColour,http://id.lincsproject.ca/cwrc#anglo-IrishRaceColour,Anglo-Irish,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#RaceColour,http://id.lincsproject.ca/cwrc#indianRaceColour,Indian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#RaceColour,http://id.lincsproject.ca/cwrc#jewishRaceColour,Jewish,jew,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#RaceColour,http://id.lincsproject.ca/cwrc#indigenousPeoplesOfAmericasRaceColour,Indigenous (of the Americas),Native American,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#RaceColour,http://id.lincsproject.ca/cwrc#whiteRaceColour,white,presumably white,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#RaceColour,http://id.lincsproject.ca/cwrc#creoleRaceColour,Creole,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#RaceColour,http://id.lincsproject.ca/cwrc#scottishRaceColour,Scottish,Scotch,Scots,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#RaceColour,http://id.lincsproject.ca/cwrc#eurasianRaceColour,eurasian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#RaceColour,http://id.lincsproject.ca/cwrc#blackRaceColour,black,blackwoman,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#RaceColour,http://id.lincsproject.ca/cwrc#asianRaceColour,Asian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#RaceColour,http://id.lincsproject.ca/cwrc#afro-CaribbeanRaceColour,Afro-Caribbean,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#RaceColour,http://id.lincsproject.ca/cwrc#englishRaceColour,English,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#RaceColour,http://id.lincsproject.ca/cwrc#blackWomanRaceColour,blackwoman,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#SocialClass,http://id.lincsproject.ca/cwrc#slave-forced-labourer,slave or forced labourer,serfs,serf,bonded labourer,slave,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#SocialClass,http://id.lincsproject.ca/cwrc#skilledCraftpersonArtisan,artisan,SKILLEDCRAFTPERSON-ARTISAN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#SocialClass,http://id.lincsproject.ca/cwrc#nobility,nobility,"royal, but not expected to become queen",royalty,royal descent,royal,NOBILITY,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#SocialClass,http://id.lincsproject.ca/cwrc#urban-industrialUnskilled,urban unskilled,URBAN-INDUSTRIALUNSKILLED,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#SocialClass,http://id.lincsproject.ca/cwrc#gentry,gentry,GENTRY,gentility,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#SocialClass,http://id.lincsproject.ca/cwrc#brahmin,Brahmin,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#SocialClass,http://id.lincsproject.ca/cwrc#workingClass,working class,working woman,rural working class parents,urban working class,working classes,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#SocialClass,http://id.lincsproject.ca/cwrc#shopkeepers,shopkeepers,SHOPKEEPERS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#SocialClass,http://id.lincsproject.ca/cwrc#upper-middleClass,upper-middle class,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#SocialClass,http://id.lincsproject.ca/cwrc#bohemianism,Bohemianism,bohemian with upper-class connections,"alternative society of young artists, dropouts, and nonconformists",classlessness,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#SocialClass,http://id.lincsproject.ca/cwrc#managerial,managerial,MANAGERIAL,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#SocialClass,http://id.lincsproject.ca/cwrc#professional,professional,professional classes,professional class,PROFESSIONAL,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#SocialClass,http://id.lincsproject.ca/cwrc#rural-unskilled,rural unskilled,RURAL-UNSKILLED,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#SocialClass,http://id.lincsproject.ca/cwrc#servants,servant,SERVANTS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#SocialClass,http://id.lincsproject.ca/cwrc#entrepreneurial-industrialist,entrepreneurial,ENTREPRENEURIAL-INDUSTRIALIST,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#SocialClass,http://id.lincsproject.ca/cwrc#lowerMiddleClass,lower-middle class,LOWER-MIDDLECLASS,genteel poverty,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#SocialClass,http://id.lincsproject.ca/cwrc#indigent,indigent,poverty,INDIGENT,impoverished,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#SocialClass,http://id.lincsproject.ca/cwrc#middleClass,middle class,middle ranks,urban middle class,middle-class,middling ranks,bourgeois,middle,middle classes,middling sort,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#SocialClass,http://id.lincsproject.ca/cwrc#yeoman-farmer,yeoman farmer,YEOMAN-FARMER,yeoman,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Gender,http://id.lincsproject.ca/cwrc#transGender,transgender,transgendered,trans,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Gender,http://id.lincsproject.ca/cwrc#woman,woman,female,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Gender,http://id.lincsproject.ca/cwrc#transMan,trans man/trans male,transgendered female to male,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Gender,http://id.lincsproject.ca/cwrc#undefinedGender,undefined,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Gender,http://id.lincsproject.ca/cwrc#man,man,male,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Gender,http://id.lincsproject.ca/cwrc#GenderQueer,genderqueer,nonconforming,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Gender,http://id.lincsproject.ca/cwrc#cisWoman,cis woman/cis female,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Gender,http://id.lincsproject.ca/cwrc#blackWomanRaceColour,blackwoman,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Gender,http://id.lincsproject.ca/cwrc#cisGender,cisgender,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Gender,http://id.lincsproject.ca/cwrc#transWoman,trans woman/trans female,transgendered male to female,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Gender,http://id.lincsproject.ca/cwrc#cisMan,cis man/cis male,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Gender,http://id.lincsproject.ca/cwrc#Androgynous,androgynous,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Sexuality,http://id.lincsproject.ca/cwrc#frigidity,frigidity,frigid,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Sexuality,http://id.lincsproject.ca/cwrc#bisexuality,bisexuality,bisexual,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Sexuality,http://id.lincsproject.ca/cwrc#libertinism,libertinism,libertine,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Sexuality,http://id.lincsproject.ca/cwrc#homosexual,homosexuality,homosexual,male HOMOSEXUAL,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Sexuality,http://id.lincsproject.ca/cwrc#lesbian,lesbianism,lesbian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Sexuality,http://id.lincsproject.ca/cwrc#celibacy,celibacy,celibate,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Sexuality,http://id.lincsproject.ca/cwrc#heterosexual,heterosexuality,heterosexual,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Sexuality,http://id.lincsproject.ca/cwrc#promiscuity,promiscuity,promiscuous,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Sexuality,http://id.lincsproject.ca/cwrc#asexuality,asexuality,asexual,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,http://id.lincsproject.ca/cwrc#iroquoisNationalHeritage,Iroquois,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,http://id.lincsproject.ca/cwrc#europeanNationalHeritage,European,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,http://id.lincsproject.ca/cwrc#mohawkNationalHeritage,Mohawk,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,http://id.lincsproject.ca/cwrc#cornishNationalHeritage,Cornish,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,http://id.lincsproject.ca/cwrc#africanNationalHeritage,African,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,http://id.lincsproject.ca/cwrc#huguenotNationalHeritage,Huguenot,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,http://id.lincsproject.ca/cwrc#normanNationalHeritage,Norman,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,http://id.lincsproject.ca/cwrc#jewishNationalHeritage,Jewish,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,http://id.lincsproject.ca/cwrc#anglo-IrishNationalHeritage,Anglo-Irish,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,http://id.lincsproject.ca/cwrc#dutchNationalHeritage,Dutch,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,http://id.lincsproject.ca/cwrc#bengaliNationalHeritage,bengali,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,http://id.lincsproject.ca/cwrc#tatarNationalHeritage,Tatar,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,http://id.lincsproject.ca/cwrc#flemishNationalHeritage,Flemish,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalHeritage,http://id.lincsproject.ca/cwrc#westIndianNationalHeritage,West Indian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#antiClericalism,anti-clericalism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#christianScience,Christian Science,Christian Scientist,Church of Christ Scientist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#occultism,occultism,occultism/theosophism,Theosophy,magician,Occultist,medium,spiritualism,Tarot card believer,Theosophist,astrologer,fortune teller,character reader,spiritualist,mediumship,vice president of the college of psychic studies,member of the council of the society for psychical research,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#gnosticism,Gnosticism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#methodism,Methodism,Methodist Church,Methodist New Connection,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#universalist,Universalist,universal salvation,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#wesleyanism,Wesleyanism,Wesleyan Methodist,Wesleyan Independent,Wesleyan,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#paganism,Paganism,pagan (Greek),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#ecumenism,ecumenism,ecumenical,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#obeah,Obeah,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#huguenotNationalHeritage,Huguenot,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#atheism,atheism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#naturalReligion,Natural Religion,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#fifthMonarchists,Fifth Monarchists,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#millenarianism,millenarianism,milleniarian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#calvinism,Calvinism,Reformed,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#behemenism,Behemenism,Behmenist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#freemasonry,Freemasonry,Freemason,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#methodistEpiscopalian,Methodist Episcopalian,African Methodist Episcopal Church,African Methodist Episcopal,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#christianity,Christianity,Christian,Russian Orthodox,orthodox Christianity,Free Christian Church,Greek Orthodox,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#catholicism,Roman Catholicism,Roman Catholic Church,Catholicism,Catholic Church,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#theism,theism,theist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#plymouthBrethren,Plymouth Brethren,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#dominicanOrder,Dominican,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#presbyterianism,Presbyterianism,Presbyterian Church,Free Church of Scotland,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#socinianism,Socinianism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#unitarianism,Unitarianism,Unitarian Church,Unitarian,Unitarian Movement,active unitarian,unitarianMovement,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#camisards,Camisards,French Prophets,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#abrahamicReligions,Abrahamic religions,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#hermeticism,Hermeticism,Hermetism,Hermetic,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#pentecostalism,Pentecostalism,Pentecostal Evangelists,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#mysticism,mysticism,Eastern mysticism,mystic,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#darwinism,Darwinism,evolutionist,Darwinist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#bushido,Bushido,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#tractarianMovement,Tractarian Movement,Oxford Movement,Tractarian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#islam,Islamism,Mahometans,Islamic,Muslim,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#puritanism,Puritanism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#moravian,Moravian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#neo-thomism,Neo-thomism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#spiritualism,spiritualism,psychic,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#vitalism,vitalism,vitalist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#freethought,freethought,free-thinker,sceptic,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#swedenborgianism,Swedenborgianism,New Church,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#quakerism,Quakerism,"Friends, Society of",Society of Friends,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#zoroastrianism,Zoroastrianism,Parsi,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#monism,monism,Monist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#shinto,Shinto,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#hinduism,Hinduism,Hindoos,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#buddhism,Buddhism,Buddhist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#deism,deism,deist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#latitudinarianism,Latitudinarianism,latudinarian,Latitudinarian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#protestantism,Protestantism,Labadists,provincial English Protestantism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#reincarnation,reincarnation,believer in reincarnation,reincarnationist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#determinism,determinism,predestinarianism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#congregationalism,Congregationalism,Separatist,Independent,Independent Church,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#sufism,Sufism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#easternReligions,eastern religions,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#seekers,Seekers,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#independentMethodistConnexion,Independent Methodist Connexion,Independent Methodist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#lollardy,Lollardy,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#fatalism,fatalism,fatalist,Necessarian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#dissentProtestant,Dissent (Protestant),Rational Dissent,Dissenter,Nonconformist,Dissenting Churches,Dissenting Presbyterian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#zen,Zen,Zen Buddhism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#evangelicalism,Evangelicalism,Evangelical,Evangelical Protestantism,Evangelicism,Evangelical Christian,Evangelical Church,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#baptistChristianity,Baptist Christianity,Particular Baptist,Baptist Church,Baptist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#pantheism,pantheism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#socialGospel,Social Gospel,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#jansenism,Jansenism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#agnosticism,agnosticism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#adventism,Adventism,Second Adventist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#faithHealing,faith healing,faith-healing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#asceticism,asceticism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#protoZionism,Proto-Zionism,proto-Zionist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#rosicrucianism,Rosicrucianism,Rosicrucian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#cartesianism,Cartesianism,Cartesian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#judaism,Judaism,Orthodox Judaism,Jewish,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#benedictineOrder,Benedictine Order,Benedictine,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#newThought,New Thought,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Religion,http://id.lincsproject.ca/cwrc#anglicanism,Anglicanism,Anglo-Catholic,High Anglican,Anglican Church,Low Church,Low-Church,Church of Ireland,High Church,Church of England,Episcopalian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#womensEducationReform,women's education reform,education for women,women's higher education,female education,women's medical education,female education advocate,campaigner for women's education,women's education reformer,activist for women's education,women educators,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#maoism,Maoism,chinese communism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#communism,communism,christian communist,communist,Communist Party,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#parliamentarianism,parliamentarianism,parliamentarian,pro-parliamentarian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#pro-Slavery,pro-slavery,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#highToryism,High Toryism,High Tory,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#stalinism,Stalinism,totalitarian,stalinist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#rationalism,rationalism,rationalist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#prisonReform,prison reform,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#feministInternationalism,feminist internationalism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Suffrage,anti-suffrage,anti-sufffragist,anti-suffrage movement,non-suffragist,anti-suffragist movement,anti-suffragist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Dreyfusard,anti-Dreyfusard,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#environmentalism,environmentalism,ecologist,environmentalist,climate activist,nature conservationist,green,environmental causes,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#irishNationalism,Irish nationalism,parnellite,irish nationalist,cultural nationalist,irish patriotism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#multiracialism,multiracialism,multi-racialist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#conservatism,conservatism,conservative,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#boulangism,boulangism,boulangist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#jewishEmancipation,Jewish emancipation,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#landReform,land reform,Irish land nationalization,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Urbanism,anti-urbanism,pro-countryside,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#christianSocialism,Christian socialism,christian socialist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#abolitionism,abolitionism,integrationism,sugar boycotter,abolition,anti-slavery,abolitionist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Monarchism,anti-monarchism,anti-monarchist,anti-royalist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#birthControlActivism,birth control activism,pro-birth control,birth-control activist,birth control campaigner,birth control movement,supporter of contraception,contraceptionist,pro-contraception,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#libertarianism,Libertarianism,religious libertarian,libertarian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#animalWelfareAdvocacy,animal welfare advocacy,animal welfare,animal activist,animal rights advocate,animal rights activist,anti-cruelty,anti-hunting,anti-blood-sports,animal rights,anti-cruelty to animals,animal welfare activist,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#nazism,Nazism,nazi,pro-nazi,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#feministPacifism,feminist pacifism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#antidisestablishmentarianism,antidisestablishmentarianism,antidisestablishmentarian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#civilLibertarianism,civil libertarianism,civil libertarian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#educationReform,education reform,educational reformer,educationalist,educational reform,state education movement,education reformer,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Bolshevism,anti-Bolshevism,anti-bolshevik,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#appeasement,appeasement,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#womanism,womanism,womanist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#scottishNationalism,Scottish nationalism,scots nationalist,scottish nationalist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#polishNationalism,Polish nationalism,polish nationalist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Communism,anti-communism,anti-communist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#eugenics,eugenics,eugenicist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#covenanters,Covenanters,Covenanting,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Imperialism,Anti-imperialism,anti-colonialism,anti-imperialist,anti-colonialist,anti-imperial,Zulu resistance to colonial rule,anti-colonial,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Fascism,anti-fascism,strongly opposed Fascism,anti-nazi,anti-fascist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#internationalism,internationalism,internationalist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#zionism,Zionism,proto-Zionist,zionist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#welshNationalism,Welsh nationalism,welsh nationalist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#newUnionism,New Unionism,New Trade Unionism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-American,anti-American politics,anti-American,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#marriageLawReform,marriage law reform,marriage law reformer,divorce reformer,marriage reformer,maternal wage activist,pro-divorce,divorce reform activist,custody rights,married women's property supporter,married women's control of their own property,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#liberalism,liberalism,ultra liberals,liberal,radical liberal,British Liberalism,Liberal Party,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#co-operativeMovement,co-operative movement,Women's Co-operative Guild,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#germanNationalism,German nationalism,pro-German,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#italianUnification,Italian unification,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#philosophicalRadicals,Philosophical Radicals,Philosophic Radicals,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#blackAnti-Oppression,black anti-oppression movement,black liberation,black activist,anti-segregationist,black power,black pride,black liberationist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Racism,anti-racism,anti-racist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-War,anti-war movement,anti-militaristic,anti-Vietnam-War demonstrations,anti-war activism,anti-militarism,vietnam war protester,anti Vietnam war,anti-war,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#greekNationalist,Greek nationalism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#liberalUnionistParty,Liberal Unionist Party,liberal unionist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#feminism,feminism,Equality Feminism,feminist movement,New Woman,maternal feminist,Women's Liberation,lobby for the rights of women,anti-sexist,contraceptionist,moderate feminist,sexual egalitarian,gender egalitarian,women's rights,feminist activism,advocate of female education,activist for women and children,non-separatist feminist,political issues concerning women,proto-feminist,women's rights activist,feminist reformer,proto-feminist consciousness,women's issues,feminist,women's movement,women's cause,advocate for women's education,worked to establish pay equity,worked devotedly for the society for promoting the employment of women,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#hanoverian,Hanoverian,House of Hanover,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#dissentProtestant,Dissent (Protestant),Rational Dissent,Dissenter,Nonconformist,Dissenting Churches,Dissenting Presbyterian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#egalitarianism,egalitarianism,egalitarian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#jacobitism,Jacobitism,jacobite,jacobites,jacobite conspirator,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#antiClericalism,anti-clericalism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#whiggism,whiggism,whigs,whig,williamite,opposition whig,dissident whig,pittite whig,foxite whig,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#gayRights,gay rights movement,gay rights advocate,pro-sexual preference,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#frenchNationalism,French nationalism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#temperanceMovement,temperance movement,temperance activist,temperance supporter,temperance worker,temperance work,temperance,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#girondin,Girondin,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#indigenousRights,Indigenous rights movement,indigenous rights,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#spanishRepublicanism,Spanish republicanism,spanish republican supporter,spanish republican,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#humanism,humanism,humanist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#malthusianism,Malthusianism,neo-Malthusianism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#dressReform,dress reform,Rational Dress Movement,dress reformer,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#existentialism,existentialism,existentialist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Federalism,Anti-Federalism,anti-federalist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#patriotism,patriotism,patriot,patriotic,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#multiculturalism,multiculturalism,multiculturalist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-LandLeague,Anti-Irish National Land League,anti-Irish Home Rule,Unionist (Irish),anti-Land League,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#artsAdvocacy,arts advocacy,advocate for the arts,artists' advocate,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#urbanReform,urban reform,urban reformer,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#humanRights,human rights,humanitarian,human rights activist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#blackNationalism,Black nationalism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#racism,racism,racist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-masonry,anti-masonry,anti-masonic,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#separatism,separatism,Separatist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#sanitaryMovement,sanitary movement,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#highChurchParty,High Church Party,High-Church party,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#socialReform,social reform,progressivism,social and legal reform,social reformer,reformist,reformers,reformer,social welfare,reform,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Vivisection,anti-vivisection,anti-vivisectionist,anti-vivisection movement,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Boer,anti-Boer politics,anti-Boer,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#feministAnti-ViolenceActivism,feminist anti-violence activism,against violence to women,anti-female-genital-mutilation,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#racialEquality,racial equality,racial integrationist,activist for racial equality,race equality,racial equality activist,racial integration,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#marxism,Marxism,marxist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#egyptianNationalism,Egyptian nationalism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#secularism,secularism,secularist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#democrat,democrat,pro-democracy,democratic,Democrat (US),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-PovertyMovement,anti-poverty movement,poverty activist,anti-poverty activist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#pro-BoerWar,pro-Boer War,pro-Boer,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#nationalism,nationalism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#neo-Conservatism,neo-conservatism,neo-Conservative,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-NuclearMovement,anti-nuclear movement,nuclear disarmament,pro nuclear disarmament,Campaign for Nuclear Disarmament,anti-nuclear weapons,anti-nuclear activist,nuclear disarmament campaigner,anti-nuclear,anti-atomic,anti-nuclear war,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#wilkite,Wilkite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#left-Wing,left-wing,leftist,anti-conservative,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Censorship,anti-censorship movement,free speech advocate,pro free speech,Freedom of Speech,anti-censorship,intellectual property activist,pro-free speech,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#irishHomeRuleMovement,Irish Home Rule Movement,irish home ruler,home ruler,home ruler (ireland),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#jacobinism,Jacobinism,jacobin,pro-Jacobin,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#capitalism,capitalism,capitalist,free market capitalism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#utilitarianism,utilitarianism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Bonapartism,anti-Bonapartism,anti-bonapartist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-CorporalPunishment,anti-corporal punishment,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#aidsActivism,AIDS activism,aids activist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#constitutionalism,constitutionalism,constitutionalist,constitutional feminist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#pacifism,pacifism,peace campaigner,peace movement,pacifist supporter,pacifist,socialist pacifist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#elderRights,elder rights,elder care activist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Pacifism,anti-pacifism,war supporter,anti-appeasement,non-pacifist,conscriptionist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anarchism,anarchism,anarchist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#guelphPartyFlorence,Guelph party (Florence),Guelph,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Capitalism,anti-capitalism,anti-capitalist,anti-property,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#americanNationalism,American nationalism,us nationalist,american nationalist,(us) nationalist,us patriotism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Jacobin,anti-Jacobin,anti-revolutionary,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#sexualReform,sexual reform,sexual libertarian,sex-trade reformer,sexual liberationist,sex-trade activist,sexual reformer,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#radicalism,radicalism,political radical,radical,radical dissident,working class radical,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#womensEmploymentReform,women's employment reform,salary reform,employment activist,women's employment reformer,equal rights in the work place,female employment,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#chartism,Chartist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#italianNationalism,Italian nationalism,mazzinian,italian nationalist,italian risorgimento,Italian nationalist movement,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#pro-American,pro-American,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#childrensWelfare,children's welfare,children's rights advocate,campaigner against child prostitution,children's rights,children's rights activist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#individualism,individualism,individualist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Socialism,anti-socialism,anti-socialist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Feminism,anti-feminism,anti-women's liberation,anti-feminist,misogynist,non-feminist,antifeminist,gender conservative,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#bolshevism,Bolshevism,Bolshevist,pro-bolshevik,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#civilRights,civil rights movement,civil rights activist,pro civil rights,personal rights advocate,civil rights,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Trade-Unionism,anti-trade-unionism,anti-Union,anti-trade-unionist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#monarchism,monarchism,royalist,constitutional monarchist,monarchist,royalist politician,loyalty to the Crown,active royalists,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#britishNationalism,British nationalism,british nationalist,pro-British,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#taxResistance,tax resistance,tax resister,tax withholder,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Catholicism,anti-catholicism,anti-catholic,anti-catholic-emancipation,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#militarism,militarism,militarist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#revolutionaryPolitics,revolutionary,pro-revolutionary,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#freeTradeMovement,free trade movement,free trader,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#tradeUnionism,trade unionism,union movement,women's trade unions,unionism,trade unionist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#conservativeFeminism,conservative feminism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#irishUnionism,Irish unionism,anti-home rule,anti-home ruler,anti-irish,unionist,anti-irish nationalist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Jacobite,anti-Jacobite,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#socialism,socialism,Social Democratic Foundation,Independent Socialist,socialist feminist,radical socialist,Social Democrat,Social Democratic Party,Social Democrats,Fabian,militant socialist,owenite socialism,socialist,fabian socialist,socialist and feminist,socialist organizer,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#socialPurity,social purity,purity movement,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#conservativePartyUk,Conservative Party (UK),Tory Party (Britain),Tory radical,Tory Party,tory,disaffected Tories,conservative party,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#propertyLawReform,property law reform,property reform,land reformer,land reform,illegitimacy reformer,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Globalism,anti-globalism,anti-globalization,anti-globalist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#catholicEmancipation,Catholic emancipation,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#indianUnification,Indian unification,Indian national unity,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Apartheid,anti-apartheid,the struggle to end Apartheid,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#sabbatarianism,Sabbatarianism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Zionism,anti-Zionism,anti-Israeli,anti-israel,anti-zionist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Conscriptionism,anti-conscriptionism,anti-conscriptionist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#homeRule,Home rule,Home Rule movement,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#nihilism,nihilism,nihilist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#poorAdvocacy,poor advocacy,advocate for the poor,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#lesbianFeminism,lesbian feminism,lesbian feminist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#societyOfFriends,Society of Friends,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#pro-Choice,pro-choice,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-European,anti-European politics,anti-European,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#housingMovement,housing movement,housing activism,housing charity,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#pro-European,pro-European,Europeanist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#parliamentaryReform,parliamentary reform,parliamentary reformer,pro-reform,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#poorLawReform,poor law reform,Poor Law reform,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#newDealer,new dealer,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Vaccination,anti-vaccination movement,movement against compulsory vaccination,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#disestablishmentarianism,disestablishmentarianism,anti-tithes,anti-episcopal,anti-anglican,anti-episcopalian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#christianPacifism,Christian pacifism,christian pacifist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-British,anti-British politics,anti-British,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#nonjurorsMovement,nonjurors movement,nonjurors,Non-jurors,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-CapitalPunishment,anti-capital punishment,opposition to capital punishment,against capital punishment,opponent of capital punishment,anti-capital-punishment,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#imperialism,imperialism,commonwealth supporter,imperialist,colonialist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#irishRepublicanism,Irish republicanism,anti-unionist,Sinn Fein,irish resistance,irish republican,irish independence,liberty for Ireland,irish republic,irish republicanism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#suffrage,suffrage movement,women's franchise,moderate suffragist,christian suffragist,suffrage demonstrator,suffragette,suffragettes,female suffrage,suffrage politics,International Suffrage Congress,Woman Suffrage,suffrage,Women's Enfranchisement,suffrage organizer,supporter of the women's suffrage movement,suffrage processions,suffrage organisations,women's suffrage,non-militant suffragist,suffrage leader,suffragist,activist; suffrage campaigner,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#yorkist,Yorkist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#isolationism,isolationism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#paternalism,paternalism,paternalist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#vegetarianism,vegetarianism,vegetarian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Antisemitism,anti-antisemitism,anti-anti-semitism,anti-antisemitic,anti-antisemitist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#pro-Catholicism,pro-Catholicism,roman catholic,non-compounder,catholic,pro-Catholic,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#communalism,communalism,communalist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#labourMovement,labour movement,labour advocate,factory reformer,labour activist,International Labour Party,Labour Party activist,anti-sweated labour,industrial reformer,labour organizer,labour activism,Independent Labour Party,women's labour activist,labour feminist,Labour party,labour,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#dreyfusard,Dreyfusard,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#oppositionPolitics,opposition politics,Opposition,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#republicanism,republicanism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-ContagiousDiseasesAct,anti-Contagious Diseases Act,anti-contagious diseases acts,against the Contagious Diseases Acts,anti-contagious diseases act activist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#protestantRule,Protestant rule,protestant,protestantism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#anti-Caste,anti-caste movement,worked against the caste system,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#antisemitism,antisemitism,antisemitic,anti-semitism,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#fascism,fascism,fascist party,pro-fascist,fascist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#indianIndependence,Indian independence movement,Indian self-government,pro-independence (indian),Indian independence,indian nationalist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#conscientiousObjection,conscientious objection,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#PoliticalAffiliation,http://id.lincsproject.ca/cwrc#bonapartism,Bonapartism,pro-bonapartist,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,http://id.lincsproject.ca/cwrc#statelessNationalIdentity,stateless,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,http://id.lincsproject.ca/cwrc#sephardicJewishNationalIdentity,Sephardic Jewish,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,http://id.lincsproject.ca/cwrc#florentineNationalIdentity,Florentine,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,http://id.lincsproject.ca/cwrc#britishNationalIdentity,British,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,http://id.lincsproject.ca/cwrc#saxonNationalIdentity,Saxon,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,http://id.lincsproject.ca/cwrc#europeanNationalIdentity,European,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,http://id.lincsproject.ca/cwrc#jewishNationalIdentity,Jewish,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,http://id.lincsproject.ca/cwrc#hanoverianNationalIdentity,Hanoverian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,http://id.lincsproject.ca/cwrc#anglo-IrishNationalIdentity,Anglo-Irish,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,http://id.lincsproject.ca/cwrc#mohawkNationalIdentity,Mohawk,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,http://id.lincsproject.ca/cwrc#africanNationalIdentity,African,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#NationalIdentity,http://id.lincsproject.ca/cwrc#anglo-IndianNationalIdentity,Anglo-Indian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://id.lincsproject.ca/cwrc#jewishGeographicHeritage,Jewish,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#GeographicHeritage,http://id.lincsproject.ca/cwrc#englishGeographicHeritage,England,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#sephardicJewishEthnicity,Sephardic Jewish,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#whiteEthnicity,white,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#slavEthnicity,Slav,Slavic,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#arabEthnicity,Arab,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#romaniEthnicity,Romani,gypsies,Roma,gypsy,gipsy,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#igboEthnicity,Igbo,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#westIndianEthnicity,West Indian,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#africanEthnicity,African,black African descent,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#bengaliEthnicity,Bengali,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#gaelEthnicity,Gael,highland,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#parsiEthnicity,Parsi,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#thracianEthnicity,Thracian,Thracians,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#blackEthnicity,black,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#anglo-IrishEthnicity,Anglo-Irish,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#jewishEthnicity,Jewish,Judaism,Jewry,Jew,a Jewish,one-quarter Jewish,Jews,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#scottishEthnicity,Scottish,highland,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#punjabiEthnicity,Punjabi,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#chineseEthnicity,Chinese,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#irishEthnicity,Irish,irish ancestry,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#african-AmericanEthnicity,African-American,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#wendishEthnicity,Wendish,Wends or Sorbs,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#ashkenaziJewishEthnicity,Ashkenazi Jewish,"Ashkenazim, or German Jewish",Ashkenazim,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#englishEthnicity,English,England,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#europeanEthnicity,European,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#creoleEthnicity,Creole,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#anglo-NormanEthnicity,Anglo-Norman,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#jamaicanEthnicity,Jamaican,Jamaican-born,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#indigenousPeoplesOfAmericasEthnicity,Indigenous (of the Americas),Amer-Indians,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-http://id.lincsproject.ca/cwrc#Ethnicity,http://id.lincsproject.ca/cwrc#celticEthnicity,Celtic,Highland (that is Celtic),Highland,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/african-AmericanEthnicity,African-American,Afro-américain
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/africanEthnicity,black African descent,Africain,African
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/anglo-IrishEthnicity,Anglo-Irish,Anglo-irlandais
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/anglo-NormanEthnicity,Anglo-Norman,Baronnage anglo-normand
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/arabEthnicity,Arab,Arabe
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/ashkenaziJewishEthnicity,Ashkenazim,Ashkenazim, or German Jewish,Ashkenazi Jewish,Juif ashkénaze
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/bengaliEthnicity,Bengali,bengali
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/blackEthnicity,black,noir
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/celticEthnicity,Highland,Highland (that is Celtic),Celte,Celtic
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/chineseEthnicity,Chinese,Chinois
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/creoleEthnicity,Creole,Créole
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/englishEthnicity,England,Anglais,English
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/europeanEthnicity,European,Européen
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/gaelEthnicity,highland,Gael,Gael
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/igboEthnicity,Igbo,Igbo
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/indigenousPeoplesOfAmericasEthnicity,Amer-Indians,Indigenous (of the Americas),Indigenous/Amérindiens
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/irishEthnicity,irish ancestry,Irish,Irlandais
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/jamaicanEthnicity,Jamaican-born,Jamaican,Jamaïcains
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/jewishEthnicity,Jew,Jewry,Jews,Judaism,a Jewish,one-quarter Jewish,Jewish,Juif
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/parsiEthnicity,Parsi,Parsi
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/punjabiEthnicity,Pendjabis,Punjabi
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/romaniEthnicity,Roma,gipsy,gypsies,gypsy,Romani,rom
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/scottishEthnicity,highlands,highland,Scottish,Écossais
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/sephardicJewishEthnicity, ,Juif séfarade,Sephardic Jewish
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/slavEthnicity,Slavic,Slav,Slave
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/thracianEthnicity,Thracians,Thracian,thrace
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/wendishEthnicity,Wends or Sorbs,Wende,Wendish
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/westIndianEthnicity,West Indian
+http://id.lincsproject.ca/cwrc/Ethnicity,http://id.lincsproject.ca/cwrc/whiteEthnicity,blanc,white
+http://id.lincsproject.ca/cwrc/Gender,http://id.lincsproject.ca/cwrc/Androgynous,androgyne,androgynous
+http://id.lincsproject.ca/cwrc/Gender,http://id.lincsproject.ca/cwrc/GenderQueer,nonconforming,genderqueer,queer
+http://id.lincsproject.ca/cwrc/Gender,http://id.lincsproject.ca/cwrc/cisGender,cisgender,cisgenre
+http://id.lincsproject.ca/cwrc/Gender,http://id.lincsproject.ca/cwrc/cisMan,cis man/cis male,homme cisgenre
+http://id.lincsproject.ca/cwrc/Gender,http://id.lincsproject.ca/cwrc/cisWoman,cis woman/cis female,femme cisgenre
+http://id.lincsproject.ca/cwrc/Gender,http://id.lincsproject.ca/cwrc/man,male,homme,man
+http://id.lincsproject.ca/cwrc/Gender,http://id.lincsproject.ca/cwrc/transGender,transgendered,trans,transgender,transgenre
+http://id.lincsproject.ca/cwrc/Gender,http://id.lincsproject.ca/cwrc/transMan,transgendered female to male,homme trans,trans man/trans male
+http://id.lincsproject.ca/cwrc/Gender,http://id.lincsproject.ca/cwrc/transWoman,transgendered male to female,femme trans,trans woman/trans female
+http://id.lincsproject.ca/cwrc/Gender,http://id.lincsproject.ca/cwrc/undefinedGender,genre indéterminé,undefined
+http://id.lincsproject.ca/cwrc/Gender,http://id.lincsproject.ca/cwrc/woman,female,femme,woman
+http://id.lincsproject.ca/cwrc/GeographicHeritage,http://id.lincsproject.ca/cwrc/englishGeographicHeritage,Angleterre,England
+http://id.lincsproject.ca/cwrc/GeographicHeritage,http://id.lincsproject.ca/cwrc/jewishGeographicHeritage,Jewish,Juif
+http://id.lincsproject.ca/cwrc/NationalHeritage,http://id.lincsproject.ca/cwrc/africanNationalHeritage,Africain,African
+http://id.lincsproject.ca/cwrc/NationalHeritage,http://id.lincsproject.ca/cwrc/anglo-IrishNationalHeritage,Anglo-Irish,Anglo-irlandais
+http://id.lincsproject.ca/cwrc/NationalHeritage,http://id.lincsproject.ca/cwrc/bengaliNationalHeritage,Bengale,bengali
+http://id.lincsproject.ca/cwrc/NationalHeritage,http://id.lincsproject.ca/cwrc/cornishNationalHeritage,Corniques,Cornish
+http://id.lincsproject.ca/cwrc/NationalHeritage,http://id.lincsproject.ca/cwrc/dutchNationalHeritage,Dutch,Néerlandais
+http://id.lincsproject.ca/cwrc/NationalHeritage,http://id.lincsproject.ca/cwrc/europeanNationalHeritage,European,Européen
+http://id.lincsproject.ca/cwrc/NationalHeritage,http://id.lincsproject.ca/cwrc/flemishNationalHeritage,Flandre,Flemish
+http://id.lincsproject.ca/cwrc/NationalHeritage,http://id.lincsproject.ca/cwrc/huguenotNationalHeritage,Huguenot,Huguenot
+http://id.lincsproject.ca/cwrc/NationalHeritage,http://id.lincsproject.ca/cwrc/iroquoisNationalHeritage,Iroquois,Iroquois
+http://id.lincsproject.ca/cwrc/NationalHeritage,http://id.lincsproject.ca/cwrc/jewishNationalHeritage,Jewish,Juif
+http://id.lincsproject.ca/cwrc/NationalHeritage,http://id.lincsproject.ca/cwrc/mohawkNationalHeritage,Mohawk,Mohawks
+http://id.lincsproject.ca/cwrc/NationalHeritage,http://id.lincsproject.ca/cwrc/normanNationalHeritage,Norman,Normand
+http://id.lincsproject.ca/cwrc/NationalHeritage,http://id.lincsproject.ca/cwrc/tatarNationalHeritage,Tatar,Tatars
+http://id.lincsproject.ca/cwrc/NationalHeritage,http://id.lincsproject.ca/cwrc/westIndianNationalHeritage,West Indian
+http://id.lincsproject.ca/cwrc/NationalIdentity,http://id.lincsproject.ca/cwrc/africanNationalIdentity,Africain,African
+http://id.lincsproject.ca/cwrc/NationalIdentity,http://id.lincsproject.ca/cwrc/anglo-IndianNationalIdentity,Anglo-Indian,Anglo-Indienne
+http://id.lincsproject.ca/cwrc/NationalIdentity,http://id.lincsproject.ca/cwrc/anglo-IrishNationalIdentity,Anglo-Irish,Anglo-Irlandaise
+http://id.lincsproject.ca/cwrc/NationalIdentity,http://id.lincsproject.ca/cwrc/britishNationalIdentity,British,Brittaniques
+http://id.lincsproject.ca/cwrc/NationalIdentity,http://id.lincsproject.ca/cwrc/europeanNationalIdentity,European
+http://id.lincsproject.ca/cwrc/NationalIdentity,http://id.lincsproject.ca/cwrc/florentineNationalIdentity,Florentin,Florentine
+http://id.lincsproject.ca/cwrc/NationalIdentity,http://id.lincsproject.ca/cwrc/hanoverianNationalIdentity,Hanoverian,Hanovrien
+http://id.lincsproject.ca/cwrc/NationalIdentity,http://id.lincsproject.ca/cwrc/jewishNationalIdentity,Jewish,Juif
+http://id.lincsproject.ca/cwrc/NationalIdentity,http://id.lincsproject.ca/cwrc/mohawkNationalIdentity,Mohawk,mohawk
+http://id.lincsproject.ca/cwrc/NationalIdentity,http://id.lincsproject.ca/cwrc/saxonNationalIdentity,Saxon,Saxon
+http://id.lincsproject.ca/cwrc/NationalIdentity,http://id.lincsproject.ca/cwrc/sephardicJewishNationalIdentity,Sephardic Jewish,Séfarade
+http://id.lincsproject.ca/cwrc/NationalIdentity,http://id.lincsproject.ca/cwrc/statelessNationalIdentity,apatride,stateless
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/antiClericalism,anti-clericalism,anticléricalisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/antiClericalism,anti-clericalism,anticléricalisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/socialism,Fabian,Independent Socialist,Social Democrat,Social Democratic Foundation,Social Democratic Party,Social Democrats,fabian socialist,militant socialist,owenite socialism,radical socialist,socialist,socialist and feminist,socialist feminist,socialist organizer,socialism,socialisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/suffrage,activist; suffrage campaigner,International Suffrage Congress,Woman Suffrage,Women's Enfranchisement,christian suffragist,female suffrage,moderate suffragist,non-militant suffragist,suffrage,suffrage demonstrator,suffrage leader,suffrage organisations,suffrage organizer,suffrage politics,suffrage processions,suffragette,suffragettes,suffragist,supporter of the women's suffrage movement,women's franchise,women's suffrage,Droit de vote,suffrage movement
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/ActivistInvolvement,activist involvement
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/GenderedPoliticalActivity,gendered political activity
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/PoliticalInvolvement,political involvement
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/PoliticalMembership,political membership
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/abolitionism,abolition,abolitionist,anti-slavery,integrationism,sugar boycotter,Abolitionnisme,abolitionism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/aidsActivism,aids activist,AIDS activism,lutte contre le sida
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/americanNationalism,(us) nationalist,american nationalist,us nationalist,us patriotism,American nationalism,nationalisme américain
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anarchism,anarchist,Anarchisme,anarchism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/animalWelfareAdvocacy,animal activist,animal rights,animal rights activist,animal rights advocate,animal welfare,animal welfare activist,anti-blood-sports,anti-cruelty,anti-cruelty to animals,anti-hunting,animal welfare advocacy,défense du bien-être animal
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-American,anti-American,anti-American politics,anti-américanisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Antisemitism,anti-anti-semitism,anti-antisemitic,anti-antisemitist,anti-antisemitism,anti-antisémitisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Apartheid,the struggle to end Apartheid,anti-apartheid,anti-apartheid
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Boer,anti-Boer,anti-Boer politics,anti-boer
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Bolshevism,anti-bolshevik,Anticommunisme,anti-Bolshevism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Bonapartism,anti-bonapartist,anti-Bonapartism,anti-bonapartisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-British,anti-British,anglophobie,anti-British politics
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-CapitalPunishment,against capital punishment,anti-capital-punishment,opponent of capital punishment,opposition to capital punishment,Peine de mort,anti-capital punishment
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Capitalism,anti-capitalist,anti-property,Anticapitalisme,anti-capitalism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Caste,worked against the caste system,anti-caste movement,mouvement contre le système de castes
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Catholicism,anti-catholic,anti-catholic-emancipation,Anticatholicisme,anti-catholicism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Censorship,Freedom of Speech,anti-censorship,free speech advocate,intellectual property activist,pro free speech,pro-free speech,anti-censorship movement,lutte contre la censure
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Communism,anti-communist,Anticommunisme,anti-communism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Conscriptionism,anti-conscriptionist,anti-conscriptionism,lutte contre la conscription militaire
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-ContagiousDiseasesAct,against the Contagious Diseases Acts,anti-contagious diseases act activist,anti-contagious diseases acts,anti-Contagious Diseases Act,anti-Contagious Diseases Acte
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-CorporalPunishment,anti-corporal punishment,lutte contre les châtiments corporels
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Dreyfusard,anti-Dreyfusard,antidreyfusard
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-European,anti-European,Euroscepticisme,anti-European politics
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Fascism,anti-fascist,anti-nazi,strongly opposed Fascism,Antifascisme,anti-fascism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Federalism,anti-federalist,Anti-Federalism,Antifédéralisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Feminism,anti-feminist,anti-women's liberation,antifeminist,gender conservative,misogynist,non-feminist,Antiféminisme,anti-feminism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Globalism,anti-globalist,anti-globalization,Mouvement antimondialisation,anti-globalism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Imperialism,Zulu resistance to colonial rule,anti-colonial,anti-colonialism,anti-colonialist,anti-imperial,anti-imperialist,Anti-imperialism,Anti-impérialisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Jacobin,anti-revolutionary,anti-Jacobin,anti-Jacobin
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Jacobite,anti-Jacobite,anti-Jacobite
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-LandLeague,Unionist (Irish),anti-Irish Home Rule,anti-Land League,Anti-Irish National Land League,Anti-Irish National Land League
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Monarchism,anti-monarchist,anti-royalist,anti-monarchism,antimonarchisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-NuclearMovement,Campaign for Nuclear Disarmament,anti-atomic,anti-nuclear,anti-nuclear activist,anti-nuclear war,anti-nuclear weapons,nuclear disarmament,nuclear disarmament campaigner,pro nuclear disarmament,anti-nuclear movement,mouvement antinucléaire
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Pacifism,anti-appeasement,conscriptionist,non-pacifist,war supporter,anti-pacifism,antipacifisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-PovertyMovement,anti-poverty activist,poverty activist,anti-poverty movement,mouvement de lutte contre la pauvreté
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Racism,anti-racist,anti-racism,antiracisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Socialism,anti-socialist,Critiques du socialisme,anti-socialism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Suffrage,anti-sufffragist,anti-suffrage movement,anti-suffragist,anti-suffragist movement,non-suffragist,anti-suffrage,opposition au suffrage universel
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Trade-Unionism,anti-Union,anti-trade-unionist,anti-trade-unionism,opposition au syndicalisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Urbanism,pro-countryside,anti-urbanism,antiurbain
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Vaccination,movement against compulsory vaccination,anti-vaccination movement,mouvement contre la vaccination
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Vivisection,anti-vivisection movement,anti-vivisectionist,anti-vivisection,antivivisection
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-War,anti Vietnam war,anti-Vietnam-War demonstrations,anti-militarism,anti-militaristic,anti-war,anti-war activism,vietnam war protester,Antiguerre,anti-war movement
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-Zionism,anti-Israeli,anti-israel,anti-zionist,Antisionisme,anti-Zionism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/anti-masonry,anti-masonic,anti-masonry,antimaçonnisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/antidisestablishmentarianism,antidisestablishmentarian,antidisestablishmentarianism,opposition à l'Establismhment
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/antisemitism,anti-semitism,antisemitic,Antisémitisme,antisemitism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/appeasement,appeasement,politique d'apaisement
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/artsAdvocacy,advocate for the arts,artists' advocate,arts advocacy,défense des arts
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/birthControlActivism,birth control campaigner,birth control movement,birth-control activist,contraceptionist,pro-birth control,pro-contraception,supporter of contraception,birth control activism,défense du contrôle des naissances
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/blackAnti-Oppression,anti-segregationist,black activist,black liberation,black liberationist,black power,black pride,black anti-oppression movement,mouvement contre l'oppression des Noirs
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/blackNationalism,Black nationalism,nationalisme Noir
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/bolshevism,Bolshevist,pro-bolshevik,Bolcheviks,Bolshevism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/bonapartism,pro-bonapartist,Bonapartism,Bonapartisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/boulangism,boulangist,Boulangisme,boulangism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/britishNationalism,british nationalist,pro-British,British nationalism,nationalisme anglais
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/capitalism,capitalist,free market capitalism,capitalism,capitalisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/catholicEmancipation,Catholic emancipation,émancipation des catholiques
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/chartism,Chartist
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/childrensWelfare,campaigner against child prostitution,children's rights,children's rights activist,children's rights advocate,children's welfare,défense des droits des enfants
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/christianPacifism,christian pacifist,Christian pacifism,Pacifisme chrétien
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/christianSocialism,christian socialist,Christian socialism,socialisme chrétien
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/civilLibertarianism,civil libertarian,civil libertarianism,mouvement libertaire
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/civilRights,civil rights,civil rights activist,personal rights advocate,pro civil rights,civil rights movement,droits civiques
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/co-operativeMovement,Women's Co-operative Guild,co-operative movement,mouvement pour l'économie sociale
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/communalism,communalist,communalism,municipalisme libertaire
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/communism,Communist Party,christian communist,communist,communism,communisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/conscientiousObjection,conscientious objection,objection de conscience
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/conservatism,conservative,conservatism,conservatisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/conservativeFeminism,conservative feminism,féminisme conservateur
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/conservativePartyUk,Tory Party,Tory Party (Britain),Tory radical,conservative party,disaffected Tories,tory,Conservative Party (UK),Parti Conservateur (Royaume-Uni)
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/constitutionalism,constitutional feminist,constitutionalist,Constitutionnalisme,constitutionalism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/covenanters,Covenanting,Covenantaire,Covenanters
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/democrat,Democrat (US),democratic,pro-democracy,democrat
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/disestablishmentarianism,anti-anglican,anti-episcopal,anti-episcopalian,anti-tithes,disestablishmentarianism,sécularisme anglais
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/dressReform,Rational Dress Movement,dress reformer,dress reform,réforme vestimentaire
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/dreyfusard,Dreyfusard,Dreyfusard
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/educationReform,education reformer,educational reform,educational reformer,educationalist,state education movement,education reform,réforme de l'éducation
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/egalitarianism,egalitarian,egalitarianism,Égalitarisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/egyptianNationalism,Egyptian nationalism,nationalisme égyptien
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/elderRights,elder care activist,droit des personnes âgées,elder rights
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/environmentalism,environmental causes,climate activist,ecologist,environmentalist,green,nature conservationist,environmentalism,Écologisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/eugenics,eugenicist,Eugénisme,eugenics
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/existentialism,existentialist,Existentialisme,existentialism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/fascism,fascist,fascist party,pro-fascist,Fascisme,fascism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/feminism,advocate for women's education,worked devotedly for the society for promoting the employment of women,worked to establish pay equity,Equality Feminism,New Woman,Women's Liberation,activist for women and children,advocate of female education,anti-sexist,contraceptionist,feminist,feminist activism,feminist movement,feminist reformer,gender egalitarian,lobby for the rights of women,maternal feminist,moderate feminist,non-separatist feminist,political issues concerning women,proto-feminist,proto-feminist consciousness,sexual egalitarian,women's cause,women's issues,women's movement,women's rights,women's rights activist,Féminisme,feminism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/feministAnti-ViolenceActivism,against violence to women,anti-female-genital-mutilation,feminist anti-violence activism,féminisme contre la violence
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/feministInternationalism,feminist internationalism,féminisme internationaliste
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/feministPacifism,feminist pacifism,féminisme pacifiste
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/freeTradeMovement,free trader,free trade movement,mouvement pour le libre-échange
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/frenchNationalism,French nationalism,Nationalisme en France
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/gayRights,gay rights advocate,pro-sexual preference,Mouvement LGBT,gay rights movement
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/germanNationalism,pro-German,German nationalism,nationalisme allemand
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/girondin,Gironde (Révolution française),Girondin
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/greekNationalist,Greek nationalism,nationliste grec
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/guelphPartyFlorence,Guelph,Guelfes et gibelins,Guelph party (Florence)
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/hanoverian,House of Hanover,Hanoverian,Maison de Hanovre
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/highChurchParty,High-Church party,Haute Église,High Church Party
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/highToryism,High Tory,High Toryism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/homeRule,Home Rule movement,Home Rule,Home rule
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/housingMovement,housing activism,housing charity,housing movement,mouvement pour le droit au logement
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/humanRights,human rights activist,humanitarian,droits de l'homme,human rights
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/humanism,humanist,Humanisme,humanism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/imperialism,colonialist,commonwealth supporter,imperialist,Impérialisme,imperialism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/indianIndependence,Indian independence,Indian self-government,indian nationalist,pro-independence (indian),Indian independence movement,Mouvement pour l'indépendance de l'Inde
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/indianUnification,Indian national unity,Indian unification
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/indigenousRights,indigenous rights,Indigenous rights movement,droit des peuples autochtones
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/individualism,individualist,Individualisme,individualism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/internationalism,internationalist,Internationalisme institutionnel,internationalism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/irishHomeRuleMovement,home ruler,home ruler (ireland),irish home ruler,Irish Home Rule Movement,mouvement Irish Home Rule
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/irishNationalism,cultural nationalist,irish nationalist,irish patriotism,parnellite,Irish nationalism,Nationalisme irlandais
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/irishRepublicanism,Sinn Fein,anti-unionist,irish independence,irish republic,irish republican,irish republicanism,irish resistance,liberty for Ireland,Irish republicanism,Républicanisme irlandais
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/irishUnionism,anti-home rule,anti-home ruler,anti-irish,anti-irish nationalist,unionist,Irish unionism,Unionisme en Irlande
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/isolationism,isolationism,isolationnisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/italianNationalism,Italian nationalist movement,italian nationalist,italian risorgimento,mazzinian,Italian nationalism,nationalisme Italien
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/italianUnification,Italian unification,Risorgimento
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/jacobinism,jacobin,pro-Jacobin,Jacobinism,Jacobinisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/jacobitism,jacobite,jacobite conspirator,jacobites,Jacobitism,Jacobitisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/jewishEmancipation,Jewish emancipation,Émancipation des Juifs
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/labourMovement,Independent Labour Party,International Labour Party,Labour Party activist,Labour party,anti-sweated labour,factory reformer,industrial reformer,labour,labour activism,labour activist,labour advocate,labour feminist,labour organizer,women's labour activist,Mouvement ouvrier,labour movement
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/landReform,Irish land nationalization,land reform
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/left-Wing,anti-conservative,leftist,Gauche (politique),left-wing
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/lesbianFeminism,lesbian feminist,lesbian feminism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/liberalUnionistParty,liberal unionist,Liberal Unionist Party,Parti libéral unioniste
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/liberalism,British Liberalism,Liberal Party,liberal,radical liberal,ultra liberals,Libéralisme,liberalism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/libertarianism,libertarian,religious libertarian,Libertarianism,Libertarianisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/malthusianism,neo-Malthusianism,Malthusianism,Malthusianisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/maoism,chinese communism,Maoism,Maoïsme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/marriageLawReform,married women's control of their own property,custody rights,divorce reform activist,divorce reformer,marriage law reformer,marriage reformer,married women's property supporter,maternal wage activist,pro-divorce,marriage law reform,réforme du mariage
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/marxism,marxist,Marxism,Marxisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/militarism,militarist,militarism,militarisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/monarchism,active royalists,loyalty to the Crown,royalist politician,constitutional monarchist,monarchist,royalist,Monarchisme,monarchism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/multiculturalism,multiculturalist,Multiculturalisme,multiculturalism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/multiracialism,multi-racialist,multiracialism,multiracialisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/nationalism,Nationalisme,nationalism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/nazism,nazi,pro-nazi,Nazism,Nazisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/neo-Conservatism,neo-Conservative,Néo-conservatisme,neo-conservatism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/newDealer,défenseur du New Deal,new dealer
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/newUnionism,New Trade Unionism,New Unionism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/nihilism,nihilist,Nihilisme,nihilism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/nonjurorsMovement,Non-jurors,nonjurors,mouvement du clergé réfractaire,nonjurors movement
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/oppositionPolitics,Opposition,opposition (politique),opposition politics
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/pacifism,pacifist,pacifist supporter,peace campaigner,peace movement,socialist pacifist,Pacifisme,pacifism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/parliamentarianism,parliamentarian,pro-parliamentarian,parlementarisme,parliamentarianism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/parliamentaryReform,parliamentary reformer,pro-reform,parliamentary reform,réforme parlementaire
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/paternalism,paternalist,paternalism,paternalisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/patriotism,patriot,patriotic,Patriotisme,patriotism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/philosophicalRadicals,Philosophic Radicals,Philosophical Radicals
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/polishNationalism,polish nationalist,Polish nationalism,nationalisme polonais
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/poorAdvocacy,advocate for the poor,défense des pauvres,poor advocacy
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/poorLawReform,Poor Law reform,poor law reform,réforme de la Poor Law
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/prisonReform,prison reform,réforme pénitentiaire
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/pro-American,pro-American,pro-américain
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/pro-BoerWar,pro-Boer,pro-Boer War,pro-guerre des Boers
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/pro-Catholicism,catholic,non-compounder,pro-Catholic,roman catholic,pro-Catholicism,procatholicisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/pro-Choice,Mouvement pro-choix,pro-choice
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/pro-European,Europeanist,europhile,pro-European
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/pro-Slavery,pro-esclavagisme,pro-slavery
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/propertyLawReform,illegitimacy reformer,land reform,land reformer,property reform,property law reform,réforme des droits à la propriété
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/protestantRule,protestant,protestantism,Protestant rule,gouvernement protestant
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/racialEquality,activist for racial equality,race equality,racial equality activist,racial integration,racial integrationist,racial equality,équité raciale
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/racism,racist,Racisme,racism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/radicalism,political radical,radical,radical dissident,working class radical,radicalism,radicalisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/rationalism,rationalist,Rationalisme,rationalism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/republicanism,Républicanisme,republicanism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/revolutionaryPolitics,pro-revolutionary,revolutionary,révolutionnaire
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/sabbatarianism,Sabbatarianism,Sabbatarianisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/sanitaryMovement,mouvement pour l'assainissement,sanitary movement
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/scottishNationalism,scots nationalist,scottish nationalist,Nationalisme écossais,Scottish nationalism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/secularism,secularist,Laïcité,secularism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/separatism,Separatist,indépendantisme,separatism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/sexualReform,sex-trade activist,sex-trade reformer,sexual liberationist,sexual libertarian,sexual reformer,révolution sexuelle,sexual reform
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/socialPurity,purity movement,abolition de la prostitution (Royaume-Uni),social purity
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/socialReform,progressivism,reform,reformer,reformers,reformist,social and legal reform,social reformer,social welfare,réforme sociale,social reform
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/societyOfFriends,Society of Friends,Société religieuse des Amis
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/spanishRepublicanism,spanish republican,spanish republican supporter,Spanish republicanism,républicanisme Espagnol
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/stalinism,stalinist,totalitarian,Stalinism,Stalinisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/taxResistance,tax resister,tax withholder,Résistance fiscale,tax resistance
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/temperanceMovement,temperance,temperance activist,temperance supporter,temperance work,temperance worker,Ligue de tempérance,temperance movement
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/tradeUnionism,trade unionist,union movement,unionism,women's trade unions,syndicalisme,trade unionism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/urbanReform,urban reformer,renouvellement urbain,urban reform
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/utilitarianism,Utilitarisme,utilitarianism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/vegetarianism,vegetarian,Végétarisme,vegetarianism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/welshNationalism,welsh nationalist,Nationalisme gallois,Welsh nationalism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/whiggism,dissident whig,foxite whig,opposition whig,pittite whig,whig,whigs,williamite,whiggism,whiggisme
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/wilkite,Wilkite,Wilkite
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/womanism,womanist,féminisme africain,womanism
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/womensEducationReform,activist for women's education,campaigner for women's education,education for women,female education,female education advocate,women educators,women's education reformer,women's higher education,women's medical education,réforme de l'éducation des filles,women's education reform
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/womensEmploymentReform,employment activist,equal rights in the work place,female employment,salary reform,women's employment reformer,réforme du travail des femmes,women's employment reform
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/yorkist,Maison d'York,Yorkist
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/zionism,proto-Zionist,zionist,Sionisme,Zionism
+http://id.lincsproject.ca/cwrc/RaceColour,http://id.lincsproject.ca/cwrc/blackWomanRaceColour,blackwoman,femme noire
+http://id.lincsproject.ca/cwrc/Gender,http://id.lincsproject.ca/cwrc/blackWomanRaceColour,blackwoman,femme noire
+http://id.lincsproject.ca/cwrc/RaceColour,http://id.lincsproject.ca/cwrc/afro-CaribbeanRaceColour,Afro-Caribbean,Afro-Caribéens
+http://id.lincsproject.ca/cwrc/RaceColour,http://id.lincsproject.ca/cwrc/anglo-IrishRaceColour,Anglo-Irish,Anglo-irlandais
+http://id.lincsproject.ca/cwrc/RaceColour,http://id.lincsproject.ca/cwrc/asianRaceColour,Asian,Asiatique
+http://id.lincsproject.ca/cwrc/RaceColour,http://id.lincsproject.ca/cwrc/blackRaceColour,blackwoman,black,noir
+http://id.lincsproject.ca/cwrc/RaceColour,http://id.lincsproject.ca/cwrc/creoleRaceColour,Creole,Créole
+http://id.lincsproject.ca/cwrc/RaceColour,http://id.lincsproject.ca/cwrc/englishRaceColour,Anglais,English
+http://id.lincsproject.ca/cwrc/RaceColour,http://id.lincsproject.ca/cwrc/eurasianRaceColour,eurasian,eurasien
+http://id.lincsproject.ca/cwrc/RaceColour,http://id.lincsproject.ca/cwrc/indianRaceColour,Indian
+http://id.lincsproject.ca/cwrc/RaceColour,http://id.lincsproject.ca/cwrc/indigenousPeoplesOfAmericasRaceColour,Native American,Indigenous (of the Americas)
+http://id.lincsproject.ca/cwrc/RaceColour,http://id.lincsproject.ca/cwrc/jewishRaceColour,jew,Jewish,Juif
+http://id.lincsproject.ca/cwrc/RaceColour,http://id.lincsproject.ca/cwrc/mixedRaceColour,coloured (mixed-race),mixed,mixed white and black (or, in her own word, colored),mixed-blood,racially mixed,red mulatto,mixed-race,métis
+http://id.lincsproject.ca/cwrc/RaceColour,http://id.lincsproject.ca/cwrc/scottishRaceColour,Scotch,Scots,Scottish
+http://id.lincsproject.ca/cwrc/RaceColour,http://id.lincsproject.ca/cwrc/whiteRaceColour,presumably white,blanc,white
+http://id.lincsproject.ca/cwrc/PoliticalAffiliation,http://id.lincsproject.ca/cwrc/dissentProtestant,Dissenter,Dissenting Churches,Dissenting Presbyterian,Nonconformist,Rational Dissent,Dissent (Protestant),dissidents (ou non-conformistes)
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/dissentProtestant,Dissenter,Dissenting Churches,Dissenting Presbyterian,Nonconformist,Rational Dissent,Dissent (Protestant),dissidents (ou non-conformistes)
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/abrahamicReligions,Abrahamic religions,Religions abrahamiques
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/adventism,Second Adventist,Adventism,Adventisme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/agnosticism,agnosticism,agnosticisme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/anglicanism,Anglican Church,Anglo-Catholic,Church of England,Church of Ireland,Episcopalian,High Anglican,High Church,Low Church,Low-Church,Anglicaans (kerk van Engeland),Anglicanism,Anglicanismo,Iglesia de Inglaterra,ying guo sheng gong hui,ying kuo sheng kung hui,yīng guó shèng gōng huì,Église d'Angleterre,英國聖公會 (英國國教)
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/asceticism,asceticism,ascèse
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/atheism,atheism,athéisme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/baptistChristianity,Baptist,Baptist Church,Particular Baptist,Baptisme,Baptisme,Baptismo,Baptist Christianity,Baptistas,chin li tsung,jin li zong,jìn lǐ zōng,浸信會,浸禮宗,浸禮派
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/behemenism,Behmenist,Behemenism
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/benedictineOrder,Benedictine,Benedictine Order,Ordre de Saint-Benoît
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/buddhism,Buddhist,Boeddhisme,Bouddhisme,Buddhism,Budismo,fo chiao,fo jiao,fó jiào,佛教
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/bushido,Bushido,Bushido
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/calvinism,Reformed,Calvinism,calvinisme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/camisards,French Prophets,Camisard,Camisards
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/cartesianism,Cartesian,Cartesianism,Cartésianisme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/catholicism,Catholic Church,Catholicism,Roman Catholic Church,Catholicisme,Catolicismo,Catolicismo Romano,Katholicisme,Katholiek,Roman Catholicism,Rooms-Katholicisme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/christianScience,Christian Scientist,Church of Christ Scientist,Christenwetenschap,Christian Science,Ciencia Cristiana,Science Chrétienne
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/christianity,Christian,Free Christian Church,Greek Orthodox,Russian Orthodox,orthodox Christianity,Christelijk,Christendom,Christianisme,Christianity,Cristianismo,chi tu chiao,ji du jiao,jī dū jiāo,基督教
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/congregationalism,Independent,Independent Church,Separatist,Congregationalism,Églises congrégationalistes
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/darwinism,Darwinist,evolutionist,Darwinism,Darwinisme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/deism,deist,deism,déisme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/determinism,predestinarianism,determinism,déterminisme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/dominicanOrder,Dominican,Ordre des Prêcheurs
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/easternReligions,eastern religions
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/ecumenism,ecumenical,ecumenism,œcuménisme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/evangelicalism,Evangelical,Evangelical Christian,Evangelical Church,Evangelical Protestantism,Evangelicism,Evangelicalism,évangélisme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/faithHealing,faith-healing,faith healing
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/fatalism,Necessarian,fatalist,fatalism,fatalisme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/fifthMonarchists,Cinquièmes Monarchistes,Fifth Monarchists
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/freemasonry,Freemason,Freemasonry,franc-maçonnerie
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/freethought,free-thinker,sceptic,freethought,libre-pensée
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/gnosticism,Gnosticism,gnosticisme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/hermeticism,Hermetic,Hermetism,Hermeticism,Hermétisme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/hinduism,Hindoos,Hindoeïsme,Hindou,Hinduism,Hinduismo,hindouisme,yin du jiao,yin tu chiao,yìn dù jiào,印度教
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/independentMethodistConnexion,Independent Methodist,Independent Methodist Connexion
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/islam,Islamic,Mahometans,Muslim,Islam,Islam,Islamism,Islamismo,i ssu lan chiao,islam,yi si lan jiao,yī sī lán jiāo,伊斯蘭教,回教
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/jansenism,Jansenism,Jansénisme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/judaism,Jewish,Orthodox Judaism,Jodendom,Joods,Judaism,Judaísmo,Judaïsme,you tai jiao,yu t'ai chiao,yóu tài jiāo,猶太教
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/latitudinarianism,Latitudinarian,latudinarian,Latitudinarianism
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/lollardy,Lollardy,Lollardy
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/methodism,Methodist Church,Methodist New Connection,Methodism,Église méthodiste
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/methodistEpiscopalian,African Methodist Episcopal,African Methodist Episcopal Church,Methodist Episcopalian
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/millenarianism,milleniarian,millenarianism,millénarisme, ou chiliasme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/monism,Monist,monism,monisme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/moravian,Frères moraves,Moravian
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/mysticism,Eastern mysticism,mystic,mysticism,mystique
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/naturalReligion,Natural Religion
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/neo-thomism,Neo-thomism,néothomisme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/newThought,New Thought,Nouvelle Pensée
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/obeah,Obeah,Obeah
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/occultism,mediumship,member of the council of the society for psychical research,vice president of the college of psychic studies,Occultist,Tarot card believer,Theosophist,Theosophy,astrologer,character reader,fortune teller,magician,medium,spiritualism,spiritualist,occultism,occultism/theosophism,occultisme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/paganism,pagan (Greek),Paganism,Paganisme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/pantheism,pantheism,panthéisme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/pentecostalism,Pentecostal Evangelists,Pentecostalism,Pentecôtisme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/plymouthBrethren,Assemblées de Frères,Frères de Schwarzenau,Plymouth Brethren
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/presbyterianism,Free Church of Scotland,Presbyterian Church,Prebyteriaan,Presbiterianismo,Presbytarianisme,Presbyterianism,Presbyterianisme,chang lao tsung,zhang lao zong,zhǎng lǎo zōng,長老制,長老宗,長老教會
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/protestantism,Labadists,provincial English Protestantism,Protestantism,hsin chiao,protestant,protestantisme,protestantisme,protestantismo,xin jiao,xīn jiāo,抗羅宗,新教
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/protoZionism,proto-Zionist,Proto-Zionism
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/puritanism,Puritanism,puritanisme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/quakerism,Friends, Society of,Society of Friends,Quakerism,quaker
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/reincarnation,believer in reincarnation,reincarnationist,reincarnation,réincarnation
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/rosicrucianism,Rosicrucian,Rose-Croix,Rosicrucianism
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/seekers,Seekers
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/shinto,Shinto,Shintoïsme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/socialGospel,Social Gospel,Évangile social
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/socinianism,Socinianism,socinianisme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/spiritualism,psychic,spiritualism,spritisme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/sufism,Soufisme,Sufism
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/swedenborgianism,New Church,Swedenborgianism
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/theism,theist,theism,théisme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/tractarianMovement,Oxford Movement,Tractarian,Tractarian Movement,tractarianisme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/unitarianism,Unitarian,Unitarian Church,Unitarian Movement,active unitarian,unitarianMovement,Unitarianism,unitarios,unitarisme,unitarisme,unitarismo
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/universalist,universal salvation,Universalist
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/vitalism,vitalist,vitalism,vitalisme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/wesleyanism,Wesleyan,Wesleyan Independent,Wesleyan Methodist,Wesleyanism,Wesleyanisme
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/zen,Zen Buddhism,Zen,zen
+http://id.lincsproject.ca/cwrc/Religion,http://id.lincsproject.ca/cwrc/zoroastrianism,Parsi,Zoroastrianism,Zoroastrisme
+http://id.lincsproject.ca/cwrc/Sexuality,http://id.lincsproject.ca/cwrc/asexuality,asexual,asexuality,asexualité
+http://id.lincsproject.ca/cwrc/Sexuality,http://id.lincsproject.ca/cwrc/bisexuality,bisexual,bisexuality,bisexualité
+http://id.lincsproject.ca/cwrc/Sexuality,http://id.lincsproject.ca/cwrc/celibacy,celibate,celibacy,célibat
+http://id.lincsproject.ca/cwrc/Sexuality,http://id.lincsproject.ca/cwrc/frigidity,frigid,frigidity,frigidité
+http://id.lincsproject.ca/cwrc/Sexuality,http://id.lincsproject.ca/cwrc/heterosexual,heterosexual,heterosexuality,hétérosexualité
+http://id.lincsproject.ca/cwrc/Sexuality,http://id.lincsproject.ca/cwrc/homosexual,homosexual,male HOMOSEXUAL,homosexuality,homosexualité
+http://id.lincsproject.ca/cwrc/Sexuality,http://id.lincsproject.ca/cwrc/lesbian,lesbian,lesbianism,lesbianisme
+http://id.lincsproject.ca/cwrc/Sexuality,http://id.lincsproject.ca/cwrc/libertinism,libertine,libertinage,libertinism
+http://id.lincsproject.ca/cwrc/Sexuality,http://id.lincsproject.ca/cwrc/promiscuity,promiscuous,promiscuity,promiscuité
+http://id.lincsproject.ca/cwrc/SocialClass,http://id.lincsproject.ca/cwrc/bohemianism,alternative society of young artists, dropouts, and nonconformists,bohemian with upper-class connections,classlessness,Bohemianism,Bohème
+http://id.lincsproject.ca/cwrc/SocialClass,http://id.lincsproject.ca/cwrc/brahmin,Brahmane,Brahmin
+http://id.lincsproject.ca/cwrc/SocialClass,http://id.lincsproject.ca/cwrc/entrepreneurial-industrialist,ENTREPRENEURIAL-INDUSTRIALIST,entreprenariat,entrepreneurial
+http://id.lincsproject.ca/cwrc/SocialClass,http://id.lincsproject.ca/cwrc/gentry,GENTRY,gentility,aristocratie,gentry
+http://id.lincsproject.ca/cwrc/SocialClass,http://id.lincsproject.ca/cwrc/indigent,INDIGENT,impoverished,poverty,indigent,indigent•e•s
+http://id.lincsproject.ca/cwrc/SocialClass,http://id.lincsproject.ca/cwrc/lowerMiddleClass,LOWER-MIDDLECLASS,genteel poverty,classe moyenne inférieure,lower-middle class
+http://id.lincsproject.ca/cwrc/SocialClass,http://id.lincsproject.ca/cwrc/managerial,MANAGERIAL,cadre,managerial
+http://id.lincsproject.ca/cwrc/SocialClass,http://id.lincsproject.ca/cwrc/middleClass,bourgeois,middle,middle classes,middle ranks,middle-class,middling ranks,middling sort,urban middle class,classe moyenne,middle class
+http://id.lincsproject.ca/cwrc/SocialClass,http://id.lincsproject.ca/cwrc/nobility,NOBILITY,royal,royal descent,royal, but not expected to become queen,royalty,nobility,noblesse
+http://id.lincsproject.ca/cwrc/SocialClass,http://id.lincsproject.ca/cwrc/professional,PROFESSIONAL,professional class,professional classes,professional,professionelle
+http://id.lincsproject.ca/cwrc/SocialClass,http://id.lincsproject.ca/cwrc/rural-unskilled,RURAL-UNSKILLED,ouvrière agricole,rural unskilled
+http://id.lincsproject.ca/cwrc/SocialClass,http://id.lincsproject.ca/cwrc/servants,SERVANTS,domestique,servant
+http://id.lincsproject.ca/cwrc/SocialClass,http://id.lincsproject.ca/cwrc/shopkeepers,SHOPKEEPERS,commerçants,shopkeepers
+http://id.lincsproject.ca/cwrc/SocialClass,http://id.lincsproject.ca/cwrc/skilledCraftpersonArtisan,SKILLEDCRAFTPERSON-ARTISAN,artisan,artisane qualifiée
+http://id.lincsproject.ca/cwrc/SocialClass,http://id.lincsproject.ca/cwrc/slave-forced-labourer,bonded labourer,serf,serfs,slave,slave or forced labourer
+http://id.lincsproject.ca/cwrc/SocialClass,http://id.lincsproject.ca/cwrc/upper-middleClass,classe moyenne supérieure,upper-middle class
+http://id.lincsproject.ca/cwrc/SocialClass,http://id.lincsproject.ca/cwrc/urban-industrialUnskilled,URBAN-INDUSTRIALUNSKILLED,ouvrier non qualifié,urban unskilled
+http://id.lincsproject.ca/cwrc/SocialClass,http://id.lincsproject.ca/cwrc/workingClass,rural working class parents,urban working class,working classes,working woman,classe ouvrière,working class
+http://id.lincsproject.ca/cwrc/SocialClass,http://id.lincsproject.ca/cwrc/yeoman-farmer,YEOMAN-FARMER,yeoman,paysanne yeoman,yeoman farmer

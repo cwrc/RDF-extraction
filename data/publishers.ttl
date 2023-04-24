@@ -1,0 +1,2503 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix crm: <http://www.cidoc-crm.org/cidoc-crm/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<http://viaf.org/viaf/149560951> skos:altLabel "T. N. Longman"@en .
+
+<http://viaf.org/viaf/129138489> skos:altLabel "Harper"@en .
+
+<http://viaf.org/viaf/129138489> skos:altLabel "Harper & Brothers"@en .
+
+<http://viaf.org/viaf/129138489> skos:altLabel "Harper and Row"@en .
+
+<http://viaf.org/viaf/129138489> skos:altLabel "HarperCollins Fourth Estate"@en .
+
+<http://viaf.org/viaf/264492873> skos:altLabel "W. and R. Chambers"@en .
+
+<http://viaf.org/viaf/143444973> skos:altLabel "Adam Matthew Publications"@en .
+
+<http://viaf.org/viaf/148038877> skos:altLabel "Blackwood and Sons"@en .
+
+<http://viaf.org/viaf/148038877> skos:altLabel "W. Blackwood and Sons"@en .
+
+<http://viaf.org/viaf/136297286> skos:altLabel "Bloodaxe Books Ltd"@en .
+
+<http://viaf.org/viaf/141847954> skos:altLabel "Broadview Press"@en .
+
+<http://viaf.org/viaf/123244823> skos:altLabel "Edwin Mellen Press"@en .
+
+<http://viaf.org/viaf/150761751> skos:altLabel "Gale Group"@en .
+
+<http://viaf.org/viaf/167837026> skos:altLabel "Harcourt, Brace and World"@en .
+
+<http://viaf.org/viaf/167837026> skos:altLabel "Harcourt, Brace, and World"@en .
+
+<http://viaf.org/viaf/142395924> skos:altLabel "A. A. Knopf"@en .
+
+<http://viaf.org/viaf/144240696> skos:altLabel "Little, Brown and Co."@en .
+
+<http://viaf.org/viaf/146646454> skos:altLabel "Macmillan and Co."@en .
+
+<http://viaf.org/viaf/146646454> skos:altLabel "Macmillan of Canada"@en .
+
+<http://viaf.org/viaf/167761845> skos:altLabel "Methuen & Co."@en .
+
+<http://viaf.org/viaf/134443168> skos:altLabel "Viking Penguin"@en .
+
+<http://viaf.org/viaf/134443168> skos:altLabel "Penguin Books"@en .
+
+<http://viaf.org/viaf/146326081> skos:altLabel "G. Routledge"@en .
+
+<http://viaf.org/viaf/147851790> skos:altLabel "Smith, Elder & Co."@en .
+
+<http://viaf.org/viaf/146726169> skos:altLabel "Twayne Publishers"@en .
+
+<http://viaf.org/viaf/306402845> skos:altLabel "Vintage Books"@en .
+
+<http://viaf.org/viaf/306402845> skos:altLabel "Vintage Canada"@en .
+
+<http://viaf.org/viaf/148038877> skos:altLabel "William Blackwood and Sons"@en .
+
+<http://viaf.org/viaf/142395924> skos:altLabel "Alfred A. Knopf"@en .
+
+<http://viaf.org/viaf/135219350> skos:altLabel "Blackwell"@en .
+
+<http://viaf.org/viaf/100920895> rdfs:label "T. Cadell"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/105158669993527202417> rdfs:label "Anchor Books"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/105158669993527202417> rdfs:label "Anchor"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/11152682479623310486> rdfs:label "Fig Tree"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/1152561518215441866> rdfs:label "J. F. Hughes"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/11900001> rdfs:label "J. Dicks"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/121005241> rdfs:label "J. Murray"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/121287478> rdfs:label "T. F. Unwin"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/121287478> rdfs:label "T. Fisher Unwin"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/121289363> rdfs:label "G. G. J. and J. Robinson"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/121291910> rdfs:label "R. and J. Dodsley"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/121292050> rdfs:label "G. and W. B. Whittaker"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/121292520> rdfs:label "Taylor and Hessey"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/121292667> rdfs:label "G. G. and J. Robinson"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/121292786> rdfs:label "Sampson Low"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/121293252> rdfs:label "G. W. Carleton"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/121294067> rdfs:label "C. and J. Ollier"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/121301341> rdfs:label "Cadell and Davies"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/121318215> rdfs:label "Honoré Champion"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/121555288> rdfs:label "C. Scribner's Sons"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/121555288> rdfs:label "Charles Scribner's Sons"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/121718240> rdfs:label "Cassell and Co."@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/121718240> rdfs:label "Cassell"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/121971897> rdfs:label "Yale University Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/122099855> rdfs:label "Harper and Brothers"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/122335523> rdfs:label "Indiana University Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/122888939> rdfs:label "University of Chicago Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/123122501> rdfs:label "McGraw-Hill"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/123220463> rdfs:label "A. and C. Black"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/123220463> rdfs:label "Adam and Charles Black"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/123241335> rdfs:label "Fortune Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/123244823> rdfs:label "Edwin Mellen"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/123541450> rdfs:label "J. M. Dent"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/123569460> rdfs:label "Coward-McCann"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/123598224> rdfs:label "Heywood"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/123671218> rdfs:label "Harcourt Brace Jovanovich"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/123671218> rdfs:label "Harcourt, Brace, Jovanovich"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/123681958> rdfs:label "Phaidon"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/123865415> rdfs:label "Poetry Bookshop"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/124255804> rdfs:label "Arrowsmith"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/124280108> rdfs:label "Manchester University Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/124433028> rdfs:label "Peter Lang"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/1247154137631715370007> rdfs:label "Ellis and White"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/124791143> rdfs:label "George Redway"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/124935207> rdfs:label "Longmans, Green and Co."@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/124935207> rdfs:label "Longmans, Green"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/124959469> rdfs:label "Pickering and Chatto"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/125335127> rdfs:label "Hurst, Robinson"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/125513648> rdfs:label "Hale"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/125513648> rdfs:label "R. Hale"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/125513648> rdfs:label "Robert Hale"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/125795705> rdfs:label "Chawton House Library"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/125844022> rdfs:label "Benjamin Blom"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/125902455> rdfs:label "Henry Holt"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/125903678> rdfs:label "Tinsley Brothers"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/125903678> rdfs:label "Tinsley"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/125936755> rdfs:label "A. K. Newman"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/126093235> rdfs:label "T. Nelson and Sons"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/126093235> rdfs:label "T. Nelson"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/126230561> rdfs:label "Bentley"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/126230561> rdfs:label "R. Bentley and Son"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/126230561> rdfs:label "R. Bentley"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/126230561> rdfs:label "Richard Bentley and Son"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/126230561> rdfs:label "Richard Bentley"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/126595939> rdfs:label "University of Toronto Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/126720804> rdfs:label "Ohio University Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/126764779> rdfs:label "Scolar Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/126775354> rdfs:label "H. Holt"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/126853904> rdfs:label "Athlone Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/126856852> rdfs:label "Rutgers University Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/126965936> rdfs:label "George G. Harrap"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/127105541> rdfs:label "Walter Scott"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/127127261> rdfs:label "Theosophical Publishing House"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/127130809> rdfs:label "Eyre and Spottiswoode"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/127175063> rdfs:label "Columbia University Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/127458402> rdfs:label "BBC"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/127676589> rdfs:label "W. W. Norton"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/127710360> rdfs:label "J. and A. Arch"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/127846763> rdfs:label "University Press of Kentucky"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/127926910> rdfs:label "Secker and Warburg"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/127945522> rdfs:label "Bloomsbury"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/127954890> rdfs:label "Gyldendal"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/127979069> rdfs:label "Cambridge University Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/128197663> rdfs:label "Edmonston and Douglas"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/128950504> rdfs:label "Carleton University Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/128972161> rdfs:label "H. W. Wilson"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/129012558> rdfs:label "D. Appleton"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/129092275> rdfs:label "Thames and Hudson"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/129138489> rdfs:label "Collins"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/129138489> rdfs:label "HarperCollins"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/129146094369900332992> rdfs:label "Gowans and Gray"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/129171041> rdfs:label "Farrar, Straus and Giroux"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/129171041> rdfs:label "Farrar, Straus, Giroux"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/129333745> rdfs:label "Carcanet New Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/129333745> rdfs:label "Carcanet Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/129333745> rdfs:label "Carcanet"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/1294149368873985980001> rdfs:label "Her Majesty's Stationery Office"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/129472710> rdfs:label "Henry Mozley"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/129480794> rdfs:label "Longman, Brown, Green, Longmans, and Roberts"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/129788129> rdfs:label "Bodleian Library"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/129885448> rdfs:label "Longman, Hurst, Rees, Orme, Brown and Green"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/129885448> rdfs:label "Longman, Hurst, Rees, Orme, Brown, and Green"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/129924961> rdfs:label "Heinemann"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/129924961> rdfs:label "Heinemann; Putnam"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/129924961> rdfs:label "W. Heinemann"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/129924961> rdfs:label "William Heinemann"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/130132158> rdfs:label "Society for Promoting Christian Knowledge"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/130207793> rdfs:label "Cresset Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/130247428> rdfs:label "Blackstaff Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/130257644> rdfs:label "Enitharmon Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/130276384> rdfs:label "Folio Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/130276384> rdfs:label "Folio Society"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/130458260> rdfs:label "Edinburgh University Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/130566866> rdfs:label "Richard Phillips"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/130626936> rdfs:label "T. N. Longman and O. Rees"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/130793280> rdfs:label "B. T. Batsford"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/130793280> rdfs:label "Batsford"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/131167970> rdfs:label "Chatto & Windus"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/131167970> rdfs:label "Chatto and Windus"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/131167970> rdfs:label "Chatto"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/131373685> rdfs:label "University of Michigan Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/131785575> rdfs:label "Frederick A. Stokes"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/132580591> rdfs:label "A. Deutsch"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/132580591> rdfs:label "Deutsch"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/132651880> rdfs:label "Beacon Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/132881385> rdfs:label "Groombridge and Sons"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/132881385> rdfs:label "Groombridge"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/132886564> rdfs:label "Daldy, Isbister"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/132966589> rdfs:label "Longman, Brown, Green, and Longmans"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/132977294> rdfs:label "A. Strahan"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/132977294> rdfs:label "Strahan"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/132991602> rdfs:label "Bowes and Bowes"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/133434477> rdfs:label "Arizona Center for Medieval and Renaissance Studies"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/133686263> rdfs:label "Barnes and Noble"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/133764091> rdfs:label "Egoist"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/133830549> rdfs:label "Barrie and Jenkins"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/134021014> rdfs:label "Belford, Clarke"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/134097999> rdfs:label "Peterloo Poets"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/134109645> rdfs:label "Jarrold and Sons"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/134109645> rdfs:label "Jarrolds"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/134158478> rdfs:label "J. Clarke"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/134164875> rdfs:label "Eveleigh Nash and Grayson"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/134443168> rdfs:label "Penguin"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/134664707> rdfs:label "H. Hamilton"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/134664707> rdfs:label "Hamish Hamilton"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/134878895> rdfs:label "St Martin's Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/135108302> rdfs:label "Holt, Rinehart and Winston"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/135166554> rdfs:label "Bell and Sons"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/135166554> rdfs:label "G. Bell and Sons"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/135166554> rdfs:label "George Bell and Sons"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/135166554> rdfs:label "George Bell"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/135219350> rdfs:label "Blackwood"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/135289335> rdfs:label "Canongate"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/136037399> rdfs:label "J. B. Lippincott"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/136167633> rdfs:label "Hodder & Stoughton"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/136167633> rdfs:label "Hodder and Stoughton"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/136297286> rdfs:label "Bloodaxe"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/136341792> rdfs:label "Fields, Osgood"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/136415249> rdfs:label "Grant and Griffith"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/136434951> rdfs:label "Maunsel"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/136499357> rdfs:label "A. L. Burt"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/137102179> rdfs:label "Fisher"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/137251158> rdfs:label "Leicester University Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/137483859> rdfs:label "J. Ballantyne"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/137523007> rdfs:label "David and Charles"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/137725401> rdfs:label "B. Tauchnitz"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/137725401> rdfs:label "Bernhard Tauchnitz"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/137764636> rdfs:label "ECW Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/138432217> rdfs:label "Sidgwick and Jackson"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/138487679> rdfs:label "Ace Books"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/138558579> rdfs:label "Mills and Boon"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/138711119> rdfs:label "Hours Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/138789613> rdfs:label "Calder and Boyars"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/138847498> rdfs:label "Eveleigh Nash"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/139553701> rdfs:label "Fabian Society"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/139568154> rdfs:label "Harvard University Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/139733654> rdfs:label "Academy Chicago"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/140069880> rdfs:label "Cork University Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/140104148> rdfs:label "Clarendon Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/140104148> rdfs:label "Clarendon"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/140705396> rdfs:label "Oxford University Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/140706820> rdfs:label "Harvey and Darton"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/140758077> rdfs:label "J. M. Dent and Sons"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/140800687> rdfs:label "George H. Doran"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/141084982> rdfs:label "Ward and Downey"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/141164782> rdfs:label "Longman, Rees, Orme, Brown, Green, and Longman"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/141688600> rdfs:label "Camden Society"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/141847954> rdfs:label "Broadview"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/141909012> rdfs:label "Trübner"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/141922044> rdfs:label "Allen and Unwin"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/141922044> rdfs:label "G. Allen and Unwin"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/141922044> rdfs:label "George Allen and Unwin"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/142082115> rdfs:label "Allison and Busby"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/142299454> rdfs:label "Arlen House"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/142329830> rdfs:label "H. Colburn and R. Bentley"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/142329830> rdfs:label "H. Colburn"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/142329830> rdfs:label "Henry Colburn"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/142359393> rdfs:label "J. W. Parker"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/142395924> rdfs:label "Alfred Knopf"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/142395924> rdfs:label "Knopf"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/142839588> rdfs:label "University of Wisconsin Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/142878694> rdfs:label "Longman, Hurst, Rees, Orme and Brown"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/142878694> rdfs:label "Longman, Hurst, Rees, Orme, and Brown"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/142986780> rdfs:label "Blackie and Son"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/142986780> rdfs:label "Blackie"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/143226806> rdfs:label "Blizzard"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/143390459> rdfs:label "Minerva"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/143428526> rdfs:label "Bickers and Son"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/143444973> rdfs:label "Adam Matthew"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/143615064> rdfs:label "Hyperion Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/144093895> rdfs:label "Longman, Hurst, Rees, and Orme"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/144240696> rdfs:label "Little, Brown"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/144355732> rdfs:label "Croom Helm"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/144550791> rdfs:label "Cornerstone Hutchinson"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/144550791> rdfs:label "Hutchinson"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/144650416> rdfs:label "Bowling Green State University Popular Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/144676714> rdfs:label "Hall, Virtue"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/144693767> rdfs:label "Golgonooza Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/144748692> rdfs:label "Arno Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/144762049> rdfs:label "Duckworth and Co."@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/144762049> rdfs:label "Duckworth"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/144762049> rdfs:label "G. Duckworth"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/144765371> rdfs:label "Freethought Publishing"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/144898842> rdfs:label "Collins; Dodd, Mead"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/144898842> rdfs:label "W. Collins"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/145370293> rdfs:label "Bodley Head"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/145370293> rdfs:label "The Bodley Head"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/145581718> rdfs:label "New Directions"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/145613647> rdfs:label "Stanford University Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/146326081> rdfs:label "G. Routledge and Sons"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/146326081> rdfs:label "George Routledge and Sons"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/146326081> rdfs:label "George Routledge"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/146326081> rdfs:label "Kegan Paul, Trench, Trübner"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/146326081> rdfs:label "Routledge"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/146326081> rdfs:label "Routledge, Warne, and Routledge"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/146646454> rdfs:label "MacMillan"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/146646454> rdfs:label "Macmillan"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/146649027> rdfs:label "Flamingo"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/146659267> rdfs:label "Éditions de la Nouvelle Revue Française"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/146726169> rdfs:label "Twayne"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/146944844> rdfs:label "Books for Libraries Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/146950190> rdfs:label "John Day"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/147236009> rdfs:label "Huntington Library"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/147720522> rdfs:label "Department of English, Temple University"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/147851790> rdfs:label "Smith, Elder"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/148023349> rdfs:label "F. Houlston and Son"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/148038877> rdfs:label "Blackwood"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/148038877> rdfs:label "W. Blackwood"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/148132252> rdfs:label "A. D. Innes"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/148137300> rdfs:label "F. V. White"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/148137300> rdfs:label "F.V. White"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/14820783> rdfs:label "Chapman"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/14820783> rdfs:label "J. Chapman"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/14820783> rdfs:label "John Chapman"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/148353283> rdfs:label "Charles Knight"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/148358760> rdfs:label "Longman, Rees, Orme, Brown and Green"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/148358760> rdfs:label "Longman, Rees, Orme, Brown, and Green"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/148844867> rdfs:label "Seeley, Jackson, and Halliday"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/148948307> rdfs:label "University of California Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/148998778> rdfs:label "G. P. Putnam"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/148998778> rdfs:label "G. P. Putnam's Sons"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/149019905> rdfs:label "F. C. and J. Rivington"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/149331633> rdfs:label "G. K. Hall and Maxwell Macmillan"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/149369138> rdfs:label "Hookham and Carpenter"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/149378079> rdfs:label "Atheneum"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/149435281> rdfs:label "Macmillan"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/149560951> rdfs:label "Longman"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/149560951> rdfs:label "Longmans"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/149880181> rdfs:label "Editions de Minuit"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/149958803> rdfs:label "Simon and Schuster"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/15008766> rdfs:label "A. Millar"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/15008766> rdfs:label "Andrew Millar"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/150456712> rdfs:label "Isbister"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/150537829> rdfs:label "Boni and Liveright"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/150558064> rdfs:label "Hatchards"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/150566756> rdfs:label "J. Johnson"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/150761751> rdfs:label "Gale Research"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/150761751> rdfs:label "Gale"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/15101148> rdfs:label "J. Hatchard"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/151283596> rdfs:label "Chapman and Hall"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/151350062> rdfs:label "Peter Owen"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/151371874> rdfs:label "Continuum"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/151401859> rdfs:label "Harvester Wheatsheaf"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/151524798> rdfs:label "Headline"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/151635949> rdfs:label "Hurst and Blackett"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/151773916> rdfs:label "Cuala Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/151925962> rdfs:label "Hamilton, Adams"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/152418237> rdfs:label "Grove Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/152418237> rdfs:label "Grove"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/152544929> rdfs:label "Fairleigh Dickinson University Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/152755326> rdfs:label "McClelland and Stewart"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/153153594> rdfs:label "Random House"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/153421486> rdfs:label "Roberts Brothers"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/153672966> rdfs:label "Southern Illinois University Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/153864593> rdfs:label "New York University Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/154010484> rdfs:label "Persephone Books"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/154038101> rdfs:label "J. and R. Maxwell"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/154887734> rdfs:label "Garland Publishing"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/154887734> rdfs:label "Garland"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/155126472> rdfs:label "Griffith and Farran"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/155134447> rdfs:label "Remington"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/155151284> rdfs:label "Houlston and Stoneman"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/155184733> rdfs:label "Four Courts Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/155492116> rdfs:label "University of Alberta"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/155859348> rdfs:label "Baldwin and Cradock"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/155859883> rdfs:label "C. Dilly"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/155859883> rdfs:label "E. and C. Dilly"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/155888541> rdfs:label "Coach House Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/155961891> rdfs:label "Independent Labour Party"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/156269465> rdfs:label "Bell and Daldy"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/156281760> rdfs:label "Allen Lane"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/156313027> rdfs:label "Darton, Harvey and Darton"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/156381325> rdfs:label "Adam Matthew"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/156672148> rdfs:label "A. Constable"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/156672148> rdfs:label "Archibald Constable"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/156672148> rdfs:label "Constable & Co."@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/156672148> rdfs:label "Constable and Company"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/157127303> rdfs:label "G. K. Hall"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/157193471> rdfs:label "Anvil Press Poetry"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/157201525> rdfs:label "Greenwood Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/157245161> rdfs:label "University of Illinois Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/157408888> rdfs:label "Johns Hopkins University Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/157505963> rdfs:label "Williams and Norgate"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/15754285> rdfs:label "Saunders and Otley"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/157556037> rdfs:label "Cassell, Petter and Galpin"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/157639707> rdfs:label "Department of English, University of Queensland"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/158047212> rdfs:label "Bibliographical Society"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/158197516> rdfs:label "Irish Academic Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/158197537> rdfs:label "Baldwin, Cradock and Joy"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/158317684> rdfs:label "Princeton University Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/158327693> rdfs:label "University of Georgia Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/158346573> rdfs:label "Facts on File"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/158650657> rdfs:label "Darton and Harvey"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/158650657> rdfs:label "Darton"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/158743903> rdfs:label "Kegan Paul, Trench"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/158745426> rdfs:label "G. Richards"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/158745426> rdfs:label "Grant Richards"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/158783898> rdfs:label "William Andrews Clark Memorial Library, University of California"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/158876127> rdfs:label "Frank Cass"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/159379729> rdfs:label "Angus and Robertson"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/159556432> rdfs:label "Houghton Mifflin Co."@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/159556432> rdfs:label "Houghton Mifflin"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/159556432> rdfs:label "Houghton, Mifflin"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/159571939> rdfs:label "University of Pennsylvania Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/159791798> rdfs:label "J. Nisbet and Co."@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/159791798> rdfs:label "J. Nisbet"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/159791798> rdfs:label "James Nisbet"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/159820037> rdfs:label "F. Westley and A. H. Davis"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/160882254> rdfs:label "Alan Sutton"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/160882254> rdfs:label "Sutton"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/167144783002351387426> rdfs:label "Elkin Mathews and John Lane"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/167617309> rdfs:label "C. Kegan Paul"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/167617309> rdfs:label "Kegan Paul"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/167761845> rdfs:label "Methuen"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/167837026> rdfs:label "Harcourt Brace"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/167837026> rdfs:label "Harcourt, Brace and Company"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/167837026> rdfs:label "Harcourt, Brace"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/167923742> rdfs:label "Weidenfeld and Nicolson"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/167993560> rdfs:label "E. Benn"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/167993560> rdfs:label "Ernest Benn"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/168198318> rdfs:label "S. French"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/168198318> rdfs:label "Samuel French"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/168200157> rdfs:label "Gall and Inglis"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/168384203> rdfs:label "Ward, Lock"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/168471063> rdfs:label "George Newnes"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/168993563> rdfs:label "Colin Smythe"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/169368934> rdfs:label "Basic Books"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/169837938> rdfs:label "Gill and Macmillan"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/169943856> rdfs:label "Lane, Newman"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/170264319> rdfs:label "M. Joseph"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/170264319> rdfs:label "Michael Joseph"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/170596537> rdfs:label "Virago"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/17088379> rdfs:label "William Lane"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/17163935897000830293> rdfs:label "J. and C. Mozley"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/173251676> rdfs:label "Granta Books"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/173251676> rdfs:label "Granta"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/173549121> rdfs:label "E. Arnold"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/173549121> rdfs:label "Edward Arnold"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/175529333> rdfs:label "AMS Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/175529333> rdfs:label "AMS"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/185935443> rdfs:label "Canongate Classics"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/215146094150100330674> rdfs:label "A. C. Fifield"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/2192145856864222920063> rdfs:label "Barbin"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/236613093> rdfs:label "Methuen Drama"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/245463737> rdfs:label "A. Barker"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/245463737> rdfs:label "Arthur Barker"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/24680588> rdfs:label "J. Debrett"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/25158427931506061790> rdfs:label "H. R. Allenson"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/251951772> rdfs:label "Peter Davies"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/2583646> rdfs:label "Anthony Blond"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/261535565> rdfs:label "Scarecrow Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/261536203> rdfs:label "Women's Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/262511249> rdfs:label "Fremantle Arts Centre Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/264265782> rdfs:label "Granada"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/264492873> rdfs:label "Chambers"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/264801395> rdfs:label "Duke University Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/264951771> rdfs:label "Harrison"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/265092408> rdfs:label "Macdonald"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/265412814> rdfs:label "University of North Carolina Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/265628035> rdfs:label "H. S. King"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/265628035> rdfs:label "Henry S. King"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/266034617> rdfs:label "Dutton"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/266034617> rdfs:label "E. P. Dutton"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/266360169> rdfs:label "Hogarth Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/266381764> rdfs:label "Gallimard"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/266483422> rdfs:label "Dodd, Mead"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/268199074> rdfs:label "Anansi"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/278497987> rdfs:label "F. Warne"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/278497987> rdfs:label "Frederick Warne"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/2833599> rdfs:label "Dent"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/28967567> rdfs:label "P. Norbury"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/29155224425184371271> rdfs:label "Cedric Chivers"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/294124461> rdfs:label "Constable"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/294994700> rdfs:label "Doubleday"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/295173224> rdfs:label "Dolmen"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/295664937> rdfs:label "Harvester Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/295664937> rdfs:label "Harvester"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/295681810> rdfs:label "Viking Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/295681810> rdfs:label "Viking"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/296593421> rdfs:label "Berg"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/297015946> rdfs:label "Bradbury and Evans"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/297377613> rdfs:label "University Press of Virginia"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/297828202> rdfs:label "Cornell University Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/302965116> rdfs:label "Belknap Press of Harvard University Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/304943288> rdfs:label "T. Hookham"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/304947057> rdfs:label "H. Herringman"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/305290209> rdfs:label "B. Grasset"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/306402845> rdfs:label "Vintage"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/311118748> rdfs:label "Evans Brothers"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/311349386> rdfs:label "Nick Hern"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/311350009> rdfs:label "Bucknell University Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/311350485> rdfs:label "Arrow Books"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/311351897> rdfs:label "A. H. Bullen"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/311352319> rdfs:label "Free Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/311352549> rdfs:label "M. Secker"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/311352557> rdfs:label "David Bogue"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/311354004> rdfs:label "State University of New York Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/311354022> rdfs:label "Geoffrey Bles"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/311354383> rdfs:label "University of Delaware Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/311354883> rdfs:label "Harvill Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/311354936> rdfs:label "Fourth Estate"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/311357659> rdfs:label "Cape"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/311357659> rdfs:label "J. Cape"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/311357659> rdfs:label "Jonathan Cape"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/311358603> rdfs:label "John Long"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/311359666> rdfs:label "Hollis and Carter"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/311359948> rdfs:label "Elliot Stock"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/311377972> rdfs:label "Frederick Muller"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/311378618> rdfs:label "Burns and Oates"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/311378962> rdfs:label "Bantam"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/311382888> rdfs:label "Associated University Presses"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/311382938> rdfs:label "Abacus"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/31167959> rdfs:label "Emily Faithfull"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/311833884> rdfs:label "Haskell House"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/312736099> rdfs:label "B. Blackwell"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/312736099> rdfs:label "B. H. Blackwell"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/312738538> rdfs:label "Ashgate"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/312738991> rdfs:label "Fayard"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/312803894> rdfs:label "Routledge and Kegan Paul"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/313086845> rdfs:label "David Douglas"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/313090149> rdfs:label "Hart-Davis"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/313090149> rdfs:label "Rupert Hart-Davis"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/314332> rdfs:label "Dodsley"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/314332> rdfs:label "J. Dodsley"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/315242234> rdfs:label "Scholars' Facsimiles and Reprints"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/315242555> rdfs:label "MacGibbon and Kee"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/315532896> rdfs:label "Palgrave Macmillan"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/315532896> rdfs:label "Palgrave"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/315717862> rdfs:label "Archon Books"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/316027384> rdfs:label "Hambledon Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/33165265326010192783> rdfs:label "Guardian News and Media"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/3395151837987320520003> rdfs:label "Seren"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/34325653> rdfs:label "T. C. Newby"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/34509981> rdfs:label "Bernard Lintot"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/34509981> rdfs:label "Bernard Lintott"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/37673712> rdfs:label "John Lane"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/37803933> rdfs:label "E. Moxon"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/37803933> rdfs:label "Edward Moxon"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/39150030775610962228> rdfs:label "W. Pickering"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/39150030775610962228> rdfs:label "William Pickering"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/40810077> rdfs:label "Alexander Strahan"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/45159035185601380002> rdfs:label "W. H. Allen"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/47157340569609920294> rdfs:label "Andrew Melrose"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/50271899> rdfs:label "Charles Tilt"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/51686108> rdfs:label "F. Bonnaire"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/51741707> rdfs:label "J. Bell"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/565154380888630290180> rdfs:label "Sinclair-Stevenson"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/57413861> rdfs:label "E. Mathews"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/57413861> rdfs:label "Elkin Mathews"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/5770911> rdfs:label "F. S. Ellis"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/60155767464927762653> rdfs:label "Andrew Dakers"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/60342307> rdfs:label "Andrew Sowle"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/61431027> rdfs:label "A. Maxwell"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/6175149489110093810000> rdfs:label "B. Crosby"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/62146095286600371861> rdfs:label "Arc Publications"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/63104125> rdfs:label "Effingham Wilson"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/71283786> rdfs:label "A. Dodd"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/7165322385916020178> rdfs:label "Eyre Methuen"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/73995150> rdfs:label "E. Curll"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/7617625> rdfs:label "Joseph Johnson"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/79052528> rdfs:label "D. S. Brewer"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/833145857125022921545> rdfs:label "Amber Lane Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/90644401> rdfs:label "Colburn"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/9157222727884971473> rdfs:label "Alston Rivers"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<https://www.wikidata.org/wiki/Q5009015> rdfs:label "CBC Radio 2"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<https://www.wikidata.org/wiki/Q6318982> rdfs:label "Juvenilia Press"@en ;
+    a crm:E74_Group ;
+    crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
+
+<http://viaf.org/viaf/142395924> owl:sameAs <https://commons.cwrc.ca/orlando:ce2c88c2-1ce4-4349-83ae-8454a9e8ce44> .
+
+<http://viaf.org/viaf/142839588> owl:sameAs <https://commons.cwrc.ca/orlando:74789d7e-3e40-4d3c-97ad-b80015e82fa1> .
+
+<http://viaf.org/viaf/129138489> owl:sameAs <https://commons.cwrc.ca/orlando:f01f6be3-65d0-4702-b11b-1f6ea1e3f656> .
+
+<http://viaf.org/viaf/264492873> owl:sameAs <https://commons.cwrc.ca/orlando:3a0109b5-fb4e-425f-8119-b7b9caaad60e> .
+
+<http://viaf.org/viaf/143444973> owl:sameAs <https://commons.cwrc.ca/orlando:f1d554cd-900e-4e51-9c1b-04ec8a46ea4b> .
+
+<http://viaf.org/viaf/141847954> owl:sameAs <https://commons.cwrc.ca/orlando:7ff203ff-0f3b-45e0-aad1-a3e3833ab6cd> .
+
+<http://viaf.org/viaf/123244823> owl:sameAs <https://commons.cwrc.ca/orlando:6d17b70b-4150-4057-9bc0-5b8b34db02a4> .
+
+<http://viaf.org/viaf/150761751> owl:sameAs <https://commons.cwrc.ca/orlando:04692fb5-5e5c-4e3d-90bb-f0a81f301da8> .
+
+<http://viaf.org/viaf/306402845> owl:sameAs <https://commons.cwrc.ca/orlando:c27c0a5e-1d46-454a-a0f2-607fe8572507> .
+
+<http://viaf.org/viaf/134443168> owl:sameAs <https://commons.cwrc.ca/orlando:d4bafcfa-5739-480a-ad02-bc11ac21bf33> .
+
+<http://viaf.org/viaf/140705396> owl:sameAs <https://commons.cwrc.ca/orlando:6ad3f7c1-b263-42cd-bfe2-e864ddecf761> .
+
+<http://viaf.org/viaf/131167970> owl:sameAs <https://commons.cwrc.ca/orlando:0f5ab112-4e81-4977-8c29-8ab17d64e707> .
+
+<http://viaf.org/viaf/127979069> owl:sameAs <https://commons.cwrc.ca/orlando:93cde812-c1cf-445f-9569-ecdd51c39693> .
+
+<http://viaf.org/viaf/129924961> owl:sameAs <https://commons.cwrc.ca/orlando:3c55bbdc-3419-4c07-87b1-7bd16a6bd9e9> .
+
+<http://viaf.org/viaf/144550791> owl:sameAs <https://commons.cwrc.ca/orlando:36931740-4d9d-4c0f-b12c-cabbe9b5ee24> .
+
+<http://viaf.org/viaf/167761845> owl:sameAs <https://commons.cwrc.ca/orlando:7e64e23a-5a3f-4ac1-a85d-957e10bcfdf8> .
+
+<http://viaf.org/viaf/136167633> owl:sameAs <https://commons.cwrc.ca/orlando:0a0f48c0-6025-464d-9a9f-cceccdaf3364> .
+
+<http://viaf.org/viaf/151635949> owl:sameAs <https://commons.cwrc.ca/orlando:ea296c73-251f-4f0b-964e-9c521591ef01> .
+
+<http://viaf.org/viaf/151283596> owl:sameAs <https://commons.cwrc.ca/orlando:e6274979-905a-40dd-a0de-09aaec31ac06> .
+
+<http://viaf.org/viaf/311357659> owl:sameAs <https://commons.cwrc.ca/orlando:32c1fd04-048b-4f69-96d1-4e7ecb578919> .
+
+<http://viaf.org/viaf/134664707> owl:sameAs <https://commons.cwrc.ca/orlando:e561af49-e7f0-4737-97e3-981b912b05fb> .
+
+<http://viaf.org/viaf/266360169> owl:sameAs <https://commons.cwrc.ca/orlando:8a6a76bb-b525-4a85-a5e6-2947531e97e3> .
+
+<http://viaf.org/viaf/294124461> owl:sameAs <https://commons.cwrc.ca/orlando:deefa90a-1791-47e1-ab60-4e0a93a39485> .
+
+<http://viaf.org/viaf/121718240> owl:sameAs <https://commons.cwrc.ca/orlando:7d48e978-a7cf-40a9-ac5f-3cdac2d97116> .
+
+<http://viaf.org/viaf/140104148> owl:sameAs <https://commons.cwrc.ca/orlando:542d6373-7f24-45e9-9ae8-5079a7a8b260> .
+
+<http://viaf.org/viaf/144762049> owl:sameAs <https://commons.cwrc.ca/orlando:532f6241-c9bf-4178-8816-b97213738dc3> .
+
+<http://viaf.org/viaf/167923742> owl:sameAs <https://commons.cwrc.ca/orlando:8795bfe9-28dc-483f-ac82-daa34ce87576> .
+
+<http://viaf.org/viaf/146726169> owl:sameAs <https://commons.cwrc.ca/orlando:262cd913-a414-430f-a479-b1488d49b243> .
+
+<http://viaf.org/viaf/170264319> owl:sameAs <https://commons.cwrc.ca/orlando:1342cc09-3c5a-4d6f-91f2-700bdfee8d2e> .
+
+<http://viaf.org/viaf/121287478> owl:sameAs <https://commons.cwrc.ca/orlando:a06d2c26-138a-43f4-8b15-2c0b1c64587f> .
+
+<http://viaf.org/viaf/121971897> owl:sameAs <https://commons.cwrc.ca/orlando:a4a5f4d7-dce0-43c3-b8e6-7c30bfc2ce90> .
+
+<http://viaf.org/viaf/129333745> owl:sameAs <https://commons.cwrc.ca/orlando:ba73538b-42a9-451d-b385-d46a5a33019f> .
+
+<http://viaf.org/viaf/153153594> owl:sameAs <https://commons.cwrc.ca/orlando:1145d26a-5ed4-4f40-a862-812bcc90d58f> .
+
+<http://viaf.org/viaf/15754285> owl:sameAs <https://commons.cwrc.ca/orlando:1c74f22e-7e85-4057-b5b3-369d2c1082f8> .
+
+<http://viaf.org/viaf/127926910> owl:sameAs <https://commons.cwrc.ca/orlando:b86c6213-53f1-4b82-b406-b5055d4537c3> .
+
+<http://viaf.org/viaf/124280108> owl:sameAs <https://commons.cwrc.ca/orlando:ae825b26-2241-44d9-863b-179a0c5838cd> .
+
+<http://viaf.org/viaf/134878895> owl:sameAs <https://commons.cwrc.ca/orlando:cdb57c80-a03a-46c0-87e6-6680a4dde082> .
+
+<http://viaf.org/viaf/125936755> owl:sameAs <https://commons.cwrc.ca/orlando:7d74f9f4-f968-4a71-94e5-84a930a54f05> .
+
+<http://viaf.org/viaf/312738538> owl:sameAs <https://commons.cwrc.ca/orlando:c1a624be-a9d8-471f-a0d4-0c3856702756> .
+
+<http://viaf.org/viaf/138432217> owl:sameAs <https://commons.cwrc.ca/orlando:aace004b-396b-4296-870f-21f7c6979cc6> .
+
+<http://viaf.org/viaf/152755326> owl:sameAs <https://commons.cwrc.ca/orlando:ff5f68af-9cb5-4c2f-b0a8-db67f32639cc> .
+
+<http://viaf.org/viaf/122888939> owl:sameAs <https://commons.cwrc.ca/orlando:6e3e9db7-0127-4937-997b-0ed303de4381> .
+
+<http://viaf.org/viaf/37673712> owl:sameAs <https://commons.cwrc.ca/orlando:9bcf95d1-c828-4a41-b004-19c15090058d> .
+
+<http://viaf.org/viaf/315532896> owl:sameAs <https://commons.cwrc.ca/orlando:528dd763-6084-4927-9fd7-92c3167a7803> .
+
+<http://viaf.org/viaf/139568154> owl:sameAs <https://commons.cwrc.ca/orlando:a9469600-96f9-4f51-8c65-16220866e3ba> .
+
+<http://viaf.org/viaf/158317684> owl:sameAs <https://commons.cwrc.ca/orlando:329de765-c183-4619-afe2-1e6e5d0b2dd9> .
+
+<http://viaf.org/viaf/125903678> owl:sameAs <https://commons.cwrc.ca/orlando:2db402f7-300e-4364-b476-634529f2535d> .
+
+<http://viaf.org/viaf/127175063> owl:sameAs <https://commons.cwrc.ca/orlando:40da0494-c100-406d-8f70-dfdf78fbb27a> .
+
+<http://viaf.org/viaf/127846763> owl:sameAs <https://commons.cwrc.ca/orlando:c30baf89-cdca-488e-8c2f-d962d8a69a4c> .
+
+<http://viaf.org/viaf/168198318> owl:sameAs <https://commons.cwrc.ca/orlando:2db3c82b-6504-420c-a948-56dcddcace5e> .
+
+<http://viaf.org/viaf/251951772> owl:sameAs <https://commons.cwrc.ca/orlando:ba23a133-16d8-4b37-aee3-84266c0af563> .
+
+<http://viaf.org/viaf/123541450> owl:sameAs <https://commons.cwrc.ca/orlando:6851591c-cbbc-459e-bbe2-7bfef136dbe3> .
+
+<http://viaf.org/viaf/124959469> owl:sameAs <https://commons.cwrc.ca/orlando:8b6ec41a-ade3-4797-85e4-f36d590e2710> .
+
+<http://viaf.org/viaf/175529333> owl:sameAs <https://commons.cwrc.ca/orlando:f468aa24-95ee-4c64-b7b1-33684e3d6166> .
+
+<http://viaf.org/viaf/148948307> owl:sameAs <https://commons.cwrc.ca/orlando:75ee6387-9458-4ec8-8280-8dbaf441e5d2> .
+
+<http://viaf.org/viaf/565154380888630290180> owl:sameAs <https://commons.cwrc.ca/orlando:92810427-6afc-4457-91b1-65207e930b59> .
+
+<http://viaf.org/viaf/145370293> owl:sameAs <https://commons.cwrc.ca/orlando:b5905053-a305-4567-a6be-dd2fb08e243f> .
+
+<http://viaf.org/viaf/159791798> owl:sameAs <https://commons.cwrc.ca/orlando:7ef0afba-346e-4177-91f2-3fa66ba0beea> .
+
+<http://viaf.org/viaf/134109645> owl:sameAs <https://commons.cwrc.ca/orlando:a090df26-497c-49b2-8618-7c216b87d12e> .
+
+<http://viaf.org/viaf/14820783> owl:sameAs <https://commons.cwrc.ca/orlando:3130213b-f041-4acd-8fd8-002c8ada4374> .
+
+<http://viaf.org/viaf/146950190> owl:sameAs <https://commons.cwrc.ca/orlando:1473d6b5-3980-457a-b35b-4d1ec15c4f0c> .
+
+<http://viaf.org/viaf/311358603> owl:sameAs <https://commons.cwrc.ca/orlando:62b7009c-fb12-4c94-b3e0-fc04e33a3f7a> .
+
+<http://viaf.org/viaf/157408888> owl:sameAs <https://commons.cwrc.ca/orlando:785980f8-bd83-4028-93f0-f05bb186cc28> .
+
+<http://viaf.org/viaf/7617625> owl:sameAs <https://commons.cwrc.ca/orlando:36ae6eb5-5526-4084-b310-88bee8429c9b> .
+
+<https://www.wikidata.org/wiki/Q6318982> owl:sameAs <https://commons.cwrc.ca/orlando:120abdba-89c5-4d2a-a5a8-182f02b10609> .
+
+<http://viaf.org/viaf/167617309> owl:sameAs <https://commons.cwrc.ca/orlando:19e78a22-43cf-4198-905e-6af94cbab708> .
+
+<http://viaf.org/viaf/137251158> owl:sameAs <https://commons.cwrc.ca/orlando:de833654-30ed-419e-98dc-36d3ebe130e5> .
+
+<http://viaf.org/viaf/265092408> owl:sameAs <https://commons.cwrc.ca/orlando:ce1dc577-daef-4970-94fa-bc32cc080df0> .
+
+<http://viaf.org/viaf/315242555> owl:sameAs <https://commons.cwrc.ca/orlando:41f5b605-91f0-4067-b2ca-db8a738f8a07> .
+
+<http://viaf.org/viaf/136434951> owl:sameAs <https://commons.cwrc.ca/orlando:faf5a1a5-aa18-40d0-8897-1b47ef06a3dd> .
+
+<http://viaf.org/viaf/123122501> owl:sameAs <https://commons.cwrc.ca/orlando:5c1e544e-5b53-4a29-a7fb-ea51d66132fe> .
+
+<http://viaf.org/viaf/138558579> owl:sameAs <https://commons.cwrc.ca/orlando:5879bbc8-89c6-4826-8615-f9c403f9d3f9> .
+
+<http://viaf.org/viaf/311349386> owl:sameAs <https://commons.cwrc.ca/orlando:9ce4c72f-d2ef-4a13-bf42-d40a5738505b> .
+
+<http://viaf.org/viaf/28967567> owl:sameAs <https://commons.cwrc.ca/orlando:a505bc69-27d3-44e0-a230-11f5ae2faf94> .
+
+<http://viaf.org/viaf/154010484> owl:sameAs <https://commons.cwrc.ca/orlando:eaa1a4ee-6886-432c-8cd7-fea61619a6e6> .
+
+<http://viaf.org/viaf/124433028> owl:sameAs <https://commons.cwrc.ca/orlando:19f61d4f-eac9-4a87-9495-eec87036fac5> .
+
+<http://viaf.org/viaf/151350062> owl:sameAs <https://commons.cwrc.ca/orlando:0f710b67-8ba0-43ac-bd53-4989e4386795> .
+
+<http://viaf.org/viaf/134097999> owl:sameAs <https://commons.cwrc.ca/orlando:f5a98d96-117c-46bf-8a8a-ee2ed41b6a7f> .
+
+<http://viaf.org/viaf/123681958> owl:sameAs <https://commons.cwrc.ca/orlando:a104547f-8a6f-4fe1-b5b8-7b49257333f8> .
+
+<http://viaf.org/viaf/123865415> owl:sameAs <https://commons.cwrc.ca/orlando:aed43827-b5aa-4bab-81dc-46a23b409242> .
+
+<http://viaf.org/viaf/126230561> owl:sameAs <https://commons.cwrc.ca/orlando:747b5c41-8e1c-48dc-9b88-94dcc54c71f1> .
+
+<http://viaf.org/viaf/130566866> owl:sameAs <https://commons.cwrc.ca/orlando:3c06166b-4909-480f-aa31-ec674503f17d> .
+
+<http://viaf.org/viaf/125513648> owl:sameAs <https://commons.cwrc.ca/orlando:d8fd7370-34a0-4517-a42d-3f05d7428591> .
+
+<http://viaf.org/viaf/153421486> owl:sameAs <https://commons.cwrc.ca/orlando:fdc21a8a-f681-4ecc-93ee-aafc31e3db2c> .
+
+<http://viaf.org/viaf/121292786> owl:sameAs <https://commons.cwrc.ca/orlando:19a69b6f-d32a-4abd-bb45-48a4080c404a> .
+
+<http://viaf.org/viaf/315242234> owl:sameAs <https://commons.cwrc.ca/orlando:adc0ef35-31db-4439-a6c6-49309698ab1b> .
+
+<http://viaf.org/viaf/126764779> owl:sameAs <https://commons.cwrc.ca/orlando:ee7ba286-cd7f-46f5-b6e5-366fc60df8e3> .
+
+<http://viaf.org/viaf/149958803> owl:sameAs <https://commons.cwrc.ca/orlando:a1615e6e-1c3a-4361-ad46-f379655640d1> .
+
+<http://viaf.org/viaf/130132158> owl:sameAs <https://commons.cwrc.ca/orlando:b37161cf-6464-47cf-881b-ffd338359c71> .
+
+<http://viaf.org/viaf/126093235> owl:sameAs <https://commons.cwrc.ca/orlando:7d731621-352c-41a9-8e74-ce563f6fcb61> .
+
+<http://viaf.org/viaf/121292520> owl:sameAs <https://commons.cwrc.ca/orlando:59ae809f-4db7-470b-b28e-64286de71842> .
+
+<http://viaf.org/viaf/129092275> owl:sameAs <https://commons.cwrc.ca/orlando:e60af7f5-6814-4927-96f7-dd97c5c24cea> .
+
+<http://viaf.org/viaf/127127261> owl:sameAs <https://commons.cwrc.ca/orlando:3bcaa33a-2551-4681-895e-8e636d81eab1> .
+
+<http://viaf.org/viaf/155492116> owl:sameAs <https://commons.cwrc.ca/orlando:6a9d995b-4cd6-460f-9c55-7e83669ad6a8> .
+
+<http://viaf.org/viaf/157245161> owl:sameAs <https://commons.cwrc.ca/orlando:cf14d596-a777-43a1-909d-b4997b1870d1> .
+
+<http://viaf.org/viaf/131373685> owl:sameAs <https://commons.cwrc.ca/orlando:cb766dde-9a33-4cf2-9b88-52bb72010a98> .
+
+<http://viaf.org/viaf/159571939> owl:sameAs <https://commons.cwrc.ca/orlando:43f651f6-b47a-459a-9a99-795b121bba30> .
+
+<http://viaf.org/viaf/295681810> owl:sameAs <https://commons.cwrc.ca/orlando:3b1e5b2e-f2cd-4d94-b7bd-7665afdfc402> .
+
+<http://viaf.org/viaf/39150030775610962228> owl:sameAs <https://commons.cwrc.ca/orlando:9a175136-8a95-431c-8afa-22de92f6e912> .
+
+<http://viaf.org/viaf/127676589> owl:sameAs <https://commons.cwrc.ca/orlando:fe7dae9f-dcda-421c-b4de-3a1f235a9d4d> .
+
+<http://viaf.org/viaf/141084982> owl:sameAs <https://commons.cwrc.ca/orlando:49ef5858-9265-4bd4-9348-8e40c7245505> .
+
+<http://viaf.org/viaf/157505963> owl:sameAs <https://commons.cwrc.ca/orlando:1c562ecb-2108-47b1-b62e-6698c5e40d67> .
+
+<http://viaf.org/viaf/123220463> owl:sameAs <https://commons.cwrc.ca/orlando:d127f119-c5af-4156-918a-d9647da3d8c2> .
+
+<http://viaf.org/viaf/136499357> owl:sameAs <https://commons.cwrc.ca/orlando:cb251d3f-fa64-4dec-833d-c7dac68bdddd> .
+
+<http://viaf.org/viaf/311382938> owl:sameAs <https://commons.cwrc.ca/orlando:71afd20f-a15f-4c1c-b2de-e065eb8f5300> .
+
+<http://viaf.org/viaf/123220463> owl:sameAs <https://commons.cwrc.ca/orlando:edff8e26-6fbc-4e40-a39c-dc83b3adab1d> .
+
+<http://viaf.org/viaf/156281760> owl:sameAs <https://commons.cwrc.ca/orlando:8a47f510-675f-460b-8686-d77677534217> .
+
+<http://viaf.org/viaf/142082115> owl:sameAs <https://commons.cwrc.ca/orlando:f976acd3-6331-4ec9-96dd-167533e9aeb2> .
+
+<http://viaf.org/viaf/9157222727884971473> owl:sameAs <https://commons.cwrc.ca/orlando:4d5c2f8d-b7e8-49d5-a794-8710b7cf81ba> .
+
+<http://viaf.org/viaf/60155767464927762653> owl:sameAs <https://commons.cwrc.ca/orlando:f246a89f-eb6b-4ed4-aaa6-11355b8b724b> .
+
+<http://viaf.org/viaf/47157340569609920294> owl:sameAs <https://commons.cwrc.ca/orlando:3e4b9aac-ba56-41a2-8eb4-bd051319a005> .
+
+<http://viaf.org/viaf/15008766> owl:sameAs <https://commons.cwrc.ca/orlando:aeefa4d3-c5b8-48d9-881f-417cbffee115> .
+
+<http://viaf.org/viaf/159379729> owl:sameAs <https://commons.cwrc.ca/orlando:7d0ac51e-0c88-4b7a-957e-60d443862a92> .
+
+<http://viaf.org/viaf/2583646> owl:sameAs <https://commons.cwrc.ca/orlando:777fa536-84a8-4044-86c5-9d4b47c6e802> .
+
+<http://viaf.org/viaf/157193471> owl:sameAs <https://commons.cwrc.ca/orlando:0198518b-221e-4335-971a-1374c8774bf8> .
+
+<http://viaf.org/viaf/133434477> owl:sameAs <https://commons.cwrc.ca/orlando:4ec53357-8e3c-4973-a142-1052978fadd5> .
+
+<http://viaf.org/viaf/142299454> owl:sameAs <https://commons.cwrc.ca/orlando:534bb5fe-7623-4d05-8a35-aee1760e16df> .
+
+<http://viaf.org/viaf/144748692> owl:sameAs <https://commons.cwrc.ca/orlando:c2873ab5-0afa-413b-84a1-8c803cdedf11> .
+
+<http://viaf.org/viaf/311350485> owl:sameAs <https://commons.cwrc.ca/orlando:60757086-e149-4937-a414-8eba473ae8dc> .
+
+<http://viaf.org/viaf/124255804> owl:sameAs <https://commons.cwrc.ca/orlando:60a92829-eb07-433a-9451-21a6b9bc36cd> .
+
+<http://viaf.org/viaf/126853904> owl:sameAs <https://commons.cwrc.ca/orlando:00ce2c41-b247-44e3-a9d9-b10a155413f9> .
+
+<http://viaf.org/viaf/130793280> owl:sameAs <https://commons.cwrc.ca/orlando:038614a5-0851-46e4-a567-a58a4a710510> .
+
+<http://viaf.org/viaf/2192145856864222920063> owl:sameAs <https://commons.cwrc.ca/orlando:57df298a-d684-4854-a7e1-dd16ce72cde9> .
+
+<http://viaf.org/viaf/133830549> owl:sameAs <https://commons.cwrc.ca/orlando:f91939aa-e572-4dda-a325-ea613cf1113d> .
+
+<http://viaf.org/viaf/127458402> owl:sameAs <https://commons.cwrc.ca/orlando:b8ac2ad8-b938-4e1d-8e71-582f5a67513e> .
+
+<http://viaf.org/viaf/132651880> owl:sameAs <https://commons.cwrc.ca/orlando:bbc610bb-d8f9-4223-a8d2-b6167ab504b2> .
+
+<http://viaf.org/viaf/156269465> owl:sameAs <https://commons.cwrc.ca/orlando:a565299c-0abe-42ed-be68-ee7eaf3b0919> .
+
+<http://viaf.org/viaf/34509981> owl:sameAs <https://commons.cwrc.ca/orlando:d19b07a8-1a4b-4209-a696-53ee1082119d> .
+
+<http://viaf.org/viaf/158047212> owl:sameAs <https://commons.cwrc.ca/orlando:b591d117-79d6-443d-8c5b-683624150dbf> .
+
+<http://viaf.org/viaf/142986780> owl:sameAs <https://commons.cwrc.ca/orlando:21fc82e3-e57b-402b-a272-a047490b3035> .
+
+<http://viaf.org/viaf/130247428> owl:sameAs <https://commons.cwrc.ca/orlando:52c51a20-b3bf-4c13-a98c-467c9d839556> .
+
+<http://viaf.org/viaf/129788129> owl:sameAs <https://commons.cwrc.ca/orlando:59f01c25-9207-4e62-91b2-3bd1a287537a> .
+
+<http://viaf.org/viaf/150537829> owl:sameAs <https://commons.cwrc.ca/orlando:5a282750-1638-4805-8781-b6c0e052e320> .
+
+<http://viaf.org/viaf/146944844> owl:sameAs <https://commons.cwrc.ca/orlando:9c4e89a2-83e4-4fd2-b0cc-d5249f285f04> .
+
+<http://viaf.org/viaf/132991602> owl:sameAs <https://commons.cwrc.ca/orlando:744ec949-34ed-43c6-ab59-fee5b4b2266b> .
+
+<http://viaf.org/viaf/297015946> owl:sameAs <https://commons.cwrc.ca/orlando:6a85e9ae-4abc-43b0-a267-2d385725724d> .
+
+<http://viaf.org/viaf/311378618> owl:sameAs <https://commons.cwrc.ca/orlando:2740ad20-9442-45bd-9fbf-e98e06556ce4> .
+
+<http://viaf.org/viaf/138789613> owl:sameAs <https://commons.cwrc.ca/orlando:77263c45-f819-48e4-aa3f-a35861eb593e> .
+
+<http://viaf.org/viaf/141688600> owl:sameAs <https://commons.cwrc.ca/orlando:4dff9515-b1d9-4efd-b547-808df1282006> .
+
+<http://viaf.org/viaf/135289335> owl:sameAs <https://commons.cwrc.ca/orlando:321bc778-b535-4bdd-acec-5cc2c78ef2dd> .
+
+<http://viaf.org/viaf/185935443> owl:sameAs <https://commons.cwrc.ca/orlando:66be5920-9923-4b72-8221-a0088cc09053> .
+
+<http://viaf.org/viaf/29155224425184371271> owl:sameAs <https://commons.cwrc.ca/orlando:37c26274-0fe1-4421-be1e-3fcf4279bb2a> .
+
+<http://viaf.org/viaf/50271899> owl:sameAs <https://commons.cwrc.ca/orlando:be671e2f-de3f-4d35-b240-b7fe1da74fec> .
+
+<http://viaf.org/viaf/125795705> owl:sameAs <https://commons.cwrc.ca/orlando:1ce85604-72e5-43ac-a832-e6f3daf57636> .
+
+<http://viaf.org/viaf/155888541> owl:sameAs <https://commons.cwrc.ca/orlando:b68b6ec1-dda9-4ecd-8b35-fc85dc2e6a31> .
+
+<http://viaf.org/viaf/90644401> owl:sameAs <https://commons.cwrc.ca/orlando:cb84b4a2-7fe7-4fb1-a7c4-85cd15f72fb3> .
+
+<http://viaf.org/viaf/151371874> owl:sameAs <https://commons.cwrc.ca/orlando:c7999d67-3185-464b-b6d0-542a59e3c259> .
+
+<http://viaf.org/viaf/130207793> owl:sameAs <https://commons.cwrc.ca/orlando:29eeaf94-84fa-4282-af6a-bb53abbcc00d> .
+
+<http://viaf.org/viaf/151773916> owl:sameAs <https://commons.cwrc.ca/orlando:f690e0ce-0256-41e1-bd6d-949ee5ca8f86> .
+
+<http://viaf.org/viaf/158650657> owl:sameAs <https://commons.cwrc.ca/orlando:9fbc259c-02cd-446f-96f4-5aed11cbb78b> .
+
+<http://viaf.org/viaf/137523007> owl:sameAs <https://commons.cwrc.ca/orlando:3b31a4d1-dd87-431a-963e-8d602666cf2d> .
+
+<http://viaf.org/viaf/311352557> owl:sameAs <https://commons.cwrc.ca/orlando:11cc76ac-fce9-4952-b8bc-4259742ba96f> .
+
+<http://viaf.org/viaf/313086845> owl:sameAs <https://commons.cwrc.ca/orlando:8cdafc1f-dbea-4890-9b4b-4145abbd9541> .
+
+<http://viaf.org/viaf/266034617> owl:sameAs <https://commons.cwrc.ca/orlando:7901a010-5100-4957-9e67-3fdf9c89e2a1> .
+
+<http://viaf.org/viaf/130458260> owl:sameAs <https://commons.cwrc.ca/orlando:cbbd5bd0-1075-4b27-b17b-0f7e4b46da57> .
+
+<http://viaf.org/viaf/149880181> owl:sameAs <https://commons.cwrc.ca/orlando:f002a7c2-811c-47cc-891a-413f651417c2> .
+
+<http://viaf.org/viaf/128197663> owl:sameAs <https://commons.cwrc.ca/orlando:751dd2a9-ed38-4287-b950-a1a7bf761282> .
+
+<http://viaf.org/viaf/173549121> owl:sameAs <https://commons.cwrc.ca/orlando:4f8220ca-bcca-4c3d-b5af-bb5da663dcf5> .
+
+<http://viaf.org/viaf/37803933> owl:sameAs <https://commons.cwrc.ca/orlando:192a2d0d-dbcd-451e-9c12-d09d8254ca0a> .
+
+<http://viaf.org/viaf/1247154137631715370007> owl:sameAs <https://commons.cwrc.ca/orlando:ee751e4d-f8f9-45c0-8a82-4565d88f809d> .
+
+<http://viaf.org/viaf/130257644> owl:sameAs <https://commons.cwrc.ca/orlando:df7b038f-4e1d-4f17-81dd-a56089eacae6> .
+
+<http://viaf.org/viaf/167993560> owl:sameAs <https://commons.cwrc.ca/orlando:c2452f59-db42-4919-a810-e35314762800> .
+
+<http://viaf.org/viaf/311118748> owl:sameAs <https://commons.cwrc.ca/orlando:10027c77-f630-46e3-a5a1-bd9f7765c4bd> .
+
+<http://viaf.org/viaf/138847498> owl:sameAs <https://commons.cwrc.ca/orlando:531e6cdb-5021-422f-99b6-2d06df363bc2> .
+
+<http://viaf.org/viaf/127130809> owl:sameAs <https://commons.cwrc.ca/orlando:8e0944d3-a063-4eb3-b73f-02ab02d4ac61> .
+
+<http://viaf.org/viaf/5770911> owl:sameAs <https://commons.cwrc.ca/orlando:9a5e5907-8f2b-4f7c-9cc5-acd81596a614> .
+
+<http://viaf.org/viaf/139553701> owl:sameAs <https://commons.cwrc.ca/orlando:9e6fcd2f-21fb-4d2c-8c18-28d2469fea6d> .
+
+<http://viaf.org/viaf/152544929> owl:sameAs <https://commons.cwrc.ca/orlando:53a394c2-5d6d-4e4e-9bfa-71b020063c2f> .
+
+<http://viaf.org/viaf/129171041> owl:sameAs <https://commons.cwrc.ca/orlando:bd7952dd-7277-4ed9-a68e-d83c42336e49> .
+
+<http://viaf.org/viaf/146649027> owl:sameAs <https://commons.cwrc.ca/orlando:bc9a3861-ed2b-4e77-8682-e9eb743307ce> .
+
+<http://viaf.org/viaf/130276384> owl:sameAs <https://commons.cwrc.ca/orlando:2320eb3b-1348-4f0e-82f3-697d69d7ce92> .
+
+<http://viaf.org/viaf/130276384> owl:sameAs <https://commons.cwrc.ca/orlando:b8192b06-04d5-4db8-b41b-5d21a8ca7696> .
+
+<http://viaf.org/viaf/123241335> owl:sameAs <https://commons.cwrc.ca/orlando:0002e97c-f9f6-41ac-bbf4-af2ab1e1f51c> .
+
+<http://viaf.org/viaf/155184733> owl:sameAs <https://commons.cwrc.ca/orlando:85b18ddf-2411-46e0-a5eb-4e8e514ed8e0> .
+
+<http://viaf.org/viaf/121293252> owl:sameAs <https://commons.cwrc.ca/orlando:f2c08461-8c66-4a11-851d-888dffbdfb7e> .
+
+<http://viaf.org/viaf/168200157> owl:sameAs <https://commons.cwrc.ca/orlando:8510e494-bb91-4f26-9f67-c38f887ea3e2> .
+
+<http://viaf.org/viaf/266381764> owl:sameAs <https://commons.cwrc.ca/orlando:78018588-e8ec-4653-afbc-f49aa38e1812> .
+
+<http://viaf.org/viaf/154887734> owl:sameAs <https://commons.cwrc.ca/orlando:82050c28-3bd5-41fa-a622-43fbb548b213> .
+
+<http://viaf.org/viaf/141922044> owl:sameAs <https://commons.cwrc.ca/orlando:c6f48638-03f5-4b27-8b19-7ca766b72d09> .
+
+<http://viaf.org/viaf/135166554> owl:sameAs <https://commons.cwrc.ca/orlando:1a31e082-537d-463e-bf37-09ea522c16a1> .
+
+<http://viaf.org/viaf/140800687> owl:sameAs <https://commons.cwrc.ca/orlando:401f642b-6d92-40d6-b887-581aa3351dea> .
+
+<http://viaf.org/viaf/168471063> owl:sameAs <https://commons.cwrc.ca/orlando:447f72d9-f191-4b33-b93f-e9e9ee6a5d84> .
+
+<http://viaf.org/viaf/124791143> owl:sameAs <https://commons.cwrc.ca/orlando:89f8f713-5f89-446d-9287-94cc11cdbe4d> .
+
+<http://viaf.org/viaf/129146094369900332992> owl:sameAs <https://commons.cwrc.ca/orlando:13bfd702-1ad3-426c-a407-dd8defe66a3d> .
+
+<http://viaf.org/viaf/264265782> owl:sameAs <https://commons.cwrc.ca/orlando:54bdf03f-926d-4e04-bf73-51cf687fabd1> .
+
+<http://viaf.org/viaf/136415249> owl:sameAs <https://commons.cwrc.ca/orlando:73c736ad-5aa0-4a80-b804-3b9c84260f47> .
+
+<http://viaf.org/viaf/158745426> owl:sameAs <https://commons.cwrc.ca/orlando:411586c3-39b0-4148-b66b-b104bb237359> .
+
+<http://viaf.org/viaf/173251676> owl:sameAs <https://commons.cwrc.ca/orlando:91cc60a1-5fc0-427a-b959-1f4193fc6baa> .
+
+<http://viaf.org/viaf/265628035> owl:sameAs <https://commons.cwrc.ca/orlando:aac59f12-48c2-4979-a40e-0d9eeba6e9ce> .
+
+<http://viaf.org/viaf/167837026> owl:sameAs <https://commons.cwrc.ca/orlando:f198662b-62f3-4d14-a5cb-df063e9f3af4> .
+
+<http://viaf.org/viaf/313090149> owl:sameAs <https://commons.cwrc.ca/orlando:44a85177-f354-4c7a-8a77-bf18d8d43659> .
+
+<http://viaf.org/viaf/295664937> owl:sameAs <https://commons.cwrc.ca/orlando:50b38b93-808b-4847-b08c-67fb4d18f430> .
+
+<http://viaf.org/viaf/125902455> owl:sameAs <https://commons.cwrc.ca/orlando:41927962-55e9-4aca-830f-44b846a33339> .
+
+<http://viaf.org/viaf/129472710> owl:sameAs <https://commons.cwrc.ca/orlando:f0669685-c8a0-4c69-8873-9caca86bcc50> .
+
+<http://viaf.org/viaf/265628035> owl:sameAs <https://commons.cwrc.ca/orlando:0d925c39-cb56-4658-b50e-7384f13aff0f> .
+
+<http://viaf.org/viaf/1294149368873985980001> owl:sameAs <https://commons.cwrc.ca/orlando:c2e1b8de-18d2-452c-8d2e-f50e61fa0948> .
+
+<http://viaf.org/viaf/138711119> owl:sameAs <https://commons.cwrc.ca/orlando:5902912c-f61e-4745-ae85-754fe8a8fef1> .
+
+<http://viaf.org/viaf/147236009> owl:sameAs <https://commons.cwrc.ca/orlando:28074ac8-ddfd-4f0d-b515-299809d004a2> .
+
+<http://viaf.org/viaf/143615064> owl:sameAs <https://commons.cwrc.ca/orlando:6d529eb9-9adc-41ed-b881-629c75a844c7> .
+
+<http://viaf.org/viaf/155961891> owl:sameAs <https://commons.cwrc.ca/orlando:e6190424-7cd1-4e1b-87c8-d19553cbc699> .
+
+<http://viaf.org/viaf/158197516> owl:sameAs <https://commons.cwrc.ca/orlando:eb79193a-d29d-4f41-8b11-8d6977d0e9fa> .
+
+<http://viaf.org/viaf/127710360> owl:sameAs <https://commons.cwrc.ca/orlando:8a2cb058-4a86-4d2c-a18c-8e8f7a32d5e3> .
+
+<http://viaf.org/viaf/154038101> owl:sameAs <https://commons.cwrc.ca/orlando:c54cccab-db7c-4888-addf-900e1466a17c> .
+
+<http://viaf.org/viaf/136037399> owl:sameAs <https://commons.cwrc.ca/orlando:d8b51908-5b85-40f4-98fd-0e3d1a161df9> .
+
+<http://viaf.org/viaf/51741707> owl:sameAs <https://commons.cwrc.ca/orlando:f39c9225-3478-427d-9e40-0dd386e038f6> .
+
+<http://viaf.org/viaf/314332> owl:sameAs <https://commons.cwrc.ca/orlando:8334f215-05d6-4b01-bb4c-09e52ef7d048> .
+
+<http://viaf.org/viaf/1152561518215441866> owl:sameAs <https://commons.cwrc.ca/orlando:17ee5ad2-4003-46d8-a74e-6adf829c906d> .
