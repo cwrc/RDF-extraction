@@ -771,12 +771,24 @@ class BibliographyParse:
                 self.mainTitle = x['title'].strip().replace("\n"," ").replace("\t"," ")
                 return
     
+    def get_person_id(self, uri):
+        person = None
+        if uri:
+            if uri in PEOPLE_MAPPING:
+                person = PEOPLE_MAPPING[uri]
+            else:
+                person = uri
+    
+        return person
     def get_publisher_id(self, origin, index):
+        publisher = None
         if origin['publisher uri']:                    
             if origin['publisher uri'] in PUBLISHER_MAPPING:
                 publisher = PUBLISHER_MAPPING[origin['publisher uri']]
             elif origin['publisher'] in PUBLISHER_MAPPING:
                 publisher = PUBLISHER_MAPPING[origin['publisher']]
+            elif origin['publisher uri'] in PEOPLE_MAPPING:
+                publisher = PEOPLE_MAPPING[origin['publisher uri']]
             else:
                 publisher = origin['publisher uri']
         else:
@@ -924,10 +936,13 @@ class BibliographyParse:
             j = 0
             for name in self.get_names():          
                 # TODO: insert some tests surrounding names
+
                 agent_resource = None
                 if "uri" in name and name["uri"]:
-                    agent_resource=g.resource(name["uri"])
-                else:
+                    agent_resource = self.get_person_id(name["uri"])    
+                    if agent_resource:
+                        agent_resource = g.resource(agent_resource)
+                if agent_resource == None:
                     temp_name = urllib.parse.quote_plus(
                     remove_punctuation(name['name']))
                     agent_resource=g.resource(DATA[F"{temp_name}"])
