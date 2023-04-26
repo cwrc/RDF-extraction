@@ -992,6 +992,8 @@ class BibliographyParse:
                 
                 publisher.add(RDF.type, CRM.E39_Actor)
                 publisher.add(RDFS.label, rdflib.Literal(F"{o['publisher']}"))
+                publisher.add(CRM.P2_has_type, ROLES["publisher"])
+                
                 publisher_role = g.resource(F"{self.placeholderURI}_publisher_role_{i}")
                 publisher_role.add(RDFS.label, rdflib.Literal(
                     F"{o['publisher']} in the role of publisher", lang="en"))
@@ -1000,7 +1002,7 @@ class BibliographyParse:
                 publisher_role.add( CRMPC.P02_has_range, publisher.identifier)
                 publisher_role.add( CRMPC["P14.1_in_the_role_of"],ROLES["publisher"])
                 
-                originInfo.add(CRMPC.P01i_is_domain_of,publisher_role)
+                originInfo.add(CRMPC.P01i_is_domain_of, publisher_role)
         
             if o['place']:
 
