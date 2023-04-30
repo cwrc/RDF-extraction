@@ -272,8 +272,6 @@ class ParseGeoNamesMapping:
                 logger.info(F"Unable to map Place {place_name}")
                 UNIQUE_UNMATCHED_PLACES.add(place_name)
 
-        print(F"Mapped Places: {mapped_places}")
-        # return matched_places
         return mapped_places
 
 
@@ -1031,16 +1029,6 @@ class BibliographyParse:
                 originInfo.add(CRMPC.P01i_is_domain_of, publisher_role)
         
             if o['place']:
-
-                # TODO: review place mapping
-                # place_map = GEOMAPPER.get_place(o['place'].strip())
-                # if place_map:
-                #     for item in place_map:
-                #         originInfo.add(CRM.P7_took_place_at, rdflib.URIRef(item))
-                #         place = g.resource(item)
-                #         place.add(SKOS.altLabel, rdflib.Literal(o['place']))
-                #         place.add(RDF.type, CRM.E53_Place)
-                
                 place_map = GEOMAPPER.get_place(o['place'].strip())
                 if place_map:
                     for item in place_map:
