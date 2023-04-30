@@ -687,6 +687,7 @@ Canada,https://sws.geonames.org/6251999/
 "Tottenham,Middlesex,London",https://sws.geonames.org/6167983/
 "Toronto,,",https://sws.geonames.org/6167865/
 "Toronto,Ontario,Canada",https://sws.geonames.org/6167865/
+"Toronto, ON",https://sws.geonames.org/6167865/
 "Toronto,Upper Canada,Canada",https://sws.geonames.org/6167865/
 "Timmins,Ontario,Canada",https://sws.geonames.org/6166739/
 "Thousand Islands,Canada",https://sws.geonames.org/6165765/
@@ -720,11 +721,14 @@ Georgia,https://sws.geonames.org/614540/
 "Port Hope,Upper Canada,Canada",https://sws.geonames.org/6111881/
 "Porden Islands,Canada",https://sws.geonames.org/6111197/
 "Pitcairn Island,UK",https://sws.geonames.org/6105734/
+"Peterborough,ON",https://sws.geonames.org/6101645/
+"Peterborough,ON,",https://sws.geonames.org/6101645/
 "Peterborough,Ontario,Canada",https://sws.geonames.org/6101645/
 "Peterborough,Upper Canada,Canada",https://sws.geonames.org/6101645/
 "Penetanguishene,Upper Canada,Canada",https://sws.geonames.org/6100931/
 "Pacific,",https://sws.geonames.org/6095929/
 "Ottawa,Ontario,Canada",https://sws.geonames.org/6094817/
+"Ottawa,ON",https://sws.geonames.org/6094817/
 "Otonabee River,Canada",https://sws.geonames.org/6094793/
 "Ontario,Canada",https://sws.geonames.org/6093943/
 "Nova Scotia,Canada",https://sws.geonames.org/6091530/
@@ -783,6 +787,7 @@ English,https://sws.geonames.org/5948854/
 "Ellesmere Island,Canada",https://sws.geonames.org/5947838/
 "Elgin,Ontario,Canada",https://sws.geonames.org/5947586/
 "Edmonton,Alberta,Canada",https://sws.geonames.org/5946768/
+"Edmonton,AB",https://sws.geonames.org/5946768/
 "Dundonald,Down,Northern Ireland",https://sws.geonames.org/5944004/
 "Dawson,Yukon Territory,Canada",https://sws.geonames.org/5935788/
 "Creston,British Columbia,Canada",https://sws.geonames.org/5932311/
@@ -836,6 +841,7 @@ Baltic,https://sws.geonames.org/5892408/
 "Wounded Knee,South Dakota,USA",https://sws.geonames.org/5770538/
 "South Pass,USA",https://sws.geonames.org/5753485/
 "Portland,Oregon,USA",https://sws.geonames.org/5746545/
+"Portland,OR",https://sws.geonames.org/5746545/
 "Oregon,USA",https://sws.geonames.org/5744337/
 "Medford,Massachusetts,USA",https://sws.geonames.org/5740099/
 "Klondike,USA",https://sws.geonames.org/5735286/
@@ -865,6 +871,7 @@ Baltic,https://sws.geonames.org/5892408/
 "Los Alamos,New Mexico,USA",https://sws.geonames.org/5476825/
 "Farmington,Connecticut,USA",https://sws.geonames.org/5467328/
 "Albuquerque,New Mexico,USA",https://sws.geonames.org/5454711/
+"Albuquerque,NM",https://sws.geonames.org/5454711/
 "Rincon Creek,USA",https://sws.geonames.org/5436462/
 "Denver,Colorado,USA",https://sws.geonames.org/5419384/
 "Del Norte,Colorado,USA",https://sws.geonames.org/5419302/
@@ -874,6 +881,7 @@ Baltic,https://sws.geonames.org/5892408/
 "Stockton,California,USA",https://sws.geonames.org/5399020/
 "Stanislaus,California,USA",https://sws.geonames.org/5398597/
 "Stanford,California,USA",https://sws.geonames.org/5398563/
+"Stanford,CA",https://sws.geonames.org/5398563/
 "Sierra Nevadas,USA",https://sws.geonames.org/5395648/
 "Sebastopol,Crimea,",https://sws.geonames.org/5394165/
 "Sebastopol,Crimea,Russia",https://sws.geonames.org/5394165/
@@ -882,6 +890,7 @@ Baltic,https://sws.geonames.org/5892408/
 "Santa Clara Valley,USA",https://sws.geonames.org/5393046/
 "Santa Barbara,California,USA",https://sws.geonames.org/5392952/
 "San Marino,California,USA",https://sws.geonames.org/5392400/
+"San Marino, CA",https://sws.geonames.org/5392400/
 "San Diego,California,USA",https://sws.geonames.org/5391811/
 "Sacramento,California,USA",https://sws.geonames.org/5389489/
 "Rialto,California,USA",https://sws.geonames.org/5387288/
@@ -896,6 +905,7 @@ Baltic,https://sws.geonames.org/5892408/
 "Mendocino County,USA",https://sws.geonames.org/5372163/
 "Mendocino,USA",https://sws.geonames.org/5372153/
 "Los Angeles,California,",https://sws.geonames.org/5368361/
+"Los Angeles,CA",https://sws.geonames.org/5368361/
 "Los Angeles,California,USA",https://sws.geonames.org/5368361/
 "Mogadishu,Somalia",https://sws.geonames.org/53654/
 "La Jolla,California,USA",https://sws.geonames.org/5363943/
@@ -909,6 +919,7 @@ Baltic,https://sws.geonames.org/5892408/
 "Boonville,California,USA",https://sws.geonames.org/5330040/
 "Beverly Hills,California,USA",https://sws.geonames.org/5328041/
 "Berkeley,California,USA",https://sws.geonames.org/5327684/
+"Berkeley,CA",https://sws.geonames.org/5327684/
 "White Mountains,USA",https://sws.geonames.org/5320662/
 "Tucson,Arizona,USA",https://sws.geonames.org/5318313/
 "Tempe,Arizona,USA",https://sws.geonames.org/5317058/
@@ -1001,12 +1012,14 @@ Somalia,https://sws.geonames.org/51537/
 "New York,New York,USA",https://sws.geonames.org/5128581/
 "New York,United States",https://sws.geonames.org/5128581/
 "New York,USA",https://sws.geonames.org/5128581/
+"New York",https://sws.geonames.org/5128581/
 "Mount Kisco,New York,USA",https://sws.geonames.org/5127744/
 "Monroe,New York,USA",https://sws.geonames.org/5127302/
 "Manhattan,New York,USA",https://sws.geonames.org/5125771/
 "Manhasset,Long Island,USA",https://sws.geonames.org/5125766/
 "Katonah,New York,USA",https://sws.geonames.org/5123118/
 "Ithaca,New York,USA",https://sws.geonames.org/5122432/
+"Ithaca,NY",https://sws.geonames.org/5122432/
 "Hurley,New York,USA",https://sws.geonames.org/5121679/
 "Hudson,New York,USA",https://sws.geonames.org/5121509/
 "Harlem River,USA",https://sws.geonames.org/5120037/
@@ -1015,7 +1028,9 @@ Somalia,https://sws.geonames.org/51537/
 "Grand-View-on-Hudson,New York,USA",https://sws.geonames.org/5119026/
 "Genesee River,USA",https://sws.geonames.org/5118388/
 "Garden City,New York,USA",https://sws.geonames.org/5118226/
+"Garden City,NY",https://sws.geonames.org/5118226/
 "Freeport,New York,USA",https://sws.geonames.org/5117949/
+"Freeport,NY",https://sws.geonames.org/5117949/
 "Erie Canal,USA",https://sws.geonames.org/5116640/
 "Dead Sea,",https://sws.geonames.org/5114639/
 "Croton-on-Hudson,New York,USA",https://sws.geonames.org/5114221/
@@ -1031,8 +1046,10 @@ Somalia,https://sws.geonames.org/51537/
 "Austerlitz,New York,USA",https://sws.geonames.org/5107543/
 "Annandale-on-Hudson,New York,USA",https://sws.geonames.org/5107221/
 "Albany,New York,USA",https://sws.geonames.org/5106834/
+"Albany,NY",https://sws.geonames.org/5106834/
 "Rahway,New Jersey,USA",https://sws.geonames.org/5103055/
 "Princeton,New Jersey,USA",https://sws.geonames.org/5102922/
+"Princeton,NJ",https://sws.geonames.org/5102922/
 "Perth Amboy,New Jersey,USA",https://sws.geonames.org/5102578/
 "Newark,New Jersey,USA",https://sws.geonames.org/5101798/
 "New Jersey,USA",https://sws.geonames.org/5101760/
@@ -1071,6 +1088,7 @@ Somalia,https://sws.geonames.org/51537/
 "Mackinac Island,USA",https://sws.geonames.org/5000469/
 "Grand Rapids,Michigan,USA",https://sws.geonames.org/4994358/
 "Detroit,Michigan,USA",https://sws.geonames.org/4990729/
+"Detroit, MI",https://sws.geonames.org/4990729/
 "Leningrad,Russia",https://sws.geonames.org/498817/
 "Leningrad,USSR",https://sws.geonames.org/498817/
 "Petrograd,Russia",https://sws.geonames.org/498817/
@@ -1081,6 +1099,7 @@ Somalia,https://sws.geonames.org/51537/
 "Bloomfield Hills,Michigan,USA",https://sws.geonames.org/4986429/
 "Battle Creek,Michigan,USA",https://sws.geonames.org/4985153/
 "Ann Arbor,Michigan,USA",https://sws.geonames.org/4984247/
+"Ann Arbor,MI",https://sws.geonames.org/4984247/
 "Waterville,Maine,USA",https://sws.geonames.org/4982236/
 "Temple,Maine,USA",https://sws.geonames.org/4980455/
 "Squirrel Island,USA",https://sws.geonames.org/4979685/
@@ -1142,12 +1161,13 @@ Rwanda,https://sws.geonames.org/49518/
 "Canton,Massachusetts,USA",https://sws.geonames.org/4932214/
 "Cambridgeport,Massachusetts,USA",https://sws.geonames.org/4932005/
 "Cambridge,Massachusetts,USA",https://sws.geonames.org/4931972/
-"Cambridge,Massachusetts,USA",https://sws.geonames.org/4931972/
+"Cambridge,MA",https://sws.geonames.org/4931972/
 "Cambridge,United States of America,USA",https://sws.geonames.org/4931972/
 "Brookline,Massachusetts,USA",https://sws.geonames.org/4931482/
 "Brighton,Massachusetts,USA",https://sws.geonames.org/4931353/
 "Braintree,Massachusetts,USA",https://sws.geonames.org/4931181/
 "Boston,",https://sws.geonames.org/4930956/
+"Boston,MA",https://sws.geonames.org/4930956/
 "Boston,Massachuseetts,USA",https://sws.geonames.org/4930956/
 "Boston,Massachusetfs,USA",https://sws.geonames.org/4930956/
 "Boston,Massachusettes,USA",https://sws.geonames.org/4930956/
@@ -1171,6 +1191,7 @@ Rwanda,https://sws.geonames.org/49518/
 "Lake Forest,Illinois,USA",https://sws.geonames.org/4899012/
 "Illinois,USA",https://sws.geonames.org/4896861/
 "Chicago,Illinois,USA",https://sws.geonames.org/4887398/
+"Chicago,IL",https://sws.geonames.org/4887398/
 Persia,https://sws.geonames.org/4871055/
 "Iowa,USA",https://sws.geonames.org/4862182/
 "Iowa City,Iowa,USA",https://sws.geonames.org/4862034/
@@ -1179,6 +1200,7 @@ Persia,https://sws.geonames.org/4871055/
 "Short Beach,Connecticut,USA",https://sws.geonames.org/4843005/
 "Ridgefield,Connecticut,USA",https://sws.geonames.org/4841463/
 "New Haven,Connecticut,USA",https://sws.geonames.org/4839366/
+"New Haven,CT",https://sws.geonames.org/4839366/
 "Middletown,Connecticut,USA",https://sws.geonames.org/4838633/
 "Middlebury,Connecticut,USA",https://sws.geonames.org/4838611/
 "Meriden,Connecticut,USA",https://sws.geonames.org/4838524/
@@ -1211,8 +1233,10 @@ Persia,https://sws.geonames.org/4871055/
 "Vyborg,Russia",https://sws.geonames.org/470546/
 "Houston,Texas,USA",https://sws.geonames.org/4699066/
 "Fort Worth,Texas,USA",https://sws.geonames.org/4691930/
+"Fort Worth,TX",https://sws.geonames.org/4691930/
 "Dallas,Texas,USA",https://sws.geonames.org/4684888/
 "Austin,Texas,USA",https://sws.geonames.org/4671654/
+"Austin,TX",https://sws.geonames.org/4671654/
 "Tennessee,USA",https://sws.geonames.org/4662168/
 "New Market,Tennessee,USA",https://sws.geonames.org/4645293/
 "Natchez Trace,USA",https://sws.geonames.org/4644601/
@@ -1254,6 +1278,7 @@ Estonia,https://sws.geonames.org/453733/
 "Edenton,North Carolina,USA",https://sws.geonames.org/4464897/
 "Charlotte,North Carolina,USA",https://sws.geonames.org/4460243/
 "Chapel Hill,North Carolina,USA",https://sws.geonames.org/4460162/
+"Chapel Hill,NC",https://sws.geonames.org/4460162/
 "Yazoo City,Mississippi,USA",https://sws.geonames.org/4451810/
 "Tupelo,Mississippi,USA",https://sws.geonames.org/4448903/
 "Natchez,Mississippi,USA",https://sws.geonames.org/4437982/
@@ -1278,6 +1303,7 @@ Estonia,https://sws.geonames.org/453733/
 "Chesapeake Bay,USA",https://sws.geonames.org/4351177/
 "Bar Harbor,Maine,USA",https://sws.geonames.org/4347849/
 "Baltimore,Maryland,USA",https://sws.geonames.org/4347778/
+"Baltimore,MD",https://sws.geonames.org/4347778/
 "Annapolis,Maryland,USA",https://sws.geonames.org/4347242/
 "New Orleans,Louisiana,USA",https://sws.geonames.org/4335045/
 "Louisiana,USA",https://sws.geonames.org/4331987/
@@ -1286,6 +1312,7 @@ Estonia,https://sws.geonames.org/453733/
 "Basile,Fernando Po,Spanish Guinea",https://sws.geonames.org/4315514/
 "Louisville,Kentucky,USA",https://sws.geonames.org/4299276/
 "Lexington,Kentucky,USA",https://sws.geonames.org/4297983/
+"Lexington,KY",https://sws.geonames.org/4297983/
 "Topeka,Kansas,USA",https://sws.geonames.org/4280539/
 "Lawrence,Kansas,USA",https://sws.geonames.org/4274277/
 "Kansas,USA",https://sws.geonames.org/4273857/
@@ -1294,9 +1321,12 @@ Estonia,https://sws.geonames.org/453733/
 "New Harmony,Indiana,USA",https://sws.geonames.org/4262092/
 "Needham,Massachusetts,USA",https://sws.geonames.org/4262008/
 "Indianapolis,Indiana,USA",https://sws.geonames.org/4259418/
+"Indianapolis,IN",https://sws.geonames.org/4259418/
+"Bloomington,IN",https://sws.geonames.org/4254679/
 "Bloomington,Indiana,USA",https://sws.geonames.org/4254679/
 "Sparta,Illinois,USA",https://sws.geonames.org/4250476/
 "Carbondale,Illinois,USA",https://sws.geonames.org/4235193/
+"Carbondale,IL",https://sws.geonames.org/4235193/
 "Wards Chapel,Georgia,USA",https://sws.geonames.org/4229408/
 "Savannah,Georgia,USA",https://sws.geonames.org/4221552/
 "Milledgeville,Georgia,USA",https://sws.geonames.org/4209448/
@@ -1401,6 +1431,7 @@ Ecuador,https://sws.geonames.org/3658394/
 "Mediterranean Sea,",https://sws.geonames.org/363196/
 Venezuela,https://sws.geonames.org/3625428/
 "San Francisco,California,USA",https://sws.geonames.org/3621911/
+"San Francisco,CA",https://sws.geonames.org/3621911/
 "Abu Simbel,Nubia,Egypt",https://sws.geonames.org/362041/
 Nicaragua,https://sws.geonames.org/3617476/
 "El Alamein,Egypt",https://sws.geonames.org/361612/
@@ -1751,7 +1782,6 @@ Rome,https://sws.geonames.org/3169070/
 "San Cassiano,Italy",https://sws.geonames.org/3168497/
 "San Giorgio Montagna,Italy",https://sws.geonames.org/3168305/
 "Bagni di San Giuliano,Italy",https://sws.geonames.org/3168221/
-San Marino,https://sws.geonames.org/3168070/
 "San Remo,Italy",https://sws.geonames.org/3167777/
 "Savona,Italy",https://sws.geonames.org/3167022/
 "Siena,Italy",https://sws.geonames.org/3166548/
@@ -2591,6 +2621,7 @@ Switzerland,https://sws.geonames.org/2658434/
 "Aldenham,Hertfordshire,England",https://sws.geonames.org/2657553/
 "Aldermaston,Berkshire,England",https://sws.geonames.org/2657544/
 "Aldershot,Hampshire,England",https://sws.geonames.org/2657540/
+"Aldershot,England",https://sws.geonames.org/2657540/
 "Aldington,Kent,England",https://sws.geonames.org/2657531/
 "Aldworth,Berkshire,England",https://sws.geonames.org/2657522/
 "Allerton Mauleverer,Yorkshire,England",https://sws.geonames.org/2657481/
@@ -2657,6 +2688,7 @@ Switzerland,https://sws.geonames.org/2658434/
 "Aylesbury,Buckinghamshire,England",https://sws.geonames.org/2656719/
 "Aylesford,Kent,England",https://sws.geonames.org/2656716/
 "Ayr,Ayrshire,Scotland",https://sws.geonames.org/2656708/
+"Ayr,Scotland",https://sws.geonames.org/2656708/
 "Ayrshire,Scotland",https://sws.geonames.org/2656700/
 "Babraham,Cambridgeshire,England",https://sws.geonames.org/2656686/
 "Bacup,Lancashire,England",https://sws.geonames.org/2656666/
@@ -2688,6 +2720,7 @@ Switzerland,https://sws.geonames.org/2658434/
 "Barton on Sea,Hampshire,England",https://sws.geonames.org/2656221/
 "Basildon,Essex,England",https://sws.geonames.org/2656194/
 "Basingstoke,Hampshire,England",https://sws.geonames.org/2656192/
+"Basingstoke,Hampshire",https://sws.geonames.org/2656192/
 " ,Somerset,England",https://sws.geonames.org/2656173/
 "Bath,Somerset,England",https://sws.geonames.org/2656173/
 "Batheaston,Somerset,England",https://sws.geonames.org/2656171/
@@ -2833,6 +2866,7 @@ Switzerland,https://sws.geonames.org/2658434/
 "Brightwalton,Berkshire,England",https://sws.geonames.org/2654708/
 "Brislington,Somerset,England",https://sws.geonames.org/2654677/
 "Bristol,",https://sws.geonames.org/2654675/
+"Bristol,England",https://sws.geonames.org/2654675/
 "Bristol,Gloucester,England",https://sws.geonames.org/2654675/
 "Bristol,Gloucestershire ,England",https://sws.geonames.org/2654675/
 "Bristol,Gloucestershire,England",https://sws.geonames.org/2654675/
@@ -3847,6 +3881,7 @@ London,https://sws.geonames.org/2643743/
 "Newarthill,Lanarkshire,Scotland",https://sws.geonames.org/2641729/
 "Newcastle under Lyme,Staffordshire,England",https://sws.geonames.org/2641674/
 "Newcastle upon Tyne,Northumberland,England",https://sws.geonames.org/2641673/
+"Newcastle upon Tyne",https://sws.geonames.org/2641673/
 "Newcastle,Shropshire,England",https://sws.geonames.org/2641673/
 "New Cross,Cardiganshire,Wales",https://sws.geonames.org/2641661/
 "New Cross,Wales",https://sws.geonames.org/2641661/
@@ -4823,6 +4858,7 @@ Tuvalu,https://sws.geonames.org/2110297/
 Solomon Islands,https://sws.geonames.org/2103350/
 Papua New Guinea,https://sws.geonames.org/2088628/
 "Adelaide,South Australia,Australia",https://sws.geonames.org/2078025/
+"Adelaide,Australia",https://sws.geonames.org/2078025/
 "Armadale,Western Australia,Australia",https://sws.geonames.org/2077579/
 Australia,https://sws.geonames.org/2077456/
 "Darwin,Northern Territory,Australia",https://sws.geonames.org/2073124/
@@ -5521,6 +5557,7 @@ Scottish,https://sws.geonames.org/2638360/
 "Millerton, NY",https://sws.geonames.org/5127066/
 "Auckland, New Zealand",https://sws.geonames.org/2193733/
 "Orlando, Florida",https://sws.geonames.org/4167147/
+"Orlando, FL",https://sws.geonames.org/4167147/
 "Cheltenham, UK",https://sws.geonames.org/7290548/
 "Llandeilo, Wales",https://sws.geonames.org/2644135/
 "Bozeman, MT",https://sws.geonames.org/5641727/
