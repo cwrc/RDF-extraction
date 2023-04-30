@@ -369,7 +369,7 @@ def extract_culturalforms(tag_list, context_type, person, list_type="paragraphs"
             for x in attributes.keys():
                 temp_attr = {x:attributes[x]}
                 activity_id = context_id.replace("Context","Event") + "_"+ str(count)
-                label = f"{utilities.split_by_casing(CONTEXT_TYPE)}Event: {utilities.split_by_casing(str(x).split('#')[1]).lower()}".replace("Context", "")
+                label = f"{utilities.split_by_casing(CONTEXT_TYPE)}Event: {utilities.split_by_casing(str(x).split('/')[-1]).lower()}".replace("Context", "")
                 activity = Activity(person, label, activity_id, tag, activity_type="culturalform", attributes=temp_attr)
                 activity.event_type.append(utilities.create_cwrc_uri(CONTEXT_TYPE))
                 temp_context.link_activity(activity)
@@ -548,8 +548,8 @@ def get_mapped_term(rdf_type, value, retry=False, id=None):
     global map_attempt
     global map_success
     global map_fail
-    if "http://id.lincsproject.ca/cwrc#" not in rdf_type:
-        rdf_type = "http://id.lincsproject.ca/cwrc#" + rdf_type
+    if "http://id.lincsproject.ca/cwrc/" not in rdf_type:
+        rdf_type = "http://id.lincsproject.ca/cwrc/" + rdf_type
     map_attempt += 1
     term = None
     temp_val = clean_term(value)
@@ -575,7 +575,7 @@ def get_mapped_term(rdf_type, value, retry=False, id=None):
             for x in CF_MAP[rdf_type]:
                 if get_close_matches(value.lower(), x):
                     possibilites.append(x[0])
-            log_str = "Unable to find matching " + rdf_type.split("#")[1] + " instance for '" + value + "'"
+            log_str = "Unable to find matching " + rdf_type.split("/")[1] + " instance for '" + value + "'"
 
             if type(term) is Literal:
                 update_fails(rdf_type, value)
@@ -602,11 +602,11 @@ def log_mapping_fails(detail=True,toFile=False):
     for x in fail_dict.keys():
         num = len(fail_dict[x].keys())
         total_unmapped += num
-        log_str += "\t" + x.split("#")[1] + ":" + str(num) + "\n"
+        log_str += "\t" + x.split("/")[-1] + ":" + str(num) + "\n"
     log_str += F"\nFailed to find {total_unmapped} unique terms\n"
 
     for x in fail_dict.keys():
-        entity_class = x.split("#")[1] 
+        entity_class = x.split("/")[-1] 
         log_str += F"\t{entity_class} ({len(fail_dict[x].keys())}  unique) :\n"
 
         new_dict = OrderedDict(sorted(fail_dict[x].items(), key=lambda t: t[1], reverse=True))

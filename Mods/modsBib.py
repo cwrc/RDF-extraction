@@ -39,6 +39,8 @@ CRMPC = rdflib.Namespace("http://www.cidoc-crm.org/cidoc-crm/")
 CRM = rdflib.Namespace("http://www.cidoc-crm.org/cidoc-crm/")
 
 GETTY = rdflib.Namespace("https://vocab.getty.edu/aat/")
+TGN = rdflib.Namespace("https://vocab.getty.edu/tgn/")
+GEONAMES = rdflib.Namespace("https://sws.geonames.org/")
 
 BF_PROPERTIES = {
     "change date": BF.changeDate,
@@ -73,11 +75,14 @@ ROLES = {
     "recipient":MARC_REL.rcp
 }
 
-genre_graph = None
-genre_map = {}
-geoMapper = None
-genre_mapping = {}
-STRING_MATCH_RATIO = 80
+GENRE_GRAPH = None
+URI_TO_GENRE_MAPPING = {} # URIs to GENRE labels
+GEOMAPPER = None
+GENRE_MAPPING = {} # labels to URIs
+STRING_MATCH_RATIO = 95
+
+PUBLISHER_MAPPING = {}
+PEOPLE_MAPPING = {}
 
 UNIQUE_UNMATCHED_PLACES = set()
 AGENTS = {}
@@ -125,6 +130,12 @@ def dateParse(date_string: str, both=True):
 
     try:
         dt = datetime.datetime.strptime(date_string, "%Y-%m-%d")
+        end_dt = dt + datetime.timedelta(days=1,seconds=-1)
+        return dt.isoformat(), True, end_dt.isoformat()
+    except ValueError:
+        pass
+    try:
+        dt = datetime.datetime.strptime(date_string, "%Y-%m-%d-")
         end_dt = dt + datetime.timedelta(days=1,seconds=-1)
         return dt.isoformat(), True, end_dt.isoformat()
     except ValueError:
@@ -214,7 +225,7 @@ class ParseGeoNamesMapping:
             for row in csvfile:
                 place_name = row[0].rstrip(',.')
                 place_name = place_name.strip()
-                url_string = row[1] if 'http://' in row[1] else F"http://{row[1]}"
+                url_string = row[1] if 'https://' in row[1] else F"https://{row[1]}"
                 self.place_mapper.append(
                     {"placename": place_name, "url": url_string})
 
@@ -226,10 +237,11 @@ class ParseGeoNamesMapping:
         if ';' in place:
             place_name_parts = re.split("\s*;\s*", place)
         elif 'and' in place:
-            place_name_parts = re.split('\s*and\s*', place)
+            place_name_parts = re.split('\s* and \s*', place)
         else:
             place_name_parts = [place]
 
+        
         return place_name_parts
 
     def get_place(self, place_name):
@@ -241,6 +253,7 @@ class ParseGeoNamesMapping:
         """
         place_name = place_name.strip()
         matched_places = []
+        mapped_places = {}
 
         place_name_parts = ParseGeoNamesMapping.split_place_parts(place_name)
         for part in place_name_parts:
@@ -253,6 +266,7 @@ class ParseGeoNamesMapping:
                     selected_item = place
 
                     matched_places.append(place['url'])
+                    mapped_places[part] = place['url']
                     break
 
             if not selected_item:
@@ -260,7 +274,7 @@ class ParseGeoNamesMapping:
                 logger.info(F"Unable to map Place {place_name}")
                 UNIQUE_UNMATCHED_PLACES.add(place_name)
 
-        return matched_places
+        return mapped_places
 
 
 class WritingParse:
@@ -421,7 +435,7 @@ class BibliographyParse:
         else:
             self.old_id = resource_name.replace(".xml", "")
 
-        if 'data:' in self.id or "cwrcdata" in self.id: #What's wrong with this?
+        if 'data:' in self.id or "cwrcdata" in self.id: # TODO: Review: What's wrong with this?
             self.mainURI = self.id
             self.placeholderURI = self.id
         elif "https://commons.cwrc.ca/orlando:" in self.id:
@@ -767,6 +781,34 @@ class BibliographyParse:
             if x['usage'] == 'primary':
                 self.mainTitle = x['title'].strip().replace("\n"," ").replace("\t"," ")
                 return
+    
+    def get_person_id(self, uri):
+        person = None
+        if uri:
+            if uri in PEOPLE_MAPPING:
+                person = PEOPLE_MAPPING[uri]
+            else:
+                person = uri
+    
+        return person
+    def get_publisher_id(self, origin, index):
+        publisher = None
+        if origin['publisher uri']:                    
+            if origin['publisher uri'] in PUBLISHER_MAPPING:
+                publisher = PUBLISHER_MAPPING[origin['publisher uri']]
+            elif origin['publisher'] in PUBLISHER_MAPPING:
+                publisher = PUBLISHER_MAPPING[origin['publisher']]
+            elif origin['publisher uri'] in PEOPLE_MAPPING:
+                publisher = PEOPLE_MAPPING[origin['publisher uri']]
+            else:
+                publisher = origin['publisher uri']
+        else:
+            if origin['publisher'] in PUBLISHER_MAPPING:
+                publisher = PUBLISHER_MAPPING[origin['publisher']]
+            else:
+                publisher = F"{self.placeholderURI}_activity_statement_publisher_{index}"
+        return publisher
+    
     def build_graph(self, part_type=None):
         g = self.g
 
@@ -845,7 +887,7 @@ class BibliographyParse:
 
             
         
-        #CIDOC: Creating time-spans for record change
+        #CIDOC: Creating time-spans for record change (<recordChangeDate>)
         r_count = 1
         for r in self.get_record_change_date():
             start_date, transformed, end_date = dateParse(r['date'])
@@ -905,10 +947,13 @@ class BibliographyParse:
             j = 0
             for name in self.get_names():          
                 # TODO: insert some tests surrounding names
+
                 agent_resource = None
                 if "uri" in name and name["uri"]:
-                    agent_resource=g.resource(name["uri"])
-                else:
+                    agent_resource = self.get_person_id(name["uri"])    
+                    if agent_resource:
+                        agent_resource = g.resource(agent_resource)
+                if agent_resource == None:
                     temp_name = urllib.parse.quote_plus(
                     remove_punctuation(name['name']))
                     agent_resource=g.resource(DATA[F"{temp_name}"])
@@ -968,13 +1013,13 @@ class BibliographyParse:
                 j+=1         
             
             if o['publisher']:
-                if o['publisher uri']:
-                    publisher = g.resource(o['publisher uri'])
-                else:
-                    publisher = g.resource(F"{self.placeholderURI}_activity_statement_publisher_{i}")
+                publisher = g.resource(self.get_publisher_id(o,i))
+                o['publisher_id'] = str(publisher.identifier)
                 
                 publisher.add(RDF.type, CRM.E39_Actor)
                 publisher.add(RDFS.label, rdflib.Literal(F"{o['publisher']}"))
+                publisher.add(CRM.P2_has_type, ROLES["publisher"])
+                
                 publisher_role = g.resource(F"{self.placeholderURI}_publisher_role_{i}")
                 publisher_role.add(RDFS.label, rdflib.Literal(
                     F"{o['publisher']} in the role of publisher", lang="en"))
@@ -983,17 +1028,15 @@ class BibliographyParse:
                 publisher_role.add( CRMPC.P02_has_range, publisher.identifier)
                 publisher_role.add( CRMPC["P14.1_in_the_role_of"],ROLES["publisher"])
                 
-                originInfo.add(CRMPC.P01i_is_domain_of,publisher_role)
+                originInfo.add(CRMPC.P01i_is_domain_of, publisher_role)
         
             if o['place']:
-
-                # TODO: review place mapping
-                place_map = geoMapper.get_place(o['place'].strip())
+                place_map = GEOMAPPER.get_place(o['place'].strip())
                 if place_map:
                     for item in place_map:
-                        originInfo.add(CRM.P7_took_place_at, rdflib.URIRef(item))
-                        place = g.resource(item)
-                        place.add(RDFS.label, rdflib.Literal(o['place']))
+                        place = g.resource(place_map[item])
+                        originInfo.add(CRM.P7_took_place_at, place)
+                        place.add(SKOS.altLabel, rdflib.Literal(item))
                         place.add(RDF.type, CRM.E53_Place)
 
 
@@ -1133,9 +1176,9 @@ class BibliographyParse:
         genres = self.get_genre()
         for genre in genres:
             genre["genre"] = genre["genre"].lower()
-            if genre["genre"] in genre_mapping:
-                uri = rdflib.URIRef(genre_mapping[genre["genre"]])
-                if genre_graph[uri]:
+            if genre["genre"] in GENRE_MAPPING:
+                uri = rdflib.URIRef(GENRE_MAPPING[genre["genre"]])
+                if GENRE_GRAPH[uri]:
                     resource.add(CRM.P2_has_type, uri)
                 else:
                     logger.warning(F"GENRE NOT FOUND: {genre['genre']}")
@@ -1143,16 +1186,20 @@ class BibliographyParse:
                     logger.warning(F"GENRE NOT FOUND: {genre['genre']}")
 
         # Grabbing genres extracted from Orlando files
-        if self.id in genre_map:
-            genres = genre_map[self.id]
+        if self.id in URI_TO_GENRE_MAPPING:
+            genres = URI_TO_GENRE_MAPPING[self.id]
             for genre in genres:
-                if genre in genre_mapping:            
-                    uri = genre_mapping[genre]
+                if genre in GENRE_MAPPING:            
+                    uri = GENRE_MAPPING[genre]
                 else:
-                    uri = genre_mapping[genre.lower()]
+                    if genre.lower() in GENRE_MAPPING:
+                        uri = GENRE_MAPPING[genre.lower()]
+                    else:
+                        logger.warning(F"GENRE NOT FOUND: {genre}")
+                        continue
                 uri = rdflib.URIRef(uri)
 
-                if genre_graph[uri]:
+                if (uri, None, None) in GENRE_GRAPH:
                     resource.add(CRM.P2_has_type, uri)
                 else:
                     logger.info(F"GENRE NOT FOUND: {genre}")
@@ -1179,6 +1226,8 @@ if __name__ == "__main__":
     g.bind("skos", SKOS)
     g.bind("orlando", ORLANDO)
     g.bind("aat", GETTY)
+    g.bind("geonames", GEONAMES)
+    g.bind("tgn", TGN)
 
     # Adding declaration of references
     for label, uri in BibliographyParse.type_map.items():
@@ -1203,34 +1252,52 @@ if __name__ == "__main__":
         print("Missing config file")
         print("Need a file with the following variables: ")
         print("WRITING_FILES=[DIRECTORY OF WRITING FILES]")
-        print("GENRE_ONTOLOGY=[PATH TO GENRE ONTOLOGY]")
+        print("GENRE_VOCAB=[PATH TO GENRE VOCAB]")
         print("BIBLIOGRAPHY_FILES=[DIRECTORY OF BILBIOGRAPHY FILES]")
         print("GENRE_CSV=[PATH TO GENRE MAPPING]")
+        print("PUBLISHER_CSV=[PATH TO PUBLISHER MAPPING]")
+        print("PEOPLE_CSV=[PATH TO PEOPLE MAPPING]")
 
     dirname = config_options['BIBLIOGRAPHY_FILES']
     writing_dir = config_options['WRITING_FILES']
-    genre_ontology = config_options['GENRE_ONTOLOGY']
+    genre_ontology = config_options['GENRE_VOCAB']
     places = config_options['PLACES_CSV']
-    genre_map_file = config_options['GENRE_CSV']
-
-    geoMapper = ParseGeoNamesMapping(places)
+    URI_TO_GENRE_MAPPING_file = config_options['GENRE_CSV']
+    publishers_file = config_options['PUBLISHERS_CSV']
+    people_file = config_options['PEOPLE_CSV']
+    
+    GEOMAPPER = ParseGeoNamesMapping(places)
 
     # TODO: Eventually orlando labels should be used as hidden labels or special orlando label
-    genre_graph = rdflib.Graph()
-    genre_graph.parse(genre_ontology)
+    GENRE_GRAPH = rdflib.Graph()
+    GENRE_GRAPH.parse(genre_ontology)
 
-    with open(genre_map_file) as f:
+    with open(URI_TO_GENRE_MAPPING_file) as f:
         csvfile = csv.reader(f)
         for row in csvfile:
-            genre_mapping[row[0]] = row[1]
+            GENRE_MAPPING[row[0]] = row[1]
+            
+    
+    with open(publishers_file) as f:
+        csvfile = csv.reader(f)
+        for row in csvfile:
+            PUBLISHER_MAPPING[row[0]] = row[1]
+            
+    with open(people_file) as f:
+        csvfile = csv.reader(f)
+        for row in csvfile:
+            PEOPLE_MAPPING[row[0]] = row[1]
+            
 
-    for fname in os.listdir(writing_dir):
+            
+
+    for fname in os.listdir(writing_dir)[:10]:
         path = os.path.join(writing_dir, fname)
         if os.path.isdir(path):
             continue
 
         try:
-            genreParse = WritingParse(path, genre_map)
+            genreParse = WritingParse(path, URI_TO_GENRE_MAPPING)
         except UnicodeError:
             pass
 
@@ -1249,10 +1316,10 @@ if __name__ == "__main__":
 
     count = 1
     total = len(os.listdir(dirname))
-    # for fname in os.listdir(dirname)[:1000]:
     # for fname in test_filenames:
-    for fname in os.listdir(dirname):
-        print(F"{count}/{total} files extracted")
+    # for fname in os.listdir(dirname):
+    for fname in os.listdir(dirname)[:5000]:
+        print(F"{count}/{total} files extracted: {fname}")
         path = os.path.join(dirname, fname)
         if os.path.isdir(path):
             continue
@@ -1268,8 +1335,8 @@ if __name__ == "__main__":
 
     with open("unmatchedplaces.csv", "w") as f:
         writer = csv.writer(f, delimiter='\t', quoting=csv.QUOTE_MINIMAL)
-        for item in UNIQUE_UNMATCHED_PLACES:
-            writer.writerow([item])
+        for unmatched_place in UNIQUE_UNMATCHED_PLACES:
+            writer.writerow([unmatched_place])
 
     fname = "bibliography_full"
     fname = F"bibliography_{datetime.datetime.now().strftime('%d-%m-%Y')}"
