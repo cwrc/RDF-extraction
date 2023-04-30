@@ -251,6 +251,7 @@ class ParseGeoNamesMapping:
         """
         place_name = place_name.strip()
         matched_places = []
+        mapped_places = {}
 
         place_name_parts = ParseGeoNamesMapping.split_place_parts(place_name)
         for part in place_name_parts:
@@ -263,6 +264,7 @@ class ParseGeoNamesMapping:
                     selected_item = place
 
                     matched_places.append(place['url'])
+                    mapped_places[part] = place['url']
                     break
 
             if not selected_item:
@@ -270,7 +272,9 @@ class ParseGeoNamesMapping:
                 logger.info(F"Unable to map Place {place_name}")
                 UNIQUE_UNMATCHED_PLACES.add(place_name)
 
-        return matched_places
+        print(F"Mapped Places: {mapped_places}")
+        # return matched_places
+        return mapped_places
 
 
 class WritingParse:
@@ -1029,12 +1033,20 @@ class BibliographyParse:
             if o['place']:
 
                 # TODO: review place mapping
+                # place_map = GEOMAPPER.get_place(o['place'].strip())
+                # if place_map:
+                #     for item in place_map:
+                #         originInfo.add(CRM.P7_took_place_at, rdflib.URIRef(item))
+                #         place = g.resource(item)
+                #         place.add(SKOS.altLabel, rdflib.Literal(o['place']))
+                #         place.add(RDF.type, CRM.E53_Place)
+                
                 place_map = GEOMAPPER.get_place(o['place'].strip())
                 if place_map:
                     for item in place_map:
-                        originInfo.add(CRM.P7_took_place_at, rdflib.URIRef(item))
-                        place = g.resource(item)
-                        place.add(SKOS.altLabel, rdflib.Literal(o['place']))
+                        place = g.resource(place_map[item])
+                        originInfo.add(CRM.P7_took_place_at, place)
+                        place.add(SKOS.altLabel, rdflib.Literal(item))
                         place.add(RDF.type, CRM.E53_Place)
 
 
@@ -1312,9 +1324,9 @@ if __name__ == "__main__":
 
     count = 1
     total = len(os.listdir(dirname))
-    # for fname in os.listdir(dirname)[:1000]:
     # for fname in test_filenames:
-    for fname in os.listdir(dirname):
+    # for fname in os.listdir(dirname):
+    for fname in os.listdir(dirname)[:1000]:
         print(F"{count}/{total} files extracted: {fname}")
         path = os.path.join(dirname, fname)
         if os.path.isdir(path):
