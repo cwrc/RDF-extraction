@@ -39,6 +39,8 @@ CRMPC = rdflib.Namespace("http://www.cidoc-crm.org/cidoc-crm/")
 CRM = rdflib.Namespace("http://www.cidoc-crm.org/cidoc-crm/")
 
 GETTY = rdflib.Namespace("https://vocab.getty.edu/aat/")
+TGN = rdflib.Namespace("https://vocab.getty.edu/tgn/")
+GEONAMES = rdflib.Namespace("https://sws.geonames.org/")
 
 BF_PROPERTIES = {
     "change date": BF.changeDate,
@@ -1224,6 +1226,8 @@ if __name__ == "__main__":
     g.bind("skos", SKOS)
     g.bind("orlando", ORLANDO)
     g.bind("aat", GETTY)
+    g.bind("geonames", GEONAMES)
+    g.bind("tgn", TGN)
 
     # Adding declaration of references
     for label, uri in BibliographyParse.type_map.items():
@@ -1314,7 +1318,7 @@ if __name__ == "__main__":
     total = len(os.listdir(dirname))
     # for fname in test_filenames:
     # for fname in os.listdir(dirname):
-    for fname in os.listdir(dirname)[:1000]:
+    for fname in os.listdir(dirname)[:5000]:
         print(F"{count}/{total} files extracted: {fname}")
         path = os.path.join(dirname, fname)
         if os.path.isdir(path):
