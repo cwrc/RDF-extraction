@@ -1,230 +1,47 @@
-viaf: owl:sameAs orlando:03717273-e821-4e60-a78e-03df0e926e24 .
 
-viaf: owl:sameAs orlando:0609f6c8-4052-4195-b3a4-62d3d298984e .
+ulan:500001626 owl:sameAs orlando:8eeb3a25-3fc3-42cd-b052-be179061209f .
 
-viaf: owl:sameAs orlando:0f365e01-538c-40de-a42f-19130cff5352 .
+ulan:500017454 owl:sameAs orlando:6f2c57c9-dc5c-4fc8-a945-2b85bc76b067 .
 
-viaf: owl:sameAs orlando:1513d602-2c93-49c3-a512-862fc2517693 .
+ulan:500029650 owl:sameAs orlando:a5b56600-83c7-4f81-9504-0b5abd805464 .
 
-viaf: owl:sameAs orlando:16de74cc-ca1e-4460-800a-f2e5a97cd19b .
+ulan:500030207 owl:sameAs orlando:3d02f589-f301-44fc-8182-52a6842dc4c0 .
 
-viaf: owl:sameAs orlando:1724274b-e162-47f9-a2c5-b2257ee21d1c .
+ulan:500030207 owl:sameAs orlando:b97c766b-b725-464b-95ad-ce1962996efd .
 
-viaf: owl:sameAs orlando:1c6e3dc2-c964-4e10-87d4-dbdf31a41060 .
+ulan:500060628 owl:sameAs orlando:aef169e1-ca8d-43cb-8f2a-c23a9eb2aedf .
 
-viaf: owl:sameAs orlando:26e95b6f-bbeb-46ac-a846-7923758d5059 .
+ulan:500115520 owl:sameAs orlando:b9dac576-7ec5-4d18-b1ff-f35d04c4e9a5 .
 
-viaf: owl:sameAs orlando:2ba9fd9d-2221-4a2a-bb14-6ab80b3eb1a7 .
+ulan:500123798 owl:sameAs orlando:7764cc7f-2ced-4459-b180-8bae14945f0a .
 
-viaf: owl:sameAs orlando:2d07fcdc-cbcd-49b1-ae1a-4a25efba923b .
+ulan:500212585 owl:sameAs orlando:850aca8b-4385-44fe-b8fd-fadae2945e6b .
 
-viaf: owl:sameAs orlando:2deb2ca7-ebd5-4deb-aa0d-75d7d6ba5529 .
+ulan:500243012 owl:sameAs orlando:e76a0d25-4052-4ecc-b00f-f747edd70108 .
 
-viaf: owl:sameAs orlando:318b9d52-2e8e-4807-bd29-49c3288b0995 .
+ulan:500258923 owl:sameAs orlando:35bfd68b-5078-40e5-8603-fa93cae36192 .
 
-viaf: owl:sameAs orlando:35bfd68b-5078-40e5-8603-fa93cae36192 .
+ulan:500266923 owl:sameAs orlando:3ad6922e-890f-4545-842d-7deba44a1a6d .
 
-viaf: owl:sameAs orlando:3ad6922e-890f-4545-842d-7deba44a1a6d .
+ulan:500327954 owl:sameAs orlando:a63ed939-f418-4c55-a951-acd409e20fae .
 
-viaf: owl:sameAs orlando:3c0bf8b9-dd40-4d30-be4d-65ca5b92bed3 .
+ulan:500337014 owl:sameAs orlando:5d0d1370-c3d5-4a38-beb3-d837d75a465b .
 
-viaf: owl:sameAs orlando:3d02f589-f301-44fc-8182-52a6842dc4c0 .
+ulan:500372729 owl:sameAs orlando:0f365e01-538c-40de-a42f-19130cff5352 .
 
-viaf: owl:sameAs orlando:3fdb9247-91eb-464c-8536-57e1a455982b .
+ulan:500404083 owl:sameAs orlando:ca123c6d-0a44-4388-8e8f-f14d29c76195 .
 
-viaf: owl:sameAs orlando:4791d5ac-0d00-40f9-981c-ff5a84b8825a .
+ulan:500434228 owl:sameAs orlando:b0d67def-e5f7-4be3-922a-74598af2e947 .
 
-viaf: owl:sameAs orlando:492f64d6-90c7-438a-aa61-931724899b5e .
+ulan:500435724 owl:sameAs orlando:f513ba2e-4257-4663-8396-2339e096b9b9 .
 
-viaf: owl:sameAs orlando:4c5ff3b2-4678-49d0-a3b2-033414913396 .
+ulan:500437072 owl:sameAs orlando:4fd8d7e0-d0f5-41d7-99e2-fff9db230b92 .
 
-viaf: owl:sameAs orlando:4fd8d7e0-d0f5-41d7-99e2-fff9db230b92 .
+ulan:500437141 owl:sameAs orlando:f08a285f-3e56-4959-beb7-8ae8a90a4adc .
 
-viaf: owl:sameAs orlando:53a58ed7-bf20-4069-b67e-9e7d6a3b938b .
+ulan:500437448 owl:sameAs orlando:4791d5ac-0d00-40f9-981c-ff5a84b8825a .
 
-viaf: owl:sameAs orlando:57ea9183-b5b0-4aa3-8ee8-d907f44eebcf .
-
-viaf: owl:sameAs orlando:5b81c47f-5dc4-4a82-a81d-ddbcab2feeb3 .
-
-viaf: owl:sameAs orlando:5c4e6b1f-9bfc-45c9-83cd-71af86639d43 .
-
-viaf: owl:sameAs orlando:5d0d1370-c3d5-4a38-beb3-d837d75a465b .
-
-viaf: owl:sameAs orlando:5fa2b956-ddb1-4889-9880-5ad829168ee1 .
-
-viaf: owl:sameAs orlando:694bc939-83d7-4b02-9990-d0e60cd7393b .
-
-viaf: owl:sameAs orlando:6a8a1a54-f8ee-43fb-a068-d384d5df7dc7 .
-
-viaf: owl:sameAs orlando:6ca6392a-bc26-4b43-b32d-2151f0c6566c .
-
-viaf: owl:sameAs orlando:6f2c57c9-dc5c-4fc8-a945-2b85bc76b067 .
-
-viaf: owl:sameAs orlando:75685254-8a09-40f5-a482-87c8c1dc5679 .
-
-viaf: owl:sameAs orlando:7764cc7f-2ced-4459-b180-8bae14945f0a .
-
-viaf: owl:sameAs orlando:7a6c7e5d-c508-4da3-b907-e3d3936dc38d .
-
-viaf: owl:sameAs orlando:7c7b113e-2b07-421d-88e1-5dee7ff7686c .
-
-viaf: owl:sameAs orlando:850aca8b-4385-44fe-b8fd-fadae2945e6b .
-
-viaf: owl:sameAs orlando:8587f0cb-e299-4154-b875-a915bc569dd0 .
-
-viaf: owl:sameAs orlando:85aa3863-88d8-48d0-871b-a14bfbbed95b .
-
-viaf: owl:sameAs orlando:85e1897b-956d-437d-a933-fc83c4c7ec8f .
-
-viaf: owl:sameAs orlando:875cc568-a42c-4c9c-a6d4-81d04e4db996 .
-
-viaf: owl:sameAs orlando:87d21c72-a508-4856-a0a4-b8d953a3a432 .
-
-viaf: owl:sameAs orlando:8eeb3a25-3fc3-42cd-b052-be179061209f .
-
-viaf: owl:sameAs orlando:8ffdefaf-b63c-4c66-9554-67826d8fe7d7 .
-
-viaf: owl:sameAs orlando:925f010f-3d60-444d-8716-4cd31ffbf2eb .
-
-viaf: owl:sameAs orlando:9b0fa8c5-87ac-43a1-a973-063c55487d9c .
-
-viaf: owl:sameAs orlando:9d0b6cd4-cf6e-4836-9bfd-09ae5e8bd55b .
-
-viaf: owl:sameAs orlando:9d4cb26d-5b4b-4b69-86ea-0d106ebc7f61 .
-
-viaf: owl:sameAs orlando:a1759b38-ef10-4d5c-953a-57b80b3786e4 .
-
-viaf: owl:sameAs orlando:a1a853da-fc7f-4594-b481-48dd2ae40b38 .
-
-viaf: owl:sameAs orlando:a2651fe5-59fe-4b4d-9b7c-1b0eb10c84a0 .
-
-viaf: owl:sameAs orlando:a395f1bb-0299-4483-9fec-409daa94d532 .
-
-viaf: owl:sameAs orlando:a5b56600-83c7-4f81-9504-0b5abd805464 .
-
-viaf: owl:sameAs orlando:a63ed939-f418-4c55-a951-acd409e20fae .
-
-viaf: owl:sameAs orlando:a781f198-c771-45a3-bbbf-8cc95ef4f5bb .
-
-viaf: owl:sameAs orlando:aef169e1-ca8d-43cb-8f2a-c23a9eb2aedf .
-
-viaf: owl:sameAs orlando:afdcf297-1a92-43be-8d00-de6600fa3fb8 .
-
-viaf: owl:sameAs orlando:b0d67def-e5f7-4be3-922a-74598af2e947 .
-
-viaf: owl:sameAs orlando:b46fe19a-d3e8-4a22-9ecb-77eeba73d582 .
-
-viaf: owl:sameAs orlando:b70ac0b1-e074-4f91-a905-a141b4c51d48 .
-
-viaf: owl:sameAs orlando:b71f3112-456d-4d79-8eb8-f29e0a7f7e51 .
-
-viaf: owl:sameAs orlando:b7328158-f765-4202-b8a5-1e37ca2d6642 .
-
-viaf: owl:sameAs orlando:b95e9e89-19bb-4ac6-bcf5-635ecc00d463 .
-
-viaf: owl:sameAs orlando:b97c766b-b725-464b-95ad-ce1962996efd .
-
-viaf: owl:sameAs orlando:b9dac576-7ec5-4d18-b1ff-f35d04c4e9a5 .
-
-viaf: owl:sameAs orlando:ba4079f7-2590-40de-8a4d-91446cbcae13 .
-
-viaf: owl:sameAs orlando:ba43cf7e-09cf-4f6a-b4e2-a05c22341f25 .
-
-viaf: owl:sameAs orlando:bd6b9f8c-0940-4ee3-addb-89d66120466a .
-
-viaf: owl:sameAs orlando:c0565a3b-3177-4a2e-81e1-7deaca07a36c .
-
-viaf: owl:sameAs orlando:c1114048-d2ac-4eec-9a17-122b6059bfd9 .
-
-viaf: owl:sameAs orlando:c4af79b3-d86e-404a-aab5-97ed5af87f8b .
-
-viaf: owl:sameAs orlando:c61efacd-89e9-492d-995e-89ea31e40c05 .
-
-viaf: owl:sameAs orlando:c77507c7-be95-46ff-9378-f95e7316a00e .
-
-viaf: owl:sameAs orlando:ca123c6d-0a44-4388-8e8f-f14d29c76195 .
-
-viaf: owl:sameAs orlando:ca513378-b728-4713-bcb8-b3d887d1f183 .
-
-viaf: owl:sameAs orlando:cae875fd-13c3-441d-a2be-e075390d4097 .
-
-viaf: owl:sameAs orlando:d4af8573-59e7-46ca-b6eb-d51079e6f29c .
-
-viaf: owl:sameAs orlando:d50c404f-0d5e-4aa9-ba96-8643b5aca741 .
-
-viaf: owl:sameAs orlando:d7337450-a9e5-4444-ad00-57df9c0f217a .
-
-viaf: owl:sameAs orlando:dd6abeb9-32ed-4394-b57c-49e81138d3f5 .
-
-viaf: owl:sameAs orlando:e37354df-b193-4d0f-8afa-db5c7d835f01 .
-
-viaf: owl:sameAs orlando:e416a326-074f-4281-bc5b-dddf4f1ccf5b .
-
-viaf: owl:sameAs orlando:e76a0d25-4052-4ecc-b00f-f747edd70108 .
-
-viaf: owl:sameAs orlando:e9c8d270-8308-43c4-9cae-5a72ef10c067 .
-
-viaf: owl:sameAs orlando:eea9c56a-ae4a-4811-97c3-e6bd7f2b4afb .
-
-viaf: owl:sameAs orlando:efdec8df-524b-4fe0-9a3d-d632f1b18ca6 .
-
-viaf: owl:sameAs orlando:f08a285f-3e56-4959-beb7-8ae8a90a4adc .
-
-viaf: owl:sameAs orlando:f4f992fa-7b5a-4f5f-934b-37ea9ad05c52 .
-
-viaf: owl:sameAs orlando:f513ba2e-4257-4663-8396-2339e096b9b9 .
-
-viaf: owl:sameAs orlando:f631f86a-1c1f-4608-a826-b6ff7f16c8b1 .
-
-viaf: owl:sameAs orlando:f885afe5-e27e-4471-b532-5244b0e1329c .
-
-viaf: owl:sameAs orlando:f8a17d66-e783-42ef-bb95-2020a1a03968 .
-
-viaf: owl:sameAs orlando:ffde9ddc-e159-40ec-8bdf-3fa5a33e9f8c .
-
-viaf: owl:sameAs ulan:500001626 .
-
-viaf: owl:sameAs ulan:500017454 .
-
-viaf: owl:sameAs ulan:500029650 .
-
-viaf: owl:sameAs ulan:500030207 .
-
-viaf: owl:sameAs ulan:500060628 .
-
-viaf: owl:sameAs ulan:500115520 .
-
-viaf: owl:sameAs ulan:500121354 .
-
-viaf: owl:sameAs ulan:500123798 .
-
-viaf: owl:sameAs ulan:500212585 .
-
-viaf: owl:sameAs ulan:500243012 .
-
-viaf: owl:sameAs ulan:500258923 .
-
-viaf: owl:sameAs ulan:500266923 .
-
-viaf: owl:sameAs ulan:500327954 .
-
-viaf: owl:sameAs ulan:500337014 .
-
-viaf: owl:sameAs ulan:500372729 .
-
-viaf: owl:sameAs ulan:500404083 .
-
-viaf: owl:sameAs ulan:500434228 .
-
-viaf: owl:sameAs ulan:500435724 .
-
-viaf: owl:sameAs ulan:500437072 .
-
-viaf: owl:sameAs ulan:500437141 .
-
-viaf: owl:sameAs ulan:500437448 .
-
-viaf: owl:sameAs ulan:500437563 .
+ulan:500437563 owl:sameAs orlando:16de74cc-ca1e-4460-800a-f2e5a97cd19b .
 
 viaf:100093484 owl:sameAs orlando:69bd3267-8e82-469a-b34c-df73c785280f .
 
@@ -3079,8 +2896,6 @@ viaf:134799300 owl:sameAs wd:Q528201 .
 viaf:1349149068523065730006 owl:sameAs orlando:abe123a6-8aec-4593-b82b-3ba494444ad5 .
 
 viaf:1349149068523065730006 owl:sameAs wd:Q4797796 .
-
-viaf:1349149068523065835520 owl:sameAs orlando:abe123a6-8aec-4593-b82b-3ba494444ad5 .
 
 viaf:13496949 owl:sameAs orlando:88132ea8-2894-4bba-9eed-3021426016d0 .
 
@@ -11373,6 +11188,8 @@ viaf:38241616 owl:sameAs orlando:3d736add-e0e0-4601-aaa6-a36b44634cd1 .
 viaf:38241616 owl:sameAs wd:Q4233439 .
 
 viaf:38242134 owl:sameAs orlando:cae875fd-13c3-441d-a2be-e075390d4097 .
+
+viaf:38242134 owl:sameAs ulan:500121354 .
 
 viaf:38242134 owl:sameAs wd:Q5131232 .
 
