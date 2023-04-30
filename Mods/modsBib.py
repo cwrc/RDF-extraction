@@ -77,7 +77,7 @@ GENRE_GRAPH = None
 URI_TO_GENRE_MAPPING = {} # URIs to GENRE labels
 GEOMAPPER = None
 GENRE_MAPPING = {} # labels to URIs
-STRING_MATCH_RATIO = 80
+STRING_MATCH_RATIO = 95
 
 PUBLISHER_MAPPING = {}
 PEOPLE_MAPPING = {}
@@ -128,6 +128,12 @@ def dateParse(date_string: str, both=True):
 
     try:
         dt = datetime.datetime.strptime(date_string, "%Y-%m-%d")
+        end_dt = dt + datetime.timedelta(days=1,seconds=-1)
+        return dt.isoformat(), True, end_dt.isoformat()
+    except ValueError:
+        pass
+    try:
+        dt = datetime.datetime.strptime(date_string, "%Y-%m-%d-")
         end_dt = dt + datetime.timedelta(days=1,seconds=-1)
         return dt.isoformat(), True, end_dt.isoformat()
     except ValueError:
@@ -217,7 +223,7 @@ class ParseGeoNamesMapping:
             for row in csvfile:
                 place_name = row[0].rstrip(',.')
                 place_name = place_name.strip()
-                url_string = row[1] if 'http://' in row[1] else F"http://{row[1]}"
+                url_string = row[1] if 'https://' in row[1] else F"https://{row[1]}"
                 self.place_mapper.append(
                     {"placename": place_name, "url": url_string})
 
@@ -229,10 +235,11 @@ class ParseGeoNamesMapping:
         if ';' in place:
             place_name_parts = re.split("\s*;\s*", place)
         elif 'and' in place:
-            place_name_parts = re.split('\s*and\s*', place)
+            place_name_parts = re.split('\s* and \s*', place)
         else:
             place_name_parts = [place]
 
+        
         return place_name_parts
 
     def get_place(self, place_name):
@@ -876,7 +883,7 @@ class BibliographyParse:
 
             
         
-        #CIDOC: Creating time-spans for record change
+        #CIDOC: Creating time-spans for record change (<recordChangeDate>)
         r_count = 1
         for r in self.get_record_change_date():
             start_date, transformed, end_date = dateParse(r['date'])
@@ -1027,7 +1034,7 @@ class BibliographyParse:
                     for item in place_map:
                         originInfo.add(CRM.P7_took_place_at, rdflib.URIRef(item))
                         place = g.resource(item)
-                        place.add(RDFS.label, rdflib.Literal(o['place']))
+                        place.add(SKOS.altLabel, rdflib.Literal(o['place']))
                         place.add(RDF.type, CRM.E53_Place)
 
 
@@ -1324,8 +1331,8 @@ if __name__ == "__main__":
 
     with open("unmatchedplaces.csv", "w") as f:
         writer = csv.writer(f, delimiter='\t', quoting=csv.QUOTE_MINIMAL)
-        for item in UNIQUE_UNMATCHED_PLACES:
-            writer.writerow([item])
+        for unmatched_place in UNIQUE_UNMATCHED_PLACES:
+            writer.writerow([unmatched_place])
 
     fname = "bibliography_full"
     fname = F"bibliography_{datetime.datetime.now().strftime('%d-%m-%Y')}"
