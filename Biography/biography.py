@@ -120,7 +120,6 @@ class Biography(object):
         self.get_all_members()
 
         self.wd_id = get_wd_identifier(id)
-
         self.context_list = []
         self.event_list = []
         self.activity_list = []
@@ -192,7 +191,7 @@ class Biography(object):
         g.add((self.uri, utilities.NS_DICT["skos"].altLabel, Literal(self.name)))
 
         # Adding names for all the people mentioned in an entry
-        generic_names = ["king","King","mother-in-law" , "Queen", "queen","husband","wife","partner" ,"father", "daughter","essay", "son","he","she","they","her","him","them", "sisters","the",  "mother", "sibling", "brother", "sister", "friend", "his wife", "her husband","his husband", "her wife", "their husband", "their wife", "lover"]
+        generic_names = ["king","King","mother-in-law" , "Queen", "queen","husband","wife","partner" ,"father", "daughter","essay", "son","he","she","they","her","him","them", "sisters","the",  "mother", "sibling", "brother", "sister", "friend", "his wife", "her husband","his husband", "her wife", "their husband", "their wife", "lover", "family"]
         for x in self.document.find_all("NAME"):
             uri = utilities.get_name_uri(x)
             if not uri:

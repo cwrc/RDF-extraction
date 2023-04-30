@@ -30,9 +30,10 @@ WRITER_MAP = {}
 MAX_WORD_COUNT = 35
 
 NS_DICT = {
-    "cwrc": rdflib.Namespace("http://id.lincsproject.ca/cwrc#"),
-    "ii": rdflib.Namespace("http://id.lincsproject.ca/ii#"),
-    "genre": rdflib.Namespace("http://id.lincsproject.ca/genre#"),
+    "cwrc": rdflib.Namespace("http://id.lincsproject.ca/cwrc/"),
+    "occupation": rdflib.Namespace("http://id.lincsproject.ca/occupation/"),
+    "ii": rdflib.Namespace("http://id.lincsproject.ca/ii/"),
+    "genre": rdflib.Namespace("http://id.lincsproject.ca/genre/"),
     "cwrc_temp": rdflib.Namespace("http://temp.lincsproject.ca/cwrc/"),
     "frbroo": rdflib.Namespace("http://iflastandards.info/ns/fr/frbr/frbroo/"),
     "as": rdflib.Namespace("http://www.w3.org/ns/activitystreams#"),
