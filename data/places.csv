@@ -687,7 +687,7 @@ Canada,https://sws.geonames.org/6251999/
 "Tottenham,Middlesex,London",https://sws.geonames.org/6167983/
 "Toronto,,",https://sws.geonames.org/6167865/
 "Toronto,Ontario,Canada",https://sws.geonames.org/6167865/
-"Toronto, ON",https://sws.geonames.org/6167865/
+"Toronto,ON",https://sws.geonames.org/6167865/
 "Toronto,Upper Canada,Canada",https://sws.geonames.org/6167865/
 "Timmins,Ontario,Canada",https://sws.geonames.org/6166739/
 "Thousand Islands,Canada",https://sws.geonames.org/6165765/
@@ -890,7 +890,7 @@ Baltic,https://sws.geonames.org/5892408/
 "Santa Clara Valley,USA",https://sws.geonames.org/5393046/
 "Santa Barbara,California,USA",https://sws.geonames.org/5392952/
 "San Marino,California,USA",https://sws.geonames.org/5392400/
-"San Marino, CA",https://sws.geonames.org/5392400/
+"San Marino,CA",https://sws.geonames.org/5392400/
 "San Diego,California,USA",https://sws.geonames.org/5391811/
 "Sacramento,California,USA",https://sws.geonames.org/5389489/
 "Rialto,California,USA",https://sws.geonames.org/5387288/
@@ -933,6 +933,7 @@ Baltic,https://sws.geonames.org/5892408/
 "Madison,Wisconsin,USA",https://sws.geonames.org/5261457/
 "Johnstown Center,Wisconsin,USA",https://sws.geonames.org/5258066/
 "Moscow,Russia",https://sws.geonames.org/524901/
+"Moscow,Russian Federation",https://sws.geonames.org/524901/
 "Moscow,USSR",https://sws.geonames.org/524901/
 "Woodstock,Vermont,USA",https://sws.geonames.org/5243145/
 "Wilmington,Vermont,USA",https://sws.geonames.org/5243030/
@@ -1088,7 +1089,7 @@ Somalia,https://sws.geonames.org/51537/
 "Mackinac Island,USA",https://sws.geonames.org/5000469/
 "Grand Rapids,Michigan,USA",https://sws.geonames.org/4994358/
 "Detroit,Michigan,USA",https://sws.geonames.org/4990729/
-"Detroit, MI",https://sws.geonames.org/4990729/
+"Detroit,MI",https://sws.geonames.org/4990729/
 "Leningrad,Russia",https://sws.geonames.org/498817/
 "Leningrad,USSR",https://sws.geonames.org/498817/
 "Petrograd,Russia",https://sws.geonames.org/498817/
@@ -1363,6 +1364,7 @@ Estonia,https://sws.geonames.org/453733/
 "Delaware,USA",https://sws.geonames.org/4142224/
 "Delaware Bay,USA",https://sws.geonames.org/4142190/
 "Washington,District of Columbia,USA",https://sws.geonames.org/4140963/
+"Washington,DC,USA",https://sws.geonames.org/4140963/
 "Washington,District of Columbria,USA",https://sws.geonames.org/4140963/
 "District of Columbia,USA",https://sws.geonames.org/4138106/
 "Stamps,Arkansas,USA",https://sws.geonames.org/4132194/
@@ -2315,7 +2317,7 @@ Luxembourg,https://sws.geonames.org/2960316/
 "Bad Wörishofen,Germany",https://sws.geonames.org/2953313/
 "Bavaria,Germany",https://sws.geonames.org/2951840/
 "Bayreuth,Bavaria,Germany",https://sws.geonames.org/2951825/
-"Berlin , Germany ",https://sws.geonames.org/2950159/
+"Berlin ,Germany ",https://sws.geonames.org/2950159/
 "Berlin,GDR",https://sws.geonames.org/2950159/
 "Berlin,German Democratic Republic",https://sws.geonames.org/2950159/
 "Berlin,Germany",https://sws.geonames.org/2950159/
@@ -4399,6 +4401,7 @@ Scotland,https://sws.geonames.org/2638360/
 "Ulverston,Lancashire,England",https://sws.geonames.org/2635183/
 "Umberleigh,Devon,England",https://sws.geonames.org/2635180/
 United Kingdom,https://sws.geonames.org/2635167/
+UK,https://sws.geonames.org/2635167/
 "Unst,Scotland",https://sws.geonames.org/2635166/
 "Upminster,Essex,England",https://sws.geonames.org/2635150/
 "Upper Norwood,Surrey,England",https://sws.geonames.org/2635113/
@@ -4710,6 +4713,7 @@ Chad,https://sws.geonames.org/2434508/
 Gambia,https://sws.geonames.org/2413451/
 Seychelles,https://sws.geonames.org/241170/
 "Gibraltar,",https://sws.geonames.org/2411585/
+"Gibraltar",https://sws.geonames.org/2411585/
 "Charlotte,Sierra Leone",https://sws.geonames.org/2409744/
 "Freetown,Sierra Leone",https://sws.geonames.org/2409306/
 Sierra Leone,https://sws.geonames.org/2403846/
@@ -5534,7 +5538,7 @@ Scottish,https://sws.geonames.org/2638360/
 "Strabane,Tyrone,Ireland",https://sws.geonames.org/2636745/
 "Cape Trafalgar,Spain",https://sws.geonames.org/2510212/
 "Moab,Jordan",https://sws.geonames.org/248018/
-"Benin, Kingdom of,Nigeria",https://sws.geonames.org/2347283/
+"Benin,Kingdom of,Nigeria",https://sws.geonames.org/2347283/
 "River Tagus,Portugal",https://sws.geonames.org/2262787/
 "Mount Pirongia,New Zealand",https://sws.geonames.org/2184538/
 "Cook's River,Australia",https://sws.geonames.org/2170661/
@@ -5553,39 +5557,39 @@ Scottish,https://sws.geonames.org/2638360/
 "Transvaal,South Africa",https://sws.geonames.org/1105783/
 "Ha`il,Saudi Arabia",https://sws.geonames.org/106281/
 "Drakensberg Mountains,South Africa",https://sws.geonames.org/1008481/
-"Tallahasse, FL",https://sws.geonames.org/7170883//
-"Millerton, NY",https://sws.geonames.org/5127066/
-"Auckland, New Zealand",https://sws.geonames.org/2193733/
-"Orlando, Florida",https://sws.geonames.org/4167147/
-"Orlando, FL",https://sws.geonames.org/4167147/
-"Cheltenham, UK",https://sws.geonames.org/7290548/
-"Llandeilo, Wales",https://sws.geonames.org/2644135/
-"Bozeman, MT",https://sws.geonames.org/5641727/
-"University Park, PA",https://sws.geonames.org/5216774/
-"St. Clair Shores, MI",https://sws.geonames.org/5010978/
-"Highland, Scotland",https://sws.geonames.org/2646944/
-"Waco, TX",https://sws.geonames.org/2646944/
-"Auburn, NY",https://sws.geonames.org/5107505/
-"Wolfeboro Falls, NH",https://sws.geonames.org/5094883/
-"Dobbs Ferry, NY",https://sws.geonames.org/5115123/
-"Fresh Meadows, NY",https://sws.geonames.org/5118005/
-"Eugene, OR",https://sws.geonames.org/5725846/
-"Englewood Cliffs, NJ",https://sws.geonames.org/5097677/
-"Llandysul, Wales",https://sws.geonames.org/2644107/
-"Pawlet, VT",https://sws.geonames.org/5239668/
-"Lugdunum, Batavorum",https://sws.geonames.org/2751773/
-"Highlands, NC",https://sws.geonames.org/4494821/
-"Downsview, ON",https://sws.geonames.org/5942354/
-"Hicksville, NY",https://sws.geonames.org/5120656/
-"St. James, NY",https://sws.geonames.org/5135192//
-"Plainview, NY",https://sws.geonames.org/5131638/
-"Dubuque, IA",https://sws.geonames.org/4854529/
-"Kirksville, MO",https://sws.geonames.org/5055787/
-"Llandeilo, Wales",https://sws.geonames.org/2644135/
-"Lewiston, NY",https://sws.geonames.org/5124307/
-"Kalamazoo, MI",https://sws.geonames.org/4997787/
+"Tallahasse,FL",https://sws.geonames.org/7170883//
+"Millerton,NY",https://sws.geonames.org/5127066/
+"Auckland,New Zealand",https://sws.geonames.org/2193733/
+"Orlando,Florida",https://sws.geonames.org/4167147/
+"Orlando,FL",https://sws.geonames.org/4167147/
+"Cheltenham,UK",https://sws.geonames.org/7290548/
+"Llandeilo,Wales",https://sws.geonames.org/2644135/
+"Bozeman,MT",https://sws.geonames.org/5641727/
+"University Park,PA",https://sws.geonames.org/5216774/
+"St. Clair Shores,MI",https://sws.geonames.org/5010978/
+"Highland,Scotland",https://sws.geonames.org/2646944/
+"Waco,TX",https://sws.geonames.org/2646944/
+"Auburn,NY",https://sws.geonames.org/5107505/
+"Wolfeboro Falls,NH",https://sws.geonames.org/5094883/
+"Dobbs Ferry,NY",https://sws.geonames.org/5115123/
+"Fresh Meadows,NY",https://sws.geonames.org/5118005/
+"Eugene,OR",https://sws.geonames.org/5725846/
+"Englewood Cliffs,NJ",https://sws.geonames.org/5097677/
+"Llandysul,Wales",https://sws.geonames.org/2644107/
+"Pawlet,VT",https://sws.geonames.org/5239668/
+"Lugdunum,Batavorum",https://sws.geonames.org/2751773/
+"Highlands,NC",https://sws.geonames.org/4494821/
+"Downsview,ON",https://sws.geonames.org/5942354/
+"Hicksville,NY",https://sws.geonames.org/5120656/
+"St. James,NY",https://sws.geonames.org/5135192//
+"Plainview,NY",https://sws.geonames.org/5131638/
+"Dubuque,IA",https://sws.geonames.org/4854529/
+"Kirksville,MO",https://sws.geonames.org/5055787/
+"Llandeilo,Wales",https://sws.geonames.org/2644135/
+"Lewiston,NY",https://sws.geonames.org/5124307/
+"Kalamazoo,MI",https://sws.geonames.org/4997787/
 Auckland,https://sws.geonames.org/2193733/
 Llandysul,https://sws.geonames.org/2644107/
-"Secaucus, NJ",https://sws.geonames.org/5104504/
-"DeKalb, IL",https://sws.geonames.org/4889554/
-"Totowa, NJ",https://sws.geonames.org/5105455/
+"Secaucus,NJ",https://sws.geonames.org/5104504/
+"DeKalb,IL",https://sws.geonames.org/4889554/
+"Totowa,NJ",https://sws.geonames.org/5105455/
