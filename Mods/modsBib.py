@@ -950,14 +950,21 @@ class BibliographyParse:
                 # TODO: insert some tests surrounding names
 
                 agent_resource = None
+                agent_internal_ID = None # This will keep the cwrc id for the agent
                 if "uri" in name and name["uri"]:
                     agent_resource = self.get_person_id(name["uri"])    
                     if agent_resource:
                         agent_resource = g.resource(agent_resource)
+                
                 if agent_resource == None:
                     temp_name = urllib.parse.quote_plus(
                     remove_punctuation(name['name']))
                     agent_resource=g.resource(DATA[F"{temp_name}"])
+                    agent_internal_ID= str(DATA[F"{temp_name}"])  
+                elif "orlando" in str(agent_resource.identifier):
+                    agent_internal_ID = str(agent_resource.identifier)
+                else:
+                    agent_internal_ID = name["uri"]
                 
                 agent_resource.add(RDFS.label, rdflib.Literal(name["name"]))
                                 
@@ -993,12 +1000,12 @@ class BibliographyParse:
                     if agent_label in AGENTS:
                         uri = AGENTS[agent_label]
                     else:
-                        if "orlando" in str(agent_resource.identifier):
-                            temp = DATA[f"{agent_resource.identifier.split('orlando:')[1]}_{name['role']}"]                        
+                        if "orlando" in str(agent_internal_ID):
+                            temp = DATA[f"{str(agent_internal_ID).split('orlando:')[1]}_{name['role']}"]                        
                             AGENTS[agent_label] = temp
                             uri = temp
                         else:
-                            uri = f"{agent_resource.identifier}_{name['role']}"
+                            uri = f"{str(agent_resource)}_{name['role']}"
                             
                         
                     agent = g.resource(uri)
