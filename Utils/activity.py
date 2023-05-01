@@ -54,9 +54,19 @@ def format_date(date):
     if date[-1] == "-":
         date = date.strip("-")
 
-    if len(date) in [10,7,4]:
+    if len(date) == 19:
         formatted_date = Literal(date, datatype=XSD.dateTime)
+    elif len(date) in [5, 4]:
+        logger.warning("unideal date format: " + date)
+        formatted_date = Literal(date, datatype=XSD.gYear)
+    elif len(date) == 7:
+        logger.warning("unideal date format: " + date)
+        formatted_date = Literal(date, datatype=XSD.gYearMonth)
+    elif len(date) == 10:
+        logger.warning("unideal date format: " + date)
+        formatted_date = Literal(date, datatype=XSD.date)
     else:
+        logger.warning("Unknown date format: " + date)
         formatted_date = Literal(date)
 
 
@@ -351,7 +361,19 @@ precision: {self.precision}
         activity_label = self.title
         if self.person:
             activity_label = self.person.name +": "+  self.title
+            
+        if self.date:
+            if ":" in self.date:
+                date_1 = self.date.split(":")[0].strip()[:4]
+                date_2 = self.date.split(":")[1].strip()[:4]
+                if date_1 == date_2:
+                    activity_label = F"{date_1}: {activity_label}"
+                else:
+                    activity_label = F"{date_1}-{date_2}: {activity_label}"
+            else:
+                activity_label = F"{self.date[:4]}: {activity_label}"
 
+        print(activity_label)
         connection = None
         if self.activity_type:
             activity.add(RDF.type, self.activity_type)
