@@ -24,14 +24,14 @@ logger.info(F"Started extraction: {datetime.datetime.now().strftime('%d %b %Y %H
 
 # ---------- SETUP NAMESPACES ----------
 
-CWRC = rdflib.Namespace("http://id.lincsproject.ca/cwrc#")
+CWRC = rdflib.Namespace("http://id.lincsproject.ca/cwrc/")
 ORLANDO= rdflib.Namespace("https://commons.cwrc.ca/orlando:")
 BF = rdflib.Namespace("http://id.loc.gov/ontologies/bibframe/")
 XML = rdflib.Namespace("http://www.w3.org/XML/1998/namespace")
 MARC_REL = rdflib.Namespace("http://id.loc.gov/vocabulary/relators/")
 DATA = rdflib.Namespace("http://cwrc.ca/cwrcdata/")
 
-GENRE = rdflib.Namespace("http://id.lincsproject.ca/genre#")
+GENRE = rdflib.Namespace("http://id.lincsproject.ca/genre/")
 SCHEMA = rdflib.Namespace("http://schema.org/")
 SKOS = rdflib.Namespace("http://www.w3.org/2004/02/skos/core#")
 FRBROO = rdflib.Namespace("http://iflastandards.info/ns/fr/frbr/frbroo/")
@@ -76,14 +76,15 @@ ROLES = {
 }
 
 GENRE_GRAPH = None
-URI_TO_GENRE_MAPPING = {} # URIs to GENRE labels
+URI_TO_GENRE_MAPPING = {} # TITLE URIs to GENRE labels
 GEOMAPPER = None
-GENRE_MAPPING = {} # labels to URIs
+GENRE_MAPPING = {} # labels to vocab URIs
 STRING_MATCH_RATIO = 95
 
 PUBLISHER_MAPPING = {}
 PEOPLE_MAPPING = {}
 
+USED_GENRES = []
 UNIQUE_UNMATCHED_PLACES = set()
 AGENTS = {}
 
@@ -1017,7 +1018,7 @@ class BibliographyParse:
                 o['publisher_id'] = str(publisher.identifier)
                 
                 publisher.add(RDF.type, CRM.E39_Actor)
-                publisher.add(RDFS.label, rdflib.Literal(F"{o['publisher']}"))
+                publisher.add(SKOS.altLabel, rdflib.Literal(F"{o['publisher']}"))
                 publisher.add(CRM.P2_has_type, ROLES["publisher"])
                 
                 publisher_role = g.resource(F"{self.placeholderURI}_publisher_role_{i}")
@@ -1180,6 +1181,7 @@ class BibliographyParse:
                 uri = rdflib.URIRef(GENRE_MAPPING[genre["genre"]])
                 if GENRE_GRAPH[uri]:
                     resource.add(CRM.P2_has_type, uri)
+                    USED_GENRES.append(uri)
                 else:
                     logger.warning(F"GENRE NOT FOUND: {genre['genre']}")
             else:
@@ -1201,6 +1203,7 @@ class BibliographyParse:
 
                 if (uri, None, None) in GENRE_GRAPH:
                     resource.add(CRM.P2_has_type, uri)
+                    USED_GENRES.append(uri)
                 else:
                     logger.info(F"GENRE NOT FOUND: {genre}")
 
@@ -1318,7 +1321,7 @@ if __name__ == "__main__":
     total = len(os.listdir(dirname))
     # for fname in test_filenames:
     # for fname in os.listdir(dirname):
-    for fname in os.listdir(dirname)[:5000]:
+    for fname in os.listdir(dirname)[:1000]:
         print(F"{count}/{total} files extracted: {fname}")
         path = os.path.join(dirname, fname)
         if os.path.isdir(path):
@@ -1332,6 +1335,21 @@ if __name__ == "__main__":
         except UnicodeError:
             pass
         count+=1
+
+    # Adding labels for Genres used
+    USED_GENRES = list(set(USED_GENRES))
+    for genre in USED_GENRES:
+        query = """
+SELECT ?label
+WHERE {
+  <%s> rdfs:label ?label .
+  FILTER (langMatches(lang(?label), 'en'))
+}
+""" % genre
+        
+        label = [row[0].value for row in GENRE_GRAPH.query(query)][0]
+        add_types_to_graph(g,genre,label)
+
 
     with open("unmatchedplaces.csv", "w") as f:
         writer = csv.writer(f, delimiter='\t', quoting=csv.QUOTE_MINIMAL)
