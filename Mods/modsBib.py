@@ -31,6 +31,7 @@ XML = rdflib.Namespace("http://www.w3.org/XML/1998/namespace")
 MARC_REL = rdflib.Namespace("http://id.loc.gov/vocabulary/relators/")
 DATA = rdflib.Namespace("http://cwrc.ca/cwrcdata/")
 
+LINCS = rdflib.Namespace("http://id.lincsproject.ca/")
 GENRE = rdflib.Namespace("http://id.lincsproject.ca/genre/")
 SCHEMA = rdflib.Namespace("http://schema.org/")
 SKOS = rdflib.Namespace("http://www.w3.org/2004/02/skos/core#")
@@ -51,11 +52,12 @@ BF_PROPERTIES = {
 
 # To reduce duplication of admin agents
 ADMIN_AGENTS = {
-    "Orlando Document Archive": DATA.Orlando_Document_Archive,
-    "CaAEU": DATA.CaAEU,
-    "UAB": DATA.UAB,
-    "U3G": DATA.U3G,
-    "Orlando: Women's Writing in the British Isles from the Beginnings to the Present": DATA.Orlando,
+    "Orlando Document Archive": LINCS.z7dHu6axJWK,
+    "Canadian Writing Research Collaboratory": LINCS.Ph49VISFM8m,
+    "CaAEU": LINCS.zBnrYP48rmJ,
+    "UAB": LINCS.zBosqEEBC6a,
+    "U3G": LINCS.zBoaS2NkStT,
+    "Orlando: Women's Writing in the British Isles from the Beginnings to the Present": LINCS.zBkArbArQww,
 }
 
 ROLES = {
@@ -870,7 +872,7 @@ class BibliographyParse:
 
         adminMetaData = g.resource(F"{self.placeholderURI}_admin_metadata")
         adminMetaData.add(RDF.type, CRM.E13_Attribute_Assignment)
-        adminMetaData.add(RDFS.label, rdflib.Literal( (F"administrative metadata {'of the creation of the MODS record for '+ self.mainTitle}") if self.mainTitle else "administrative metadata of MODS record" ))
+        adminMetaData.add(RDFS.label, rdflib.Literal( (F"administrative metadata {'of the creation of the MODS record for '+ self.mainTitle}") if self.mainTitle else "administrative metadata of MODS record",lang="en" ))
 
 
         i = 0
@@ -882,7 +884,7 @@ class BibliographyParse:
 
                 i += 1
             # Note: Authority value unused, values encountered: "marcorg", "oclcorg"
-            assigner_agent.add(RDFS.label, rdflib.Literal(r['value']))
+            assigner_agent.add(RDFS.label, rdflib.Literal(r['value'],lang="en"))
             assigner_agent.add(RDF.type, CRM.E39_Actor)
             adminMetaData.add(CRM.P14_carried_out_by, assigner_agent)
 
@@ -893,7 +895,7 @@ class BibliographyParse:
         for r in self.get_record_change_date():
             start_date, transformed, end_date = dateParse(r['date'])
             time_span = g.resource(F"{self.placeholderURI}_time-span_{r_count}")
-            time_span.add(RDFS.label, rdflib.Literal(F"time-span of modification of MODS record for {self.mainTitle}"))
+            time_span.add(RDFS.label, rdflib.Literal(F"time-span of modification of MODS record for {self.mainTitle}",lang="en"))
             time_span.add(RDF.type, CRM["E52_Time-Span"])
             time_span.add(CRM["P82_at_some_time_within"], rdflib.Literal(r['date'],lang="en"))
             time_span.add(CRM.P2_has_type, BF.changeDate)
@@ -908,27 +910,12 @@ class BibliographyParse:
             r_count +=1 
 
         #CIDOC Creating Generation Process
-        i = 0
-        for r in self.get_record_origin():
-            if r['origin'] == "Record has been transformed into MODS from an XML Orlando record using an XSLT stylesheet. Metadata originally created in Orlando Document Archive's bibliographic database formerly available at nifflheim.arts.ualberta.ca/wwp.":
-                generation_process = g.resource(DATA.generation_process_xslt)
-                generation_process.add(RDF.type, CRM.E29_Design_or_Procedure)
-                generation_process.add(CRM.P2_has_type, BF.GenerationProcess)
-                generation_process.add(RDFS.comment,rdflib.Literal(r['origin']))
-                generation_process.add(RDFS.label, rdflib.Literal(F"generation process of the MODS Record of Orlando bibiliographic records",lang="en"))
-                adminMetaData.add(CRM.P33_used_specific_technique, generation_process)
-            else:
-                generation_process = g.resource(F"{self.placeholderURI}_generation_process_{i}")
-                generation_process.add(RDF.type, CRM.E29_Design_or_Procedure)
-                generation_process.add(RDFS.label, rdflib.Literal(
-                    F"generation process of the MODS Record for {self.mainTitle}", lang="en"))
-                generation_process.add(CRM.P2_has_type, BF.GenerationProcess)
-                generation_process.add(RDFS.comment, rdflib.Literal(r['origin']))
-
-                adminMetaData.add(
-                    CRM.P33_used_specific_technique, generation_process)
-            i += 1
-
+        generation_process = g.resource(LINCS.z7kKbF0M7cw)
+        generation_process.add(RDF.type, CRM.E29_Design_or_Procedure)
+        generation_process.add(CRM.P2_has_type, BF.GenerationProcess)
+        generation_process.add(RDFS.comment,rdflib.Literal("Record has been transformed into MODS from an XML Orlando record using an XSLT stylesheet. Metadata originally created in Orlando Document Archive's bibliographic database formerly available at nifflheim.arts.ualberta.ca/wwp.",lang="en"))
+        generation_process.add(RDFS.label, rdflib.Literal(F"generation process of the MODS Record of Orlando bibiliographic records",lang="en"))
+        adminMetaData.add(CRM.P33_used_specific_technique, generation_process)
         resource.add(CRM.P140i_was_attributed_by, adminMetaData)
 
         i = 0
@@ -1009,7 +996,7 @@ class BibliographyParse:
                             
                         
                     agent = g.resource(uri)
-                    agent.add(RDFS.label, rdflib.Literal(agent_label))
+                    agent.add(RDFS.label, rdflib.Literal(agent_label,lang="en"))
                     agent.add(RDF.type, CRMPC.PC14_carried_out_by)
                     agent.add(CRMPC.P02_has_range, agent_resource.identifier)
                     agent.add(rdflib.URIRef("http://www.cidoc-crm.org/cidoc-crm/P14.1_in_the_role_of"),
@@ -1061,7 +1048,7 @@ class BibliographyParse:
                     end_date, transformed, dump = dateParse(o['end date'], o)
 
                 time_span = g.resource(F"{self.placeholderURI}_time-span_{i}")
-                time_span.add(RDFS.label, rdflib.Literal( (F"time-span {'of the publishing of '+ self.mainTitle}") if self.mainTitle else "creation time-span" ))
+                time_span.add(RDFS.label, rdflib.Literal( (F"time-span {'of the publishing of '+ self.mainTitle}") if self.mainTitle else "creation time-span",lang="en" ))
                 time_span.add(RDF.type, CRM["E52_Time-Span"])
                 time_span.add(CRM["P82_at_some_time_within"],
                               rdflib.Literal(o['date'], lang="en"))
@@ -1174,7 +1161,7 @@ class BibliographyParse:
                     extent_label += ", "
                 extent_label += "Page " + p['value']
 
-            extent_resource.add(RDFS.label, rdflib.Literal(extent_label))
+            extent_resource.add(RDFS.label, rdflib.Literal(extent_label,lang="en"))
             
             # TODO: Clarify if instance needs to be identified by extent:
             if instance:
@@ -1238,6 +1225,7 @@ if __name__ == "__main__":
     g.bind("aat", GETTY)
     g.bind("geonames", GEONAMES)
     g.bind("tgn", TGN)
+    g.bind("lincs", LINCS)
 
     # Adding declaration of references
     for label, uri in BibliographyParse.type_map.items():
@@ -1328,7 +1316,7 @@ if __name__ == "__main__":
     total = len(os.listdir(dirname))
     # for fname in test_filenames:
     # for fname in os.listdir(dirname):
-    for fname in os.listdir(dirname)[:1000]:
+    for fname in os.listdir(dirname)[:2000]:
         print(F"{count}/{total} files extracted: {fname}")
         path = os.path.join(dirname, fname)
         if os.path.isdir(path):
