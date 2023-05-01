@@ -353,7 +353,7 @@ def get_name(entry):
 
 
 def get_readable_name(bio):
-    return bio.find("DOCTITLE").text.split(":")[0]
+    return bio.find("DOCTITLE").text.split(":")[0].strip()
 
 
 # TODO: Remove call to this function as it's likely no longer needed with new schema

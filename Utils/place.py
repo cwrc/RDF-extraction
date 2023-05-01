@@ -98,7 +98,7 @@ def get_value(tag):
 
 
 def log_mapping_fails():
-    log_str = "\nUnique Missed Terms: " + str(len(UNMAPPED_OCCURENCES.keys())) + "\n"
+    log_str = "\nUnique Missed Places: " + str(len(UNMAPPED_OCCURENCES.keys())) + "\n"
 
     from collections import OrderedDict
 
