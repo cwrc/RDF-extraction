@@ -1,5 +1,5 @@
 {
-  "default directory": "../data/entry_2023-04-23/",
+  "default directory": "../data/entry_2023-04-29/",
   "file ending": ".xml",
   "notes": {
     "to do": "scrape possible biographers"
@@ -68,7 +68,7 @@
       "thican": "LIVESWITH within Friends, Associates",
       "montma": "LIVESWITH within Intimate Relationships",
       "dickma": "LIVESWITH within Family(cousin)",
-      "jewsge": "INTIMATERELATIONSHIPS Erotic :Relationship with an actress who plays characters from Shakespeare plays"
+      "jewsge": "INTIMATERELATIONSHIPS EroticRelationship with an actress who plays characters from Shakespeare plays"
     },
     "notes": {
       "contexts": "Family: Whole member tag is the context",
