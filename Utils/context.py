@@ -195,7 +195,11 @@ class Context(object):
             self.context_predicate = None
             self.context_label = " ".join(self.id.split("_")).title().replace(" Context", ":") + " Context"
 
-        self.context_type = utilities.create_cwrc_uri(self.context_type)
+        # TODO: Add this logic to the mapping file instead of hardcoding
+        if context_type == "OCCUPATION":
+            self.context_type = utilities.create_uri("occupation",self.context_type)
+        else:
+            self.context_type = utilities.create_cwrc_uri(self.context_type)
 
         self.named_entities = get_named_entities(self.tag)
 

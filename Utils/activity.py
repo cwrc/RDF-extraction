@@ -373,7 +373,6 @@ precision: {self.precision}
             else:
                 activity_label = F"{self.date[:4]}: {activity_label}"
 
-        print(activity_label)
         connection = None
         if self.activity_type:
             activity.add(RDF.type, self.activity_type)
