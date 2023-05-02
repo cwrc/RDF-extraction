@@ -189,37 +189,10 @@ class Biography(object):
             g.add((self.uri, utilities.NS_DICT["owl"].sameAs, rdflib.term.URIRef(self.wd_id)))
 
         g.add((self.uri, RDFS.label, Literal(self.std_name)))
-        g.add((self.uri, utilities.NS_DICT["skos"].altLabel, Literal(self.name)))
+        g.add((self.uri, utilities.NS_DICT["skos"].prefLabel, Literal(self.name)))
 
-        # Adding names for all the people mentioned in an entry
-        generic_names = ["king","King","mother-in-law" , "Queen", "queen","husband","wife","partner" ,"father", "daughter","essay", "son","he","she","they","her","him","them", "sisters","the",  "mother", "sibling", "brother", "sister", "friend", "his wife", "her husband","his husband", "her wife", "their husband", "their wife", "lover", "family"]
-        for x in self.document.find_all("NAME"):
-            uri = utilities.get_name_uri(x)
-            if not uri:
-                logger.warning(F"URI not found for: {x} within entry: {id}")
-                continue
-            else: 
-                uri = rdflib.term.URIRef(uri)
-            
-            g.add((uri, RDF.type, utilities.NS_DICT["crm"].E21_Person))
-            std_name = x.get("STANDARD")
-            g.add((uri, RDFS.label, Literal(std_name)))
-            altname = x.get_text()
-            if altname and std_name != altname and altname not in generic_names:
-                g.add((uri, utilities.NS_DICT["skos"].altLabel, Literal(altname)))
-        
-        for x in self.document.find_all("TITLE"):
-            entity_uri = utilities.get_title_uri(x)
-            label = utilities.get_value(x)
-            g.add((entity_uri,RDFS.label,Literal(label)))
-            g.add((entity_uri,RDF.type,utilities.NS_DICT["frbroo"].F1_Work))
-            
-            # TODO: Fix alternate names duplicating
-            altname = x.get_text()
+ 
 
-            if altname and altname != label:
-                g.add((entity_uri, utilities.NS_DICT["skos"].altLabel, Literal(altname)))
-        
         return g
 
     def to_file(self, graph=None, serialization="ttl"):
