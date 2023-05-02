@@ -421,10 +421,17 @@ precision: {self.precision}
             activity.add(utilities.NS_DICT["crm"].P3_has_note, Literal(
                 self.text, lang="en"))
 
-
-        if self.activity_path != "generic+":
+        if connection:
             for x in self.places:
-                activity.add(utilities.NS_DICT["crm"].P7_took_place_at, x)
+                connection.add(utilities.NS_DICT["crm"].P7_took_place_at, x)
+        else:
+            if not self.related_activity:
+                for x in self.places:
+                    activity.add(utilities.NS_DICT["crm"].P7_took_place_at, x)
+
+        # if self.activity_path != "generic+":
+        #     for x in self.places:
+        #         activity.add(utilities.NS_DICT["crm"].P7_took_place_at, x)
             
         if "Attribute" not in str(self.activity_type):
             for x in self.event_type:
@@ -432,7 +439,7 @@ precision: {self.precision}
 
 
         if self.activity_path == "generic+":            
-            # TODO Review this portion of code
+            # TODO Review this portion of code - Seems to never occur
             connection = g.resource(f"{self.connection_uri}")
             connection.add(RDFS.label, Literal(activity_label+" (??)"))
             connection.add(RDF.type, utilities.NS_DICT["crm"][self.activity_map["generic"]])
