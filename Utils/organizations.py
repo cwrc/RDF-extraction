@@ -63,7 +63,11 @@ def get_org_uri(tag):
     std_name = tag.get("STANDARD")
     uri = tag.get("REF")
     if uri:
+        if uri in utilities.ORGANIZATION_MAP:
+            uri = utilities.ORGANIZATION_MAP[uri]
+        
         uri = rdflib.term.URIRef(uri)
+    
     else:
         if std_name in org_list:
             name = std_name

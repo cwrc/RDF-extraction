@@ -3,6 +3,7 @@ import os
 import re
 import datetime
 import urllib
+import csv
 
 try:
     from Utils.place import Place, PLACE_MAP
@@ -28,6 +29,9 @@ TODO: parse required ns from external files
 """
 WRITER_MAP = {}
 MAX_WORD_COUNT = 35
+
+PERSON_MAP = {}
+ORGANIZATION_MAP = {} # Publishers for now but this will be expanded
 
 NS_DICT = {
     "cwrc": rdflib.Namespace("http://id.lincsproject.ca/cwrc/"),
@@ -140,7 +144,6 @@ def remove_unwanted_tags(tag):
 
 
 def create_writer_map(path=None):
-    import csv
     if not path:
         path = '../data/writers_sex.csv'
     with open(path, newline='', encoding='utf-8') as csvfile:
@@ -150,7 +153,29 @@ def create_writer_map(path=None):
             if row[0] not in WRITER_MAP:
                 WRITER_MAP[row[0]] = {"ID": row[1], "SEX": row[2]}
 
+def create_person_map(path=None):
+    if not path:
+        path = '../data/people_mapping.csv'
+    with open(path) as f:
+        csvfile = csv.reader(f)
+        for row in csvfile:
+            PERSON_MAP[row[0]] = row[1]
+
+def create_org_map(path=None):
+    if not path:
+        path = '../data/publisher_mapping.csv'
+    with open(path) as f:
+        csvfile = csv.reader(f)
+        for row in csvfile:
+            PERSON_MAP[row[0]] = row[1]
+    
+
 create_writer_map()
+create_person_map()
+create_org_map()
+    
+
+
 
 def get_current_time():
     return datetime.datetime.now().strftime("%d %b %Y %H:%M:%S")
@@ -264,6 +289,9 @@ def get_name_uri(tag):
                 return make_standard_uri(tag.get_text())
                 
     else:
+        if uri in PERSON_MAP:
+            uri = PERSON_MAP[uri]
+        
         return rdflib.term.URIRef(uri)
 
 
