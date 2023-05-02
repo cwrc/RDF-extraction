@@ -191,14 +191,14 @@ def get_date_tag(tag):
 
 class Activity(object):
     event_type_map = {
-        "NATIONALINTERNATIONAL": "PoliticalClimate",
-        "BRITISHWOMENWRITERS": "BritishWomenLiteraryClimate",
-        "WRITINGCLIMATE": "LiteraryClimate",
-        "SOCIALCLIMATE": "SocialClimate",
-        "SELECTIVE": "HistoricSignificance",
-        "PERIOD": "PeriodSignificance",
-        "DECADE": "DecadeSignficance",
-        "COMPREHENSIVE": "IndividualSignificance"
+        "NATIONALINTERNATIONAL": "politicalClimate",
+        "BRITISHWOMENWRITERS": "britishWomenLiteraryClimate",
+        "WRITINGCLIMATE": "literaryClimate",
+        "SOCIALCLIMATE": "socialClimate",
+        "SELECTIVE": "historicSignificance",
+        "PERIOD": "periodSignificance",
+        "DECADE": "decadeSignficance",
+        "COMPREHENSIVE": "individualSignificance"
     }
 
     activity_map = {
