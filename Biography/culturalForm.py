@@ -295,7 +295,9 @@ def find_cultural_forms(cf, person):
             if x.get("ACTIVISM") == "ACTIVISTYES":
                 cf_list.append(CulturalForm("activistInvolvementIn", None, value))
             elif x.get("MEMBERSHIP") == "MEMBERSHIPYES":
-                cf_list.append(CulturalForm("politicalMembershipIn", None, value))
+                # TODO: Uncomment this when orgs are better handled
+                # cf_list.append(CulturalForm("politicalMembershipIn", None, value))
+                pass
             elif x.get("INVOLVEMENT") == "INVOLVEMENTYES":
                 cf_list.append(CulturalForm("politicalInvolvementIn", None, value))
             else:
@@ -368,13 +370,23 @@ def extract_culturalforms(tag_list, context_type, person, list_type="paragraphs"
             temp_context = Context(context_id, tag, context_type,pattern="culturalform")
             for x in attributes.keys():
                 temp_attr = {x:attributes[x]}
-                activity_id = context_id.replace("Context","Event") + "_"+ str(count)
-                label = f"{utilities.split_by_casing(CONTEXT_TYPE)}Event: {utilities.split_by_casing(str(x).split('/')[-1]).lower()}".replace("Context", "")
-                activity = Activity(person, label, activity_id, tag, activity_type="culturalform", attributes=temp_attr)
-                activity.event_type.append(utilities.create_cwrc_uri(CONTEXT_TYPE))
-                temp_context.link_activity(activity)
-                person.add_activity(activity)
-                count+=1
+                
+                if "politicalMembershipIn" in str(x):
+                    activity_id = context_id.replace("Context","Event") + "_"+ str(count)
+                    label = f"{utilities.split_by_casing(CONTEXT_TYPE)}Event: {utilities.split_by_casing(str(x).split('/')[-1]).lower()}".replace("Context", "")
+                    activity = Activity(person, label, activity_id, tag, activity_type="culturalform", attributes=temp_attr)
+                    activity.event_type.append(utilities.create_cwrc_uri(CONTEXT_TYPE))
+                    temp_context.link_activity(activity)
+                    person.add_activity(activity)
+                    count+=1
+                else:
+                    activity_id = context_id.replace("Context","Event") + "_"+ str(count)
+                    label = f"{utilities.split_by_casing(CONTEXT_TYPE)}Event: {utilities.split_by_casing(str(x).split('/')[-1]).lower()}".replace("Context", "")
+                    activity = Activity(person, label, activity_id, tag, activity_type="culturalform", attributes=temp_attr)
+                    activity.event_type.append(utilities.create_cwrc_uri(CONTEXT_TYPE))
+                    temp_context.link_activity(activity)
+                    person.add_activity(activity)
+                    count+=1
 
         else:
             temp_context = Context(context_id, tag, context_type, "identifying")
