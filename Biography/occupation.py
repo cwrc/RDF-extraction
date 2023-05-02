@@ -77,7 +77,7 @@ class Occupation(object):
             if self.get_attribute(tag, "PHILANTHROPYVOLUNTEER"):
                 return "volunteerOccupation"
             else:
-                return "occupation"
+                return "Occupation"
         if tag.name == "EMPLOYER":
             return "employment"
         if tag.name == "REMUNERATION":

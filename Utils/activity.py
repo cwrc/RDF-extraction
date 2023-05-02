@@ -197,7 +197,7 @@ class Activity(object):
         "SOCIALCLIMATE": "socialClimate",
         "SELECTIVE": "historicSignificance",
         "PERIOD": "periodSignificance",
-        "DECADE": "decadeSignficance",
+        "DECADE": "decadeSignificance",
         "COMPREHENSIVE": "individualSignificance"
     }
 

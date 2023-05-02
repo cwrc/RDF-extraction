@@ -120,11 +120,11 @@ def extract_org_data(bio):
             org = get_org(instance)
             if org:
                 if element == elements[0]:
-                    org_type = utilities.NS_DICT["cwrc"].PoliticalOrganization
+                    org_type = utilities.NS_DICT["cwrc"].politicalOrganization
                 elif element == elements[1]:
-                    org_type = utilities.NS_DICT["cwrc"].ReligiousOrganization
+                    org_type = utilities.NS_DICT["cwrc"].religiousOrganization
                 elif element == elements[2]:
-                    org_type = utilities.NS_DICT["cwrc"].EducationalOrganization
+                    org_type = utilities.NS_DICT["cwrc"].educationalOrganization
 
                 for x in org:
                     org_uri = get_org_uri(x)
@@ -132,11 +132,11 @@ def extract_org_data(bio):
                     uber_graph.remove((org_uri, RDF.type, utilities.NS_DICT["org"].Organization))
 
                     # Adding the hasOrganization relation
-                    if org_type == utilities.NS_DICT["cwrc"].ReligiousOrganization:
+                    if org_type == utilities.NS_DICT["cwrc"].religiousOrganization:
                         mapped_value = cf.get_mapped_term("Religion", utilities.get_value(instance))
                         if type(mapped_value) is rdflib.term.URIRef:
                             uber_graph.add((mapped_value, utilities.NS_DICT["cwrc"].hasOrganization, org_uri))
-                    elif org_type == utilities.NS_DICT["cwrc"].PoliticalOrganization:
+                    elif org_type == utilities.NS_DICT["cwrc"].politicalOrganization:
                         mapped_value = cf.get_mapped_term("PoliticalAffiliation", utilities.get_value(instance))
                         if type(mapped_value) is rdflib.term.URIRef:
                             uber_graph.add((mapped_value, utilities.NS_DICT["cwrc"].hasOrganization, org_uri))

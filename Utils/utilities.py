@@ -483,7 +483,7 @@ def create_place_nodes(g):
         uri = rdflib.URIRef(uri)
         label = label.replace(",",", ")
         g.add((uri, rdflib.RDF.type, NS_DICT["crm"].E53_Place))
-        g.add((uri, NS_DICT["crm"].P2_has_type, NS_DICT["cwrc"].MappedPlace))
+        g.add((uri, NS_DICT["crm"].P2_has_type, NS_DICT["cwrc"].mappedPlace))
         g.add((uri, rdflib.SKOS.hiddenLabel, rdflib.Literal(label)))
 
 def create_extracted_file(filepath, person, serialization="ttl"):

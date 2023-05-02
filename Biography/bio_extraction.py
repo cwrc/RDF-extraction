@@ -14,7 +14,7 @@ import personname
 
 """
 This is a possible temporary main script that creates the biography related triples
-TODO:add documentation
+TODO: add documentation
 implement personname
 """
 
@@ -56,8 +56,8 @@ def main():
         other_contexts.extract_other_contexts_data(soup, person)
         
         # Not yet reviewed
-        # lifeInfo.extract_family_data(soup, person)
         # lifeInfo.extract_intimate_relationships_data(soup, person)
+        # lifeInfo.extract_family_data(soup, person)
         # lifeInfo.extract_friend_data(soup, person)
         # personname.extract_person_name(soup, person)
         # education.extract_education_data(soup, person)
@@ -93,6 +93,7 @@ def main():
     logger.info(F"Time completed: {utilities.get_current_time()}")
 
     temp_path = "extracted_triples/biography_triples.ttl"
+    # utilities.create_extracted_uberfile(temp_path, uber_graph,serialization="ttl")
     utilities.create_extracted_uberfile(temp_path, uber_graph,serialization="ttl", extra_triples="../data/additional_triples.ttl")
 
 if __name__ == "__main__":

@@ -118,7 +118,7 @@ def find_cultural_forms(cf, person):
             cf_list.append(CulturalForm(predicate, None, get_mapped_term("Language", value, id=person.id)))
 
     def get_other_cfs():
-        tags = {"NATIONALITY": ["nationality", "NationalIdentity"],
+        tags = {"NATIONALITY": ["nationalIdentity", "NationalIdentity"],
                 "SEXUALIDENTITY": ["sexuality", "Sexuality"]}
         for tag in tags.keys():
             instances = cf.find_all(tag)
@@ -337,7 +337,7 @@ def get_event_type(pred):
         return "GenderEvent"
     elif "socialClass" in str(pred):
         return "SocialClassEvent"
-    elif "nationality" in str(pred):
+    elif "nationalIdentity" in str(pred):
         return "NationalityEvent"
     elif "sexuality" in str(pred):
         return "SexualityEvent"
