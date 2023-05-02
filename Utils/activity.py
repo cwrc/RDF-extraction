@@ -487,7 +487,8 @@ precision: {self.precision}
                 if any(term in pred for term in ["genderedPoliticalActivity", "activistInvolvementIn", "politicalMembershipIn"]):
                     connection.add(utilities.NS_DICT["crm"].P2_has_type, pred)
                 if "Self" in pred:
-                    connection.add(utilities.NS_DICT["crm"].P2_has_type, pred)
+                    temp_pred = pred.replace("SelfReported","")
+                    connection.add(utilities.NS_DICT["crm"].P2_has_type, rdflib.URIRef(temp_pred))
                     activity.add(utilities.NS_DICT["crm"].P14_carried_out_by, self.person.uri)
                 for obj in self.attributes[pred]:
                     connection.add(utilities.NS_DICT["crm"].P16_used_specific_object, obj)
