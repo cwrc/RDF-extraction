@@ -1,3 +1,13 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix crm: <http://www.cidoc-crm.org/cidoc-crm/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix ulan: <https://vocab.getty.edu/ulan/> .
+@prefix orlando: <https://commons.cwrc.ca/orlando:> .
+@prefix viaf: <http://viaf.org/viaf/> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+
 
 ulan:500001626 owl:sameAs orlando:8eeb3a25-3fc3-42cd-b052-be179061209f .
 
@@ -8623,7 +8633,7 @@ viaf:300979230 owl:sameAs orlando:caed2df4-4565-4924-86c6-c2116ff02818 .
 
 viaf:300979230 owl:sameAs wd:Q1113742 .
 
-viaf:3012622;91256832 owl:sameAs orlando:ddde1cc6-d86a-4f01-aa71-92ea9efbef4b .
+viaf:3012622 owl:sameAs orlando:ddde1cc6-d86a-4f01-aa71-92ea9efbef4b, viaf:91256832 .
 
 viaf:30145542359096640697 owl:sameAs orlando:1fe8218d-836f-4d7c-bbd7-ec229298fc18 .
 
