@@ -42,7 +42,7 @@ class CulturalForm(object):
 
     def __init__(self, predicate, reported, value, other_attributes=None):
         super(CulturalForm, self).__init__()
-        self.predicate = predicate
+        self.predicate = f"{predicate[0].upper()}{predicate[1:]}"
         self.reported = reported
         self.value = value
 
