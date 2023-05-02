@@ -144,9 +144,12 @@ def find_cultural_forms(cf, person):
             place_values = []
             for x in places:
                 temp_place = Place(x)
-                if type(temp_place.uri) is Literal:
+                
+                if temp_place.uri is None:
                     value = get_mapped_term("GeographicHeritage", temp_place.address, id=person.id)
-                    place_values.append(value)
+                    if type(value) is not Literal:
+                        place_values.append(value)
+                        
                 else:
                     place_values.append(temp_place.uri)
             return place_values
