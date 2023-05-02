@@ -323,6 +323,7 @@ def get_people(tag):
 def get_title_uri(tag):
     title = get_value(tag)
     return make_standard_uri(title + " TITLE", ns="data")
+
 def get_titles(tag):
     """Returns all titles within a given tag TODO Mapping"""
     titles = []
@@ -332,8 +333,8 @@ def get_titles(tag):
 
 
 def get_places(tag):
-    """Returns all places uris within a given tag"""
-    return [Place(x).uri for x in tag.find_all("PLACE")]
+    """Returns all places uris within a given tag""" 
+    return [Place(x).uri for x in tag.find_all("PLACE") if Place(x).uri != None]
 
 
 def get_place_strings(tag):
