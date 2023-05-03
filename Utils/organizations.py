@@ -43,7 +43,7 @@ class Organization(object):
         g = utilities.create_graph()
         g.add((self.uri, utilities.NS_DICT["foaf"].name, Literal(self.name)))
         g.add((self.uri, RDFS.label, Literal(self.name)))
-        g.add((self.uri, RDF.type, utilities.NS_DICT["org"].Organization))
+        g.add((self.uri, RDF.type, utilities.NS_DICT["foaf"].Organization))
         for x in self.altlabels:
             g.add((self.uri, utilities.NS_DICT["skos"].altLabel, Literal(x)))
         return g
@@ -129,7 +129,7 @@ def extract_org_data(bio):
                 for x in org:
                     org_uri = get_org_uri(x)
                     uber_graph.add((org_uri, RDF.type, org_type))
-                    uber_graph.remove((org_uri, RDF.type, utilities.NS_DICT["org"].Organization))
+                    uber_graph.remove((org_uri, RDF.type, utilities.NS_DICT["foaf"].Organization))
 
                     # Adding the hasOrganization relation
                     if org_type == utilities.NS_DICT["cwrc"].religiousOrganization:
