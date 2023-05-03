@@ -1291,7 +1291,7 @@ if __name__ == "__main__":
             PEOPLE_MAPPING[row[0]] = row[1]
             
 
-    for fname in os.listdir(writing_dir)[:10]:
+    for fname in os.listdir(writing_dir):
         path = os.path.join(writing_dir, fname)
         if os.path.isdir(path):
             continue
@@ -1318,7 +1318,7 @@ if __name__ == "__main__":
     total = len(os.listdir(dirname))
     # for fname in test_filenames:
     # for fname in os.listdir(dirname)[:2000]:
-    for fname in os.listdir(dirname)[:100]:
+    for fname in os.listdir(dirname):
         print(F"{count}/{total} files extracted: {fname}")
         path = os.path.join(dirname, fname)
         if os.path.isdir(path):
