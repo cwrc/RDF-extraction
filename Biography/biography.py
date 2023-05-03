@@ -94,8 +94,13 @@ class Biography(object):
         self.url = rdflib.term.URIRef(F"https://orlando.cambridge.org/profiles/{id}")
         self.name = utilities.get_readable_name(doc)
         self.std_name = utilities.get_name(doc)
+        self.cwrc_uri = self.document.ENTRY.DIV0.STANDARD.get("REF")
 
-        self.uri =  self.document.ENTRY.DIV0.STANDARD.get("REF")
+        if self.cwrc_uri in utilities.PERSON_MAP:
+            self.uri = utilities.PERSON_MAP[self.cwrc_uri]
+        else:
+            self.uri = self.cwrc_uri
+
         self.uri = rdflib.term.URIRef(self.uri)
         
         # TODO: Review names and people extraction for more precision
@@ -183,42 +188,20 @@ class Biography(object):
 
         for x in self.organizations:
             g.add((x, utilities.NS_DICT["crm"].P107_has_current_or_former_member, self.uri))
+            g.add((self.uri, utilities.NS_DICT["crm"].P107i_is_current_or_former_member_of,x ))
 
-        if self.wd_id:
+        if self.wd_id and self.wd_id != str(self.uri):
             g.add((self.uri, utilities.NS_DICT["owl"].sameAs, rdflib.term.URIRef(self.wd_id)))
 
         g.add((self.uri, RDFS.label, Literal(self.std_name)))
-        g.add((self.uri, utilities.NS_DICT["skos"].altLabel, Literal(self.name)))
+        g.add((self.uri, utilities.NS_DICT["skos"].prefLabel, Literal(self.name)))
 
-        # Adding names for all the people mentioned in an entry
-        generic_names = ["king","King","mother-in-law" , "Queen", "queen","husband","wife","partner" ,"father", "daughter","essay", "son","he","she","they","her","him","them", "sisters","the",  "mother", "sibling", "brother", "sister", "friend", "his wife", "her husband","his husband", "her wife", "their husband", "their wife", "lover", "family"]
-        for x in self.document.find_all("NAME"):
-            uri = utilities.get_name_uri(x)
-            if not uri:
-                logger.warning(F"URI not found for: {x} within entry: {id}")
-                continue
-            else: 
-                uri = rdflib.term.URIRef(uri)
+ 
+        if str(self.uri) !=  self.cwrc_uri:
+            g.add((self.uri, utilities.NS_DICT["owl"].sameAs, rdflib.term.URIRef(self.cwrc_uri)))
             
-            g.add((uri, RDF.type, utilities.NS_DICT["crm"].E21_Person))
-            std_name = x.get("STANDARD")
-            g.add((uri, RDFS.label, Literal(std_name)))
-            altname = x.get_text()
-            if altname and std_name != altname and altname not in generic_names:
-                g.add((uri, utilities.NS_DICT["skos"].altLabel, Literal(altname)))
-        
-        for x in self.document.find_all("TITLE"):
-            entity_uri = utilities.get_title_uri(x)
-            label = utilities.get_value(x)
-            g.add((entity_uri,RDFS.label,Literal(label)))
-            g.add((entity_uri,RDF.type,utilities.NS_DICT["frbroo"].F1_Work))
-            
-            # TODO: Fix alternate names duplicating
-            altname = x.get_text()
+ 
 
-            if altname and altname != label:
-                g.add((entity_uri, utilities.NS_DICT["skos"].altLabel, Literal(altname)))
-        
         return g
 
     def to_file(self, graph=None, serialization="ttl"):

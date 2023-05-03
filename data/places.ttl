@@ -1,7 +1,6 @@
 @prefix crm: <http://www.cidoc-crm.org/cidoc-crm/> .
 @prefix geonames: <https://sws.geonames.org/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix tgn: <http://vocab.getty.edu/tgn/> .
 
 geonames:1000501 a crm:E53_Place ;
@@ -19704,6 +19703,402 @@ geonames:9998075 a crm:E53_Place ;
     rdfs:label "Kyerwa District Council"@en ;
     crm:P168_place_is_defined_by "POINT(-1.26036 30.79555)" .
 
+@prefix crm: <http://www.cidoc-crm.org/cidoc-crm/> .
+@prefix geonames: <https://sws.geonames.org/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+geonames:11609027 a crm:E53_Place ;
+    rdfs:label "Cornwall"@en ;
+    crm:P168_place_is_defined_by "POINT(50.40303 -4.83416)" .
+
+geonames:11609047 a crm:E53_Place ;
+    rdfs:label "Lancashire"@en ;
+    crm:P168_place_is_defined_by "POINT(53.84331 -2.63001)" .
+
+geonames:1185241 a crm:E53_Place ;
+    rdfs:label "Dhaka"@en ;
+    crm:P168_place_is_defined_by "POINT(23.7104 90.40744)" .
+
+geonames:1253405 a crm:E53_Place ;
+    rdfs:label "Varanasi"@en ;
+    crm:P168_place_is_defined_by "POINT(25.31668 83.01041)" .
+
+geonames:1275339 a crm:E53_Place ;
+    rdfs:label "Mumbai"@en ;
+    crm:P168_place_is_defined_by "POINT(19.07283 72.88261)" .
+
+geonames:1814991 a crm:E53_Place ;
+    rdfs:label "China"@en ;
+    crm:P168_place_is_defined_by "POINT(35 105)" .
+
+geonames:1816670 a crm:E53_Place ;
+    rdfs:label "Beijing"@en ;
+    crm:P168_place_is_defined_by "POINT(39.9075 116.39723)" .
+
+geonames:1861060 a crm:E53_Place ;
+    rdfs:label "Japan"@en ;
+    crm:P168_place_is_defined_by "POINT(35.68536 139.75309)" .
+
+geonames:192950 a crm:E53_Place ;
+    rdfs:label "Kenya"@en ;
+    crm:P168_place_is_defined_by "POINT(1 38)" .
+
+geonames:2017370 a crm:E53_Place ;
+    rdfs:label "Russia"@en ;
+    crm:P168_place_is_defined_by "POINT(60 100)" .
+
+geonames:2077456 a crm:E53_Place ;
+    rdfs:label "Australia"@en ;
+    crm:P168_place_is_defined_by "POINT(-25 135)" .
+
+geonames:2155400 a crm:E53_Place ;
+    rdfs:label "New South Wales"@en ;
+    crm:P168_place_is_defined_by "POINT(-33 146)" .
+
+geonames:2186224 a crm:E53_Place ;
+    rdfs:label "New Zealand"@en ;
+    crm:P168_place_is_defined_by "POINT(-42 174)" .
+
+geonames:2264397 a crm:E53_Place ;
+    rdfs:label "Portugal"@en ;
+    crm:P168_place_is_defined_by "POINT(39.6945 -8.13057)" .
+
+geonames:2328926 a crm:E53_Place ;
+    rdfs:label "Nigeria"@en ;
+    crm:P168_place_is_defined_by "POINT(10 8)" .
+
+geonames:2510769 a crm:E53_Place ;
+    rdfs:label "Spain"@en ;
+    crm:P168_place_is_defined_by "POINT(40 -4)" .
+
+geonames:2589581 a crm:E53_Place ;
+    rdfs:label "Algeria"@en ;
+    crm:P168_place_is_defined_by "POINT(28 3)" .
+
+geonames:2623032 a crm:E53_Place ;
+    rdfs:label "Denmark"@en ;
+    crm:P168_place_is_defined_by "POINT(56 10)" .
+
+geonames:2634135 a crm:E53_Place ;
+    rdfs:label "Whitby"@en ;
+    crm:P168_place_is_defined_by "POINT(54.48774 -0.61498)" .
+
+geonames:2634895 a crm:E53_Place ;
+    rdfs:label "Wales"@en ;
+    crm:P168_place_is_defined_by "POINT(52.5 -3.5)" .
+
+geonames:2635166 a crm:E53_Place ;
+    rdfs:label "Unst"@en ;
+    crm:P168_place_is_defined_by "POINT(60.75 -0.88333)" .
+
+geonames:2635167 a crm:E53_Place ;
+    rdfs:label "United Kingdom"@en ;
+    crm:P168_place_is_defined_by "POINT(54.75844 -2.69531)" .
+
+geonames:2638010 a crm:E53_Place ;
+    rdfs:label "Shetland Islands"@en ;
+    crm:P168_place_is_defined_by "POINT(60.33333 -1.33333)" .
+
+geonames:2638360 a crm:E53_Place ;
+    rdfs:label "Scotland"@en ;
+    crm:P168_place_is_defined_by "POINT(56 -4)" .
+
+geonames:2639110 a crm:E53_Place ;
+    rdfs:label "Ross on Wye"@en ;
+    crm:P168_place_is_defined_by "POINT(51.91667 -2.56667)" .
+
+geonames:2639204 a crm:E53_Place ;
+    rdfs:label "Rolleston"@en ;
+    crm:P168_place_is_defined_by "POINT(53.06422 -0.89135)" .
+
+geonames:2639996 a crm:E53_Place ;
+    rdfs:label "Portsmouth"@en ;
+    crm:P168_place_is_defined_by "POINT(50.79899 -1.09125)" .
+
+geonames:2640500 a crm:E53_Place ;
+    rdfs:label "Pembrokeshire"@en ;
+    crm:P168_place_is_defined_by "POINT(51.83333 -4.91667)" .
+
+geonames:2641181 a crm:E53_Place ;
+    rdfs:label "Norwich"@en ;
+    crm:P168_place_is_defined_by "POINT(52.62783 1.29834)" .
+
+geonames:2641364 a crm:E53_Place ;
+    rdfs:label "Northern Ireland"@en ;
+    crm:P168_place_is_defined_by "POINT(54.5 -6.5)" .
+
+geonames:2642559 a crm:E53_Place ;
+    rdfs:label "Midlothian"@en ;
+    crm:P168_place_is_defined_by "POINT(55.82347 -3.09334)" .
+
+geonames:2643743 a crm:E53_Place ;
+    rdfs:label "London"@en ;
+    crm:P168_place_is_defined_by "POINT(51.50853 -0.12574)" .
+
+geonames:2644210 a crm:E53_Place ;
+    rdfs:label "Liverpool"@en ;
+    crm:P168_place_is_defined_by "POINT(53.41058 -2.97794)" .
+
+geonames:2644688 a crm:E53_Place ;
+    rdfs:label "Leeds"@en ;
+    crm:P168_place_is_defined_by "POINT(53.79648 -1.54785)" .
+
+geonames:2646088 a crm:E53_Place ;
+    rdfs:label "Inverness"@en ;
+    crm:P168_place_is_defined_by "POINT(57.47908 -4.22398)" .
+
+geonames:2646943 a crm:E53_Place ;
+    rdfs:label "Scottish Highlands"@en ;
+    crm:P168_place_is_defined_by "POINT(57.12 -4.71)" .
+
+geonames:2648229 a crm:E53_Place ;
+    rdfs:label "Grampian Mountains"@en ;
+    crm:P168_place_is_defined_by "POINT(56.91667 -4)" .
+
+geonames:2650797 a crm:E53_Place ;
+    rdfs:label "Dumfries and Galloway"@en ;
+    crm:P168_place_is_defined_by "POINT(55.08333 -3.83333)" .
+
+geonames:2651722 a crm:E53_Place ;
+    rdfs:label "Cults"@en ;
+    crm:P168_place_is_defined_by "POINT(57.11667 -2.16667)" .
+
+geonames:2652355 a crm:E53_Place ;
+    rdfs:label "Cornwall"@en ;
+    crm:P168_place_is_defined_by "POINT(50.41667 -4.75)" .
+
+geonames:2654064 a crm:E53_Place ;
+    rdfs:label "The Cairngorms"@en ;
+    crm:P168_place_is_defined_by "POINT(57.06667 -3.83333)" .
+
+geonames:2654242 a crm:E53_Place ;
+    rdfs:label "Burray"@en ;
+    crm:P168_place_is_defined_by "POINT(58.85 -2.9)" .
+
+geonames:2656700 a crm:E53_Place ;
+    rdfs:label "Ayrshire"@en ;
+    crm:P168_place_is_defined_by "POINT(55.5 -4.5)" .
+
+geonames:2661886 a crm:E53_Place ;
+    rdfs:label "Sweden"@en ;
+    crm:P168_place_is_defined_by "POINT(62 15)" .
+
+geonames:2750405 a crm:E53_Place ;
+    rdfs:label "Netherlands"@en ;
+    crm:P168_place_is_defined_by "POINT(52.25 5.75)" .
+
+geonames:2782113 a crm:E53_Place ;
+    rdfs:label "Austria"@en ;
+    crm:P168_place_is_defined_by "POINT(47.33333 13.33333)" .
+
+geonames:2800866 a crm:E53_Place ;
+    rdfs:label "Brussels"@en ;
+    crm:P168_place_is_defined_by "POINT(50.85045 4.34878)" .
+
+geonames:2880010 a crm:E53_Place ;
+    rdfs:label "Lausitz-Spreewald"@en ;
+    crm:P168_place_is_defined_by "POINT(51.41667 14.58333)" .
+
+geonames:2910831 a crm:E53_Place ;
+    rdfs:label "Hanover"@en ;
+    crm:P168_place_is_defined_by "POINT(52.37052 9.73322)" .
+
+geonames:2921044 a crm:E53_Place ;
+    rdfs:label "Germany"@en ;
+    crm:P168_place_is_defined_by "POINT(51.5 10.5)" .
+
+geonames:2963597 a crm:E53_Place ;
+    rdfs:label "Ireland"@en ;
+    crm:P168_place_is_defined_by "POINT(53 -8)" .
+
+geonames:2964180 a crm:E53_Place ;
+    rdfs:label "Galway"@en ;
+    crm:P168_place_is_defined_by "POINT(53.27245 -9.05095)" .
+
+geonames:2964574 a crm:E53_Place ;
+    rdfs:label "Dublin"@en ;
+    crm:P168_place_is_defined_by "POINT(53.33306 -6.24889)" .
+
+geonames:2965535 a crm:E53_Place ;
+    rdfs:label "Cavan"@en ;
+    crm:P168_place_is_defined_by "POINT(53.99083 -7.36056)" .
+
+geonames:2979309 a crm:E53_Place ;
+    rdfs:label "Saint-Jean-de-Luz"@en ;
+    crm:P168_place_is_defined_by "POINT(43.38871 -1.66267)" .
+
+geonames:3007671 a crm:E53_Place ;
+    rdfs:label "Languedoc"@en ;
+    crm:P168_place_is_defined_by "POINT(44 4)" .
+
+geonames:3017382 a crm:E53_Place ;
+    rdfs:label "France"@en ;
+    crm:P168_place_is_defined_by "POINT(46 2)" .
+
+geonames:3077311 a crm:E53_Place ;
+    rdfs:label "Czechia"@en ;
+    crm:P168_place_is_defined_by "POINT(49.75 15)" .
+
+geonames:3164603 a crm:E53_Place ;
+    rdfs:label "Venice"@en ;
+    crm:P168_place_is_defined_by "POINT(45.43713 12.33265)" .
+
+geonames:3175395 a crm:E53_Place ;
+    rdfs:label "Italy"@en ;
+    crm:P168_place_is_defined_by "POINT(42.83333 12.83333)" .
+
+geonames:3310143 a crm:E53_Place ;
+    rdfs:label "Blackwater River"@en ;
+    crm:P168_place_is_defined_by "POINT(52.6775 -8.58222)" .
+
+geonames:3374084 a crm:E53_Place ;
+    rdfs:label "Barbados"@en ;
+    crm:P168_place_is_defined_by "POINT(13.16453 -59.55165)" .
+
+geonames:3378535 a crm:E53_Place ;
+    rdfs:label "Guyana"@en ;
+    crm:P168_place_is_defined_by "POINT(5 -59)" .
+
+geonames:3489940 a crm:E53_Place ;
+    rdfs:label "Jamaica"@en ;
+    crm:P168_place_is_defined_by "POINT(18.16667 -77.25)" .
+
+geonames:357994 a crm:E53_Place ;
+    rdfs:label "Egypt"@en ;
+    crm:P168_place_is_defined_by "POINT(27 30)" .
+
+geonames:3895114 a crm:E53_Place ;
+    rdfs:label "Chile"@en ;
+    crm:P168_place_is_defined_by "POINT(-30 -71)" .
+
+geonames:390903 a crm:E53_Place ;
+    rdfs:label "Greece"@en ;
+    crm:P168_place_is_defined_by "POINT(39 22)" .
+
+geonames:4132194 a crm:E53_Place ;
+    rdfs:label "Stamps"@en ;
+    crm:P168_place_is_defined_by "POINT(33.3654 -93.49518)" .
+
+geonames:4197000 a crm:E53_Place ;
+    rdfs:label "Georgia"@en ;
+    crm:P168_place_is_defined_by "POINT(32.75042 -83.50018)" .
+
+geonames:4331987 a crm:E53_Place ;
+    rdfs:label "Louisiana"@en ;
+    crm:P168_place_is_defined_by "POINT(31.00047 -92.0004)" .
+
+geonames:4436296 a crm:E53_Place ;
+    rdfs:label "Mississippi"@en ;
+    crm:P168_place_is_defined_by "POINT(32.75041 -89.75036)" .
+
+geonames:4470617 a crm:E53_Place ;
+    rdfs:label "Henrietta"@en ;
+    crm:P168_place_is_defined_by "POINT(35.2579 -81.79621)" .
+
+geonames:4597040 a crm:E53_Place ;
+    rdfs:label "South Carolina"@en ;
+    crm:P168_place_is_defined_by "POINT(34.00043 -81.00009)" .
+
+geonames:4662168 a crm:E53_Place ;
+    rdfs:label "Tennessee"@en ;
+    crm:P168_place_is_defined_by "POINT(35.75035 -86.25027)" .
+
+geonames:4736286 a crm:E53_Place ;
+    rdfs:label "Texas"@en ;
+    crm:P168_place_is_defined_by "POINT(31.25044 -99.25061)" .
+
+geonames:4930956 a crm:E53_Place ;
+    rdfs:label "Boston"@en ;
+    crm:P168_place_is_defined_by "POINT(42.35843 -71.05977)" .
+
+geonames:5128581 a crm:E53_Place ;
+    rdfs:label "New York"@en ;
+    crm:P168_place_is_defined_by "POINT(40.71427 -74.00597)" .
+
+geonames:6091530 a crm:E53_Place ;
+    rdfs:label "Nova Scotia"@en ;
+    crm:P168_place_is_defined_by "POINT(45.00015 -62.99865)" .
+
+geonames:6093943 a crm:E53_Place ;
+    rdfs:label "Ontario"@en ;
+    crm:P168_place_is_defined_by "POINT(49.25014 -84.49983)" .
+
+geonames:6251999 a crm:E53_Place ;
+    rdfs:label "Canada"@en ;
+    crm:P168_place_is_defined_by "POINT(60.10867 -113.64258)" .
+
+geonames:6252001 a crm:E53_Place ;
+    rdfs:label "United States"@en ;
+    crm:P168_place_is_defined_by "POINT(39.76 -98.5)" .
+
+geonames:6254926 a crm:E53_Place ;
+    rdfs:label "Massachusetts"@en ;
+    crm:P168_place_is_defined_by "POINT(42.36565 -71.10832)" .
+
+geonames:6254927 a crm:E53_Place ;
+    rdfs:label "Pennsylvania"@en ;
+    crm:P168_place_is_defined_by "POINT(40.8 -77.7)" .
+
+geonames:6254928 a crm:E53_Place ;
+    rdfs:label "Virginia"@en ;
+    crm:P168_place_is_defined_by "POINT(37.54812 -77.44675)" .
+
+geonames:6255146 a crm:E53_Place ;
+    rdfs:label "Africa"@en ;
+    crm:P168_place_is_defined_by "POINT(7.1881 21.09375)" .
+
+geonames:6255148 a crm:E53_Place ;
+    rdfs:label "Europe"@en ;
+    crm:P168_place_is_defined_by "POINT(48.69096 9.14062)" .
+
+geonames:6269131 a crm:E53_Place ;
+    rdfs:label "England"@en ;
+    crm:P168_place_is_defined_by "POINT(52.16045 -0.70312)" .
+
+geonames:6951102 a crm:E53_Place ;
+    rdfs:label "San Donato in Fronzano"@en ;
+    crm:P168_place_is_defined_by "POINT(42.8333 12.8333)" .
+
+geonames:698740 a crm:E53_Place ;
+    rdfs:label "Odesa"@en ;
+    crm:P168_place_is_defined_by "POINT(46.48572 30.74383)" .
+
+geonames:727011 a crm:E53_Place ;
+    rdfs:label "Sofia"@en ;
+    crm:P168_place_is_defined_by "POINT(42.69751 23.32415)" .
+
+geonames:7293104 a crm:E53_Place ;
+    rdfs:label "St. Kew"@en ;
+    crm:P168_place_is_defined_by "POINT(50.56123 -4.79945)" .
+
+geonames:7729891 a crm:E53_Place ;
+    rdfs:label "Caribbean"@en ;
+    crm:P168_place_is_defined_by "POINT(20.38583 -72.33398)" .
+
+geonames:798544 a crm:E53_Place ;
+    rdfs:label "Poland"@en ;
+    crm:P168_place_is_defined_by "POINT(52 20)" .
+
+geonames:8502102 a crm:E53_Place ;
+    rdfs:label "New England Region - 2-digit Hydrologic Unit Code - 01"@en ;
+    crm:P168_place_is_defined_by "POINT(44.2056 -70.3064)" .
+
+geonames:8581589 a crm:E53_Place ;
+    rdfs:label "Yorkshire"@en ;
+    crm:P168_place_is_defined_by "POINT(53.95528 -1.16318)" .
+
+geonames:9528173 a crm:E53_Place ;
+    rdfs:label "Panyucun"@en ;
+    crm:P168_place_is_defined_by "POINT(36.75087 113.70076)" .
+
+geonames:953987 a crm:E53_Place ;
+    rdfs:label "South Africa"@en ;
+    crm:P168_place_is_defined_by "POINT(-29 24)" .
+
+geonames:9610282 a crm:E53_Place ;
+    rdfs:label "Normandy"@en ;
+    crm:P168_place_is_defined_by "POINT(49.08826 0.3241)" .
+
 tgn:1000105 a crm:53_Place ;
     rdfs:label "Bangladesh"@en .
 
@@ -19889,5 +20284,14 @@ tgn:8060300 a crm:53_Place ;
 
 tgn:8711667 a crm:53_Place ;
     rdfs:label "Spanish Netherlands"@en .
+
+tgn:7000198 a crm:53_Place ;
+    rdfs:label "India"@en .
+
+tgn:7004550 a crm:53_Place ;
+    rdfs:label "West Indies (archipelago)"@en .
+
+tgn:7017283 a crm:53_Place ;
+    rdfs:label " Glasgow (inhabited place)"@en .
 
 

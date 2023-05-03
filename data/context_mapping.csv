@@ -11,7 +11,7 @@ LEISUREANDSOCIETY,,LeisureContext,leisureRelationship,LeisureEvent
 PERSONNAME,,NameContext,nameRelationship,NameEvent
 NATIONALITYISSUE,,NationalityContext,culturalFormRelationship,NationalityEvent
 OCCUPATION,,OccupationContext,occupationRelationship,OccupationEvent
-POLITICS,,PoliticalContext,culturalFormRelationship,PoliticalEvent
+POLITICS,,PoliticalContext,culturalFormRelationship,PoliticsEvent
 RACEANDETHNICITY,,RaceEthnicityContext,culturalFormRelationship,RaceEthnicityEvent
 RELIGION,,ReligionContext,culturalFormRelationship,ReligionEvent
 GENDER,,GenderContext,culturalFormRelationship,GenderEvent

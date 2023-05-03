@@ -41,8 +41,8 @@ class Citation(object):
         else:
             logger.error(F"In entry: {self.entry_id} - BIBCIT: tag missing REF attribute: {self.tag}")
 
-            uri = utilities.create_uri("data", "dbref_"+self.citing_entity)
-            citing_uri = utilities.create_uri("data", self.citing_entity)
+            uri = utilities.create_uri("temp", "dbref_"+self.citing_entity)
+            citing_uri = utilities.create_uri("temp", self.citing_entity)
         
         g.add((target_uri, utilities.NS_DICT["crm"].P67_refers_to, uri))
 

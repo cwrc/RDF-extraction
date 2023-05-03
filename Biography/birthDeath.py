@@ -119,7 +119,8 @@ def extract_death_data(bio, person):
                     burial = [Place(burial_tag).uri]
                 if burial:
                     context_count += 1
-                    death_event.places = [death_event.places[0]]
+                    if death_event.places:
+                        death_event.places = [death_event.places[0]]
                     context_id2 = person.id + "_DeathContext_" + str(context_count)
                     temp_context2 = Context(context_id2, shortprose, "DEATH", pattern="death")
                     activity_id2 = context_id2.replace("Context","Event")

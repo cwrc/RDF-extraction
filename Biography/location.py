@@ -119,6 +119,8 @@ def find_locations(tag, relation):
                 elif "to " + place.text in tag.text or "to the " + place.text in tag.text or "at " + place.text in tag.text:
                     location_list.append(Location("migration", place))
 
+    location_list = [x for x in location_list if x.value != None]
+
     return location_list
 
 

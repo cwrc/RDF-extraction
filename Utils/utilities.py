@@ -3,6 +3,7 @@ import os
 import re
 import datetime
 import urllib
+import csv
 
 try:
     from Utils.place import Place, PLACE_MAP
@@ -29,6 +30,9 @@ TODO: parse required ns from external files
 WRITER_MAP = {}
 MAX_WORD_COUNT = 35
 
+PERSON_MAP = {}
+ORGANIZATION_MAP = {} # Publishers for now but this will be expanded
+
 NS_DICT = {
     "cwrc": rdflib.Namespace("http://id.lincsproject.ca/cwrc/"),
     "occupation": rdflib.Namespace("http://id.lincsproject.ca/occupation/"),
@@ -46,12 +50,13 @@ NS_DICT = {
     "crm": rdflib.Namespace("http://www.cidoc-crm.org/cidoc-crm/"),
     "crmdig": rdflib.Namespace("http://www.ics.forth.gr/isl/CRMdig/"),
     "data": rdflib.Namespace("http://cwrc.ca/cwrcdata/"),
+    "temp": rdflib.Namespace("http://www.temp.lincsproject.ca/"),
     "dbpedia": rdflib.Namespace("http://dbpedia.org/resource/"),
     "dcterms": rdflib.Namespace("http://purl.org/dc/terms/"),
     "dctypes": rdflib.Namespace("http://purl.org/dc/dcmitype/"),
     "eurovoc": rdflib.Namespace("http://eurovoc.europa.eu/"),
     "foaf": rdflib.Namespace("http://xmlns.com/foaf/0.1/"),
-    "geonames": rdflib.Namespace("http://sws.geonames.org/"),
+    "geonames": rdflib.Namespace("https://sws.geonames.org/"),
     "gvp": rdflib.Namespace("http://vocab.getty.edu/ontology#"),
     "loc": rdflib.Namespace("http://id.loc.gov/vocabulary/relators/"),
     "oa": rdflib.Namespace("http://www.w3.org/ns/oa#"),
@@ -140,7 +145,6 @@ def remove_unwanted_tags(tag):
 
 
 def create_writer_map(path=None):
-    import csv
     if not path:
         path = '../data/writers_sex.csv'
     with open(path, newline='', encoding='utf-8') as csvfile:
@@ -150,7 +154,29 @@ def create_writer_map(path=None):
             if row[0] not in WRITER_MAP:
                 WRITER_MAP[row[0]] = {"ID": row[1], "SEX": row[2]}
 
+def create_person_map(path=None):
+    if not path:
+        path = '../data/people_mapping.csv'
+    with open(path) as f:
+        csvfile = csv.reader(f)
+        for row in csvfile:
+            PERSON_MAP[row[0]] = row[1]
+
+def create_org_map(path=None):
+    if not path:
+        path = '../data/publisher_mapping.csv'
+    with open(path) as f:
+        csvfile = csv.reader(f)
+        for row in csvfile:
+            PERSON_MAP[row[0]] = row[1]
+    
+
 create_writer_map()
+create_person_map()
+create_org_map()
+    
+
+
 
 def get_current_time():
     return datetime.datetime.now().strftime("%d %b %Y %H:%M:%S")
@@ -164,10 +190,12 @@ def create_graph():
     bind_ns(namespace_manager, NS_DICT)
     return g
 
-
 def bind_ns(namespace_manager, ns_dictionary):
     for x in ns_dictionary.keys():
-        namespace_manager.bind(x, ns_dictionary[x], override=False)
+        if x == "temp":
+            namespace_manager.bind("temp_lincs_temp", ns_dictionary[x], override=False)
+        else:
+            namespace_manager.bind(x, ns_dictionary[x], override=False)
 
 
 """Some string manipulation functions"""
@@ -264,10 +292,13 @@ def get_name_uri(tag):
                 return make_standard_uri(tag.get_text())
                 
     else:
+        if uri in PERSON_MAP:
+            uri = PERSON_MAP[uri]
+        
         return rdflib.term.URIRef(uri)
 
 
-def make_standard_uri(std_str, ns="data"):
+def make_standard_uri(std_str, ns="temp"):
     """Makes uri based of string, removes punctuation and replaces spaces with an underscore
     v2, leaving hypens
     """
@@ -322,7 +353,8 @@ def get_people(tag):
 
 def get_title_uri(tag):
     title = get_value(tag)
-    return make_standard_uri(title + " TITLE", ns="data")
+    return make_standard_uri(title + " TITLE", ns="temp")
+
 def get_titles(tag):
     """Returns all titles within a given tag TODO Mapping"""
     titles = []
@@ -332,8 +364,8 @@ def get_titles(tag):
 
 
 def get_places(tag):
-    """Returns all places uris within a given tag"""
-    return [Place(x).uri for x in tag.find_all("PLACE")]
+    """Returns all places uris within a given tag""" 
+    return [Place(x).uri for x in tag.find_all("PLACE") if Place(x).uri != None]
 
 
 def get_place_strings(tag):
@@ -353,7 +385,7 @@ def get_name(entry):
 
 
 def get_readable_name(bio):
-    return bio.find("DOCTITLE").text.split(":")[0]
+    return bio.find("DOCTITLE").text.split(":")[0].strip()
 
 
 # TODO: Remove call to this function as it's likely no longer needed with new schema
@@ -454,7 +486,7 @@ def create_place_nodes(g):
         uri = rdflib.URIRef(uri)
         label = label.replace(",",", ")
         g.add((uri, rdflib.RDF.type, NS_DICT["crm"].E53_Place))
-        g.add((uri, NS_DICT["crm"].P2_has_type, NS_DICT["cwrc"].MappedPlace))
+        g.add((uri, NS_DICT["crm"].P2_has_type, NS_DICT["cwrc"].mappedPlace))
         g.add((uri, rdflib.SKOS.hiddenLabel, rdflib.Literal(label)))
 
 def create_extracted_file(filepath, person, serialization="ttl"):

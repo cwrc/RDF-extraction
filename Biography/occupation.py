@@ -47,7 +47,7 @@ class Occupation(object):
         if other_attributes:
             self.uri = other_attributes
 
-        self.uri = utilities.create_uri("cwrc", self.predicate)
+        self.uri = utilities.create_uri("occupation", self.predicate)
     """
     TODO figure out if i can just return tuple or triple without creating
     a whole graph
@@ -77,7 +77,7 @@ class Occupation(object):
             if self.get_attribute(tag, "PHILANTHROPYVOLUNTEER"):
                 return "volunteerOccupation"
             else:
-                return "occupation"
+                return "Occupation"
         if tag.name == "EMPLOYER":
             return "employment"
         if tag.name == "REMUNERATION":
@@ -263,7 +263,7 @@ def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
                 activity_id = context_id.replace("Context","Event") + "_"+ str(event_count)
                 label = f"Occupation Event: {utilities.split_by_casing(str(x).split('/')[-1]).lower()}"
                 activity = Activity(person, label, activity_id, tag, activity_type="generic", attributes=temp_attr)
-                activity.event_type.append(utilities.create_cwrc_uri(get_event_type(tag_name)))
+                activity.event_type.append(utilities.create_uri("occupation",get_event_type(tag_name)))
 
                 if participants:
                     activity.participants = participants

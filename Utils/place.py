@@ -98,7 +98,7 @@ def get_value(tag):
 
 
 def log_mapping_fails():
-    log_str = "\nUnique Missed Terms: " + str(len(UNMAPPED_OCCURENCES.keys())) + "\n"
+    log_str = "\nUnique Missed Places: " + str(len(UNMAPPED_OCCURENCES.keys())) + "\n"
 
     from collections import OrderedDict
 
@@ -144,7 +144,7 @@ class Place(object):
 
         # TODO: Use PLACENAME as address perhaps
         if self.address in UNMAPPED_OCCURENCES:
-            self.uri = rdflib.term.Literal(self.address)
+            self.uri = None
             UNMAPPED_OCCURENCES[self.address] += 1
         elif self.address in PLACE_MAP:
             self.uri = rdflib.term.URIRef(PLACE_MAP[self.address])
@@ -152,7 +152,7 @@ class Place(object):
         else:
             logger.warning("Unable to find matching place instance for: " +
                            self.address + "(" + str(place_tag) + ")")
-            self.uri = rdflib.term.Literal(self.address)
+            self.uri = None
             UNMAPPED_OCCURENCES[self.address] = 1
 
     # Hopefully won't have to create triples about a place just provide a uri but

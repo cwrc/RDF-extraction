@@ -43,7 +43,7 @@ class Organization(object):
         g = utilities.create_graph()
         g.add((self.uri, utilities.NS_DICT["foaf"].name, Literal(self.name)))
         g.add((self.uri, RDFS.label, Literal(self.name)))
-        g.add((self.uri, RDF.type, utilities.NS_DICT["org"].Organization))
+        g.add((self.uri, RDF.type, utilities.NS_DICT["foaf"].Organization))
         for x in self.altlabels:
             g.add((self.uri, utilities.NS_DICT["skos"].altLabel, Literal(x)))
         return g
@@ -63,7 +63,11 @@ def get_org_uri(tag):
     std_name = tag.get("STANDARD")
     uri = tag.get("REF")
     if uri:
+        if uri in utilities.ORGANIZATION_MAP:
+            uri = utilities.ORGANIZATION_MAP[uri]
+        
         uri = rdflib.term.URIRef(uri)
+    
     else:
         if std_name in org_list:
             name = std_name
@@ -74,7 +78,7 @@ def get_org_uri(tag):
         else:
             logger.warn(F"No standard name or URI: {tag}")
             name = tag.get_text()
-        uri = utilities.make_standard_uri(name + " ORG", ns="cwrc")
+        uri = utilities.make_standard_uri(name + " ORG", ns="temp")
     
     if str(uri) in ORG_MAP:
         ORG_MAP[str(uri)] += 1
@@ -116,23 +120,23 @@ def extract_org_data(bio):
             org = get_org(instance)
             if org:
                 if element == elements[0]:
-                    org_type = utilities.NS_DICT["cwrc"].PoliticalOrganization
+                    org_type = utilities.NS_DICT["cwrc"].politicalOrganization
                 elif element == elements[1]:
-                    org_type = utilities.NS_DICT["cwrc"].ReligiousOrganization
+                    org_type = utilities.NS_DICT["cwrc"].religiousOrganization
                 elif element == elements[2]:
-                    org_type = utilities.NS_DICT["cwrc"].EducationalOrganization
+                    org_type = utilities.NS_DICT["cwrc"].educationalOrganization
 
                 for x in org:
                     org_uri = get_org_uri(x)
                     uber_graph.add((org_uri, RDF.type, org_type))
-                    uber_graph.remove((org_uri, RDF.type, utilities.NS_DICT["org"].Organization))
+                    uber_graph.remove((org_uri, RDF.type, utilities.NS_DICT["foaf"].Organization))
 
                     # Adding the hasOrganization relation
-                    if org_type == utilities.NS_DICT["cwrc"].ReligiousOrganization:
+                    if org_type == utilities.NS_DICT["cwrc"].religiousOrganization:
                         mapped_value = cf.get_mapped_term("Religion", utilities.get_value(instance))
                         if type(mapped_value) is rdflib.term.URIRef:
                             uber_graph.add((mapped_value, utilities.NS_DICT["cwrc"].hasOrganization, org_uri))
-                    elif org_type == utilities.NS_DICT["cwrc"].PoliticalOrganization:
+                    elif org_type == utilities.NS_DICT["cwrc"].politicalOrganization:
                         mapped_value = cf.get_mapped_term("PoliticalAffiliation", utilities.get_value(instance))
                         if type(mapped_value) is rdflib.term.URIRef:
                             uber_graph.add((mapped_value, utilities.NS_DICT["cwrc"].hasOrganization, org_uri))

@@ -54,9 +54,19 @@ def format_date(date):
     if date[-1] == "-":
         date = date.strip("-")
 
-    if len(date) in [10,7,4]:
+    if len(date) == 19:
         formatted_date = Literal(date, datatype=XSD.dateTime)
+    elif len(date) in [5, 4]:
+        logger.warning("unideal date format: " + date)
+        formatted_date = Literal(date, datatype=XSD.gYear)
+    elif len(date) == 7:
+        logger.warning("unideal date format: " + date)
+        formatted_date = Literal(date, datatype=XSD.gYearMonth)
+    elif len(date) == 10:
+        logger.warning("unideal date format: " + date)
+        formatted_date = Literal(date, datatype=XSD.date)
     else:
+        logger.warning("Unknown date format: " + date)
         formatted_date = Literal(date)
 
 
@@ -181,14 +191,14 @@ def get_date_tag(tag):
 
 class Activity(object):
     event_type_map = {
-        "NATIONALINTERNATIONAL": "PoliticalClimate",
-        "BRITISHWOMENWRITERS": "BritishWomenLiteraryClimate",
-        "WRITINGCLIMATE": "LiteraryClimate",
-        "SOCIALCLIMATE": "SocialClimate",
-        "SELECTIVE": "HistoricSignificance",
-        "PERIOD": "PeriodSignificance",
-        "DECADE": "DecadeSignficance",
-        "COMPREHENSIVE": "IndividualSignificance"
+        "NATIONALINTERNATIONAL": "politicalClimate",
+        "BRITISHWOMENWRITERS": "britishWomenLiteraryClimate",
+        "WRITINGCLIMATE": "literaryClimate",
+        "SOCIALCLIMATE": "socialClimate",
+        "SELECTIVE": "historicSignificance",
+        "PERIOD": "periodSignificance",
+        "DECADE": "decadeSignificance",
+        "COMPREHENSIVE": "individualSignificance"
     }
 
     activity_map = {
@@ -242,7 +252,7 @@ class Activity(object):
         self.title = title
         self.tag = tag
         self.id = id
-        self.uri = utilities.create_uri("data", id)
+        self.uri = utilities.create_uri("temp", id)
         self.connection_uri = None
 
         # TODO: populate this variable with different possibilities similar to the activity map
@@ -250,10 +260,10 @@ class Activity(object):
         self.activity_type = None
         
         if self.activity_path == "generic+":
-            self.uri = utilities.create_uri("data", id+"_Context")
-            self.connection_uri = utilities.create_uri("data", id)
+            self.uri = utilities.create_uri("temp", id+"_Context")
+            self.connection_uri = utilities.create_uri("temp", id)
         else:
-            self.uri = utilities.create_uri("data", id)
+            self.uri = utilities.create_uri("temp", id)
 
         
         self.places = utilities.get_places(tag)
@@ -351,6 +361,17 @@ precision: {self.precision}
         activity_label = self.title
         if self.person:
             activity_label = self.person.name +": "+  self.title
+            
+        if self.date:
+            if ":" in self.date:
+                date_1 = self.date.split(":")[0].strip()[:4]
+                date_2 = self.date.split(":")[1].strip()[:4]
+                if date_1 == date_2:
+                    activity_label = F"{date_1}: {activity_label}"
+                else:
+                    activity_label = F"{date_1}-{date_2}: {activity_label}"
+            else:
+                activity_label = F"{self.date[:4]}: {activity_label}"
 
         connection = None
         if self.activity_type:
@@ -400,10 +421,17 @@ precision: {self.precision}
             activity.add(utilities.NS_DICT["crm"].P3_has_note, Literal(
                 self.text, lang="en"))
 
-
-        if self.activity_path != "generic+":
+        if connection:
             for x in self.places:
-                activity.add(utilities.NS_DICT["crm"].P7_took_place_at, x)
+                connection.add(utilities.NS_DICT["crm"].P7_took_place_at, x)
+        else:
+            if not self.related_activity:
+                for x in self.places:
+                    activity.add(utilities.NS_DICT["crm"].P7_took_place_at, x)
+
+        # if self.activity_path != "generic+":
+        #     for x in self.places:
+        #         activity.add(utilities.NS_DICT["crm"].P7_took_place_at, x)
             
         if "Attribute" not in str(self.activity_type):
             for x in self.event_type:
@@ -411,7 +439,7 @@ precision: {self.precision}
 
 
         if self.activity_path == "generic+":            
-            # TODO Review this portion of code
+            # TODO Review this portion of code - Seems to never occur
             connection = g.resource(f"{self.connection_uri}")
             connection.add(RDFS.label, Literal(activity_label+" (??)"))
             connection.add(RDF.type, utilities.NS_DICT["crm"][self.activity_map["generic"]])
@@ -459,7 +487,8 @@ precision: {self.precision}
                 if any(term in pred for term in ["genderedPoliticalActivity", "activistInvolvementIn", "politicalMembershipIn"]):
                     connection.add(utilities.NS_DICT["crm"].P2_has_type, pred)
                 if "Self" in pred:
-                    connection.add(utilities.NS_DICT["crm"].P2_has_type, pred)
+                    temp_pred = pred.replace("SelfReported","")
+                    connection.add(utilities.NS_DICT["crm"].P2_has_type, rdflib.URIRef(temp_pred))
                     activity.add(utilities.NS_DICT["crm"].P14_carried_out_by, self.person.uri)
                 for obj in self.attributes[pred]:
                     connection.add(utilities.NS_DICT["crm"].P16_used_specific_object, obj)

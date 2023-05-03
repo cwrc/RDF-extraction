@@ -156,7 +156,7 @@ class Context(object):
         self.id = id
         self.context_focus = subject_uri
         self.identifying_uri = id_context
-        self.uri = utilities.create_uri("data", id)
+        self.uri = utilities.create_uri("temp", id)
         self.label = subject_name
         self.cidoc_pattern=pattern
 
@@ -170,7 +170,7 @@ class Context(object):
 
         # Creating citations from bibcit tags
         if not self.identifying_uri:
-            self.identifying_uri = utilities.create_uri("data", self.id + "_identifying")
+            self.identifying_uri = utilities.create_uri("temp", self.id + "_identifying")
             self.xpath = get_xpath(tag)
             bibcits = tag.find_all("BIBCIT")
             self.citations = [Citation(x) for x in bibcits]
@@ -195,7 +195,11 @@ class Context(object):
             self.context_predicate = None
             self.context_label = " ".join(self.id.split("_")).title().replace(" Context", ":") + " Context"
 
-        self.context_type = utilities.create_cwrc_uri(self.context_type)
+        # TODO: Add this logic to the mapping file instead of hardcoding
+        if context_type == "OCCUPATION":
+            self.context_type = utilities.create_uri("occupation",self.context_type)
+        else:
+            self.context_type = utilities.create_cwrc_uri(self.context_type)
 
         self.named_entities = get_named_entities(self.tag)
 
@@ -327,7 +331,7 @@ class Context(object):
         else:
             context_label = self.context_label + " (identifying)"
 
-        identifying_uri = utilities.create_uri("data", self.id + "_identifying")
+        identifying_uri = utilities.create_uri("temp", self.id + "_identifying")
         g.add((identifying_uri, RDF.type, utilities.NS_DICT["crm"].E33_Linguistic_Object))
         g.add((identifying_uri, RDF.type, utilities.NS_DICT["oa"].Annotation))
         g.add((identifying_uri, utilities.NS_DICT["crm"].P2_has_type, self.context_type))
@@ -349,15 +353,41 @@ class Context(object):
             g.add((identifying_uri, utilities.NS_DICT["oa"].hasBody, x))
         
         if not person:
-            for x in self.tag.find_all("NAME"):
-                entity_uri = utilities.get_name_uri(x)
-                g.add((entity_uri,RDFS.label,Literal(utilities.get_value(x))))
-                g.add((entity_uri,RDF.type,utilities.NS_DICT["crm"].E21_Person))
             for x in self.tag.find_all("ORG"):
                 entity_uri = utilities.get_name_uri(x)
                 g.add((entity_uri,RDFS.label,Literal(utilities.get_value(x))))
                 g.add((entity_uri,RDF.type,utilities.NS_DICT["crm"].E74_Group))
 
+                # Adding names for all the people mentioned in an entry
+        generic_names = ["king","King","mother-in-law" , "Queen", "queen","husband","wife","partner" ,"father", "daughter","essay", "son","he","she","they","her","him","them", "sisters","the",  "mother", "sibling", "brother", "sister", "friend", "his wife", "her husband","his husband", "her wife", "their husband", "their wife", "lover", "family"]
+        for x in self.tag.find_all("NAME"):
+            uri = utilities.get_name_uri(x)
+            if not uri:
+                logger.warning(F"URI not found for: {x} within entry: {id}")
+                continue
+            else: 
+                uri = rdflib.term.URIRef(uri)
+            
+            g.add((uri, RDF.type, utilities.NS_DICT["crm"].E21_Person))
+            std_name = x.get("STANDARD")
+            g.add((uri, RDFS.label, Literal(std_name)))
+            altname = x.get_text()
+            if altname and std_name != altname and altname not in generic_names:
+                g.add((uri, utilities.NS_DICT["skos"].altLabel, Literal(altname)))
+       
+
+        for x in self.tag.find_all("TITLE"):
+            entity_uri = utilities.get_title_uri(x)
+            label = utilities.get_value(x)
+            g.add((entity_uri,RDFS.label,Literal(label)))
+            g.add((entity_uri,RDF.type,utilities.NS_DICT["frbroo"].F1_Work))
+            
+            # TODO: Fix alternate names duplicating
+            altname = x.get_text()
+
+            if altname and altname != label:
+                g.add((entity_uri, utilities.NS_DICT["skos"].altLabel, Literal(altname)))
+        
 
         if person:
             g.add((identifying_uri, utilities.NS_DICT["oa"].hasBody, person.uri))
@@ -367,7 +397,7 @@ class Context(object):
         if self.cidoc_pattern not in ["birth","death","occupation", "location", "culturalform","relationships"]:
         # Creating describing context if applicable
             if self.motivation == utilities.NS_DICT["oa"].describing:
-                self.uri = utilities.create_uri("data", self.id + "_attributing")
+                self.uri = utilities.create_uri("temp", self.id + "_attributing")
                 context_label = person.name + ": " + self.context_label + " (attributing)"
                 g.add((self.uri, RDF.type, self.context_type))
                 g.add((self.uri, RDFS.label, Literal(context_label, lang="en")))

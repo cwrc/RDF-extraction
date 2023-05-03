@@ -145,7 +145,7 @@ class Event(object):
         super(Event, self).__init__()
         self.title = title
         self.tag = tag
-        self.uri = utilities.create_uri("data", id)
+        self.uri = utilities.create_uri("temp", id)
         self.place = utilities.get_places(tag)
         self.place_str = utilities.get_place_strings(tag)
         self.event_type = get_event_type(tag)
@@ -211,7 +211,7 @@ class Event(object):
             g.add((self.uri, utilities.NS_DICT["sem"].hasPlace, blanknode))
             g.add((blanknode, RDFS.label, Literal(self.place_str[index])))
             g.add((blanknode, utilities.NS_DICT["cwrc"].hasMappedLocation, place))
-            g.add((blanknode, RDF.type, utilities.NS_DICT["cwrc"].MappedPlace))
+            g.add((blanknode, RDF.type, utilities.NS_DICT["cwrc"].mappedPlace))
             
 
 
@@ -273,7 +273,7 @@ class Event(object):
             g.add((self.uri, utilities.NS_DICT["sem"].hasPlace, blanknode))
             g.add((blanknode, RDFS.label, Literal(self.place_str[index])))
             g.add((blanknode, utilities.NS_DICT["cwrc"].hasMappedLocation, place))
-            g.add((blanknode, RDF.type, utilities.NS_DICT["cwrc"].MappedPlace))
+            g.add((blanknode, RDF.type, utilities.NS_DICT["cwrc"].mappedPlace))
             
 
 
