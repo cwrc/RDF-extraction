@@ -78,7 +78,7 @@ def get_org_uri(tag):
         else:
             logger.warn(F"No standard name or URI: {tag}")
             name = tag.get_text()
-        uri = utilities.make_standard_uri(name + " ORG", ns="data")
+        uri = utilities.make_standard_uri(name + " ORG", ns="temp")
     
     if str(uri) in ORG_MAP:
         ORG_MAP[str(uri)] += 1

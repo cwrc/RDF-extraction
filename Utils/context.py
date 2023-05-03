@@ -156,7 +156,7 @@ class Context(object):
         self.id = id
         self.context_focus = subject_uri
         self.identifying_uri = id_context
-        self.uri = utilities.create_uri("data", id)
+        self.uri = utilities.create_uri("temp", id)
         self.label = subject_name
         self.cidoc_pattern=pattern
 
@@ -170,7 +170,7 @@ class Context(object):
 
         # Creating citations from bibcit tags
         if not self.identifying_uri:
-            self.identifying_uri = utilities.create_uri("data", self.id + "_identifying")
+            self.identifying_uri = utilities.create_uri("temp", self.id + "_identifying")
             self.xpath = get_xpath(tag)
             bibcits = tag.find_all("BIBCIT")
             self.citations = [Citation(x) for x in bibcits]
@@ -331,7 +331,7 @@ class Context(object):
         else:
             context_label = self.context_label + " (identifying)"
 
-        identifying_uri = utilities.create_uri("data", self.id + "_identifying")
+        identifying_uri = utilities.create_uri("temp", self.id + "_identifying")
         g.add((identifying_uri, RDF.type, utilities.NS_DICT["crm"].E33_Linguistic_Object))
         g.add((identifying_uri, RDF.type, utilities.NS_DICT["oa"].Annotation))
         g.add((identifying_uri, utilities.NS_DICT["crm"].P2_has_type, self.context_type))
@@ -397,7 +397,7 @@ class Context(object):
         if self.cidoc_pattern not in ["birth","death","occupation", "location", "culturalform","relationships"]:
         # Creating describing context if applicable
             if self.motivation == utilities.NS_DICT["oa"].describing:
-                self.uri = utilities.create_uri("data", self.id + "_attributing")
+                self.uri = utilities.create_uri("temp", self.id + "_attributing")
                 context_label = person.name + ": " + self.context_label + " (attributing)"
                 g.add((self.uri, RDF.type, self.context_type))
                 g.add((self.uri, RDFS.label, Literal(context_label, lang="en")))

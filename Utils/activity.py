@@ -252,7 +252,7 @@ class Activity(object):
         self.title = title
         self.tag = tag
         self.id = id
-        self.uri = utilities.create_uri("data", id)
+        self.uri = utilities.create_uri("temp", id)
         self.connection_uri = None
 
         # TODO: populate this variable with different possibilities similar to the activity map
@@ -260,10 +260,10 @@ class Activity(object):
         self.activity_type = None
         
         if self.activity_path == "generic+":
-            self.uri = utilities.create_uri("data", id+"_Context")
-            self.connection_uri = utilities.create_uri("data", id)
+            self.uri = utilities.create_uri("temp", id+"_Context")
+            self.connection_uri = utilities.create_uri("temp", id)
         else:
-            self.uri = utilities.create_uri("data", id)
+            self.uri = utilities.create_uri("temp", id)
 
         
         self.places = utilities.get_places(tag)

@@ -145,7 +145,7 @@ class Event(object):
         super(Event, self).__init__()
         self.title = title
         self.tag = tag
-        self.uri = utilities.create_uri("data", id)
+        self.uri = utilities.create_uri("temp", id)
         self.place = utilities.get_places(tag)
         self.place_str = utilities.get_place_strings(tag)
         self.event_type = get_event_type(tag)

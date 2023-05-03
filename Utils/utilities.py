@@ -50,6 +50,7 @@ NS_DICT = {
     "crm": rdflib.Namespace("http://www.cidoc-crm.org/cidoc-crm/"),
     "crmdig": rdflib.Namespace("http://www.ics.forth.gr/isl/CRMdig/"),
     "data": rdflib.Namespace("http://cwrc.ca/cwrcdata/"),
+    "temp": rdflib.Namespace("temp.lincsproject.ca/"),
     "dbpedia": rdflib.Namespace("http://dbpedia.org/resource/"),
     "dcterms": rdflib.Namespace("http://purl.org/dc/terms/"),
     "dctypes": rdflib.Namespace("http://purl.org/dc/dcmitype/"),
@@ -189,10 +190,12 @@ def create_graph():
     bind_ns(namespace_manager, NS_DICT)
     return g
 
-
 def bind_ns(namespace_manager, ns_dictionary):
     for x in ns_dictionary.keys():
-        namespace_manager.bind(x, ns_dictionary[x], override=False)
+        if x == "temp":
+            namespace_manager.bind("temp_lincs_temp", ns_dictionary[x], override=False)
+        else:
+            namespace_manager.bind(x, ns_dictionary[x], override=False)
 
 
 """Some string manipulation functions"""
@@ -295,7 +298,7 @@ def get_name_uri(tag):
         return rdflib.term.URIRef(uri)
 
 
-def make_standard_uri(std_str, ns="data"):
+def make_standard_uri(std_str, ns="temp"):
     """Makes uri based of string, removes punctuation and replaces spaces with an underscore
     v2, leaving hypens
     """
@@ -350,7 +353,7 @@ def get_people(tag):
 
 def get_title_uri(tag):
     title = get_value(tag)
-    return make_standard_uri(title + " TITLE", ns="data")
+    return make_standard_uri(title + " TITLE", ns="temp")
 
 def get_titles(tag):
     """Returns all titles within a given tag TODO Mapping"""
