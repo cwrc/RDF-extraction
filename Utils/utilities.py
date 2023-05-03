@@ -50,7 +50,7 @@ NS_DICT = {
     "crm": rdflib.Namespace("http://www.cidoc-crm.org/cidoc-crm/"),
     "crmdig": rdflib.Namespace("http://www.ics.forth.gr/isl/CRMdig/"),
     "data": rdflib.Namespace("http://cwrc.ca/cwrcdata/"),
-    "temp": rdflib.Namespace("temp.lincsproject.ca/"),
+    "temp": rdflib.Namespace("http://www.temp.lincsproject.ca/"),
     "dbpedia": rdflib.Namespace("http://dbpedia.org/resource/"),
     "dcterms": rdflib.Namespace("http://purl.org/dc/terms/"),
     "dctypes": rdflib.Namespace("http://purl.org/dc/dcmitype/"),
