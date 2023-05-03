@@ -30,6 +30,9 @@ BF = rdflib.Namespace("http://id.loc.gov/ontologies/bibframe/")
 XML = rdflib.Namespace("http://www.w3.org/XML/1998/namespace")
 MARC_REL = rdflib.Namespace("http://id.loc.gov/vocabulary/relators/")
 DATA = rdflib.Namespace("http://cwrc.ca/cwrcdata/")
+TEMP = rdflib.Namespace("temp.lincsproject.ca/")
+# @prefix temp_lincs_temp: <temp.lincsproject.ca/> .
+
 
 LINCS = rdflib.Namespace("http://id.lincsproject.ca/")
 GENRE = rdflib.Namespace("http://id.lincsproject.ca/genre/")
@@ -438,15 +441,15 @@ class BibliographyParse:
         else:
             self.old_id = resource_name.replace(".xml", "")
 
-        if 'data:' in self.id or "cwrcdata" in self.id: # TODO: Review: What's wrong with this?
+        if 'temp_lincs_temp:' in self.id or "temp.lincsproject" in self.id: # TODO: Review: What's wrong with this?
             self.mainURI = self.id
             self.placeholderURI = self.id
         elif "https://commons.cwrc.ca/orlando:" in self.id:
             self.mainURI = self.id
-            self.placeholderURI = DATA[F"{self.id.split('orlando:')[1]}"]
+            self.placeholderURI = TEMP[F"{self.id.split('orlando:')[1]}"]
         else: # Level 1 work
             self.mainURI = F"https://commons.cwrc.ca/orlando:{self.id}"
-            self.placeholderURI = DATA[F"{self.id}"]
+            self.placeholderURI = TEMP[F"{self.id}"]
 
 
         self.relatedItem = related_item
@@ -946,8 +949,8 @@ class BibliographyParse:
                 if agent_resource == None:
                     temp_name = urllib.parse.quote_plus(
                     remove_punctuation(name['name']))
-                    agent_resource=g.resource(DATA[F"{temp_name}"])
-                    agent_internal_ID= str(DATA[F"{temp_name}"])  
+                    agent_resource=g.resource(TEMP[F"{temp_name}"])
+                    agent_internal_ID= str(TEMP[F"{temp_name}"])  
                 elif "orlando" in str(agent_resource.identifier):
                     agent_internal_ID = str(agent_resource.identifier)
                 else:
@@ -988,13 +991,13 @@ class BibliographyParse:
                         uri = AGENTS[agent_label]
                     else:
                         if "orlando" in str(agent_internal_ID):
-                            temp = DATA[f"{str(agent_internal_ID).split('orlando:')[1]}_{name['role']}"]                        
+                            temp = TEMP[f"{str(agent_internal_ID).split('orlando:')[1]}_{name['role']}"]   
                             AGENTS[agent_label] = temp
                             uri = temp
                         else:
-                            uri = f"{str(agent_resource)}_{name['role']}"
+                            uri = f"{str(agent_resource.identifier)}_{name['role']}"
+                            AGENTS[agent_label] = rdflib.URIRef(uri)
                             
-                        
                     agent = g.resource(uri)
                     agent.add(RDFS.label, rdflib.Literal(agent_label,lang="en"))
                     agent.add(RDF.type, CRMPC.PC14_carried_out_by)
@@ -1226,6 +1229,7 @@ if __name__ == "__main__":
     g.bind("geonames", GEONAMES)
     g.bind("tgn", TGN)
     g.bind("lincs", LINCS)
+    g.bind("temp_lincs_temp", TEMP)
 
     # Adding declaration of references
     for label, uri in BibliographyParse.type_map.items():
@@ -1287,7 +1291,7 @@ if __name__ == "__main__":
             PEOPLE_MAPPING[row[0]] = row[1]
             
 
-    for fname in os.listdir(writing_dir):
+    for fname in os.listdir(writing_dir)[:10]:
         path = os.path.join(writing_dir, fname)
         if os.path.isdir(path):
             continue
@@ -1314,7 +1318,7 @@ if __name__ == "__main__":
     total = len(os.listdir(dirname))
     # for fname in test_filenames:
     # for fname in os.listdir(dirname)[:2000]:
-    for fname in os.listdir(dirname):
+    for fname in os.listdir(dirname)[:100]:
         print(F"{count}/{total} files extracted: {fname}")
         path = os.path.join(dirname, fname)
         if os.path.isdir(path):
