@@ -590,7 +590,7 @@ def get_mapped_term(rdf_type, value, retry=False, id=None):
             for x in CF_MAP[rdf_type]:
                 if get_close_matches(value.lower(), x):
                     possibilites.append(x[0])
-            log_str = "Unable to find matching " + rdf_type.split("/")[1] + " instance for '" + value + "'"
+            log_str = "Unable to find matching " + rdf_type.split("/")[-1] + " instance for '" + value + "'"
 
             if type(term) is Literal:
                 update_fails(rdf_type, value)
