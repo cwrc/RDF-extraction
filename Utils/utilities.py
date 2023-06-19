@@ -402,6 +402,38 @@ def get_persontype(bio):
     return bio.BIOGRAPHY.get("PERSON")
 
 
+def get_div2(tag):
+    # NOTE: Might be easier with recursion
+    for parent in tag.parents:
+        if parent.name == "DIV2":
+            return parent
+
+    return None
+
+def get_textscopes_text(tag):
+    tag = get_div2(tag)
+    if not tag:
+        logger.warning(F"Unable to find DIV2 for {tag}")
+        return None
+    textscopes = tag.find_all("TEXTSCOPE")
+    if textscopes == []:
+        logger.info(F"No corresponding textscope: {tag}")
+    else:
+        textscopes = [x.get("PLACEHOLDER") for x in textscopes]
+    return textscopes
+
+
+def get_textscopes(tag):
+    tag = get_div2(tag)
+    textscopes = tag.find_all("TEXTSCOPE")
+    if textscopes == [] or textscopes is None:
+        logger.info(F"No corresponding textscope: {tag}")
+    else:
+        textscopes = [rdflib.term.URIRef(x.get("REF"))
+                      for x in textscopes if x.get("REF")]
+    return textscopes
+
+
 def get_sparql_results(endpoint_url, query):
     from SPARQLWrapper import SPARQLWrapper, JSON
     sparql = SPARQLWrapper(
