@@ -41,8 +41,8 @@ sub findCOD {
    $i = 0;
    while ( $stopflag == 0 ) {
       if ( $string eq $mapping[$i] ) {
-          $found = $category[$i];
-          $stopflag = 1;
+         $found = $category[$i];
+         $stopflag = 1;
       } else {
          $i++;
          if ( $i > $total ) {
@@ -57,8 +57,8 @@ sub findCOD {
       $i = 0;
       while ( $stopflag == 0 ) {
          if ( $string =~ m/$mapping[$i]/ ) {
-             $found = $category[$i];
-             $stopflag = 1;
+            $found = $category[$i];
+            $stopflag = 1;
          } else {
             $i++;
             if ( $i > $total ) {
@@ -82,7 +82,7 @@ sub findCOD {
 #
 #  Location of the biography directory with the XML files for each author
 #
-my $directory = '/Users/debstacey/Research/CWRC/Testing/Output2/biography_output';
+my $directory = "/Users/alliyya/Desktop/RDF-extraction/RDF-extraction/data/entry_2022-05-04/";
 my $label;
 my $date;
 my $deathflag;
@@ -113,36 +113,38 @@ my $flag = 0;
 
 opendir (DIR, $directory) or die $!;
 while (my $file = readdir(DIR)) {
+
    $deathflag = 0;
    $label = $file;
-   $label =~ s/-b.xml//;
+   $label =~ s/.xml//;
    if ( $file ne "." and $file ne ".." ) {
       $file = $directory."/".$file;
 
-#      my $dom = XML::LibXML->load_xml(location => $file);
+      #      my $dom = XML::LibXML->load_xml(location => $file);
 
        my $dom = XML::LibXML->load_xml(
           location => $file,
           validation => 0,
           load_ext_dtd => 0, # <- That's the key
        );
-
       my $name = "";
       my $death = "";
       $cause = "";
       my $prose = "";
       my $snippet = "";
 
-#
-#  Find the Standard Name of the person in the biography
-#
-      foreach my $temp ($dom->findnodes('/BIOGRAPHY/DIV0')) {
+      #
+      #  Find the Standard Name of the person in the biography
+      #
+      foreach my $temp ($dom->findnodes('/ENTRY/DIV0')) {
          $name = $temp->findvalue('./STANDARD');
       }
 
-#
-#  Replace comma with underscore and remove blanks
-#
+      print "Processing $name\n";
+
+      #
+      #  Replace comma with underscore and remove blanks
+      #
       $name1 = "";
       $name1 = $name;
       $name1 =~ s/, /_/;
@@ -156,26 +158,26 @@ while (my $file = readdir(DIR)) {
       $strLabel  = "   rdfs:label \"" . $name . "\"^^xsd:string ;\n";
       $strName   = "   foaf:name \"$name\"\^\^xsd:string .\n";
 
-#
-#  Find all the causes of death in the Death entry
-#
-      foreach my $bio ($dom->findnodes('/BIOGRAPHY/DIV0/DIV1/DEATH')) {
+      #
+      #  Find all the causes of death in the Death entry
+      #
+      foreach my $bio ($dom->findnodes('/ENTRY/DIV0/BIOGRAPHY/DIV1/DEATH')) {
          $cause = join '; ', map {
             $_->to_literal();
          } $bio->findnodes('//CAUSE');
 
-#
-#  Check if there is a Regularized cause of death
-#
+         #
+         #  Check if there is a Regularized cause of death
+         #
          if ( $bio =~ m/CAUSE REG/ ) {
             if ( $bio =~ m/(CAUSE REG="[-\w]+\s*[-\w]+\s*[-\w]+")/ ) {
                 $cause = $1;
             }
          }
 
-#
-#  Extract the prose/snippet that goes with this cause of death
-#
+         #
+         #  Extract the prose/snippet that goes with this cause of death
+         #
          $prose = $bio->findnodes('./DIV2/CHRONSTRUCT/CHRONPROSE');
          if ( $prose eq "" ) {
             $prose = $bio->findnodes('./CHRONSTRUCT/CHRONPROSE');
@@ -188,9 +190,9 @@ while (my $file = readdir(DIR)) {
          }
       }
 
-#
-#  Extract the Cause of Death snippet from the prose found in the CAUSE
-#
+      #
+      #  Extract the Cause of Death snippet from the prose found in the CAUSE
+      #
       $strSnippet1  = "data:" . $label . "_causeofdeath_context0_Snippet a oa:TextualBody ;\n";
       $strSnippet1a = "   rdfs:label " . "\"" . $name . " DeathContext snippet \" ;\n";
       $strSnippet1b = "   dcterms:description ";
@@ -223,12 +225,12 @@ while (my $file = readdir(DIR)) {
       $strSnippet2g = "      data:" . $label . "_causeofdeath_context0_Snippet ;\n";
       $strSnippet2h = "   oa:motivatedBy oa:describing .\n";
 
-#
-#  The mapping process: match the cause of death string with a category (either
-#  a regularized cause or one extracted from the CAUSE tags
-#
-#  First check if it is a Regularized Cause of Death (currently 17 have been found in Orlando)
-#
+      #
+      #  The mapping process: match the cause of death string with a category (either
+      #  a regularized cause or one extracted from the CAUSE tags
+      #
+      #  First check if it is a Regularized Cause of Death (currently 17 have been found in Orlando)
+      #
       if ( $cause ne "" ) {
          $deathflag = 0;
          if ( $cause =~ /asthma/ ) {
@@ -304,9 +306,9 @@ while (my $file = readdir(DIR)) {
             $found = "Typhoid";
             $deathflag++;
          } 
-#
-#  If it is not a Regularized Cause of Death then search for a mapping.
-#
+         #
+         #  If it is not a Regularized Cause of Death then search for a mapping.
+         #
          if ( $deathflag == 0 ) {
             $found = "";
             $found = &findCOD($cause);
@@ -323,26 +325,27 @@ while (my $file = readdir(DIR)) {
    $strSnippet2b = $strSnippet2b . $found . " ;\n";      
    $strSnippet2e = "      rdf:value \"data:" . $name1 . " cwrc:hasCauseOfDeath ii:" . $found . " .\"^^xsd:string ] ;\n";
 
-#
-#  Now that the Name, Cause of Death, and Snippet have been found, output the following:
-#     a) Prefixes
-#     b) Person instance
-#     c) Name
-#     d) Cause of Death
-#     e) Snippet
-#
+   #
+   #  Now that the Name, Cause of Death, and Snippet have been found, output the following:
+   #     a) Prefixes
+   #     b) Person instance
+   #     c) Name
+   #     d) Cause of Death
+   #     e) Snippet
+   #
 
-#
-#  The directory where the triples (each author's in an individual file )
-#  is defined below as part of the file names for the output files
-#
+   #
+   #  The directory where the triples (each author's in an individual file )
+   #  is defined below as part of the file names for the output files
+   #
    if ( $deathflag == 1 ) {
-      my $ofile = "V1CauseOfDeath_Triples/".$label."-cod.txt";
+      my $ofile = "extracted_triples/death_ttl/".$label."-cod.ttl";
       open(my $fh, '>', $ofile);
       binmode $fh, ':utf8';
-#
-#  Prefixes
-#
+      print "Writing to $ofile\n";
+      #
+      #  Prefixes
+      #
       print $fh "\@prefix as: <http://www.w3.org/ns/activitystreams#> . \n";
       print $fh "\@prefix cwrc: <http://sparql.cwrc.ca/ontologies/cwrc#> . \n";
       print $fh "\@prefix data: <http://cwrc.ca/cwrcdata/> . \n";
@@ -356,9 +359,9 @@ while (my $file = readdir(DIR)) {
       print $fh "\@prefix xml: <http://www.w3.org/XML/1998/namespace> . \n";
       print $fh "\@prefix xsd: <http://www.w3.org/2001/XMLSchema#> . \n\n";
 
-#
-#   Person Instance, Cause of Death, Annotation Snippet, Name
-#
+      #
+      #   Person Instance, Cause of Death, Annotation Snippet, Name
+      #
       print $fh $strSnippet2;
       print $fh $strSnippet2a;
       print $fh $strSnippet2b;
