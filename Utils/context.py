@@ -332,11 +332,7 @@ class Context(object):
 
         # Creating the mentioned people as natural person
         for x in self.tag.find_all("NAME"):
-            uri = x.get("REF")
-            if not uri:
-                uri = utilities.make_standard_uri(x.get("STANDARD"))
-            else: 
-                uri = rdflib.term.URIRef(uri)
+            uri = utilities.get_name_uri(x)
             
             g.add((uri, RDF.type, utilities.NS_DICT["cwrc"].NaturalPerson))
             std_name = x.get("STANDARD")

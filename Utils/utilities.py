@@ -228,6 +228,9 @@ def split_by_casing(string, altmode=None):
 
 def remove_punctuation(temp_str, all=False):
     import string
+    if not temp_str:
+        return ""
+    
     if all:
         translator = str.maketrans('', '', string.punctuation)
     else:
@@ -291,8 +294,13 @@ def get_name_uri(tag):
     uri = tag.get("REF")
     if not uri:
         id = get_entry_id(tag)
-        logger.error(F"In entry: {id}- NAME tag missing ref attribute: {tag}")
-        return make_standard_uri(tag.get("STANDARD"))
+        logger.error(F"In entry: {id} - NAME tag missing REF attribute: {tag}")
+        std_val = tag.get("STANDARD")
+
+        if not std_val:
+            logger.error(F"In entry: {id} - NAME tag missing STANDARD attribute: {tag}")
+            return make_standard_uri(tag.text)
+        return make_standard_uri(std_val)
     else:
         return rdflib.term.URIRef(uri)
 

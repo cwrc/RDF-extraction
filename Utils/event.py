@@ -11,7 +11,7 @@ def get_actors(tag):
     """ Returns actors within an event (any name/org/title mentioned)"""
     actors = []
     for x in tag.find_all("NAME"):
-        actors.append(utilities.make_standard_uri(x.get("STANDARD")))
+        actors.append(utilities.get_name_uri(x))
     for x in tag.find_all("ORGNAME"):
         actors.append(organizations.get_org_uri(x))
     for x in tag.find_all("TITLE"):
