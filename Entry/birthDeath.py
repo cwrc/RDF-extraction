@@ -4,6 +4,8 @@ from Utils import utilities
 from Utils.context import Context
 from Utils.place import Place
 from Utils.event import get_date_tag, Event, format_date
+import rdflib
+from difflib import get_close_matches
 
 # TODO
 # - once resolved: https://github.com/cwrc/ontology/issues/462
@@ -12,6 +14,28 @@ from Utils.event import get_date_tag, Event, format_date
 logger = utilities.config_logger("birthdeath")
 
 BURIAL_KEYWORDS = ["buried", "grave", "interred"]
+CAUSE_MAP = {}
+map_attempt = 0
+map_success = 0
+map_fail = 0
+fail_dict = {}
+
+
+def clean_term(string):
+    string = string.lower().replace("-", " ").strip().replace(" ", "")
+    return string
+
+def create_cause_map():
+    
+    import csv
+    global CAUSE_MAP
+    with open('../data/COD_mapping.csv', newline='', encoding="utf8") as csvfile:
+        reader = csv.reader(csvfile)
+        next(reader)
+        for row in reader:
+            temp_row = [clean_term(x) for x in row[1:]]
+            CAUSE_MAP[row[0]] = (list(filter(None, temp_row)))
+
 
 class Birth:
     def __init__(self, date, positions, birthplace, date_certainty=False):
@@ -135,19 +159,86 @@ def extract_birth_data(bio, person):
         person.add_context(temp_context)
         context_count += 1
 
+    def get_value(self, tag):
+        value = tag.get("REG")
+        if not value:
+            value = tag.get("CURRENTALTERNATIVETERM")
+        if not value:
+            value = str(tag.text)
+            value = ' '.join(value.split())
+        return value
+
+    def get_mapped_term(self, value, id=None):
+
+        def update_fails(rdf_type, value):
+            global fail_dict
+            if rdf_type in fail_dict:
+                if value in fail_dict[rdf_type]:
+                    fail_dict[rdf_type][value] += 1
+                else:
+                    fail_dict[rdf_type][value] = 1
+            else:
+                fail_dict[rdf_type] = {value: 1}
+        """
+            Currently getting exact match ignoring case and "-"
+            TODO:
+            Make csv of unmapped
+        """
+        global map_attempt
+        global map_success
+        global map_fail
+        rdf_type = "http://sparql.cwrc.ca/ontologies/ii#IllnessInjury"
+        map_attempt += 1
+        term = None
+        temp_val = clean_term(value)
+        for x in CAUSE_MAP.keys():
+            if temp_val in CAUSE_MAP[x]:
+                term = x
+                map_success += 1
+                break
+
+        if "http" in str(term):
+            term = rdflib.term.URIRef(term)
+        elif term:
+            term = rdflib.Literal(term, datatype=rdflib.namespace.XSD.string)
+        else:
+            term = rdflib.Literal(value, datatype=rdflib.namespace.XSD.string)
+            map_fail += 1
+            possibilities = []
+            log_str = "Unable to find matching occupation instance for '" + value + "'"
+
+            for x in CAUSE_MAP.keys():
+                if get_close_matches(value.lower(), CAUSE_MAP[x]):
+                    possibilities.append(x)
+            if type(term) is rdflib.Literal:
+                update_fails(rdf_type, value)
+            else:
+                update_fails(rdf_type, value + "->" + str(possibilities) + "?")
+                log_str += "Possible matches" + value + \
+                    "->" + str(possibilities) + "?"
+
+            if id:
+                logger.warning("In entry: " + id + " " + log_str)
+            else:
+                logger.warning(log_str)
+        return term
+
+
 
 class Death:
-    def __init__(self, date, burialplace, deathplace, date_certainty=False):
+    def __init__(self, date, burialplace, deathplace, cause = [], date_certainty=False):
         self.date = date
         self.burial = burialplace
         self.place = deathplace
         self.date_certainty = date_certainty
+        self.cause = cause
 
     def __str__(self):
-        string = "\tDate: " + str(self.date) + "\n"
-        string += "\tdeathplace: " + str(self.place) + "\n"
-        string += "\tburial: " + str(self.burial) + "\n"
-        string += "\tdate certainty: " + str(self.date_certainty) + "\n"
+        string = F"\tDate: ${self.date}\n"
+        string += F"\tdeath place: ${self.place}\n"
+        string += F"\tburial: ${self.burial}\n"
+        string += F"\tcause: ${self.cause}\n"
+        string += F"\tdate certainty: ${self.date_certainty}\n"
         return string
 
     def to_triple(self, context):
@@ -168,6 +259,9 @@ class Death:
         if self.place:
             g.add(
                 (context.uri, utilities.NS_DICT["cwrc"].deathPlace, self.place))
+
+        for x in self.cause:
+            g.add((context.uri, utilities.NS_DICT["cwrc"].causeOfDeath, x))
 
         return g
 
@@ -237,6 +331,9 @@ def extract_death_data(bio, person):
             temp_context.link_event(x)
             person.add_event(x)
 
+        cause_tags = death_tag.find_all("CAUSE")
+        
+
         # adding context and birth to person
         temp_context.link_triples(death)
         person.add_context(temp_context)
@@ -265,7 +362,7 @@ def main():
         print("*" * 55)
 
         person = Biography(person_id, soup)
-        extract_birth_data(soup, person)
+        # extract_birth_data(soup, person)
         extract_death_data(soup, person)
         graph = person.to_graph()
 
