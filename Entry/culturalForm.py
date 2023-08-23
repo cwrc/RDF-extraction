@@ -436,7 +436,12 @@ def extract_gender_data(bio, person):
         logger.warning(F"{person.id} : No gender specified")
         return
     else:
-        gender_context.link_triples(CulturalForm("gender", None, get_mapped_term("Gender", gender["GENDERIDENTITY"])))
+        identity = gender.get("GENDERIDENTITY")
+        if identity:
+            gender_context.link_triples(CulturalForm("gender", None, get_mapped_term("Gender", identity)))
+        else:
+            gender_context.link_triples(CulturalForm("gender", None, get_mapped_term("Gender", gender.text)))
+            
 
     person.add_context(gender_context)
 

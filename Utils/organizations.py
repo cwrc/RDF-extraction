@@ -84,7 +84,7 @@ def get_org_uri(tag):
     elif "REG" in tag.attrs:
         name = tag.get("REG")
     else:
-        name = tag.get("STANDARD")
+        name = tag.text
     
     if not uri:
         logger.error(F"In entry: {utilities.get_entry_id(tag)} - ORG tag missing REF attribute: {tag} ")
