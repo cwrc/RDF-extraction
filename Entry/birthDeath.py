@@ -159,71 +159,91 @@ def extract_birth_data(bio, person):
         person.add_context(temp_context)
         context_count += 1
 
-    def get_value(self, tag):
-        value = tag.get("REG")
-        if not value:
-            value = tag.get("CURRENTALTERNATIVETERM")
-        if not value:
-            value = str(tag.text)
-            value = ' '.join(value.split())
-        return value
+def get_mapped_term(value, id=None):
 
-    def get_mapped_term(self, value, id=None):
 
-        def update_fails(rdf_type, value):
-            global fail_dict
-            if rdf_type in fail_dict:
-                if value in fail_dict[rdf_type]:
-                    fail_dict[rdf_type][value] += 1
-                else:
-                    fail_dict[rdf_type][value] = 1
+    def update_fails(rdf_type, value):
+        global fail_dict
+        if rdf_type in fail_dict:
+            if value in fail_dict[rdf_type]:
+                fail_dict[rdf_type][value] += 1
             else:
-                fail_dict[rdf_type] = {value: 1}
-        """
-            Currently getting exact match ignoring case and "-"
-            TODO:
-            Make csv of unmapped
-        """
-        global map_attempt
-        global map_success
-        global map_fail
-        rdf_type = "http://sparql.cwrc.ca/ontologies/ii#IllnessInjury"
-        map_attempt += 1
-        term = None
-        temp_val = clean_term(value)
-        for x in CAUSE_MAP.keys():
-            if temp_val in CAUSE_MAP[x]:
-                term = x
-                map_success += 1
-                break
-
-        if "http" in str(term):
-            term = rdflib.term.URIRef(term)
-        elif term:
-            term = rdflib.Literal(term, datatype=rdflib.namespace.XSD.string)
+                fail_dict[rdf_type][value] = 1
         else:
-            term = rdflib.Literal(value, datatype=rdflib.namespace.XSD.string)
-            map_fail += 1
-            possibilities = []
-            log_str = "Unable to find matching occupation instance for '" + value + "'"
+            fail_dict[rdf_type] = {value: 1}
+    """
+        Currently getting exact match ignoring case and "-"
+        TODO:
+        Make csv of unmapped
+    """
+    global map_attempt
+    global map_success
+    global map_fail
+    rdf_type = "http://sparql.cwrc.ca/ontologies/ii#IllnessInjury"
+    map_attempt += 1
+    term = None
+    temp_val = clean_term(value)
+    
+    for x in CAUSE_MAP.keys():
+        if temp_val in CAUSE_MAP[x]:
+            term = x
+            map_success += 1
+            break
 
-            for x in CAUSE_MAP.keys():
-                if get_close_matches(value.lower(), CAUSE_MAP[x]):
-                    possibilities.append(x)
-            if type(term) is rdflib.Literal:
-                update_fails(rdf_type, value)
-            else:
-                update_fails(rdf_type, value + "->" + str(possibilities) + "?")
-                log_str += "Possible matches" + value + \
-                    "->" + str(possibilities) + "?"
 
-            if id:
-                logger.warning("In entry: " + id + " " + log_str)
-            else:
-                logger.warning(log_str)
-        return term
+    if "http" in str(term):
+        term = rdflib.term.URIRef(term)
+    elif term:
+        term = rdflib.Literal(term, datatype=rdflib.namespace.XSD.string)
+    else:
+        term = rdflib.Literal(value, datatype=rdflib.namespace.XSD.string)
+        map_fail += 1
+        possibilities = []
+        log_str = "Unable to find matching occupation instance for '" + value + "'"
+
+        for x in CAUSE_MAP.keys():
+            if get_close_matches(value.lower(), CAUSE_MAP[x]):
+                possibilities.append(x)
+        if type(term) is rdflib.Literal:
+            update_fails(rdf_type, value)
+        else:
+            update_fails(rdf_type, value + "->" + str(possibilities) + "?")
+            log_str += "Possible matches" + value + \
+                "->" + str(possibilities) + "?"
+
+        if id:
+            logger.warning("In entry: " + id + " " + log_str)
+        else:
+            logger.warning(log_str)
+    return term
 
 
+def log_mapping_fails(detail=True):
+    if 'http://sparql.cwrc.ca/ontologies/ii#IllnessInjury' in fail_dict:
+        cod_fail_dict = fail_dict['http://sparql.cwrc.ca/ontologies/ii#IllnessInjury']
+        log_str = "\n\n"
+        log_str += "Attempts: " + str(map_attempt) + "\n"
+        log_str += "Fails: " + str(map_fail) + "\n"
+        log_str += "Success: " + str(map_success) + "\n"
+        log_str += "\nFailure Details:" + "\n"
+        log_str += "\nUnique Missed Terms: " + \
+            str(len(cod_fail_dict.keys())) + "\n"
+
+        from collections import OrderedDict
+
+        new_dict = OrderedDict(
+            sorted(cod_fail_dict.items(), key=lambda t: t[1], reverse=True))
+        count = 0
+        for y in new_dict.keys():
+            log_str += "\t\t" + str(new_dict[y]) + ": " + y + "\n"
+            count += new_dict[y]
+        log_str += "\tTotal missed CODs: " + str(count) + "\n\n"
+
+        print(log_str)
+        logger.info(log_str)
+
+
+create_cause_map()
 
 class Death:
     def __init__(self, date, burialplace, deathplace, cause = [], date_certainty=False):
@@ -332,7 +352,9 @@ def extract_death_data(bio, person):
             person.add_event(x)
 
         cause_tags = death_tag.find_all("CAUSE")
-        
+        causes = [get_mapped_term(utilities.get_value(x)) for x in cause_tags]
+
+        death.cause = causes
 
         # adding context and birth to person
         temp_context.link_triples(death)
@@ -371,6 +393,8 @@ def main():
         utilities.manage_mode(extraction_mode, person, graph)
 
         uber_graph += graph
+
+    log_mapping_fails()
 
     logger.info(str(len(uber_graph)) + " triples created")
     if extraction_mode.verbosity >= 0:
