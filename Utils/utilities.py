@@ -72,15 +72,13 @@ NS_DICT = {
 class Extraction(object):
     """docstring for Extraction"""
 
-    def __init__(self, file_dict, name, verbosity=None, format=None, output=None, pause=None, sparql_endpoint=None, logger=None):
+    def __init__(self, file_dict, name, verbosity=None, format=None, output=None, pause=None, logger=None):
         super(Extraction, self).__init__()
         self.file_dict = file_dict
         self.verbosity = verbosity
         self.format = format or "ttl"
         self.output = output
         self.pause = pause
-
-        self.sparql_endpoint = sparql_endpoint
 
         if logger:
             self.logger = logger
@@ -99,7 +97,6 @@ class Extraction(object):
         string += "format: " + str(self.format) + "\n"
         string += "output: " + str(self.output) + "\n"
         string += "pause: " + str(self.pause) + "\n"
-        string += "sparql_endpoint: " + str(self.sparql_endpoint) + "\n"
         string += "logger: " + str(self.logger) + "\n"
         return string
 
@@ -790,9 +787,6 @@ def parse_args(script, info_type, logger=None):
                         help="increase output verbosity")
     parser.add_argument("-fmt", "--format", default="ttl",
                         choices=["rdf", "rdf/xml", "ttl", "turtle", "json-ld", "nt", "trix", "n3", "all"])
-    parser.add_argument("-u", "-update", "--update", "-update-sparqlendpoint",
-                        help="url of sparql endpoint to update")
-
     # NOTE: could make this to pause after ever n entries? #uselessfeature?
     parser.add_argument("-p", "-pause", "--pause", action="store_true",
                         help="pause after every entry to examine output and be prompted to continue/quit")
