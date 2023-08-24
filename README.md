@@ -35,25 +35,34 @@ password=mySuperSecretpassword12!
 
 1. Run script:
 `python3 islandora_auth.py`
-(This by default will only download the Entries)
+(This by default will only download the Entries to `data/entries_YYYY-MM-DD` where YYYY, MM, DD are replaced with their respective date valuess)
+1. Deactivate Virtual Environment:
+`deactivate`
 
-### To Run Extraction scripts
+### To Run Extraction scripts (First time)
 
 These commands take place in `Entry` folder (`cd Entry`)
 
-1. Update `default directory` field within `testcases.json` to match where your source data files are
+1. Update `default directory` field within `testcases.json` to match where your source data files are (You can either copy the full path of the directory and add `/` or use a relative path like `../data/entry_YYYY-MM-DD/`)
 1. Create a Virtual Environment:
 `python3 -m venv venv`
 1. Start Virtual Environment:
-`source ./venv/bin/activate` 
+`source ./venv/bin/activate`
 1. Install modules:
 `pip install -r requirements.txt`
 1. Run script `python3 bio_extraction.py`
 
+### Running Extraction Scripts after set-up
+
+1. in `Entry` folder (`cd Entry`), start Virtual Environment
+`source ./venv/bin/activate`
+1. Run script `python3 bio_extraction.py` or `python3 bio_extraction.py`
+
 ## Features
+
 Run `python3 bio_extraction.py -h` for a list of available options
 
-```
+```text
 No particular testcases available, please add to testcases.json
 usage: bio_extraction.py [-h] [-qa | -s | -g | -i | -id ORLANDO | -f FILE | -d DIRECTORY | -r [RANDOM] | -l [LAST] | -fi [FIRST]] [-v {0,1,2,3}] [-fmt {rdf,rdf/xml,ttl,turtle,json-ld,nt,trix,n3,all}] [-u UPDATE] [-p]
 
@@ -85,7 +94,7 @@ optional arguments:
   -p, -pause, --pause   pause after every entry to examine output and be prompted to continue/quit
 ```
 
-Each script within `Entry/` can be run on its own, `bio_extraction.py` is the current main driver that calls needed functions within separate scripts. The same arguments are applicable to those scripts.
+Each script within `Entry/` can be run on its own, `bio_extraction.py` is the current main driver of biography that calls needed functions within separate scripts. The same arguments are applicable to those scripts.
 
 Example:
 If you just wanted to test the extraction of cultural forms. You could do `python3 culturalForm.py -r 1`
