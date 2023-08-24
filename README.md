@@ -1,6 +1,8 @@
 # RDF-extraction
 
-Extraction scripts for transforming the Orlando XML data into Linked Data.
+Extraction scripts for transforming the Orlando XML data into Linked Data. (CWRC Ontology Edition)
+
+Note: The LINCS (CIDOC-CRM) version of these extraction scripts can be found on the [cidoc-revisions](https://github.com/cwrc/RDF-extraction)
 
 You must have Python installed, at least version 3.8.
 
@@ -40,13 +42,13 @@ password=mySuperSecretpassword12!
 These commands take place in `Entry` folder (`cd Entry`)
 
 1. Update `default directory` field within `testcases.json` to match where your source data files are
-2. Create a Virtual Environment:
+1. Create a Virtual Environment:
 `python3 -m venv venv`
 1. Start Virtual Environment:
 `source ./venv/bin/activate` 
-3. Install modules:
+1. Install modules:
 `pip install -r requirements.txt`
-4. Run script `python3 bio_extraction.py`
+1. Run script `python3 bio_extraction.py`
 
 ## Features
 Run `python3 bio_extraction.py -h` for a list of available options
