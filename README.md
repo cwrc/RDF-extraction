@@ -12,7 +12,7 @@ Clone the repository if you haven't already.
 `git clone https://github.com/cwrc/RDF-extraction.git`
 
 Switch to the CWRC branch
-`git checkout origin/classic`
+`git switch classic`
 
 ### Download files from CWRC
 
