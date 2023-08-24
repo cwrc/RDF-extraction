@@ -153,8 +153,8 @@ class Place(object):
         pass
 
     def __str__(self):
-        string = "\taddress: " + str(self.address) + "\n"
-        string += "\turi: " + str(self.uri) + "\n"
+        string = f"\taddress: {self.address}\n"
+        string += f"\turi: {self.uri}\n"
         return string
 
 

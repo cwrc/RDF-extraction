@@ -48,10 +48,9 @@ class Freestanding_Event(object):
             return self.to_graph().serialize(format=serialization).decode()
 
     def __str__(self):
-        string = "Event:"
-        string += str(self.event)
-        string += str(self.context)
+        string = f"Event:\n{self.event}\nContext:\n{self.context}"
         return string
+
 
 
 def main():

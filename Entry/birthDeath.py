@@ -45,11 +45,11 @@ class Birth:
         self.date_certainty = date_certainty
 
     def __str__(self):
-        string = "\tDate: " + str(self.date) + "\n"
-        string += "\tbirthplace: " + str(self.place) + "\n"
+        string = f"\tDate: {self.date}\n"
+        string += f"\tbirthplace: {self.place}\n"
         for x in self.position:
-            string += "\tbirthposition: " + str(x) + "\n"
-        string += "\tdate certainty: " + str(self.date_certainty) + "\n"
+            string += f"\tbirthposition: {x}\n"
+        string += f"\tdate certainty: {self.date_certainty}\n"
         return string
 
     def update_birthposition_uris(self):

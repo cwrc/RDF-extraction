@@ -32,6 +32,10 @@ class Title(object):
 
     def to_triple(self):
         g = utilities.create_graph()
-        g.add((self.uri, RDF.type, self.value))
+        if self.typing:
+            g.add((self.uri, RDF.type, self.typing))
         g.add((self.uri, RDFS.Label, self.label))
         return g
+    
+    def __str__(self) -> str:
+        return f"URI: {self.uri}\nTitle: {self.label}\nTyping:{self.typing}\n"

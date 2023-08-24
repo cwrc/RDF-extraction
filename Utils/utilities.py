@@ -212,7 +212,6 @@ def bind_ns(namespace_manager, ns_dictionary):
 
 """Some string manipulation functions"""
 
-
 def strip_all_whitespace(string):
     # temp function for condensing the context strings for visibility in testing
     import re
@@ -336,10 +335,10 @@ def get_reg(tag):
     return tag.get("REG")
 
 def get_other_people(tag, author):
-    """returns all unique people other than author, does not return in order"""
+    """returns all unique people other than author, does not return in order of occurences"""
     return [x for x in get_people(tag) if x != author.uri]
 def get_all_other_people(tag, author):
-    """returns all people other than author, does return in order"""
+    """returns all people other than author, does return in order of occurences"""
     return [x for x in get_all_people(tag) if x != author.uri]
 
 def get_all_people(tag):
@@ -369,7 +368,7 @@ def get_title_uri(tag):
         return rdflib.URIRef(TITLE_MAPPING[title])
     return make_standard_uri(title + " TITLE", ns="cwrc")
 def get_titles(tag):
-    """Returns all titles within a given tag temporory Mapping"""
+    """Returns all titles within a given tag temporary Mapping"""
     titles = []
     for x in tag.find_all("TITLE"):
         title = get_value(x)

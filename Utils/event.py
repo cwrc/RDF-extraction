@@ -163,6 +163,7 @@ class Event(object):
         self.text = str(tag.CHRONPROSE.get_text())
 
         self.date_tag = get_date_tag(tag)
+        print(self.date_tag)
         self.time_type = get_time_type(self.date_tag)
         self.precision = self.date_tag.get("CERTAINTY")
         self.time_certainty = get_time_certainty(self.date_tag)
@@ -183,7 +184,9 @@ class Event(object):
                 self.predicate = utilities.NS_DICT["sem"].hasTimeStamp
             else:
                 self.predicate = utilities.NS_DICT["sem"].hasTime
-            self.date = format_date(self.date)
+            
+            if self.date:
+                self.date = format_date(self.date)
 
     def to_triple(self, person=None):
         g = utilities.create_graph()
@@ -225,7 +228,9 @@ class Event(object):
                    utilities.create_cwrc_uri(self.time_certainty)))
 
         # Attaching the time stamp to the event
-        if self.predicate:
+        if  not self.date:
+            logger.error("Missing date for event: " + str(self))
+        elif self.predicate:
             g.add((self.uri, self.predicate, self.date))
         else:
             if self.time_type == "PunctiveTime":
@@ -244,20 +249,21 @@ class Event(object):
         return g
 
     def __str__(self):
-        string = "\ttitle: " + self.title + "\n"
-        string += "\tevent_type: "
+        string = f"\n"
+        string += f"\ttitle: {self.title}\n"
+        string += "\tevent_type: \n"
         for x in self.event_type:
-            string += str(x) + "\n"
-        string += "\tactors: "
+            string += f"\t • {x}\n"
+        string += "\tactors:\n"
         for x in self.actors:
-            string += str(x) + "\n"
-        string += "\tplaces: "
+            string += f"\t • {x}\n"
+        string += "\tplaces:\n"
         for x in self.place:
-            string += str(x) + "\n"
-        string += "\tdatetag: " + str(self.date_tag) + "\n"
-        string += "\tdate: " + str(self.date) + "\n"
-        string += "\ttime_type: " + str(self.time_type) + "\n"
-        string += "\ttime_certainty: " + str(self.time_certainty) + "\n"
-        string += "\tpredicate: " + str(self.predicate) + "\n"
-        string += "\tEvent tag:\n " + str(self.tag.prettify()) + "\n"
+            string += f"\t • {x}\n"
+        string += f"\tdate tag: {self.date_tag}\n"
+        string += f"\tdate: {self.date}\n"
+        string += f"\ttime_type: {self.time_type}\n"
+        string += f"\ttime_certainty: {self.time_certainty}\n"
+        string += f"\tpredicate: {self.predicate}\n"
+        string += f"\tEvent tag:\n{self.tag.prettify()}\n"
         return string

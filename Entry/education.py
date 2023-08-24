@@ -91,19 +91,19 @@ class School(object):
         self.studied_subjects = []
 
     def __str__(self):
-        string = "\t\tname: " + str(self.name) + "\n"
+        string = f"\t\tname: {self.name}\n"
         if self.types:
             string += "\t\tTypes:\n"
             for x in self.types:
-                string += "\t\t" + str(x) + "\n"
+                string += f"\t\t{x}\n"
         if self.instructors:
             string += "\t\tInstructors:\n"
             for x in self.instructors:
-                string += "\t\t" + str(x) + "\n"
+                string += f"\t\t{x}\n"
         if self.locations:
             string += "\t\tLocations:\n"
             for x in self.locations:
-                string += "\t\t" + str(x) + "\n"
+                string += f"\t\t{x}\n"
         return string
 
     def to_triple(self, context):
@@ -180,12 +180,12 @@ class EducationalAward(object):
         return list(set(types))
 
     def __str__(self):
-        string = "\t\tname: " + str(self.name) + "\n"
-        string += "\t\turi: " + str(self.uri) + "\n"
+        string = f"\t\tname: {self.name}\n"
+        string += f"\t\turi: {self.uri}\n"
         if self.award_type:
             string += "\t\tTypes:\n"
             for x in self.award_type:
-                string += "\t\t" + str(x) + "\n"
+                string += f"\t\t{x}\n"
         return string
 
     def to_triple(self, context):
@@ -277,34 +277,34 @@ class Education(object):
         if self.schools:
             string += "\tschools:\n"
             for x in self.schools:
-                string += str(x) + "\n"
+                string += f"\t\t{x}\n"
         if self.instructors:
             string += "\tinstructors:\n"
             for x in self.instructors:
-                string += "\t\t" + str(x) + "\n"
+                string += f"\t\t{x}\n"
         if self.companions:
             string += "\tcompanions:\n"
             for x in self.companions:
-                string += "\t\t" + str(x) + "\n"
+                string += f"\t\t{x}\n"
         if self.contested_behaviour:
             string += "\tcontested behaviour:\n"
             for x in self.contested_behaviour:
-                string += "\t\t" + str(x) + "\n"
+                string += f"\t\t{x}\n"
         if self.awards:
             string += "\tawards:\n"
             for x in self.awards:
-                string += "\t\t" + str(x) + "\n"
+                string += f"\t\t{x}\n"
         if self.studied_subjects:
             string += "\tstudied_subjects:\n"
             for x in self.studied_subjects:
-                string += "\t\t" + str(x) + "\n"
+                string += f"\t\t{x}\n"
         # TODO
         if self.texts:
             string += "\ttexts:\n"
             for x in self.texts:
-                string += "\t\t" + str(x) + "\n"
+                string += f"\t\t{x}\n"
 
-        return string + "\n"
+        return f"{string}\n"
 # TODO: Review all below methods for duplication of efforts
     def add_school(self, schools):
         self.schools += schools

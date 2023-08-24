@@ -66,9 +66,9 @@ class Response(object):
         return g
 
     def __str__(self):
-        string = "\tURI: " + str(self.uri) + "\n"
-        string += "\tpredicate: " + str(self.predicate) + "\n"
-        string += "\tvalue: " + str(self.value) + "\n"
+        string = f"\tURI: {self.uri}\n"
+        string += f"\tpredicate: {self.predicate}\n"
+        string += f"\tvalue: {self.value}\n"
 
         return string
 

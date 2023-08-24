@@ -65,12 +65,12 @@ class Organization(object):
         return g
 
     def __str__(self):
-        string = "\tname: " + self.name + "\n"
-        string += "\turi: " + str(self.uri) + "\n"
+        string = f"\tname: {self.name}\n"
+        string += f"\turi: {self.uri}\n"
         if self.altlabels:
-            string += "\taltlabels: \n"
+            string += "\talt labels: \n"
         for x in self.altlabels:
-            string += "\t\t" + x + "\n"
+            string += f"\t\t• {x}\n"
         return string
 
 

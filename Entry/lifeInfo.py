@@ -48,9 +48,9 @@ class Person(object):
         return g
 
     def __str__(self):
-        string = "\tURI: " + str(self.uri) + "\n"
-        string += "\tname: " + str(self.name) + "\n"
-        string += "\tpredicate: " + str(self.predicate) + "\n"
+        string = f"\tURI: {self.uri}\n"
+        string += f"\tname: {self.name}\n"
+        string += f"\tpredicate: {self.predicate}\n"
         return string
 
 def create_marital_status(tagname):

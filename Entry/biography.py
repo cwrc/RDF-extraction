@@ -181,15 +181,15 @@ class Biography(object):
 
     def __str__(self):
         # TODO: add occupation + education
-        string = "id: " + str(self.id) + "\n"
-        string += "name: " + str(self.name) + "\n"
+        string = f"id: {self.id}\n"
+        string += f"name: {self.name}\n"
         if self.context_list:
             string += "Contexts: \n"
             for x in self.context_list:
-                string += str(x) + "\n"
+                string += f"{x}\n"
         if self.event_list:
             string += "Events: \n"
             for x in self.event_list:
-                string += str(x) + "\n"
+                string += f"{x}\n"
 
         return string
