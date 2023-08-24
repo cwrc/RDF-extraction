@@ -2,52 +2,59 @@
 
 Extraction scripts for transforming the Orlando XML data into Linked Data (CIDOC edition) (cidoc-revisions branch)
 
+Note: The CWRC version of these extraction scripts can be found on the [Classic Branch](https://github.com/cwrc/RDF-extraction/tree/classic)
 
+You must have Python installed, at least version 3.8.
 
 ## Setup
 
-
 ### Download files from CWRC
-You must have a CWRC account to be able to do this with the appropriate permissions. (Sign up here)
+
+#### Prerequisites
+
+You must have a CWRC account to be able to do this with the appropriate permissions. ([Sign up here](https://cwrc.ca/user))
 
 In Root folder:
 
 1. Create a Virtual Environment:
 `python3 -m venv venv`
 1. Start Virtual Environment:
-`source ./venv/bin/activate` 
-2. Install modules:
+`source ./venv/bin/activate`
+1. Install modules:
 `pip install -r requirements.txt`
-3. Create an `.env` file with `username=XXX` and `password=yyy`, replacing `xxx` and `yyy` with the respective credentials.
+1. Create an `.env` file with `username=XXX` and `password=yyy`, replacing `xxx` and `yyy` with the respective credentials.
 
 Example file:
+
 ```env
 username=John Doe
 password=mySuperSecretpassword12!
 ```
 
-4. Run script: 
+#### Run download script
+
+1. Run script:
 `python3 islandora_auth.py`
 (This by default will only download the Entries)
 
-
-
 ### To Run Extraction scripts
-These commands take place in `Entry` folder (`cd Entry`)
+
+These commands take place in `Biography` folder (`cd Biography`)
 
 1. Update `default directory` field within `testcases.json` to match where your source data files are
-2. Create a Virtual Environment:
+1. Create a Virtual Environment:
 `python3 -m venv venv`
-1. Start Virtual environment:
+1. Start Virtual Environment:
 `source ./venv/bin/activate`
-3. Install modules:
+1. Install modules:
 `pip install -r requirements.txt`
-4. Run script `python3 bio_extraction.py` 
+1. Run script `python3 bio_extraction.py`
 
 ## Features
+
 Run `python3 bio_extraction.py -h` for a list of available options
 
-```
+```text
 No particular testcases available, please add to testcases.json
 usage: bio_extraction.py [-h] [-qa | -s | -g | -i | -id ORLANDO | -f FILE | -d DIRECTORY | -r [RANDOM] | -l [LAST] | -fi [FIRST]] [-v {0,1,2,3}] [-fmt {rdf,rdf/xml,ttl,turtle,json-ld,nt,trix,n3,all}] [-u UPDATE] [-p]
 
@@ -76,25 +83,16 @@ optional arguments:
   -v {0,1,2,3}, --verbosity {0,1,2,3}
                         increase output verbosity
   -fmt {rdf,rdf/xml,ttl,turtle,json-ld,nt,trix,n3,all}, --format {rdf,rdf/xml,ttl,turtle,json-ld,nt,trix,n3,all}
-  -u UPDATE, -update UPDATE, --update UPDATE, -update-sparqlendpoint UPDATE
-                        url of sparql endpoint to update
   -p, -pause, --pause   pause after every entry to examine output and be prompted to continue/quit
 ```
 
-Each script within `Entry/` can be run on its own, `bio_extraction.py` is the current main driver that calls needed functions within separate scripts. The same arguments are applicable to those scripts.
+Each script within `Biography/` can be run on its own, `bio_extraction.py` is the current main driver that calls needed functions within separate scripts. The same arguments are applicable to those scripts.
 
 Example:
 If you just wanted to test the extraction of cultural forms. You could do `python3 culturalForm.py -r 1`
 
 This would only extract from culturalform tags, from 1 random source file. This allows for better testing and more modular classes to be made.
 
-
-
-
-
-
 ## Additional Configuration details
-
-
 
 ## Design Considerations
