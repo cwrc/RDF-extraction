@@ -8,6 +8,12 @@ You must have Python installed, at least version 3.8.
 
 ## Setup
 
+Clone the repository if you haven't already.
+`git clone https://github.com/cwrc/RDF-extraction.git`
+
+Switch to the CWRC branch
+`git checkout origin/classic`
+
 ### Download files from CWRC
 
 #### Prerequisites
