@@ -9,13 +9,7 @@ from Utils import utilities
 from Utils.context import Context, get_context_type, get_event_type
 from Utils.event import Event
 from Utils.organizations import get_org_uri
-"""
-Status: ~75%
-TODO:
- - review unmapped instances
- - revise method of capturing failed mappings to be similar to culturalforms
- - update predicate for employer/employment
-"""
+
 logger = utilities.config_logger("occupation")
 uber_graph = utilities.create_graph()
 
@@ -49,15 +43,6 @@ class Occupation(object):
             self.uri = other_attributes
 
         self.uri = utilities.create_uri("cwrc", self.predicate)
-    """
-    TODO figure out if i can just return tuple or triple without creating
-    a whole graph
-    Evaluate efficency of creating this graph or just returning a tuple and
-    have the biography deal with it
-    """
-
-    def to_tuple(self, person_uri):
-        return ((person_uri, self.uri, self.value))
 
     def to_triple(self, context):
         g = utilities.create_graph()
@@ -124,8 +109,6 @@ class Occupation(object):
                 fail_dict[rdf_type] = {value: 1}
         """
             Currently getting exact match ignoring case and "-"
-            TODO:
-            Make csv of unmapped
         """
         global map_attempt
         global map_success

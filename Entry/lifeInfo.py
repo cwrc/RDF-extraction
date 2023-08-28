@@ -269,9 +269,8 @@ def extract_family_data(bio, person):
     if sex not in ["FEMALE", "MALE"]:
         sex = "NEUTRAL"
 
-    print(person.uri,"\n")
-    # Revisit this
-    # maybe best approach is to create family tree then go about creating the contexts? 
+    print(person.uri)
+    # Revisit this maybe best approach is to create family tree then go about creating the contexts? 
     get_all_members(bio, person)
     family_tags = bio.find_all("FAMILY")
 

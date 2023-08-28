@@ -44,7 +44,7 @@ def extract_general_info(doc, person, count):
     for x in extent:
         general_relations.append(utilities.GeneralRelation(cwrc.extent, rdflib.Literal(utilities.limit_words(x.text, 35))))
 
-    # TODO!: Make Oeuvre into it's own class similar to titles so that more properties can be attached
+    # TODO!: Make Oeuvre into it's own class similar to titles so that more properties can be attached?
     for x in titles:
         general_relations.append(utilities.GeneralRelation(utilities.NS_DICT["bf"].hasPart, x))
 

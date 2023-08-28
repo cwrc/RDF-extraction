@@ -303,7 +303,7 @@ def get_name_uri(tag):
 
 def make_standard_uri(std_str, ns="data"):
     """Makes uri based of string, removes punctuation and replaces spaces with an underscore
-    v2, leaving hypens
+    v2, leaving hyphens
     """
     return create_uri(ns, remove_punctuation(std_str))
 
@@ -314,6 +314,7 @@ def create_uri(prefix, term):
 
 
 def create_cwrc_uri(term):
+    # TODO: Deprecate this and use create_uri instead
     """prepends the cwrc namespace uri to the given term"""
     return create_uri("cwrc", term)
 
@@ -331,7 +332,7 @@ def get_value(tag):
 
 
 def get_reg(tag):
-    # TODO: Remove this function
+    # TODO: Remove this function and where it's been used.
     return tag.get("REG")
 
 def get_other_people(tag, author):
@@ -597,36 +598,6 @@ def manage_mode(mode, person, graph):
         res = input("Enter q/quit to exit or any key to continue\n")
         if res in ["q", "quit"]:
             exit()
-
-def config_logger2(name, verbose=False):
-    # Will likely want to convert logging records to be json formatted and based on external file.
-    # Add metadata info about time of extraction run and remove asctime
-    # TODO: Deprecate this
-    import logging
-    import os
-    if not os.path.exists("log"):
-        os.makedirs("log")
-
-    if name != "utilities":
-        name += '_extraction'
-
-    name = name.lower()
-
-    logger = logging.getLogger(name)
-    logger.setLevel(logging.INFO)
-    fh = logging.FileHandler("log/" + name + ".log", mode="w")
-    fh.setLevel(logging.INFO)
-    formatter = logging.Formatter('%(levelname)s - %(asctime)s {%(module)s.py:%(lineno)d} - %(message)s ')
-    fh.setFormatter(formatter)
-    logger.addHandler(fh)
-
-    if verbose:
-        ch = logging.StreamHandler()
-        ch.setLevel(logging.ERROR)
-        ch.setFormatter(formatter)
-        logger.addHandler(ch)
-
-    return logger
 
 
 def get_file_dict(script, args, testcase_data, testcases_available):

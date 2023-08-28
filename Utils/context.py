@@ -11,7 +11,6 @@ GENERIC_NAMES = ["king","King","mother-in-law" , "Queen", "queen","husband","wif
 """
 Status: ~84%
 TODO:
-
 1) revise mechanism for getting closest heading
 2) Fix up labelling of contexts possibly
 3) replace mapping related fx with a closure
@@ -39,7 +38,6 @@ def get_heading(tag):
     # TODO: improve heading finding
     # Figure out distance between tag and the two available headings
     # to see which is closest
-    # Placeholder for now
     heading = tag.find("HEADING")
     if not heading:
         heading = tag.findPrevious("HEADING")
@@ -52,6 +50,7 @@ def get_heading(tag):
 
 
 def create_context_map():
+    # TODO: add exception handling
     import pandas as pd
     with open('../data/context_mapping.csv', newline='') as csvfile:
         return pd.read_csv(csvfile)

@@ -47,7 +47,6 @@ def extract_other_contexts_data(bio, person):
         loops through tags within other_context list and creates
         simple identifying contexts, as no triples are currently being
         extracted from these contexts due to there being no unique subtagging
-        TODO: after reviewing contexts/events remove uber_graph
     """
     other_contexts = ["VIOLENCE", "WEALTH", "LEISUREANDSOCIETY", "OTHERLIFEEVENT"]
 

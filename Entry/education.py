@@ -9,8 +9,7 @@ from Utils.event import Event
 from Utils.context import Context
 """
 Status: ~75%
-TODO:
-Handle name tags with subject tags
+TODO: Handle name tags with subject tags
 TEXT tags
     name within text
     title within text
@@ -255,7 +254,7 @@ class Education(object):
         for x in self.awards:
             g += x.to_triple(context)
 
-        # TODO figure out how texts are to be handled
+        # TODO: figure out how texts are to be handled
         for x in self.edu_texts:
             print(x)
             g.add((x, RDF.type, CWRC.EducationalText))
@@ -274,35 +273,34 @@ class Education(object):
 
     def __str__(self):
         string = "Education:\n"
-        if self.schools:
-            string += "\tschools:\n"
-            for x in self.schools:
-                string += f"\t\t{x}\n"
-        if self.instructors:
-            string += "\tinstructors:\n"
-            for x in self.instructors:
-                string += f"\t\t{x}\n"
-        if self.companions:
-            string += "\tcompanions:\n"
-            for x in self.companions:
-                string += f"\t\t{x}\n"
-        if self.contested_behaviour:
-            string += "\tcontested behaviour:\n"
-            for x in self.contested_behaviour:
-                string += f"\t\t{x}\n"
-        if self.awards:
-            string += "\tawards:\n"
-            for x in self.awards:
-                string += f"\t\t{x}\n"
-        if self.studied_subjects:
-            string += "\tstudied_subjects:\n"
-            for x in self.studied_subjects:
-                string += f"\t\t{x}\n"
-        # TODO
-        if self.texts:
-            string += "\ttexts:\n"
-            for x in self.texts:
-                string += f"\t\t{x}\n"
+        
+        string += "\tschools:\n"
+        for x in self.schools:
+            string += f"\t\t{x}\n"
+        
+        string += "\tinstructors:\n"
+        for x in self.instructors:
+            string += f"\t\t{x}\n"
+        
+        string += "\tcompanions:\n"
+        for x in self.companions:
+            string += f"\t\t{x}\n"
+        
+        string += "\tcontested behaviour:\n"
+        for x in self.contested_behaviour:
+            string += f"\t\t{x}\n"
+        
+        string += "\tawards:\n"
+        for x in self.awards:
+            string += f"\t\t{x}\n"
+        
+        string += "\tstudied_subjects:\n"
+        for x in self.studied_subjects:
+            string += f"\t\t{x}\n"
+        
+        string += "\ttexts:\n"
+        for x in self.texts:
+            string += f"\t\t{x}\n"
 
         return f"{string}\n"
 # TODO: Review all below methods for duplication of efforts
@@ -488,8 +486,6 @@ def update_fails(rdf_type, value):
 def get_mapped_term(rdf_type, value, retry=False):
     """
         Currently getting exact match ignoring case and "-"
-        TODO:
-        Make csv of unmapped
     """
     global map_attempt
     global map_success

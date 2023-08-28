@@ -112,7 +112,6 @@ def find_locations(tag, relation):
             location_list.append(Location("migration", places[0]))
         else:
             for place in places:
-                # TODO: clean up these if statements
                 if "leaving " + place.text in tag.text or "left " + place.text in tag.text or "from " + place.text in tag.text:
                     location_list.append(Location("emigration", place))
                 elif "to " + place.text in tag.text or "to the " + place.text in tag.text or "at " + place.text in tag.text:

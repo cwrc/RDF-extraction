@@ -180,7 +180,6 @@ class Biography(object):
             return self.to_graph().serialize(format=serialization)
 
     def __str__(self):
-        # TODO: add occupation + education
         string = f"id: {self.id}\n"
         string += f"name: {self.name}\n"
         if self.context_list:

@@ -84,10 +84,9 @@ def get_date_tag(tag):
             return(x)
     return get_indirect_date_tag(tag)
 
-# TODO: apply '-' if calendar is BC also log this date
-
 
 def format_date(date):
+    # TODO: apply '-' if calendar is BC also log this date
     """ Formats date to be in usable xsd format
     # https://github.com/RDFLib/rdflib/issues/747
     :/

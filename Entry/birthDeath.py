@@ -8,7 +8,6 @@ import rdflib
 from difflib import get_close_matches
 
 # TODO
-# - once resolved: https://github.com/cwrc/ontology/issues/462
 # - handle multiple DEATH/BIRTH tags
 
 logger = utilities.config_logger("birthdeath")
@@ -109,7 +108,6 @@ def extract_birth_data(bio, person):
             event_uri = person.id + "_BirthEvent_1"
 
             if len(birth_events) > 0:
-                # TODO: possibly revise uri as well
                 logger.info(
                     "Multiple Birth events encountered within entry: " + person.id)
                 event_title = person.name + " - Birth Related Event"
@@ -172,9 +170,7 @@ def get_mapped_term(value, id=None):
         else:
             fail_dict[rdf_type] = {value: 1}
     """
-        Currently getting exact match ignoring case and "-"
-        TODO:
-        Make csv of unmapped
+        Currently getting exact match ignoring case and "-" characters
     """
     global map_attempt
     global map_success
@@ -199,7 +195,7 @@ def get_mapped_term(value, id=None):
         term = rdflib.Literal(value, datatype=rdflib.namespace.XSD.string)
         map_fail += 1
         possibilities = []
-        log_str = "Unable to find matching occupation instance for '" + value + "'"
+        log_str = "Unable to find matching COD instance for '" + value + "'"
 
         for x in CAUSE_MAP.keys():
             if get_close_matches(value.lower(), CAUSE_MAP[x]):
@@ -308,7 +304,6 @@ def extract_death_data(bio, person):
             event_uri = person.id + "_DeathEvent_1"
 
             if len(death_events) > 0:
-                # TODO: possibly revise uri as well
                 logger.info(
                     "Multiple Death events encountered within entry: " + person.id)
                 event_title = person.name + " - Death Related Event"

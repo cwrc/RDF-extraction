@@ -256,11 +256,7 @@ def find_cultural_forms(cf, person):
             value = utilities.get_reg(x)
             orgName = get_org(x)
 
-            if not value and orgName:
-                for org in orgName:
-                    cf_list.append(CulturalForm(None, None, get_org_uri(org),
-                                                other_attributes=utilities.NS_DICT["org"].memberOf))
-            elif orgName:
+            if orgName:
                 for org in orgName:
                     cf_list.append(CulturalForm(None, None, get_org_uri(org),
                                                 other_attributes=utilities.NS_DICT["org"].memberOf))
@@ -459,6 +455,7 @@ def clean_term(string):
 
 def create_cf_map():
     # TODO: Add exception handling for when file cannot be opened/parsed
+    # Program should stop if this happens
     import csv
     global CF_MAP
     with open('../data/cf_mapping.csv', newline='') as csvfile:
@@ -493,7 +490,6 @@ def update_fails(rdf_type, value):
 def get_mapped_term(rdf_type, value, retry=False, id=None):
     """
         Currently getting exact match ignoring case and "-"
-        TODO: Make csv of unmapped
     """
     global map_attempt
     global map_success
