@@ -1062,16 +1062,16 @@ class BibliographyParse:
                     time_span.add(CRM.P82a_begin_of_the_begin, rdflib.Literal(start_date, datatype=XSD.dateTime))
                     time_span.add(CRM.P82b_end_of_the_end,rdflib.Literal(end_date, datatype=XSD.dateTime))
                 
+                print(o)
+                print(o['date'])
+                print(start_date)
+                print(end_date)
+                print()
+                
                 originInfo.add(CRM["P4_has_time-span"],time_span)
 
-            # CIDOC: Creating a manifestation, given an edition
+            # CIDOC: Creating a linguistic appellation, given an edition
             if o['edition']:
-                # instance_manifestion = g.resource(F"{self.placeholderURI}_instance_manifestation")
-                # instance_manifestion.add(RDF.type, FRBROO.F4_Manifestation_Singleton)
-                # instance_manifestion.add(RDFS.label, rdflib.Literal(F"manifestation of {self.mainTitle}"))
-                # instance_manifestion.add(FRBROO.R4_embodies,resource)
-
-                
                 edition_node = g.resource(F"{self.placeholderURI}_edition")
 
                 instance.add(CRM.P1_is_identified_by, edition_node)
@@ -1210,6 +1210,35 @@ def add_types_to_graph(graph, uri, label, rdf_type=CRM.E55_Type):
     term.add(RDF.type, rdf_type)
     term.add(RDFS.label, rdflib.Literal(label,lang="en"))            
 
+def create_testcases(id):
+    if id=="p82a value not formatted":
+        return [
+            "0b681cee-b42c-4a63-ad65-c0af45b62ce8.xml",
+            "1383fa3f-1165-4ff4-b2dd-c95c75fc2c13.xml",
+            "02d7c5d7-c35c-4014-937c-7ac3293ca5da.xml",
+            "51a0f1ac-a935-4030-af4c-1efa386311e2.xml",
+            "5fded5be-698c-44a6-b5d9-dcfc916a3080.xml",
+            "586f3760-ca74-4719-86af-f272db0e871a.xml",
+            "78c6593a-e40c-4315-8579-e2f626c32097.xml",
+            "8e367bab-26fe-4737-a660-1b347512f39d.xml",
+            "7a1b0250-e39c-4b23-9e1a-0628875b8ee9.xml",
+            "c024cc20-b224-4262-9cf7-7b75fa77d6af.xml",
+            "ff1e9376-9e49-4ee7-885c-6c43fd8529fb.xml",
+            "ece7a309-06ab-484d-9b6e-327673760d6e.xml",
+            "061d2321-dfb5-4f44-942c-9a7e65c21a94.xml",
+            "5bed980f-5550-4947-912c-932d2b93d8c4.xml",
+            "51ede06d-3b58-49f8-8aed-fa22a68b7155.xml",
+            "5cf828b7-c0da-4325-883c-823f77dd9fe0.xml",
+            "d9b4b496-aee5-4045-b6d6-b87038ff3b95.xml",
+            "d51fb7d2-333f-450e-ab4d-4b0c786f9807.xml",
+            "a35fcb83-5f4c-482f-8834-eb8afb8f3500.xml",
+        ]
+    elif id=="part of series":
+        return ["e6180094-ba76-4020-991d-1e8c68a9d20a.xml",
+                      "e1b2f98f-1001-4787-a711-464f1527e5a7.xml", "15655c66-8c0b-4493-8f68-8d6cf4998303.xml","0d0e00bf-3224-4286-8ec4-f389ec6cc7bb.xml", # VW, the wave
+                      "005eb7df-fada-4d13-8206-8c30ec309ece.xml", "73bddacf-9be7-49a9-bc6b-05f5928f823d.xml"]    
+    return None
+
 
 if __name__ == "__main__":
     g = rdflib.Graph()
@@ -1301,24 +1330,15 @@ if __name__ == "__main__":
         except UnicodeError:
             pass
 
-    # test_filenames = ["d75215cb-d102-4256-9538-c44bfbf490d9.xml","2e3e602e-b82c-441d-81bc-883f834b20c1.xml","13f8e71a-def5-41e4-90a0-6ae1092ae446.xml","16d427db-a8a2-4f33-ac53-9f811672584b.xml","4109f3c5-0508-447b-9f86-ea8052ff3981.xml",
-    # test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"] 
+    test_filenames = create_testcases("p82a value not formatted")
     
-    # Part of series, then host has an edition, an edition
-    test_filenames = ["e6180094-ba76-4020-991d-1e8c68a9d20a.xml",
-                      "e1b2f98f-1001-4787-a711-464f1527e5a7.xml", "15655c66-8c0b-4493-8f68-8d6cf4998303.xml","0d0e00bf-3224-4286-8ec4-f389ec6cc7bb.xml", # VW, the wave
-                      "005eb7df-fada-4d13-8206-8c30ec309ece.xml", "73bddacf-9be7-49a9-bc6b-05f5928f823d.xml"]
-    
-    # test_filenames = ["e35f16d8-d8f6-414d-b465-2a8a916ba53a.xml"] 
-    # test_filenames = ["64d3c008-8a9d-415b-b52b-91d232c00952.xml",
-    # test_filenames = ["55aff3fb-8ea9-4e95-9e04-0f3e630896e3.xml", "0c133817-f55e-4a8f-a9b4-474566418d9b.xml"]
+    if not test_filenames:
+        test_filenames = os.listdir(dirname)
 
 
     count = 1
-    total = len(os.listdir(dirname))
-    # for fname in test_filenames:
-    # for fname in os.listdir(dirname)[:2000]:
-    for fname in os.listdir(dirname):
+    total = len(test_filenames)
+    for fname in test_filenames:
         print(F"{count}/{total} files extracted: {fname}")
         path = os.path.join(dirname, fname)
         if os.path.isdir(path):
