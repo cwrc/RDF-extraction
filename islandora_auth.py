@@ -108,9 +108,7 @@ def download_data(subset="all", latest_date=None):
         download_files(date, subset, latest_date)
         
         
-def get_modified_entities(subset="all"):
-    # TODO: update this function to actually work
-    
+def get_modified_entities(subset="all"):    
     if subset== "all":
         for key in collections.keys():
             print(key)
@@ -189,10 +187,12 @@ def main(argv):
     
     # get_modified_entities("entry")
     # download_data("entry", "2022-05-04")
+    # download_data("person")
+    # download_data("organizations")
+    # download_data("events")
     # download_data("entry")
-    # download_data()
-    download_data("bibliography", "2022-05-04")
-    # download_data("bibliography")
+    # download_data("bibliography", "2022-05-04")
+    download_data("bibliography")
 
     # get_images()
 
