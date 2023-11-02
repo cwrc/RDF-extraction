@@ -350,12 +350,7 @@ precision: {self.precision}
 
     def to_triple(self, person=None):
         g = utilities.create_graph()
-        activity = None
-
-        if self.activity_path == "generic+":
-            activity = g.resource(self.uri)
-        else:
-            activity = g.resource(self.uri)
+        activity = g.resource(self.uri)
 
 
         activity_label = self.title
@@ -374,7 +369,10 @@ precision: {self.precision}
                 activity_label = F"{self.date[:4]}: {activity_label}"
 
         connection = None
-        if self.activity_type:
+        
+        if  self.activity_path == "generic+":
+            activity.add(RDF.type, utilities.NS_DICT["crm"][self.activity_map["attribute"]])
+        elif self.activity_type:
             activity.add(RDF.type, self.activity_type)
         else:
             activity.add(RDF.type, utilities.NS_DICT["crm"][self.activity_map["attribute"]])
@@ -438,10 +436,9 @@ precision: {self.precision}
                 activity.add(utilities.NS_DICT["crm"].P2_has_type, x)
 
 
-        if self.activity_path == "generic+":            
-            # TODO Review this portion of code - Seems to never occur
+        if self.activity_path == "generic+":      
             connection = g.resource(f"{self.connection_uri}")
-            connection.add(RDFS.label, Literal(activity_label+" (??)"))
+            connection.add(RDFS.label, Literal(activity_label))
             connection.add(RDF.type, utilities.NS_DICT["crm"][self.activity_map["generic"]])
             connection.add(utilities.NS_DICT["crm"].P14_carried_out_by, self.person.uri)
             connection.add(utilities.NS_DICT["crm"].P140i_was_attributed_by,activity)
@@ -449,8 +446,7 @@ precision: {self.precision}
             for x in self.places:
                 connection.add(utilities.NS_DICT["crm"].P7_took_place_at, x)
 
-            activity.add(RDF.type, utilities.NS_DICT["crm"][self.activity_map["attribute"]])
-            
+
             # TODO: REMOVE THIS AFTER TESTING
             if len(self.attributes.keys()) > 1:
                 logger.warning(F"Multiple types of attributes: {self.attributes}")
@@ -467,11 +463,8 @@ precision: {self.precision}
                    connection.add(utilities.NS_DICT["crm"].P11_had_participant, y)
 
 
-
-            
             activity.add(utilities.NS_DICT["crm"].P140_assigned_attribute_to,connection)
             
-
             if self.event_type:
                 event_type = self.event_type[0].replace("Context","Event")
                 connection.add(utilities.NS_DICT["crm"].P2_has_type, rdflib.term.URIRef(event_type))
@@ -507,14 +500,12 @@ precision: {self.precision}
             for x in self.biographers:
                 activity.add(utilities.NS_DICT["crm"].P14_carried_out_by, x)
 
-
         elif self.person and "Activity" in str(self.activity_type):
             activity.add(utilities.NS_DICT["crm"].P14_carried_out_by, self.person.uri)
 
         #TODO: consult if this property should be a list & review usage
         if self.related_activity:
             activity.add(utilities.NS_DICT["crm"].P140_assigned_attribute_to, self.related_activity)
-
 
         return g
 
