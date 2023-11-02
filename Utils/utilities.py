@@ -342,13 +342,16 @@ def get_attribute(tag, attribute):
 def get_reg(tag):
     return get_attribute(tag, "REG")
 
-def get_other_people(tag, author):
+def get_other_people(tag, author, unique=True):
     """returns all people other than author"""
-    return list(filter(lambda a: a != author.uri, get_people(tag)))
+    return list(filter(lambda a: a != author.uri, get_people(tag, unique)))
 
-def get_people(tag):
+def get_people(tag, unique=True):
     """Returns all people within a given tag"""
-    return list(set([get_name_uri(x) for x in tag.find_all("NAME")]))
+    if unique:
+        return list(set([get_name_uri(x) for x in tag.find_all("NAME")]))
+    else:
+        return [get_name_uri(x) for x in tag.find_all("NAME")]
 
 
 def get_title_uri(tag):
@@ -527,7 +530,8 @@ def create_extracted_file(filepath, person, serialization="ttl"):
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     with open(filepath, "w", encoding="utf-8") as f:
         if serialization == "ttl":
-            f.write("#" + str(len(person.to_graph())) + " triples created\n")
+            f.write(F"# date extracted: ~{get_current_time()}\n")
+            f.write(F"# {len(person.to_graph())} triples created\n")
             f.write(person.to_file())
         elif serialization:
             f.write(person.to_file(serialization=serialization))
