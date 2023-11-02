@@ -151,7 +151,7 @@ def extract_relationships(tag_list, context_type, person, list_type="paragraphs"
         context_count += 1
         context_id = person.id + "_" + CONTEXT_TYPE + "_" + str(context_count)
         relationship_list = find_relationships(tag, person, context_type)
-        
+
         # Sometimes includes cohabitant as well
         attributes = get_attributes(relationship_list)
 
@@ -159,12 +159,12 @@ def extract_relationships(tag_list, context_type, person, list_type="paragraphs"
             print(attributes)
             input()
 
-        if relationship_list:
+        # Only extracting intimate relation if there is one name, aiming for precision here
+        if len(relationship_list) == 1:
             temp_context = Context(context_id, tag, tag_name,pattern="relationships")
             event_count = 1
             participants = None
             
-
             for x in attributes.keys():
                 # need to loop inner list
                 temp_attr = {x:attributes[x]}
@@ -214,7 +214,7 @@ def find_friends(tag, person, predicate="interpersonalRelationshipWith"):
         else:
             friends.append(Person(x, "cohabitant"))
     
-    return list(filter(lambda a: a.uri != person.uri and a.uri not in person.biographers, friends))
+    return list(filter(lambda a: a.uri != person.uri and a.uri not in person.biographers and a.uri not in person.parents, friends))
 
 
 def extract_friends(tag_list, context_type, person, list_type="paragraphs"):
