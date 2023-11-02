@@ -358,7 +358,7 @@ class Context(object):
                 g.add((entity_uri,RDFS.label,Literal(utilities.get_value(x))))
                 g.add((entity_uri,RDF.type,utilities.NS_DICT["crm"].E74_Group))
 
-                # Adding names for all the people mentioned in an entry
+        # Adding names for all the people mentioned in an entry
         generic_names = ["king","King","mother-in-law" , "Queen", "queen","husband","wife","partner" ,"father", "daughter","essay", "son","he","she","they","her","him","them", "sisters","the",  "mother", "sibling", "brother", "sister", "friend", "his wife", "her husband","his husband", "her wife", "their husband", "their wife", "lover", "family"]
         for x in self.tag.find_all("NAME"):
             uri = utilities.get_name_uri(x)

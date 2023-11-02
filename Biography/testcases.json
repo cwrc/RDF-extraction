@@ -73,7 +73,9 @@
     "notes": {
       "contexts": "Family: Whole member tag is the context",
       "inverse contexts": "using gender of biographee to apply appropriate family member relationship",
-      "marital status": "creating inverse relationship if occurs in an identifiable spouse tag, creating for any occurence",
+      "intimate relations": "Decision: If there is ONLY one name within the tag, select that as the subject of the intimate relationship but then and only then (will be working on a better solution in the interim). ",
+      "friends/associates": "Decision: Whereas in the case of FriendsAndAssociates we are going higher recall and less precision.",
+      "marital status": "creating inverse relationship if occurs in an identifiable spouse tag, creating for any occurrence",
       "for review": [
         "liveswith --> cohabitant",
         "childlessness, no cases of abortion/birthControl?"
