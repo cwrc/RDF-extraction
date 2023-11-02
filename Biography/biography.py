@@ -121,8 +121,11 @@ class Biography(object):
         # TODO: get nickname from file most common acroynm and replace in event/context strings
         self.nickname = None
 
-        self.family_members = {}
+        self.parents = []
+        self.possible_family_members = {}
         self.get_all_members()
+        self.family_members = {}
+        self.get_family_members()
 
         self.wd_id = get_wd_identifier(id)
         self.context_list = []
@@ -131,19 +134,37 @@ class Biography(object):
         self.organizations = []
         self.name_list = []
 
+    def get_family_members(self):
+        # Assuming mother and father are the first names
+        if "MOTHER" in self.possible_family_members:
+            self.family_members["MOTHER"] = self.possible_family_members["MOTHER"][0]
+            self.parents.append(self.family_members["MOTHER"])
+        if "FATHER" in self.possible_family_members:
+            self.family_members["FATHER"] = self.possible_family_members["FATHER"][0]
+            self.parents.append(self.family_members["FATHER"])
+
+        ignore_members = [self.family_members.get(
+            "MOTHER"), self.family_members.get("FATHER")]
+        
+        # Copying rest of possible family members in family members
+        for relation, members in self.possible_family_members.items():
+            if relation not in ["MOTHER", "FATHER"]:
+                # Removing mother/father URIs from other members
+                members = [x for x in members if x not in ignore_members ]
+                self.family_members[relation] = members
+        
+                
     def get_all_members(self):
         member_tags = self.document.find_all("MEMBER")
         for x in member_tags:
-            peeps = utilities.get_other_people(x,self)
+            peeps = utilities.get_other_people(x,self, unique=False)
             peeps = [y for y in peeps if y not in self.biographers]
             
-            if x["RELATION"] in self.family_members:
-                self.family_members[x["RELATION"]]+=peeps
+            if x["RELATION"] in self.possible_family_members:
+                self.possible_family_members[x["RELATION"]]+=peeps
             else:
-                self.family_members[x["RELATION"]] = peeps
+                self.possible_family_members[x["RELATION"]] = peeps
         
-         
-
     def add_context(self, context):
         if type(context) is list:
             self.context_list += context
