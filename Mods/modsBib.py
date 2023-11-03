@@ -26,7 +26,7 @@ logger.info(
 
 # ---------- SETUP NAMESPACES ----------
 
-CWRC = rdflib.Namespace("http://id.lincsproject.ca/cwrc/")
+EVENT = rdflib.Namespace("http://id.lincsproject.ca/event/")
 ORLANDO = rdflib.Namespace("https://commons.cwrc.ca/orlando:")
 BF = rdflib.Namespace("http://id.loc.gov/ontologies/bibframe/")
 XML = rdflib.Namespace("http://www.w3.org/XML/1998/namespace")
@@ -937,8 +937,8 @@ class BibliographyParse:
             originInfo = g.resource(
                 F"{self.placeholderURI}_activity_statement_{i}")
             originInfo.add(RDF.type, CRM.E65_Creation)
-            originInfo.add(CRM.P2_has_type, CWRC.ProductionEvent)
-            originInfo.add(CRM.P2_has_type, CWRC.PublishingEvent)
+            originInfo.add(CRM.P2_has_type, EVENT.ProductionEvent)
+            originInfo.add(CRM.P2_has_type, EVENT.PublishingEvent)
 
             originInfo.add(RDFS.label, rdflib.Literal(
                 F"creation of {self.mainTitle}", lang="en"))
@@ -1280,7 +1280,7 @@ def create_testcases(id):
 
 if __name__ == "__main__":
     g = rdflib.Graph()
-    g.bind("cwrc", CWRC)
+    g.bind("event", EVENT)
     g.bind("bf", BF)
     g.bind("xml", XML, True)
     g.bind("marcrel", MARC_REL)
@@ -1407,7 +1407,6 @@ WHERE {
         for unmatched_place in UNIQUE_UNMATCHED_PLACES:
             writer.writerow([unmatched_place])
 
-    fname = "bibliography_full"
     fname = F"bibliography_{datetime.datetime.now().strftime('%Y-%m-%d')}"
     output_name = fname.replace(".xml", "")
     formats = {'ttl': 'turtle'}
