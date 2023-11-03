@@ -174,7 +174,6 @@ def extract_relationships(tag_list, context_type, person, list_type="paragraphs"
                 activity = Activity(person, label, activity_id, tag, activity_type="generic+", attributes=temp_attr)
                 activity.event_type.append(utilities.create_cwrc_uri(get_event_type(tag_name)))
 
-
                 if participants:
                     activity.participants = participants
                 temp_context.link_activity(activity)
@@ -183,7 +182,6 @@ def extract_relationships(tag_list, context_type, person, list_type="paragraphs"
             
         else:
             temp_context = Context(context_id, tag, tag_name, "identifying")
-
 
         person.add_context(temp_context)
 

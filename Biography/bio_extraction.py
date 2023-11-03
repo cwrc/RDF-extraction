@@ -40,13 +40,12 @@ def main():
         with open(filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
         
-
-
         print(person_id)
         print(file_dict[filename])
         print("*" * 55)
         person = Biography(person_id, soup)
         
+
         occupation.extract_occupation_data(soup, person)
         birthDeath.extract_death_data(soup, person)
         birthDeath.extract_birth_data(soup, person)
@@ -77,7 +76,7 @@ def main():
         utilities.manage_mode(extraction_mode, person, graph)
 
         uber_graph += graph
-    
+
     place.log_mapping_fails()
     cf.log_mapping_fails()
     occupation.log_mapping_fails()
