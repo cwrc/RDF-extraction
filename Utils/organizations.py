@@ -30,20 +30,15 @@ class Organization(object):
         self.name = name
 
         self.altlabels = altlabels
-        self.uri = rdflib.term.URIRef(str(utilities.NS_DICT["cwrc"]) + uri)
+        self.uri = rdflib.term.URIRef(str(utilities.NS_DICT["cwrc_temp"]) + uri)
         # self.uri = rdflib.term.URIRef(uri)
-
-    # TODO figure out if i can just return tuple or triple without creating a whole graph
-    # Evaluate efficency of creating this graph or just returning a tuple and have the biography deal with it
-    def to_tuple(self):
-        pass
-        # return ((person_uri, self.uri, self.value))
 
     def to_triple(self):
         g = utilities.create_graph()
         g.add((self.uri, utilities.NS_DICT["foaf"].name, Literal(self.name)))
         g.add((self.uri, RDFS.label, Literal(self.name)))
-        g.add((self.uri, RDF.type, utilities.NS_DICT["foaf"].Organization))
+        g.add((self.uri, RDF.type, utilities.NS_DICT["crm"].E74_Group))
+        g.add((self.uri, utilities.NS_DICT["crm"].P2_has_type, utilities.NS_DICT["foaf"].Organization))
         for x in self.altlabels:
             g.add((self.uri, utilities.NS_DICT["skos"].altLabel, Literal(x)))
         return g
@@ -114,33 +109,45 @@ def extract_org_data(bio):
     import culturalForm as cf
     global uber_graph
     elements = ["POLITICALAFFILIATION", "DENOMINATION", "SCHOOL"]
+   
+    org_type_dict = {
+        utilities.NS_DICT["biography"].religiousOrganization: ("Religion", "PoliticalAffiliation"),
+        utilities.NS_DICT["biography"].politicalOrganization: ("PoliticalAffiliation", "Religion")
+    }
+   
     for element in elements:
         tag = bio.find_all(element)
         for instance in tag:
             org = get_org(instance)
-            if org:
-                if element == elements[0]:
-                    org_type = utilities.NS_DICT["biography"].politicalOrganization
-                elif element == elements[1]:
-                    org_type = utilities.NS_DICT["biography"].religiousOrganization
-                elif element == elements[2]:
-                    org_type = utilities.NS_DICT["biography"].educationalOrganization
+            if not org:
+                continue
+            
+            if element == elements[0]:
+                org_type = utilities.NS_DICT["biography"].politicalOrganization
+            elif element == elements[1]:
+                org_type = utilities.NS_DICT["biography"].religiousOrganization
+            elif element == elements[2]:
+                org_type = utilities.NS_DICT["biography"].educationalOrganization
 
-                for x in org:
-                    org_uri = get_org_uri(x)
-                    uber_graph.add((org_uri, RDF.type, org_type))
-                    uber_graph.remove((org_uri, RDF.type, utilities.NS_DICT["foaf"].Organization))
+            # Adding the hasOrganization relation
+            for x in org:
+                org_uri = get_org_uri(x)
+                
+                uber_graph.add((org_uri, RDF.type, utilities.NS_DICT["crm"].E74_Group))
+                uber_graph.add((org_uri, utilities.NS_DICT["crm"].P2_has_type, org_type))
+                uber_graph.remove((org_uri, utilities.NS_DICT["crm"].P2_has_type, utilities.NS_DICT["foaf"].Organization))
 
-                    # Adding the hasOrganization relation
-                    if org_type == utilities.NS_DICT["biography"].religiousOrganization:
-                        mapped_value = cf.get_mapped_term("Religion", utilities.get_value(instance))
-                        if type(mapped_value) is rdflib.term.URIRef:
-                            uber_graph.add((mapped_value, utilities.NS_DICT["cwrc"].hasOrganization, org_uri))
-                    elif org_type == utilities.NS_DICT["biography"].politicalOrganization:
-                        mapped_value = cf.get_mapped_term("PoliticalAffiliation", utilities.get_value(instance))
-                        if type(mapped_value) is rdflib.term.URIRef:
-                            uber_graph.add((mapped_value, utilities.NS_DICT["biography"].hasOrganization, org_uri))
 
+                mapped_value = None
+                for org_type_key, terms in org_type_dict.items():
+                    if org_type == org_type_key:
+                        mapped_value = cf.get_mapped_term(terms[0], utilities.get_value(instance))
+                        if type(mapped_value) is not rdflib.term.URIRef:
+                            mapped_value = cf.get_mapped_term(terms[1], utilities.get_value(instance))
+
+                if type(mapped_value) is rdflib.term.URIRef:
+                    uber_graph.add((org_uri, utilities.NS_DICT["crm"].P2_has_type, mapped_value))
+                
 
 def create_org_csv():
     """ Creates orgName.csv based off of authority file using forms as alt labels
@@ -180,19 +187,20 @@ def main():
     import os
     global uber_graph
 
-    create_org_csv()
-    csv_to_triples()
+    path = "../data/entry_2023-10-04"
+    # create_org_csv()
+    # csv_to_triples()
     filelist = [filename for filename in sorted(os.listdir(
-        "../data/biography_entries")) if filename.endswith(".xml")]
+        path)) if filename.endswith(".xml")]
 
     for filename in filelist:
-        with open("../data/biography_entries/" + filename) as f:
+        with open(F"{path}/{filename}") as f:
             soup = BeautifulSoup(f, 'lxml-xml')
         extract_org_data(soup)
 
     file = open("organizations.ttl", "w")
     file.write("#" + str(len(uber_graph)) + " triples created\n")
-    file.write(uber_graph.serialize(format="ttl").decode())
+    file.write(uber_graph.serialize(format="ttl"))
     file.close()
 
 
