@@ -8,7 +8,6 @@ from Utils import utilities
 from Utils.organizations import get_org, get_org_uri
 from Utils.place import Place
 from Utils.activity import Activity 
-from Utils.event import Event
 from Utils.context import Context, get_event_type, get_context_type
 
 """
@@ -49,9 +48,9 @@ class CulturalForm(object):
         if other_attributes:
             self.uri = other_attributes
         elif self.reported:
-            self.uri = utilities.create_uri("cwrc", self.predicate + self.reported)
+            self.uri = utilities.create_uri("identity", self.predicate + self.reported)
         else:
-            self.uri = utilities.create_uri("cwrc", self.predicate)
+            self.uri = utilities.create_uri("identity", self.predicate)
 
         self.uri = rdflib.term.URIRef(self.uri)
 
@@ -378,7 +377,7 @@ def extract_culturalforms(tag_list, context_type, person, list_type="paragraphs"
                     activity_id = context_id.replace("Context","Event") + "_"+ str(count)
                     label = f"{utilities.split_by_casing(CONTEXT_TYPE)}Event: {utilities.split_by_casing(str(x).split('/')[-1]).lower()}".replace("Context", "")
                     activity = Activity(person, label, activity_id, tag, activity_type="culturalform", attributes=temp_attr)
-                    activity.event_type.append(utilities.create_cwrc_uri(CONTEXT_TYPE))
+                    activity.event_type.append(utilities.create_uri("context",CONTEXT_TYPE))
                     temp_context.link_activity(activity)
                     person.add_activity(activity)
                     count+=1
@@ -386,7 +385,7 @@ def extract_culturalforms(tag_list, context_type, person, list_type="paragraphs"
                     activity_id = context_id.replace("Context","Event") + "_"+ str(count)
                     label = f"{utilities.split_by_casing(CONTEXT_TYPE)}Event: {utilities.split_by_casing(str(x).split('/')[-1]).lower()}".replace("Context", "")
                     activity = Activity(person, label, activity_id, tag, activity_type="culturalform", attributes=temp_attr)
-                    activity.event_type.append(utilities.create_cwrc_uri(CONTEXT_TYPE))
+                    activity.event_type.append(utilities.create_uri("context",CONTEXT_TYPE))
                     temp_context.link_activity(activity)
                     person.add_activity(activity)
                     count+=1
@@ -504,7 +503,7 @@ def extract_gender_data(bio, person):
             activity_id = context_id.replace("Context","Event") + "_"+ str(count)
             label = f"Gender Event"
             activity = Activity(person, label, activity_id, parent_tag, activity_type="culturalform", attributes=temp_attr)
-            activity.event_type.append(utilities.create_cwrc_uri("GenderContext"))
+            activity.event_type.append(utilities.create_uri("context","GenderContext"))
             temp_context.link_activity(activity)
             person.add_activity(activity)
             count+=1
@@ -563,8 +562,8 @@ def get_mapped_term(rdf_type, value, retry=False, id=None):
     global map_attempt
     global map_success
     global map_fail
-    if "http://id.lincsproject.ca/cwrc/" not in rdf_type:
-        rdf_type = "http://id.lincsproject.ca/cwrc/" + rdf_type
+    if "http://id.lincsproject.ca/identity/" not in rdf_type:
+        rdf_type = "http://id.lincsproject.ca/identity/" + rdf_type
     map_attempt += 1
     term = None
     temp_val = clean_term(value)

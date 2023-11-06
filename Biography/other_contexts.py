@@ -1,6 +1,5 @@
 from Utils import utilities
 from Utils.context import Context, get_event_type, get_context_type
-from Utils.event import Event
 from Utils.activity import Activity 
 
 """
@@ -29,7 +28,7 @@ def extract_health_contexts_data(bio, person):
             activity_id = context_id.replace("Context","Event") + "_"+ str(event_count)
             label = f"{utilities.split_by_casing(event_type)}"
             activity = Activity(person, label, activity_id, paragraph, activity_type="generic")
-            activity.event_type.append(utilities.create_cwrc_uri(event_type))
+            activity.event_type.append(utilities.create_uri("event",event_type))
             temp_context.link_activity(activity)
             person.add_activity(activity)
 
@@ -46,7 +45,7 @@ def extract_health_contexts_data(bio, person):
             activity_id = context_id.replace("Context","Event") + "_"+ str(event_count)
             label = f"{utilities.split_by_casing(event_type)}"
             activity = Activity(person, label, activity_id, event, activity_type="generic")
-            activity.event_type.append(utilities.create_cwrc_uri(event_type))
+            activity.event_type.append(utilities.create_uri("event",event_type))
             temp_context.link_activity(activity)
             person.add_activity(activity)
 
@@ -80,7 +79,7 @@ def extract_other_contexts_data(bio, person):
                 activity_id = context_id.replace("Context","Event") + "_"+ str(event_count)
                 label = f"{utilities.split_by_casing(event_type)}"
                 activity = Activity(person, label, activity_id, paragraph, activity_type="generic")
-                activity.event_type.append(utilities.create_cwrc_uri(event_type))
+                activity.event_type.append(utilities.create_uri("event",event_type))
                 temp_context.link_activity(activity)
                 person.add_activity(activity)
                 
@@ -96,7 +95,7 @@ def extract_other_contexts_data(bio, person):
                 activity_id = context_id.replace("Context","Event") + "_"+ str(event_count)
                 label = f"{utilities.split_by_casing(event_type)}"
                 activity = Activity(person, label, activity_id, event, activity_type="generic")
-                activity.event_type.append(utilities.create_cwrc_uri(event_type))
+                activity.event_type.append(utilities.create_uri("event",event_type))
                 temp_context.link_activity(activity)
                 person.add_activity(activity)
 

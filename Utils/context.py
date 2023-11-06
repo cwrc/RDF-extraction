@@ -188,18 +188,14 @@ class Context(object):
         # logger.info(context_type + " " + str(mode))
         if context_type != "CHRONEVENT":
             self.context_type = get_context_type(context_type, mode)
-            self.context_predicate = utilities.create_cwrc_uri(get_context_predicate(context_type))
+            self.context_predicate = utilities.create_uri("persrel",get_context_predicate(context_type))
             self.context_label = utilities.split_by_casing(self.context_type)
         else:
             self.context_type = "Context"
             self.context_predicate = None
             self.context_label = " ".join(self.id.split("_")).title().replace(" Context", ":") + " Context"
 
-        # TODO: Add this logic to the mapping file instead of hardcoding
-        if context_type == "OCCUPATION":
-            self.context_type = utilities.create_uri("occupation",self.context_type)
-        else:
-            self.context_type = utilities.create_cwrc_uri(self.context_type)
+        self.context_type = utilities.create_uri("context",self.context_type)
 
         self.named_entities = get_named_entities(self.tag)
 
@@ -346,7 +342,7 @@ class Context(object):
         identified_places = utilities.get_places(self.tag)
         if identified_places:
             self.named_entities += identified_places
-            g.add((identifying_uri, utilities.NS_DICT["crm"].P2_has_type, utilities.create_cwrc_uri("SpatialContext")))
+            g.add((identifying_uri, utilities.NS_DICT["crm"].P2_has_type, utilities.create_uri("context","SpatialContext")))
 
         # Adding identifying bodies to annotation
         for x in self.named_entities:
@@ -425,7 +421,7 @@ class Context(object):
                     g.add((self.uri, self.context_predicate, x))
 
                 if identified_places:
-                    g.add((self.uri, RDF.type, utilities.create_cwrc_uri("SpatialContext")))
+                    g.add((self.uri, RDF.type, utilities.create_uri("context","SpatialContext")))
         else:
                 temp_graph = utilities.create_graph()
                 for x in self.triples:

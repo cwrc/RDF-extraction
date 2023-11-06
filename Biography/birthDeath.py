@@ -19,13 +19,13 @@ def get_birthposition_uris(positions):
     if positions:
         for birth_position in positions:
             if birth_position == "ONLY":
-                positions_uris.append(utilities.NS_DICT["cwrc"].onlyChild)
+                positions_uris.append(utilities.NS_DICT["biography"].onlyChild)
             elif birth_position == "ELDEST":
-                positions_uris.append(utilities.NS_DICT["cwrc"].eldestChild)
+                positions_uris.append(utilities.NS_DICT["biography"].eldestChild)
             elif birth_position == "YOUNGEST":
-                positions_uris.append(utilities.NS_DICT["cwrc"].youngestChild)
+                positions_uris.append(utilities.NS_DICT["biography"].youngestChild)
             elif birth_position == "MIDDLE:":
-                positions_uris.append(utilities.NS_DICT["cwrc"].middleChild)
+                positions_uris.append(utilities.NS_DICT["biography"].middleChild)
     return positions_uris
 
 def get_attributes(person):
@@ -77,10 +77,10 @@ def extract_birth_data(bio, person):
         if birth_positions:
             birth_positions = get_birthposition_uris(birth_positions)
             attributes = {utilities.NS_DICT["crm"].P141_assigned: birth_positions}
-            attributes[utilities.NS_DICT["crm"].P2_has_type] = [utilities.create_uri("cwrc","birthPosition")]
+            attributes[utilities.NS_DICT["crm"].P2_has_type] = [utilities.create_uri("biography","birthPosition")]
             activity_id = activity_id.replace("1","2")
             birth_position_event = Activity(person, "Birth Related Event", activity_id, birth_tag, activity_type="attribute", attributes=attributes,related_activity=birth_event.uri)
-            birth_position_event.event_type.append(utilities.create_cwrc_uri(get_event_type("BIRTH")))
+            birth_position_event.event_type.append(utilities.create_uri("event",get_event_type("BIRTH")))
             temp_context.link_activity(birth_position_event)
             person.add_activity(birth_position_event)
 
@@ -125,7 +125,7 @@ def extract_death_data(bio, person):
                     temp_context2 = Context(context_id2, shortprose, "DEATH", pattern="death")
                     activity_id2 = context_id2.replace("Context","Event")
                     burial_event = Activity(person, "Burial Event", activity_id2, shortprose, activity_type="generic")
-                    burial_event.event_type.append(utilities.create_cwrc_uri(get_event_type("DEATH")))
+                    burial_event.event_type.append(utilities.create_uri("event",get_event_type("DEATH")))
                     temp_context2.link_activity(burial_event)
                     person.add_activity(burial_event)
                     person.add_context(temp_context2)

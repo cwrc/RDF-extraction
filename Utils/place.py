@@ -71,7 +71,7 @@ def create_place_rdf(path=None):
                 (place, utilities.NS_DICT["rdf"].type, utilities.NS_DICT["crm"].E53_Place))
             g.add((place, utilities.NS_DICT["rdfs"].label, label))
             g.add(
-                (place, utilities.NS_DICT["crm"].P2_has_type, utilities.NS_DICT["cwrc"].MappedPlace))
+                (place, utilities.NS_DICT["crm"].P2_has_type, utilities.NS_DICT["biography"].MappedPlace))
 
     with open("places.ttl", "w", encoding="utf-8") as f:
         f.write("#" + str(len(g)) + " triples created\n")

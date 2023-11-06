@@ -34,11 +34,11 @@ class Person(object):
             logger.info("Other Attributes: " +
                         str(other_attributes) + " is unhandled ")
 
-        self.predicate = utilities.create_cwrc_uri(relationship)
+        self.predicate = utilities.create_uri("persrel",relationship)
 
     def to_triple(self, context):
         g = utilities.create_graph()
-        g.add((self.uri, RDF.type, utilities.create_cwrc_uri("NaturalPerson")))
+        g.add((self.uri, RDF.type, utilities.create_uri("writing","NaturalPerson")))
         g.add((context.uri, self.predicate, self.uri))
         if self.name:
             g.add((self.uri, RDFS.label, Literal(self.name)))
@@ -59,7 +59,7 @@ predicate: {self.predicate}
         return string
 
 def create_marital_status(tagname):
-    return utilities.GeneralRelation(utilities.create_cwrc_uri("maritalStatusChange"), utilities.create_cwrc_uri(tagname.lower()))
+    return utilities.GeneralRelation(utilities.create_uri("biography","maritalStatusChange"), utilities.create_uri("biography",tagname.lower()))
 
 def find_marital_status(tag):
     tags = tag.find_all("MARRIAGE", limit=1) + tag.find_all("SEPARATION",
@@ -94,13 +94,13 @@ def find_childlessness(tag):
         for reproductiveHistory in childlessness_words.keys():
             if any(word in x.text for word in childlessness_words[reproductiveHistory]):
                 keyword_found =True
-                childlessness.append(utilities.GeneralRelation(utilities.create_cwrc_uri(
-                    "reproductiveHistory"), utilities.create_cwrc_uri(reproductiveHistory)))
+                childlessness.append(utilities.GeneralRelation(utilities.create_uri("biography",
+                    "reproductiveHistory"), utilities.create_uri("biography",reproductiveHistory)))
                 print(reproductiveHistory)
 
         if not keyword_found:
-            childlessness.append(utilities.GeneralRelation(utilities.create_cwrc_uri(
-                "unspecifiedReproductiveHistory"), utilities.create_cwrc_uri("unspecifiedReproductiveHistory")))
+            childlessness.append(utilities.GeneralRelation(utilities.create_uri("biography",
+                "unspecifiedReproductiveHistory"), utilities.create_uri("biography","unspecifiedReproductiveHistory")))
             input()
 
     return childlessness
@@ -172,7 +172,7 @@ def extract_relationships(tag_list, context_type, person, list_type="paragraphs"
                 activity_id = context_id.replace("Context","Event") + "_"+ str(event_count)
                 label = f"Intimate Relationship Event: {utilities.split_by_casing(str(x).split('/')[-1]).lower()}"
                 activity = Activity(person, label, activity_id, tag, activity_type="generic+", attributes=temp_attr)
-                activity.event_type.append(utilities.create_cwrc_uri(get_event_type(tag_name)))
+                activity.event_type.append(utilities.create_uri("context",get_event_type(tag_name)))
 
                 if participants:
                     activity.participants = participants
@@ -402,7 +402,7 @@ def extract_family_data(bio, person):
                     gender = get_mapped_term(
                         "Gender", FAMILY_MAP[member_tag["RELATION"]]["SEX"])
                     relative_triples.append(utilities.GeneralRelation(
-                        utilities.create_cwrc_uri("gender"), gender))
+                        utilities.create_uri("identity","gender"), gender))
 
                 if relative_triples:
                     context_count += 1

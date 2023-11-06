@@ -263,7 +263,7 @@ def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
                 activity_id = context_id.replace("Context","Event") + "_"+ str(event_count)
                 label = f"Occupation Event: {utilities.split_by_casing(str(x).split('/')[-1]).lower()}"
                 activity = Activity(person, label, activity_id, tag, activity_type="generic", attributes=temp_attr)
-                activity.event_type.append(utilities.create_uri("occupation",get_event_type(tag_name)))
+                activity.event_type.append(utilities.create_uri("event",get_event_type(tag_name)))
 
                 if participants:
                     activity.participants = participants

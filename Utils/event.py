@@ -36,7 +36,7 @@ def get_event_type(tag):
     else:
         event_types.append(Event.event_type_map[event_type])
 
-    return [utilities.create_cwrc_uri(x) for x in event_types]
+    return [utilities.create_uri("event",x) for x in event_types]
 
 
 def get_time_type(tag):
@@ -157,6 +157,9 @@ class Event(object):
 
         # NOTE: Event could possibly have multiple types/non cwrc types? may need to revise
         self.type = utilities.create_cwrc_uri(type)
+        input(self.type)
+        print("hiiiiiii")
+        logger.info("Not sure if this code ever runs")
 
         # No longer grabing text of title, no word limit now
         # TODO: replace initials with full name of author where applicable

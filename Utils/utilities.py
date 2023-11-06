@@ -17,7 +17,6 @@ TODO: Add doctests for:
 - get_name_uri
 - make_standard_uri
 - create_uri
-- create_cwrc_uri
 - get_value
 - get_attribute
 - get_reg
@@ -34,10 +33,16 @@ PERSON_MAP = {}
 ORGANIZATION_MAP = {} # Publishers for now but this will be expanded
 
 NS_DICT = {
+    "biography": rdflib.Namespace("http://id.lincsproject.ca/biography/"),
+    "context": rdflib.Namespace("http://id.lincsproject.ca/context/"),
     "cwrc": rdflib.Namespace("http://id.lincsproject.ca/cwrc/"),
-    "occupation": rdflib.Namespace("http://id.lincsproject.ca/occupation/"),
-    "ii": rdflib.Namespace("http://id.lincsproject.ca/ii/"),
+    "event": rdflib.Namespace("http://id.lincsproject.ca/event/"),
     "genre": rdflib.Namespace("http://id.lincsproject.ca/genre/"),
+    "identity": rdflib.Namespace("http://id.lincsproject.ca/identity/"),
+    "ii": rdflib.Namespace("http://id.lincsproject.ca/ii/"),
+    "occupation": rdflib.Namespace("http://id.lincsproject.ca/occupation/"),
+    "persrel": rdflib.Namespace("http://id.lincsproject.ca/persrel/"),
+    "writing": rdflib.Namespace("http://id.lincsproject.ca/writing/"),
     "cwrc_temp": rdflib.Namespace("http://temp.lincsproject.ca/cwrc/"),
     "frbroo": rdflib.Namespace("http://iflastandards.info/ns/fr/frbr/frbroo/"),
     "as": rdflib.Namespace("http://www.w3.org/ns/activitystreams#"),
@@ -135,7 +140,7 @@ def get_entry_id(tag):
     return tag.find_parent("ENTRY").get("ID")
 
 def remove_unwanted_tags(tag):
-    unwanted_tag_names = ["BIBCITS", "RESPONSIBILITIES", "KEYWORDCLASSES","RESEARCHNOTE"]
+    unwanted_tag_names = ["BIBCITS", "RESPONSIBILITIES", "KEYWORDCLASSES","RESEARCHNOTE", "HEADING"]
     unwanted_tags = []
     for x in unwanted_tag_names:
         unwanted_tags += tag.find_all(x)

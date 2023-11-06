@@ -2,7 +2,6 @@
 
 
 from Utils.context import Context, get_event_type
-from Utils.event import Event
 from Utils.activity import Activity
 from Utils.place import Place
 from Utils import utilities
@@ -54,7 +53,7 @@ class Location(object):
         if other_attributes:
             self.uri = other_attributes
 
-        self.uri = utilities.create_uri("cwrc", self.predicate)
+        self.uri = utilities.create_uri("biography", self.predicate)
 
     def to_tuple(self, person_uri):
         return ((person_uri, self.uri, self.value))
@@ -178,7 +177,7 @@ def extract_locations(tag_list, context_type, person, list_type="paragraphs"):
                 activity_id = context_id.replace("Context","Event") + "_"+ str(count)
                 activity = Activity(person, "Spatial Event: "+str(x).split("/")[-1], activity_id, tag, activity_type="generic", attributes=temp_attr)
                 activity.places = attributes[x]
-                activity.event_type.append(utilities.create_cwrc_uri(get_event_type(tag_name, context_type)))
+                activity.event_type.append(utilities.create_uri("event",get_event_type(tag_name, context_type)))
                 temp_context.link_activity(activity)
                 person.add_activity(activity)
                 count+=1

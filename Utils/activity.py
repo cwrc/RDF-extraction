@@ -33,7 +33,7 @@ def get_event_type(tag):
             event_types.append(Activity.event_type_map[event_type])
 
 
-        return [utilities.create_cwrc_uri(x) for x in event_types]
+        return [utilities.create_uri("event", x) for x in event_types]
     return []
 
 
@@ -80,15 +80,19 @@ def get_next_month(date):
 
 
 def date_parse(date_string: str, both=True):
+    # Currently works for single dates need to examine patterns further for 2 days
     # Strip spaces surrounding the date string
-    if not date_string:
-        return date_string, False, date_string
-    
     date_string = date_string.strip().rstrip()
     end_dt = None
-
+    
     try:
         dt = datetime.datetime.strptime(date_string, "%Y-%m-%d")
+        end_dt = dt + datetime.timedelta(days=1, seconds=-1)
+        return dt.isoformat(), True, end_dt.isoformat()
+    except ValueError:
+        pass
+    try:
+        dt = datetime.datetime.strptime(date_string, "%Y-%m-%d-")
         end_dt = dt + datetime.timedelta(days=1, seconds=-1)
         return dt.isoformat(), True, end_dt.isoformat()
     except ValueError:
@@ -244,6 +248,7 @@ class Activity(object):
         # todo: add smarter method to clean up period spacing.
         self.text = self.text.replace("\n", " ").strip()
         self.text = self.text.replace(".", ". ").strip()
+        self.text = self.text.replace("  ", " ").strip()
 
         
 
@@ -308,7 +313,7 @@ class Activity(object):
         if self.date_tag:
             self.date_text = self.date_tag.get_text()
             self.precision = self.certainty_map[self.date_tag.get("CERTAINTY")]
-            self.precision = utilities.create_uri("cwrc", self.precision)
+            self.precision = utilities.create_uri("event", self.precision)
             if self.date_tag.name == "DATERANGE":
                 if self.date_tag.get("FROM") and self.date_tag.get("TO"):
                     self.start_date, status, status = date_parse(self.date_tag.get("FROM"))
@@ -386,6 +391,7 @@ precision: {self.precision}
             
             if self.event_type:
                 event_type = self.event_type[0].replace("Context","Event")
+                event_type = event_type.replace("context","event")
                 connection.add(utilities.NS_DICT["crm"].P2_has_type, rdflib.term.URIRef(event_type))
 
         activity.add(RDFS.label, Literal(activity_label, lang="en"))
@@ -467,6 +473,7 @@ precision: {self.precision}
             
             if self.event_type:
                 event_type = self.event_type[0].replace("Context","Event")
+                event_type = event_type.replace("context","event")
                 connection.add(utilities.NS_DICT["crm"].P2_has_type, rdflib.term.URIRef(event_type))
         
         elif "Activity" in str(self.activity_type) and self.attributes:
