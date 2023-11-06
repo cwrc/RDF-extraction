@@ -135,11 +135,11 @@ class Biography(object):
         self.name_list = []
 
     def get_family_members(self):
-        # Assuming mother and father are the first names
-        if "MOTHER" in self.possible_family_members:
+        # Assuming mother and father are the first names mentioned in context
+        if "MOTHER" in self.possible_family_members and len(self.possible_family_members["MOTHER"]) > 0:
             self.family_members["MOTHER"] = self.possible_family_members["MOTHER"][0]
             self.parents.append(self.family_members["MOTHER"])
-        if "FATHER" in self.possible_family_members:
+        if "FATHER" in self.possible_family_members and len(self.possible_family_members["FATHER"]) > 0:
             self.family_members["FATHER"] = self.possible_family_members["FATHER"][0]
             self.parents.append(self.family_members["FATHER"])
 

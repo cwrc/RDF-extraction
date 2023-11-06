@@ -237,18 +237,27 @@ def extract_friends(tag_list, context_type, person, list_type="paragraphs"):
 
 
         if friend_list:
-            temp_context = Context(context_id, tag, tag_name)
+            temp_context = Context(context_id, tag, tag_name, pattern="relationships")
+            event_count = 1
+            participants = None
             temp_context.link_triples(friend_list)
+       
+            for x in attributes.keys():
+                temp_attr = {x:attributes[x]}
+                
+                activity_id = context_id.replace("Context","Event") + "_"+ str(event_count)
+                label = f"Friend Relationship Event: {utilities.split_by_casing(str(x).split('/')[-1]).lower()}"
+                activity = Activity(person, label, activity_id, tag, activity_type="generic+", attributes=temp_attr)
+                activity.event_type.append(utilities.create_uri("context",get_event_type(tag_name)))
+
+                if participants:
+                    activity.participants = participants
+                temp_context.link_activity(activity)
+                person.add_activity(activity)
+                event_count+=1
+       
         else:
             temp_context = Context(context_id, tag, tag_name, "identifying")
-
-        if list_type == "events":
-            event_count += 1
-            event_title = person.name + " - " + "Friends and Associates Event"
-            event_uri = person.id + "_FriendsAndAssociatesEvent_" + str(event_count)
-            temp_event = Event(event_title, event_uri, tag, EVENT_TYPE)
-            temp_context.link_event(temp_event)
-            person.add_event(temp_event)
 
         person.add_context(temp_context)
 
