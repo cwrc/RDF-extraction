@@ -483,8 +483,8 @@ def main():
 
         person = Biography(person_id, soup)
         # extract_family_data(soup, person)
-        # extract_friend_data(soup, person)
         extract_intimate_relationships_data(soup, person)
+        extract_friend_data(soup, person)
 
         graph = person.to_graph()
 
