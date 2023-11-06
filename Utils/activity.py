@@ -362,16 +362,6 @@ precision: {self.precision}
         if self.person:
             activity_label = self.person.name +": "+  self.title
             
-        if self.date:
-            if ":" in self.date:
-                date_1 = self.date.split(":")[0].strip()[:4]
-                date_2 = self.date.split(":")[1].strip()[:4]
-                if date_1 == date_2:
-                    activity_label = F"{date_1}: {activity_label}"
-                else:
-                    activity_label = F"{date_1}-{date_2}: {activity_label}"
-            else:
-                activity_label = F"{self.date[:4]}: {activity_label}"
 
         connection = None
         
