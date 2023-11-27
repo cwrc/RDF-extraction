@@ -1873,7 +1873,7 @@
     crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
 
 <http://viaf.org/viaf/31167959> rdfs:label "Emily Faithfull"@en ;
-    a crm:E74_Group ;
+    a crm:E21_Person ;
     crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
 
 <http://viaf.org/viaf/311833884> rdfs:label "Haskell House"@en ;
@@ -1985,7 +1985,7 @@
     crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
 
 <http://viaf.org/viaf/40810077> rdfs:label "Alexander Strahan"@en ;
-    a crm:E74_Group ;
+    a crm:E21_Person ;
     crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
 
 <http://viaf.org/viaf/45159035185601380002> rdfs:label "W. H. Allen"@en ;
@@ -2057,11 +2057,11 @@
     crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
 
 <http://viaf.org/viaf/73995150> rdfs:label "E. Curll"@en ;
-    a crm:E74_Group ;
+    a crm:E21_Person ;
     crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
 
 <http://viaf.org/viaf/7617625> rdfs:label "Joseph Johnson"@en ;
-    a crm:E74_Group ;
+    a crm:E21_Person ;
     crm:P2_has_type <http://id.loc.gov/vocabulary/relators/pbl> .
 
 <http://viaf.org/viaf/79052528> rdfs:label "D. S. Brewer"@en ;
