@@ -227,6 +227,18 @@ class Activity(object):
         None: "unknownCertainty",
     }
 
+    def clean_date_string(self, date_string):
+        words = ["Summer", "Spring", "Fall", "Winter", "Autumn"]
+        # replace words with word with a space after
+        print(date_string)
+        for x in words:
+            date_string = date_string.replace(x, x + " ")
+        
+        
+        print(date_string)
+        print("----")
+        return date_string
+
     def get_snippet(self):
         # removing tags that mess up the snippet
         utilities.remove_unwanted_tags(self.tag)
@@ -242,8 +254,12 @@ class Activity(object):
         if not date:
             date = self.tag.find("DATERANGE")    
         
+        if not date:
+            date = self.tag.find("DATESTRUCT")    
+        
         if date:
-            self.text = self.text.replace(date.text, date.text + ": ")
+            date_string = self.clean_date_string(date.text)
+            self.text = self.text.replace(date.text, date_string + ": ")
         
         # todo: add smarter method to clean up period spacing.
         self.text = self.text.replace("\n", " ").strip()
