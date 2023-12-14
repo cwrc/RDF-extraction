@@ -168,17 +168,6 @@ class Context(object):
             self.target_uri = self.uri +"_target"
             self.new_target = True
 
-        # Creating citations from bibcit tags
-        if not self.identifying_uri:
-            self.identifying_uri = utilities.create_uri("temp", self.id + "_identifying")
-            self.xpath = get_xpath(tag)
-            bibcits = tag.find_all("BIBCIT")
-            self.citations = [Citation(x) for x in bibcits]
-
-            self.heading = get_heading(tag)
-            self.src = "https://orlando.cambridge.org/profiles/"
-            if not self.heading:
-                self.src = "http://orlando.cambridge.org"
 
         self.tag = tag
         self.text = tag.get_text()
@@ -200,6 +189,22 @@ class Context(object):
         self.named_entities = get_named_entities(self.tag)
 
         self.motivation = utilities.create_uri("oa", motivation)
+
+                # Creating citations from bibcit tags
+        if not self.identifying_uri:
+            self.identifying_uri = utilities.create_uri("temp", self.id + "_identifying")
+            self.xpath = get_xpath(tag)
+            bibcits = tag.find_all("BIBCIT")
+            citation_label = self.context_label + " Excerpt"
+            
+            self.citations = [Citation(x, citation_label) for x in bibcits]
+
+            self.heading = get_heading(tag)
+            self.src = "https://orlando.cambridge.org/profiles/"
+            if not self.heading:
+                self.src = "http://orlando.cambridge.org"
+
+
 
 
     def link_triples(self, components):
@@ -251,6 +256,13 @@ class Context(object):
             self.text = utilities.limit_to_full_sentences(str(self.tag.get_text()), utilities.MAX_WORD_COUNT)
         
         date = self.tag.find("DATE")
+        
+        if not date:
+            date = self.tag.find("DATERANGE")    
+        
+        if not date:
+            date = self.tag.find("DATESTRUCT")    
+  
         if date:
             self.text = self.text.replace(date.text, date.text + ": ")
         
@@ -297,6 +309,7 @@ class Context(object):
 
             # Adding citations
             for x in self.citations:
+                x.label = F"Citation for {target_label}"
                 g += x.to_triple(self.target_uri, source_url)
 
             # Creating xpath selector
