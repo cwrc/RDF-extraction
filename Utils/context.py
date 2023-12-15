@@ -343,6 +343,8 @@ class Context(object):
         identifying_uri = utilities.create_uri("temp", self.id + "_identifying")
         g.add((identifying_uri, RDF.type, utilities.NS_DICT["crm"].E33_Linguistic_Object))
         g.add((identifying_uri, RDF.type, utilities.NS_DICT["oa"].Annotation))
+        g.add((identifying_uri, utilities.NS_DICT["crm"].P2_has_type, utilities.NS_DICT["oa"].identifying))
+        g.add((identifying_uri, utilities.NS_DICT["oa"].motivatedBy, utilities.NS_DICT["oa"].identifying))
         g.add((identifying_uri, utilities.NS_DICT["crm"].P2_has_type, self.context_type))
         g.add((identifying_uri, RDFS.label, Literal(context_label, lang="en")))
         
