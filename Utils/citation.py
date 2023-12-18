@@ -1,7 +1,6 @@
 from rdflib import RDF, RDFS, Literal
 from Utils import utilities
 import rdflib
-import copy
 
 logger = utilities.config_logger("citation")
 
@@ -25,7 +24,7 @@ class Citation(object):
                 self.citing_entity = self.citing_entity.replace(" ","")
 
 
-    def to_triple(self, target_uri, source_url=None):
+    def to_triple(self, target_uri, source_url=None, source_label=None):
         g = utilities.create_graph()
 
         if not self.citing_entity:
@@ -60,10 +59,10 @@ class Citation(object):
         if self.page:
             g.add((uri, utilities.NS_DICT["crm"].P190_has_symbolic_content, Literal(self.page)))
 
-        if source_url:
+        if source_url:      
             g.add((source_url, RDF.type, utilities.NS_DICT["crmdig"].D1_Digital_Object))
             g.add((source_url, utilities.NS_DICT["crm"].P67_refers_to, citing_uri))
-            g.add((source_url, RDFS.label, Literal(source_url.split("/")[-1])))
+            g.add((source_url, RDFS.label, Literal(source_label, lang="en")))
         else:
             logger.warning(F"No source URL for {self}")    
             

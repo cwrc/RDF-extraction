@@ -63,25 +63,33 @@ def get_heading(tag):
     # Figure out distance between tag and the two available headings
     # to see which is closest
     # Placeholder for now
-    heading = tag.find("HEADING")
-    heading_text = ""
+    heading_tag = tag.find("HEADING")
+
+    heading = {
+        "text": "",
+        "tag": None,
+        "url": "",
+    }
     
-    if not heading:
-        heading = tag.findPrevious("HEADING")
-    if not heading:
-        heading = tag.findNext("HEADING")
-    if not heading:
+    if not heading_tag:
+        heading_tag = tag.findPrevious("HEADING")
+    if not heading_tag:
+        heading_tag = tag.findNext("HEADING")
+    if not heading_tag:
         logger.error("Unable to find heading for:" + str(tag))
         return None
 
-    if heading.parent.name == "DIV1":
-        heading_text = "-chapter-"
+    heading["tag"] = heading_tag
+
+    if heading_tag.parent.name == "DIV1":
+        heading["url"] = "-chapter-"
     else:
-        heading_text = "-subchapter-"
+        heading["url"] = "-subchapter-"
     
-    heading_text += utilities.remove_punctuation(utilities.strip_all_whitespace(heading.text.lower()),True)
+    heading["url"] += utilities.remove_punctuation(utilities.strip_all_whitespace(heading_tag.text.lower()),True)
+    heading["text"] = heading_tag.text
     
-    return heading_text
+    return heading
 
 
 def create_context_map():
@@ -287,30 +295,30 @@ class Context(object):
         # Creating target first - CIDOCified
         if self.new_target:
             target_label = None
-            source_url = None
-
+            source_uri = None
+            source_label = self.heading["text"]
+            
             if person:
-                src_uri = f"{self.src}{person.id}#{person.id}{self.heading}"
-                source_url = rdflib.term.URIRef(src_uri)
+                source_label = F"{person.name}: {self.heading['text']} | Orlando"
+                source_uri = f"{self.src}{person.id}#{person.id}{self.heading['url']}"
                 target_label = person.name + ": " + self.context_label + " Excerpt"
 
             else:
-                source_url = rdflib.term.URIRef(
-                    self.src + "#FE" + self.id.split("_")[-1])
+                source_uri  = F"{self.src}#FE{self.id.split('_')[-1]}"
                 target_label = self.context_label + " Excerpt"
         
-            source_url = rdflib.term.URIRef(source_url)
+            source_uri = rdflib.term.URIRef(source_uri)
 
             g.add((self.target_uri, RDF.type,utilities.NS_DICT["oa"].SpecificResource))
             g.add((self.target_uri, RDF.type,
                    utilities.NS_DICT["crm"].E73_Information_Object))
             g.add((self.target_uri, RDFS.label, Literal(target_label, lang="en")))
-            g.add((self.target_uri, utilities.NS_DICT["oa"].hasSource, source_url))
-
+            g.add((self.target_uri, utilities.NS_DICT["oa"].hasSource, source_uri))
+            
             # Adding citations
             for x in self.citations:
                 x.label = F"Citation for {target_label}"
-                g += x.to_triple(self.target_uri, source_url)
+                g += x.to_triple(self.target_uri, source_uri, source_label)
 
             # Creating xpath selector
             xpath_uri = self.uri +"_xpath_selector"
