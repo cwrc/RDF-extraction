@@ -228,15 +228,12 @@ class Activity(object):
     }
 
     def clean_date_string(self, date_string):
+        # This seems be needed for the DATESTRUCT tag
         words = ["Summer", "Spring", "Fall", "Winter", "Autumn"]
         # replace words with word with a space after
-        print(date_string)
         for x in words:
             date_string = date_string.replace(x, x + " ")
         
-        
-        print(date_string)
-        print("----")
         return date_string
 
     def get_snippet(self):
