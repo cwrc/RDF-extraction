@@ -39,6 +39,7 @@ NS_DICT = {
     "event": rdflib.Namespace("http://id.lincsproject.ca/event/"),
     "genre": rdflib.Namespace("http://id.lincsproject.ca/genre/"),
     "identity": rdflib.Namespace("http://id.lincsproject.ca/identity/"),
+    "edit": rdflib.Namespace("http://id.lincsproject.ca/edit/"),
     "ii": rdflib.Namespace("http://id.lincsproject.ca/ii/"),
     "occupation": rdflib.Namespace("http://id.lincsproject.ca/occupation/"),
     "persrel": rdflib.Namespace("http://id.lincsproject.ca/persrel/"),
