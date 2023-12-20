@@ -247,32 +247,46 @@ def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
         context_id = person.id + "_" + CONTEXT_TYPE + "_" + str(context_count)
         occupation_list = find_occupations(tag)
         attributes = get_attributes(occupation_list)
+        # print(tag)
+        # print(*occupation_list, sep="\n\n\n")
+        # print(attributes)
+        # print("*"*55)   
   
-        if occupation_list:
-            temp_context = Context(context_id, tag, tag_name, pattern="occupation")
-            # TODO Review this variable assignment
-            event_count = 1
-            participants = None
-            if rdflib.term.URIRef('http://id.lincsproject.ca/occupation/employment') in attributes:
-                participants = attributes[rdflib.term.URIRef('http://id.lincsproject.ca/occupation/employment')]
-                del attributes[rdflib.term.URIRef('http://id.lincsproject.ca/occupation/employment')]
+        # Creating identifying context if no occupation is found
+        if not occupation_list:
+            temp_context = Context(context_id, tag, tag_name, "identifying")
+            person.add_context(temp_context)
+            continue
 
-            for x in attributes.keys():
-                temp_attr = {x:attributes[x]}
-       
+
+        # Creating context for occupation
+        temp_context = Context(context_id, tag, tag_name, pattern="occupation")
+        event_count = 1 # reset event count for each context, contexts may have multiple events
+        participants = None
+        
+        if rdflib.term.URIRef('http://id.lincsproject.ca/occupation/employment') in attributes:
+            participants = attributes[rdflib.term.URIRef('http://id.lincsproject.ca/occupation/employment')]
+            del attributes[rdflib.term.URIRef('http://id.lincsproject.ca/occupation/employment')]
+
+        for x in attributes.keys():
+            temp_attr = {x:attributes[x]}
+            
+            # Splitting occupations into multiple events if there are multiple occupations
+            for job in temp_attr[x]:
+                single_occupation = {x:[job]}            
                 activity_id = context_id.replace("Context","Event") + "_"+ str(event_count)
                 label = f"Occupation Event: {utilities.split_by_casing(str(x).split('/')[-1]).lower()}"
-                activity = Activity(person, label, activity_id, tag, activity_type="generic", attributes=temp_attr)
+                
+                activity = Activity(person, label, activity_id, tag, activity_type="generic", attributes=single_occupation)
                 activity.event_type.append(utilities.create_uri("event",get_event_type(tag_name)))
 
                 if participants:
                     activity.participants = participants
+                
                 temp_context.link_activity(activity)
                 person.add_activity(activity)
                 event_count+=1
             
-        else:
-            temp_context = Context(context_id, tag, tag_name, "identifying")
         
         person.add_context(temp_context)
 
