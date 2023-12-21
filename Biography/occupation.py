@@ -26,23 +26,44 @@ context_count = 0
 event_count = 0
 
 
+class IncomeStatement(object):
+    
+    def __init__(self, tag, label, id):
+        super(IncomeStatement, self).__init__()
+        self.tag = tag
+        self.value = tag.text
+        self.label = label
+        self.id = id
+        self.uri = utilities.create_uri("temp", self.id)   
+
+    def to_triple(self, context):
+        g = utilities.create_graph()
+        g.add((self.uri, utilities.NS_DICT["rdf"].type, utilities.NS_DICT["crm"].E54_Dimension))
+        g.add((self.uri, utilities.NS_DICT["rdfs"].label, rdflib.Literal(self.label,lang="en")))
+        g.add((self.uri, utilities.NS_DICT["rdf"].value, rdflib.Literal(self.value)))
+        return g
+    
+    def __str__(self):
+        string = f"\tURI: {self.uri}\n"
+        string += f"\tlabel: {self.label}\n"
+        string += f"\tvalue: {self.value}\n"
+        string += f"\ttag: {self.tag}\n"
+        string += f"\tid: {self.id}\n"
+
+        return string
+    
 class Occupation(object):
     """docstring for Occupation
     """
 
-    def __init__(self, job_tag, predicate=None, other_attributes=None):
+    def __init__(self, job_tag, predicate=None, other_attributes=None,id=None):
         super(Occupation, self).__init__()
         if predicate:
             self.predicate = predicate
             self.value = self.get_mapped_term(job_tag)
         else:
             self.predicate = self.get_occupation_predicate(job_tag)
-            if self.predicate == "employment":
-                self.value = self.get_employer(job_tag)
-            elif self.predicate == "occupationIncome":
-                self.value = Literal(self.get_value(job_tag))
-            else:
-                self.value = self.get_mapped_term(self.get_value(job_tag))
+            self.value = self.get_mapped_term(self.get_value(job_tag), id=id)
 
         if other_attributes:
             self.uri = other_attributes
@@ -51,7 +72,7 @@ class Occupation(object):
     """
     TODO figure out if i can just return tuple or triple without creating
     a whole graph
-    Evaluate efficency of creating this graph or just returning a tuple and
+    Evaluate efficiency of creating this graph or just returning a tuple and
     have the biography deal with it
     """
 
@@ -83,14 +104,6 @@ class Occupation(object):
         if tag.name == "REMUNERATION":
             return "occupationIncome"
 
-    def get_employer(self, tag):
-        employer = tag.find("NAME")
-        if employer:
-            return utilities.get_name_uri(employer)
-        employer = tag.find("ORGNAME")
-        if employer:
-            return get_org_uri(employer)
-        return Literal(self.get_value(tag))
 
     def get_attribute(self, tag, attribute):
         value = tag.get(attribute)
@@ -214,13 +227,12 @@ def log_mapping_fails(detail=True):
         logger.info(log_str)
 
 
-def find_occupations(tag):
+def find_occupations(tag, id=None):
     """Creates a list of occupations given the tag
     """
 
     jobs_tags = tag.find_all("JOB") + tag.find_all("SIGNIFICANTACTIVITY")
-    # jobs_tags += tag.find_all("EMPLOYER") #+ tag.find_all("REMUNERATION")
-    return [Occupation(x) for x in jobs_tags]
+    return [Occupation(x, id=id) for x in jobs_tags]
 
 def get_attributes(occupations):
     attributes = {}
@@ -230,6 +242,19 @@ def get_attributes(occupations):
         else:
             attributes[x.uri] = [x.value]
     return attributes
+
+
+def get_employer(tag):
+    employer = tag.find("NAME")
+    if employer:
+        return utilities.get_name_uri(employer)
+    employer = tag.find("ORGNAME")
+    if employer:
+        return get_org_uri(employer)
+    
+    # Note some employers are not in the name or orgname tag
+    logger.info(F"Unable to find employer for: {tag}")    
+    return None
 
 def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
     """ Creates the occupation relation and ascribes them to the person along
@@ -245,12 +270,8 @@ def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
         occupation_list = None
         context_count += 1
         context_id = person.id + "_" + CONTEXT_TYPE + "_" + str(context_count)
-        occupation_list = find_occupations(tag)
+        occupation_list = find_occupations(tag, id=person.id)
         attributes = get_attributes(occupation_list)
-        # print(tag)
-        # print(*occupation_list, sep="\n\n\n")
-        # print(attributes)
-        # print("*"*55)   
   
         # Creating identifying context if no occupation is found
         if not occupation_list:
@@ -262,11 +283,14 @@ def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
         # Creating context for occupation
         temp_context = Context(context_id, tag, tag_name, pattern="occupation")
         event_count = 1 # reset event count for each context, contexts may have multiple events
-        participants = None
+        related_activities = []
+
+        # Adding employer as participant if there is one 
+        employer_tags = tag.find_all("EMPLOYER")
+        employers = [ get_employer(x) for x in employer_tags ]
+        employers = list(filter(None, employers))
         
-        if rdflib.term.URIRef('http://id.lincsproject.ca/occupation/employment') in attributes:
-            participants = attributes[rdflib.term.URIRef('http://id.lincsproject.ca/occupation/employment')]
-            del attributes[rdflib.term.URIRef('http://id.lincsproject.ca/occupation/employment')]
+
 
         for x in attributes.keys():
             temp_attr = {x:attributes[x]}
@@ -280,13 +304,26 @@ def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
                 activity = Activity(person, label, activity_id, tag, activity_type="generic", attributes=single_occupation)
                 activity.event_type.append(utilities.create_uri("event",get_event_type(tag_name)))
 
-                if participants:
-                    activity.participants = participants
+                if employers:
+                    activity.participants = employers
                 
                 temp_context.link_activity(activity)
                 person.add_activity(activity)
                 event_count+=1
+                related_activities.append(activity.uri)
             
+        remuneration_tags = tag.find_all("REMUNERATION")
+        income_statement_label = F"{person.name}: Occupation Remuneration Amount"
+        income_statements = [ IncomeStatement(x, income_statement_label, context_id+"_remuneration_amount") for x in remuneration_tags ]
+        income_event = None
+        if income_statements:
+            print(*income_statements, sep="\n")
+            activity_id = F"{context_id}_remuneration"
+            temp_attr = {utilities.NS_DICT["crm"].P141_assigned : [ x.uri for x in income_statements ]}
+            temp_attr[utilities.NS_DICT["crm"].P2_has_type] = [utilities.create_uri("biography","occupationIncome")]
+            income_event = Activity(person, "Occupation Remuneration Event", activity_id, tag, activity_type="attribute", attributes=temp_attr, related_activity=related_activities, additional_nodes=income_statements)
+            temp_context.link_activity(income_event)
+            person.add_activity(income_event)
         
         person.add_context(temp_context)
 

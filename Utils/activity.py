@@ -265,13 +265,14 @@ class Activity(object):
 
         
 
-    def __init__(self, person, title, id, tag, activity_type="generic", attributes={},related_activity=None):
+    def __init__(self, person, title, id, tag, activity_type="generic", attributes={},related_activity=None, additional_nodes = []):
         super(Activity, self).__init__()
         self.title = title
         self.tag = tag
         self.id = id
         self.uri = utilities.create_uri("temp", id)
         self.connection_uri = None
+        self.additional_nodes = additional_nodes
 
         # TODO: populate this variable with different possibilities similar to the activity map
         self.activity_path = activity_type
@@ -370,6 +371,8 @@ precision: {self.precision}
         g = utilities.create_graph()
         activity = g.resource(self.uri)
 
+        for x in self.additional_nodes:
+            g += x.to_triple(self)
 
         activity_label = self.title
         if self.person:
@@ -513,9 +516,12 @@ precision: {self.precision}
         elif self.person and "Activity" in str(self.activity_type):
             activity.add(utilities.NS_DICT["crm"].P14_carried_out_by, self.person.uri)
 
-        #TODO: consult if this property should be a list & review usage
         if self.related_activity:
-            activity.add(utilities.NS_DICT["crm"].P140_assigned_attribute_to, self.related_activity)
+            if type(self.related_activity) is list:
+                for x in self.related_activity:
+                    activity.add(utilities.NS_DICT["crm"].P140_assigned_attribute_to, x)
+            else:
+                activity.add(utilities.NS_DICT["crm"].P140_assigned_attribute_to, self.related_activity)
 
         return g
 
