@@ -64,6 +64,8 @@ def extract_other_contexts_data(bio, person):
     """
     other_contexts = ["VIOLENCE", "WEALTH", "LEISUREANDSOCIETY", "OTHERLIFEEVENT"]
 
+
+    # TODO: REVIEW WHY EVENTS ARE BEING CREATED FOR EACH CONTEXT
     for context in other_contexts:
         contexts = bio.find_all(context)
         count = 1

@@ -39,6 +39,7 @@
       "askean": "birth: chronstruct w. date range",
       "bootfr": "birth: Has two dates in shortprose",
       "butls2": "birth: Daterange within shortprose",
+      "barnch": "birth: multiple birth position tags",
       "cuthca": "birth: birthposition (no attribute) & birthdate in a shortprose, no chronstruct",
       "scotsa": "birth: has two events in a birthtag(first birth, second christening)",
       "siddel": "birth: Elizabeth Siddal - has 3 events within death",
@@ -50,8 +51,7 @@
       "bellev": "death: Eva Mary Bell - certain death date"
     },
     "notes": {
-      "contexts": "Now grabbing the whole DEATH/BIRTH tag as context",
-      "dates": "using approximate{X}Date for CERTAINTY!= CERT",
+      "contexts": "The whole DEATH/BIRTH tag as context",
       "daterange": "using FROM value for birthDate, using TO value for deathdate"
     }
   },
@@ -70,6 +70,16 @@
       "dickma": "LIVESWITH within Family(cousin)",
       "jewsge": "INTIMATERELATIONSHIPS EroticRelationship with an actress who plays characters from Shakespeare plays"
     },
+    "occupation.py": {
+      "allima": "Multiple occupations in same paragraph, employer and remuneration tags",
+      "barche": "Multiple remuneration tags (2)",
+      "box_mu": "Multiple remuneration tags (3)",
+      "notes": {
+        "contexts": "Per paragraph",
+        "to do": "Forebear occupations, remuneration handling"
+      }
+    },
+
     "notes": {
       "contexts": "Family: Whole member tag is the context",
       "inverse contexts": "using gender of biographee to apply appropriate family member relationship",
