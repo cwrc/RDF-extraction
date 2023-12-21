@@ -213,8 +213,8 @@ def extract_death_data(bio, person):
         
         cause_tags = death_tag.find_all("CAUSE")
         causes = [get_mapped_term(utilities.get_value(x),person.id) for x in cause_tags]
-        print(causes)
-
+        causes = list(filter(None, causes))
+        
         # create a death event
         activity_id = context_id.replace("Context","Event")
         death_event = Activity(person, "Death Event", activity_id, death_tag, activity_type="death")
