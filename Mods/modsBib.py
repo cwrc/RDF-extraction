@@ -32,8 +32,8 @@ BF = rdflib.Namespace("http://id.loc.gov/ontologies/bibframe/")
 XML = rdflib.Namespace("http://www.w3.org/XML/1998/namespace")
 MARC_REL = rdflib.Namespace("http://id.loc.gov/vocabulary/relators/")
 DATA = rdflib.Namespace("http://cwrc.ca/cwrcdata/")
-TEMP = rdflib.Namespace("temp.lincsproject.ca/")
-# @prefix temp_lincs_temp: <temp.lincsproject.ca/> .
+TEMP = rdflib.Namespace("http://www.temp.lincsproject.ca/")
+# <http://www.temp.lincsproject.ca/> .
 
 
 LINCS = rdflib.Namespace("http://id.lincsproject.ca/")
