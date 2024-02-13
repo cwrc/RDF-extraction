@@ -4,6 +4,7 @@ import os
 import datetime
 from Env import env
 from bs4 import BeautifulSoup
+import time
 
 session = requests.Session()
 
@@ -86,6 +87,8 @@ def download_files(date, collection_key, latest_date=None):
         f.write(content)
         f.close()
         print()
+        if count % 100 == 0:
+            time.sleep(5)
 
 def download_data(subset="all", latest_date=None):
     date = str(datetime.date.today())
@@ -187,12 +190,12 @@ def main(argv):
     
     # get_modified_entities("entry")
     # download_data("entry", "2022-05-04")
-    # download_data("person")
+    download_data("person")
     # download_data("organizations")
     # download_data("events")
     # download_data("entry")
     # download_data("bibliography", "2022-05-04")
-    download_data("bibliography")
+    # download_data("bibliography")
 
     # get_images()
 
