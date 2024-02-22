@@ -35,6 +35,8 @@
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix geonames: <https://sws.geonames.org/> .
+@prefix tgn: <http://vocab.getty.edu/tgn/> .
 
 cwrc:Abbey_School_ORG a cwrc:EducationalOrganization ;
     rdfs:label "Abbey School" .
