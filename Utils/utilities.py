@@ -80,7 +80,8 @@ NS_DICT = {
     "vann": rdflib.Namespace("http://purl.org/vocab/vann/"),
     "voaf": rdflib.Namespace("http://purl.org/vocommons/voaf#"),
     "void": rdflib.Namespace("http://rdfs.org/ns/void#"),
-    "vs": rdflib.Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#")
+    "vs": rdflib.Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#"),
+    "orlando": rdflib.Namespace("https://commons.cwrc.ca/orlando:"),
 }
 
 class Extraction(object):
@@ -162,11 +163,15 @@ def create_writer_map(path=None):
 
 def create_person_map(path=None):
     if not path:
-        path = '../data/people_mapping.csv'
+        path = '../data/full_people_mapping.csv'
     with open(path) as f:
-        csvfile = csv.reader(f)
+        csvfile = csv.DictReader(f)
         for row in csvfile:
-            PERSON_MAP[row[0]] = row[1]
+            row["CWRC URI"] = f"{NS_DICT['orlando']}{row['ID']}"
+            PERSON_MAP[row["CWRC URI"]] = row
+
+
+
 
 def create_org_map(path=None):
     if not path:
@@ -299,10 +304,25 @@ def get_name_uri(tag):
                 
     else:
         if uri in PERSON_MAP:
-            uri = PERSON_MAP[uri]
-        
+            new_uri = PERSON_MAP[uri]['Primary Identifier']
+            if new_uri:
+                uri = new_uri
+                
         return rdflib.term.URIRef(uri)
 
+def get_full_name(tag):
+    full_name = tag.get_text()
+    uri = tag.get("REF")
+    
+    if uri in PERSON_MAP:
+        full_name = PERSON_MAP[uri]['Full Name']
+
+    if not full_name:
+        logger.warning(F"Full name missing for {uri}")
+
+    return full_name
+
+        
 
 def make_standard_uri(std_str, ns="temp"):
     """Makes uri based of string, removes punctuation and replaces spaces with an underscore
@@ -385,7 +405,7 @@ def get_place_strings(tag):
     return places
 
 
-def get_name(entry):
+def get_entry_standard_name(entry):
     name = entry.find("STANDARD")
     if name:
         return name.text

@@ -15,7 +15,7 @@ class Writer(object):
         self.url = "http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id=" + id
         self.url = rdflib.term.URIRef(self.url)
         self.name = utilities.get_readable_name(doc)
-        self.std_name = utilities.get_name(doc)
+        self.std_name = utilities.get_entry_standard_name(doc)
         self.uri = utilities.make_standard_uri(self.std_name)
         self.document = doc
         # TODO: get nickname from file most common acroynm and replace in event/context strings

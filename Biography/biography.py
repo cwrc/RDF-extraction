@@ -93,11 +93,11 @@ class Biography(object):
         self.old_url = rdflib.term.URIRef(F"http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id={id}")
         self.url = rdflib.term.URIRef(F"https://orlando.cambridge.org/profiles/{id}")
         self.name = utilities.get_readable_name(doc)
-        self.std_name = utilities.get_name(doc)
+        self.std_name = utilities.get_entry_standard_name(doc)
         self.cwrc_uri = self.document.ENTRY.DIV0.STANDARD.get("REF")
 
         if self.cwrc_uri in utilities.PERSON_MAP:
-            self.uri = utilities.PERSON_MAP[self.cwrc_uri]
+            self.uri = utilities.PERSON_MAP[self.cwrc_uri]["Primary Identifier"]
         else:
             self.uri = self.cwrc_uri
 
@@ -214,7 +214,7 @@ class Biography(object):
         if self.wd_id and self.wd_id != str(self.uri):
             g.add((self.uri, utilities.NS_DICT["owl"].sameAs, rdflib.term.URIRef(self.wd_id)))
 
-        g.add((self.uri, RDFS.label, Literal(self.std_name)))
+        g.add((self.uri, RDFS.label, Literal(self.name)))
         g.add((self.uri, utilities.NS_DICT["skos"].prefLabel, Literal(self.name)))
 
  
