@@ -1,0 +1,253 @@
+@prefix aat: <https://vocab.getty.edu/aat/> .
+@prefix bf: <http://id.loc.gov/ontologies/bibframe/> .
+@prefix biography: <http://id.lincsproject.ca/biography/> .
+@prefix context: <http://id.lincsproject.ca/context/> .
+@prefix crm: <http://www.cidoc-crm.org/cidoc-crm/> .
+@prefix cwrc: <http://id.lincsproject.ca/cwrc/> .
+@prefix data: <http://cwrc.ca/cwrcdata/> .
+@prefix edit: <http://id.lincsproject.ca/edit/> .
+@prefix event: <http://id.lincsproject.ca/event/> .
+@prefix frbroo: <http://iflastandards.info/ns/fr/frbr/frbroo/> .
+@prefix genre: <http://id.lincsproject.ca/genre/> .
+@prefix identity: <http://id.lincsproject.ca/identity/> .
+@prefix ii: <http://id.lincsproject.ca/ii/> .
+@prefix lincs: <http://id.lincsproject.ca/> .
+@prefix marcrel: <http://id.loc.gov/vocabulary/relators/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix occupation: <http://id.lincsproject.ca/occupation/> .
+@prefix orlando: <https://commons.cwrc.ca/orlando:> .
+@prefix persrel: <http://id.lincsproject.ca/persrel/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix writing: <http://id.lincsproject.ca/writing/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://id.loc.gov/vocabulary/languages/ara> a crm:E56_Language ;
+    rdfs:label "Arabic"@en .
+    
+<http://id.loc.gov/vocabulary/languages/ben> a crm:E56_Language ;
+    rdfs:label "Bengali"@en .
+    
+<http://id.loc.gov/vocabulary/languages/bul> a crm:E56_Language ;
+    rdfs:label "Bulgarian"@en .
+    
+<http://id.loc.gov/vocabulary/languages/chi> a crm:E56_Language ;
+    rdfs:label "Chinese"@en .
+    
+<http://id.loc.gov/vocabulary/languages/cze> a crm:E56_Language ;
+    rdfs:label "Czech"@en .
+    
+<http://id.loc.gov/vocabulary/languages/eng> a crm:E56_Language ;
+    rdfs:label "English"@en .
+    
+<http://id.loc.gov/vocabulary/languages/fre> a crm:E56_Language ;
+    rdfs:label "French"@en .
+    
+<http://id.loc.gov/vocabulary/languages/ger> a crm:E56_Language ;
+    rdfs:label "German"@en .
+    
+<http://id.loc.gov/vocabulary/languages/gla> a crm:E56_Language ;
+    rdfs:label "Gaelic"@en .
+    
+<http://id.loc.gov/vocabulary/languages/gle> a crm:E56_Language ;
+    rdfs:label "Irish"@en .
+    
+<http://id.loc.gov/vocabulary/languages/guj> a crm:E56_Language ;
+    rdfs:label "Gujarati"@en .
+    
+<http://id.loc.gov/vocabulary/languages/heb> a crm:E56_Language ;
+    rdfs:label "Hebrew"@en .
+    
+<http://id.loc.gov/vocabulary/languages/hin> a crm:E56_Language ;
+    rdfs:label "Hindi"@en .
+    
+<http://id.loc.gov/vocabulary/languages/ita> a crm:E56_Language ;
+    rdfs:label "Italian"@en .
+    
+<http://id.loc.gov/vocabulary/languages/jpn> a crm:E56_Language ;
+    rdfs:label "Japanese"@en .
+    
+<http://id.loc.gov/vocabulary/languages/kan> a crm:E56_Language ;
+    rdfs:label "Kanarese"@en .
+    
+<http://id.loc.gov/vocabulary/languages/lat> a crm:E56_Language ;
+    rdfs:label "Latin"@en .
+    
+<http://id.loc.gov/vocabulary/languages/mar> a crm:E56_Language ;
+    rdfs:label "Marathi"@en .
+    
+<http://id.loc.gov/vocabulary/languages/may> a crm:E56_Language ;
+    rdfs:label "Malay"@en .
+    
+<http://id.loc.gov/vocabulary/languages/per> a crm:E56_Language ;
+    rdfs:label "Persian"@en .
+    
+<http://id.loc.gov/vocabulary/languages/pli> a crm:E56_Language ;
+    rdfs:label "Pali"@en .
+    
+<http://id.loc.gov/vocabulary/languages/pol> a crm:E56_Language ;
+    rdfs:label "Polish"@en .
+    
+<http://id.loc.gov/vocabulary/languages/rus> a crm:E56_Language ;
+    rdfs:label "Russian"@en .
+    
+<http://id.loc.gov/vocabulary/languages/san> a crm:E56_Language ;
+    rdfs:label "Sanskrit"@en .
+    
+<http://id.loc.gov/vocabulary/languages/spa> a crm:E56_Language ;
+    rdfs:label "Spanish"@en .
+    
+<http://id.loc.gov/vocabulary/languages/tha> a crm:E56_Language ;
+    rdfs:label "Thai"@en .
+    
+<http://id.loc.gov/vocabulary/languages/ukr> a crm:E56_Language ;
+    rdfs:label "Ukrainian"@en .
+    
+<http://id.loc.gov/vocabulary/languages/urdu> a crm:E56_Language ;
+    rdfs:label "Hindustani"@en .
+    
+<http://id.loc.gov/vocabulary/languages/wel> a crm:E56_Language ;
+    rdfs:label "Welsh"@en .
+
+aat:300262699 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Algerian"@en .
+    
+aat:300107956 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "American (North American)"@en, "américaine"@fr .
+    
+aat:300021861 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Australian"@en, "australienne"@fr .
+    
+aat:300111153 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Austrian"@en, "autrichienne"@fr .
+    
+aat:300111156 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Belgian (modern)"@en, "belge"@fr .
+    
+aat:300107967 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Brazilian"@en, "brésilienne"@fr .
+    
+aat:300111159 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "British (modern)"@en, "britannique"@fr .
+    
+aat:300111163 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Bulgarian (culture or style)"@en .
+    
+aat:300107962 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Canadian"@en, "canadienne"@fr .
+    
+aat:300018322 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Chinese (culture or style)"@en, "chinoise"@fr .
+    
+aat:300386017 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Corsican (culture or style)"@en, "corses"@fr .
+    
+aat:300107948 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Cuban"@en, "cubaine"@fr .
+    
+aat:300111172 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Danish (culture or style)"@en .
+    
+aat:300111178 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "English (culture or style)"@en, "anglaise"@fr .
+    
+aat:300111188 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "French (culture or style)"@en, "française"@fr .
+    
+aat:300386124 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Genoese"@en .
+    
+aat:300111192 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "German (culture, style, period)"@en, "allemande"@fr .
+    
+aat:300262651 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Ghanaian"@en .
+    
+aat:300386129 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Guyanese"@en .
+    
+aat:300111195 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Hungarian"@en .
+    
+aat:300018863 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Indian (South Asian)"@en, "indienne"@fr .
+    
+aat:300111259 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Irish"@en .
+    
+aat:300111198 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Italian (culture or style)"@en, "italienne"@fr .
+    
+aat:300107950 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Jamaican"@en .
+    
+aat:300262654 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Kenyan"@en .
+    
+aat:300386387 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Latvian (culture or style)"@en .
+    
+aat:300379451 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Lithuanian (culture or style)"@en .
+    
+aat:300107963 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Mexican"@en, "mexicaine"@fr .
+    
+aat:300111175 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Dutch (culture or style)"@en, "hollandaise"@fr .
+    
+aat:300021959 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "New Zealand"@en .
+    
+aat:300015776 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Nigerian"@en .
+    
+aat:300386467 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Northern Irish"@en .
+    
+aat:300266840 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Pakistani"@en .
+    
+aat:300107971 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Peruvian"@en, "péruvienne"@fr .
+    
+aat:300111204 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Polish (culture)"@en .
+    
+aat:300111207 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Portuguese (culture or style)"@en .
+    
+aat:300111210 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Romanian (culture or style)"@en .
+    
+aat:300111276 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Russian (culture or style)"@en, "russe"@fr .
+    
+aat:300111212 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Scottish"@en, "écossaise"@fr .
+    
+aat:300262706 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "South African"@en .
+    
+aat:300111215 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Spanish (culture or style)"@en, "espagnole"@fr .
+    
+aat:300111218 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Swedish (culture or style)"@en .
+    
+aat:300111221 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Swiss"@en, "suisse"@fr .
+    
+aat:300193868 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Turkish (culture or style)"@en .
+    
+aat:300380343 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Ukrainian (culture or style)"@en .
+    
+aat:300386576 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Viennese"@en .
+    
+aat:300111225 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
+    rdfs:label "Welsh (culture or style)"@en .
+
