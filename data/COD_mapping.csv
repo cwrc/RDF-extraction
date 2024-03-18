@@ -1,85 +1,164 @@
-http://id.lincsproject.ca/ii/Addisons_disease,"Addison's disease"
-http://id.lincsproject.ca/ii/Alcohol_poisoning,"alcohol poisoning","chronic alcohol poisoning"
-http://id.lincsproject.ca/ii/Alcohol_use_disorders,"alcoholism","delirium tremens"
-http://id.lincsproject.ca/ii/Alzheimers_disease_dementias,"Alzheimer's Disease","Senile","dementia","senile debility","senile decay","senile dementia"
-http://id.lincsproject.ca/ii/Anaemia,"aplastic anaemia","pernicious anaemia"
-http://id.lincsproject.ca/ii/Appendicitis,"acute appendicitis"
-http://id.lincsproject.ca/ii/Asphyxia,"asphyxia"
-http://id.lincsproject.ca/ii/Assault,"fatally stabbed","murder"
-http://id.lincsproject.ca/ii/Asthma,"asthma attacks","asthma","general decline in health complicated by asthma"
-http://id.lincsproject.ca/ii/Cancer,"cancer","complications following lymphoma","lymphoma"
-http://id.lincsproject.ca/ii/Cancer_of_breast,"breast cancer"
-http://id.lincsproject.ca/ii/Cancer_of_central_nervous_system,"brain tumour","lymphoma of the brain cells"
-http://id.lincsproject.ca/ii/Cancer_of_cervix,"cervical cancer"
-http://id.lincsproject.ca/ii/Cancer_of_colon_rectum_and_anus,"bowel cancer","cancer of the colon","colon cancer","intestinal cancer"
-http://id.lincsproject.ca/ii/Cancer_of_lip_oral_cavity_and_pharynx,"mouth cancer"
-http://id.lincsproject.ca/ii/Cancer_of_liver,"cancer of the liver","liver cancer"
-http://id.lincsproject.ca/ii/Cancer_of_ovary,"ovarian cancer","ovarian tumour"
-http://id.lincsproject.ca/ii/Cancer_of_pancreas,"cancer of the pancreas"
-http://id.lincsproject.ca/ii/Cancer_of_stomach,"stomach cancer"
-http://id.lincsproject.ca/ii/Cancer_of_trachea_bronchus_and_lung,"cancer of the lungs (metastasised breast cancer)","lung cancer"
-http://id.lincsproject.ca/ii/Cancer_of_uterus,"cancer of the uterus","uterine cancer"
-http://id.lincsproject.ca/ii/Cerebrovascular_diseases_stroke,"a series of strokes","a stroke","apoplectic fit","apoplexy (that is a stroke)","apoplexy","cerebral aneurism","cerebral haemorrage","cerebral haemorrhage","cerebral thrombosis","cerebral vascular disease","coronary thrombosis","lingering effects of a brain haemorrhage","paralytic stroke","stroke brought on by cardiovascular degeneration","stroke which had paralysed her","stroke"
-http://id.lincsproject.ca/ii/Chill,"chill"
-http://id.lincsproject.ca/ii/Cholera,"cholera"
-http://id.lincsproject.ca/ii/Cold,"apparently slight cold","cold"
-http://id.lincsproject.ca/ii/Coma,"coma"
-http://id.lincsproject.ca/ii/Complications_of_surgery,"complications from surgery","post-surgical complications"
-http://id.lincsproject.ca/ii/Concussion,"a serious concussion","concussion"
-http://id.lincsproject.ca/ii/Convulsions,"convulsions"
-http://id.lincsproject.ca/ii/Diabetes,"diabetes"
-http://id.lincsproject.ca/ii/Diphtheria,"diphtheria","diptheria"
-http://id.lincsproject.ca/ii/Disease_of_the_blood,"blood disease"
-http://id.lincsproject.ca/ii/Disease_of_the_circulatory_system,"cardiac arrest","cardiac degeneration","cardiac failure","cardiopulmonary failure","dropsy (congestive heart failure)","dropsy","fatty myocardial degeneration","gradual collapse of blood vessels in her brain","heart and kidney disease","heart by-pass operation","heart condition","heart disease","heart failed","heart failure","heart problems","heart spasms","myocarditis","rupture of the heart","heart trouble","years of heart disease","gradual heart failure"
-http://id.lincsproject.ca/ii/Disease_of_the_digestive_system,"abscess on the liver","cholic","chronic digestive problems","cramp in the stomach","digestive disorder","disease of the liver","disease of the stomach","enteritis","gastro-intestinal disease","inflamation in her Bowels","liver complaint","liver disease","peritonitis","stomach ailment"
-http://id.lincsproject.ca/ii/Disease_of_the_ear,"Ménière's disease"
-http://id.lincsproject.ca/ii/Disease_of_the_genitourinary_system,"Bright's disease","complications of kidney disease","kidney disease","kidney failure caused by gout","kidney failure","kidney infection","renal dysfunction, probably Bright's Disease","renal sclerosis"
-http://id.lincsproject.ca/ii/Disease_of_the_musculoskeletal_system,"disease of the spine"
-http://id.lincsproject.ca/ii/Disease_of_the_nervous_system,"motor neuron disease"
-http://id.lincsproject.ca/ii/Disease_of_the_respiratory_system,"a massive tubercular haemorrhage","bronchitis","congestion of the lungs","emphysema","inflammation of the Lungs","pulmonary complications","pulmonary disease","respiratory disease","respiratory failure","respiratory problems","ulcers of the larynx","water on the lungs"
-http://id.lincsproject.ca/ii/Drowning,"drowned in a shipwreck","drowned","drowning"
-http://id.lincsproject.ca/ii/Edema,"edema"
-http://id.lincsproject.ca/ii/Epilepsy,"epileptic fits","epilepsy"
-http://id.lincsproject.ca/ii/External_cause,"accident","hanged","suspicious circumstances"
-http://id.lincsproject.ca/ii/Falls,"after-effects of a fall","fall","falling downstairs","falling out of bed"
-http://id.lincsproject.ca/ii/Fever,"fever","sharp Feavour"
-http://id.lincsproject.ca/ii/Fire,"burned alive","burned to death","burns"
-http://id.lincsproject.ca/ii/Gangrene,"gangrene"
-http://id.lincsproject.ca/ii/Gastric_and_duodenal_ulcer,"burst stomach ulcer or appendix","duodenal ulcer","haemorrhage from a perforated duodenal ulcer"
-http://id.lincsproject.ca/ii/Gravess_disease,"Graves's Disease"
-http://id.lincsproject.ca/ii/Hepatitis,"hepatitis or phthisis"
-http://id.lincsproject.ca/ii/Hodgkins_lymphoma,"Hodgkin's disease","Hodgkin's lymphoma"
-http://id.lincsproject.ca/ii/Influenza,"influenza"
-http://id.lincsproject.ca/ii/Intentional_self-harm,"committed suicide","drinking half a bottle of the disinfectant lysol","drug overdose","gassing herself","hanged herself","killed herself","overdose of sleeping potion","shot herself","suicide by ingesting perchloride of mercury","suicide"
-http://id.lincsproject.ca/ii/Intestinal_malabsorption,"malabsorption disease"
-http://id.lincsproject.ca/ii/Jaundice,"jaundice"
-http://id.lincsproject.ca/ii/Kidney_stones,"gravel","kidney stone complications"
-http://id.lincsproject.ca/ii/Leukaemia,"leukaemia","leukemia"
-http://id.lincsproject.ca/ii/Liver_cirrhosis,"cirrhosis of the liver"
-http://id.lincsproject.ca/ii/Malaise_and_fatigue,"inanition"
-http://id.lincsproject.ca/ii/Malaria,"malaria","malarial fever"
-http://id.lincsproject.ca/ii/Malnutrition,"malnutrition"
-http://id.lincsproject.ca/ii/Measles,"measles"
-http://id.lincsproject.ca/ii/Meningitis,"meningitis"
-http://id.lincsproject.ca/ii/Mental_behavioural_disorder,"mania"
-http://id.lincsproject.ca/ii/Multiple_sclerosis,"multiple sclerosis"
-http://id.lincsproject.ca/ii/Myocardial_infarction_heart_attack,"heart attack","massive coronary"
-http://id.lincsproject.ca/ii/Paralysis,"paralysis"
-http://id.lincsproject.ca/ii/Parkinson_disease,"Parkinson's disease"
-http://id.lincsproject.ca/ii/Pleurisy,"pleurisy"
-http://id.lincsproject.ca/ii/Pneumonia,"bronchial pneumonia","bronchopneumonia","double pneumonia","pneumnia","pneumonia"
-http://id.lincsproject.ca/ii/Poisoning,"arsenic poisoning","poison"
-http://id.lincsproject.ca/ii/Pregnancy_or_childbirth,"after giving birth","bearing a dead son in premature labour","childbirth","complications from premature childbirth","puerperal fever"
-http://id.lincsproject.ca/ii/Puerperal_fever,"puerperal fever"
-http://id.lincsproject.ca/ii/Rabies,"rabies"
-http://id.lincsproject.ca/ii/Rheumatic_fever,"rheumatic heart disease"
-http://id.lincsproject.ca/ii/Rheumatoid_Arthritis,"arthritis","rheumatoid arthritis"
-http://id.lincsproject.ca/ii/Septicaemia,"septicaemia caused by a mosquito bite","septicaemia"
-http://id.lincsproject.ca/ii/Severe_stress_and_adjustment_disorders,"broken Heart","grief","nervous shock","shock"
-http://id.lincsproject.ca/ii/Smallpox,"smallpox"
-http://id.lincsproject.ca/ii/Stings,"bee-sting"
-http://id.lincsproject.ca/ii/Syphilis,"syphilis"
-http://id.lincsproject.ca/ii/Tuberculosis,"Pott's disease","consumption or lung disease","consumption","pulmonary tuberculosis","tubercular haemorrhage","tuberculosis"
-http://id.lincsproject.ca/ii/Typhoid,"typhoid fever","typhoid or enteric fever","typhoid"
-http://id.lincsproject.ca/ii/Typhus,"typhus"
-http://id.lincsproject.ca/ii/Unspecified_Unknown_Cause_of_Death,"Her cause of death is unknown","a long illness","decay of nature","decline","destitution","exquisite sensibility; poverty","general ill-health","long illness","old age","same illness that William had died from","severe illness","sudden illness","undisclosed illness","unknown causes"
+http://id.lincsproject.ca/ii/Abortion,Abortion
+http://id.lincsproject.ca/ii/Addisons_disease,Addison's disease
+http://id.lincsproject.ca/ii/Alcohol_poisoning,chronic alcohol poisioning,Alcohol poisoning
+http://id.lincsproject.ca/ii/Alcohol_use_disorders,alcoholism,delirium tremens,Alcohol use disorders
+http://id.lincsproject.ca/ii/Alzheimers_disease_dementias,Alzheimer's disease,dementia,senility,senile,senile debility,senile dementia,senile decay,"Alzheimer's disease, dementias"
+http://id.lincsproject.ca/ii/Anaemia,aplastic anaemia,pernicious anaemia,Anaemia
+http://id.lincsproject.ca/ii/Appendicitis,acute appendicitis,Appendicitis
+http://id.lincsproject.ca/ii/Asphyxia,Asphyxia
+http://id.lincsproject.ca/ii/Asphyxiation,Asphyxiation
+http://id.lincsproject.ca/ii/Assault,fatally stabbed,murder,Assault
+http://id.lincsproject.ca/ii/Asthma,asthma attacks,Asthma
+http://id.lincsproject.ca/ii/Benign_tumours,Benign tumours
+http://id.lincsproject.ca/ii/Birth_trauma,Birth trauma
+http://id.lincsproject.ca/ii/Broken_bones,breaking her hip,breaking her neck,Broken bones
+http://id.lincsproject.ca/ii/Cancer,complications following lymphoma,lymphoma,Cancer
+http://id.lincsproject.ca/ii/Cancer_of_bladder,Cancer of the bladder
+http://id.lincsproject.ca/ii/Cancer_of_breast,breast cancer,Cancer of the breast
+http://id.lincsproject.ca/ii/Cancer_of_central_nervous_system,brain cancer,brain tumour,lymphoma of the brain,Cancer of the central nervous system
+http://id.lincsproject.ca/ii/Cancer_of_cervix,cervical cancer,Cancer of the cervix
+http://id.lincsproject.ca/ii/Cancer_of_colon_rectum_anus,bowel cancer,cancer of the colon,colon cancer,intestinal cancer,"Cancer of the colon, rectum, anus"
+http://id.lincsproject.ca/ii/Cancer_of_larynx,Cancer of the larynx
+http://id.lincsproject.ca/ii/Cancer_of_lip_oral_cavity_and_pharynx,mouth cancer,"Cancer of the lip, oral cavity and pharynx"
+http://id.lincsproject.ca/ii/Cancer_of_liver,liver cancer,Cancer of the liver
+http://id.lincsproject.ca/ii/Cancer_of_oesophagus,Cancer of the oesophagus
+http://id.lincsproject.ca/ii/Cancer_of_ovary,ovarian cancer,ovarian tumour,Cancer of the ovary
+http://id.lincsproject.ca/ii/Cancer_of_pancreas,Cancer of the pancreas
+http://id.lincsproject.ca/ii/Cancer_of_prostate,Cancer of the prostate
+http://id.lincsproject.ca/ii/Cancer_of_skin,Cancer of the skin
+http://id.lincsproject.ca/ii/Cancer_of_stomach,stomach cancer,Cancer of the stomach
+http://id.lincsproject.ca/ii/Cancer_of_trachea_bronchus_and_lung,lung cancer,"Cancer of trachea, bronchus and lung"
+http://id.lincsproject.ca/ii/Cancer_of_uterus,uterine cancer,Cancer of the uterus
+http://id.lincsproject.ca/ii/Cancers,Neoplasms,Cancers
+http://id.lincsproject.ca/ii/Celiac_disease,Coeliac disease,Sprue,Celiac disease
+http://id.lincsproject.ca/ii/Cerebrovascular_diseases_stroke,apoplexy (that is a stroke),stroke brought on by cardiovascular degeneration,stroke which had paralysed her,a series of strokes,a stroke,apoplexy,stroke of apoplexy,apoplectic fit,cerebral aneurism,cerebral haemorrage,cerebral haemorrhage,cerebral thrombosis,cerebral vascular disease,coronary thrombosis,paralytic stroke,stroke,strokes,"Cerebrovascular diseases, stroke"
+http://id.lincsproject.ca/ii/Chill,Chill
+http://id.lincsproject.ca/ii/Cholera,Cholera
+http://id.lincsproject.ca/ii/Cold,apparently slight cold,common cold,Cold
+http://id.lincsproject.ca/ii/Coma,Coma
+http://id.lincsproject.ca/ii/Complications_of_pregnancy_labour_delivery,"Complications of pregnancy, labour, delivery"
+http://id.lincsproject.ca/ii/Complications_of_surgery,post-operative complications,post-surgical complications,Complications of surgery
+http://id.lincsproject.ca/ii/Concussion,a serious concussion,Concussion
+http://id.lincsproject.ca/ii/Conflict_and_war,Conflict and war
+http://id.lincsproject.ca/ii/Congenital_hydrocephalus_spina_bifida,"Congenital hydrocephalus, spina bifida"
+http://id.lincsproject.ca/ii/Congenital_malformation_deformation_or_chromosomal_abnormality,"Congenital malformation, deformation or chromosomal abnormality"
+http://id.lincsproject.ca/ii/Congenital_malformations_deformations_and_chromosomal_abnormalities,"Congenital malformations, deformations and chromosomal abnormalities"
+http://id.lincsproject.ca/ii/Congenital_malformations_of_the_heart,Congenital malformations of the heart
+http://id.lincsproject.ca/ii/Convulsions,Convulsions
+http://id.lincsproject.ca/ii/Dengue,Dengue
+http://id.lincsproject.ca/ii/Diabetes,Diabetes
+http://id.lincsproject.ca/ii/Diarrhoeal_diseases,Diarrhoeal diseases
+http://id.lincsproject.ca/ii/Diphtheria,diptheria,Diphtheria
+http://id.lincsproject.ca/ii/Disease_of_the_blood,blood disease,Disease of the blood
+http://id.lincsproject.ca/ii/Disease_of_the_circulatory_system,fatty myocardial degeneration,gradual collapse of blood vessels in her brain,years of heart disease,gradual heart failure,ruptured blood vessel,cardiac arrest,cardiac degeneration,cardiac failure,cardiopulmonary failure,dropsy (congestive heart failure),dropsy,heart by-pass operation,heart condition,heart disease,heart failed,heart failure,heart problems,heart spasms,myocarditis,chronic myocarditis,rupture of the heart,heart trouble,edema,Disease of the circulatory system
+http://id.lincsproject.ca/ii/Disease_of_the_digestive_system,cramp in the stomach,inflamation in her Bowels,liver complaint,abscess on the liver,cholic,chronic digestive problems,digestive disorder,disease of the liver,disease of the stomach,enteritis,gastro-intestinal disease,liver disease,peritonitis,stomach ailment,liver failure,Disease of the digestive system
+http://id.lincsproject.ca/ii/Disease_of_the_ear,Ménière's disease,Disease of the ear
+http://id.lincsproject.ca/ii/Disease_of_the_eye,Diseases of the eye
+http://id.lincsproject.ca/ii/Disease_of_the_genitourinary_system,kidney failure caused by gout,"renal dysfunction, probably Bright's Disease",genitourinary disease,Bright's disease,complications of kidney disease,kidney disease,kidney failure,kidney infection,renal sclerosis,Disease of the genitourinary system
+http://id.lincsproject.ca/ii/Disease_of_the_musculoskeletal_system,disease of the spine,Disease of the musculoskeletal system
+http://id.lincsproject.ca/ii/Disease_of_the_nervous_system,motor neuron disease,massive brain haemorrhage,lingering effects of a brain haemorrhage,Disease of the nervous system
+http://id.lincsproject.ca/ii/Disease_of_the_respiratory_system,bronchitis,pulmonary congestion,congestion of the lungs,emphysema,inflammation of the Lungs,pulmonary complications,pulmonary disease,respiratory disease,respiratory failure,respiratory problems,ulcers of the larynx,water on the lungs,lung trouble,oedema of the lungs,Disease of the respiratory system
+http://id.lincsproject.ca/ii/Disease_of_the_skin,Disease of the skin
+http://id.lincsproject.ca/ii/Diseases_of_the_blood,Diseases of the blood
+http://id.lincsproject.ca/ii/Diseases_of_the_circulatory_system,Diseases of the circulatory system
+http://id.lincsproject.ca/ii/Diseases_of_the_digestive_system,Diseases of the gastrointestinal system
+http://id.lincsproject.ca/ii/Diseases_of_the_ear,Diseases of the ear
+http://id.lincsproject.ca/ii/Diseases_of_the_eye,Diseases of the eye
+http://id.lincsproject.ca/ii/Diseases_of_the_genitourinary_system,Diseases of the genitourinary system
+http://id.lincsproject.ca/ii/Diseases_of_the_musculoskeletal_system,Diseases of the musculoskeletal system
+http://id.lincsproject.ca/ii/Diseases_of_the_nervous_system,Diseases of the nervous system
+http://id.lincsproject.ca/ii/Diseases_of_the_respiratory_system,Diseases of the respiratory system
+http://id.lincsproject.ca/ii/Diseases_of_the_skin,Diseases of the skin
+http://id.lincsproject.ca/ii/Down_syndrome,Down syndrome
+http://id.lincsproject.ca/ii/Drowning,drowned in a shipwreck,drowned,Drowning
+http://id.lincsproject.ca/ii/Drug_poisoning,"Dr James's powder, a patent remedy.",Drug poisoning
+http://id.lincsproject.ca/ii/Drug_use_disorders,Drug use disorders
+http://id.lincsproject.ca/ii/Eating_disorders,Eating disorders
+http://id.lincsproject.ca/ii/Endocrine_nutritional_and_metabolic_diseases,"Endocrine, nutritional and metabolic diseases"
+http://id.lincsproject.ca/ii/Endocrine_nutritional_or_metabolic_disease,"Endocrine, nutritional, or metabolic disease"
+http://id.lincsproject.ca/ii/Epilepsy,epileptic fits,Epilepsy
+http://id.lincsproject.ca/ii/Erysipelas,Erysipelas
+http://id.lincsproject.ca/ii/External_cause,External cause
+http://id.lincsproject.ca/ii/External_causes,accident,hanged,suspicious circumstances,External causes
+http://id.lincsproject.ca/ii/Falls,falling downstairs,falling out of bed,after-effects of a fall,fall,Falls
+http://id.lincsproject.ca/ii/Female_infertility,Sterility,Female infertility
+http://id.lincsproject.ca/ii/Fever,malignant fever,Fever
+http://id.lincsproject.ca/ii/Fire,burned alive,burned to death,burns,Fire
+http://id.lincsproject.ca/ii/Forces_of_nature,Forces of nature
+http://id.lincsproject.ca/ii/Gangrene,Gangrene
+http://id.lincsproject.ca/ii/Gastric_and_duodenal_ulcer,haemorrhage from a perforated duodenal ulcer,duodenal ulcer,Gastric and duodenal ulcer
+http://id.lincsproject.ca/ii/Gravess_disease,Graves's Disease,Graves' disease
+http://id.lincsproject.ca/ii/HIV,HIV
+http://id.lincsproject.ca/ii/Hepatitis,Hepatitis
+http://id.lincsproject.ca/ii/Hepatitis_A,Hepatitis A
+http://id.lincsproject.ca/ii/Hepatitis_B,Hepatitis B
+http://id.lincsproject.ca/ii/Hodgkins_lymphoma,Hodgkin's disease,Hodgkin's lymphoma
+http://id.lincsproject.ca/ii/Hypertensive_heart_diseases,Hypertensive heart diseases
+http://id.lincsproject.ca/ii/Indirect_obstetric_deaths,Indirect obstetric deaths
+http://id.lincsproject.ca/ii/InfantDeath,Infant death
+http://id.lincsproject.ca/ii/Infant_death,Infant death
+http://id.lincsproject.ca/ii/Infectious_disease,Infectious disease
+http://id.lincsproject.ca/ii/Infectious_diseases,Infectious diseases
+http://id.lincsproject.ca/ii/Influenza,Influenza
+http://id.lincsproject.ca/ii/Injuries,Injuries
+http://id.lincsproject.ca/ii/Injury,Injury
+http://id.lincsproject.ca/ii/Intentional_self-harm,overdose of sleeping potion,large overdose of laudanum,suicide,committed suicide,drug overdose,Intentional self-harm
+http://id.lincsproject.ca/ii/Intestinal_malabsorption,malabsorption disease,Intestinal malabsorption
+http://id.lincsproject.ca/ii/Jaundice,Jaundice
+http://id.lincsproject.ca/ii/Kidney_stones,gravel,kidney stone disease,Kidney stones
+http://id.lincsproject.ca/ii/Leprosy,Leprosy
+http://id.lincsproject.ca/ii/Leukaemia,leukemia,Leukaemia
+http://id.lincsproject.ca/ii/Liver_cirrhosis,Liver cirrhosis
+http://id.lincsproject.ca/ii/Malaise_and_fatigue,inanition,Malaise and fatigue
+http://id.lincsproject.ca/ii/Malaria,malarial fever,Malaria
+http://id.lincsproject.ca/ii/Male_infertility,Sterility,Male infertility
+http://id.lincsproject.ca/ii/Malnutrition,Malnutrition
+http://id.lincsproject.ca/ii/Maternal_haemorrhage,Maternal haemorrhage
+http://id.lincsproject.ca/ii/Maternal_hypertensive_disorders,Maternal hypertensive disorders
+http://id.lincsproject.ca/ii/Maternal_sepsis,Maternal sepsis
+http://id.lincsproject.ca/ii/Measles,Measles
+http://id.lincsproject.ca/ii/Meningitis,Meningitis
+http://id.lincsproject.ca/ii/Meningococcal_infection,Meningococcal infection
+http://id.lincsproject.ca/ii/Mental_and_behavioural_disorder,mania,Mental and behavioural disorder
+http://id.lincsproject.ca/ii/Mental_and_behavioural_disorders,Mental and behavioural disorders
+http://id.lincsproject.ca/ii/Miscarriage,Miscarriage
+http://id.lincsproject.ca/ii/Multiple_myeloma,Multiple myeloma
+http://id.lincsproject.ca/ii/Multiple_sclerosis,Multiple sclerosis
+http://id.lincsproject.ca/ii/Myocardial_infarction_heart_attack,heart attack,massive coronary,"Myocardial infarction, heart attack"
+http://id.lincsproject.ca/ii/Non-Hodgkin_lymphoma,Non-Hodgkin lymphoma
+http://id.lincsproject.ca/ii/Obstructed_labour,Obstructed labour
+http://id.lincsproject.ca/ii/Other_transport_accidents,Other transport accidents
+http://id.lincsproject.ca/ii/Paralysis,Paralysis
+http://id.lincsproject.ca/ii/Parkinson_disease,Parkinson disease,Parkinson's disease
+http://id.lincsproject.ca/ii/Plague,Plague
+http://id.lincsproject.ca/ii/Pleurisy,pleuritis,Pleurisy
+http://id.lincsproject.ca/ii/Pneumonia,double pneumonia,pneumnia,bronchial pneumonia,bronchopneumonia,Pneumonia
+http://id.lincsproject.ca/ii/Poisoning,arsenic poisoning,Poisoning
+http://id.lincsproject.ca/ii/Poliomyelitis,Poliomyelitis
+http://id.lincsproject.ca/ii/Pregnancy_childbirth,"Pregnancy, childbirth"
+http://id.lincsproject.ca/ii/Pregnancy_or_childbirth,complications from premature childbirth,childbirth,puerperal fever,Pregnancy or childbirth
+http://id.lincsproject.ca/ii/Prematurity_low_birth_weight,"Prematurity, low birth weight"
+http://id.lincsproject.ca/ii/Rabies,Rabies
+http://id.lincsproject.ca/ii/Rheumatic_fever,rheumatic heart disease,Rheumatic fever
+http://id.lincsproject.ca/ii/Rheumatoid_Arthritis,arthritis,Rheumatoid Arthritis
+http://id.lincsproject.ca/ii/Road_traffic_accidents,Road traffic accidents
+http://id.lincsproject.ca/ii/Septicaemia,Septicaemia
+http://id.lincsproject.ca/ii/Severe_stress_and_adjustment_disorders,broken heart,grief,nervous shock,shock,Severe stress and adjustment disorders
+http://id.lincsproject.ca/ii/Sexually_transmitted_diseases,Venereal diseases,Sexually transmitted diseases
+http://id.lincsproject.ca/ii/Shock,Shock
+http://id.lincsproject.ca/ii/Smallpox,Smallpox
+http://id.lincsproject.ca/ii/Stillbirth,Fetal death,Stillbirth
+http://id.lincsproject.ca/ii/Stings,bee-stings,Stings
+http://id.lincsproject.ca/ii/Symptoms_unspecified_unknown,"Symptoms, unspecified, unknown"
+http://id.lincsproject.ca/ii/Syphilis,Syphilis
+http://id.lincsproject.ca/ii/Tachycardia,tachycardia exhaustion,Tachycardia
+http://id.lincsproject.ca/ii/Tetanus,Tetanus
+http://id.lincsproject.ca/ii/Throat_infection,Throat infection
+http://id.lincsproject.ca/ii/Tuberculosis,consumption or lung disease,consumption,Pott's disease,tubercular haemorrhage,Tuberculosis
+http://id.lincsproject.ca/ii/Typhoid,enteric fever,typhoid fever,Typhoid
+http://id.lincsproject.ca/ii/Typhus,Typhus
+http://id.lincsproject.ca/ii/Ulcer,ulcers,perforated ulcer,bleeding ulcer,Ulcer
+http://id.lincsproject.ca/ii/Unspecified_Unknown_Cause_of_Death,Her cause of death is unknown,a long illness,exquisite sensibility,same illness that William had died from,fainting fit,decay of nature,decline,destitution,poverty,general ill-health,long illness,old age,severe illness,sudden illness,undisclosed illness,unknown causes,"Unspecified, Unknown Cause of Death"
+http://id.lincsproject.ca/ii/Unspecified_unknown,"Unspecified, unknown"
+http://id.lincsproject.ca/ii/Whooping_cough,Whooping cough
+http://id.lincsproject.ca/ii/Yellow_fever,Yellow fever
