@@ -76,11 +76,15 @@ NS_MAP = {
     "skos" : "http://www.w3.org/2004/02/skos/core#",
     "skosxl" : "http://www.w3.org/2008/05/skos-xl#",
     "temp" : "http://www.temp.lincsproject.ca/",
+    "tgn" : "http://vocab.getty.edu/tgn/",
     "time" : "http://www.w3.org/2006/time#",
+    "ulan" : "http://vocab.getty.edu/ulan/",
     "vann" : "http://purl.org/vocab/vann/",
+    "viaf" : "http://viaf.org/viaf/",
     "voaf" : "http://purl.org/vocommons/voaf#",
     "void" : "http://rdfs.org/ns/void#",
     "vs" : "http://www.w3.org/2003/06/sw-vocab-status/ns#",
+    "wikidata" : "http://www.wikidata.org/entity/",
     "writing" : "http://id.lincsproject.ca/writing/",
 }
 
