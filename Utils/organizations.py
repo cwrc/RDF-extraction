@@ -2,7 +2,7 @@
 
 import rdflib
 from bs4 import BeautifulSoup
-from rdflib import RDF, RDFS, Literal
+from rdflib import RDF, RDFS,OWL, Literal
 
 try:
     from Utils import utilities
@@ -11,7 +11,9 @@ except Exception as e:
 
 # this is temporary list to ensure that the orgname standard is within the auth list
 org_list = []
-ORG_MAP = {}
+ORG_COUNT = {}
+ORGS_USED = set()
+TEMP_ORGS = {}
 logger = utilities.config_logger("organizations")
 
 
@@ -54,39 +56,78 @@ class Organization(object):
 
 
 def get_org_uri(tag):
-    global ORG_MAP
+    global ORG_COUNT
     std_name = tag.get("STANDARD")
     uri = tag.get("REF")
     if uri:
+        ORGS_USED.add(uri)
         if uri in utilities.ORGANIZATION_MAP:
-            uri = utilities.ORGANIZATION_MAP[uri]
+            print(utilities.ORGANIZATION_MAP[uri])
+            if utilities.ORGANIZATION_MAP[uri]["Primary Identifier"] != "":
+                uri = utilities.ORGANIZATION_MAP[uri]["Primary Identifier"]
+            else:
+                uri = utilities.ORGANIZATION_MAP[uri]['CWRC URI']
         
         uri = rdflib.term.URIRef(uri)
     
     else:
-        if std_name in org_list:
+        if std_name:
             name = std_name
-        elif tag.get("REG") in org_list:
+        elif tag.get("REG"):
             name = tag.get("REG")
-        elif std_name:
-            name = std_name
         else:
             logger.warn(F"No standard name or URI: {tag}")
             name = tag.get_text()
         uri = utilities.make_standard_uri(name + " ORG", ns="temp")
+        ORGS_USED.add(uri)
+        TEMP_ORGS[uri] = name
     
-    if str(uri) in ORG_MAP:
-        ORG_MAP[str(uri)] += 1
+    if str(uri) in ORG_COUNT:
+        ORG_COUNT[str(uri)] += 1
     else:
-        ORG_MAP[str(uri)] = 1
+        ORG_COUNT[str(uri)] = 1
 
     return uri
 
 
+def get_primary_uri(cwrc_uri):
+    primary_identifier = utilities.ORGANIZATION_MAP[cwrc_uri]["Primary Identifier"]
+    
+    if primary_identifier == "":
+        return cwrc_uri 
+    return primary_identifier
+
+def get_secondary_uris(cwrc_uri):
+    secondary_identifier = utilities.ORGANIZATION_MAP[cwrc_uri]["Secondary Identifier"]
+    secondary_uris = []
+    if secondary_identifier != "":
+        secondary_uris = secondary_identifier.split(" | ")
+    
+    secondary_uris.append(cwrc_uri)
+    
+    return secondary_uris
+
+def add_organizations():
+    g = utilities.create_graph()
+
+    for x in ORGS_USED:
+        if x not in ORGS_USED:
+            logger.warn(F"Organization not in authority list: {x}")
+        if x in utilities.ORGANIZATION_MAP:
+            primary_identifier = rdflib.term.URIRef(get_primary_uri(x))
+            secondary_uris = get_secondary_uris(x)
+            g.add((primary_identifier, RDF.type, utilities.NS_DICT["crm"].E74_Group))
+            for secondary_uri in secondary_uris:
+                g.add((primary_identifier, OWL.sameAs, rdflib.term.URIRef(secondary_uri)))
+                
+            
+    
+    return g        
+
 def log_mapping(detail=True):
     from collections import OrderedDict
     log_str = "Mentioned Orgnames:\n"
-    new_dict = OrderedDict(sorted(ORG_MAP.items(), key=lambda t: t[1], reverse=True))
+    new_dict = OrderedDict(sorted(ORG_COUNT.items(), key=lambda t: t[1], reverse=True))
     count = 0
     for y in new_dict.keys():
         log_str += "\t\t" + str(new_dict[y]) + ": " + y.split("#")[0] + "\n"

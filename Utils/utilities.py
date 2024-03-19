@@ -165,8 +165,8 @@ def create_person_map(path=None):
     if not path:
         path = '../data/full_people_mapping.csv'
     with open(path) as f:
-        csvfile = csv.DictReader(f)
-        for row in csvfile:
+        csv_file = csv.DictReader(f)
+        for row in csv_file:
             row["CWRC URI"] = f"{NS_DICT['orlando']}{row['ID']}"
             PERSON_MAP[row["CWRC URI"]] = row
 
@@ -175,11 +175,13 @@ def create_person_map(path=None):
 
 def create_org_map(path=None):
     if not path:
-        path = '../data/publisher_mapping.csv'
+        path = '../data/organization_mapping.csv'
     with open(path) as f:
-        csvfile = csv.reader(f)
-        for row in csvfile:
-            PERSON_MAP[row[0]] = row[1]
+        csv_file = csv.DictReader(f)
+        for row in csv_file:
+            row["CWRC URI"] = f"{NS_DICT['orlando']}{row['ID']}"
+            ORGANIZATION_MAP[row["CWRC URI"]] = row
+            # PERSON_MAP[row[0]] = row[1]
     
 
 create_writer_map()

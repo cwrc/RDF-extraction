@@ -77,6 +77,8 @@ def main():
 
         uber_graph += graph
 
+    uber_graph += organizations.add_organizations()
+
     place.log_mapping_fails()
     cf.log_mapping_fails()
     occupation.log_mapping_fails()
@@ -93,7 +95,8 @@ def main():
 
     temp_path = "extracted_triples/biography_triples.ttl"
     # utilities.create_extracted_uberfile(temp_path, uber_graph,serialization="ttl")
-    utilities.create_extracted_uberfile(temp_path, uber_graph,serialization="ttl", extra_triples="../data/additional_triples.ttl")
+    utilities.create_extracted_uberfile(temp_path, uber_graph,serialization="ttl", extra_triples=None)
+    # utilities.create_extracted_uberfile(temp_path, uber_graph,serialization="ttl", extra_triples="../data/additional_triples.ttl")
 
 if __name__ == "__main__":
     main()
