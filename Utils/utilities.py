@@ -32,57 +32,60 @@ MAX_WORD_COUNT = 35
 PERSON_MAP = {}
 ORGANIZATION_MAP = {} # Publishers for now but this will be expanded
 
-NS_DICT = {
-    "biography": rdflib.Namespace("http://id.lincsproject.ca/biography/"),
-    "context": rdflib.Namespace("http://id.lincsproject.ca/context/"),
-    "cwrc": rdflib.Namespace("http://id.lincsproject.ca/cwrc/"),
-    "event": rdflib.Namespace("http://id.lincsproject.ca/event/"),
-    "genre": rdflib.Namespace("http://id.lincsproject.ca/genre/"),
-    "identity": rdflib.Namespace("http://id.lincsproject.ca/identity/"),
-    "edit": rdflib.Namespace("http://id.lincsproject.ca/edit/"),
-    "ii": rdflib.Namespace("http://id.lincsproject.ca/ii/"),
-    "occupation": rdflib.Namespace("http://id.lincsproject.ca/occupation/"),
-    "persrel": rdflib.Namespace("http://id.lincsproject.ca/persrel/"),
-    "writing": rdflib.Namespace("http://id.lincsproject.ca/writing/"),
-    "cwrc_temp": rdflib.Namespace("http://temp.lincsproject.ca/cwrc/"),
-    "frbroo": rdflib.Namespace("http://iflastandards.info/ns/fr/frbr/frbroo/"),
-    "as": rdflib.Namespace("http://www.w3.org/ns/activitystreams#"),
-    "bibo": rdflib.Namespace("http://purl.org/ontology/bibo/"),
-    "biro": rdflib.Namespace("http://purl.org/spar/biro/"),
-    "bio": rdflib.Namespace("http://purl.org/vocab/bio/0.1/"),
-    "bf": rdflib.Namespace("http://id.loc.gov/ontologies/bibframe/"),
-    "cc": rdflib.Namespace("http://creativecommons.org/ns#"),
-    "cito": rdflib.Namespace("http://purl.org/spar/cito/"),
-    "crm": rdflib.Namespace("http://www.cidoc-crm.org/cidoc-crm/"),
-    "crmdig": rdflib.Namespace("http://www.ics.forth.gr/isl/CRMdig/"),
-    "data": rdflib.Namespace("http://cwrc.ca/cwrcdata/"),
-    "temp": rdflib.Namespace("http://www.temp.lincsproject.ca/"),
-    "dbpedia": rdflib.Namespace("http://dbpedia.org/resource/"),
-    "dcterms": rdflib.Namespace("http://purl.org/dc/terms/"),
-    "dctypes": rdflib.Namespace("http://purl.org/dc/dcmitype/"),
-    "eurovoc": rdflib.Namespace("http://eurovoc.europa.eu/"),
-    "foaf": rdflib.Namespace("http://xmlns.com/foaf/0.1/"),
-    "geonames": rdflib.Namespace("https://sws.geonames.org/"),
-    "gvp": rdflib.Namespace("http://vocab.getty.edu/ontology#"),
-    "loc": rdflib.Namespace("http://id.loc.gov/vocabulary/relators/"),
-    "oa": rdflib.Namespace("http://www.w3.org/ns/oa#"),
-    "org": rdflib.Namespace("http://www.w3.org/ns/org#"),
-    "owl": rdflib.Namespace("http://www.w3.org/2002/07/owl#"),
-    "prov": rdflib.Namespace("http://www.w3.org/ns/prov#"),
-    "prism": rdflib.Namespace("http://prismstandard.org/namespaces/1.2/basic/"),
-    "rdf": rdflib.Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#"),
-    "rdfs": rdflib.Namespace("http://www.w3.org/2000/01/rdf-schema#"),
-    "sem": rdflib.Namespace("http://semanticweb.cs.vu.nl/2009/11/sem/"),
-    "schema": rdflib.Namespace("http://schema.org/"),
-    "skos": rdflib.Namespace("http://www.w3.org/2004/02/skos/core#"),
-    "skosxl": rdflib.Namespace("http://www.w3.org/2008/05/skos-xl#"),
-    "time": rdflib.Namespace("http://www.w3.org/2006/time#"),
-    "vann": rdflib.Namespace("http://purl.org/vocab/vann/"),
-    "voaf": rdflib.Namespace("http://purl.org/vocommons/voaf#"),
-    "void": rdflib.Namespace("http://rdfs.org/ns/void#"),
-    "vs": rdflib.Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#"),
-    "orlando": rdflib.Namespace("https://commons.cwrc.ca/orlando:"),
+NS_MAP = {
+    "biography": "http://id.lincsproject.ca/biography/",
+    "context": "http://id.lincsproject.ca/context/",
+    "cwrc": "http://id.lincsproject.ca/cwrc/",
+    "event": "http://id.lincsproject.ca/event/",
+    "genre": "http://id.lincsproject.ca/genre/",
+    "identity": "http://id.lincsproject.ca/identity/",
+    "edit": "http://id.lincsproject.ca/edit/",
+    "ii": "http://id.lincsproject.ca/ii/",
+    "occupation": "http://id.lincsproject.ca/occupation/",
+    "persrel": "http://id.lincsproject.ca/persrel/",
+    "writing": "http://id.lincsproject.ca/writing/",
+    "cwrc_temp": "http://temp.lincsproject.ca/cwrc/",
+    "frbroo": "http://iflastandards.info/ns/fr/frbr/frbroo/",
+    "as": "http://www.w3.org/ns/activitystreams#",
+    "bibo": "http://purl.org/ontology/bibo/",
+    "biro": "http://purl.org/spar/biro/",
+    "bio": "http://purl.org/vocab/bio/0.1/",
+    "bf": "http://id.loc.gov/ontologies/bibframe/",
+    "cc": "http://creativecommons.org/ns#",
+    "cito": "http://purl.org/spar/cito/",
+    "crm": "http://www.cidoc-crm.org/cidoc-crm/",
+    "crmdig": "http://www.ics.forth.gr/isl/CRMdig/",
+    "data": "http://cwrc.ca/cwrcdata/",
+    "temp": "http://www.temp.lincsproject.ca/",
+    "dbpedia": "http://dbpedia.org/resource/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "dctypes": "http://purl.org/dc/dcmitype/",
+    "eurovoc": "http://eurovoc.europa.eu/",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "geonames": "https://sws.geonames.org/",
+    "gvp": "http://vocab.getty.edu/ontology#",
+    "loc": "http://id.loc.gov/vocabulary/relators/",
+    "oa": "http://www.w3.org/ns/oa#",
+    "org": "http://www.w3.org/ns/org#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "prism": "http://prismstandard.org/namespaces/1.2/basic/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "sem": "http://semanticweb.cs.vu.nl/2009/11/sem/",
+    "schema": "http://schema.org/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "skosxl": "http://www.w3.org/2008/05/skos-xl#",
+    "time": "http://www.w3.org/2006/time#",
+    "vann": "http://purl.org/vocab/vann/",
+    "voaf": "http://purl.org/vocommons/voaf#",
+    "void": "http://rdfs.org/ns/void#",
+    "vs": "http://www.w3.org/2003/06/sw-vocab-status/ns#",
+    "orlando": "https://commons.cwrc.ca/orlando:",
 }
+
+
+
 
 class Extraction(object):
     """docstring for Extraction"""
@@ -150,6 +153,14 @@ def remove_unwanted_tags(tag):
     for x in unwanted_tags:
         x.decompose()
 
+def init_NS_DICT():
+    NS_DICT = {}    
+    for x in NS_MAP.keys():
+        NS_DICT[x] = rdflib.Namespace(NS_MAP[x])
+    return NS_DICT
+
+
+
 
 def create_writer_map(path=None):
     if not path:
@@ -184,11 +195,11 @@ def create_org_map(path=None):
             # PERSON_MAP[row[0]] = row[1]
     
 
+# Setting up various mappings
+NS_DICT = init_NS_DICT()
 create_writer_map()
 create_person_map()
 create_org_map()
-    
-
 
 
 def get_current_time():
