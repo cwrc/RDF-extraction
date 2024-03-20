@@ -928,7 +928,7 @@ class BibliographyParse:
         generation_process.add(RDFS.label, rdflib.Literal(
             F"generation process of the MODS Record of Orlando bibiliographic records", lang="en"))
         adminMetaData.add(CRM.P33_used_specific_technique, generation_process)
-        resource.add(CRM.P140i_was_attributed_by, adminMetaData)
+        adminMetaData.add(CRM.P140_assigned_attribute_to, resource)
 
         i = 0
         # CIDOC: Creating publication event/expression creation
@@ -1013,9 +1013,8 @@ class BibliographyParse:
                         agent_label, lang="en"))
                     agent.add(RDF.type, CRMPC.PC14_carried_out_by)
                     agent.add(CRMPC.P02_has_range, agent_resource.identifier)
-                    agent.add(rdflib.URIRef("http://www.cidoc-crm.org/cidoc-crm/P14.1_in_the_role_of"),
-                              ROLES[name['role']])
-                    originInfo.add(CRMPC.P01i_is_domain_of, agent)
+                    agent.add(rdflib.URIRef("http://www.cidoc-crm.org/cidoc-crm/P14.1_in_the_role_of"), ROLES[name['role']])  
+                    agent.add(CRMPC.P01_has_domain, originInfo)
                 elif name['role'] is None:
                     logger.warning("Role not handled: "+str(name['role']))
 
@@ -1037,10 +1036,8 @@ class BibliographyParse:
 
                 publisher_role.add(RDF.type, CRMPC.PC14_carried_out_by)
                 publisher_role.add(CRMPC.P02_has_range, publisher.identifier)
-                publisher_role.add(
-                    CRMPC["P14.1_in_the_role_of"], ROLES["publisher"])
-
-                originInfo.add(CRMPC.P01i_is_domain_of, publisher_role)
+                publisher_role.add(CRMPC["P14.1_in_the_role_of"], ROLES["publisher"])
+                publisher_role.add(CRMPC.P01_has_domain, originInfo)
 
             # Adding place of publication
             if o['place']:
@@ -1103,7 +1100,7 @@ class BibliographyParse:
 
                 edition_node.add(CRM.P2_has_type, GETTY["300121294"])
 
-            resource.add(CRM.P94i_was_created_by, originInfo)
+            originInfo.add(CRM.P94_has_created,resource)
             i += 1
 
         i = 0
