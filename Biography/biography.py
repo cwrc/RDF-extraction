@@ -96,9 +96,10 @@ class Biography(object):
         self.std_name = utilities.get_entry_standard_name(doc)
         self.cwrc_uri = self.document.ENTRY.DIV0.STANDARD.get("REF")
 
-        if self.cwrc_uri in utilities.PERSON_MAP:
+        if self.cwrc_uri in utilities.PERSON_MAP and utilities.PERSON_MAP[self.cwrc_uri]["Primary Identifier"] != "":
             self.uri = utilities.PERSON_MAP[self.cwrc_uri]["Primary Identifier"]
         else:
+            logger.warning(F"Person not in authority list: {self.cwrc_uri}")
             self.uri = self.cwrc_uri
 
         self.uri = rdflib.term.URIRef(self.uri)
@@ -200,7 +201,7 @@ class Biography(object):
 
         g.add((self.uri, RDF.type, utilities.NS_DICT["crm"].E21_Person))
         g.add(
-            (self.uri, utilities.NS_DICT["crm"].P129i_is_subject_of, self.url))
+            (self.url, utilities.NS_DICT["crm"].P129_is_about, self.uri))
         
 
         g += self.create_triples(self.context_list)
@@ -209,7 +210,6 @@ class Biography(object):
 
         for x in self.organizations:
             g.add((x, utilities.NS_DICT["crm"].P107_has_current_or_former_member, self.uri))
-            g.add((self.uri, utilities.NS_DICT["crm"].P107i_is_current_or_former_member_of,x ))
 
         if self.wd_id and self.wd_id != str(self.uri):
             g.add((self.uri, utilities.NS_DICT["owl"].sameAs, rdflib.term.URIRef(self.wd_id)))

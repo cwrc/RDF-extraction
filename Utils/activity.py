@@ -448,12 +448,13 @@ precision: {self.precision}
                 activity.add(utilities.NS_DICT["crm"].P2_has_type, x)
 
 
-        if self.activity_path == "generic+":      
+        if self.activity_path == "generic+":
+            input("This block of code never is run!")      
             connection = g.resource(f"{self.connection_uri}")
             connection.add(RDFS.label, Literal(activity_label))
             connection.add(RDF.type, utilities.NS_DICT["crm"][self.activity_map["generic"]])
             connection.add(utilities.NS_DICT["crm"].P14_carried_out_by, self.person.uri)
-            connection.add(utilities.NS_DICT["crm"].P140i_was_attributed_by,activity)
+            activity.add(utilities.NS_DICT["crm"].P140_assigned_attribute_to,connection)
 
             for x in self.places:
                 connection.add(utilities.NS_DICT["crm"].P7_took_place_at, x)

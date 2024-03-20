@@ -54,7 +54,7 @@ class Citation(object):
         g.add((uri, RDF.type, utilities.NS_DICT["crm"].E33_Linguistic_Object))
         g.add((uri, RDF.type, utilities.NS_DICT["cito"].Citation))
         g.add((uri, RDFS.label, Literal(self.label, lang="en")))
-        g.add((uri, utilities.NS_DICT["crm"].P67i_is_referred_to_by, citing_uri))
+        g.add((citing_uri, utilities.NS_DICT["crm"].P67_refers_to, uri))
 
         if self.page:
             g.add((uri, utilities.NS_DICT["crm"].P190_has_symbolic_content, Literal(self.page)))
