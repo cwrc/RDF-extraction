@@ -62,11 +62,12 @@ def get_org_uri(tag):
     if uri:
         ORGS_USED.add(uri)
         if uri in utilities.ORGANIZATION_MAP:
-            print(utilities.ORGANIZATION_MAP[uri])
             if utilities.ORGANIZATION_MAP[uri]["Primary Identifier"] != "":
                 uri = utilities.ORGANIZATION_MAP[uri]["Primary Identifier"]
             else:
                 uri = utilities.ORGANIZATION_MAP[uri]['CWRC URI']
+        else:
+            logger.warn(F"Organization not in authority list: {uri}, {tag}")
         
         uri = rdflib.term.URIRef(uri)
     
@@ -111,8 +112,6 @@ def add_organizations():
     g = utilities.create_graph()
 
     for x in ORGS_USED:
-        if x not in ORGS_USED:
-            logger.warn(F"Organization not in authority list: {x}")
         if x in utilities.ORGANIZATION_MAP:
             primary_identifier = rdflib.term.URIRef(get_primary_uri(x))
             secondary_uris = get_secondary_uris(x)
@@ -120,6 +119,16 @@ def add_organizations():
             for secondary_uri in secondary_uris:
                 g.add((primary_identifier, OWL.sameAs, rdflib.term.URIRef(secondary_uri)))
                 
+            g.add((primary_identifier, RDFS.label, Literal(utilities.ORGANIZATION_MAP[x]["Preferred Name"])))
+            
+        elif x in TEMP_ORGS:
+            logger.warn(F"Organization not in authority list: {x}")
+            primary_identifier = rdflib.term.URIRef(x)
+            g.add((primary_identifier, RDF.type, utilities.NS_DICT["crm"].E74_Group))
+            g.add((primary_identifier, RDFS.label, Literal(TEMP_ORGS[x])))
+        else:
+            primary_identifier = rdflib.term.URIRef(x)
+            g.add((primary_identifier, RDF.type, utilities.NS_DICT["crm"].E74_Group))
             
     
     return g        
