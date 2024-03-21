@@ -3,6 +3,14 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix tgn: <http://vocab.getty.edu/tgn/> .
 
+geonames:4155751 a crm:E53_Place ;
+    rdfs:label "Florida"@en ;
+    crm:P168_place_is_defined_by "POINT(-82.5001 28.75054)" .
+
+geonames:1269750 a crm:E53_Place ;
+    rdfs:label "Republic of India"@en ;
+    crm:P168_place_is_defined_by "POINT(79 22)" .
+
 geonames:1000501 a crm:E53_Place ;
     rdfs:label "Grahamstown"@en ;
     crm:P168_place_is_defined_by "POINT(26.53276 -33.30422)" .
