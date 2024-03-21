@@ -1,40 +1,9 @@
-from time import clock_getres
 import rdflib
 from rdflib import RDF, RDFS, Literal
 from Utils import utilities
 
 
 logger = utilities.config_logger("biography")
-
-# TODO: Move this to utilities?
-WIKIDATA_MAP = {}
-
-def create_wikidata_map(path=None):
-    import csv
-    # if searching takes too long
-    # Create better searching mechanism
-    if not path:
-        path = '../data/wikidata_ids.csv'
-    with open(path, newline='', encoding='utf-8') as csvfile:
-        reader = csv.reader(csvfile)
-        next(reader)
-        for row in reader:
-            if row[0] not in WIKIDATA_MAP:
-                WIKIDATA_MAP[row[0]] = row[1]
-
-
-create_wikidata_map()
-
-
-def get_wd_identifier(id):
-    if id not in WIKIDATA_MAP:
-        logger.warning("Unable to find wikidata identifier for " + id)
-        return None
-    elif WIKIDATA_MAP[id] == "None":
-        return None
-    else:
-        return WIKIDATA_MAP[id]
-
 
 def get_possible_biographers(doc):
     # TODO: Review possible additional phrases/sentence structure to id biographers/cr
@@ -128,7 +97,6 @@ class Biography(object):
         self.family_members = {}
         self.get_family_members()
 
-        self.wd_id = get_wd_identifier(id)
         self.context_list = []
         self.event_list = []
         self.activity_list = []
@@ -211,13 +179,9 @@ class Biography(object):
         for x in self.organizations:
             g.add((x, utilities.NS_DICT["crm"].P107_has_current_or_former_member, self.uri))
 
-        if self.wd_id and self.wd_id != str(self.uri):
-            g.add((self.uri, utilities.NS_DICT["owl"].sameAs, rdflib.term.URIRef(self.wd_id)))
-
         g.add((self.uri, RDFS.label, Literal(self.name)))
         g.add((self.uri, utilities.NS_DICT["skos"].prefLabel, Literal(self.name)))
 
- 
         if str(self.uri) !=  self.cwrc_uri:
             g.add((self.uri, utilities.NS_DICT["owl"].sameAs, rdflib.term.URIRef(self.cwrc_uri)))
             
