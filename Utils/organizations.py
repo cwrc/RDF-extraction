@@ -67,7 +67,7 @@ def get_org_uri(tag):
             else:
                 uri = utilities.ORGANIZATION_MAP[uri]['CWRC URI']
         else:
-            logger.warn(F"Organization not in authority list: {uri}, {tag}")
+            logger.warn(F"Organization not in published authority list: {uri}, {tag}")
         
         uri = rdflib.term.URIRef(uri)
     
@@ -80,6 +80,7 @@ def get_org_uri(tag):
             logger.warn(F"No standard name or URI: {tag}")
             name = tag.get_text()
         uri = utilities.make_standard_uri(name + " ORG", ns="temp")
+        logger.warn(F"Organization has no REF attribute: {tag}, {uri}")
         ORGS_USED.add(uri)
         TEMP_ORGS[uri] = name
     
@@ -122,7 +123,6 @@ def add_organizations():
             g.add((primary_identifier, RDFS.label, Literal(utilities.ORGANIZATION_MAP[x]["Preferred Name"])))
             
         elif x in TEMP_ORGS:
-            logger.warn(F"Organization not in authority list: {x}")
             primary_identifier = rdflib.term.URIRef(x)
             g.add((primary_identifier, RDF.type, utilities.NS_DICT["crm"].E74_Group))
             g.add((primary_identifier, RDFS.label, Literal(TEMP_ORGS[x])))

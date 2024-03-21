@@ -308,11 +308,14 @@ def limit_to_full_sentences(string, max):
 """
 
 
+# TODO: Track names that are not in the published authority list
+# TODO: Track names missing REF attribute
 def get_name_uri(tag):
-    """Creates a uri based on the standard attribute of a tag if ref attribute not present"""
+    """Gets a uri from REF or creates uri based on the standard attribute of a tag"""
     uri = tag.get("REF")
     if not uri:
         try:
+            logger.warning(F"Name missing REF attribute: {tag}")
             return make_standard_uri(tag.get("STANDARD"))
         except AttributeError:
             if tag.get_text():
@@ -326,6 +329,21 @@ def get_name_uri(tag):
                 uri = new_uri
                 
         return rdflib.term.URIRef(uri)
+
+def get_person_secondary_uris(cwrc_uri):
+    if cwrc_uri not in PERSON_MAP:
+        logger.warning(F"Person not in published authority list: {cwrc_uri}")
+        return []
+    secondary_identifier = PERSON_MAP[cwrc_uri]["Secondary Identifier"]
+    secondary_uris = []
+    if secondary_identifier != "":
+        secondary_uris = secondary_identifier.split(" | ")
+    if PERSON_MAP[cwrc_uri]["Primary Identifier"] != "":
+        secondary_uris.append(cwrc_uri)
+    
+    secondary_uris = [rdflib.term.URIRef(x) for x in secondary_uris]    
+    
+    return secondary_uris
 
 def get_full_name(tag):
     full_name = tag.get_text()
@@ -479,52 +497,6 @@ def get_textscopes(tag):
                       for x in textscopes if x.get("REF")]
     return textscopes
 
-
-def get_sparql_results(endpoint_url, query):
-    from SPARQLWrapper import SPARQLWrapper, JSON
-    sparql = SPARQLWrapper(
-        endpoint_url, agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11")
-
-    sparql.setQuery(query)
-    sparql.setReturnFormat(JSON)
-    # return sparql.query().convert()
-    try:
-        res = sparql.query().convert()
-    except urllib.error.HTTPError as e:
-        logger.error(e)
-        res = None
-    return res
-
-
-def get_wd_identifier(id):
-    """Given orlando identifier, returns corresponding uri of wikidata should it exist
-        :param id: orlando id
-        :return: corresponding uri of wikidata should it exist, otherwise returns None
-    """
-    endpoint_url = "https://query.wikidata.org/sparql"
-
-    query = """SELECT ?item ?itemLabel
-    WHERE
-    {
-      ?item wdt:P6745 "%s"
-      SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
-    }
-    LIMIT 10""" % id
-    results = get_sparql_results(endpoint_url, query)
-    if not results:
-        return None
-    elif len(results["results"]["bindings"]) > 1:
-        logger.info("Multiple wikidata matches found:" + id)
-    elif len(results["results"]["bindings"]) < 1:
-        logger.info("Entry not found in wikidata: " + id)
-    else:
-        for result in results["results"]["bindings"]:
-            if (result["item"]["type"]) == "uri":
-                logger.info(F"Wikidata Identifier found: {id} | {result['item']['value']}")
-                return rdflib.term.URIRef(result["item"]["value"])
-        # TODO: Validate this against standard name perhaps
-        # result["itemLabel"]
-    return None
 
 
 """

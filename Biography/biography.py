@@ -68,7 +68,7 @@ class Biography(object):
         if self.cwrc_uri in utilities.PERSON_MAP and utilities.PERSON_MAP[self.cwrc_uri]["Primary Identifier"] != "":
             self.uri = utilities.PERSON_MAP[self.cwrc_uri]["Primary Identifier"]
         else:
-            logger.warning(F"Person not in authority list: {self.cwrc_uri}")
+            logger.warning(F"Person not in published authority list: {self.cwrc_uri}")
             self.uri = self.cwrc_uri
 
         self.uri = rdflib.term.URIRef(self.uri)
@@ -185,7 +185,10 @@ class Biography(object):
         if str(self.uri) !=  self.cwrc_uri:
             g.add((self.uri, utilities.NS_DICT["owl"].sameAs, rdflib.term.URIRef(self.cwrc_uri)))
             
- 
+        # Add sameAs for other URIs
+        secondary_uris =  utilities.get_person_secondary_uris(self.cwrc_uri)
+        for x in secondary_uris:
+            g.add((self.uri, utilities.NS_DICT["owl"].sameAs, rdflib.term.URIRef(x)))
 
         return g
 

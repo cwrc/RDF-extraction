@@ -377,14 +377,20 @@ class Context(object):
                 g.add((entity_uri,RDFS.label,Literal(utilities.get_value(x))))
                 g.add((entity_uri,RDF.type,utilities.NS_DICT["crm"].E74_Group))
 
-        # Adding names for all the people mentioned in an entry
+        # Adding names for all the people mentioned in an context
         generic_names = ["king","King","mother-in-law" , "Queen", "queen","husband","wife","partner" ,"father", "daughter","essay", "son","he","she","they","her","him","them", "sisters","the",  "mother", "sibling", "brother", "sister", "friend", "his wife", "her husband","his husband", "her wife", "their husband", "their wife", "lover", "family"]
         for x in self.tag.find_all("NAME"):
             uri = utilities.get_name_uri(x)
+            secondary_uris = []
             if not uri:
-                logger.warning(F"URI not found for: {x} within entry: {id}")
+                logger.warning(F"URI not found for: {x} within entry: {person.id}")
                 continue
-            else: 
+            else:
+                cwrc_uri = x.get("REF")
+                if not cwrc_uri:
+                    logger.warning(F"URI not found for: {x} within entry: {person.id}")
+                else:
+                    secondary_uris = utilities.get_person_secondary_uris(cwrc_uri) 
                 uri = rdflib.term.URIRef(uri)
             
             g.add((uri, RDF.type, utilities.NS_DICT["crm"].E21_Person))
@@ -393,6 +399,9 @@ class Context(object):
             altname = x.get_text()
             if altname and std_name != altname and altname not in generic_names:
                 g.add((uri, utilities.NS_DICT["skos"].altLabel, Literal(altname)))
+            
+            for y in secondary_uris:
+                g.add((uri, utilities.NS_DICT["owl"].sameAs, y))
        
 
         for x in self.tag.find_all("TITLE"):
