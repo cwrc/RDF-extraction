@@ -5,6 +5,15 @@ import os
 # Folder containing your XML files
 folder_path = '../data/person_2024-02-13/'
 
+files_of_interest = [
+                     "b29f292e-4d7e-4475-9512-7b09ab2b1cec.xml",
+"ed8fc2e4-827a-4694-8181-13c0a95e2efa.xml",
+"60347188-2616-4ef3-a0b7-09f7a7729107.xml",
+"0ba7b2ee-836e-4c5b-84c9-90452c9943ce.xml",
+"2ceb5c1c-3948-4fbf-9a42-7b16be9d061d.xml",
+"74b6f20d-5716-4828-92cf-4a68d13b374a.xml",
+                     ]
+
 # CSV file to store the extracted information
 csv_file_path = 'people_data.csv'
 
@@ -115,7 +124,8 @@ with open(csv_file_path, mode='w', newline='', encoding='utf-8') as file:
     writer.writeheader()
 
     # Process each XML file in the folder
-    for filename in os.listdir(folder_path):
+    # for filename in os.listdir(folder_path):
+    for filename in files_of_interest:
         if filename.endswith('.xml'):
             file_path = os.path.join(folder_path, filename)
             try:

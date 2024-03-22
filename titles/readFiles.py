@@ -198,5 +198,4 @@ if __name__ == "__main__":
                 title['count'] = 1
                 results[title['normalized']] = title
     
-    toFile("titles_no_bibliography.csv", results, unique_columns)
-        
+    toFile("titles_no_bibliography.csv", results, unique_columns)    

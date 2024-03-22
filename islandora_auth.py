@@ -87,8 +87,8 @@ def download_files(date, collection_key, latest_date=None):
         f.write(content)
         f.close()
         print()
-        if count % 100 == 0:
-            time.sleep(5)
+        # if count % 20 == 0:
+        #     time.sleep(5)
 
 def download_data(subset="all", latest_date=None):
     date = str(datetime.date.today())
@@ -141,6 +141,9 @@ def get_modified_entities(subset="all"):
             
         print(dates)
         
+        for date in dates:
+            print(date, len(dates[date]))
+        
 def get_author_id(xml):
     try:
         return xml.subject.get_text().strip()
@@ -188,9 +191,10 @@ def main(argv):
     # Store the session for future requests.
     login({"username": argv[0], "password": argv[1]})
     
+    get_modified_entities("bibliography")
     # get_modified_entities("entry")
     # download_data("entry", "2022-05-04")
-    download_data("person")
+    # download_data("person")
     # download_data("organizations")
     # download_data("events")
     # download_data("entry")
