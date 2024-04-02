@@ -49,7 +49,7 @@ def get_datastream(file_desc):
 
 def download_files(date, collection_key, latest_date=None):
     docs = get_document_ids(collections[collection_key])
-    dir = f"data/{collection_key}_{date}"
+    dir = f"data/{collection_key}_files/{collection_key}_{date}"
     print(collection_key)
 
     try:
