@@ -24,7 +24,7 @@ class Citation(object):
                 self.citing_entity = self.citing_entity.replace(" ","")
 
 
-    def to_triple(self, target_uri, source_url=None, source_label=None):
+    def to_triple(self, target_uri, source_url=None, source_label=None, source_title=None):
         g = utilities.create_graph()
 
         if not self.citing_entity:
@@ -63,6 +63,17 @@ class Citation(object):
             g.add((source_url, RDF.type, utilities.NS_DICT["crmdig"].D1_Digital_Object))
             g.add((source_url, utilities.NS_DICT["crm"].P67_refers_to, citing_uri))
             g.add((source_url, RDFS.label, Literal(source_label, lang="en")))
+            
+            
+            title_uri = source_url.split("#")[1] + "_title"
+            title_uri = utilities.create_uri("temp", title_uri)
+            
+            g.add((source_url, utilities.NS_DICT["crm"].P1_is_identified_by, title_uri))
+            g.add((title_uri, RDF.type, utilities.NS_DICT["crm"].E33_E41_Linguistic_Appellation))
+            g.add((title_uri, RDFS.label, Literal(F"Title of {source_title}", lang="en")))
+            g.add((title_uri, utilities.NS_DICT["crm"].P190_has_symbolic_content, Literal(source_title, lang="en")))
+            g.add((title_uri, utilities.NS_DICT["crm"].P2_has_type, utilities.NS_DICT["aat"]["300435445"]))
+
         else:
             logger.warning(F"No source URL for {self}")    
             

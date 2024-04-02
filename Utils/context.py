@@ -297,9 +297,11 @@ class Context(object):
             target_label = None
             source_uri = None
             source_label = self.heading["text"]
+            source_title = self.heading["text"]
             
             if person:
-                source_label = F"{person.name}: {self.heading['text']} | Orlando"
+                source_label = F"Webpage for {person.name}: {self.heading['text']} | Orlando"
+                source_title = F"{person.name}: {self.heading['text']} | Orlando"
                 source_uri = f"{self.src}{person.id}#{person.id}{self.heading['url']}"
                 target_label = person.name + ": " + self.context_label + " Excerpt"
 
@@ -318,7 +320,7 @@ class Context(object):
             # Adding citations
             for x in self.citations:
                 x.label = F"Citation for {target_label}"
-                g += x.to_triple(self.target_uri, source_uri, source_label)
+                g += x.to_triple(self.target_uri, source_uri, source_label, source_title)
 
             # Creating xpath selector
             xpath_uri = self.uri +"_xpath_selector"

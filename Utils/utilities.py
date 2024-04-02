@@ -33,6 +33,7 @@ PERSON_MAP = {}
 ORGANIZATION_MAP = {} 
 
 NS_MAP = {
+    "aat" : "http://vocab.getty.edu/aat/",
     "as" : "http://www.w3.org/ns/activitystreams#",
     "bf" : "http://id.loc.gov/ontologies/bibframe/",
     "bibo" : "http://purl.org/ontology/bibo/",
@@ -44,8 +45,8 @@ NS_MAP = {
     "context" : "http://id.lincsproject.ca/context/",
     "crm" : "http://www.cidoc-crm.org/cidoc-crm/",
     "crmdig" : "http://www.ics.forth.gr/isl/CRMdig/",
-    "cwrc" : "http://id.lincsproject.ca/cwrc/",
     "cwrc_temp" : "http://temp.lincsproject.ca/cwrc/",
+    "cwrc" : "http://id.lincsproject.ca/cwrc/",
     "data" : "http://cwrc.ca/cwrcdata/",
     "dbpedia" : "http://dbpedia.org/resource/",
     "dcterms" : "http://purl.org/dc/terms/",
