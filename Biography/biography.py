@@ -170,7 +170,10 @@ class Biography(object):
         g.add((self.uri, RDF.type, utilities.NS_DICT["crm"].E21_Person))
         g.add(
             (self.url, utilities.NS_DICT["crm"].P129_is_about, self.uri))
+        g.add((self.url, RDF.type, utilities.NS_DICT["crmdig"].D1_Digital_Object ))
         
+        url_label = F"Webpage for {self.name} | Orlando"
+        g.add((self.url, RDFS.label, rdflib.Literal(url_label,lang="en") ))
 
         g += self.create_triples(self.context_list)
         g += self.create_triples(self.event_list)

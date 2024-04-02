@@ -69,12 +69,7 @@ class Occupation(object):
             self.uri = other_attributes
 
         self.uri = utilities.create_uri("occupation", self.predicate)
-    """
-    TODO figure out if i can just return tuple or triple without creating
-    a whole graph
-    Evaluate efficiency of creating this graph or just returning a tuple and
-    have the biography deal with it
-    """
+
 
     def to_triple(self, context):
         g = utilities.create_graph()
@@ -317,7 +312,6 @@ def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
         income_statements = [ IncomeStatement(x, income_statement_label, context_id+"_remuneration_amount") for x in remuneration_tags ]
         income_event = None
         if income_statements:
-            print(*income_statements, sep="\n")
             activity_id = F"{context_id}_remuneration"
             temp_attr = {utilities.NS_DICT["crm"].P141_assigned : [ x.uri for x in income_statements ]}
             temp_attr[utilities.NS_DICT["crm"].P2_has_type] = [utilities.create_uri("biography","occupationIncome")]
