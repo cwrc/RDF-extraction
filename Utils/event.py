@@ -214,7 +214,7 @@ class Event(object):
             g.add((self.uri, utilities.NS_DICT["sem"].hasPlace, blanknode))
             g.add((blanknode, RDFS.label, Literal(self.place_str[index])))
             g.add((blanknode, utilities.NS_DICT["cwrc"].hasMappedLocation, place))
-            g.add((blanknode, RDF.type, utilities.NS_DICT["cwrc"].mappedPlace))
+            g.add((blanknode, RDF.type, utilities.NS_DICT["biography"].mappedPlace))
             
 
 
@@ -276,7 +276,7 @@ class Event(object):
             g.add((self.uri, utilities.NS_DICT["sem"].hasPlace, blanknode))
             g.add((blanknode, RDFS.label, Literal(self.place_str[index])))
             g.add((blanknode, utilities.NS_DICT["cwrc"].hasMappedLocation, place))
-            g.add((blanknode, RDF.type, utilities.NS_DICT["cwrc"].mappedPlace))
+            g.add((blanknode, RDF.type, utilities.NS_DICT["biography"].mappedPlace))
             
 
 
