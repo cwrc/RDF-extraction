@@ -33,8 +33,6 @@ XML = rdflib.Namespace("http://www.w3.org/XML/1998/namespace")
 MARC_REL = rdflib.Namespace("http://id.loc.gov/vocabulary/relators/")
 DATA = rdflib.Namespace("http://cwrc.ca/cwrcdata/")
 TEMP = rdflib.Namespace("http://www.temp.lincsproject.ca/")
-# <http://www.temp.lincsproject.ca/> .
-
 
 LINCS = rdflib.Namespace("http://id.lincsproject.ca/")
 GENRE = rdflib.Namespace("http://id.lincsproject.ca/genre/")
@@ -217,6 +215,12 @@ def dateParse(date_string: str, both=True):
         return dt.isoformat(), True, end_dt.isoformat()
     except ValueError:
         pass
+    try:
+        dt = datetime.datetime.strptime(date_string, "%Y")
+        end_dt = dt + datetime.timedelta(days=365, seconds=-1)
+        return dt.isoformat(), True, end_dt.isoformat()
+    except ValueError:
+        pass
 
     return date_string, False, date_string
 
@@ -393,18 +397,26 @@ class BibliographyParse:
 # See: https://lincs-cfi.slack.com/archives/D016S5Y05K2/p1617723686006600?thread_ts=1617648071.002900&cid=D016S5Y05K2
     related_item_map = {
         "host": CRM.P148_has_component,
-        "constituent": FRBROO.R5i_is_component_of,
+        "constituent": FRBROO.R5_has_component,
         "iconstituent": FRBROO.R5_has_component,
-        "isReferencedBy": CRM.P67i_is_referenced_by,
+        "isReferencedBy": CRM.P67_refers_to,
         "preceding": FRBROO.R1_is_logical_successor_of,
         "references": CRM.P67_refers_to,
         "reviewOf": CRM.P129_is_about,
-        "series": CRM.P148i_is_component_of,
-        "succeeding": FRBROO.R1i_has_successor
+        "series": CRM.P148_has_component,
+        "succeeding": FRBROO.R1_is_logical_successor_of
+        
         # "original": BF.original,
         # "otherFormat": BF.otherPhysicalFormat,
         # "otherVersion": BF.otherEdition,
     }
+    INVERSE_RELATED_ITEMS = [
+        "isReferencedBy",
+        "constituent",
+        "series",
+        "succeeding",
+    ]
+    
 
     def __init__(self, filename, graph, resource_name, related_item=False):
         """
@@ -845,7 +857,7 @@ class BibliographyParse:
         # The Expression
         instance = g.resource(self.placeholderURI + "_instance")
         instance.add(RDF.type, FRBROO.F2_Expression)
-        instance.add(FRBROO.R3i_realises, resource)
+        resource.add(FRBROO.R3_is_realised_in, instance)
 
         # CIDOC: Creating titles
         i = 0
@@ -1118,10 +1130,9 @@ class BibliographyParse:
                     if bp.mainTitle is None:
                         work.add(RDFS.label, rdflib.Literal(
                             F"{part['type']} of {self.mainTitle}", lang="en"))
-                    if part["type"] == "constituent":
-                        work.add(self.related_item_map[part['type']], instance)
-                        instance.add(
-                            self.related_item_map["i"+part['type']], work)
+
+                    if part['type'] in self.INVERSE_RELATED_ITEMS:
+                        work.add(self.related_item_map[part['type']], resource)
                     else:
                         resource.add(self.related_item_map[part['type']], work)
                     i += 1
