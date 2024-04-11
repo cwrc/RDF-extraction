@@ -952,7 +952,7 @@ class BibliographyParse:
                 title_res = g.resource(F"{self.placeholderURI}_title_{i}")
                 title_res.add(RDF.type, CRM.E33_E41_Linguistic_Appellation)
                 title_res.add(CRM.P190_has_symbolic_content,
-                              rdflib.Literal(item["title"].strip()),lang="en")
+                              rdflib.Literal(item["title"].strip(),lang="en"))
 
                 if item['usage'] == 'alternative':
                     title_res.add(RDFS.label, rdflib.Literal(
