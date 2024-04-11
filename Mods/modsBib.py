@@ -89,6 +89,8 @@ STRING_MATCH_RATIO = 95
 ORGANIZATION_MAPPING = {}
 PUBLISHER_MAPPING = {}
 PEOPLE_MAPPING = {}
+EXTERNAL_TO_CWRC_MAPPING = {}
+USED_ORGANIZATIONS = {}
 
 USED_GENRES = []
 UNIQUE_UNMATCHED_PLACES = set()
@@ -354,6 +356,8 @@ class WritingParse:
 def get_person_name(person_uri):
     if person_uri in PEOPLE_MAPPING:
         return PEOPLE_MAPPING[person_uri]["Full Name"]
+    elif person_uri in EXTERNAL_TO_CWRC_MAPPING:
+        return PEOPLE_MAPPING[EXTERNAL_TO_CWRC_MAPPING[person_uri]]["Full Name"]
     else:
         logger.warning(F"Person not in published authority list: {person_uri}")
     return None
@@ -362,6 +366,7 @@ def get_person_uri(identifier):
     if identifier in PEOPLE_MAPPING:
         uri = PEOPLE_MAPPING[identifier]['Primary Identifier']
         if uri != "":
+            EXTERNAL_TO_CWRC_MAPPING[uri] = identifier
             return uri
     else:
         logger.warn(F"Person not in published authority list: {identifier}")
@@ -388,6 +393,7 @@ def get_org_uri(identifier):
     if identifier in ORGANIZATION_MAPPING:
         if ORGANIZATION_MAPPING[identifier]["Primary Identifier"] != "":
             uri = ORGANIZATION_MAPPING[identifier]["Primary Identifier"]
+            EXTERNAL_TO_CWRC_MAPPING[uri] = identifier
         else:
             uri = ORGANIZATION_MAPPING[identifier]['CWRC URI']
     else:
@@ -678,7 +684,7 @@ class BibliographyParse:
                 uri = np.attrs["valueURI"]
 
             names.append({"type": name_type, "role": role,
-                          "name": name.strip(), "uri": uri.strip(), "altname": alt.strip()})
+                          "name": name, "uri": uri, "altname": alt})
 
         return names
 
@@ -877,19 +883,28 @@ class BibliographyParse:
         if origin['publisher uri']:
             if origin['publisher uri'] in ORGANIZATION_MAPPING:
                 publisher =  get_org_uri(origin['publisher uri'])
+                origin['publisher type'] = "group"
+                origin['publisher label'] = ORGANIZATION_MAPPING[origin['publisher uri']]["Preferred Name"]
             elif origin['publisher'] in ORGANIZATION_MAPPING:
+                origin['publisher type'] = "group"
+                origin['publisher label'] = ORGANIZATION_MAPPING[origin['publisher']]["Preferred Name"]
                 publisher = get_org_uri(origin['publisher'])
             elif origin['publisher uri'] in PEOPLE_MAPPING:
+                origin['publisher type'] = "person"
                 publisher = get_person_uri(origin['publisher uri'])
+                origin['publisher label'] = PEOPLE_MAPPING[origin['publisher uri']]["Full Name"]
             elif origin['publisher'] in PUBLISHER_MAPPING:
+                origin['publisher type'] = "group"
                 publisher = PUBLISHER_MAPPING[origin['publisher']]
             else:
                 publisher = origin['publisher uri']
         else:
             if origin['publisher'] in ORGANIZATION_MAPPING:
                 publisher = ORGANIZATION_MAPPING[origin['publisher']]
+                origin['publisher type'] = "group"
             elif origin['publisher'] in PUBLISHER_MAPPING:
                 publisher = PUBLISHER_MAPPING[origin['publisher']]
+                origin['publisher type'] = "group"
             else:
                 logger.warning(F"Publisher not in published authority list: {origin['publisher']}")
                 publisher = F"{self.placeholderURI}_activity_statement_publisher_{index}"
@@ -911,7 +926,7 @@ class BibliographyParse:
             resource.add(RDF.type, FRBROO.F1_Work)
 
         if self.mainTitle is not None:
-            resource.add(RDFS.label, rdflib.Literal(self.mainTitle))
+            resource.add(RDFS.label, rdflib.Literal(self.mainTitle,lang="en"))
 
         resource.add(CRM.P2_has_type, self.get_type())
 
@@ -937,7 +952,7 @@ class BibliographyParse:
                 title_res = g.resource(F"{self.placeholderURI}_title_{i}")
                 title_res.add(RDF.type, CRM.E33_E41_Linguistic_Appellation)
                 title_res.add(CRM.P190_has_symbolic_content,
-                              rdflib.Literal(item["title"].strip()))
+                              rdflib.Literal(item["title"].strip()),lang="en")
 
                 if item['usage'] == 'alternative':
                     title_res.add(RDFS.label, rdflib.Literal(
@@ -1051,9 +1066,9 @@ class BibliographyParse:
                     agent_internal_ID = name["uri"]
 
                 if name["full name"]:
-                    agent_resource.add(RDFS.label, rdflib.Literal(name["full name"]))
+                    agent_resource.add(RDFS.label, rdflib.Literal(name["full name"],lang="en"))
                 else:
-                    agent_resource.add(RDFS.label, rdflib.Literal(name["name"]))
+                    agent_resource.add(RDFS.label, rdflib.Literal(name["name"],lang="en"))
 
                 # TODO: revise these possibly to roles
                 if name['type'] == 'personal':
@@ -1063,15 +1078,21 @@ class BibliographyParse:
 
                 if "altname" in name and name["altname"]:
                     agent_resource.add(
-                        SKOS.altLabel, rdflib.Literal(name["altname"]))
+                        SKOS.altLabel, rdflib.Literal(name["altname"],lang="en"))
 
 
                 # Attaching role to the event
-                if name['role'] in ROLES or name['role'] is None:
-                    if name['role'] is None:
+                if name['role'] is None:
                         name['role'] = "author"
-                    agent_label = F"{name['name']} in role of {name['role']}"
+                
+                
+                if name['role'] in ROLES:
                     uri = None
+                    if name["full name"]:    
+                        agent_label = F"{name['full name']} in role of {name['role']}"
+                    else:
+                        agent_label = F"{name['name']} in role of {name['role']}"
+                    
                     if agent_label in AGENTS:
                         uri = AGENTS[agent_label]
                     else:
@@ -1084,8 +1105,7 @@ class BibliographyParse:
                             AGENTS[agent_label] = rdflib.URIRef(uri)
 
                     agent = g.resource(uri)
-                    agent.add(RDFS.label, rdflib.Literal(
-                        agent_label, lang="en"))
+                    agent.add(RDFS.label, rdflib.Literal(agent_label, lang="en"))
                     agent.add(RDF.type, CRMPC.PC14_carried_out_by)
                     agent.add(CRMPC.P02_has_range, agent_resource.identifier)
                     agent.add(rdflib.URIRef("http://www.cidoc-crm.org/cidoc-crm/P14.1_in_the_role_of"), ROLES[name['role']])  
@@ -1101,8 +1121,18 @@ class BibliographyParse:
 
                 publisher.add(RDF.type, CRM.E39_Actor)
                 publisher.add(SKOS.altLabel, rdflib.Literal(
-                    F"{o['publisher']}"))
+                    F"{o['publisher']}",lang="en"))
                 publisher.add(CRM.P2_has_type, ROLES["publisher"])
+                
+                if "publisher type" in o:
+                    if o["publisher type"] == "person":
+                        publisher.add(RDF.type, CRM.E21_Person)
+                    else:
+                        publisher.add(RDF.type, CRM.E74_Group)
+                
+                if "publisher label" in o:
+                    publisher.add(RDFS.label, rdflib.Literal(o["publisher label"],lang="en"))
+
 
                 publisher_role = g.resource(
                     F"{self.placeholderURI}_publisher_role_{i}")
@@ -1121,7 +1151,7 @@ class BibliographyParse:
                     for item in place_map:
                         place = g.resource(place_map[item])
                         originInfo.add(CRM.P7_took_place_at, place)
-                        place.add(SKOS.altLabel, rdflib.Literal(item))
+                        place.add(SKOS.altLabel, rdflib.Literal(item,lang="en"))
                         place.add(RDF.type, CRM.E53_Place)
 
             # Adding date of publication
@@ -1171,7 +1201,7 @@ class BibliographyParse:
                 instance.add(CRM.P1_is_identified_by, edition_node)
                 edition_node.add(RDF.type, CRM.E33_E41_Linguistic_Appellation)
                 edition_node.add(CRM.P190_has_symbolic_content,
-                                 rdflib.Literal(o['edition']))
+                                 rdflib.Literal(o['edition'],lang="en"))
 
                 edition_node.add(CRM.P2_has_type, GETTY["300121294"])
 
@@ -1236,7 +1266,7 @@ class BibliographyParse:
                 extent_resource.add(CRM.P106_is_composed_of, vol_node)
                 vol_node.add(RDF.type, CRM.E33_E41_Linguistic_Appellation)
                 vol_node.add(CRM.P190_has_symbolic_content,
-                             rdflib.Literal(p['volume']))
+                             rdflib.Literal(p['volume'],lang="en"))
                 vol_node.add(CRM.P2_has_type, SCHEMA.volumeNumber)
                 extent_label += "Volume " + p['volume']
 
@@ -1246,7 +1276,7 @@ class BibliographyParse:
                 extent_resource.add(CRM.P106_is_composed_of, issue_node)
                 issue_node.add(RDF.type, CRM.E33_E41_Linguistic_Appellation)
                 issue_node.add(CRM.P190_has_symbolic_content,
-                               rdflib.Literal(p['issue']))
+                               rdflib.Literal(p['issue'],lang="en"))
                 issue_node.add(CRM.P2_has_type, SCHEMA.issueNumber)
 
                 if p['volume']:
@@ -1258,7 +1288,7 @@ class BibliographyParse:
                 extent_resource.add(CRM.P106_is_composed_of, page_node)
                 page_node.add(RDF.type, CRM.E33_E41_Linguistic_Appellation)
                 page_node.add(CRM.P190_has_symbolic_content,
-                              rdflib.Literal(p['value']))
+                              rdflib.Literal(p['value'],lang="en"))
                 page_node.add(CRM.P2_has_type, rdflib.URIRef(
                     "http://www.wikidata.org/entity/Q11325816"))
 
