@@ -20107,199 +20107,199 @@ geonames:9610282 a crm:E53_Place ;
     rdfs:label "Normandy"@en ;
     crm:P168_place_is_defined_by "POINT(0.3241 49.08826)" .
 
-tgn:1000105 a crm:53_Place ;
+tgn:1000105 a crm:E53_Place ;
     rdfs:label "Bangladesh"@en .
 
-tgn:1000121 a crm:53_Place ;
+tgn:1000121 a crm:E53_Place ;
     rdfs:label "Jordan"@en .
 
-tgn:1000762 a crm:53_Place ;
+tgn:1000762 a crm:E53_Place ;
     rdfs:label "Seine-et-Oise"@en .
 
-tgn:1028497 a crm:53_Place ;
+tgn:1028497 a crm:E53_Place ;
     rdfs:label "Birkdale"@en .
 
-tgn:1030622 a crm:53_Place ;
+tgn:1030622 a crm:E53_Place ;
     rdfs:label "Shotton Colliery"@en .
 
-tgn:1030655 a crm:53_Place ;
+tgn:1030655 a crm:E53_Place ;
     rdfs:label "Smithfield"@en .
 
-tgn:1083350 a crm:53_Place ;
+tgn:1083350 a crm:E53_Place ;
     rdfs:label "Attock"@en .
 
-tgn:1084975 a crm:53_Place ;
+tgn:1084975 a crm:E53_Place ;
     rdfs:label "Bi'r ʻAlī"@en .
 
-tgn:1100676 a crm:53_Place ;
+tgn:1100676 a crm:E53_Place ;
     rdfs:label "Kings, Valley of the"@en .
 
-tgn:1103028 a crm:53_Place ;
+tgn:1103028 a crm:E53_Place ;
     rdfs:label "Queens Park"@en .
 
-tgn:1103466 a crm:53_Place ;
+tgn:1103466 a crm:E53_Place ;
     rdfs:label "Ettrick Forest"@en .
 
-tgn:1111742 a crm:53_Place ;
+tgn:1111742 a crm:E53_Place ;
     rdfs:label "Redesdale"@en .
 
-tgn:1121388 a crm:53_Place ;
+tgn:1121388 a crm:E53_Place ;
     rdfs:label "Arno River"@en .
 
-tgn:1130657 a crm:53_Place ;
+tgn:1130657 a crm:E53_Place ;
     rdfs:label "Tas"@en .
 
-tgn:4001602 a crm:53_Place ;
+tgn:4001602 a crm:E53_Place ;
     rdfs:label "Bledlow"@en .
 
-tgn:4002098 a crm:53_Place ;
+tgn:4002098 a crm:E53_Place ;
     rdfs:label "Caldecotte"@en .
 
-tgn:4002799 a crm:53_Place ;
+tgn:4002799 a crm:E53_Place ;
     rdfs:label "Colne Valley"@en .
 
-tgn:4003095 a crm:53_Place ;
+tgn:4003095 a crm:E53_Place ;
     rdfs:label "Nantcol, Cwm"@en .
 
-tgn:4004295 a crm:53_Place ;
+tgn:4004295 a crm:E53_Place ;
     rdfs:label "Creux-de-Genthod"@en .
 
-tgn:4012707 a crm:53_Place ;
+tgn:4012707 a crm:E53_Place ;
     rdfs:label "Shepherd's Bush"@en .
 
-tgn:6000511 a crm:53_Place ;
+tgn:6000511 a crm:E53_Place ;
     rdfs:label "Austria-Hungary"@en .
 
-tgn:6000963 a crm:53_Place ;
+tgn:6000963 a crm:E53_Place ;
     rdfs:label "British Bechuanaland"@en .
 
-tgn:6005333 a crm:53_Place ;
+tgn:6005333 a crm:E53_Place ;
     rdfs:label "Seleucia"@en .
 
-tgn:7001191 a crm:53_Place ;
+tgn:7001191 a crm:E53_Place ;
     rdfs:label "Abū Qīr, Khalīj"@en .
 
-tgn:7002460 a crm:53_Place ;
+tgn:7002460 a crm:E53_Place ;
     rdfs:label "Northwest Frontier"@en .
 
-tgn:7002787 a crm:53_Place ;
+tgn:7002787 a crm:E53_Place ;
     rdfs:label "Galicia"@en .
 
-tgn:7002851 a crm:53_Place ;
+tgn:7002851 a crm:E53_Place ;
     rdfs:label "Alsace-Lorraine"@en .
 
-tgn:7004583 a crm:53_Place ;
+tgn:7004583 a crm:E53_Place ;
     rdfs:label "Vietri sul Mare"@en .
 
-tgn:7007809 a crm:53_Place ;
+tgn:7007809 a crm:E53_Place ;
     rdfs:label "Szczecin"@en .
 
-tgn:7010004 a crm:53_Place ;
+tgn:7010004 a crm:E53_Place ;
     rdfs:label "Cambo"@en .
 
-tgn:7011485 a crm:53_Place ;
+tgn:7011485 a crm:E53_Place ;
     rdfs:label "Glyndebourne"@en .
 
-tgn:7012156 a crm:53_Place ;
+tgn:7012156 a crm:E53_Place ;
     rdfs:label "Beddington"@en .
 
-tgn:7016540 a crm:53_Place ;
+tgn:7016540 a crm:E53_Place ;
     rdfs:label "Cape of Good Hope"@en .
 
-tgn:7016879 a crm:53_Place ;
+tgn:7016879 a crm:E53_Place ;
     rdfs:label "Indochina"@en .
 
-tgn:7016886 a crm:53_Place ;
+tgn:7016886 a crm:E53_Place ;
     rdfs:label "North Africa"@en .
 
-tgn:7017217 a crm:53_Place ;
+tgn:7017217 a crm:E53_Place ;
     rdfs:label "Arduenna Silva"@en .
 
-tgn:7017245 a crm:53_Place ;
+tgn:7017245 a crm:E53_Place ;
     rdfs:label "Sunderland"@en .
 
-tgn:7018842 a crm:53_Place ;
+tgn:7018842 a crm:E53_Place ;
     rdfs:label "Australasian"@en .
 
-tgn:7024412 a crm:53_Place ;
+tgn:7024412 a crm:E53_Place ;
     rdfs:label "Ottoman Empire"@en .
 
-tgn:7025558 a crm:53_Place ;
+tgn:7025558 a crm:E53_Place ;
     rdfs:label "Barbary Coast"@en .
 
-tgn:7025839 a crm:53_Place ;
+tgn:7025839 a crm:E53_Place ;
     rdfs:label "Higher Bockhampton"@en .
 
-tgn:7026939 a crm:53_Place ;
+tgn:7026939 a crm:E53_Place ;
     rdfs:label "Sydmonton"@en .
 
-tgn:7026945 a crm:53_Place ;
+tgn:7026945 a crm:E53_Place ;
     rdfs:label "Walhampton"@en .
 
-tgn:7028116 a crm:53_Place ;
+tgn:7028116 a crm:E53_Place ;
     rdfs:label "South Ormsby"@en .
 
-tgn:7029195 a crm:53_Place ;
+tgn:7029195 a crm:E53_Place ;
     rdfs:label "Somers Town"@en .
 
-tgn:7029845 a crm:53_Place ;
+tgn:7029845 a crm:E53_Place ;
     rdfs:label "Balby"@en .
 
-tgn:7029866 a crm:53_Place ;
+tgn:7029866 a crm:E53_Place ;
     rdfs:label "Bilton"@en .
 
-tgn:7029906 a crm:53_Place ;
+tgn:7029906 a crm:E53_Place ;
     rdfs:label "Carleton"@en .
 
-tgn:7029934 a crm:53_Place ;
+tgn:7029934 a crm:E53_Place ;
     rdfs:label "Cottingley"@en .
 
-tgn:7029964 a crm:53_Place ;
+tgn:7029964 a crm:E53_Place ;
     rdfs:label "Eccup"@en .
 
-tgn:7030436 a crm:53_Place ;
+tgn:7030436 a crm:E53_Place ;
     rdfs:label "South Tyrol"@en .
 
-tgn:7030963 a crm:53_Place ;
+tgn:7030963 a crm:E53_Place ;
     rdfs:label "Weedon Lois"@en .
 
-tgn:7032927 a crm:53_Place ;
+tgn:7032927 a crm:E53_Place ;
     rdfs:label "West Africa"@en .
 
-tgn:7032932 a crm:53_Place ;
+tgn:7032932 a crm:E53_Place ;
     rdfs:label "East Africa"@en .
 
-tgn:7334118 a crm:53_Place ;
+tgn:7334118 a crm:E53_Place ;
     rdfs:label "El Terreno"@en .
 
-tgn:7448029 a crm:53_Place ;
+tgn:7448029 a crm:E53_Place ;
     rdfs:label "Sheriff Muir"@en .
 
-tgn:7449416 a crm:53_Place ;
+tgn:7449416 a crm:E53_Place ;
     rdfs:label "Glenoe"@en .
 
-tgn:7451726 a crm:53_Place ;
+tgn:7451726 a crm:E53_Place ;
     rdfs:label "Frome Vauchurch"@en .
 
-tgn:7454276 a crm:53_Place ;
+tgn:7454276 a crm:E53_Place ;
     rdfs:label "Buckhurst Hill"@en .
 
-tgn:7864661 a crm:53_Place ;
+tgn:7864661 a crm:E53_Place ;
     rdfs:label "Buckland"@en .
 
-tgn:8060300 a crm:53_Place ;
+tgn:8060300 a crm:E53_Place ;
     rdfs:label "Emmaus"@en .
 
-tgn:8711667 a crm:53_Place ;
+tgn:8711667 a crm:E53_Place ;
     rdfs:label "Spanish Netherlands"@en .
 
-tgn:7000198 a crm:53_Place ;
+tgn:7000198 a crm:E53_Place ;
     rdfs:label "India"@en .
 
-tgn:7004550 a crm:53_Place ;
+tgn:7004550 a crm:E53_Place ;
     rdfs:label "West Indies (archipelago)"@en .
 
-tgn:7017283 a crm:53_Place ;
+tgn:7017283 a crm:E53_Place ;
     rdfs:label " Glasgow (inhabited place)"@en .
 
 
