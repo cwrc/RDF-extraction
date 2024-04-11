@@ -86,6 +86,7 @@ GEOMAPPER = None
 GENRE_MAPPING = {}  # labels to vocab URIs
 STRING_MATCH_RATIO = 95
 
+ORGANIZATION_MAPPING = {}
 PUBLISHER_MAPPING = {}
 PEOPLE_MAPPING = {}
 
@@ -349,6 +350,69 @@ class WritingParse:
 
             else:
                 logger.error(F"TEXTSCOPE ({ts}) missing REF & DBREF attribute from {self.filename}")
+
+def get_person_name(person_uri):
+    if person_uri in PEOPLE_MAPPING:
+        return PEOPLE_MAPPING[person_uri]["Full Name"]
+    else:
+        logger.warning(F"Person not in published authority list: {person_uri}")
+    return None
+def get_person_uri(identifier):
+    uri = None
+    if identifier in PEOPLE_MAPPING:
+        uri = PEOPLE_MAPPING[identifier]['Primary Identifier']
+        if uri != "":
+            return uri
+    else:
+        logger.warn(F"Person not in published authority list: {identifier}")
+        
+    return identifier
+
+def get_person_secondary_uris(cwrc_uri):
+    if cwrc_uri not in PEOPLE_MAPPING:
+        logger.warning(F"Person not in published authority list: {cwrc_uri}")
+        return []
+    secondary_identifier = PEOPLE_MAPPING[cwrc_uri]["Secondary Identifier"]
+    secondary_uris = []
+    if secondary_identifier != "":
+        secondary_uris = secondary_identifier.split(" | ")
+    if PEOPLE_MAPPING[cwrc_uri]["Primary Identifier"] != "":
+        secondary_uris.append(cwrc_uri)
+    
+    # secondary_uris = [rdflib.term.URIRef(x) for x in secondary_uris]    
+    
+    return secondary_uris
+
+def get_org_uri(identifier):
+    uri = None
+    if identifier in ORGANIZATION_MAPPING:
+        if ORGANIZATION_MAPPING[identifier]["Primary Identifier"] != "":
+            uri = ORGANIZATION_MAPPING[identifier]["Primary Identifier"]
+        else:
+            uri = ORGANIZATION_MAPPING[identifier]['CWRC URI']
+    else:
+        uri = identifier
+        logger.warn(F"Organization not in published authority list: {identifier}")
+    
+    uri = rdflib.term.URIRef(uri)
+    return uri
+
+def get_primary_uri(cwrc_uri):
+    primary_identifier = ORGANIZATION_MAPPING[cwrc_uri]["Primary Identifier"]
+    
+    if primary_identifier == "":
+        return cwrc_uri 
+    return primary_identifier
+
+def get_secondary_uris(cwrc_uri):
+    secondary_identifier = ORGANIZATION_MAPPING[cwrc_uri]["Secondary Identifier"]
+    secondary_uris = []
+    if secondary_identifier != "":
+        secondary_uris = secondary_identifier.split(" | ")
+    
+    secondary_uris.append(cwrc_uri)
+    
+    return secondary_uris
 
 
 class BibliographyParse:
@@ -614,7 +678,7 @@ class BibliographyParse:
                 uri = np.attrs["valueURI"]
 
             names.append({"type": name_type, "role": role,
-                          "name": name, "uri": uri, "altname": alt})
+                          "name": name.strip(), "uri": uri.strip(), "altname": alt.strip()})
 
         return names
 
@@ -811,19 +875,25 @@ class BibliographyParse:
     def get_publisher_id(self, origin, index):
         publisher = None
         if origin['publisher uri']:
-            if origin['publisher uri'] in PUBLISHER_MAPPING:
-                publisher = PUBLISHER_MAPPING[origin['publisher uri']]
+            if origin['publisher uri'] in ORGANIZATION_MAPPING:
+                publisher =  get_org_uri(origin['publisher uri'])
+            elif origin['publisher'] in ORGANIZATION_MAPPING:
+                publisher = get_org_uri(origin['publisher'])
+            elif origin['publisher uri'] in PEOPLE_MAPPING:
+                publisher = get_person_uri(origin['publisher uri'])
             elif origin['publisher'] in PUBLISHER_MAPPING:
                 publisher = PUBLISHER_MAPPING[origin['publisher']]
-            elif origin['publisher uri'] in PEOPLE_MAPPING:
-                publisher = PEOPLE_MAPPING[origin['publisher uri']]
             else:
                 publisher = origin['publisher uri']
         else:
-            if origin['publisher'] in PUBLISHER_MAPPING:
+            if origin['publisher'] in ORGANIZATION_MAPPING:
+                publisher = ORGANIZATION_MAPPING[origin['publisher']]
+            elif origin['publisher'] in PUBLISHER_MAPPING:
                 publisher = PUBLISHER_MAPPING[origin['publisher']]
             else:
+                logger.warning(F"Publisher not in published authority list: {origin['publisher']}")
                 publisher = F"{self.placeholderURI}_activity_statement_publisher_{index}"
+        
         return publisher
 
     def build_graph(self, part_type=None):
@@ -962,13 +1032,15 @@ class BibliographyParse:
                 # TODO: insert some tests surrounding names
 
                 agent_resource = None
+                name["full name"] = None
                 agent_internal_ID = None  # This will keep the cwrc id for the agent
                 if "uri" in name and name["uri"]:
-                    agent_resource = self.get_person_id(name["uri"])
+                    agent_resource = get_person_uri(name["uri"])
                     if agent_resource:
+                        name["full name"] = get_person_name(agent_resource)
                         agent_resource = g.resource(agent_resource)
 
-                if agent_resource == None:
+                if agent_resource is None:
                     temp_name = urllib.parse.quote_plus(
                         remove_punctuation(name['name']))
                     agent_resource = g.resource(TEMP[F"{temp_name}"])
@@ -978,7 +1050,10 @@ class BibliographyParse:
                 else:
                     agent_internal_ID = name["uri"]
 
-                agent_resource.add(RDFS.label, rdflib.Literal(name["name"]))
+                if name["full name"]:
+                    agent_resource.add(RDFS.label, rdflib.Literal(name["full name"]))
+                else:
+                    agent_resource.add(RDFS.label, rdflib.Literal(name["name"]))
 
                 # TODO: revise these possibly to roles
                 if name['type'] == 'personal':
@@ -990,18 +1065,6 @@ class BibliographyParse:
                     agent_resource.add(
                         SKOS.altLabel, rdflib.Literal(name["altname"]))
 
-                """             
-               if name['type'] == 'personal':
-                    agent_resource.add(RDF.type, BF.Person)
-                elif name['type'] == 'family':
-                    agent_resource.add(RDF.type, BF.Family)
-                elif name['type'] == "corporate":
-                    agent_resource.add(RDF.type, BF.Organization)
-                elif name['type'] == "conference":
-                    agent_resource.add(RDF.type, BF.Meeting)
-                else:
-                    agent_resource.add(RDF.type, BF.Agent)
-                """
 
                 # Attaching role to the event
                 if name['role'] in ROLES or name['role'] is None:
@@ -1331,7 +1394,8 @@ if __name__ == "__main__":
         print("GENRE_VOCAB=[PATH TO GENRE VOCAB]")
         print("BIBLIOGRAPHY_FILES=[DIRECTORY OF BILBIOGRAPHY FILES]")
         print("GENRE_CSV=[PATH TO GENRE MAPPING]")
-        print("PUBLISHER_CSV=[PATH TO PUBLISHER MAPPING]")
+        print("ORGANIZATIONS=[PATH TO ORGANIZATIONS MAPPING]")
+        print("PUBLISHERS_CSV=[PATH TO PUBLISHER MAPPING]")
         print("PEOPLE_CSV=[PATH TO PEOPLE MAPPING]")
 
     dirname = config_options['BIBLIOGRAPHY_FILES']
@@ -1340,6 +1404,7 @@ if __name__ == "__main__":
     places = config_options['PLACES_CSV']
     URI_TO_GENRE_MAPPING_file = config_options['GENRE_CSV']
     publishers_file = config_options['PUBLISHERS_CSV']
+    org_file = config_options['ORGANIZATIONS_CSV']
     people_file = config_options['PEOPLE_CSV']
 
     GEOMAPPER = ParseGeoNamesMapping(places)
@@ -1349,8 +1414,8 @@ if __name__ == "__main__":
     GENRE_GRAPH.parse(genre_ontology)
 
     with open(URI_TO_GENRE_MAPPING_file) as f:
-        csvfile = csv.reader(f)
-        for row in csvfile:
+        csv_file = csv.reader(f)
+        for row in csv_file:
             GENRE_MAPPING[row[0]] = row[1]
 
     with open(publishers_file) as f:
@@ -1358,10 +1423,19 @@ if __name__ == "__main__":
         for row in csvfile:
             PUBLISHER_MAPPING[row[0]] = row[1]
 
+    with open(org_file) as f:
+        csv_file = csv.DictReader(f)
+        for row in csv_file:
+            row["CWRC URI"] = f"{ORLANDO}{row['ID']}"
+            ORGANIZATION_MAPPING[row["CWRC URI"]] = row
+
+
+
     with open(people_file) as f:
-        csvfile = csv.reader(f)
-        for row in csvfile:
-            PEOPLE_MAPPING[row[0]] = row[1]
+        csv_file = csv.DictReader(f)
+        for row in csv_file:
+            row["CWRC URI"] = f"{ORLANDO}{row['ID']}"
+            PEOPLE_MAPPING[row["CWRC URI"]] = row
 
     for fname in os.listdir(writing_dir):
         path = os.path.join(writing_dir, fname)

@@ -60,6 +60,7 @@ def get_org_uri(tag):
     std_name = tag.get("STANDARD")
     uri = tag.get("REF")
     if uri:
+        uri = uri.strip()
         ORGS_USED.add(uri)
         if uri in utilities.ORGANIZATION_MAP:
             if utilities.ORGANIZATION_MAP[uri]["Primary Identifier"] != "":
@@ -73,9 +74,9 @@ def get_org_uri(tag):
     
     else:
         if std_name:
-            name = std_name
+            name = std_name.strip()
         elif tag.get("REG"):
-            name = tag.get("REG")
+            name = tag.get("REG").strip()
         else:
             logger.warn(F"No standard name or URI: {tag}")
             name = tag.get_text()

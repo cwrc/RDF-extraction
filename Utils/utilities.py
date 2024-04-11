@@ -349,6 +349,8 @@ def get_person_secondary_uris(cwrc_uri):
 def get_full_name(tag):
     full_name = tag.get_text()
     uri = tag.get("REF")
+    if uri:
+        uri = uri.strip()
     
     if uri in PERSON_MAP:
         full_name = PERSON_MAP[uri]['Full Name']
