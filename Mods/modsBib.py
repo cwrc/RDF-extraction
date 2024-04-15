@@ -1165,7 +1165,11 @@ class BibliographyParse:
 
                 if o['end date']:
                     end_date, transformed, dump = dateParse(o['end date'], o)
-                    
+                
+                if start_date is None and end_date is None and o['date string']:
+                    start_date, transformed, end_date = dateParse(
+                        o['date string'], o)     
+                
                 time_span = g.resource(F"{self.placeholderURI}_time-span_{i}")
                 time_span.add(RDFS.label, rdflib.Literal(
                     (F"time-span {'of the publishing of '+ self.mainTitle}") if self.mainTitle else "creation time-span", lang="en"))
