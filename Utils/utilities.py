@@ -540,7 +540,7 @@ def create_place_nodes(g):
         label = label.replace(",",", ")
         g.add((uri, rdflib.RDF.type, NS_DICT["crm"].E53_Place))
         g.add((uri, NS_DICT["crm"].P2_has_type, NS_DICT["biography"].mappedPlace))
-        g.add((uri, rdflib.SKOS.hiddenLabel, rdflib.Literal(label)))
+        g.add((uri, rdflib.SKOS.hiddenLabel, rdflib.Literal(label,lang="en")))
 
 def create_extracted_file(filepath, person, serialization="ttl"):
     """Create file of extracted triples for particular person
