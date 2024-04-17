@@ -1,4 +1,4 @@
-@prefix aat: <https://vocab.getty.edu/aat/> .
+@prefix aat: <http://vocab.getty.edu/aat/> .
 @prefix bf: <http://id.loc.gov/ontologies/bibframe/> .
 @prefix biography: <http://id.lincsproject.ca/biography/> .
 @prefix context: <http://id.lincsproject.ca/context/> .
