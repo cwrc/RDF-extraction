@@ -57,7 +57,7 @@ class Citation(object):
         g.add((citing_uri, utilities.NS_DICT["crm"].P67_refers_to, uri))
 
         if self.page:
-            g.add((uri, utilities.NS_DICT["crm"].P190_has_symbolic_content, Literal(self.page)))
+            g.add((uri, utilities.NS_DICT["crm"].P190_has_symbolic_content, Literal(self.page, lang="en")))
 
         if source_url:      
             g.add((source_url, RDF.type, utilities.NS_DICT["crmdig"].D1_Digital_Object))

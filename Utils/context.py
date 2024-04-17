@@ -376,7 +376,8 @@ class Context(object):
         if not person:
             for x in self.tag.find_all("ORG"):
                 entity_uri = utilities.get_name_uri(x)
-                g.add((entity_uri,RDFS.label,Literal(utilities.get_value(x))))
+                std_name = utilities.get_full_name(x)
+                g.add((entity_uri,RDFS.label,Literal(std_name, lang="en")))
                 g.add((entity_uri,RDF.type,utilities.NS_DICT["crm"].E74_Group))
 
         # Adding names for all the people mentioned in an context
@@ -397,10 +398,10 @@ class Context(object):
             
             g.add((uri, RDF.type, utilities.NS_DICT["crm"].E21_Person))
             std_name = utilities.get_full_name(x)
-            g.add((uri, RDFS.label, Literal(std_name)))
+            g.add((uri, RDFS.label, Literal(std_name, lang="en")))
             altname = x.get_text()
             if altname and std_name != altname and altname not in generic_names:
-                g.add((uri, utilities.NS_DICT["skos"].altLabel, Literal(altname)))
+                g.add((uri, utilities.NS_DICT["skos"].altLabel, Literal(altname, lang="en")))
             
             for y in secondary_uris:
                 g.add((uri, utilities.NS_DICT["owl"].sameAs, y))
@@ -409,14 +410,14 @@ class Context(object):
         for x in self.tag.find_all("TITLE"):
             entity_uri = utilities.get_title_uri(x)
             label = utilities.get_value(x)
-            g.add((entity_uri,RDFS.label,Literal(label)))
+            g.add((entity_uri,RDFS.label,Literal(label, lang="en")))
             g.add((entity_uri,RDF.type,utilities.NS_DICT["frbroo"].F1_Work))
             
             # TODO: Fix alternate names duplicating
             altname = x.get_text()
 
             if altname and altname != label:
-                g.add((entity_uri, utilities.NS_DICT["skos"].altLabel, Literal(altname)))
+                g.add((entity_uri, utilities.NS_DICT["skos"].altLabel, Literal(altname, lang="en")))
         
 
         if person:

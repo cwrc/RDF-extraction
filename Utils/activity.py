@@ -448,8 +448,8 @@ precision: {self.precision}
                 activity.add(utilities.NS_DICT["crm"].P2_has_type, x)
 
 
+        # Seems to only be used for relationships
         if self.activity_path == "generic+":
-            input("This block of code never is run!")      
             connection = g.resource(f"{self.connection_uri}")
             connection.add(RDFS.label, Literal(activity_label))
             connection.add(RDF.type, utilities.NS_DICT["crm"][self.activity_map["generic"]])

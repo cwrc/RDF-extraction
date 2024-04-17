@@ -37,12 +37,12 @@ class Organization(object):
 
     def to_triple(self):
         g = utilities.create_graph()
-        g.add((self.uri, utilities.NS_DICT["foaf"].name, Literal(self.name)))
-        g.add((self.uri, RDFS.label, Literal(self.name)))
+        g.add((self.uri, utilities.NS_DICT["foaf"].name, Literal(self.name, lang="en")))
+        g.add((self.uri, RDFS.label, Literal(self.name, lang="en")))
         g.add((self.uri, RDF.type, utilities.NS_DICT["crm"].E74_Group))
         g.add((self.uri, utilities.NS_DICT["crm"].P2_has_type, utilities.NS_DICT["foaf"].Organization))
         for x in self.altlabels:
-            g.add((self.uri, utilities.NS_DICT["skos"].altLabel, Literal(x)))
+            g.add((self.uri, utilities.NS_DICT["skos"].altLabel, Literal(x,lang="en")))
         return g
 
     def __str__(self):
@@ -121,12 +121,12 @@ def add_organizations():
             for secondary_uri in secondary_uris:
                 g.add((primary_identifier, OWL.sameAs, rdflib.term.URIRef(secondary_uri)))
                 
-            g.add((primary_identifier, RDFS.label, Literal(utilities.ORGANIZATION_MAP[x]["Preferred Name"])))
+            g.add((primary_identifier, RDFS.label, Literal(utilities.ORGANIZATION_MAP[x]["Preferred Name"], lang="en")))
             
         elif x in TEMP_ORGS:
             primary_identifier = rdflib.term.URIRef(x)
             g.add((primary_identifier, RDF.type, utilities.NS_DICT["crm"].E74_Group))
-            g.add((primary_identifier, RDFS.label, Literal(TEMP_ORGS[x])))
+            g.add((primary_identifier, RDFS.label, Literal(TEMP_ORGS[x], lang="en")))
         else:
             primary_identifier = rdflib.term.URIRef(x)
             g.add((primary_identifier, RDF.type, utilities.NS_DICT["crm"].E74_Group))

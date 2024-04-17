@@ -328,6 +328,10 @@ def get_name_uri(tag):
             new_uri = PERSON_MAP[uri]['Primary Identifier']
             if new_uri:
                 uri = new_uri
+        elif uri in ORGANIZATION_MAP:
+            new_uri = ORGANIZATION_MAP[uri]['Primary Identifier']
+            if new_uri:
+                uri = new_uri
                 
         return rdflib.term.URIRef(uri)
 
@@ -354,6 +358,8 @@ def get_full_name(tag):
     
     if uri in PERSON_MAP:
         full_name = PERSON_MAP[uri]['Full Name']
+    elif uri in ORGANIZATION_MAP:
+        full_name = ORGANIZATION_MAP[uri]['Preferred Name']
 
     if not full_name:
         logger.warning(F"Full name missing for {uri}")
