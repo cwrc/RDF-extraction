@@ -182,8 +182,8 @@ class Biography(object):
         for x in self.organizations:
             g.add((x, utilities.NS_DICT["crm"].P107_has_current_or_former_member, self.uri))
 
-        g.add((self.uri, RDFS.label, Literal(self.name)))
-        g.add((self.uri, utilities.NS_DICT["skos"].prefLabel, Literal(self.name)))
+        g.add((self.uri, RDFS.label, Literal(self.name, lang="en")))
+        g.add((self.uri, utilities.NS_DICT["skos"].prefLabel, Literal(self.name,lang="en")))
 
         if str(self.uri) !=  self.cwrc_uri:
             g.add((self.uri, utilities.NS_DICT["owl"].sameAs, rdflib.term.URIRef(self.cwrc_uri)))

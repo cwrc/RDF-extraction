@@ -38,7 +38,6 @@ class Person(object):
 
     def to_triple(self, context):
         g = utilities.create_graph()
-        g.add((self.uri, RDF.type, utilities.create_uri("writing","NaturalPerson")))
         g.add((context.uri, self.predicate, self.uri))
         if self.name:
             g.add((self.uri, RDFS.label, Literal(self.name)))
