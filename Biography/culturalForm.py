@@ -330,25 +330,24 @@ def get_attributes(cfs):
     return attributes
 
 def get_event_type(pred):
-    if "religion" in str(pred):
-        return "ReligionEvent"
-    elif "gender" in str(pred):
-        return "GenderEvent"
-    elif "socialClass" in str(pred):
-        return "SocialClassEvent"
-    elif "nationalIdentity" in str(pred):
-        return "NationalityEvent"
-    elif "sexuality" in str(pred):
-        return "SexualityEvent"
-    elif "political" in str(pred):
-        return "PoliticsEvent"
-    elif "raceColour" in str(pred):
-        return "RaceEthnicityEvent"
-    elif "ethnicity" in str(pred):
-        return "RaceEthnicityEvent"
-    else:
-        return "CulturalFormEvent"
+    event_dict = {
+        "ethnicity": "EthnicityEvent",
+        "gender": "GenderEvent",
+        "nationalHeritage": "NationalHeritageEvent",
+        "geographicHeritage": "GeographicHeritageEvent",
+        "nationalIdentity": "NationalityEvent",
+        "political": "PoliticsEvent",
+        "raceColour": "RaceColourEvent",
+        "religion": "ReligionEvent",
+        "sexuality": "SexualityEvent",
+        "socialClass": "SocialClassEvent",
+    }
 
+    pred_str = str(pred)
+    for key in event_dict:
+        if key in pred_str:
+            return event_dict[key]
+    return "CulturalFormEvent"
 
 def extract_culturalforms(tag_list, context_type, person, list_type="paragraphs", event_count=1):
     """ Creates the cultural forms ascribes them to the person along with the associated
