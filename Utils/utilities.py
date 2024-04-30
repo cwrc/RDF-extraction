@@ -4,7 +4,7 @@ import re
 import datetime
 import urllib
 import csv
-
+import copy 
 try:
     from Utils.place import Place, PLACE_MAP
 except ModuleNotFoundError as e:
@@ -150,13 +150,16 @@ def get_entry_id(tag):
     return tag.find_parent("ENTRY").get("ID")
 
 def remove_unwanted_tags(tag):
+    tag_copy = copy.copy(tag)
+
     unwanted_tag_names = ["BIBCITS", "RESPONSIBILITIES", "KEYWORDCLASSES","RESEARCHNOTE", "HEADING"]
     unwanted_tags = []
     for x in unwanted_tag_names:
-        unwanted_tags += tag.find_all(x)
+        unwanted_tags += tag_copy.find_all(x)
 
     for x in unwanted_tags:
         x.decompose()
+    return tag_copy
 
 def init_NS_DICT():
     NS_DICT = {}    

@@ -1,4 +1,5 @@
 import rdflib
+import copy
 from Utils.citation import Citation
 from rdflib import RDF, RDFS, Literal
 from Utils import utilities, organizations
@@ -126,14 +127,17 @@ def get_context_type(tag, mode=None):
 
 
 def remove_unwanted_tags(tag):
+    tag_copy = copy.copy(tag)
     unwanted_tag_names = ["BIBCITS", "RESPONSIBILITIES", "KEYWORDCLASSES","RESEARCHNOTE"]
     unwanted_tags = []
+    
     for x in unwanted_tag_names:
-        unwanted_tags += tag.find_all(x)
+        unwanted_tags += tag_copy.find_all(x)
 
     for x in unwanted_tags:
         x.decompose()
 
+    return tag_copy
 
 class Context(object):
     """
@@ -255,21 +259,21 @@ class Context(object):
 
     def get_snippet(self):
         # removing tags that mess up the snippet
-        remove_unwanted_tags(self.tag)
-        if not self.tag.get_text():
-            logger.error("Empty tag encountered when creating the context:  " + self.id +
-                         ": Within:  " + self.orlando_tagname + " " + str(self.tag))
+        simplified_tag = remove_unwanted_tags(self.tag)
+       
+        if not simplified_tag.get_text():
+            logger.error(F"Empty tag encountered when creating the context: {self.id} : Within: {self.orlando_tagname} {str(self.tag)}")
             self.text = ""
         else:
-            self.text = utilities.limit_to_full_sentences(str(self.tag.get_text()), utilities.MAX_WORD_COUNT)
+            self.text = utilities.limit_to_full_sentences(str(simplified_tag.get_text()), utilities.MAX_WORD_COUNT)
         
-        date = self.tag.find("DATE")
-        
-        if not date:
-            date = self.tag.find("DATERANGE")    
+        date = simplified_tag.find("DATE")
         
         if not date:
-            date = self.tag.find("DATESTRUCT")    
+            date = simplified_tag.find("DATERANGE")    
+        
+        if not date:
+            date = simplified_tag.find("DATESTRUCT")    
   
         if date:
             self.text = self.text.replace(date.text, date.text + ": ")
