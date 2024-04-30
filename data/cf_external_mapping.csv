@@ -38,7 +38,7 @@ http://id.lincsproject.ca/identity/GeographicHeritage,https://sws.geonames.org/9
 http://id.lincsproject.ca/identity/Language,http://id.loc.gov/vocabulary/languages/ara,Arabic,arabic,,,,,,,,,,,,
 http://id.lincsproject.ca/identity/Language,http://id.loc.gov/vocabulary/languages/ben,Bengali,bengali,,,,,,,,,,,,
 http://id.lincsproject.ca/identity/Language,http://id.loc.gov/vocabulary/languages/bul,Bulgarian,bulgarian,,,,,,,,,,,,
-http://id.lincsproject.ca/identity/Language,http://id.loc.gov/vocabulary/languages/chi,Chinese,chinese,,,,,,,,,,,,
+http://id.lincsproject.ca/identity/Language,http://id.loc.gov/vocabulary/languages/chi,Chinese,chinese,cantonese,mandarin,,,,,,,,,,
 http://id.lincsproject.ca/identity/Language,http://id.loc.gov/vocabulary/languages/cze,Czech,czech,,,,,,,,,,,,
 http://id.lincsproject.ca/identity/Language,http://id.loc.gov/vocabulary/languages/eng,English,english,,,,,,,,,,,,
 http://id.lincsproject.ca/identity/Language,http://id.loc.gov/vocabulary/languages/fre,French,french,,,,,,,,,,,,
