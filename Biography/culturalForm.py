@@ -8,7 +8,7 @@ from Utils import utilities
 from Utils.organizations import get_org, get_org_uri
 from Utils.place import Place
 from Utils.activity import Activity 
-from Utils.context import Context, get_event_type, get_context_type
+from Utils.context import Context, get_context_type
 
 """
 Status: ~90%
@@ -333,21 +333,25 @@ def get_event_type(pred):
     event_dict = {
         "ethnicity": "EthnicityEvent",
         "gender": "GenderEvent",
-        "nationalHeritage": "NationalHeritageEvent",
-        "geographicHeritage": "GeographicHeritageEvent",
-        "nationalIdentity": "NationalityEvent",
+        "nationalheritage": "NationalHeritageEvent",
+        "geographicheritage": "GeographicHeritageEvent",
+        "nationalidentity": "NationalityEvent",
         "political": "PoliticsEvent",
-        "raceColour": "RaceColourEvent",
+        "involvementin": "PoliticsEvent",
+        "racecolour": "RaceColourEvent",
         "religion": "ReligionEvent",
         "sexuality": "SexualityEvent",
-        "socialClass": "SocialClassEvent",
+        "socialclass": "SocialClassEvent",
     }
 
-    pred_str = str(pred)
+    pred_str = str(pred).lower()
+    if "political" in pred_str:
+        return utilities.create_uri("event","PoliticsEvent")
+    
     for key in event_dict:
         if key in pred_str:
-            return event_dict[key]
-    return "CulturalFormEvent"
+            return utilities.create_uri("event",event_dict[key])
+    return utilities.create_uri("event","CulturalFormEvent")
 
 def extract_culturalforms(tag_list, context_type, person, list_type="paragraphs", event_count=1):
     """ Creates the cultural forms ascribes them to the person along with the associated
@@ -365,18 +369,20 @@ def extract_culturalforms(tag_list, context_type, person, list_type="paragraphs"
 
         cf_list = find_cultural_forms(tag, person)
         attributes = get_attributes(cf_list)
-
+        
         if cf_list:
             count = 0
             temp_context = Context(context_id, tag, context_type,pattern="culturalform")
             for x in attributes.keys():
-                temp_attr = {x:attributes[x]}
                 
+                temp_attr = {x:attributes[x]}
+                print(temp_attr)
                 if "politicalMembershipIn" in str(x):
                     activity_id = context_id.replace("Context","Event") + "_"+ str(count)
                     label = f"{utilities.split_by_casing(CONTEXT_TYPE)}Event: {utilities.split_by_casing(str(x).split('/')[-1]).lower()}".replace("Context", "")
                     activity = Activity(person, label, activity_id, tag, activity_type="culturalform", attributes=temp_attr)
                     activity.event_type.append(utilities.create_uri("context",CONTEXT_TYPE))
+                    activity.connection_type = get_event_type(x)
                     temp_context.link_activity(activity)
                     person.add_activity(activity)
                     count+=1
@@ -385,6 +391,7 @@ def extract_culturalforms(tag_list, context_type, person, list_type="paragraphs"
                     label = f"{utilities.split_by_casing(CONTEXT_TYPE)}Event: {utilities.split_by_casing(str(x).split('/')[-1]).lower()}".replace("Context", "")
                     activity = Activity(person, label, activity_id, tag, activity_type="culturalform", attributes=temp_attr)
                     activity.event_type.append(utilities.create_uri("context",CONTEXT_TYPE))
+                    activity.connection_type = get_event_type(x)
                     temp_context.link_activity(activity)
                     person.add_activity(activity)
                     count+=1
@@ -503,6 +510,7 @@ def extract_gender_data(bio, person):
             label = f"Gender Event"
             activity = Activity(person, label, activity_id, parent_tag, activity_type="culturalform", attributes=temp_attr)
             activity.event_type.append(utilities.create_uri("context","GenderContext"))
+            activity.connection_type = get_event_type("genderContext")
             temp_context.link_activity(activity)
             person.add_activity(activity)
             count+=1

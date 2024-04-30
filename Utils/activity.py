@@ -238,8 +238,8 @@ class Activity(object):
 
     def get_snippet(self):
         # removing tags that mess up the snippet
-        utilities.remove_unwanted_tags(self.tag)
-        self.text = self.tag.get_text()
+        simplified_tag = utilities.remove_unwanted_tags(self.tag)
+        self.text = simplified_tag.get_text()
         if not self.text:
             logger.error("Empty tag encountered when creating the context:  " + self.id +
                          ": Within:  " + self.tag.name + " " + str(self.tag))
@@ -247,12 +247,12 @@ class Activity(object):
         else:
             self.text = utilities.limit_to_full_sentences(str(self.text), utilities.MAX_WORD_COUNT)
         
-        date = self.tag.find("DATE")
+        date = simplified_tag.find("DATE")
         if not date:
-            date = self.tag.find("DATERANGE")    
+            date = simplified_tag.find("DATERANGE")    
         
         if not date:
-            date = self.tag.find("DATESTRUCT")    
+            date = simplified_tag.find("DATESTRUCT")    
         
         if date:
             date_string = self.clean_date_string(date.text)
@@ -272,6 +272,7 @@ class Activity(object):
         self.id = id
         self.uri = utilities.create_uri("temp", id)
         self.connection_uri = None
+        self.connection_type = None
         self.additional_nodes = additional_nodes
 
         # TODO: populate this variable with different possibilities similar to the activity map
@@ -395,10 +396,10 @@ precision: {self.precision}
             connection.add(RDFS.label, Literal(
                 activity_label+" (connection)", lang="en"))
             
-            if self.event_type:
-                event_type = self.event_type[0].replace("Context","Event")
-                event_type = event_type.replace("context","event")
-                connection.add(utilities.NS_DICT["crm"].P2_has_type, rdflib.term.URIRef(event_type))
+            if self.connection_type:
+                # event_type = self.event_type[0].replace("Context","Event")
+                # event_type = event_type.replace("context","event")
+                connection.add(utilities.NS_DICT["crm"].P2_has_type, rdflib.term.URIRef(self.connection_type))
 
         activity.add(RDFS.label, Literal(activity_label, lang="en"))
 
@@ -447,7 +448,6 @@ precision: {self.precision}
             for x in self.event_type:
                 activity.add(utilities.NS_DICT["crm"].P2_has_type, x)
 
-
         # Seems to only be used for relationships
         if self.activity_path == "generic+":
             connection = g.resource(f"{self.connection_uri}")
@@ -477,10 +477,12 @@ precision: {self.precision}
 
 
             activity.add(utilities.NS_DICT["crm"].P140_assigned_attribute_to,connection)
+
             
             if self.event_type:
                 event_type = self.event_type[0].replace("Context","Event")
                 event_type = event_type.replace("context","event")
+        
                 connection.add(utilities.NS_DICT["crm"].P2_has_type, rdflib.term.URIRef(event_type))
         
         elif "Activity" in str(self.activity_type) and self.attributes:
@@ -490,6 +492,7 @@ precision: {self.precision}
                     if obj not in self.participants: 
                         activity.add(utilities.NS_DICT["crm"].P2_has_type, obj)
         elif connection:
+            
             for pred in self.attributes:
                 if any(term in pred for term in ["genderedPoliticalActivity", "activistInvolvementIn", "politicalMembershipIn"]):
                     connection.add(utilities.NS_DICT["crm"].P2_has_type, pred)
