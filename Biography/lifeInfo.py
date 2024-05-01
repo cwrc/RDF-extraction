@@ -13,6 +13,13 @@ numtags = 0
 
 logger = utilities.config_logger("relationships",verbose=0)
 
+RELATIONSHIP_LABELS = {
+    utilities.create_uri("persrel","interpersonalRelationship"): "interpersonal relationship",
+    utilities.create_uri("persrel","cohabitant"): "cohabitation relationship",
+    utilities.create_uri("persrel","eroticRelationship"): "erotic relationship",
+    utilities.create_uri("persrel","nonEroticRelationship"): "non-erotic relationship",
+    utilities.create_uri("persrel","possiblyEroticRelationship"): "possibly erotic relationship",
+}
 class Person(object):
     """docstring for a general Person with a social/familar relation to biographee"""
 
@@ -237,7 +244,6 @@ def extract_friends(tag_list, context_type, person, list_type="paragraphs"):
         if friend_list:
             temp_context = Context(context_id, tag, tag_name, pattern="relationships")
             event_count = 1
-            participants = []
             temp_context.link_triples(friend_list)
             for x in attributes.keys():
                 for relationship in attributes[x]:
@@ -251,15 +257,12 @@ def extract_friends(tag_list, context_type, person, list_type="paragraphs"):
                      
                     activity_id = context_id.replace("Context","Event") + "_"+ str(event_count)
                     relationship_cwrc_uri = relationship if "cwrc" in str(relationship) else utilities.get_cwrc_uri(relationship)
-                    
-                    label = f"{utilities.split_by_casing(str(x).split('/')[-1]).lower()} with {utilities.get_full_name(relationship_cwrc_uri)}"
-                    
-                    if "cohabitant" in str(x):
-                        label = f"cohabitation with {utilities.get_full_name(relationship_cwrc_uri)}"
+                    label = f"{RELATIONSHIP_LABELS[x]} with {utilities.get_full_name(relationship_cwrc_uri)}"
                     
                     activity = Activity(person, label, activity_id, tag, activity_type="generic", attributes=temp_attr)
                     activity.participants = []
                     activity.active_participants = active_participants
+                    
                     temp_context.link_activity(activity)
                     person.add_activity(activity)
                     event_count+=1
