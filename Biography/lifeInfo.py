@@ -23,7 +23,7 @@ class Person(object):
             self.alt_name = None
             self.uri = name
         elif type(name) is Tag and name.name == "NAME":
-            self.name = name.get("STANDARD")
+            self.name = utilities.get_full_name(name)
             self.alt_name = name.get_text()
             self.uri = utilities.get_name_uri(name)
         else:
@@ -38,12 +38,11 @@ class Person(object):
 
     def to_triple(self, context):
         g = utilities.create_graph()
-        g.add((context.uri, self.predicate, self.uri))
         if self.name:
-            g.add((self.uri, RDFS.label, Literal(self.name)))
+            g.add((self.uri, RDFS.label, Literal(self.name, lang="en")))
         if self.alt_name:
             g.add(
-                (self.uri, utilities.NS_DICT["skos"].altLabel, Literal(self.alt_name)))
+                (self.uri, utilities.NS_DICT["skos"].altLabel, Literal(self.alt_name, lang="en")))
 
         return g
 
@@ -199,7 +198,7 @@ def extract_intimate_relationships_data(bio, person):
         extract_relationships(events, relation, person, "events")
 
 
-def find_friends(tag, person, predicate="interpersonalRelationshipWith"):
+def find_friends(tag, person, predicate="interpersonalRelationship"):
     friends = []
     names = tag.find_all("NAME")
     companion_tags = tag.find_all("LIVESWITH")
@@ -240,20 +239,28 @@ def extract_friends(tag_list, context_type, person, list_type="paragraphs"):
             event_count = 1
             participants = None
             temp_context.link_triples(friend_list)
-       
+            print(tag)
             for x in attributes.keys():
-                temp_attr = {x:attributes[x]}
-                
-                activity_id = context_id.replace("Context","Event") + "_"+ str(event_count)
-                label = f"Friend Relationship Event: {utilities.split_by_casing(str(x).split('/')[-1]).lower()}"
-                activity = Activity(person, label, activity_id, tag, activity_type="generic+", attributes=temp_attr)
-                activity.event_type.append(utilities.create_uri("context",get_event_type(tag_name)))
-
-                if participants:
-                    activity.participants = participants
-                temp_context.link_activity(activity)
-                person.add_activity(activity)
-                event_count+=1
+                for relationship in attributes[x]:
+                    if "temp.lincsproject" in str(relationship):
+                        logger.warning(F"Need to create placeholder for: {relationship}")  
+                        continue
+                    active_participants = []
+                    temp_attr = {x:[]}
+                    active_participants.append(relationship)
+                    active_participants.append(person.uri)
+                     
+                    activity_id = context_id.replace("Context","Event") + "_"+ str(event_count)
+                    relationship_cwrc_uri = relationship if "cwrc" in str(relationship) else utilities.get_cwrc_uri(relationship)
+                    
+                    label = f"{utilities.split_by_casing(str(x).split('/')[-1]).lower()} with {utilities.get_full_name(relationship_cwrc_uri)}"
+                    activity = Activity(person, label, activity_id, tag, activity_type="generic", attributes=temp_attr)
+                    activity.participants = []
+                    activity.active_participants = active_participants
+                    print(activity.title)
+                    temp_context.link_activity(activity)
+                    person.add_activity(activity)
+                    event_count+=1
        
         else:
             temp_context = Context(context_id, tag, tag_name, "identifying")
@@ -288,7 +295,7 @@ def create_family_map(path=None):
 
 FAMILY_MAP = {}
 create_family_map()
-symmetric_relations = ["interpersonalRelationshipWith", "cousin", "partner"]
+symmetric_relations = ["interpersonalRelationship", "cousin", "partner"]
 
 def get_all_members(bio,person):
     member_tags = bio.find_all("MEMBER")
@@ -364,7 +371,7 @@ def extract_family_data(bio, person):
                 print(FAMILY_MAP[member_tag["RELATION"]])
                 if str(people_found[0]) in utilities.WRITER_MAP and utilities.WRITER_MAP[str(people_found[0])]["SEX"] != FAMILY_MAP[member_tag["RELATION"]]["SEX"]:
                     # Creating placeholder
-                    if relation != "interpersonalRelationshipWith":
+                    if relation != "interpersonalRelationship":
                         people_found[0] = person.uri + "_PLACEHOLDER_"+ relation
                 elif str(people_found[0]) in utilities.WRITER_MAP:
                     print(utilities.WRITER_MAP[str(people_found[0])])
@@ -491,7 +498,7 @@ def main():
 
         person = Biography(person_id, soup)
         # extract_family_data(soup, person)
-        extract_intimate_relationships_data(soup, person)
+        # extract_intimate_relationships_data(soup, person)
         extract_friend_data(soup, person)
 
         graph = person.to_graph()

@@ -30,7 +30,10 @@ WRITER_MAP = {}
 MAX_WORD_COUNT = 35
 
 PERSON_MAP = {}
-ORGANIZATION_MAP = {} 
+ORGANIZATION_MAP = {}
+
+CWRC_URI_MAP = {}
+ 
 
 NS_MAP = {
     "aat" : "http://vocab.getty.edu/aat/",
@@ -188,6 +191,8 @@ def create_person_map(path=None):
         for row in csv_file:
             row["CWRC URI"] = f"{NS_DICT['orlando']}{row['ID']}"
             PERSON_MAP[row["CWRC URI"]] = row
+            if row['Primary Identifier']:
+                CWRC_URI_MAP[row['Primary Identifier']] = row["CWRC URI"]
 
 
 
@@ -200,7 +205,8 @@ def create_org_map(path=None):
         for row in csv_file:
             row["CWRC URI"] = f"{NS_DICT['orlando']}{row['ID']}"
             ORGANIZATION_MAP[row["CWRC URI"]] = row
-            # PERSON_MAP[row[0]] = row[1]
+            if row['Primary Identifier']:
+                CWRC_URI_MAP[row['Primary Identifier']] = row["CWRC URI"]
     
 
 # Setting up various mappings
@@ -313,7 +319,6 @@ def limit_to_full_sentences(string, max):
 
 
 # TODO: Track names that are not in the published authority list
-# TODO: Track names missing REF attribute
 def get_name_uri(tag):
     """Gets a uri from REF or creates uri based on the standard attribute of a tag"""
     uri = tag.get("REF")
@@ -338,6 +343,11 @@ def get_name_uri(tag):
                 
         return rdflib.term.URIRef(uri)
 
+def get_cwrc_uri(uri):
+    if str(uri) in CWRC_URI_MAP:
+        return rdflib.term.URIRef(CWRC_URI_MAP[str(uri)])
+    return None
+
 def get_person_secondary_uris(cwrc_uri):
     if cwrc_uri not in PERSON_MAP:
         logger.warning(F"Person not in published authority list: {cwrc_uri}")
@@ -353,9 +363,15 @@ def get_person_secondary_uris(cwrc_uri):
     
     return secondary_uris
 
-def get_full_name(tag):
-    full_name = tag.get_text()
-    uri = tag.get("REF")
+def get_full_name(tag_or_uri):
+    full_name = None    
+    uri = None
+    if type(tag_or_uri) == rdflib.term.URIRef:
+        uri = tag_or_uri
+    else:
+        full_name = tag_or_uri.get_text()    
+        uri = tag_or_uri.get("REF")
+        
     if uri:
         uri = uri.strip()
     

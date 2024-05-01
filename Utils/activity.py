@@ -300,6 +300,7 @@ class Activity(object):
             self.activity_type = utilities.NS_DICT["crm"][Activity.activity_map[activity_type.lower()]]            
 
         self.participants = get_participants(tag)
+        self.active_participants = [] # participants that carry out the activity
         self.biographers = []
         
         # Cleaning list of participants
@@ -322,7 +323,6 @@ class Activity(object):
         self.start_date = None
         self.end_date = None
         self.date = None
-        # self.text = self.date_tag.text+": " + self.text
         self.precision = None 
         
         if self.date_tag:
@@ -519,6 +519,10 @@ precision: {self.precision}
 
         elif self.person and "Activity" in str(self.activity_type):
             activity.add(utilities.NS_DICT["crm"].P14_carried_out_by, self.person.uri)
+
+        if self.active_participants:
+            for x in self.active_participants:
+                activity.add(utilities.NS_DICT["crm"].P14_carried_out_by, x)
 
         if self.related_activity:
             if type(self.related_activity) is list:
