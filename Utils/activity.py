@@ -214,17 +214,17 @@ class Activity(object):
     }
 
     certainty_map = {
-        "CERT": "highCertainty",
-        "C": "mediumCertainty",
-        "BY": "mediumCertainty",
-        "AFTER": "mediumCertainty",
-        "ROUGHLYDATED": "lowCertainty",
-        "UNKNOWN": "unknownCertainty",
-        "FROM": "highCertainty",
-        "TO": "mediumCertainty",
-        "BOTH": "mediumCertainty",
-        "NEITHER": "mediumCertainty",
-        None: "unknownCertainty",
+        "CERT": "certaintyHigh",
+        "C": "certaintyMedium",
+        "BY": "certaintyMedium",
+        "AFTER": "certaintyMedium",
+        "ROUGHLYDATED": "certaintyLow",
+        "UNKNOWN": "certaintyUnknown",
+        "FROM": "certaintyHigh",
+        "TO": "certaintyMedium",
+        "BOTH": "certaintyMedium",
+        "NEITHER": "certaintyMedium",
+        None: "certaintyUnknown",
     }
 
     def clean_date_string(self, date_string):
@@ -328,7 +328,7 @@ class Activity(object):
         if self.date_tag:
             self.date_text = self.date_tag.get_text()
             self.precision = self.certainty_map[self.date_tag.get("CERTAINTY")]
-            self.precision = utilities.create_uri("event", self.precision)
+            self.precision = utilities.create_uri("edit", self.precision)
             if self.date_tag.name == "DATERANGE":
                 if self.date_tag.get("FROM") and self.date_tag.get("TO"):
                     self.start_date, status, status = date_parse(self.date_tag.get("FROM"))
