@@ -11,7 +11,7 @@ from culturalForm import get_mapped_term
 import rdflib
 numtags = 0
 
-logger = utilities.config_logger("relationships",verbose=0)
+logger = utilities.config_logger("relationships")
 
 RELATIONSHIP_LABELS = {
     utilities.create_uri("persrel","interpersonalRelationship"): "interpersonal relationship",
@@ -19,6 +19,7 @@ RELATIONSHIP_LABELS = {
     utilities.create_uri("persrel","eroticRelationship"): "erotic relationship",
     utilities.create_uri("persrel","nonEroticRelationship"): "non-erotic relationship",
     utilities.create_uri("persrel","possiblyEroticRelationship"): "possibly erotic relationship",
+    utilities.create_uri("persrel","intimateRelationship"): "intimate relationship",
 }
 class Person(object):
     """docstring for a general Person with a social/familar relation to biographee"""
@@ -160,30 +161,36 @@ def extract_relationships(tag_list, context_type, person, list_type="paragraphs"
         # Sometimes includes cohabitant as well
         attributes = get_attributes(relationship_list)
 
-        if len(attributes.keys())>1:
-            print(attributes)
-            input()
-
         # Only extracting intimate relation if there is one name, aiming for precision here
-        if len(relationship_list) == 1:
+        if relationship_list:
             temp_context = Context(context_id, tag, tag_name,pattern="relationships")
             event_count = 1
             participants = None
             
             for x in attributes.keys():
-                # need to loop inner list
-                temp_attr = {x:attributes[x]}
-       
-                activity_id = context_id.replace("Context","Event") + "_"+ str(event_count)
-                label = f"Intimate Relationship Event: {utilities.split_by_casing(str(x).split('/')[-1]).lower()}"
-                activity = Activity(person, label, activity_id, tag, activity_type="generic+", attributes=temp_attr)
-                activity.event_type.append(utilities.create_uri("context",get_event_type(tag_name)))
+                if x != utilities.create_uri("persrel","cohabitant") and len(attributes[x])>1:
+                    logger.warning(F"{RELATIONSHIP_LABELS[x]}: too many people to extract: {attributes[x]}")
+                    continue
+                for relationship in attributes[x]:
+                    if "temp.lincsproject" in str(relationship):
+                        logger.warning(F"Need to create placeholder for: {relationship}")  
+                        continue
 
-                if participants:
-                    activity.participants = participants
-                temp_context.link_activity(activity)
-                person.add_activity(activity)
-                event_count+=1
+                    temp_attr = {x:[]}
+                    active_participants = []
+                    active_participants.append(relationship)
+                    active_participants.append(person.uri)
+                    
+                    activity_id = context_id.replace("Context","Event") + "_"+ str(event_count)
+                    relationship_cwrc_uri = relationship if "cwrc" in str(relationship) else utilities.get_cwrc_uri(relationship)
+                    label = f"{RELATIONSHIP_LABELS[x]} with {utilities.get_full_name(relationship_cwrc_uri)}"
+                    activity = Activity(person, label, activity_id, tag, activity_type="generic", attributes=temp_attr)
+
+                    activity.participants = []
+                    activity.active_participants = active_participants
+                    temp_context.link_activity(activity)
+                    person.add_activity(activity)
+                    event_count+=1
             
         else:
             temp_context = Context(context_id, tag, tag_name, "identifying")
@@ -238,8 +245,6 @@ def extract_friends(tag_list, context_type, person, list_type="paragraphs"):
         context_id = person.id + "_" + CONTEXT_TYPE + "_" + str(context_count)
         friend_list = find_friends(tag, person)
         attributes = get_attributes(friend_list)
-
-
 
         if friend_list:
             temp_context = Context(context_id, tag, tag_name, pattern="relationships")
@@ -503,8 +508,8 @@ def main():
 
         person = Biography(person_id, soup)
         # extract_family_data(soup, person)
-        # extract_intimate_relationships_data(soup, person)
-        extract_friend_data(soup, person)
+        extract_intimate_relationships_data(soup, person)
+        # extract_friend_data(soup, person)
 
         graph = person.to_graph()
 
