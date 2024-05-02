@@ -61,6 +61,7 @@
       "abdyma": "Children: - has 1 child",
       "pulthe": "Children: - has 15 children. Daughter listed in Husband's tag + Husband's name is in NATIONALITY <NATIONALITY>Arthur Pulter</NATIONALITY>",
       "struja": "Children & Marital: - has 3 kids, 1 separation, 2 divorces, 2 marriages",
+      "campco": "Marital: 4 divorces, 3 marriages, 1 separation",
       "alcolo": "Childlessness: -Adopted Nephew",
       "fullma": "Family (Member=Husband): Margaret Fuller's husband is Giovanni Angelo Ossoli not Browning, Elizabeth Barrett",
       "moodsu": "Family (Member=Son): Susanna Moodie's son is not listed, MA is mentioned as a reference",
@@ -68,26 +69,17 @@
       "thican": "LIVESWITH within Friends, Associates",
       "montma": "LIVESWITH within Intimate Relationships",
       "dickma": "LIVESWITH within Family(cousin)",
-      "jewsge": "INTIMATERELATIONSHIPS EroticRelationship with an actress who plays characters from Shakespeare plays"
+      "jewsge": "INTIMATERELATIONSHIPS EroticRelationship with an actress who plays characters from Shakespeare plays",
+      "fryeka": "Marital: Marriage tag in mother member tag",
+      "peckwi": "Marital: Marriage tag in Father member tag",
+      "mildgr": "Marital: Marriage tag in Father member tag"
     },
-    "occupation.py": {
-      "allima": "Multiple occupations in same paragraph, employer and remuneration tags",
-      "barche": "Multiple remuneration tags (2)",
-      "box_mu": "Multiple remuneration tags (3)",
-      "notes": {
-        "contexts": "Per paragraph",
-        "to do": "Forebear occupations, remuneration handling"
-      }
-    },
-
     "notes": {
       "contexts": "Family: Whole member tag is the context",
-      "inverse contexts": "using gender of biographee to apply appropriate family member relationship",
       "intimate relations": "Decision: If there is ONLY one name within the tag, select that as the subject of the intimate relationship but then and only then (will be working on a better solution in the interim). ",
       "friends/associates": "Decision: Whereas in the case of FriendsAndAssociates we are going higher recall and less precision.",
-      "marital status": "creating inverse relationship if occurs in an identifiable spouse tag, creating for any occurrence",
+      "marriage": "Seems to be often in the Husband tag outside of a DIV2",
       "for review": [
-        "liveswith --> cohabitant",
         "childlessness, no cases of abortion/birthControl?"
       ],
       "to do": "re-do the structuring of family",
@@ -144,6 +136,17 @@
     "notes": {
       "contexts": "Unsure",
       "to do": "Review special cases"
+    }
+  },
+  "occupation.py": {
+    "testcases": {
+    "allima": "Multiple occupations in same paragraph, employer and remuneration tags",
+    "barche": "Multiple remuneration tags (2)",
+    "box_mu": "Multiple remuneration tags (3)"
+    },
+    "notes": {
+      "contexts": "Per paragraph",
+      "to do": "Forebear occupations, remuneration handling"
     }
   }
 }
