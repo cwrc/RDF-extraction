@@ -376,7 +376,6 @@ def extract_culturalforms(tag_list, context_type, person, list_type="paragraphs"
             for x in attributes.keys():
                 
                 temp_attr = {x:attributes[x]}
-                print(temp_attr)
                 if "politicalMembershipIn" in str(x):
                     activity_id = context_id.replace("Context","Event") + "_"+ str(count)
                     label = f"{utilities.split_by_casing(CONTEXT_TYPE)}Event: {utilities.split_by_casing(str(x).split('/')[-1]).lower()}".replace("Context", "")
@@ -502,7 +501,6 @@ def extract_gender_data(bio, person):
     for x in attributes.keys():
         temp_attr = {x:attributes[x]}
         person.gender += attributes[x]
-        print(temp_attr)
         activity_id = context_id.replace("Context","Event") + "_"+ str(count)
         label = f"Gender Event"
         activity = Activity(person, label, activity_id, parent_tag, activity_type="culturalform", attributes=temp_attr)

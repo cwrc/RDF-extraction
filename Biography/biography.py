@@ -164,12 +164,12 @@ class Biography(object):
         for x in e_list:
             g += x.to_triple(self)
         return g
-
-# TODO: DETERMINE WHY THIS FUNCTION IS BEING CALLED 3 Times
     def to_graph(self):
         g = utilities.create_graph()
-        print(self.gender)
-        print("lol")
+
+        # TODO: Review if this is needed here or would be better suited for CF extraction
+        if len(self.gender) > 1:
+            logger.warning(F"Multiple genders found for {self.name}")
 
         g.add((self.uri, RDF.type, utilities.NS_DICT["crm"].E21_Person))
         g.add(
