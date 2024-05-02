@@ -331,14 +331,6 @@ def extract_family_data(bio, person):
     context_count = 1
     event_count = 1
 
-    # NOTE: Will need to update this when schema changes, sex will be in culturalform tag
-    # <GENDER GENDERIDENTITY="WOMAN"/>
-
-    sex = utilities.get_sex(bio)
-
-    if sex not in ["FEMALE", "MALE"]:
-        sex = "NEUTRAL"
-
     # maybe best approach is to create family tree then go about creating the contexts? 
     get_all_members(bio, person)
     family_tags = bio.find_all("FAMILY")
@@ -353,9 +345,11 @@ def extract_family_data(bio, person):
 
             # Finding family member
             people_found = utilities.get_other_people(member_tag,person)
-            marital_statuses = find_marital_status(member_tag)
-            child_count = find_children(member_tag)
-            family_members += find_childlessness(member_tag)
+            # marital_statuses = find_marital_status(member_tag)
+            
+            # TODO: Need to handle <CHILDREN> & <CHILDLESSNESS> tags
+            # child_count = find_children(member_tag)
+            # family_members += find_childlessness(member_tag)
 
             if child_count:
                 for x in child_count:
@@ -507,14 +501,14 @@ def main():
         print("*" * 55)
 
         person = Biography(person_id, soup)
-        # extract_family_data(soup, person)
-        extract_intimate_relationships_data(soup, person)
-        # extract_friend_data(soup, person)
+        extract_family_data(soup, person)
+        # extract_intimate_relationships_data(soup, person)
+        # # extract_friend_data(soup, person)
 
         graph = person.to_graph()
 
         utilities.create_individual_triples(
-            extraction_mode, person, "relationships")
+            extraction_mode, person, "relationships",graph)
         utilities.manage_mode(extraction_mode, person, graph)
 
         uber_graph += graph

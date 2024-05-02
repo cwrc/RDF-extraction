@@ -244,7 +244,7 @@ def main():
         graph = person.to_graph()
 
         utilities.create_individual_triples(
-            extraction_mode, person, "location")
+            extraction_mode, person, "location",graph)
         utilities.manage_mode(extraction_mode, person, graph)
 
         uber_graph += graph

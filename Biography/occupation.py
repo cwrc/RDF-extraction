@@ -361,7 +361,7 @@ def main():
         graph = person.to_graph()
 
         utilities.create_individual_triples(
-            extraction_mode, person, "occcupation")
+            extraction_mode, person, "occcupation",graph)
         utilities.manage_mode(extraction_mode, person, graph)
 
         uber_graph += graph

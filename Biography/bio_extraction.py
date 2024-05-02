@@ -72,7 +72,7 @@ def main():
 
         # triples to files
         utilities.create_individual_triples(
-            extraction_mode, person, "biography")
+            extraction_mode, person, "biography",graph)
         utilities.manage_mode(extraction_mode, person, graph)
 
         uber_graph += graph

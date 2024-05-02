@@ -64,6 +64,7 @@ class Biography(object):
         self.name = utilities.get_readable_name(doc)
         self.std_name = utilities.get_entry_standard_name(doc)
         self.cwrc_uri = self.document.ENTRY.DIV0.STANDARD.get("REF")
+        self.gender = []
 
         if self.cwrc_uri in utilities.PERSON_MAP and utilities.PERSON_MAP[self.cwrc_uri]["Primary Identifier"] != "":
             self.uri = utilities.PERSON_MAP[self.cwrc_uri]["Primary Identifier"]
@@ -164,8 +165,11 @@ class Biography(object):
             g += x.to_triple(self)
         return g
 
+# TODO: DETERMINE WHY THIS FUNCTION IS BEING CALLED 3 Times
     def to_graph(self):
         g = utilities.create_graph()
+        print(self.gender)
+        print("lol")
 
         g.add((self.uri, RDF.type, utilities.NS_DICT["crm"].E21_Person))
         g.add(

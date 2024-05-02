@@ -480,16 +480,6 @@ def get_readable_name(bio):
     return bio.find("DOCTITLE").text.split(":")[0].strip()
 
 
-# TODO: Remove call to this function as it's likely no longer needed with new schema
-def get_sex(bio):
-    tag = bio.contents[-1]
-    if tag.name not in ["BIOGRAPHY", "WRITING"]:
-        logger.error("Unexpected last tag: " + tag.name)
-    else:
-        return (tag.get("SEX"))
-    return None
-
-
 def get_persontype(bio):
     return bio.BIOGRAPHY.get("PERSON")
 
@@ -546,7 +536,7 @@ def create_uber_triples(mode, graph, script_id):
         create_extracted_uberfile(temp_path, graph, x)
 
 
-def create_individual_triples(mode, person, script_id):
+def create_individual_triples(mode, person, script_id, graph=None):
     fmt = [mode.format]
     if fmt == ["pretty-xml"]:
         fmt = ["rdf"]
@@ -557,7 +547,7 @@ def create_individual_triples(mode, person, script_id):
         temp_path = "extracted_triples/" + script_id + "_" + x + "/" + person.id + "_" + script_id + "." + x
         if x == "rdf":
             x = "pretty-xml"
-        create_extracted_file(temp_path, person, x)
+        create_extracted_file(temp_path, person, x, graph)
 
 def create_place_nodes(g):
     for label, uri in PLACE_MAP.items():
@@ -567,17 +557,19 @@ def create_place_nodes(g):
         g.add((uri, NS_DICT["crm"].P2_has_type, NS_DICT["biography"].mappedPlace))
         g.add((uri, rdflib.SKOS.hiddenLabel, rdflib.Literal(label,lang="en")))
 
-def create_extracted_file(filepath, person, serialization="ttl"):
+def create_extracted_file(filepath, person, serialization="ttl", graph=None):
     """Create file of extracted triples for particular person
     """
+    if not graph:
+        graph = person.to_graph()
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     with open(filepath, "w", encoding="utf-8") as f:
         if serialization == "ttl":
             f.write(F"# date extracted: ~{get_current_time()}\n")
-            f.write(F"# {len(person.to_graph())} triples created\n")
-            f.write(person.to_file())
+            f.write(F"# {len(graph)} triples created\n")
+            f.write(person.to_file(graph))
         elif serialization:
-            f.write(person.to_file(serialization=serialization))
+            f.write(person.to_file(graph,serialization=serialization))
 
 
 def create_extracted_uberfile(filepath, graph, serialization="ttl", extra_triples=None):

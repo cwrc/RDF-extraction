@@ -288,7 +288,7 @@ def main():
         
 
         utilities.create_individual_triples(
-            extraction_mode, person, "birthDeath")
+            extraction_mode, person, "birthDeath",graph)
         
         utilities.manage_mode(extraction_mode, person, graph)
 

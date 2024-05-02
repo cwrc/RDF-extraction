@@ -472,50 +472,47 @@ def extract_cf_data(bio, person):
 def extract_gender_data(bio, person):
     # Possibly use this method get gender information for determining correct predicate?
     # Snippet for gender context is awkward
-    value = utilities.get_sex(bio)
+    
     count = 1
+    value = []
+    parent_tag = None
     context_id = f"{person.id}_GenderContext_{count}"
-    if value:
-        gender_context = Context(context_id, bio.ORLANDOHEADER.FILEDESC, "GENDER",pattern="culturalform")
-        gender_context.link_triples(CulturalForm("gender", None, get_mapped_term("Gender", value)))
-        person.add_context(gender_context)
-    else:
-        tags = bio.find_all("GENDER")
-        value = []
-        parent_tag = None
-        for x in tags:
-            if x.get("GENDERIDENTITY"):
-                value.append(x)
-                if parent_tag and parent_tag != x.parent:
-                    print(x)
-                else:
-                    parent_tag = x.parent
+    
+    tags = bio.find_all("GENDER")
+    
+    for x in tags:
+        if x.get("GENDERIDENTITY"):
+            value.append(x)
+            if parent_tag and parent_tag != x.parent:
+                print(x)
+            else:
+                parent_tag = x.parent
 
-        if tags == [ ]:
-            logger.error(F"Missing <GENDER> TAG: {person.id}")
+    if tags == [ ]:
+        logger.error(F"Missing <GENDER> TAG: {person.id}")
 
-        value = [CulturalForm("gender", None, get_mapped_term("Gender", utilities.get_value(x)))
-                        for x in value]
-        if not value:
-            return
-        
-        print(*value,sep="\n")
-        attributes = get_attributes(value)
-        
-        temp_context = Context(context_id, parent_tag, "GENDER",pattern="culturalform")
-        for x in attributes.keys():
-            temp_attr = {x:attributes[x]}
-        
-            activity_id = context_id.replace("Context","Event") + "_"+ str(count)
-            label = f"Gender Event"
-            activity = Activity(person, label, activity_id, parent_tag, activity_type="culturalform", attributes=temp_attr)
-            activity.event_type.append(utilities.create_uri("context","GenderContext"))
-            activity.connection_type = get_event_type("genderContext")
-            temp_context.link_activity(activity)
-            person.add_activity(activity)
-            count+=1
-        person.add_context(temp_context)
-        
+    value = [CulturalForm("gender", None, get_mapped_term("Gender", utilities.get_value(x)))
+                    for x in value]
+    if not value:
+        return
+    
+
+    attributes = get_attributes(value)
+    temp_context = Context(context_id, parent_tag, "GENDER",pattern="culturalform")
+    for x in attributes.keys():
+        temp_attr = {x:attributes[x]}
+        person.gender += attributes[x]
+        print(temp_attr)
+        activity_id = context_id.replace("Context","Event") + "_"+ str(count)
+        label = f"Gender Event"
+        activity = Activity(person, label, activity_id, parent_tag, activity_type="culturalform", attributes=temp_attr)
+        activity.event_type.append(utilities.create_uri("context","GenderContext"))
+        activity.connection_type = get_event_type("genderContext")
+        temp_context.link_activity(activity)
+        person.add_activity(activity)
+        count+=1
+    person.add_context(temp_context)
+    
 
 def clean_term(string):
     string = string.lower().replace("-", " ").strip().replace(" ", "")
@@ -674,10 +671,10 @@ def main():
 
         person.name = utilities.get_readable_name(soup)
         graph = person.to_graph()
-
+        
         uber_graph += graph
 
-        utilities.create_individual_triples(extraction_mode, person, "cf")
+        utilities.create_individual_triples(extraction_mode, person, "cf", graph)
         utilities.manage_mode(extraction_mode, person, graph)
 
     logger.info(str(len(uber_graph)) + " triples created")
