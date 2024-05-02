@@ -575,7 +575,7 @@ def create_extracted_file(filepath, person, serialization="ttl", graph=None):
 def create_extracted_uberfile(filepath, graph, serialization="ttl", extra_triples=None):
     """Create file of triples for a particular graph
     """
-    create_place_nodes(graph) #TODO: Review if needed?
+    # create_place_nodes(graph) #TODO: Review if needed?
     
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     with open(filepath, "w", encoding="utf-8") as f:
@@ -690,6 +690,10 @@ def get_file_dict(script, args, testcase_data, testcases_available):
         filelist = [directory +
                     filename for filename in sorted(os.listdir(directory)) if filename.endswith(file_ending)]
         if args.random:
+            if args.random > len(filelist):
+                logger.warning("Random file count exceeds file count, defaulting to all files")
+                input()
+                args.random = len(filelist)
             import random
             filelist = random.sample(filelist, args.random)
         elif args.first:
