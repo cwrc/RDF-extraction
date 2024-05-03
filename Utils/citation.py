@@ -58,7 +58,7 @@ class Citation(object):
 
         if self.page:
             g.add((uri, utilities.NS_DICT["crm"].P190_has_symbolic_content, Literal(self.page, lang="en")))
-
+            g.add((uri, utilities.NS_DICT["crm"].P2_has_type, utilities.NS_DICT["wikidata"]["Q11325816"]))
         if source_url:      
             g.add((source_url, RDF.type, utilities.NS_DICT["crmdig"].D1_Digital_Object))
             g.add((source_url, utilities.NS_DICT["crm"].P67_refers_to, citing_uri))
