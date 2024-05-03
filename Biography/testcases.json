@@ -72,10 +72,13 @@
       "jewsge": "INTIMATERELATIONSHIPS EroticRelationship with an actress who plays characters from Shakespeare plays",
       "fryeka": "Marital: Marriage tag in mother member tag",
       "peckwi": "Marital: Marriage tag in Father member tag",
-      "mildgr": "Marital: Marriage tag in Father member tag"
+      "mildgr": "Marital: Marriage tag in Father member tag",
+      "tyrwel": "Father's name in mother tag"
     },
     "notes": {
       "contexts": "Family: Whole member tag is the context",
+      "general": "Not extracting relationships if no REF value is present",
+      "family": "Members are only the first and only listed name within a tag.",
       "intimate relations": "Decision: If there is ONLY one name within the tag, select that as the subject of the intimate relationship but then and only then (will be working on a better solution in the interim). ",
       "friends/associates": "Decision: Whereas in the case of FriendsAndAssociates we are going higher recall and less precision.",
       "marriage": "Seems to be often in the Husband tag outside of a DIV2",
