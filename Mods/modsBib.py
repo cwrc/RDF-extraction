@@ -908,6 +908,7 @@ class BibliographyParse:
             else:
                 logger.warning(F"Publisher not in published authority list: {origin['publisher']}")
                 publisher = F"{self.placeholderURI}_activity_statement_publisher_{index}"
+                origin['publisher label'] = origin['publisher']
         
         return publisher
 
@@ -942,6 +943,7 @@ class BibliographyParse:
         # The Expression
         instance = g.resource(self.placeholderURI + "_instance")
         instance.add(RDF.type, FRBROO.F2_Expression)
+        instance.add(RDFS.label, rdflib.Literal(F"expression of {self.mainTitle}", lang="en"))
         resource.add(FRBROO.R3_is_realised_in, instance)
 
         # CIDOC: Creating titles
@@ -1132,6 +1134,7 @@ class BibliographyParse:
                 
                 if "publisher label" in o:
                     publisher.add(RDFS.label, rdflib.Literal(o["publisher label"],lang="en"))
+                    
 
 
                 publisher_role = g.resource(
@@ -1208,6 +1211,8 @@ class BibliographyParse:
                                  rdflib.Literal(o['edition'],lang="en"))
 
                 edition_node.add(CRM.P2_has_type, GETTY["300121294"])
+                edition_node.add(RDFS.label, rdflib.Literal(
+                    F"edition of {self.mainTitle}", lang="en"))
 
             originInfo.add(CRM.P94_has_created,resource)
             i += 1
@@ -1272,7 +1277,9 @@ class BibliographyParse:
                 vol_node.add(CRM.P190_has_symbolic_content,
                              rdflib.Literal(p['volume'],lang="en"))
                 vol_node.add(CRM.P2_has_type, SCHEMA.volumeNumber)
-                extent_label += "Volume " + p['volume']
+                vol_node.add(RDFS.label, rdflib.Literal(
+                    F"Volume of {self.mainTitle}", lang="en"))
+                extent_label += "volume " + p['volume']
 
             if p['issue']:
                 issue_node = g.resource(
@@ -1282,6 +1289,7 @@ class BibliographyParse:
                 issue_node.add(CRM.P190_has_symbolic_content,
                                rdflib.Literal(p['issue'],lang="en"))
                 issue_node.add(CRM.P2_has_type, SCHEMA.issueNumber)
+                issue_node.add(RDFS.label, rdflib.Literal(F"issue of {self.mainTitle}",lang="en"))
 
                 if p['volume']:
                     extent_label += ", "
@@ -1293,6 +1301,7 @@ class BibliographyParse:
                 page_node.add(RDF.type, CRM.E33_E41_Linguistic_Appellation)
                 page_node.add(CRM.P190_has_symbolic_content,
                               rdflib.Literal(p['value'],lang="en"))
+                page_node.add(RDFS.label, rdflib.Literal(F"page number of {self.mainTitle}",lang="en"))
                 page_node.add(CRM.P2_has_type, rdflib.URIRef(
                     "http://www.wikidata.org/entity/Q11325816"))
 

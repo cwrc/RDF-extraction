@@ -69,6 +69,14 @@ def get_org_uri(tag):
                 uri = utilities.ORGANIZATION_MAP[uri]['CWRC URI']
         else:
             logger.warn(F"Organization not in published authority list: {uri}, {tag}")
+            utilities.ORGANIZATION_MAP[uri] = {
+                "Preferred Name": tag.get_text(),
+                "Primary Identifier": "",
+                "Secondary Identifier": "",
+                "CWRC URI": uri
+            }
+            
+
         
         uri = rdflib.term.URIRef(uri)
     

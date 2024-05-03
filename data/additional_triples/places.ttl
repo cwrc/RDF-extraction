@@ -7,17 +7,29 @@ geonames:6943579 a crm:E53_Place ;
     rdfs:label "Windsor"@en ;
     crm:P168_place_is_defined_by "POINT(153.02882 -27.43631)" .
 
+geonames:2143408 a crm:E53_Place ;
+    rdfs:label "Windsor"@en ;
+    crm:P168_place_is_defined_by "POINT(153.02882 -27.43631)" .
+
 geonames:6111882 a crm:E53_Place ;
     rdfs:label "Port Hope"@en ;
     crm:P168_place_is_defined_by "POINT(-78.39953 44.01682)" .
 
+geonames:6111881 a crm:E53_Place ;
+    rdfs:label "Port Hope"@en ;
+    crm:P168_place_is_defined_by "POINT(-78.39953 44.01682)" .
+
 geonames:2521750 a crm:E53_Place ;
+    rdfs:label "Andalusia"@en ;
+    crm:P168_place_is_defined_by "POINT(-4.58333 37.5)" .
+
+geonames:6640393 a crm:E53_Place ;
     rdfs:label "Bristol Channel"@en ;
     crm:P168_place_is_defined_by "POINT(-4.31763 51.39835)" .
 
 geonames:2960857 a crm:E53_Place ;
-    rdfs:label "Andalusia"@en ;
-    crm:P168_place_is_defined_by "POINT(-4.58333 37.5)" .
+    rdfs:label "Bristol Channel"@en ;
+    crm:P168_place_is_defined_by "POINT(-4.31763 51.39835)" .
 
 geonames:4155751 a crm:E53_Place ;
     rdfs:label "Florida"@en ;
