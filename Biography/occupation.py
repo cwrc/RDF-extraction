@@ -153,9 +153,15 @@ class Occupation(object):
         if "http" in str(term):
             term = rdflib.term.URIRef(term)
         elif term:
-            term = Literal(term, datatype=rdflib.namespace.XSD.string)
+            uri = utilities.make_standard_uri(term)
+            # TODO: make better method of creating placeholder URIs
+            logger.error(F"<{uri}> a skos:Concept, crm:E55_Type ;" )
+            logger.error(F"""\t rdfs:label "{term}"@en .""" )
+            term = uri
         else:
-            term = Literal(value, datatype=rdflib.namespace.XSD.string)
+            term = utilities.make_standard_uri(value)
+            logger.error(F"<{term}> a skos:Concept, crm:E55_Type ;" )
+            logger.error(F"""\t rdfs:label "{value}"@en .""" )
             map_fail += 1
             possibilites = []
             log_str = "Unable to find matching occupation instance for '" + value + "'"

@@ -580,9 +580,15 @@ def get_mapped_term(rdf_type, value, retry=False, id=None):
     elif term:
         # Each complete ISO 3166-2 code can then be used to uniquely identify a country subdivision in a global context.
         # ISO 3166-1 alpha-2 code + The second part is a string of up to three alphanumeric characters
-        term = Literal("ISO-3166-2:" + term, datatype=rdflib.namespace.XSD.string)
+        # TODO: make better method of creating placeholder URIs
+        uri = utilities.make_standard_uri("ISO-3166-2:" + term)
+        logger.error(F"<{uri}> a skos:Concept, crm:E55_Type ;" )
+        logger.error(F"""\t rdfs:label "ISO-3166-2:{term}"@en .""" )
     else:
-        term = Literal(value, datatype=rdflib.namespace.XSD.string)
+        term = utilities.make_standard_uri(value)
+        logger.error(F"<{term}> a skos:Concept, crm:E55_Type ;" )
+        logger.error(F"""\t rdfs:label "{value}"@en .""" )
+        
         if retry:
             map_attempt -= 1
         else:

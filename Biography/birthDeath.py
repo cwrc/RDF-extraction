@@ -146,9 +146,16 @@ def get_mapped_term(value, id=None):
     if "http" in str(term):
         term = rdflib.term.URIRef(term)
     elif term:
-        term = rdflib.Literal(term, datatype=rdflib.namespace.XSD.string)
+        uri = utilities.make_standard_uri(term)
+        # TODO: make better method of creating placeholder URIs
+        logger.error(F"<{uri}> a skos:Concept, crm:E55_Type ;" )
+        logger.error(F"""\t rdfs:label "{term}"@en .""" )
+        term = uri
     else:
-        term = rdflib.Literal(value, datatype=rdflib.namespace.XSD.string)
+        term = utilities.make_standard_uri(value)
+        logger.error(F"<{term}> a skos:Concept, crm:E55_Type ;" )
+        logger.error(F"""\t rdfs:label "{value}"@en .""" )
+        
         map_fail += 1
         possibilities = []
         log_str = "Unable to find matching COD instance for '" + value + "'"

@@ -576,7 +576,7 @@ def create_extracted_file(filepath, person, serialization="ttl", graph=None):
 def create_extracted_uberfile(filepath, graph, serialization="ttl", extra_triples=None):
     """Create file of triples for a particular graph
     """
-    # create_place_nodes(graph) #TODO: Review if needed?
+    create_place_nodes(graph) #TODO: Review if needed?
     
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     with open(filepath, "w", encoding="utf-8") as f:

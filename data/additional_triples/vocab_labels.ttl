@@ -857,6 +857,22 @@ event:GenderEvent a crm:E55_Type,
         skos:Concept ;
     rdfs:label "gender event"@en .
 
+event:LanguageEvent a crm:E55_Type,
+        skos:Concept ;
+    rdfs:label "language event"@en .
+
+event:EthnicityEvent a crm:E55_Type,
+        skos:Concept ;
+    rdfs:label "ethnicity event"@en .
+
+event:RaceColourEvent a crm:E55_Type,
+        skos:Concept ;
+    rdfs:label "race or colour event"@en .
+
+event:GeographicHeritageEvent a crm:E55_Type,
+        skos:Concept ;
+    rdfs:label "geographic heritage event"@en .
+
 event:HealthEvent a crm:E55_Type,
         skos:Concept ;
     rdfs:label "health event"@en .
@@ -3023,7 +3039,7 @@ identity:ActivistInvolvement a crm:E55_Type,
         skos:Concept ;
     rdfs:label "activist involvement"@en .
 
-identity:Androgynous a crm:E55_Type,
+identity:androgynous a crm:E55_Type,
         crm:E89_Propositional_Object,
         skos:Concept ;
     rdfs:label "androgynous"@en,
@@ -3044,7 +3060,7 @@ identity:Gender a crm:E55_Type,
     rdfs:label "gender"@en,
         "genre"@fr .
 
-identity:GenderQueer a crm:E55_Type,
+identity:genderQueer a crm:E55_Type,
         crm:E89_Propositional_Object,
         skos:Concept ;
     rdfs:label "genderqueer"@en,
