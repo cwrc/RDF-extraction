@@ -251,3 +251,5 @@ aat:300386576 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
 aat:300111225 a crm:E55_Type, crm:E89_Propositional_Object, skos:Concept ;
     rdfs:label "Welsh (culture or style)"@en .
 
+<http://www.wikidata.org/entity/Q11325816> a crm:E55_Type, skos:Concept ;
+    rdfs:label "page number"@en .

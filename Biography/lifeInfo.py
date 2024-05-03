@@ -21,6 +21,45 @@ RELATIONSHIP_LABELS = {
     utilities.create_uri("persrel","possiblyEroticRelationship"): "possibly erotic relationship",
     utilities.create_uri("persrel","intimateRelationship"): "intimate relationship",
 }
+
+class Role(object):
+    """docstring for Role"""
+
+    def __init__(self, activity_uri,person_uri, role_uri, other_attributes=None):
+        super(Role, self).__init__()
+        self.person_uri = person_uri
+        cwrc_uri = person_uri if "cwrc" in str(person_uri) else utilities.get_cwrc_uri(person_uri)
+        self.name = utilities.get_full_name(cwrc_uri)
+        self.role = role_uri
+        self.role_label =role_uri.split("/")[-1].lower()
+        self.uri = utilities.make_standard_uri(F"""{self.name} as {role_uri.split("/")[-1]}""")
+        self.activity_uri = activity_uri
+
+    def to_triple(self, context):
+        g = utilities.create_graph()
+        
+        role_activity = g.resource(self.uri)
+        role_activity.add(RDF.type, utilities.NS_DICT["crm"].PC14_carried_out_by)
+        role_activity.add(utilities.NS_DICT["crm"]["P14.1_in_the_role_of"], self.role)
+        role_activity.add(utilities.NS_DICT["crm"].P02_has_range, self.person_uri)
+        role_activity.add(utilities.NS_DICT["crm"].P01_has_domain, self.activity_uri)
+        role_activity.add(RDFS.label, Literal(F"{self.name} as {self.role_label}",lang="en"))
+        
+        
+        # g.add((self.name, self.uri, self.role))
+        
+        
+        return g
+
+    def __str__(self):
+        string = F""
+        string += "person_uri: {self.person_uri}"
+        string += "name: {self.name}"
+        string += "role: {self.role}"
+        string += "role_label: {self.role_label}"
+        string += "uri: {self.uri}"
+        string += "activity_uri: {self.activity_uri}"
+
 class Person(object):
     """docstring for a general Person with a social/familar relation to biographee"""
 
@@ -123,7 +162,6 @@ def find_relationships(tag, person, relation):
     if relation is None:
         people_found = utilities.get_other_people(tag,person)
         if len(people_found) == 1:
-            logger.info(str(people_found[0]) + "-->" + str(relation) + " of " + person.name)
             relationships.append(Person(people_found[0], predicate_map[relation], True))
 
     else:
@@ -173,7 +211,7 @@ def extract_relationships(tag_list, context_type, person, list_type="paragraphs"
                     continue
                 for relationship in attributes[x]:
                     if "temp.lincsproject" in str(relationship):
-                        logger.warning(F"Need to create placeholder for: {relationship}")  
+                        logger.warning(F"NO EXTRACTION: Need to create placeholder for: {relationship}")  
                         continue
 
                     temp_attr = {x:[]}
@@ -253,12 +291,10 @@ def extract_friends(tag_list, context_type, person, list_type="paragraphs"):
             for x in attributes.keys():
                 for relationship in attributes[x]:
                     if "temp.lincsproject" in str(relationship):
-                        logger.warning(F"Need to create placeholder for: {relationship}")  
+                        logger.warning(F"NO EXTRACTION: Need to create placeholder for: {relationship}")  
                         continue
-                    active_participants = []
+                    active_participants = [relationship, person.uri]
                     temp_attr = {x:[]}
-                    active_participants.append(relationship)
-                    active_participants.append(person.uri)
                      
                     activity_id = context_id.replace("Context","Event") + "_"+ str(event_count)
                     relationship_cwrc_uri = relationship if "cwrc" in str(relationship) else utilities.get_cwrc_uri(relationship)
@@ -300,7 +336,7 @@ def create_family_map(path=None):
         for row in reader:
             if row[0] not in FAMILY_MAP:
                 FAMILY_MAP[row[0]] = {"Predicate": row[1], "MALE": row[2],
-                                      "FEMALE": row[3], "NEUTRAL": row[4], "SEX": row[5], "CIDOC":row[6]}
+                                      "FEMALE": row[3], "NEUTRAL": row[4], "SEX": row[5], "CIDOC":row[6], "Label":row[7]}
 
 
 FAMILY_MAP = {}
@@ -326,13 +362,13 @@ def extract_family_data(bio, person):
     TODO: Extract family members in a certain orders
     Parents, siblings, then partners, other relatives
     """
-    get_all_members(bio,person)
+    # get_all_members(bio,person)
 
     context_count = 1
     event_count = 1
 
     # maybe best approach is to create family tree then go about creating the contexts? 
-    get_all_members(bio, person)
+    # get_all_members(bio, person)
     family_tags = bio.find_all("FAMILY")
 
     for family_tag in family_tags:
@@ -341,7 +377,7 @@ def extract_family_data(bio, person):
             family_members = []
             relation = FAMILY_MAP[member_tag["RELATION"]]["Predicate"]
             context_id = person.id + "_FamilyContext_" + str(context_count)
-            temp_context = Context(context_id, member_tag, "FAMILY")
+            temp_context = Context(context_id, member_tag, "FAMILY",pattern="family")
 
             # Finding family member
             people_found = utilities.get_other_people(member_tag,person)
@@ -351,128 +387,134 @@ def extract_family_data(bio, person):
             # child_count = find_children(member_tag)
             # family_members += find_childlessness(member_tag)
 
-            if child_count:
-                for x in child_count:
-                    family_members.append(utilities.GeneralRelation(utilities.create_cwrc_uri(
-                        "children"), rdflib.term.Literal(int(x), datatype=rdflib.namespace.XSD.int)))
-
-            print(people_found)
-            print(len(people_found))
+            # if child_count:
+            #     for x in child_count:
+            #         family_members.append(utilities.GeneralRelation(utilities.create_cwrc_uri(
+            #             "children"), rdflib.term.Literal(int(x), datatype=rdflib.namespace.XSD.int)))
+            
             # Cleaning people found
             if person.uri in people_found:
                 people_found.remove(person.uri)
-            print(len(people_found))
             for x in people_found:
                 if x in person.biographers:
                     people_found.remove(x)
 
-            # Replace with more sopshisticated mapping
+            # Replace with more sophisticated mapping
             if people_found:
                 people_found = [people_found[0]]
             if len(people_found) == 1:
-                print(member_tag["RELATION"])
-                print(people_found[0])
-                print(FAMILY_MAP[member_tag["RELATION"]])
-                if str(people_found[0]) in utilities.WRITER_MAP and utilities.WRITER_MAP[str(people_found[0])]["SEX"] != FAMILY_MAP[member_tag["RELATION"]]["SEX"]:
-                    # Creating placeholder
-                    if relation != "interpersonalRelationship":
-                        people_found[0] = person.uri + "_PLACEHOLDER_"+ relation
-                elif str(people_found[0]) in utilities.WRITER_MAP:
-                    print(utilities.WRITER_MAP[str(people_found[0])])
-                    print(utilities.WRITER_MAP[str(people_found[0])]["SEX"])
-                    print(person.family_members)
+                relative = people_found[0]
+                if "temp.lincsproject" in str(relative):
+                    logger.warning(F"NO EXTRACTION: Need to create placeholder for: {relative}")  
+                    continue
                 
-                log_str = person.id + "\n"
-                print(relation)
-                log_str += "\t" + person.uri.split("/")[-1] + " --" + relation + "--> " + \
-                    str(people_found[0]).split("/")[-1] + "\n"
+                relative_cwrc_uri = relative if "cwrc" in str(relative) else utilities.get_cwrc_uri(relative)
+                activity_id = context_id.replace("Context","Event") + "_"+ str(event_count)
+                label = f"""{FAMILY_MAP[member_tag["RELATION"]]["Label"]} with {utilities.get_full_name(relative_cwrc_uri)}"""
+                person_role = None
+                active_participants = []
+                participants = []
+                roles = []
+                
+                activity = Activity(person, label, activity_id, member_tag, activity_type="generic")
 
-                family_members.append(Person(people_found[0], relation))
+                
+                if relation == "interpersonalRelationship":
+                    active_participants = [relative, person.uri]
+                    activity.title = f"""{RELATIONSHIP_LABELS[utilities.create_uri("persrel","interpersonalRelationship")]} with {utilities.get_full_name(relative_cwrc_uri)}"""
+                else:
+                    # Determining what role to assign to the person depending on their gender (ew but needed for asymmetrical relations)
+                    person_gendered_role_type = "NEUTRAL"
+                    if len(person.gender) == 1:
+                        if "woman" in person.gender[0]:
+                            person_gendered_role_type = "FEMALE"
+                        elif "man"  in person.gender[0]:
+                            person_gendered_role_type = "MALE"
+                        else:
+                            person_gendered_role_type = "NEUTRAL"
+                    person_role = FAMILY_MAP[member_tag["RELATION"]][person_gendered_role_type]
+                    roles.append(Role(activity.uri, relative, utilities.create_uri("persrel",relation)))
+                    roles.append(Role(activity.uri, person.uri, utilities.create_uri("persrel",person_role)))
+                    activity.additional_nodes = roles
+                    activity.event_type.append(utilities.create_uri("event", "FamilyEvent"))
+                    
+
+        
+                activity.participants = participants
+                activity.active_participants = active_participants
+                
+                
+                temp_context.link_activity(activity)
+                person.add_activity(activity)
+                event_count+=1
+
+                log_str = F"\t{person.uri} --{relation} --> {relative}\n"
+                family_members.append(Person(relative, relation))
+                
                 if relation in person.family_members:
-                    person.family_members[relation].append(people_found[0])
+                    person.family_members[relation].append(relative)
                 else:
-                    person.family_members[relation] = [people_found[0]]
-
+                    person.family_members[relation] = [relative]
+                # print(log_str)
+                
+                # TODO: HANDLE OCCUPATIONS of RELATIVES
                 # Creating context for relative
-                relative_triples = occupation.find_occupations(member_tag)
-                cohabitant_tag = member_tag.find("LIVESWITH")
-                if cohabitant_tag:
-                    relative_triples.append(Person(person.uri, "cohabitant"))
+                # relative_triples = occupation.find_occupations(member_tag)
+                # cohabitant_tag = member_tag.find("LIVESWITH")
+                # if cohabitant_tag:
+                #     relative_triples.append(Person(person.uri, "cohabitant"))
 
-                if relation in symmetric_relations:
-                    relative_triples.append(Person(person.uri, relation))
-                else:
-                    relation = FAMILY_MAP[member_tag["RELATION"]][sex]
-                    relative_triples.append(Person(person.uri, relation))
-                    logger.warning("Need to invert relation:" + relation)
+                # if relation in symmetric_relations:
+                #     relative_triples.append(Person(person.uri, relation))
+                # else:
+                #     relation = FAMILY_MAP[member_tag["RELATION"]][sex]
+                #     relative_triples.append(Person(person.uri, relation))
+                #     logger.warning("Need to invert relation:" + relation)
 
-                log_str += "\t" + str(people_found[0]).split("/")[-1] + " --" + \
-                    relation + "--> " + person.uri.split("/")[-1] + "\n"
-                logger.info(log_str)
+                # log_str += "\t" + str(people_found[0]).split("/")[-1] + " --" + \
+                #     relation + "--> " + person.uri.split("/")[-1] + "\n"
+                # logger.info(log_str)
 
-                if marital_statuses:
-                    if member_tag["RELATION"] in ["HUSBAND", "WIFE", "PARTNER"]:
-                        family_members += marital_statuses
-                        relative_triples += marital_statuses
-                    else:
-                        relative_triples += marital_statuses
+                # TODO: HANDLE OCCUPATIONS of Marital Statuses
+                # if marital_statuses:
+                #     if member_tag["RELATION"] in ["HUSBAND", "WIFE", "PARTNER"]:
+                #         family_members += marital_statuses
+                #         relative_triples += marital_statuses
+                #     else:
+                #         relative_triples += marital_statuses
 
-                if FAMILY_MAP[member_tag["RELATION"]]["SEX"] in ["FEMALE", "MALE"]:
-                    gender = get_mapped_term(
-                        "Gender", FAMILY_MAP[member_tag["RELATION"]]["SEX"])
-                    relative_triples.append(utilities.GeneralRelation(
-                        utilities.create_uri("identity","gender"), gender))
+                # if FAMILY_MAP[member_tag["RELATION"]]["SEX"] in ["FEMALE", "MALE"]:
+                #     gender = get_mapped_term(
+                #         "Gender", FAMILY_MAP[member_tag["RELATION"]]["SEX"])
+                #     relative_triples.append(utilities.GeneralRelation(
+                #         utilities.create_uri("identity","gender"), gender))
 
-                if relative_triples:
-                    context_count += 1
-                    context_id = person.id + \
-                        "_FamilyContext_" + str(context_count)
-                    relative_context = Context(context_id, member_tag, "FAMILY",
-                                               subject_uri=people_found[0], target_uri=temp_context.target_uri, id_context=temp_context.identifying_uri)
-                    relative_context.link_triples(relative_triples)
-                    person.add_context(relative_context)
+                # if relative_triples:
+                #     context_count += 1
+                #     context_id = person.id + \
+                #         "_FamilyContext_" + str(context_count)
+                #     relative_context = Context(context_id, member_tag, "FAMILY",
+                #                                subject_uri=people_found[0], target_uri=temp_context.target_uri, id_context=temp_context.identifying_uri)
+                #     relative_context.link_triples(relative_triples)
+                #     person.add_context(relative_context)
 
 
-            # Creating family events
-            events_tags = member_tag.find_all("CHRONSTRUCT")
-            family_events = []
-            for x in events_tags:
-                event_title = person.name + " - Family Event (" + relation + ")"
-                event_uri = person.id + "_FamilyEvent_" + str(event_count)
-                family_events.append(event.Event(event_title, event_uri, x, "FamilyEvent"))
-                event_count += 1
-
-            temp_context.link_triples(family_members)
-            for x in family_events:
-                temp_context.link_event(x)
-                person.add_event(x)
 
             person.add_context(temp_context)
             context_count += 1
 
         if len(member_tags) == 0:
             triples = []
-            child_count = find_children(family_tag)
-            triples += find_childlessness(family_tag)
+            # child_count = find_children(family_tag)
+            # triples += find_childlessness(family_tag)
             
-            if child_count:
-                for x in child_count:
-                    triples.append(utilities.GeneralRelation(utilities.create_cwrc_uri(
-                        "children"), rdflib.term.Literal(int(x), datatype=rdflib.namespace.XSD.int)))
+            # if child_count:
+            #     for x in child_count:
+            #         triples.append(utilities.GeneralRelation(utilities.create_cwrc_uri(
+            #             "children"), rdflib.term.Literal(int(x), datatype=rdflib.namespace.XSD.int)))
             
             context_id = person.id + "_FamilyContext_" + str(context_count)
-            temp_context = Context(context_id, family_tag, "FAMILY")
-            temp_context.link_triples(triples)
-
-            events_tags = family_tag.find_all("CHRONSTRUCT")
-            family_events = []
-
-            for x in events_tags:
-                event_title = person.name + " - Family Event"
-                event_uri = person.id + "_FamilyEvent_" + str(event_count)
-                family_events.append(event.Event(event_title, event_uri, x, "FamilyEvent"))
-                event_count += 1
-
+            temp_context = Context(context_id, family_tag, "FAMILY","identifying")
             person.add_context(temp_context)
             context_count += 1
 
@@ -497,10 +539,13 @@ def main():
 
         print(filename)
         print(file_dict[filename])
-        print(person_id)
-        print("*" * 55)
-
         person = Biography(person_id, soup)
+        
+        print(F"Full Name\t | entry ID\t | CWRC URI\t | Primary URI")
+        print("-" * 100)
+        print(F"{person.name}\t| {person_id}\t | {person.cwrc_uri}\t | {person.uri}")
+        print("*" * 100)
+
         extract_family_data(soup, person)
         # extract_intimate_relationships_data(soup, person)
         # # extract_friend_data(soup, person)

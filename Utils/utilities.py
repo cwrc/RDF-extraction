@@ -346,6 +346,7 @@ def get_name_uri(tag):
 def get_cwrc_uri(uri):
     if str(uri) in CWRC_URI_MAP:
         return rdflib.term.URIRef(CWRC_URI_MAP[str(uri)])
+    logger.warning(F"URI not in mapping: {uri}")
     return None
 
 def get_person_secondary_uris(cwrc_uri):

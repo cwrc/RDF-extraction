@@ -112,6 +112,7 @@ class Biography(object):
         if "FATHER" in self.possible_family_members and len(self.possible_family_members["FATHER"]) > 0:
             self.family_members["FATHER"] = self.possible_family_members["FATHER"][0]
             self.parents.append(self.family_members["FATHER"])
+        
 
         ignore_members = [self.family_members.get(
             "MOTHER"), self.family_members.get("FATHER")]
@@ -121,9 +122,7 @@ class Biography(object):
             if relation not in ["MOTHER", "FATHER"]:
                 # Removing mother/father URIs from other members
                 members = [x for x in members if x not in ignore_members ]
-                self.family_members[relation] = members
-        
-                
+                self.family_members[relation] = members                
     def get_all_members(self):
         member_tags = self.document.find_all("MEMBER")
         for x in member_tags:
@@ -212,7 +211,6 @@ class Biography(object):
         string += "std_name:" + str(self.std_name) + "\n"
         string += "url:" + str(self.url) + "\n"
         string += "uri:" + str(self.uri) + "\n"
-        string += "wd_id:" + str(self.wd_id) + "\n"
         if self.context_list:
             string += "Contexts: \n"
             for x in self.context_list:

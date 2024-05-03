@@ -1,29 +1,29 @@
-Relation,Predicate,Male Inverse,Female Inverse,Neutral,SEX,Other Predicate(CIDOC)
-AUNT,aunt,nephew,niece,relative,FEMALE,None
-BROTHER,brother,brother,sister,sibling, MALE,None
-CHILD,child,father,mother,parent,None,crm:P152i_is_parent_of
-COUSIN,cousin,cousin,cousin,cousin,None,None
-DAUGHTER,daughter,father,mother,parent,FEMALE,crm:P152i_is_parent_of
-FATHER,father,son,daughter,child,MALE,crm:P152_has_parent
-FOREBEAR,ancestor,descendent,descendent,descendent,None,None
-GRANDDAUGHTER,grandDaughter,grandFather,grandMother,grandParent,FEMALE,None
-GRANDFATHER,grandFather,grandSon,grandDaughter,grandChild,MALE,None
-GRANDMOTHER,grandMother,grandSon,grandDaughter,grandChild,FEMALE,None
-GRANDSON,grandSon,grandFather,grandMother,grandParent,None,None
-GUARDIAN,guardian,ward,ward,ward,None,None
-HUSBAND,husband,husband,wife,partner,MALE,None
-MOTHER,mother,son,daughter,child,FEMALE,crm:P152_has_parent
-NEPHEW,nephew,uncle,aunt,relative,MALE,None
-NIECE,niece,uncle,aunt,relative,FEMALE,None
-OTHER,interpersonalRelationshipWith,interpersonalRelationshipWith,interpersonalRelationshipWith,interpersonalRelationshipWith,None,None
-PARTNER,partner,partner,partner,partner,None,None
-SISTER,sister,brother,sister,sibling,FEMALE,None
-SON,son,father,mother,parent,MALE,crm:P152i_is_parent_of
-STEPBROTHER,stepBrother,stepBrother,stepSister,stepSibling,MALE,None
-STEPDAUGHTER,stepDaughter,stepFather,stepMother,stepParent,FEMALE,None
-STEPFATHER,stepFather,stepSon,stepDaughter,stepChild,MALE,None
-STEPMOTHER,stepMother,stepSon,stepDaughter,stepChild,FEMALE,None
-STEPSISTER,stepSister,stepBrother,stepSister,stepSibling,FEMALE,None
-STEPSON,stepSon,stepFather,stepMother,stepParent,MALE,None
-UNCLE,uncle,nephew,niece,relative,MALE,None
-WIFE,wife,husband,wife,partner,FEMALE,None
+Relation,Predicate,Male Inverse,Female Inverse,Neutral,SEX,Other Predicate(CIDOC),Activity Label
+AUNT,aunt,nephew,niece,relative,FEMALE,None,relative relationship
+BROTHER,brother,brother,sister,sibling,MALE,None,sibling relationship
+CHILD,child,father,mother,parent,None,crm:P152i_is_parent_of,parent-child relationship
+COUSIN,cousin,cousin,cousin,cousin,None,None,cousin relationship
+DAUGHTER,daughter,father,mother,parent,FEMALE,crm:P152i_is_parent_of,parent-child relationship
+FATHER,father,son,daughter,child,MALE,crm:P152_has_parent,child-parent relationship
+FOREBEAR,ancestor,descendent,descendent,descendent,None,None,relative relationship
+GRANDDAUGHTER,grandDaughter,grandFather,grandMother,grandParent,FEMALE,None,Grandparent-grandchild relationship
+GRANDFATHER,grandFather,grandSon,grandDaughter,grandChild,MALE,None,grandchild-grandparent relationship
+GRANDMOTHER,grandMother,grandSon,grandDaughter,grandChild,FEMALE,None,grandchild-grandparent relationship
+GRANDSON,grandSon,grandFather,grandMother,grandParent,None,None,Grandparent-grandchild relationship
+GUARDIAN,guardian,ward,ward,ward,None,None,guardianship relationship
+HUSBAND,husband,husband,wife,partner,MALE,None,spousal relationship
+MOTHER,mother,son,daughter,child,FEMALE,crm:P152_has_parent,child-parent relationship
+NEPHEW,nephew,uncle,aunt,relative,MALE,None,relative relationship
+NIECE,niece,uncle,aunt,relative,FEMALE,None,relative relationship
+OTHER,interpersonalRelationship,interpersonalRelationship,interpersonalRelationship,interpersonalRelationship,None,None,interpersonal relationship
+PARTNER,partner,partner,partner,partner,None,None,partnership relationship
+SISTER,sister,brother,sister,sibling,FEMALE,None,sibling relationship
+SON,son,father,mother,parent,MALE,crm:P152i_is_parent_of,parent-child relationship
+STEPBROTHER,stepBrother,stepBrother,stepSister,stepSibling,MALE,None,step-sibling relationship
+STEPDAUGHTER,stepDaughter,stepFather,stepMother,stepParent,FEMALE,None,step-child relationship
+STEPFATHER,stepFather,stepSon,stepDaughter,stepChild,MALE,None,step-parent relationship
+STEPMOTHER,stepMother,stepSon,stepDaughter,stepChild,FEMALE,None,step-parent relationship
+STEPSISTER,stepSister,stepBrother,stepSister,stepSibling,FEMALE,None,step-sibling relationship
+STEPSON,stepSon,stepFather,stepMother,stepParent,MALE,None,step-child relationship
+UNCLE,uncle,nephew,niece,relative,MALE,None,relative relationship
+WIFE,wife,husband,wife,partner,FEMALE,None,spousal relationship

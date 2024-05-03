@@ -517,7 +517,8 @@ precision: {self.precision}
             for x in self.biographers:
                 activity.add(utilities.NS_DICT["crm"].P14_carried_out_by, x)
 
-        elif self.person and "Activity" in str(self.activity_type):
+        # TODO: REVIEW IF THIS IS NEEDED - WHAT OTHER FILES USE THIS CONDITION
+        elif self.person and "Activity" in str(self.activity_type) and self.tag.name != "MEMBER":
             activity.add(utilities.NS_DICT["crm"].P14_carried_out_by, self.person.uri)
 
         if self.active_participants:
