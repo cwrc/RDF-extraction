@@ -72,6 +72,8 @@ def main():
     least_triples = 0
     smallest_person = None
     largest_person = None
+    count = 0
+    total_files = len(file_dict)
     logger.info("Time started: " + utilities.get_current_time() + "\n")
 
     for filename in file_dict.keys():
@@ -79,8 +81,9 @@ def main():
             soup = BeautifulSoup(f, 'lxml-xml')
 
         person_id = filename.split("/")[-1][:6]
-
-        print(person_id)
+        count += 1
+        
+        print(f"Processing file: {person_id} {count}/{total_files}")
         print(file_dict[filename])
         print("*" * 55)
 
