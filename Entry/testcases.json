@@ -1,6 +1,7 @@
 {
-  "default directory": "../data/entry_2023-08-24/",
+  "default directory": "/Users/alliyyamo/Desktop/test/RDF-extraction/data/entries/2024-06-03/textbase-pubc/entries-pubc/",
   "file ending": ".xml",
+  "file prefix": "orlando_",
   "ignored files": {
     "fielmi": "Michael Field - corresponds to two people and doesn't distinguish between the two"
   },

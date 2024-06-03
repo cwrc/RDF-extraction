@@ -99,7 +99,7 @@ def main():
         with open(filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
-        person_id = filename.split("/")[-1][:6]
+        person_id  = soup.find("ENTRY").get("ID")
 
         print(filename)
         print(file_dict[filename])

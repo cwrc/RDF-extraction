@@ -80,7 +80,7 @@ def main():
         with open(filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
-        person_id = filename.split("/")[-1][:6]
+        person_id  = soup.find("ENTRY").get("ID")
         count += 1
         
         print(f"Processing file: {person_id} {count}/{total_files}")

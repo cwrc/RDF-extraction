@@ -606,6 +606,7 @@ def get_file_dict(script, args, testcase_data, testcases_available):
     from collections import OrderedDict
     directory = testcase_data['default directory']
     file_ending = testcase_data['file ending']
+    file_prefix = testcase_data['file prefix']
     filelist = []
     descriptors = []
 
@@ -626,6 +627,8 @@ def get_file_dict(script, args, testcase_data, testcases_available):
         filelist = [args.file]
         descriptors = ["Testing single file specified: " + args.file]
     elif args.orlando:
+        if file_prefix:
+            args.orlando = file_prefix + args.orlando
         filelist = [args.orlando]
         descriptors = ["Testing single entry specified: " + args.orlando]
         print("Running extraction on " + args.orlando)

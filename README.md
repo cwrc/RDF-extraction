@@ -14,6 +14,13 @@ Clone the repository if you haven't already.
 Switch to the CWRC branch
 `git switch classic`
 
+There are two ways of accessing the source data files:
+
+1. [Download files from CWRC](#download-files-from-cwrc)
+ (This needs special permissions and clearance)
+2. [Download zip from repo](#download-files-from-gitlab) (2024-06-03: This is a temporary workaround)
+
+
 ### Download files from CWRC
 
 #### Prerequisites
@@ -45,6 +52,14 @@ password=mySuperSecretpassword12!
 1. Deactivate Virtual Environment:
 `deactivate`
 
+### Download files from GitLab
+
+1. [Click here to download](https://gitlab.com/calincs/cwrc/orlando-2.0-c-modelling/-/archive/master/orlando-2.0-c-modelling-master.zip?path=textbase-pubc/entries-pubc)
+1. Create a folder with today's date in `data/entries/`  (ex. `2024-06-03`)
+1. Extract the contents from the Zip folder and put into the new folder you created
+1. In testcases.json replace the value `"default directory"` with the File path of the new folder you created
+    - You can retrieve the filepath by right clicking the folder in VS code and looking for `Copy Path`
+
 ### To Run Extraction scripts (First time)
 
 These commands take place in `Entry` folder (`cd Entry`)
@@ -62,7 +77,9 @@ These commands take place in `Entry` folder (`cd Entry`)
 
 1. in `Entry` folder (`cd Entry`), start Virtual Environment
 `source ./venv/bin/activate`
-1. Run script `python3 bio_extraction.py` or `python3 bio_extraction.py`
+1. For a quick test you can run ``python3 bio_extraction.py -r 1`
+    - The `-r 1` option here is specifying to the script to run extraction on one random entry.
+1. To Run script on all entries `python3 bio_extraction.py`
 
 ## Features
 
