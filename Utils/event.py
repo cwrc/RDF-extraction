@@ -162,7 +162,6 @@ class Event(object):
         self.text = str(tag.CHRONPROSE.get_text())
 
         self.date_tag = get_date_tag(tag)
-        print(self.date_tag)
         self.time_type = get_time_type(self.date_tag)
         self.precision = self.date_tag.get("CERTAINTY")
         self.time_certainty = get_time_certainty(self.date_tag)

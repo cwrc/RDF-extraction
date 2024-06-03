@@ -30,6 +30,7 @@ MAX_WORD_COUNT = 35
 GENRE_MAPPING = {}
 TITLE_MAPPING = {}
 
+
 NS_DICT = {
     "as": rdflib.Namespace("http://www.w3.org/ns/activitystreams#"),
     "bibo": rdflib.Namespace("http://purl.org/ontology/bibo/"),
@@ -47,7 +48,7 @@ NS_DICT = {
     "dctypes": rdflib.Namespace("http://purl.org/dc/dcmitype/"),
     "eurovoc": rdflib.Namespace("http://eurovoc.europa.eu/"),
     "foaf": rdflib.Namespace("http://xmlns.com/foaf/0.1/"),
-    "geonames": rdflib.Namespace("http://sws.geonames.org/"),
+    "geonames": rdflib.Namespace("https://sws.geonames.org/"),
     "gvp": rdflib.Namespace("http://vocab.getty.edu/ontology#"),
     "loc": rdflib.Namespace("http://id.loc.gov/vocabulary/relators/"),
     "oa": rdflib.Namespace("http://www.w3.org/ns/oa#"),
@@ -61,6 +62,7 @@ NS_DICT = {
     "schema": rdflib.Namespace("http://schema.org/"),
     "skos": rdflib.Namespace("http://www.w3.org/2004/02/skos/core#"),
     "skosxl": rdflib.Namespace("http://www.w3.org/2008/05/skos-xl#"),
+    "tgn": rdflib.Namespace("http://vocab.getty.edu/tgn/"),
     "time": rdflib.Namespace("http://www.w3.org/2006/time#"),
     "vann": rdflib.Namespace("http://purl.org/vocab/vann/"),
     "voaf": rdflib.Namespace("http://purl.org/vocommons/voaf#"),

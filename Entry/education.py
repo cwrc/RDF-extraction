@@ -124,7 +124,7 @@ class School(object):
             g.add((self.uri, CWRC.hasLocation, x))
 
         for x in self.studied_subjects:
-            g.add((self.uri, CWRC.teachesEducationalSubject, x))
+            g.add((self.uri, CWRC.teachingEducationalSubject, x))
 
         return g
 

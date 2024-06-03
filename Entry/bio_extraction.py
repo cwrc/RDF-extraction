@@ -34,14 +34,15 @@ def main():
     smallest_person = None
     largest_person = None
     logger.info("Time started: " + utilities.get_current_time() + "\n")
-
+    total_files = len(file_dict)
+    count = 0
     for filename in file_dict.keys():
         with open(filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
-
+        count += 1
         person_id = filename.split("/")[-1][:6]
-
-        print(person_id)
+        
+        print(f"Processing file: {person_id} {count}/{total_files}")
         print(file_dict[filename])
         print("*" * 55)
         person = Biography(person_id, soup)

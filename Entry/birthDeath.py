@@ -379,7 +379,7 @@ def main():
         print("*" * 55)
 
         person = Biography(person_id, soup)
-        # extract_birth_data(soup, person)
+        extract_birth_data(soup, person)
         extract_death_data(soup, person)
         graph = person.to_graph()
 
