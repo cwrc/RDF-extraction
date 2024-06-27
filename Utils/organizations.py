@@ -37,7 +37,7 @@ class Organization(object):
         elif other_attributes:
             self.uri = rdflib.term.URIRef(uri)
         else:
-            self.uri = rdflib.term.URIRef(str(utilities.NS_DICT["cwrc"]) + uri)
+            self.uri = rdflib.term.URIRef(str(utilities.NS_DICT["data"]) + uri)
         
         if self.name in self.altlabels:
             self.altlabels.remove(self.name)
@@ -52,7 +52,7 @@ class Organization(object):
         if tag.text:
             self.altlabels.append(tag.text)
         
-        return utilities.make_standard_uri(self.name + " ORG", ns="cwrc")
+        return utilities.make_standard_uri(self.name + " ORG", ns="data")
 
 
 
@@ -88,7 +88,7 @@ def get_org_uri(tag):
     
     if not uri:
         logger.error(F"In entry: {utilities.get_entry_id(tag)} - ORG tag missing REF attribute: {tag} ")
-        uri = utilities.make_standard_uri(name + " ORG", ns="cwrc")
+        uri = utilities.make_standard_uri(name + " ORG", ns="data")
 
     
     if str(uri) in ORG_MAP:

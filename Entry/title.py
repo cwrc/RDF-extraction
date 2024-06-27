@@ -26,7 +26,7 @@ class Title(object):
         self.typing = None
         # Temp placeholder until reconciled with bibliography
         # Or use blanknode
-        self.uri = utilities.make_standard_uri(title + " TITLE", ns="cwrc")
+        self.uri = utilities.make_standard_uri(title + " TITLE", ns="data")
         if titleType in self.titleType_mapping: 
             self.typing = self.titleType_mapping[titleType]
 

@@ -16,7 +16,7 @@ def get_actors(tag):
         actors.append(organizations.get_org_uri(x))
     for x in tag.find_all("TITLE"):
         title = utilities.get_value(x)
-        actors.append(utilities.make_standard_uri(title + " TITLE", ns="cwrc"))
+        actors.append(utilities.make_standard_uri(title + " TITLE", ns="data"))
 
     return actors
 

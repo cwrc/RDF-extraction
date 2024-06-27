@@ -33,33 +33,34 @@ TITLE_MAPPING = {}
 
 NS_DICT = {
     "as": rdflib.Namespace("http://www.w3.org/ns/activitystreams#"),
-    "bibo": rdflib.Namespace("http://purl.org/ontology/bibo/"),
-    "biro": rdflib.Namespace("http://purl.org/spar/biro/"),
-    "bio": rdflib.Namespace("http://purl.org/vocab/bio/0.1/"),
     "bf": rdflib.Namespace("http://id.loc.gov/ontologies/bibframe/"),
+    "bibo": rdflib.Namespace("http://purl.org/ontology/bibo/"),
+    "bio": rdflib.Namespace("http://purl.org/vocab/bio/0.1/"),
+    "biro": rdflib.Namespace("http://purl.org/spar/biro/"),
     "cc": rdflib.Namespace("http://creativecommons.org/ns#"),
     "cito": rdflib.Namespace("http://purl.org/spar/cito/"),
     "cwrc": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/cwrc#"),
-    "ii": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/ii#"),
-    "genre": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/genre#"),
     "data": rdflib.Namespace("http://cwrc.ca/cwrcdata/"),
     "dbpedia": rdflib.Namespace("http://dbpedia.org/resource/"),
     "dcterms": rdflib.Namespace("http://purl.org/dc/terms/"),
     "dctypes": rdflib.Namespace("http://purl.org/dc/dcmitype/"),
     "eurovoc": rdflib.Namespace("http://eurovoc.europa.eu/"),
     "foaf": rdflib.Namespace("http://xmlns.com/foaf/0.1/"),
+    "genre": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/genre#"),
     "geonames": rdflib.Namespace("https://sws.geonames.org/"),
     "gvp": rdflib.Namespace("http://vocab.getty.edu/ontology#"),
+    "ii": rdflib.Namespace("http://sparql.cwrc.ca/ontologies/ii#"),
     "loc": rdflib.Namespace("http://id.loc.gov/vocabulary/relators/"),
     "oa": rdflib.Namespace("http://www.w3.org/ns/oa#"),
     "org": rdflib.Namespace("http://www.w3.org/ns/org#"),
+    "orlando": rdflib.Namespace("https://commons.cwrc.ca/orlando:"),
     "owl": rdflib.Namespace("http://www.w3.org/2002/07/owl#"),
-    "prov": rdflib.Namespace("http://www.w3.org/ns/prov#"),
     "prism": rdflib.Namespace("http://prismstandard.org/namespaces/1.2/basic/"),
+    "prov": rdflib.Namespace("http://www.w3.org/ns/prov#"),
     "rdf": rdflib.Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#"),
     "rdfs": rdflib.Namespace("http://www.w3.org/2000/01/rdf-schema#"),
-    "sem": rdflib.Namespace("http://semanticweb.cs.vu.nl/2009/11/sem/"),
     "schema": rdflib.Namespace("http://schema.org/"),
+    "sem": rdflib.Namespace("http://semanticweb.cs.vu.nl/2009/11/sem/"),
     "skos": rdflib.Namespace("http://www.w3.org/2004/02/skos/core#"),
     "skosxl": rdflib.Namespace("http://www.w3.org/2008/05/skos-xl#"),
     "tgn": rdflib.Namespace("http://vocab.getty.edu/tgn/"),
@@ -67,7 +68,7 @@ NS_DICT = {
     "vann": rdflib.Namespace("http://purl.org/vocab/vann/"),
     "voaf": rdflib.Namespace("http://purl.org/vocommons/voaf#"),
     "void": rdflib.Namespace("http://rdfs.org/ns/void#"),
-    "vs": rdflib.Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#")
+    "vs": rdflib.Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#"),
 }
 
 
@@ -369,7 +370,7 @@ def get_title_uri(tag):
     title = get_value(tag)
     if title in TITLE_MAPPING:
         return rdflib.URIRef(TITLE_MAPPING[title])
-    return make_standard_uri(title + " TITLE", ns="cwrc")
+    return make_standard_uri(title + " TITLE", ns="data")
 def get_titles(tag):
     """Returns all titles within a given tag temporary Mapping"""
     titles = []
@@ -378,7 +379,7 @@ def get_titles(tag):
         if title in TITLE_MAPPING:
             titles.append(rdflib.URIRef(TITLE_MAPPING[title]))
         else:
-            titles.append(make_standard_uri(title + " TITLE", ns="cwrc"))
+            titles.append(make_standard_uri(title + " TITLE", ns="data"))
     return titles
 
 
