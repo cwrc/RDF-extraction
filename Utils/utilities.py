@@ -607,7 +607,7 @@ def get_file_dict(script, args, testcase_data, testcases_available):
     from collections import OrderedDict
     directory = testcase_data['default directory']
     file_ending = testcase_data['file ending']
-    file_prefix = testcase_data['file prefix']
+    file_prefix = testcase_data['file prefix'] if 'file prefix' in testcase_data else None
     filelist = []
     descriptors = []
 

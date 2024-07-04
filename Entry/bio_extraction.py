@@ -20,7 +20,7 @@ add documentation
 implement personname
 """
 
-logger = utilities.config_logger("biography")
+logger = utilities.config_logger("bio_extraction")
 
 
 def main():
