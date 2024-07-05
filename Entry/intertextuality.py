@@ -126,6 +126,7 @@ def get_textscopes_text(tag):
     else:
         textscopes = [x.get("PLACEHOLDER") for x in textscopes ]
     return textscopes
+
 def get_textscopes(tag):
     tag = get_div2(tag)
     textscopes = tag.find_all("TEXTSCOPE")
@@ -134,6 +135,7 @@ def get_textscopes(tag):
     else:
         textscopes = [rdflib.term.URIRef(x.get("REF")) for x in textscopes if x.get("REF") ]
     return textscopes
+
 def extract_influence_data(doc, person):
     context_count = 0
     event_count = 0
@@ -142,7 +144,7 @@ def extract_influence_data(doc, person):
     for context in contexts:
         context_id = F"{person.id}_Influence_{context_count}"
         temp_context = Context(context_id, context, "PINFLUENCESHER")
-        extract_subject_influenced(context,person,temp_context)
+        extract_influencers(context,person,temp_context)
         person.add_context(temp_context)
         context_count += 1
 
@@ -150,33 +152,39 @@ def extract_influence_data(doc, person):
     for context in contexts:
         context_id = F"{person.id}_Influence_{context_count}"
         temp_context = Context(context_id, context, "RSHEINFLUENCED")
-        extract_influenced_subject(context,person,temp_context)
+        extract_influenced(context,person,temp_context)
         person.add_context(temp_context)
         context_count += 1
 
-def extract_influenced_subject(tag, person, context):
+def extract_influenced(tag, person, context):
+    """RSHEINFLUENCED"""
     named_entities = []
     named_entities += utilities.get_all_other_people(tag,person)
     named_entities += utilities.get_titles(tag)
     named_entities += utilities.get_places(tag)
     named_entities += [get_org_uri(x) for x in tag.find_all("ORGNAME")]
-    influence_triples = [ utilities.GeneralRelation(utilities.create_uri("cwrc","influence"), x) for x in named_entities ]
+    influence_triples = [ utilities.GeneralRelation(utilities.create_uri("cwrc","c_hasInfluenceOn"), x) for x in named_entities ]
     context.link_triples(influence_triples)
 
 
    
-def extract_subject_influenced(tag, person, context):
+def extract_influencers(tag, person, context):
+    """PINFLUENCESHER"""
     named_entities = []
     named_entities += utilities.get_all_other_people(tag,person)
     named_entities += utilities.get_titles(tag)
     named_entities += utilities.get_places(tag)
     named_entities += [get_org_uri(x) for x in tag.find_all("ORGNAME")]
     attribute = tag.get("INFLUENCETYPE")
+    influence_triples = []
+    attribute_property = None
     if attribute:
-        influence_triples = [ utilities.GeneralRelation(utilities.create_uri("cwrc",F"{attribute.lower()}Influence"), x) for x in named_entities ]
+        attribute_property = utilities.create_uri("cwrc",F"c_has{attribute.lower()}InfluenceOn")
     else:
-        influence_triples = [ utilities.GeneralRelation(utilities.create_uri("cwrc",F"influencedBy"), x) for x in named_entities ]
+        attribute_property = utilities.create_uri("cwrc","c_hasInfluenceOn")
 
+    influence_triples = utilities.GeneralRelation(attribute_property, person.uri)
+    context.context_focus = named_entities
     context.link_triples(influence_triples)
 
 def extract_intertextuality_data(doc, person):
