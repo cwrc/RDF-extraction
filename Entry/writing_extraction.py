@@ -42,7 +42,7 @@ def extract_general_info(doc, person, count):
     extent = tag.find_all("EXTENTOFOEUVRE")
     titles = utilities.get_titles(tag)
     for x in extent:
-        general_relations.append(utilities.GeneralRelation(cwrc.extent, rdflib.Literal(utilities.limit_words(x.text, 35))))
+        general_relations.append(utilities.GeneralRelation(cwrc.c_hasExtent, rdflib.Literal(utilities.limit_words(x.text, 35))))
 
     # TODO!: Make Oeuvre into it's own class similar to titles so that more properties can be attached?
     for x in titles:
