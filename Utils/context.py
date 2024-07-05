@@ -140,7 +140,7 @@ class Context(object):
             self.citations = [Citation(x) for x in bibcits]
 
             self.heading = get_heading(tag)
-            self.src = "http://orlando.cambridge.org/protected/svPeople?formname=r&people_tab=3&person_id="
+            self.src = "https://orlando.cambridge.org/profiles/"
             if not self.heading:
                 self.src = "http://orlando.cambridge.org"
 
@@ -322,7 +322,14 @@ class Context(object):
         for x in self.tag.find_all("TITLE"):
             uri = utilities.get_title_uri(x)
             uri = rdflib.term.URIRef(uri)
+            title_type = x.get("TITLETYPE")
             g.add((uri, RDF.type, utilities.NS_DICT["bf"].Work))
+
+            if title_type:
+                g.add((uri, RDF.type, utilities.TITLE_TYPE_MAPPING[title_type]))
+            
+
+            
             std_name = utilities.get_value(x)
             g.add((uri, RDFS.label, Literal(std_name)))
 
