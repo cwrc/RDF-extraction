@@ -71,6 +71,12 @@ NS_DICT = {
     "vs": rdflib.Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#"),
 }
 
+TITLE_TYPE_MAPPING = { "monographic": NS_DICT["genre"].standaloneWork,
+    "analytic": NS_DICT["genre"].embeddedWork,
+    "journal": NS_DICT["genre"].periodical,
+    "series": NS_DICT["genre"].series,
+    "unpublished": NS_DICT["genre"].unpublished }
+
 
 class Extraction(object):
     """docstring for Extraction"""
@@ -371,6 +377,7 @@ def get_title_uri(tag):
     if title in TITLE_MAPPING:
         return rdflib.URIRef(TITLE_MAPPING[title])
     return make_standard_uri(title + " TITLE", ns="data")
+
 def get_titles(tag):
     """Returns all titles within a given tag temporary Mapping"""
     titles = []
