@@ -71,11 +71,11 @@ NS_DICT = {
     "vs": rdflib.Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#"),
 }
 
-TITLE_TYPE_MAPPING = { "monographic": NS_DICT["genre"].standaloneWork,
-    "analytic": NS_DICT["genre"].embeddedWork,
-    "journal": NS_DICT["genre"].periodical,
-    "series": NS_DICT["genre"].series,
-    "unpublished": NS_DICT["genre"].unpublished }
+TITLE_TYPE_MAPPING = { "MONOGRAPHIC": NS_DICT["genre"].standaloneWork,
+    "ANALYTIC": NS_DICT["genre"].embeddedWork,
+    "JOURNAL": NS_DICT["genre"].periodical,
+    "SERIES": NS_DICT["genre"].series,
+    "UNPUBLISHED": NS_DICT["genre"].unpublished }
 
 
 class Extraction(object):
