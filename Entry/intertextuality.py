@@ -62,7 +62,7 @@ class Response(object):
     def to_triple(self, context):
         g = utilities.create_graph()
         response = rdflib.BNode()
-        g.add((context.uri, utilities.create_uri("cwrc","response"),response))
+        g.add((context.uri, utilities.create_uri("cwrc","c_hasResponse"),response))
         g.add((response, utilities.create_uri("rdfs","label"),rdflib.Literal(self.label)))
         for x in self.types:
             g.add((response, utilities.create_uri("rdf","type"),utilities.create_uri("cwrc",x)))

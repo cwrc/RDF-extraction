@@ -37,7 +37,7 @@ def extract_general_info(doc, person, count):
     genres = [utilities.GENRE_MAPPING[x.lower()] for x in genres if x.lower() in utilities.GENRE_MAPPING ]
     
     for x in genres:
-        general_relations.append(utilities.GeneralRelation(cwrc.genericRangeIncludes, rdflib.URIRef(x)))
+        general_relations.append(utilities.GeneralRelation(cwrc.c_hasGenericRange, rdflib.URIRef(x)))
 
     extent = tag.find_all("EXTENTOFOEUVRE")
     titles = utilities.get_titles(tag)
