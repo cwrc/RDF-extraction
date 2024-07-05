@@ -8,13 +8,23 @@ from culturalForm import get_mapped_term
 
 logger = utilities.config_logger("intertextuality")
 
+
 INTERTEXTTYPE_MAPPING = {
-    "ALLUSIONACKNOWLEDGED": "explicitAllusion",
-    "ALLUSIONUNACKNOWLEDGED": "allusion",
-    None: "intertextualRelationship",
-    "ADAPTATION-UPDATE": "adaptation",
-    # Others are just in lower case
+"ALLUSIONACKNOWLEDGED": utilities.NS_DICT["cwrc"].c_alludesExplicitlyTo,
+"ALLUSIONUNACKNOWLEDGED": utilities.NS_DICT["cwrc"].c_alludesTo,
+"QUOTATION": utilities.NS_DICT["cwrc"].c_quotes,
+"MISQUOTATION": utilities.NS_DICT["cwrc"].c_misquotes,
+"PARODY": utilities.NS_DICT["cwrc"].c_parodies,
+"SATIRE": utilities.NS_DICT["cwrc"].c_satirizes,
+"IMITATION": utilities.NS_DICT["cwrc"].c_imitates,
+"ADAPTATION-UPDATE": utilities.NS_DICT["cwrc"].c_adapts,
+"PREQUEL": utilities.NS_DICT["cwrc"].c_hasPrequel,
+"CONTINUATION": utilities.NS_DICT["cwrc"].c_hasContinuation,
+"ANSWER": utilities.NS_DICT["cwrc"].c_answers,
+    None: utilities.NS_DICT["cwrc"].c_hasIntertextualRelationTo,
 }
+
+
 
 class Response(object):
     """docstring for Response
@@ -222,11 +232,11 @@ def extract_intertextuality(tag, person, context):
     if typing in INTERTEXTTYPE_MAPPING:
         predicate = INTERTEXTTYPE_MAPPING[typing]
     else:
-        predicate = typing.lower()
+        logger.warn(F"Unknown intertextuality type: {typing}")
 
     # Determining what type of entity to extract as object
     entities = utilities.get_titles(tag)
-    if predicate not in ["continuation", "prequel"]:
+    if  "continuation" not in  str(predicate) and  "prequel" not in str(predicate):
         people = utilities.get_all_other_people(tag,person)
         entities += people
         if len(people) == 1:
@@ -243,7 +253,7 @@ def extract_intertextuality(tag, person, context):
 
 
     #NOTE that i'm ignoring: NB: extract ORGNAME and PLACES but use a receptionRelationship to the author or text
-    intertextuality_triples = [ utilities.GeneralRelation(utilities.create_uri("cwrc",predicate), x) for x in entities ]
+    intertextuality_triples = [ utilities.GeneralRelation(predicate, x) for x in entities ]
 
 
     # print(tag)
