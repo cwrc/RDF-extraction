@@ -3,6 +3,8 @@ import os
 import re
 import datetime
 import urllib
+import copy 
+
 try:
     from Utils.place import Place
 except ModuleNotFoundError as e:
@@ -154,13 +156,16 @@ def get_xpath(element):
 
 
 def remove_unwanted_tags(tag):
-    unwanted_tag_names = ["BIBCITS", "RESPONSIBILITIES", "KEYWORDCLASSES","RESEARCHNOTE"]
+    tag_copy = copy.copy(tag)
+
+    unwanted_tag_names = ["BIBCITS", "RESPONSIBILITIES", "KEYWORDCLASSES","RESEARCHNOTE", "HEADING"]
     unwanted_tags = []
     for x in unwanted_tag_names:
-        unwanted_tags += tag.find_all(x)
+        unwanted_tags += tag_copy.find_all(x)
 
     for x in unwanted_tags:
         x.decompose()
+    return tag_copy
 
 
 def create_writer_map(path=None):
@@ -400,7 +405,9 @@ def get_place_strings(tag):
     return [x.text for x in tag.find_all("PLACE")]
 
 def get_name(entry):
+    print(entry)
     name = entry.find("STANDARD")
+    print(name)
     if name:
         return name.text
     else:
