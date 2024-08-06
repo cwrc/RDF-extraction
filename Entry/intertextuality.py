@@ -98,10 +98,10 @@ def extract_response_data(doc, person):
 
 
 def extract_response(tag, person,context):
-    textscopes = get_textscopes(tag)
+    textscopes = utilities.get_textscopes(tag)
     label = ""
     if textscopes:
-        textscopes_texts = get_textscopes_text(tag)            
+        textscopes_texts = utilities.get_textscopes_text(tag)            
         label = "Response to "
         for x in range(len(textscopes)): 
             title = " ".join(textscopes_texts[x].split(", ")[1:-1])
@@ -118,33 +118,6 @@ def extract_response(tag, person,context):
     context.link_triples(responses)
 
 
-    
-    
-def get_div2(tag):
-    # NOTE: Might be easier with recursion
-    for parent in tag.parents:
-        if parent.name == "DIV2":
-            return parent
-
-    return None
-
-def get_textscopes_text(tag):
-    tag = get_div2(tag)
-    textscopes = tag.find_all("TEXTSCOPE")
-    if textscopes == []:
-        logger.info(F"No corresponding textscope: {tag}")
-    else:
-        textscopes = [x.get("PLACEHOLDER") for x in textscopes ]
-    return textscopes
-
-def get_textscopes(tag):
-    tag = get_div2(tag)
-    textscopes = tag.find_all("TEXTSCOPE")
-    if textscopes == [] or textscopes is None:
-        logger.info(F"No corresponding textscope: {tag}")
-    else:
-        textscopes = [rdflib.term.URIRef(x.get("REF")) for x in textscopes if x.get("REF") ]
-    return textscopes
 
 def extract_influence_data(doc, person):
     context_count = 0
@@ -189,7 +162,7 @@ def extract_influencers(tag, person, context):
     influence_triples = []
     attribute_property = None
     if attribute:
-        attribute_property = utilities.create_uri("cwrc",F"c_has{attribute.lower()}InfluenceOn")
+        attribute_property = utilities.create_uri("cwrc",F"c_has{attribute.title()}InfluenceOn")
     else:
         attribute_property = utilities.create_uri("cwrc","c_hasInfluenceOn")
 
@@ -226,7 +199,7 @@ def extract_intertextuality_data(doc, person):
 
 
 def extract_intertextuality(tag, person, context):
-    textscopes = get_textscopes(tag)
+    textscopes = utilities.get_textscopes(tag)
     typing = tag.get("INTERTEXTTYPE")
     predicate = None
     if typing in INTERTEXTTYPE_MAPPING:
@@ -255,21 +228,11 @@ def extract_intertextuality(tag, person, context):
     #NOTE that i'm ignoring: NB: extract ORGNAME and PLACES but use a receptionRelationship to the author or text
     intertextuality_triples = [ utilities.GeneralRelation(predicate, x) for x in entities ]
 
-
-    # print(tag)
-    # print(textscopes)
-    # print(typing)
-    # print(predicate)
-
     if textscopes:
         context.context_focus = textscopes
     
     context.link_triples(intertextuality_triples)
 
-
-
-
-    
 
 def main():
     from bs4 import BeautifulSoup
