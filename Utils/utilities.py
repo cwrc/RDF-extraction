@@ -390,9 +390,12 @@ def get_person_secondary_uris(cwrc_uri):
     
     return secondary_uris
 
-def get_full_name(tag_or_uri):
+def get_full_name(tag_or_uri, doc=None, fallback=None):
     full_name = None    
     uri = None
+    print("----")
+    print(tag_or_uri)
+    print(type(tag_or_uri))
     if type(tag_or_uri) == rdflib.term.URIRef:
         uri = tag_or_uri
     else:
@@ -406,11 +409,18 @@ def get_full_name(tag_or_uri):
         full_name = PERSON_MAP[uri]['Full Name']
     elif uri in ORGANIZATION_MAP:
         full_name = ORGANIZATION_MAP[uri]['Preferred Name']
+    elif doc:
+        full_name = doc.find(REF=uri).text
+    elif fallback:
+        full_name = fallback
+    else:
+        logger.warning(F"URI not in mapping: {uri}")
 
     if not full_name:
         logger.warning(F"Full name missing for {uri}")
 
-    return full_name.strip()
+    full_name = full_name.strip()
+    return full_name
 
 
 

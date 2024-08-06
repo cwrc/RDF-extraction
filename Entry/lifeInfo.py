@@ -27,7 +27,7 @@ class Person(object):
             self.uri = utilities.get_name_uri(name)
             
             if self.cwrc_uri:
-                self.name = utilities.get_full_name(rdflib.term.URIRef(self.cwrc_uri))
+                self.name = utilities.get_full_name(rdflib.term.URIRef(self.cwrc_uri), fallback=name.text)
             else:
                 self.name = self.alt_name
             

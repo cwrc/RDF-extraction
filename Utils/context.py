@@ -356,7 +356,7 @@ class Context(object):
                 uri = rdflib.term.URIRef(uri)
             
             g.add((uri, RDF.type,utilities.NS_DICT["cwrc"].NaturalPerson))
-            std_name = utilities.get_full_name(x)
+            std_name = utilities.get_full_name(x,self.tag)
             g.add((uri, RDFS.label, Literal(std_name,lang="en")))
             altname = x.get_text()
             if altname and std_name != altname and altname not in GENERIC_NAMES:
