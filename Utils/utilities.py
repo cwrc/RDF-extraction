@@ -4,6 +4,7 @@ import re
 import datetime
 import urllib
 import copy 
+import csv
 
 try:
     from Utils.place import Place
@@ -31,6 +32,11 @@ WRITER_MAP = {}
 MAX_WORD_COUNT = 35
 GENRE_MAPPING = {}
 TITLE_MAPPING = {}
+
+# New mappings TODO
+PERSON_MAP = {}
+ORGANIZATION_MAP = {}
+CWRC_URI_MAP = {}
 
 
 NS_DICT = {
@@ -179,7 +185,31 @@ def create_writer_map(path=None):
             if row[0] not in WRITER_MAP:
                 WRITER_MAP[row[0]] = {"ID": row[1],"NAME": row[2] , "SEX": row[3]}
 
-create_writer_map()
+
+def create_person_map(path=None):
+    if not path:
+        path = '../data/full_people_mapping.csv'
+    with open(path) as f:
+        csv_file = csv.DictReader(f)
+        for row in csv_file:
+            row["CWRC URI"] = f"{NS_DICT['orlando']}{row['ID']}"
+            PERSON_MAP[row["CWRC URI"]] = row
+            if row['Primary Identifier']:
+                CWRC_URI_MAP[row['Primary Identifier']] = row["CWRC URI"]
+
+
+def create_org_map(path=None):
+    if not path:
+        path = '../data/organization_mapping.csv'
+    with open(path) as f:
+        csv_file = csv.DictReader(f)
+        for row in csv_file:
+            row["CWRC URI"] = f"{NS_DICT['orlando']}{row['ID']}"
+            ORGANIZATION_MAP[row["CWRC URI"]] = row
+            if row['Primary Identifier']:
+                CWRC_URI_MAP[row['Primary Identifier']] = row["CWRC URI"]
+
+
 
 def create_genre_map(path=None):
     import csv
@@ -191,7 +221,6 @@ def create_genre_map(path=None):
         for row in csvfile:
             GENRE_MAPPING[row[0]] = row[1]
 
-create_genre_map()
 
 def create_title_map(path=None):
     # TODO: Review more efficient mapping + using fuzzy matching
@@ -204,7 +233,13 @@ def create_title_map(path=None):
             if ";" not in row[1]:
                 TITLE_MAPPING[row[0]] = row[1]
 
+create_writer_map()
+create_genre_map()
 create_title_map()
+create_person_map()
+create_org_map()
+
+
 def get_current_time():
     return datetime.datetime.now().strftime("%d %b %Y %H:%M:%S")
 
@@ -238,16 +273,19 @@ def split_by_casing(string, altmode=None):
 
 def remove_punctuation(temp_str, all=False):
     import string
-    if not temp_str:
-        return ""
-    
+    from unidecode import unidecode
     if all:
         translator = str.maketrans('', '', string.punctuation)
     else:
         translator = str.maketrans('', '', string.punctuation.replace("-", ""))
     temp_str = temp_str.translate(translator)
     temp_str = temp_str.replace(" ", "_")
-    return temp_str
+    # TODO: Need to revise this method to handle titles with weird unicode ex.
+    # Public Confessions of a Middle-Aged Woman Aged 55 ¾
+    temp_str = temp_str.replace("¾", "3-4")
+    temp_str = temp_str.replace("©", "c")
+    temp_str = temp_str.replace("Ã", "A")
+    return unidecode(temp_str)
 
 
 def limit_words(string, word_count=MAX_WORD_COUNT):
@@ -312,7 +350,68 @@ def get_name_uri(tag):
             return make_standard_uri(tag.text)
         return make_standard_uri(std_val)
     else:
+        if uri in PERSON_MAP:
+            new_uri = PERSON_MAP[uri]['Primary Identifier']
+            if new_uri:
+                uri = new_uri
+        elif uri in ORGANIZATION_MAP:
+            new_uri = ORGANIZATION_MAP[uri]['Primary Identifier']
+            if new_uri:
+                uri = new_uri
+       
+        
         return rdflib.term.URIRef(uri)
+
+def get_entry_standard_name(entry):
+    name = entry.find("STANDARD")
+    if name:
+        return name.text
+    else:
+        return entry.find("NAME")["STANDARD"]
+
+def get_cwrc_uri(uri):
+    if str(uri) in CWRC_URI_MAP:
+        return rdflib.term.URIRef(CWRC_URI_MAP[str(uri)])
+    logger.warning(F"URI not in mapping: {uri}")
+    return None
+
+def get_person_secondary_uris(cwrc_uri):
+    if cwrc_uri not in PERSON_MAP:
+        logger.warning(F"Person not in published authority list: {cwrc_uri}")
+        return []
+    secondary_identifier = PERSON_MAP[cwrc_uri]["Secondary Identifier"]
+    secondary_uris = []
+    if secondary_identifier != "":
+        secondary_uris = secondary_identifier.split(" | ")
+    if PERSON_MAP[cwrc_uri]["Primary Identifier"] != "":
+        secondary_uris.append(cwrc_uri)
+    
+    secondary_uris = [rdflib.term.URIRef(x) for x in secondary_uris]    
+    
+    return secondary_uris
+
+def get_full_name(tag_or_uri):
+    full_name = None    
+    uri = None
+    if type(tag_or_uri) == rdflib.term.URIRef:
+        uri = tag_or_uri
+    else:
+        full_name = tag_or_uri.get_text()    
+        uri = tag_or_uri.get("REF")
+        
+    if uri:
+        uri = uri.strip()
+    
+    if uri in PERSON_MAP:
+        full_name = PERSON_MAP[uri]['Full Name']
+    elif uri in ORGANIZATION_MAP:
+        full_name = ORGANIZATION_MAP[uri]['Preferred Name']
+
+    if not full_name:
+        logger.warning(F"Full name missing for {uri}")
+
+    return full_name.strip()
+
 
 
 def make_standard_uri(std_str, ns="data"):
@@ -405,9 +504,7 @@ def get_place_strings(tag):
     return [x.text for x in tag.find_all("PLACE")]
 
 def get_name(entry):
-    print(entry)
     name = entry.find("STANDARD")
-    print(name)
     if name:
         return name.text
     else:
@@ -447,11 +544,12 @@ def get_textscopes_text(tag):
     else:
         textscopes = [x.get("PLACEHOLDER") for x in textscopes ]
     return textscopes
+
 def get_textscopes(tag):
     tag = get_div2(tag)
     textscopes = tag.find_all("TEXTSCOPE")
     if textscopes == [] or textscopes is None:
-        logger.info(F"No corresponding textscope: {tag}")
+        logger.info(F"{get_entry_id(tag)}: No corresponding textscope: {tag}")
     else:
         textscopes = [rdflib.term.URIRef(x.get("REF")) for x in textscopes if x.get("REF") ]
     return textscopes

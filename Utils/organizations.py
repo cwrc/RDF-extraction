@@ -11,7 +11,9 @@ except Exception as e:
 
 # this is temporary list to ensure that the orgname standard is within the auth list
 org_list = []
-ORG_MAP = {}
+ORG_COUNT = {}
+ORGS_USED = set()
+TEMP_ORGS = {}
 logger = utilities.config_logger("organizations")
 
 
@@ -75,41 +77,79 @@ class Organization(object):
 
 
 def get_org_uri(tag):
-    global ORG_MAP
-    uri = None
-    if "REF" in tag.attrs: 
-        uri = rdflib.term.URIRef(tag.get("REF"))
-    elif "STANDARD" in tag.attrs:
-        name = tag.get("STANDARD")
-    elif "REG" in tag.attrs:
-        name = tag.get("REG")
-    else:
-        name = tag.text
-    
-    if not uri:
-        logger.error(F"In entry: {utilities.get_entry_id(tag)} - ORG tag missing REF attribute: {tag} ")
-        uri = utilities.make_standard_uri(name + " ORG", ns="data")
+    global ORG_COUNT
+    std_name = tag.get("STANDARD")
+    uri = tag.get("REF")
+    if uri:
+        uri = uri.strip()
+        ORGS_USED.add(uri)
+        if uri in utilities.ORGANIZATION_MAP:
+            if utilities.ORGANIZATION_MAP[uri]["Primary Identifier"] != "":
+                uri = utilities.ORGANIZATION_MAP[uri]["Primary Identifier"]
+            else:
+                uri = utilities.ORGANIZATION_MAP[uri]['CWRC URI']
+        else:
+            logger.warn(F"Organization not in published authority list: {uri}, {tag}")
+            utilities.ORGANIZATION_MAP[uri] = {
+                "Preferred Name": tag.get_text(),
+                "Primary Identifier": "",
+                "Secondary Identifier": "",
+                "CWRC URI": uri
+            }
+            
 
+        
+        uri = rdflib.term.URIRef(uri)
     
-    if str(uri) in ORG_MAP:
-        ORG_MAP[str(uri)] += 1
     else:
-        ORG_MAP[str(uri)] = 1
+        if std_name:
+            name = std_name.strip()
+        elif tag.get("REG"):
+            name = tag.get("REG").strip()
+        else:
+            logger.warn(F"No standard name or URI: {tag}")
+            name = tag.get_text()
+        uri = utilities.make_standard_uri(name + " ORG", ns="data")
+        logger.warn(F"Organization has no REF attribute: {tag}, {uri}")
+        ORGS_USED.add(uri)
+        TEMP_ORGS[uri] = name
+    
+    if str(uri) in ORG_COUNT:
+        ORG_COUNT[str(uri)] += 1
+    else:
+        ORG_COUNT[str(uri)] = 1
 
     return uri
+
+
+def get_primary_uri(cwrc_uri):
+    primary_identifier = utilities.ORGANIZATION_MAP[cwrc_uri]["Primary Identifier"]
+    
+    if primary_identifier == "":
+        return cwrc_uri 
+    return primary_identifier
+
+def get_secondary_uris(cwrc_uri):
+    secondary_identifier = utilities.ORGANIZATION_MAP[cwrc_uri]["Secondary Identifier"]
+    secondary_uris = []
+    if secondary_identifier != "":
+        secondary_uris = secondary_identifier.split(" | ")
+    
+    secondary_uris.append(cwrc_uri)
+    
+    return secondary_uris
 
 
 def log_mapping(detail=True):
     from collections import OrderedDict
     log_str = "Mentioned Orgnames:\n"
-    new_dict = OrderedDict(sorted(ORG_MAP.items(), key=lambda t: t[1], reverse=True))
+    new_dict = OrderedDict(sorted(ORG_COUNT.items(), key=lambda t: t[1], reverse=True))
     count = 0
     for y in new_dict.keys():
-        log_str += "\t\t" + str(new_dict[y]) + ": " + y + "\n"
+        log_str += "\t\t" + str(new_dict[y]) + ": " + y.split("#")[0] + "\n"
         count += new_dict[y]
     log_str += "\tTotal Organizations: " + str(count) + "\n\n"
 
-    print(log_str)
     logger.info(log_str)
 
 

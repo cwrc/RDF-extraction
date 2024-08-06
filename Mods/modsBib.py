@@ -7,6 +7,8 @@ import csv
 import logging
 from fuzzywuzzy import fuzz
 import re
+import urllib.parse
+
 
 CONFIG_FILE="./bibparse.config"
 
@@ -24,7 +26,7 @@ logger.info(
 
 # ---------- SETUP NAMESPACES ----------
 
-
+ORLANDO = rdflib.Namespace("https://commons.cwrc.ca/orlando:")
 BF = rdflib.Namespace("http://id.loc.gov/ontologies/bibframe/")
 CWRC = rdflib.Namespace("http://sparql.cwrc.ca/ontologies/cwrc#")
 DATA = rdflib.Namespace("http://cwrc.ca/cwrcdata/")
@@ -56,6 +58,12 @@ UNIQUE_UNMATCHED_PLACES = set()
 FORMS = []
 MEDIUMS = []
 AGENTS = {}
+
+ORGANIZATION_MAPPING = {}
+PUBLISHER_MAPPING = {}
+PEOPLE_MAPPING = {}
+EXTERNAL_TO_CWRC_MAPPING = {}
+USED_ORGANIZATIONS = {}
 
 
 
@@ -181,7 +189,7 @@ class ParseGeoNamesMapping:
             for row in csvfile:
                 place_name = row[0].rstrip(',.')
                 place_name = place_name.strip()
-                url_string = row[1] if 'http://' in row[1] else "http://{0}".format(row[1])
+                url_string = row[1] if 'http://' in row[1] else "{0}".format(row[1])
                 self.place_mapper.append({"placename": place_name, "url": url_string})
 
     @staticmethod
@@ -290,7 +298,73 @@ class WritingParse:
             
             else:
                 logger.error("TEXTSCOPE missing REF & DBREF attribute")
-                
+
+def get_person_name(person_uri):
+    if person_uri in PEOPLE_MAPPING:
+        return PEOPLE_MAPPING[person_uri]["Full Name"]
+    elif person_uri in EXTERNAL_TO_CWRC_MAPPING:
+        return PEOPLE_MAPPING[EXTERNAL_TO_CWRC_MAPPING[person_uri]]["Full Name"]
+    else:
+        logger.warning(F"Person not in published authority list: {person_uri}")
+    return None
+def get_person_uri(identifier):
+    uri = None
+    if identifier in PEOPLE_MAPPING:
+        uri = PEOPLE_MAPPING[identifier]['Primary Identifier']
+        if uri != "":
+            EXTERNAL_TO_CWRC_MAPPING[uri] = identifier
+            return uri
+    else:
+        logger.warn(F"Person not in published authority list: {identifier}")
+        
+    return identifier
+
+def get_person_secondary_uris(cwrc_uri):
+    if cwrc_uri not in PEOPLE_MAPPING:
+        logger.warning(F"Person not in published authority list: {cwrc_uri}")
+        return []
+    secondary_identifier = PEOPLE_MAPPING[cwrc_uri]["Secondary Identifier"]
+    secondary_uris = []
+    if secondary_identifier != "":
+        secondary_uris = secondary_identifier.split(" | ")
+    if PEOPLE_MAPPING[cwrc_uri]["Primary Identifier"] != "":
+        secondary_uris.append(cwrc_uri)
+    
+    # secondary_uris = [rdflib.term.URIRef(x) for x in secondary_uris]    
+    
+    return secondary_uris
+
+def get_org_uri(identifier):
+    uri = None
+    if identifier in ORGANIZATION_MAPPING:
+        if ORGANIZATION_MAPPING[identifier]["Primary Identifier"] != "":
+            uri = ORGANIZATION_MAPPING[identifier]["Primary Identifier"]
+            EXTERNAL_TO_CWRC_MAPPING[uri] = identifier
+        else:
+            uri = ORGANIZATION_MAPPING[identifier]['CWRC URI']
+    else:
+        uri = identifier
+        logger.warn(F"Organization not in published authority list: {identifier}")
+    
+    uri = rdflib.term.URIRef(uri)
+    return uri
+
+def get_primary_uri(cwrc_uri):
+    primary_identifier = ORGANIZATION_MAPPING[cwrc_uri]["Primary Identifier"]
+    
+    if primary_identifier == "":
+        return cwrc_uri 
+    return primary_identifier
+
+def get_secondary_uris(cwrc_uri):
+    secondary_identifier = ORGANIZATION_MAPPING[cwrc_uri]["Secondary Identifier"]
+    secondary_uris = []
+    if secondary_identifier != "":
+        secondary_uris = secondary_identifier.split(" | ")
+    
+    secondary_uris.append(cwrc_uri)
+    
+    return secondary_uris
 
 class BibliographyParse:
     """
@@ -334,7 +408,10 @@ class BibliographyParse:
         "afterword": "aft",
         "transcriber": "trc",
         "recipient":"rcp",
-        "rcp":"rcp"
+        "rcp":"rcp",
+        "transcriber":"trc",
+        "author":"aut",
+        "recipient":"rcp"
     }
 
     related_item_map = {
@@ -740,12 +817,29 @@ class BibliographyParse:
             # contribution_resource = g.resource(self.mainURI + "#contribution_{}".format(i))
             
             agent_resource = None
+            name["full name"] = None
+            agent_internal_ID = None  # This will keep the cwrc id for the agent
             if "uri" in name and name["uri"]:
-                agent_resource=g.resource(name["uri"])
+                agent_resource = get_person_uri(name["uri"])
+                if agent_resource:
+                    name["full name"] = get_person_name(agent_resource)
+                    agent_resource = g.resource(agent_resource)
+
+            if agent_resource is None:
+                temp_name = urllib.parse.quote_plus(
+                    remove_punctuation(name['name']))
+                agent_resource = g.resource(DATA[F"{temp_name}"])
+                agent_internal_ID = str(DATA[F"{temp_name}"])
+            elif "orlando" in str(agent_resource.identifier):
+                agent_internal_ID = str(agent_resource.identifier)
             else:
-                temp_name = remove_punctuation(name['name'])
-                agent_resource=g.resource(DATA[F"{temp_name}"])
-         
+                agent_internal_ID = name["uri"]
+
+            if name["full name"]:
+                agent_resource.add(RDFS.label, rdflib.Literal(name["full name"],lang="en"))
+            else:
+                agent_resource.add(RDFS.label, rdflib.Literal(name["name"],lang="en"))
+
 
             if name['role'] in self.role_map:
                 role = MARCREL[self.role_map[name['role']]]
@@ -1027,12 +1121,18 @@ if __name__ == "__main__":
         print("GENRE_ONTOLOGY=[PATH TO GENRE ONTOLOGY]")
         print("BIBLIOGRAPHY_FILES=[DIRECTORY OF BILBIOGRAPHY FILES]")
         print("GENRE_CSV=[PATH TO GENRE MAPPING]")
+        print("ORGANIZATIONS=[PATH TO ORGANIZATIONS MAPPING]")
+        print("PUBLISHERS_CSV=[PATH TO PUBLISHER MAPPING]")
+        print("PEOPLE_CSV=[PATH TO PEOPLE MAPPING]")
 
     dirname = config_options['BIBLIOGRAPHY_FILES']
     writing_dir = config_options['WRITING_FILES']
     genre_ontology = config_options['GENRE_ONTOLOGY']
     places = config_options['PLACES_CSV']
     genre_map_file = config_options['GENRE_CSV']
+    publishers_file = config_options['PUBLISHERS_CSV']
+    org_file = config_options['ORGANIZATIONS_CSV']
+    people_file = config_options['PEOPLE_CSV']
 
 
     geoMapper = ParseGeoNamesMapping(places)
@@ -1052,6 +1152,24 @@ if __name__ == "__main__":
     res = genre_graph.query("""SELECT ?s WHERE { ?s rdf:type*/rdfs:subClassOf* <http://sparql.cwrc.ca/ontologies/genre#Medium>
 . }""")
     MEDIUMS = [ row.s for row in res]
+
+
+    with open(publishers_file) as f:
+        csvfile = csv.reader(f)
+        for row in csvfile:
+            PUBLISHER_MAPPING[row[0]] = row[1]
+
+    with open(org_file) as f:
+        csv_file = csv.DictReader(f)
+        for row in csv_file:
+            row["CWRC URI"] = f"{ORLANDO}{row['ID']}"
+            ORGANIZATION_MAPPING[row["CWRC URI"]] = row
+
+    with open(people_file) as f:
+        csv_file = csv.DictReader(f)
+        for row in csv_file:
+            row["CWRC URI"] = f"{ORLANDO}{row['ID']}"
+            PEOPLE_MAPPING[row["CWRC URI"]] = row
 
 
     for fname in os.listdir(writing_dir):
@@ -1092,10 +1210,11 @@ if __name__ == "__main__":
         for item in UNIQUE_UNMATCHED_PLACES:
             writer.writerow([item])
 
-    fname = "bibliography"
+    fname = F"bibliography_{datetime.datetime.now().strftime('%Y-%m-%d')}"
     output_name = fname.replace(".xml", "")
-    formats = {'ttl': 'turtle'} # 'xml': 'pretty-xml'
+    formats = {'ttl': 'turtle'}
     for extension, file_format in formats.items():
-        g.serialize(destination=F"{output_name}.{extension}", format=file_format,encoding="utf-8")
+        g.serialize(
+            destination=F"{output_name}.{extension}", format=file_format)
 
-logger.info(F"Finished extraction: {datetime.datetime.now().strftime('%d %b %Y %H:%M:%S')}")
+    logger.info(F"Finished extraction: {datetime.datetime.now().strftime('%d %b %Y %H:%M:%S')}")

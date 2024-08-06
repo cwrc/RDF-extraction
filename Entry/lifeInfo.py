@@ -22,9 +22,15 @@ class Person(object):
             self.alt_name = None
             self.uri = name
         elif type(name) is Tag and name.name == "NAME":
-            self.name = name.get("STANDARD")
-            self.alt_name = name.get_text()
+            self.cwrc_uri = name.get("REF")
+            self.alt_name = name.get("STANDARD")
             self.uri = utilities.get_name_uri(name)
+            
+            if self.cwrc_uri:
+                self.name = utilities.get_full_name(rdflib.term.URIRef(self.cwrc_uri))
+            else:
+                self.name = self.alt_name
+            
         else:
             logger.error("Unexpected type for name parameter:" +
                          str(type(name)) + ": " + str(name))
@@ -40,10 +46,10 @@ class Person(object):
         g.add((self.uri, RDF.type, utilities.create_cwrc_uri("NaturalPerson")))
         g.add((context.uri, self.predicate, self.uri))
         if self.name:
-            g.add((self.uri, RDFS.label, Literal(self.name)))
+            g.add((self.uri, RDFS.label, Literal(self.name,lang="en")))
         if self.alt_name:
             g.add(
-                (self.uri, utilities.NS_DICT["skos"].altLabel, Literal(self.alt_name)))
+                (self.uri, utilities.NS_DICT["skos"].altLabel, Literal(self.alt_name,lang="en")))
 
         return g
 

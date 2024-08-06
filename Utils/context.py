@@ -6,7 +6,7 @@ from Utils import utilities, organizations
 
 MAX_WORD_COUNT = 35
 logger = utilities.config_logger("context")
-GENERIC_NAMES = ["king","King","mother-in-law" , "Queen", "queen","husband","wife","partner" ,"father", "daughter","essay", "son","he","she","they","her","him","them", "sisters","the",  "mother", "sibling", "brother", "sister", "friend"]
+GENERIC_NAMES = ["king","King","mother-in-law" , "Queen", "queen","husband","wife","partner" ,"father", "daughter","essay", "son","he","she","they","her","him","them", "sisters","the",  "mother", "sibling", "brother", "sister", "friend", "his wife", "her husband","his husband", "her wife", "their husband", "their wife", "lover", "family"]
 
 """
 Status: ~84%
@@ -340,19 +340,33 @@ class Context(object):
             std_name = utilities.get_value(x)
             g.add((uri, RDFS.label, Literal(std_name)))
 
-
-
-
-        # Creating the mentioned people as natural person
+        
         for x in self.tag.find_all("NAME"):
             uri = utilities.get_name_uri(x)
+            secondary_uris = []
+            if not uri:
+                logger.warning(F"URI not found for: {x} within entry: {person.id}")
+                continue
+            else:
+                cwrc_uri = x.get("REF")
+                if not cwrc_uri:
+                    logger.warning(F"URI not found for: {x} within entry: {person.id}")
+                else:
+                    secondary_uris = utilities.get_person_secondary_uris(cwrc_uri) 
+                uri = rdflib.term.URIRef(uri)
             
-            g.add((uri, RDF.type, utilities.NS_DICT["cwrc"].NaturalPerson))
-            std_name = x.get("STANDARD")
-            g.add((uri, RDFS.label, Literal(std_name)))
+            g.add((uri, RDF.type,utilities.NS_DICT["cwrc"].NaturalPerson))
+            std_name = utilities.get_full_name(x)
+            g.add((uri, RDFS.label, Literal(std_name,lang="en")))
             altname = x.get_text()
             if altname and std_name != altname and altname not in GENERIC_NAMES:
                 g.add((uri, utilities.NS_DICT["skos"].altLabel, Literal(altname)))
+            
+            for y in secondary_uris:
+                g.add((uri, utilities.NS_DICT["owl"].sameAs, y))
+       
+
+
         return g
 
     def __str__(self):
