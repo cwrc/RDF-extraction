@@ -9,7 +9,8 @@ import other_contexts
 import occupation
 import lifeInfo
 import birthDeath
-
+import intertextuality
+import writing_extraction
 import education
 import personname
 
@@ -59,6 +60,12 @@ def main():
         other_contexts.extract_other_contexts_data(soup, person)
         # personname.extract_person_name(soup, person)
         education.extract_education_data(soup, person)
+        
+        writing_extraction.extract_general_info(soup, person, 1)
+        intertextuality.extract_intertextuality_data(soup, person)
+        intertextuality.extract_influence_data(soup, person)
+        intertextuality.extract_response_data(soup,person)
+        
 
         graph = person.to_graph()
         triple_count = len(graph)

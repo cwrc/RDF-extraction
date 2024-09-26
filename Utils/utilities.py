@@ -393,9 +393,6 @@ def get_person_secondary_uris(cwrc_uri):
 def get_full_name(tag_or_uri, doc=None, fallback=None):
     full_name = None    
     uri = None
-    print("----")
-    print(tag_or_uri)
-    print(type(tag_or_uri))
     if type(tag_or_uri) == rdflib.term.URIRef:
         uri = tag_or_uri
     else:
