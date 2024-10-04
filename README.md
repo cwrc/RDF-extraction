@@ -6,6 +6,13 @@ Note: The LINCS (CIDOC-CRM) version of these extraction scripts can be found on 
 
 You must have Python installed, at least version 3.8.
 
+## Optional VS Code configuration
+1. Go to Extensions tab: `shift+cmd+x`
+2. search `@recommended`
+3. Beside WORKSPACE RECOMMENDATIONS, there's a download button to install all the extensions.
+
+
+
 ## Setup
 
 Clone the repository if you haven't already.
