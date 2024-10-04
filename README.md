@@ -1,4 +1,4 @@
-# RDF-extraction
+# Orlando RDF-extraction based on the CWRC Ontology
 
 Extraction scripts for transforming the Orlando XML data into Linked Data. (CWRC Ontology Edition)
 
@@ -12,13 +12,19 @@ Clone the repository if you haven't already.
 `git clone https://github.com/cwrc/RDF-extraction.git`
 
 Switch to the CWRC branch
-`git switch classic`
+- Usually: `git switch classic`
+- Sometimes: Check with the [most recent branches](https://github.com/cwrc/RDF-extraction/branches) and swap classic with that. You may want to confirm with Alliyya about which branch to be on. (October 4, 2024: This will be `59-small-biography-clean-up-tasks` for now)
+
 
 There are two ways of accessing the source data files:
 
-1. [Download files from CWRC](#download-files-from-cwrc)
- (This needs special permissions and clearance)
-2. [Download zip from repo](#download-files-from-gitlab) (2024-06-03: This is a temporary workaround)
+1. ~~[Download files from CWRC](#download-files-from-cwrc) (This needs special permissions and clearance)~~ This is currently not allowed.
+2. ~~[Download zip from repo](#download-files-from-gitlab) (2024-06-03: This is a temporary workaround)~~
+3. [Use source data from GitLab](#use-source-data-from-gitlab)
+
+### Use source data from GitLab
+1. In the terminal: `git clone https://gitlab.com/calincs/cwrc/orlando-2.0-c-modelling.git` or with VSCode>Command Palette (cmd+shift+p)>`Git: Clone`, paste `https://gitlab.com/calincs/cwrc/orlando-2.0-c-modelling.git` and hit enter. (Note: this may take a while to clone, it's a large repository)
+2. Switch branches to `LOD-extraction-2024`, In terminal: `git switch LOD-extraction-2024` or with VSCode>Command Palette (cmd+shift+p)>`Git: Check out to` and select `LOD-extraction-2024`. You can also click the bottom left corner of your window where it has a git icon and likely says master or main and that will open up the same window asking which branch to switch to.
 
 
 ### Download files from CWRC
