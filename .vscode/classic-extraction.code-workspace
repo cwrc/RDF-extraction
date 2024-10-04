@@ -1,0 +1,36 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../Entry"
+		},
+		{
+			"path": "../Mods"
+		},
+		{
+			"path": "../FreestandingEvents"
+		}
+	],
+	"settings": {},
+	"extensions": {
+		"recommendations": [
+			"gitlab.gitlab-workflow",
+			"streetsidesoftware.code-spell-checker",
+			"ms-toolsai.datawrangler",
+			"usernamehw.errorlens",
+			"oderwat.indent-rainbow",
+			"ms-vsliveshare.vsliveshare",
+			"davidanson.vscode-markdownlint",
+			"ms-python.vscode-pylance",
+			"ms-python.pylint",
+			"ms-python.python",
+			"ms-python.debugpy",
+			"kevinrose.vsc-python-indent",
+			"mechatroner.rainbow-csv",
+			"gruntfuggly.todo-tree",
+			"dotjoshjohnson.xml"
+		]
+	}
+}
