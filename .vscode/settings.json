@@ -3,5 +3,60 @@
         "CHRONSTRUCT",
         "cwrc",
         "intertextuality"
-    ]
+    ],
+    "todo-tree.general.tags": [
+    "TODO",
+    "FIXME",
+    "BUG",
+    "NOTE",
+    "print",
+    "logger.info",
+    "logger.warn",
+    "logger.error",
+    "input",
+  ],
+  "todo-tree.filtering.includeHiddenFiles": true,
+  "todo-tree.general.statusBar": "current file",
+  "todo-tree.highlights.customHighlight": {
+    "print": {
+      "icon": "output",
+      "type": "text",
+      "foreground": "#ff0000",
+      "iconColour": "#ff0000",
+      "hideFromStatusBar": true,
+      "hideFromActivityBar": true
+    },
+    "input": {
+      "icon": "output",
+      "type": "text",
+      "foreground": "#ff0000",
+      "iconColour": "#ff0000",
+      "hideFromStatusBar": true,
+      "hideFromActivityBar": true
+    },
+    "logger.error": {
+      "icon": "output",
+      "type": "text",
+      "foreground": "#ff0000",
+      "iconColour": "#ff0000",
+      "hideFromStatusBar": true,
+      "hideFromActivityBar": true
+    },
+    "logger.info": {
+      "icon": "warning",
+      "type": "text",
+      "foreground": "#fffb00",
+      "iconColour": "#fffb00",
+      "hideFromStatusBar": true,
+      "hideFromActivityBar": true
+    },
+    "logger.warn": {
+      "icon": "error",
+      "type": "text",
+      "foreground": "#ffaa00",
+      "iconColour": "#ffaa00",
+      "hideFromStatusBar": true,
+      "hideFromActivityBar": true
+    }
+  },
 }
