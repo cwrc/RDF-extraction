@@ -289,7 +289,7 @@ def main():
 
     log_mapping_fails()
     logger.info(str(len(uber_graph)) + " triples created")
-    if extraction_mode.verbosity >= 0:
+    if extraction_mode.verbosity > 0:
         print(str(len(uber_graph)) + " total triples created")
 
     utilities.create_uber_triples(extraction_mode, uber_graph, "occcupation")

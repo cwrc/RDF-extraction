@@ -248,11 +248,11 @@ def main():
             soup = BeautifulSoup(f, 'lxml-xml')
 
         person_id  = soup.find("ENTRY").get("ID")
-
-        print(filename)
-        print(file_dict[filename])
-        print(person_id)
-        print("*" * 55)
+        if extraction_mode.verbosity > 0:
+            print(filename)
+            print(file_dict[filename])
+            print(person_id)
+            print("*" * 55)
 
         person = Biography(person_id, soup)
         extract_intertextuality_data(soup, person)
@@ -268,7 +268,7 @@ def main():
         uber_graph += graph
 
     logger.info(str(len(uber_graph)) + " triples created")
-    if extraction_mode.verbosity >= 0:
+    if extraction_mode.verbosity > 0:
         print(str(len(uber_graph)) + " total triples created")
 
     utilities.create_uber_triples(extraction_mode, uber_graph, "intertexuality")
