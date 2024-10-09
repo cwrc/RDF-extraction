@@ -19,44 +19,76 @@
   "todo-tree.general.statusBar": "current file",
   "todo-tree.highlights.customHighlight": {
     "print": {
-      "icon": "output",
+      "icon": "log",
       "type": "text",
       "foreground": "#ff0000",
       "iconColour": "#ff0000",
       "hideFromStatusBar": true,
-      "hideFromActivityBar": true
+      "hideFromActivityBar": true,
+      "gutterIcon":true
     },
     "input": {
-      "icon": "output",
+      "icon": "log",
       "type": "text",
       "foreground": "#ff0000",
       "iconColour": "#ff0000",
       "hideFromStatusBar": true,
-      "hideFromActivityBar": true
+      "hideFromActivityBar": true,
+      "gutterIcon":true
     },
-    "logger.error": {
-      "icon": "output",
+    "console.log": {
+      "icon": "log",
       "type": "text",
       "foreground": "#ff0000",
       "iconColour": "#ff0000",
       "hideFromStatusBar": true,
-      "hideFromActivityBar": true
+      "hideFromActivityBar": true,
+      "gutterIcon":true
     },
-    "logger.info": {
-      "icon": "warning",
+    "console.warn": {
+      "icon": "log",
       "type": "text",
       "foreground": "#fffb00",
       "iconColour": "#fffb00",
       "hideFromStatusBar": true,
-      "hideFromActivityBar": true
+      "hideFromActivityBar": true,
+      "gutterIcon":true
     },
-    "logger.warn": {
-      "icon": "error",
+    "console.error": {
+      "icon": "log",
       "type": "text",
       "foreground": "#ffaa00",
       "iconColour": "#ffaa00",
       "hideFromStatusBar": true,
-      "hideFromActivityBar": true
+      "hideFromActivityBar": true,
+      "gutterIcon":true
+    },
+    "logger.error": {
+      "icon": "log",
+      "type": "text",
+      "foreground": "#ff0000",
+      "iconColour": "#ff0000",
+      "hideFromStatusBar": true,
+      "hideFromActivityBar": true,
+      "gutterIcon":true
+    },
+    "logger.info": {
+      "icon": "log",
+      "type": "text",
+      "foreground": "#fffb00",
+      "iconColour": "#fffb00",
+      "hideFromStatusBar": true,
+      "hideFromActivityBar": true,
+      "gutterIcon":true
+    },
+    "logger.warn": {
+      "icon": "log",
+      "type": "text",
+      "foreground": "#ffaa00",
+      "iconColour": "#ffaa00",
+      "hideFromStatusBar": true,
+      "hideFromActivityBar": true,
+      "gutterIcon":true
     }
-  },
+  }
 }
