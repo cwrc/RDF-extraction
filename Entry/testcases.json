@@ -136,5 +136,11 @@
       "contexts": "Unsure",
       "to do": "Review special cases"
     }
+  },
+  "writing.py":{
+    "testcases": {
+      "kay_ja": "Jamaica Kincaid - has many names missing ref values",
+      "browro": "Robert Browning - has two basic properties in same paragraph: 'RBESTKNOWNWORK', 'RSELFDESCRIPTION'"
+    }
   }
 }
