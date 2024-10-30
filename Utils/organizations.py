@@ -89,7 +89,7 @@ def get_org_uri(tag):
             else:
                 uri = utilities.ORGANIZATION_MAP[uri]['CWRC URI']
         else:
-            logger.warn(F"Organization not in published authority list: {uri}, {tag}")
+            logger.warning(F"Organization not in published authority list: {uri}, {tag}")
             utilities.ORGANIZATION_MAP[uri] = {
                 "Preferred Name": tag.get_text(),
                 "Primary Identifier": "",
@@ -107,10 +107,10 @@ def get_org_uri(tag):
         elif tag.get("REG"):
             name = tag.get("REG").strip()
         else:
-            logger.warn(F"No standard name or URI: {tag}")
+            logger.warning(F"No standard name or URI: {tag}")
             name = tag.get_text()
         uri = utilities.make_standard_uri(name + " ORG", ns="data")
-        logger.warn(F"Organization has no REF attribute: {tag}, {uri}")
+        logger.warning(F"Organization has no REF attribute: {tag}, {uri}")
         ORGS_USED.add(uri)
         TEMP_ORGS[uri] = name
     
@@ -121,6 +121,25 @@ def get_org_uri(tag):
 
     return uri
 
+def get_org_name(tag):
+    std_name = tag.get("STANDARD")
+    cwrc_uri = tag.get("REF")
+    uri = None
+    if cwrc_uri:
+        uri = cwrc_uri.strip()
+    if uri in utilities.ORGANIZATION_MAP:
+        return utilities.ORGANIZATION_MAP[cwrc_uri]["Preferred Name"]
+    else:
+        logger.warning(F"Organization not in published authority list: {cwrc_uri}, {tag}")
+        utilities.ORGANIZATION_MAP[uri] = {
+            "Preferred Name": tag.get_text(),
+            "Primary Identifier": "",
+            "Secondary Identifier": "",
+            "CWRC URI": cwrc_uri
+        }
+    if std_name:
+        return std_name
+    return tag.get_text()
 
 def get_primary_uri(cwrc_uri):
     primary_identifier = utilities.ORGANIZATION_MAP[cwrc_uri]["Primary Identifier"]
@@ -134,9 +153,9 @@ def get_secondary_uris(cwrc_uri):
     secondary_uris = []
     if secondary_identifier != "":
         secondary_uris = secondary_identifier.split(" | ")
+        secondary_uris.append(cwrc_uri)
     
-    secondary_uris.append(cwrc_uri)
-    
+    secondary_uris = [rdflib.term.URIRef(x) for x in secondary_uris]
     return secondary_uris
 
 

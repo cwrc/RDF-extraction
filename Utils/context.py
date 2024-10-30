@@ -6,7 +6,9 @@ from Utils import utilities, organizations
 
 MAX_WORD_COUNT = 35
 logger = utilities.config_logger("context")
-GENERIC_NAMES = ["king","King","mother-in-law" , "Queen", "queen","husband","wife","partner" ,"father", "daughter","essay", "son","he","she","they","her","him","them", "sisters","the",  "mother", "sibling", "brother", "sister", "friend", "his wife", "her husband","his husband", "her wife", "their husband", "their wife", "lover", "family"]
+
+# TODO: Move to utilities + review and look for substring matches instead of growing list
+GENERIC_NAMES = ["king","King","mother-in-law" , "Queen", "queen", "Prince","husband","wife","partner" ,"father", "daughter","essay", "son","he","she","they","her","him","them", "sisters","the",  "mother", "sibling", "brother", "sister", "friend", "his wife", "her husband","his husband", "her wife", "their husband", "their wife", "lover", "family", "influence", "Her father", "eldest sister", "father's", "future husband", "grandfather", "grandmother", "her blind husband", "her mother", "landlady", "man", "mother ", "one", "organization", "papa", "parents", "second husband", "secretary", "sister-in-law", "son-in-law", "stepfather", "stepmother", "uncle", "university", "a daughter", "a son", "another","aunt", "author", "baby", "brother's", "brother-in-law", "brothers", "cousin", "daughter-in-law", "elder half-sister", "elder sister", "ex-husband", "father-in-law", "female", "fiancé", "first husband", "first wife", "her aunt", "her father", "his father", "his", "husbands", "mayor", "merchant", "nanny", "nephew", "niece", "paternal grandmother", "patron", "playwright", "publisher", "second wife", "servants", "six-month-old son", "sons", "step-father", "step-grandfather", "step-grandmother", "stepson", "widower", "youngest brother"]
 
 """
 Status: ~84%
@@ -17,22 +19,46 @@ TODO:
 4) clean up imports
 """
 
+def get_organizations(tag):
+    """Returns all organization uris within a given tag"""
+    return [organizations.get_org_uri(x) for x in tag.find_all("ORGNAME")]
 
-
-def get_named_entities(tag):
-    """ extracts the identifying components in a given tag
-        to be used for the subjects of the annotation, other than places
+def get_named_entities(tag, author=None, entity_types=None):
+    """Extracts the identifying components in a given tag based on specified entity types.
+    
+    Args:
+        tag (str): The tag to extract entities from.
+        author (str, optional): The author to use for extracting people. Defaults to None.
+        entity_types (list, optional): List of entity types to extract (e.g., 'people', 'places', 'titles', 'textscopes', 'organizations'). Defaults to None.
+    
+    Returns:
+        list: A list of identified subjects based on the specified entity types.
     """
     identified_subjects = []
 
-    identified_subjects += utilities.get_people(tag)
-    identified_subjects += utilities.get_titles(tag)
+    # If entity_types is None, set it to extract all types
+    if entity_types is None:
+        entity_types = ['people', 'places', 'titles', 'textscopes', 'organizations']
 
-    for x in tag.find_all("ORGNAME"):
-        identified_subjects.append(organizations.get_org_uri(x))
-
+    if 'people' in entity_types:
+        if author:
+            identified_subjects += utilities.get_other_people(tag, author)
+        else:
+            identified_subjects += utilities.get_people(tag)
+    
+    if 'places' in entity_types:
+        identified_subjects += utilities.get_places(tag)
+    
+    if 'titles' in entity_types:
+        identified_subjects += utilities.get_titles(tag)
+    
+    if 'textscopes' in entity_types:
+        identified_subjects += utilities.get_textscopes(tag)
+    
+    if 'organizations' in entity_types:
+        identified_subjects += get_organizations(tag)
+    
     return identified_subjects
-
 
 def get_heading(tag):
     # TODO: improve heading finding
@@ -51,9 +77,28 @@ def get_heading(tag):
 
 def create_context_map():
     # TODO: add exception handling
+    temp_context_map = {}
     import pandas as pd
     with open('../data/context_mapping.csv', newline='') as csvfile:
-        return pd.read_csv(csvfile)
+        temp_context_map = pd.read_csv(csvfile)
+
+    # Iterate over WRITING_PROPERTIES and add specific fields to temp_context_map
+    for index, row in utilities.WRITING_PROPERTIES.iterrows():
+        # Extract specific fields from the row
+        new_row = {
+            'Orlando Tag': row['Orlando Tag'],
+            'Context': row['Context Type'],
+            'Event': row['Context Type'].replace('Context', 'Event'),
+            'Context relationship predicate': row['Generic Property'],
+            # Add more fields as needed
+            'Mode': None
+        }
+        # temp_context_map.concat(new_row)
+        # pd.concat([temp_context_map, new_row])
+        temp_context_map.loc[len(temp_context_map)] = new_row
+    
+    return temp_context_map
+
 
 
 def get_context_map_res(col, tag, mode=False):
@@ -97,7 +142,7 @@ class Context(object):
     TODO: Possibly move out this mapping to utilities for less coupling
     TODO: review better way to generate of ID of context
     """
-    MAPPING = create_context_map()
+    MAPPING = create_context_map() #TODO: move to utilities
 
     def __init__(self, id, tag, context_type="CULTURALFORMATION", motivation="describing", mode=None, subject_uri=None, target_uri=None, id_context=None, subject_name=None, other_triples=True):
         super(Context, self).__init__()
@@ -113,6 +158,8 @@ class Context(object):
         self.identifying_uri = id_context
         self.uri = utilities.create_uri("data", id)
         self.label = subject_name
+        self.context_label = ""
+        self.context_type = ""
 
         # allows reuse of target to reduce duplication of target/citations
         if target_uri:
@@ -137,20 +184,29 @@ class Context(object):
         self.tag = tag
         self.text = tag.get_text()
         self.orlando_tagname = context_type
-
-        # Would be nice to use the ontology and not worry about changing labels
-        # logger.info(context_type + " " + str(mode))
-        if context_type != "FREESTANDING_EVENT":
+  
+        if mode:
+            self.context_type = get_context_type(context_type, mode)
+            self.context_predicate = utilities.create_cwrc_uri(get_context_predicate(context_type)) 
+        elif isinstance(context_type, list):
+            self.context_type = [get_context_type(x) for x in context_type]
+            self.context_predicate = [ utilities.create_cwrc_uri(get_context_predicate(x)) for x in context_type ]
+            self.context_label = " and ".join([utilities.split_by_casing(x) for x in self.context_type])
+            self.context_type = [utilities.create_cwrc_uri(x) for x in self.context_type]
+            
+            # self.context_predicate = utilities.create_cwrc_uri("c_hasWritingRelationTo")
+        elif context_type != "FREESTANDING_EVENT":
             self.context_type = get_context_type(context_type, mode)
             self.context_predicate = utilities.create_cwrc_uri(get_context_predicate(context_type))
         else:
             self.context_type = "UnknownContext"
             self.context_predicate = None
 
-        self.context_label = utilities.split_by_casing(self.context_type)
-        self.context_type = utilities.create_cwrc_uri(self.context_type)
+        if self.context_label == "":
+            self.context_label = utilities.split_by_casing(self.context_type)
+            self.context_type = utilities.create_cwrc_uri(self.context_type)
 
-        self.named_entities = get_named_entities(self.tag)
+        self.named_entities = get_named_entities(self.tag,entity_types=["people","titles","organizations"])
         self.identified_places = utilities.get_places(self.tag)
 
         if self.named_entities and context_type != "FREESTANDING_EVENT":
@@ -231,7 +287,7 @@ class Context(object):
                 source_url = rdflib.term.URIRef(self.src + person.id + "#" + self.heading)
                 target_label = person.name + " - " + self.context_label + " excerpt"
             else:
-                source_url = rdflib.term.URIRef(self.src + "#FE")
+                source_url = rdflib.term.URIRef(self.src + "/events/" + self.id.split("context_")[1])
                 target_label = "FE" + " - " + self.context_label + " excerpt"
             g.add((self.target_uri, RDFS.label, Literal(target_label)))
             g.add((self.target_uri, utilities.NS_DICT["oa"].hasSource, source_url))
@@ -265,7 +321,12 @@ class Context(object):
             else:
                 context_label = self.context_label + " (identifying)"
 
-            g.add((self.identifying_uri, RDF.type, self.context_type))
+            if isinstance(self.context_type, list):
+                for x in self.context_type:
+                    g.add((self.identifying_uri, RDF.type, x))
+            else:
+                g.add((self.identifying_uri, RDF.type, self.context_type))
+
             g.add((self.identifying_uri, RDFS.label, Literal(context_label)))
             g.add((self.identifying_uri, utilities.NS_DICT["oa"].hasTarget, self.target_uri))
             g.add((self.identifying_uri, utilities.NS_DICT["oa"].motivatedBy, utilities.NS_DICT["oa"].identifying))
@@ -293,7 +354,13 @@ class Context(object):
             else:
                 context_label = person.name + " - " + self.context_label + " (describing)"
             
-            g.add((self.uri, RDF.type, self.context_type))
+            
+            if isinstance(self.context_type, list):
+                for x in self.context_type:
+                    g.add((self.uri, RDF.type, x))
+            else:
+                g.add((self.uri, RDF.type, self.context_type))
+            
             g.add((self.uri, RDFS.label, Literal(context_label)))
             g.add((self.uri, utilities.NS_DICT["cwrc"].hasIDependencyOn, self.identifying_uri))
             g.add((self.uri, utilities.NS_DICT["oa"].hasTarget, self.target_uri))
@@ -320,8 +387,15 @@ class Context(object):
                     self.named_entities.remove(x)
 
             # Adding any named entities with <context>Relationship predicate
-            for x in self.named_entities:
-                g.add((self.uri, self.context_predicate, x))
+            if isinstance(self.context_predicate, list):
+                for x in self.context_predicate:
+                    for y in self.named_entities:
+                        g.add((self.uri, x, y))
+            else:
+                for x in self.named_entities:
+                    g.add((self.uri, self.context_predicate, x))
+
+
 
             if self.identified_places:
                 g.add((self.uri, RDF.type, utilities.create_cwrc_uri("SpatialContext")))
@@ -350,7 +424,10 @@ class Context(object):
             else:
                 cwrc_uri = x.get("REF")
                 if not cwrc_uri:
-                    logger.warning(F"URI not found for: {x} within entry: {person.id}")
+                    if person:
+                        logger.warning(F"URI not found for: {x} within entry: {person.id}")
+                    else:
+                        logger.warning(F"URI not found for: {x} within: {self.id}")
                 else:
                     secondary_uris = utilities.get_person_secondary_uris(cwrc_uri) 
                 uri = rdflib.term.URIRef(uri)
@@ -360,10 +437,39 @@ class Context(object):
             g.add((uri, RDFS.label, Literal(std_name,lang="en")))
             altname = x.get_text()
             if altname and std_name != altname and altname not in GENERIC_NAMES:
-                g.add((uri, utilities.NS_DICT["skos"].altLabel, Literal(altname)))
+                g.add((uri, utilities.NS_DICT["skos"].altLabel, Literal(altname,lang="en")))
             
             for y in secondary_uris:
-                g.add((uri, utilities.NS_DICT["owl"].sameAs, y))
+                if y != uri:
+                    g.add((uri, utilities.NS_DICT["owl"].sameAs, y))
+       
+        for x in self.tag.find_all("ORGNAME"):
+            uri = organizations.get_org_uri(x)
+            secondary_uris = []
+            if not uri:
+                logger.warning(F"URI not found for: {x} within entry: {person.id}")
+                continue
+            else:
+                cwrc_uri = x.get("REF")
+                if not cwrc_uri:
+                    if person:
+                        logger.warning(F"URI not found for: {x} within entry: {person.id}")
+                    else:
+                        logger.warning(F"URI not found for: {x} within: {self.id}")
+                else:
+                    secondary_uris = organizations.get_secondary_uris(cwrc_uri) 
+                uri = rdflib.term.URIRef(uri)
+            
+            g.add((uri, RDF.type,utilities.NS_DICT["org"].Organization))
+            std_name = organizations.get_org_name(x)
+            g.add((uri, RDFS.label, Literal(std_name,lang="en")))
+            altname = x.get_text()
+            if altname and std_name != altname and altname not in GENERIC_NAMES:
+                g.add((uri, utilities.NS_DICT["skos"].altLabel, Literal(altname,lang="en")))
+            
+            for y in secondary_uris:
+                if y != uri:
+                    g.add((uri, utilities.NS_DICT["owl"].sameAs, y))
        
 
 
