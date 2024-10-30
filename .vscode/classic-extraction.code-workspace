@@ -13,7 +13,11 @@
 			"path": "../FreestandingEvents"
 		}
 	],
-	"settings": {},
+	"settings": {
+		"cSpell.words": [
+			"textscopes"
+		]
+	},
 	"extensions": {
 		"recommendations": [
 			"gitlab.gitlab-workflow",
