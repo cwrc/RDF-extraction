@@ -1,0 +1,45 @@
+Orlando Tag,Predicate Type,Attribute Type,Attribute Value,Domain Type,Range Type,Context Type,Specific Property,Generic Property,Function Type,Custom Instructions,Questions,Key
+TCHARACTERIZATION,Descriptive,,,Work,String,CharacterizationContext,c_hasCharacterization,c_hasCharacterizationRelationTo,Standard,,,TCHARACTERIZATIONDescriptive
+TCHARACTERNAME,Descriptive,,,Work,String,CharacterizationContext,c_hasCharacterName,c_hasCharacterizationRelationTo,Standard,,,TCHARACTERNAMEDescriptive
+TCHARACTERNAME,Embedded Entities,,,Work,Person,CharacterizationContext,c_hasCharacterType,c_hasCharacterizationRelationTo,Custom,,,TCHARACTERNAMEEmbedded Entities
+TCHARACTERTYPEROLE,Descriptive,,,Work,String,CharacterizationContext,c_characterRole,c_hasCharacterizationRelationTo,Custom,DO NOT extract if there is a PROTAGONIST attibute.,,TCHARACTERTYPEROLEDescriptive
+TCHARACTERTYPEROLE,Attributes,PROTAGONIST,FEMALE,Work ELSE Entry Subject Ouvre,String,CharacterizationContext,c_hasWomanProtagonistRole,c_hasCharacterizationRelationTo,Custom,Also create hasProtagonistType relationship between work and gender,,TCHARACTERTYPEROLEAttributesPROTAGONISTFEMALE
+TCHARACTERTYPEROLE,Attributes,PROTAGONIST,MALE,Work ELSE Entry Subject Ouvre,String,CharacterizationContext,c_hasManProtagonistRole,c_hasCharacterizationRelationTo,Custom,Also create hasProtagonistType relationship between work and gender,,TCHARACTERTYPEROLEAttributesPROTAGONISTMALE
+RFICTIONALIZATION,Descriptive,,,Entry Subject,String,IntertextualityContext,c_hasFictionalization,c_hasFictionalizationRelationTo,Standard,,,RFICTIONALIZATIONDescriptive
+RFICTIONALIZATION,Embedded Entities,,,Entry Subject,Author OR Work,IntertextualityContext,c_fictionalizedBy,c_hasFictionalizationRelationTo,Custom,"1)  When a FICTIONALIZATION tag contains the structure <NAME>'s <TITLE> then extract the following
+--a Person entity 
+--a Work with that TITLE
+--a creation relationship between the two
+2) When a FICTIONALIZATION tag contains only one NAME (other than that of the author of the entry) OR only one title, OR one or more of the <NAME>'s <TITLE> pattern
+SUBJECT:  author of the entry
+PREDICATE: fictionalizedBy
+OBJECT: 
+1) frbr:Work as derived above IF only one TITLE, or if more than one with the possessive pattern
+2) foaf:Person if only one NAME
+","QUERY: Should we create for all named persons within the tag as well as for all texts, but NOT for named persons who are authors of texts? Or is it best to be redundant and extract the relationship for both the author of the fictionalizing work and the text by them in which the fictionalization occurs?",RFICTIONALIZATIONEmbedded Entities
+RBESTKNOWNWORK,Embedded Entities,,,Entry Subject,Work,ReceptionContext,c_hasBestKnownWork,c_hasReceptionRelationTo,Standard,,,RBESTKNOWNWORKEmbedded Entities
+RLANDMARKTEXT,Embedded Entities,,,Entry Subject,Work,ReceptionContext,c_hasLandmarkText,c_hasReceptionRelationTo,Standard,,,RLANDMARKTEXTEmbedded Entities
+RRECOGNITIONVALUE,Descriptive,,,Entry Subject,String,RecognitionContext,c_gainsLiteraryAwardValue,c_hasRecognitionRelationTo,Standard,,,RRECOGNITIONVALUEDescriptive
+RRECOGNITIONNAME,Embedded Entities,,,Work ELSE Entry Subject,cwrc:LiteraryAward,RecognitionContext,c_hasLiteraryAward,c_hasRecognitionRelationTo,Custom,Create Literary Award,Need to sort out what we're doing with awards,RRECOGNITIONNAMEEmbedded Entities
+RRECOGNITIONS,Descriptive,,,Work ELSE Entry Subject,String,RecognitionContext,c_receivesRecognition,c_hasRecognitionRelationTo,Standard,,,RRECOGNITIONSDescriptive
+RSELFDESCRIPTION,Descriptive,,,Entry Subject,String,ResponseContext,c_hasSelfDescription,c_hasResponseRelationTo,Standard,,,RSELFDESCRIPTIONDescriptive
+RPENALTIES,Descriptive,,,Work ELSE Entry Subject,String,ResponseContext,c_suffersWritingPenalty,c_hasResponseRelationTo,Standard,,,RPENALTIESDescriptive
+RPENALTIES,Embedded Entities,,,Work ELSE Entry Subject,All Named Entities,ResponseContext,c_hasWritingPenaltyRelationTo,c_hasResponseRelationTo,Standard,,,RPENALTIESEmbedded Entities
+TSETTINGPLACE,Descriptive,,,Work,String,SettingContext,c_hasSetting,c_hasTextualFeaturesRelationTo,Standard,,,TSETTINGPLACEDescriptive
+TSETTINGDATE,Descriptive,,,Work,String,SettingContext,c_hasSetting,c_hasTextualFeaturesRelationTo,Standard,,,TSETTINGDATEDescriptive
+TSETTINGPLACE,Embedded Entities,,,Work,All Named Entities,SettingContext,c_hasSettingRelationTo,c_hasTextualFeaturesRelationTo,Standard,,,TSETTINGPLACEEmbedded Entities
+TSETTINGDATE,Embedded Entities,,,Work,All Named Entities,SettingContext,c_hasSettingRelationTo,c_hasTextualFeaturesRelationTo,Standard,,,TSETTINGDATEEmbedded Entities
+TSETTINGPLACE,Attributes,TSETTINGPLACETYPE,,Work,cwrc:SpatialSettingType,SettingContext,c_hasSpatialSettingType,c_hasTextualFeaturesRelationTo,Custom,,,TSETTINGPLACEAttributesTSETTINGPLACETYPE
+TSETTINGPLACE,Attributes,SETTINGCLASS,,Work,cwrc:SocialSettingType,SettingContext,c_hasSocialSettingType,c_hasTextualFeaturesRelationTo,Custom,,,TSETTINGPLACEAttributesSETTINGCLASS
+TSETTINGDATE,Attributes,SETTINGDATETYPE,,Work,cwrc:SpatialSettingType,SettingContext,c_hasSpatialSettingType,c_hasTextualFeaturesRelationTo,Custom,,,TSETTINGDATEAttributesSETTINGDATETYPE
+TPLOT,Descriptive,,,Work,String,TextualFeaturesContext,c_hasPlotSummary,c_hasTextualFeaturesRelationTo,Custom,Only if there's one textscope,,TPLOTDescriptive
+TGENREISSUE,Embedded Entities,,,Work ELSE Entry Subject Ouvre,genre:Genre,TextualFeaturesContext,c_hasEngagementWithGenre,c_hasTextualFeaturesRelationTo,Custom,,,TGENREISSUEEmbedded Entities
+TTECHNIQUE,Attributes,TECHNIQUETYPE,NULL,Work ELSE Entry Subject Ouvre,String,TextualFeaturesContext,,c_hasTextualFeaturesRelationTo,Custom,"To avoid duplication, do not create triple if there is a subpredicate of hasTechnique, or an annotation for engagesWithGenre; hasToneStyle; or hasVoiceOrNarration that would contain the same string.",,TTECHNIQUEAttributesTECHNIQUETYPENULL
+TTECHNIQUE,Attributes,TECHNIQUETYPE,DICTION,Work ELSE Entry Subject Ouvre,String,TextualFeaturesContext,c_hasDiction,c_hasTextualFeaturesRelationTo,Custom,,,TTECHNIQUEAttributesTECHNIQUETYPEDICTION
+TTECHNIQUE,Attributes,TECHNIQUETYPE,VERSIFICATION,Work ELSE Entry Subject Ouvre,String,TextualFeaturesContext,c_hasVersification,c_hasTextualFeaturesRelationTo,Custom,,,TTECHNIQUEAttributesTECHNIQUETYPEVERSIFICATION
+TTECHNIQUE,Attributes,TECHNIQUETYPE,NONSTANDARDENGLISH,Work ELSE Entry Subject Ouvre,String,TextualFeaturesContext,c_hasNonStandardLanguage,c_hasTextualFeaturesRelationTo,Custom,,,TTECHNIQUEAttributesTECHNIQUETYPENONSTANDARDENGLISH
+TTECHNIQUE,Attributes,TECHNIQUETYPE,IMAGERY,Work ELSE Entry Subject Ouvre,String,TextualFeaturesContext,c_hasImagery,c_hasTextualFeaturesRelationTo,Custom,,,TTECHNIQUEAttributesTECHNIQUETYPEIMAGERY
+TTECHNIQUE,Attributes,TECHNIQUETYPE,AURALEFFECTS,Work ELSE Entry Subject Ouvre,String,TextualFeaturesContext,c_hasAuralEffects,c_hasTextualFeaturesRelationTo,Custom,,,TTECHNIQUEAttributesTECHNIQUETYPEAURALEFFECTS
+TTONESTYLE,Descriptive,,,Work ELSE Entry Subject Ouvre,String,TextualFeaturesContext,c_hasToneOrStyle,c_hasTextualFeaturesRelationTo,Standard,,,TTONESTYLEDescriptive
+PNONSURVIVAL,Embedded Entities,,,Entry Subject,cwrc:LostCreativeWork,TextualHistoryContext,c_hasDestroyedWork,c_hasTextualHistoryRelationTo,Custom,Create Lost Work,,PNONSURVIVALEmbedded Entities
+TTHEMETOPIC,Descriptive,,,Work ELSE Entry Subject Ouvre,String,ThematicContext,c_hasThemeOrTopic,c_ hasThemeRelationTo,Custom,"SUBJECT: frbr: Work (use TEXTSCOPE); if used in AuthorSummary apply to Oeuvre; otherwise do not extract",,TTHEMETOPICDescriptive
