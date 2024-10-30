@@ -4,9 +4,9 @@
 from bs4 import BeautifulSoup
 import rdflib
 
-from utilities import *
-from context import Context
-from event import Event
+from Utils.utilities import *
+from Utils.context import Context
+from Utils.event import Event
 
 
 uber_graph = rdflib.Graph()
@@ -43,9 +43,9 @@ class Freestanding_Event(object):
 
     def to_file(self, graph=None, serialization="ttl"):
         if graph:
-            return graph.serialize(format=serialization).decode()
+            return graph.serialize(format=serialization)
         else:
-            return self.to_graph().serialize(format=serialization).decode()
+            return self.to_graph().serialize(format=serialization)
 
     def __str__(self):
         string = f"Event:\n{self.event}\nContext:\n{self.context}"
@@ -55,31 +55,34 @@ class Freestanding_Event(object):
 
 def main():
     import os
-    filelist = [filename[:-4] for filename in sorted(os.listdir("freeevents_data/")) if filename.endswith(".xml")]
-    filelist.sort(key=int)
+    filelist = [filename for filename in sorted(os.listdir("/Users/alliyyamo/Desktop/orlando-2.0-c-modelling/textbase-pubc/events-pubc")) if filename.endswith(".xml")]
+    filelist.sort()
 
     entry_num = 1
     global uber_graph
 
-    # for filename in filelist[:1]:
     for filename in filelist:
-        with open("freeevents_data/" + str(filename) + ".xml", encoding="utf-8") as f:
+        with open("/Users/alliyyamo/Desktop/orlando-2.0-c-modelling/textbase-pubc/events-pubc/" + str(filename) , encoding="utf-8") as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
-        event_id = "freestanding_event_" + str(filename)
-        context_id = "freestanding_event_context_" + str(filename)
-        print("===========", filename, "=============")
+        main_id = str(filename).replace(".xml", "").replace("orlando_", "")
+        
+        event_id = f"freestanding_event_{main_id}" 
+        context_id = f"freestanding_event_context_{main_id}"
+        print(F"=========== {filename}: {entry_num} =============")
 
-        event_title = "Freestanding Event #" + str(filename)
+        event_title =  soup.find("DOCTITLE").text
+        
+        
         events = soup.find_all("CHRONSTRUCT")
         if not events:
             print(event_title)
             print(events)
             input()
         event_tag = soup.find_all("CHRONSTRUCT")[0]
-        context_tag = soup.find_all("FREESTANDING_EVENT")[0]
+        context_tag = soup.find_all("CHRONEVENT")[0]
 
-        temp_context = Context(context_id, context_tag, "Context", "identifying")
+        temp_context = Context(context_id, context_tag, "FREESTANDING_EVENT", "identifying")
         temp_event = Event(event_title, event_id, event_tag)
 
         freestanding_event = Freestanding_Event(temp_event, temp_context)

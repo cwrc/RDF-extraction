@@ -191,8 +191,12 @@ class Event(object):
 
         # NOTE: Event will always be attached to a context, possibly multiple event to the same context
 
+
+
         # Labelling the event
         text = self.date_tag.text + ": " + self.text
+        if "freestanding" in str(self.uri):
+            text = self.title
         g.add((self.uri, RDFS.label, Literal(text)))
 
         # Typing of the event --> events might have multiple types down the line

@@ -15,7 +15,14 @@ class Citation(object):
         self.label = bibcit_tag.get("PLACEHOLDER")
         self.citing_entity = bibcit_tag.get("DBREF")
         self.uri = bibcit_tag.get("REF")
-        self.entry_id = utilities.get_entry_id(self.tag)
+        
+        try:
+            self.entry_id = utilities.get_entry_id(self.tag)
+        except AttributeError:
+            self.entry_id = self.tag.find_parent("EVENT").get("EID")
+            
+        
+        
         if self.citing_entity:
             if " " in self.citing_entity:
                 logger.error(F"In entry: {self.entry_id} - BIBCIT: Space encountered in DBREF attribute: {bibcit_tag}")
