@@ -315,7 +315,7 @@ def get_person_uri(identifier):
             EXTERNAL_TO_CWRC_MAPPING[uri] = identifier
             return uri
     else:
-        logger.warn(F"Person not in published authority list: {identifier}")
+        logger.warning(F"Person not in published authority list: {identifier}")
         
     return identifier
 
@@ -344,7 +344,7 @@ def get_org_uri(identifier):
             uri = ORGANIZATION_MAPPING[identifier]['CWRC URI']
     else:
         uri = identifier
-        logger.warn(F"Organization not in published authority list: {identifier}")
+        logger.warning(F"Organization not in published authority list: {identifier}")
     
     uri = rdflib.term.URIRef(uri)
     return uri

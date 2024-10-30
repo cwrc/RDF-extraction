@@ -205,7 +205,7 @@ def extract_intertextuality(tag, person, context):
     if typing in INTERTEXTTYPE_MAPPING:
         predicate = INTERTEXTTYPE_MAPPING[typing]
     else:
-        logger.warn(F"Unknown intertextuality type: {typing}")
+        logger.warning(F"Unknown intertextuality type: {typing}")
 
     # Determining what type of entity to extract as object
     entities = utilities.get_titles(tag)

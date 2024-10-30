@@ -95,7 +95,8 @@ def main():
     logger.info("Time completed: " + utilities.get_current_time())
 
     temp_path = "extracted_triples/biography_triples.ttl"
-    utilities.create_extracted_uberfile(temp_path, uber_graph,serialization="ttl", extra_triples="../data/additional_triples.ttl")
+    utilities.create_extracted_uberfile(temp_path, uber_graph,serialization="ttl")
+    # utilities.create_extracted_uberfile(temp_path, uber_graph,serialization="ttl", extra_triples="../data/additional_triples.ttl")
 
 
 if __name__ == "__main__":
