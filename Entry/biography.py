@@ -77,6 +77,15 @@ def get_name_context(doc):
     return uri_map
     
 
+def get_author_textscopes(doc):
+    textscopes = doc.find_all("TEXTSCOPE")
+    textscopes = [textscope for textscope in textscopes if textscope.get("PLACEHOLDER")]
+    textscope_strings = [textscope.get("PLACEHOLDER") for textscope in textscopes]
+    textscope_strings = [ ", ".join(x.split(", ")[1:-1]) for x in textscope_strings]
+    textscope_map = dict(zip(textscope_strings, textscopes))
+    return textscope_map
+
+
 class Biography(object):
     """docstring for Biography"""
 
@@ -90,6 +99,7 @@ class Biography(object):
         self.std_name = utilities.get_entry_standard_name(doc)
         self.cwrc_uri = self.document.ENTRY.DIV0.STANDARD.get("REF")
         self.gender = []
+        self.textscope_map = get_author_textscopes(doc)
 
         if self.cwrc_uri in utilities.PERSON_MAP and utilities.PERSON_MAP[self.cwrc_uri]["Primary Identifier"] != "":
             self.uri = utilities.PERSON_MAP[self.cwrc_uri]["Primary Identifier"]
