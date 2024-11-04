@@ -3,10 +3,11 @@ from rdflib import Literal
 from Utils import utilities
 from Utils.context import Context, get_context_type, get_event_type, get_named_entities
 from Utils.event import Event
-from Utils.organizations import get_org_uri
+from Utils.organizations import get_org_uri, get_org_name
 from culturalForm import get_mapped_term
-
-logger = utilities.config_logger("writing_2")
+from Utils.place import Place
+import csv
+logger = utilities.config_logger("adhoc-data-extraction")
 
 
 
@@ -329,9 +330,176 @@ def title_check(doc, person):
         else:
             logger.info(f"SUCCESS|{person.id}|Title has URI|{title}|{title_label}|{uri}")
 
+
+BIOGRAPHY_TAGS = ["BIRTH", "CULTURALFORMATION", "DEATH", "EDUCATION", "FAMILY","FRIENDSASSOCIATES", "HEALTH", "INTIMATERELATIONSHIPS", "LEISUREANDSOCIETY", "LOCATION", "OCCUPATION", "OTHERLIFEEVENT", "POLITICS", "VIOLENCE", "WEALTH"]
+WRITING_TAGS = ["PRODUCTION", "RECEPTION",  "TEXTUALFEATURES"]
+OTHER_TAGS = ["AUTHORSUMMARY"] 
+
+ENTITIES = {
+    "people": {},
+    "places": {},
+    "organizations": {},
+    "titles": {}    
+}
+
+def write_dict_to_csv(data, filename):
+    # Determine the maximum length of the lists in the values
+    max_list_length = max((len(value) if isinstance(value, list) else 1) for value in data.values())
+    
+    # Create the header row
+    header = ["Key"] + [f"Value_{i+1}" for i in range(max_list_length)]
+    
+    with open(filename, mode='w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(header)  # Write the header
+        
+        for key, value in data.items():
+            if isinstance(value, list):
+                row = [key] + value + [""] * (max_list_length - len(value))  # Pad the row with empty strings
+            else:
+                row = [key, value] + [""] * (max_list_length - 1)  # Pad the row with empty strings
+            writer.writerow(row)
+
+
+def get_mappings(doc, person):
+    people = utilities.get_people_names(doc)
+    
+    places_tags = doc.find_all("PLACE")
+    places = {}
+    for place_tag in places_tags:
+        place = Place(place_tag)
+        places[place.uri] = place.address
+    
+    
+    title_tags = doc.find_all("TITLE")
+    titles = {}
+    for title_tag in title_tags:
+        label = utilities.get_value(title_tag)
+        uri = utilities.get_title_uri(title_tag)
+        titles[uri] = label
+    
+    organization_tags = doc.find_all("ORGNAME")
+    orgs = {}
+    for org_tag in organization_tags:
+        uri = get_org_uri(org_tag)
+        orgs[uri] = get_org_name(org_tag)
+    
+    ENTITIES["people"].update(people)
+    ENTITIES["places"].update(places)
+    ENTITIES["titles"].update(titles)
+    ENTITIES["organizations"].update(orgs)
+    
+
+ROWS = []
+
+def get_rows(context, tag, person, subject=None):
+    basic_details = {
+        "Entry ID": person.id,
+        "Context": context,
+        "Snippet": utilities.get_snippet(tag),
+        "Subject Type": "Person",
+        "Subject SubType": "Entry Subject"
+    }
+    
+    if not subject or len(subject) == 0:
+        # basic_details["Subject"] = person.uri
+        subject = [person.uri]
+    elif len(subject) == 1:
+        basic_details["Subject Type"] = "Title"
+        basic_details["Subject SubType"] = "Textscope Text"
+        # basic_details["Subject"] = subject[0]
+    else :
+        logger.warning(f"Multiple subjects found for {person.id} in {context}")
+        basic_details["Subject Type"] = "Title"
+        basic_details["Subject SubType"] = "Textscope Text"
+        #TODO: NEED TO HANDLE MULTIPLE TEXTSCOPES
+        # basic_details["Subject"] = subject[0]
+        
+
+    rows = []
+
+    for x in subject:
+        people = get_named_entities(tag, author=person, entity_types=["people"])
+        places = get_named_entities(tag,entity_types=["places"])
+        organizations = get_named_entities(tag,entity_types=["organizations"])
+        titles = get_named_entities(tag,entity_types=["titles"])
+        
+        entity_mappings = [
+        (people, "Person"),
+        (places, "Place"),
+        (organizations, "Organization"),
+        (titles, "Title")]
+        
+        for entities, entity_type in entity_mappings:
+            for entity in entities:
+                row = basic_details.copy()
+                row["Object"] = entity
+                row["Object Type"] = entity_type
+                row["Subject"] = x
+                rows.append(row)    
+        
+    return rows
+
+def extract_adhoc_data(doc, person):
+    global ROWS
+    
+    for bio_tag in BIOGRAPHY_TAGS:
+        tags = doc.find_all(bio_tag)
+        for tag in tags:
+            paragraphs = tag.find_all("P") + tag.find_all("CHRONSTRUCT")
+            for p in paragraphs:
+                ROWS += get_rows(bio_tag, p, person,subject=None)
+
+
+    for writing_tag in WRITING_TAGS:
+        tags = doc.find_all(writing_tag)
+        for tag in tags:
+            textscopes = utilities.get_textscopes(tag)
+            paragraphs = tag.find_all("P") + tag.find_all("CHRONSTRUCT")
+            if len(textscopes) > 0:
+                for p in paragraphs:
+                    ROWS += get_rows(writing_tag, p, person,subject=textscopes)
+            else:
+                for p in paragraphs:
+                    ROWS += get_rows(writing_tag, p, person,subject=None)
+
+    tags = doc.find_all("AUTHORSUMMARY")
+    for tag in tags:
+        paragraphs = tag.find_all("P")
+        for p in paragraphs:
+            ROWS += get_rows("AUTHORSUMMARY", p, person,subject=None)
+
+
+def save_rows_to_csv(rows, filename):
+    keys = rows[0].keys()
+    with open(filename, 'w', newline='') as output_file:
+        dict_writer = csv.DictWriter(output_file, fieldnames=keys)
+        dict_writer.writeheader()
+        dict_writer.writerows(rows)
+
+        
+        
+def extract_author_titles(doc, person):
+    # titles = utilities.get_textscopes(doc)
+    titles = doc.find_all("TEXTSCOPE")
+    for title in titles:
+        uri = title.get("REF")
+        if not title.get("PLACEHOLDER"):
+            logger.warning(f"{person.id}: Textscope has no placeholder text|{title}")
+        if not uri:
+            logger.warning(f"{person.id}: Textscope has no REF attribute|{title}")
+            continue    
+        ROWS.append({
+          "Title URI": uri,
+          "Author URI": person.uri,
+        })
+    
+
+
 def main():
     from bs4 import BeautifulSoup
     from biography import Biography
+    import csv
 
     extraction_mode, file_dict = utilities.parse_args(
         __file__, "Reception", logger)
@@ -350,7 +518,11 @@ def main():
             print("*" * 55)
         person = Biography(person_id, soup)
         # textscope_analysis(soup, person)
-        title_check(soup, person)
+        # title_check(soup, person)
+        extract_adhoc_data(soup, person)
+        # extract_author_titles(soup, person)
+        # get_mappings(soup, person)
+        
         # title_analysis(soup, person)
         continue
         extract_writing_data(soup, person)
@@ -363,11 +535,15 @@ def main():
 
         uber_graph += graph
     
-    logger.info("Title Analysis")
-    logger.info(f"Matched Titles: {matched_titles}")
-    logger.info(f"Unmatched Titles: {unmatched_titles}")
-    logger.info(f"Partial Matches: {partial_matches}")
-    
+    # logger.info("Title Analysis")
+    # logger.info(f"Matched Titles: {matched_titles}")
+    # logger.info(f"Unmatched Titles: {unmatched_titles}")
+    # logger.info(f"Partial Matches: {partial_matches}")
+    # logger.info(ENTITIES)
+    save_rows_to_csv(ROWS, 'adhoc.csv')
+    # save_rows_to_csv(ROWS, 'adhoc-authors.csv')
+    # for key, value in ENTITIES.items():
+    #     write_dict_to_csv(value, f"adhoc_reference_{key}.csv")
     exit()
     logger.info(str(len(uber_graph)) + " triples created")
     if extraction_mode.verbosity > 0:
