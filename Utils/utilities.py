@@ -31,12 +31,25 @@ TODO: parse required ns from external files
 WRITER_MAP = {}
 MAX_WORD_COUNT = 35
 GENRE_MAPPING = {}
-TITLE_MAPPING = {}
 
-# New mappings TODO
+TITLE_MAPPING = {}
+TITLE_MAPPING_1 = {}
+TITLE_MAPPING_2 = {}
+
+
+
 PERSON_MAP = {}
 ORGANIZATION_MAP = {}
 CWRC_URI_MAP = {}
+CORE_TAGS = ['RS','ADDRLINE', 'ADDRESS', "SCHOLARNOTE", "RESEARCHNOTE" , "SIC", 'SOCALLED','AREA', 'FOREIGN','SETTLEMENT', 'REGION', 'GEOG', 'ORGNAME',"BIBCIT", "BIBCITS", "QUOTE","NAME", "TITLE", "PLACE", "DATE", "DATERANGE", "DATESTRUCT", "TEXTSCOPE", "TGENRE", "CHRONSTRUCT"]
+GENERIC_TITLES = ["Selected Stories","Songs", "Poems on Several Occasions", "Poems on Various Subjects", "Songs", "Selected Stories", "Essays", "Autobiography","A Book", "Collected Short Stories","Collected Stories", "","Poems", "Critical", "Monthly", "Memoirs", "Collected Poems", "Selected Poems", "Works", "Poetry", "Poetry Review", "Analytical", "Journal", "Letters", "Life", "Verses", "The Monthly Packet", "Dictionary", "Miscellaneous Poems", "Standard", "Epilogue", "Library Journal", "Plays by Women", "New Collected Poems"]
+GENERIC_NAMES = ["king","King","mother-in-law" , "Queen", "queen", "Prince","husband","wife","partner" ,"father", "daughter","essay", "son","he","she","they","her","him","them", "sisters","the",  "mother", "sibling", "brother", "sister", "friend", "his wife", "her husband","his husband", "her wife", "their husband", "their wife", "lover", "family", "influence", "Her father", "eldest sister", "father's", "future husband", "grandfather", "grandmother", "her blind husband", "her mother", "landlady", "man", "mother ", "one", "organization", "papa", "parents", "second husband", "secretary", "sister-in-law", "son-in-law", "stepfather", "stepmother", "uncle", "university", "a daughter", "a son", "another","aunt", "author", "baby", "brother's", "brother-in-law", "brothers", "cousin", "daughter-in-law", "elder half-sister", "elder sister", "ex-husband", "father-in-law", "female", "fiancé", "first husband", "first wife", "her aunt", "her father", "his father", "his", "husbands", "mayor", "merchant", "nanny", "nephew", "niece", "paternal grandmother", "patron", "playwright", "publisher", "second wife", "servants", "six-month-old son", "sons", "step-father", "step-grandfather", "step-grandmother", "stepson", "widower", "youngest brother"]
+
+WRITING_PROPERTIES = {}
+
+
+
+
 
 
 NS_DICT = {
@@ -173,9 +186,40 @@ def remove_unwanted_tags(tag):
         x.decompose()
     return tag_copy
 
+def get_snippet(tag):
+    text = ""
+    # removing tags that mess up the snippet
+    simplified_tag = remove_unwanted_tags(tag)
+    
+    if not simplified_tag.get_text():
+        logger.error(F"Empty tag encountered when creating the snippet from: {tag}")
+        text = ""
+    else:
+        text = limit_to_full_sentences(str(simplified_tag.get_text()), MAX_WORD_COUNT)
+    
+    date = simplified_tag.find("DATE")
+    
+    if not date:
+        date = simplified_tag.find("DATERANGE")    
+    
+    if not date:
+        date = simplified_tag.find("DATESTRUCT")    
+
+    if date:
+        text = text.replace(date.text, date.text + ": ")
+    
+    text= text.replace("\n"," ")
+    text= text.replace(".",". ")
+    text= text.replace("  "," ")
+
+    text=text.strip()
+    return text
+
+
+
 
 def create_writer_map(path=None):
-    import csv
+    
     if not path:
         path = '../data/writers_sex.csv'
     with open(path, newline='', encoding='utf-8') as csvfile:
@@ -212,7 +256,7 @@ def create_org_map(path=None):
 
 
 def create_genre_map(path=None):
-    import csv
+    
     if not path:
         path = "../data/genre_mapping.csv"
     with open(path) as f:
@@ -222,20 +266,43 @@ def create_genre_map(path=None):
             GENRE_MAPPING[row[0]] = row[1]
 
 
-def create_title_map(path=None):
+def create_title_mappings():
     # TODO: Review more efficient mapping + using fuzzy matching
-    import csv
-    if not path:
-        path = "../data/title_mapping.csv"
-    with open(path) as f:
-        reader = csv.reader(f)
-        for row in reader:
-            if ";" not in row[1]:
-                TITLE_MAPPING[row[0]] = row[1]
+    mapping_path_1 = "../data/title_mapping_lvl1.csv"
+    mapping_path_2 = "../data/title_mapping_lvl2.csv"
+    
+    try:
+        with open(mapping_path_1) as f:
+            reader = csv.reader(f)
+            for row in reader:
+                TITLE_MAPPING_1[row[0]] = row[1]
+    except FileNotFoundError:
+        print(f"File not found: {mapping_path_1}")
+    except Exception as e:
+        print(f"Error reading {mapping_path_1}: {e}")
+    
+    try:
+        with open(mapping_path_2) as f:
+            reader = csv.reader(f)
+            for row in reader:
+                TITLE_MAPPING_2[row[0]] = row[1]
+    except FileNotFoundError:
+        print(f"File not found: {mapping_path_2}")
+    except Exception as e:
+        print(f"Error reading {mapping_path_2}: {e}")
 
+
+def create_writing_properties_map():
+    import pandas as pd
+    global WRITING_PROPERTIES
+    with open("../data/writing_property_mapping.csv") as f:
+        WRITING_PROPERTIES = pd.read_csv(f)
+
+
+create_writing_properties_map()
 create_writer_map()
 create_genre_map()
-create_title_map()
+create_title_mappings()
 create_person_map()
 create_org_map()
 
@@ -312,21 +379,30 @@ def limit_words(string, word_count=MAX_WORD_COUNT):
     return text
 
 def limit_to_full_sentences(string, max):
-    # logger.info("\n" + string)
     string = string.strip()
     if string == "":
         return string
+
+    if string[0] == ".":
+        string = string[1:]
+    
     sentences = string.split(".")
     text = ""
     for x in sentences:
         if text.count(" ") < max:
             text += x.strip()
-            if text[-1] != ".":
-                text += "."
+            try:
+                if text[-1] != ".":
+                    text += ". "
+            except IndexError:
+                pass
         else:
             break
 
-    return text.replace(".  .", ". ")
+    text = text.strip()
+    text.replace(".  .", ". ")
+    
+    return text
 
 
 """
@@ -341,12 +417,18 @@ def get_name_uri(tag):
     """Creates a uri based on the standard attribute of a tag if ref attribute not present"""
     uri = tag.get("REF")
     if not uri:
-        id = get_entry_id(tag)
-        logger.error(F"In entry: {id} - NAME tag missing REF attribute: {tag}")
+        try:
+            id = get_entry_id(tag)
+            logger.error(F"In entry: {id} - NAME tag missing REF attribute: {tag}")
+        except AttributeError:
+            logger.error(F"NAME tag missing REF attribute: {tag}")
         std_val = tag.get("STANDARD")
 
         if not std_val:
-            logger.error(F"In entry: {id} - NAME tag missing STANDARD attribute: {tag}")
+            try:
+                logger.error(F"In entry: {id} - NAME tag missing STANDARD attribute: {tag}")
+            except UnboundLocalError:
+                logger.error(F"NAME tag missing STANDARD attribute: {tag}")
             return make_standard_uri(tag.text)
         return make_standard_uri(std_val)
     else:
@@ -359,8 +441,21 @@ def get_name_uri(tag):
             if new_uri:
                 uri = new_uri
        
-        
         return rdflib.term.URIRef(uri)
+
+
+# TODO: make this function handle different entity types
+def get_primary_uri(uri, text, entity_type="person"):
+    if uri in PERSON_MAP:
+        return rdflib.term.URIRef(PERSON_MAP[uri]['Primary Identifier'])
+    elif uri in ORGANIZATION_MAP:
+        return rdflib.term.URIRef(ORGANIZATION_MAP[uri]['Primary Identifier'])
+    elif uri:
+        return rdflib.term.URIRef(uri)
+    else:
+        logger.warning(F"{entity_type} not in mapping: {text}")
+        return make_standard_uri(text)
+    
 
 def get_entry_standard_name(entry):
     name = entry.find("STANDARD")
@@ -391,6 +486,8 @@ def get_person_secondary_uris(cwrc_uri):
     return secondary_uris
 
 def get_full_name(tag_or_uri, doc=None, fallback=None):
+# TODO: Leverage standard name to get full name from URI's name tag
+    
     full_name = None    
     uri = None
     if type(tag_or_uri) == rdflib.term.URIRef:
@@ -401,6 +498,16 @@ def get_full_name(tag_or_uri, doc=None, fallback=None):
         
     if uri:
         uri = uri.strip()
+    else:
+        logger.warning(F"URI not found for {full_name}")
+        if full_name in GENERIC_NAMES:
+            logger.warning(F"Generic name found: {full_name} from {tag_or_uri}")
+            return tag_or_uri.get("STANDARD").strip()
+        else:
+            return full_name
+
+    if uri in CWRC_URI_MAP:
+        uri = str(get_cwrc_uri(uri))
     
     if uri in PERSON_MAP:
         full_name = PERSON_MAP[uri]['Full Name']
@@ -410,13 +517,16 @@ def get_full_name(tag_or_uri, doc=None, fallback=None):
         full_name = doc.find(REF=uri).text
     elif fallback:
         full_name = fallback
+        logger.warning(F"URI not in mapping, using fallback: {uri}: {fallback}")
     else:
         logger.warning(F"URI not in mapping: {uri}")
+        input("NO NAME FOUND")
 
     if not full_name:
         logger.warning(F"Full name missing for {uri}")
 
     full_name = full_name.strip()
+
     return full_name
 
 
@@ -450,6 +560,19 @@ def get_value(tag):
         value = ' '.join(value.split())
     return value
 
+def get_values(tag):
+    values = []
+    values.append(tag.get("STANDARD"))
+    values.append(tag.get("REG"))
+    values.append(tag.get("CURRENTALTERNATIVETERM"))
+    text = str(tag.text)
+    text = ' '.join(text.split())
+    values.append(text)
+    
+    values = [x for x in values if x]
+        
+    return values
+
 
 def get_reg(tag):
     # TODO: Remove this function and where it's been used.
@@ -465,6 +588,7 @@ def get_all_other_people(tag, author):
 def get_all_people(tag):
     """Returns all people within a given tag"""
     return [get_name_uri(x) for x in tag.find_all("NAME")]
+
 def get_people(tag):
     """Returns all unique people within a given tag, no order guaranteed due to use of set()"""
     return list(set([get_name_uri(x) for x in tag.find_all("NAME")]))
@@ -474,7 +598,10 @@ def get_people_names(tag, exclude=None):
     people = {}
     for x in tag.find_all("NAME"):
         uri = get_name_uri(x)
-        name = get_value(x)
+        # print(tag)
+        # print(uri)
+        # name = get_value(x)
+        name = get_full_name(x)
         if uri == exclude:
             continue
         elif uri in people and name not in people[uri]:
@@ -483,21 +610,49 @@ def get_people_names(tag, exclude=None):
             people[uri]=[name]
     return people
 
-def get_title_uri(tag):
+def get_title_uri(tag, person=None):
     title = get_value(tag)
-    if title in TITLE_MAPPING:
-        return rdflib.URIRef(TITLE_MAPPING[title])
+    possible_titles = get_values(tag)
+    
+    if not title:
+        logger.warning(f"Title tag has no value: {tag}")
+        return None
+    
+    for x in possible_titles:    
+        # Check if the title is in the person's text scope map
+        if person and x in person.textscope_map:
+            uri = person.textscope_map[x].get("REF")
+            if uri:
+                return rdflib.term.URIRef(uri)
+            else:
+                logger.warning(f"Textscope has no REF attribute: {textscope_map[x]} in {person.id}")
+
+
+    
+    # Check the title mappings
+        if x in TITLE_MAPPING_1:
+            return rdflib.URIRef(TITLE_MAPPING_1[x])
+        if x in TITLE_MAPPING_2:
+            return rdflib.URIRef(TITLE_MAPPING_2[x])
+        
+        if person:
+            logger.warning(f"Title not in mapping: {x} for {person.id}")
+        else:
+            logger.warning(f"Title not in mapping: {x}")
+        
+    # Create a standard URI if no mapping is found
     return make_standard_uri(title + " TITLE", ns="data")
 
-def get_titles(tag):
+def get_titles(tag, person=None):
     """Returns all titles within a given tag temporary Mapping"""
-    titles = []
-    for x in tag.find_all("TITLE"):
-        title = get_value(x)
-        if title in TITLE_MAPPING:
-            titles.append(rdflib.URIRef(TITLE_MAPPING[title]))
-        else:
-            titles.append(make_standard_uri(title + " TITLE", ns="data"))
+    title_tags = tag.find_all("TITLE")
+    
+    # Get URIs for all title tags
+    titles = [get_title_uri(x, person) for x in title_tags]
+    
+    # Filter out None values
+    titles = [x for x in titles if x]
+    
     return titles
 
 
@@ -769,8 +924,12 @@ def get_file_dict(script, args, testcase_data, testcases_available):
         descriptors = [testcase_data['special'][desc] for desc in filelist]
         print("Running extraction on special cases: ")
         print(*filelist, sep=", ")
-    elif "graffles" in testcase_data and args.g:
+    elif "graffles" in testcase_data and args.g:        
         filelist = sorted(testcase_data['graffles'].keys())
+        
+        if file_prefix:
+            filelist = [file_prefix + x for x in filelist]
+        
         descriptors = [testcase_data['graffles'][desc] for desc in filelist]
         print("Running extraction on graffle examples: ")
         print(*filelist, sep=", ")
@@ -782,6 +941,8 @@ def get_file_dict(script, args, testcase_data, testcases_available):
     elif testcases_available and args.testcases:
         filelist = sorted(testcase_data[script]['testcases'].keys())
         descriptors = [testcase_data[script]['testcases'][desc] for desc in filelist]
+        if file_prefix:
+            filelist = [file_prefix + x for x in filelist]
         print("Running extraction on test cases: ")
         print(*filelist, sep=", ")
     else:
