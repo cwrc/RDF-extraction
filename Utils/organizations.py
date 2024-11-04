@@ -127,7 +127,11 @@ def get_org_name(tag):
     uri = None
     if cwrc_uri:
         uri = cwrc_uri.strip()
-    if uri in utilities.ORGANIZATION_MAP:
+
+    if not uri:
+        cwrc_uri = get_org_uri(tag)
+    
+    if uri and uri in utilities.ORGANIZATION_MAP:
         return utilities.ORGANIZATION_MAP[cwrc_uri]["Preferred Name"]
     else:
         logger.warning(F"Organization not in published authority list: {cwrc_uri}, {tag}")
@@ -137,8 +141,11 @@ def get_org_name(tag):
             "Secondary Identifier": "",
             "CWRC URI": cwrc_uri
         }
+        
+    
     if std_name:
         return std_name
+
     return tag.get_text()
 
 def get_primary_uri(cwrc_uri):
