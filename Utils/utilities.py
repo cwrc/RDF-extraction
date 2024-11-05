@@ -450,7 +450,7 @@ def get_primary_uri(uri, text, entity_type="person"):
         return rdflib.term.URIRef(PERSON_MAP[uri]['Primary Identifier'])
     elif uri in ORGANIZATION_MAP:
         return rdflib.term.URIRef(ORGANIZATION_MAP[uri]['Primary Identifier'])
-    elif uri:
+    elif uri and uri != "None":
         return rdflib.term.URIRef(uri)
     else:
         logger.warning(F"{entity_type} not in mapping: {text}")
