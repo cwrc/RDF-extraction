@@ -19,3 +19,6 @@ venv
 .dccache
 /Mods/unmatchedplaces.csv
 Mods/unmatchedplaces.csv
+/Entry/Adhoc Extraction
+adhoc*
+*-adhoc*
