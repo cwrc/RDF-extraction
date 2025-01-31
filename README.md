@@ -7,11 +7,10 @@ Note: The LINCS (CIDOC-CRM) version of these extraction scripts can be found on 
 You must have Python installed, at least version 3.8.
 
 ## Optional VS Code configuration
+
 1. Go to Extensions tab: `shift+cmd+x`
 2. search `@recommended`
 3. Beside WORKSPACE RECOMMENDATIONS, there's a download button to install all the extensions.
-
-
 
 ## Setup
 
@@ -19,9 +18,9 @@ Clone the repository if you haven't already.
 `git clone https://github.com/cwrc/RDF-extraction.git`
 
 Switch to the CWRC branch
+
 - Usually: `git switch classic`
 - Sometimes: Check with the [most recent branches](https://github.com/cwrc/RDF-extraction/branches) and swap classic with that. You may want to confirm with Alliyya about which branch to be on. (October 4, 2024: This will be `59-small-biography-clean-up-tasks` for now)
-
 
 There are two ways of accessing the source data files:
 
@@ -30,9 +29,9 @@ There are two ways of accessing the source data files:
 3. [Use source data from GitLab](#use-source-data-from-gitlab)
 
 ### Use source data from GitLab
-1. In the terminal: `git clone https://gitlab.com/calincs/cwrc/orlando-2.0-c-modelling.git` or with VSCode>Command Palette (cmd+shift+p)>`Git: Clone`, paste `https://gitlab.com/calincs/cwrc/orlando-2.0-c-modelling.git` and hit enter. (Note: this may take a while to clone, it's a large repository)
-2. Switch branches to `LOD-extraction-2024`, In terminal: `git switch LOD-extraction-2024` or with VSCode>Command Palette (cmd+shift+p)>`Git: Check out to` and select `LOD-extraction-2024`. You can also click the bottom left corner of your window where it has a git icon and likely says master or main and that will open up the same window asking which branch to switch to.
 
+1. In the terminal: `git clone https://gitlab.com/calincs/cwrc/orlando-2.0-c-modelling.git` or with VSCode>Command Palette (`cmd+shift+p`)>`Git: Clone`, paste `https://gitlab.com/calincs/cwrc/orlando-2.0-c-modelling.git` and hit enter. (Note: this may take a while to clone, it's a large repository)
+2. Switch branches to `LOD-extraction-2024`, In terminal: `git switch LOD-extraction-2024` or with VSCode>Command Palette (`cmd+shift+p`)>`Git: Check out to` and select `LOD-extraction-2024`. You can also click the bottom left corner of your window where it has a Git icon and likely says master or main or classic and that will open up the same window asking which branch to switch to.
 
 ### Download files from CWRC
 
