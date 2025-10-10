@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 from bs4 import BeautifulSoup
-import re
 from utils import utilities, place, organizations
 from entry.biography import Biography
-from entry import culturalForm as cf, location, other_contexts, occupation, lifeInfo, birthDeath, intertextuality, writing_extraction, education, personname
+from entry import culturalForm as cf, location, other_contexts, occupation, lifeInfo, birthDeath, intertextuality, writing_extraction, education #, personname
 
 
 """
@@ -25,7 +24,7 @@ def main():
     least_triples = 0
     smallest_person = None
     largest_person = None
-    logger.info("Time started: " + utilities.get_current_time() + "\n")
+    logger.info(F"Time started: {utilities.get_current_time()}\n")
     total_files = len(file_dict)
     count = 0
 
@@ -37,14 +36,14 @@ def main():
 
         soup = BeautifulSoup(xml_text, 'lxml-xml')
         person_id  = soup.find("ENTRY").get("ID")
-        
+
         print(f"Processing file: {person_id} {count}/{total_files}")
         print(file_dict[filename])
         print("*" * 55)
 
         person = Biography(person_id, soup)
-        
-        
+
+
         occupation.extract_occupation_data(soup, person)
         birthDeath.extract_death_data(soup, person)
         birthDeath.extract_birth_data(soup, person)
@@ -56,12 +55,12 @@ def main():
         other_contexts.extract_other_contexts_data(soup, person)
         # personname.extract_person_name(soup, person) # still reviewing this
         education.extract_education_data(soup, person)
-        
+
         writing_extraction.extract_general_info(soup, person, 1)
         intertextuality.extract_intertextuality_data(soup, person)
         intertextuality.extract_influence_data(soup, person)
         intertextuality.extract_response_data(soup,person)
-        
+
 
         graph = person.to_graph()
         triple_count = len(graph)
@@ -87,11 +86,11 @@ def main():
     cf.log_mapping_fails()
     occupation.log_mapping_fails()
     organizations.log_mapping()
-    logger.info(str(len(uber_graph)) + " total triples created")
-    logger.info(str(largest_person) + " produces the most triples(" + str(highest_triples) + ")")
-    logger.info(str(smallest_person) + " produces the least triples(" + str(least_triples) + ")")
+    logger.info(f"{len(uber_graph)} total triples created")
+    logger.info(f"{largest_person} produces the most triples ({highest_triples})")
+    logger.info(f"{smallest_person} produces the least triples({least_triples})")
 
-    logger.info("Time completed: " + utilities.get_current_time())
+    logger.info(f"Time completed: {utilities.get_current_time()}")
 
     temp_path = "extracted_triples/biography_triples.ttl"
     utilities.create_extracted_uberfile(temp_path, uber_graph,serialization="ttl")

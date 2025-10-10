@@ -15,6 +15,7 @@ venv
 *.xml
 *.rdf
 *.log
+*.csv
 *.config
 .dccache
 /Mods/unmatchedplaces.csv

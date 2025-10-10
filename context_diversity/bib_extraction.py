@@ -157,7 +157,6 @@ def main():
         get_roles(soup, main_id)
         print("=====================================")
 
-    pass
 
 if __name__ == "__main__":
     main()

@@ -1,6 +1,3 @@
-import sys
-
-
 variables = {}
 
 
@@ -15,7 +12,7 @@ def env(name, default="NONE"):
 
 
 def setEnv():
-    with open(".env", 'r') as f:
+    with open(".env", 'r', encoding="utf-8") as f:
         for line in f:
             (name, value) = line.split("=")
             variables[name] = value.strip()
