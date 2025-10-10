@@ -1,4 +1,5 @@
 " ,Somerset,England",https://sws.geonames.org/2656173
+",England",http://vocab.getty.edu/tgn/tgn/7002445
 ",Middlesex,England",https://sws.geonames.org/2643743
 ",Yorkshire,England",https://sws.geonames.org/2643743
 "Aachen,Germany",https://sws.geonames.org/3247449
@@ -49,6 +50,7 @@
 "Adlestrop,Gloucestershire,England",https://sws.geonames.org/2657670
 "Adstock,Buckinghamshire,England",https://sws.geonames.org/2657663
 "Adyar,India",https://sws.geonames.org/1279311
+"Adyar,Madras,India",https://sws.geonames.org/1279311
 "Aegean Islands,Greece",https://sws.geonames.org/256376
 "Aegean Sea,",https://sws.geonames.org/265695
 "Africatown,Alabama,USA",https://sws.geonames.org/4047404
@@ -66,6 +68,7 @@
 "Aix,France",https://sws.geonames.org/3038354
 "Aix-en-Provence,France",https://sws.geonames.org/3038354
 "Aix-les-Bains,France",https://sws.geonames.org/3038350
+"Aix-les-Bains,Savoie",https://sws.geonames.org/3038350
 "Aix-les-Bains,Savoie,",https://sws.geonames.org/3038350
 "Ajaccio,Corsica,France",https://sws.geonames.org/3038334
 "Akaroa,New Zealand",https://sws.geonames.org/2194064
@@ -140,7 +143,7 @@
 "American Rockies,USA",https://sws.geonames.org/5836950
 "Amersham,Buckinghamshire,England",https://sws.geonames.org/2657356
 "Amesbury,Wiltshire,England",https://sws.geonames.org/7296251
-"Amherst,Massachusetts,USA",https://sws.geonames.org/4929022
+"Amherst,MA",https://sws.geonames.org/4929022
 "Amherst,Massachusetts,USA",https://sws.geonames.org/4929022
 "Amherst,New Hampshire,USA",https://sws.geonames.org/5082636
 "Amherst,Nova Scotia,Canada",https://sws.geonames.org/5884467
@@ -228,6 +231,7 @@
 "Ashby-de-la-Zouch,Leicestershire,England",https://sws.geonames.org/2656970
 "Ashcroft,British Columbia,Canada",https://sws.geonames.org/5887531
 "Ashdown Forest,England",https://sws.geonames.org/11887914
+"Ashfield,MA",https://sws.geonames.org/4929276
 "Ashfield,Massachusetts,USA",https://sws.geonames.org/4929276
 "Ashford Carbonel,Shropshire,England",https://sws.geonames.org/7297085
 "Ashford,Kent,England",https://sws.geonames.org/2656955
@@ -253,7 +257,10 @@
 "Aswan,Egypt",https://sws.geonames.org/359792
 "Atcham,Shropshire,England",https://sws.geonames.org/2656852
 "Athenry,Galway,Ireland",https://sws.geonames.org/2966843
+"Athens,Georgia,USA",https://sws.geonames.org/4180386
 "Athens,Greece",https://sws.geonames.org/264371
+"Athens,Ohio",https://sws.geonames.org/4505542
+"Athens,Ohio,USA",https://sws.geonames.org/4505542
 "Athlone,Westmeath,Ireland",https://sws.geonames.org/3313472
 "Atlanta,Georgia,USA",https://sws.geonames.org/4180439
 "Atlanta,USA",https://sws.geonames.org/4180439
@@ -269,7 +276,6 @@
 "Auchintoul,Aberdeenshire,Scotland",https://sws.geonames.org/2657740
 "Auchterarder,Perthshire,Scotland",https://sws.geonames.org/2656803
 "Auchtermuchty,Fife,Scotland",https://sws.geonames.org/2656799
-"Auckland,New Zealand",https://sws.geonames.org/2193733
 "Auckland,New Zealand",https://sws.geonames.org/2193733
 "Audley,Staffordshire,England",https://sws.geonames.org/2656792
 "Aughrim,Galway,Ireland",https://sws.geonames.org/2966817
@@ -332,6 +338,7 @@
 "Bailey's Bay,Bermuda,UK",https://sws.geonames.org/3573195
 "Baillieston,Lanarkshire,Scotland",https://sws.geonames.org/2656624
 "Bakewell,Derbyshire,England",https://sws.geonames.org/2656617
+"Bakhtiari Mountains,Iran",http://vocab.getty.edu/tgn/tgn/8883770
 "Baku,Azerbaijan",https://sws.geonames.org/587084
 "Balaclava,Crimea,Ukraine",https://sws.geonames.org/712930
 "Balbriggan,Dublin,Ireland",https://sws.geonames.org/2966794
@@ -352,6 +359,7 @@
 "Ballybay,Monaghan,Ireland",https://sws.geonames.org/2966675
 "Ballymore,Kildare,Ireland",https://sws.geonames.org/2966500
 "Ballynahinch,Down,Ireland",https://sws.geonames.org/3306369
+"Ballynahinch,Down,Northern Ireland",https://sws.geonames.org/3306369
 "Ballyshannon,Donegal,Ireland",https://sws.geonames.org/3301957
 "Baltic Sea,",https://sws.geonames.org/2633321
 "Baltimore,MD",https://sws.geonames.org/4347778
@@ -361,6 +369,7 @@
 "Bamian,Afghanistan",https://sws.geonames.org/1147242
 "Bampton,Oxfordshire,England",https://sws.geonames.org/2656421
 "Banbury,Oxfordshire,England",https://sws.geonames.org/2656406
+"Bance Island,Sierra Leone",http://www.wikidata.org/entity/Q1004939
 "Banchory,Kincardineshire,Scotland",https://sws.geonames.org/2656405
 "Banda Islands,Indonesia",https://sws.geonames.org/1650397
 "Bandol,France",https://sws.geonames.org/3035156
@@ -479,8 +488,8 @@
 "Belize City,Belize",https://sws.geonames.org/3582677
 "Bellagio,Italy",https://sws.geonames.org/3182230
 "Bellegarde,France",https://sws.geonames.org/3033697
-"Belleville,Upper Canada,Canada",https://sws.geonames.org/5897884
 "Belleville,Ontario,Canada",https://sws.geonames.org/5897884
+"Belleville,Upper Canada,Canada",https://sws.geonames.org/5897884
 "Bellevue,Illinois,USA",https://sws.geonames.org/5786882
 "Bellosguardo,Italy",https://sws.geonames.org/3182212
 "Belmont,Lancashire,England",https://sws.geonames.org/11550767
@@ -491,11 +500,13 @@
 "Ben Nevis,Scotland",https://sws.geonames.org/2641744
 "Benares,India",https://sws.geonames.org/1253405
 "Bendigo,Victoria,Australia",https://sws.geonames.org/2176187
+"Bengal,Bangladesh",http://vocab.getty.edu/tgn/tgn/7547215
 "Bengal,India",https://sws.geonames.org/1276468
 "Bengaluru,India",https://sws.geonames.org/1277333
 "Bengazi,Libya",https://sws.geonames.org/88319
 "Beni Hassan,Egypt",https://sws.geonames.org/359245
 "Beni Isguen,Algeria",https://sws.geonames.org/2504662
+"Benin City,Benin,Kingdom of,Nigeria",https://sws.geonames.org/2347283
 "Benin,Kingdom of,Nigeria",https://sws.geonames.org/2347283
 "Benington,Hertfordshire,England",https://sws.geonames.org/2655897
 "Bentley,Hampshire,England",https://sws.geonames.org/2655882
@@ -504,9 +515,11 @@
 "Berbice,Guyana",https://sws.geonames.org/3379444
 "Berck-Plage,France",https://sws.geonames.org/3033416
 "Berdychiv,Ukraine",https://sws.geonames.org/712441
+"Bere Ferrers,Devon,England",https://sws.geonames.org/7293367
 "Berezhany,Ukraine",https://sws.geonames.org/712374
 "Bergamo,Italy",https://sws.geonames.org/3182164
 "Bergen op Zoom,Netherlands",https://sws.geonames.org/2759145
+"Bergher's Hill,Buckinghamshire,England",http://www.wikidata.org/entity/Q4891651
 "Berhampore,India",https://sws.geonames.org/1277820
 "Berkeley,CA",https://sws.geonames.org/5327684
 "Berkeley,California,USA",https://sws.geonames.org/5327684
@@ -558,10 +571,11 @@
 "Biggleswade,Bedfordshire,England",https://sws.geonames.org/2655689
 "Bigorre,France",https://sws.geonames.org/3032672
 "Bihar ,India",https://sws.geonames.org/1275715
+"Bihar,India",https://sws.geonames.org/1275715
 "Bijapur,India",https://sws.geonames.org/1275702
 "Bilbao,Spain",https://sws.geonames.org/3128026
 "Billingshurst,Sussex,England",https://sws.geonames.org/2655662
-"Bilton Ainsty,Yorkshire,England",http://vocab.getty.edu/tgn/7029866
+"Bilton Ainsty,Yorkshire,England",https://sws.geonames.org/2655653
 "Bilton,Yorkshire,England",https://sws.geonames.org/2655653
 "Binfield,Berkshire,England",https://sws.geonames.org/7294200
 "Bingen,Germany",https://sws.geonames.org/2948825
@@ -577,6 +591,7 @@
 "Birmingham ,Warwickshire,England",https://sws.geonames.org/2655603
 "Birmingham,Lancashire,England",https://sws.geonames.org/2655603
 "Birmingham,Warwickshire,England",https://sws.geonames.org/2655603
+"Birmingham,West Midlands,England",http://www.wikidata.org/entity/Q2256
 "Bishop Auckland,Durham,England",https://sws.geonames.org/2655583
 "Bishop's Frome,Herefordshire,England",https://sws.geonames.org/7294492
 "Bishop's Stortford,Hertfordshire,England",https://sws.geonames.org/2655562
@@ -595,7 +610,6 @@
 "Black Mountains,Wales",https://sws.geonames.org/2655461
 "Black River,Jamaica",https://sws.geonames.org/11495102
 "Black Sea,",https://sws.geonames.org/630673
-"Black Sea",https://sws.geonames.org/630673
 "Blackburn,Lancashire,England",https://sws.geonames.org/2655524
 "Blackford,Scotland",https://sws.geonames.org/2655496
 "Blackfriars,Middlesex,England",https://sws.geonames.org/11550821
@@ -609,6 +623,7 @@
 "Blaengarw,Glamorgan,Wales",https://sws.geonames.org/2655412
 "Blagdon,Somerset,England",https://sws.geonames.org/2655407
 "Blair Athol,Perth and Kinross,Scotland",https://sws.geonames.org/2655397
+"Blair Atholl,Perth and Kinross,Scotland",https://sws.geonames.org/2655397
 "Blakeney,Norfolk,England",https://sws.geonames.org/2655384
 "Blandford,Dorset,England",https://sws.geonames.org/2655378
 "Blandford,Upper Canada,Canada",https://sws.geonames.org/5903668
@@ -638,6 +653,7 @@
 "Bodmin Moor,England",https://sws.geonames.org/2655272
 "Bodmin,Cornwall,England",https://sws.geonames.org/2655273
 "Bognor Regis,Sussex,England",https://sws.geonames.org/2655262
+"Bogtown,Stirlingshire,Scotland",http://www.wikidata.org/entity/Q4937790
 "Bol'shoy Fontan,Russia",https://sws.geonames.org/618535
 "Bola,Wicklow,Ireland",https://sws.geonames.org/2960936
 "Boldre,Hampshire,England",https://sws.geonames.org/2655249
@@ -658,7 +674,6 @@
 "Boothbay Harbor,Maine,USA",https://sws.geonames.org/4958958
 "Bootle,Lancashire,England",https://sws.geonames.org/2655198
 "Bora Bora,Leeward Islands",https://sws.geonames.org/4034582
-"Bordeaux,France",https://sws.geonames.org/3031582
 "Bordeaux,France",https://sws.geonames.org/3031582
 "Bordeaux,Gironde,France",https://sws.geonames.org/3031582
 "Borders,Scotland",https://sws.geonames.org/2655192
@@ -721,7 +736,6 @@
 "Brancaster,Norfolk,England",https://sws.geonames.org/2654903
 "Brandberg,Namibia",https://sws.geonames.org/3358252
 "Brandenburg,Germany",https://sws.geonames.org/2945358
-"Brandenburg,Germany",https://sws.geonames.org/2945358
 "Brandeston,Suffolk,England",https://sws.geonames.org/7292586
 "Brandon,Manitoba,Canada",https://sws.geonames.org/5907896
 "Brandys,Czechoslovakia",https://sws.geonames.org/6550864
@@ -759,11 +773,14 @@
 "Brickhill,Clare,Ireland",https://sws.geonames.org/3310254
 "Bridge of Allan,Perthshire,Scotland",https://sws.geonames.org/2654747
 "Bridgenorth,Shropshire,England",https://sws.geonames.org/2654731
+"Bridgeton,Lanarkshire,Scotland",http://www.wikidata.org/entity/Q4966763
 "Bridgetown,Barbados",https://sws.geonames.org/3374036
+"Bridgnorth,Shropshire,England",https://sws.geonames.org/2654731
 "Bridgwater,Somerset,England",https://sws.geonames.org/2654730
 "Bridlington,Yorkshire,England",https://sws.geonames.org/2654728
 "Bridport,Dorset,England",https://sws.geonames.org/2654726
 "Bridstow,Herefordshire,England",https://sws.geonames.org/7294496
+"Brielle,Netherlands",https://sws.geonames.org/2758326
 "Brightlingsea,Essex,England",https://sws.geonames.org/2654711
 "Brighton,East Sussex,England",https://sws.geonames.org/2654710
 "Brighton,Massachusetts,USA",https://sws.geonames.org/4931353
@@ -787,6 +804,7 @@
 "Brixham,Devon,England",https://sws.geonames.org/2654663
 "Brixton,Middlesex,England",https://sws.geonames.org/2654662
 "Brixton,Surrey,England",https://sws.geonames.org/2654662
+"Broad Clyst,Devon,England",https://sws.geonames.org/7291149
 "Broad Oak,Flintshire,Wales",https://sws.geonames.org/2654641
 "Broadclyst,Devon,England",https://sws.geonames.org/7291149
 "Broadfield,Hertfordshire,England",https://sws.geonames.org/6621545
@@ -820,7 +838,6 @@
 "Brunswick,Germany",https://sws.geonames.org/2945024
 "Brunswick,Maine,USA",https://sws.geonames.org/4959473
 "Brussels,Belgium",https://sws.geonames.org/2800866
-"Brussels,Belgium",https://sws.geonames.org/2800866
 "Bruton,Somerset,England",https://sws.geonames.org/2654454
 "Bryn Mawr,Pennsylvania,USA",https://sws.geonames.org/5182064
 "Buccleuch,Selkirk,Scotland",https://sws.geonames.org/2654429
@@ -834,6 +851,7 @@
 "Bude,Cornwall,England",https://sws.geonames.org/2654380
 "Budleigh Salterton,Devon,England",https://sws.geonames.org/2654376
 "Buenos Aires,Argentina",https://sws.geonames.org/3435910
+"Buffalo,NY",https://sws.geonames.org/5110629
 "Buffalo,New York,USA",https://sws.geonames.org/5110629
 "Buffels Hoek,South Africa",https://sws.geonames.org/1015096
 "Bukhara,USSR",https://sws.geonames.org/1217662
@@ -845,6 +863,7 @@
 "Burgos,Spain",https://sws.geonames.org/3127461
 "Burgundy,France",https://sws.geonames.org/3030964
 "Burlington,New Jersey,USA",https://sws.geonames.org/5096075
+"Burlington,Vermont,USA",https://sws.geonames.org/5234372
 "Burnham Thorpe,Norfolk,England",https://sws.geonames.org/2654267
 "Burnham on Crouch,Essex,England",https://sws.geonames.org/2654270
 "Burnham,Berkshire,England",https://sws.geonames.org/2654269
@@ -855,6 +874,7 @@
 "Burray,Scotland",https://sws.geonames.org/2654242
 "Burren,Ireland",https://sws.geonames.org/3310242
 "Burslem,Staffordshire,England",https://sws.geonames.org/2654225
+"Burslem,West Midlands,England",http://vocab.getty.edu/tgn/tgn/4002012
 "Burstwick,Yorkshire,England",https://sws.geonames.org/2654220
 "Burton upon Trent,Staffordshire,England",https://sws.geonames.org/2654200
 "Burujird,Iran",https://sws.geonames.org/140044
@@ -906,6 +926,7 @@
 "California,USA",https://sws.geonames.org/5332921
 "Callander,Stirlingshire,Scotland",https://sws.geonames.org/2653989
 "Callington,Cornwall,England",https://sws.geonames.org/2653981
+"Callow End,Worcestershire,England",http://www.wikidata.org/entity/Q5022920
 "Calne,Wiltshire,England",https://sws.geonames.org/2653974
 "Calshot,Hampshire,England",https://sws.geonames.org/2653972
 "Calstock,Cornwall,England",https://sws.geonames.org/2653971
@@ -926,6 +947,7 @@
 "Cambridge,Cambridgeshire,England",https://sws.geonames.org/2653941
 "Cambridge,MA",https://sws.geonames.org/4931972
 "Cambridge,Massachusetts,USA",https://sws.geonames.org/4931972
+"Cambridge,UK",https://sws.geonames.org/2653941
 "Cambridge,United States of America,USA",https://sws.geonames.org/4931972
 "Cambridgeport,Massachusetts,USA",https://sws.geonames.org/4932005
 "Cambridgeshire,Cambridgeshire,England",https://sws.geonames.org/11609029
@@ -954,7 +976,7 @@
 "Cap d'Antibes,France",https://sws.geonames.org/3037455
 "Cape Cod,USA",https://sws.geonames.org/4933508
 "Cape Horn,South America",https://sws.geonames.org/5588025
-"Cape Province,South Africa",http://vocab.getty.edu/tgn/7016540
+"Cape Province,South Africa",https://sws.geonames.org/3367577
 "Cape Town,Cape Province,Cape Colony",https://sws.geonames.org/3369157
 "Cape Town,Cape Province,South Africa",https://sws.geonames.org/3369157
 "Cape Town,South Africa",https://sws.geonames.org/3369157
@@ -964,9 +986,9 @@
 "Capel Curig,Conwy,Wales",https://sws.geonames.org/7299983
 "Capel,Surrey,England",https://sws.geonames.org/2653855
 "Capernaeum,Israel",https://sws.geonames.org/294522
+"Capernaum,Israel",https://sws.geonames.org/294522
 "Capheaton,Northumberland,England",https://sws.geonames.org/2653840
 "Cappoquin,Waterford,Ireland",https://sws.geonames.org/2965786
-"Capri,Italy",https://sws.geonames.org/3180630
 "Capri,Italy",https://sws.geonames.org/3180630
 "Caracas,Venezuela",https://sws.geonames.org/3646738
 "Caragh Lake,Ireland",https://sws.geonames.org/2965784
@@ -1038,6 +1060,7 @@
 "Cavan,Ireland",https://sws.geonames.org/2965535
 "Cave Creek,Australia",https://sws.geonames.org/11551404
 "Cavendish,Prince Edward Island,Canada",https://sws.geonames.org/5918581
+"Cavers,Scottish Borders,Scotland",http://www.wikidata.org/entity/Q5055077
 "Caversham,Oxfordshire,England",https://sws.geonames.org/2653473
 "Caverswall,Staffordshire,England",https://sws.geonames.org/2653471
 "Cawnpore,",https://sws.geonames.org/1267995
@@ -1052,6 +1075,7 @@
 "Cevennes,France",https://sws.geonames.org/3027753
 "Chagar Bazar,Syria",https://sws.geonames.org/169252
 "Chagford,Devon,England",https://sws.geonames.org/2653408
+"Chaillot,France",http://www.wikidata.org/entity/Q3413160
 "Chalbury,Dorset,England",https://sws.geonames.org/2653400
 "Chaldon Herring,Dorset,England",https://sws.geonames.org/2653397
 "Chaldon,Dorset,England",https://sws.geonames.org/7301442
@@ -1065,9 +1089,9 @@
 "Chambéry,Switzerland",https://sws.geonames.org/2661223
 "Chamonix,Alps,France",https://sws.geonames.org/3027301
 "Chamonix,France",https://sws.geonames.org/3027301
-"Chamonix,France",https://sws.geonames.org/3027301
 "Champagne-Ardenne,France",https://sws.geonames.org/3027256
 "Chandolin d'Anniviers,Switzerland",https://sws.geonames.org/2661218
+"Channel Islands,England",http://www.wikidata.org/entity/Q42314
 "Chantilly,France",https://sws.geonames.org/3026827
 "Chapel Hill,NC",https://sws.geonames.org/4460162
 "Chapel Hill,North Carolina,USA",https://sws.geonames.org/4460162
@@ -1079,10 +1103,12 @@
 "Charlcombe,Somerset,England",https://sws.geonames.org/9253745
 "Charleston,South Carolina,USA",https://sws.geonames.org/4574324
 "Charleston,Sussex,England",https://sws.geonames.org/11524639
+"Charlestown,MA",https://sws.geonames.org/4932819
 "Charlestown,Massachusetts,USA",https://sws.geonames.org/4932819
 "Charlotte,North Carolina,USA",https://sws.geonames.org/4460243
 "Charlotte,Sierra Leone",https://sws.geonames.org/2409744
 "Charlottenburg,Brandenburg,Germany",https://sws.geonames.org/2940187
+"Charlottesville,Virginia,USA",https://sws.geonames.org/4752031
 "Charlottetown,Prince Edward Island,Canada",https://sws.geonames.org/5920288
 "Charlton Kings,Gloucestershire,England",https://sws.geonames.org/2653324
 "Charlton,Kent,England",https://sws.geonames.org/7301024
@@ -1101,6 +1127,7 @@
 "Chawton,Hampshire,England",https://sws.geonames.org/2653293
 "Cheam,Surrey,England",https://sws.geonames.org/2653289
 "Checkenden,Oxfordshire,England",https://sws.geonames.org/2653285
+"Checkendon,Oxfordshire,England",https://sws.geonames.org/2653285
 "Cheddar,Somerset,England",https://sws.geonames.org/2653281
 "Chedworth,Gloucestershire,England",https://sws.geonames.org/2653276
 "Cheetham,Lancashire,England",https://sws.geonames.org/6691216
@@ -1174,6 +1201,7 @@
 "Christchurch,Cashmere Hills,New Zealand",https://sws.geonames.org/2192362
 "Christchurch,Dorset,England",https://sws.geonames.org/2653074
 "Christchurch,Hampshire,England",https://sws.geonames.org/2653074
+"Christchurch,NZ",https://sws.geonames.org/2192362
 "Christchurch,New Zealand",https://sws.geonames.org/2192362
 "Christchurch,South Island,New Zealand",https://sws.geonames.org/2192362
 "Chudleigh,Devon,England",https://sws.geonames.org/2653056
@@ -1183,6 +1211,7 @@
 "Cilicia,Turkey",https://sws.geonames.org/318458
 "Cincinnati,Ohio,USA",https://sws.geonames.org/4508722
 "Circassia,Russia",https://sws.geonames.org/552927
+"Circassia,Russian Federation",https://sws.geonames.org/552927
 "Cirencester,Gloucestershire,England",https://sws.geonames.org/2652995
 "Cirey,France",https://sws.geonames.org/3024904
 "City Of Westminster,Middlesex,England",https://sws.geonames.org/2634341
@@ -1234,6 +1263,7 @@
 "Coalport,Shropshire,England",https://sws.geonames.org/2652701
 "Coatbridge,Lanarkshire,Scotland",https://sws.geonames.org/2652696
 "Coatham Mundeville,Durham,England",https://sws.geonames.org/7298119
+"Coatham,Redcar and Cleveland,England",http://vocab.getty.edu/tgn/tgn/7029238
 "Cobh,Cork,Ireland",https://sws.geonames.org/2965260
 "Cobh,County Cork,Ireland",https://sws.geonames.org/2965260
 "Cobham,Surrey,England",https://sws.geonames.org/2652689
@@ -1276,6 +1306,7 @@
 "Columbia,Pennsylvania,USA",https://sws.geonames.org/5185029
 "Columbus,Georgia,USA",https://sws.geonames.org/4188985
 "Columbus,Mississippi,USA",https://sws.geonames.org/4422442
+"Columbus,OH",https://sws.geonames.org/4509177
 "Columbus,Ohio,USA",https://sws.geonames.org/4509177
 "Colwich,Staffordshire,England",https://sws.geonames.org/2652516
 "Colwyn Bay,Denbighshire,Wales",https://sws.geonames.org/2652513
@@ -1323,6 +1354,7 @@
 "Cornwall-on-Hudson,New York,USA",https://sws.geonames.org/5113775
 "Coromandel Coast,India",https://sws.geonames.org/1273819
 "Coromandel Peninsula,New Zealand",https://sws.geonames.org/2192090
+"Corrèze,France",https://sws.geonames.org/3023532
 "Corrèzes,France",https://sws.geonames.org/3023532
 "Corseaux,Switzerland",https://sws.geonames.org/8533404
 "Corsica,France",https://sws.geonames.org/8378560
@@ -1412,6 +1444,7 @@
 "Dacre,Cumberland,England",https://sws.geonames.org/2651626
 "Dal Lake,India",https://sws.geonames.org/1273640
 "Dalarna,Sweden",https://sws.geonames.org/2699767
+"Dalecarlia,Sweden",http://www.wikidata.org/entity/Q205218
 "Dalhousie,India",https://sws.geonames.org/1273648
 "Dalkeith,Midlothian,Scotland",https://sws.geonames.org/2651587
 "Dalkey,Dublin,Ireland",https://sws.geonames.org/2964892
@@ -1436,6 +1469,7 @@
 "Darjeeling,India",https://sws.geonames.org/1273467
 "Darley Dale,Derbyshire,England",https://sws.geonames.org/7298139
 "Darlington,Durham,England",https://sws.geonames.org/2651513
+"Dart River,England",http://vocab.getty.edu/tgn/tgn/1123308
 "Dartington,Devon,England",https://sws.geonames.org/2651514
 "Dartmoor,England",https://sws.geonames.org/2651499
 "Dartmouth,Devon,England",https://sws.geonames.org/2651498
@@ -1461,9 +1495,9 @@
 "Delaware Bay,USA",https://sws.geonames.org/4142190
 "Delaware,USA",https://sws.geonames.org/4142224
 "Delft,Netherlands",https://sws.geonames.org/2757345
-"India",https://sws.geonames.org/1269750
 "Delhi,India",https://sws.geonames.org/1273294
 "Delhi,National Capital Territory,India",https://sws.geonames.org/1273294
+"Delmar,New York",https://sws.geonames.org/5114831
 "Delos,Greece",https://sws.geonames.org/263090
 "Delphi,Greece",https://sws.geonames.org/263219
 "Demerara,British Guiana",https://sws.geonames.org/3378644
@@ -1476,6 +1510,7 @@
 "Derby,Derbyshire,England",https://sws.geonames.org/2651347
 "Derbyshire,England",https://sws.geonames.org/11609031
 "Derry City,Derry,Northern Ireland",https://sws.geonames.org/2643736
+"Derry,Derry,Northern Ireland",http://vocab.getty.edu/tgn/tgn/7012110
 "Derry,Ireland",https://sws.geonames.org/3304253
 "Derry,Northern Ireland ",https://sws.geonames.org/2643736
 "Derry,Northern Ireland",https://sws.geonames.org/2643736
@@ -1489,12 +1524,14 @@
 "Devonport,Devon,England",https://sws.geonames.org/2651289
 "Dewas,India",https://sws.geonames.org/1273066
 "Dewsbury,Yorkshire,England",https://sws.geonames.org/2651286
+"Deyá,Mallorca,Spain",http://vocab.getty.edu/tgn/tgn/7339235
 "Dhaka,Bangladesh",https://sws.geonames.org/1185241
 "Dharwar,India",https://sws.geonames.org/7002961
 "Didsbury,Lancashire,England",https://sws.geonames.org/6620310
 "Dieppe,Normandy,France",https://sws.geonames.org/3021411
 "Dietenheim,Germany",https://sws.geonames.org/6558171
 "Dijon,France",https://sws.geonames.org/3021372
+"Dilston,Northumberland,England",http://www.wikidata.org/entity/Q23638504
 "Dinan,Brittany,France",https://sws.geonames.org/3021356
 "Dinapore,India",https://sws.geonames.org/1273581
 "Dingle,Kerry,Ireland",https://sws.geonames.org/2964782
@@ -1539,6 +1576,7 @@
 "Douai,France",https://sws.geonames.org/3021000
 "Douarnenez,Brittany,France",https://sws.geonames.org/3020996
 "Douglas,Isle of Man,England",https://sws.geonames.org/3042237
+"Dove River,England",http://vocab.getty.edu/tgn/tgn/1123510
 "Dover,Kent,England",https://sws.geonames.org/2651048
 "Dowdeswell,Gloucestershire,England",https://sws.geonames.org/7295159
 "Dowlais,Glamorgan,Wales",https://sws.geonames.org/2651039
@@ -1558,12 +1596,14 @@
 "Dromore,Down,Northern Ireland",https://sws.geonames.org/2650976
 "Dronero,Italy",https://sws.geonames.org/3177474
 "Dronrijp,Netherlands",https://sws.geonames.org/2756561
+"Drumaness,Down,Northern Ireland",http://www.wikidata.org/entity/Q84101
 "Drumcliff,Sligo,Ireland",https://sws.geonames.org/3310493
 "Drumcondra,Dublin,Ireland",https://sws.geonames.org/3315312
 "Dubai,United Arab Emirates",https://sws.geonames.org/292223
 "Dublin City,Dublin City,Ireland",https://sws.geonames.org/2964574
 "Dublin City,Dublin,Ireland",https://sws.geonames.org/2964574
 "Dublin,Ireland",https://sws.geonames.org/2964574
+"Dubllin City,Dublin,Ireland",https://sws.geonames.org/2964574
 "Dubrovnik,Croatia",https://sws.geonames.org/3201047
 "Dubuque,IA",https://sws.geonames.org/4854529
 "Duddingston,Midlothian,Scotland",https://sws.geonames.org/7644899
@@ -1601,6 +1641,7 @@
 "Dunoon,Argyllshire,Scotland",https://sws.geonames.org/2650681
 "Dunsany,Meath,Ireland",https://sws.geonames.org/9867304
 "Durban,Kwa-Zulu Natal,South Africa",https://sws.geonames.org/1007311
+"Durban,KwaZulu-Natal,South Africa",http://www.wikidata.org/entity/Q5468
 "Durban,Natal,South Africa",https://sws.geonames.org/1007311
 "Durham,Durham,England",https://sws.geonames.org/11609048
 "Durham,England",https://sws.geonames.org/11609048
@@ -1621,6 +1662,7 @@
 "East Ardsley,Yorkshire,England",https://sws.geonames.org/2657117
 "East Chaldon,Dorset,England",https://sws.geonames.org/2653397
 "East Coker,Somerset,England",https://sws.geonames.org/7301218
+"East Dene,Sussex,England",http://www.wikidata.org/entity/Q2584490
 "East Dereham,Norfolk,England",https://sws.geonames.org/2650470
 "East End,Middlesex,England",https://sws.geonames.org/6697195
 "East Grinstead,Sussex,England",https://sws.geonames.org/2650435
@@ -1647,6 +1689,7 @@
 "Eastwell,Kent,England",https://sws.geonames.org/2650317
 "Eastwood,Nottinghamshire,England",https://sws.geonames.org/2650308
 "Eatonton,Georgia,USA",https://sws.geonames.org/4192800
+"Eatonville,Florida,USA",http://vocab.getty.edu/tgn/tgn/2019194
 "Ebrington,Gloucestershire,England",https://sws.geonames.org/2650282
 "Ecclefechan,Dumfriesshire,Scotland",https://sws.geonames.org/2650280
 "Eccles,Lancashire,England",https://sws.geonames.org/2650278
@@ -1663,9 +1706,9 @@
 "Edinburgh,Lothian,Scotland",https://sws.geonames.org/2650225
 "Edinburgh,Midlothian,Scotland",https://sws.geonames.org/2650225
 "Edinburgh,Scotland",https://sws.geonames.org/2650225
-"Edinburgh,Scotland",https://sws.geonames.org/2650225
 "Edirne,Turkey",https://sws.geonames.org/747712
 "Edmonton,AB",https://sws.geonames.org/5946768
+"Edmonton,Alberta",https://sws.geonames.org/5946768
 "Edmonton,Alberta,Canada",https://sws.geonames.org/5946768
 "Edmonton,Middlesex,England",https://sws.geonames.org/2650209
 "Edwinstowe,Nottinghamshire,England",https://sws.geonames.org/2650200
@@ -1681,6 +1724,7 @@
 "El Giza,Egypt",https://sws.geonames.org/360995
 "El Oued,Algeria",https://sws.geonames.org/2497406
 "Elba,Italy",https://sws.geonames.org/3177426
+"Elbe River,Germany",https://sws.geonames.org/2931271
 "Eleusis,Greece",https://sws.geonames.org/262752
 "Eleuthera,Bahamas",https://sws.geonames.org/7576014
 "Elgin,Morayshire,Scotland",https://sws.geonames.org/2650122
@@ -1706,6 +1750,7 @@
 "Englefield,Berkshire,England",https://sws.geonames.org/2649993
 "Englewood Cliffs,NJ",https://sws.geonames.org/5097677
 "English Channel,",https://sws.geonames.org/2649991
+"English Harbour,Antigua and Barbuda",http://www.wikidata.org/entity/Q31578200
 "Ennis,Clare,Ireland",https://sws.geonames.org/2964405
 "Enschede,Netherlands",https://sws.geonames.org/2756071
 "Ensenada,Mexico",https://sws.geonames.org/6942830
@@ -1751,6 +1796,7 @@
 "Evesham,Worcestershire,England",https://sws.geonames.org/2649833
 "Ewelme,Oxfordshire,England",https://sws.geonames.org/2649823
 "Ewhurst,Surrey,England",https://sws.geonames.org/2649817
+"Exeter,Devon",https://sws.geonames.org/2649808
 "Exeter,Devon,",https://sws.geonames.org/2649808
 "Exeter,Devon,England",https://sws.geonames.org/2649808
 "Exeter,New Hampshire,USA",https://sws.geonames.org/5085966
@@ -1766,7 +1812,6 @@
 "Fairlight,Sussex,England",https://sws.geonames.org/2649737
 "Falkirk,Stirlingshire,Scotland",https://sws.geonames.org/3333230
 "Falkland Islands,",https://sws.geonames.org/3474414
-"Falkland Islands",https://sws.geonames.org/3474414
 "Falkland,Fife,Scotland",https://sws.geonames.org/2649722
 "Falmouth,Cornwall,England",https://sws.geonames.org/2649715
 "Falmouth,Devon,England",https://sws.geonames.org/2649715
@@ -1826,6 +1871,7 @@
 "Florence,Italy",https://sws.geonames.org/3176959
 "Florence,Lucca,Italy",https://sws.geonames.org/3176959
 "Florence,Tuscany,Italy",https://sws.geonames.org/3176959
+"Florida,USA",https://sws.geonames.org/4155751
 "Flushing,Netherlands",https://sws.geonames.org/2745392
 "Folcroft,Pennsylvania,USA",https://sws.geonames.org/4558004
 "Folkestone,Kent,England",https://sws.geonames.org/2649258
@@ -1869,6 +1915,7 @@
 "Fraser River,Canada",https://sws.geonames.org/5957633
 "Fredericia,Denmark",https://sws.geonames.org/2621951
 "Fredericksburg,Virginia,USA",https://sws.geonames.org/4760059
+"Fredericton,NB",https://sws.geonames.org/5957776
 "Fredericton,New Brunswick,Canada",https://sws.geonames.org/5957776
 "Freehold,New Jersey,USA",https://sws.geonames.org/5098278
 "Freeport,NY",https://sws.geonames.org/5117949
@@ -1896,6 +1943,8 @@
 "Furnes,Belgium",https://sws.geonames.org/2784804
 "Fyfield,Essex,England",https://sws.geonames.org/2648973
 "Fyvie,Aberdeenshire,Scotland",https://sws.geonames.org/2648962
+"Gainesville,FL",https://sws.geonames.org/4156404
+"Gainesville,Florida",https://sws.geonames.org/4156404
 "Gainesville,Florida,USA",https://sws.geonames.org/4156404
 "Gainsborough,Lincolnshire,England",https://sws.geonames.org/2648945
 "Gairsay,Scotland",https://sws.geonames.org/2648933
@@ -1903,6 +1952,7 @@
 "Galatz,Romania",https://sws.geonames.org/677697
 "Galicia,Poland",http://vocab.getty.edu/tgn/7002787
 "Gallipoli,Turkey",https://sws.geonames.org/746983
+"Galloway and Dumfries,Scotland",http://vocab.getty.edu/tgn/tgn/7008074
 "Galloway,Kirkcudbrightshire,Scotland",https://sws.geonames.org/2648915
 "Galloway,Scotland",https://sws.geonames.org/2648915
 "Galston,Ayrshire,Scotland",https://sws.geonames.org/2648909
@@ -1924,17 +1974,19 @@
 "Gartmore,Stirlingshire,Scotland",https://sws.geonames.org/2648812
 "Garvellachs,Scotland",https://sws.geonames.org/2648795
 "Gascony,France",https://sws.geonames.org/3016565
+"Gask,Perthshire,Scotland",http://www.wikidata.org/entity/Q5450008
+"Gatehouse of Fleet,Dumfries and Galloway",https://sws.geonames.org/2648778
 "Gatehouse of Fleet,Dumfries and Galloway,",https://sws.geonames.org/2648778
 "Gatehouse of Fleet,Dumfries and Galloway,Scotland",https://sws.geonames.org/2648778
 "Gateshead,Durham,England",https://sws.geonames.org/2648773
 "Gateshead,Northumberland,England",https://sws.geonames.org/2648773
 "Gateshead,Yorkshire,England",https://sws.geonames.org/2648773
 "Gaza,Israel",https://sws.geonames.org/7870269
-"Gaza,Israel",https://sws.geonames.org/7870269
 "Geelong,Victoria,Australia",https://sws.geonames.org/2165798
 "Genesee River,USA",https://sws.geonames.org/5118388
 "Geneva,Alps,Switzerland",https://sws.geonames.org/2660646
 "Geneva,Lac Léman,Switzerland",https://sws.geonames.org/2660646
+"Geneva,Republic and Canton of Geneva",https://sws.geonames.org/2660646
 "Geneva,Republic and Canton of Geneva,",https://sws.geonames.org/2660646
 "Geneva,Republic and Canton of Geneva,Switzerland",https://sws.geonames.org/2660646
 "Geneva,Switzerland",https://sws.geonames.org/2660646
@@ -1949,7 +2001,6 @@
 "Ghardaïa,Algeria",https://sws.geonames.org/2496045
 "Ghent,",https://sws.geonames.org/2797656
 "Ghent,Belgium",https://sws.geonames.org/2797656
-"Gibraltar",https://sws.geonames.org/2411585
 "Gibraltar,",https://sws.geonames.org/2411585
 "Giggleswick,Yorkshire,England",https://sws.geonames.org/2648680
 "Gillingham,Kent,England",https://sws.geonames.org/2648657
@@ -1967,6 +2018,7 @@
 "Glasbury on Wye,Radnorshire,Wales",https://sws.geonames.org/2648592
 "Glasbury,Radnorshire,Wales",https://sws.geonames.org/2648592
 "Glasgow,Lanarkshire,Scotland",https://sws.geonames.org/2648579
+"Glasgow,Scotland",https://sws.geonames.org/2648579
 "Glastonbury,Somerset,England",https://sws.geonames.org/2648559
 "Glebe,New South Wales,Australia",https://sws.geonames.org/8349409
 "Glen Beach,South Africa",https://sws.geonames.org/3367641
@@ -1980,6 +2032,7 @@
 "Glion,Switzerland",https://sws.geonames.org/2660581
 "Glossop,Derbyshire,England",https://sws.geonames.org/2648405
 "Gloucester,Gloucestershire,England",https://sws.geonames.org/2648404
+"Gloucester,MA",https://sws.geonames.org/4937829
 "Gloucester,Massachusetts,USA",https://sws.geonames.org/4937829
 "Gloucestershire,England",https://sws.geonames.org/11609035
 "Glyndebourne,Sussex,England",http://vocab.getty.edu/tgn/7011485
@@ -2015,7 +2068,6 @@
 "Grampian Hills,Scotland",https://sws.geonames.org/2648229
 "Grampian Mountains,Scotland",https://sws.geonames.org/2648229
 "Granada,Granada,Spain",https://sws.geonames.org/2517117
-"Granada,Spain",https://sws.geonames.org/2517117
 "Granada,Spain",https://sws.geonames.org/2517117
 "Granby,Lancashire,England",https://sws.geonames.org/2648225
 "Grand Canyon,USA",https://sws.geonames.org/5296391
@@ -2080,6 +2132,7 @@
 "Guadeloupe,France",https://sws.geonames.org/3579143
 "Guantanamo Bay,Cuba",https://sws.geonames.org/3557688
 "Guatemala City,Guatemala",https://sws.geonames.org/3598132
+"Guelph,ON",https://sws.geonames.org/5967629
 "Guelph,Ontario,Canada",https://sws.geonames.org/5967629
 "Guernsey,England",https://sws.geonames.org/3042362
 "Guernsey,UK",https://sws.geonames.org/3042362
@@ -2114,6 +2167,7 @@
 "Hainaut,Belgium",https://sws.geonames.org/2796741
 "Haiphong,Tonkin,French Indo-China",https://sws.geonames.org/1581298
 "Halberstadt,Germany",https://sws.geonames.org/2911665
+"Halesowen,Lancashire,England",http://www.wikidata.org/entity/Q612260
 "Halifax,Nova Scotia,Canada",https://sws.geonames.org/6324729
 "Halifax,Yorkshire,England",https://sws.geonames.org/2647632
 "Halstead,Kent,England",https://sws.geonames.org/2647604
@@ -2123,6 +2177,7 @@
 "Hamadan,Persia",https://sws.geonames.org/132144
 "Hambledon,Hampshire,England",https://sws.geonames.org/2647581
 "Hamburg,Germany",https://sws.geonames.org/2911298
+"Hamden,Connecticut,USA",https://sws.geonames.org/4835654
 "Hamerton,Huntingdonshire,England",https://sws.geonames.org/2647573
 "Hamilton,Lanarkshire,Scotland",https://sws.geonames.org/2647570
 "Hamilton,Ontario,Canada",https://sws.geonames.org/5969784
@@ -2166,6 +2221,7 @@
 "Harrogate,Yorkshire,England",https://sws.geonames.org/2647428
 "Harrow,Middlesex,England",https://sws.geonames.org/2647421
 "Hartfield,Sussex,England",https://sws.geonames.org/2647411
+"Hartford,CT",https://sws.geonames.org/4835797
 "Hartford,Connecticut,USA",https://sws.geonames.org/4835797
 "Hartland,Devon,England",https://sws.geonames.org/2647403
 "Hartley Wintney,Hampshire,England",https://sws.geonames.org/2647395
@@ -2258,6 +2314,8 @@
 "High Barnet,Hertfordshire,England",https://sws.geonames.org/6941037
 "High Laver,Essex,England",https://sws.geonames.org/7293520
 "High Legh,Cheshire,England",https://sws.geonames.org/2646942
+"High Lorton,Cumbria,England",http://vocab.getty.edu/tgn/tgn/4005016
+"High Wickham,Sussex,England",http://www.wikidata.org/entity/Q64116
 "High Wycombe,Buckinghamshire,England",https://sws.geonames.org/2646914
 "Higham,Kent,England",https://sws.geonames.org/2646987
 "Higher Bebington,Cheshire,England",https://sws.geonames.org/2646968
@@ -2265,16 +2323,15 @@
 "Highgate,Middlesex,England",https://sws.geonames.org/2646957
 "Highgate,Middlesex,London",https://sws.geonames.org/11495120
 "Highland,Scotland",https://sws.geonames.org/2646944
-"Highland,Scotland",https://sws.geonames.org/2646944
 "Highlands,NC",https://sws.geonames.org/4494821
 "Highlands,Scotland",https://sws.geonames.org/2646943
+"Hightown,Lancashire",https://sws.geonames.org/4764146
 "Hightown,Lancashire,",https://sws.geonames.org/4764146
 "Hillerød,Denmark",https://sws.geonames.org/2620320
 "Hillingdon,Middlesex,England",https://sws.geonames.org/3333154
 "Hillsboro,West Virginia,USA",https://sws.geonames.org/4808897
 "Himalaya Mountains,",https://sws.geonames.org/1252558
 "Himalayas,",https://sws.geonames.org/1252558
-"Himalayas",https://sws.geonames.org/1252558
 "Himalayas,Pakistan",https://sws.geonames.org/1252558
 "Hinckley,Leicestershire,England",https://sws.geonames.org/2646867
 "Hindhead,Surrey,England",https://sws.geonames.org/2646863
@@ -2320,6 +2377,7 @@
 "Horspath,Oxfordshire,England",https://sws.geonames.org/2646564
 "Horton,Buckinghamshire,England",https://sws.geonames.org/7299108
 "Hothfield,Kent,England",https://sws.geonames.org/2646536
+"Hotwells,Gloucestershire,England",https://sws.geonames.org/9257671
 "Houghton,Sussex,England",https://sws.geonames.org/2646527
 "Houghton-Le-Spring,Durham,England",https://sws.geonames.org/2646525
 "Houlgate,Normandy,France",https://sws.geonames.org/3013091
@@ -2358,6 +2416,7 @@
 "Hydra,Greece",https://sws.geonames.org/261821
 "Hythe,Kent,England",https://sws.geonames.org/2646317
 "Hyères,France",https://sws.geonames.org/3012937
+"Ibuza,Nigeria",http://www.wikidata.org/entity/Q5991617
 "Ife,Nigeria",https://sws.geonames.org/2338898
 "Iffley,Oxfordshire,England",https://sws.geonames.org/7303328
 "Ilchester,Somerset,England",https://sws.geonames.org/2646279
@@ -2369,7 +2428,6 @@
 "Illinois,USA",https://sws.geonames.org/4896861
 "Ilminster,Somerset,England",https://sws.geonames.org/2646265
 "Indian Ocean,",https://sws.geonames.org/1545739
-"Indian Ocean",https://sws.geonames.org/1545739
 "Indiana,USA",https://sws.geonames.org/5194868
 "Indianapolis,IN",https://sws.geonames.org/4259418
 "Indianapolis,Indiana,USA",https://sws.geonames.org/4259418
@@ -2382,6 +2440,7 @@
 "Innerleithen,Peeblesshire,Scotland",https://sws.geonames.org/2646172
 "Innsbruck,Tyrol,Austria",https://sws.geonames.org/2775220
 "Interlaken,Switzerland",https://sws.geonames.org/2660253
+"Inveraray,Argyll and Bute,Scotland",http://vocab.getty.edu/tgn/tgn/1050753
 "Inveraray,Argyllshire,Scotland",https://sws.geonames.org/2646140
 "Inverarity,Angus,Scotland",https://sws.geonames.org/2646139
 "Inverness,Highland,Scotland",https://sws.geonames.org/2646088
@@ -2435,6 +2494,8 @@
 "Izmit,Sea of Marmara,Turkey",https://sws.geonames.org/745028
 "Izmit,Turkey",https://sws.geonames.org/745028
 "Jackson,Louisiana,USA",https://sws.geonames.org/4328824
+"Jackson,MS",https://sws.geonames.org/4431410
+"Jackson,Mississippi",https://sws.geonames.org/4431410
 "Jackson,Mississippi,USA",https://sws.geonames.org/4431410
 "Jacksonville,Florida,USA",https://sws.geonames.org/4160021
 "Jaffa,Israel",https://sws.geonames.org/293253
@@ -2470,6 +2531,7 @@
 "Jordan River,Israel",https://sws.geonames.org/294624
 "Jordans,Buckinghamshire,England",https://sws.geonames.org/2645946
 "Jouy-en-Josas,France",https://sws.geonames.org/3012165
+"Juniper Hill,Oxfordshire,England",http://www.wikidata.org/entity/Q6313603
 "Jura Mountains,France",https://sws.geonames.org/3012052
 "Jura Mountains,Switzerland",https://sws.geonames.org/3012052
 "Jura,France",https://sws.geonames.org/3012051
@@ -2490,13 +2552,17 @@
 "Kannur,Malabar Coast,India",https://sws.geonames.org/1274987
 "Kano,Nigeria",https://sws.geonames.org/2335204
 "Kanpur,India",https://sws.geonames.org/1267995
+"Kansas City,KS",https://sws.geonames.org/4273837
 "Kansas City,Kansas,USA",https://sws.geonames.org/4273837
+"Kansas City,MO",https://sws.geonames.org/4393217
+"Kansas City,Missouri",https://sws.geonames.org/4393217
 "Kansas City,Missouri,USA",https://sws.geonames.org/4393217
 "Kansas,USA",https://sws.geonames.org/4273857
 "Karachi,Pakistan",https://sws.geonames.org/1174872
 "Karachi,Sindh,Pakistan",https://sws.geonames.org/1174872
 "Karakoram,Tibet",https://sws.geonames.org/9073582
 "Karbala',Iraq",https://sws.geonames.org/94824
+"Karlovy Vary,Czech Republic",http://www.wikidata.org/entity/Q384544
 "Karlowitz,Serbia",https://sws.geonames.org/3190101
 "Karoo,South Africa",https://sws.geonames.org/991851
 "Karori,New Zealand",https://sws.geonames.org/2189028
@@ -2513,6 +2579,7 @@
 "Keir,Stirlingshire,Scotland",https://sws.geonames.org/2645886
 "Kelso,Berwickshire,Scotland",https://sws.geonames.org/2645849
 "Kelso,Roxburghshire,Scotland",https://sws.geonames.org/2645849
+"Kelso,Scotland",https://sws.geonames.org/2645849
 "Kelvedon Hatch,Essex,England",https://sws.geonames.org/2645840
 "Kendal,Westmorland,England",https://sws.geonames.org/2645826
 "Kenilworth,Warwickshire,England",https://sws.geonames.org/2645822
@@ -2539,7 +2606,6 @@
 "Kew,Surrey,England",https://sws.geonames.org/2645740
 "Key Largo,Florida,USA",https://sws.geonames.org/4160795
 "Key West,Florida,USA",https://sws.geonames.org/4160813
-"Florida,USA",https://sws.geonames.org/4155751
 "Khartoum,Sudan",https://sws.geonames.org/379252
 "Kibworth Harcourt,Leicestershire,England",https://sws.geonames.org/2645728
 "Kibworth,Leicestershire,England",https://sws.geonames.org/2645728
@@ -2549,10 +2615,12 @@
 "Kiel Canal,Germany",https://sws.geonames.org/2861884
 "Kiel,Germany",https://sws.geonames.org/2891122
 "Kiev,Russia",https://sws.geonames.org/703448
+"Kiev,Ukraine",https://sws.geonames.org/703448
 "Kigali,Rwanda",https://sws.geonames.org/202061
 "Kilburn,Middlesex,England",https://sws.geonames.org/2645702
 "Kildare,Ireland",https://sws.geonames.org/2963435
 "Kildorrery,Cork,Ireland",https://sws.geonames.org/2963426
+"Kilfintinan,Clare,Ireland",http://www.wikidata.org/entity/Q16852275
 "Kilkee,Clare,Ireland",https://sws.geonames.org/2963400
 "Kilkenny City,Kilkenny,Ireland",https://sws.geonames.org/2963398
 "Kilkenny,Ireland",https://sws.geonames.org/2963398
@@ -2591,6 +2659,7 @@
 "Kingston upon Hull,Yorkshire,England",https://sws.geonames.org/2645425
 "Kingston upon Thames,Surrey,England",https://sws.geonames.org/6690829
 "Kingston,Jamaica",https://sws.geonames.org/3489854
+"Kingston,ON",https://sws.geonames.org/5992500
 "Kingston,Ontario,Canada",https://sws.geonames.org/5992500
 "Kingston,Surrey,England",https://sws.geonames.org/2645438
 "Kingston,Upper Canada,Canada",https://sws.geonames.org/5992500
@@ -2650,12 +2719,12 @@
 "Koniggratz,Bohemia",https://sws.geonames.org/3074967
 "Koroit,Victoria,Australia",https://sws.geonames.org/2161047
 "Kosovo,Serbia",https://sws.geonames.org/837946
-"Kosovo,Serbia",https://sws.geonames.org/837946
 "Kosovo,Yugoslavia",https://sws.geonames.org/831053
 "Krakow,Poland",https://sws.geonames.org/3094802
 "Krasnoyarsk,Russia",https://sws.geonames.org/1502026
 "Kristiansand,Norway",https://sws.geonames.org/3149318
 "Kronstadt,Russia",https://sws.geonames.org/10076958
+"Kronstadt,Russian Federation",https://sws.geonames.org/10076958
 "Kruger National Park,South Africa",https://sws.geonames.org/986833
 "Kuala Lumpur,Malaysia",https://sws.geonames.org/1735161
 "Kufra,Libya",https://sws.geonames.org/88931
@@ -2666,15 +2735,18 @@
 "Kutaisi,Georgia",https://sws.geonames.org/613607
 "KwaZulu-Natal,South Africa",https://sws.geonames.org/972062
 "Kyerwa,Tanzania",https://sws.geonames.org/9998075
+"Kyiv,Ukraine",https://sws.geonames.org/703448
 "Kyneton,Victoria,Australia",https://sws.geonames.org/2160885
 "Kyoto,Japan",https://sws.geonames.org/1857910
 "Kyzyl Kum,Asia",https://sws.geonames.org/8144405
 "Königsberg,Germany",https://sws.geonames.org/2885916
+"La Celle St Cloud,France",http://vocab.getty.edu/tgn/tgn/8722347
 "La Chapelle-Réanville,Normandy,France",https://sws.geonames.org/3010285
 "La Châtre,France",https://sws.geonames.org/3010154
 "La Colle,France",https://sws.geonames.org/3009980
 "La Flèche,France",https://sws.geonames.org/3009443
 "La Jolla,California,USA",https://sws.geonames.org/5363943
+"La Mortola,Italy",http://vocab.getty.edu/tgn/tgn/1045605
 "La Panne,Belgium",https://sws.geonames.org/2799577
 "La Rochelle,France",https://sws.geonames.org/3006787
 "La Spezia,Italy",https://sws.geonames.org/3175081
@@ -2689,6 +2761,7 @@
 "Lake District,England",https://sws.geonames.org/2645022
 "Lake Forest,Illinois,USA",https://sws.geonames.org/4899012
 "Lake Garda,Italy",https://sws.geonames.org/3176317
+"Lake Geneva,Switzerland",http://www.wikidata.org/entity/Q6403
 "Lake Huron,Canada",https://sws.geonames.org/6048422
 "Lake Ladoga,",https://sws.geonames.org/537232
 "Lake Louise,Alberta,Canada",https://sws.geonames.org/6048484
@@ -2735,6 +2808,7 @@
 "Largentière,France",https://sws.geonames.org/3006958
 "Largo,Fife,Scotland",https://sws.geonames.org/2643511
 "Larne,Antrim,Ireland",https://sws.geonames.org/2644850
+"Larne,Antrim,Northern Ireland",https://sws.geonames.org/2644850
 "Las Palmas,Canary Islands,Spain",https://sws.geonames.org/2515270
 "Las Palmas,Spain",https://sws.geonames.org/2515270
 "Las Vegas,Nevada,USA",https://sws.geonames.org/5506956
@@ -2793,6 +2867,7 @@
 "Lesbos,Greece",https://sws.geonames.org/258466
 "Lesbury,Northumberland,England",https://sws.geonames.org/2644604
 "Leszno,Posnania,Poland",https://sws.geonames.org/7530993
+"Leszno,Poznan,Poland",http://vocab.getty.edu/tgn/tgn/1002024
 "Letchworth,Hertfordshire,England",https://sws.geonames.org/8224216
 "Lethbridge,Alberta,Canada",https://sws.geonames.org/6053154
 "Letheringham,Suffolk,England",https://sws.geonames.org/7301387
@@ -2801,6 +2876,7 @@
 "Levenshulme,Lancashire,England",https://sws.geonames.org/2644568
 "Lewes,Sussex,England",https://sws.geonames.org/2644559
 "Leweston,Dorset,England",https://sws.geonames.org/7293424
+"Lewisburg,Pennsylvania,USA",https://sws.geonames.org/5197842
 "Lewisham,Kent,England",https://sws.geonames.org/3333166
 "Lewiston,NY",https://sws.geonames.org/5124307
 "Lexden,Essex,England",https://sws.geonames.org/2644549
@@ -2814,6 +2890,7 @@
 "Liberton,Midlothian,Scotland",https://sws.geonames.org/2644533
 "Libreville,French Congo",https://sws.geonames.org/2399697
 "Lichfield,Staffordshire,England",https://sws.geonames.org/2644531
+"Lidice,Czech Republic",https://sws.geonames.org/3071858
 "Lidice,Czechoslovakia",https://sws.geonames.org/3071858
 "Liffey River,Ireland",https://sws.geonames.org/2962947
 "Lifford,Donegal,Ireland",https://sws.geonames.org/3310510
@@ -2872,7 +2949,6 @@
 "Llanddulas,Denbighshire,Wales",https://sws.geonames.org/2644148
 "Llandeilo,Carmarthenshire,Wales",https://sws.geonames.org/7294061
 "Llandeilo,Wales",https://sws.geonames.org/2644135
-"Llandeilo,Wales",https://sws.geonames.org/2644135
 "Llandogo,Monmouthshire,Wales",https://sws.geonames.org/2644129
 "Llandovery,Carnarvonshire,Wales",https://sws.geonames.org/2644127
 "Llandudno,Conwy,Wales",https://sws.geonames.org/2644120
@@ -2907,11 +2983,11 @@
 "Lockerbie,Dumfriesshire,Scotland",https://sws.geonames.org/2643791
 "Locquirec,Brittany,France",https://sws.geonames.org/2997947
 "Lodsworth,Sussex,England",https://sws.geonames.org/2643777
+"Loire River,France",http://www.wikidata.org/entity/Q1469
 "Loire Valley,France",https://sws.geonames.org/2997862
 "Loire,France",https://sws.geonames.org/2997870
 "Lombardy,Italy",https://sws.geonames.org/3174618
 "London,",https://sws.geonames.org/2643743
-"London,England",https://sws.geonames.org/2643743
 "London,England",https://sws.geonames.org/2643743
 "London,Essex,England",https://sws.geonames.org/2643743
 "London,Hertfordshire,England",https://sws.geonames.org/2643743
@@ -2931,6 +3007,7 @@
 "Long Compton,Warwickshire,England",https://sws.geonames.org/7301497
 "Long Crendon,Buckinghamshire,England",https://sws.geonames.org/2643707
 "Long Ditton,Surrey,England",https://sws.geonames.org/2643701
+"Long Island,USA",http://www.wikidata.org/entity/Q18438
 "Long Melford,Suffolk,England",https://sws.geonames.org/2643661
 "Long Wittenham,Berkshire,England",https://sws.geonames.org/2643613
 "Longbridge Deverill,Wiltshire,England",https://sws.geonames.org/2643715
@@ -2946,6 +3023,7 @@
 "Lorton,Cumberland,England",https://sws.geonames.org/2643590
 "Los Alamos,New Mexico,USA",https://sws.geonames.org/5476825
 "Los Angeles,CA",https://sws.geonames.org/5368361
+"Los Angeles,California",https://sws.geonames.org/5368361
 "Los Angeles,California,",https://sws.geonames.org/5368361
 "Los Angeles,California,USA",https://sws.geonames.org/5368361
 "Lossiemouth,Morayshire,Scotland",https://sws.geonames.org/6296641
@@ -2966,7 +3044,9 @@
 "Lower Bedeque,Prince Edward Island,Canada",https://sws.geonames.org/6061087
 "Lower Frome Vauchurch,Dorset,England",http://vocab.getty.edu/tgn/7451726
 "Lowestoft,Suffolk,England",https://sws.geonames.org/2643490
+"Loweswater,Cumbria",https://sws.geonames.org/7303793
 "Loweswater,Cumbria,",https://sws.geonames.org/7303793
+"Lowlands,Scotland",http://www.wikidata.org/entity/Q654252
 "Lozère,France",https://sws.geonames.org/2997288
 "Luanda,Angola",https://sws.geonames.org/2240449
 "Luanshya,Zambia",https://sws.geonames.org/909863
@@ -2981,6 +3061,8 @@
 "Lugano,Switzerland",https://sws.geonames.org/2659836
 "Lugdunum,Batavorum",https://sws.geonames.org/2751773
 "Luhacovice,Czech Republic",https://sws.geonames.org/3071407
+"Lulworth,Dorset,England",http://www.wikidata.org/entity/Q1144249
+"Lumb Bank,Yorkshire,England",http://vocab.getty.edu/tgn/tgn/1029919
 "Lund,Sweden",https://sws.geonames.org/2693678
 "Lung Ching Tsun,Manchuria,China",https://sws.geonames.org/2035966
 "Lunéville,Vosges,France",https://sws.geonames.org/2997110
@@ -2999,7 +3081,9 @@
 "Lyndhurst,Hampshire,England",https://sws.geonames.org/2643304
 "Lynton,Devon,England",https://sws.geonames.org/2643285
 "Lyon,France",https://sws.geonames.org/2996944
+"Lyons Hill,Kildare,Ireland",http://www.wikidata.org/entity/Q2367797
 "Lyons,France",https://sws.geonames.org/2996944
+"Lyth Hill,Shropshire,England",http://www.wikidata.org/entity/Q15243215
 "Lyttelton,New Zealand",https://sws.geonames.org/2188095
 "Lytton,British Columbia,Canada",https://sws.geonames.org/6062479
 "Lübeck,Germany",https://sws.geonames.org/2875601
@@ -3015,9 +3099,10 @@
 "Madeira Islands,Portugal",https://sws.geonames.org/2266877
 "Madeley,Staffordshire,England",https://sws.geonames.org/2643234
 "Madeley,Yorkshire,England",https://sws.geonames.org/2643234
+"Madison,NJ",https://sws.geonames.org/5100748
 "Madison,New Jersey,USA",https://sws.geonames.org/5100748
+"Madison,WI",https://sws.geonames.org/5261457
 "Madison,Wisconsin,USA",https://sws.geonames.org/5261457
-"Madras,India",https://sws.geonames.org/1264527
 "Madras,India",https://sws.geonames.org/1264527
 "Madras,Tamil Nadu,India",https://sws.geonames.org/1264527
 "Madrid,Spain",https://sws.geonames.org/3117735
@@ -3025,9 +3110,11 @@
 "Mafeking,South Africa",https://sws.geonames.org/980600
 "Magdebourg,Germany",https://sws.geonames.org/2874545
 "Magersfontein,Cape Colony,South Africa",https://sws.geonames.org/980497
+"Magersfontein,Cape Province,South Africa",http://www.wikidata.org/entity/Q2447796
 "Maharashtra,India",https://sws.geonames.org/1264419
 "Maiano,Italy",https://sws.geonames.org/3174229
 "Maiden Newton,Dorset,England",https://sws.geonames.org/2643185
+"Maidenhead Thicket,Berkshire,England",http://vocab.getty.edu/tgn/tgn/7011917
 "Maidenhead,Berkshire,England",https://sws.geonames.org/2643186
 "Maidenhead,Buckinghamshire,England",https://sws.geonames.org/2643186
 "Maidstone,Kent,England",https://sws.geonames.org/2643179
@@ -3054,6 +3141,7 @@
 "Manasquan,New Jersey,USA",https://sws.geonames.org/5100809
 "Manchester,Lancashire,England",https://sws.geonames.org/2643123
 "Manchester,Massachusetts,USA",https://sws.geonames.org/4942975
+"Manchester,UK",https://sws.geonames.org/2643123
 "Manchuria,China",https://sws.geonames.org/2035836
 "Mandalay,Burma",https://sws.geonames.org/1311874
 "Mandalay,Myanmar",https://sws.geonames.org/1311874
@@ -3083,6 +3171,7 @@
 "Market Rasen,Lincolnshire,England",https://sws.geonames.org/2643023
 "Markinch,Fife,Scotland",https://sws.geonames.org/2643016
 "Markyate,Hertfordshire,England",https://sws.geonames.org/2643011
+"Marlborough,Wiltshire",https://sws.geonames.org/7300355
 "Marlborough,Wiltshire,England",https://sws.geonames.org/7300355
 "Marldon,Devon,England",https://sws.geonames.org/2643009
 "Marlow,Buckinghamshire,England",https://sws.geonames.org/2643003
@@ -3094,6 +3183,7 @@
 "Marsden,Yorkshire,England",https://sws.geonames.org/2642991
 "Marseilles,France",https://sws.geonames.org/2995469
 "Marseilles,Provence-Alpes-CÃ´te d'Azur,France",https://sws.geonames.org/2995469
+"Marsh Benham,Berkshire,England",http://www.wikidata.org/entity/Q1840862
 "Marston Moor,England",https://sws.geonames.org/11711326
 "Marston St Lawrence,Northamptonshire,England",https://sws.geonames.org/7295753
 "Martinique,France",https://sws.geonames.org/6690603
@@ -3104,6 +3194,7 @@
 "Marylebone,Middlesex,England",https://sws.geonames.org/6545170
 "Maryport,Cumberland,England",https://sws.geonames.org/2642927
 "Massachusetts,USA",https://sws.geonames.org/6254926
+"Matabeleland,Zimbabwe",http://vocab.getty.edu/tgn/tgn/6003765
 "Matjesfontein,South Africa",https://sws.geonames.org/978169
 "Matlock,Derbyshire,England",https://sws.geonames.org/2642910
 "Matterhorn,Switzerland",https://sws.geonames.org/2659729
@@ -3127,7 +3218,6 @@
 "Medford,Massachusetts,USA",https://sws.geonames.org/5740099
 "Medina,Saudi Arabia",https://sws.geonames.org/109223
 "Mediterranean Sea,",https://sws.geonames.org/363196
-"Mediterranean Sea",https://sws.geonames.org/363196
 "Mediterranean,",https://sws.geonames.org/9962130
 "Meerut,India",https://sws.geonames.org/1263214
 "Melaka,Malaysia",https://sws.geonames.org/1733035
@@ -3162,6 +3252,7 @@
 "Merritt,British Columbia,Canada",https://sws.geonames.org/6072349
 "Mers-les-Bains,Picardy,France",https://sws.geonames.org/2994313
 "Mersea Island,England",https://sws.geonames.org/2642716
+"Mersey River,England",http://vocab.getty.edu/tgn/tgn/1127090
 "Merseyside,England",https://sws.geonames.org/2642713
 "Merstham,Surrey,England",https://sws.geonames.org/2642711
 "Merthyr Tydfil,Glamorgan,Wales",https://sws.geonames.org/2642705
@@ -3172,6 +3263,7 @@
 "Messenia,Greece",https://sws.geonames.org/257149
 "Mestre,Italy",https://sws.geonames.org/3173529
 "Methley,Yorkshire,England",https://sws.geonames.org/2642693
+"Metuchen,NJ",https://sws.geonames.org/5101125
 "Meudon,France",https://sws.geonames.org/2994144
 "Mevagissey,Cornwall,England",https://sws.geonames.org/2642687
 "Mexico City,Mexico",https://sws.geonames.org/3530597
@@ -3187,6 +3279,7 @@
 "Middlesbrough,Yorkshire,England",https://sws.geonames.org/2642607
 "Middlesex,England",https://sws.geonames.org/2642605
 "Middleton,Lancashire,England",https://sws.geonames.org/2642593
+"Middletown,CT",https://sws.geonames.org/4838633
 "Middletown,Connecticut,USA",https://sws.geonames.org/4838633
 "Middlewich,Cheshire,England",https://sws.geonames.org/2642573
 "Midhurst,Sussex,England",https://sws.geonames.org/2642567
@@ -3202,18 +3295,24 @@
 "Milland,Sussex,England",https://sws.geonames.org/10099992
 "Milledgeville,Georgia,USA",https://sws.geonames.org/4209448
 "Millerton,NY",https://sws.geonames.org/5127066
+"Millicent,Kildare,Ireland",http://www.wikidata.org/entity/Q104263856
 "Millisle,Ards Peninsula,Northern reland",https://sws.geonames.org/2642511
 "Millisle,Down,Ireland",https://sws.geonames.org/2642511
+"Millisle,Down,Northern Ireland",https://sws.geonames.org/2642511
+"Millstreet Town,Cork,Ireland",http://vocab.getty.edu/tgn/tgn/1042927
 "Millwall,Middlesex,England",https://sws.geonames.org/2642487
 "Milnthorpe,Westmorland,England",https://sws.geonames.org/2642482
 "Milston,Wiltshire,England",https://sws.geonames.org/2642480
 "Milton Bryan,Bedfordshire,England",https://sws.geonames.org/6946887
 "Milton Keynes,Buckinghamshire,England",https://sws.geonames.org/2642465
+"Milton Keynes,UK",https://sws.geonames.org/2642465
 "Milverton,Warwickshire,England",https://sws.geonames.org/2642457
+"Milwaukee,WI",https://sws.geonames.org/5263045
 "Milwaukee,Wisconsin,USA",https://sws.geonames.org/5263045
 "Minchinhampton,Cotswolds,England",https://sws.geonames.org/2642452
 "Minchinhampton,Gloucestershire,England",https://sws.geonames.org/2642452
 "Minffordd,Caernarfonshire,Wales",https://sws.geonames.org/2642447
+"Minneapolis, MN",https://sws.geonames.org/5037649
 "Minneapolis,",https://sws.geonames.org/5037649
 "Minneapolis,Minnesota,USA",https://sws.geonames.org/5037649
 "Minnesota,USA",https://sws.geonames.org/5037779
@@ -3247,6 +3346,7 @@
 "Mona,Jamaica",https://sws.geonames.org/6690769
 "Monceau,France",https://sws.geonames.org/2993426
 "Moneymore,Derry,Northern Ireland",https://sws.geonames.org/2642349
+"Mongolia,China",http://www.wikidata.org/entity/Q41079
 "Monkton,Kent,England",https://sws.geonames.org/2642319
 "Monmouth,Monmouthshire,Wales",https://sws.geonames.org/2642313
 "Monmouthshire,Wales",https://sws.geonames.org/3333244
@@ -3254,6 +3354,7 @@
 "Monrovia,Liberia",https://sws.geonames.org/2274895
 "Mons,Belgium",https://sws.geonames.org/2790869
 "Mont Blanc,France",https://sws.geonames.org/3181986
+"Mont St Gothard,Switzerland",http://vocab.getty.edu/tgn/tgn/7544627
 "Montana,USA",https://sws.geonames.org/5667009
 "Monte Carlo,Monaco",https://sws.geonames.org/2992741
 "Monte Nero,Italy",https://sws.geonames.org/6695956
@@ -3268,6 +3369,7 @@
 "Montparnasse,France",https://sws.geonames.org/6545263
 "Montpellier,France",https://sws.geonames.org/2992166
 "Montreal,Lower Canada,Canada",https://sws.geonames.org/6077243
+"Montreal,QC",https://sws.geonames.org/6077243
 "Montreal,Quebec,Canada",https://sws.geonames.org/6077243
 "Montreuil,France",https://sws.geonames.org/2992090
 "Montreuil-sur-Mer,France",https://sws.geonames.org/2992061
@@ -3315,6 +3417,7 @@
 "Muirkirk,Ayrshire,Scotland",https://sws.geonames.org/2642005
 "Mull,Scotland",https://sws.geonames.org/2641992
 "Mulranny,Mayo,Ireland",https://sws.geonames.org/7870964
+"Mulwith,Yorkshire,England",http://www.wikidata.org/entity/Q26443155
 "Mumbai,India",https://sws.geonames.org/1275339
 "Mumbai,Maharashtra,India",https://sws.geonames.org/1275339
 "Munich,Bavaria ,Germany",https://sws.geonames.org/2867714
@@ -3361,6 +3464,7 @@
 "Nantes,Normandy,France",https://sws.geonames.org/2990969
 "Nantucket,USA",https://sws.geonames.org/4944911
 "Nantwich,Cheshire,England",https://sws.geonames.org/2641892
+"Napa Valley,USA",http://vocab.getty.edu/tgn/tgn/7014184
 "Napier,New Zealand",https://sws.geonames.org/2186314
 "Naples,Italy",https://sws.geonames.org/3172394
 "Narayanganj,Bangladesh",https://sws.geonames.org/1185155
@@ -3399,6 +3503,7 @@
 "New Alresford,Hampshire,England",https://sws.geonames.org/2641736
 "New Bedford,Massachusetts,USA",https://sws.geonames.org/4945121
 "New Brunswick,Canada",https://sws.geonames.org/6087430
+"New Brunswick,NJ",https://sws.geonames.org/5101717
 "New Caledonia,France",https://sws.geonames.org/2139509
 "New Cross,Cardiganshire,Wales",https://sws.geonames.org/2641661
 "New Cross,Wales",https://sws.geonames.org/2641661
@@ -3426,12 +3531,13 @@
 "New York City,",https://sws.geonames.org/5128581
 "New York City,New York,USA",https://sws.geonames.org/5128581
 "New York City,USA",https://sws.geonames.org/5128581
-"New York",https://sws.geonames.org/5128581
 "New York,New York,USA",https://sws.geonames.org/5128581
 "New York,USA",https://sws.geonames.org/5128581
 "New York,United States",https://sws.geonames.org/5128581
 "New Zealand,",https://sws.geonames.org/2186224
+"Newark,DE",https://sws.geonames.org/4143861
 "Newark,Delaware,USA",https://sws.geonames.org/4143861
+"Newark,NJ",https://sws.geonames.org/5101798
 "Newark,New Jersey,USA",https://sws.geonames.org/5101798
 "Newark,Nottinghamshire,England",https://sws.geonames.org/2641731
 "Newarthill,Lanarkshire,Scotland",https://sws.geonames.org/2641729
@@ -3439,7 +3545,6 @@
 "Newbury,Massachusetts,USA",https://sws.geonames.org/4945254
 "Newburyport,Massachusetts,USA",https://sws.geonames.org/4945256
 "Newcastle under Lyme,Staffordshire,England",https://sws.geonames.org/2641674
-"Newcastle upon Tyne",https://sws.geonames.org/2641673
 "Newcastle upon Tyne,Northumberland,England",https://sws.geonames.org/2641673
 "Newcastle,Shropshire,England",https://sws.geonames.org/2641673
 "Newcastle,South Africa",https://sws.geonames.org/971421
@@ -3458,6 +3563,7 @@
 "Newport,Cornwall,England",https://sws.geonames.org/2641598
 "Newport,Isle of Wight,England",https://sws.geonames.org/2641598
 "Newport,Mayo,Ireland",https://sws.geonames.org/2962257
+"Newport,Monmouthshire,Wales",http://www.wikidata.org/entity/Q101254
 "Newport,New Hampshire,USA",https://sws.geonames.org/5090256
 "Newport,Rhode Island,USA",https://sws.geonames.org/5223593
 "Newport,Shropshire,England",https://sws.geonames.org/2641598
@@ -3484,7 +3590,6 @@
 "Nieuport,Belgium",https://sws.geonames.org/2790150
 "Nikkô,Japan",https://sws.geonames.org/1855395
 "Nile River,",https://sws.geonames.org/351036
-"Nile River",https://sws.geonames.org/351036
 "Nile River,Egypt",https://sws.geonames.org/351036
 "Nilgiris,India",https://sws.geonames.org/1261391
 "Nimes,France",https://sws.geonames.org/2990363
@@ -3533,11 +3638,13 @@
 "Norton in Hales,Shropshire,England",https://sws.geonames.org/2641187
 "Norton,Cheshire,England",https://sws.geonames.org/2641200
 "Norval,Ontario,Canada",https://sws.geonames.org/6091132
-"Norwich,Connecticut,USA",https://sws.geonames.org/2641181
+"Norwich,CT",https://sws.geonames.org/4839843
+"Norwich,Connecticut,USA",https://sws.geonames.org/4839843
 "Norwich,Massachusetts,USA",https://sws.geonames.org/4945946
 "Norwich,Norfolk,England",https://sws.geonames.org/2641181
 "Norwood,South Africa",https://sws.geonames.org/3363574
 "Norwood,Surrey,England",https://sws.geonames.org/2641178
+"Notre Dame,IN",https://sws.geonames.org/8469294
 "Notre Dame,Indiana,USA",https://sws.geonames.org/8469294
 "Notting Hill,Middlesex,England",https://sws.geonames.org/2641168
 "Nottingham,Norringhamshire,England",https://sws.geonames.org/2641170
@@ -3559,12 +3666,14 @@
 "Nîmes,France",https://sws.geonames.org/2990363
 "Oak Park,Illinois,USA",https://sws.geonames.org/4904381
 "Oakington,Cambridgeshire,England",https://sws.geonames.org/2641125
+"Oakland,California",https://sws.geonames.org/5378538
 "Oakland,California,",https://sws.geonames.org/5378538
 "Oakland,California,USA",https://sws.geonames.org/5378538
 "Oaksey,Wiltshire,England",https://sws.geonames.org/2641117
 "Oaxaca,Mexico",https://sws.geonames.org/3522509
 "Oban,Argyll and Bute,Scotland",https://sws.geonames.org/2641108
 "Oban,Argyllshire,Scotland",https://sws.geonames.org/2641108
+"Ober Saulheim,Rhine River",https://sws.geonames.org/2859199
 "Ober Saulheim,Rhine River,",https://sws.geonames.org/2859199
 "Oberammergau,Bavaria,Germany",https://sws.geonames.org/2861422
 "Oberammergau,Germany",https://sws.geonames.org/2861422
@@ -3597,6 +3706,8 @@
 "Oran,Algeria",https://sws.geonames.org/2485926
 "Orange River,South Africa",https://sws.geonames.org/967554
 "Orange,France",https://sws.geonames.org/2989460
+"Orchard Park,NY",https://sws.geonames.org/5129951
+"Orchardleigh,Somerset,England",http://www.wikidata.org/entity/Q107231020
 "Orcop,Herefordshire,England",https://sws.geonames.org/7291448
 "Oregon,USA",https://sws.geonames.org/5744337
 "Orford,Suffolk,England",https://sws.geonames.org/2640930
@@ -3627,6 +3738,7 @@
 "Otago,New Zealand",https://sws.geonames.org/6612109
 "Otaki,New Zealand",https://sws.geonames.org/2185362
 "Otley,Yorkshire,England",https://sws.geonames.org/2640857
+"Otmoor,England",http://www.wikidata.org/entity/Q7108900
 "Otonabee River,Canada",https://sws.geonames.org/6094793
 "Ottawa,ON",https://sws.geonames.org/6094817
 "Ottawa,Ontario,Canada",https://sws.geonames.org/6094817
@@ -3636,6 +3748,7 @@
 "Oughterard,Galway,Ireland",https://sws.geonames.org/3308273
 "Oundle,Northamptonshire,England",https://sws.geonames.org/2640825
 "Ouro Prêto,Brazil",https://sws.geonames.org/3455671
+"Ouse River,England",http://vocab.getty.edu/tgn/tgn/7011437
 "Outer Hebrides,Scotland",https://sws.geonames.org/2640801
 "Over,Cambridgeshire,England",https://sws.geonames.org/2640777
 "Overbrook,Pennsylvania,USA",https://sws.geonames.org/4560179
@@ -3644,6 +3757,7 @@
 "Ovington,Norfolk,England",https://sws.geonames.org/2640752
 "Oxford,",https://sws.geonames.org/2640729
 "Oxford,Oxfordshire,England",https://sws.geonames.org/2640729
+"Oxford,UK",https://sws.geonames.org/2640729
 "Oxfordshire,England",https://sws.geonames.org/11609045
 "Oxfordshire,Oxford",https://sws.geonames.org/11609045
 "Oxley,Victoria,Australia",https://sws.geonames.org/2154048
@@ -3665,6 +3779,7 @@
 "Paisley,Renfrewshire,Scotland",https://sws.geonames.org/2640677
 "Pakhoi,China",https://sws.geonames.org/1816705
 "Palermo,Italy",https://sws.geonames.org/2523920
+"Palermo,Sicily",https://sws.geonames.org/2523920
 "Palermo,Sicily,",https://sws.geonames.org/2523920
 "Palermo,Sicily,Italy",https://sws.geonames.org/2523920
 "Palgrave,Suffolk,England",https://sws.geonames.org/7299595
@@ -3701,6 +3816,7 @@
 "Patna,India",https://sws.geonames.org/1260086
 "Patrickstown,Meath,Ireland",https://sws.geonames.org/9866595
 "Patterdale,Cumberland,England",https://sws.geonames.org/2640567
+"Patterdale,Cumbria,England",https://sws.geonames.org/2640567
 "Pau,Pyrénées-Atlantiques,France",https://sws.geonames.org/2988358
 "Pavlovka,Belarus",https://sws.geonames.org/623735
 "Pavlovsk,Russia",https://sws.geonames.org/1495448
@@ -3744,6 +3860,7 @@
 "Pentland Hills,Scotland",https://sws.geonames.org/2640402
 "Pentraeth,Anglesey,Wales",https://sws.geonames.org/7301165
 "Penzance,Cornwall,England",https://sws.geonames.org/2640377
+"Peppard Common,Oxfordshire,England",http://vocab.getty.edu/tgn/tgn/8723054
 "Pera,Turkey",https://sws.geonames.org/750640
 "Perivale,Middlesex,England",https://sws.geonames.org/2640368
 "Perkasie,Pennsylvania,USA",https://sws.geonames.org/5205638
@@ -3775,11 +3892,14 @@
 "Peterborough,Upper Canada,Canada",https://sws.geonames.org/6101645
 "Peterhead,Aberdeenshire,Scotland",https://sws.geonames.org/2640351
 "Petersfield,Hampshire,England",https://sws.geonames.org/2640348
+"Petersham,Surrey,England",http://vocab.getty.edu/tgn/tgn/4008596
 "Petra,Jordan",https://sws.geonames.org/250745
 "Petra,Trans-Jordan",https://sws.geonames.org/10195160
 "Petrograd,Russia",https://sws.geonames.org/498817
 "Pevensey Bay,Sussex,England",https://sws.geonames.org/6945683
 "Pevensey,Sussex,England",https://sws.geonames.org/2640331
+"Philadelphia,PA,",https://sws.geonames.org/4560349
+"Philadelphia,Pennsylvania",https://sws.geonames.org/4560349
 "Philadelphia,Pennsylvania,",https://sws.geonames.org/4560349
 "Philadelphia,Pennsylvania,USA",https://sws.geonames.org/4560349
 "Philadelphia,Philadelphia,USA",https://sws.geonames.org/4560349
@@ -3791,7 +3911,9 @@
 "Picardy,France",https://sws.geonames.org/2987374
 "Piccotts End,Hertfordshire,England",https://sws.geonames.org/10244606
 "Piedmont,Italy",https://sws.geonames.org/3170831
+"Pietermaritzburg,KwaZulu-Natal,South Africa",https://sws.geonames.org/965301
 "Pietermaritzburg,Natal,South Africa",https://sws.geonames.org/965301
+"Pietermaritzburg,South Africa",https://sws.geonames.org/965301
 "Pill,Somerset,England",https://sws.geonames.org/2640294
 "Pimlico,Middlesex,England",https://sws.geonames.org/6545249
 "Pinang,Malaya",https://sws.geonames.org/8633268
@@ -3803,6 +3925,7 @@
 "Pisté,Yucatán,Mexico",https://sws.geonames.org/3521411
 "Pitcairn Island,UK",https://sws.geonames.org/6105734
 "Pitlochry,Perthshire,Scotland",https://sws.geonames.org/2640255
+"Pittsburgh,PA",https://sws.geonames.org/5206379
 "Pittsburgh,Pennsylvania,USA",https://sws.geonames.org/5206379
 "Pizzano,Italy",https://sws.geonames.org/8948957
 "Plainview,NY",https://sws.geonames.org/5131638
@@ -3813,8 +3936,10 @@
 "Pleshey,Essex,England",https://sws.geonames.org/2640216
 "Pluckley,Kent,England",https://sws.geonames.org/2640211
 "Plymouth,Devon,England",https://sws.geonames.org/2640194
+"Plymouth,Devon,UK",https://sws.geonames.org/2640194
 "Plymouth,England",https://sws.geonames.org/2640194
 "Plymouth,Massachusetts,USA",https://sws.geonames.org/4947597
+"Plymouth,UK",https://sws.geonames.org/2640194
 "Plympton Erle,Devon,England",https://sws.geonames.org/2640191
 "Poitiers,France",https://sws.geonames.org/2986495
 "Pokhara,Nepal",https://sws.geonames.org/1282898
@@ -3831,6 +3956,7 @@
 "Pontefract,Yorkshire,England",https://sws.geonames.org/2640132
 "Pontesbury,Shropshire,England",https://sws.geonames.org/2640129
 "Pontigny,Yonne,France",https://sws.geonames.org/2986168
+"Pontllyfni,Caernarfonshire,Wales",http://www.wikidata.org/entity/Q3399408
 "Pontoise,France",https://sws.geonames.org/2986140
 "Pontresina,Switzerland",https://sws.geonames.org/2659172
 "Pontycymer,Glamorgan,Wales",https://sws.geonames.org/2640109
@@ -3843,6 +3969,7 @@
 "Porquerolles,France",https://sws.geonames.org/2986057
 "Port Adelaide,South Australia,Australia",https://sws.geonames.org/11886621
 "Port Alfred,Kowie River,South Africa",https://sws.geonames.org/964433
+"Port Arthur,Tasmania,Australia",https://sws.geonames.org/2152685
 "Port Arthur,Van Diemen's Land,Australia",https://sws.geonames.org/2152685
 "Port Chalmers,New Zealand",https://sws.geonames.org/2184376
 "Port Elizabeth,Cape Province,South Africa",https://sws.geonames.org/964420
@@ -3883,6 +4010,7 @@
 "Potchefstroom,South Africa",https://sws.geonames.org/964349
 "Potters Bar,Hertfordshire,England",https://sws.geonames.org/2639970
 "Potton,Bedfordshire,England",https://sws.geonames.org/7294328
+"Poughkeepsie,NY",https://sws.geonames.org/5132143
 "Poughkeepsie,New York,USA",https://sws.geonames.org/5132143
 "Poughkeepsie,NewYork,USA",https://sws.geonames.org/5132143
 "Pouilly,France",https://sws.geonames.org/2985841
@@ -3891,6 +4019,7 @@
 "Prague,Czech Republic",https://sws.geonames.org/3067696
 "Prague,Czechoslovakia",https://sws.geonames.org/3067696
 "Praia da Luz,Algarve,Portugal",https://sws.geonames.org/10342547
+"Prairies,Canada",http://www.wikidata.org/entity/Q1364746
 "Prees,Shropshire,England",https://sws.geonames.org/7292286
 "Prestbury,Gloucestershire,England",https://sws.geonames.org/7294569
 "Presteigne,Radnorshire,Wales",https://sws.geonames.org/7297057
@@ -3905,12 +4034,15 @@
 "Princeton,New Jersey,USA",https://sws.geonames.org/5102922
 "Prosser Plains,Tasmania,Australia",http://vocab.getty.edu/tgn/7864661
 "Provence,France",https://sws.geonames.org/2985246
+"Providence,RI",https://sws.geonames.org/5224151
 "Providence,Rhode Island,USA",https://sws.geonames.org/5224151
 "Provincetown,Massachusetts,USA",https://sws.geonames.org/4948087
 "Provins,France",https://sws.geonames.org/2985229
 "Puch,Austria",https://sws.geonames.org/2768284
+"Puerto Soller,Mallorca,Spain",http://vocab.getty.edu/tgn/tgn/7297888
 "Puglia,Italy",https://sws.geonames.org/3169778
 "Pulborough,Sussex,England",https://sws.geonames.org/2639864
+"Pune,Maharashtra",https://sws.geonames.org/1259229
 "Pune,Maharashtra,",https://sws.geonames.org/1259229
 "Pune,Maharashtra,India",https://sws.geonames.org/1259229
 "Punjab,India",https://sws.geonames.org/1259224
@@ -3973,6 +4105,7 @@
 "Rawalpindi,India",https://sws.geonames.org/10729112
 "Rawalpindi,Punjab,Pakistan",https://sws.geonames.org/1166993
 "Rawdon,Yorkshire,England",https://sws.geonames.org/2639589
+"Rea River,England",http://vocab.getty.edu/tgn/tgn/7446749
 "Reading,Berkshire,England",https://sws.geonames.org/2639577
 "Recife,Brazil",https://sws.geonames.org/3390760
 "Red Cloud,Nebraska,USA",https://sws.geonames.org/5076060
@@ -3987,6 +4120,7 @@
 "Reepham,Norfolk,England",https://sws.geonames.org/2639511
 "Reeth,Yorkshire,England",https://sws.geonames.org/2639510
 "Regent's Park,Middlesex,England",https://sws.geonames.org/6619474
+"Regina,SK",https://sws.geonames.org/6119109
 "Regina,Saskatchewan,Canada",https://sws.geonames.org/6119109
 "Reigate,Surrey,England",https://sws.geonames.org/2639506
 "Rendsburg,Kiel Canal,Germany",https://sws.geonames.org/2848245
@@ -4000,6 +4134,7 @@
 "Reykjavik,Iceland",https://sws.geonames.org/3413829
 "Rheims,France",https://sws.geonames.org/2984114
 "Rhine River,",https://sws.geonames.org/2748179
+"Rhineland,Germany",http://vocab.getty.edu/tgn/tgn/7003683
 "Rhode Island,USA",https://sws.geonames.org/5224323
 "Rhyl,Flintshire,Wales",https://sws.geonames.org/2639409
 "Rialto,California,USA",https://sws.geonames.org/5387288
@@ -4029,20 +4164,24 @@
 "River Arun,England",https://sws.geonames.org/2656998
 "River Barrow,Ireland",https://sws.geonames.org/2966310
 "River Beauly,Scotland",https://sws.geonames.org/2656075
+"River Boyne,Ireland",https://sws.geonames.org/2966042
 "River Cam,England",https://sws.geonames.org/9035028
 "River Clyde,Scotland",https://sws.geonames.org/2652731
 "River Congo,",https://sws.geonames.org/2241717
+"River Danube,Europe",http://vocab.getty.edu/tgn/tgn/7012913
 "River Dee,Wales",https://sws.geonames.org/2651429
 "River Douro,Portugal",https://sws.geonames.org/7701505
 "River Elbe,Germany",https://sws.geonames.org/2931271
 "River Forth,Scotland",https://sws.geonames.org/2649177
 "River Gambia,",https://sws.geonames.org/2413452
 "River Ganges,",https://sws.geonames.org/1819096
-"River Ganges,",https://sws.geonames.org/1819096
+"River Ganges,India",http://www.wikidata.org/entity/Q5089
+"River Guadalquivir,Spain",http://vocab.getty.edu/tgn/tgn/7007769
 "River Medway,England",https://sws.geonames.org/2642831
 "River Murray,Australia",https://sws.geonames.org/2065165
 "River Niger,",https://sws.geonames.org/2328928
 "River Nile,",https://sws.geonames.org/408664
+"River Orinoco,South America",http://vocab.getty.edu/tgn/tgn/1128153
 "River Rhone,",https://sws.geonames.org/2983752
 "River Severn,England",https://sws.geonames.org/2638182
 "River Somme,France",https://sws.geonames.org/2974308
@@ -4061,6 +4200,8 @@
 "Rochdale,Lancashire,England",https://sws.geonames.org/2639272
 "Rochester,Kent,England",https://sws.geonames.org/2639268
 "Rochester,Michigan,USA",https://sws.geonames.org/5043473
+"Rochester,NY",https://sws.geonames.org/5043473
+"Rochester,New York",https://sws.geonames.org/5043473
 "Rochester,New York,USA",https://sws.geonames.org/5043473
 "Rockdale,New South Wales,Australia",https://sws.geonames.org/7839768
 "Rockford,Illinois,USA",https://sws.geonames.org/4907959
@@ -4090,6 +4231,7 @@
 "Rosemarkie,Highlands,Scotland",https://sws.geonames.org/2639142
 "Roshven,Inverness-shire,Scotland",https://sws.geonames.org/2639136
 "Ross-on-Wye,Herefordshire,England",https://sws.geonames.org/2639110
+"Rostov-on-Don,Russian Federation",https://sws.geonames.org/501175
 "Rostov-on-Don,USSR",https://sws.geonames.org/501175
 "Rostrevor,Down,Ireland",https://sws.geonames.org/2639106
 "Rosyth,Fife,Scotland",https://sws.geonames.org/2639104
@@ -4115,10 +4257,12 @@
 "Roxbury,Massachusetts,USA",https://sws.geonames.org/4949151
 "Royaumont,France",https://sws.geonames.org/2982334
 "Royston,Hertfordshire,England",https://sws.geonames.org/2639017
+"Rub' al-Khali,Saudi Arabia",http://www.wikidata.org/entity/Q229269
 "Rudston,Yorkshire,England",https://sws.geonames.org/2638986
 "Rugby,Warwickshire,England",https://sws.geonames.org/2638978
 "Ruhr,Germany",https://sws.geonames.org/2843202
 "Ruislip,Middlesex,England",https://sws.geonames.org/2638976
+"Rungstedlund,Denmark",http://www.wikidata.org/entity/Q1569018
 "Runnymede,England",https://sws.geonames.org/2638956
 "Rusholme,Lancashire,England",https://sws.geonames.org/2638942
 "Ruswarp,Yorkshire,England",https://sws.geonames.org/2638928
@@ -4173,7 +4317,9 @@
 "Sambre-Oise Canal,France",https://sws.geonames.org/2976297
 "San Cassiano,Italy",https://sws.geonames.org/3168497
 "San Cristobal,New Mexico,USA",https://sws.geonames.org/5489525
+"San Diego,CA",https://sws.geonames.org/5391811
 "San Diego,California,USA",https://sws.geonames.org/5391811
+"San Domingo,Dominican Republic",http://www.wikidata.org/entity/Q34820
 "San Domingo,San Domingo",https://sws.geonames.org/3536684
 "San Francisco,CA",https://sws.geonames.org/3621911
 "San Francisco,California,USA",https://sws.geonames.org/3621911
@@ -4199,6 +4345,7 @@
 "Sanibel,Florida,USA",https://sws.geonames.org/4172052
 "Sanquhar,Dumfriesshire,Scotland",https://sws.geonames.org/2638520
 "Sanshui,China",https://sws.geonames.org/1789273
+"Santa Barbara,CA",https://sws.geonames.org/5392952
 "Santa Barbara,California,USA",https://sws.geonames.org/5392952
 "Santa Brigida,Canary Islands,Spain",https://sws.geonames.org/2511202
 "Santa Clara Valley,USA",https://sws.geonames.org/5393046
@@ -4237,6 +4384,7 @@
 "Scaleby,Cumberland,England",https://sws.geonames.org/2638445
 "Scalford,Leicestershire,England",https://sws.geonames.org/2638442
 "Scapa Flow,Scotland",https://sws.geonames.org/2638425
+"Scarborough,ON",https://sws.geonames.org/6948711
 "Scarborough,Yorkshire,England",https://sws.geonames.org/2638419
 "Scarborough,Yorkshire,England'",https://sws.geonames.org/2638419
 "Scarriff,Clare,Ireland",https://sws.geonames.org/2961574
@@ -4257,8 +4405,10 @@
 "Searsmont,Maine,USA",https://sws.geonames.org/4978095
 "Seaton Delaval,Northumberland,England",https://sws.geonames.org/2638273
 "Seaton,Devon,England",https://sws.geonames.org/2638276
+"Seattle,WA",https://sws.geonames.org/5809844
 "Seattle,Washington,USA",https://sws.geonames.org/5809844
 "Sebastian,Florida,USA",https://sws.geonames.org/4172372
+"Sebastopol,Crimea",https://sws.geonames.org/5394165
 "Sebastopol,Crimea,",https://sws.geonames.org/5394165
 "Sebastopol,Crimea,Russia",https://sws.geonames.org/5394165
 "Sebergham,Cumberland,England",https://sws.geonames.org/7296394
@@ -4289,6 +4439,7 @@
 "Seravalle,Italy",https://sws.geonames.org/6536447
 "Seringapatam,India",https://sws.geonames.org/1256807
 "Settrington,Yorkshire,England",https://sws.geonames.org/2638191
+"Sevastopol,Crimea",https://sws.geonames.org/694423
 "Sevastopol,Crimea,Ukraine",https://sws.geonames.org/694423
 "Sevenoaks,Kent,England",https://sws.geonames.org/2638187
 "Seville,Andalusia,Spain",https://sws.geonames.org/2510911
@@ -4297,12 +4448,14 @@
 "Shabwa,Persia",https://sws.geonames.org/1297246
 "Shabwa,Yemen",https://sws.geonames.org/70935
 "Shaftesbury,Dorset,England",https://sws.geonames.org/2638157
+"Shakenhurst,Worcestershire,England",http://www.wikidata.org/entity/Q17547621
 "Shaldon,Devon,England",https://sws.geonames.org/7293349
 "Shalford,Surrey,England",https://sws.geonames.org/9538923
 "Shamley Green,Surrey,England",https://sws.geonames.org/11593388
 "Shandong,China",https://sws.geonames.org/1796328
 "Shanghai,China",https://sws.geonames.org/1796236
 "Shankill,Dublin,Ireland",https://sws.geonames.org/2961523
+"Shannon River,Ireland",http://vocab.getty.edu/tgn/tgn/1129925
 "Shannon,Clare,Ireland",https://sws.geonames.org/3310247
 "Shap,Westmorland,England",https://sws.geonames.org/2638135
 "Shapinsay,Scotland",https://sws.geonames.org/2638133
@@ -4375,6 +4528,7 @@
 "Sirmione,Lake Garda,Italy",https://sws.geonames.org/3166499
 "Sitges,Spain",https://sws.geonames.org/3108877
 "Sittingbourne,Kent,England",https://sws.geonames.org/2637802
+"Six Nations Reserve,Canada",http://www.wikidata.org/entity/Q3457190
 "Sizewell,Suffolk,England",https://sws.geonames.org/2637796
 "Skagen,Denmark",https://sws.geonames.org/2613939
 "Skara Brae,Scotland",https://sws.geonames.org/2637786
@@ -4393,12 +4547,14 @@
 "Slaughterford,Wiltshire,England",https://sws.geonames.org/2637662
 "Sleaford,Lincolnshire,England",https://sws.geonames.org/2637659
 "Sledmere,Yorkshire,England",https://sws.geonames.org/2637656
+"Sligachan,Skye,Scotland",http://www.wikidata.org/entity/Q7540453
 "Sligo Town,Sligo,Ireland",https://sws.geonames.org/2961423
 "Sligo,Ireland",https://sws.geonames.org/2961423
 "Slindon,Sussex,England",https://sws.geonames.org/2637636
 "Sliven,Bulgaria",https://sws.geonames.org/727079
 "Slough,Berkshire,England",https://sws.geonames.org/2637627
 "Slough,Buckinghamshire,England",https://sws.geonames.org/2637627
+"Smallhythe,Kent,England",http://www.wikidata.org/entity/Q3486845
 "Smithfield,Middlesex,England",http://vocab.getty.edu/tgn/1030655
 "Snelston,Derbyshire,England",https://sws.geonames.org/2637583
 "Snowdonia,Wales",https://sws.geonames.org/2637568
@@ -4463,6 +4619,7 @@
 "Southport,Lancashire,England",https://sws.geonames.org/2637343
 "Southsea,Hampshire,England",https://sws.geonames.org/7294421
 "Southwark,Surrey,England",https://sws.geonames.org/2637299
+"Southwest,USA",http://www.wikidata.org/entity/Q858847
 "Southwold,Suffolk,England",https://sws.geonames.org/2637277
 "Soweto,South Africa",https://sws.geonames.org/953781
 "Spa,Belgium",https://sws.geonames.org/2786318
@@ -4476,8 +4633,10 @@
 "Spetchley,Worcestershire,England",https://sws.geonames.org/2637233
 "Spetsai,Greece",https://sws.geonames.org/253356
 "Spitalfields,Middlesex,England",https://sws.geonames.org/2637221
+"Spitalfields-Banglatown,Middlesex,England",http://www.wikidata.org/entity/Q56296120
 "Spithead,Hampshire,England",https://sws.geonames.org/2637219
 "Springburn,Lanarkshire,Scotland",https://sws.geonames.org/2637197
+"Springfield,MA",https://sws.geonames.org/4951788
 "Springfield,Massachusetts,USA",https://sws.geonames.org/4951788
 "Springs,East Rand,South Africa",https://sws.geonames.org/952865
 "Sprowston,Norfolk,England",https://sws.geonames.org/7295644
@@ -4489,6 +4648,7 @@
 "St Andrews,Fife,Scotland",https://sws.geonames.org/2638864
 "St Ann's,Jamaica",https://sws.geonames.org/11495653
 "St Asaph,Flintshire,Wales",https://sws.geonames.org/7297866
+"St Augustine,Florida,USA",http://www.wikidata.org/entity/Q487988
 "St Bees,Cumberland,England",https://sws.geonames.org/7298074
 "St Cloud,France",https://sws.geonames.org/2981041
 "St Columb Major,Cornwall,England",https://sws.geonames.org/7300036
@@ -4497,13 +4657,13 @@
 "St Gervais-les-Bains,Savoie,France",https://sws.geonames.org/6443036
 "St Gothard Pass,Switzerland",https://sws.geonames.org/2658828
 "St Helena,",https://sws.geonames.org/3370751
-"St Helena,",https://sws.geonames.org/3370751
 "St Helens,Lancashire,England",https://sws.geonames.org/2638785
 "St Helier,Jersey,England",https://sws.geonames.org/3042091
 "St Helier,Jersey,UK",https://sws.geonames.org/3042091
 "St Ives,Cornwall,England",https://sws.geonames.org/2638778
 "St John River,North America",https://sws.geonames.org/4977402
 "St John's Wood,Middlesex,England",https://sws.geonames.org/2638768
+"St John's,Antigua and Barbuda",http://vocab.getty.edu/tgn/tgn/7032071
 "St John's,Antigua",https://sws.geonames.org/3576022
 "St John's,Newfoundland and Labrador,Canada",https://sws.geonames.org/6324733
 "St Kew,Cornwall,England",https://sws.geonames.org/7293104
@@ -4511,6 +4671,7 @@
 "St Kitts,Caribbean",https://sws.geonames.org/3575181
 "St Lawrence River,Canada",https://sws.geonames.org/6156984
 "St Lawrence,Isle of Wight,England",https://sws.geonames.org/7932001
+"St Leonard's Hill,Berkshire,England",http://www.wikidata.org/entity/Q18162463
 "St Leonards,Sussex,England",https://sws.geonames.org/2638757
 "St Louis,Missouri,USA",https://sws.geonames.org/6955119
 "St Loup de Naud,France",https://sws.geonames.org/6613862
@@ -4600,6 +4761,7 @@
 "Stonehaven,Kincardineshire,Scotland",https://sws.geonames.org/2636814
 "Stonehouse,Devon,England",https://sws.geonames.org/2636811
 "Stoneleigh,Warwickshire,England",https://sws.geonames.org/2636809
+"Stonepitts,Kent,England",http://www.wikidata.org/entity/Q17545595
 "Stoney Creek,Ontario,Canada",https://sws.geonames.org/6157390
 "Stonham Aspall,Suffolk,England",https://sws.geonames.org/2636800
 "Stony Brook,New York,USA",https://sws.geonames.org/5139865
@@ -4607,6 +4769,7 @@
 "Stony Stratford,Buckinghamshire,England",https://sws.geonames.org/7301831
 "Storrington,Sussex,England",https://sws.geonames.org/2636786
 "Stoughton,Leicestershire,England",https://sws.geonames.org/2636780
+"Stour River,England",http://vocab.getty.edu/tgn/tgn/7011543
 "Stourbridge,Worcestershire,England",https://sws.geonames.org/2636769
 "Stourpaine,Dorset,England",https://sws.geonames.org/2636768
 "Stourton Caundle,Dorset,England",https://sws.geonames.org/2636764
@@ -4617,6 +4780,7 @@
 "Stowmarket,Suffolk,England",https://sws.geonames.org/2636749
 "Stowting,Kent,England",https://sws.geonames.org/2636746
 "Strabane,Tyrone,Ireland",https://sws.geonames.org/2636745
+"Strabane,Tyrone,Northern Ireland",https://sws.geonames.org/2636745
 "Stradbroke,Suffolk,England",https://sws.geonames.org/2636738
 "Stradishall,Stradishall,England",https://sws.geonames.org/2636737
 "Stradishall,Suffolk,England",https://sws.geonames.org/2636737
@@ -4630,6 +4794,7 @@
 "Stratford-upon-Avon,Warwickshire,England",https://sws.geonames.org/2636713
 "Strathaven,Lanarkshire,Scotland",https://sws.geonames.org/2636710
 "Strathclyde,Scotland",https://sws.geonames.org/2636703
+"Strathnaver,Scotland",http://www.wikidata.org/entity/Q1845392
 "Strathpeffer,Ross-shire,Scotland",https://sws.geonames.org/2636689
 "Stratton,Hampshire,England",https://sws.geonames.org/2636682
 "Streatham,Surrey,England",https://sws.geonames.org/2636675
@@ -4647,7 +4812,6 @@
 "Suez Canal,Egypt",https://sws.geonames.org/347712
 "Suez,Egypt",https://sws.geonames.org/359796
 "Suffern,New York,USA",https://sws.geonames.org/5140072
-"Suffolk,England",https://sws.geonames.org/11609019
 "Suffolk,England",https://sws.geonames.org/11609019
 "Sulawesi,Indonesia",https://sws.geonames.org/9062340
 "Sullington,Sussex,England",https://sws.geonames.org/7292757
@@ -4689,8 +4853,10 @@
 "Sydenham,Kent,England",https://sws.geonames.org/6693031
 "Sydmonton,Hampshire,England",http://vocab.getty.edu/tgn/7026939
 "Sydney,Australia",https://sws.geonames.org/2147714
+"Sydney,New South Wales",https://sws.geonames.org/2147714
 "Sydney,New South Wales,",https://sws.geonames.org/2147714
 "Sydney,New South Wales,Australia",https://sws.geonames.org/2147714
+"Syracuse,NY",https://sws.geonames.org/5140405
 "Syracuse,New York,USA",https://sws.geonames.org/5140405
 "Syracuse,Sicily,Italy",https://sws.geonames.org/2523083
 "São Francisco River,Brazil",https://sws.geonames.org/9165693
@@ -4736,6 +4902,7 @@
 "Tayport,Fife,Scotland",https://sws.geonames.org/2636158
 "Tbilisi,Georgia",https://sws.geonames.org/611717
 "Teddington,Middlesex,England",https://sws.geonames.org/2636146
+"Tees River,England",http://www.wikidata.org/entity/Q515022
 "Tegna,Switzerland",https://sws.geonames.org/7287287
 "Tehran,Iran",https://sws.geonames.org/112931
 "Tehran,Persia",https://sws.geonames.org/112931
@@ -4765,6 +4932,7 @@
 "Thames Ditton,Surrey,England",https://sws.geonames.org/2636062
 "Thames River,England",https://sws.geonames.org/2636063
 "Thames Valley,England",https://sws.geonames.org/7116407
+"Thames,England",http://www.wikidata.org/entity/Q19686
 "Thatcham,Berkshire,England",https://sws.geonames.org/2636049
 "Thaxted,Essex,England",https://sws.geonames.org/2636047
 "The Ardennes,Belgium",http://vocab.getty.edu/tgn/7017217
@@ -4779,6 +4947,7 @@
 "Thetford,Norfolk,England",https://sws.geonames.org/2636032
 "Thika,Kenya",https://sws.geonames.org/179330
 "Thirsk,Yorkshire,England",https://sws.geonames.org/2636021
+"Thiruvannamalai,India",http://www.wikidata.org/entity/Q162830
 "Thompson River,Canada",https://sws.geonames.org/6165523
 "Thornaby-on-Tees,Yorkshire,England",https://sws.geonames.org/2636005
 "Thornbury,Gloucestershire,England",https://sws.geonames.org/2636003
@@ -4826,6 +4995,8 @@
 "Tokyo,Japan",https://sws.geonames.org/1850147
 "Toledo,Spain",https://sws.geonames.org/2510409
 "Tolleshunt D'Arcy,Essex,England",https://sws.geonames.org/2635719
+"Tomb,Norway",http://www.wikidata.org/entity/Q68022655
+"Tomhanick,New York,USA",http://www.wikidata.org/entity/Q600301
 "Tomis,Romania",https://sws.geonames.org/680963
 "Tomsk,Russia",https://sws.geonames.org/1489425
 "Tonbridge,Kent,England",https://sws.geonames.org/2635703
@@ -4841,14 +5012,17 @@
 "Tor Bay,England",https://sws.geonames.org/2635679
 "Torcello,Italy",https://sws.geonames.org/3165538
 "Toronto,,",https://sws.geonames.org/6167865
+"Toronto,Canada",https://sws.geonames.org/6167865
 "Toronto,ON",https://sws.geonames.org/6167865
 "Toronto,Ontario,Canada",https://sws.geonames.org/6167865
 "Toronto,Upper Canada,Canada",https://sws.geonames.org/6167865
 "Torphins,Aberdeenshire,Scotland",https://sws.geonames.org/2635652
+"Torquay,Devon",https://sws.geonames.org/2635650
 "Torquay,Devon,",https://sws.geonames.org/2635650
 "Torquay,Devon,England",https://sws.geonames.org/2635650
 "Torremolinos,Spain",https://sws.geonames.org/2510281
 "Torthorwald,Dumfriesshire,Scotland",https://sws.geonames.org/2635625
+"Totleigh Barton,Devon,England",http://www.wikidata.org/entity/Q26611980
 "Totnes,Devon,England",https://sws.geonames.org/2635610
 "Totowa,NJ",https://sws.geonames.org/5105455
 "Tottenham,Middlesex,England",https://sws.geonames.org/2635608
@@ -4870,7 +5044,9 @@
 "Travemünde,Germany",https://sws.geonames.org/2821480
 "Trebetherick,Cornwall,England",https://sws.geonames.org/6324518
 "Trebizond,Turkey",https://sws.geonames.org/738648
+"Tregerthen,Cornwall,England",http://www.wikidata.org/entity/Q116888773
 "Tregynon,Montgomeryshire,Wales",https://sws.geonames.org/2635526
+"Trent River,England",http://vocab.getty.edu/tgn/tgn/1131023
 "Trent Vale,Staffordshire,England",https://sws.geonames.org/2635497
 "Trier,Germany",https://sws.geonames.org/2821164
 "Trier,Prussia",https://sws.geonames.org/2821164
@@ -4890,6 +5066,7 @@
 "Truro,Cornwall,England",https://sws.geonames.org/2635412
 "Tryfan,Wales",https://sws.geonames.org/6940974
 "Tshwane,South Africa",https://sws.geonames.org/964137
+"Tsingkiangpu,China",http://www.wikidata.org/entity/Q27661960
 "Tuamgraney,Clare,Ireland",https://sws.geonames.org/2961165
 "Tuckahoe,New York,USA",https://sws.geonames.org/5141528
 "Tucson,Arizona,USA",https://sws.geonames.org/5318313
@@ -4911,13 +5088,14 @@
 "Twyford,Buckinghamshire,England",https://sws.geonames.org/2635295
 "Twywell,Northamptonshire,England",https://sws.geonames.org/2635289
 "Tydd St Mary,Lincolnshire,England",https://sws.geonames.org/7299172
+"Tyne River,England",http://vocab.getty.edu/tgn/tgn/1131175
 "Tynemouth,Northumberland,England",https://sws.geonames.org/2635269
 "Tyneside,England",https://sws.geonames.org/2635268
 "Tyre,Lebanon",https://sws.geonames.org/267008
 "Tyrol,Austria",https://sws.geonames.org/2763586
 "Tyrol,Italy",http://vocab.getty.edu/tgn/7030436
 "Tyrone,Ireland",https://sws.geonames.org/3312286
-"Tyrone,Northern Ireland",https://sws.geonames.org/5515949
+"Tyrone,Northern Ireland",https://sws.geonames.org/3312286
 "Tübingen,Germany",https://sws.geonames.org/2820860
 "USA,",https://sws.geonames.org/6252001
 "Udaipur,Rajasthan,India",https://sws.geonames.org/1253989
@@ -4941,11 +5119,13 @@
 "Up Holland,Lancashire,England",https://sws.geonames.org/7301452
 "Upminster,Essex,England",https://sws.geonames.org/2635150
 "Upper Canada,Canada",https://sws.geonames.org/7304072
+"Upper Halliford,Surrey,England",http://www.wikidata.org/entity/Q7898677
 "Upper Norwood,Surrey,England",https://sws.geonames.org/2635113
 "Upper Winchendon,Buckinghamshire,England",https://sws.geonames.org/2635102
 "Uppsala,",https://sws.geonames.org/2666199
 "Uppsala,Sweden",https://sws.geonames.org/2666199
 "Upshire,Essex,England",https://sws.geonames.org/6690800
+"Upton Cross,Cornwall,England",http://www.wikidata.org/entity/Q934556
 "Upton on Severn,Worcestershire,England",https://sws.geonames.org/2635080
 "Upton,Berkshire,England",https://sws.geonames.org/2635093
 "Upwey,Dorset,England",https://sws.geonames.org/2635077
@@ -4953,6 +5133,7 @@
 "Ur,Mesopotamia",https://sws.geonames.org/93199
 "Ural Mountains,Russia",https://sws.geonames.org/1488441
 "Urbana,Illinois,USA",https://sws.geonames.org/4914570
+"Urbana-Champaign,Illinois,USA",http://www.wikidata.org/entity/Q2948658
 "Urbino,Italy",https://sws.geonames.org/3165035
 "Usk,Monmouthshire,Wales",https://sws.geonames.org/2635052
 "Utah,USA",https://sws.geonames.org/4832154
@@ -4970,6 +5151,7 @@
 "Valparaiso,Chile",https://sws.geonames.org/3868626
 "Van Diemen's Land,Australia",https://sws.geonames.org/2147292
 "Vancouver Island,Canada",https://sws.geonames.org/8630140
+"Vancouver,BC",https://sws.geonames.org/6173331
 "Vancouver,British Columbia,Canada",https://sws.geonames.org/6173331
 "Varanasi,India",https://sws.geonames.org/1253405
 "Varazze,Italy",https://sws.geonames.org/3164709
@@ -4996,6 +5178,7 @@
 "Vicenza,Italy",https://sws.geonames.org/3164419
 "Vichy,France",https://sws.geonames.org/2969392
 "Victoria,Australia",https://sws.geonames.org/2145234
+"Victoria,BC",https://sws.geonames.org/6174041
 "Victoria,British Columbia,Canada",https://sws.geonames.org/6174041
 "Victoria,Hong Kong,China",https://sws.geonames.org/10117340
 "Vienna,Austria",https://sws.geonames.org/2761369
@@ -5060,6 +5243,7 @@
 "Warminster,Wiltshire,England",https://sws.geonames.org/2634755
 "Warnham,Sussex,England",https://sws.geonames.org/2634749
 "Warrington,Cheshire,England",https://sws.geonames.org/2634739
+"Warrington,Lancashire",https://sws.geonames.org/2634739
 "Warrington,Lancashire,",https://sws.geonames.org/2634739
 "Warrington,Lancashire,England",https://sws.geonames.org/2634739
 "Warrington,Yorkshire,England",https://sws.geonames.org/2634739
@@ -5068,6 +5252,8 @@
 "Warwick,Warwickshire,England",https://sws.geonames.org/2634725
 "Warwickshire,England",https://sws.geonames.org/11609021
 "Wasdale Head,Cumberland,England",https://sws.geonames.org/8199022
+"Washington,D.C.",https://sws.geonames.org/4140963
+"Washington,DC",https://sws.geonames.org/4140963
 "Washington,DC,USA",https://sws.geonames.org/4140963
 "Washington,District of Columbia,USA",https://sws.geonames.org/4140963
 "Washington,District of Columbria,USA",https://sws.geonames.org/4140963
@@ -5077,6 +5263,7 @@
 "Waterford,Ireland",https://sws.geonames.org/2960992
 "Waterhouses,Staffordshire,England",https://sws.geonames.org/2634692
 "Waterloo,Belgium",https://sws.geonames.org/2783985
+"Waterloo,ON",https://sws.geonames.org/6176823
 "Watersfield,Sussex,England",https://sws.geonames.org/10376351
 "Watertown,Massachusetts,USA",https://sws.geonames.org/4954611
 "Waterville,Maine,USA",https://sws.geonames.org/4982236
@@ -5087,6 +5274,7 @@
 "Watrous,New Mexico,USA",https://sws.geonames.org/5497204
 "Watson's Bay,New South Wales,Australia",https://sws.geonames.org/2144391
 "Watton,Norfolk,England",https://sws.geonames.org/2634661
+"Waveney River,England",http://vocab.getty.edu/tgn/tgn/1131658
 "Wavertree,Lancashire,England",https://sws.geonames.org/2634646
 "Wayland,Massachusetts,USA",https://sws.geonames.org/4954654
 "Weald,England",https://sws.geonames.org/2634639
@@ -5119,17 +5307,21 @@
 "Wengen,Switzerland",https://sws.geonames.org/2658020
 "Wensleydale,England",https://sws.geonames.org/2634530
 "Wentworth,Yorkshire,England",https://sws.geonames.org/7300750
+"Wesel,Germany",https://sws.geonames.org/6557521
 "Wessex,England",https://sws.geonames.org/7118030
 "West Africa,",http://vocab.getty.edu/tgn/7032927
 "West Bengal,India",https://sws.geonames.org/1252881
+"West Bilney,Norfolk,England",http://vocab.getty.edu/tgn/tgn/7030708
 "West Bromwich,Staffordshire,England",https://sws.geonames.org/2634491
 "West Camel,Somerset,England",https://sws.geonames.org/6693235
 "West Challow,Berkshire,England",https://sws.geonames.org/2634474
 "West Challow,Oxfordshire,England",https://sws.geonames.org/2634474
 "West Chester,Pennsylvania,USA",https://sws.geonames.org/4562144
 "West Coker,Somerset,England",https://sws.geonames.org/2634468
+"West Country,England",http://www.wikidata.org/entity/Q1344070
 "West Ham,Essex,England",https://sws.geonames.org/2634403
 "West Hatfield,Massachusetts,USA",https://sws.geonames.org/4954968
+"West Kirkby,Lancashire,England",http://www.wikidata.org/entity/Q633627
 "West Lothian,Scotland",https://sws.geonames.org/2634354
 "West Lulworth,Dorset,England",https://sws.geonames.org/2634353
 "West Malling,Kent,England",https://sws.geonames.org/2634349
@@ -5158,11 +5350,14 @@
 "Weston Turville,Buckinghamshire,England",https://sws.geonames.org/2634307
 "Weston,Northamptonshire,England",https://sws.geonames.org/2634319
 "Weston-super-Mare,Somerset,England",https://sws.geonames.org/2634308
+"Westport,CT",https://sws.geonames.org/4845585
+"Westport,Connecticut",https://sws.geonames.org/4845585
 "Westport,Connecticut,USA",https://sws.geonames.org/4845585
 "Westport,Mayo,Ireland",https://sws.geonames.org/2960970
 "Westport,Wisconsin,USA",https://sws.geonames.org/5278705
 "Westray,Scotland",https://sws.geonames.org/2634285
 "Westward Ho!,Devon,England",https://sws.geonames.org/2634240
+"Wexford Town,Wexford,Ireland",https://sws.geonames.org/2960964
 "Wexford,Ireland",https://sws.geonames.org/2960964
 "Weybridge,Surrey,England",https://sws.geonames.org/2634204
 "Weymouth,Dorset,England",https://sws.geonames.org/2634202
@@ -5197,6 +5392,7 @@
 "Wickham,Hampshire,England",https://sws.geonames.org/2633974
 "Wickhambrook,Suffolk,England",https://sws.geonames.org/2633972
 "Wickhamford,Worcestershire,England",https://sws.geonames.org/8224212
+"Wicklow Town,Wicklow,Ireland",https://sws.geonames.org/2960935
 "Wicklow,Ireland",https://sws.geonames.org/2960935
 "Widdrington,Northumberland,England",https://sws.geonames.org/2633962
 "Widford,Hertfordshire,England",https://sws.geonames.org/2633956
@@ -5232,6 +5428,7 @@
 "Windesheim,Netherlands",https://sws.geonames.org/2744361
 "Windlesham,Berkshire,England",https://sws.geonames.org/2633849
 "Windmill Hill,Sussex,England",https://sws.geonames.org/2633846
+"Windsor Forest,England",http://vocab.getty.edu/tgn/tgn/1103505
 "Windsor,Berkshire,England",https://sws.geonames.org/2633842
 "Windsor,Canada West,Canada",https://sws.geonames.org/6182962
 "Windsor,Kent,England",https://sws.geonames.org/2633842
@@ -5242,6 +5439,7 @@
 "Windward Islands,",https://sws.geonames.org/3578263
 "Wingham,Kent,England",https://sws.geonames.org/2633821
 "Wingham,Ontario,Canada",https://sws.geonames.org/6183141
+"Winnipeg,Manitoba",https://sws.geonames.org/6183235
 "Winnipeg,Manitoba,Canada",https://sws.geonames.org/6183235
 "Winslade,Devon,England",https://sws.geonames.org/7296305
 "Winslow,Buckinghamshire,England",https://sws.geonames.org/2633808
@@ -5275,6 +5473,7 @@
 "Wollombi,New South Wales,Australia",https://sws.geonames.org/2143250
 "Wolvercote,Oxfordshire,England",https://sws.geonames.org/10376993
 "Wolverhampton,Staffordshire,England",https://sws.geonames.org/2633691
+"Wooburn Green,Buckinghamshire,England",http://www.wikidata.org/entity/Q8032138
 "Wooburn,Buckinghamshire,England",https://sws.geonames.org/2633675
 "Woodbridge,Suffolk,England",https://sws.geonames.org/2633671
 "Woodcote,Shropshire,England",https://sws.geonames.org/2633664
@@ -5295,6 +5494,7 @@
 "Worcester,Worcestershire,England",https://sws.geonames.org/2633563
 "Worcester,Worcestershrre,England",https://sws.geonames.org/2633563
 "Worcestershire,England",https://sws.geonames.org/11609023
+"Worminghurst,Sussex,England",http://www.wikidata.org/entity/Q7969627
 "Wormleighton,Warwickshire,England",https://sws.geonames.org/2633536
 "Worms,Germany",https://sws.geonames.org/2806142
 "Wortham,Suffolk,England",https://sws.geonames.org/7301363
@@ -5310,6 +5510,8 @@
 "Wuhan,China",https://sws.geonames.org/1791247
 "Wuxi,Lake Tai,China",https://sws.geonames.org/1790923
 "Wybunbury,Cheshire,England",https://sws.geonames.org/2633466
+"Wye River,England",http://vocab.getty.edu/tgn/tgn/7011102
+"Wye Valley,Wales",http://www.wikidata.org/entity/Q24670626
 "Wye,Kent,England",https://sws.geonames.org/2633460
 "Wyke,Surrey,England",https://sws.geonames.org/2633457
 "Wylam,Northumberland,England",https://sws.geonames.org/2633453
@@ -5343,6 +5545,7 @@
 "Yoxall,Staffordshire,England",https://sws.geonames.org/2633345
 "Yoxford,Suffolk,England",https://sws.geonames.org/2633344
 "Ypres,Belgium",https://sws.geonames.org/2795100
+"Ysgafell,Montgomeryshire,Wales",http://www.wikidata.org/entity/Q8059705
 "Yucatán,Mexico",https://sws.geonames.org/3514211
 "Yukon Territory,Canada",https://sws.geonames.org/6185811
 "Zagreb,Croatia",https://sws.geonames.org/3186886
@@ -5361,23 +5564,39 @@
 "Zurich,Switzerland",https://sws.geonames.org/2657896
 "Zutphen,Netherlands",https://sws.geonames.org/2743608
 "lago d'Iseo,Italy",https://sws.geonames.org/3175446
+"Årsta,Sweden",http://www.wikidata.org/entity/Q1782644
 "Île de France,France",https://sws.geonames.org/3012874
 Abyssinia,https://sws.geonames.org/337996
+Accra,https://sws.geonames.org/2306104
+Aegean Sea,https://sws.geonames.org/265695
 Afghanistan,https://sws.geonames.org/1149361
 Africa,https://sws.geonames.org/6255146
 Albania,https://sws.geonames.org/783754
+Aleutian Islands,https://sws.geonames.org/5879148
 Algeria,https://sws.geonames.org/2589581
+Alps,https://sws.geonames.org/2661786
+Amazon River,https://sws.geonames.org/3407729
 America,https://sws.geonames.org/10861432
 Americas,https://sws.geonames.org/10861432
+Andes,https://sws.geonames.org/3689899
 Angola,https://sws.geonames.org/3351879
 Antarctica,https://sws.geonames.org/6632699
 Antigua and Barbuda,https://sws.geonames.org/3576396
+Antigua,https://sws.geonames.org/3576395
 Antilles,https://sws.geonames.org/3491552
+Appleby-in-Westmorland,https://sws.geonames.org/8224207
 Arabia,https://sws.geonames.org/6957698
+Arabian Peninsula,https://sws.geonames.org/6957697
+Arctic,https://sws.geonames.org/10941926
 Argentina,https://sws.geonames.org/3865483
 Armenia,https://sws.geonames.org/174982
+Arnside,https://sws.geonames.org/2657029
+Ashtead,https://sws.geonames.org/2656924
+Asia Minor,https://sws.geonames.org/323835
 Asia,https://sws.geonames.org/6255147
 Assyria,https://sws.geonames.org/8378483
+Atlantic Ocean,https://sws.geonames.org/3358844
+Atlas Mountains,https://sws.geonames.org/2556769
 Auckland,https://sws.geonames.org/2193733
 Australasia,http://vocab.getty.edu/tgn/7018842
 Australia,https://sws.geonames.org/2077456
@@ -5387,81 +5606,146 @@ Babylonia,https://sws.geonames.org/3471239
 Bahama,https://sws.geonames.org/3572887
 Bahamas,https://sws.geonames.org/3572887
 Bahrain,https://sws.geonames.org/290291
+Bali,https://sws.geonames.org/1277539
 Balkans,https://sws.geonames.org/685608
+Baltic Sea,https://sws.geonames.org/2633321
 Baltic,https://sws.geonames.org/5892408
 Bangladesh,https://sws.geonames.org/1210997
 Barbados,https://sws.geonames.org/3374084
 Barbary States,http://vocab.getty.edu/tgn/7025558
-Barbary,https://sws.geonames.org/2219875
+Barbary,http://vocab.getty.edu/tgn/7025558
 Bechuanaland,http://vocab.getty.edu/tgn/6000963
+Beetham,https://sws.geonames.org/2656008
 Belarus,https://sws.geonames.org/630336
 Belgian Congo,https://sws.geonames.org/203312
 Belgium,https://sws.geonames.org/2802361
 Belize,https://sws.geonames.org/3582678
+Berezhany,https://sws.geonames.org/712374
 Bhutan,https://sws.geonames.org/1252634
+Black Sea,https://sws.geonames.org/630673
+Blue Nile,https://sws.geonames.org/408654
+Bodinnick,https://sws.geonames.org/12263892
 Bolivia,https://sws.geonames.org/3923057
 Borneo,https://sws.geonames.org/1648148
 Bosnia and Hercegovina,https://sws.geonames.org/3277605
+Boston,https://sws.geonames.org/4930956
 Botswana,https://sws.geonames.org/933860
+Boyne,https://sws.geonames.org/1016529
 Brazil,https://sws.geonames.org/3469034
+Brenner Pass,https://sws.geonames.org/2781423
+Brington,https://sws.geonames.org/7301944
+Bristol,https://sws.geonames.org/2654675
 Britain,https://sws.geonames.org/6301961
 British Guiana,https://sws.geonames.org/3378535
+British Virgin Islands,https://sws.geonames.org/3577718
+Bukhara,https://sws.geonames.org/1217662
 Bulgaria,https://sws.geonames.org/732800
 Burma,https://sws.geonames.org/1327865
+Calcutta,https://sws.geonames.org/1275004
 Cambodia,https://sws.geonames.org/1831722
 Cameroon,https://sws.geonames.org/2233387
+Camperduin,https://sws.geonames.org/2758020
 Canada,https://sws.geonames.org/6251999
+Canary Islands,https://sws.geonames.org/2520308
+Canton,https://sws.geonames.org/5149222
 Cape Verde Islands,https://sws.geonames.org/3374818
 Caribbean,https://sws.geonames.org/7729891
+Carpathian Mountains,https://sws.geonames.org/682674
+Caspian Sea,https://sws.geonames.org/630671
+Cawnpore,https://sws.geonames.org/1267995
 Central America,https://sws.geonames.org/7729892
 Chad,https://sws.geonames.org/2434508
+Chesapeake Bay,https://sws.geonames.org/4351177
+Chester,https://sws.geonames.org/2653228
 Chile,https://sws.geonames.org/3895114
 China,https://sws.geonames.org/1814991
+Chirikof Island,https://sws.geonames.org/5859276
+Cockermouth,https://sws.geonames.org/2652676
 Colombia,https://sws.geonames.org/3686110
+Colorado River,https://sws.geonames.org/4013157
+Congo Republic,https://sws.geonames.org/2260494
 Congo,https://sws.geonames.org/2260494
+Coniston,https://sws.geonames.org/2652457
+Constantinople,https://sws.geonames.org/745044
+Conwy,https://sws.geonames.org/2652426
+Cordilleras,https://sws.geonames.org/4030283
+County Wicklow,https://sws.geonames.org/2960935
 Croatia,https://sws.geonames.org/3202326
 Cuba,https://sws.geonames.org/3562981
 Cyprus,https://sws.geonames.org/146669
 Czech Republic,https://sws.geonames.org/3077311
 Czechoslovakia,https://sws.geonames.org/8505031
+DR Congo,https://sws.geonames.org/203312
+Dead Sea,https://sws.geonames.org/5114639
 Democratic Republic of Congo,https://sws.geonames.org/203312
 Denmark,https://sws.geonames.org/2623032
+Dingwall,https://sws.geonames.org/2651245
 Dominica,https://sws.geonames.org/3575830
 Dominican Republic,https://sws.geonames.org/3508796
 Dutch East Indies,https://sws.geonames.org/1643084
+East Africa,https://sws.geonames.org/7729889
 East Bengal,http://vocab.getty.edu/tgn/1000105
 East Indies,https://sws.geonames.org/1636682
+Eastern Africa,https://sws.geonames.org/7729889
 Eastern Europe,https://sws.geonames.org/7729884
 Ecuador,https://sws.geonames.org/3658394
+Edinburgh,https://sws.geonames.org/2650225
 Egypt,https://sws.geonames.org/357994
 El Salvador,https://sws.geonames.org/3585968
 England,https://sws.geonames.org/6269131
+English Channel,https://sws.geonames.org/2649991
 English,https://sws.geonames.org/5948854
 Eritrea,https://sws.geonames.org/338010
 Estonia,https://sws.geonames.org/453733
 Ethiopia,https://sws.geonames.org/337996
 Europe,https://sws.geonames.org/6255148
+Falkland Islands,https://sws.geonames.org/3474414
+Far East,http://www.wikidata.org/entity/Q42225
+Felsted,https://sws.geonames.org/2649574
 Fiji,https://sws.geonames.org/2205218
 Finland,https://sws.geonames.org/660013
 France,https://sws.geonames.org/3017382
+Francistown,https://sws.geonames.org/933778
 French Indo-China,http://vocab.getty.edu/tgn/7016879
 GDR,https://sws.geonames.org/8354410
 Gabon,https://sws.geonames.org/2400553
+Gadshill,https://sws.geonames.org/13280975
 Gambia,https://sws.geonames.org/2413451
+Gangamula,https://sws.geonames.org/10856787
+Gaza Strip,https://sws.geonames.org/281132
 Georgia,https://sws.geonames.org/614540
 Germany,https://sws.geonames.org/2921044
 Ghana,https://sws.geonames.org/2300660
+Ghent,https://sws.geonames.org/2797656
+Gibraltar,https://sws.geonames.org/2411585
+Gillingham,https://sws.geonames.org/2648658
+Glenridding,https://sws.geonames.org/2648443
 Gold Coast,https://sws.geonames.org/2165087
+Grasmere,https://sws.geonames.org/2648201
+Great Tew,https://sws.geonames.org/2648006
 Greece,https://sws.geonames.org/390903
 Greenland,https://sws.geonames.org/3425505
 Grenada,https://sws.geonames.org/3580239
 Guatemala,https://sws.geonames.org/3595528
+Gulf of Finland,https://sws.geonames.org/453749
 Guyana,https://sws.geonames.org/3378535
+Hadrian's Wall,https://sws.geonames.org/8739739
 Haiti,https://sws.geonames.org/3723988
+Hanover,https://sws.geonames.org/3490145
+Harrogate,https://sws.geonames.org/2647428
+Hellevoetsluis,https://sws.geonames.org/2754454
+Himalaya Mountains,https://sws.geonames.org/1252558
+Himalayas,https://sws.geonames.org/1252558
 Holland,https://sws.geonames.org/2750405
+Hong Kong,https://sws.geonames.org/1819729
+Hudson River,https://sws.geonames.org/4201648
 Hungary,https://sws.geonames.org/719819
 Iceland,https://sws.geonames.org/2629691
+India,https://sws.geonames.org/1269750
+Indian Ocean,https://sws.geonames.org/1545739
 Indonesia,https://sws.geonames.org/1643084
+Indus River,https://sws.geonames.org/1115007
+Innerleithen,https://sws.geonames.org/2646172
 Iran,https://sws.geonames.org/130758
 Iraq,https://sws.geonames.org/99237
 Ireland,https://sws.geonames.org/2963597
@@ -5472,20 +5756,38 @@ Jamaica,https://sws.geonames.org/3489940
 Japan,https://sws.geonames.org/1861060
 Java,https://sws.geonames.org/1642673
 Jordan,https://sws.geonames.org/248816
+Kaliningrad Oblast,https://sws.geonames.org/554230
 Kazakhstan,https://sws.geonames.org/1522867
+Kelso,https://sws.geonames.org/2645849
+Kendal,https://sws.geonames.org/2645826
 Kenya,https://sws.geonames.org/192950
+Keswick,https://sws.geonames.org/2645756
+Khyber Pass,https://sws.geonames.org/1162005
+Kirkby Lonsdale,https://sws.geonames.org/2645308
+Kitzbühel,https://sws.geonames.org/2774347
+Kolkata,https://sws.geonames.org/1275004
 Korea,https://sws.geonames.org/7106279
 Kuwait,https://sws.geonames.org/285570
 Kyrgyzstan,https://sws.geonames.org/1527747
+Lake Ladoga,https://sws.geonames.org/537232
+Lake Tanganyika,https://sws.geonames.org/175122
+Lake Victoria,https://sws.geonames.org/2145239
+Lancashire,https://sws.geonames.org/11609047
+Langloan,https://sws.geonames.org/13265356
+Lanzarote,https://sws.geonames.org/2515699
 Laos,https://sws.geonames.org/1655842
+Latin America,http://vocab.getty.edu/tgn/tgn/4006155
 Latvia,https://sws.geonames.org/458258
 Lebanon,https://sws.geonames.org/272103
+Leeward Islands,https://sws.geonames.org/3513538
 Lesotho,https://sws.geonames.org/932692
 Liberia,https://sws.geonames.org/2275384
 Libya,https://sws.geonames.org/2215636
 Lithuania,https://sws.geonames.org/597427
+Liverpool,https://sws.geonames.org/2644210
 Llandysul,https://sws.geonames.org/2644107
 London,https://sws.geonames.org/2643743
+Longhorsley,https://sws.geonames.org/2643677
 Luxembourg,https://sws.geonames.org/2960316
 Macedonia,https://sws.geonames.org/718075
 Madagascar,https://sws.geonames.org/1062947
@@ -5493,75 +5795,136 @@ Malawi,https://sws.geonames.org/927384
 Malaysia,https://sws.geonames.org/1733045
 Maldives,https://sws.geonames.org/1282028
 Malta,https://sws.geonames.org/2562770
+Manningham,https://sws.geonames.org/13271811
 Mauritius,https://sws.geonames.org/934292
+Mediterranean Sea,https://sws.geonames.org/363196
+Mediterranean,https://sws.geonames.org/9962130
 Melanesia,https://sws.geonames.org/7729899
+Melbourne,https://sws.geonames.org/2158177
 Mexico,https://sws.geonames.org/3530597
 Middle East,https://sws.geonames.org/6269133
+Milnthorpe,https://sws.geonames.org/2642482
+Minneapolis,https://sws.geonames.org/5037649
+Minsk,https://sws.geonames.org/625144
 Monaco,https://sws.geonames.org/2993458
 Mongolia,https://sws.geonames.org/2029969
+Montcenis,https://sws.geonames.org/2992852
 Montenegro,https://sws.geonames.org/3194884
+Montserrat,https://sws.geonames.org/3578097
 Morocco,https://sws.geonames.org/2542007
+Mosi-oa-Tunya,https://sws.geonames.org/906001
+Mountmellick,https://sws.geonames.org/2962476
 Mozambique,https://sws.geonames.org/1036973
 Myanmar,https://sws.geonames.org/1327865
+Nablus,https://sws.geonames.org/282615
 Nepal,https://sws.geonames.org/1282988
 Netherlands,https://sws.geonames.org/2750405
+New York City,https://sws.geonames.org/5128581
+New York,https://sws.geonames.org/5128581
 New Zealand,https://sws.geonames.org/2186224
+Newcastle upon Tyne,https://sws.geonames.org/2641673
+Newholm,https://sws.geonames.org/12266003
 Nicaragua,https://sws.geonames.org/3617476
 Niger,https://sws.geonames.org/2440476
 Nigeria,https://sws.geonames.org/2328926
+Nile River,https://sws.geonames.org/351036
+Nile,https://sws.geonames.org/351036
+North Africa,http://vocab.getty.edu/tgn/7016886
 North America,https://sws.geonames.org/6255149
+North Sea,https://sws.geonames.org/5129210
 Northern Ireland,https://sws.geonames.org/2641364
 Norway,https://sws.geonames.org/3144096
+Nottinghamshire,https://sws.geonames.org/11609044
 Oman,https://sws.geonames.org/286963
+Orkneys,https://sws.geonames.org/2640924
 Ottoman Empire,http://vocab.getty.edu/tgn/7024412
+Oxford,https://sws.geonames.org/2640729
 Pacific Islands,https://sws.geonames.org/6942348
+Pacific Ocean,https://sws.geonames.org/2363254
+Pacific,https://sws.geonames.org/6095929
 Pakistan,https://sws.geonames.org/1168579
 Palestinian territories,https://sws.geonames.org/6254930
+Panama Canal,https://sws.geonames.org/3703441
 Panama,https://sws.geonames.org/3703430
 Papua New Guinea,https://sws.geonames.org/2088628
 Paraguay,https://sws.geonames.org/3437598
 Paris,https://sws.geonames.org/2988507
+Pateley Bridge,https://sws.geonames.org/2640579
+Penrith,https://sws.geonames.org/2640416
 Persia,https://sws.geonames.org/4871055
 Peru,https://sws.geonames.org/3932488
+Pervyse,https://sws.geonames.org/2789160
 Philippines,https://sws.geonames.org/1694008
+Place String,URI
 Poland,https://sws.geonames.org/798544
 Portugal,https://sws.geonames.org/2264397
 Puerto Rico,https://sws.geonames.org/4568127
+Pyrenees,https://sws.geonames.org/3112616
 Qatar,https://sws.geonames.org/289688
+Ragley Hall,https://sws.geonames.org/9353155
+Red Sea,https://sws.geonames.org/408646
 Republic of Singapore,https://sws.geonames.org/1880251
+Rhine River,https://sws.geonames.org/2748179
 Rhodesia,https://sws.geonames.org/962414
+Rio Grande,https://sws.geonames.org/3451138
+River Congo,https://sws.geonames.org/2241717
+River Gambia,https://sws.geonames.org/2413452
+River Ganges,https://sws.geonames.org/1819096
+River Niger,https://sws.geonames.org/2328928
+River Nile,https://sws.geonames.org/408664
+River Rhone,https://sws.geonames.org/2983752
+Roadwater,https://sws.geonames.org/12266307
+Rodhuish,https://sws.geonames.org/13281599
 Romania,https://sws.geonames.org/798549
 Rome,https://sws.geonames.org/3169070
+Ross Port,https://sws.geonames.org/2961670
 Russian Federation,https://sws.geonames.org/2017370
 Rwanda,https://sws.geonames.org/49518
+Sahara,https://sws.geonames.org/1366117
+Samarkand,https://sws.geonames.org/1216265
 Samoa,https://sws.geonames.org/4034894
 San Domingo,https://sws.geonames.org/3536684
+San Marino,https://sws.geonames.org/3168070
 Santo Domingo,https://sws.geonames.org/3492908
 Sarawak,https://sws.geonames.org/1733038
+Sarnia,https://sws.geonames.org/6141190
 Saudi Arabia,https://sws.geonames.org/102358
 Scandinavia,https://sws.geonames.org/2614165
 Scotland,https://sws.geonames.org/2638360
 Scottish,https://sws.geonames.org/2638360
+Semidi Islands,https://sws.geonames.org/5873702
 Senegal,https://sws.geonames.org/2245662
 Serbia,https://sws.geonames.org/6290252
+Serowe,https://sws.geonames.org/933088
 Seychelles,https://sws.geonames.org/241170
 Sierra Leone,https://sws.geonames.org/2403846
+Silchester,https://sws.geonames.org/2637846
 Singapore,https://sws.geonames.org/1880252
 Slovakia,https://sws.geonames.org/3057568
 Slovenia,https://sws.geonames.org/3190538
+Snowdon,https://sws.geonames.org/2637569
+Solapur,https://sws.geonames.org/1256436
 Solomon Islands,https://sws.geonames.org/2103350
 Somalia,https://sws.geonames.org/51537
 Somaliland,https://sws.geonames.org/8220542
 South Africa,https://sws.geonames.org/953987
 South African,https://sws.geonames.org/953987
 South America,https://sws.geonames.org/6255150
+South Pacific,http://vocab.getty.edu/tgn/tgn/7029385
+South Sea Islands,https://sws.geonames.org/6942348
 South Seas,https://sws.geonames.org/6942348
 Southern Rhodesia,https://sws.geonames.org/878675
 Spain,https://sws.geonames.org/2510769
 Sri Lanka,https://sws.geonames.org/1227603
+St Helena,https://sws.geonames.org/3370751
 St Kitts and Nevis,https://sws.geonames.org/3575174
 St Kitts,https://sws.geonames.org/3575181
 St Lucia,https://sws.geonames.org/3576468
+St Vincent,https://sws.geonames.org/11495146
+Stafford,https://sws.geonames.org/2637142
+Stockdalewath,https://sws.geonames.org/13276506
+Strait of Gibraltar,https://sws.geonames.org/2363256
+Sub-Saharan Africa,https://sws.geonames.org/12212804
 Sudan,https://sws.geonames.org/366755
 Suriname,https://sws.geonames.org/3382998
 Swaziland,https://sws.geonames.org/934841
@@ -5569,13 +5932,19 @@ Sweden,https://sws.geonames.org/2661886
 Switzerland,https://sws.geonames.org/2658434
 Syria,https://sws.geonames.org/163843
 Taiwan,https://sws.geonames.org/1668284
+Talgarth,https://sws.geonames.org/2636307
 Tanganyika,https://sws.geonames.org/149597
 Tanzania,https://sws.geonames.org/149590
+Tashkent,https://sws.geonames.org/1512569
 Thailand,https://sws.geonames.org/1605651
+The Potteries,https://sws.geonames.org/2639972
 Tibet,https://sws.geonames.org/8449601
 Togo,https://sws.geonames.org/2363686
 Tonga,https://sws.geonames.org/4032283
+Toronto,https://sws.geonames.org/6167865
 Transjordan,http://vocab.getty.edu/tgn/1000121
+Transylvania,https://sws.geonames.org/664661
+Tregynon,https://sws.geonames.org/2635526
 Trinidad and Tobago,https://sws.geonames.org/3573591
 Trinidad,https://sws.geonames.org/3902377
 Tunisia,https://sws.geonames.org/2464461
@@ -5589,16 +5958,29 @@ Uganda,https://sws.geonames.org/226074
 Ukraine,https://sws.geonames.org/690791
 United Arab Emirates,https://sws.geonames.org/290557
 United Kingdom,https://sws.geonames.org/2635167
+United States of America,https://sws.geonames.org/6252001
 United States,https://sws.geonames.org/6252001
+Uppsala,https://sws.geonames.org/2666199
 Uruguay,https://sws.geonames.org/3439705
 Uzbekistan,https://sws.geonames.org/1512440
 Vatican,https://sws.geonames.org/6691831
+Vejle,https://sws.geonames.org/2610613
 Venezuela,https://sws.geonames.org/3625428
 Vietnam,https://sws.geonames.org/1562822
 Wales,https://sws.geonames.org/2634895
+Welshpool,https://sws.geonames.org/2634560
 West Africa,http://vocab.getty.edu/tgn/7032927
 West Indies,https://sws.geonames.org/3571219
+Westhumble,https://sws.geonames.org/10104025
+White Nile,https://sws.geonames.org/408653
+Wigton,https://sws.geonames.org/2633933
+Windward Islands,https://sws.geonames.org/3578263
+Wittersham,https://sws.geonames.org/2633726
+Woolbeding with Redford,https://sws.geonames.org/7292751
+Wroot,https://sws.geonames.org/2633479
+Yangon,https://sws.geonames.org/1298824
 Yemen,https://sws.geonames.org/69543
+Yugoslavia,https://sws.geonames.org/7500737
 Zambia,https://sws.geonames.org/895949
 Zanzibar,https://sws.geonames.org/148730
 Zimbabwe,https://sws.geonames.org/878675
