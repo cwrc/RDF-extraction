@@ -852,8 +852,8 @@ def config_logger(name, verbose=False):
     # Will likely want to convert logging records to be json formatted and based on external file.
     import logging
     import os
-    if not os.path.exists("log"):
-        os.makedirs("log")
+    if not os.path.exists(".log"):
+        os.makedirs(".log")
 
     if name != "utilities":
         name += '_extraction'
@@ -862,7 +862,7 @@ def config_logger(name, verbose=False):
     logger = logging.getLogger(name)
     
     logger.setLevel(logging.INFO)
-    fh = logging.FileHandler("log/" + name + ".log", mode="w")
+    fh = logging.FileHandler(".log/" + name + ".log", mode="w")
     fh.setLevel(logging.INFO)
     # formatter = logging.Formatter('%(levelname)s - %(asctime)s {%(module)s.py:%(lineno)d} - %(message)s ')
     formatter = logging.Formatter('%(message)s ')

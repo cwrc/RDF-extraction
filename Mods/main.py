@@ -10,7 +10,7 @@ import re
 import urllib.parse
 
 
-CONFIG_FILE="./bibparse.config"
+CONFIG_FILE="config/bibparse.config"
 
 # ----------- SETUP LOGGER ------------
 
@@ -1329,7 +1329,7 @@ if __name__ == "__main__":
             pass
         count +=1
 
-    with open("unmatchedplaces.csv", "w") as f:
+    with open("unmatchedplaces.csv", "w", encoding="utf-8") as f:
         writer = csv.writer(f, quoting=csv.QUOTE_MINIMAL)
         for item in UNIQUE_UNMATCHED_PLACES:
             writer.writerow([item, UNIQUE_UNMATCHED_PLACE_COUNTS[item]])

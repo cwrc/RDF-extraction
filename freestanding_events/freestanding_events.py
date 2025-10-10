@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-# from Env import env
-# import islandora_auth as login
+
+import os
 from bs4 import BeautifulSoup
 import rdflib
 
@@ -54,7 +54,7 @@ class Freestanding_Event(object):
 
 
 def main():
-    import os
+
     filelist = [filename for filename in sorted(os.listdir("/Users/alliyyamo/Desktop/orlando-2.0-c-modelling/textbase-pubc/events-pubc")) if filename.endswith(".xml")]
     filelist.sort()
 
