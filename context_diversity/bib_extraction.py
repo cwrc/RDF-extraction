@@ -1,17 +1,11 @@
 import copy
-import rdflib
-from rdflib import Literal
-import rdflib.term
-from utils import utilities
-from utils.context import Context, get_context_type, get_event_type, get_named_entities
-from utils.event import Event
-from utils.organizations import get_org_uri, get_org_name
-from culturalForm import get_mapped_term
-from utils.place import Place
-import csv
 import os
-logger = utilities.config_logger("adhoc-bib-extraction")
+import rdflib
+import rdflib.term
 from bs4 import BeautifulSoup
+from utils import utilities
+
+logger = utilities.config_logger("CD-bib-extraction")
 
 
 BIB_PATH = "/Users/alliyyamo/Desktop/orlando-2.0-c-modelling/textbase-pubc/bibls-pubc/"
@@ -52,7 +46,7 @@ PEOPLE = []
 # role ={
 #     role_name: "",
 #     person_uri: "",
-#     title: "", 
+#     title: "",
 #     title_uri: ""
 # }
 def reduce_roles(roles):
@@ -62,7 +56,7 @@ def reduce_roles(roles):
             reduced_roles.append(ROLE_MAP[role])
         else:
             reduced_roles.append(role.lower())
-    
+
     reduce_roles = list(set(reduced_roles))
     return reduced_roles
 
@@ -74,17 +68,17 @@ def get_name_string(name_tag):
         unwanted.decompose()
     name = name_tag_copy.text
     return name
-        
+
 def get_roles(doc, main_id):
     names = []
     name_tags = doc.find_all("name")
-    
+
     for name_tag in name_tags:
         rows = []
         row = {}
         if name_tag.parent.name == "relatedItem":
             continue
-        
+
         if 'type' in name_tag.attrs:
             name_type = name_tag['type']
         else:
@@ -101,7 +95,7 @@ def get_roles(doc, main_id):
         name = name.strip()
         name = name.replace("\n", " ")
         name = name.replace("  ", " ")
-        
+
 
         new_uri = utilities.get_primary_uri(original_uri, name)
         print(f"CWRC URI: {original_uri}")
@@ -117,8 +111,8 @@ def get_roles(doc, main_id):
         role = None
         role_terms = name_tag.find_all('roleTerm')
         role_terms = reduce_roles([x.text for x in role_terms])
-        
-        
+
+
         if len(role_terms) == 1:
             role = role_terms[0]
         elif len(role_terms) > 1:
@@ -133,7 +127,7 @@ def get_roles(doc, main_id):
         else:
             role = "author"
             logger.error(f"No role found for {name_tag.text}")
-        
+
 
         row = {
             "name": name,
@@ -144,27 +138,26 @@ def get_roles(doc, main_id):
         }
         print("row:", row)
         logger.info(row)
-        person = {"person_uri": new_uri, "full_name": full_name }
+        # person = {"person_uri": new_uri, "full_name": full_name }
     # print(doc)
     # input()
-    pass
+    
 
 def main():
     count = 0
-    max = len(BIB_FILES)    
+    total = len(BIB_FILES)
     for filename in BIB_FILES:
-        with open(BIB_PATH + filename, "r") as f:
+        with open(BIB_PATH + filename, "r", encoding="utf-8") as f:
             soup = BeautifulSoup(f, 'lxml-xml')
-        
+
         count+=1
         main_id = str(filename).replace(".xml", "").replace("orlando_", "")
-        print(F"{count}/{max}:")
+        print(F"{count}/{total}:")
         print(F"MAIN ID: {main_id}")
         get_roles(soup, main_id)
         print("=====================================")
-    
+
     pass
 
 if __name__ == "__main__":
     main()
-    
