@@ -20,5 +20,8 @@ venv
 /Mods/unmatchedplaces.csv
 Mods/unmatchedplaces.csv
 /Entry/Adhoc Extraction
+/Entry/Context Based Extraction
 adhoc*
 *-adhoc*
+Analytics/
+Entry/log/place_log.csv

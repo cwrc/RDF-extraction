@@ -15,33 +15,6 @@ implement personname
 
 logger = utilities.config_logger("bio_extraction")
 
-def count_children(soup, person):
-    """
-    Counts the number of children for a person.
-    :param soup: BeautifulSoup object of the XML file.
-    :param person: Biography object representing the person.
-    :return: Number of children.
-    """
-    children = soup.find_all("CHILDREN")
-    
-    for child in children:
-        child_count = child.get("NUMBER")
-        print(f"CHILDREN|{person.id}|{person.cwrc_uri}|{person.std_name}|{person.name}|{person.uri}|{child_count}|{child.text}|{child}")
-
-
-def marital_status(soup, person):
-    """
-    Extracts marital status information from the soup object and adds it to the person object.
-    :param soup: BeautifulSoup object of the XML file.
-    :param person: Biography object representing the person.
-    """
-    marital_tags = ["MARRIAGE", "DIVORCE", "SEPARATION"]
-    marital_status = soup.find_all(marital_tags)
-    for status in marital_status:
-        print(f"MARITALSTATUS|{person.id}|{person.cwrc_uri}|{person.std_name}|{person.name}|{person.uri}|{status.name}|{status}|{status.text}")
-    else:
-        person.marital_status = "Unknown"
-
 def main():
     extraction_mode, file_dict = utilities.parse_args(
         __file__, "Majority of biography related data", logger)
@@ -109,7 +82,7 @@ def main():
         utilities.manage_mode(extraction_mode, person, graph)
 
         uber_graph += graph
-    # exit(0)
+
     place.log_mapping_fails()
     cf.log_mapping_fails()
     occupation.log_mapping_fails()

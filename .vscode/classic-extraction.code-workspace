@@ -3,15 +3,6 @@
 		{
 			"path": ".."
 		},
-		{
-			"path": "../Entry"
-		},
-		{
-			"path": "../Mods"
-		},
-		{
-			"path": "../FreestandingEvents"
-		}
 	],
 	"settings": {
 		"cSpell.words": [
