@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 
-from Utils import utilities
-from Utils.context import Context
-from Utils.place import Place
-from Utils.event import get_date_tag, Event, format_date
+from utils import utilities
+from utils.context import Context
+from utils.place import Place
+from utils.event import get_date_tag, Event, format_date
 import rdflib
 from difflib import get_close_matches
 
@@ -28,7 +28,7 @@ def create_cause_map():
     
     import csv
     global CAUSE_MAP
-    with open('../data/COD_mapping.csv', newline='', encoding="utf8") as csvfile:
+    with open('data/COD_mapping.csv', newline='', encoding="utf8") as csvfile:
         reader = csv.reader(csvfile)
         next(reader)
         for row in reader:
@@ -99,7 +99,7 @@ def extract_birth_data(bio, person):
 
     for birth_tag in birth_tags:
         context_id = person.id + "_BirthContext_" + str(context_count)
-        temp_context = Context(context_id, birth_tag, "BIRTH")
+        temp_context = Context(context_id, birth_tag, "BIRTH", person=person)
 
         # creating Birth event
         event_tags = birth_tag.find_all("CHRONSTRUCT")
@@ -295,7 +295,7 @@ def extract_death_data(bio, person):
     death = Death(None, None, None)
     for death_tag in death_tags:
         context_id = person.id + "_DeathContext_" + str(context_count)
-        temp_context = Context(context_id, death_tag, "DEATH")
+        temp_context = Context(context_id, death_tag, "DEATH", person=person)
 
         # creating death events
         events_tags = death_tag.find_all("CHRONSTRUCT")
@@ -347,7 +347,12 @@ def extract_death_data(bio, person):
             person.add_event(x)
 
         cause_tags = death_tag.find_all("CAUSE")
-        causes = [get_mapped_term(utilities.get_value(x)) for x in cause_tags]
+        causes = [get_mapped_term(utilities.get_value(x), person.id) for x in cause_tags]
+        
+        zipped_causes = list(zip(cause_tags, causes))
+        for cause_tag, cause in zipped_causes:
+            if type(cause) == rdflib.Literal:
+                logger.warning(F"{person.id}|Unable to map cause of death: {cause_tag}|{cause} ")
 
         death.cause = causes
 
@@ -359,7 +364,7 @@ def extract_death_data(bio, person):
 
 def main():
     from bs4 import BeautifulSoup
-    from biography import Biography
+    from entry.biography import Biography
 
     extraction_mode, file_dict = utilities.parse_args(
         __file__, "BirthDeath", logger)
@@ -395,7 +400,7 @@ def main():
     if extraction_mode.verbosity > 0:
         print(str(len(uber_graph)) + " total triples created")
 
-    utilities.create_uber_triples(extraction_mode, uber_graph, "birthDeath",extra_triples="../data/additional_triples.ttl")
+    utilities.create_uber_triples(extraction_mode, uber_graph, "birthDeath",extra_triples="data/itional_triples.ttl")
     logger.info(F"Time completed: " + utilities.get_current_time())
 
 if __name__ == '__main__':

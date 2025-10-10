@@ -5,10 +5,10 @@ import rdflib
 
 from difflib import get_close_matches
 from rdflib import Literal
-from Utils import utilities
-from Utils.context import Context, get_context_type, get_event_type
-from Utils.event import Event
-from Utils.organizations import get_org_uri
+from utils import utilities
+from utils.context import Context, get_context_type, get_event_type
+from utils.event import Event
+from utils.organizations import get_org_uri
 
 logger = utilities.config_logger("occupation")
 uber_graph = utilities.create_graph()
@@ -22,11 +22,11 @@ class Occupation(object):
     """docstring for Occupation
     """
 
-    def __init__(self, job_tag, predicate=None, other_attributes=None):
+    def __init__(self, job_tag, predicate=None, other_attributes=None, person_id=None):
         super(Occupation, self).__init__()
         if predicate:
             self.predicate = predicate
-            self.value = self.get_mapped_term(job_tag)
+            self.value = self.get_mapped_term(job_tag,person_id)
         else:
             self.predicate = self.get_occupation_predicate(job_tag)
             if self.predicate == "employment":
@@ -34,7 +34,7 @@ class Occupation(object):
             elif self.predicate == "occupationIncome":
                 self.value = Literal(self.get_value(job_tag))
             else:
-                self.value = self.get_mapped_term(self.get_value(job_tag))
+                self.value = self.get_mapped_term(self.get_value(job_tag),person_id)
                 if(type(self.value) == rdflib.term.Literal):
                     logger.info(F"Full tag:{job_tag}")
                 
@@ -91,8 +91,6 @@ class Occupation(object):
         return value
 
     def get_mapped_term(self, value, id=None):
-        if value == "Counsellor":
-            return Literal(value)
 
         def clean_term(string):
             string = string.lower().replace("-", " ").strip().replace(" ", "")
@@ -131,7 +129,7 @@ class Occupation(object):
             term = Literal(value, datatype=rdflib.namespace.XSD.string)
             map_fail += 1
             possibilities = []
-            log_str = "Unable to find matching occupation instance for '" + value + "'"
+            log_str = F"Unable to find matching occupation instance for \"{value}\""
 
             for x in JOB_MAP.keys():
                 if get_close_matches(value.lower(), JOB_MAP[x]):
@@ -157,9 +155,8 @@ def clean_term(string):
 def create_job_map():
     import csv
     global JOB_MAP
-    with open('../data/occupation_mapping.csv', newline='', encoding="utf8") as csvfile:
+    with open('data/occupation_mapping.csv', newline='', encoding="utf8") as csvfile:
         reader = csv.reader(csvfile)
-        next(reader)
         for row in reader:
             temp_row = [clean_term(x) for x in row[1:]]
             JOB_MAP[row[0]] = (list(filter(None, temp_row)))
@@ -196,13 +193,13 @@ def log_mapping_fails(detail=True):
         logger.info(log_str)
 
 
-def find_occupations(tag):
+def find_occupations(tag, person_id=None):
     """Creates a list of occupations given the tag
     """
 
     jobs_tags = tag.find_all("JOB") + tag.find_all("SIGNIFICANTACTIVITY")
     jobs_tags += tag.find_all("EMPLOYER") + tag.find_all("REMUNERATION")
-    return [Occupation(x) for x in jobs_tags]
+    return [Occupation(x,person_id=person_id) for x in jobs_tags]
 
 
 def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
@@ -219,13 +216,13 @@ def extract_occupations(tag_list, context_type, person, list_type="paragraphs"):
         occupation_list = None
         context_count += 1
         context_id = person.id + "_" + CONTEXT_TYPE + "_" + str(context_count)
-        occupation_list = find_occupations(tag)
+        occupation_list = find_occupations(tag, person.id)
         if occupation_list:
-            temp_context = Context(context_id, tag, "OCCUPATION")
+            temp_context = Context(context_id, tag, "OCCUPATION", person=person)
             temp_context.link_triples(occupation_list)
             # person.add_occupation(occupation_list)
         else:
-            temp_context = Context(context_id, tag, "OCCUPATION", "identifying")
+            temp_context = Context(context_id, tag, "OCCUPATION", "identifying", person=person)
 
         if list_type == "events":
             event_count += 1
@@ -258,7 +255,7 @@ def extract_occupation_data(bio, person):
 
 def main():
     from bs4 import BeautifulSoup
-    from biography import Biography
+    from entry.biography import Biography
 
     extraction_mode, file_dict = utilities.parse_args(
         __file__, "Occupation", logger)

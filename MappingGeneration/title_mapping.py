@@ -3,10 +3,10 @@
 
 import rdflib
 from rdflib import Literal
-from Utils import utilities
-from Utils.context import Context, get_context_type, get_event_type, get_named_entities
-from Utils.event import Event
-from Utils.organizations import get_org_uri
+from utils import utilities
+from utils.context import Context, get_context_type, get_event_type, get_named_entities
+from utils.event import Event
+from utils.organizations import get_org_uri
 from culturalForm import get_mapped_term
 
 
@@ -118,7 +118,7 @@ def title_analysis(soup, person):
 
 def main():
     from bs4 import BeautifulSoup
-    from biography import Biography
+    from entry.biography import Biography
 
     extraction_mode, file_dict = utilities.parse_args(
         __file__, "Reception", logger)

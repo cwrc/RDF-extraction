@@ -2,12 +2,12 @@ import copy
 import rdflib
 from rdflib import Literal
 import rdflib.term
-from Utils import utilities
-from Utils.context import Context, get_context_type, get_event_type, get_named_entities
-from Utils.event import Event
-from Utils.organizations import get_org_uri, get_org_name
+from utils import utilities
+from utils.context import Context, get_context_type, get_event_type, get_named_entities
+from utils.event import Event
+from utils.organizations import get_org_uri, get_org_name
 from culturalForm import get_mapped_term
-from Utils.place import Place
+from utils.place import Place
 import csv
 import os
 logger = utilities.config_logger("adhoc-bib-extraction")

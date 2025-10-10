@@ -1,9 +1,9 @@
 import rdflib
 from rdflib import Literal
-from Utils import utilities
-from Utils.context import Context, get_context_type, get_event_type, get_named_entities
-from Utils.event import Event
-from Utils.organizations import get_org_uri
+from utils import utilities
+from utils.context import Context, get_context_type, get_event_type, get_named_entities
+from utils.event import Event
+from utils.organizations import get_org_uri
 from culturalForm import get_mapped_term
 
 logger = utilities.config_logger("writing_2")
@@ -66,7 +66,16 @@ def extract_standard_properties(tag, rule):
     elif (rule["Range Type"] == "All Named Entities"):
         for named_entity in get_named_entities(tag):
             triples.append(utilities.GeneralRelation(property_uri, named_entity))
-        
+    elif (rule["Range Type"] == "People & Organizations"):
+        entities = get_named_entities(tag,entity_types=["organizations", "people"])
+        for entity in entities:
+            triples.append(utilities.GeneralRelation(property_uri, entity))
+    elif (rule["Range Type"] == "Places"):
+        entities = get_named_entities(tag,entity_types=["places"])
+        for entity in entities:
+            triples.append(utilities.GeneralRelation(property_uri, entity))
+
+
     return triples
 
 def extract_non_standard_properties(tag, rule):
@@ -77,7 +86,7 @@ def extract_non_standard_properties(tag, rule):
 def extract_triples(tag,tag_info):
     triples = []
     
-    print(tag_info)
+    # print(tag_info)
 
     for index, rule in tag_info.iterrows():
         if rule["Function Type"] == "Standard":
@@ -85,11 +94,12 @@ def extract_triples(tag,tag_info):
         else:
             print("Not Standard")
             logger.warning(f"Custom Function Type not yet handled for {rule['Orlando Tag']}")   
+            continue
             triples += extract_non_standard_properties(tag, rule)
             # triples += extract_standard_entrySubject_triples(tag, rule, person)
     
-        
-          
+
+   
     return triples
 
 
@@ -97,6 +107,27 @@ def extract_triples(tag,tag_info):
     
     
 
+
+def process_tags_by_domain_type(tags, tag_metadata, works, entry_based_triples, work_based_triples, ouvre_based_triples):
+    domain_type = tag_metadata["Domain Type"].values[0]
+    for tag in tags:
+        if domain_type == "Entry Subject":
+            entry_based_triples += extract_triples(tag, tag_metadata)
+        elif domain_type == "Work":
+            if len(works) > 0:
+                work_based_triples += extract_triples(tag, tag_metadata)
+        elif domain_type == "Work ELSE Entry Subject":
+            if len(works) > 0:
+                work_based_triples += extract_triples(tag, tag_metadata)
+            else:
+                entry_based_triples += extract_triples(tag, tag_metadata)
+        elif domain_type == "Work ELSE Entry Subject Ouvre":
+            if len(works) > 0:
+                work_based_triples += extract_triples(tag, tag_metadata)
+            else:
+                ouvre_based_triples += extract_triples(tag, tag_metadata)
+        else:
+            logger.warning(f"Domain Type not yet handled: {domain_type}")
 
 def extract_writing_data(doc, person):
     global writing_context_counts
@@ -108,107 +139,58 @@ def extract_writing_data(doc, person):
     paragraphs = writing_tag.find_all("P")
     events = writing_tag.find_all("CHRONSTRUCT")
     
-
+    context_tags = paragraphs + events
     
     # May need to handle multiple different context types
-    for p in paragraphs:
-        tag_names = list({tag.name for tag in p.descendants if tag.name})
+    for context_tag in context_tags:
+        tag_names = list({tag.name for tag in context_tag.descendants if tag.name})
         tag_names = [x for x in tag_names if x not in utilities.CORE_TAGS]
         
         entry_based_triples = []
         work_based_triples = []
         ouvre_based_triples = []
 
+        works = extract_works(context_tag)
+
         for tag_name in tag_names:
             if tag_name not in utilities.WRITING_PROPERTIES["Orlando Tag"].values:
                 logger.warning(f"Tag not yet handled: {tag_name}")
-                continue 
-            
-            tags = p.find_all(tag_name)
-            
+                continue
+
+            tags = context_tag.find_all(tag_name)
             tag_metadata = utilities.WRITING_PROPERTIES[utilities.WRITING_PROPERTIES["Orlando Tag"] == tag_name]
 
-            
-            # Get triples for which the subject of the entry is the context focus
-            # TODO: we may want to loop through rows of tag_metadata if there are multiple rows with different domain types and same Orlando Tag, 
-            # but for now we are assuming there is only one domain type
-            if tag_metadata["Domain Type"].values[0] == "Entry Subject":
-                print("Entry Subject")
-                for tag in tags:
-                    entry_based_triples += extract_triples(tag, tag_metadata)
-            elif tag_metadata["Domain Type"].values[0] == "Work":
-                for tag in tags:
-                    work_based_triples += extract_triples(tag, tag_metadata)
-                print("Work")
-            elif tag_metadata["Domain Type"].values[0] == "Work ELSE Entry Subject":
-                for tag in tags:
-                    works = extract_works(tag)
-                    if len(works) > 0:
-                        work_based_triples += extract_triples(tag, tag_metadata)
-                    else:
-                        entry_based_triples += extract_triples(tag, tag_metadata)
-                print("Work ELSE Entry Subject")  
-            elif tag_metadata["Domain Type"].values[0] == "Work ELSE Entry Subject Ouvre":
-                for tag in tags:
-                    works = extract_works(tag)
-                    if len(works) > 0:
-                        work_based_triples += extract_triples(tag, tag_metadata)
-                    else:
-                        ouvre_based_triples += extract_triples(tag, tag_metadata)
-                
-                print("Work ELSE Entry Subject Ouvre")
-                pass
-            else:
-                logger.warning(f"Domain Type not yet handled: {tag_metadata['Domain Type'].values[0]}")
-            
-                    
-            # Get triples for which the work is the context focus
-            # if not simple_work_tags.empty:
-            #     for tag in tags:
-            #         work_based_triples += extract_triples(tag, tag_metadata, person)
-                    
-
-            # Get triples for which the context focus is work or then entry subject
-            
-            # Get triples for which the context focus is work or then entry subject's ouvre
-            
+            process_tags_by_domain_type(tags, tag_metadata, works, entry_based_triples, work_based_triples, ouvre_based_triples)
          
         # TODO: Count specific properties  to get the list of  orlando tags to be given to the context creation    
+        # Getting tags by expected domain type
         entry_based_tags = get_orlando_tags(entry_based_triples)
         work_based_tags = get_orlando_tags(work_based_triples)
         ouvre_based_tags = get_orlando_tags(ouvre_based_triples)
         
-            
-        # TODO Fix how contexts are created here, they should be created based on the type of data extracted
-        # Need to handle multiple different context types
-        if len(entry_based_triples) > 0:
-            context_id = person.id + "_WritingContext_" + str(writing_context_counts["WritingContext"])
-            temp_context = Context(context_id, p, entry_based_tags)
-            temp_context.link_triples(entry_based_triples)
-            person.add_context(temp_context)
-            writing_context_counts["WritingContext"] += 1
-
-        if len(work_based_triples) > 0:
-            context_id = person.id + "_WritingContext_" + str(writing_context_counts["WritingContext"])
-            temp_context = Context(context_id, p, work_based_tags)
-            temp_context.link_triples(work_based_triples)
-            person.add_context(temp_context)
-            writing_context_counts["WritingContext"] += 1
-            
-        if len(ouvre_based_triples) > 0:
-            context_id = person.id + "_WritingContext_" + str(writing_context_counts["WritingContext"])
-            temp_context = Context(context_id, p, ouvre_based_tags)
-            temp_context.link_triples(ouvre_based_triples)
-            person.add_context(temp_context)
-            writing_context_counts["WritingContext"] += 1
+        create_and_link_context(person, context_tag, entry_based_triples, entry_based_tags, person.uri, "WritingContext")
+        create_and_link_context(person, context_tag, work_based_triples, work_based_tags, works, "WritingContext")
+        create_and_link_context(person, context_tag, ouvre_based_triples, ouvre_based_tags, person.oeuvre_uri, "WritingContext")
         
-    
 def get_orlando_tags(triples):
     predicates = [str(triple.predicate).split("#")[1] for triple in triples]
     filtered_df = utilities.WRITING_PROPERTIES[utilities.WRITING_PROPERTIES['Specific Property'].isin(predicates)]
     orlando_tags = filtered_df['Orlando Tag'].tolist()
     return list(set(orlando_tags))
 
+def create_and_link_context(person, context_tag, triples, tags, context_focus, context_type):
+    if len(triples) > 0:
+        context_id = f"{person.id}_{context_type}_{writing_context_counts[context_type]}"
+        temp_context = Context(context_id, context_tag, tags, person=person)
+        temp_context.context_focus = context_focus
+
+        for x in triples:
+            if x.object in temp_context.context_focus or x.object == context_focus:
+                triples.remove(x)
+
+        temp_context.link_triples(triples)
+        person.add_context(temp_context)
+        writing_context_counts[context_type] += 1
 
 all_textscopes_texts = []
 all_textscopes_map = []
@@ -331,7 +313,7 @@ def title_check(doc, person):
 
 def main():
     from bs4 import BeautifulSoup
-    from biography import Biography
+    from entry.biography import Biography
 
     extraction_mode, file_dict = utilities.parse_args(
         __file__, "Reception", logger)
@@ -350,15 +332,15 @@ def main():
             print("*" * 55)
         person = Biography(person_id, soup)
         # textscope_analysis(soup, person)
-        title_check(soup, person)
+        # title_check(soup, person)
         # title_analysis(soup, person)
-        continue
+        
         extract_writing_data(soup, person)
         
         graph = person.to_graph()
 
         utilities.create_individual_triples(
-            extraction_mode, person, "reception")
+            extraction_mode, person, "Writing")
         utilities.manage_mode(extraction_mode, person, graph)
 
         uber_graph += graph
@@ -368,12 +350,11 @@ def main():
     logger.info(f"Unmatched Titles: {unmatched_titles}")
     logger.info(f"Partial Matches: {partial_matches}")
     
-    exit()
     logger.info(str(len(uber_graph)) + " triples created")
     if extraction_mode.verbosity > 0:
         print(str(len(uber_graph)) + " total triples created")
 
-    utilities.create_uber_triples(extraction_mode, uber_graph, "reception")
+    utilities.create_uber_triples(extraction_mode, uber_graph, "writing")
     logger.info("Time completed: " + utilities.get_current_time())
 
 

@@ -1,7 +1,11 @@
 import rdflib
 PLACE_MAP = {}
+
+# TODO create a better methodology for tracking unmapped places 
+# to account for get_places() being called multiple times
 UNMAPPED_OCCURENCES = {}
 
+UNMAPPED_DETAILED_OCCURENCES = []
 
 def config_logger(name, verbose=3):
     # Will likely want to convert logging records to be json formatted and based on external file.
@@ -65,7 +69,7 @@ def create_place_map(path=None):
     # if searching takes too long
     # Create better searching mechanism
     if not path:
-        path = '../data/places.csv'
+        path = 'data/places.csv'
     with open(path, newline='', encoding='utf-8') as csvfile:
         reader = csv.reader(csvfile)
         next(reader)
@@ -86,6 +90,22 @@ def get_value(tag):
         value = ' '.join(value.split())
     return value
 
+def placejson_to_csv():
+    import csv
+    import os
+
+    log_dir = 'log'
+    if not os.path.exists(log_dir):
+        os.makedirs(log_dir)
+
+    csv_filepath = os.path.join(log_dir, 'place_log.csv')
+    with open(csv_filepath, 'w', newline='', encoding='utf-8') as csvfile:
+        fieldnames = ['entry_id', 'tag', 'text', 'address used', 'PLACENAME', 'PLACENAME (REG)', 'PLACENAME (CURRENT)', 'SETTLEMENT', 'SETTLEMENT (REG)', 'SETTLEMENT (CURRENT)', 'REGION', 'REGION (REG)', 'REGION (CURRENT)', 'GEOG', 'GEOG (REG)', 'GEOG (CURRENT)', 'AREA', 'AREA (REG)', 'AREA (CURRENT)', "ADDRESS",'ADDRESS (REG)', 'ADDRESS (CURRENT)']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        for place in UNMAPPED_DETAILED_OCCURENCES:
+            writer.writerow(place)
+
 
 def log_mapping_fails():
     log_str = "\nUnique Missed Terms: " + str(len(UNMAPPED_OCCURENCES.keys())) + "\n"
@@ -99,8 +119,44 @@ def log_mapping_fails():
         count += new_dict[y]
     log_str += "\tTotal missed places: " + str(count) + "\n\n"
 
+    placejson_to_csv()
     print(log_str)
     logger.info(log_str)
+    
+def place_to_json(tag, entry_id, address):
+    place_dict = {
+        "entry_id": entry_id,
+        "tag": str(tag).replace("\n", ""),
+        "text": str(tag.text).replace("\n", ""),
+        "address used": address,
+        "ADDRESS": "",
+        "PLACENAME": "",
+        "PLACENAME (REG)": "",
+        "PLACENAME (CURRENT)": "",
+        "SETTLEMENT": "",
+        "SETTLEMENT (REG)": "",
+        "SETTLEMENT (CURRENT)": "",
+        "REGION": "",
+        "REGION (REG)": "",
+        "REGION (CURRENT)": "",
+        "GEOG": "",
+        "GEOG (REG)": "",
+        "GEOG (CURRENT)": "",
+        "AREA": "",
+        "AREA (REG)": "",
+        "AREA (CURRENT)": "",
+    }
+    
+    subtags = ["ADDRESS","PLACENAME", "SETTLEMENT", "REGION", "GEOG", "AREA"]
+    for subtag in subtags:
+        subtag_element = tag.find(subtag)
+        if subtag_element is not None:
+            place_dict[subtag] = subtag_element.text
+            place_dict[f"{subtag} (REG)"] = subtag_element.get("REG", "")
+            place_dict[f"{subtag} (CURRENT)"] = subtag_element.get("CURRENT", "")
+    
+    return place_dict
+    
 
 
 class Place(object):
@@ -126,8 +182,9 @@ class Place(object):
             add_str = add_str[1:]
         return add_str
 
-    def __init__(self, place_tag, other_attributes=None):
+    def __init__(self, place_tag, other_attributes=None, entry_id=None):
         super(Place, self).__init__()
+        self.tag = place_tag
         self.address = self.get_address(place_tag)
         if self.address == '':
             self.address = place_tag.text
@@ -135,14 +192,16 @@ class Place(object):
         # TODO: Use PLACENAME as address perhaps
         if self.address in UNMAPPED_OCCURENCES:
             self.uri = rdflib.term.Literal(self.address)
+            UNMAPPED_DETAILED_OCCURENCES.append(place_to_json(place_tag, entry_id, self.address))
             UNMAPPED_OCCURENCES[self.address] += 1
         elif self.address in PLACE_MAP:
             self.uri = rdflib.term.URIRef(PLACE_MAP[self.address])
             # TODO: get place string from uri --> extend csv?
         else:
-            logger.warning("Unable to find matching place instance for: " +
-                           self.address + "(" + str(place_tag) + ")")
+            logger.warning(F"Unable to find matching place instance for: {self.address} ({str(place_tag)}) in entry: {entry_id}")
+            logger.warning(F"{place_to_json(place_tag, entry_id, self.address)}")
             self.uri = rdflib.term.Literal(self.address)
+            UNMAPPED_DETAILED_OCCURENCES.append(place_to_json(place_tag, entry_id, self.address))
             UNMAPPED_OCCURENCES[self.address] = 1
 
     # Hopefully won't have to create triples about a place just provide a uri but

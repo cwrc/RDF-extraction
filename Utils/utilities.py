@@ -7,7 +7,7 @@ import copy
 import csv
 
 try:
-    from Utils.place import Place
+    from utils.place import Place
 except ModuleNotFoundError as e:
     from . import Place
 
@@ -177,7 +177,7 @@ def get_xpath(element):
 def remove_unwanted_tags(tag):
     tag_copy = copy.copy(tag)
 
-    unwanted_tag_names = ["BIBCITS", "RESPONSIBILITIES", "KEYWORDCLASSES","RESEARCHNOTE", "HEADING"]
+    unwanted_tag_names = ["BIBCITS", "RESPONSIBILITIES", "KEYWORDCLASSES","RESEARCHNOTE", "SOURCES", "SOURCE", "ORLANDOHEADER", "WORKSCITED"]
     unwanted_tags = []
     for x in unwanted_tag_names:
         unwanted_tags += tag_copy.find_all(x)
@@ -186,7 +186,20 @@ def remove_unwanted_tags(tag):
         x.decompose()
     return tag_copy
 
-def get_snippet(tag):
+def remove_tags(tag_names,tag):
+    tag_copy = copy.copy(tag)
+
+    # unwanted_tag_names = ["BIBCITS", "RESPONSIBILITIES", "KEYWORDCLASSES","RESEARCHNOTE", "SOURCES", "SOURCE", "ORLANDOHEADER", "WORKSCITED"]
+    unwanted_tags = tag_copy.find_all(tag_names)
+    # for x in unwanted_tag_names:
+    #     unwanted_tags += tag_copy.find_all(x)
+
+    for x in unwanted_tags:
+        x.decompose()
+
+    return tag_copy
+
+def get_snippet(tag, no_limit=False):
     text = ""
     # removing tags that mess up the snippet
     simplified_tag = remove_unwanted_tags(tag)
@@ -194,6 +207,14 @@ def get_snippet(tag):
     if not simplified_tag.get_text():
         logger.error(F"Empty tag encountered when creating the snippet from: {tag}")
         text = ""
+    elif no_limit:
+        text = str(simplified_tag.get_text())
+        name = simplified_tag.find("STANDARD")
+        if name:
+            text = text.replace(name.text, name.text + ": ")
+        headings = simplified_tag.find_all("HEADING")
+        for x in headings:
+            text = text.replace(x.get_text(), F"{x.get_text()} ")
     else:
         text = limit_to_full_sentences(str(simplified_tag.get_text()), MAX_WORD_COUNT)
     
@@ -211,6 +232,7 @@ def get_snippet(tag):
     text= text.replace("\n"," ")
     text= text.replace(".",". ")
     text= text.replace("  "," ")
+    text= text.replace(". .",".")
 
     text=text.strip()
     return text
@@ -221,7 +243,7 @@ def get_snippet(tag):
 def create_writer_map(path=None):
     
     if not path:
-        path = '../data/writers_sex.csv'
+        path = 'data/writers_sex.csv'
     with open(path, newline='', encoding='utf-8') as csvfile:
         reader = csv.reader(csvfile)
         next(reader)
@@ -232,33 +254,33 @@ def create_writer_map(path=None):
 
 def create_person_map(path=None):
     if not path:
-        path = '../data/full_people_mapping.csv'
+        path = 'data/full_people_mapping.csv'
     with open(path) as f:
         csv_file = csv.DictReader(f)
         for row in csv_file:
             row["CWRC URI"] = f"{NS_DICT['orlando']}{row['ID']}"
             PERSON_MAP[row["CWRC URI"]] = row
-            if row['Primary Identifier']:
-                CWRC_URI_MAP[row['Primary Identifier']] = row["CWRC URI"]
+            if row['Primary URI']:
+                CWRC_URI_MAP[row['Primary URI']] = row["CWRC URI"]
 
 
 def create_org_map(path=None):
     if not path:
-        path = '../data/organization_mapping.csv'
+        path = 'data/organization_mapping.csv'
     with open(path) as f:
         csv_file = csv.DictReader(f)
         for row in csv_file:
             row["CWRC URI"] = f"{NS_DICT['orlando']}{row['ID']}"
             ORGANIZATION_MAP[row["CWRC URI"]] = row
-            if row['Primary Identifier']:
-                CWRC_URI_MAP[row['Primary Identifier']] = row["CWRC URI"]
+            if row['Primary URI']:
+                CWRC_URI_MAP[row['Primary URI']] = row["CWRC URI"]
 
 
 
 def create_genre_map(path=None):
     
     if not path:
-        path = "../data/genre_mapping.csv"
+        path = "data/genre_mapping.csv"
     with open(path) as f:
         csvfile = csv.reader(f)
         next(csvfile)
@@ -268,8 +290,8 @@ def create_genre_map(path=None):
 
 def create_title_mappings():
     # TODO: Review more efficient mapping + using fuzzy matching
-    mapping_path_1 = "../data/title_mapping_lvl1.csv"
-    mapping_path_2 = "../data/title_mapping_lvl2.csv"
+    mapping_path_1 = "data/title_mapping_lvl1.csv"
+    mapping_path_2 = "data/title_mapping_lvl2.csv"
     
     try:
         with open(mapping_path_1) as f:
@@ -295,7 +317,7 @@ def create_title_mappings():
 def create_writing_properties_map():
     import pandas as pd
     global WRITING_PROPERTIES
-    with open("../data/writing_property_mapping.csv") as f:
+    with open("data/writing_property_mapping.csv") as f:
         WRITING_PROPERTIES = pd.read_csv(f)
 
 
@@ -433,11 +455,11 @@ def get_name_uri(tag):
         return make_standard_uri(std_val)
     else:
         if uri in PERSON_MAP:
-            new_uri = PERSON_MAP[uri]['Primary Identifier']
+            new_uri = PERSON_MAP[uri]['Primary URI']
             if new_uri:
                 uri = new_uri
         elif uri in ORGANIZATION_MAP:
-            new_uri = ORGANIZATION_MAP[uri]['Primary Identifier']
+            new_uri = ORGANIZATION_MAP[uri]['Primary URI']
             if new_uri:
                 uri = new_uri
        
@@ -447,9 +469,9 @@ def get_name_uri(tag):
 # TODO: make this function handle different entity types
 def get_primary_uri(uri, text, entity_type="person"):
     if uri in PERSON_MAP:
-        return rdflib.term.URIRef(PERSON_MAP[uri]['Primary Identifier'])
+        return rdflib.term.URIRef(PERSON_MAP[uri]['Primary URI'])
     elif uri in ORGANIZATION_MAP:
-        return rdflib.term.URIRef(ORGANIZATION_MAP[uri]['Primary Identifier'])
+        return rdflib.term.URIRef(ORGANIZATION_MAP[uri]['Primary URI'])
     elif uri and uri != "None":
         return rdflib.term.URIRef(uri)
     else:
@@ -474,11 +496,11 @@ def get_person_secondary_uris(cwrc_uri):
     if cwrc_uri not in PERSON_MAP:
         logger.warning(F"Person not in published authority list: {cwrc_uri}")
         return []
-    secondary_identifier = PERSON_MAP[cwrc_uri]["Secondary Identifier"]
+    secondary_identifier = PERSON_MAP[cwrc_uri]["Secondary URI"]
     secondary_uris = []
     if secondary_identifier != "":
         secondary_uris = secondary_identifier.split(" | ")
-    if PERSON_MAP[cwrc_uri]["Primary Identifier"] != "":
+    if PERSON_MAP[cwrc_uri]["Primary URI"] != "":
         secondary_uris.append(cwrc_uri)
     
     secondary_uris = [rdflib.term.URIRef(x) for x in secondary_uris]    
@@ -520,7 +542,6 @@ def get_full_name(tag_or_uri, doc=None, fallback=None):
         logger.warning(F"URI not in mapping, using fallback: {uri}: {fallback}")
     else:
         logger.warning(F"URI not in mapping: {uri}")
-        input("NO NAME FOUND")
 
     if not full_name:
         logger.warning(F"Full name missing for {uri}")
@@ -625,7 +646,7 @@ def get_title_uri(tag, person=None):
             if uri:
                 return rdflib.term.URIRef(uri)
             else:
-                logger.warning(f"Textscope has no REF attribute: {textscope_map[x]} in {person.id}")
+                logger.warning(f"Textscope has no REF attribute: {person.textscope_map[x]} in {person.id}")
 
 
     
@@ -656,12 +677,12 @@ def get_titles(tag, person=None):
     return titles
 
 
-def get_places(tag):
+def get_places(tag, entry_id=None):
     """Returns all places uris within a given tag"""
-    return [Place(x).uri for x in tag.find_all("PLACE")]
+    return [Place(x,entry_id=entry_id).uri for x in tag.find_all("PLACE")]
 
 
-def get_place_strings(tag):
+def get_place_strings(tag, entry_id=None):
     """Returns all places strings within a given tag"""
     return [x.text for x in tag.find_all("PLACE")]
 
@@ -685,13 +706,19 @@ def get_sex(bio):
 
 
 def get_persontype(bio):
-    return bio.BIOGRAPHY.get("PERSON")
+    return bio.get("PERSON")
 
 
 def get_div2(tag):
     # NOTE: Might be easier with recursion
     for parent in tag.parents:
         if parent.name == "DIV2":
+            return parent
+
+def get_div(tag):
+    # NOTE: Might be easier with recursion
+    for parent in tag.parents:
+        if "DIV" in parent.name:
             return parent
 
     return None
@@ -725,7 +752,7 @@ def get_sparql_results(endpoint_url, query):
 
 
 def get_wd_identifier(id):
-    """Given orlando identifier, returns corresponding uri of wikidata should it exist
+    """Given orlando URI, returns corresponding uri of wikidata should it exist
         :param id: orlando id
         :return: corresponding uri of wikidata should it exist, otherwise returns None
     """
@@ -798,6 +825,7 @@ def create_extracted_file(filepath, person, serialization="ttl"):
     with open(filepath, "w", encoding="utf-8") as f:
         if serialization == "ttl":
             f.write("#" + str(len(person.to_graph())) + " triples created\n")
+            f.write("# date extracted: ~" + get_current_time() + "\n")
             f.write(person.to_file())
         elif serialization:
             f.write(person.to_file(serialization=serialization))
@@ -884,6 +912,7 @@ def get_file_dict(script, args, testcase_data, testcases_available):
     file_prefix = testcase_data['file prefix'] if 'file prefix' in testcase_data else None
     filelist = []
     descriptors = []
+    print(args)
 
     if args.random or args.first or args.last:
         filelist = [directory +
@@ -960,7 +989,7 @@ def get_file_dict(script, args, testcase_data, testcases_available):
         filelist = [directory + file + file_ending for file in filelist]
 
     # TODO: Allow script specific testcases to overwrite ignored files, maybe?
-    if "ignored files" in testcase_data and not args.s and not args.i and not args.g:
+    if "ignored files" in testcase_data and not args.s and not args.i and not args.g and not args.override_ignored:
         # Get full filepaths of to be ignored files since it may vary per option chosen
         ignore_files = [x for x in filelist if any(s in x for s in testcase_data["ignored files"].keys())]
         for x in ignore_files:
@@ -1038,6 +1067,7 @@ def parse_args(script, info_type, logger=None):
                        help="chooses {last} file(s) to run extraction upon, ex. the last 20 files")
     modes.add_argument("-fi", "-first", "--first", nargs='?', const=1, type=int,
                        help="chooses {first} file(s) to run extraction upon, ex. the first 20 files")
+    modes.add_argument("-oi", "-override-ignored", "--override-ignored", action="store_true")
 
     parser.add_argument("-v", "--verbosity", default=1, type=int, choices=[0, 1, 2, 3],
                         help="increase output verbosity")
@@ -1046,6 +1076,7 @@ def parse_args(script, info_type, logger=None):
     # NOTE: could make this to pause after ever n entries? #uselessfeature?
     parser.add_argument("-p", "-pause", "--pause", action="store_true",
                         help="pause after every entry to examine output and be prompted to continue/quit")
+
 
     # TODO: Add option for only large graph not individual triples
 

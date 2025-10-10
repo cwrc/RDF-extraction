@@ -5,11 +5,11 @@ from rdflib import Literal
 import rdflib
 
 import logging
-from Utils import utilities
-from Utils.organizations import get_org, get_org_uri
-from Utils.place import Place
-from Utils.event import Event
-from Utils.context import Context, get_event_type, get_context_type
+from utils import utilities
+from utils.organizations import get_org, get_org_uri
+from utils.place import Place
+from utils.event import Event
+from utils.context import Context, get_event_type, get_context_type
 
 """
 Status: ~90%
@@ -102,7 +102,7 @@ def find_cultural_forms(cf, person):
                 value = utilities.get_value(x)
 
             cf_list.append(CulturalForm("socialClass", get_reported(
-                x), get_mapped_term("SocialClass", value, id=person.id)))
+                x), get_mapped_term("SocialClass", value, id=person.id,tag=x)))
 
     def get_language():
         langs = cf.find_all("LANGUAGE")
@@ -121,7 +121,7 @@ def find_cultural_forms(cf, person):
 
             if value == "hindustani":
                 cf_list.append(CulturalForm(predicate, None, get_mapped_term("Language", "hindi")))
-            cf_list.append(CulturalForm(predicate, None, get_mapped_term("Language", value, id=person.id)))
+            cf_list.append(CulturalForm(predicate, None, get_mapped_term("Language", value, id=person.id, tag=x)))
 
     def get_other_cfs():
         tags = {"NATIONALITY": ["nationality", "NationalIdentity"],
@@ -140,7 +140,7 @@ def find_cultural_forms(cf, person):
                             x), get_mapped_term(tags[tag][1], value.split("-")[0], id=person.id)))
                         value = value.split("-")[1]
 
-                value = get_mapped_term(tags[tag][1], value, id=person.id)
+                value = get_mapped_term(tags[tag][1], value, id=person.id, tag=x)
                 cf_list.append(CulturalForm(tags[tag][0], get_reported(x), value))
 
 
@@ -151,13 +151,13 @@ def find_cultural_forms(cf, person):
             for x in places:
                 temp_place = Place(x)
                 if type(temp_place.uri) is Literal:
-                    value = get_mapped_term("GeographicHeritage", temp_place.address, id=person.id)
+                    value = get_mapped_term("GeographicHeritage", temp_place.address, id=person.id, tag=x)
                     place_values.append(value)
                 else:
                     place_values.append(temp_place.uri)
             return place_values
         else:
-            return get_mapped_term("GeographicHeritage", utilities.get_value(tag), id=person.id)
+            return get_mapped_term("GeographicHeritage", utilities.get_value(tag), id=person.id, tag=tag)
 
     def get_forebear_cfs():
         # TODO: Check with Erin on how to map forebear 
@@ -225,12 +225,12 @@ def find_cultural_forms(cf, person):
                     value = utilities.get_value(x)
                     if tag == "NATIONALHERITAGE" and value in ["American-Austrian", "Anglo-Scottish", "Scottish-Irish"]:
                         culturalforms.append(CulturalForm(
-                            predicate, get_reported(x), get_mapped_term(tags[tag], value.split("-")[0], id=person.id)))
+                            predicate, get_reported(x), get_mapped_term(tags[tag], value.split("-")[0], id=person.id, tag=x)))
                         culturalforms.append(CulturalForm(
-                            predicate, get_reported(x), get_mapped_term(tags[tag], value.split("-")[1], id=person.id)))
+                            predicate, get_reported(x), get_mapped_term(tags[tag], value.split("-")[1], id=person.id, tag=x)))
                     else:
                         culturalforms.append(CulturalForm(
-                            predicate, get_reported(x), get_mapped_term(tags[tag], value, id=person.id)))
+                            predicate, get_reported(x), get_mapped_term(tags[tag], value, id=person.id, tag=x)))
 
                 for culturalform in culturalforms:
                     cf_list.append(culturalform)
@@ -268,7 +268,7 @@ def find_cultural_forms(cf, person):
                 value = get_mapped_term("PoliticalAffiliation", utilities.get_value(x), True, id=person.id)
                 # logger.warning("Mapping Religion to PA: " + value)
             if type(value) is Literal:
-                value = get_mapped_term("Religion", utilities.get_value(x), id=person.id)
+                value = get_mapped_term("Religion", utilities.get_value(x), id=person.id, tag=x)
 
             religion = CulturalForm("religion", get_reported(x), value)
 
@@ -288,9 +288,9 @@ def find_cultural_forms(cf, person):
                 for org in orgName:
                     cf_list.append(CulturalForm(None, None, get_org_uri(org),
                                                 other_attributes=utilities.NS_DICT["org"].memberOf))
-                value = get_mapped_term("PoliticalAffiliation", utilities.get_value(x), id=person.id)
+                value = get_mapped_term("PoliticalAffiliation", utilities.get_value(x), id=person.id, tag=x)
             else:
-                value = get_mapped_term("PoliticalAffiliation", utilities.get_value(x), id=person.id)
+                value = get_mapped_term("PoliticalAffiliation", utilities.get_value(x), id=person.id, tag=x)
 
             gender_issue = False
             if x.get("WOMAN-GENDERISSUE") == "GENDERYES":
@@ -309,7 +309,7 @@ def find_cultural_forms(cf, person):
 
     def get_gender():
         # cf_list += [CulturalForm("gender", None, get_mapped_term("Gender", utilities.get_value(x)))
-        cf_list.extend([CulturalForm("gender", None, get_mapped_term("Gender", utilities.get_value(x)))
+        cf_list.extend([CulturalForm("gender", None, get_mapped_term("Gender", utilities.get_value(x), id=person.id,tag=x))
                         for x in cf.find_all("GENDER")])
 
     get_forebear_cfs()
@@ -337,10 +337,10 @@ def extract_culturalforms(tag_list, context_type, person, list_type="paragraphs"
 
         cf_list = find_cultural_forms(tag, person)
         if cf_list:
-            temp_context = Context(context_id, tag, context_type)
+            temp_context = Context(context_id, tag, context_type, person=person)
             temp_context.link_triples(cf_list)
         else:
-            temp_context = Context(context_id, tag, context_type, "identifying")
+            temp_context = Context(context_id, tag, context_type, "identifying", person=person)
 
         forms_found += 1
 
@@ -398,11 +398,11 @@ def extract_cf_data(bio, person):
     for element in elements:
         paragraphs = element.find_all("P")
         events = element.find_all("CHRONSTRUCT")
-        extract_culturalforms(paragraphs, "POLITICS", person)
+        forms_found += extract_culturalforms(paragraphs, "POLITICS", person)
         forms_found += extract_culturalforms(events, "POLITICS", person, "events", forms_found)
 
     # Extracting additional information from writer
-    persontype = utilities.get_persontype(bio)
+    # persontype = utilities.get_persontype(bio)
     # TODO: figure out what context to attach this nationality + genre
     # if persontype in ["BRWWRITER", "IBRWRITER"]:
     #     if not any(x in ["GB", "GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS", "IE"] for x in person.nationalities):
@@ -419,7 +419,7 @@ def extract_gender_data(bio, person):
     genders = bio.find_all("GENDER")
     gender = bio.find("GENDER")
     sex = utilities.get_sex(bio)
-    gender_context = Context(context_id, bio.ORLANDOHEADER.FILEDESC, "GENDER")
+    gender_context = Context(context_id, bio.ORLANDOHEADER.FILEDESC, "GENDER", person=person)
     if sex:
         gender_context.link_triples(CulturalForm(
             "gender", None, get_mapped_term("Gender", utilities.get_sex(bio))))
@@ -458,7 +458,7 @@ def create_cf_map():
     # Program should stop if this happens
     import csv
     global CF_MAP
-    with open('../data/cf_mapping.csv', newline='') as csvfile:
+    with open('data/cf_mapping.csv', newline='') as csvfile:
         reader = csv.reader(csvfile)
         next(reader)
         for row in reader:
@@ -487,7 +487,7 @@ def update_fails(rdf_type, value):
         fail_dict[rdf_type] = {value: 1}
 
 
-def get_mapped_term(rdf_type, value, retry=False, id=None):
+def get_mapped_term(rdf_type, value, retry=False, id=None, tag=None):
     """
         Currently getting exact match ignoring case and "-"
     """
@@ -529,6 +529,8 @@ def get_mapped_term(rdf_type, value, retry=False, id=None):
                 update_fails(rdf_type, value + "->" + str(possibilites) + "?")
                 log_str += "Possible matches: " + value + "->" + str(possibilites) + "?"
 
+            if tag:
+                log_str += " in tag: " + str(tag)
             if id:
                 logger.warning("In entry: " + id + " " + log_str)
             else:
@@ -564,7 +566,7 @@ def log_mapping_fails(detail=True):
 
 
 def main():
-    from biography import Biography
+    from entry.biography import Biography
     from bs4 import BeautifulSoup
 
     # file_dict = utilities.parse_args(__file__, "CulturalForm")

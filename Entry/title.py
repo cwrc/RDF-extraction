@@ -3,11 +3,11 @@ import rdflib
 from rdflib import RDF, RDFS, Literal
 from difflib import get_close_matches
 
-from Utils import utilities
-from Utils.organizations import get_org, get_org_uri
-from Utils.place import Place
-from Utils.event import Event
-from Utils.context import Context
+from utils import utilities
+from utils.organizations import get_org, get_org_uri
+from utils.place import Place
+from utils.event import Event
+from utils.context import Context
 
 class Title(object):
     """"docstring for Title

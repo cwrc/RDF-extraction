@@ -1,7 +1,7 @@
 import rdflib
-from Utils.citation import Citation
+from utils.citation import Citation
 from rdflib import RDF, RDFS, Literal
-from Utils import utilities, organizations
+from utils import utilities, organizations
 
 
 MAX_WORD_COUNT = 35
@@ -19,11 +19,11 @@ TODO:
 4) clean up imports
 """
 
-def get_organizations(tag):
+def get_organizations(tag, person_id=None):
     """Returns all organization uris within a given tag"""
-    return [organizations.get_org_uri(x) for x in tag.find_all("ORGNAME")]
+    return [organizations.get_org_uri(x,person_id=person_id) for x in tag.find_all("ORGNAME")]
 
-def get_named_entities(tag, author=None, entity_types=None):
+def get_named_entities(tag, author=None, entity_types=None, entry_id=None):
     """Extracts the identifying components in a given tag based on specified entity types.
     
     Args:
@@ -47,16 +47,24 @@ def get_named_entities(tag, author=None, entity_types=None):
             identified_subjects += utilities.get_people(tag)
     
     if 'places' in entity_types:
-        identified_subjects += utilities.get_places(tag)
+        identified_subjects += utilities.get_places(tag, entry_id=entry_id)
     
     if 'titles' in entity_types:
-        identified_subjects += utilities.get_titles(tag)
+        if author:
+            identified_subjects += utilities.get_titles(tag, author)
+        else:
+            identified_subjects += utilities.get_titles(tag)
     
     if 'textscopes' in entity_types:
         identified_subjects += utilities.get_textscopes(tag)
     
     if 'organizations' in entity_types:
-        identified_subjects += get_organizations(tag)
+        if entry_id:
+            identified_subjects += get_organizations(tag, person_id=entry_id)
+        elif author:
+            identified_subjects += get_organizations(tag, person_id=author.id)
+        else:
+            identified_subjects += get_organizations(tag)
     
     return identified_subjects
 
@@ -69,6 +77,8 @@ def get_heading(tag):
         heading = tag.findPrevious("HEADING")
     if not heading:
         heading = tag.findNext("HEADING")
+    if not heading and tag.name == "AUTHORSUMMARY":
+        return "author-profile--highlights"
     if not heading:
         logger.error("Unable to find heading for:" + str(tag))
         return None
@@ -79,12 +89,13 @@ def create_context_map():
     # TODO: add exception handling
     temp_context_map = {}
     import pandas as pd
-    with open('../data/context_mapping.csv', newline='') as csvfile:
+    with open('data/context_mapping.csv', newline='') as csvfile:
         temp_context_map = pd.read_csv(csvfile)
 
     # Iterate over WRITING_PROPERTIES and add specific fields to temp_context_map
     for index, row in utilities.WRITING_PROPERTIES.iterrows():
         # Extract specific fields from the row
+        print(row)
         new_row = {
             'Orlando Tag': row['Orlando Tag'],
             'Context': row['Context Type'],
@@ -144,7 +155,7 @@ class Context(object):
     """
     MAPPING = create_context_map() #TODO: move to utilities
 
-    def __init__(self, id, tag, context_type="CULTURALFORMATION", motivation="describing", mode=None, subject_uri=None, target_uri=None, id_context=None, subject_name=None, other_triples=True):
+    def __init__(self, id, tag, context_type="CULTURALFORMATION", motivation="describing", mode=None, subject_uri=None, target_uri=None, id_context=None, subject_name=None, other_triples=True, person=None):
         super(Context, self).__init__()
         self.citations = []
         self.events = []
@@ -180,6 +191,7 @@ class Context(object):
             self.src = "https://orlando.cambridge.org/profiles/"
             if not self.heading:
                 self.src = "http://orlando.cambridge.org"
+                print(tag)
 
         self.tag = tag
         self.text = tag.get_text()
@@ -190,6 +202,7 @@ class Context(object):
             self.context_predicate = utilities.create_cwrc_uri(get_context_predicate(context_type)) 
         elif isinstance(context_type, list):
             self.context_type = [get_context_type(x) for x in context_type]
+            self.context_type = list(set(self.context_type))
             self.context_predicate = [ utilities.create_cwrc_uri(get_context_predicate(x)) for x in context_type ]
             self.context_label = " and ".join([utilities.split_by_casing(x) for x in self.context_type])
             self.context_type = [utilities.create_cwrc_uri(x) for x in self.context_type]
@@ -206,8 +219,8 @@ class Context(object):
             self.context_label = utilities.split_by_casing(self.context_type)
             self.context_type = utilities.create_cwrc_uri(self.context_type)
 
-        self.named_entities = get_named_entities(self.tag,entity_types=["people","titles","organizations"])
-        self.identified_places = utilities.get_places(self.tag)
+        self.named_entities = get_named_entities(self.tag,entity_types=["people","titles","organizations"], author=person)
+        self.identified_places = utilities.get_places(self.tag,entry_id=self.id.split("_")[0])
 
         if self.named_entities and context_type != "FREESTANDING_EVENT":
             motivation = "describing"
@@ -271,7 +284,7 @@ class Context(object):
         self.text= self.text.replace("\n"," ")
         self.text= self.text.replace(".",". ")
         self.text= self.text.replace("  "," ")
-
+        self.text= self.text.replace(". .",".")
         self.text=self.text.strip()
 
     def to_triple(self, person=None):
@@ -380,6 +393,10 @@ class Context(object):
 
             # Remove person from named entities
             self.named_entities = list(filter(lambda a: a != person.uri, self.named_entities))
+            
+            for x in self.named_entities:
+                if x == self.context_focus or x in self.context_focus:
+                    self.named_entities.remove(x)
 
             # Removing named entities if appear within triples
             for x in temp_graph.objects(None, None):
@@ -401,6 +418,10 @@ class Context(object):
                 g.add((self.uri, RDF.type, utilities.create_cwrc_uri("SpatialContext")))
 
         for x in self.tag.find_all("TITLE"):
+            std_name = utilities.get_value(x)
+            if not std_name:
+                continue
+            
             uri = utilities.get_title_uri(x)
             uri = rdflib.term.URIRef(uri)
             title_type = x.get("TITLETYPE")
@@ -411,7 +432,6 @@ class Context(object):
             
 
             
-            std_name = utilities.get_value(x)
             g.add((uri, RDFS.label, Literal(std_name)))
 
         

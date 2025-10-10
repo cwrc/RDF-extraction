@@ -71,7 +71,8 @@
       "jewsge": "INTIMATERELATIONSHIPS Erotic :Relationship with an actress who plays characters from Shakespeare plays",
       "woolvi": "Family (Member=STEPBROTHER): should be orlando:e0e00419-a55d-44d3-ac2f-87cd59f87304 (George Duckworth) not Vanessa Bell (orlando:1bf0fd5f-5351-4161-a1f4-4a62368fb09e)\nMany other relationships seem incorrect",
       "straja": "Family (Member=Aunt): - Aunt is not VW, it is Elinor Strachey Rendel",
-      "panksy": "Family (Member=Mother): - Mother is not Christabel, it is Emmeline Pankhurst "
+      "panksy": "Family (Member=Mother): - Mother is not Christabel, it is Emmeline Pankhurst ",
+      "smitch": "Family tag has children tag and additional member tags, which is atypical"
     },
     "notes": {
       "contexts": "Family: Whole member tag is the context",

@@ -1,10 +1,10 @@
 import rdflib
 from rdflib import Literal
-from Utils import utilities
-from Utils.context import Context, get_context_type, get_event_type
-from Utils.event import Event
-from Utils.organizations import get_org_uri
-from culturalForm import get_mapped_term
+from utils import utilities
+from utils.context import Context, get_context_type, get_event_type
+from utils.event import Event
+from utils.organizations import get_org_uri
+from entry.culturalForm import get_mapped_term
 
 logger = utilities.config_logger("intertextuality")
 
@@ -91,7 +91,7 @@ def extract_response_data(doc, person):
     contexts = doc.find_all("RRESPONSES")
     for context in contexts:
         context_id = F"{person.id}_Response_{context_count}"
-        temp_context = Context(context_id, context, "RRESPONSES")
+        temp_context = Context(context_id, context, "RRESPONSES", person=person)
         extract_response(context,person,temp_context)
         person.add_context(temp_context)
         context_count += 1
@@ -126,7 +126,7 @@ def extract_influence_data(doc, person):
     contexts = doc.find_all("PINFLUENCESHER")
     for context in contexts:
         context_id = F"{person.id}_Influence_{context_count}"
-        temp_context = Context(context_id, context, "PINFLUENCESHER")
+        temp_context = Context(context_id, context, "PINFLUENCESHER", person=person)
         extract_influencers(context,person,temp_context)
         person.add_context(temp_context)
         context_count += 1
@@ -134,7 +134,7 @@ def extract_influence_data(doc, person):
     contexts = doc.find_all("RSHEINFLUENCED")
     for context in contexts:
         context_id = F"{person.id}_Influence_{context_count}"
-        temp_context = Context(context_id, context, "RSHEINFLUENCED")
+        temp_context = Context(context_id, context, "RSHEINFLUENCED", person=person)
         extract_influenced(context,person,temp_context)
         person.add_context(temp_context)
         context_count += 1
@@ -178,7 +178,7 @@ def extract_intertextuality_data(doc, person):
 
     for context in contexts:
         context_id = F"{person.id}_Intertextuality_{context_count}"
-        temp_context = Context(context_id, context, "TINTERTEXTUALITY")
+        temp_context = Context(context_id, context, "TINTERTEXTUALITY", person=person)
         extract_intertextuality(context,person,temp_context)
         context_count += 1
         person.add_context(temp_context)
@@ -187,7 +187,7 @@ def extract_intertextuality_data(doc, person):
         
         # for e in events:
         #     context_id = F"{person.id}_Intertextuality_{context_count}"
-        #     temp_context = Context(context_id, e, "TINTERTEXTUALITY")
+        #     temp_context = Context(context_id, e, "TINTERTEXTUALITY", person=person)
         #     extract_intertextuality_data(e,person,temp_context)
 
         #     event_title = person.name + " - " + "Intertextuality Event"
@@ -219,13 +219,13 @@ def extract_intertextuality(tag, person, context):
                 gender_triple = utilities.GeneralRelation(utilities.create_uri("cwrc","genderReported"), get_mapped_term("Gender",authorGender))
                 context_id =  context.id.replace("_Intertextuality_", "_Intertextuality_CulturalForm_")
                 
-                g_context = Context(context_id, tag, "GENDER",subject_name=author_name, subject_uri=people[0], target_uri=context.target_uri,id_context=context.identifying_uri )
+                g_context = Context(context_id, tag, "GENDER",subject_name=author_name, subject_uri=people[0], target_uri=context.target_uri,id_context=context.identifying_uri , person=person)
                 g_context.link_triples(gender_triple)
                 person.add_context(g_context)
 
 
 
-    #NOTE that i'm ignoring: NB: extract ORGNAME and PLACES but use a receptionRelationship to the author or text
+    #NOTE that i'm ignoring: `NB: extract ORGNAME and PLACES but use a receptionRelationship to the author or text`
     intertextuality_triples = [ utilities.GeneralRelation(predicate, x) for x in entities ]
 
     if textscopes:
@@ -236,7 +236,7 @@ def extract_intertextuality(tag, person, context):
 
 def main():
     from bs4 import BeautifulSoup
-    from biography import Biography
+    from entry.biography import Biography
 
     extraction_mode, file_dict = utilities.parse_args(
         __file__, "Intertextuality", logger)

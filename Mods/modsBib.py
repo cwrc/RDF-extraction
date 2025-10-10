@@ -55,6 +55,7 @@ geoMapper = None
 STRING_MATCH_RATIO = 90
 
 UNIQUE_UNMATCHED_PLACES = set()
+UNIQUE_UNMATCHED_PLACE_COUNTS = {} 
 FORMS = []
 MEDIUMS = []
 AGENTS = {}
@@ -180,6 +181,88 @@ def dateParse(date_string: str):
 # ----------- MAIN CLASSES ----------
 class ParseGeoNamesMapping:
 
+    US_abbreviation_to_name = {
+    # https://en.wikipedia.org/wiki/List_of_states_and_territories_of_the_United_States#States.
+    "AK": "Alaska",
+    "AL": "Alabama",
+    "AR": "Arkansas",
+    "AZ": "Arizona",
+    "CA": "California",
+    "CO": "Colorado",
+    "CT": "Connecticut",
+    "DE": "Delaware",
+    "FL": "Florida",
+    "GA": "Georgia",
+    "HI": "Hawaii",
+    "IA": "Iowa",
+    "ID": "Idaho",
+    "IL": "Illinois",
+    "IN": "Indiana",
+    "KS": "Kansas",
+    "KY": "Kentucky",
+    "LA": "Louisiana",
+    "MA": "Massachusetts",
+    "MD": "Maryland",
+    "ME": "Maine",
+    "MI": "Michigan",
+    "MN": "Minnesota",
+    "MO": "Missouri",
+    "MS": "Mississippi",
+    "MT": "Montana",
+    "NC": "North Carolina",
+    "ND": "North Dakota",
+    "NE": "Nebraska",
+    "NH": "New Hampshire",
+    "NJ": "New Jersey",
+    "NM": "New Mexico",
+    "NV": "Nevada",
+    "NY": "New York",
+    "OH": "Ohio",
+    "OK": "Oklahoma",
+    "OR": "Oregon",
+    "PA": "Pennsylvania",
+    "RI": "Rhode Island",
+    "SC": "South Carolina",
+    "SD": "South Dakota",
+    "TN": "Tennessee",
+    "TX": "Texas",
+    "UT": "Utah",
+    "VA": "Virginia",
+    "VT": "Vermont",
+    "WA": "Washington",
+    "WI": "Wisconsin",
+    "WV": "West Virginia",
+    "WY": "Wyoming",
+    # https://en.wikipedia.org/wiki/List_of_states_and_territories_of_the_United_States#Federal_district.
+    "DC": "District of Columbia",
+    # https://en.wikipedia.org/wiki/List_of_states_and_territories_of_the_United_States#Inhabited_territories.
+    "AS": "American Samoa",
+    "GU": "Guam GU",
+    "MP": "Northern Mariana Islands",
+    "PR": "Puerto Rico PR",
+    "VI": "U.S. Virgin Islands",
+    }
+    US_STATES = set(US_abbreviation_to_name.values())
+    
+
+    CAN_abbreviation_to_name = {
+    # https://en.wikipedia.org/wiki/Provinces_and_territories_of_Canada.
+    "AB": "Alberta",
+    "BC": "British Columbia",
+    "MB": "Manitoba",
+    "NB": "New Brunswick",
+    "NL": "Newfoundland and Labrador",
+    "NS": "Nova Scotia",
+    "NT": "Northwest Territories",
+    "NU": "Nunavut",
+    "ON": "Ontario",
+    "PE": "Prince Edward Island",
+    "QC": "Quebec",
+    "SK": "Saskatchewan",
+    "YT": "Yukon",
+    }
+    CAN_PROVINCES = set(CAN_abbreviation_to_name.values())
+
     place_mapper = []
 
     def __init__(self, filename):
@@ -191,26 +274,32 @@ class ParseGeoNamesMapping:
                 place_name = place_name.strip()
                 url_string = row[1] if 'http://' in row[1] else "{0}".format(row[1])
                 self.place_mapper.append({"placename": place_name, "url": url_string})
-
+ 
     @staticmethod
     def split_place_parts(place):
         place_name_parts = None
         place = place.strip()
 
-        if ';' in place:
-            place_name_parts = re.split("\s*;\s*", place)
-        elif 'and' in place:
-            place_name_parts = re.split('\s*and\s*', place)
+        # TESTING if additional places helps results
+        if '; ' in place:
+            place_name_parts = re.split("\s*; \s*", place)
+        elif ' and ' in place:
+            place_name_parts = re.split('\s* and \s*', place)
         else:
             place_name_parts = [place]
 
+        # Remove any trailing punctuation
+        for i in range(len(place_name_parts)):
+            place_name_parts[i] = place_name_parts[i].rstrip(",")
+
         return place_name_parts
 
-    def get_place(self, place_name):
+    def get_place(self, place_name, bib_id):
         """
         Get the Geonames link given a string of a place
         This uses fuzzy string search library
         :param place_name:
+        :param bib_id: for logging purposes
         :return:
         """
         place_name = place_name.strip()
@@ -219,11 +308,38 @@ class ParseGeoNamesMapping:
         place_name_parts = ParseGeoNamesMapping.split_place_parts(place_name)
         for part in place_name_parts:
             selected_item = None
+            alt_part_1 = None
+            alt_part_2 = None
+            
+            sub_parts = part.split(", ")
+            if len(sub_parts) > 1 and len(sub_parts[-1]) == 2:
+                sub_region = sub_parts[-1].strip().upper()
+                if sub_region in self.US_abbreviation_to_name:
+                    sub_region_full = self.US_abbreviation_to_name[sub_region]
+                    alt_part_1 = part.replace(sub_parts[-1], sub_region_full)
+                    alt_part_2 = part.replace(sub_parts[-1], sub_region_full) + ", USA"
+                    
+                elif sub_region in self.CAN_abbreviation_to_name:
+                    sub_region_full = self.CAN_abbreviation_to_name[sub_region]
+                    alt_part_1 = part.replace(sub_parts[-1], sub_region_full)
+                    alt_part_2 = part.replace(sub_parts[-1], sub_region_full) + ", Canada"
+            else:
+                if sub_parts[-1] in self.US_STATES:
+                    alt_part_1 = part + ", USA"
+                elif sub_parts[-1] in self.CAN_PROVINCES:
+                    alt_part_1 = part + ", Canada"
+
+            
+            
 
             for place in self.place_mapper:
                 ratio = fuzz.ratio(place['placename'], part)
+                alt_ratio_1 = fuzz.ratio(place['placename'], alt_part_1)
+                alt_ratio_2 = fuzz.ratio(place['placename'], alt_part_2)
+                
+                
 
-                if ratio >= STRING_MATCH_RATIO:
+                if ratio >= STRING_MATCH_RATIO or alt_ratio_1 >= STRING_MATCH_RATIO or alt_ratio_2 >= STRING_MATCH_RATIO:
                     selected_item = place
 
                     matched_places.append(place['url'])
@@ -231,8 +347,16 @@ class ParseGeoNamesMapping:
 
             if not selected_item:
                 # Log unmatched places
-                logger.warning("Unable to map place: {0}".format(place_name))
-                UNIQUE_UNMATCHED_PLACES.add(place_name)
+                if part != place_name:
+                    logger.warning(F"Unable to map part of place: '{part}' from '{place_name}' in {bib_id} | {place_name_parts}")
+                else:
+                    logger.warning(F"Unable to map place: '{part}' in {bib_id} | {place_name_parts}")
+                
+                UNIQUE_UNMATCHED_PLACES.add(part)
+                if part in UNIQUE_UNMATCHED_PLACE_COUNTS:
+                    UNIQUE_UNMATCHED_PLACE_COUNTS[part] += 1
+                else:
+                    UNIQUE_UNMATCHED_PLACE_COUNTS[part] = 1
 
         return matched_places
 
@@ -257,7 +381,7 @@ class WritingParse:
         
 
         self.matched_documents = matched_documents
-
+        self.filename = filename
         self.parse_db_refs()
 
     def parse_db_refs(self):
@@ -297,7 +421,7 @@ class WritingParse:
             
             
             else:
-                logger.error("TEXTSCOPE missing REF & DBREF attribute")
+                logger.error(F"{self.filename}|TEXTSCOPE missing REF & DBREF attribute|{ts}")
 
 def get_person_name(person_uri):
     if person_uri in PEOPLE_MAPPING:
@@ -310,7 +434,7 @@ def get_person_name(person_uri):
 def get_person_uri(identifier):
     uri = None
     if identifier in PEOPLE_MAPPING:
-        uri = PEOPLE_MAPPING[identifier]['Primary Identifier']
+        uri = PEOPLE_MAPPING[identifier]['Primary URI']
         if uri != "":
             EXTERNAL_TO_CWRC_MAPPING[uri] = identifier
             return uri
@@ -323,11 +447,11 @@ def get_person_secondary_uris(cwrc_uri):
     if cwrc_uri not in PEOPLE_MAPPING:
         logger.warning(F"Person not in published authority list: {cwrc_uri}")
         return []
-    secondary_identifier = PEOPLE_MAPPING[cwrc_uri]["Secondary Identifier"]
+    secondary_identifier = PEOPLE_MAPPING[cwrc_uri]["Secondary URI"]
     secondary_uris = []
     if secondary_identifier != "":
         secondary_uris = secondary_identifier.split(" | ")
-    if PEOPLE_MAPPING[cwrc_uri]["Primary Identifier"] != "":
+    if PEOPLE_MAPPING[cwrc_uri]["Primary URI"] != "":
         secondary_uris.append(cwrc_uri)
     
     # secondary_uris = [rdflib.term.URIRef(x) for x in secondary_uris]    
@@ -337,8 +461,8 @@ def get_person_secondary_uris(cwrc_uri):
 def get_org_uri(identifier):
     uri = None
     if identifier in ORGANIZATION_MAPPING:
-        if ORGANIZATION_MAPPING[identifier]["Primary Identifier"] != "":
-            uri = ORGANIZATION_MAPPING[identifier]["Primary Identifier"]
+        if ORGANIZATION_MAPPING[identifier]["Primary URI"] != "":
+            uri = ORGANIZATION_MAPPING[identifier]["Primary URI"]
             EXTERNAL_TO_CWRC_MAPPING[uri] = identifier
         else:
             uri = ORGANIZATION_MAPPING[identifier]['CWRC URI']
@@ -350,14 +474,14 @@ def get_org_uri(identifier):
     return uri
 
 def get_primary_uri(cwrc_uri):
-    primary_identifier = ORGANIZATION_MAPPING[cwrc_uri]["Primary Identifier"]
+    primary_identifier = ORGANIZATION_MAPPING[cwrc_uri]["Primary URI"]
     
     if primary_identifier == "":
         return cwrc_uri 
     return primary_identifier
 
 def get_secondary_uris(cwrc_uri):
-    secondary_identifier = ORGANIZATION_MAPPING[cwrc_uri]["Secondary Identifier"]
+    secondary_identifier = ORGANIZATION_MAPPING[cwrc_uri]["Secondary URI"]
     secondary_uris = []
     if secondary_identifier != "":
         secondary_uris = secondary_identifier.split(" | ")
@@ -991,7 +1115,7 @@ class BibliographyParse:
                 place.add(RDF.value, rdflib.Literal(o['place']))
                 place.add(RDF.type, BF.Place)
 
-                place_map = geoMapper.get_place(o['place'].strip())
+                place_map = geoMapper.get_place(o['place'].strip(), self.id)
 
                 if place_map:
                     for item in place_map:
@@ -1206,9 +1330,9 @@ if __name__ == "__main__":
         count +=1
 
     with open("unmatchedplaces.csv", "w") as f:
-        writer = csv.writer(f, delimiter='\t', quoting=csv.QUOTE_MINIMAL)
+        writer = csv.writer(f, quoting=csv.QUOTE_MINIMAL)
         for item in UNIQUE_UNMATCHED_PLACES:
-            writer.writerow([item])
+            writer.writerow([item, UNIQUE_UNMATCHED_PLACE_COUNTS[item]])
 
     fname = F"bibliography_{datetime.datetime.now().strftime('%Y-%m-%d')}"
     output_name = fname.replace(".xml", "")

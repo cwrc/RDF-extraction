@@ -1,6 +1,6 @@
 import rdflib
 from rdflib import RDF, RDFS, Literal
-from Utils import utilities
+from utils import utilities
 
 logger = utilities.config_logger("biography")
 
@@ -13,7 +13,7 @@ def create_wikidata_map(path=None):
     # if searching takes too long
     # Create better searching mechanism
     if not path:
-        path = '../data/wikidata_ids.csv'
+        path = 'data/wikidata_ids.csv'
     with open(path, newline='', encoding='utf-8') as csvfile:
         reader = csv.reader(csvfile)
         next(reader)
@@ -101,8 +101,8 @@ class Biography(object):
         self.gender = []
         self.textscope_map = get_author_textscopes(doc)
 
-        if self.cwrc_uri in utilities.PERSON_MAP and utilities.PERSON_MAP[self.cwrc_uri]["Primary Identifier"] != "":
-            self.uri = utilities.PERSON_MAP[self.cwrc_uri]["Primary Identifier"]
+        if self.cwrc_uri in utilities.PERSON_MAP and utilities.PERSON_MAP[self.cwrc_uri]["Primary URI"] != "":
+            self.uri = utilities.PERSON_MAP[self.cwrc_uri]["Primary URI"]
         else:
             logger.warning(F"Person not in published authority list: {self.cwrc_uri}")
             self.uri = self.cwrc_uri

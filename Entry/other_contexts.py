@@ -1,6 +1,6 @@
-from Utils import utilities
-from Utils.context import Context, get_event_type, get_context_type
-from Utils.event import Event
+from utils import utilities
+from utils.context import Context, get_event_type, get_context_type
+from utils.event import Event
 """
 Status: ~89%
 extraction of health context will possibly accompanied by health factors at a later point
@@ -21,14 +21,14 @@ def extract_health_contexts_data(bio, person):
         for paragraph in paragraphs:
             context_id = person.id + "_" + context_type + "_" + str(count)
 
-            temp_context = Context(context_id, paragraph, "HEALTH", "identifying", mode)
+            temp_context = Context(context_id, paragraph, "HEALTH", "identifying", mode, person=person)
             person.add_context(temp_context)
             count += 1
 
         events = context.find_all("CHRONSTRUCT")
         for event in events:
             context_id = person.id + "_" + context_type + "_" + str(count)
-            temp_context = Context(context_id, event, "HEALTH", "identifying", mode)
+            temp_context = Context(context_id, event, "HEALTH", "identifying", mode, person=person)
 
             event_title = person.name + " - " + context_type.split("Context")[0] + " Event"
             event_uri = person.id + "_" + context_type.split("Context")[0] + "Event_" + str(event_count)
@@ -58,17 +58,22 @@ def extract_other_contexts_data(bio, person):
         context_type = get_context_type(context)
         for x in contexts:
             paragraphs = x.find_all("P")
+            jobs = x.find_all("SIGNIFICANTACTIVITY") + x.find_all("JOB")
+            if jobs:
+                logger.error(f"Found jobs in {context} context for {person.id}. This is not currently supported.")
+                logger.warning(jobs)
+
             for paragraph in paragraphs:
                 context_id = person.id + "_" + context_type + "_" + str(count)
 
-                temp_context = Context(context_id, paragraph, context, "identifying")
+                temp_context = Context(context_id, paragraph, context, "identifying", person=person)
                 person.add_context(temp_context)
                 count += 1
 
             events = x.find_all("CHRONSTRUCT")
             for event in events:
                 context_id = person.id + "_" + context_type + "_" + str(count)
-                temp_context = Context(context_id, event, context, "identifying")
+                temp_context = Context(context_id, event, context, "identifying", person=person)
 
                 event_title = person.name + " - " + context_type.split("Context")[0] + " Event"
                 event_uri = person.id + "_" + \
@@ -87,7 +92,7 @@ def extract_other_contexts_data(bio, person):
 
 def main():
     from bs4 import BeautifulSoup
-    from biography import Biography
+    from entry.biography import Biography
 
     ext_type = "Violence, Wealth, Leisure and Society, Other Life Event, Health contexts"
     extraction_mode, file_dict = utilities.parse_args(
@@ -100,11 +105,22 @@ def main():
             soup = BeautifulSoup(f, 'lxml-xml')
 
         person_id  = soup.find("ENTRY").get("ID")
+        
+        # job_tags = soup.find_all("SIGNIFICANTACTIVITY") + soup.find_all("JOB")
+        # if job_tags:
+        #     for job_tag in job_tags:
+        #         div = utilities.get_div(job_tag)
+        #         if div is None:
+        #             logger.error(
+        #                 F"Div2 not found for {job_tag.name} in {filename} for {person_id} | {job_tag}")
+        #         else:
+        #             logger.info(F"{job_tag.name} found in {div.parent.name} for {person_id} in {filename} | {job_tag}")
 
         print(filename)
         print(file_dict[filename])
         print(person_id)
         print("*" * 55)
+        # continue
 
         person = Biography(person_id, soup)
         extract_other_contexts_data(soup, person)
@@ -116,7 +132,7 @@ def main():
         utilities.manage_mode(extraction_mode, person, graph)
 
         uber_graph += graph
-
+    # exit(0)
     logger.info(str(len(uber_graph)) + " triples created")
     if extraction_mode.verbosity > 0:
         print(str(len(uber_graph)) + " total triples created")

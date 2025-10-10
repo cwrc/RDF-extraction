@@ -4,9 +4,9 @@
 from bs4 import BeautifulSoup
 import rdflib
 
-from Utils.utilities import *
-from Utils.context import Context
-from Utils.event import Event
+from utils.utilities import *
+from utils.context import Context
+from utils.event import Event
 
 
 uber_graph = rdflib.Graph()
@@ -82,7 +82,7 @@ def main():
         event_tag = soup.find_all("CHRONSTRUCT")[0]
         context_tag = soup.find_all("CHRONEVENT")[0]
 
-        temp_context = Context(context_id, context_tag, "FREESTANDING_EVENT", "identifying")
+        temp_context = Context(context_id, context_tag, "FREESTANDING_EVENT", "identifying", person=person)
         temp_event = Event(event_title, event_id, event_tag)
 
         freestanding_event = Freestanding_Event(temp_event, temp_context)

@@ -1,18 +1,10 @@
 #!/usr/bin/python3
 from bs4 import BeautifulSoup
+import re
+from utils import utilities, place, organizations
+from entry.biography import Biography
+from entry import culturalForm as cf, location, other_contexts, occupation, lifeInfo, birthDeath, intertextuality, writing_extraction, education, personname
 
-from Utils import utilities, place, organizations
-from biography import Biography
-import culturalForm as cf
-import location
-import other_contexts
-import occupation
-import lifeInfo
-import birthDeath
-import intertextuality
-import writing_extraction
-import education
-import personname
 
 """
 This is a possible temporary main script that creates the biography related triples
@@ -23,6 +15,32 @@ implement personname
 
 logger = utilities.config_logger("bio_extraction")
 
+def count_children(soup, person):
+    """
+    Counts the number of children for a person.
+    :param soup: BeautifulSoup object of the XML file.
+    :param person: Biography object representing the person.
+    :return: Number of children.
+    """
+    children = soup.find_all("CHILDREN")
+    
+    for child in children:
+        child_count = child.get("NUMBER")
+        print(f"CHILDREN|{person.id}|{person.cwrc_uri}|{person.std_name}|{person.name}|{person.uri}|{child_count}|{child.text}|{child}")
+
+
+def marital_status(soup, person):
+    """
+    Extracts marital status information from the soup object and adds it to the person object.
+    :param soup: BeautifulSoup object of the XML file.
+    :param person: Biography object representing the person.
+    """
+    marital_tags = ["MARRIAGE", "DIVORCE", "SEPARATION"]
+    marital_status = soup.find_all(marital_tags)
+    for status in marital_status:
+        print(f"MARITALSTATUS|{person.id}|{person.cwrc_uri}|{person.std_name}|{person.name}|{person.uri}|{status.name}|{status}|{status.text}")
+    else:
+        person.marital_status = "Unknown"
 
 def main():
     extraction_mode, file_dict = utilities.parse_args(
@@ -39,16 +57,21 @@ def main():
     count = 0
 
     for filename in file_dict.keys():
-        with open(filename) as f:
-            soup = BeautifulSoup(f, 'lxml-xml')
+        with open(filename, "r",encoding="UTF-8" ) as f:
+            xml_text = f.read()
+
         count += 1
-        
+
+        soup = BeautifulSoup(xml_text, 'lxml-xml')
         person_id  = soup.find("ENTRY").get("ID")
         
         print(f"Processing file: {person_id} {count}/{total_files}")
         print(file_dict[filename])
         print("*" * 55)
+
         person = Biography(person_id, soup)
+        
+        
         occupation.extract_occupation_data(soup, person)
         birthDeath.extract_death_data(soup, person)
         birthDeath.extract_birth_data(soup, person)
@@ -76,6 +99,9 @@ def main():
         if least_triples == 0 or triple_count < least_triples:
             least_triples = triple_count
             smallest_person = filename
+        if triple_count == 0:
+            logger.warning(f"No triples created for {filename} ({person_id})")
+            input("Press Enter to continue...")
 
         # triples to files
         utilities.create_individual_triples(
@@ -83,7 +109,7 @@ def main():
         utilities.manage_mode(extraction_mode, person, graph)
 
         uber_graph += graph
-
+    # exit(0)
     place.log_mapping_fails()
     cf.log_mapping_fails()
     occupation.log_mapping_fails()

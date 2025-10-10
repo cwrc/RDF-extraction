@@ -1,6 +1,6 @@
 from rdflib import RDF, RDFS, Literal, BNode
 import rdflib
-from Utils import utilities
+from utils import utilities
 
 logger = utilities.config_logger("citation")
 

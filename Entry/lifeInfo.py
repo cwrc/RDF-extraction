@@ -1,12 +1,12 @@
-from Utils import utilities, event
-from Utils.context import Context, get_context_type, get_event_type
-from Utils.event import Event
-# from Utils.place import Place
+from utils import utilities, event
+from utils.context import Context, get_context_type, get_event_type
+from utils.event import Event
+# from utils.place import Place
 import csv
 from bs4 import Tag
-import occupation
+from entry import occupation
 from rdflib import RDF, RDFS, Literal
-from culturalForm import get_mapped_term
+from entry.culturalForm import get_mapped_term
 import rdflib
 numtags = 0
 
@@ -143,10 +143,10 @@ def extract_relationships(tag_list, context_type, person, list_type="paragraphs"
         context_id = person.id + "_" + CONTEXT_TYPE + "_" + str(context_count)
         relationship_list = find_relationships(tag, person, context_type)
         if relationship_list:
-            temp_context = Context(context_id, tag, "INTIMATERELATIONSHIPS")
+            temp_context = Context(context_id, tag, "INTIMATERELATIONSHIPS", person=person)
             temp_context.link_triples(relationship_list)
         else:
-            temp_context = Context(context_id, tag, "INTIMATERELATIONSHIPS", "identifying")
+            temp_context = Context(context_id, tag, "INTIMATERELATIONSHIPS", "identifying", person=person)
 
         if list_type == "events":
             event_count += 1
@@ -204,10 +204,10 @@ def extract_friends(tag_list, context_type, person, list_type="paragraphs"):
         context_id = person.id + "_" + CONTEXT_TYPE + "_" + str(context_count)
         friend_list = find_friends(tag, person)
         if friend_list:
-            temp_context = Context(context_id, tag, "FRIENDSASSOCIATES")
+            temp_context = Context(context_id, tag, "FRIENDSASSOCIATES", person=person)
             temp_context.link_triples(friend_list)
         else:
-            temp_context = Context(context_id, tag, "FRIENDSASSOCIATES", "identifying")
+            temp_context = Context(context_id, tag, "FRIENDSASSOCIATES", "identifying", person=person)
 
         if list_type == "events":
             event_count += 1
@@ -235,7 +235,7 @@ def extract_friend_data(bio, person):
 
 def create_family_map(path=None):
     if not path:
-        path = '../data/family_mapping.csv'
+        path = 'data/family_mapping.csv'
     with open(path, newline='', encoding='utf-8') as csvfile:
         reader = csv.reader(csvfile)
         next(reader)
@@ -286,7 +286,7 @@ def extract_family_data(bio, person):
             family_members = []
             relation = FAMILY_MAP[member_tag["RELATION"]]["Predicate"]
             context_id = person.id + "_FamilyContext_" + str(context_count)
-            temp_context = Context(context_id, member_tag, "FAMILY")
+            temp_context = Context(context_id, member_tag, "FAMILY", person=person)
 
             # Finding family member
             people_found = utilities.get_all_other_people(member_tag,person)
@@ -344,7 +344,7 @@ def extract_family_data(bio, person):
 
 
                 # Creating context for relative
-                relative_triples = occupation.find_occupations(member_tag)
+                relative_triples = occupation.find_occupations(member_tag,person_id=person.id)
                 cohabitant_tag = member_tag.find("LIVESWITH")
                 if cohabitant_tag:
                     relative_triples.append(Person(person.uri, "cohabitant"))
@@ -377,8 +377,7 @@ def extract_family_data(bio, person):
                     context_count += 1
                     context_id = person.id + \
                         "_FamilyContext_" + str(context_count)
-                    relative_context = Context(context_id, member_tag, "FAMILY",
-                                               subject_uri=people_found[0], target_uri=temp_context.target_uri, id_context=temp_context.identifying_uri)
+                    relative_context = Context(context_id, member_tag, "FAMILY", subject_uri=people_found[0], target_uri=temp_context.target_uri, id_context=temp_context.identifying_uri, person=person)
                     relative_context.link_triples(relative_triples)
                     person.add_context(relative_context)
 
@@ -411,7 +410,7 @@ def extract_family_data(bio, person):
                         "children"), rdflib.term.Literal(int(x), datatype=rdflib.namespace.XSD.int)))
             
             context_id = person.id + "_FamilyContext_" + str(context_count)
-            temp_context = Context(context_id, family_tag, "FAMILY")
+            temp_context = Context(context_id, family_tag, "FAMILY", person=person)
             temp_context.link_triples(triples)
 
             events_tags = family_tag.find_all("CHRONSTRUCT")
@@ -431,7 +430,7 @@ def extract_family_data(bio, person):
 
 def main():
     from bs4 import BeautifulSoup
-    from biography import Biography
+    from entry.biography import Biography
     extraction_mode, file_dict = utilities.parse_args(
         __file__, "relationships", logger)
     print("-" * 200)

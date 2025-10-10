@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 
 
-from Utils.context import Context, get_event_type
-from Utils.event import Event
-from Utils.place import Place
-from Utils import utilities
+from utils.context import Context, get_event_type
+from utils.event import Event
+from utils.place import Place
+from utils import utilities
 
 """
 Status: ~80%
@@ -154,10 +154,10 @@ def extract_locations(tag_list, context_type, person, list_type="paragraphs"):
 
         location_list = find_locations(tag, context_type)
         if location_list:
-            temp_context = Context(context_id, tag, "LOCATION")
+            temp_context = Context(context_id, tag, "LOCATION", person=person)
             temp_context.link_triples(location_list)
         else:
-            temp_context = Context(context_id, tag, "LOCATION", "identifying")
+            temp_context = Context(context_id, tag, "LOCATION", "identifying", person=person)
 
         if list_type == "events":
             event_type = get_event_type("LOCATION", context_type)
@@ -206,7 +206,7 @@ def extract_location_data(bio, person):
 
 def main():
     from bs4 import BeautifulSoup
-    from biography import Biography
+    from entry.biography import Biography
 
     extraction_mode, file_dict = utilities.parse_args(
         __file__, "location", logger)

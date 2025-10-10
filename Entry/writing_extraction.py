@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 from bs4 import BeautifulSoup
-from biography import Biography
-from Utils import utilities, place, organizations
-from Utils.context import Context, get_context_type, get_event_type
-from Utils.event import Event
-from Utils.organizations import get_org_uri
-import intertextuality
+from entry.biography import Biography
+from utils import utilities, place, organizations
+from utils.context import Context, get_context_type, get_event_type
+from utils.event import Event
+from utils.organizations import get_org_uri
+from entry import intertextuality
 import rdflib
 logger = utilities.config_logger("writing")
 
@@ -18,7 +18,7 @@ def extract_general_info(doc, person, count):
     general_relations.append(utilities.GeneralRelation(cwrc.profile, rdflib.Literal(utilities.limit_words(tag.text))))
 
     context_id = person.id + "_WritingContext_" + str(count)
-    temp_context = Context(context_id, tag, "AUTHORSUMMARY")
+    temp_context = Context(context_id, tag, "AUTHORSUMMARY", person=person)
     temp_context.link_triples(general_relations)
     person.add_context(temp_context)
 
@@ -51,7 +51,7 @@ def extract_general_info(doc, person, count):
 
     # Reusing above Context's target uri/snippet
     context_id = person.id + "_WritingContext_" + str(count)
-    temp_context2 = Context(context_id, tag, "AUTHORSUMMARY", subject_uri=person.oeuvre_uri, target_uri=temp_context.target_uri,id_context=temp_context.identifying_uri)
+    temp_context2 = Context(context_id, tag, "AUTHORSUMMARY", subject_uri=person.oeuvre_uri, target_uri=temp_context.target_uri,id_context=temp_context.identifying_uri, person=person)
     temp_context2.link_triples(general_relations)
     person.add_context(temp_context2)
 
@@ -60,6 +60,39 @@ def extract_general_info(doc, person, count):
         logger.warning("Events found in AUTHORSUMMARY of entry: " + person.id + "\n" + str(events))
 
     return count
+
+def extract_place_contexts(bio, person):
+    context = "WEALTH"
+    contexts = bio.find_all("ENTRY")
+    count = 1
+    event_count = 1
+    event_type = get_event_type(context)
+    context_type = get_context_type(context)
+    for x in contexts:
+        paragraphs = x.find_all("P")
+        for paragraph in paragraphs:
+            context_id = person.id + "_" + context_type + "_" + str(count)
+
+            temp_context = Context(context_id, paragraph, context, "identifying", person=person)
+            person.add_context(temp_context)
+            count += 1
+
+        events = x.find_all("CHRONSTRUCT")
+        for event in events:
+            context_id = person.id + "_" + context_type + "_" + str(count)
+            temp_context = Context(context_id, event, context, "identifying", person=person)
+
+            event_title = person.name + " - " + context_type.split("Context")[0] + " Event"
+            event_uri = person.id + "_" + \
+                context_type.split("Context")[0] + "Event_" + str(event_count)
+            temp_event = Event(event_title, event_uri, event, type=event_type)
+
+            temp_context.link_event(temp_event)
+            person.add_event(temp_event)
+            person.add_context(temp_context)
+
+            count += 1
+            event_count += 1
 
 
 def main():
@@ -88,11 +121,11 @@ def main():
         print("*" * 55)
 
         person = Biography(person_id, soup)
-        
-        extract_general_info(soup, person, 1)
-        intertextuality.extract_intertextuality_data(soup, person)
-        intertextuality.extract_influence_data(soup, person)
-        intertextuality.extract_response_data(soup,person)
+        extract_place_contexts(soup, person)
+        # extract_general_info(soup, person, 1)
+        # intertextuality.extract_intertextuality_data(soup, person)
+        # intertextuality.extract_influence_data(soup, person)
+        # intertextuality.extract_response_data(soup,person)
         graph = person.to_graph()
         triple_count = len(graph)
 
@@ -120,7 +153,7 @@ def main():
     logger.info("Time completed: " + utilities.get_current_time())
 
     temp_path = "extracted_triples/writing_triples.ttl"
-    utilities.create_extracted_uberfile(temp_path, uber_graph,serialization="ttl", extra_triples="../data/additional_triples.ttl")
+    utilities.create_extracted_uberfile(temp_path, uber_graph,serialization="ttl", extra_triples="data/itional_triples.ttl")
 
     
   

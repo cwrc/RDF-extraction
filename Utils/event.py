@@ -1,7 +1,7 @@
 import rdflib
 from rdflib import RDF, RDFS, Literal, XSD
-from Utils.citation import Citation
-from Utils import utilities, organizations
+from utils.citation import Citation
+from utils import utilities, organizations
 
 
 logger = utilities.config_logger("event")
@@ -145,7 +145,7 @@ class Event(object):
         self.title = title
         self.tag = tag
         self.uri = utilities.create_uri("data", id)
-        self.place = utilities.get_places(tag)
+        self.place = utilities.get_places(tag,entry_id=id.split("_")[0])
         self.place_str = utilities.get_place_strings(tag)
         self.event_type = get_event_type(tag)
         self.actors = get_actors(tag)
@@ -185,6 +185,8 @@ class Event(object):
             
             if self.date:
                 self.date = format_date(self.date)
+            elif self.date_tag.text:
+                logger.warning("Missing date for event: " + str(self))
 
     def to_triple(self, person=None):
         g = utilities.create_graph()

@@ -1,15 +1,21 @@
-import rdflib
-from rdflib import Literal
-from Utils import utilities
-from Utils.context import Context, get_context_type, get_event_type, get_named_entities
-from Utils.event import Event
-from Utils.organizations import get_org_uri, get_org_name
+from ..Utils import utilities
+from utils.context import Context, get_context_type, get_event_type, get_named_entities
+from utils.event import Event
+from utils.organizations import get_org_uri, get_org_name
+from utils.place import Place
 from culturalForm import get_mapped_term
-from Utils.place import Place
+from itertools import combinations
+from rdflib import RDF, RDFS, Literal, XSD
+import Utils.event
+import copy
 import csv
+import os
+import rdflib
+import rdflib.term
+
 logger = utilities.config_logger("adhoc-data-extraction")
 
-
+COLUMNS =['Entry ID', 'Context', 'Old Context' ,'Specific Tag', 'Snippet', 'Subject Type', 'Subject SubType', 'Context Tag Type', 'Object', 'Object Type', 'Subject', 'Raw Date', 'Date', 'Raw Start Date', 'Start Date', 'End Date', 'Raw End Date', 'Shortprose' ,"CHRONCOLUMN","CHRONCOLUMN1","CHRONCOLUMN2","CHRONCOLUMN3","RELEVANCE","RELEVANCE1","RELEVANCE2","RELEVANCE3"]
 
 writing_context_counts = {
     "CharacterizationContext": 0,
@@ -92,11 +98,6 @@ def extract_triples(tag,tag_info):
         
           
     return triples
-
-
-
-    
-    
 
 
 def extract_writing_data(doc, person):
@@ -184,21 +185,21 @@ def extract_writing_data(doc, person):
         # Need to handle multiple different context types
         if len(entry_based_triples) > 0:
             context_id = person.id + "_WritingContext_" + str(writing_context_counts["WritingContext"])
-            temp_context = Context(context_id, p, entry_based_tags)
+            temp_context = Context(context_id, p, entry_based_tags, person=person)
             temp_context.link_triples(entry_based_triples)
             person.add_context(temp_context)
             writing_context_counts["WritingContext"] += 1
 
         if len(work_based_triples) > 0:
             context_id = person.id + "_WritingContext_" + str(writing_context_counts["WritingContext"])
-            temp_context = Context(context_id, p, work_based_tags)
+            temp_context = Context(context_id, p, work_based_tags, person=person)
             temp_context.link_triples(work_based_triples)
             person.add_context(temp_context)
             writing_context_counts["WritingContext"] += 1
             
         if len(ouvre_based_triples) > 0:
             context_id = person.id + "_WritingContext_" + str(writing_context_counts["WritingContext"])
-            temp_context = Context(context_id, p, ouvre_based_tags)
+            temp_context = Context(context_id, p, ouvre_based_tags, person=person)
             temp_context.link_triples(ouvre_based_triples)
             person.add_context(temp_context)
             writing_context_counts["WritingContext"] += 1
@@ -335,12 +336,42 @@ BIOGRAPHY_TAGS = ["BIRTH", "CULTURALFORMATION", "DEATH", "EDUCATION", "FAMILY","
 WRITING_TAGS = ["PRODUCTION", "RECEPTION",  "TEXTUALFEATURES"]
 OTHER_TAGS = ["AUTHORSUMMARY"] 
 
+DIVERSITY_CONTEXTS = {
+    "Cultural Identity Context": ["CULTURALFORMATION"],
+    "Education Context": ["EDUCATION"],
+    "Occupation Context": ["OCCUPATION"],
+    "Location Context": ["LOCATION"],
+    "Politics Context": ["POLITICS"], # National & International Events?)
+    "Social Context": ["LEISUREANDSOCIETY", "WEALTH", "FRIENDSASSOCIATES","OTHERLIFEEVENT"],
+    "Bodily Context": ["BIRTH", "HEALTH", "DEATH", "VIOLENCE"],
+    "Intimate Context": ["INTIMATERELATIONSHIPS", "FAMILY"], 
+    "Literary Context": ["AUTHORSUMMARY", "RLANDMARKTEXT", "RRECOGNITIONS"],
+    "Intertextual Context": ["TINTERTEXTUALITY", "PINFLUENCESHER", "RSHEINFLUENCED", "PLITERARYSCHOOLS", "RFICTIONALIZATION", "PNONBOOKMEDIA"],
+    "Adverse Literary Distinction Context": ["RPENALTIES", "RDESTRUCTIONOFWORK", "PNONSURVIVAL"],
+    "Production Context": ["PRODUCTION"],  # (+ British Women Writers & Writing Climate Events?)
+    "Reception Context": ["RECEPTION"],
+    "Textual Features Context": ["TEXTUALFEATURES"],
+}
+
+TAGS_OF_INTEREST = DIVERSITY_CONTEXTS["Literary Context"] + DIVERSITY_CONTEXTS["Intertextual Context"] + DIVERSITY_CONTEXTS["Adverse Literary Distinction Context"]
+
 ENTITIES = {
     "people": {},
     "places": {},
     "organizations": {},
     "titles": {}    
 }
+
+ROWS = []
+
+ROWS_PER_PERSON = {}
+
+def get_diversity_context_label(tag_name):
+    """ Returns the label for the diversity context based on the tag name """
+    for context, tags in DIVERSITY_CONTEXTS.items():
+        if tag_name in tags:
+            return context
+    return None
 
 def write_dict_to_csv(data, filename):
     # Determine the maximum length of the lists in the values
@@ -375,7 +406,7 @@ def get_mappings(doc, person):
     titles = {}
     for title_tag in title_tags:
         label = utilities.get_value(title_tag)
-        uri = utilities.get_title_uri(title_tag)
+        uri = utilities.get_title_uri(title_tag, person)
         titles[uri] = label
     
     organization_tags = doc.find_all("ORGNAME")
@@ -388,17 +419,80 @@ def get_mappings(doc, person):
     ENTITIES["places"].update(places)
     ENTITIES["titles"].update(titles)
     ENTITIES["organizations"].update(orgs)
+
+
+def format_date(date):
+    # TODO: apply '-' if calendar is BC also log this date
+    """ Formats date to be in usable xsd format
+    # https://github.com/RDFLib/rdflib/issues/747
+    :/
+    Weird issue with using gYearMonth and gYear resulting in filling out the date
+    ex. 1891 --> 1891-01-01
+    ex. 1891-12 --> 1891-12-01
+    Using normalizing fix from https://github.com/RDFLib/rdflib/issues/806
+    Not too sure the side effects of this
+    """
+
+    if not date:
+        return Literal("")
+
+    if date[-1] == "-":
+        date = date.strip("-")
+
+    if len(date) == 10:
+        return Literal(date, datatype=XSD.date)
+    elif len(date) == 7:
+        return Literal(date, datatype=XSD.date)
+    elif len(date) == 4:
+        return Literal(date, datatype=XSD.date)
+    else:
+        return Literal(date)
+        
+
+
+
+def get_event_details(doc):
+    details = {}
+
+    details["CHRONCOLUMN"] = doc.get("CHRONCOLUMN")
+    details["CHRONCOLUMN1"] = doc.get("CHRONCOLUMN1")
+    details["CHRONCOLUMN2"] = doc.get("CHRONCOLUMN2")
+    details["CHRONCOLUMN3"] = doc.get("CHRONCOLUMN3")
+    details["RELEVANCE"] = doc.get("RELEVANCE")
+    details["RELEVANCE1"] = doc.get("RELEVANCE1")
+    details["RELEVANCE2"] = doc.get("RELEVANCE2")
+    details["RELEVANCE3"] = doc.get("RELEVANCE3")
     
+    date_tag = Utils.event.get_date_tag(doc)
+    if date_tag.name != "DATERANGE":
+        details["Raw Date"] = date_tag.get("VALUE")
+        details["Date"] =  str(format_date(date_tag.get("VALUE")))
+        # details["date format"] = get_date_format(details["date"])
+    else:
+        details["Raw Start Date"] = date_tag.get("FROM")
+        details["Start Date"] =  str(format_date(date_tag.get("FROM")))
+        details["End Date"] =  str(format_date(date_tag.get("TO")))
+        details["Raw End Date"] = date_tag.get("TO")
+    
+    
+    shortprose_tag = doc.find("SHORTPROSE") 
+    if shortprose_tag:
+        details["Shortprose"] = utilities.get_snippet(shortprose_tag)
+    else:
+        details["Shortprose"] = None
 
-ROWS = []
+    return details
 
-def get_rows(context, tag, person, subject=None):
+
+def get_rows(context, context_label,tag, snippet ,person, subject=None, old_context=None):
     basic_details = {
         "Entry ID": person.id,
-        "Context": context,
-        "Snippet": utilities.get_snippet(tag),
+        "Context": context_label,
+        "Specific Tag": context,
+        "Snippet": snippet,
         "Subject Type": "Person",
-        "Subject SubType": "Entry Subject"
+        "Subject SubType": "Entry Subject",
+        "Old Context": old_context
     }
     
     if not subject or len(subject) == 0:
@@ -416,13 +510,24 @@ def get_rows(context, tag, person, subject=None):
         # basic_details["Subject"] = subject[0]
         
 
+    if tag.name == "P":
+        basic_details["Context Tag Type"] = "Paragraph"
+    elif tag.name == "CHRONSTRUCT":
+        basic_details["Context Tag Type"] = "Event"
+        basic_details.update(get_event_details(tag))
+    else:
+        basic_details["Context Tag Type"] = "More Specific Tag"
+        
+        
+
+
     rows = []
 
     for x in subject:
         people = get_named_entities(tag, author=person, entity_types=["people"])
         places = get_named_entities(tag,entity_types=["places"])
         organizations = get_named_entities(tag,entity_types=["organizations"])
-        titles = get_named_entities(tag,entity_types=["titles"])
+        titles = get_named_entities(tag,entity_types=["titles"],author=person)
         
         entity_mappings = [
         (people, "Person"),
@@ -438,40 +543,73 @@ def get_rows(context, tag, person, subject=None):
                 row["Subject"] = x
                 rows.append(row)    
         
+    print(rows)    
     return rows
 
 def extract_adhoc_data(doc, person):
     global ROWS
-    
+    person_rows = []
     for bio_tag in BIOGRAPHY_TAGS:
         tags = doc.find_all(bio_tag)
         for tag in tags:
             paragraphs = tag.find_all("P") + tag.find_all("CHRONSTRUCT")
             for p in paragraphs:
-                ROWS += get_rows(bio_tag, p, person,subject=None)
+                snippet = utilities.get_snippet(p)
+                person_rows += get_rows(bio_tag, get_diversity_context_label(bio_tag) ,p, snippet, person,subject=None, old_context=bio_tag)
 
 
     for writing_tag in WRITING_TAGS:
         tags = doc.find_all(writing_tag)
         for tag in tags:
             textscopes = utilities.get_textscopes(tag)
+
             paragraphs = tag.find_all("P") + tag.find_all("CHRONSTRUCT")
+            
+            
             if len(textscopes) > 0:
                 for p in paragraphs:
-                    ROWS += get_rows(writing_tag, p, person,subject=textscopes)
+                    specific_tags = p.find_all(TAGS_OF_INTEREST)
+                    specific_tag_texts = [x.text for x in specific_tags]
+                    snippet = utilities.get_snippet(p)
+                    for x in specific_tags:
+                        person_rows += get_rows(x.name,get_diversity_context_label(x.name), x, utilities.get_snippet(x), person,subject=textscopes, old_context=writing_tag)
+                    
+                    for x in specific_tag_texts:
+                        snippet = snippet.replace(x, "....")                        
+                    p = utilities.remove_tags(TAGS_OF_INTEREST, p)    
+
+                    person_rows += get_rows(writing_tag,get_diversity_context_label(writing_tag), p, snippet, person,subject=textscopes, old_context=writing_tag)
             else:
                 for p in paragraphs:
-                    ROWS += get_rows(writing_tag, p, person,subject=None)
+                    snippet = utilities.get_snippet(p)
+                    specific_tags = p.find_all(TAGS_OF_INTEREST)
+                    specific_tag_texts = [x.text for x in specific_tags]
+                    snippet = utilities.get_snippet(p)
+                    for x in specific_tags:
+                        person_rows += get_rows(x.name,get_diversity_context_label(x.name), x, utilities.get_snippet(x), person,subject=None, old_context=writing_tag)
+                    
+                    for x in specific_tag_texts:
+                        snippet = snippet.replace(x, "....")                        
+                    p = utilities.remove_tags(TAGS_OF_INTEREST, p)    
 
-    tags = doc.find_all("AUTHORSUMMARY")
-    for tag in tags:
-        paragraphs = tag.find_all("P")
-        for p in paragraphs:
-            ROWS += get_rows("AUTHORSUMMARY", p, person,subject=None)
+                    person_rows += get_rows(writing_tag,get_diversity_context_label(writing_tag), p,snippet, person,subject=None, old_context=writing_tag)
+
+    # tags = doc.find_all("AUTHORSUMMARY")
+    # for tag in tags:
+    #     paragraphs = tag.find_all("P")
+    #     for p in paragraphs:
+    #         snippet = utilities.get_snippet(p)
+    #         ROWS += get_rows("AUTHORSUMMARY", "Literary Context", p, snippet ,person,subject=None, old_context="AUTHORSUMMARY")
+    
+    ROWS_PER_PERSON[person.id] = len(person_rows)
+    ROWS += person_rows 
+    
 
 
-def save_rows_to_csv(rows, filename):
+def save_rows_to_csv(rows, filename, columns=None):
     keys = rows[0].keys()
+    if columns:
+        keys = columns
     with open(filename, 'w', newline='') as output_file:
         dict_writer = csv.DictWriter(output_file, fieldnames=keys)
         dict_writer.writeheader()
@@ -498,7 +636,7 @@ def extract_author_titles(doc, person):
 
 def main():
     from bs4 import BeautifulSoup
-    from biography import Biography
+    from entry.biography import Biography
     import csv
 
     extraction_mode, file_dict = utilities.parse_args(
@@ -521,7 +659,7 @@ def main():
         # title_check(soup, person)
         extract_adhoc_data(soup, person)
         # extract_author_titles(soup, person)
-        # get_mappings(soup, person)
+        get_mappings(soup, person)
         
         # title_analysis(soup, person)
         continue
@@ -540,11 +678,12 @@ def main():
     # logger.info(f"Unmatched Titles: {unmatched_titles}")
     # logger.info(f"Partial Matches: {partial_matches}")
     # logger.info(ENTITIES)
-    save_rows_to_csv(ROWS, 'adhoc.csv')
+    save_rows_to_csv(ROWS, 'context-based_relationships.csv', columns=COLUMNS)
+    print(ROWS_PER_PERSON)
     # save_rows_to_csv(ROWS, 'adhoc-authors.csv')
-    # for key, value in ENTITIES.items():
-    #     write_dict_to_csv(value, f"adhoc_reference_{key}.csv")
-    exit()
+    for key, value in ENTITIES.items():
+        write_dict_to_csv(value, f"context-based_reference_{key}.csv")
+    # exit()
     logger.info(str(len(uber_graph)) + " triples created")
     if extraction_mode.verbosity > 0:
         print(str(len(uber_graph)) + " total triples created")

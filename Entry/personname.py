@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 
 from rdflib import URIRef, Literal
-from Utils import utilities
-from Utils.context import Context
-from Utils.event import get_date_tag, Event, format_date
-from Utils.place import Place
+from utils import utilities
+from utils.context import Context
+from utils.event import get_date_tag, Event, format_date
+from utils.place import Place
 import rdflib
 
 """
@@ -263,14 +263,14 @@ def extract_person_name(xmlString, person):
 
     if personNameTags:
         context_id = person.id + "_PersonNameContext" + str(0)
-        tempContext = Context(context_id, personNameTags[0], "PERSONNAME")
+        tempContext = Context(context_id, personNameTags[0], "PERSONNAME", person=person)
         tempContext.link_triples(personname_entities[1:])
         person.add_context(tempContext)
 
 
 def main():
     from bs4 import BeautifulSoup
-    from biography import Biography
+    from entry.biography import Biography
     extraction_mode,file_dict = utilities.parse_args(__file__, "Personname",logger)
     print("-" * 200)
 

@@ -2,11 +2,11 @@ import rdflib
 from rdflib import RDF, RDFS, Literal
 from difflib import get_close_matches
 
-from Utils import utilities
-from Utils.organizations import get_org, get_org_uri
-from Utils.place import Place
-from Utils.event import Event
-from Utils.context import Context
+from utils import utilities
+from utils.organizations import get_org, get_org_uri
+from utils.place import Place
+from utils.event import Event
+from utils.context import Context
 """
 Status: ~75%
 TODO: Handle name tags with subject tags
@@ -434,10 +434,10 @@ def extract_education(tag_list, context_type, person, list_type="paragraphs"):
 
         education_list = create_education(tag, person)
         if len(education_list.to_triple(person)) > 0:
-            temp_context = Context(context_id, tag, "EDUCATION", mode=context_type)
+            temp_context = Context(context_id, tag, "EDUCATION", mode=context_type, person=person)
             temp_context.link_triples(education_list)
         else:
-            temp_context = Context(context_id, tag, "EDUCATION", "identifying", mode=context_type)
+            temp_context = Context(context_id, tag, "EDUCATION", "identifying", mode=context_type, person=person)
 
         if list_type == "events":
             education_event_count[context_type] += 1
@@ -459,7 +459,7 @@ def clean_term(string):
 def create_edu_map():
     import csv
     global EDU_MAP
-    with open('../data/education_mapping.csv', newline='') as csvfile:
+    with open('data/education_mapping.csv', newline='') as csvfile:
         reader = csv.reader(csvfile)
         next(reader)
         for row in reader:
@@ -549,7 +549,7 @@ def extract_education_data(bio, person):
 
 def main():
     from bs4 import BeautifulSoup
-    from biography import Biography
+    from entry.biography import Biography
 
     extraction_mode, file_dict = utilities.parse_args(
         __file__, "Education", logger)

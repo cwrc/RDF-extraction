@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 from rdflib import RDF, RDFS, Literal
 
 try:
-    from Utils import utilities
+    from utils import utilities
 except Exception as e:
     import utilities
 
@@ -76,7 +76,7 @@ class Organization(object):
         return string
 
 
-def get_org_uri(tag):
+def get_org_uri(tag, person_id=None):
     global ORG_COUNT
     std_name = tag.get("STANDARD")
     uri = tag.get("REF")
@@ -84,16 +84,16 @@ def get_org_uri(tag):
         uri = uri.strip()
         ORGS_USED.add(uri)
         if uri in utilities.ORGANIZATION_MAP:
-            if utilities.ORGANIZATION_MAP[uri]["Primary Identifier"] != "":
-                uri = utilities.ORGANIZATION_MAP[uri]["Primary Identifier"]
+            if utilities.ORGANIZATION_MAP[uri]["Primary URI"] != "":
+                uri = utilities.ORGANIZATION_MAP[uri]["Primary URI"]
             else:
                 uri = utilities.ORGANIZATION_MAP[uri]['CWRC URI']
         else:
             logger.warning(F"Organization not in published authority list: {uri}, {tag}")
             utilities.ORGANIZATION_MAP[uri] = {
                 "Preferred Name": tag.get_text(),
-                "Primary Identifier": "",
-                "Secondary Identifier": "",
+                "Primary URI": "",
+                "Secondary URI": "",
                 "CWRC URI": uri
             }
             
@@ -110,7 +110,11 @@ def get_org_uri(tag):
             logger.warning(F"No standard name or URI: {tag}")
             name = tag.get_text()
         uri = utilities.make_standard_uri(name + " ORG", ns="data")
-        logger.warning(F"Organization has no REF attribute: {tag}, {uri}")
+        
+        if person_id:
+            logger.warning(F"{person_id}|Organization has no REF attribute: {tag}|{uri}")
+        else:
+            logger.warning(F"Organization has no REF attribute: {tag}|{uri}")
         ORGS_USED.add(uri)
         TEMP_ORGS[uri] = name
     
@@ -137,8 +141,8 @@ def get_org_name(tag):
         logger.warning(F"Organization not in published authority list: {cwrc_uri}, {tag}")
         utilities.ORGANIZATION_MAP[uri] = {
             "Preferred Name": tag.get_text(),
-            "Primary Identifier": "",
-            "Secondary Identifier": "",
+            "Primary URI": "",
+            "Secondary URI": "",
             "CWRC URI": cwrc_uri
         }
         
@@ -149,14 +153,14 @@ def get_org_name(tag):
     return tag.get_text()
 
 def get_primary_uri(cwrc_uri):
-    primary_identifier = utilities.ORGANIZATION_MAP[cwrc_uri]["Primary Identifier"]
+    primary_identifier = utilities.ORGANIZATION_MAP[cwrc_uri]["Primary URI"]
     
     if primary_identifier == "":
         return cwrc_uri 
     return primary_identifier
 
 def get_secondary_uris(cwrc_uri):
-    secondary_identifier = utilities.ORGANIZATION_MAP[cwrc_uri]["Secondary Identifier"]
+    secondary_identifier = utilities.ORGANIZATION_MAP[cwrc_uri]["Secondary URI"]
     secondary_uris = []
     if secondary_identifier != "":
         secondary_uris = secondary_identifier.split(" | ")
