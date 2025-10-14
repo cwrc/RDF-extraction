@@ -75,7 +75,7 @@ class PersonName:
             self.hasSpareGraph = True
         if parentType and parentType == "Nickname":
             pass
-    
+
 
     def makeBirthGraph(self, givenNameList, surNameList):
         g = utilities.create_graph()

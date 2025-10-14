@@ -273,31 +273,31 @@ class Education(object):
 
     def __str__(self):
         string = "Education:\n"
-        
+
         string += "\tschools:\n"
         for x in self.schools:
             string += f"\t\t{x}\n"
-        
+
         string += "\tinstructors:\n"
         for x in self.instructors:
             string += f"\t\t{x}\n"
-        
+
         string += "\tcompanions:\n"
         for x in self.companions:
             string += f"\t\t{x}\n"
-        
+
         string += "\tcontested behaviour:\n"
         for x in self.contested_behaviour:
             string += f"\t\t{x}\n"
-        
+
         string += "\tawards:\n"
         for x in self.awards:
             string += f"\t\t{x}\n"
-        
+
         string += "\tstudied_subjects:\n"
         for x in self.studied_subjects:
             string += f"\t\t{x}\n"
-        
+
         string += "\ttexts:\n"
         for x in self.texts:
             string += f"\t\t{x}\n"
@@ -569,7 +569,7 @@ def main():
 
         person = Biography(person_id, soup)
         extract_education_data(soup, person)
-        
+
         graph = person.to_graph()
         utilities.create_individual_triples(
             extraction_mode, person, "education")

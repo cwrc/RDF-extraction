@@ -2,7 +2,7 @@ import sys
 import os
 import datetime
 import requests
-from config_env import env
+from config import env
 
 session = requests.Session()
 

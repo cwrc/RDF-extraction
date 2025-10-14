@@ -105,7 +105,7 @@ def main():
             soup = BeautifulSoup(f, 'lxml-xml')
 
         person_id  = soup.find("ENTRY").get("ID")
-        
+
         # job_tags = soup.find_all("SIGNIFICANTACTIVITY") + soup.find_all("JOB")
         # if job_tags:
         #     for job_tag in job_tags:

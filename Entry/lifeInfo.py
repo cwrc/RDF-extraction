@@ -25,12 +25,12 @@ class Person(object):
             self.cwrc_uri = name.get("REF")
             self.alt_name = name.get("STANDARD")
             self.uri = utilities.get_name_uri(name)
-            
+
             if self.cwrc_uri:
                 self.name = utilities.get_full_name(rdflib.term.URIRef(self.cwrc_uri), fallback=name.text)
             else:
                 self.name = self.alt_name
-            
+
         else:
             logger.error("Unexpected type for name parameter:" +
                          str(type(name)) + ": " + str(name))
@@ -103,7 +103,7 @@ def find_childlessness(tag):
         if not keyword_found:
             childlessness.append(utilities.GeneralRelation(utilities.create_cwrc_uri(
                 "unspecifiedReproductiveHistory"), utilities.create_cwrc_uri("unspecifiedReproductiveHistory")))
-            
+
     return childlessness
 
 
@@ -184,7 +184,7 @@ def find_friends(tag, person, predicate="interpersonalRelationshipWith"):
             friends.append(Person(x, predicate))
         else:
             friends.append(Person(x, "cohabitant"))
-    
+
     return list(filter(lambda a: a.uri != person.uri and a.uri not in person.biographers, friends))
 
 
@@ -265,7 +265,7 @@ def extract_family_data(bio, person):
     TODO: Extract family members in a certain orders
     Parents, siblings, then partners, other relatives
     """
-    # 
+    #
     context_count = 1
     event_count = 1
 
@@ -276,7 +276,7 @@ def extract_family_data(bio, person):
         sex = "NEUTRAL"
 
     print(person.uri)
-    # Revisit this maybe best approach is to create family tree then go about creating the contexts? 
+    # Revisit this maybe best approach is to create family tree then go about creating the contexts?
     get_all_members(bio, person)
     family_tags = bio.find_all("FAMILY")
 
@@ -329,7 +329,7 @@ def extract_family_data(bio, person):
                         people_found[0] = person.uri + "_PLACEHOLDER_"+ relation
                 elif str(people_found[0]) in utilities.WRITER_MAP:
                     print(utilities.WRITER_MAP[str(people_found[0])])
-                
+
                 log_str = person.id + "\n"
                 log_str += "\t" + str(person.uri) + " --" + relation + "--> " + \
                     str(people_found[0]) + "\n"
@@ -403,12 +403,12 @@ def extract_family_data(bio, person):
             triples = []
             child_count = find_children(family_tag)
             triples += find_childlessness(family_tag)
-            
+
             if child_count:
                 for x in child_count:
                     triples.append(utilities.GeneralRelation(utilities.create_cwrc_uri(
                         "children"), rdflib.term.Literal(int(x), datatype=rdflib.namespace.XSD.int)))
-            
+
             context_id = person.id + "_FamilyContext_" + str(context_count)
             temp_context = Context(context_id, family_tag, "FAMILY", person=person)
             temp_context.link_triples(triples)
@@ -434,7 +434,7 @@ def main():
     extraction_mode, file_dict = utilities.parse_args(
         __file__, "relationships", logger)
     print("-" * 200)
-    
+
 
     uber_graph = utilities.create_graph()
 

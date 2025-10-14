@@ -160,7 +160,7 @@ def find_cultural_forms(cf, person):
             return get_mapped_term("GeographicHeritage", utilities.get_value(tag), id=person.id, tag=tag)
 
     def get_forebear_cfs():
-        # TODO: Check with Erin on how to map forebear 
+        # TODO: Check with Erin on how to map forebear
         # sparql query to check if person hasMother/hasFather, and there is a valid uri
         # otherwise create the person and familial relation?
         def get_forebear(tag):
@@ -437,7 +437,7 @@ def extract_gender_data(bio, person):
             gender_context.link_triples(CulturalForm("gender", None, get_mapped_term("Gender", identity)))
         else:
             gender_context.link_triples(CulturalForm("gender", None, get_mapped_term("Gender", gender.text)))
-            
+
 
     person.add_context(gender_context)
 

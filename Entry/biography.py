@@ -40,12 +40,12 @@ def get_possible_biographers(doc):
     names = doc.find_all("NAME")
     biographers = []
     for x in names:
-        parent_text = x.parent.get_text().lower()     
+        parent_text = x.parent.get_text().lower()
         role_text = [f"{role} {x.get_text().lower()}" for role in ROLE_KEYWORDS]
 
         if any(role in parent_text for role in role_text):
             biographers.append(x)
-            
+
     return list(set(biographers))
 
 
@@ -54,7 +54,7 @@ def get_parent_context(tag):
     # Might be easier with recursion
     tags = ["HEALTH", "WEALTH", "VIOLENCE", "LEISUREANDSOCIETY", "FRIENDSASSOCIATES", "PERSONNAME", "FAMILY", "INTIMATERELATIONSHIPS", "CULTURALFORMATION",
             "LOCATION", "POLITICS", "OCCUPATION", "OTHERLIFEEVENT", "DEATH", "BIRTH", "EDUCATION"]
-    
+
     for parent in tag.parents:
         if parent.name == "MEMBER":
             if "RELATION" in parent.attrs:
@@ -73,9 +73,9 @@ def get_name_context(doc):
             uri_map[uri].append(get_parent_context(x))
         else:
             uri_map[uri] = [get_parent_context(x)]
-    
+
     return uri_map
-    
+
 
 def get_author_textscopes(doc):
     textscopes = doc.find_all("TEXTSCOPE")
@@ -111,14 +111,14 @@ class Biography(object):
         self.oeuvre_uri = rdflib.term.URIRef(F"{self.uri}_Oeuvre")
 
         logger.info(F"{self.id}|{self.uri}|{self.std_name}")
-        
+
         # TODO: Review names and people extraction for more precision
         self.biographers = [
             utilities.get_name_uri(x) for x in get_possible_biographers(self.document)]
         self.names_mentioned = utilities.get_people(self.document)
         # uris:Orlando tag
         self.people_contexts = get_name_context(doc)
-        
+
         # uri:role
         self.people_map = {}
         self.people_map[self.uri] = "self"
@@ -133,7 +133,7 @@ class Biography(object):
         self.people_mentioned= utilities.get_people_names(self.document)
         self.family_members = {}
         self.get_all_members()
-        
+
         self.context_list = []
         self.event_list = []
 
@@ -144,7 +144,7 @@ class Biography(object):
         for x in member_tags:
             peeps = utilities.get_other_people(x,self)
             peeps = [y for y in peeps if y not in self.biographers]
-            
+
             if x["RELATION"] in self.family_members:
                 self.family_members[x["RELATION"]]+=peeps
             else:

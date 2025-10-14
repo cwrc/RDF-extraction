@@ -11,7 +11,7 @@ from utils.context import Context
 
 class Title(object):
     """"docstring for Title
-    This class will be used to type a title 
+    This class will be used to type a title
     and eventually map to the bibliographic data
     """
     titleType_mapping = { "monographic": "standaloneWork",
@@ -27,7 +27,7 @@ class Title(object):
         # Temp placeholder until reconciled with bibliography
         # Or use blanknode
         self.uri = utilities.make_standard_uri(title + " TITLE", ns="data")
-        if titleType in self.titleType_mapping: 
+        if titleType in self.titleType_mapping:
             self.typing = self.titleType_mapping[titleType]
 
     def to_triple(self):
@@ -36,6 +36,6 @@ class Title(object):
             g.add((self.uri, RDF.type, self.typing))
         g.add((self.uri, RDFS.Label, self.label))
         return g
-    
+
     def __str__(self) -> str:
         return f"URI: {self.uri}\nTitle: {self.label}\nTyping:{self.typing}\n"

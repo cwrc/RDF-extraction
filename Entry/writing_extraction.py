@@ -26,7 +26,7 @@ def extract_general_info(doc, person, count):
     general_relations = []
 
     # TODO: Need to check mapping with genre ontology
-    # Make genre class for mapping 
+    # Make genre class for mapping
     # does this apply to person or the ouevre
     tags = tag.find_all("GENERICRANGE")
     genre_tags = []
@@ -35,7 +35,7 @@ def extract_general_info(doc, person, count):
 
     genres = [x["GENRENAME"] for x in genre_tags]
     genres = [utilities.GENRE_MAPPING[x.lower()] for x in genres if x.lower() in utilities.GENRE_MAPPING ]
-    
+
     for x in genres:
         general_relations.append(utilities.GeneralRelation(cwrc.c_hasGenericRange, rdflib.URIRef(x)))
 
@@ -115,13 +115,13 @@ def main():
 
         person_id  = soup.find("ENTRY").get("ID")
         count += 1
-        
+
         print(f"Processing file: {person_id} {count}/{total_files}")
         print(file_dict[filename])
         print("*" * 55)
 
         person = Biography(person_id, soup)
-        extract_place_contexts(soup, person)
+        # extract_place_contexts(soup, person)
         # extract_general_info(soup, person, 1)
         # intertextuality.extract_intertextuality_data(soup, person)
         # intertextuality.extract_influence_data(soup, person)
@@ -153,10 +153,10 @@ def main():
     logger.info("Time completed: " + utilities.get_current_time())
 
     temp_path = "extracted_triples/writing_triples.ttl"
-    utilities.create_extracted_uberfile(temp_path, uber_graph,serialization="ttl", extra_triples="data/itional_triples.ttl")
+    utilities.create_extracted_uberfile(temp_path, uber_graph,serialization="ttl", extra_triples="data/additional_triples.ttl")
 
-    
-  
+
+
 
 if __name__ == "__main__":
     main()

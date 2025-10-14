@@ -25,7 +25,7 @@ def clean_term(string):
     return string
 
 def create_cause_map():
-    
+
     import csv
     global CAUSE_MAP
     with open('data/COD_mapping.csv', newline='', encoding="utf8") as csvfile:
@@ -179,7 +179,7 @@ def get_mapped_term(value, id=None):
     map_attempt += 1
     term = None
     temp_val = clean_term(value)
-    
+
     for x in CAUSE_MAP.keys():
         if temp_val in CAUSE_MAP[x]:
             term = x
@@ -348,7 +348,7 @@ def extract_death_data(bio, person):
 
         cause_tags = death_tag.find_all("CAUSE")
         causes = [get_mapped_term(utilities.get_value(x), person.id) for x in cause_tags]
-        
+
         zipped_causes = list(zip(cause_tags, causes))
         for cause_tag, cause in zipped_causes:
             if type(cause) == rdflib.Literal:
@@ -400,7 +400,7 @@ def main():
     if extraction_mode.verbosity > 0:
         print(str(len(uber_graph)) + " total triples created")
 
-    utilities.create_uber_triples(extraction_mode, uber_graph, "birthDeath",extra_triples="data/itional_triples.ttl")
+    utilities.create_uber_triples(extraction_mode, uber_graph, "birthDeath",extra_triples="data/additional_triples.ttl")
     logger.info(F"Time completed: " + utilities.get_current_time())
 
 if __name__ == '__main__':

@@ -41,7 +41,7 @@ class Response(object):
     }
     def __init__(self, response_tag, label, other_attributes=None):
         super(Response, self).__init__()
-        
+
         self.types = [
         response_tag.get("GENDEREDRESPONSE"),
         response_tag.get("FORMALITY"),
@@ -58,7 +58,7 @@ class Response(object):
         self.named_entities += utilities.get_places(response_tag)
         self.named_entities += [get_org_uri(x) for x in response_tag.find_all("ORGNAME")]
 
-             
+
     def to_triple(self, context):
         g = utilities.create_graph()
         response = rdflib.BNode()
@@ -69,7 +69,7 @@ class Response(object):
 
         if context.context_focus in self.named_entities:
             self.named_entities.remove(context.context_focus)
-        
+
         for x in self.named_entities:
             g.add((response, utilities.create_uri("cwrc","hasResponseRelationTo"),x))
 
@@ -101,15 +101,15 @@ def extract_response(tag, person,context):
     textscopes = utilities.get_textscopes(tag)
     label = ""
     if textscopes:
-        textscopes_texts = utilities.get_textscopes_text(tag)            
+        textscopes_texts = utilities.get_textscopes_text(tag)
         label = "Response to "
-        for x in range(len(textscopes)): 
+        for x in range(len(textscopes)):
             title = " ".join(textscopes_texts[x].split(", ")[1:-1])
             label += title + ", "
 
         if label[-2:] == ", ":
             label = label[:-2]
-        
+
         context.context_focus = textscopes
     else:
         label = F"Response to {person.name}"
@@ -150,7 +150,7 @@ def extract_influenced(tag, person, context):
     context.link_triples(influence_triples)
 
 
-   
+
 def extract_influencers(tag, person, context):
     """PINFLUENCESHER"""
     named_entities = []
@@ -182,9 +182,9 @@ def extract_intertextuality_data(doc, person):
         extract_intertextuality(context,person,temp_context)
         context_count += 1
         person.add_context(temp_context)
-    
 
-        
+
+
         # for e in events:
         #     context_id = F"{person.id}_Intertextuality_{context_count}"
         #     temp_context = Context(context_id, e, "TINTERTEXTUALITY", person=person)
@@ -218,7 +218,7 @@ def extract_intertextuality(tag, person, context):
                 author_name = tag.find("NAME").get_text()
                 gender_triple = utilities.GeneralRelation(utilities.create_uri("cwrc","genderReported"), get_mapped_term("Gender",authorGender))
                 context_id =  context.id.replace("_Intertextuality_", "_Intertextuality_CulturalForm_")
-                
+
                 g_context = Context(context_id, tag, "GENDER",subject_name=author_name, subject_uri=people[0], target_uri=context.target_uri,id_context=context.identifying_uri , person=person)
                 g_context.link_triples(gender_triple)
                 person.add_context(g_context)
@@ -230,7 +230,7 @@ def extract_intertextuality(tag, person, context):
 
     if textscopes:
         context.context_focus = textscopes
-    
+
     context.link_triples(intertextuality_triples)
 
 
@@ -258,7 +258,7 @@ def main():
         extract_intertextuality_data(soup, person)
         extract_influence_data(soup, person)
         extract_response_data(soup,person)
-        
+
         graph = person.to_graph()
 
         utilities.create_individual_triples(
