@@ -100,81 +100,60 @@ def remove_punctuation(input_str, all_punctuation=False):
 
 
 
-def dateParse(date_string: str):
+def dateParse(date_string: str, *, raise_on_failure: bool = False, log_on_failure: bool = True):
+    # Normalize and try a compact list of formats instead of many repeated tries
+    date_string = date_string.strip()
+    if not date_string:
+        if raise_on_failure:
+            raise ValueError(f"Empty date string")
+        return date_string, False
 
-    # Strip spaces surrounding the date string
-    date_string = date_string.strip().rstrip()
+    # Collapse multiple dashes and remove trailing dashes (e.g. "1999--" -> "1999")
+    date_string = re.sub(r'-{2,}', '-', date_string)
+    date_string = date_string.rstrip('-').strip()
 
-    try:
-        dt = datetime.datetime.strptime(date_string, "%Y-%m-%d")
-        return dt.isoformat().split("T")[0], True
-    except ValueError:
-        pass
-    try:
-        dt = datetime.datetime.strptime(date_string, "%Y--")
-        return dt.isoformat().split("T")[0], True
-    except ValueError:
-        pass
-    try:
-        dt = datetime.datetime.strptime(date_string, "%Y-")
-        return dt.isoformat().split("T")[0], True
-    except ValueError:
-        pass
+    formats = [
+        "%Y-%m-%d",
+        "%Y-%m",
+        "%Y",
+        "%B %Y",
+        "%b %Y",
+        "%d %B %Y",
+        "%d %b %Y",
+    ]
 
-    try:
-        dt = datetime.datetime.strptime(date_string, "%Y")
-        return dt.isoformat().split("T")[0], True
-    except ValueError:
-        pass
+    for fmt in formats:
+        try:
+            dt = datetime.datetime.strptime(date_string, fmt)
+            return dt.date().isoformat(), True
+        except ValueError:
+            continue
 
+    # Try ISO parsing (handles full ISO datetimes)
     try:
-        dt = datetime.datetime.strptime(date_string, "%Y-%m-")
-        return dt.isoformat().split("T")[0], True
-    except ValueError:
-        pass
-
-    try:
-        dt = datetime.datetime.strptime(date_string, "%Y-%m")
-        return dt.isoformat().split("T")[0], True
-    except ValueError:
+        dt = datetime.datetime.fromisoformat(date_string)
+        return dt.date().isoformat(), True
+    except Exception:
         pass
 
+    # Optional: if python-dateutil is installed, use it as a fuzzy fallback
     try:
-        dt = datetime.datetime.strptime(date_string, "%Y")
-        return dt.isoformat().split("T")[0], True
-    except ValueError:
-        pass
+        from dateutil import parser as _dateutil_parser
+    except Exception:
+        _dateutil_parser = None
 
-    try:
-        dt = datetime.datetime.strptime(date_string, "%B %Y")
-        return dt.isoformat().split("T")[0], True
-    except ValueError:
-        pass
+    if _dateutil_parser:
+        try:
+            # fuzzy=True allows parsing noisy strings like "July, 1999" or "circa 1999"
+            dt = _dateutil_parser.parse(date_string, fuzzy=True)
+            return dt.date().isoformat(), True
+        except Exception:
+            pass
 
-    try:
-        dt = datetime.datetime.strptime(date_string, "%d %B %Y")
-        return dt.isoformat().split("T")[0], True
-    except ValueError:
-        pass
-
-    try:
-        dt = datetime.datetime.strptime(date_string, "%Y-%m--")
-        return dt.isoformat().split("T")[0], True
-    except ValueError:
-        pass
-
-    try:
-        dt = datetime.datetime.strptime(date_string, "%b %Y")
-        return dt.isoformat().split("T")[0], True
-    except ValueError:
-        pass
-
-    try:
-        dt = datetime.datetime.strptime(date_string, "%d %b %Y")
-        return dt.isoformat().split("T")[0], True
-    except ValueError:
-        pass
-
+    if log_on_failure:
+        logger.info(F"MISSING DATE FORMAT: {date_string}")
+    if raise_on_failure:
+        raise ValueError(F"Unable to parse date: {date_string}")
 
     return date_string, False
 
@@ -280,13 +259,8 @@ class ParseGeoNamesMapping:
         place_name_parts = None
         place = place.strip()
 
-        # TESTING if additional places helps results
-        if '; ' in place:
-            place_name_parts = re.split("\s*; \s*", place)
-        elif ' and ' in place:
-            place_name_parts = re.split('\s* and \s*', place)
-        else:
-            place_name_parts = [place]
+        # Split on semicolon or 'and' (case-insensitive) with flexible whitespace
+        place_name_parts = re.split(r"\s*(?:;|and)\s*", place, flags=re.IGNORECASE)
 
         # Remove any trailing punctuation
         for i in range(len(place_name_parts)):
@@ -411,14 +385,15 @@ class WritingParse:
                         name = genre.attrs['GENRENAME']
                         genres.append(name)
 
-                
+                rec_id = "orlando_" + rec_id
                 if rec_id in self.matched_documents:
                     for x in genres:
                         if x not in self.matched_documents[rec_id]:
                             self.matched_documents[rec_id].append(x)
                 else:
                         self.matched_documents[rec_id] = list(set(genres))
-            
+
+                genre_map[rec_id] = genres
             
             else:
                 logger.error(F"{self.filename}|TEXTSCOPE missing REF & DBREF attribute|{ts}")
@@ -522,9 +497,12 @@ class BibliographyParse:
     # Maps MODS roles used in orlando to MARC roles
     role_map = {
         "editor": "edt",
+        "edt": "edt",
+        "series editor": "edt",
         "translator": "trl",
         "compiler": "com",
         "adapter": "adp",
+        "adaptor": "adp",
         "contributor": "ctb",
         "illustrator": "ill",
         "introduction": "win",
@@ -535,7 +513,12 @@ class BibliographyParse:
         "rcp":"rcp",
         "transcriber":"trc",
         "author":"aut",
-        "recipient":"rcp"
+        "recipient":"rcp",
+        "director":"drt",
+        "reviewer":"rev",
+        "interviewer":"ivr",
+        "interviewee":"ive",
+        "photographer":"pht",
     }
 
     related_item_map = {
@@ -581,6 +564,7 @@ class BibliographyParse:
         else:
             self.old_id = resource_name.replace(".xml", "")
 
+        self.id = self.id.replace("orlando_", "")
 
         if 'data:' in self.id:
             self.mainURI = self.id
@@ -589,6 +573,7 @@ class BibliographyParse:
         else:
             self.mainURI = F"https://commons.cwrc.ca/orlando:{self.id}"
     
+        
         self.relatedItem = related_item
 
     def get_type(self):
@@ -695,7 +680,7 @@ class BibliographyParse:
                 else:
                     record['sources'].append({'source': source.text, 'authority': ""})
             record['id'] = {'id': r.recordIdentifier, 'source': r.source}
-            record['creationDate'] = {'date': r.creationDate.text, 'encoding': r.creationDate['encoding']}
+            record['creationDate'] = {'date': r.recordCreationDate.text, 'encoding': r.recordCreationDate['encoding']}
             record['origin'] = {'origin': r.recordOrigin.text}
 
             records.append(record)
@@ -720,6 +705,7 @@ class BibliographyParse:
                     role = role.text
                 else:
                     role = role.text
+                role = role.lower()
                     # continue
 
 
@@ -738,6 +724,9 @@ class BibliographyParse:
             uri = None
             if "valueURI" in np.attrs:
                 uri = np.attrs["valueURI"]
+            
+            if name:
+                name = name.strip()
 
             names.append({"type": name_type, "role": role, "name": name, "uri":uri, "altname":alt})
         return names
@@ -749,10 +738,12 @@ class BibliographyParse:
                 if oi.parent.name == 'relatedItem' and self.relatedItem == False:
                     continue
                 place = oi.place.placeTerm.text
-                publisher = oi.publisher.text
-                date = oi.dateIssued.text
-                date_type = oi.dateIssued['encoding']
-
+                publisher = oi.publisher.text.strip()
+                # date_issued = oi.find_all('dateIssued')
+                date_issued = oi.find('dateIssued', encoding="iso8601")
+                date = date_issued.text if date_issued else None
+                date_type = date_issued['encoding'] if date_issued and 'encoding' in date_issued.attrs else None
+                print(F"Place: {place}, Publisher: {publisher}, Date: {date}, Date Type: {date_type}")
                 origins.append({'place': place, 'publisher': publisher, 'date': date, 'date_type': date_type})
 
         return origins
@@ -779,10 +770,17 @@ class BibliographyParse:
                 continue
             if o.publisher:
                 publisher = o.publisher.text
+                publisher = publisher.strip()
                 if "valueURI" in o.publisher.attrs:
                     publisher_uri = o.publisher["valueURI"]
-            if o.dateIssued:
-                date = o.dateIssued.text
+                    USED_ORGANIZATIONS[publisher] = publisher_uri
+                elif publisher in USED_ORGANIZATIONS:
+                    publisher_uri = USED_ORGANIZATIONS[publisher]
+                else:
+                    publisher_uri = None
+            dateIssued = o.find('dateIssued', encoding="iso8601")
+            if dateIssued:
+                date =dateIssued.text
             if o.place:
                 place = o.place.placeTerm.text
             if o.edition:
@@ -962,12 +960,17 @@ class BibliographyParse:
             if name["full name"]:
                 agent_resource.add(RDFS.label, rdflib.Literal(name["full name"],lang="en"))
             else:
+                
                 agent_resource.add(RDFS.label, rdflib.Literal(name["name"],lang="en"))
 
 
-            if name['role'] in self.role_map:
+            if 'role' not in name or not name['role']:
+                role = MARCREL.aut
+            elif name['role'] in self.role_map:
                 role = MARCREL[self.role_map[name['role']]]
             elif name['role']:
+                print(F"Role not in mapping: {name['role']} for name {name['name']} in document {self.mainURI}")
+                logger.warning(F"Role not in mapping: {name['role']} for name {name['name']} in document {self.mainURI}")
                 role = rdflib.Literal(name["role"])
             else:
                 role = MARCREL.aut
@@ -977,6 +980,7 @@ class BibliographyParse:
                 
             
             agent_label = F"{name['name']} in role of {role}"
+            
             uri = None
             if agent_label in AGENTS:
                 uri = AGENTS[agent_label]
@@ -1014,7 +1018,7 @@ class BibliographyParse:
                 # role_resource.add(BF.code, rdflib.Literal(self.role_map[name['role']]))
                 # role_resource.add(BF.source, MARCREL[self.role_map[name['role']]])
                 contribution_resource.add(BF.role,MARCREL[self.role_map[name['role']]])
-            if name['role']:
+            elif name['role']:
                 # role_resource.add(RDFS.label, rdflib.Literal(name["role"]))
                 contribution_resource.add(BF.role,rdflib.Literal(name["role"]))
             else:
@@ -1060,7 +1064,7 @@ class BibliographyParse:
 
 
         for r in self.get_record_change_date():
-
+            
             dateValue, transformed = dateParse(r['date'])
             if not transformed:
                 logger.info("MISSING DATE FORMAT: {} on Document {}".format(dateValue, self.mainURI))
@@ -1103,7 +1107,7 @@ class BibliographyParse:
                     publisher = g.resource(o['publisher uri'])
                 else:
                     publisher = g.resource(DATA[remove_punctuation(o['publisher'])])
-                    publisher = g.resource("{}_activity_statement_publisher_{}".format(self.mainURI, i))
+                    # publisher = g.resource("{}_activity_statement_publisher_{}".format(self.mainURI, i))
                 
                 publisher.add(RDF.type, BF.Agent)
                 publisher.add(RDFS.label, rdflib.Literal(o['publisher']))
@@ -1201,8 +1205,13 @@ class BibliographyParse:
             for genre in genres:
                 if genre in genre_mapping:            
                     uri = genre_mapping[genre]
-                else:
+                elif genre.lower() in genre_mapping:
                     uri = genre_mapping[genre.lower()]
+                elif genre.replace(" ", "").lower() in genre_mapping:
+                    uri = genre_mapping[genre.replace(" ", "").lower()]
+                else:
+                    logger.info(F"GENRE NOT FOUND: {genre} for document {self.id}")
+                    continue
                 uri = rdflib.URIRef(uri)
 
                 if genre_graph[uri]:
@@ -1298,8 +1307,8 @@ if __name__ == "__main__":
 
     for fname in os.listdir(writing_dir):
         path = os.path.join(writing_dir, fname)
-        if os.path.isdir(path):
-            continue
+        # if os.path.isdir(path):
+        #     continue
 
         try:
             genreParse = WritingParse(path, genre_map)
@@ -1308,12 +1317,17 @@ if __name__ == "__main__":
 
     # test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"]
     # test_filenames = ["0d0e00bf-3224-4286-8ec4-f389ec6cc7bb.xml"]
-    test_filenames = ["55aff3fb-8ea9-4e95-9e04-0f3e630896e3.xml", "0c133817-f55e-4a8f-a9b4-474566418d9b.xml"]
-
+    # test_filenames = ["orlando_47f2e582-85ce-44cc-b338-2f315496399a.xml", "orlando_0c133817-f55e-4a8f-a9b4-474566418d9b.xml"]
+    # print(genre_map)
+    # input("Press enter to continue with bibliography parsing...")
     count = 1
-    total = len(os.listdir(dirname))
+    files = os.listdir(dirname)
+    total = len(files)
+    # only should be xml files 
+    files = [f for f in files if f.endswith(".xml")]
+
     # for fname in test_filenames:
-    for fname in os.listdir(dirname):
+    for fname in files:
         print(F"{count}/{total} files extracted ({fname})")
 
         path = os.path.join(dirname, fname)
