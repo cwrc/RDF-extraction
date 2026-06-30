@@ -62,7 +62,7 @@ def extract_general_info(doc, person, count):
     return count
 
 def extract_place_contexts(bio, person):
-    context = "WEALTH"
+    context = "Writing"
     contexts = bio.find_all("ENTRY")
     count = 1
     event_count = 1
@@ -122,7 +122,7 @@ def main():
 
         person = Biography(person_id, soup)
         # extract_place_contexts(soup, person)
-        # extract_general_info(soup, person, 1)
+        extract_general_info(soup, person, 1)
         # intertextuality.extract_intertextuality_data(soup, person)
         # intertextuality.extract_influence_data(soup, person)
         # intertextuality.extract_response_data(soup,person)

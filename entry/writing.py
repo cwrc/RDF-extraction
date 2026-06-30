@@ -120,8 +120,8 @@ def extract_non_standard_properties(tag, rule):
 
     if tag.name == "TMOTIF":
         motif_name = tag.get("MOTIFNAME")
-        motif_name = utilities.camel_case(motif_name)
         if motif_name:
+            motif_name = utilities.camel_case(motif_name)
             motif_uri = utilities.make_standard_uri(motif_name + "Motif", ns="cwrc")
             triples.append(utilities.GeneralRelation(property_uri, motif_uri))
         else:

@@ -2,7 +2,7 @@
 from bs4 import BeautifulSoup
 from utils import utilities, place, organizations
 from entry.biography import Biography
-from entry import culturalForm as cf, location, other_contexts, occupation, lifeInfo, birthDeath, intertextuality, writing_extraction, education #, personname
+from entry import culturalForm as cf, location, other_contexts, occupation, lifeInfo, birthDeath, intertextuality, writing_extraction, education, writing #, personname
 
 
 """
@@ -60,6 +60,7 @@ def main():
         intertextuality.extract_intertextuality_data(soup, person)
         intertextuality.extract_influence_data(soup, person)
         intertextuality.extract_response_data(soup,person)
+        writing.extract_writing_data(soup, person)
 
 
         graph = person.to_graph()

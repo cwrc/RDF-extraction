@@ -385,7 +385,7 @@ class WritingParse:
                         name = genre.attrs['GENRENAME']
                         genres.append(name)
 
-                rec_id = "orlando_" + rec_id
+                # rec_id = "orlando_" + rec_id
                 if rec_id in self.matched_documents:
                     for x in genres:
                         if x not in self.matched_documents[rec_id]:
@@ -394,7 +394,7 @@ class WritingParse:
                         self.matched_documents[rec_id] = list(set(genres))
 
                 genre_map[rec_id] = genres
-            
+
             else:
                 logger.error(F"{self.filename}|TEXTSCOPE missing REF & DBREF attribute|{ts}")
 
@@ -1200,6 +1200,7 @@ class BibliographyParse:
             else:
                     logger.warning(F"GENRE NOT FOUND: {genre['genre']}")
 
+
         if self.id in genre_map:
             genres = genre_map[self.id]
             for genre in genres:
@@ -1223,6 +1224,8 @@ class BibliographyParse:
                         resource.add(GENRE.hasGenre, uri)
                 else:
                     logger.info(F"GENRE NOT FOUND: {genre}")
+        else:
+            logger.info(F"GENRE NOT FOUND: No genre mapping for document {self.id}")
 
 
 
@@ -1315,7 +1318,7 @@ if __name__ == "__main__":
         except UnicodeError:
             pass
 
-    # test_filenames = ["e57c7868-a3b7-460e-9f20-399fab7f894c.xml"]
+    # test_filenames = ["orlando_dae633f2-657e-4d43-ba9d-979ac2b30e0b.xml"]
     # test_filenames = ["0d0e00bf-3224-4286-8ec4-f389ec6cc7bb.xml"]
     # test_filenames = ["orlando_47f2e582-85ce-44cc-b338-2f315496399a.xml", "orlando_0c133817-f55e-4a8f-a9b4-474566418d9b.xml"]
     # print(genre_map)

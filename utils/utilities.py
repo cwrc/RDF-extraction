@@ -951,6 +951,9 @@ def get_file_dict(script, args, testcase_data, testcases_available):
     elif "special" in testcase_data and args.s:
         filelist = sorted(testcase_data['special'].keys())
         descriptors = [testcase_data['special'][desc] for desc in filelist]
+        if file_prefix:
+            filelist = [file_prefix + x for x in filelist]
+        print(filelist)
         print("Running extraction on special cases: ")
         print(*filelist, sep=", ")
     elif "graffles" in testcase_data and args.g:
