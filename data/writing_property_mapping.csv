@@ -70,7 +70,7 @@ RRECOGNITIONNAME,Embedded Entities,,,,Work ELSE Entry Subject,cwrc:LiteraryAward
 RRECOGNITIONS,Descriptive,,,,Work ELSE Entry Subject,String,RecognitionContext,c_receivesRecognition,c_hasRecognitionRelationTo,Standard,,,RRECOGNITIONSDescriptive
 RRECOGNITIONVALUE,Descriptive,,,,Entry Subject,String,RecognitionContext,c_gainsLiteraryAwardValue,c_hasRecognitionRelationTo,Standard,,,RRECOGNITIONVALUEDescriptive
 RSELFDESCRIPTION,Descriptive,,,,Entry Subject,String,ResponseContext,c_hasSelfDescription,c_hasResponseRelationTo,Standard,,,RSELFDESCRIPTIONDescriptive
-RSHEINFLUENCED,Embedded Entities,,,,Entry Subject,All Named Entities,InfluenceContext,c_hasInfluenceOn,c_hasIntertextualRelationTo,Standard,,,RSHEINFLUENCEDEmbedded Entities
+RSHEINFLUENCED,Embedded Entities,,,,Entry Subject,All Named Entities,InfluenceContext,c_hasLiteraryInfluenceOn,c_hasInfluenceOn,Standard,,,RSHEINFLUENCEDEmbedded Entities
 TCHARACTERIZATION,Descriptive,,,,Work,String,CharacterizationContext,c_hasCharacterization,c_hasCharacterizationRelationTo,Standard,,,TCHARACTERIZATIONDescriptive
 TCHARACTERNAME,Descriptive,,,,Work,String,CharacterizationContext,c_hasCharacterName,c_hasCharacterizationRelationTo,Standard,,,TCHARACTERNAMEDescriptive
 TCHARACTERNAME,Embedded Entities,,,,Work,Person,CharacterizationContext,c_hasCharacterType,c_hasCharacterizationRelationTo,Custom,,,TCHARACTERNAMEEmbedded Entities
