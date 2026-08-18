@@ -255,6 +255,8 @@ def extract_writing_data(doc, person):
     LOSTWORK_COUNT = 1
     # May need to handle multiple different context types
     for context_tag in context_tags:
+        id_context_URI = None
+        target_URI = None
         tag_names = list({tag.name for tag in context_tag.descendants if tag.name})
         tag_names = [x for x in tag_names if x not in utilities.CORE_TAGS]
 
@@ -320,27 +322,49 @@ def extract_writing_data(doc, person):
 
             if destruction_type in DESTRUCTION_TYPE_MAPPING:
                 lostwork_based_triples.append(utilities.GeneralRelation(utilities.NS_DICT["cwrc"]["c_hasDestructionType"], utilities.NS_DICT["cwrc"][DESTRUCTION_TYPE_MAPPING[destruction_type]]))
+            else:
+                input(f"Unhandled destruction type for {person.id}: {destruction_type}")
 
             person.add_event(lostwork)
             entry_based_tags.append(lostwork_tag.name)
-            create_and_link_context(person, context_tag, lostwork_based_triples, lostwork_tag.name, lostwork.uri, "WritingContext")
+            
+            temp = create_and_link_context(person, context_tag, lostwork_based_triples, lostwork_tag.name, lostwork.uri, "WritingContext")
+            if temp != None:
+                target_URI = temp.target_uri
+                id_context_URI = temp.identifying_uri
+
+
+
             LOSTWORK_COUNT += 1
 
+        context_groups = (
+            (entry_based_triples, entry_based_tags, person.uri),
+            (work_based_triples, work_based_tags, works),
+            (ouvre_based_triples, ouvre_based_tags, person.oeuvre_uri),
+        )
+        context_kwargs = (
+            {"id_context": id_context_URI, "target_uri": target_URI}
+            if id_context_URI is not None and target_URI is not None
+            else {}
+        )
 
-        create_and_link_context(person, context_tag, entry_based_triples, entry_based_tags, person.uri, "WritingContext")
-        create_and_link_context(person, context_tag, work_based_triples, work_based_tags, works, "WritingContext")
-        create_and_link_context(person, context_tag, ouvre_based_triples, ouvre_based_tags, person.oeuvre_uri, "WritingContext")
+        for triples, tags, context_focus in context_groups:
+            temp = create_and_link_context(
+                person, context_tag, triples, tags, context_focus,
+                "WritingContext", **context_kwargs
+            )
+            if temp is not None:
+                id_context_URI = temp.identifying_uri
+                target_URI = temp.target_uri
+                context_kwargs = {
+                    "id_context": id_context_URI,
+                    "target_uri": target_URI,
+                }
 
-def get_orlando_tags(triples):
-    """ Get a list of unique orlando tags from the given triples
-    triples: List of GeneralRelation objects representing the triples to be analyzed
-    """
-    predicates = [str(triple.predicate).split("#")[1] for triple in triples]
-    filtered_df = utilities.WRITING_PROPERTIES[utilities.WRITING_PROPERTIES['Specific Property'].isin(predicates)]
-    orlando_tags = filtered_df['Orlando Tag'].tolist()
-    return list(set(orlando_tags))
 
-def create_and_link_context(person, context_tag, triples, tags, context_focus, context_type):
+
+
+def create_and_link_context(person, context_tag, triples, tags, context_focus, context_type, id_context=None, target_uri=None):
     """ Create a context of the given type, link the triples to it, and add it to the person
 
     person: Biography object representing the person being processed
@@ -353,7 +377,9 @@ def create_and_link_context(person, context_tag, triples, tags, context_focus, c
 
     if len(triples) > 0:
         context_id = f"{person.id}_{context_type}_{writing_context_counts[context_type]}"
-        temp_context = Context(context_id, context_tag, context_type=tags, person=person)
+
+
+        temp_context = Context(context_id, context_tag, context_type=tags, person=person, id_context=id_context, target_uri=target_uri)
         temp_context.context_focus = context_focus
 
         # To avoid self-referential triples
@@ -362,6 +388,21 @@ def create_and_link_context(person, context_tag, triples, tags, context_focus, c
         temp_context.link_triples(triples)
         person.add_context(temp_context)
         writing_context_counts[context_type] += 1
+        return temp_context
+    else:
+        logger.info(f"No triples found for context {context_type} in {person.id}")
+        return None
+
+
+def get_orlando_tags(triples):
+    """ Get a list of unique orlando tags from the given triples
+    triples: List of GeneralRelation objects representing the triples to be analyzed
+    """
+    predicates = [str(triple.predicate).split("#")[1] for triple in triples]
+    filtered_df = utilities.WRITING_PROPERTIES[utilities.WRITING_PROPERTIES['Specific Property'].isin(predicates)]
+    orlando_tags = filtered_df['Orlando Tag'].tolist()
+    return list(set(orlando_tags))
+
 
 all_textscopes_texts = []
 all_textscopes_map = []
