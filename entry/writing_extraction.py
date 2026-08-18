@@ -123,9 +123,9 @@ def main():
         person = Biography(person_id, soup)
         # extract_place_contexts(soup, person)
         extract_general_info(soup, person, 1)
-        # intertextuality.extract_intertextuality_data(soup, person)
-        # intertextuality.extract_influence_data(soup, person)
-        # intertextuality.extract_response_data(soup,person)
+        intertextuality.extract_intertextuality_data(soup, person)
+        intertextuality.extract_influence_data(soup, person)
+        intertextuality.extract_response_data(soup,person)
         graph = person.to_graph()
         triple_count = len(graph)
 

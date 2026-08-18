@@ -36,6 +36,37 @@ PUBLICATION_MODE_MAPPING = {
 "SUBSCRIPTION": "subscription"
 }
 
+DESTRUCTION_TYPE_MAPPING = {
+    "ACCIDENT": "destructionByAccident",
+    "SELF": "destructionByCreator",
+    "UNKNOWN": "destructionUnspecified",
+    "OTHER": "destructionByAnother"
+}
+
+class LostWork:
+    def __init__(self, id, label, genres=[]):
+        self.id = id
+        self.uri = utilities.make_standard_uri(id, ns="data")
+        self.label = label
+        self.genres = []
+
+        if genres:
+            for g in genres:
+                if g not in utilities.GENRE_MAPPING:
+                    logger.warning(f"Genre {g} not found in GENRE_MAPPING. Please check for typos or add to mapping.")
+                else:
+                    self.genres.append(rdflib.URIRef(utilities.GENRE_MAPPING[g]))
+
+    def to_triple(self, context):
+        g = utilities.create_graph()
+        g.add((self.uri, rdflib.RDF.type, utilities.NS_DICT["cwrc"]["LostWork"]))
+        g.add((self.uri, rdflib.RDFS.label, rdflib.Literal(self.label, lang="en")))
+
+        for genre in self.genres:
+            g.add((self.uri, utilities.NS_DICT["genre"]["hasGenre"], genre))
+
+        return g
+
 
 
 # TODO: Review: Are these actually used/useful?
@@ -97,8 +128,7 @@ def extract_standard_properties(tag, rule):
         for entity in entities:
             triples.append(utilities.GeneralRelation(property_uri, entity))
     else:
-        logger.warning(f"Range Type not yet handled: {rule['Range Type']} for {rule['Orlando Tag']}")
-        print(f"Range Type not yet handled: {rule['Range Type']} for {rule['Orlando Tag']}")
+        logger.info(f"Range Type not yet handled: {rule['Range Type']} for {rule['Orlando Tag']}")
         # input()
         # triples.append(utilities.GeneralRelation(property_uri, Literal("RANGE TYPE NOT HANDLED")))
 
@@ -114,16 +144,17 @@ def extract_non_standard_properties(tag, rule):
     triples = []
     property_uri = utilities.NS_DICT["cwrc"][rule["Specific Property"]]
     # print(f"Custom extraction needed for {rule['Orlando Tag']} with property {property_uri}")
-    logger.warning(f"Custom extraction needed for {rule['Orlando Tag']} with property {property_uri}")
+    logger.info(f"Custom extraction needed for {rule['Orlando Tag']} with property {property_uri}")
     # print(tag)
     # print(rule)
+    global LOST_WORK_COUNT
 
     if tag.name == "TMOTIF":
         motif_name = tag.get("MOTIFNAME")
         if motif_name:
-            motif_name = utilities.camel_case(motif_name)
-            motif_uri = utilities.make_standard_uri(motif_name + "Motif", ns="cwrc")
-            triples.append(utilities.GeneralRelation(property_uri, motif_uri))
+            # motif_name = utilities.camel_case(motif_name)
+            # motif_uri = utilities.make_standard_uri(motif_name + "Motif", ns="cwrc")
+            triples.append(utilities.GeneralRelation(property_uri, Literal(motif_name, lang="en")))
         else:
             logger.warning(f"TMOTIF tag without MOTIFNAME attribute: {tag}")
     elif tag.name == "PMODEOFPUBLICATION":
@@ -131,6 +162,8 @@ def extract_non_standard_properties(tag, rule):
         if mode:
             mode_uri = utilities.make_standard_uri(PUBLICATION_MODE_MAPPING.get(mode), ns="cwrc")
             triples.append(utilities.GeneralRelation(property_uri, mode_uri))
+
+
 
 
 
@@ -177,7 +210,7 @@ def process_tags_by_domain_type(tags, tag_metadata, works, entry_based_triples, 
 
     for domain_type in tag_metadata["Domain Type"].values:
         for tag in tags:
-            print(f"Processing tag: {tag.name} with domain type: {domain_type}")
+            logger.info(f"Processing tag: {tag.name} with domain type: {domain_type}")
             if domain_type == "Entry Subject":
                 entry_based_triples += extract_triples(tag, tag_metadata)
             elif domain_type == "Work":
@@ -219,7 +252,7 @@ def extract_writing_data(doc, person):
     events = writing_tag.find_all("CHRONSTRUCT")
 
     context_tags = paragraphs + events
-
+    LOSTWORK_COUNT = 1
     # May need to handle multiple different context types
     for context_tag in context_tags:
         tag_names = list({tag.name for tag in context_tag.descendants if tag.name})
@@ -247,6 +280,53 @@ def extract_writing_data(doc, person):
         work_based_tags = get_orlando_tags(work_based_triples)
         ouvre_based_tags = get_orlando_tags(ouvre_based_triples)
 
+
+        LOSTWORK_TAG_NAMES = ["PNONSURVIVAL", "RDESTRUCTIONOFWORK"]
+        lostwork_tags = context_tag.find_all(LOSTWORK_TAG_NAMES)
+        
+        if lostwork_tags:
+            logger.warning(f"Lost work tags found in context for {person.id}: {[tag.name for tag in lostwork_tags]}")
+
+        for lostwork_tag in lostwork_tags:
+            genres = lostwork_tag.find_all("TGENRE")
+            genre_values = []
+            if genres:
+                genre_values = [genre.get("GENRENAME") if genre.get("GENRENAME") else genre.text for genre in genres ]
+
+            lostwork = LostWork(f"{person.id} LostWork {LOSTWORK_COUNT}", f"{person.name} Lost Work {LOSTWORK_COUNT}",genres=genre_values)
+            entry_based_triples += [utilities.GeneralRelation(utilities.NS_DICT["cwrc"]["c_hasDestroyedWork"], lostwork.uri)]
+
+            lostwork_based_triples =[]
+            lostwork_based_triples.append(utilities.GeneralRelation(utilities.NS_DICT["cwrc"]["c_isDestroyed"], rdflib.Literal(utilities.get_snippet(lostwork_tag), lang="en")))
+
+            named_entities = get_named_entities(lostwork_tag, author=person)
+            for x in named_entities:
+                lostwork_based_triples.append(utilities.GeneralRelation(utilities.NS_DICT["cwrc"]["c_hasTextualHistoryRelationTo"], x))
+
+            destruction_type = "UNKNOWN"
+            if lostwork_tag.get("TYPEOFNONSURVIVAL"):
+                destruction_type = lostwork_tag.get("TYPEOFNONSURVIVAL")
+            elif lostwork_tag.get("RDESTRUCTIONOFWORK"):
+                destruction_type = lostwork_tag.get("RDESTRUCTIONOFWORK")
+                if destruction_type == "OTHER": 
+                    destroyers = get_named_entities(lostwork_tag, author=person, entity_types=["people", "organizations"])
+                    for destroyer in destroyers:
+                        lostwork_based_triples.append(utilities.GeneralRelation(utilities.NS_DICT["cwrc"]["c_destroyedBy"], destroyer))
+
+                elif destruction_type == "SELF":
+                    lostwork_based_triples.append(utilities.GeneralRelation(utilities.NS_DICT["cwrc"]["c_destroyedBy"], person.uri))
+            else:
+                logger.warning(f"Lost work tag without attribute for {person.id}: {lostwork_tag}")
+
+            if destruction_type in DESTRUCTION_TYPE_MAPPING:
+                lostwork_based_triples.append(utilities.GeneralRelation(utilities.NS_DICT["cwrc"]["c_hasDestructionType"], utilities.NS_DICT["cwrc"][DESTRUCTION_TYPE_MAPPING[destruction_type]]))
+
+            person.add_event(lostwork)
+            entry_based_tags.append(lostwork_tag.name)
+            create_and_link_context(person, context_tag, lostwork_based_triples, lostwork_tag.name, lostwork.uri, "WritingContext")
+            LOSTWORK_COUNT += 1
+
+
         create_and_link_context(person, context_tag, entry_based_triples, entry_based_tags, person.uri, "WritingContext")
         create_and_link_context(person, context_tag, work_based_triples, work_based_tags, works, "WritingContext")
         create_and_link_context(person, context_tag, ouvre_based_triples, ouvre_based_tags, person.oeuvre_uri, "WritingContext")
@@ -273,7 +353,7 @@ def create_and_link_context(person, context_tag, triples, tags, context_focus, c
 
     if len(triples) > 0:
         context_id = f"{person.id}_{context_type}_{writing_context_counts[context_type]}"
-        temp_context = Context(context_id, context_tag, tags, person=person)
+        temp_context = Context(context_id, context_tag, context_type=tags, person=person)
         temp_context.context_focus = context_focus
 
         # To avoid self-referential triples
@@ -410,6 +490,7 @@ def main():
         __file__, "Reception", logger)
 
     uber_graph = utilities.create_graph()
+    global LOST_WORK_COUNT
 
     for filename in file_dict.keys():
         with open(filename, encoding="utf-8") as f:

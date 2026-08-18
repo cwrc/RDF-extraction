@@ -93,9 +93,9 @@ def extract_response_data(doc, person):
         context_id = F"{person.id}_Response_{context_count}"
         temp_context = Context(context_id, context, "RRESPONSES", person=person)
         extract_response(context,person,temp_context)
+
         person.add_context(temp_context)
         context_count += 1
-
 
 def extract_response(tag, person,context):
     textscopes = utilities.get_textscopes(tag)
@@ -225,7 +225,7 @@ def extract_intertextuality(tag, person, context):
 
 
 
-    #NOTE that i'm ignoring: `NB: extract ORGNAME and PLACES but use a receptionRelationship to the author or text`
+    # NOTE that i'm ignoring: `NB: extract ORGNAME and PLACES but use a receptionRelationship to the author or text`
     intertextuality_triples = [ utilities.GeneralRelation(predicate, x) for x in entities ]
 
     if textscopes:
