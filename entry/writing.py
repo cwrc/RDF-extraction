@@ -306,10 +306,11 @@ def extract_writing_data(doc, person):
                 lostwork_based_triples.append(utilities.GeneralRelation(utilities.NS_DICT["cwrc"]["c_hasTextualHistoryRelationTo"], x))
 
             destruction_type = "UNKNOWN"
+
             if lostwork_tag.get("TYPEOFNONSURVIVAL"):
                 destruction_type = lostwork_tag.get("TYPEOFNONSURVIVAL")
-            elif lostwork_tag.get("RDESTRUCTIONOFWORK"):
-                destruction_type = lostwork_tag.get("RDESTRUCTIONOFWORK")
+            elif lostwork_tag.get("DESTROYEDBY"):
+                destruction_type = lostwork_tag.get("DESTROYEDBY")
                 if destruction_type == "OTHER": 
                     destroyers = get_named_entities(lostwork_tag, author=person, entity_types=["people", "organizations"])
                     for destroyer in destroyers:
