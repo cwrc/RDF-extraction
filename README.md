@@ -1,129 +1,152 @@
-# RDF-extraction
+# Orlando RDF-extraction based on the CWRC Ontology
 
-Extraction scripts for transforming the Orlando XML data into Linked Data. (CWRC Ontology Edition)
+Extraction scripts for transforming the Orlando XML data into Linked Data (CWRC Ontology Edition).
 
-Note: The LINCS (CIDOC-CRM) version of these extraction scripts can be found on the [cidoc-revisions](https://github.com/cwrc/RDF-extraction)
+> Note: The LINCS (CIDOC-CRM) version of these extraction scripts can be found on the [cidoc-revisions](https://github.com/cwrc/RDF-extraction)
 
-You must have Python installed, at least version 3.8.
+You must have **Python ≥3.14** and **uv** installed.
+
+---
+
+## Optional VS Code configuration
+
+1. Go to Extensions tab: `Shift+Cmd+X`
+2. Search `@recommended`
+3. Click the download button next to **WORKSPACE RECOMMENDATIONS** to install all recommended extensions.
+
+---
 
 ## Setup
 
-Clone the repository if you haven't already.
-`git clone https://github.com/cwrc/RDF-extraction.git`
+### Clone the repository
 
-Switch to the CWRC branch
-`git switch classic`
+```bash
+git clone https://github.com/cwrc/RDF-extraction.git
+cd RDF-extraction
 
-There are two ways of accessing the source data files:
-
-1. [Download files from CWRC](#download-files-from-cwrc)
- (This needs special permissions and clearance)
-2. [Download zip from repo](#download-files-from-gitlab) (2024-06-03: This is a temporary workaround)
-
-
-### Download files from CWRC
-
-#### Prerequisites
-
-You must have a CWRC account to be able to do this with the appropriate permissions. ([Sign up here](https://cwrc.ca/user))
-
-In Root folder:
-
-1. Create a Virtual Environment:
-`python3 -m venv venv`
-1. Start Virtual Environment:
-`source ./venv/bin/activate`
-1. Install modules:
-`pip install -r requirements.txt`
-1. Create an `.env` file with `username=XXX` and `password=yyy`, replacing `xxx` and `yyy` with the respective credentials.
-
-Example file:
-
-```env
-username=John Doe
-password=mySuperSecretpassword12!
 ```
 
-#### Run download script
+### Switch to the CWRC branch
 
-1. Run script:
-`python3 islandora_auth.py`
-(This by default will only download the Entries to `data/entries_YYYY-MM-DD` where YYYY, MM, DD are replaced with their respective date valuess)
-1. Deactivate Virtual Environment:
-`deactivate`
+`git switch classic`
 
-### Download files from GitLab
+> Check [most recent branches](https://github.com/cwrc/RDF-extraction/branches) if unsure and consult @alliyya.
+(Oct 4, 2024: currently `59-small-biography-clean-up-tasks`)
 
-1. [Click here to download](https://gitlab.com/calincs/cwrc/orlando-2.0-c-modelling/-/archive/master/orlando-2.0-c-modelling-master.zip?path=textbase-pubc/entries-pubc)
-1. Create a folder with today's date in `data/entries/`  (ex. `2024-06-03`)
-1. Extract the contents from the Zip folder and put into the new folder you created
-1. In testcases.json replace the value `"default directory"` with the File path of the new folder you created
-    - You can retrieve the filepath by right clicking the folder in VS code and looking for `Copy Path`
+---
 
-### To Run Extraction scripts (First time)
+## Accessing Source Data
 
-These commands take place in `Entry` folder (`cd Entry`)
+### Use source data from GitLab (recommended)
 
-1. Update `default directory` field within `testcases.json` to match where your source data files are (You can either copy the full path of the directory and add `/` or use a relative path like `../data/entry_YYYY-MM-DD/`)
-1. Create a Virtual Environment:
-`python3 -m venv venv`
-1. Start Virtual Environment:
-`source ./venv/bin/activate`
-1. Install modules:
-`pip install -r requirements.txt`
-1. Run script `python3 bio_extraction.py`
+```bash
+git clone https://gitlab.com/calincs/cwrc/orlando-2.0-c-modelling.git
+cd orlando-2.0-c-modelling
+git switch LOD-extraction-2024
+```
 
-### Running Extraction Scripts after set-up
+- Or in VS Code: Command Palette → `Git: Clone` → paste repo URL → switch branch to `LOD-extraction-2024`.
+- The repository is large; cloning may take some time.
 
-1. in `Entry` folder (`cd Entry`), start Virtual Environment
-`source ./venv/bin/activate`
-1. For a quick test you can run ``python3 bio_extraction.py -r 1`
-    - The `-r 1` option here is specifying to the script to run extraction on one random entry.
-1. To Run script on all entries `python3 bio_extraction.py`
+### Optional: Download files from CWRC (requires permissions)
+
+- Create a `.env` file in the root:
+
+```env
+username=YourUsername 
+password=YourPassword`
+```
+
+- Run download script:
+`uv run python -m islandora_auth`
+- Files will download to `data/entries_YYYY-MM-DD`.
+
+## Project Environment Setup
+
+1. Create and activate the uv virtual environment:
+
+    ```bash
+    uv venv
+    source .venv/bin/activate
+    ```
+
+2. Sync dependencies:
+
+    ```bash
+    uv sync
+    ```
+
+---
+
+## Running Extraction Scripts
+
+All commands assume:
+
+- Virtual environment is **active** (`source .venv/bin/activate`)
+- You are in the root folder of the repository
+
+### Quick test on 1 random entry
+
+`uv run python -m entry.bio_extraction -r 1`
+
+### Quick test on a specific entry
+
+`uv run python -m entry.bio_extraction -id moulma`
+
+### Full extraction
+
+`uv run python -m entry.bio_extraction`
+
+### Running modular scripts (example: culturalForm)
+
+`uv run python -m entry.culturalForm -r 1`
+
+> Arguments follow the same format as `bio_extraction.py -h`.
+
+## Updating `testcases.json`
+
+- Make sure the `default directory` field matches the path of your source data.
+- Can use **absolute paths** or **relative paths** like `data/entries_YYYY-MM-DD/`.
+
+---
+
+## Notes for New Contributors
+
+- `uv run` ensures the **correct Python interpreter** and dependency versions from `uv.lock` are used.
+- You can also activate the environment and run scripts directly:
+
+`source .venv/bin/activate python -m entry.bio_extraction -r 1`
+
+> Using `uv run` is safer and ensures reproducibility.
+
+---
 
 ## Features
 
-Run `python3 bio_extraction.py -h` for a list of available options
+Run:
+
+`python -m entry.bio_extraction -h`
+
+to see all available options:
 
 ```text
-No particular testcases available, please add to testcases.json
-usage: bio_extraction.py [-h] [-qa | -s | -g | -i | -id ORLANDO | -f FILE | -d DIRECTORY | -r [RANDOM] | -l [LAST] | -fi [FIRST]] [-v {0,1,2,3}] [-fmt {rdf,rdf/xml,ttl,turtle,json-ld,nt,trix,n3,all}] [-u UPDATE] [-p]
-
-Extract the Majority of biography related data information from selection of orlando xml documents
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -qa                   will run through qa test cases that are related to www.github.com/cwrc/testData/tree/master/qa, Which currently are:'aguigr', 'alcolo', 'atwoma', 'bronch', 'bronem', 'levyam', 'seacma',
-                        'shakwi', 'woolvi'
-  -s, -special          will run through special cases that are of particular interest atm which currently are: 'fielmi'
-  -g, -graffles, -graffle
-                        will run through cases related to our graffles'seacma', 'lel___', 'edgema', 'blesma', 'leonan'
-  -i, -ignored          will run through files that are currently being ignored which currently include: 'fielmi'
-  -id ORLANDO, -orlando ORLANDO, --orlando ORLANDO
-                        entry id of a single orlando document to run extraction upon, ex. woolvi
-  -f FILE, -file FILE, --file FILE
-                        single orlando xml document to run extraction upon
-  -d DIRECTORY, -directory DIRECTORY, --directory DIRECTORY
-                        directory of files to run extraction upon
-  -r [RANDOM], -random [RANDOM], --random [RANDOM]
-                        chooses {RANDOM} random file(s) to run extraction upon
-  -l [LAST], -last [LAST], --last [LAST]
-                        chooses {last} file(s) to run extraction upon, ex. the last 20 files
-  -fi [FIRST], -first [FIRST], --first [FIRST]
-                        chooses {first} file(s) to run extraction upon, ex. the first 20 files
-  -v {0,1,2,3}, --verbosity {0,1,2,3}
-                        increase output verbosity
-  -fmt {rdf,rdf/xml,ttl,turtle,json-ld,nt,trix,n3,all}, --format {rdf,rdf/xml,ttl,turtle,json-ld,nt,trix,n3,all}
-  -p, -pause, --pause   pause after every entry to examine output and be prompted to continue/quit
+No particular testcases available, please add to testcases.json usage: bio_extraction.py [-h] [-qa | -s | -g | -i | -id ORLANDO | -f FILE | -d DIRECTORY | -r [RANDOM] | -l [LAST] | -fi [FIRST]] [-v {0,1,2,3}] [-fmt {rdf,rdf/xml,ttl,turtle,json-ld,nt,trix,n3,all}] [-u UPDATE] [-p]  Extract the Majority of biography related data information from selection of orlando xml documents
 ```
 
-Each script within `Entry/` can be run on its own, `bio_extraction.py` is the current main driver of biography that calls needed functions within separate scripts. The same arguments are applicable to those scripts.
+- Each script in `Entry/` can be run independently.
+- `bio_extraction.py` is the main driver but modular scripts use the same arguments.
+- Examples:
 
-Example:
-If you just wanted to test the extraction of cultural forms. You could do `python3 culturalForm.py -r 1`
+```bash
+uv run python -m entry.culturalForm -r 1 
+uv run python -m entry.location -r 5`
+```
 
-This would only extract from culturalform tags, from 1 random source file. This allows for better testing and more modular classes to be made.
-
-## Additional Configuration details
+---
 
 ## Design Considerations
+
+- Extraction scripts are modular to allow testing of individual components.
+- `-r`, `-l`, `-fi`, `-id` options allow fine-grained control over which entries are processed.
+- Scripts are designed to work with both GitLab source files and CWRC downloads (with permissions).
+- uv ensures consistent Python environment and dependencies across contributors.

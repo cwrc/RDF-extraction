@@ -1,8 +1,8 @@
-import requests
 import sys
 import os
 import datetime
-from Env import env
+import requests
+from config import env
 
 session = requests.Session()
 

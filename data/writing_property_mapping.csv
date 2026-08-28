@@ -1,0 +1,110 @@
+Orlando Tag,Predicate Type,Attribute Type,Attribute Value,Include Empty Attribute,Domain Type,Range Type,Context Type,Specific Property,Generic Property,Function Type,Custom Instructions,Questions,Key
+PADVERTISING,Descriptive,,,,Work ELSE Entry Subject,String,PublishingContext,c_hasAdvertising,c_hasPublicationFeatures,Standard,,,PADVERTISINGDescriptive
+PADVERTISING,Embedded Entities,,,,Work ELSE Entry Subject,All Named Entities,PublishingContext,c_hasAdvertisingRelationTo,c_hasPublicationFeatures,Standard,,,PADVERTISINGEmbedded Entities
+PANTHOLOGIZATION,Descriptive,,,,Entry Subject,String,PublishingContext,c_hasAnthologization,c_hasPublicationMode,Standard,,,PANTHOLOGIZATIONDescriptive
+PANTHOLOGIZATION,Embedded Entities,,,,Entry Subject,All Named Entities,PublishingContext,c_hasAnthologizationRelationTo,c_hasPublicationMode,Standard,,,PANTHOLOGIZATIONEmbedded Entities
+PARCHIVALLOCATION,Descriptive,,,,Work ELSE Entry Subject,String,TextualHistoryContext,c_hasArchivalLocation,c_hasTextualHistoryRelationTo,Standard,,,
+PARCHIVALLOCATION,Embedded Entities,,,,Work ELSE Entry Subject,All Named Entities,TextualHistoryContext,c_relatesViaArchiveTo,c_hasTextualHistoryRelationTo,Standard,,,
+PATTITUDES,Descriptive,,,,Entry Subject,String,WritingConditionsContext,c_hasAttitudeTowardsWritingOrGender,c_hasWritingRelationTo,Standard,,,PATTITUDESDescriptive
+PCIRCULATION,Descriptive,,,,Work ELSE Entry Subject,String,PublishingContext,c_hasCirculation,c_hasPublicationFeatures,Standard,,,PCIRCULATIONDescriptive
+PCONTRACT,Descriptive,,,,Work ELSE Entry Subject,String,PublishingContext,c_hasContract,c_hasPublicationEconomics,Standard,,,PCONTRACTDescriptive
+PCONTRACT,Embedded Entities,,,,Work ELSE Entry Subject,All Named Entities,PublishingContext,c_hasContractRelationTo,c_hasPublicationEconomics,Standard,,,PCONTRACTEmbedded Entities
+PCOPYRIGHT,Descriptive,,,,Work ELSE Entry Subject,String,PublishingContext,c_hasCopyright,c_hasPublicationEconomics,Standard,,,PCOPYRIGHTDescriptive
+PCOPYRIGHT,Embedded Entities,,,,Work ELSE Entry Subject,All Named Entities,PublishingContext,c_hasCopyrightRelationTo,c_hasPublicationEconomics,Standard,,,PCOPYRIGHTEmbedded Entities
+PDEDICATION,Descriptive,,,,Work ELSE Entry Subject,String,PublishingContext,c_hasDedication,c_hasProductionRelationTo,Standard,,,PDEDICATIONDescriptive
+PDEDICATION,Embedded Entities,,,,Work ELSE Entry Subject,All Named Entities,PublishingContext,c_hasDedicationRelationTo,c_hasProductionRelationTo,Standard,,,PDEDICATIONEmbedded Entities
+PEARNINGS,Descriptive,,,,Work ELSE Entry Subject,String,PublishingContext,c_hasEarnings,c_hasPublicationEconomics,Standard,,,PEARNINGSDescriptive
+PEDITIONS,Descriptive,,,,Entry Subject,String,PublishingContext,c_hasEdition,c_hasPublicationMode,Standard,,,PEDITIONSDescriptive
+PEDITIONS,Embedded Entities,,,,Entry Subject,All Named Entities,PublishingContext,c_hasEditionRelationTo,c_hasPublicationMode,Standard,,,PEDITIONSEmbedded Entities
+PFIRSTLITERARYACTIVITY,Descriptive,,,,Entry Subject,String,PublishingContext,c_hasFirstLiteraryActivity,c_hasWritingRelationTo,Standard,,,PFIRSTLITERARYACTIVITYDescriptive
+PINFLUENCESHER,Attributes,INFLUENCETYPE,FAMILIAL,,All Named Entities,Person,InfluenceContext,c_hasFamilialInfluenceOn,c_hasInfluenceOn,Standard,,,PINFLUENCESHERAttributesINFLUENCETYPEFAMILIAL
+PINFLUENCESHER,Attributes,INFLUENCETYPE,INTELLECTUAL,,All Named Entities,Person,InfluenceContext,c_hasIntellectualnfluenceOn,c_hasInfluenceOn,Standard,,,PINFLUENCESHERAttributesINFLUENCETYPEINTELLECTUAL
+PINFLUENCESHER,Attributes,INFLUENCETYPE,LITERARY,,All Named Entities,Person,InfluenceContext,c_hasLiteraryInfluenceOn,c_hasInfluenceOn,Standard,,,PINFLUENCESHERAttributesINFLUENCETYPELITERARY
+PLASTLITERARYACTIVITY,Descriptive,,,,Entry Subject,String,PublishingContext,c_hasLastLiteraryActivity,c_hasWritingRelationTo,Standard,,,PLASTLITERARYACTIVITYDescriptive
+PLITERARYSCHOOLS,Attributes,INVOLVEMENT,INVOLVEMENTNO,TRUE,Entry Subject,People & Organizations,WritingConditionsContext,c_hasLiterarySchoolRelationTo,c_hasWritingConditionsRelationTo,Custom,And no attribute,,PLITERARYSCHOOLSAttributesINVOLVEMENTINVOLVEMENTNO
+PLITERARYSCHOOLS,Attributes,INVOLVEMENT,INVOLVEMENTYES,,Entry Subject,People & Organizations,WritingConditionsContext,c_hasLiterarySchoolInvolvementWith,c_hasLiterarySchoolRelationTo,Standard,,,PLITERARYSCHOOLSAttributesINVOLVEMENTINVOLVEMENTYES
+PLITERARYSCHOOLS,Descriptive,INVOLVEMENT,INVOLVEMENTNO,TRUE,Entry Subject,String,WritingConditionsContext,c_hasLiterarySchoolDescription,c_hasWritingConditionsRelationTo,Standard,,,PLITERARYSCHOOLSDescriptiveINVOLVEMENTINVOLVEMENTNO
+PLITERARYSCHOOLS,Descriptive,INVOLVEMENT,INVOLVEMENTYES,,Entry Subject,String,WritingConditionsContext,c_hasLiterarySchoolInvolvementDescription,c_LiterarySchoolDescription,Standard,,,PLITERARYSCHOOLSDescriptiveINVOLVEMENTINVOLVEMENTYES
+PMANUSCRIPTHISTORY,Descriptive,,,,Work ELSE Entry Subject Ouvre,String,TextualHistoryContext,c_hasManuscriptHistory,c_hasTextualHistoryRelationTo,Standard,,,
+PMANUSCRIPTHISTORY,Embedded Entities,,,,Work ELSE Entry Subject,All Named Entities,TextualHistoryContext,c_relatesViaManuscriptTo,c_hasTextualHistoryRelationTo,Standard,,,
+PMATERIALCONDITIONS,Descriptive,,,,Work ELSE Entry Subject,String,WritingConditionsContext,c_hasMaterialWritingCondition,c_hasWritingConditionsRelationTo,Standard,,,PMATERIALCONDITIONSDescriptive
+PMATERIALCONDITIONS,Embedded Entities,,,,Work ELSE Entry Subject,All Named Entities,WritingConditionsContext,c_hasMaterialWritingRelationTo,c_hasWritingConditionsRelationTo,Standard,,,PMATERIALCONDITIONSEmbedded Entities
+PMATERIALCONDITIONS,Embedded Entities,DISPLACEMENT,DISPLACEMENTYES,,Work ELSE Entry Subject,Places,WritingConditionsContext,c_hasDisplacedWritingRelationTo,c_hasMaterialWritingCondition,Standard,,,PMATERIALCONDITIONSEmbedded EntitiesDISPLACEMENTDISPLACEMENTYES
+PMODEOFPUBLICATION,Attributes,PUBLICATIONMODE,,,Work ELSE Entry Subject,cwrc:PublicationMode,PublishingContext,c_hasPublicationModeType,c_hasProductionRelationTo,Custom,,,PMODEOFPUBLICATIONAttributesPUBLICATIONMODE
+PMODEOFPUBLICATION,Descriptive,,,,Work ELSE Entry Subject,String,PublishingContext,c_hasPublicationMode,c_hasProductionRelationTo,Standard,,,PMODEOFPUBLICATIONDescriptive
+PMODEOFPUBLICATION,Embedded Entities,,,,Work ELSE Entry Subject,All Named Entities,PublishingContext,c_hasPublicationModeRelationTo,c_hasProductionRelationTo,Standard,,,PMODEOFPUBLICATIONEmbedded Entities
+PMOTIVES,Attributes,MOTIVETYPE,ASCRIBED,,Work ELSE Entry Subject,String,WritingConditionsContext,c_hasAscribedWritingMotive,c_hasWritingConditionsRelationTo,Standard,,,PMOTIVESAttributesMOTIVETYPEASCRIBED
+PMOTIVES,Attributes,MOTIVETYPE,SELF-IDENTIFIED,,Work ELSE Entry Subject,String,WritingConditionsContext,c_hasSelfIdentifiedWritingMotive,c_hasWritingConditionsRelationTo,Standard,,,PMOTIVESAttributesMOTIVETYPESELF-IDENTIFIED
+PMOTIVES,Descriptive,MOTIVETYPE,NONE,TRUE,Work ELSE Entry Subject,String,WritingConditionsContext,c_hasWritingMotive,c_hasWritingConditionsRelationTo,Standard,Need to handle no attribute,,PMOTIVESDescriptiveMOTIVETYPENONE
+PMOTIVES,Embedded Entities,,,,Work ELSE Entry Subject,All Named Entities,WritingConditionsContext,c_hasWritingMotiveRelationTo,c_hasWritingConditionsRelationTo,Standard,,,PMOTIVESEmbedded Entities
+PNONBOOKMEDIA,Descriptive,,,,Work ELSE Entry Subject,String,PublishingContext,c_hasNonPrintMedia,c_hasProductionRelationTo,Standard,,,PNONBOOKMEDIADescriptive
+PNONBOOKMEDIA,Embedded Entities,,,,Work ELSE Entry Subject,All Named Entities,PublishingContext,c_hasNonPrintMediaRelationTo,c_hasProductionRelationTo,Standard,,,PNONBOOKMEDIAEmbedded Entities
+PNONSURVIVAL,Embedded Entities,,,,Entry Subject,cwrc:LostCreativeWork,TextualHistoryContext,c_hasDestroyedWork,c_hasTextualHistoryRelationTo,Custom,Create Lost Work,,PNONSURVIVALEmbedded Entities
+RDESTRUCTIONOFWORK,Embedded Entities,,,,Entry Subject,cwrc:LostCreativeWork,TextualHistoryContext,c_hasDestroyedWork,c_hasTextualHistoryRelationTo,Custom,Create Lost Work,,RDESTRUCTIONOFWORKEmbedded Entities
+PPERFORMANCE,Descriptive,,,,Entry Subject,String,PerformanceContext,c_hasPerformance,c_hasProductionRelationTo,Standard,,,PPERFORMANCEDescriptive
+PPERFORMANCE,Embedded Entities,,,,Entry Subject,All Named Entities,PerformanceContext,c_hasPerformanceRelationTo,c_hasProductionRelationTo,Standard,,,PPERFORMANCEEmbedded Entities
+PPERIODICALPUBLICATION,Descriptive,,,,Entry Subject,String,PublishingContext,c_hasPeriodicalPublication,c_hasPeriodicalPublicationRelationTo,Standard,,,PPERIODICALPUBLICATIONDescriptive
+PPERIODICALPUBLICATION,Embedded Entities,,,,Entry Subject,All Named Entities,PublishingContext,c_hasPeriodicalPublicationRelationTo,c_hasProductionRelationTo,Standard,,,PPERIODICALPUBLICATIONEmbedded Entities
+PPLACEOFPUBLICATION,Embedded Entities,,,,Work ELSE Entry Subject Ouvre,Places,PublishingContext,c_hasPlaceOfPublication,c_hasWritingRelationTo,Standard,,,PPLACEOFPUBLICATIONEmbedded Entities
+PPRESSRUN,Descriptive,,,,Work ELSE Entry Subject,String,PublishingContext,c_hasPressRun,c_hasProductionRelationTo,Standard,,,PPRESSRUNDescriptive
+PRARITIESFEATURESDECORATIONS,Descriptive,,,,Work ELSE Entry Subject,String,PublishingContext,c_hasMaterialExpression,c_hasProductionRelationTo,Standard,,,PRARITIESFEATURESDECORATIONSDescriptive
+PRARITIESFEATURESDECORATIONS,Embedded Entities,,,,Work ELSE Entry Subject,All Named Entities,PublishingContext,c_hasMaterialExpressionRelationTo,c_hasProductionRelationTo,Standard,,,PRARITIESFEATURESDECORATIONSEmbedded Entities
+PRELATIONSWITHPUBLISHER,Attributes,RELATIONSHIPTYPE,PERSONAL,,Entry Subject,String,PublishingContext,c_hasPersonalPublishingRelationship,c_hasProductionRelationTo,Standard,,,PRELATIONSWITHPUBLISHERAttributesRELATIONSHIPTYPEPERSONAL
+PRELATIONSWITHPUBLISHER,Attributes,RELATIONSHIPTYPE,PROFESSIONAL,,Entry Subject,String,PublishingContext,c_hasProfessionalPublishingRelationship,c_hasProductionRelationTo,Standard,,,PRELATIONSWITHPUBLISHERAttributesRELATIONSHIPTYPEPROFESSIONAL
+TMOTIF,Attributes,MOTIFNAME,NONE,,Work,cwrc:Motif,ThematicContext,c_hasMotif,c_hasThemeRelationTo,Custom,,,TMOTIFAttributesRELATIONSHIPTYPEPROFESSIONAL
+PRELATIONSWITHPUBLISHER,Embedded Entities,,,,Entry Subject,All Named Entities,PublishingContext,c_hasPublishingRelationTo,c_hasProductionRelationTo,Standard,,,PRELATIONSWITHPUBLISHEREmbedded Entities
+PRODUCTION,Descriptive,,,,,,ProductionContext,c_hasTextualProduction,c_hasWritingRelationTo,Custom,,,PRODUCTIONDescriptive
+PRODUCTION,Embedded Entities,,,,,,ProductionContext,c_hasProductionRelationTo,c_hasWritingRelationTo,Custom,,,PRODUCTIONEmbedded Entities
+PSERIALIZATION,Descriptive,,,,Entry Subject,String,PublishingContext,c_hasSerialization,c_hasPublicationMode,Standard,,,PSERIALIZATIONDescriptive
+PSERIALIZATION,Embedded Entities,,,,Entry Subject,All Named Entities,PublishingContext,c_hasSerializationRelationTo,c_hasPublicationMode,Standard,,,PSERIALIZATIONEmbedded Entities
+PSERIALIZATION,Embedded Entities,,,,Work,Genre:Form,PublishingContext,,,Custom,"This may need to be moved out of here and handled separately just as typing of serial works genre:serialVolume genre:serialPeriodical",,PSERIALIZATIONEmbedded Entities
+PSUBMISSIONSREJECTIONS,Descriptive,,,,Work ELSE Entry Subject,String,PublishingContext,c_hasPublicationSubmission,c_hasProductionRelationTo,Standard,,,PSUBMISSIONSREJECTIONSDescriptive
+PSUBMISSIONSREJECTIONS,Embedded Entities,,,,Work ELSE Entry Subject,All Named Entities,PublishingContext,c_hasPublicationSubmissionRelationTo,c_hasProductionRelationTo,Standard,,,PSUBMISSIONSREJECTIONSEmbedded Entities
+RBESTKNOWNWORK,Embedded Entities,,,,Entry Subject,Work,ReceptionContext,c_hasBestKnownWork,c_hasReceptionRelationTo,Standard,,,RBESTKNOWNWORKEmbedded Entities
+RFICTIONALIZATION,Descriptive,,,,Entry Subject,String,IntertextualityContext,c_hasFictionalization,c_hasFictionalizationRelationTo,Standard,,,RFICTIONALIZATIONDescriptive
+RFICTIONALIZATION,Embedded Entities,,,,Entry Subject,Author OR Work,IntertextualityContext,c_fictionalizedBy,c_hasFictionalizationRelationTo,Custom,"1)  When a FICTIONALIZATION tag contains the structure <NAME>'s <TITLE> then extract the following --a Person entity --a Work with that TITLE --a creation relationship between the two 2) When a FICTIONALIZATION tag contains only one NAME (other than that of the author of the entry) OR only one title, OR one or more of the <NAME>'s <TITLE> pattern SUBJECT:  author of the entry PREDICATE: fictionalizedBy OBJECT:  1) frbr:Work as derived above IF only one TITLE, or if more than one with the possessive pattern 2) foaf:Person if only one NAME","QUERY: Should we create for all named persons within the tag as well as for all texts, but NOT for named persons who are authors of texts? Or is it best to be redundant and extract the relationship for both the author of the fictionalizing work and the text by them in which the fictionalization occurs?",RFICTIONALIZATIONEmbedded Entities
+RLANDMARKTEXT,Embedded Entities,,,,Entry Subject,Work,ReceptionContext,c_hasLandmarkText,c_hasReceptionRelationTo,Standard,,,RLANDMARKTEXTEmbedded Entities
+RPENALTIES,Descriptive,,,,Work ELSE Entry Subject,String,ResponseContext,c_suffersWritingPenalty,c_hasResponseRelationTo,Standard,,,RPENALTIESDescriptive
+RPENALTIES,Embedded Entities,,,,Work ELSE Entry Subject,All Named Entities,ResponseContext,c_hasWritingPenaltyRelationTo,c_hasResponseRelationTo,Standard,,,RPENALTIESEmbedded Entities
+RRECOGNITIONNAME,Embedded Entities,,,,Work ELSE Entry Subject,cwrc:LiteraryAward,RecognitionContext,c_hasLiteraryAward,c_hasRecognitionRelationTo,Custom,Create Literary Award,Need to sort out what we're doing with awards,RRECOGNITIONNAMEEmbedded Entities
+RRECOGNITIONS,Descriptive,,,,Work ELSE Entry Subject,String,RecognitionContext,c_receivesRecognition,c_hasRecognitionRelationTo,Standard,,,RRECOGNITIONSDescriptive
+RRECOGNITIONVALUE,Descriptive,,,,Entry Subject,String,RecognitionContext,c_gainsLiteraryAwardValue,c_hasRecognitionRelationTo,Standard,,,RRECOGNITIONVALUEDescriptive
+RSELFDESCRIPTION,Descriptive,,,,Entry Subject,String,ResponseContext,c_hasSelfDescription,c_hasResponseRelationTo,Standard,,,RSELFDESCRIPTIONDescriptive
+RSHEINFLUENCED,Embedded Entities,,,,Entry Subject,All Named Entities,InfluenceContext,c_hasLiteraryInfluenceOn,c_hasInfluenceOn,Standard,,,RSHEINFLUENCEDEmbedded Entities
+TCHARACTERIZATION,Descriptive,,,,Work,String,CharacterizationContext,c_hasCharacterization,c_hasCharacterizationRelationTo,Standard,,,TCHARACTERIZATIONDescriptive
+TCHARACTERNAME,Descriptive,,,,Work,String,CharacterizationContext,c_hasCharacterName,c_hasCharacterizationRelationTo,Standard,,,TCHARACTERNAMEDescriptive
+TCHARACTERNAME,Embedded Entities,,,,Work,Person,CharacterizationContext,c_hasCharacterType,c_hasCharacterizationRelationTo,Custom,,,TCHARACTERNAMEEmbedded Entities
+TCHARACTERTYPEROLE,Attributes,PROTAGONIST,FEMALE,,Work ELSE Entry Subject Ouvre,String,CharacterizationContext,c_hasWomanProtagonistRole,c_hasCharacterizationRelationTo,Custom,Also create hasProtagonistType relationship between work and gender,,TCHARACTERTYPEROLEAttributesPROTAGONISTFEMALE
+TCHARACTERTYPEROLE,Attributes,PROTAGONIST,MALE,,Work ELSE Entry Subject Ouvre,String,CharacterizationContext,c_hasManProtagonistRole,c_hasCharacterizationRelationTo,Custom,Also create hasProtagonistType relationship between work and gender,,TCHARACTERTYPEROLEAttributesPROTAGONISTMALE
+TCHARACTERTYPEROLE,Descriptive,,,,Work,String,CharacterizationContext,c_characterRole,c_hasCharacterizationRelationTo,Custom,DO NOT extract if there is a PROTAGONIST attibute.,,TCHARACTERTYPEROLEDescriptive
+TGENREISSUE,Embedded Entities,,,,Work ELSE Entry Subject Ouvre,genre:Genre,TextualFeaturesContext,c_hasEngagementWithGenre,c_hasTextualFeaturesRelationTo,Custom,,,TGENREISSUEEmbedded Entities
+TINTERTEXTUALITY,Attributes,INTERTEXTTYPE,,,,,IntertextualityContext,c_hasIntertextualRelationTo,c_hasWritingRelationTo,Custom,,,TINTERTEXTUALITYAttributesINTERTEXTTYPE
+TINTERTEXTUALITY,Attributes,INTERTEXTTYPE,ADAPTATION-UPDATE,,Work ELSE Entry Subject,People & Works,IntertextualityContext,c_adapts,c_hasIntertextualRelationTo,Custom,,,TINTERTEXTUALITYAttributesINTERTEXTTYPEADAPTATION-UPDATE
+TINTERTEXTUALITY,Attributes,INTERTEXTTYPE,ALLUSIONACKNOWLEDGED,,Work ELSE Entry Subject,People & Works,IntertextualityContext,c_alludesExplicitlyTo,c_hasIntertextualRelationTo,Custom,,,TINTERTEXTUALITYAttributesINTERTEXTTYPEALLUSIONACKNOWLEDGED
+TINTERTEXTUALITY,Attributes,INTERTEXTTYPE,ALLUSIONUNACKNOWLEDGED,,Work ELSE Entry Subject,People & Works,IntertextualityContext,c_alludesTo,c_hasIntertextualRelationTo,Custom,,,TINTERTEXTUALITYAttributesINTERTEXTTYPEALLUSIONUNACKNOWLEDGED
+TINTERTEXTUALITY,Attributes,INTERTEXTTYPE,ANSWER,,Work ELSE Entry Subject,Work,IntertextualityContext,c_answers,c_hasIntertextualRelationTo,Custom,,,TINTERTEXTUALITYAttributesINTERTEXTTYPEANSWER
+TINTERTEXTUALITY,Attributes,INTERTEXTTYPE,CONTINUATION,,Work,Work,IntertextualityContext,c_hasContinuation,c_hasIntertextualRelationTo,Custom,,,TINTERTEXTUALITYAttributesINTERTEXTTYPECONTINUATION
+TINTERTEXTUALITY,Attributes,INTERTEXTTYPE,IMITATION,,Work ELSE Entry Subject,People & Works,IntertextualityContext,c_imitates,c_hasIntertextualRelationTo,Custom,,,TINTERTEXTUALITYAttributesINTERTEXTTYPEIMITATION
+TINTERTEXTUALITY,Attributes,INTERTEXTTYPE,MISQUOTATION,,Work ELSE Entry Subject,People & Works,IntertextualityContext,c_misquotes,c_hasIntertextualRelationTo,Custom,,,TINTERTEXTUALITYAttributesINTERTEXTTYPEMISQUOTATION
+TINTERTEXTUALITY,Attributes,INTERTEXTTYPE,PARODY,,Work ELSE Entry Subject,People & Works,IntertextualityContext,c_parodies,c_hasIntertextualRelationTo,Custom,,,TINTERTEXTUALITYAttributesINTERTEXTTYPEPARODY
+TINTERTEXTUALITY,Attributes,INTERTEXTTYPE,PREQUEL,,Work,Work,IntertextualityContext,c_hasPrequel,c_hasIntertextualRelationTo,Custom,,,TINTERTEXTUALITYAttributesINTERTEXTTYPEPREQUEL
+TINTERTEXTUALITY,Attributes,INTERTEXTTYPE,QUOTATION,,Work ELSE Entry Subject,People & Works,IntertextualityContext,c_quotes,c_hasIntertextualRelationTo,Custom,,,TINTERTEXTUALITYAttributesINTERTEXTTYPEQUOTATION
+TINTERTEXTUALITY,Attributes,INTERTEXTTYPE,SATIRE,,Work ELSE Entry Subject,People & Works,IntertextualityContext,c_satirizes,c_hasIntertextualRelationTo,Custom,,,TINTERTEXTUALITYAttributesINTERTEXTTYPESATIRE
+TPLOT,Descriptive,,,,Work,String,TextualFeaturesContext,c_hasPlotSummary,c_hasTextualFeaturesRelationTo,Custom,Only if there's one textscope,,TPLOTDescriptive
+TSETTINGDATE,Attributes,SETTINGDATETYPE,,,Work,cwrc:SpatialSettingType,SettingContext,c_hasSpatialSettingType,c_hasTextualFeaturesRelationTo,Custom,,,TSETTINGDATEAttributesSETTINGDATETYPE
+TSETTINGDATE,Descriptive,,,,Work,String,SettingContext,c_hasSetting,c_hasTextualFeaturesRelationTo,Standard,,,TSETTINGDATEDescriptive
+TSETTINGDATE,Embedded Entities,,,,Work,All Named Entities,SettingContext,c_hasSettingRelationTo,c_hasTextualFeaturesRelationTo,Standard,,,TSETTINGDATEEmbedded Entities
+TSETTINGPLACE,Attributes,SETTINGCLASS,,,Work,cwrc:SocialSettingType,SettingContext,c_hasSocialSettingType,c_hasTextualFeaturesRelationTo,Custom,,,TSETTINGPLACEAttributesSETTINGCLASS
+TSETTINGPLACE,Attributes,TSETTINGPLACETYPE,,,Work,cwrc:SpatialSettingType,SettingContext,c_hasSpatialSettingType,c_hasTextualFeaturesRelationTo,Custom,,,TSETTINGPLACEAttributesTSETTINGPLACETYPE
+TSETTINGPLACE,Descriptive,,,,Work,String,SettingContext,c_hasSetting,c_hasTextualFeaturesRelationTo,Standard,,,TSETTINGPLACEDescriptive
+TSETTINGPLACE,Embedded Entities,,,,Work,All Named Entities,SettingContext,c_hasSettingRelationTo,c_hasTextualFeaturesRelationTo,Standard,,,TSETTINGPLACEEmbedded Entities
+TTECHNIQUES,Attributes,TECHNIQUETYPE,AURALEFFECTS,,Work ELSE Entry Subject Ouvre,String,TextualFeaturesContext,c_hasAuralEffects,c_hasTextualFeaturesRelationTo,Standard,,,TTECHNIQUEAttributesTECHNIQUETYPEAURALEFFECTS
+TTECHNIQUES,Attributes,TECHNIQUETYPE,DICTION,,Work ELSE Entry Subject Ouvre,String,TextualFeaturesContext,c_hasDiction,c_hasTextualFeaturesRelationTo,Standard,,,TTECHNIQUEAttributesTECHNIQUETYPEDICTION
+TTECHNIQUES,Attributes,TECHNIQUETYPE,IMAGERY,,Work ELSE Entry Subject Ouvre,String,TextualFeaturesContext,c_hasImagery,c_hasTextualFeaturesRelationTo,Standard,,,TTECHNIQUEAttributesTECHNIQUETYPEIMAGERY
+TTECHNIQUES,Attributes,TECHNIQUETYPE,NONSTANDARDENGLISH,,Work ELSE Entry Subject Ouvre,String,TextualFeaturesContext,c_hasNonStandardLanguage,c_hasTextualFeaturesRelationTo,Standard,,,TTECHNIQUEAttributesTECHNIQUETYPENONSTANDARDENGLISH
+TTECHNIQUES,Attributes,TECHNIQUETYPE,NULL,,Work ELSE Entry Subject Ouvre,String,TextualFeaturesContext,c_hasTechnique,c_hasTextualFeaturesRelationTo,Custom,"To avoid duplication, do not create triple if there is a subpredicate of hasTechnique, or an annotation for engagesWithGenre; hasToneStyle; or hasVoiceOrNarration that would contain the same string. Only if one textscope or none",,TTECHNIQUEAttributesTECHNIQUETYPENULL
+TTECHNIQUES,Attributes,TECHNIQUETYPE,VERSIFICATION,,Work ELSE Entry Subject Ouvre,String,TextualFeaturesContext,c_hasVersification,c_hasTextualFeaturesRelationTo,Standard,,,TTECHNIQUEAttributesTECHNIQUETYPEVERSIFICATION
+TTHEMETOPIC,Descriptive,,,,Work ELSE Entry Subject Ouvre,String,ThematicContext,c_hasThemeOrTopic,c_hasThemeRelationTo,Standard,SUBJECT: frbr: Work (use TEXTSCOPE); if used in AuthorSummary apply to Oeuvre; otherwise do not extract,,TTHEMETOPICDescriptive
+TTONESTYLE,Descriptive,,,,Work ELSE Entry Subject Ouvre,String,TextualFeaturesContext,c_hasToneOrStyle,c_hasTextualFeaturesRelationTo,Standard,,,TTONESTYLEDescriptive
+PAUTHORSHIP,Attributes,,,,,All Named Entities,PublishingContext,c_hasAuthorshipRelationTo,c_hasProductionRelationTo,Custom,,,PAUTHORSHIPAttributes
+PAUTHORSHIP,Embedded Entities,,,,Work ELSE Entry Subject,All Named Entities,PublishingContext,c_hasAuthorshipRelationTo,c_hasProductionRelationTo,Standard,,,PAUTHORSHIPEmbedded Entities
