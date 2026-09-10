@@ -1,8 +1,9 @@
 from bs4 import BeautifulSoup
-import rdflib, sys
+import rdflib, sys, argparse
 from rdflib import RDF, RDFS, OWL, XSD
 import os, datetime
 import csv
+import random
 
 import logging
 from fuzzywuzzy import fuzz
@@ -1230,6 +1231,53 @@ class BibliographyParse:
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description="Extract Orlando MODS bibliography records into BIBFRAME RDF",
+        add_help=True)
+    parser.add_argument(
+        "-o", "-output", "--output",
+        default=None,
+        help="base name for the output .ttl file "
+             "(default: bibliography_<today>, with a suffix describing the subset)")
+    parser.add_argument(
+        "-d", "-dir", "--dir",
+        default=None, metavar="PATH",
+        help="read bibliography files from PATH instead of "
+             "BIBLIOGRAPHY_FILES in the config")
+
+    subset = parser.add_mutually_exclusive_group()
+    subset.add_argument(
+        "-n", "--limit",
+        type=int, default=None, metavar="NUM",
+        help="only extract the first NUM bibliography files (sorted by filename)")
+    subset.add_argument(
+        "-r", "--random",
+        type=int, default=None, metavar="NUM",
+        help="only extract NUM randomly sampled bibliography files")
+    subset.add_argument(
+        "-f", "--files",
+        nargs="+", default=None, metavar="FILE",
+        help="only extract these bibliography files, named within the "
+             "source directory or given as paths")
+
+    parser.add_argument(
+        "--seed",
+        type=int, default=None, metavar="INT",
+        help="seed for -r/--random so a sample can be reproduced")
+    parser.add_argument(
+        "--skip-writing",
+        action="store_true",
+        help="skip parsing the writing files; genres taken from them will be missing")
+
+    args = parser.parse_args()
+
+    if args.limit is not None and args.limit <= 0:
+        parser.error("-n/--limit must be greater than 0")
+    if args.random is not None and args.random <= 0:
+        parser.error("-r/--random must be greater than 0")
+    if args.dir and not os.path.isdir(args.dir):
+        parser.error(F"-d/--dir is not a directory: {args.dir}")
+
     g = rdflib.Graph()
     g.bind("bf", BF)
     g.bind("cwrc", CWRC)
@@ -1261,7 +1309,8 @@ if __name__ == "__main__":
         print("PUBLISHERS_CSV=[PATH TO PUBLISHER MAPPING]")
         print("PEOPLE_CSV=[PATH TO PEOPLE MAPPING]")
 
-    dirname = config_options['BIBLIOGRAPHY_FILES']
+    dirname = args.dir or config_options['BIBLIOGRAPHY_FILES']
+    dir_suffix = F"_{os.path.basename(os.path.normpath(args.dir))}" if args.dir else ""
     writing_dir = config_options['WRITING_FILES']
     genre_ontology = config_options['GENRE_ONTOLOGY']
     places = config_options['PLACES_CSV']
@@ -1308,32 +1357,67 @@ if __name__ == "__main__":
             PEOPLE_MAPPING[row["CWRC URI"]] = row
 
 
-    for fname in os.listdir(writing_dir):
-        path = os.path.join(writing_dir, fname)
-        # if os.path.isdir(path):
-        #     continue
+    if args.skip_writing:
+        print("Skipping writing files (--skip-writing): genres from them will be missing")
+        logger.info("Skipping writing files (--skip-writing): genre_map will be empty")
+    else:
+        for fname in os.listdir(writing_dir):
+            path = os.path.join(writing_dir, fname)
+            # if os.path.isdir(path):
+            #     continue
 
-        try:
-            genreParse = WritingParse(path, genre_map)
-        except UnicodeError:
-            pass
+            try:
+                genreParse = WritingParse(path, genre_map)
+            except UnicodeError:
+                pass
 
-    # test_filenames = ["orlando_dae633f2-657e-4d43-ba9d-979ac2b30e0b.xml"]
-    # test_filenames = ["0d0e00bf-3224-4286-8ec4-f389ec6cc7bb.xml"]
-    # test_filenames = ["orlando_47f2e582-85ce-44cc-b338-2f315496399a.xml", "orlando_0c133817-f55e-4a8f-a9b4-474566418d9b.xml"]
     # print(genre_map)
     # input("Press enter to continue with bibliography parsing...")
-    count = 1
-    files = os.listdir(dirname)
-    total = len(files)
-    # only should be xml files 
-    files = [f for f in files if f.endswith(".xml")]
 
-    # for fname in test_filenames:
-    for fname in files:
+    # only should be xml files
+    files = sorted(os.path.join(dirname, f)
+                   for f in os.listdir(dirname) if f.endswith(".xml"))
+
+    subset_suffix = ""
+    if args.files:
+        selected = []
+        for name in args.files:
+            candidates = [name, os.path.join(dirname, name)]
+            if not name.endswith(".xml"):
+                candidates.append(os.path.join(dirname, name + ".xml"))
+
+            match = next((c for c in candidates if os.path.isfile(c)), None)
+            if match:
+                selected.append(match)
+            else:
+                print(F"Skipping missing file: {name}")
+                logger.warning(F"No such bibliography file: {name}")
+
+        if not selected:
+            parser.error("none of the files given to -f/--files were found")
+
+        files = selected
+        subset_suffix = F"_files{len(files)}"
+    elif args.random:
+        if args.seed is not None:
+            random.seed(args.seed)
+        files = random.sample(files, min(args.random, len(files)))
+        subset_suffix = F"_random{len(files)}"
+        if args.seed is not None:
+            subset_suffix += F"-seed{args.seed}"
+    elif args.limit:
+        files = files[:args.limit]
+        subset_suffix = F"_first{len(files)}"
+
+    count = 1
+    total = len(files)
+    print(F"Extracting {total} bibliography files from {dirname}")
+    logger.info(F"Extracting {total} bibliography files from {dirname}{subset_suffix}")
+
+    for path in files:
+        fname = os.path.basename(path)
         print(F"{count}/{total} files extracted ({fname})")
 
-        path = os.path.join(dirname, fname)
         if os.path.isdir(path):
             continue
 
@@ -1351,11 +1435,23 @@ if __name__ == "__main__":
         for item in UNIQUE_UNMATCHED_PLACES:
             writer.writerow([item, UNIQUE_UNMATCHED_PLACE_COUNTS[item]])
 
-    fname = F"bibliography_{datetime.datetime.now().strftime('%Y-%m-%d')}"
-    output_name = fname.replace(".xml", "")
+    output_name = args.output
+    if not output_name:
+        output_name = (F"bibliography_{datetime.datetime.now().strftime('%Y-%m-%d')}"
+                       F"{dir_suffix}{subset_suffix}")
+
+    if output_name.lower().endswith(".ttl"):
+        output_name = output_name[:-4]
+
+    output_dir = os.path.dirname(output_name)
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
+
     formats = {'ttl': 'turtle'}
     for extension, file_format in formats.items():
         g.serialize(
             destination=F"{output_name}.{extension}", format=file_format)
+
+    logger.info(F"Wrote output to {output_name}.ttl")
 
     logger.info(F"Finished extraction: {datetime.datetime.now().strftime('%d %b %Y %H:%M:%S')}")
