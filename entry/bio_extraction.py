@@ -1,0 +1,102 @@
+#!/usr/bin/python3
+from bs4 import BeautifulSoup
+from utils import utilities, place, organizations
+from entry.biography import Biography
+from entry import culturalForm as cf, location, other_contexts, occupation, lifeInfo, birthDeath, intertextuality, writing_extraction, education, writing #, personname
+
+
+"""
+This is a possible temporary main script that creates the biography related triples
+TODO:
+add documentation
+implement personname
+"""
+
+logger = utilities.config_logger("bio_extraction")
+
+def main():
+    extraction_mode, file_dict = utilities.parse_args(
+        __file__, "Majority of biography related data", logger)
+
+    uber_graph = utilities.create_graph()
+
+    highest_triples = 0
+    least_triples = 0
+    smallest_person = None
+    largest_person = None
+    logger.info(F"Time started: {utilities.get_current_time()}\n")
+    total_files = len(file_dict)
+    count = 0
+
+    for filename in file_dict.keys():
+        with open(filename, "r",encoding="UTF-8" ) as f:
+            xml_text = f.read()
+
+        count += 1
+
+        soup = BeautifulSoup(xml_text, 'lxml-xml')
+        person_id  = soup.find("ENTRY").get("ID")
+
+        print(f"Processing file: {person_id} {count}/{total_files}")
+        print(file_dict[filename])
+        print("*" * 55)
+
+        person = Biography(person_id, soup)
+
+
+        occupation.extract_occupation_data(soup, person)
+        birthDeath.extract_death_data(soup, person)
+        birthDeath.extract_birth_data(soup, person)
+        location.extract_location_data(soup, person)
+        cf.extract_cf_data(soup, person)
+        lifeInfo.extract_family_data(soup, person)
+        lifeInfo.extract_intimate_relationships_data(soup, person)
+        lifeInfo.extract_friend_data(soup, person)
+        other_contexts.extract_other_contexts_data(soup, person)
+        # personname.extract_person_name(soup, person) # still reviewing this
+        education.extract_education_data(soup, person)
+
+        writing_extraction.extract_general_info(soup, person, 1)
+        intertextuality.extract_intertextuality_data(soup, person)
+        intertextuality.extract_influence_data(soup, person)
+        intertextuality.extract_response_data(soup,person)
+        writing.extract_writing_data(soup, person)
+
+
+        graph = person.to_graph()
+        triple_count = len(graph)
+
+        if triple_count > highest_triples:
+            highest_triples = triple_count
+            largest_person = filename
+        if least_triples == 0 or triple_count < least_triples:
+            least_triples = triple_count
+            smallest_person = filename
+        if triple_count == 0:
+            logger.warning(f"No triples created for {filename} ({person_id})")
+            input("Press Enter to continue...")
+
+        # triples to files
+        utilities.create_individual_triples(
+            extraction_mode, person, "biography")
+        utilities.manage_mode(extraction_mode, person, graph)
+
+        uber_graph += graph
+
+    place.log_mapping_fails()
+    cf.log_mapping_fails()
+    occupation.log_mapping_fails()
+    organizations.log_mapping()
+    logger.info(f"{len(uber_graph)} total triples created")
+    logger.info(f"{largest_person} produces the most triples ({highest_triples})")
+    logger.info(f"{smallest_person} produces the least triples({least_triples})")
+
+    logger.info(f"Time completed: {utilities.get_current_time()}")
+
+    temp_path = "extracted_triples/biography_triples.ttl"
+    utilities.create_extracted_uberfile(temp_path, uber_graph,serialization="ttl")
+    # utilities.create_extracted_uberfile(temp_path, uber_graph,serialization="ttl", extra_triples="../data/additional_triples.ttl")
+
+
+if __name__ == "__main__":
+    main()

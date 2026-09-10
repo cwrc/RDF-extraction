@@ -20,7 +20,7 @@ And prior to making a dataset publically available. For a large dataset, suggest
 
 #### Sample Output
 
-```
+```txt
 224 Triples in provided data file
 Term not found: http://sparql.cwrc.ca/ontologies/cwrc#monArchism
 Term has been deprecated: http://sparql.cwrc.ca/ontologies/cwrc#hasReligionSelfDefined
@@ -40,12 +40,12 @@ Number of invalid terms: 2
 Hoping to extend this past our ontology eventually
 Very barebones at the moment
 
--   Loading other ontologies
--   General error handling (inability to parse file, ...)
--   Options for parsing different formats (simple)
--   Adding counts for error occurences within the dataset
--   Validating other used ontology terms from within the namespace (Not any adv reasoning)
-    -   catching simple spelling errors
-        ex. prov:derivedFrom is not a valid term in the provenance ontology
--   Suggest near matches for incorrect terms
+- Loading other ontologies
+- General error handling (inability to parse file, ...)
+- Options for parsing different formats (simple)
+- Adding counts for error occurences within the dataset
+- Validating other used ontology terms from within the namespace (Not any adv reasoning)
+  - catching simple spelling errors
+     > ex. prov:derivedFrom is not a valid term in the provenance ontology
+- Suggest near matches for incorrect terms
     ex. prov:derivedFrom should actually be prov:wasDerivedFrom

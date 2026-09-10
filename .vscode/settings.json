@@ -1,0 +1,94 @@
+{
+    "cSpell.words": [
+        "CHRONSTRUCT",
+        "cwrc",
+        "intertextuality"
+    ],
+    "todo-tree.general.tags": [
+    "TODO",
+    "FIXME",
+    "BUG",
+    "NOTE",
+    "print",
+    "logger.info",
+    "logger.warn",
+    "logger.error",
+    "input",
+  ],
+  "todo-tree.filtering.includeHiddenFiles": true,
+  "todo-tree.general.statusBar": "current file",
+  "todo-tree.highlights.customHighlight": {
+    "print": {
+      "icon": "log",
+      "type": "text",
+      "foreground": "#ff0000",
+      "iconColour": "#ff0000",
+      "hideFromStatusBar": true,
+      "hideFromActivityBar": true,
+      "gutterIcon":true
+    },
+    "input": {
+      "icon": "log",
+      "type": "text",
+      "foreground": "#ff0000",
+      "iconColour": "#ff0000",
+      "hideFromStatusBar": true,
+      "hideFromActivityBar": true,
+      "gutterIcon":true
+    },
+    "console.log": {
+      "icon": "log",
+      "type": "text",
+      "foreground": "#ff0000",
+      "iconColour": "#ff0000",
+      "hideFromStatusBar": true,
+      "hideFromActivityBar": true,
+      "gutterIcon":true
+    },
+    "console.warn": {
+      "icon": "log",
+      "type": "text",
+      "foreground": "#fffb00",
+      "iconColour": "#fffb00",
+      "hideFromStatusBar": true,
+      "hideFromActivityBar": true,
+      "gutterIcon":true
+    },
+    "console.error": {
+      "icon": "log",
+      "type": "text",
+      "foreground": "#ffaa00",
+      "iconColour": "#ffaa00",
+      "hideFromStatusBar": true,
+      "hideFromActivityBar": true,
+      "gutterIcon":true
+    },
+    "logger.error": {
+      "icon": "log",
+      "type": "text",
+      "foreground": "#ff0000",
+      "iconColour": "#ff0000",
+      "hideFromStatusBar": true,
+      "hideFromActivityBar": true,
+      "gutterIcon":true
+    },
+    "logger.info": {
+      "icon": "log",
+      "type": "text",
+      "foreground": "#fffb00",
+      "iconColour": "#fffb00",
+      "hideFromStatusBar": true,
+      "hideFromActivityBar": true,
+      "gutterIcon":true
+    },
+    "logger.warn": {
+      "icon": "log",
+      "type": "text",
+      "foreground": "#ffaa00",
+      "iconColour": "#ffaa00",
+      "hideFromStatusBar": true,
+      "hideFromActivityBar": true,
+      "gutterIcon":true
+    }
+  }
+}
