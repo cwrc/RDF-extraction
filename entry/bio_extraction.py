@@ -2,7 +2,7 @@
 from bs4 import BeautifulSoup
 from utils import utilities, place, organizations
 from entry.biography import Biography
-from entry import culturalForm as cf, location, other_contexts, occupation, lifeInfo, birthDeath, intertextuality, writing_extraction, education, writing #, personname
+from entry import culturalForm as cf, location, other_contexts, occupation, lifeInfo, birthDeath, intertextuality, writing_extraction, education, writing , personname
 
 
 """
@@ -53,7 +53,7 @@ def main():
         lifeInfo.extract_intimate_relationships_data(soup, person)
         lifeInfo.extract_friend_data(soup, person)
         other_contexts.extract_other_contexts_data(soup, person)
-        # personname.extract_person_name(soup, person) # still reviewing this
+        personname.extract_person_name_data(soup, person) # still reviewing this
         education.extract_education_data(soup, person)
 
         writing_extraction.extract_general_info(soup, person, 1)

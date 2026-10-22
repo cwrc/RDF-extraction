@@ -1,23 +1,46 @@
 #!/usr/bin/python3
 
-from rdflib import URIRef, Literal
+from rdflib import Literal
 from utils import utilities
-from utils.context import Context
-from utils.event import get_date_tag, Event, format_date
-from utils.place import Place
-import rdflib
+from utils.context import Context, get_context_type, get_event_type
+from utils.event import Event
 
 """
     TODO:
-    Handle events, shortprose
-    fix incorrect uris
-    worry about awks redundancy next week
+    rename ReligousName once the typo is fixed within the ontology
 """
 
 logger = utilities.config_logger("personname")
 
-basic_layout_dict = {
-    "NICKNAME": {
+NAME_TYPE_MAPPING = {
+    "BIRTHNAME": "Birthname",
+    "INDEXED": "IndexedName",
+    "MARRIED": "MarriedName",
+    "NICKNAME": "Nickname",
+    "PSEUDONYM": "Pseudonym",
+    "RELIGIOUSNAME": "ReligiousName",
+    "ROYAL": "RoyalName",
+    "SELFCONSTRUCTED": "SelfConstructedName",
+    "STYLED": "StyledName",
+    "TITLED": "TitledName",
+    "STANDARD": "IndexedName",
+    "DOCTITLE": "PreferredName",
+}
+
+# Names of the entry as a whole, found outside of PERSONNAME
+ENTRY_NAME_TAGS = ["STANDARD", "DOCTITLE"]
+PERSONNAME_TAGS = [x for x in NAME_TYPE_MAPPING if x not in ENTRY_NAME_TAGS]
+
+# Tags whose text shouldn't be treated as part of a name
+NOTE_TAGS = ["SCHOLARNOTE", "RESEARCHNOTE", "BIBCITS", "BIBCIT"]
+
+
+class Name(object):
+    """docstring for Name
+        A name of the biographee, all properties are attached to the name entity
+        which is only connected to the context via cwrc:name
+    """
+    ATTRIBUTE_MAP = {
         "ABUSIVE": "AbusiveName",
         "HONORIFIC": "HonorificName",
         "CRYPTIC": "CrypticName",
@@ -25,254 +48,183 @@ basic_layout_dict = {
         "ROMANCE": "RomanceName",
         "LITERARY": "LiteraryName",
         "FAMILIAR": "FamiliarName",
-    },
-    "PSEUDONYM": "Pseudonym",
-    "BIRTHNAME": "BirthName",
-    # "PROFESSIONALTITLE": None,
-    "INDEXED": "IndexedName",
-    "MARRIED": "MarriedName",
-    "RELIGIOUS": "ReligiousName",
-    "ROYAL": "RoyalName",
-    "SELFCONSTRUCTED": "SelfConstructedName",
-    "STYLED": "StyledName",
-    "TITLE": "TitledName"
-}
+    }
+    NAME_PART_MAP = {
+        "GIVEN": "Forename",
+        "SURNAME": "Surname",
+    }
 
+    def __init__(self, name_tag, person_id):
+        super(Name, self).__init__()
+        self.person_id = person_id
 
-class BirthName:
+        self.label = get_name_text(name_tag, use_reg=name_tag.name == "BIRTHNAME")
+        if name_tag.name == "DOCTITLE":
+            self.label = self.label.split(":")[0].strip()
 
-    def __init__(self, gvnNames, srNames, personName):
-        self.givenNames = gvnNames
-        self.surNames = srNames
-        self.personName = personName
+        self.uri = utilities.make_standard_uri(F"{person_id} NameEnt {self.label}")
 
+        self.types = [NAME_TYPE_MAPPING[name_tag.name]]
+        for attribute in ["NAMECONNOTATION", "NAMESIGNIFIER", "NAMETYPE"]:
+            value = name_tag.get(attribute)
+            if value in self.ATTRIBUTE_MAP:
+                self.types.append(self.ATTRIBUTE_MAP[value])
+            elif value:
+                logger.info(F"Unmapped {attribute} value within {person_id}: {value}")
 
-class PersonName:
-    def __init__(self, types, value, personName, uri=None, extraAttributes=None, parentType=None, otherTriples=None):
-        self.id = utilities.remove_punctuation("NameEnt " + value)
-        self.uri = None
-        # used for body in the context sections
-        self.predicate = utilities.NS_DICT["cwrc"].hasName
-        self.value = utilities.make_standard_uri(
-            personName + " NameEnt " + value)  # used for body in context sections
-        self.typeLabels = []
-        self.personName = Literal(value)
-        self.otherTriples = otherTriples
-        for thisType in types:
-            self.typeLabels.append(utilities.create_uri("cwrc", thisType))
+        if name_tag.get("WROTEORPUBLISHEDAS") == "WROTEPUBLISHEDASYES":
+            self.types.append("AuthorialName")
 
-        if uri:
-            self.uri = uri
-        else:
-            self.uri = value
+        if name_tag.name == "MARRIED" and is_married_surname(name_tag):
+            self.types.append("Surname")
 
-        self.hasSpareGraph = False
-        self.spareGraph = None
+        self.index_sources = []
+        if name_tag.name == "STANDARD":
+            self.index_sources.append("Orlando")
+        elif name_tag.get("INDEXSOURCE"):
+            self.index_sources.append(name_tag.get("INDEXSOURCE"))
 
-        if "BirthName" in types:
-            self.spareGraph = self.makeBirthGraph(
-                givenNameList=extraAttributes.givenNames, surNameList=extraAttributes.surNames)
-            self.hasSpareGraph = True
-        if parentType and parentType == "Nickname":
-            pass
+        self.name_parts = []
+        for part_tag in name_tag.find_all("GIVEN") + name_tag.find_all("SURNAME"):
+            if part_tag.find_parent(NOTE_TAGS):
+                continue
+            part_label = get_name_text(part_tag, use_reg=True)
+            if part_label:
+                self.name_parts.append((self.NAME_PART_MAP[part_tag.name], part_label))
+            else:
+                logger.info(F"Empty {part_tag.name} tag within {person_id}: {self.label}")
 
-
-    def makeBirthGraph(self, givenNameList, surNameList):
-        g = utilities.create_graph()
-        # thisNameEntity = utilities.make_standard_uri(personName + " NameEnt " + self.value)
-        thisNameEntity = self.value
-
-        numPart = 1
-
-        for thisName in givenNameList:
-            thisNamePart = utilities.make_standard_uri(thisName)
-            g.add((thisNamePart, utilities.NS_DICT["rdf"].type, utilities.NS_DICT["cwrc"].Forename))
-            g.add((thisNamePart, utilities.NS_DICT["cwrc"].hasSortOrder, Literal(numPart)))
-            g.add((thisNamePart, utilities.NS_DICT["rdf"].label, Literal(thisName)))
-
-            g.add((thisNameEntity, utilities.NS_DICT["cwrc"].hasNamePart, thisNamePart))
-            numPart += 1
-
-        for thisName in surNameList:
-            thisNamePart = utilities.make_standard_uri(thisName)
-            g.add((thisNamePart, utilities.NS_DICT["rdf"].type, utilities.NS_DICT["cwrc"].Surname))
-            g.add((thisNamePart, utilities.NS_DICT["cwrc"].hasSortOrder, Literal(numPart)))
-            g.add((thisNamePart, utilities.NS_DICT["rdf"].label, Literal(thisName)))
-
-            g.add((thisNameEntity, utilities.NS_DICT["cwrc"].hasNamePart, thisNamePart))
-            numPart += 1
-
-        g.add((thisNameEntity, utilities.NS_DICT["rdf"].label, self.personName))
-
-        return g
+    def merge(self, other):
+        """Combines the properties of another Name with the same label, ex. from nested tags"""
+        self.types += [x for x in other.types if x not in self.types]
+        self.index_sources += [x for x in other.index_sources if x not in self.index_sources]
+        if not self.name_parts:
+            self.name_parts = other.name_parts
 
     def to_triple(self, context):
         g = utilities.create_graph()
+        g.add((context.uri, utilities.create_uri("cwrc", "name"), self.uri))
+        g.add((self.uri, utilities.create_uri("rdfs", "label"), Literal(self.label)))
+        for x in self.types:
+            g.add((self.uri, utilities.create_uri("rdf", "type"), utilities.create_uri("cwrc", x)))
 
-        # thisNameEntity = utilities.make_standard_uri(person.name + " NameEnt " + self.value)
-        thisNameEntity = self.value
+        for x in self.index_sources:
+            g.add((self.uri, utilities.create_uri("cwrc", "indexedBy"), Literal(x)))
 
-        for type in self.typeLabels:
-            g.add((thisNameEntity, utilities.NS_DICT["rdf"].type, type))
+        for order, (part_type, part_label) in enumerate(self.name_parts, start=1):
+            part_uri = utilities.make_standard_uri(F"{self.person_id} NameEnt {self.label} NamePart {order}")
+            g.add((self.uri, utilities.create_uri("cwrc", "hasNamePart"), part_uri))
+            g.add((part_uri, utilities.create_uri("rdf", "type"), utilities.create_uri("cwrc", part_type)))
+            g.add((part_uri, utilities.create_uri("rdfs", "label"), Literal(part_label)))
+            g.add((part_uri, utilities.create_uri("cwrc", "hasSortOrder"), Literal(order)))
 
-        g.add((thisNameEntity, utilities.NS_DICT["rdf"].label, self.personName))
-
-        if self.otherTriples is not None:
-            for otherTriple in self.otherTriples:
-                g.add((thisNameEntity, otherTriple["predicate"], Literal(otherTriple["value"])))
-
-        g.add((context.uri, utilities.NS_DICT["cwrc"].name, thisNameEntity))
-
-        if self.hasSpareGraph:
-            g += self.spareGraph
         return g
 
-
-# temporary function because i think alliyya already has one but i can't find it
-def getTheName(tag, ignore_reg_value=False):
-    if "REG" in tag.attrs and ignore_reg_value == False:
-        nameRaw = tag["REG"]
-        return nameRaw
-    else:
-        # print(tag.find_all(text=True, recursive=False))
-        # print(tag.text)
-        return tag.text.replace("\n", " ").strip()
+    def __str__(self):
+        string = f"\tURI: {self.uri}\n"
+        string += f"\tlabel: {self.label}\n"
+        string += f"\ttypes: {self.types}\n"
+        string += f"\tindex sources: {self.index_sources}\n"
+        string += f"\tname parts: {self.name_parts}\n"
+        return string
 
 
-def getGivenAndSurNames(tag):
-    allGivenNames = []
-    allSurNames = []
-
-    for gName in tag.find_all("GIVEN"):
-        allGivenNames.append(getTheName(gName))
-
-    for sName in tag.find_all("SURNAME"):
-        allSurNames.append(getTheName(sName))
-
-    return allGivenNames, allSurNames
+def get_name_text(tag, use_reg=False):
+    """Returns the whitespace normalized text of a name tag, ignoring any notes or citations within it"""
+    if use_reg and tag.get("REG"):
+        return " ".join(tag.get("REG").split())
+    tag = utilities.remove_tags(NOTE_TAGS, tag)
+    return " ".join(tag.get_text().split())
 
 
-def makePerson(type, tag, existingList, personName=None):
-    types = [type]
+def is_married_surname(tag):
+    """Married names are surnames unless titled (ex. Countess of Blessington),
+        which are only surnames if explicitly tagged as such
+    """
+    if not tag.find("TITLED"):
+        return True
+    return tag.find_parent("SURNAME") is not None or tag.find("SURNAME") is not None
 
-    # usefull for birthnames as you have to send the given and surname to the PersonName class
-    otherAttributes = None
-    otherAttrsReqd = False
-    otherTriples = None
-    name_to_send = ""
 
-    # print(type)
-    if "WROTEORPUBLISHEDAS" in tag.attrs:
-        types.append("AuthorialName")
-
-    if "BirthName" in types:
-        givenNames, surNames = getGivenAndSurNames(tag)
-        otherAttrsReqd = True
-        otherAttributes = BirthName(givenNames, surNames, personName)
-        name_to_send = getTheName(tag)
-    elif "NickName" in types:
-        name_type_dict = basic_layout_dict["NICKNAME"]
-        if "NAMECONNOTATION" in tag.attrs:
-            property = tag["NAMECONNOTATION"]
-            # print("name connotation ", property)
-            if property in name_type_dict:
-                types.append(name_type_dict[property])
-                name_to_send = getTheName(tag)
-
-        elif "NAMESIGNIFIER" in tag.attrs:
-            property = tag["NAMESIGNIFIER"]
-            # print("name signifier ", property)
-            if property in name_type_dict:
-                types.append(name_type_dict[property])
-                name_to_send = getTheName(tag)
-
-        elif "NAMETYPE" in tag.attrs:
-            property = tag["NAMETYPE"]
-            # print("name type ", property)
-            if property in name_type_dict:
-                types.append(name_type_dict[property])
-                name_to_send = getTheName(tag)
-    elif "MarriedName" in types:
-        types.append("Surname")
-        name_to_send = getTheName(tag, ignore_reg_value=True)
-    elif "IndexedName" in types:
-        otherTriples = [
-            {
-                "predicate": utilities.NS_DICT["cwrc"].IndexedBy,
-                "value": "Orlando"
-            }
-        ]
-        name_to_send = getTheName(tag, ignore_reg_value=True)
-    elif "PreferredName" in types:
-        docText = getTheName(tag, ignore_reg_value=True)
-        if ":" in docText:
-            name_to_send = docText.split(":")[0]
+def get_entry_name_tags(doc, person):
+    """Returns the STANDARD and DOCTITLE tags of the entry, which are found outside of PERSONNAME"""
+    tags = []
+    for tagname in ENTRY_NAME_TAGS:
+        tag = doc.find(tagname)
+        if tag:
+            tags.append(tag)
         else:
-            name_to_send = docText
-    else:
-        name_to_send = getTheName(tag, ignore_reg_value=True)
+            logger.warning(F"{tagname} tag not found within {person.id}")
+    return tags
 
-    if any(person.id == utilities.remove_punctuation("NameEnt " + name_to_send) for person in existingList) == False:
-        if otherAttrsReqd:
-            return PersonName(types, name_to_send, personName, extraAttributes=otherAttributes)
+
+def find_names(name_tags, person):
+    """Returns the Names of the given tags, merging those with the same label, ex. nested tags"""
+    names = {}
+    for tag in name_tags:
+        if tag.find_parent(NOTE_TAGS):
+            continue
+
+        name = Name(tag, person.id)
+        if not name.label:
+            logger.warning(F"Empty {tag.name} tag within {person.id}: {tag}")
+            continue
+
+        if name.label in names:
+            names[name.label].merge(name)
         else:
-            return PersonName(types, name_to_send, personName, otherTriples=otherTriples)
-    else:
-        return None
+            names[name.label] = name
+
+    return list(names.values())
 
 
-def extract_person_name(xmlString, person):
-    root = xmlString.BIOGRAPHY
-    personname_entities = []
-    stdEntry = makePerson("IndexedName", root.find("STANDARD"), personname_entities, personName=person.id)
-    if stdEntry:
-        personname_entities.append(stdEntry)
+def extract_person_name_data(doc, person):
+    context_count = 1
+    event_count = 1
+    CONTEXT_TYPE = get_context_type("PERSONNAME")
+    EVENT_TYPE = get_event_type("PERSONNAME")
 
-    docTitle = makePerson("PreferredName", root.find("DOCTITLE"), personname_entities, personName=person.id)
-    if docTitle:
-        personname_entities.append(docTitle)
+    contexts = doc.find_all("PERSONNAME")
+    if len(contexts) > 1:
+        logger.info(F"Multiple PERSONNAME tags within: {person.id}")
 
-    id = 1
-    personNameTags = root.find_all("PERSONNAME")
-    if personNameTags is None:
-        return
-    if len(personNameTags) > 1:
-        logger.info("Multiple Personname tags within: " + person.id)
-    for name in personNameTags:
-        possible_event = name.find_all("CHRONSTRUCT")
-        if possible_event:
-            logger.info("Event found in " + person.id + "\n\t" + str(possible_event))
-        logger.info("\n" + str(name.prettify()))
-        for tagname in basic_layout_dict:
-            if tagname == "BIRTHNAME":
-                for givenName in name.find_all("BIRTHNAME"):
-                    newPerson = makePerson("BirthName", (givenName), personname_entities, personName=person.id)
-                    if newPerson:
-                        personname_entities.append(newPerson)
-            elif tagname == "NICKNAME":
-                for nickname in name.find_all("NICKNAME"):
-                    newPerson = makePerson("NickName", nickname, personname_entities, personName=person.id)
-                    if newPerson:
-                        personname_entities.append(newPerson)
-            else:
-                for thisTag in name.find_all(tagname):
-                    newPerson = makePerson(basic_layout_dict[tagname],
-                                           thisTag, personname_entities, personName=person.id)
-                    if newPerson:
-                        personname_entities.append(newPerson)
+    for context in contexts:
+        name_tags = context.find_all(PERSONNAME_TAGS)
+        if context_count == 1:
+            name_tags = get_entry_name_tags(doc, person) + name_tags
 
-    if personNameTags:
-        context_id = person.id + "_PersonNameContext" + str(0)
-        tempContext = Context(context_id, personNameTags[0], "PERSONNAME", person=person)
-        tempContext.link_triples(personname_entities[1:])
-        person.add_context(tempContext)
+        context_id = F"{person.id}_{CONTEXT_TYPE}_{context_count}"
+        names = find_names(name_tags, person)
+        if names:
+            temp_context = Context(context_id, context, "PERSONNAME", person=person)
+            temp_context.link_triples(names)
+        else:
+            temp_context = Context(context_id, context, "PERSONNAME", "identifying", person=person)
+
+        person.add_context(temp_context)
+        context_count += 1
+
+        for event in context.find_all("CHRONSTRUCT"):
+            context_id = F"{person.id}_{CONTEXT_TYPE}_{context_count}"
+            temp_context = Context(context_id, event, "PERSONNAME", "identifying", person=person)
+
+            event_title = F"{person.name} - {utilities.split_by_casing(EVENT_TYPE)}"
+            event_uri = F"{person.id}_{EVENT_TYPE}_{event_count}"
+            temp_event = Event(event_title, event_uri, event, type=EVENT_TYPE)
+
+            temp_context.link_event(temp_event)
+            person.add_event(temp_event)
+            person.add_context(temp_context)
+
+            context_count += 1
+            event_count += 1
 
 
 def main():
     from bs4 import BeautifulSoup
     from entry.biography import Biography
-    extraction_mode,file_dict = utilities.parse_args(__file__, "Personname",logger)
-    print("-" * 200)
+
+    extraction_mode, file_dict = utilities.parse_args(__file__, "Personname", logger)
 
     uber_graph = utilities.create_graph()
 
@@ -280,29 +232,30 @@ def main():
         with open(filename) as f:
             soup = BeautifulSoup(f, 'lxml-xml')
 
-        person_id  = soup.find("ENTRY").get("ID")
-
-        print(filename)
-        print(file_dict[filename])
-        print(person_id)
-        print("*" * 55)
+        person_id = soup.find("ENTRY").get("ID")
+        if extraction_mode.verbosity > 0:
+            print(filename)
+            print(file_dict[filename])
+            print(person_id)
+            print("*" * 55)
 
         person = Biography(person_id, soup)
-        extract_person_name(soup, person)
-        person.name = utilities.get_readable_name(soup)
-        graph = person.to_graph()
-        uber_graph += graph
+        extract_person_name_data(soup, person)
 
-        utilities.create_individual_triples(extraction_mode, person, "cf")
+        graph = person.to_graph()
+
+        utilities.create_individual_triples(extraction_mode, person, "personname")
         utilities.manage_mode(extraction_mode, person, graph)
+
+        uber_graph += graph
 
     logger.info(str(len(uber_graph)) + " triples created")
     if extraction_mode.verbosity > 0:
         print(str(len(uber_graph)) + " total triples created")
 
-    utilities.create_uber_triples(extraction_mode, uber_graph, "cf")
-    log_mapping_fails()
+    utilities.create_uber_triples(extraction_mode, uber_graph, "personname")
     logger.info("Time completed: " + utilities.get_current_time())
+
 
 if __name__ == "__main__":
     main()
